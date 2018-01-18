@@ -1,12 +1,13 @@
 /**
  * External dependencies
  */
+const path = require('path');
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // Main CSS loader for everything but blocks..
 const cssExtractTextPlugin = new ExtractTextPlugin( {
-	filename: "./src/resources/css/[name].css"
+	filename: "src/resources/css/[name].css"
 } );
 
 // Configuration for the ExtractTextPlugin.
@@ -31,16 +32,26 @@ const extractConfig = {
 	]
 };
 
-const entryPointNames = [ "editor" ];
+const entryPointNames = [ 'editor', 'blocks' ];
 
 const externals = {};
 entryPointNames.forEach( entryPointName => {
-	externals[ "@tribe-editor/" + entryPointName ] = {
-		this: [ "tribe-editor", entryPointName ]
+	externals[ "@tribe/events/" + entryPointName ] = {
+		this: [ "tribe", 'events', entryPointName ]
 	};
 } );
 
-const wpDependencies = [ "components", "element", "blocks", "utils" ];
+
+const wpDependencies = [
+	'blocks',
+	'components',
+	'date',
+	'editor',
+	'element',
+	'i18n',
+	'utils',
+	'data',
+];
 wpDependencies.forEach( wpDependency => {
 	externals[ "@wordpress/" + wpDependency ] = {
 		this: [ "wp", wpDependency ]
@@ -49,18 +60,25 @@ wpDependencies.forEach( wpDependency => {
 
 const config = {
 	entry: entryPointNames.reduce( ( memo, entryPointName ) => {
-		memo[ entryPointName ] = `./src/modules/${ entryPointName }/index.js`;
+		memo[ entryPointName ] = `src/modules/${ entryPointName }/index.js`;
 		return memo;
 	}, {} ),
 	externals,
 	output: {
 		filename: "src/resources/js/[name].js",
 		path: __dirname,
-		library: [ "tribe", "editor", "[name]" ],
+		library: [ "tribe", "events", "[name]" ],
 		libraryTarget: "this"
 	},
 	resolve: {
-		modules: [ __dirname, "node_modules" ]
+		modules: [
+			__dirname,
+			'node_modules'
+		],
+		alias: entryPointNames.reduce( ( memo, entryPointName ) => {
+			memo[ entryPointName ] = path.resolve( __dirname, `src/modules/${ entryPointName }` );
+			return memo;
+		}, {} )
 	},
 	module: {
 		rules: [
@@ -100,5 +118,4 @@ switch (process.env.NODE_ENV) {
 	default:
 		config.devtool = "source-map";
 }
-
 module.exports = config;

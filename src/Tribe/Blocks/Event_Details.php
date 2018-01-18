@@ -38,21 +38,4 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		wp_send_json_success( $data );
 	}
-
-	/**
-	 * Used to include any Assets for the Block we are registering
-	 *
-	 * @since  TBD
-	 *
-	 * @return void
-	 */
-	public function assets() {
-		tribe_asset(
-			$this->plugin(),
-			'tribe-block-editor-event-details',
-			'editor/blocks/event-details.js',
-			array( 'react', 'wp-blocks', 'wp-i18n', 'wp-element', 'tribe-events-html-react-parser', 'tribe-events-editor-qs' ),
-			'enqueue_block_editor_assets'
-		);
-	}
 }
