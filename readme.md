@@ -6,6 +6,12 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 [Read more about _Why Gutenberg is Worth the Effort_](https://theeventscalendar.com/going-gutenberg-chapter/)
 
+---
+
+:warning: **Please Note:** This is an Alpha-version plugin at this point; while we test thoroughly and hope to code well, _we do not recommend running this on production sites_.
+
+---
+
 ### Using developement Version from GitHub
 
 1. Clone the Repository
