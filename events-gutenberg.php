@@ -1,0 +1,90 @@
+<?php
+/**
+ * Plugin Name: The Events Calendar: Gutenberg Extension
+ * Description: [Description]
+ * Version: 0.1.0
+ * Author: Modern Tribe, Inc.
+ * Author URI: http://m.tri.be/1971
+ * License: GPLv2 or later
+ */
+
+defined( 'WPINC' ) || die;
+
+class Tribe__Events_Gutenberg__Plugin {
+
+	/**
+	 * The semantic version number of this extension; should always match the plugin header.
+	 */
+	const VERSION = '0.1.0';
+
+	/**
+	 * Each plugin required by this extension
+	 *
+	 * @var array Plugins are listed in 'main class' => 'minimum version #' format
+	 */
+	public $plugins_required = array(
+		'Tribe__Events__Main' => '4.6.9',
+	);
+
+	/**
+	 * The constructor; delays initializing the extension until all other plugins are loaded.
+	 */
+	public function __construct() {
+		add_action( 'plugins_loaded', array( $this, 'load' ), 100 );
+
+		// Setup the Condiguration file
+		$this->plugin_file = __FILE__;
+		$this->plugin_path = trailingslashit( dirname( $this->plugin_file ) );
+		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );
+		$this->plugin_url  = plugins_url( $this->plugin_dir );
+	}
+
+	/**
+	 * Extension hooks and initialization; exits if the extension is not authorized by Tribe Common to run.
+	 */
+	public function load() {
+
+		// Exit early if our framework is saying this extension should not run.
+		if ( ! function_exists( 'tribe_register_plugin' ) ) {
+			return;
+		}
+
+		// Bail when the Required versions are not avail
+		if ( ! tribe_register_plugin( $this->plugin_file, __CLASS__, self::VERSION, $this->plugins_required ) ) {
+			return;
+		}
+
+		// Setup the Autoloading of classes
+		$this->autoloading();
+
+		// Register the Service Provider
+		tribe_register_provider( 'Tribe__Events_Gutenberg__Provider' );
+	}
+
+	/**
+	 * To allow easier usage of classes on our files we have a AutoLoader that will match
+	 * class names to it's required file inclusion into the Request.
+	 *
+	 * @return void
+	 */
+	protected function autoloading() {
+		$prefixes = array(
+			'Tribe__Events_Gutenberg__' => $this->plugin_path . 'src/Tribe',
+		);
+
+		$autoloader = Tribe__Autoloader::instance();
+		$autoloader->register_prefixes( $prefixes );
+
+		// deprecated classes are registered in a class to path fashion
+		foreach ( glob( $this->plugin_path . 'src/deprecated/*.php' ) as $file ) {
+			$class_name = str_replace( '.php', '', basename( $file ) );
+			$autoloader->register_class( $class_name, $file );
+		}
+
+		$autoloader->register_autoloader();
+	}
+
+}
+
+// Will be unset once we have the proper Singleton setup
+$__tribe_events_gutenberg_plugin = new Tribe__Events_Gutenberg__Plugin();
