@@ -32,7 +32,7 @@ const extractConfig = {
 	]
 };
 
-const entryPointNames = [ 'editor', 'blocks' ];
+const entryPointNames = [ 'element', 'editor', 'blocks' ];
 
 const externals = {};
 entryPointNames.forEach( entryPointName => {
@@ -88,8 +88,17 @@ const config = {
 				use: "babel-loader"
 			},
 			{
-				test: /\.p?css$/,
+				test: /\.(css|pcss)$/,
 				use: cssExtractTextPlugin.extract( extractConfig )
+			},
+			{
+				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+				use: {
+					loader: 'url-loader',
+					options: {
+						limit: 100000,
+					},
+				},
 			}
 		]
 	},

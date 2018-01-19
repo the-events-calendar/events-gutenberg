@@ -1,13 +1,15 @@
 import { __ } from '@wordpress/i18n'
 import { createElement, Component, renderToString } from '@wordpress/element';
 
+import DateTimeRange from 'element/datetime-range';
+
 class EventDetails extends Component {
 	render() {
 		const { focus } = this.props;
 
 		return (
 			<div className="tribe-editor-block-wrap">
-				<em>Development</em>
+				<DateTimeRange />
 			</div>
 		);
 	}

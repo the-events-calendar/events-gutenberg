@@ -1,6 +1,6 @@
 
 import { registerBlockType } from "@wordpress/blocks";
-import eventDetails from  "blocks/event-details";
+import eventDetails from  'blocks/event-details';
 
 export default [
 	eventDetails

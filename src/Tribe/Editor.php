@@ -75,9 +75,17 @@ class Tribe__Events_Gutenberg__Editor {
 
 		tribe_asset(
 			$plugin,
-			'tribe-block-editor-styles',
-			'block-editor-styles.css',
-			array( 'wp-edit-blocks' ),
+			'tribe-events-editor-element',
+			'element.js',
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
+			'enqueue_block_editor_assets'
+		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-block-editor-element',
+			'element.css',
+			array(),
 			'enqueue_block_editor_assets'
 		);
 
