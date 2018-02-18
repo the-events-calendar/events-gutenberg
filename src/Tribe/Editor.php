@@ -47,6 +47,37 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
+	 * Adds the required blocks into the Events Post Type
+	 *
+	 * @since  TBD
+	 *
+	 * @param  array $args Arguments used to setup the CPT template
+	 *
+	 * @return array
+	 */
+	public function add_template_blocks( $args = array() ) {
+		$template = array();
+
+		/**
+		 * @todo Have a good method from the block class to em here
+		 */
+		$template[] = array( 'tribe/event-subtitle' );
+		$template[] = array(
+			'core/paragraph',
+			array(
+				'placeholder' => 'Add Description...',
+			),
+		);
+		$template[] = array( 'tribe/event-details' );
+
+
+		// Save into args
+ 		$args['template'] = $template;
+
+ 		return $args;
+	}
+
+	/**
 	 * Prevents us from using `init` to register our own blocks, allows us to move
 	 * it when the proper place shows up
 	 *
@@ -70,15 +101,21 @@ class Tribe__Events_Gutenberg__Editor {
 			'tribe-events-editor-blocks',
 			'blocks.js',
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
-			'enqueue_block_editor_assets'
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+			)
 		);
 
 		tribe_asset(
 			$plugin,
-			'tribe-events-editor-element',
-			'element.js',
+			'tribe-events-editor-elements',
+			'elements.js',
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
-			'enqueue_block_editor_assets'
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+			)
 		);
 
 		tribe_asset(
@@ -86,15 +123,21 @@ class Tribe__Events_Gutenberg__Editor {
 			'tribe-block-editor-element',
 			'element.css',
 			array(),
-			'enqueue_block_editor_assets'
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+			)
 		);
 
 		tribe_asset(
 			$plugin,
-			'tribe-gutenberg-block-lite-events-frontend-style',
-			'block-lite-events.css',
-			array( 'wp-blocks' ),
-			'enqueue_block_assets'
+			'tribe-block-editor-blocks',
+			'blocks.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+			)
 		);
 	}
 }

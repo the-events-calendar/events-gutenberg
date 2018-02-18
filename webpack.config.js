@@ -32,7 +32,11 @@ const extractConfig = {
 	]
 };
 
-const entryPointNames = [ 'element', 'editor', 'blocks' ];
+const entryPointNames = [
+	'elements',
+	'editor',
+	'blocks',
+];
 
 const externals = {};
 entryPointNames.forEach( entryPointName => {

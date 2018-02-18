@@ -21,6 +21,9 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 			return;
 		}
 
+		$this->container->singleton( 'gutenberg.meta', 'Tribe__Events_Gutenberg__Meta' );
+
+		$this->container->singleton( 'gutenberg.blocks.event-subtitle', 'Tribe__Events_Gutenberg__Blocks__Event_Subtitle' );
 		$this->container->singleton( 'gutenberg.blocks.event-details', 'Tribe__Events_Gutenberg__Blocks__Event_Details' );
 
 		$this->hook();
@@ -41,8 +44,10 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	 */
 	protected function hook() {
 		add_filter( 'tribe_events_register_event_type_args', tribe_callback( 'gutenberg.editor', 'add_support' ) );
+		add_filter( 'tribe_events_register_event_type_args', tribe_callback( 'gutenberg.editor', 'add_template_blocks' ) );
 
 		add_action( 'init', tribe_callback( 'gutenberg.editor', 'register_blocks' ), 20 );
+		add_action( 'init', tribe_callback( 'gutenberg.meta', 'register' ), 25 );
 
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-details', 'register' ) );
 	}

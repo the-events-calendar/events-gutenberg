@@ -1,19 +1,16 @@
-import { __ } from '@wordpress/i18n'
-import { createElement, Component, renderToString } from '@wordpress/element';
+/**
+ * External dependencies
+ */
 
-import DateTimeRange from 'element/datetime-range';
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
 
-class EventDetails extends Component {
-	render() {
-		const { focus } = this.props;
-
-		return (
-			<div className="tribe-editor-block-wrap">
-				<DateTimeRange />
-			</div>
-		);
-	}
-}
+/**
+ * Internal dependencies
+ */
+import EventDetails from './block'
 
 export default {
 	id: 'event-details',
@@ -23,18 +20,40 @@ export default {
 	category: 'common',
 	keywords: [ 'event', 'the-events-calendar', 'tribe' ],
 
-	useOnce: true,
+	supports: {
+		html: false,
+	},
 
 	attributes: {
+		organizerTitle: {
+			type: 'html',
+		},
+		detailsTitle: {
+			type: 'html',
+		},
+		startDate: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventStartDate',
+		},
+		endDate: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventEndDate',
+		},
+		eventUrl: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventURL',
+		}
 	},
 
-	// The "edit" property must be a valid function.
-	edit: function( props ) {
-		return <EventDetails />;
-	},
+	useOnce: true,
 
-	// The "save" property must be specified and must be a valid function.
-	save: function( props ) {
+	edit: EventDetails,
+
+	save( props ) {
 		return null;
 	}
 };
+
