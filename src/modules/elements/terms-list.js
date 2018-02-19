@@ -22,7 +22,6 @@ import { __ } from '@wordpress/i18n';
 /**
  * Module Code
  */
-
 class TaxonomiesElement extends Component {
 	constructor() {
 		super( ...arguments );

@@ -12,6 +12,9 @@ import { __ } from '@wordpress/i18n';
  */
 import EventDetails from './block'
 
+/**
+ * Module Code
+ */
 export default {
 	id: 'event-details',
 	title: __( 'Event Details', 'the-events-calendar' ),

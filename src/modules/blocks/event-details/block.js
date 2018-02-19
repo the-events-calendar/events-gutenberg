@@ -9,9 +9,7 @@ import { connect } from 'react-redux';
  */
 import { Component, compose } from '@wordpress/element';
 import {
-	DateTimePicker,
-	Dropdown,
-	withAPIData
+	Dropdown
 } from '@wordpress/components';
 import { RichText, PlainText } from '@wordpress/blocks'
 import { select } from '@wordpress/data'
@@ -21,136 +19,21 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import {
-	TermsList, OrganizerForm
+	TermsList,
+	OrganizerForm,
+	DateTime,
 } from 'elements'
 
-function round15( minute ) {
-	let intervals = [ 15, 30, 45, 59, 0 ];
-	let closest;
-	let min = 90;
-
-	for ( let i = 0; i < intervals.length; i++ ) {
-		let iv = intervals[ i ];
-		let maybeMin = Math.abs( minute - iv );
-
-		if ( maybeMin < min ) {
-			min = maybeMin;
-			closest = iv;
-		}
-	}
-
-	if ( 59 === closest ) {
-		closest = 0;
-	}
-
-	return closest;
-}
-
 /**
- * Block Code
+ * Module Code
  */
 class EventDetails extends Component {
 	constructor() {
 		super( ...arguments );
-
-		const { attributes, setAttributes } = this.props;
-		this.onChangeEnd = this.onChangeEnd.bind( this );
-		this.onChangeStart = this.onChangeStart.bind( this );
-		this.formatDate = this.formatDate.bind( this );
-
-		this.onChangeStart( attributes.startDate );
-		this.onChangeEnd( attributes.endDate );
-	}
-
-	formatDate( date, label = false ) {
-		const format = label ? 'YYYY-MM-DD @ HH:mm' : 'YYYY-MM-DD HH:mm:00';
-
-		if ( ! date ) {
-			date = moment();
-		}
-
-		// Convert to moment
-		if ( 'string' === typeof date ) {
-			date = moment( date );
-		}
-
-		return date.minutes( round15( date.minutes() ) ).format( format );
-	}
-
-	onChangeStart( date ) {
-		const { attributes, setAttributes } = this.props;
-
-		// Start defaults to now
-		var dateMoment = moment();
-
-		// if we have the date we prep the moment
-		if ( date ) {
-			dateMoment = moment( date );
-		}
-
-		setAttributes( {
-			startDate: this.formatDate( dateMoment )
-		} );
-	}
-
-	onChangeEnd( date ) {
-		const { attributes, setAttributes } = this.props;
-
-		// End defaults to now + 2h
-		var dateMoment = moment().add( 2, 'hours' );
-
-		// if we have the date we prep the moment
-		if ( date ) {
-			dateMoment = moment( date );
-		}
-
-		setAttributes( {
-			endDate: this.formatDate( dateMoment )
-		} );
 	}
 
 	render() {
 		const { attributes, setAttributes, focus, setFocus } = this.props;
-
-		const startDropdown = (
-			<Dropdown
-				className="tribe-editor-datetime"
-				position="bottom left"
-				contentClassName="tribe-editor-datetime__dialog"
-				renderToggle={ ( { onToggle, isOpen } ) => (
-					<button
-						type="button"
-						className="button-link"
-						onClick={ onToggle }
-						aria-expanded={ isOpen }
-					>
-						{ this.formatDate( attributes.startDate, true ) }
-					</button>
-				) }
-				renderContent={ () => <DateTimePicker key="start-datetime-picker" currentDate={ attributes.startDate } onChange={ this.onChangeStart } /> }
-			/>
-		);
-
-		const endDropdown = (
-			<Dropdown
-				className="tribe-editor-datetime"
-				position="bottom left"
-				contentClassName="tribe-editor-datetime__dialog"
-				renderToggle={ ( { onToggle, isOpen } ) => (
-					<button
-						type="button"
-						className="button-link"
-						onClick={ onToggle }
-						aria-expanded={ isOpen }
-					>
-						{ this.formatDate( attributes.endDate, true ) }
-					</button>
-				) }
-				renderContent={ () => <DateTimePicker key="end-datetime-picker" currentDate={ attributes.endDate } onChange={ this.onChangeEnd } /> }
-			/>
-		);
-
-		const focusDetailTitle = ( focusValue ) => setFocus( { editable: 'detailsTitle', ...focusValue } );
 
 		const organizerExistingDropdown = (
 			<Dropdown
@@ -203,6 +86,8 @@ class EventDetails extends Component {
 			/>
 		);
 
+		const focusDetailTitle = ( focusValue ) => setFocus( { editable: 'detailsTitle', ...focusValue } );
+
 		const DetailsBox = (
 			<div
 				className="tribe-events-meta-group tribe-events-meta-group-details"
@@ -225,15 +110,18 @@ class EventDetails extends Component {
 					placeholder={ __( 'Details', 'the-events-calendar' ) }
 					formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 				/>
-				<div>
-					<strong>Start: </strong><br />
-					{ startDropdown }
-				</div>
 
-				<div>
-					<strong>End: </strong><br />
-					{ endDropdown }
-				</div>
+				<DateTime
+					changeDatetime={ ( date ) => setAttributes( { startDate: date } ) }
+					datetime={ attributes.startDate }
+					label={ __( 'Start: ', 'the-events-calendar' ) }
+				/>
+
+				<DateTime
+					changeDatetime={ ( date ) => setAttributes( { endDate: date } ) }
+					datetime={ attributes.endDate }
+					label={ __( 'End: ', 'the-events-calendar' ) }
+				/>
 
 				<div>
 					<strong>Website: </strong>
