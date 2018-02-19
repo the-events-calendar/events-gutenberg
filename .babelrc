@@ -29,7 +29,8 @@
 			"plugins": [
 				"import-glob",
 				"lodash",
-				"transform-runtime"
+				"transform-runtime",
+				"transform-class-properties"
 			]
 		},
 		"test": {
