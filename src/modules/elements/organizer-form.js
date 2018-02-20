@@ -14,11 +14,44 @@ const { decodeEntities } = wp.utils;
 
 
 class OrganizerForm extends Component {
+	static defaultProps = { postType: 'tribe_organizer' }
+
 	constructor() {
 		super( ...arguments );
+		this.updateOrganizer = this.updateOrganizer.bind( this );
+		this.onSubmit = this.onSubmit.bind( this );
+	}
+
+	onSubmit() {
+		const {
+			title,
+			phone,
+			website,
+			email,
+		} = this.state;
+
+		this.updateOrganizer( {
+			title: title,
+			meta: {
+				_OrganizerEmail: email,
+				_OrganizerPhone: phone,
+				_OrganizerWebsite: website,
+			}
+		} );
+	}
+
+	updateOrganizer( toSend ) {
+		const Model = wp.api.getPostTypeModel( this.props.postType );
+
+		new Model( toSend ).save().done( ( newPost ) => {
+			console.log( newPost );
+		} ).fail( ( err ) => {
+			console.log( err );
+		} );
 	}
 
 	render() {
+
 		return [
 			<div
 				className="tribe-organizer-form"
@@ -33,6 +66,7 @@ class OrganizerForm extends Component {
 							type='text'
 							name='organizer[name]'
 							ref={ ( input ) => this.input = input }
+							onChange={ ( next ) => this.setState( { title: next.target.value } ) }
 						/>
 					</dd>
 					<dt>{ __( 'Phone:', 'the-events-calendar' ) } </dt>
@@ -41,6 +75,7 @@ class OrganizerForm extends Component {
 							type='text'
 							name='organizer[phone]'
 							ref={ ( input ) => this.input = input }
+							onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
 						/>
 					</dd>
 					<dt>{ __( 'Website:', 'the-events-calendar' ) } </dt>
@@ -49,6 +84,7 @@ class OrganizerForm extends Component {
 							type='text'
 							name='organizer[website]'
 							ref={ ( input ) => this.input = input }
+							onChange={ ( next ) => this.setState( { website: next.target.value } ) }
 						/>
 					</dd>
 					<dt>{ __( 'Email:', 'the-events-calendar' ) } </dt>
@@ -57,12 +93,14 @@ class OrganizerForm extends Component {
 							type='text'
 							name='organizer[email]'
 							ref={ ( input ) => this.input = input }
+							onChange={ ( next ) => this.setState( { email: next.target.value } ) }
 						/>
 					</dd>
 				</dl>
 				<button
 					type="button"
 					className="button-secondary"
+					onClick={ this.onSubmit }
 				>
 					{ __( 'Create Organizer', 'the-events-calendar' ) }
 				</button>

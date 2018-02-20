@@ -7,13 +7,20 @@ import { connect } from 'react-redux';
 /**
  * WordPress dependencies
  */
-import { Component, compose } from '@wordpress/element';
-import {
-	Dropdown
-} from '@wordpress/components';
-import { RichText, PlainText } from '@wordpress/blocks'
 import { select } from '@wordpress/data'
 import { __ } from '@wordpress/i18n';
+import { Component, compose } from '@wordpress/element';
+
+import {
+	Dropdown,
+	IconButton,
+	Dashicon
+} from '@wordpress/components';
+
+import {
+	RichText,
+	PlainText,
+} from '@wordpress/blocks'
 
 /**
  * Internal dependencies
@@ -24,6 +31,8 @@ import {
 	DateTime,
 	MetaGroup,
 } from 'elements'
+
+import { default as EventOrganizers } from './organizers'
 
 /**
  * Module Code
@@ -59,13 +68,13 @@ class EventDetails extends Component {
 					/>
 
 					<DateTime
-						changeDatetime={ date => setAttributes( { startDate: date } ) }
+						changeDatetime={ ( date ) => setAttributes( { startDate: date } ) }
 						datetime={ attributes.startDate }
 						label={ __( 'Start: ', 'the-events-calendar' ) }
 					/>
 
 					<DateTime
-						changeDatetime={ date => setAttributes( { endDate: date } ) }
+						changeDatetime={ ( date ) => setAttributes( { endDate: date } ) }
 						datetime={ attributes.endDate }
 						label={ __( 'End: ', 'the-events-calendar' ) }
 					/>
@@ -76,11 +85,7 @@ class EventDetails extends Component {
 							id="tribe-event-url"
 							value={ attributes.eventUrl }
 							placeholder={ __( 'Write event website here…', 'the-events-calendar' ) }
-							onChange={ ( nextContent ) => {
-								setAttributes( {
-									eventUrl: nextContent
-								} );
-							} }
+							onChange={ ( nextContent ) => setAttributes( { eventUrl: nextContent } ) }
 						/>
 					</div>
 
@@ -99,47 +104,16 @@ class EventDetails extends Component {
 						tagName="h3"
 						className="tribe-events-single-section-title"
 						value={ attributes.organizerTitle }
-						onChange={ ( nextContent ) => {
-							setAttributes( {
-								organizerTitle: nextContent
-							} );
-						} }
+						onChange={ ( nextContent ) => setAttributes( { organizerTitle: nextContent } ) }
 						focus={ focus && 'organizerTitle' === focus.editable ? focus : undefined }
 						onFocus={ ( focusValue ) => setFocus( { editable: 'organizerTitle', ...focusValue } ) }
 						placeholder={ __( 'Organizer', 'the-events-calendar' ) }
 						formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 					/>
-					<Dropdown
-						className="tribe-editor-organizer-dropdown"
-						position="bottom center"
-						contentClassName="tribe-editor-dropdown__dialog"
-						renderToggle={ ( { onToggle, isOpen } ) => (
-							<button
-								type="button"
-								className="button-secondary"
-								onClick={ onToggle }
-								aria-expanded={ isOpen }
-							>
-								{ __( 'Add Existing', 'the-events-calendar' ) }
-							</button>
-						) }
-						renderContent={ () => ( <OrganizerForm /> ) }
-					/>
-					<Dropdown
-						className="tribe-editor-organizer-dropdown"
-						position="bottom center"
-						contentClassName="tribe-editor-dropdown__dialog"
-						renderToggle={ ( { onToggle, isOpen } ) => (
-							<button
-								type="button"
-								className="button-secondary"
-								onClick={ onToggle }
-								aria-expanded={ isOpen }
-							>
-								{ __( 'Create', 'the-events-calendar' ) }
-							</button>
-						) }
-						renderContent={ () => ( <OrganizerForm /> ) }
+
+					<EventOrganizers
+						focus={ focus }
+						onChange={ nextOrganizer => setAttributes( { eventOrganizer: nextOrganizer } ) }
 					/>
 				</MetaGroup>
 			</div>

@@ -46,9 +46,18 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		add_filter( 'tribe_events_register_event_type_args', tribe_callback( 'gutenberg.editor', 'add_support' ) );
 		add_filter( 'tribe_events_register_event_type_args', tribe_callback( 'gutenberg.editor', 'add_template_blocks' ) );
 
-		add_action( 'init', tribe_callback( 'gutenberg.editor', 'register_blocks' ), 20 );
+		// Add Rest API support
+		add_filter( 'tribe_events_register_event_type_args', tribe_callback( 'gutenberg.editor', 'add_rest_support' ) );
+		add_filter( 'tribe_events_register_venue_type_args', tribe_callback( 'gutenberg.editor', 'add_rest_support' ) );
+		add_filter( 'tribe_events_register_organizer_type_args', tribe_callback( 'gutenberg.editor', 'add_rest_support' ) );
+
+		// Setup the Meta registration
 		add_action( 'init', tribe_callback( 'gutenberg.meta', 'register' ), 25 );
 
+		// Setup the registration of Blocks
+		add_action( 'init', tribe_callback( 'gutenberg.editor', 'register_blocks' ), 20 );
+
+		// Register blocks to own own action
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-details', 'register' ) );
 	}
 

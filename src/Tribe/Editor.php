@@ -25,14 +25,11 @@ class Tribe__Events_Gutenberg__Editor {
 	 *
 	 * @since  TBD
 	 *
-	 * @param  array $args Arguments used to setup the CPT
+	 * @param  array $args Arguments used to setup the Post Type
 	 *
 	 * @return array
 	 */
 	public function add_support( $args = array() ) {
-		// Blocks Editor requires REST support
-		$args['show_in_rest'] = true;
-
 		// Make sure we have the Support argument and it's an array
 		if ( ! isset( $args['supports'] ) || ! is_array( $args['supports'] ) ) {
 			$args['supports'] = array();
@@ -41,6 +38,32 @@ class Tribe__Events_Gutenberg__Editor {
 		// Add Editor Support
 		if ( ! in_array( 'editor', $args['supports'] ) ) {
 			$args['supports'][] = 'editor';
+		}
+
+		return $args;
+	}
+
+	/**
+	 * Adds the required fields into the Post Type so that we can the Rest API to update it
+	 *
+	 * @since  TBD
+	 *
+	 * @param  array $args Arguments used to setup the Post Type
+	 *
+	 * @return array
+	 */
+	public function add_rest_support( $args = array() ) {
+		// Blocks Editor requires REST support
+		$args['show_in_rest'] = true;
+
+		// Make sure we have the Support argument and it's an array
+		if ( ! isset( $args['supports'] ) || ! is_array( $args['supports'] ) ) {
+			$args['supports'] = array();
+		}
+
+		// Add Custom Fields (meta) Support
+		if ( ! in_array( 'custom-fields', $args['supports'] ) ) {
+			$args['supports'][] = 'custom-fields';
 		}
 
 		return $args;
@@ -65,7 +88,7 @@ class Tribe__Events_Gutenberg__Editor {
 		$template[] = array(
 			'core/paragraph',
 			array(
-				'placeholder' => 'Add Description...',
+				'placeholder' => __( 'Add Description...', 'the-events-calendar' ),
 			),
 		);
 		$template[] = array( 'tribe/event-details' );

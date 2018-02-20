@@ -34,3 +34,5 @@ class MetaGroup extends Component {
 		)
 	}
 }
+
+export default MetaGroup

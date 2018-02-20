@@ -23,5 +23,9 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_EventStartDate', $args );
 		register_meta( 'post', '_EventEndDate', $args );
 		register_meta( 'post', '_EventURL', $args );
+
+		register_meta( 'post', '_OrganizerEmail', $args );
+		register_meta( 'post', '_OrganizerPhone', $args );
+		register_meta( 'post', '_OrganizerWebsite', $args );
 	}
 }
