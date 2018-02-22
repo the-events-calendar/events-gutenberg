@@ -33,8 +33,8 @@ class Tribe__Events_Gutenberg__Meta {
 			array(
 				'description' => __( 'Event Organizers', 'the-events-calendar' ),
 				'auth_callback' => '__return_true',
-				'sanitize_callback' => 'wp_parse_id_list',
-				'type' => 'array',
+				'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
+				'type' => 'number',
 				'single' => false,
 				'show_in_rest' => true,
 			)
@@ -43,5 +43,15 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_OrganizerEmail', $args->text );
 		register_meta( 'post', '_OrganizerPhone', $args->text );
 		register_meta( 'post', '_OrganizerWebsite', $args->text );
+	}
+
+	public function sanitize_numeric_array( $value ) {
+		if ( is_array( $value ) ) {
+			return wp_parse_id_list( $value );
+		} elseif ( is_numeric( $value ) ) {
+			return absint( $value );
+		} else {
+			return false;
+		}
 	}
 }
