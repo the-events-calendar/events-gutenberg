@@ -3,7 +3,7 @@
  */
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { union } from 'lodash';
+import { union, without } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -116,6 +116,7 @@ class EventDetails extends Component {
 					<EventOrganizers
 						focus={ focus }
 						addOrganizer={ nextOrganizer => setAttributes( { eventOrganizers: union( attributes.eventOrganizers, [ nextOrganizer ] ) } ) }
+						removeOrganizer={ organizer => setAttributes( { eventOrganizers: without( attributes.eventOrganizers, organizer ) } ) }
 					/>
 				</MetaGroup>
 			</div>

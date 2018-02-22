@@ -1,16 +1,19 @@
 /**
  * External dependencies
  */
-import { get } from 'lodash';
+import { get, isFunction } from 'lodash';
 import { stringify } from 'querystringify';
 
 /**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
-const { withAPIData } = wp.components;
 const { Component } = wp.element;
-const { decodeEntities } = wp.utils;
+import {
+	Spinner,
+	Placeholder,
+	withAPIData
+} from '@wordpress/components';
 
 
 class OrganizerForm extends Component {
@@ -20,6 +23,26 @@ class OrganizerForm extends Component {
 		super( ...arguments );
 		this.updateOrganizer = this.updateOrganizer.bind( this );
 		this.onSubmit = this.onSubmit.bind( this );
+
+		this.state = {
+			title: null,
+			phone: '',
+			website: '',
+			email: '',
+			organizer: null,
+		}
+	}
+
+	isCreating() {
+		if ( ! this.state.organizer ) {
+			return false;
+		}
+
+		if ( ! isFunction( this.state.organizer.state ) ) {
+			return false;
+		}
+
+		return 'pending' === this.state.organizer.state()
 	}
 
 	onSubmit() {
@@ -32,6 +55,8 @@ class OrganizerForm extends Component {
 
 		this.updateOrganizer( {
 			title: title,
+			// For now every Organizer goes are publish
+			status: 'publish',
 			meta: {
 				_OrganizerEmail: email,
 				_OrganizerPhone: phone,
@@ -41,18 +66,37 @@ class OrganizerForm extends Component {
 	}
 
 	updateOrganizer( toSend ) {
-		const Model = wp.api.getPostTypeModel( this.props.postType );
+		const organizerModel = wp.api.getPostTypeModel( this.props.postType )
+		const organizer = new organizerModel( toSend ).save();
 
-		new Model( toSend ).save().done( ( newPost ) => {
-			console.log( newPost );
+		// Set the organizer state
+		this.setState( { organizer: organizer } );
+
+		organizer.done( ( newPost ) => {
+			if ( ! newPost.id ) {
+				console.warning( 'Invalid creation of organizer:', newPost )
+			}
+
 			this.props.addOrganizer( newPost.id );
-
+			this.props.onClose();
 		} ).fail( ( err ) => {
 			console.log( err );
 		} );
 	}
 
 	render() {
+		if ( this.isCreating() ) {
+			return [
+				<div
+					className="tribe-organizer-form"
+					key='tribe-organizer-form'
+				>
+					<Placeholder key="placeholder">
+						<Spinner />
+					</Placeholder>
+				</div>
+			];
+		}
 
 		return [
 			<div

@@ -3,6 +3,7 @@
  */
 import { unescape, union } from 'lodash';
 import { stringify } from 'querystringify';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -16,6 +17,7 @@ import {
 	IconButton,
 	Dashicon,
 	Spinner,
+	Placeholder,
 	withAPIData
 } from '@wordpress/components';
 
@@ -43,6 +45,7 @@ function SearchDropdown( { ...props } ) {
 			label={ __( 'Add existing Organizer' ) }
 			onClick={ onToggle }
 			icon={ icon }
+			aria-expanded={ isOpen }
 		/>
 	)
 
@@ -63,6 +66,7 @@ function SearchDropdown( { ...props } ) {
 	return content
 }
 
+
 function CreateDropdown( { ...props } ) {
 	const { focus, addOrganizer } = props;
 
@@ -80,12 +84,14 @@ function CreateDropdown( { ...props } ) {
 			label={ __( 'Create Organizer' ) }
 			onClick={ onToggle }
 			icon={ icon }
+			aria-expanded={ isOpen }
 		/>
 	)
 
-	const dropdownContent = () => (
+	const dropdownContent = ( { onToggle, isOpen, onClose } ) => (
 		<OrganizerForm
 			addOrganizer={ addOrganizer }
+			onClose={ onClose }
 		/>
 	)
 
@@ -102,12 +108,39 @@ function CreateDropdown( { ...props } ) {
 	return content
 }
 
+function OrganizerActions( { ...props } ) {
+	const { focus, organizer, onClick } = props;
+
+	if ( ! focus  ) {
+		return null;
+	}
+
+	const icon = (
+		<Dashicon icon='no' />
+	)
+
+	return (
+		<IconButton
+			className='tribe-editor-button'
+			label={ __( 'Remove Organizer' ) }
+			onClick={ onClick }
+			icon={ icon }
+			aria-expanded={ focus }
+			style={{ position: 'absolute', right: 0, top: '-5px' }}
+		/>
+	)
+}
+
 /**
  * Module Code
  */
 class EventOrganizers extends Component {
 	constructor( props ) {
 		super( ...arguments );
+
+		this.state = {
+			overOrganizer: null,
+		}
 	}
 
 	renderOrganizerName( organizer ) {
@@ -139,16 +172,34 @@ class EventOrganizers extends Component {
 		const organizers = this.getOrganizers();
 
 		return (
-			<ul>
+			<ul className={ classNames( 'tribe-editor-organizer-list' ) }>
 				{ organizers.map( ( organizer, index ) => this.renderOrganizerListItem( organizer, index + 1 === organizers.length, 0 ) ) }
 			</ul>
 		);
 	}
 
 	renderOrganizerListItem( organizer, isLast, level ) {
+		const { focus, removeOrganizer } = this.props;
+		const { overOrganizer } = this.state;
+		const current = overOrganizer === organizer.id;
+		const classes = {
+			'tribe-current': focus && current
+		}
+
+		let renderButtons = null;
 		return (
-			<li key={ organizer.id }>
-				<a href={ organizer.link } target="_blank">{ this.renderOrganizerName( organizer ) }</a>
+			<li
+				className={ classNames( classes ) }
+				key={ organizer.id }
+				onMouseEnter={ () => { this.setState( { overOrganizer: organizer.id } ) } }
+				onMouseLeave={ () => { this.setState( { overOrganizer: null } ) } }
+			>
+				{ this.renderOrganizerName( organizer ) }
+				<OrganizerActions
+					focus={ focus && current }
+					organizer={ organizer }
+					onClick={ () => removeOrganizer( organizer.id ) }
+				/>
 			</li>
 		);
 	}
@@ -156,15 +207,13 @@ class EventOrganizers extends Component {
 	render() {
 		const { focus, addOrganizer } = this.props;
 		const organizers = this.getOrganizers();
-		var list = null
+		var list = (
+			<Placeholder key="placeholder">
+				<Spinner />
+			</Placeholder>
+		)
 
-		if ( this.props.organizers.isLoading ) {
-			list = (
-				<div key='organizer-list'>
-					<Spinner key='organizer-spinner' />
-				</div>
-			);
-		} else if ( organizers.length ) {
+		if ( organizers.length ) {
 			list = (
 				<div key='organizer-list'>
 					{ this.renderOrganizerList() }
