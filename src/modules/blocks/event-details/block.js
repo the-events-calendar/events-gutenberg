@@ -3,6 +3,7 @@
  */
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { union } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -37,6 +38,7 @@ import { default as EventOrganizers } from './organizers'
 /**
  * Module Code
  */
+
 class EventDetails extends Component {
 	constructor() {
 		super( ...arguments );
@@ -113,7 +115,7 @@ class EventDetails extends Component {
 
 					<EventOrganizers
 						focus={ focus }
-						onChange={ nextOrganizer => setAttributes( { eventOrganizer: nextOrganizer } ) }
+						addOrganizer={ nextOrganizer => setAttributes( { eventOrganizers: union( attributes.eventOrganizers, [ nextOrganizer ] ) } ) }
 					/>
 				</MetaGroup>
 			</div>

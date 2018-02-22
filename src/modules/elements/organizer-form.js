@@ -45,6 +45,8 @@ class OrganizerForm extends Component {
 
 		new Model( toSend ).save().done( ( newPost ) => {
 			console.log( newPost );
+			this.props.addOrganizer( newPost.id );
+
 		} ).fail( ( err ) => {
 			console.log( err );
 		} );

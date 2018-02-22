@@ -19,7 +19,7 @@
 		"@wordpress/a11y": "1.0.3",
 		"@wordpress/hooks": "1.1.1",
 		"@wordpress/url": "1.0.0",
-		"classnames": "2.2.5",
+		"classnames": "^2.2.5",
 		"element-closest": "2.0.2",
 		"file-loader": "^1.1.6",
 		"jed": "1.1.1",

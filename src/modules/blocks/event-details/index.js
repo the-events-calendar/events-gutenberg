@@ -31,6 +31,11 @@ export default {
 		organizerTitle: {
 			type: 'html',
 		},
+		eventOrganizers: {
+			type: 'array',
+			source: 'meta',
+			meta: '_EventOrganizerID',
+		},
 		detailsTitle: {
 			type: 'html',
 		},

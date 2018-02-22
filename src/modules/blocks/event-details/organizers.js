@@ -22,7 +22,7 @@ import {
 } from 'elements'
 
 function SearchDropdown( { ...props } ) {
-	const { focus } = props;
+	const { focus, addOrganizer } = props;
 
 	if ( ! focus  ) {
 		return null;
@@ -59,7 +59,7 @@ function SearchDropdown( { ...props } ) {
 }
 
 function CreateDropdown( { ...props } ) {
-	const { focus } = props;
+	const { focus, addOrganizer } = props;
 
 	if ( ! focus  ) {
 		return null;
@@ -79,7 +79,9 @@ function CreateDropdown( { ...props } ) {
 	)
 
 	const dropdownContent = () => (
-		<OrganizerForm />
+		<OrganizerForm
+			addOrganizer={ addOrganizer }
+		/>
 	)
 
 	const content = (
@@ -103,14 +105,20 @@ class EventOrganizers extends Component {
 		super( ...arguments );
 	}
 
-
-
 	render() {
-		const { focus } = this.props;
+		const { focus, addOrganizer } = this.props;
 
 		const content = [
-			<SearchDropdown key='organizer-search-dropdown' focus={ focus } />,
-			<CreateDropdown key='organizer-create-dropdown' focus={ focus } />
+			<SearchDropdown
+				key='organizer-search-dropdown'
+				focus={ focus }
+				addOrganizer={ addOrganizer }
+			/>,
+			<CreateDropdown
+				key='organizer-create-dropdown'
+				focus={ focus }
+				addOrganizer={ addOrganizer }
+			/>
 		]
 
 		return content
