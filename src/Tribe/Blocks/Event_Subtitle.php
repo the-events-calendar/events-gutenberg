@@ -23,19 +23,6 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
-		return 'Event Subtitle';
-	}
-
-	/**
-	 * Sends a valid JSON response to the AJAX request for the block contents
-	 *
-	 * @since  TBD
-	 *
-	 * @return void
-	 */
-	public function ajax() {
-		$data = $this->render();
-
-		wp_send_json_success( $data );
+		return '{{ placeholder-text-' . $this->name() . ' }}';
 	}
 }
