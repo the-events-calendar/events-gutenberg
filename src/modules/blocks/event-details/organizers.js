@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, union } from 'lodash';
+import { unescape, union, uniqueId } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 
@@ -26,46 +26,8 @@ import {
  */
 import {
 	OrganizerForm,
+	SearchPosts,
 } from 'elements'
-
-function SearchDropdown( { ...props } ) {
-	const { focus, addOrganizer } = props;
-
-	if ( ! focus  ) {
-		return null;
-	}
-
-	const icon = (
-		<Dashicon icon='search' />
-	)
-
-	const dropdownToggle = ( { onToggle, isOpen } ) => (
-		<IconButton
-			className='tribe-editor-button'
-			label={ __( 'Add existing Organizer' ) }
-			onClick={ onToggle }
-			icon={ icon }
-			aria-expanded={ isOpen }
-		/>
-	)
-
-	const dropdownContent = () => (
-		'Search organizer here!'
-	)
-
-	const content = (
-		<Dropdown
-			className="tribe-editor-organizer-dropdown"
-			position="bottom center"
-			contentClassName="tribe-editor-dropdown__dialog"
-			renderToggle={ dropdownToggle }
-			renderContent={ dropdownContent }
-		/>
-	)
-
-	return content
-}
-
 
 function CreateDropdown( { ...props } ) {
 	const { focus, addOrganizer } = props;
@@ -223,8 +185,9 @@ class EventOrganizers extends Component {
 
 		const content = [
 			list,
-			<SearchDropdown
+			<SearchPosts
 				key='organizer-search-dropdown'
+				postType='tribe_organizer'
 				focus={ focus }
 				addOrganizer={ addOrganizer }
 			/>,
