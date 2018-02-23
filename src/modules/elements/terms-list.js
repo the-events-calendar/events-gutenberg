@@ -73,7 +73,7 @@ class TaxonomiesElement extends Component {
 
 	renderTermListItem( term, isLast, level ) {
 		const childTerms = this.getTerms( term.id );
-		const separator = ! isLast ? <span>{ this.props.termSeparator } </span> : '';
+		const separator = ! isLast ? <span>{ this.props.termSeparator } </span> : null;
 
 		return (
 			<li key={ term.id }>

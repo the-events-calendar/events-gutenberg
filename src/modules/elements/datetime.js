@@ -108,7 +108,7 @@ class DateTime extends Component {
 			/>
 		);
 
-		const label = this.props.label ? <strong className='tribe-detail-label'>{ this.props.label } </strong> : '';
+		const label = this.props.label ? <strong className='tribe-detail-label'>{ this.props.label } </strong> : null;
 
 		return [
 			<div
