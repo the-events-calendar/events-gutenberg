@@ -78,7 +78,7 @@ class DateTime extends Component {
 
 	onChange( date ) {
 		// Start defaults to now
-		var dateMoment = moment();
+		let dateMoment = moment();
 
 		// if we have the date we prep the moment
 		if ( date ) {

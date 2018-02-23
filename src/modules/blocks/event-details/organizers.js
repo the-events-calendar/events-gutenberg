@@ -169,7 +169,7 @@ class EventOrganizers extends Component {
 	render() {
 		const { focus, addOrganizer } = this.props;
 		const organizers = this.getOrganizers();
-		var list = (
+		let list = (
 			<Placeholder key="placeholder">
 				<Spinner />
 			</Placeholder>
