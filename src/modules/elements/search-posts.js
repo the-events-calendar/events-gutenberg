@@ -29,6 +29,10 @@ import {
  * Module Code
  */
 class SearchPosts extends Component {
+	static defaultProps = {
+		onHover: () => {},
+	};
+
 	constructor() {
 		super( ...arguments );
 		this.state = {
@@ -42,19 +46,6 @@ class SearchPosts extends Component {
 		this.renderItem = this.renderItem.bind( this );
 		this.renderDropdown = this.renderDropdown.bind( this );
 		this.renderToggle = this.renderToggle.bind( this );
-	}
-
-	/**
-	 * Returns an event handler triggered when hovering a block.
-	 *
-	 * @param   {Object} block Block object.
-	 * @return  {Func}         Event Handler.
-	 */
-	createToggleBlockHover( block ) {
-		if ( ! this.props.onHover ) {
-			return null;
-		}
-		return () => this.props.onHover( block );
 	}
 
 	getItems() {
@@ -71,7 +62,7 @@ class SearchPosts extends Component {
 	}
 
 	renderList() {
-		const { items, focus, addOrganizer } = this.props;
+		const { items, focus } = this.props;
 		const isLoading = items.isLoading;
 
 		if ( isLoading ) {
@@ -87,7 +78,7 @@ class SearchPosts extends Component {
 
 	renderItem( item ) {
 		const { current } = this.state;
-		const { onSelectItem } = this.props;
+		const { onSelectItem, onHover } = this.props;
 
 		const isCurrent = current && current.id === item.id;
 
@@ -102,8 +93,8 @@ class SearchPosts extends Component {
 				} }
 				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
 				disabled={ item.isDisabled }
-				onMouseEnter={ this.createToggleBlockHover( item ) }
-				onMouseLeave={ this.createToggleBlockHover( null ) }
+				onMouseEnter={ onHover( item ) }
+				onMouseLeave={ onHover( null ) }
 			>
 				{ item.title.rendered }
 			</button>

@@ -17,7 +17,9 @@ import {
 
 
 class OrganizerForm extends Component {
-	static defaultProps = { postType: 'tribe_organizer' }
+	static defaultProps = {
+		postType: 'tribe_organizer',
+	};
 
 	constructor() {
 		super( ...arguments );
