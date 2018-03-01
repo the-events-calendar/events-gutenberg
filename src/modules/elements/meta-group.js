@@ -15,11 +15,10 @@ import { Component } from '@wordpress/element';
  * Module Code
  */
 class MetaGroup extends Component {
-	static defaultProps = { className: '', children: null }
-
-	constructor() {
-		super( ...arguments );
-	}
+	static defaultProps = {
+		className: '',
+		children: null,
+	};
 
 	render() {
 		const { groupKey, className, children } = this.props;
