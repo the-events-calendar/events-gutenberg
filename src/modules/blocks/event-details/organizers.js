@@ -169,11 +169,15 @@ class EventOrganizers extends Component {
 	render() {
 		const { focus, addOrganizer } = this.props;
 		const organizers = this.getOrganizers();
-		let list = (
-			<Placeholder key="placeholder">
-				<Spinner />
-			</Placeholder>
-		)
+		let list = null;
+
+		if ( this.props.organizers.isLoading ) {
+			list = (
+				<Placeholder key="placeholder">
+					<Spinner />
+				</Placeholder>
+			)
+		}
 
 		if ( organizers.length ) {
 			list = (
@@ -188,8 +192,11 @@ class EventOrganizers extends Component {
 			<SearchPosts
 				key='organizer-search-dropdown'
 				postType='tribe_organizer'
+				metaKey='_EventOrganizerID'
+				searchLabel={ __( 'Search for an organizer', 'the-events-calendar' ) }
+				iconLabel={ __( 'Add existing Organizer', 'the-events-calendar' ) }
 				focus={ focus }
-				addOrganizer={ addOrganizer }
+				onSelectItem={ addOrganizer }
 			/>,
 			<CreateDropdown
 				key='organizer-create-dropdown'
@@ -212,16 +219,22 @@ const applyQuery = query( ( select, props ) => {
 
 const applyWithAPIData = withAPIData( ( props ) => {
 	const { organizers } = props
-	const query = stringify( {
+	let query = {
 		per_page: 100,
 		orderby: 'modified',
 		status: [ 'draft', 'publish' ],
 		order: 'desc',
 		include: organizers,
-	} );
+	};
+
+	if ( ! organizers || 0 === organizers.length ) {
+		return {
+			organizers: [],
+		}
+	}
 
 	return {
-		organizers: `/wp/v2/tribe_organizer?${ query }`,
+		organizers: `/wp/v2/tribe_organizer?${ stringify( query ) }`,
 	};
 } );
 

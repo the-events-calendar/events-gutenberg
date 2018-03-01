@@ -8,7 +8,6 @@ import classNames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
 import { query } from '@wordpress/data'
 import { Component, compose } from '@wordpress/element';
 
@@ -32,7 +31,6 @@ import {
 class SearchPosts extends Component {
 	constructor() {
 		super( ...arguments );
-		this.nodes = {};
 		this.state = {
 			filterValue: '',
 			selectedItem: null,
@@ -45,7 +43,6 @@ class SearchPosts extends Component {
 		this.renderDropdown = this.renderDropdown.bind( this );
 		this.renderToggle = this.renderToggle.bind( this );
 	}
-
 
 	/**
 	 * Returns an event handler triggered when hovering a block.
@@ -60,10 +57,22 @@ class SearchPosts extends Component {
 		return () => this.props.onHover( block );
 	}
 
+	getItems() {
+		if ( ! this.props.items ) {
+			return [];
+		}
+
+		const items = this.props.items.data;
+		if ( ! items || ! items.length ) {
+			return [];
+		}
+
+		return items;
+	}
+
 	renderList() {
 		const { items, focus, addOrganizer } = this.props;
-		const instanceId = uniqueId( 'search-' );
-		const isLoading = true;
+		const isLoading = items.isLoading;
 
 		if ( isLoading ) {
 			return (
@@ -73,11 +82,7 @@ class SearchPosts extends Component {
 			);
 		}
 
-		return (
-			<ul>
-				{ items.map( this.renderItem, this ) }
-			</ul>
-		);
+		return this.getItems().map( this.renderItem, this );
 	}
 
 	renderItem( item ) {
@@ -87,39 +92,42 @@ class SearchPosts extends Component {
 		const isCurrent = current && current.id === item.id;
 
 		return (
-			<li>
-				<button
-					role="menuitem"
-					key={ item.id }
-					className="editor-inserter__block"
-					onClick={ () => onSelectItem( item ) }
-					tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
-					disabled={ item.isDisabled }
-					onMouseEnter={ this.createToggleBlockHover( item ) }
-					onMouseLeave={ this.createToggleBlockHover( null ) }
-				>
-					{ item.title }
-				</button>
-			</li>
+			<button
+				key={ `post-${ item.id }` }
+				role="menuitem"
+				className="tribe-editor__search-item"
+				onClick={ () => {
+					onSelectItem( item.id )
+					this.onClose()
+				} }
+				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
+				disabled={ item.isDisabled }
+				onMouseEnter={ this.createToggleBlockHover( item ) }
+				onMouseLeave={ this.createToggleBlockHover( null ) }
+			>
+				{ item.title.rendered }
+			</button>
 		);
 	}
 
-	renderDropdown() {
+	renderDropdown( { onToggle, isOpen, onClose } ) {
 		const instanceId = uniqueId( 'search-' );
+		const { searchLabel } = this.props;
+		this.onClose = onClose.bind( this );
 
 		return (
-			<div className={ classNames( 'tribe-editor-organizer__search' ) }>
+			<div className={ classNames( 'tribe-editor__search' ) }>
 				<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
-					{ __( 'Search for an organizer', 'the-events-calendar' ) }
+					{ searchLabel }
 				</label>
 				<input
 					id={ `editor-inserter__${ instanceId }` }
 					type='search'
-					placeholder={ __( 'Search for an organizer', 'the-events-calendar' ) }
+					placeholder={ searchLabel }
 					className='editor-inserter__search'
 					onChange={ ( event ) => console.log( event.target.value ) }
 				/>
-				<div role="menu" className={ classNames( 'tribe-editor-organizer__search-results' ) }>
+				<div role="menu" className={ classNames( 'tribe-editor__search-results' ) }>
 					{ this.renderList() }
 				</div>
 			</div>
@@ -127,6 +135,7 @@ class SearchPosts extends Component {
 	}
 
 	renderToggle( { onToggle, isOpen } ) {
+		const { iconLabel } = this.props;
 		const icon = (
 			<Dashicon icon='search' />
 		)
@@ -134,7 +143,7 @@ class SearchPosts extends Component {
 		return (
 			<IconButton
 				className='tribe-editor-button'
-				label={ __( 'Add existing Organizer' ) }
+				label={ iconLabel }
 				onClick={ onToggle }
 				icon={ icon }
 				aria-expanded={ isOpen }
@@ -143,7 +152,7 @@ class SearchPosts extends Component {
 	}
 
 	render() {
-		const { items, focus, addOrganizer } = this.props;
+		const { items, focus } = this.props;
 
 		if ( ! focus ) {
 			return null;
@@ -161,4 +170,34 @@ class SearchPosts extends Component {
 	}
 }
 
-export default SearchPosts
+const applyQuery = query( ( select, props ) => {
+	const { metaKey } = props;
+	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' )
+	const items = meta[ metaKey ] ? meta[ metaKey ] : []
+	return {
+		items: items,
+	}
+} );
+
+const applyWithAPIData = withAPIData( ( props ) => {
+	const { items, postType } = props
+	let query = {
+		per_page: 100,
+		orderby: 'modified',
+		status: [ 'draft', 'publish' ],
+		order: 'desc',
+	};
+
+	if ( items && 0 !== items.length ) {
+		query.exclude = items;
+	}
+
+	return {
+		items: `/wp/v2/${ postType }?${ stringify( query ) }`,
+	};
+} );
+
+export default compose(
+	applyQuery,
+	applyWithAPIData,
+)( SearchPosts );
