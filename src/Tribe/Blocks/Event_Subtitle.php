@@ -1,5 +1,5 @@
 <?php
-class Tribe__Events_Gutenberg__Blocks__Event_Details
+class Tribe__Events_Gutenberg__Blocks__Event_Subtitle
 extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 	/**
@@ -10,7 +10,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return string
 	 */
 	public function name() {
-		return 'tribe/event-details';
+		return 'tribe/event-subtitle';
 	}
 
 	/**

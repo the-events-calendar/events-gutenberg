@@ -1,0 +1,192 @@
+.tribe-editor-datetime {
+	display: inline-block;
+}
+
+.tribe-editor-block {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 14px;
+}
+
+.tribe-editor-button {
+	&.components-icon-button {
+		border-radius: 4px;
+		padding-bottom: 6px;
+	}
+}
+
+.tribe-editor-events-subtitle {
+	display: inline-block;
+	font-size: 1.2em;
+	font-style: normal;
+	font-weight: bold;
+	line-height: normal;
+	margin-bottom: 0;
+	margin-top: 0;
+
+	.button-link {
+		text-decoration: none;
+		color: #666;
+	}
+
+	.tribe-element__datetime {
+		display: inline-block;
+	}
+}
+
+.tribe-editor-events-details {
+	background: #fafafa;
+	border: 1px solid #eee;
+	margin: 30px 0;
+	zoom: 1;
+
+	&::before,
+	&::after {
+		clear: both;
+		content: '';
+		display: table;
+	}
+
+	.tribe-detail-label {
+		display: block;
+	}
+
+	.tribe-editor-meta-group {
+		box-sizing: border-box;
+		display: inline-block;
+		float: left;
+		margin: 0 0 20px 0;
+		padding: 0 4%;
+		text-align: left;
+		vertical-align: top;
+		width: 50%;
+		zoom: 1;
+
+		.tribe-events-single-section-title {
+			font-size: 17px;
+			font-weight: bold;
+			padding: 20px 0 10px;
+			word-wrap: break-word;
+		}
+
+		.tribe-terms__block {
+			.spinner {
+				float: none;
+			}
+		}
+
+		.tribe-terms__list {
+			list-style: none;
+
+			li {
+				display: inline;
+			}
+		}
+	}
+
+	.blocks-plain-text {
+		background-color: transparent;
+	}
+}
+
+.tribe-editor-organizer-dropdown {
+	display: inline-block;
+	font-size: 14px;
+	margin-right: 15px;
+}
+
+.edit-post-layout__content ul.tribe-editor-organizer-list {
+	list-style: none;
+	margin-bottom: 15px;
+
+	li {
+		position: relative;
+	}
+}
+
+.tribe-editor__search {
+	width: 340px;
+
+	.tribe-editor__search-results {
+		height: 250px;
+		overflow: auto;
+
+		.components-placeholder {
+			height: inherit;
+		}
+	}
+
+	.tribe-editor__search-item {
+		display: block;
+		width: 100%;
+		color: #555d66;
+		padding: 12px;
+		cursor: pointer;
+		border: 0;
+		border-bottom: 1px solid #e2e4e7;
+		line-height: 20px;
+		background: transparent;
+		text-align: left;
+
+		&:disabled {
+
+		}
+
+		&:not(:disabled) {
+			&:hover {
+				background-color: #f8f9f9;
+			}
+
+			&:focus,
+			&:active,
+			&.is-active {
+				position: relative;
+			}
+		}
+	}
+}
+
+.tribe-organizer-form {
+	margin: 20px 30px;
+	width: 360px;
+
+	.components-placeholder {
+		background-color: transparent;
+	}
+
+	dl {
+		display: flex;
+		flex-flow: row;
+		flex-wrap: wrap;
+
+		dt {
+			flex: 0 0 25%;
+			text-overflow: ellipsis;
+		}
+
+		dd {
+			flex:0 0 75%;
+			margin-left: auto;
+			text-align: left;
+			text-overflow: ellipsis;
+
+			input,
+			textarea {
+				width: 100%;
+			}
+		}
+	}
+}
+
+
+/**
+ * Reset our Width of the Gutenberg Editor
+ */
+.gutenberg-editor-page.post-type-tribe_events {
+	.edit-post-visual-editor {
+		.editor-block-list__block,
+		.editor-default-block-appender,
+		.editor-post-title {
+			max-width: 900px;
+		}
+	}
+}
