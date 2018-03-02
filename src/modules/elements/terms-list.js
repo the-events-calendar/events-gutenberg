@@ -11,7 +11,7 @@ import { stringify } from 'querystringify';
  */
 import { Component, compose } from '@wordpress/element';
 import { Placeholder, Spinner, withAPIData } from '@wordpress/components';
-import { query } from '@wordpress/data'
+import { withSelect } from '@wordpress/data'
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -116,7 +116,7 @@ TaxonomiesElement.defaultProps = {
 	className: '',
 };
 
-const applyQuery = query( ( select, props ) => {
+const applySelect = withSelect( ( select, props ) => {
 	return {
 		terms: select( 'core/editor' ).getEditedPostAttribute( props.slug ),
 	}
@@ -137,6 +137,6 @@ const applyWithAPIData = withAPIData( ( props ) => {
 } );
 
 export default compose(
-	applyQuery,
+	applySelect,
 	applyWithAPIData,
 )( TaxonomiesElement );
