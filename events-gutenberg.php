@@ -2,7 +2,7 @@
 /**
  * Plugin Name: The Events Calendar: Gutenberg Extension
  * Description: [Description]
- * Version: 0.1.0
+ * Version: 0.1.0-alpha.1
  * Author: Modern Tribe, Inc.
  * Author URI: http://m.tri.be/1971
  * License: GPLv2 or later
@@ -15,7 +15,7 @@ class Tribe__Events_Gutenberg__Plugin {
 	/**
 	 * The semantic version number of this extension; should always match the plugin header.
 	 */
-	const VERSION = '0.1.0';
+	const VERSION = '0.1.0-alpha.1';
 
 	/**
 	 * Each plugin required by this extension

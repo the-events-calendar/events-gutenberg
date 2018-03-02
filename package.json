@@ -1,6 +1,6 @@
 {
 	"name": "events-gutenberg",
-	"version": "0.1.0",
+	"version": "0.1.0-alpha.1",
 	"description": "A new WordPress editor experience",
 	"repository": "git+https://github.com/WordPress/gutenberg.git",
 	"author": "Modern Tribe",
