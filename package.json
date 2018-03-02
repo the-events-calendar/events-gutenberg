@@ -34,6 +34,8 @@
 		"react": "16.2.0",
 		"react-datepicker": "0.61.0",
 		"react-dom": "16.2.0",
+		"react-google-maps": "^9.4.5",
+		"react-places-autocomplete": "^6.1.2",
 		"react-redux": "5.0.6",
 		"redux": "^3.7.2",
 		"semantic-ui-css": "^2.2.12",

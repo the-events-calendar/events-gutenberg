@@ -25,6 +25,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 
 		$this->container->singleton( 'gutenberg.blocks.event-subtitle', 'Tribe__Events_Gutenberg__Blocks__Event_Subtitle' );
 		$this->container->singleton( 'gutenberg.blocks.event-details', 'Tribe__Events_Gutenberg__Blocks__Event_Details' );
+		$this->container->singleton( 'gutenberg.blocks.event-venue', 'Tribe__Events_Gutenberg__Blocks__Event_Venue' );
 
 		$this->hook();
 
@@ -58,7 +59,9 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		add_action( 'init', tribe_callback( 'gutenberg.editor', 'register_blocks' ), 20 );
 
 		// Register blocks to own own action
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-subtitle', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-details', 'register' ) );
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-venue', 'register' ) );
 	}
 
 	/**

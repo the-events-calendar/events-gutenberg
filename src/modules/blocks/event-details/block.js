@@ -48,7 +48,7 @@ class EventDetails extends Component {
 		const { attributes, setAttributes, focus, setFocus } = this.props;
 
 		const content = (
-			<div key="event-details-box" className="tribe-editor-block tribe-editor-events-details">
+			<div key="event-details-box" className="tribe-editor-block tribe-editor-event__details">
 				<MetaGroup groupKey='event-details'>
 					<RichText
 						tagName="h3"
@@ -115,8 +115,8 @@ class EventDetails extends Component {
 
 					<EventOrganizers
 						focus={ focus }
-						addOrganizer={ nextOrganizer => setAttributes( { eventOrganizers: union( attributes.eventOrganizers, [ nextOrganizer ] ) } ) }
-						removeOrganizer={ organizer => setAttributes( { eventOrganizers: without( attributes.eventOrganizers, organizer ) } ) }
+						addOrganizer={ nextOrganizer => setAttributes( { eventOrganizers: union( attributes.eventOrganizers, [ nextOrganizer.id ] ) } ) }
+						removeOrganizer={ organizer => setAttributes( { eventOrganizers: without( attributes.eventOrganizers, organizer.id ) } ) }
 					/>
 				</MetaGroup>
 			</div>
