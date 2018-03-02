@@ -7,7 +7,6 @@ import { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 /**
  * WordPress dependencies
  */
-import { query } from '@wordpress/data'
 import { Component, compose } from '@wordpress/element';
 
 import {

@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { query } from '@wordpress/data'
+import { withSelect } from '@wordpress/data'
 import { Component, compose } from '@wordpress/element';
 
 import {
@@ -167,7 +167,7 @@ class SearchPosts extends Component {
 	}
 }
 
-const applyQuery = query( ( select, props ) => {
+const applySelect = withSelect( ( select, props ) => {
 	const { metaKey } = props;
 	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' )
 	const items = meta[ metaKey ] ? meta[ metaKey ] : []
@@ -195,6 +195,6 @@ const applyWithAPIData = withAPIData( ( props ) => {
 } );
 
 export default compose(
-	applyQuery,
+	applySelect,
 	applyWithAPIData,
 )( SearchPosts );

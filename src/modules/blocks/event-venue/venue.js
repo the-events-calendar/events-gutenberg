@@ -9,7 +9,7 @@ import classNames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { query } from '@wordpress/data'
+import { withSelect } from '@wordpress/data'
 import { Component, compose } from '@wordpress/element';
 
 import {
@@ -188,7 +188,7 @@ class VenueComponent extends Component {
 	}
 }
 
-const applyQuery = query( ( select, props ) => {
+const applySelect = withSelect( ( select, props ) => {
 	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' )
 	const venue = meta._EventVenueID ? meta._EventVenueID : null
 	return {
@@ -219,6 +219,6 @@ const applyWithAPIData = withAPIData( ( props ) => {
 
 
 export default compose(
-	applyQuery,
+	applySelect,
 	applyWithAPIData,
 )( VenueComponent );
