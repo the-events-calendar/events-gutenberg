@@ -88,7 +88,7 @@ class SearchPosts extends Component {
 				role="menuitem"
 				className="tribe-editor__search-item"
 				onClick={ () => {
-					onSelectItem( item.id )
+					onSelectItem( item )
 					this.onClose()
 				} }
 				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
@@ -108,6 +108,11 @@ class SearchPosts extends Component {
 
 		return (
 			<div className={ classNames( 'tribe-editor__search' ) }>
+			{
+			/**
+			 * @todo We need to add Search Later on, for now it adds unecessary complexity
+			 */
+			/*
 				<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
 					{ searchLabel }
 				</label>
@@ -118,6 +123,7 @@ class SearchPosts extends Component {
 					className='editor-inserter__search'
 					onChange={ ( event ) => console.log( event.target.value ) }
 				/>
+			 */}
 				<div role="menu" className={ classNames( 'tribe-editor__search-results' ) }>
 					{ this.renderList() }
 				</div>

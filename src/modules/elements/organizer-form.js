@@ -68,18 +68,22 @@ class OrganizerForm extends Component {
 	}
 
 	updateOrganizer( toSend ) {
-		const organizerModel = wp.api.getPostTypeModel( this.props.postType )
-		const organizer = new organizerModel( toSend ).save();
+		const basePath = wp.api.getPostTypeRoute( this.props.postType )
+		const request = wp.apiRequest( {
+			path: `/wp/v2/${ basePath }`,
+			method: 'POST',
+			data: toSend,
+		} );
 
 		// Set the organizer state
-		this.setState( { organizer: organizer } );
+		this.setState( { organizer: request } );
 
-		organizer.done( ( newPost ) => {
+		request.done( ( newPost ) => {
 			if ( ! newPost.id ) {
 				console.warning( 'Invalid creation of organizer:', newPost )
 			}
 
-			this.props.addOrganizer( newPost.id );
+			this.props.addOrganizer( newPost );
 			this.props.onClose();
 		} ).fail( ( err ) => {
 			console.log( err );

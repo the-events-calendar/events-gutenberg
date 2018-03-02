@@ -1,5 +1,7 @@
 export { default as TermsList } from './terms-list'
 export { default as OrganizerForm } from './organizer-form'
+export { default as VenueForm } from './venue-form'
 export { default as DateTime } from './datetime'
 export { default as MetaGroup } from './meta-group'
 export { default as SearchPosts } from './search-posts'
+export { default as MapContainer } from './map-container'

@@ -92,7 +92,7 @@ class Tribe__Events_Gutenberg__Editor {
 			),
 		);
 		$template[] = array( 'tribe/event-details' );
-
+		$template[] = array( 'tribe/event-venue' );
 
 		// Save into args
  		$args['template'] = $template;
