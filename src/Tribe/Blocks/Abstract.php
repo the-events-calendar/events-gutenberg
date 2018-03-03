@@ -11,7 +11,19 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	 *
 	 * @return string
 	 */
-	abstract public function render( $attributes = array() );
+	public function render( $attributes = array() ) {
+		if ( version_compare( phpversion(), '5.4', '>=' ) ) {
+			$json_string = json_encode( $attributes, JSON_PRETTY_PRINT );
+		} else {
+			$json_string = json_encode( $attributes );
+		}
+
+		return
+		'<pre class="tribe-placeholder-text-' . $this->name() . '">' .
+			'Block Name: ' . $this->name() . "\n" .
+			'Block Attributes: ' . "\n" . $json_string .
+		'</pre>';
+	}
 
 	/**
 	 * Sends a valid JSON response to the AJAX request for the block contents

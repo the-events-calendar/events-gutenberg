@@ -23,6 +23,6 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
-		return '{{ placeholder-text-' . $this->name() . ' }}';
+		return parent::render( $attributes );
 	}
 }
