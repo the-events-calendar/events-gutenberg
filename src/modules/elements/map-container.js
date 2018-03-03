@@ -36,6 +36,7 @@ class MapContainer extends Component {
 
 	componentDidMount() {
 		this.props.onRef( this )
+		this.updateAddress( this.props.address() )
 	}
 
 	componentWillUnmount() {
@@ -48,12 +49,12 @@ class MapContainer extends Component {
 		this.state = this.props
 
 		this.updateAddress = this.updateAddress.bind( this )
-		this.updateAddress( this.props.address )
 	}
 
 	updateAddress( address ) {
 		if ( ! address ) {
 			this.setState( { center: null, address: null } )
+			return false
 		}
 
 		geocodeByAddress( address )
@@ -68,7 +69,7 @@ class MapContainer extends Component {
 	}
 
 	render() {
-		const { zoom, center } = this.state;
+		const { zoom, center, address } = this.state;
 
 		if ( ! center ) {
 			return null
