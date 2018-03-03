@@ -34,13 +34,13 @@ class EventSubtitle extends Component {
 					changeDatetime={ ( date ) => setAttributes( { startDate: date } ) }
 					datetime={ attributes.startDate }
 				/>
-				<span> - </span>
+				<span>{ __( ' - ', 'the-events-calendar' ) }</span>
 				<DateTime
 					changeDatetime={ ( date ) => setAttributes( { endDate: date } ) }
 					datetime={ attributes.endDate }
 				/>
 			</h2>
-		];//
+		]
 	}
 }
 
