@@ -56,6 +56,7 @@ const wpDependencies = [
 	'utils',
 	'data',
 ];
+
 wpDependencies.forEach( wpDependency => {
 	externals[ "@wordpress/" + wpDependency ] = {
 		this: [ "wp", wpDependency ]
