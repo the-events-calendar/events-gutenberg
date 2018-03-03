@@ -43,14 +43,6 @@ class EventVenue extends Component {
 		super( ...arguments );
 	}
 
-	componentDidMount() {
-		this.syncState( this.props );
-	}
-
-	syncState( { eventVenueId, eventVenue } ) {
-		console.log( this.props )
-	}
-
 	renderTitle() {
 		const { attributes, setAttributes, focus, setFocus } = this.props;
 
