@@ -43,8 +43,12 @@ class EventVenue extends Component {
 		super( ...arguments );
 	}
 
-	updateAddress = ( address ) => {
-		this.map.updateAddress( address ) // do stuff
+	componentDidMount() {
+		this.syncState( this.props );
+	}
+
+	syncState( { eventVenueId, eventVenue } ) {
+		console.log( this.props )
 	}
 
 	renderTitle() {
@@ -74,21 +78,23 @@ class EventVenue extends Component {
 
 	render() {
 		const { attributes, setAttributes, focus, setFocus } = this.props;
-		const { eventVenue } = attributes;
+		const { eventVenueId } = attributes;
 		const venueContainer = (
 			<VenueComponent
-				focus={ ! eventVenue ? true : focus }
+				ref='venue'
+				onRef={ ref => ( this.venue = ref ) }
+				focus={ ! eventVenueId ? true : focus }
 				addVenue={ next => {
-					setAttributes( { eventVenueId: next.id, eventVenue: next } )
-					let address = trim( `${next.meta._VenueAddress} ${next.meta._VenueCity} ${next.meta._VenueProvince} ${next.meta._VenueZip} ${next.meta._VenueCountry}` )
-					this.map.updateAddress( address )
+					setAttributes( { eventVenueId: next.id } )
+					this.map.updateAddress( this.venue.getAddress( next ) )
 				} }
 				removeVenue={ () => {
-					setAttributes( { eventVenueId: null, eventVenue: null } )
+					setAttributes( { eventVenueId: null } )
 					this.map.updateAddress( null )
 				} }
 			/>
 		)
+
 		let block = (
 			<MetaGroup groupKey='event-venue-map' className='column-full-width'>
 				{ this.renderTitle() }
@@ -96,48 +102,18 @@ class EventVenue extends Component {
 			</MetaGroup>
 		);
 
-		if ( attributes.eventVenueId ) {
-			const mapQuery = trim( `${eventVenue.meta._VenueAddress} ${eventVenue.meta._VenueCity} ${eventVenue.meta._VenueProvince} ${eventVenue.meta._VenueZip} ${eventVenue.meta._VenueCountry}` )
-			const mapsUrlArgs = {
-				f: 'q',
-				source: 's_q',
-				geocode: '',
-				q: mapQuery,
-			}
-			const mapsUrl = `https://maps.google.com/maps?${ stringify( mapsUrlArgs ) }`
-
+		if ( eventVenueId ) {
 			block = (
 				<div>
 					<MetaGroup groupKey='event-venue-details' className='column-1-3'>
 						{ this.renderTitle() }
-						<h4>{ eventVenue.title.rendered }</h4>
-						{ ! isEmpty( mapQuery ) &&
-							<address className="tribe-events-address">
-								<span className="tribe-street-address">{ eventVenue.meta._VenueAddress }</span>
-								<br />
-								<span className="tribe-locality">{ eventVenue.meta._VenueCity }</span><span className="tribe-delimiter">,</span>&nbsp;
-								<abbr className="tribe-region tribe-events-abbr" title={ eventVenue.meta._VenueProvince }>{ eventVenue.meta._VenueProvince }</abbr>&nbsp;
-								<span className="tribe-postal-code">{ eventVenue.meta._VenueZip }</span>&nbsp;
-								<span className="tribe-country-name">{ eventVenue.meta._VenueCountry }</span>&nbsp;
-								{ ! isEmpty( mapQuery ) &&
-									<a
-										className="tribe-events-gmap"
-										href={ mapsUrl }
-										title={ __( 'Click to view a Google Map', 'the-events-calendar' ) }
-										target="_blank"
-									>
-										{ __( '+ Google Map', 'the-events-calendar' ) }
-									</a>
-								}
-							</address>
-						}
 						{ venueContainer }
 					</MetaGroup>
 					<MetaGroup groupKey='event-venue-map' className='column-2-3'>
 						<MapContainer
 							ref="map"
 							onRef={ ref => ( this.map = ref ) }
-							address={ mapQuery }
+							address={ () => this.venue.getAddress() }
 						/>
 					</MetaGroup>
 				</div>

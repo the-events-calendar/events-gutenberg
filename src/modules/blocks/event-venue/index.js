@@ -36,9 +36,6 @@ export default {
 			source: 'meta',
 			meta: '_EventVenueID',
 		},
-		eventVenue: {
-			type: 'object',
-		},
 	},
 
 	useOnce: true,

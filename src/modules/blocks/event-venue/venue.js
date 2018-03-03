@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId } from 'lodash';
+import { unescape, union, uniqueId, trim, isEmpty } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 
@@ -98,6 +98,20 @@ function VenueActions( { ...props } ) {
 class VenueComponent extends Component {
 	constructor( props ) {
 		super( ...arguments );
+
+		this.getVenue = this.getVenue.bind( this )
+		this.getAddress = this.getAddress.bind( this )
+		this.renderVenueName = this.renderVenueName.bind( this )
+		this.renderVenue = this.renderVenue.bind( this )
+		this.renderActions = this.renderActions.bind( this )
+	}
+
+	componentDidMount() {
+		this.props.onRef( this )
+	}
+
+	componentWillUnmount() {
+		this.props.onRef( undefined )
 	}
 
 	getVenue() {
@@ -113,7 +127,55 @@ class VenueComponent extends Component {
 		return venues[0];
 	}
 
-	renderVenueName( venue ) {
+	getAddress( venue = null ) {
+		// If we don't have a venue we fetch the one in the state
+		if ( ! venue ) {
+			venue = this.getVenue()
+		}
+
+		// if we still don't have venue we don't have an address
+		if ( ! venue ) {
+			return false
+		}
+
+		// Get the meta for us to work with
+		const { meta } = venue
+
+		// Validate meta before using it
+		if ( isEmpty( meta ) ) {
+			return false
+		}
+
+		const {
+			_VenueAddress,
+			_VenueCity,
+			_VenueProvince,
+			_VenueZip,
+			_VenueCountry,
+		} = meta
+
+		let address = trim( `${ _VenueAddress } ${ _VenueCity } ${ _VenueProvince } ${ _VenueZip } ${ _VenueCountry }` )
+
+		// If it's an empty string we return boolean
+		if ( isEmpty( address ) ) {
+			return false
+		}
+
+		return address
+	}
+
+	renderVenueName( venue = null ) {
+		// If we don't have a venue we fetch the one in the state
+		if ( ! venue ) {
+			venue = this.getVenue()
+		}
+
+		// if we still don't have venue we don't have an address
+		if ( ! venue ) {
+			return false
+		}
+
+		// If we don't have a title we say it's untitled
 		if ( ! venue.title ) {
 			return __( '(Untitled Venue)', 'the-events-calendar' );
 		}
@@ -122,33 +184,57 @@ class VenueComponent extends Component {
 	}
 
 	renderVenue() {
-		const venue = this.getVenue();
-		const { focus, removeVenue } = this.props;
+		const venue = this.getVenue()
+		const { focus, removeVenue } = this.props
 		const classes = {
 			'tribe-current': true
 		}
+
+		const address = this.getAddress()
+		const mapsUrlArgs = {
+			f: 'q',
+			source: 's_q',
+			geocode: '',
+			q: address,
+		}
+		const mapsUrl = `https://maps.google.com/maps?${ stringify( mapsUrlArgs ) }`
 
 		return (
 			<div
 				className={ classNames( classes ) }
 				key={ venue.id }
 			>
-				{ this.renderVenueName( venue ) }
+				<h4>{ this.renderVenueName() }</h4>
+				{ ! isEmpty( address ) &&
+					<address className="tribe-events-address">
+						<span className="tribe-street-address">{ venue.meta._VenueAddress }</span>
+						<br />
+						<span className="tribe-locality">{ venue.meta._VenueCity }</span><span className="tribe-delimiter">,</span>&nbsp;
+						<abbr className="tribe-region tribe-events-abbr" title={ venue.meta._VenueProvince }>{ venue.meta._VenueProvince }</abbr>&nbsp;
+						<span className="tribe-postal-code">{ venue.meta._VenueZip }</span>&nbsp;
+						<span className="tribe-country-name">{ venue.meta._VenueCountry }</span>&nbsp;
+						{ ! isEmpty( address ) &&
+							<a
+								className="tribe-events-gmap"
+								href={ mapsUrl }
+								title={ __( 'Click to view a Google Map', 'the-events-calendar' ) }
+								target="_blank"
+							>
+								{ __( '+ Google Map', 'the-events-calendar' ) }
+							</a>
+						}
+					</address>
+				}
 			</div>
 		);
 	}
 
-	render() {
+	renderActions() {
 		const { focus, addVenue, removeVenue } = this.props;
 		const venue = this.getVenue();
-		let block = null;
 
-		if ( this.props.venue.isLoading ) {
-			return null
-		}
-
-		block = (
-			<div className='tribe-editor-venue__actions'>
+		return (
+			<div key='venue-actions' className='tribe-editor-venue__actions'>
 				<SearchPosts
 					key='venue-search-dropdown'
 					postType='tribe_venue'
@@ -173,18 +259,20 @@ class VenueComponent extends Component {
 				}
 			</div>
 		)
+	}
 
-		if ( venue ) {
-			return block
+	render() {
+		const { focus, addVenue, removeVenue, venue } = this.props;
+
+		if ( this.getVenue() && ! venue.isLoading ) {
+			return [ this.renderVenue(), this.renderActions() ]
 		}
 
-		const content = (
+		return (
 			<Placeholder>
-				{ block }
+				{ this.renderActions() }
 			</Placeholder>
 		)
-
-		return content
 	}
 }
 
