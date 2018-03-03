@@ -28,6 +28,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 * Fix - Button to remove organizers functions properly
 * Fix - Venue loading optimized to avoid having `eventVenue` showing on the public block props
+* Fix - Makes sure we only load the plugin once Blocks Editor is fully loaded
 
 #### 0.1.0-alpha.1 &mdash; 2018-03-02
 
