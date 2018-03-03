@@ -21,6 +21,17 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
+	 * Checks if we have Editor Block active
+	 *
+	 * @since  TBD
+	 *
+	 * @return boolean
+	 */
+	public function is_blocks_editor_active() {
+		return function_exists( 'register_block_type' ) && function_exists( 'unregister_block_type' );
+	}
+
+	/**
 	 * Adds the required fields into the Events Post Type so that we can use Block Editor
 	 *
 	 * @since  TBD
