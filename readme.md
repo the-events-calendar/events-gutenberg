@@ -24,7 +24,13 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.1.0-alpha.2 &mdash; TBD
+
+* Fix - Button to remove organizers functions properly
+* Fix - Venue loading optimized to avoid having `eventVenue` showing on the public block props
+
 #### 0.1.0-alpha.1 &mdash; 2018-03-02
+
 * *Note - Front-end still doesn't respect blocks from Gutenberg*
 * Feature - Created Subtitle block
 * Feature - Created Event Details and Organizer block
