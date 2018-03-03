@@ -160,7 +160,7 @@ class EventOrganizers extends Component {
 				<OrganizerActions
 					focus={ focus && current }
 					organizer={ organizer }
-					onClick={ () => removeOrganizer( organizer.id ) }
+					onClick={ () => removeOrganizer( organizer ) }
 				/>
 			</li>
 		);
