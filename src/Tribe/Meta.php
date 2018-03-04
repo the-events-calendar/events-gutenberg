@@ -66,7 +66,8 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_VenueZip', $args->text );
 		register_meta( 'post', '_VenuePhone', $args->text );
 		register_meta( 'post', '_VenueStateProvince', $args->text );
-
+		register_meta( 'post', '_VenueLat', $args->text );
+		register_meta( 'post', '_VenueLng', $args->text );
 	}
 
 	public function sanitize_numeric_array( $value ) {
