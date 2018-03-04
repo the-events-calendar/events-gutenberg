@@ -3,6 +3,8 @@
  */
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import { isFunction } from 'lodash'
+import slug from 'slug'
 
 /**
  * WordPress dependencies
@@ -26,21 +28,19 @@ import {
 /**
  * Module Code
  */
+const GMAPS_API_KEY = 'AIzaSyDquv6yMOGPHM6-Y7MkI5gv20mCS740M8A'
+
 class MapContainer extends Component {
 	static defaultProps = {
-		key: 'AIzaSyDquv6yMOGPHM6-Y7MkI5gv20mCS740M8A',
-		center: null,
+		coordinates: undefined,
 		zoom: 14,
-		address: null,
+		address: undefined,
 	};
 
 	componentDidMount() {
-		this.props.onRef( this )
-		this.updateAddress( this.props.address() )
-	}
-
-	componentWillUnmount() {
-		this.props.onRef( undefined )
+		const address = this.props.address()
+		this.setState( { address: address } )
+		this.updateAddress( address )
 	}
 
 	constructor() {
@@ -53,14 +53,15 @@ class MapContainer extends Component {
 
 	updateAddress( address ) {
 		if ( ! address ) {
-			this.setState( { center: null, address: null } )
+			this.setState( { coordinates: undefined, address: undefined } )
 			return false
 		}
 
 		geocodeByAddress( address )
 			.then( results => getLatLng( results[0] ) )
 			.then( latLng => {
-				this.setState( { center: latLng, address: address } )
+				this.setState( { coordinates: latLng, address: address } )
+				this.state.onCoordinatesChange( latLng )
 				console.debug( 'Successfully Geocoded Address', latLng, address )
 			} )
 			.catch( error => {
@@ -69,19 +70,23 @@ class MapContainer extends Component {
 	}
 
 	render() {
-		const { zoom, center, address } = this.state;
+		const { zoom, coordinates, address } = this.state;
 
-		if ( ! center ) {
+		if ( ! coordinates ) {
 			return null
 		}
 
+		const addressSlug = slug( isFunction( address ) ? address() : address );
+
 		return (
 			<GoogleMap
+				key={ `venue-map-${ addressSlug }` }
 				defaultZoom={ zoom }
-				defaultCenter={ center }
+				defaultCenter={ coordinates }
 			>
 				<Marker
-					position={ center }
+					key={ `map-marker-${ addressSlug }` }
+					position={ coordinates }
 				/>
 			</GoogleMap>
 		);
@@ -90,8 +95,7 @@ class MapContainer extends Component {
 
 export default compose(
 	withState( {
-		googleMapURL: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDquv6yMOGPHM6-Y7MkI5gv20mCS740M8A&v=3.exp&libraries=geometry,drawing,places',
-		isMarkerShown: false,
+		googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${ GMAPS_API_KEY }&v=3.exp&libraries=geometry,drawing,places`,
 		loadingElement: ( <Placeholder key="placeholder"><Spinner /></Placeholder> ),
 		containerElement: ( <div className='tribe-editor-map__container' /> ),
 		mapElement: ( <div className='tribe-editor-map__element' /> ),

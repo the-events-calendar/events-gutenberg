@@ -2,7 +2,6 @@
  * External dependencies
  */
 import moment from 'moment';
-import { connect } from 'react-redux';
 import { stringify } from 'querystringify';
 import { union, without, isEmpty, trim } from 'lodash';
 
@@ -41,6 +40,11 @@ import { default as VenueComponent } from './venue'
 class EventVenue extends Component {
 	constructor() {
 		super( ...arguments );
+
+		this.state = {
+			venueCoordinates: undefined,
+			venue: undefined,
+		}
 	}
 
 	renderTitle() {
@@ -77,12 +81,13 @@ class EventVenue extends Component {
 				onRef={ ref => ( this.venue = ref ) }
 				focus={ ! eventVenueId ? true : focus }
 				addVenue={ next => {
+					const coordinates = { lng: parseFloat( next.meta._VenueLng ), lat: parseFloat( next.meta._VenueLat ) }
 					setAttributes( { eventVenueId: next.id } )
-					this.map.updateAddress( this.venue.getAddress( next ) )
+					this.setState( { venueCoordinates: coordinates, venue: next } )
 				} }
 				removeVenue={ () => {
-					setAttributes( { eventVenueId: null } )
-					this.map.updateAddress( null )
+					setAttributes( { eventVenueId: undefined } )
+					this.setState( { venueCoordinates: undefined, venue: undefined } )
 				} }
 			/>
 		)
@@ -95,6 +100,8 @@ class EventVenue extends Component {
 		);
 
 		if ( eventVenueId ) {
+			const { venueCoordinates, coordinates } = this.state
+
 			block = (
 				<div>
 					<MetaGroup groupKey='event-venue-details' className='column-1-3'>
@@ -103,9 +110,10 @@ class EventVenue extends Component {
 					</MetaGroup>
 					<MetaGroup groupKey='event-venue-map' className='column-2-3'>
 						<MapContainer
-							ref="map"
-							onRef={ ref => ( this.map = ref ) }
+							key={ `venue-map-${ eventVenueId }` }
 							address={ () => this.venue.getAddress() }
+							coordinates={ this.state.venueCoordinates }
+							onCoordinatesChange={ ( coordinates ) => this.setState( { venueCoordinates: coordinates } ) }
 						/>
 					</MetaGroup>
 				</div>

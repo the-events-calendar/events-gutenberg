@@ -2,7 +2,6 @@
  * External dependencies
  */
 import moment from 'moment';
-import { connect } from 'react-redux';
 import { union, without } from 'lodash';
 
 /**

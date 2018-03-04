@@ -31,10 +31,11 @@
 		"moment": "2.18.1",
 		"moment-timezone": "0.5.13",
 		"querystringify": "^1.0.0",
+		"react": "16.2.0",
+		"react-dom": "16.2.0",
 		"react-google-maps": "^9.4.5",
 		"react-places-autocomplete": "^6.1.2",
-		"semantic-ui-css": "^2.2.12",
-		"semantic-ui-react": "^0.77.2",
+		"slug": "^0.9.1",
 		"url-loader": "^0.6.2",
 		"uuid": "^3.1.0"
 	},

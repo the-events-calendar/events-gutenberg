@@ -2,7 +2,6 @@
  * External dependencies
  */
 import moment from 'moment';
-import { connect } from 'react-redux';
 import { times, unescape, get } from 'lodash';
 import { stringify } from 'querystringify';
 
