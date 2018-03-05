@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId, trim, isEmpty } from 'lodash';
+import { unescape, union, uniqueId, trim, isEmpty, mapValues } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 
@@ -9,7 +9,6 @@ import classNames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { withSelect } from '@wordpress/data'
 import { Component, compose } from '@wordpress/element';
 
 import {
@@ -18,7 +17,6 @@ import {
 	Dashicon,
 	Spinner,
 	Placeholder,
-	withAPIData
 } from '@wordpress/components';
 
 /**
@@ -95,79 +93,19 @@ function VenueActions( { ...props } ) {
 /**
  * Module Code
  */
-class VenueComponent extends Component {
+class VenueDetails extends Component {
 	constructor( props ) {
 		super( ...arguments );
 
-		this.getVenue = this.getVenue.bind( this )
-		this.getAddress = this.getAddress.bind( this )
 		this.renderVenueName = this.renderVenueName.bind( this )
 		this.renderVenue = this.renderVenue.bind( this )
 		this.renderActions = this.renderActions.bind( this )
 	}
 
-	componentDidMount() {
-		this.props.onRef( this )
-	}
-
-	componentWillUnmount() {
-		this.props.onRef( undefined )
-	}
-
-	getVenue() {
-		if ( ! this.props.venue ) {
-			return null;
-		}
-
-		const venues = this.props.venue.data;
-		if ( ! venues || ! venues.length ) {
-			return null;
-		}
-
-		return venues[0];
-	}
-
-	getAddress( venue = null ) {
-		// If we don't have a venue we fetch the one in the state
-		if ( ! venue ) {
-			venue = this.getVenue()
-		}
-
-		// if we still don't have venue we don't have an address
-		if ( ! venue ) {
-			return false
-		}
-
-		// Get the meta for us to work with
-		const { meta } = venue
-
-		// Validate meta before using it
-		if ( isEmpty( meta ) ) {
-			return false
-		}
-
-		const {
-			_VenueAddress,
-			_VenueCity,
-			_VenueProvince,
-			_VenueZip,
-			_VenueCountry,
-		} = meta
-
-		let address = trim( `${ _VenueAddress } ${ _VenueCity } ${ _VenueProvince } ${ _VenueZip } ${ _VenueCountry }` )
-
-		// If it's an empty string we return boolean
-		if ( isEmpty( address ) ) {
-			return false
-		}
-
-		return address
-	}
-
 	renderVenueName( venue = null ) {
 		// If we don't have a venue we fetch the one in the state
 		if ( ! venue ) {
-			venue = this.getVenue()
+			venue = this.props.venue
 		}
 
 		// if we still don't have venue we don't have an address
@@ -184,13 +122,13 @@ class VenueComponent extends Component {
 	}
 
 	renderVenue() {
-		const venue = this.getVenue()
+		const venue = this.props.venue
 		const { focus, removeVenue } = this.props
 		const classes = {
 			'tribe-current': true
 		}
 
-		const address = this.getAddress()
+		const address = this.props.getAddress()
 		const mapsUrlArgs = {
 			f: 'q',
 			source: 's_q',
@@ -230,8 +168,7 @@ class VenueComponent extends Component {
 	}
 
 	renderActions() {
-		const { focus, addVenue, removeVenue } = this.props;
-		const venue = this.getVenue();
+		const { focus, addVenue, removeVenue, venue } = this.props;
 
 		return (
 			<div key='venue-actions' className='tribe-editor-venue__actions'>
@@ -262,51 +199,26 @@ class VenueComponent extends Component {
 	}
 
 	render() {
-		const { focus, addVenue, removeVenue, venue } = this.props;
+		const { focus, addVenue, removeVenue, venue, isLoading } = this.props;
 
-		if ( this.getVenue() && ! venue.isLoading ) {
+		if ( isLoading ) {
+			return (
+				<Placeholder key='loading'>
+					<Spinner />
+				</Placeholder>
+			)
+		}
+
+		if ( venue ) {
 			return [ this.renderVenue(), this.renderActions() ]
 		}
 
 		return (
-			<Placeholder>
+			<Placeholder key='actions'>
 				{ this.renderActions() }
 			</Placeholder>
 		)
 	}
 }
 
-const applySelect = withSelect( ( select, props ) => {
-	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' )
-	const venue = meta._EventVenueID ? meta._EventVenueID : null
-	return {
-		venue: venue,
-	}
-} );
-
-const applyWithAPIData = withAPIData( ( props ) => {
-	const { venue } = props
-	let query = {
-		per_page: 1,
-		orderby: 'modified',
-		status: [ 'draft', 'publish' ],
-		order: 'desc',
-		include: venue,
-	};
-
-	if ( ! venue ) {
-		return {
-			venue: null,
-		}
-	}
-
-	return {
-		venue: `/wp/v2/tribe_venue?${ stringify( query ) }`,
-	};
-} );
-
-
-export default compose(
-	applySelect,
-	applyWithAPIData,
-)( VenueComponent );
+export default VenueDetails

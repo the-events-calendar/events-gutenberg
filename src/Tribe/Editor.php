@@ -130,6 +130,49 @@ class Tribe__Events_Gutenberg__Editor {
 	public function assets() {
 		$plugin = tribe( 'gutenberg' );
 
+		/**
+		 * Allows for filtering the embedded Google Maps API URL.
+		 *
+		 * @since ??
+		 *
+		 * @param string $api_url The Google Maps API URL.
+		 */
+		$gmaps_api_zoom = apply_filters( 'tribe_events_single_map_zoom_level', (int) tribe_get_option( 'embedGoogleMapsZoom', 8 ) );
+		$gmaps_api_key = tribe_get_option( 'google_maps_js_api_key' );
+		$gmaps_api_url = 'https://maps.googleapis.com/maps/api/js';
+
+		if ( ! empty( $gmaps_api_key ) && is_string( $gmaps_api_key ) ) {
+			$gmaps_api_url = add_query_arg( array( 'key' => $gmaps_api_key ), $gmaps_api_url );
+		}
+
+		/**
+		 * Allows for filtering the embedded Google Maps API URL.
+		 *
+		 * @since  ??
+		 *
+		 * @param string $api_url The Google Maps API URL.
+		 */
+		$gmaps_api_url = apply_filters( 'tribe_events_google_maps_api', $gmaps_api_url );
+
+		tribe_asset(
+			$plugin,
+			'tribe-events-editor-blocks-gmaps-api',
+			$gmaps_api_url,
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'type'      => 'js',
+				'in_footer' => false,
+				'localize'  => array(
+					'name' => 'tribe_blocks_editor_google_maps_api',
+					'data' => array(
+						'zoom' => $gmaps_api_zoom,
+						'key' => $gmaps_api_key,
+					),
+				),
+			)
+		);
+
 		tribe_asset(
 			$plugin,
 			'tribe-events-editor-blocks',
