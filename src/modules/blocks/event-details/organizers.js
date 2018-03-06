@@ -169,40 +169,52 @@ class EventOrganizers extends Component {
 	render() {
 		const { focus, addOrganizer } = this.props;
 		const organizers = this.getOrganizers();
+		const hasOrganizers = 0 !== organizers.length
 		let list = null;
+		let actions = (
+			<div key='organizer-actions'>
+				<SearchPosts
+					key='organizer-search-dropdown'
+					postType='tribe_organizer'
+					metaKey='_EventOrganizerID'
+					searchLabel={ __( 'Search for an organizer', 'the-events-calendar' ) }
+					iconLabel={ __( 'Add existing Organizer', 'the-events-calendar' ) }
+					focus={ hasOrganizers ? focus : true }
+					onSelectItem={ addOrganizer }
+				/>
+				<CreateDropdown
+					key='organizer-create-dropdown'
+					focus={ hasOrganizers ? focus : true }
+					addOrganizer={ addOrganizer }
+				/>
+			</div>
+		)
 
 		if ( this.props.organizers.isLoading ) {
 			list = (
-				<Placeholder key="placeholder">
+				<Placeholder style={{ 'min-height': 50 }} key="placeholder">
 					<Spinner />
 				</Placeholder>
 			)
 		}
 
-		if ( organizers.length ) {
+		if ( hasOrganizers ) {
 			list = (
 				<div key='organizer-list'>
 					{ this.renderOrganizerList() }
 				</div>
 			);
+		} else {
+			actions = (
+				<Placeholder style={{ 'min-height': 50 }} key="actions-placeholder">
+					{ actions }
+				</Placeholder>
+			)
 		}
 
 		const content = [
 			list,
-			<SearchPosts
-				key='organizer-search-dropdown'
-				postType='tribe_organizer'
-				metaKey='_EventOrganizerID'
-				searchLabel={ __( 'Search for an organizer', 'the-events-calendar' ) }
-				iconLabel={ __( 'Add existing Organizer', 'the-events-calendar' ) }
-				focus={ focus }
-				onSelectItem={ addOrganizer }
-			/>,
-			<CreateDropdown
-				key='organizer-create-dropdown'
-				focus={ focus }
-				addOrganizer={ addOrganizer }
-			/>
+			actions
 		]
 
 		return content
