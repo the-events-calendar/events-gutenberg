@@ -5,7 +5,16 @@ interface Tribe__Events_Gutenberg__Blocks__Interface {
 	/**
 	 * Which is the name/slug of this block
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.2
+	 *
+	 * @return string
+	 */
+	public function slug();
+
+	/**
+	 * Which is the name/slug of this block
+	 *
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return string
 	 */
@@ -14,7 +23,7 @@ interface Tribe__Events_Gutenberg__Blocks__Interface {
 	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @param  array $attributes
 	 *
@@ -26,7 +35,7 @@ interface Tribe__Events_Gutenberg__Blocks__Interface {
 	 * Does the registration for PHP rendering for the Block, important due to been
 	 * an dynamic Block
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return void
 	 */
@@ -35,7 +44,7 @@ interface Tribe__Events_Gutenberg__Blocks__Interface {
 	/**
 	 * Used to include any Assets for the Block we are registering
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return void
 	 */
@@ -44,7 +53,7 @@ interface Tribe__Events_Gutenberg__Blocks__Interface {
 	/**
 	 * Fetches which ever is the plugin we are dealing with
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return mixed
 	 */
