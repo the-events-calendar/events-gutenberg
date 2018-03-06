@@ -18,6 +18,6 @@ The Events Calendar is a carefully crafted, extensible plugin that lets you easi
 
 We've made significant rewrites and refactors of our products over the years, but adapting our plugins to fully integrate with the new editor coming in WordPress version 5.0, code-named "Gutenberg" **is the biggest ecosystem change we’ve faced since the introduction of custom post types.**
 
-This plugin is our first attempt at integrating the Event post type with the Gutenberg editor. Download this plugin as a .zip and install it on your site like any other plugin, or use the _Using developement Version from GitHub_ steps below.
+This plugin allows you to use The Events Calendar with the Gutenberg development plugin's block editor. Download this plugin as a .zip and install it on your site like any other plugin, or use the _Using developement Version from GitHub_ steps below.
 
 [Read more about _Why Gutenberg is Worth the Effort_](https://theeventscalendar.com/going-gutenberg-chapter/)
