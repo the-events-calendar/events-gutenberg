@@ -2,6 +2,7 @@
 if ( ! tribe_has_organizer() ) {
 	return;
 }
+$attributes = $this->get( 'attributes', array() );
 
 $organizer_ids = tribe_get_organizer_ids();
 $multiple = count( $organizer_ids ) > 1;
@@ -12,7 +13,13 @@ $website = tribe_get_organizer_website_link();
 ?>
 
 <div class="tribe-events-meta-group tribe-events-meta-group-organizer">
-	<h3 class="tribe-events-single-section-title"><?php echo tribe_get_organizer_label( ! $multiple ); ?></h3>
+	<h3 class="tribe-events-single-section-title">
+		<?php if ( empty( $attributes['organizerTitle'] ) ) : ?>
+			<?php echo tribe_get_organizer_label( ! $multiple ); ?>
+		<?php else : ?>
+			<?php echo is_array( $attributes['organizerTitle'] ) ? reset( $attributes['organizerTitle'] ) : esc_html( $attributes['organizerTitle'] ) ?>
+		<?php endif; ?>
+	</h3>
 	<dl>
 		<?php
 		do_action( 'tribe_events_single_meta_organizer_section_start' );
