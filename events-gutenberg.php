@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: The Events Calendar: Gutenberg Extension
- * Description: This plugin is our first attempt at integrating the Event post type with the Gutenberg editor
+ * Description: This plugin allows you to use The Events Calendar with the Gutenberg development plugin's block editor.
  * Version: 0.1.0-alpha.1
  * Author: Modern Tribe, Inc.
  * Author URI: https://github.com/moderntribe/events-gutenberg
