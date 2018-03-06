@@ -192,7 +192,7 @@ class EventOrganizers extends Component {
 
 		if ( this.props.organizers.isLoading ) {
 			list = (
-				<Placeholder style={{ 'min-height': 50 }} key="placeholder">
+				<Placeholder style={{ minHeight: 50 }} key="placeholder">
 					<Spinner />
 				</Placeholder>
 			)
@@ -206,7 +206,7 @@ class EventOrganizers extends Component {
 			);
 		} else {
 			actions = (
-				<Placeholder style={{ 'min-height': 50 }} key="actions-placeholder">
+				<Placeholder style={{ minHeight: 50 }} key="actions-placeholder">
 					{ actions }
 				</Placeholder>
 			)

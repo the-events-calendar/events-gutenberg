@@ -1,5 +1,5 @@
 <?php
-class Tribe__Events_Gutenberg__Blocks__Event_Subtitle
+class Tribe__Events_Gutenberg__Blocks__Event_Links
 extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 	/**
@@ -10,13 +10,13 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return string
 	 */
 	public function slug() {
-		return 'event-subtitle';
+		return 'event-links';
 	}
 
 	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha.2
 	 *
 	 * @param  array $attributes
 	 *
