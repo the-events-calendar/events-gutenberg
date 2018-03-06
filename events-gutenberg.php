@@ -14,11 +14,15 @@ class Tribe__Events_Gutenberg__Plugin {
 
 	/**
 	 * The semantic version number of this extension; should always match the plugin header.
+	 *
+	 * @since  0.1.0-alpha.1
 	 */
 	const VERSION = '0.1.0-alpha.1';
 
 	/**
 	 * Each plugin required by this extension
+	 *
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @var array Plugins are listed in 'main class' => 'minimum version #' format
 	 */
@@ -28,6 +32,8 @@ class Tribe__Events_Gutenberg__Plugin {
 
 	/**
 	 * The constructor; delays initializing the extension until all other plugins are loaded.
+	 *
+	 * @since  0.1.0-alpha.1
 	 */
 	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'load' ), 100 );
@@ -41,6 +47,8 @@ class Tribe__Events_Gutenberg__Plugin {
 
 	/**
 	 * Extension hooks and initialization; exits if the extension is not authorized by Tribe Common to run.
+	 *
+	 * @since  0.1.0-alpha.1
 	 */
 	public function load() {
 
@@ -64,6 +72,8 @@ class Tribe__Events_Gutenberg__Plugin {
 	/**
 	 * To allow easier usage of classes on our files we have a AutoLoader that will match
 	 * class names to it's required file inclusion into the Request.
+	 *
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return void
 	 */

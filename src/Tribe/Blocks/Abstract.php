@@ -2,10 +2,31 @@
 
 abstract class Tribe__Events_Gutenberg__Blocks__Abstract
 implements Tribe__Events_Gutenberg__Blocks__Interface {
+
+	/**
+	 * Namespace for Blocks from tribe
+	 *
+	 * @since  0.1.0-alpha.2
+	 *
+	 * @var string
+	 */
+	private $namespace = 'tribe';
+
+	/**
+	 * Builds the name of the Block
+	 *
+	 * @since  0.1.0-alpha.2
+	 *
+	 * @return string
+	 */
+	public function name() {
+		return $this->namespace . '/' . $this->slug();
+	}
+
 	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @param  array $attributes
 	 *
@@ -28,7 +49,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	/**
 	 * Sends a valid JSON response to the AJAX request for the block contents
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return void
 	 */
@@ -39,7 +60,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	/**
 	 * Fetches which ever is the plugin we are dealing with
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return mixed
 	 */
@@ -51,7 +72,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	 * Does the registration for PHP rendering for the Block, important due to been
 	 * an dynamic Block
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return void
 	 */
@@ -71,7 +92,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	 * Fetches the name for the block we are working with and converts it to the
 	 * correct `wp_ajax_{$action}` string for us to Hook
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return string
 	 */
@@ -82,7 +103,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	/**
 	 * Used to include any Assets for the Block we are registering
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return void
 	 */

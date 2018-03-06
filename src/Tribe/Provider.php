@@ -4,7 +4,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations.
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 */
 	public function register() {
@@ -22,12 +22,19 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		}
 
 		$this->container->singleton( 'gutenberg.meta', 'Tribe__Events_Gutenberg__Meta' );
+		$this->container->singleton( 'gutenberg.template', 'Tribe__Events_Gutenberg__Template' );
+		$this->container->singleton( 'gutenberg.template.overwrite', 'Tribe__Events_Gutenberg__Template__Overwrite', array( 'hook' ) );
 
 		$this->container->singleton( 'gutenberg.blocks.event-subtitle', 'Tribe__Events_Gutenberg__Blocks__Event_Subtitle' );
 		$this->container->singleton( 'gutenberg.blocks.event-details', 'Tribe__Events_Gutenberg__Blocks__Event_Details' );
 		$this->container->singleton( 'gutenberg.blocks.event-venue', 'Tribe__Events_Gutenberg__Blocks__Event_Venue' );
 
 		$this->hook();
+
+		/**
+		 * Call all the Singletons that need to be setup/hooked
+		 */
+		tribe( 'gutenberg.template.overwrite' );
 
 		/**
 		 * @todo  Remove this later on
@@ -40,7 +47,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 * In place of delegating the hooking responsibility to the single classes they are all hooked here.
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 */
 	protected function hook() {
@@ -67,7 +74,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations at boot time.
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 */
 	public function boot() {
 		// no ops

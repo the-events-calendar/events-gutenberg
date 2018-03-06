@@ -12,7 +12,7 @@ class Tribe__Events_Gutenberg__Editor {
 	 *
 	 * @todo   Revise when Gutenberg is merged into core
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return boolean
 	 */
@@ -23,7 +23,7 @@ class Tribe__Events_Gutenberg__Editor {
 	/**
 	 * Checks if we have Editor Block active
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.2
 	 *
 	 * @return boolean
 	 */
@@ -34,7 +34,7 @@ class Tribe__Events_Gutenberg__Editor {
 	/**
 	 * Adds the required fields into the Events Post Type so that we can use Block Editor
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @param  array $args Arguments used to setup the Post Type
 	 *
@@ -57,7 +57,7 @@ class Tribe__Events_Gutenberg__Editor {
 	/**
 	 * Adds the required fields into the Post Type so that we can the Rest API to update it
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @param  array $args Arguments used to setup the Post Type
 	 *
@@ -83,7 +83,7 @@ class Tribe__Events_Gutenberg__Editor {
 	/**
 	 * Adds the required blocks into the Events Post Type
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @param  array $args Arguments used to setup the CPT template
 	 *
@@ -115,7 +115,7 @@ class Tribe__Events_Gutenberg__Editor {
 	 * Prevents us from using `init` to register our own blocks, allows us to move
 	 * it when the proper place shows up
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha.1
 	 *
 	 * @return void
 	 */
@@ -125,6 +125,9 @@ class Tribe__Events_Gutenberg__Editor {
 
 	/**
 	 * @todo   Move this into the Block PHP files
+	 *
+	 * @since  0.1.0-alpha.1
+	 *
 	 * @return void
 	 */
 	public function assets() {
