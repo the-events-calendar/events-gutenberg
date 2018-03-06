@@ -129,7 +129,7 @@ class GoogleStaticMap extends Component {
 			<div className='tribe-editor-map__container'>
 				<img
 					className='tribe-editor-map__element'
-					src={this.staticMapUrl}
+					src={ this.staticMapUrl }
 				/>
 			</div>
 		);
@@ -144,6 +144,7 @@ class GoogleStaticMap extends Component {
 			scale,
 			format,
 			mapType,
+			apiKey,
 		} = this.props;
 
 		const { width, height } = size;
@@ -157,7 +158,7 @@ class GoogleStaticMap extends Component {
 			maptype: mapType,
 			format: format,
 			markers: this.markerParams,
-			key: this.apiKeyParam,
+			key: apiKey,
 		}
 
 		return `${rootUrl}?${ stringify( queryArgs ) }`;
@@ -172,11 +173,6 @@ class GoogleStaticMap extends Component {
 
 		const markerParams = `size:mid|color:0xff0000|label:|${latitude},${longitude}`;
 		return hasCenterMarker ? markerParams : '';
-	}
-
-	get apiKeyParam() {
-		const apiKey = this.constructor.ApiKey;
-		return apiKey ? `${apiKey}` : '';
 	}
 }
 

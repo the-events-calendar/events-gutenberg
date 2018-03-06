@@ -181,7 +181,7 @@ class Tribe__Events_Gutenberg__Editor {
 			$plugin,
 			'tribe-events-editor-blocks',
 			'blocks.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'tribe-events-editor-blocks-gmaps-api' ),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,

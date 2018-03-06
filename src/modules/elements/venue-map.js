@@ -30,6 +30,9 @@ import {
 /**
  * Module Code
  */
+
+const DATA = window.tribe_blocks_editor_google_maps_api
+
 class VenueMap extends Component {
 	static defaultProps = {
 		venue: undefined,
@@ -45,6 +48,10 @@ class VenueMap extends Component {
 
 	componentDidMount() {
 		this.setState( { coordinates: this.getCoordinates() } )
+		this.setState( {
+			apiKey: DATA.key,
+			zoom: parseInt( DATA.zoom, 10 ),
+		} )
 	}
 
 	getCoordinates() {
@@ -57,7 +64,7 @@ class VenueMap extends Component {
 	}
 
 	render() {
-		const { zoom } = this.state;
+		const { zoom, apiKey } = this.state;
 		const coordinates = this.getCoordinates()
 
 		if ( ! coordinates ) {
@@ -70,6 +77,7 @@ class VenueMap extends Component {
 				size={{ width: 450, height: 353 }}
 				latitude={ toString( coordinates.lat ) }
 				longitude={ toString( coordinates.lng ) }
+				apiKey={ apiKey }
 			/>
 		);
 	}
