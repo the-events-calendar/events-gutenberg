@@ -97,14 +97,12 @@ class EventDetails extends Component {
 							value={ attributes.eventCost }
 							placeholder={ __( 'Enter cost here', 'the-events-calendar' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
-							keepPlaceholderOnFocus
 						/>
 						<PlainText
 							className="tribe-editor__event-cost-currency"
 							value={ attributes.eventCurrencySymbol }
 							placeholder={ __( '$', 'the-events-calendar' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventCurrencySymbol: nextContent } ) }
-							keepPlaceholderOnFocus
 						/>
 
 					</div>
