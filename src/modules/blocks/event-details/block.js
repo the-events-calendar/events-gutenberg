@@ -91,11 +91,11 @@ class EventDetails extends Component {
 					</div>
 
 					<div className='tribe-editor__event-cost'>
-						<strong>{ __( 'Cost: ', 'the-events-calendar' ) }</strong><br />
+						<strong>{ __( 'Price: ', 'the-events-calendar' ) }</strong><br />
 						<PlainText
 							className="tribe-editor__event-cost-value"
 							value={ attributes.eventCost }
-							placeholder={ __( 'Enter cost here', 'the-events-calendar' ) }
+							placeholder={ __( 'Enter price', 'the-events-calendar' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
 						/>
 						<PlainText
