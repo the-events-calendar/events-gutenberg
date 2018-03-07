@@ -85,7 +85,7 @@ class EventDetails extends Component {
 						<PlainText
 							id="tribe-event-url"
 							value={ attributes.eventUrl }
-							placeholder={ __( 'Enter url here', 'the-events-calendar' ) }
+							placeholder={ __( 'Enter url', 'the-events-calendar' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventUrl: nextContent } ) }
 						/>
 					</div>
