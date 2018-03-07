@@ -10,15 +10,15 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventVenue from './block'
+import EventSubtitle from './block'
 
 /**
  * Module Code
  */
 export default {
-	id: 'event-venue',
-	title: __( 'Event Location', 'the-events-calendar' ),
-	description: __( 'Indicate where the event takes place.', 'the-events-calendar' ),
+	id: 'event-subtitle',
+	title: __( 'Event Subtitle', 'the-events-calendar' ),
+	description: __( 'Configuration for the Event Date Time', 'the-events-calendar' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'the-events-calendar', 'tribe' ],
@@ -28,19 +28,21 @@ export default {
 	},
 
 	attributes: {
-		venueTitle: {
-			type: 'html',
-		},
-		eventVenueId: {
-			type: 'integer',
+		startDate: {
+			type: 'string',
 			source: 'meta',
-			meta: '_EventVenueID',
+			meta: '_EventStartDate',
 		},
+		endDate: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventEndDate',
+		}
 	},
 
 	useOnce: true,
 
-	edit: EventVenue,
+	edit: EventSubtitle,
 
 	save( props ) {
 		return null;
