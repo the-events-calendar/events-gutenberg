@@ -53,7 +53,17 @@ export default {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventURL',
-		}
+		},
+		eventCost: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventCost',
+		},
+		eventCurrencySymbol: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventCurrencySymbol',
+		},
 	},
 
 	useOnce: true,

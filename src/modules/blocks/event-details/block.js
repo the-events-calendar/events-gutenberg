@@ -81,13 +81,32 @@ class EventDetails extends Component {
 					/>
 
 					<div>
-						<strong>Website: </strong>
+						<strong>{ __( 'Website: ', 'the-events-calendar' ) }</strong><br />
 						<PlainText
 							id="tribe-event-url"
 							value={ attributes.eventUrl }
 							placeholder={ __( 'Enter url here', 'the-events-calendar' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventUrl: nextContent } ) }
 						/>
+					</div>
+
+					<div className='tribe-editor__event-cost'>
+						<strong>{ __( 'Cost: ', 'the-events-calendar' ) }</strong><br />
+						<PlainText
+							className="tribe-editor__event-cost-value"
+							value={ attributes.eventCost }
+							placeholder={ __( 'Enter cost here', 'the-events-calendar' ) }
+							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
+							keepPlaceholderOnFocus
+						/>
+						<PlainText
+							className="tribe-editor__event-cost-currency"
+							value={ attributes.eventCurrencySymbol }
+							placeholder={ __( '$', 'the-events-calendar' ) }
+							onChange={ ( nextContent ) => setAttributes( { eventCurrencySymbol: nextContent } ) }
+							keepPlaceholderOnFocus
+						/>
+
 					</div>
 
 					<TermsList
