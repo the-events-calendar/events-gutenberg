@@ -17,8 +17,8 @@ import EventLinks from './block'
  */
 export default {
 	id: 'event-links',
-	title: __( 'Event Links', 'the-events-calendar' ),
-	description: __( 'Configuration for the Event Links', 'the-events-calendar' ),
+	title: __( 'Event Sharing', 'the-events-calendar' ),
+	description: __( 'Display buttons so visitors can add this event to their calendar.', 'the-events-calendar' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'the-events-calendar', 'tribe' ],
