@@ -220,7 +220,7 @@ class EventVenue extends Component {
 					this.updateAddress( this.getAddress() )
 				} }
 				removeVenue={ () => {
-					setAttributes( { eventVenueId: undefined } )
+					setAttributes( { eventVenueId: 0 } )
 					this.setState( { venue: undefined } )
 				} }
 			/>

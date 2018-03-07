@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment';
-import { union, without } from 'lodash';
+import { union, without, isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -132,7 +132,15 @@ class EventDetails extends Component {
 					<EventOrganizers
 						focus={ focus }
 						addOrganizer={ nextOrganizer => setAttributes( { eventOrganizers: union( attributes.eventOrganizers, [ nextOrganizer.id ] ) } ) }
-						removeOrganizer={ organizer => setAttributes( { eventOrganizers: without( attributes.eventOrganizers, organizer.id ) } ) }
+						removeOrganizer={ organizer => {
+							let organizers = without( attributes.eventOrganizers, organizer.id )
+
+							// If none are there we remove existing
+							if ( isEmpty( organizers ) ) {
+								organizers = [ 0 ]
+							}
+							setAttributes( { eventOrganizers: organizers } )
+						} }
 					/>
 				</MetaGroup>
 			</div>

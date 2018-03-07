@@ -22,6 +22,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		}
 
 		$this->container->singleton( 'gutenberg.meta', 'Tribe__Events_Gutenberg__Meta' );
+		$this->container->singleton( 'gutenberg.i18n', 'Tribe__Events_Gutenberg__I18n', array( 'hook' ) );
 		$this->container->singleton( 'gutenberg.template', 'Tribe__Events_Gutenberg__Template' );
 		$this->container->singleton( 'gutenberg.template.overwrite', 'Tribe__Events_Gutenberg__Template__Overwrite', array( 'hook' ) );
 
@@ -35,6 +36,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		/**
 		 * Call all the Singletons that need to be setup/hooked
 		 */
+		tribe( 'gutenberg.i18n' );
 		tribe( 'gutenberg.template.overwrite' );
 
 		/**
