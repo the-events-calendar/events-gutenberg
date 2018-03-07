@@ -28,6 +28,8 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 * Feature - Events Single page will now respect configurations from Blocks Editor
 * Feature - Create a Event Links block
+* Tweak - Add Cost field to Event Details block
+* Tweak - Venue Block now has Website and Phone fields
 * Fix - Use the Google Maps API key for Blocks Editor venue image
 * Fix - Button to remove organizers functions properly
 * Fix - Venue loading optimized to avoid having `eventVenue` showing on the public block props
