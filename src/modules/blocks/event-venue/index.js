@@ -17,8 +17,8 @@ import EventVenue from './block'
  */
 export default {
 	id: 'event-venue',
-	title: __( 'Event Venue', 'the-events-calendar' ),
-	description: __( 'Configuration for the Event Venue', 'the-events-calendar' ),
+	title: __( 'Event Location', 'the-events-calendar' ),
+	description: __( 'Indicate where the event takes place.', 'the-events-calendar' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'the-events-calendar', 'tribe' ],
