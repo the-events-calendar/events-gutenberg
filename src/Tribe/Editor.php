@@ -185,6 +185,10 @@ class Tribe__Events_Gutenberg__Editor {
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,
+				'localize'  => array(
+					'name' => 'tribe_blocks_editor_settings',
+					'data' => tribe( 'gutenberg.settings' )->get_options(),
+				),
 			)
 		);
 

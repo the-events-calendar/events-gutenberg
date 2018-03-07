@@ -38,6 +38,8 @@ import { default as EventOrganizers } from './organizers'
  * Module Code
  */
 
+const DATA = tribe_blocks_editor_settings;
+
 class EventDetails extends Component {
 	constructor() {
 		super( ...arguments );
@@ -45,6 +47,15 @@ class EventDetails extends Component {
 
 	render() {
 		const { attributes, setAttributes, focus, setFocus } = this.props;
+		const reverseCurrencySymbolPositon = '1' == DATA.reverseCurrencyPosition;
+		const currencySymbol = (
+			<PlainText
+				className="tribe-editor__event-cost-currency"
+				value={ attributes.eventCurrencySymbol }
+				placeholder={ __( '$', 'the-events-calendar' ) }
+				onChange={ ( nextContent ) => setAttributes( { eventCurrencySymbol: nextContent } ) }
+			/>
+		)
 
 		const content = (
 			<div key="event-details-box" className="tribe-editor-block tribe-editor-event__details">
@@ -92,19 +103,18 @@ class EventDetails extends Component {
 
 					<div className='tribe-editor__event-cost'>
 						<strong>{ __( 'Price: ', 'the-events-calendar' ) }</strong><br />
+						{ ! reverseCurrencySymbolPositon &&
+							currencySymbol
+						}
 						<PlainText
 							className="tribe-editor__event-cost-value"
 							value={ attributes.eventCost }
 							placeholder={ __( 'Enter price', 'the-events-calendar' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
 						/>
-						<PlainText
-							className="tribe-editor__event-cost-currency"
-							value={ attributes.eventCurrencySymbol }
-							placeholder={ __( '$', 'the-events-calendar' ) }
-							onChange={ ( nextContent ) => setAttributes( { eventCurrencySymbol: nextContent } ) }
-						/>
-
+						{ reverseCurrencySymbolPositon &&
+							currencySymbol
+						}
 					</div>
 
 					<TermsList
