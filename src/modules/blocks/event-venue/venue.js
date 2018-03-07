@@ -163,6 +163,20 @@ class VenueDetails extends Component {
 						}
 					</address>
 				}
+
+				{ ! isEmpty( venue.meta._VenuePhone ) &&
+					<p className='tribe-editor__meta-field'>
+						<strong>{ __( 'Phone: ', 'the-events-calendar' ) }</strong><br />
+						<span>{ venue.meta._VenuePhone }</span>
+					</p>
+				}
+
+				{ ! isEmpty( venue.meta._VenueURL ) &&
+					<p className='tribe-editor__meta-field'>
+						<strong>{ __( 'Website: ', 'the-events-calendar' ) }</strong><br />
+						<span>{ venue.meta._VenueURL }</span>
+					</p>
+				}
 			</div>
 		);
 	}

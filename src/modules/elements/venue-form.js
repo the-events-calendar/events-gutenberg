@@ -33,6 +33,7 @@ class VenueForm extends Component {
 			country: '',
 			zip: '',
 			phone: '',
+			url: '',
 			stateProvince: '',
 			venue: null,
 		}
@@ -58,6 +59,7 @@ class VenueForm extends Component {
 			country,
 			zip,
 			phone,
+			website,
 			stateProvince,
 		} = this.state;
 
@@ -72,6 +74,7 @@ class VenueForm extends Component {
 				_VenueProvince: stateProvince,
 				_VenueZip: zip,
 				_VenuePhone: phone,
+				_VenueURL: website,
 				_VenueStateProvince: stateProvince,
 			}
 		} );
@@ -182,6 +185,15 @@ class VenueForm extends Component {
 							name='venue[phone]'
 							ref={ ( input ) => this.input = input }
 							onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
+						/>
+					</dd>
+					<dt>{ __( 'URL:', 'the-events-calendar' ) } </dt>
+					<dd>
+						<input
+							type='text'
+							name='venue[url]'
+							ref={ ( input ) => this.input = input }
+							onChange={ ( next ) => this.setState( { url: next.target.value } ) }
 						/>
 					</dd>
 				</dl>
