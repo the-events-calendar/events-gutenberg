@@ -3,9 +3,22 @@
 }
 
 
+.editor-block-list__block[data-type^="tribe/"] {
+	zoom: 1;
+
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+		position: relative;
+	}
+}
+
 .tribe-editor-block {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 14px;
+
 	p {
 		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 		font-size: 14px;
