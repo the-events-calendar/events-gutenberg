@@ -24,7 +24,7 @@ import {
  */
 
 import {
-	GoogleStaticMap,
+	GoogleMap,
 } from 'elements';
 
 /**
@@ -72,12 +72,13 @@ class VenueMap extends Component {
 		}
 
 		return (
-			<GoogleStaticMap
+			<GoogleMap
 				zoom={ zoom }
 				size={{ width: 450, height: 353 }}
 				latitude={ toString( coordinates.lat ) }
 				longitude={ toString( coordinates.lng ) }
 				apiKey={ apiKey }
+				interactive={ true }
 			/>
 		);
 	}

@@ -66,14 +66,15 @@ const MAP_TYPES_VALUES = values( MAP_TYPES );
  *
  * @example: http://staticmapmaker.com/google/
  */
-class GoogleStaticMap extends Component {
+class GoogleMap extends Component {
 
 	/**
 	 * https://developers.google.com/maps/documentation/staticmaps/intro#api_key
 	 */
 	static ApiKey = null
 
-	static RootUrl = 'http://maps.googleapis.com/maps/api/staticmap';
+	static RootStaticUrl = 'https://maps.googleapis.com/maps/api/staticmap';
+	static RootEmbedUrl = 'https://www.google.com/maps/embed/v1/place';
 
 	static ImageFormats = IMAGE_FORMATS
 
@@ -128,6 +129,7 @@ class GoogleStaticMap extends Component {
 		hasCenterMarker: true,
 		style: {},
 		scale: 2,
+		interactive: false,
 	}
 
 	render() {
@@ -138,16 +140,28 @@ class GoogleStaticMap extends Component {
 		)
 
 		const {
+			interactive,
 			apiKey,
 		} = this.props;
 
 		if ( apiKey ) {
-			mapElement = (
-				<img
-					className='tribe-editor-map__element'
-					src={ this.staticMapUrl }
-				/>
-			)
+			if ( ! interactive ) {
+				mapElement = (
+					<img
+						className='tribe-editor-map__element'
+						src={ this.mapUrl }
+					/>
+				)
+			} else {
+				mapElement = (
+					<iframe
+						style={{ border: 0, width: '100%', height: '100%' }}
+						src={ this.mapUrl }
+						allowFullScreen={ true }
+					>
+					</iframe>
+				)
+			}
 		}
 
 		return (
@@ -157,7 +171,7 @@ class GoogleStaticMap extends Component {
 		);
 	}
 
-	get staticMapUrl() {
+	get mapUrl() {
 		const {
 			latitude,
 			longitude,
@@ -167,20 +181,30 @@ class GoogleStaticMap extends Component {
 			format,
 			mapType,
 			apiKey,
+			interactive,
 		} = this.props;
 
 		const { width, height } = size;
-		const rootUrl = this.constructor.RootUrl;
 
-		const queryArgs = {
-			center: `${latitude},${longitude}`,
+		let queryArgs = {
 			zoom: zoom,
-			scale: scale,
-			size: `${width}x${height}`,
 			maptype: mapType,
-			format: format,
-			markers: this.markerParams,
 			key: apiKey,
+		}
+		let rootUrl = null;
+
+		if ( interactive ) {
+			rootUrl = this.constructor.RootEmbedUrl;
+
+			queryArgs.q = `${latitude},${longitude}`;
+		} else {
+			rootUrl = this.constructor.RootStaticUrl;
+
+			queryArgs.center = `${latitude},${longitude}`;
+			queryArgs.scale = scale;
+			queryArgs.size = `${width}x${height}`;
+			queryArgs.format = format;
+			queryArgs.markers = this.markerParams;
 		}
 
 		return `${rootUrl}?${ stringify( queryArgs ) }`;
@@ -198,4 +222,4 @@ class GoogleStaticMap extends Component {
 	}
 }
 
-export default GoogleStaticMap;
+export default GoogleMap;
