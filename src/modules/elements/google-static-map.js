@@ -8,7 +8,13 @@ import PropTypes from 'prop-types';
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
+
 import { Component } from '@wordpress/element';
+
+import {
+	Placeholder,
+} from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -125,12 +131,28 @@ class GoogleStaticMap extends Component {
 	}
 
 	render() {
-		return (
-			<div className='tribe-editor-map__container'>
+		let mapElement = (
+			<Placeholder style={{ height: '100%' }}>
+				<p>{ __( 'No map preview available', 'the-events-calendar' ) }</p>
+			</Placeholder>
+		)
+
+		const {
+			apiKey,
+		} = this.props;
+
+		if ( apiKey ) {
+			mapElement = (
 				<img
 					className='tribe-editor-map__element'
 					src={ this.staticMapUrl }
 				/>
+			)
+		}
+
+		return (
+			<div className='tribe-editor-map__container'>
+				{ mapElement }
 			</div>
 		);
 	}
