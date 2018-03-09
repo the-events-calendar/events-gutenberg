@@ -2,7 +2,7 @@
 /**
  * Plugin Name: The Events Calendar: Gutenberg Extension
  * Description: This plugin allows you to use The Events Calendar with the Gutenberg development plugin's block editor.
- * Version: 0.1.0-alpha.1
+ * Version: 0.1.1-alpha
  * Author: Modern Tribe, Inc.
  * Author URI: https://github.com/moderntribe/events-gutenberg
  * License: GPLv2 or later
@@ -15,14 +15,14 @@ class Tribe__Events_Gutenberg__Plugin {
 	/**
 	 * The semantic version number of this extension; should always match the plugin header.
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha
 	 */
-	const VERSION = '0.1.0-alpha.1';
+	const VERSION = '0.1.1-alpha';
 
 	/**
 	 * Each plugin required by this extension
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha
 	 *
 	 * @var array Plugins are listed in 'main class' => 'minimum version #' format
 	 */
@@ -33,7 +33,7 @@ class Tribe__Events_Gutenberg__Plugin {
 	/**
 	 * The constructor; delays initializing the extension until all other plugins are loaded.
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha
 	 */
 	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'load' ), 100 );
@@ -48,7 +48,7 @@ class Tribe__Events_Gutenberg__Plugin {
 	/**
 	 * Extension hooks and initialization; exits if the extension is not authorized by Tribe Common to run.
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha
 	 */
 	public function load() {
 
@@ -73,7 +73,7 @@ class Tribe__Events_Gutenberg__Plugin {
 	 * To allow easier usage of classes on our files we have a AutoLoader that will match
 	 * class names to it's required file inclusion into the Request.
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha
 	 *
 	 * @return void
 	 */

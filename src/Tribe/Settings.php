@@ -2,13 +2,13 @@
 /**
  * Fetch the Tribe Settings to use on the JS side
  *
- * @since 0.1.0-alpha.2
+ * @since 0.1.1-alpha
  */
 class Tribe__Events_Gutenberg__Settings {
 	/**
 	 * Hook into the required places to make it work
 	 *
-	 * @since  0.1.0-alpha.2
+	 * @since  0.1.1-alpha
 	 *
 	 * @return void
 	 */
@@ -19,7 +19,7 @@ class Tribe__Events_Gutenberg__Settings {
 	/**
 	 * Based on a set of rules determines if a Tribe Option is private or not
 	 *
-	 * @since  0.1.0-alpha.2
+	 * @since  0.1.1-alpha
 	 *
 	 * @param string $key Which key we are checking against
 	 *
@@ -43,7 +43,7 @@ class Tribe__Events_Gutenberg__Settings {
 	/**
 	 * Get all Public options of Tribe Options
 	 *
-	 * @since  0.1.0-alpha.2
+	 * @since  0.1.1-alpha
 	 *
 	 * @todo   move the filtering into Core Tribe__Settings_Manager::get_options
 	 *

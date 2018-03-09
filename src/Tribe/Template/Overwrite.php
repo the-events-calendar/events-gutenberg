@@ -2,14 +2,14 @@
 /**
  * Initialize template overwrite for block single pages
  *
- * @since 0.1.0-alpha.2
+ * @since 0.1.1-alpha
  */
 class Tribe__Events_Gutenberg__Template__Overwrite {
 
 	/**
 	 * Hook into the Events Template single page to allow Blocks to be properly reordered
 	 *
-	 * @since 0.1.0-alpha.2
+	 * @since 0.1.1-alpha
 	 *
 	 * @return void
 	 */
@@ -21,7 +21,7 @@ class Tribe__Events_Gutenberg__Template__Overwrite {
 	/**
 	 * Gets the file path in Gutenberg Ext
 	 *
- 	 * @since 0.1.0-alpha.2
+ 	 * @since 0.1.1-alpha
 	 *
 	 * @param  array|string  $slug  Which file we want to include
 	 *
@@ -37,7 +37,7 @@ class Tribe__Events_Gutenberg__Template__Overwrite {
 	 * Silence the actual templating and lets use an action to prevent Old Stuff to have any sort of interactions
 	 * with what we are constructing here.
 	 *
-	 * @since 0.1.0-alpha.2
+	 * @since 0.1.1-alpha
 	 *
 	 * @param string $file Which file would be loaded
 	 *
@@ -57,7 +57,7 @@ class Tribe__Events_Gutenberg__Template__Overwrite {
 	/**
 	 * After `tribe_events_before_view` we will include the blocks template for Single Events
 	 *
-	 * @since 0.1.0-alpha.2
+	 * @since 0.1.1-alpha
 	 *
 	 * @param string $silence Unused file path, since it's always the same for Blocks editor
 	 *

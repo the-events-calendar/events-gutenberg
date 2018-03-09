@@ -2,13 +2,13 @@
 /**
  * Initialize Gutenberg Event Meta fields
  *
- * @since TBD
+ * @since 0.1.0-alpha
  */
 class Tribe__Events_Gutenberg__Meta {
 	/**
 	 * Register the required Meta fields for good Gutenberg saving
 	 *
-	 * @since  TBD
+	 * @since  0.1.0-alpha
 	 *
 	 * @return void
 	 */
@@ -16,7 +16,7 @@ class Tribe__Events_Gutenberg__Meta {
 		$args = (object) array();
 
 		$args->text = array(
-			'auth_callback' => '__return_true',
+			'auth_callback' => array( $this,'auth_callback' ),
 			'sanitize_callback' => 'sanitize_text_field',
 			'type' => 'string',
 			'single' => true,
@@ -28,32 +28,24 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_EventURL', $args->text );
 		register_meta( 'post', '_EventCost', $args->text );
 		register_meta( 'post', '_EventCurrencySymbol', $args->text );
-
-		// Organizers Meta
 		register_meta(
 			'post',
 			'_EventOrganizerID',
 			array(
 				'description' => __( 'Event Organizers', 'the-events-calendar' ),
-				'auth_callback' => '__return_true',
+				'auth_callback' => array( $this,'auth_callback' ),
 				'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
 				'type' => 'number',
 				'single' => false,
 				'show_in_rest' => true,
 			)
 		);
-
-		register_meta( 'post', '_OrganizerEmail', $args->text );
-		register_meta( 'post', '_OrganizerPhone', $args->text );
-		register_meta( 'post', '_OrganizerWebsite', $args->text );
-
-		// Venue Meta
 		register_meta(
 			'post',
 			'_EventVenueID',
 			array(
 				'description' => __( 'Event Organizers', 'the-events-calendar' ),
-				'auth_callback' => '__return_true',
+				'auth_callback' => array( $this,'auth_callback' ),
 				'sanitize_callback' => 'absint',
 				'type' => 'integer',
 				'single' => true,
@@ -61,6 +53,12 @@ class Tribe__Events_Gutenberg__Meta {
 			)
 		);
 
+		// Organizers Meta
+		register_meta( 'post', '_OrganizerEmail', $args->text );
+		register_meta( 'post', '_OrganizerPhone', $args->text );
+		register_meta( 'post', '_OrganizerWebsite', $args->text );
+
+		// Venue Meta
 		register_meta( 'post', '_VenueAddress', $args->text );
 		register_meta( 'post', '_VenueCity', $args->text );
 		register_meta( 'post', '_VenueCountry', $args->text );
@@ -73,6 +71,35 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_VenueLng', $args->text );
 	}
 
+	/**
+	 * Verify if the current user can edit or not this Post
+	 *
+	 * @since  0.1.1-alpha
+	 *
+	 * @param bool   $allowed  Whether the user can add the post meta. Default false.
+	 * @param string $meta_key The meta key.
+	 * @param int    $post_id  Post ID.
+	 * @param int    $user_id  User ID.
+	 * @param string $cap      Capability name.
+	 * @param array  $caps     User capabilities.
+	 *
+	 * @return boolean
+	 */
+	public function auth_callback( $allowed, $meta_key, $post_id, $user_id, $cap, $caps ) {
+		$post = get_post( $post_id );
+		$post_type_obj = get_post_type_object( $post->post_type );
+		return current_user_can( $post_type_obj->cap->edit_post, $post_id );
+	}
+
+	/**
+	 * Checks and sanitize a given value to a numeric array or a numeric string
+	 *
+	 * @since  0.1.0-alpha
+	 *
+	 * @param  mixed $value Check agains this value
+	 *
+	 * @return array|bool|int
+	 */
 	public function sanitize_numeric_array( $value ) {
 		if ( is_array( $value ) ) {
 			return wp_parse_id_list( $value );

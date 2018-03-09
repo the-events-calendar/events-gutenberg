@@ -4,7 +4,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations.
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha
 	 *
 	 */
 	public function register() {
@@ -51,7 +51,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 * In place of delegating the hooking responsibility to the single classes they are all hooked here.
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha
 	 *
 	 */
 	protected function hook() {
@@ -79,7 +79,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations at boot time.
 	 *
-	 * @since  0.1.0-alpha.1
+	 * @since  0.1.0-alpha
 	 */
 	public function boot() {
 		// no ops

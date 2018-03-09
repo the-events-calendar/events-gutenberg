@@ -2,13 +2,13 @@
 /**
  * Include translations to Gutenberg Ext
  *
- * @since 0.1.0-alpha.2
+ * @since 0.1.1-alpha
  */
 class Tribe__Events_Gutenberg__I18n {
 	/**
 	 * Hook into the required places to make it work
 	 *
-	 * @since  0.1.0-alpha.2
+	 * @since  0.1.1-alpha
 	 *
 	 * @return void
 	 */
@@ -19,7 +19,7 @@ class Tribe__Events_Gutenberg__I18n {
 	/**
 	 * Include the Inline Script with locale
 	 *
-	 * @since  0.1.0-alpha.2
+	 * @since  0.1.1-alpha
 	 *
 	 * @return void
 	 */
