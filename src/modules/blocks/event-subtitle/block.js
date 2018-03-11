@@ -23,6 +23,7 @@ import {
  */
 // Fetches all the Editor Settings
 const DATA = tribe_blocks_editor_settings;
+const WPDateSettings = _wpDateSettings;
 
 class EventSubtitle extends Component {
 	constructor() {
@@ -47,6 +48,7 @@ class EventSubtitle extends Component {
 						setAttributes( { startDate: date } )
 					} }
 					current={ attributes.startDate }
+					timeFormat={ WPDateSettings.formats.time }
 				/>
 				<span>{ DATA.timeRangeSeparator || ' - ' }</span>
 				<DatePicker
@@ -61,6 +63,7 @@ class EventSubtitle extends Component {
 						setAttributes( { endDate: date } )
 					} }
 					current={ attributes.endDate }
+					timeFormat={ WPDateSettings.formats.time }
 				/>
 			</h2>
 		]

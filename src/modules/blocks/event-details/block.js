@@ -40,6 +40,7 @@ import { default as EventOrganizers } from './organizers'
  */
 
 const DATA = tribe_blocks_editor_settings;
+const WPDateSettings = _wpDateSettings;
 
 class EventDetails extends Component {
 	constructor() {
@@ -119,6 +120,7 @@ class EventDetails extends Component {
 								setAttributes( { startDate: date } )
 							} }
 							current={ attributes.startDate }
+							timeFormat={ WPDateSettings.formats.time }
 						/>
 					</div>
 
@@ -136,6 +138,7 @@ class EventDetails extends Component {
 								setAttributes( { endDate: date } )
 							} }
 							current={ attributes.endDate }
+							timeFormat={ WPDateSettings.formats.time }
 						/>
 					</div>
 

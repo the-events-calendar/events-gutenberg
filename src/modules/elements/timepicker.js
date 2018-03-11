@@ -110,7 +110,7 @@ class DateTime extends Component {
 		minTime: undefined,
 		maxTime: undefined,
 		show2400: false,
-		timeFormat: 'HH:mm',
+		timeFormat: 'H:i',
 		current: NOW,
 	}
 
@@ -194,7 +194,7 @@ class DateTime extends Component {
 			timeFormat
 		} = this.props
 
-		return moment().startOf( 'day' ).add( seconds, 'seconds' ).format( timeFormat )
+		return moment().startOf( 'day' ).add( seconds, 'seconds' ).format( toMomentFormat( timeFormat ) )
 	}
 
 	roundTime( seconds ) {
