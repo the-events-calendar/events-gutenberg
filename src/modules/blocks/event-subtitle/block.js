@@ -18,11 +18,12 @@ import {
 	TimePicker,
 } from 'elements'
 
+import { getSetting } from 'editor/settings'
+
 /**
  * Module Code
  */
 // Fetches all the Editor Settings
-const DATA = tribe_blocks_editor_settings;
 const WPDateSettings = _wpDateSettings;
 
 class EventSubtitle extends Component {
@@ -48,7 +49,7 @@ class EventSubtitle extends Component {
 					} }
 					datetime={ attributes.startDate }
 				/>
-				<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
+				<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
 				<TimePicker
 					onSelectItem={ ( date ) => {
 						setAttributes( { startDate: date } )
@@ -56,14 +57,14 @@ class EventSubtitle extends Component {
 					current={ attributes.startDate }
 					timeFormat={ WPDateSettings.formats.time }
 				/>
-				<span>{ DATA.timeRangeSeparator || ' - ' }</span>
+				<span>{ getSetting( 'timeRangeSeparator', __( ' - ', 'the-events-calendar' ) ) }</span>
 				<DatePicker
 					changeDatetime={ ( date ) => {
 						setAttributes( { endDate: date } )
 					} }
 					datetime={ attributes.endDate }
 				/>
-				<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
+				<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
 				<TimePicker
 					onSelectItem={ ( date ) => {
 						setAttributes( { endDate: date } )

@@ -22,7 +22,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-
+import { toMomentFormat } from 'editor/utils/date'
+import { getSetting } from 'editor/settings'
 
 /**
  * Module Code
@@ -30,79 +31,6 @@ import { __ } from '@wordpress/i18n';
 
 // Fetches all the Editor Settings
 const DATA = tribe_blocks_editor_settings;
-
-function round15( minute ) {
-	let intervals = [ 15, 30, 45, 59, 0 ];
-	let closest;
-	let min = 90;
-
-	for ( let i = 0; i < intervals.length; i++ ) {
-		let iv = intervals[ i ];
-		let maybeMin = Math.abs( minute - iv );
-
-		if ( maybeMin < min ) {
-			min = maybeMin;
-			closest = iv;
-		}
-	}
-
-	if ( 59 === closest ) {
-		closest = 0;
-	}
-
-	return closest;
-}
-
-const toMomentFormat = ( format ) => {
-	const strtr = ( str, pairs ) => {
-		const substrs = Object.keys( pairs ).map( escapeRegExp )
-		return str.split( RegExp( `(${ substrs.join( '|' ) })` ) )
-			.map( part => pairs[ part ] || part )
-			.join( '' )
-	}
-
-    const replacements = {
-        'd': 'DD',
-        'D': 'ddd',
-        'j': 'D',
-        'l': 'dddd',
-        'N': 'E',
-        'S': 'o',
-        'w': 'e',
-        'z': 'DDD',
-        'W': 'W',
-        'F': 'MMMM',
-        'm': 'MM',
-        'M': 'MMM',
-        'n': 'M',
-        't': '', // no equivalent
-        'L': '', // no equivalent
-        'o': 'YYYY',
-        'Y': 'YYYY',
-        'y': 'YY',
-        'a': 'a',
-        'A': 'A',
-        'B': '', // no equivalent
-        'g': 'h',
-        'G': 'H',
-        'h': 'hh',
-        'H': 'HH',
-        'i': 'mm',
-        's': 'ss',
-        'u': 'SSS',
-        'e': 'zz', // deprecated since version 1.6.0 of moment.js
-        'I': '', // no equivalent
-        'O': '', // no equivalent
-        'P': '', // no equivalent
-        'T': '', // no equivalent
-        'Z': '', // no equivalent
-        'c': '', // no equivalent
-        'r': '', // no equivalent
-        'U': 'X',
-    };
-
-    return strtr( format, replacements );
-}
 
 class DatePicker extends Component {
 	constructor() {
@@ -134,10 +62,10 @@ class DatePicker extends Component {
 		}
 
 		if ( label ) {
-			format = `${ toMomentFormat( DATA.dateWithYearFormat || 'F j, Y' ) }`
+			format = `${ toMomentFormat( getSetting( 'dateWithYearFormat', __( 'F j, Y', 'the-events-calendar' ) ) ) }`
 		}
 
-		return date.minutes( round15( date.minutes() ) ).format( format );
+		return date.minutes( date.minutes() ).format( format );
 	}
 
 	onChange( date ) {

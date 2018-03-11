@@ -39,30 +39,17 @@ import {
 } from 'elements'
 
 import { default as EventOrganizers } from './organizers'
+import { getSetting } from 'editor/settings'
 
 /**
  * Module Code
  */
 
-const DATA = tribe_blocks_editor_settings;
 const WPDateSettings = _wpDateSettings;
 
 class EventDetails extends Component {
 	constructor() {
 		super( ...arguments );
-
-		this.setAttributes = this.setAttributes.bind( this );
-
-		this.state = this.props
-	}
-
-	setAttributes( attributes ) {
-		// Set attributes to Blocks List
-		this.state.setAttributes( attributes )
-
-		this.setState( ( prevState ) => ( {
-			attributes: { ...prevState.attributes, ...attributes },
-		} ) );
 	}
 
 	changeTime( current, item ) {
@@ -86,14 +73,14 @@ class EventDetails extends Component {
 			isSelected
 		} = this.props;
 
-		let currencyPosition = '1' == DATA.reverseCurrencyPosition ? 'suffix' : 'prefix';
+		let currencyPosition = '1' == getSetting( 'reverseCurrencyPosition', 0 ) ? 'suffix' : 'prefix';
 
 		// If we have it saved we replace it
 		if ( attributes.eventCurrencyPosition ) {
 			currencyPosition = attributes.eventCurrencyPosition;
 		}
 
-		let eventCurrencySymbol = __( '$', 'the-events-calendar' );
+		let eventCurrencySymbol = getSetting( 'defaultCurrencySymbol', __( '$', 'the-events-calendar' ) );
 		if ( attributes.eventCurrencySymbol ) {
 			eventCurrencySymbol = attributes.eventCurrencySymbol;
 		}
@@ -131,7 +118,7 @@ class EventDetails extends Component {
 							} }
 							datetime={ attributes.startDate }
 						/>
-						<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
+						<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
 						<TimePicker
 							onSelectItem={ ( date ) => {
 								setAttributes( { startDate: date } )
@@ -149,7 +136,7 @@ class EventDetails extends Component {
 							} }
 							datetime={ attributes.endDate }
 						/>
-						<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
+						<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
 						<TimePicker
 							onSelectItem={ ( date ) => {
 								setAttributes( { endDate: date } )
@@ -224,7 +211,7 @@ class EventDetails extends Component {
 			</div>,
 			isSelected && (
 				<InspectorControls key="inspector">
-					<PanelBody title={ __( 'Venue Map Settings' ) }>
+					<PanelBody title={ __( 'Price Settings', 'the-events-calendar' ) }>
 						<ToggleControl
 							label={ __( 'Show symbol before', 'the-events-calendar' ) }
 							checked={ 'prefix' === currencyPosition ? true : false  }

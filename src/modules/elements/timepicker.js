@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment';
-import { times, unescape, get, escapeRegExp, isString, find } from 'lodash';
+import { isString, find } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 import { ScrollTo, ScrollArea } from "react-scroll-to";
@@ -22,66 +22,11 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-
+import { toMomentFormat } from 'editor/utils/date'
 
 /**
  * Module Code
  */
-
-// Fetches all the Editor Settings
-const DATA = tribe_blocks_editor_settings;
-
-const toMomentFormat = ( format ) => {
-	const strtr = ( str, pairs ) => {
-		const substrs = Object.keys( pairs ).map( escapeRegExp )
-		return str.split( RegExp( `(${ substrs.join( '|' ) })` ) )
-			.map( part => pairs[ part ] || part )
-			.join( '' )
-	}
-
-    const replacements = {
-        'd': 'DD',
-        'D': 'ddd',
-        'j': 'D',
-        'l': 'dddd',
-        'N': 'E',
-        'S': 'o',
-        'w': 'e',
-        'z': 'DDD',
-        'W': 'W',
-        'F': 'MMMM',
-        'm': 'MM',
-        'M': 'MMM',
-        'n': 'M',
-        't': '', // no equivalent
-        'L': '', // no equivalent
-        'o': 'YYYY',
-        'Y': 'YYYY',
-        'y': 'YY',
-        'a': 'a',
-        'A': 'A',
-        'B': '', // no equivalent
-        'g': 'h',
-        'G': 'H',
-        'h': 'hh',
-        'H': 'HH',
-        'i': 'mm',
-        's': 'ss',
-        'u': 'SSS',
-        'e': 'zz', // deprecated since version 1.6.0 of moment.js
-        'I': '', // no equivalent
-        'O': '', // no equivalent
-        'P': '', // no equivalent
-        'T': '', // no equivalent
-        'Z': '', // no equivalent
-        'c': '', // no equivalent
-        'r': '', // no equivalent
-        'U': 'X',
-    };
-
-    return strtr( format, replacements );
-}
-
 const ONE_DAY = 86400;
 const NOW = moment().format( 'X' ) - moment( '00:00:00', 'HH:mm:ss' ).format( 'X' );
 
