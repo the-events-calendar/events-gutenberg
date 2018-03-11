@@ -64,6 +64,11 @@ export default {
 			source: 'meta',
 			meta: '_EventCurrencySymbol',
 		},
+		eventCurrencyPosition: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventCurrencyPosition',
+		},
 	},
 
 	useOnce: true,

@@ -3,6 +3,7 @@
  */
 import moment from 'moment';
 import { union, without, isEmpty } from 'lodash';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -14,12 +15,16 @@ import { Component, compose } from '@wordpress/element';
 import {
 	Dropdown,
 	IconButton,
-	Dashicon
+	Dashicon,
+	ToggleControl,
+	TextControl,
+	PanelBody,
 } from '@wordpress/components';
 
 import {
 	RichText,
 	PlainText,
+	InspectorControls,
 } from '@wordpress/blocks'
 
 /**
@@ -73,18 +78,30 @@ class EventDetails extends Component {
 	}
 
 	render() {
-		const { attributes, setAttributes, focus, setFocus } = this.props;
-		const reverseCurrencySymbolPositon = '1' == DATA.reverseCurrencyPosition;
-		const currencySymbol = (
-			<PlainText
-				className="tribe-editor__event-cost-currency"
-				value={ attributes.eventCurrencySymbol }
-				placeholder={ __( '$', 'the-events-calendar' ) }
-				onChange={ ( nextContent ) => setAttributes( { eventCurrencySymbol: nextContent } ) }
-			/>
-		)
+		const {
+			attributes,
+			setAttributes,
+			focus,
+			setFocus,
+			isSelected
+		} = this.props;
 
-		const content = (
+		let currencyPosition = '1' == DATA.reverseCurrencyPosition ? 'suffix' : 'prefix';
+
+		// If we have it saved we replace it
+		if ( attributes.eventCurrencyPosition ) {
+			currencyPosition = attributes.eventCurrencyPosition;
+		}
+
+		let eventCurrencySymbol = __( '$', 'the-events-calendar' );
+		if ( attributes.eventCurrencySymbol ) {
+			eventCurrencySymbol = attributes.eventCurrencySymbol;
+		}
+		eventCurrencySymbol = (
+			<span>{ eventCurrencySymbol }</span>
+		);
+
+		const content = [
 			<div key="event-details-box" className="tribe-editor-block tribe-editor-event__details">
 				<MetaGroup groupKey='event-details'>
 					<RichText
@@ -154,17 +171,17 @@ class EventDetails extends Component {
 
 					<div className='tribe-editor__event-cost'>
 						<strong>{ __( 'Price: ', 'the-events-calendar' ) }</strong><br />
-						{ ! reverseCurrencySymbolPositon &&
-							currencySymbol
+						{ 'prefix' === currencyPosition &&
+							eventCurrencySymbol
 						}
 						<PlainText
-							className="tribe-editor__event-cost-value"
+							className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 							value={ attributes.eventCost }
 							placeholder={ __( 'Enter price', 'the-events-calendar' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
 						/>
-						{ reverseCurrencySymbolPositon &&
-							currencySymbol
+						{ 'suffix' === currencyPosition &&
+							eventCurrencySymbol
 						}
 					</div>
 
@@ -204,8 +221,25 @@ class EventDetails extends Component {
 						} }
 					/>
 				</MetaGroup>
-			</div>
-		)
+			</div>,
+			isSelected && (
+				<InspectorControls key="inspector">
+					<PanelBody title={ __( 'Venue Map Settings' ) }>
+						<ToggleControl
+							label={ __( 'Show symbol before', 'the-events-calendar' ) }
+							checked={ 'prefix' === currencyPosition ? true : false  }
+							onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
+						/>
+						<TextControl
+							label={ __( ' Currency Symbol', 'the-events-calendar' ) }
+							value={ attributes.eventCurrencySymbol }
+							placeholder={ __( '$', 'the-events-calendar' ) }
+							onChange={ ( value ) => setAttributes( { eventCurrencySymbol: value } ) }
+						/>
+					</PanelBody>
+				</InspectorControls>
+			)
+		]
 
 		return content
 	}
