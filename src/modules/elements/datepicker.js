@@ -29,18 +29,17 @@ import { getSetting } from 'editor/settings'
  * Module Code
  */
 
-// Fetches all the Editor Settings
-const DATA = tribe_blocks_editor_settings;
-
 class DatePicker extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.onChange = this.onChange.bind( this );
 		this.changeDatetime = this.props.changeDatetime.bind( this );
+
+		this.onChange = this.onChange.bind( this );
 		this.formatDate = this.formatDate.bind( this );
 
-		this.onChange( this.props.datetime );
+		this.renderToggle = this.renderToggle.bind( this );
+		this.renderContent = this.renderContent.bind( this );
 	}
 
 	formatDate( date, label = false ) {
@@ -68,16 +67,30 @@ class DatePicker extends Component {
 		return date.minutes( date.minutes() ).format( format );
 	}
 
+	renderContent( { onToggle, isOpen, onClose } ) {
+		this.onClose = onClose.bind( this );
+
+		return (
+			<WPDatePicker key="date-picker" currentDate={ this.props.datetime } onChange={ this.onChange } />
+		);
+	}
+
+	renderToggle( { onToggle, isOpen, onClose } ) {
+		return (
+			<button
+				type="button"
+				className="button-link"
+				onClick={ onToggle }
+				aria-expanded={ isOpen }
+			>
+				{ this.formatDate( this.props.datetime, true ) }
+			</button>
+		);
+	}
+
 	onChange( date ) {
-		// Start defaults to now
-		let dateMoment = moment();
-
-		// if we have the date we prep the moment
-		if ( date ) {
-			dateMoment = moment( date );
-		}
-
-		this.changeDatetime( this.formatDate( dateMoment ) );
+		this.changeDatetime( this.formatDate( date ) );
+		this.onClose();
 	}
 
 	render() {
@@ -86,17 +99,8 @@ class DatePicker extends Component {
 				className="tribe-editor-datetime"
 				position="bottom left"
 				contentClassName="tribe-editor-datetime__dialog"
-				renderToggle={ ( { onToggle, isOpen } ) => (
-					<button
-						type="button"
-						className="button-link"
-						onClick={ onToggle }
-						aria-expanded={ isOpen }
-					>
-						{ this.formatDate( this.props.datetime, true ) }
-					</button>
-				) }
-				renderContent={ () => <WPDatePicker key="date-picker" currentDate={ this.props.datetime } onChange={ this.onChange } /> }
+				renderToggle={ this.renderToggle }
+				renderContent={ this.renderContent }
 			/>
 		);
 	}

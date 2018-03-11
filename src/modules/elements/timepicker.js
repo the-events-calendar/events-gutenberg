@@ -57,6 +57,7 @@ class DateTime extends Component {
 		show2400: false,
 		timeFormat: 'H:i',
 		current: NOW,
+		allDay: false,
 	}
 
 	get currentLabel() {
@@ -152,7 +153,7 @@ class DateTime extends Component {
 			show2400,
 		} = this.props
 
-		let offset = seconds % ( step *60 ); // step is in minutes
+		let offset = seconds % ( step * 60 ); // step is in minutes
 
 		if ( offset >= step * 30 ) {
 			// if offset is larger than a half step, round up
@@ -213,16 +214,18 @@ class DateTime extends Component {
 						scrollById( 'tribe-element-timepicker-items', 0, 31 * index )
 					} ).bind( this );
 
-					return (
+					return [
+						this.props.allDay && this.renderItem( { text: 'All Day', value: 'all-day' } ),
 						<ScrollArea
 							id='tribe-element-timepicker-items'
+							key='tribe-element-timepicker-items'
 							role="menu"
 							className={ classNames( 'tribe-element-timepicker-items' ) }
 						>
 							{ this.renderList() }
 						</ScrollArea>
-					);
-				}}
+					];
+				} }
 			</ScrollTo>
 		);
 	}
