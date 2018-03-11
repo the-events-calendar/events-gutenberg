@@ -91,15 +91,15 @@ class DateTime extends Component {
 
 		this.formatLabel = this.formatLabel.bind( this )
 		this.getSeconds = this.getSeconds.bind( this )
+		this.changeTime = this.changeTime.bind( this )
 		this.roundTime = this.roundTime.bind( this )
 		this.renderList = this.renderList.bind( this )
 		this.renderItem = this.renderItem.bind( this )
 		this.renderDropdown = this.renderDropdown.bind( this )
 
-		this.state = {
-			...this.props,
-			current: this.getSeconds( this.props.current ),
-		}
+		this.onSelectItem = this.props.onSelectItem.bind( this );
+
+		// this.onSelectItem( this.props.current )
 	}
 
 	static defaultProps = {
@@ -115,13 +115,7 @@ class DateTime extends Component {
 	}
 
 	get currentLabel() {
-		let current = this.state.current;
-
-		if ( current.value ) {
-			current = current.value
-		}
-
-		return this.formatLabel( this.roundTime( current ) );
+		return this.formatLabel( this.roundTime( this.getSeconds( this.props.current ) ) );
 	}
 
 	getSeconds( datetime, onInvalid = moment() ) {
@@ -136,11 +130,22 @@ class DateTime extends Component {
 		return currentDate.format( 'X' ) - currentDate.startOf( 'day' ).format( 'X' );
 	}
 
-	getItems( searchFor, state ) {
+	changeTime( original, seconds ) {
+		let originalMoment = moment( original, 'YYYY-MM-DD HH:mm:ss' )
+		// On invalid date we reset to today
+		if ( ! originalMoment.isValid() ) {
+			originalMoment = moment()
+		}
+
+		const nextMoment = originalMoment.startOf( 'day' ).add( seconds, 'seconds' )
+		return nextMoment.format( 'YYYY-MM-DD HH:mm:ss' )
+	}
+
+	getItems( searchFor, props ) {
 		let items = [];
 
-		if ( ! state ) {
-			state = this.state
+		if ( ! props ) {
+			props = this.props
 		}
 
 		const {
@@ -150,9 +155,9 @@ class DateTime extends Component {
 			show2400,
 			timeFormat,
 			current,
-		} = state
+		} = props
 
-		const currentValue = this.roundTime( current.value ? current.value : current )
+		const currentValue = this.roundTime( this.getSeconds( current ) )
 		let start = minTime ? minTime : 0;
 		let end = maxTime ? maxTime : ( start + ONE_DAY - 1 );
 
@@ -170,6 +175,7 @@ class DateTime extends Component {
 			items.push( {
 				index: index,
 				value: item,
+				datetime: this.changeTime( current, item ),
 				text: this.formatLabel( item ),
 				isDisabled: false,
 				isCurrent: item === currentValue,
@@ -186,7 +192,7 @@ class DateTime extends Component {
 	formatLabel( seconds ) {
 		const {
 			timeFormat
-		} = this.state
+		} = this.props
 
 		return moment().startOf( 'day' ).add( seconds, 'seconds' ).format( timeFormat )
 	}
@@ -199,7 +205,7 @@ class DateTime extends Component {
 		let {
 			step,
 			show2400,
-		} = this.state
+		} = this.props
 
 		let offset = seconds % ( step *60 ); // step is in minutes
 
@@ -222,6 +228,30 @@ class DateTime extends Component {
 		const { focus } = this.props;
 
 		return this.getItems().map( this.renderItem, this );
+	}
+
+	renderItem( item ) {
+		const { onHover } = this.props;
+
+		const itemClasses = {
+			'tribe-element-timepicker-item': true,
+			'tribe-current': item.isCurrent,
+		}
+
+		return (
+			<button
+				key={ `time-${ item.value }` }
+				role="menuitem"
+				className={ classNames( itemClasses ) }
+				value={ item.value }
+				onClick={ () => {
+					this.onSelectItem( item.datetime )
+					this.onClose()
+				} }
+			>
+				{ item.text }
+			</button>
+		);
 	}
 
 	renderDropdown( { onToggle, isOpen, onClose } ) {
@@ -255,37 +285,12 @@ class DateTime extends Component {
 	scrollToCurrent() {}
 
 	componentDidUpdate( nextProps, nextState ) {
-		const current = this.roundTime( nextState.current.value ? nextState.current.value : nextState.current )
-		const currentItem = this.getItems( { 'value': current }, nextState )
+		const current = this.roundTime( nextProps.current.value ? nextProps.current.value : nextProps.current )
+		const currentItem = this.getItems( { 'value': current }, nextProps )
 
 		if ( currentItem && currentItem.index ) {
 			this.scrollToCurrent( currentItem.index );
 		}
-	}
-
-	renderItem( item ) {
-		const { current, onSelectItem, onHover } = this.state;
-
-		const itemClasses = {
-			'tribe-element-timepicker-item': true,
-			'tribe-current': item.isCurrent,
-		}
-
-		return (
-			<button
-				key={ `time-${ item.value }` }
-				role="menuitem"
-				className={ classNames( itemClasses ) }
-				value={ item.value }
-				onClick={ () => {
-					onSelectItem( item )
-					this.setState( { current: item } )
-					this.onClose()
-				} }
-			>
-				{ item.text }
-			</button>
-		);
 	}
 
 	render() {

@@ -44,7 +44,19 @@ const DATA = tribe_blocks_editor_settings;
 class EventDetails extends Component {
 	constructor() {
 		super( ...arguments );
-		this.state = this.props.attributes
+
+		this.setAttributes = this.setAttributes.bind( this );
+
+		this.state = this.props
+	}
+
+	setAttributes( attributes ) {
+		// Set attributes to Blocks List
+		this.state.setAttributes( attributes )
+
+		this.setState( ( prevState ) => ( {
+			attributes: { ...prevState.attributes, ...attributes },
+		} ) );
 	}
 
 	changeTime( current, item ) {
@@ -96,13 +108,15 @@ class EventDetails extends Component {
 					<div>
 						<strong>{ __( 'Start: ', 'the-events-calendar' ) }</strong><br />
 						<DatePicker
-							changeDatetime={ ( date ) => setAttributes( { startDate: date } ) }
+							changeDatetime={ ( date ) => {
+								setAttributes( { startDate: date } )
+							} }
 							datetime={ attributes.startDate }
 						/>
 						<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
 						<TimePicker
-							onSelectItem={ ( item ) => {
-								setAttributes( { startDate: this.changeTime( attributes.startDate, item ) } )
+							onSelectItem={ ( date ) => {
+								setAttributes( { startDate: date } )
 							} }
 							current={ attributes.startDate }
 						/>
@@ -111,18 +125,19 @@ class EventDetails extends Component {
 					<div>
 						<strong>{ __( 'End: ', 'the-events-calendar' ) }</strong><br />
 						<DatePicker
-							changeDatetime={ ( date ) => setAttributes( { endDate: date } ) }
+							changeDatetime={ ( date ) => {
+								setAttributes( { endDate: date } )
+							} }
 							datetime={ attributes.endDate }
 						/>
 						<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
 						<TimePicker
-							onSelectItem={ ( item ) => {
-								setAttributes( { endDate: this.changeTime( attributes.endDate, item ) } )
+							onSelectItem={ ( date ) => {
+								setAttributes( { endDate: date } )
 							} }
 							current={ attributes.endDate }
 						/>
 					</div>
-
 
 					<div>
 						<strong>{ __( 'Website: ', 'the-events-calendar' ) }</strong><br />
