@@ -180,9 +180,9 @@ const applyWithAPIData = withAPIData( ( props ) => {
 	const { items, postType } = props
 	let query = {
 		per_page: 100,
-		orderby: 'modified',
+		orderby: 'title',
 		status: [ 'draft', 'publish' ],
-		order: 'desc',
+		order: 'asc',
 	};
 
 	if ( items && 0 !== items.length ) {
