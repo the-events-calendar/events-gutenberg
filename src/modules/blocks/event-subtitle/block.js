@@ -28,18 +28,7 @@ class EventSubtitle extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.setAttributes = this.setAttributes.bind( this );
-
 		this.state = this.props
-	}
-
-	setAttributes( attributes ) {
-		// Set attributes to Blocks List
-		this.state.setAttributes( attributes )
-
-		this.setState( ( prevState ) => ( {
-			attributes: { ...prevState.attributes, ...attributes },
-		} ) );
 	}
 
 	render() {

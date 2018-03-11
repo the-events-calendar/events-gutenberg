@@ -99,7 +99,7 @@ class DateTime extends Component {
 
 		this.onSelectItem = this.props.onSelectItem.bind( this );
 
-		// this.onSelectItem( this.props.current )
+		this.onSelectItem( this.props.current )
 	}
 
 	static defaultProps = {
@@ -285,7 +285,7 @@ class DateTime extends Component {
 	scrollToCurrent() {}
 
 	componentDidUpdate( nextProps, nextState ) {
-		const current = this.roundTime( nextProps.current.value ? nextProps.current.value : nextProps.current )
+		const current = this.roundTime( this.getSeconds( nextProps.current ) )
 		const currentItem = this.getItems( { 'value': current }, nextProps )
 
 		if ( currentItem && currentItem.index ) {
