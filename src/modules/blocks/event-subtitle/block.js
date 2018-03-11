@@ -33,7 +33,13 @@ class EventSubtitle extends Component {
 	}
 
 	render() {
-		const { attributes, setAttributes, focus } = this.props;
+		const {
+			attributes,
+			setAttributes,
+			focus,
+			isSelected,
+		} = this.props;
+
 		return [
 			<h2 key="event-datetime" className="tribe-editor-block tribe-editor-events-subtitle">
 				<DatePicker

@@ -20,11 +20,14 @@ import {
 	withAPIData,
 	Spinner,
 	Placeholder,
+	ToggleControl,
+	PanelBody,
 } from '@wordpress/components';
 
 import {
 	RichText,
 	PlainText,
+	InspectorControls,
 } from '@wordpress/blocks'
 
 /**
@@ -202,7 +205,19 @@ class EventVenue extends Component {
 	}
 
 	render() {
-		const { attributes, setAttributes, focus, setFocus } = this.props;
+		const {
+			attributes,
+			setAttributes,
+			focus,
+			setFocus,
+			isSelected,
+		} = this.props;
+
+		const {
+			showMapLink,
+			showMap,
+		} = attributes
+
 		const venue = this.getVenue()
 		let venueContainer = (
 			<VenueDetails
@@ -223,6 +238,8 @@ class EventVenue extends Component {
 					setAttributes( { eventVenueId: 0 } )
 					this.setState( { venue: undefined } )
 				} }
+				showMap={ showMap }
+				showMapLink={ showMapLink }
 			/>
 		)
 
@@ -241,7 +258,7 @@ class EventVenue extends Component {
 			</MetaGroup>
 		);
 
-		if ( venue && this.getAddress() ) {
+		if ( venue && this.getAddress() && showMap ) {
 			block = (
 				<div>
 					<MetaGroup groupKey='event-venue-details' className='column-1-3'>
@@ -258,11 +275,27 @@ class EventVenue extends Component {
 			)
 		}
 
-		const content = (
+		const content = [
 			<div key="event-venue-box" className="tribe-editor-block tribe-editor-event__venue">
 				{ block }
-			</div>
-		)
+			</div>,
+			isSelected && (
+				<InspectorControls key="inspector">
+					<PanelBody title={ __( 'Venue Map Settings' ) }>
+						<ToggleControl
+							label={ __( 'Show Google Maps Link' ) }
+							checked={ !! showMapLink }
+							onChange={ ( value ) => setAttributes( { showMapLink: value } ) }
+						/>
+						<ToggleControl
+							label={ __( 'Show Google Maps Embed' ) }
+							checked={ !! showMap }
+							onChange={ ( value ) => setAttributes( { showMap: value } ) }
+						/>
+					</PanelBody>
+				</InspectorControls>
+			)
+		]
 
 		return content
 	}

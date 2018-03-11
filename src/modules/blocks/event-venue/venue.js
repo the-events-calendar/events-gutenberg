@@ -123,7 +123,12 @@ class VenueDetails extends Component {
 
 	renderVenue() {
 		const venue = this.props.venue
-		const { focus, removeVenue } = this.props
+		const {
+			focus,
+			removeVenue,
+			showMap,
+			showMapLink,
+		} = this.props
 		const classes = {
 			'tribe-current': true
 		}
@@ -151,7 +156,7 @@ class VenueDetails extends Component {
 						<abbr className="tribe-region tribe-events-abbr" title={ venue.meta._VenueProvince }>{ venue.meta._VenueProvince }</abbr>&nbsp;
 						<span className="tribe-postal-code">{ venue.meta._VenueZip }</span>&nbsp;
 						<span className="tribe-country-name">{ venue.meta._VenueCountry }</span>&nbsp;
-						{ ! isEmpty( address ) &&
+						{ ! isEmpty( address ) && showMapLink &&
 							<a
 								className="tribe-events-gmap"
 								href={ mapsUrl }

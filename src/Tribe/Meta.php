@@ -25,6 +25,8 @@ class Tribe__Events_Gutenberg__Meta {
 
 		register_meta( 'post', '_EventStartDate', $args->text );
 		register_meta( 'post', '_EventEndDate', $args->text );
+		register_meta( 'post', '_EventShowMap', $args->text );
+		register_meta( 'post', '_EventShowMapLink', $args->text );
 		register_meta( 'post', '_EventURL', $args->text );
 		register_meta( 'post', '_EventCost', $args->text );
 		register_meta( 'post', '_EventCurrencySymbol', $args->text );

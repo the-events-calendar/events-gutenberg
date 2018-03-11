@@ -36,6 +36,16 @@ export default {
 			source: 'meta',
 			meta: '_EventVenueID',
 		},
+		showMapLink: {
+			type: 'boolean',
+			source: 'meta',
+			meta: '_EventShowMapLink',
+		},
+		showMap: {
+			type: 'boolean',
+			source: 'meta',
+			meta: '_EventShowMap',
+		},
 	},
 
 	useOnce: true,
