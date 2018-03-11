@@ -14,30 +14,53 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import {
-	DateTime,
+	DatePicker,
+	TimePicker,
 } from 'elements'
 
 /**
  * Module Code
  */
+// Fetches all the Editor Settings
+const DATA = tribe_blocks_editor_settings;
+
 class EventSubtitle extends Component {
 	constructor() {
 		super( ...arguments );
+
+		this.state = this.props
 	}
 
 	render() {
-		const { attributes, focus, setAttributes } = this.props;
-
+		const { attributes, setAttributes, focus } = this.props;
 		return [
 			<h2 key="event-datetime" className="tribe-editor-block tribe-editor-events-subtitle">
-				<DateTime
-					changeDatetime={ ( date ) => setAttributes( { startDate: date } ) }
+				<DatePicker
+					changeDatetime={ ( date ) => {
+						setAttributes( { startDate: date } )
+					} }
 					datetime={ attributes.startDate }
 				/>
-				<span>{ __( ' - ', 'the-events-calendar' ) }</span>
-				<DateTime
-					changeDatetime={ ( date ) => setAttributes( { endDate: date } ) }
+				<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
+				<TimePicker
+					onSelectItem={ ( date ) => {
+						setAttributes( { startDate: date } )
+					} }
+					current={ attributes.startDate }
+				/>
+				<span>{ DATA.timeRangeSeparator || ' - ' }</span>
+				<DatePicker
+					changeDatetime={ ( date ) => {
+						setAttributes( { endDate: date } )
+					} }
 					datetime={ attributes.endDate }
+				/>
+				<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
+				<TimePicker
+					onSelectItem={ ( date ) => {
+						setAttributes( { endDate: date } )
+					} }
+					current={ attributes.endDate }
 				/>
 			</h2>
 		]
