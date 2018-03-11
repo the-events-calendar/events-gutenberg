@@ -28,7 +28,8 @@ import {
 import {
 	TermsList,
 	OrganizerForm,
-	DateTime,
+	DatePicker,
+	TimePicker,
 	MetaGroup,
 } from 'elements'
 
@@ -43,6 +44,19 @@ const DATA = tribe_blocks_editor_settings;
 class EventDetails extends Component {
 	constructor() {
 		super( ...arguments );
+		this.state = this.props.attributes
+	}
+
+	changeTime( current, item ) {
+		let currentDate = moment( current, 'YYYY-MM-DD HH:mm:ss' )
+
+		// On invalid date we reset to today
+		if ( ! currentDate.isValid() ) {
+			currentDate = moment()
+		}
+
+		const nextDatetime = currentDate.startOf( 'day' ).add( item.value, 'seconds' )
+		return nextDatetime.format( 'YYYY-MM-DD HH:mm:ss' )
 	}
 
 	render() {
@@ -79,17 +93,36 @@ class EventDetails extends Component {
 						formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 					/>
 
-					<DateTime
-						changeDatetime={ ( date ) => setAttributes( { startDate: date } ) }
-						datetime={ attributes.startDate }
-						label={ __( 'Start: ', 'the-events-calendar' ) }
-					/>
+					<div>
+						<strong>{ __( 'Start: ', 'the-events-calendar' ) }</strong><br />
+						<DatePicker
+							changeDatetime={ ( date ) => setAttributes( { startDate: date } ) }
+							datetime={ attributes.startDate }
+						/>
+						<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
+						<TimePicker
+							onSelectItem={ ( item ) => {
+								setAttributes( { startDate: this.changeTime( attributes.startDate, item ) } )
+							} }
+							current={ attributes.startDate }
+						/>
+					</div>
 
-					<DateTime
-						changeDatetime={ ( date ) => setAttributes( { endDate: date } ) }
-						datetime={ attributes.endDate }
-						label={ __( 'End: ', 'the-events-calendar' ) }
-					/>
+					<div>
+						<strong>{ __( 'End: ', 'the-events-calendar' ) }</strong><br />
+						<DatePicker
+							changeDatetime={ ( date ) => setAttributes( { endDate: date } ) }
+							datetime={ attributes.endDate }
+						/>
+						<span>{ DATA.dateTimeSeparator || ' @ ' }</span>
+						<TimePicker
+							onSelectItem={ ( item ) => {
+								setAttributes( { endDate: this.changeTime( attributes.endDate, item ) } )
+							} }
+							current={ attributes.endDate }
+						/>
+					</div>
+
 
 					<div>
 						<strong>{ __( 'Website: ', 'the-events-calendar' ) }</strong><br />

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment';
-import { times, unescape, get } from 'lodash';
+import { times, unescape, get, escapeRegExp } from 'lodash';
 import { stringify } from 'querystringify';
 
 /**
@@ -12,7 +12,7 @@ import { Component, compose } from '@wordpress/element';
 import {
 	Placeholder,
 	Spinner,
-	DateTimePicker,
+	DatePicker as WPDatePicker,
 	Dropdown,
 	withAPIData,
 } from '@wordpress/components';
@@ -27,6 +27,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Module Code
  */
+
+// Fetches all the Editor Settings
+const DATA = tribe_blocks_editor_settings;
+
 function round15( minute ) {
 	let intervals = [ 15, 30, 45, 59, 0 ];
 	let closest;
@@ -49,7 +53,58 @@ function round15( minute ) {
 	return closest;
 }
 
-class DateTime extends Component {
+const toMomentFormat = ( format ) => {
+	const strtr = ( str, pairs ) => {
+		const substrs = Object.keys( pairs ).map( escapeRegExp )
+		return str.split( RegExp( `(${ substrs.join( '|' ) })` ) )
+			.map( part => pairs[ part ] || part )
+			.join( '' )
+	}
+
+    const replacements = {
+        'd': 'DD',
+        'D': 'ddd',
+        'j': 'D',
+        'l': 'dddd',
+        'N': 'E',
+        'S': 'o',
+        'w': 'e',
+        'z': 'DDD',
+        'W': 'W',
+        'F': 'MMMM',
+        'm': 'MM',
+        'M': 'MMM',
+        'n': 'M',
+        't': '', // no equivalent
+        'L': '', // no equivalent
+        'o': 'YYYY',
+        'Y': 'YYYY',
+        'y': 'YY',
+        'a': 'a',
+        'A': 'A',
+        'B': '', // no equivalent
+        'g': 'h',
+        'G': 'H',
+        'h': 'hh',
+        'H': 'HH',
+        'i': 'mm',
+        's': 'ss',
+        'u': 'SSS',
+        'e': 'zz', // deprecated since version 1.6.0 of moment.js
+        'I': '', // no equivalent
+        'O': '', // no equivalent
+        'P': '', // no equivalent
+        'T': '', // no equivalent
+        'Z': '', // no equivalent
+        'c': '', // no equivalent
+        'r': '', // no equivalent
+        'U': 'X',
+    };
+
+    return strtr( format, replacements );
+}
+
+class DatePicker extends Component {
 	constructor() {
 		super( ...arguments );
 
@@ -61,7 +116,8 @@ class DateTime extends Component {
 	}
 
 	formatDate( date, label = false ) {
-		const format = label ? 'YYYY-MM-DD @ HH:mm' : 'YYYY-MM-DD HH:mm:00';
+		// Defaults to the non-label format
+		let format = 'YYYY-MM-DD HH:mm:00';
 
 		if ( ! date ) {
 			date = moment();
@@ -70,6 +126,15 @@ class DateTime extends Component {
 		// Convert to moment
 		if ( 'string' === typeof date ) {
 			date = moment( date );
+		}
+
+		// on Invalid date we reset to now
+		if ( ! date.isValid() ) {
+			date = moment();
+		}
+
+		if ( label ) {
+			format = `${ toMomentFormat( DATA.dateWithYearFormat || 'F j, Y' ) }`
 		}
 
 		return date.minutes( round15( date.minutes() ) ).format( format );
@@ -88,7 +153,7 @@ class DateTime extends Component {
 	}
 
 	render() {
-		const dropdown = (
+		return (
 			<Dropdown
 				className="tribe-editor-datetime"
 				position="bottom left"
@@ -103,22 +168,10 @@ class DateTime extends Component {
 						{ this.formatDate( this.props.datetime, true ) }
 					</button>
 				) }
-				renderContent={ () => <DateTimePicker key="datetime-picker" currentDate={ this.props.datetime } onChange={ this.onChange } /> }
+				renderContent={ () => <WPDatePicker key="date-picker" currentDate={ this.props.datetime } onChange={ this.onChange } /> }
 			/>
 		);
-
-		const label = this.props.label ? <strong className='tribe-detail-label'>{ this.props.label } </strong> : null;
-
-		return [
-			<div
-				key='tribe-element-datetime'
-				className='tribe-element tribe-element__datetime'
-			>
-				{ label }
-				{ dropdown }
-			</div>
-		];
 	}
 }
 
-export default DateTime;
+export default DatePicker;
