@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment';
-import { union, without, isEmpty } from 'lodash';
+import { union, without, isEmpty, equals } from 'lodash';
 import classNames from 'classnames';
 
 /**
@@ -84,9 +84,6 @@ class EventDetails extends Component {
 		if ( attributes.eventCurrencySymbol ) {
 			eventCurrencySymbol = attributes.eventCurrencySymbol;
 		}
-		eventCurrencySymbol = (
-			<span>{ eventCurrencySymbol }</span>
-		);
 
 		const content = [
 			<div key="event-details-box" className="tribe-editor-block tribe-editor-event__details">
@@ -95,15 +92,7 @@ class EventDetails extends Component {
 						tagName="h3"
 						className="tribe-events-single-section-title"
 						value={ attributes.detailsTitle }
-						onChange={ ( nextContent ) => {
-							if ( ! nextContent ) {
-								nextContent = __( 'Details', 'the-events-calendar' );
-							}
-
-							setAttributes( {
-								detailsTitle: nextContent
-							} );
-						} }
+						onChange={ ( nextContent ) => setAttributes( { detailsTitle: nextContent } ) }
 						focus={ focus && 'detailsTitle' === focus.editable ? focus : undefined }
 						onFocus={ ( focusValue ) => setFocus( { editable: 'detailsTitle', ...focusValue } ) }
 						placeholder={ __( 'Details', 'the-events-calendar' ) }
@@ -159,7 +148,7 @@ class EventDetails extends Component {
 					<div className='tribe-editor__event-cost'>
 						<strong>{ __( 'Price: ', 'the-events-calendar' ) }</strong><br />
 						{ 'prefix' === currencyPosition &&
-							eventCurrencySymbol
+							<span>{ eventCurrencySymbol }</span>
 						}
 						<PlainText
 							className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
@@ -168,7 +157,7 @@ class EventDetails extends Component {
 							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
 						/>
 						{ 'suffix' === currencyPosition &&
-							eventCurrencySymbol
+							<span>{ eventCurrencySymbol }</span>
 						}
 					</div>
 
@@ -219,8 +208,8 @@ class EventDetails extends Component {
 						/>
 						<TextControl
 							label={ __( ' Currency Symbol', 'the-events-calendar' ) }
-							value={ attributes.eventCurrencySymbol }
-							placeholder={ __( '$', 'the-events-calendar' ) }
+							value={ equals( attributes.eventCurrencySymbol, eventCurrencySymbol ) ? '' : attributes.eventCurrencySymbol }
+							placeholder={ __( 'E.g.: $', 'the-events-calendar' ) }
 							onChange={ ( value ) => setAttributes( { eventCurrencySymbol: value } ) }
 						/>
 					</PanelBody>

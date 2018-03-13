@@ -24,6 +24,15 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.1.2-alpha &mdash; 2018-03-13
+
+* Feature - Venue Block sidebar control for displaying Google Maps Link and Embed
+* Feature - Event Details Block sidebar control for currency and currency symbol positon
+* Tweak - Date and Time Picker split into two fields to improve User Experience
+* Tweak - Time Picker now is no longer based on default Gutenberg Timepicker
+* Tweak - Improved internal query of Tribe Settings
+* Fix - Add existing Posts now orders by title instead of modified date `<SearchPosts>`
+
 #### 0.1.1-alpha &mdash; 2018-03-08
 
 * Feature - Events Single page will now respect configurations from Blocks Editor
