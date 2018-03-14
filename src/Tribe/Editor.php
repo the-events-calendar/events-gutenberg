@@ -83,7 +83,7 @@ class Tribe__Events_Gutenberg__Editor {
 	/**
 	 * Adds the required blocks into the Events Post Type
 	 *
-	 * @since  0.1.0-alpha
+	 * @since  0.1.3-alpha
 	 *
 	 * @param  array $args Arguments used to setup the CPT template
 	 *
@@ -239,5 +239,24 @@ class Tribe__Events_Gutenberg__Editor {
 			)
 		);
 	}
-}
 
+	/************************
+	 *                      *
+	 *  Deprecated Methods  *
+	 *                      *
+	 ************************/
+
+	/**
+	 * Adds the required blocks into the Events Post Type
+	 *
+	 * @since      0.1.0-alpha
+	 * @deprecated 0.1.3-alpha
+	 *
+	 * @param  array $args Arguments used to setup the CPT template
+	 *
+	 * @return array
+	 */
+	public function add_template_blocks( $args = array() ) {
+		return $this->add_event_template_blocks( $args );
+	}
+}
