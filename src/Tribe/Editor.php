@@ -89,7 +89,7 @@ class Tribe__Events_Gutenberg__Editor {
 	 *
 	 * @return array
 	 */
-	public function add_template_blocks( $args = array() ) {
+	public function add_event_template_blocks( $args = array() ) {
 		$template = array();
 
 		/**
@@ -106,8 +106,17 @@ class Tribe__Events_Gutenberg__Editor {
 		$template[] = array( 'tribe/event-details' );
 		$template[] = array( 'tribe/event-venue' );
 
-		// Save into args
- 		$args['template'] = $template;
+		/**
+		 * Allow modifying the default template for Events
+		 *
+		 * @since  0.1.3-alpha
+		 *
+		 * @param  array   $template   Array of all the templates used by default
+		 * @param  string  $post_type  Which post type we are filtering
+		 * @param  array   $args       Array of configurations for the post type
+		 *
+		 */
+ 		$args['template'] = apply_filters( 'tribe_events_editor_default_template', $template, Tribe__Events__Main::POSTTYPE, $args );
 
  		return $args;
 	}
@@ -121,6 +130,11 @@ class Tribe__Events_Gutenberg__Editor {
 	 * @return void
 	 */
 	public function register_blocks() {
+		/**
+		 * Internal Action used to register blocks for Events
+		 *
+		 * @since  0.1.0-alpha
+		 */
 		do_action( 'tribe_events_editor_register_blocks' );
 	}
 

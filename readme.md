@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.1.3-alpha &mdash; 2018-03-15
+
+* Tweak - Added filter `tribe_events_editor_default_template` to allow tweaking which default blocks will be used
+
 #### 0.1.2-alpha &mdash; 2018-03-13
 
 * Feature - Venue Block sidebar control for displaying Google Maps Link and Embed

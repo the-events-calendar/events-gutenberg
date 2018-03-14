@@ -55,7 +55,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 */
 	protected function hook() {
-		add_filter( 'tribe_events_register_event_type_args', tribe_callback( 'gutenberg.editor', 'add_support' ) );
+		add_filter( 'tribe_events_register_event_type_args', tribe_callback( 'gutenberg.editor', 'add_event_template_blocks' ) );
 		add_filter( 'tribe_events_register_event_type_args', tribe_callback( 'gutenberg.editor', 'add_template_blocks' ) );
 
 		// Add Rest API support
