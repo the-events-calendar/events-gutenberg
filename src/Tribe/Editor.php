@@ -211,8 +211,14 @@ class Tribe__Events_Gutenberg__Editor {
 			array(
 				'in_footer' => false,
 				'localize'  => array(
-					'name' => 'tribe_blocks_editor_settings',
-					'data' => tribe( 'gutenberg.settings' )->get_options(),
+					array(
+						'name' => 'tribe_blocks_editor_settings',
+						'data' => tribe( 'gutenberg.settings' )->get_options(),
+					),
+					array(
+						'name' => 'tribe_blocks_editor_timezone_html',
+						'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
+					),
 				),
 			)
 		);

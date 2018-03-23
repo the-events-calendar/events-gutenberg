@@ -3,7 +3,7 @@
 $events_label_singular = tribe_get_event_label_singular();
 $events_label_plural   = tribe_get_event_label_plural();
 
-$event_id = $this->get( 'post_id' )
+$event_id = $this->get( 'post_id' );
 
 ?>
 

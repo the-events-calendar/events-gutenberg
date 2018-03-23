@@ -30,7 +30,7 @@ import { toMomentFormat } from 'editor/utils/date'
 const ONE_DAY = 86400;
 const NOW = moment().format( 'X' ) - moment( '00:00:00', 'HH:mm:ss' ).format( 'X' );
 
-class DateTime extends Component {
+class TimePicker extends Component {
 	constructor() {
 		super( ...arguments );
 
@@ -272,4 +272,4 @@ class DateTime extends Component {
 	}
 }
 
-export default DateTime;
+export default TimePicker;

@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	DatePicker,
 	TimePicker,
+	TimezonePicker,
 } from 'elements'
 
 import { getSetting } from 'editor/settings'
@@ -71,6 +72,14 @@ class EventSubtitle extends Component {
 					} }
 					current={ attributes.endDate }
 					timeFormat={ WPDateSettings.formats.time }
+				/>
+				<span> &mdash; </span>
+				<TimezonePicker
+					onSelectItem={ ( value ) => {
+						setAttributes( { timezone: value } )
+					} }
+					current={ attributes.timezone }
+					siteTimezone={ WPDateSettings.timezone }
 				/>
 			</h2>
 		]

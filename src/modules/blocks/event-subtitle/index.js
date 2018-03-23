@@ -37,6 +37,11 @@ export default {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventEndDate',
+		},
+		timezone: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventTimezone',
 		}
 	},
 
