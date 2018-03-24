@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.1.4-alpha &mdash; 2018-03-27
+
+* Feature - Added the strucutre for All Day Events
+
 #### 0.1.3-alpha &mdash; 2018-03-23
 
 * Feature - Added a Timezone picker into Subtitle Block

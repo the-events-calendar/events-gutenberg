@@ -39,6 +39,11 @@ export default {
 		detailsTitle: {
 			type: 'html',
 		},
+		allDay: {
+			type: 'boolean',
+			source: 'meta',
+			meta: '_EventAllDay',
+		},
 		startDate: {
 			type: 'string',
 			source: 'meta',

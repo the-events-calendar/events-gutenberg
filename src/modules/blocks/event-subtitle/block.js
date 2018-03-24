@@ -2,13 +2,24 @@
  * External dependencies
  */
 import moment from 'moment';
+import React from 'react';
 
 /**
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
-import { Dropdown } from '@wordpress/components';
+
+import {
+	Dropdown,
+	ToggleControl,
+	PanelBody,
+} from '@wordpress/components';
+
 import { __ } from '@wordpress/i18n';
+
+import {
+	InspectorControls,
+} from '@wordpress/blocks'
 
 /**
  * Internal dependencies
@@ -50,14 +61,26 @@ class EventSubtitle extends Component {
 					} }
 					datetime={ attributes.startDate }
 				/>
-				<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
-				<TimePicker
-					onSelectItem={ ( date ) => {
-						setAttributes( { startDate: date } )
-					} }
-					current={ attributes.startDate }
-					timeFormat={ WPDateSettings.formats.time }
-				/>
+				{ ! attributes.allDay &&
+					<React.Fragment>
+						<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
+						<TimePicker
+							onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
+								if ( 'all-day' === date ) {
+									setAttributes( {
+										allDay: true,
+										startDate: startAllDay,
+										endDate: endAllDay,
+									} )
+								} else {
+									setAttributes( { startDate: date } )
+								}
+							} }
+							current={ attributes.startDate }
+							timeFormat={ WPDateSettings.formats.time }
+						/>
+					</React.Fragment>
+				}
 				<span>{ getSetting( 'timeRangeSeparator', __( ' - ', 'the-events-calendar' ) ) }</span>
 				<DatePicker
 					changeDatetime={ ( date ) => {
@@ -65,14 +88,26 @@ class EventSubtitle extends Component {
 					} }
 					datetime={ attributes.endDate }
 				/>
-				<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
-				<TimePicker
-					onSelectItem={ ( date ) => {
-						setAttributes( { endDate: date } )
-					} }
-					current={ attributes.endDate }
-					timeFormat={ WPDateSettings.formats.time }
-				/>
+				{ ! attributes.allDay &&
+					<React.Fragment>
+						<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
+						<TimePicker
+							onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
+								if ( 'all-day' === date ) {
+									setAttributes( {
+										allDay: true,
+										startDate: startAllDay,
+										endDate: endAllDay,
+									} )
+								} else {
+									setAttributes( { endDate: date } )
+								}
+							} }
+							current={ attributes.endDate }
+							timeFormat={ WPDateSettings.formats.time }
+						/>
+					</React.Fragment>
+				}
 				<span> &mdash; </span>
 				<TimezonePicker
 					onSelectItem={ ( value ) => {
@@ -81,7 +116,18 @@ class EventSubtitle extends Component {
 					current={ attributes.timezone }
 					siteTimezone={ WPDateSettings.timezone }
 				/>
-			</h2>
+			</h2>,
+			isSelected && (
+				<InspectorControls key="inspector">
+					<PanelBody title={ __( 'Date Time Settings', 'the-events-calendar' ) }>
+						<ToggleControl
+							label={ __( 'Is All Day Event', 'the-events-calendar' ) }
+							checked={ attributes.allDay }
+							onChange={ ( value ) => setAttributes( { allDay: value } ) }
+						/>
+					</PanelBody>
+				</InspectorControls>
+			)
 		]
 	}
 }

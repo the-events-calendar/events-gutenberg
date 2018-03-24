@@ -57,7 +57,7 @@ class TimePicker extends Component {
 		show2400: false,
 		timeFormat: 'H:i',
 		current: NOW,
-		allDay: false,
+		allDay: true,
 	}
 
 	get currentLabel() {
@@ -177,7 +177,7 @@ class TimePicker extends Component {
 	}
 
 	renderItem( item ) {
-		const { onHover } = this.props;
+		const { onHover, current } = this.props;
 
 		const itemClasses = {
 			'tribe-element-timepicker-item': true,
@@ -191,7 +191,13 @@ class TimePicker extends Component {
 				className={ classNames( itemClasses ) }
 				value={ item.value }
 				onClick={ () => {
-					this.onSelectItem( item.datetime )
+					if ( 'all-day' === item.value ) {
+						const startAllDay = this.changeTime( current, 0 );
+						const endAllDay = this.changeTime( current, ( 60 * 60 * 24 )-1 );
+						this.onSelectItem( item.value, startAllDay, endAllDay )
+					} else {
+						this.onSelectItem( item.datetime )
+					}
 					this.onClose()
 				} }
 			>

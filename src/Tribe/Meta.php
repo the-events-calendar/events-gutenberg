@@ -23,6 +23,7 @@ class Tribe__Events_Gutenberg__Meta {
 			'show_in_rest' => true,
 		);
 
+		register_meta( 'post', '_EventAllDay', $args->text );
 		register_meta( 'post', '_EventTimezone', $args->text );
 		register_meta( 'post', '_EventStartDate', $args->text );
 		register_meta( 'post', '_EventEndDate', $args->text );

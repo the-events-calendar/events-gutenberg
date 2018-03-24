@@ -38,6 +38,11 @@ export default {
 			source: 'meta',
 			meta: '_EventEndDate',
 		},
+		allDay: {
+			type: 'boolean',
+			source: 'meta',
+			meta: '_EventAllDay',
+		},
 		timezone: {
 			type: 'string',
 			source: 'meta',
