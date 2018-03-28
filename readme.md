@@ -26,7 +26,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 #### 0.1.4-alpha &mdash; 2018-03-27
 
-* Feature - Added the strucutre for All Day Events
+* Feature - Added the structure for All Day Events
 
 #### 0.1.3-alpha &mdash; 2018-03-23
 
