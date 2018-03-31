@@ -1,8 +1,9 @@
 /**
  * External dependencies
  */
-import { get, isFunction } from 'lodash';
+import { get, isFunction, values } from 'lodash';
 import { stringify } from 'querystringify';
+import Input from './input.js';
 
 /**
  * WordPress dependencies
@@ -32,7 +33,10 @@ class OrganizerForm extends Component {
 			website: '',
 			email: '',
 			organizer: null,
+			isValid: false,
 		}
+
+		this.fields = {};
 	}
 
 	isCreating() {
@@ -90,6 +94,32 @@ class OrganizerForm extends Component {
 		} );
 	}
 
+	componentDidMount() {
+		this.setState({
+			isValid: this.isValid()
+		})
+	}
+
+	isValid() {
+		const fields = values(this.fields);
+		const results = fields.filter( (input) => input.isValid() );
+		
+		return fields.length === results.length;
+	}
+
+	focus( name ) {
+		return () => {
+			let input = this.fields[ name ];
+			if ( input ) {
+				input.focus();
+			}
+		}
+	}
+
+	saveRef = (input) => {
+		this.fields[input.props.name] = input;
+	}
+
 	render() {
 		if ( this.isCreating() ) {
 			return [
@@ -104,6 +134,15 @@ class OrganizerForm extends Component {
 			];
 		}
 
+		const submitProps = {
+			type: "button",
+			className: "button-secondary",
+		}
+
+		if ( ! this.state.isValid ) {
+			submitProps.disabled = true;
+		}
+
 		return [
 			<div
 				className="tribe-organizer-form"
@@ -112,48 +151,55 @@ class OrganizerForm extends Component {
 				<h3 key="tribe-organizer-form-title">{ __( 'Create Organizer' ) }</h3>
 				<p className='description'>{ __( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'the-events-calendar' ) }</p>
 				<dl>
-					<dt>{ __( 'Name:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus('organizer[name]')}>{ __( 'Name:', 'the-events-calendar' ) } </dt>
 					<dd>
-						<input
+						<Input
 							type='text'
+							ref={this.saveRef}
 							name='organizer[name]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { title: next.target.value } ) }
+							onComplete={ () => this.setState({ isValid: this.isValid() }) }
+							onChange={ ( next ) => this.setState({ title: next.target.value }) }
+							validate
+							required
 						/>
 					</dd>
-					<dt>{ __( 'Phone:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus('organizer[phone]')}>{ __( 'Phone:', 'the-events-calendar' ) } </dt>
 					<dd>
-						<input
-							type='text'
+						<Input
+							type='phone'
+							ref={this.saveRef}
 							name='organizer[phone]'
-							ref={ ( input ) => this.input = input }
+							onComplete={ () => this.setState({ isValid: this.isValid() }) }
 							onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
+							validate
 						/>
 					</dd>
-					<dt>{ __( 'Website:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus('organizer[url]')}>{ __( 'Website:', 'the-events-calendar' ) } </dt>
 					<dd>
-						<input
-							type='text'
-							name='organizer[website]'
-							ref={ ( input ) => this.input = input }
+						<Input
+							type='url'
+							ref={this.saveRef}
+							onComplete={ () => this.setState({ isValid: this.isValid() }) }
 							onChange={ ( next ) => this.setState( { website: next.target.value } ) }
+							name='organizer[website]'
+							validate
 						/>
 					</dd>
-					<dt>{ __( 'Email:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus('organizer[email]')}>{ __( 'Email:', 'the-events-calendar' ) } </dt>
 					<dd>
-						<input
-							type='text'
+						<Input
+							type='email'
+							ref={this.saveRef}
 							name='organizer[email]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { email: next.target.value } ) }
+							onComplete={ () => this.setState({ isValid: this.isValid() }) }
+							onChange={ ( next ) => this.setState( { email: next.target.value, isValid: this.isValid() } ) }
+							validate
 						/>
 					</dd>
 				</dl>
 				<button
-					type="button"
-					className="button-secondary"
 					onClick={ this.onSubmit }
-				>
+					{...submitProps}>
 					{ __( 'Create Organizer', 'the-events-calendar' ) }
 				</button>
 			</div>,
