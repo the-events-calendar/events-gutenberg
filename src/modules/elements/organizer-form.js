@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { Component } from '@wordpress/element';
 import { get, isFunction, values } from 'lodash';
 import { stringify } from 'querystringify';
 import Input from './input.js';
@@ -9,7 +10,6 @@ import Input from './input.js';
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
-const { Component } = wp.element;
 import {
 	Spinner,
 	Placeholder,

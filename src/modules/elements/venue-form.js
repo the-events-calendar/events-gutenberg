@@ -3,12 +3,12 @@
  */
 import { get, isFunction } from 'lodash';
 import { stringify } from 'querystringify';
+import { Component } from '@wordpress/element';
 
 /**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
-const { Component } = wp.element;
 import {
 	Spinner,
 	Placeholder,
