@@ -176,7 +176,7 @@ class OrganizerForm extends Component {
 							validate
 						/>
 					</dd>
-					<dt onClick={this.focus('organizer[url]')}>{ __( 'Website:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus('organizer[website]')}>{ __( 'Website:', 'the-events-calendar' ) } </dt>
 					<dd>
 						<Input
 							type='url'
@@ -194,7 +194,7 @@ class OrganizerForm extends Component {
 							ref={this.saveRef}
 							name='organizer[email]'
 							onComplete={ () => this.setState({ isValid: this.isValid() }) }
-							onChange={ ( next ) => this.setState( { email: next.target.value, isValid: this.isValid() } ) }
+							onChange={ ( next ) => this.setState( { email: next.target.value } ) }
 							validate
 						/>
 					</dd>
