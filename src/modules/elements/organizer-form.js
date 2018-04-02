@@ -117,7 +117,9 @@ class OrganizerForm extends Component {
 	}
 
 	saveRef = (input) => {
-		this.fields[input.props.name] = input;
+		if ( input ) {
+			this.fields[input.props.name] = input;
+		}
 	}
 
 	render() {
