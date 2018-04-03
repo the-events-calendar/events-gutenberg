@@ -118,7 +118,9 @@ class OrganizerForm extends Component {
 
 	saveRef = (input) => {
 		if ( input ) {
-			this.fields[input.props.name] = input;
+			const { props } = input;
+			const { name } = props || {};
+			this.fields[name] = input;
 		}
 	}
 
@@ -134,15 +136,6 @@ class OrganizerForm extends Component {
 					</Placeholder>
 				</div>
 			];
-		}
-
-		const submitProps = {
-			type: "button",
-			className: "button-secondary",
-		}
-
-		if ( ! this.state.isValid ) {
-			submitProps.disabled = true;
 		}
 
 		return [
@@ -199,9 +192,12 @@ class OrganizerForm extends Component {
 						/>
 					</dd>
 				</dl>
+
 				<button
+					type="button"
+					className="button-secondary"
 					onClick={ this.onSubmit }
-					{...submitProps}>
+					disabled={!this.isValid()}>
 					{ __( 'Create Organizer', 'the-events-calendar' ) }
 				</button>
 			</div>,
