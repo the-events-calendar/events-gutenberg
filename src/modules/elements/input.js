@@ -33,7 +33,7 @@ class Input extends Component {
 	 * @type {{validated: shim, required: shim}}
 	 */
 	static propTypes = {
-		validated: PropTypes.bool,
+		validate: PropTypes.bool,
 		required: PropTypes.bool,
 	}
 
