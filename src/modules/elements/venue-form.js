@@ -1,30 +1,30 @@
 /**
  * External dependencies
  */
-import { get, isFunction } from 'lodash';
-import { stringify } from 'querystringify';
-import { Component } from '@wordpress/element';
+import { get, isFunction, values } from 'lodash'
+import { stringify } from 'querystringify'
+import { Component } from '@wordpress/element'
+import Input from './input'
 
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+const {__} = wp.i18n
 import {
 	Spinner,
 	Placeholder,
 	withAPIData
-} from '@wordpress/components';
-
+} from '@wordpress/components'
 
 class VenueForm extends Component {
 	static defaultProps = {
 		postType: 'tribe_venue',
-	};
+	}
 
-	constructor() {
-		super( ...arguments );
-		this.updateVenue = this.updateVenue.bind( this );
-		this.onSubmit = this.onSubmit.bind( this );
+	constructor () {
+		super(...arguments)
+		this.updateVenue = this.updateVenue.bind(this)
+		this.onSubmit = this.onSubmit.bind(this)
 
 		this.state = {
 			title: null,
@@ -36,22 +36,31 @@ class VenueForm extends Component {
 			url: '',
 			stateProvince: '',
 			venue: null,
+			isValid: false,
 		}
+
+		this.fields = {}
 	}
 
-	isCreating() {
-		if ( ! this.state.venue ) {
-			return false;
+	componentDidMount () {
+		this.setState({
+			isValid: this.isValid()
+		})
+	}
+
+	isCreating () {
+		if (!this.state.venue) {
+			return false
 		}
 
-		if ( ! isFunction( this.state.venue.state ) ) {
-			return false;
+		if (!isFunction(this.state.venue.state)) {
+			return false
 		}
 
 		return 'pending' === this.state.venue.state()
 	}
 
-	onSubmit() {
+	onSubmit () {
 		const {
 			title,
 			address,
@@ -61,9 +70,9 @@ class VenueForm extends Component {
 			phone,
 			website,
 			stateProvince,
-		} = this.state;
+		} = this.state
 
-		this.updateVenue( {
+		this.updateVenue({
 			title: title,
 			// For now every Venue goes are publish
 			status: 'publish',
@@ -77,44 +86,59 @@ class VenueForm extends Component {
 				_VenueURL: website,
 				_VenueStateProvince: stateProvince,
 			}
-		} );
+		})
 	}
 
-	updateVenue( toSend ) {
-		const basePath = wp.api.getPostTypeRoute( this.props.postType )
-		const request = wp.apiRequest( {
+	updateVenue (toSend) {
+		const basePath = wp.api.getPostTypeRoute(this.props.postType)
+		const request = wp.apiRequest({
 			path: `/wp/v2/${ basePath }`,
 			method: 'POST',
 			data: toSend,
-		} );
+		})
 
 		// Set the venue state
-		this.setState( { venue: request } );
+		this.setState({venue: request})
 
-		request.done( ( newPost ) => {
-			if ( ! newPost.id ) {
-				console.warning( 'Invalid creation of venue:', newPost )
+		request.done((newPost) => {
+			if (!newPost.id) {
+				console.warning('Invalid creation of venue:', newPost)
 			}
 
-			this.props.addVenue( newPost );
-			this.props.onClose();
-		} ).fail( ( err ) => {
-			console.log( err );
-		} );
+			this.props.addVenue(newPost)
+			this.props.onClose()
+		}).fail((err) => {
+			console.log(err)
+		})
 	}
 
-	render() {
-		if ( this.isCreating() ) {
+	saveRef = (input) => {
+		if (input) {
+			const {props} = input
+			const {name} = props || {}
+			this.fields[name] = input
+		}
+	}
+
+	isValid () {
+		const fields = values(this.fields)
+		const results = fields.filter((input) => input.isValid())
+
+		return fields.length === results.length
+	}
+
+	render () {
+		if (this.isCreating()) {
 			return [
 				<div
 					className="tribe-venue-form"
 					key='tribe-venue-form'
 				>
 					<Placeholder key="placeholder">
-						<Spinner />
+						<Spinner/>
 					</Placeholder>
 				</div>
-			];
+			]
 		}
 
 		return [
@@ -122,91 +146,95 @@ class VenueForm extends Component {
 				className="tribe-venue-form"
 				key='tribe-venue-form'
 			>
-				<h3 key="tribe-venue-form-title">{ __( 'Create Venue' ) }</h3>
-				<dl>
-					<dt>{ __( 'Name:', 'the-events-calendar' ) } </dt>
-					<dd>
-						<input
-							type='text'
-							name='venue[title]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { title: next.target.value } ) }
-						/>
-					</dd>
-					<dt>{ __( 'Address:', 'the-events-calendar' ) } </dt>
-					<dd>
-						<input
-							type='text'
-							name='venue[address]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { address: next.target.value } ) }
-						/>
-					</dd>
-					<dt>{ __( 'City:', 'the-events-calendar' ) } </dt>
-					<dd>
-						<input
-							type='text'
-							name='venue[city]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { city: next.target.value } ) }
-						/>
-					</dd>
-					<dt>{ __( 'Country:', 'the-events-calendar' ) } </dt>
-					<dd>
-						<input
+				<h3 key="tribe-venue-form-title">{__('Create Venue')}</h3>
+				<div className="tribe-venue-fields-container">
+					<Input
+						type='text'
+						name='venue[title]'
+						placeholder='Name'
+						onComplete={() => this.setState({isValid: this.isValid()})}
+						ref={this.saveRef}
+						onChange={(next) => this.setState({title: next.target.value})}
+						validate
+						required
+					/>
+					<Input
+						type='text'
+						name='venue[address]'
+						placeholder='Street Address'
+						onComplete={() => this.setState({isValid: this.isValid()})}
+						ref={this.saveRef}
+						onChange={(next) => this.setState({address: next.target.value})}
+					/>
+					<Input
+						type='text'
+						name='venue[city]'
+						placeholder='City'
+						onComplete={() => this.setState({isValid: this.isValid()})}
+						ref={this.saveRef}
+						onChange={(next) => this.setState({city: next.target.value})}
+					/>
+					<div className="row">
+						<Input
+							className='small'
 							type='text'
 							name='venue[country]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { country: next.target.value } ) }
+							placeholder='Country'
+							onComplete={() => this.setState({isValid: this.isValid()})}
+							ref={this.saveRef}
+							onChange={(next) => this.setState({country: next.target.value})}
 						/>
-					</dd>
-					<dt>{ __( 'State/Province:', 'the-events-calendar' ) } </dt>
-					<dd>
-						<input
+						<Input
+							className='medium'
 							type='text'
 							name='venue[stateProvince]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { stateProvince: next.target.value } ) }
+							placeholder='State'
+							onComplete={() => this.setState({isValid: this.isValid()})}
+							ref={this.saveRef}
+							onChange={(next) => this.setState({stateProvince: next.target.value})}
 						/>
-					</dd>
-					<dt>{ __( 'ZIP:', 'the-events-calendar' ) } </dt>
-					<dd>
-						<input
+					</div>
+					<div className='row'>
+						<Input
+							className='small'
 							type='text'
 							name='venue[zip]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { zip: next.target.value } ) }
+							placeholder='ZIP'
+							onComplete={() => this.setState({isValid: this.isValid()})}
+							ref={this.saveRef}
+							onChange={(next) => this.setState({zip: next.target.value})}
 						/>
-					</dd>
-					<dt>{ __( 'Phone:', 'the-events-calendar' ) } </dt>
-					<dd>
-						<input
-							type='text'
-							name='venue[phone]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
-						/>
-					</dd>
-					<dt>{ __( 'URL:', 'the-events-calendar' ) } </dt>
-					<dd>
-						<input
-							type='text'
-							name='venue[url]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { url: next.target.value } ) }
-						/>
-					</dd>
-				</dl>
+					</div>
+					<Input
+						type='phone'
+						name='venue[phone]'
+						placeholder='Phone number'
+						onComplete={() => this.setState({isValid: this.isValid()})}
+						ref={this.saveRef}
+						onChange={(next) => this.setState({phone: next.target.value})}
+						validate
+					/>
+					<Input
+						type='url'
+						name='venue[url]'
+						placeholder='Website'
+						onComplete={() => this.setState({isValid: this.isValid()})}
+						ref={this.saveRef}
+						onChange={(next) => this.setState({url: next.target.value})}
+						validate
+					/>
+				</div>
 				<button
 					type="button"
 					className="button-secondary"
-					onClick={ this.onSubmit }
+					onClick={this.onSubmit}
+					disabled={!this.isValid()}
 				>
-					{ __( 'Create Venue', 'the-events-calendar' ) }
+					{__('Create Venue', 'the-events-calendar')}
 				</button>
 			</div>,
-		];
+		]
 	};
 }
 
-export default VenueForm;
+export default VenueForm
