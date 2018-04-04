@@ -108,7 +108,7 @@ class VenueForm extends Component {
 			this.props.addVenue(newPost)
 			this.props.onClose()
 		}).fail((err) => {
-			console.log(err)
+			console.warn(err)
 		})
 	}
 

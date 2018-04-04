@@ -113,8 +113,6 @@ class Input extends Component {
 			case 'number':
 				isValid = validator.isNumeric( value );
 				break;
-				isValid = validator.isURL( value )
-				break
 		}
 		return isValid
 	}
