@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.1.5-alpha &mdash; 2018-04-04
+
+* Tweak - Add required Google JavaScript API into Location Block
+
 #### 0.1.4-alpha &mdash; 2018-03-27
 
 * Feature - Added the structure for All Day Events

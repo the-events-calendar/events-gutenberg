@@ -2,7 +2,7 @@
 /**
  * Plugin Name: The Events Calendar: Gutenberg Extension
  * Description: This plugin allows you to use The Events Calendar with the Gutenberg development plugin's block editor.
- * Version: 0.1.4-alpha
+ * Version: 0.1.5-alpha
  * Author: Modern Tribe, Inc.
  * Author URI: https://github.com/moderntribe/events-gutenberg
  * License: GPLv2 or later
@@ -17,7 +17,7 @@ class Tribe__Events_Gutenberg__Plugin {
 	 *
 	 * @since  0.1.0-alpha
 	 */
-	const VERSION = '0.1.4-alpha';
+	const VERSION = '0.1.5-alpha';
 
 	/**
 	 * Each plugin required by this extension
@@ -27,7 +27,7 @@ class Tribe__Events_Gutenberg__Plugin {
 	 * @var array Plugins are listed in 'main class' => 'minimum version #' format
 	 */
 	public $plugins_required = array(
-		'Tribe__Events__Main' => '4.6.9',
+		'Tribe__Events__Main' => '4.6.13',
 	);
 
 	/**
