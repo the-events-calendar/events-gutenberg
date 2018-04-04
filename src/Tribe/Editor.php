@@ -193,20 +193,30 @@ class Tribe__Events_Gutenberg__Editor {
 
 		tribe_asset(
 			$plugin,
-			'tribe-events-editor-blocks',
-			'blocks.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'tribe-events-editor-blocks-gmaps-api' ),
+			'tribe-events-editor-elements',
+			'elements.js',
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,
+				'localize'  => array(
+					array(
+						'name' => 'tribe_blocks_editor_settings',
+						'data' => tribe( 'gutenberg.settings' )->get_options(),
+					),
+					array(
+						'name' => 'tribe_blocks_editor_timezone_html',
+						'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
+					),
+				),
 			)
 		);
 
 		tribe_asset(
 			$plugin,
-			'tribe-events-editor-elements',
-			'elements.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
+			'tribe-events-editor-blocks',
+			'blocks.js',
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'tribe-events-editor-blocks-gmaps-api', 'tribe-events-editor-elements' ),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,

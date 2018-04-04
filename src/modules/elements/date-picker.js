@@ -16,14 +16,14 @@ import {
 	Dropdown,
 	withAPIData,
 } from '@wordpress/components';
-import { query } from '@wordpress/data'
+import { query } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { toMomentFormat } from 'editor/utils/date'
-import { getSetting } from 'editor/settings'
+import { toMomentFormat } from 'editor/utils/date';
+import { getSetting } from 'editor/settings';
 
 /**
  * Module Code
@@ -61,7 +61,7 @@ class DatePicker extends Component {
 		}
 
 		if ( label ) {
-			format = `${ toMomentFormat( getSetting( 'dateWithYearFormat', __( 'F j, Y', 'the-events-calendar' ) ) ) }`
+			format = `${ toMomentFormat( getSetting( 'dateWithYearFormat', __( 'F j, Y', 'the-events-calendar' ) ) ) }`;
 		}
 
 		return date.minutes( date.minutes() ).format( format );

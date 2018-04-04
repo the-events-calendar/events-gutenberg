@@ -233,8 +233,8 @@ class VenueForm extends Component {
 					{__('Create Venue', 'the-events-calendar')}
 				</button>
 			</div>,
-		]
-	};
+		];
+	}
 }
 
 export default VenueForm

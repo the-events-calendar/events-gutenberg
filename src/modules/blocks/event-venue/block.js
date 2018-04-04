@@ -154,8 +154,6 @@ class EventVenue extends Component {
 			center = mapValues( center, parseFloat )
 		}
 
-		console.log( venue );
-
 		if ( ! venue.meta._VenueLat || ! venue.meta._VenueLng ) {
 			const currentCenter = mapValues( { lat: venue.meta._VenueLat, lng: venue.meta._VenueLng }, parseFloat )
 
