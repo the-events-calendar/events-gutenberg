@@ -1,30 +1,30 @@
 /**
  * External dependencies
  */
-import { get, isFunction } from 'lodash';
-import { stringify } from 'querystringify';
+import { Component } from '@wordpress/element'
+import { get, isFunction, values } from 'lodash'
+import { stringify } from 'querystringify'
+import Input from './input.js'
 
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { Component } = wp.element;
+const { __ } = wp.i18n
 import {
 	Spinner,
 	Placeholder,
 	withAPIData
-} from '@wordpress/components';
-
+} from '@wordpress/components'
 
 class OrganizerForm extends Component {
 	static defaultProps = {
 		postType: 'tribe_organizer',
-	};
+	}
 
-	constructor() {
-		super( ...arguments );
-		this.updateOrganizer = this.updateOrganizer.bind( this );
-		this.onSubmit = this.onSubmit.bind( this );
+	constructor () {
+		super( ...arguments )
+		this.updateOrganizer = this.updateOrganizer.bind( this )
+		this.onSubmit = this.onSubmit.bind( this )
 
 		this.state = {
 			title: null,
@@ -32,28 +32,31 @@ class OrganizerForm extends Component {
 			website: '',
 			email: '',
 			organizer: null,
+			isValid: false,
 		}
+
+		this.fields = {}
 	}
 
-	isCreating() {
-		if ( ! this.state.organizer ) {
-			return false;
+	isCreating () {
+		if ( !this.state.organizer ) {
+			return false
 		}
 
-		if ( ! isFunction( this.state.organizer.state ) ) {
-			return false;
+		if ( !isFunction( this.state.organizer.state ) ) {
+			return false
 		}
 
 		return 'pending' === this.state.organizer.state()
 	}
 
-	onSubmit() {
+	onSubmit () {
 		const {
 			title,
 			phone,
 			website,
 			email,
-		} = this.state;
+		} = this.state
 
 		this.updateOrganizer( {
 			title: title,
@@ -64,33 +67,61 @@ class OrganizerForm extends Component {
 				_OrganizerPhone: phone,
 				_OrganizerWebsite: website,
 			}
-		} );
+		} )
 	}
 
-	updateOrganizer( toSend ) {
+	updateOrganizer ( toSend ) {
 		const basePath = wp.api.getPostTypeRoute( this.props.postType )
 		const request = wp.apiRequest( {
 			path: `/wp/v2/${ basePath }`,
 			method: 'POST',
 			data: toSend,
-		} );
+		} )
 
 		// Set the organizer state
-		this.setState( { organizer: request } );
+		this.setState( { organizer: request } )
 
 		request.done( ( newPost ) => {
-			if ( ! newPost.id ) {
+			if ( !newPost.id ) {
 				console.warning( 'Invalid creation of organizer:', newPost )
 			}
 
-			this.props.addOrganizer( newPost );
-			this.props.onClose();
+			this.props.addOrganizer( newPost )
+			this.props.onClose()
 		} ).fail( ( err ) => {
-			console.log( err );
-		} );
+			console.error( err )
+		} )
 	}
 
-	render() {
+	componentDidMount () {
+		this.setState( {
+			isValid: this.isValid()
+		} )
+	}
+
+	isValid () {
+		const fields = values( this.fields )
+		const results = fields.filter( ( input ) => input.isValid() )
+
+		return fields.length === results.length
+	}
+
+	focus ( name ) {
+		return () => {
+			let input = this.fields[name]
+			if ( input ) {
+				input.focus()
+			}
+		}
+	}
+
+	saveRef = ( input ) => {
+		if ( input ) {
+			this.fields[input.props.name] = input
+		}
+	}
+
+	render () {
 		if ( this.isCreating() ) {
 			return [
 				<div
@@ -98,10 +129,19 @@ class OrganizerForm extends Component {
 					key='tribe-organizer-form'
 				>
 					<Placeholder key="placeholder">
-						<Spinner />
+						<Spinner/>
 					</Placeholder>
 				</div>
-			];
+			]
+		}
+
+		const submitProps = {
+			type: 'button',
+			className: 'button-secondary',
+		}
+
+		if ( !this.state.isValid ) {
+			submitProps.disabled = true
 		}
 
 		return [
@@ -109,56 +149,64 @@ class OrganizerForm extends Component {
 				className="tribe-organizer-form"
 				key='tribe-organizer-form'
 			>
-				<h3 key="tribe-organizer-form-title">{ __( 'Create Organizer' ) }</h3>
-				<p className='description'>{ __( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'the-events-calendar' ) }</p>
+				<h3 key="tribe-organizer-form-title">{__( 'Create Organizer' )}</h3>
+				<p
+					className='description'>{__( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'the-events-calendar' )}</p>
 				<dl>
-					<dt>{ __( 'Name:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus( 'organizer[name]' )}>{__( 'Name:', 'the-events-calendar' )} </dt>
 					<dd>
-						<input
+						<Input
 							type='text'
+							ref={this.saveRef}
 							name='organizer[name]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { title: next.target.value } ) }
+							onComplete={() => this.setState( { isValid: this.isValid() } )}
+							onChange={( next ) => this.setState( { title: next.target.value } )}
+							validate
+							required
 						/>
 					</dd>
-					<dt>{ __( 'Phone:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus( 'organizer[phone]' )}>{__( 'Phone:', 'the-events-calendar' )} </dt>
 					<dd>
-						<input
-							type='text'
+						<Input
+							type='phone'
+							ref={this.saveRef}
 							name='organizer[phone]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
+							onComplete={() => this.setState( { isValid: this.isValid() } )}
+							onChange={( next ) => this.setState( { phone: next.target.value } )}
+							validate
 						/>
 					</dd>
-					<dt>{ __( 'Website:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus( 'organizer[website]' )}>{__( 'Website:', 'the-events-calendar' )} </dt>
 					<dd>
-						<input
-							type='text'
+						<Input
+							type='url'
+							ref={this.saveRef}
+							onComplete={() => this.setState( { isValid: this.isValid() } )}
+							onChange={( next ) => this.setState( { website: next.target.value } )}
 							name='organizer[website]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { website: next.target.value } ) }
+							validate
 						/>
 					</dd>
-					<dt>{ __( 'Email:', 'the-events-calendar' ) } </dt>
+					<dt onClick={this.focus( 'organizer[email]' )}>{__( 'Email:', 'the-events-calendar' )} </dt>
 					<dd>
-						<input
-							type='text'
+						<Input
+							type='email'
+							ref={this.saveRef}
 							name='organizer[email]'
-							ref={ ( input ) => this.input = input }
-							onChange={ ( next ) => this.setState( { email: next.target.value } ) }
+							onComplete={() => this.setState( { isValid: this.isValid() } )}
+							onChange={( next ) => this.setState( { email: next.target.value } )}
+							validate
 						/>
 					</dd>
 				</dl>
 				<button
-					type="button"
-					className="button-secondary"
-					onClick={ this.onSubmit }
-				>
-					{ __( 'Create Organizer', 'the-events-calendar' ) }
+					onClick={this.onSubmit}
+					{...submitProps}>
+					{__( 'Create Organizer', 'the-events-calendar' )}
 				</button>
 			</div>,
-		];
-	};
+		]
+	}
 }
 
 const applyWithAPIData = withAPIData( ( props ) => {
@@ -166,11 +214,11 @@ const applyWithAPIData = withAPIData( ( props ) => {
 		per_page: 100,
 		orderby: 'menu_order',
 		order: 'asc',
-		_fields: [ 'id', 'parent', 'title' ],
-	} );
+		_fields: ['id', 'parent', 'title'],
+	} )
 	return {
 		pages: `/wp/v2/pages?${ query }`,
-	};
-} );
+	}
+} )
 
-export default OrganizerForm;
+export default OrganizerForm

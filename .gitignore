@@ -10,3 +10,4 @@ phpcs.xml
 yarn.lock
 docker-compose.override.yml
 cypress.env.json
+.idea

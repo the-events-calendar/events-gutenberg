@@ -3,12 +3,12 @@
  */
 import { get, isFunction } from 'lodash';
 import { stringify } from 'querystringify';
+import { Component } from '@wordpress/element';
 
 /**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
-const { Component } = wp.element;
 import {
 	Spinner,
 	Placeholder,
@@ -99,7 +99,7 @@ class VenueForm extends Component {
 			this.props.addVenue( newPost );
 			this.props.onClose();
 		} ).fail( ( err ) => {
-			console.log( err );
+			console.error( err );
 		} );
 	}
 
@@ -206,7 +206,7 @@ class VenueForm extends Component {
 				</button>
 			</div>,
 		];
-	};
+	}
 }
 
 export default VenueForm;
