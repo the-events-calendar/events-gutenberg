@@ -149,7 +149,7 @@ class TimezonePicker extends Component {
 			'tribe-current': equals( item.key, this.props.current ),
 		}
 
-		console.log( equals( item.key, this.props.current ) );
+		console.warn( equals( item.key, this.props.current ) );
 
 		return (
 			<li

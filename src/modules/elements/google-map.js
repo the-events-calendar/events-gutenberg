@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { stringify } from 'querystringify';
-import { values } from 'lodash'
+import { values } from 'lodash';
 import PropTypes from 'prop-types';
 
 /**
@@ -71,7 +71,7 @@ class GoogleMap extends Component {
 	/**
 	 * https://developers.google.com/maps/documentation/staticmaps/intro#api_key
 	 */
-	static ApiKey = null
+	static ApiKey = null;
 
 	static RootStaticUrl = 'https://maps.googleapis.com/maps/api/staticmap';
 	static RootEmbedUrl = 'https://www.google.com/maps/embed/v1/place';
