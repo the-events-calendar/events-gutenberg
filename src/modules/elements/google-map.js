@@ -4,6 +4,7 @@
 import { stringify } from 'querystringify';
 import { values } from 'lodash'
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom'
 
 /**
  * WordPress dependencies
@@ -13,6 +14,7 @@ import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 
 import {
+	Spinner,
 	Placeholder,
 } from '@wordpress/components';
 
@@ -132,6 +134,63 @@ class GoogleMap extends Component {
 		interactive: false,
 	}
 
+	constructor() {
+		super( ...arguments );
+
+		this.state = {
+			latitude: this.props.latitude,
+			longitude: this.props.longitude,
+		}
+	}
+
+	componentDidUpdate() {
+		this.loadMap()
+	}
+
+	loadMap() {
+		const {
+			latitude,
+			longitude,
+			zoom,
+			size,
+		} = this.props;
+
+		const google = window.google;
+		const maps = google.maps;
+
+		const mapRef = this.refs.map;
+		const node = ReactDOM.findDOMNode( mapRef );
+		const location = {
+			lat: parseFloat( latitude ),
+			lng: parseFloat( longitude ),
+		}
+
+		const mapConfig = {
+			center: location,
+			zoom: zoom,
+			mapTypeId: 'roadmap'
+		}
+
+		this.map = new maps.Map( node, mapConfig );
+		const marker = new google.maps.Marker( {
+			position: location,
+			map: this.map,
+		} );
+	}
+
+	renderInteractive() {
+		return (
+			<div
+				className='tribe-editor-map__element'
+				ref="map"
+			>
+				<Placeholder key="placeholder">
+					<Spinner />
+				</Placeholder>
+			</div>
+		)
+	}
+
 	render() {
 		let mapElement = (
 			<Placeholder style={{ height: '100%' }}>
@@ -153,14 +212,7 @@ class GoogleMap extends Component {
 					/>
 				)
 			} else {
-				mapElement = (
-					<iframe
-						style={{ border: 0, width: '100%', height: '100%' }}
-						src={ this.mapUrl }
-						allowFullScreen={ true }
-					>
-					</iframe>
-				)
+				mapElement = this.renderInteractive();
 			}
 		}
 
