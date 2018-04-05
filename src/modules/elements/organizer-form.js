@@ -39,11 +39,11 @@ class OrganizerForm extends Component {
 	}
 
 	isCreating () {
-		if ( !this.state.organizer ) {
+		if ( ! this.state.organizer ) {
 			return false;
 		}
 
-		if ( !isFunction( this.state.organizer.state ) ) {
+		if ( ! isFunction( this.state.organizer.state ) ) {
 			return false;
 		}
 
@@ -82,7 +82,7 @@ class OrganizerForm extends Component {
 		this.setState( { organizer: request } );
 
 		request.done( ( newPost ) => {
-			if ( !newPost.id ) {
+			if ( ! newPost.id ) {
 				console.warning( 'Invalid creation of organizer:', newPost );
 			}
 
@@ -197,7 +197,7 @@ class OrganizerForm extends Component {
 					type="button"
 					className="button-secondary"
 					onClick={ this.onSubmit }
-					disabled={!this.isValid()}>
+					disabled={! this.isValid()}>
 					{ __( 'Create Organizer', 'the-events-calendar' ) }
 				</button>
 			</div>,
@@ -210,7 +210,7 @@ const applyWithAPIData = withAPIData( ( props ) => {
 		per_page: 100,
 		orderby: 'menu_order',
 		order: 'asc',
-		_fields: ['id', 'parent', 'title'],
+		_fields: [ 'id', 'parent', 'title' ],
 	} );
 	return {
 		pages: `/wp/v2/pages?${ query }`,

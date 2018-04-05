@@ -97,7 +97,7 @@ class Input extends Component {
 		const { type, required } = this.props;
 
 		if ( value.length === 0 ) {
-			return !required;
+			return ! required;
 		}
 
 		let isValid = true;

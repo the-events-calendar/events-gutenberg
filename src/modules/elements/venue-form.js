@@ -49,11 +49,11 @@ class VenueForm extends Component {
 	}
 
 	isCreating () {
-		if ( !this.state.venue ) {
+		if ( ! this.state.venue ) {
 			return false;
 		}
 
-		if ( !isFunction( this.state.venue.state ) ) {
+		if ( ! isFunction( this.state.venue.state ) ) {
 			return false;
 		}
 
@@ -101,7 +101,7 @@ class VenueForm extends Component {
 		this.setState( { venue: request } );
 
 		request.done( ( newPost ) => {
-			if ( !newPost.id ) {
+			if ( ! newPost.id ) {
 				console.warning( 'Invalid creation of venue:', newPost );
 			}
 
@@ -228,7 +228,7 @@ class VenueForm extends Component {
 					type="button"
 					className="button-secondary"
 					onClick={this.onSubmit}
-					disabled={!this.isValid()}
+					disabled={! this.isValid()}
 				>
 					{__( 'Create Venue', 'the-events-calendar' )}
 				</button>

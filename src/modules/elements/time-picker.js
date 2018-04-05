@@ -163,7 +163,7 @@ class TimePicker extends Component {
 			seconds -= offset;
 		}
 
-		if ( seconds == ONE_DAY && show2400 ) {
+		if ( seconds === ONE_DAY && show2400 ) {
 			return seconds;
 		}
 

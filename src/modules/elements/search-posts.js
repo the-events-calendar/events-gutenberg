@@ -48,12 +48,12 @@ class SearchPosts extends Component {
 	}
 
 	getItems () {
-		if ( !this.props.items ) {
+		if ( ! this.props.items ) {
 			return [];
 		}
 
 		const items = this.props.items.data;
-		if ( !items || !items.length ) {
+		if ( ! items || ! items.length ) {
 			return [];
 		}
 
@@ -150,7 +150,7 @@ class SearchPosts extends Component {
 	render () {
 		const { items, focus } = this.props;
 
-		if ( !focus ) {
+		if ( ! focus ) {
 			return null;
 		}
 
@@ -180,7 +180,7 @@ const applyWithAPIData = withAPIData( ( props ) => {
 	let query = {
 		per_page: 100,
 		orderby: 'title',
-		status: ['draft', 'publish'],
+		status: [ 'draft', 'publish' ],
 		order: 'asc',
 	};
 
