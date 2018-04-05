@@ -5,6 +5,7 @@ import { stringify } from 'querystringify';
 import { values } from 'lodash';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import React from 'react';
 
 /**
  * WordPress dependencies
@@ -138,9 +139,12 @@ class GoogleMap extends Component {
 		super( ...arguments );
 
 		this.state = {
-			latitude: this.props.latitude,
-			longitude: this.props.longitude,
+			map: null,
+			marker: null,
+			google: window.google ? window.google : null
 		};
+
+		this.map = React.createRef();
 	}
 
 	componentDidUpdate() {
@@ -153,13 +157,20 @@ class GoogleMap extends Component {
 			longitude,
 			zoom,
 			size,
-		} = this.props;
+			mapType,
+		} = this.props
 
-		const google = window.google;
-		const maps = google.maps;
+		let {
+			map,
+			marker,
+		} = this.state
 
-		const mapRef = this.refs.map;
-		const node = ReactDOM.findDOMNode( mapRef );
+		const {
+			google,
+		} = this.state
+
+		const maps = google.maps
+
 		const location = {
 			lat: parseFloat( latitude ),
 			lng: parseFloat( longitude ),
@@ -168,21 +179,31 @@ class GoogleMap extends Component {
 		const mapConfig = {
 			center: location,
 			zoom: zoom,
-			mapTypeId: 'roadmap'
+			mapTypeId: mapType
 		};
 
-		this.map = new maps.Map( node, mapConfig );
-		const marker = new google.maps.Marker( {
-			position: location,
-			map: this.map,
-		} );
+		if ( ! map ) {
+			map = new maps.Map( this.map.current, mapConfig )
+
+			this.setState( { map: map } )
+		}
+
+		// Don't re-set it a bunch
+		if ( map && ! marker ) {
+			marker = new maps.Marker( {
+				position: location,
+				map: map,
+			} )
+
+			this.setState( { marker: marker } )
+		}
 	}
 
 	renderInteractive() {
 		return (
 			<div
 				className='tribe-editor-map__element'
-				ref="map"
+				ref={ this.map }
 			>
 				<Placeholder key="placeholder">
 					<Spinner />
