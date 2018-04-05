@@ -39,7 +39,26 @@
             }
         ],
         "object-curly-spacing": [ "error", "always" ],
-        "space-in-parens": [ "error", "always" ]
+        "space-in-parens": [ "error", "always" ],
+        "array-bracket-spacing": [
+            "error",
+            "always",
+            {
+                "objectsInArrays": false
+            }
+        ],
+        "eqeqeq": [ "error", "smart" ],
+        "space-unary-ops": [
+            "error", 
+            {
+                "words": true,
+                "nonwords": true,
+                "overrides": {
+                    "--": false,
+                    "++": false
+                }
+            }
+        ]
     },
     "globals": {
         "wp": true,
