@@ -138,8 +138,8 @@ class GoogleMap extends Component {
 		super( ...arguments );
 
 		this.state = {
-			latitude: this.props.latitude,
-			longitude: this.props.longitude,
+			map: null,
+			marker: null,
 		}
 	}
 
@@ -153,13 +153,12 @@ class GoogleMap extends Component {
 			longitude,
 			zoom,
 			size,
-		} = this.props;
+			mapType,
+		} = this.props
 
-		const google = window.google;
-		const maps = google.maps;
+		const google = window.google
+		const maps = google.maps
 
-		const mapRef = this.refs.map;
-		const node = ReactDOM.findDOMNode( mapRef );
 		const location = {
 			lat: parseFloat( latitude ),
 			lng: parseFloat( longitude ),
@@ -168,21 +167,37 @@ class GoogleMap extends Component {
 		const mapConfig = {
 			center: location,
 			zoom: zoom,
-			mapTypeId: 'roadmap'
+			mapTypeId: mapType
 		}
 
-		this.map = new maps.Map( node, mapConfig );
-		const marker = new google.maps.Marker( {
-			position: location,
-			map: this.map,
-		} );
+		let map;
+
+		if ( ! this.state.map ) {
+			const mapRef = this.refs.map;
+			const node = ReactDOM.findDOMNode( mapRef )
+			map = new maps.Map( node, mapConfig )
+
+			this.setState( { map: map } )
+		} else {
+			map = this.state.map
+		}
+
+		// Don't re-set it a bunch
+		if ( ! this.state.marker ) {
+			const marker = new maps.Marker( {
+				position: location,
+				map: map,
+			} )
+
+			this.setState( { marker: marker } )
+		}
 	}
 
 	renderInteractive() {
 		return (
 			<div
 				className='tribe-editor-map__element'
-				ref="map"
+				ref='map'
 			>
 				<Placeholder key="placeholder">
 					<Spinner />
