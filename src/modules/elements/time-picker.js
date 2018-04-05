@@ -16,13 +16,13 @@ import {
 	Spinner,
 	Dropdown,
 } from '@wordpress/components';
-import { query } from '@wordpress/data'
+import { query } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { toMomentFormat } from 'editor/utils/date'
+import { toMomentFormat } from 'editor/utils/date';
 
 /**
  * Module Code
@@ -34,17 +34,17 @@ class TimePicker extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.formatLabel = this.formatLabel.bind( this )
-		this.getSeconds = this.getSeconds.bind( this )
-		this.changeTime = this.changeTime.bind( this )
-		this.roundTime = this.roundTime.bind( this )
-		this.renderList = this.renderList.bind( this )
-		this.renderItem = this.renderItem.bind( this )
-		this.renderDropdown = this.renderDropdown.bind( this )
+		this.formatLabel = this.formatLabel.bind( this );
+		this.getSeconds = this.getSeconds.bind( this );
+		this.changeTime = this.changeTime.bind( this );
+		this.roundTime = this.roundTime.bind( this );
+		this.renderList = this.renderList.bind( this );
+		this.renderItem = this.renderItem.bind( this );
+		this.renderDropdown = this.renderDropdown.bind( this );
 
 		this.onSelectItem = this.props.onSelectItem.bind( this );
 
-		this.onSelectItem( this.props.current )
+		this.onSelectItem( this.props.current );
 	}
 
 	static defaultProps = {
@@ -65,11 +65,11 @@ class TimePicker extends Component {
 	}
 
 	getSeconds( datetime, onInvalid = moment() ) {
-		let currentDate = moment( datetime, 'YYYY-MM-DD HH:mm:ss' )
+		let currentDate = moment( datetime, 'YYYY-MM-DD HH:mm:ss' );
 
 		// On invalid date we reset to today
 		if ( ! currentDate.isValid() ) {
-			currentDate = onInvalid
+			currentDate = onInvalid;
 		}
 
 		// Gets the seconds from the start if the day
@@ -77,21 +77,21 @@ class TimePicker extends Component {
 	}
 
 	changeTime( original, seconds ) {
-		let originalMoment = moment( original, 'YYYY-MM-DD HH:mm:ss' )
+		let originalMoment = moment( original, 'YYYY-MM-DD HH:mm:ss' );
 		// On invalid date we reset to today
 		if ( ! originalMoment.isValid() ) {
-			originalMoment = moment()
+			originalMoment = moment();
 		}
 
-		const nextMoment = originalMoment.startOf( 'day' ).add( seconds, 'seconds' )
-		return nextMoment.format( 'YYYY-MM-DD HH:mm:ss' )
+		const nextMoment = originalMoment.startOf( 'day' ).add( seconds, 'seconds' );
+		return nextMoment.format( 'YYYY-MM-DD HH:mm:ss' );
 	}
 
 	getItems( searchFor, props ) {
 		let items = [];
 
 		if ( ! props ) {
-			props = this.props
+			props = this.props;
 		}
 
 		const {
@@ -101,9 +101,9 @@ class TimePicker extends Component {
 			show2400,
 			timeFormat,
 			current,
-		} = props
+		} = props;
 
-		const currentValue = this.roundTime( this.getSeconds( current ) )
+		const currentValue = this.roundTime( this.getSeconds( current ) );
 		let start = minTime ? minTime : 0;
 		let end = maxTime ? maxTime : ( start + ONE_DAY - 1 );
 
@@ -125,11 +125,11 @@ class TimePicker extends Component {
 				text: this.formatLabel( item ),
 				isDisabled: false,
 				isCurrent: item === currentValue,
-			} )
+			} );
 		}
 
 		if ( searchFor ) {
-			return find( items, searchFor )
+			return find( items, searchFor );
 		}
 
 		return items;
@@ -138,9 +138,9 @@ class TimePicker extends Component {
 	formatLabel( seconds ) {
 		const {
 			timeFormat
-		} = this.props
+		} = this.props;
 
-		return moment().startOf( 'day' ).add( seconds, 'seconds' ).format( toMomentFormat( timeFormat ) )
+		return moment().startOf( 'day' ).add( seconds, 'seconds' ).format( toMomentFormat( timeFormat ) );
 	}
 
 	roundTime( seconds ) {
@@ -151,7 +151,7 @@ class TimePicker extends Component {
 		let {
 			step,
 			show2400,
-		} = this.props
+		} = this.props;
 
 		let offset = seconds % ( step * 60 ); // step is in minutes
 
@@ -163,7 +163,7 @@ class TimePicker extends Component {
 			seconds -= offset;
 		}
 
-		if ( seconds == ONE_DAY && show2400 ) {
+		if ( seconds === ONE_DAY && show2400 ) {
 			return seconds;
 		}
 
@@ -182,7 +182,7 @@ class TimePicker extends Component {
 		const itemClasses = {
 			'tribe-element-timepicker-item': true,
 			'tribe-current': item.isCurrent,
-		}
+		};
 
 		return (
 			<button
@@ -194,11 +194,11 @@ class TimePicker extends Component {
 					if ( 'all-day' === item.value ) {
 						const startAllDay = this.changeTime( current, 0 );
 						const endAllDay = this.changeTime( current, ( 60 * 60 * 24 )-1 );
-						this.onSelectItem( item.value, startAllDay, endAllDay )
+						this.onSelectItem( item.value, startAllDay, endAllDay );
 					} else {
-						this.onSelectItem( item.datetime )
+						this.onSelectItem( item.datetime );
 					}
-					this.onClose()
+					this.onClose();
 				} }
 			>
 				{ item.text }
@@ -213,11 +213,11 @@ class TimePicker extends Component {
 			<ScrollTo>
 				{ ( scroll, scrollById ) => {
 					this.scrollToCurrent = ( ( index ) => {
-						index = index - 2
+						index = index - 2;
 						if ( 0 > index ) {
-							index = 0
+							index = 0;
 						}
-						scrollById( 'tribe-element-timepicker-items', 0, 31 * index )
+						scrollById( 'tribe-element-timepicker-items', 0, 31 * index );
 					} ).bind( this );
 
 					return [
@@ -239,8 +239,8 @@ class TimePicker extends Component {
 	scrollToCurrent() {}
 
 	componentDidUpdate( nextProps, nextState ) {
-		const current = this.roundTime( this.getSeconds( nextProps.current ) )
-		const currentItem = this.getItems( { 'value': current }, nextProps )
+		const current = this.roundTime( this.getSeconds( nextProps.current ) );
+		const currentItem = this.getItems( { 'value': current }, nextProps );
 
 		if ( currentItem && currentItem.index ) {
 			this.scrollToCurrent( currentItem.index );

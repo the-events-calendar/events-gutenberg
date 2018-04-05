@@ -16,14 +16,15 @@ import {
 	Spinner,
 	Dropdown,
 } from '@wordpress/components';
-import { query } from '@wordpress/data'
+import { query } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
 
-const $timezoneOpts = jQuery( tribe_blocks_editor_timezone_html )
+const options = 'tribe_blocks_editor_timezone_html' in window ? tribe_blocks_editor_timezone_html : '';
+const $timezoneOpts = jQuery( options );
 
 let timezoneOpts;
 
@@ -34,13 +35,13 @@ class TimezonePicker extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.renderList = this.renderList.bind( this )
-		this.renderItem = this.renderItem.bind( this )
-		this.renderDropdown = this.renderDropdown.bind( this )
+		this.renderList = this.renderList.bind( this );
+		this.renderItem = this.renderItem.bind( this );
+		this.renderDropdown = this.renderDropdown.bind( this );
 
 		this.onSelectItem = this.props.onSelectItem.bind( this );
 
-		this.onSelectItem( this.props.current )
+		this.onSelectItem( this.props.current );
 	}
 
 	static defaultProps = {
@@ -56,61 +57,61 @@ class TimezonePicker extends Component {
 			return timezoneOpts;
 		}
 
-		let groups = []
+		let groups = [];
 		let number = 0;
 
 		$timezoneOpts.each( function( index, item ) {
-			let $group = jQuery( item )
+			let $group = jQuery( item );
 
 			if ( ! $group.is( 'optgroup' ) ) {
-				return
+				return;
 			}
 
 			number++;
 
-			let label = $group.attr( 'label' )
+			let label = $group.attr( 'label' );
 			let group = {
 				key: label,
 				text: label,
 				options: []
-			}
+			};
 
 			$group.find( 'option' ).each( function( optIndex, optionEl ) {
 				number++;
 
-				let $option = jQuery( optionEl )
+				let $option = jQuery( optionEl );
 				group.options.push( {
 					key: $option.val(),
 					text: $option.text(),
 					index: number,
-				} )
-			} )
+				} );
+			} );
 
-			groups.push( group )
-		} )
+			groups.push( group );
+		} );
 
 		// Save it in a cache
-		timezoneOpts = groups
+		timezoneOpts = groups;
 
-		return groups
+		return groups;
 	}
 
 	getItems( searchFor, props ) {
-		let groups = this.getTimezoneOpts()
+		let groups = this.getTimezoneOpts();
 
 		if ( ! props ) {
-			props = this.props
+			props = this.props;
 		}
 
 		const {
 			current,
-		} = props
+		} = props;
 
 		if ( searchFor ) {
 			let result;
-			let options = flatten( map( groups, 'options' ) )
+			let options = flatten( map( groups, 'options' ) );
 
-			return find( options, searchFor )
+			return find( options, searchFor );
 		}
 
 		return groups;
@@ -123,11 +124,11 @@ class TimezonePicker extends Component {
 	}
 
 	renderGroup( group ) {
-		const { onHover } = this.props
+		const { onHover } = this.props;
 
 		const itemClasses = {
 			'tribe-element-timezone-picker-group': true,
-		}
+		};
 
 		return (
 			<ul
@@ -135,7 +136,9 @@ class TimezonePicker extends Component {
 				role="menuitem"
 				className={ classNames( itemClasses ) }
 			>
-				<li className='tribe-element-timezone-picker-group-label'>{ group.text }</li>
+				<li className='tribe-element-timezone-picker-group-label'>
+					{ group.text }
+				</li>
 				{ group.options.map( this.renderItem, this ) }
 			</ul>
 		);
@@ -147,7 +150,7 @@ class TimezonePicker extends Component {
 		const itemClasses = {
 			'tribe-element-timezone-picker-item': true,
 			'tribe-current': equals( item.key, this.props.current ),
-		}
+		};
 
 		console.warn( equals( item.key, this.props.current ) );
 
@@ -160,8 +163,8 @@ class TimezonePicker extends Component {
 					role="menuitem"
 					value={ item.key }
 					onClick={ () => {
-						this.onSelectItem( item.key )
-						this.onClose()
+						this.onSelectItem( item.key );
+						this.onClose();
 					} }
 				>
 					{ item.text }
@@ -177,11 +180,11 @@ class TimezonePicker extends Component {
 			<ScrollTo>
 				{ ( scroll, scrollById ) => {
 					this.scrollToCurrent = ( ( index ) => {
-						index = index - 2
+						index = index - 2;
 						if ( 0 > index ) {
-							index = 0
+							index = 0;
 						}
-						scrollById( 'tribe-element-timezone-picker-items', 0, 31 * index )
+						scrollById( 'tribe-element-timezone-picker-items', 0, 31 * index );
 					} ).bind( this );
 
 					return (
@@ -202,7 +205,7 @@ class TimezonePicker extends Component {
 	scrollToCurrent() {}
 
 	componentDidUpdate( nextProps, nextState ) {
-		const currentItem = this.getItems( { key: nextProps.current }, nextProps )
+		const currentItem = this.getItems( { key: nextProps.current }, nextProps );
 
 		if ( currentItem && currentItem.index ) {
 			this.scrollToCurrent( currentItem.index );
@@ -213,21 +216,21 @@ class TimezonePicker extends Component {
 		const {
 			current,
 			siteTimezone,
-		} = this.props
+		} = this.props;
 
 		if ( current ) {
-			return current
+			return current;
 		}
 
-		let timezone = siteTimezone.string ? siteTimezone.string : `UTC${ siteTimezone.offset }`
-		let search = { key: timezone }
-		let items = this.getItems( search )
+		let timezone = siteTimezone.string ? siteTimezone.string : `UTC${ siteTimezone.offset }`;
+		let search = { key: timezone };
+		let items = this.getItems( search );
 
 		if ( ! items ) {
-			return __( 'Invalid Timezone', 'the-events-calendar' )
+			return __( 'Invalid Timezone', 'the-events-calendar' );
 		}
 
-		return items.key
+		return items.key;
 	}
 
 	render() {
