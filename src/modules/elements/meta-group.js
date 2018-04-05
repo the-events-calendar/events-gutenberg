@@ -30,8 +30,8 @@ class MetaGroup extends Component {
 			>
 				{ children }
 			</div>
-		)
+		);
 	}
 }
 
-export default MetaGroup
+export default MetaGroup;

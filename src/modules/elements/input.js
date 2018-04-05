@@ -1,10 +1,10 @@
 /**
  * Dependencies
  */
-import { Component } from '@wordpress/element'
-import { isFunction, noop } from 'lodash'
-import PropTypes from 'prop-types'
-import validator from 'validator'
+import { Component } from '@wordpress/element';
+import { isFunction, noop } from 'lodash';
+import PropTypes from 'prop-types';
+import validator from 'validator';
 
 /**
  * Input element that adds two important properties:
@@ -48,11 +48,11 @@ class Input extends Component {
 	}
 
 	constructor () {
-		super( ...arguments )
+		super( ...arguments );
 
 		this.state = {
 			isValid: this.validate( '' ),
-		}
+		};
 	}
 
 	/**
@@ -62,16 +62,16 @@ class Input extends Component {
 	 * @param event
 	 */
 	onChange = ( event ) => {
-		const { onChange, onComplete, validate } = this.props
-		let callback = isFunction( onChange ) ? onChange : noop
-		let completeCallback = isFunction( onComplete ) ? onComplete : noop
+		const { onChange, onComplete, validate } = this.props;
+		let callback = isFunction( onChange ) ? onChange : noop;
+		let completeCallback = isFunction( onComplete ) ? onComplete : noop;
 
 		if ( validate ) {
-			this.setState( { isValid: this.validate( event.target.value ) }, completeCallback )
-			callback( event )
+			this.setState( { isValid: this.validate( event.target.value ) }, completeCallback );
+			callback( event );
 		} else {
-			completeCallback()
-			callback( event )
+			completeCallback();
+			callback( event );
 		}
 	}
 
@@ -82,8 +82,8 @@ class Input extends Component {
 	 * @returns {boolean}
 	 */
 	validate ( value ) {
-		const { validateCallback } = this.props
-		return isFunction( validateCallback ) ? validateCallback( value ) : this.maybeValidate( value )
+		const { validateCallback } = this.props;
+		return isFunction( validateCallback ) ? validateCallback( value ) : this.maybeValidate( value );
 	}
 
 	/**
@@ -94,20 +94,20 @@ class Input extends Component {
 	 * @returns {boolean}
 	 */
 	maybeValidate = ( value ) => {
-		const { type, required } = this.props
+		const { type, required } = this.props;
 
 		if ( value.length === 0 ) {
-			return !required
+			return !required;
 		}
 
-		let isValid = true
+		let isValid = true;
 		switch ( type ) {
 			case 'phone':
-				isValid = validator.isMobilePhone( value, 'any' )
-				break
+				isValid = validator.isMobilePhone( value, 'any' );
+				break;
 			case 'email':
-				isValid = validator.isEmail( value )
-				break
+				isValid = validator.isEmail( value );
+				break;
 			case 'url':
 				isValid = validator.isURL( value );
 				break;
@@ -115,7 +115,7 @@ class Input extends Component {
 				isValid = validator.isNumeric( value );
 				break;
 		}
-		return isValid
+		return isValid;
 	}
 
 	/**
@@ -124,14 +124,14 @@ class Input extends Component {
 	 * @returns {boolean}
 	 */
 	isValid () {
-		return this.state.isValid
+		return this.state.isValid;
 	}
 
 	/**
 	 * Focus to the current component input
 	 */
 	focus () {
-		this.input.focus()
+		this.input.focus();
 	}
 
 	/**
@@ -141,33 +141,33 @@ class Input extends Component {
 	 * @returns {string|*}
 	 */
 	getClassName () {
-		const { className, validate } = this.props
-		const { isValid } = this.state
-		let classes = className ? className.split( ' ' ) : []
+		const { className, validate } = this.props;
+		const { isValid } = this.state;
+		let classes = className ? className.split( ' ' ) : [];
 
 		if ( validate ) {
 			if ( isValid ) {
-				classes.push( 'tribe-is-valid' )
+				classes.push( 'tribe-is-valid' );
 			} else {
-				classes.push( 'tribe-is-invalid' )
+				classes.push( 'tribe-is-invalid' );
 			}
 		}
 
 		return classes
 			.filter( ( className ) => className && className.length )
-			.join( ' ' )
+			.join( ' ' );
 	}
 
 	render () {
 		// Remove properties that are not part of the DOM.
-		const { onComplete, required, validate, ...properties } = this.props
+		const { onComplete, required, validate, ...properties } = this.props;
 		return <input
 			{...properties}
 			className={`${this.getClassName()}`}
 			ref={( input ) => this.input = input}
 			onChange={this.onChange}
-		/>
+		/>;
 	}
 }
 
-export default Input
+export default Input;
