@@ -44,8 +44,7 @@ import { getSetting } from 'editor/settings'
 /**
  * Module Code
  */
-
-const WPDateSettings = _wpDateSettings;
+const WPDateSettings = window.tribe_date_settings;
 
 class EventDetails extends Component {
 	constructor() {

@@ -208,6 +208,10 @@ class Tribe__Events_Gutenberg__Editor {
 						'name' => 'tribe_blocks_editor_timezone_html',
 						'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
 					),
+					array(
+						'name' => 'tribe_date_settings',
+						'data' => array( $this, 'get_date_settings' ),
+					),
 				),
 			)
 		);
@@ -253,6 +257,42 @@ class Tribe__Events_Gutenberg__Editor {
 			array(
 				'in_footer' => false,
 			)
+		);
+	}
+
+	/**
+	 * Get Localization data for Date settings
+	 *
+	 * @since  0.1.6-alpha
+	 *
+	 * @return array
+	 */
+	public function get_date_settings() {
+		global $wp_locale;
+		return array(
+			'l10n'     => array(
+				'locale'        => get_user_locale(),
+				'months'        => array_values( $wp_locale->month ),
+				'monthsShort'   => array_values( $wp_locale->month_abbrev ),
+				'weekdays'      => array_values( $wp_locale->weekday ),
+				'weekdaysShort' => array_values( $wp_locale->weekday_abbrev ),
+				'meridiem'      => (object) $wp_locale->meridiem,
+				'relative'      => array(
+					/* translators: %s: duration */
+					'future' => __( '%s from now', 'default' ),
+					/* translators: %s: duration */
+					'past'   => __( '%s ago', 'default' ),
+				),
+			),
+			'formats'  => array(
+				'time'     => get_option( 'time_format', __( 'g:i a', 'default' ) ),
+				'date'     => get_option( 'date_format', __( 'F j, Y', 'default' ) ),
+				'datetime' => __( 'F j, Y g:i a', 'default' ),
+			),
+			'timezone' => array(
+				'offset' => get_option( 'gmt_offset', 0 ),
+				'string' => get_option( 'timezone_string', 'UTC' ),
+			),
 		);
 	}
 
