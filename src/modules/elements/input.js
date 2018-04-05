@@ -161,12 +161,14 @@ class Input extends Component {
 	render () {
 		// Remove properties that are not part of the DOM.
 		const { onComplete, required, validate, ...properties } = this.props;
-		return <input
-			{...properties}
-			className={`${this.getClassName()}`}
-			ref={( input ) => this.input = input}
-			onChange={this.onChange}
-		/>;
+		return (
+			<input
+				{...properties}
+				className={`${this.getClassName()}`}
+				ref={( input ) => this.input = input}
+				onChange={this.onChange}
+			/>
+		);
 	}
 }
 

@@ -194,7 +194,9 @@ class GoogleMap extends Component {
 	render() {
 		let mapElement = (
 			<Placeholder style={{ height: '100%' }}>
-				<p>{ __( 'No map preview available', 'the-events-calendar' ) }</p>
+				<p>
+					{ __( 'No map preview available', 'the-events-calendar' ) }
+				</p>
 			</Placeholder>
 		);
 

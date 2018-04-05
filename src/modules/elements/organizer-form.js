@@ -142,11 +142,19 @@ class OrganizerForm extends Component {
 				className="tribe-organizer-form"
 				key='tribe-organizer-form'
 			>
-				<h3 key="tribe-organizer-form-title">{__( 'Create Organizer' )}</h3>
+				<h3 key="tribe-organizer-form-title">
+					{__( 'Create Organizer' )}
+				</h3>
 				<p
-					className='description'>{__( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'the-events-calendar' )}</p>
+					className='description'
+				>
+					{__( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'the-events-calendar' )}
+				</p>
 				<dl>
-					<dt onClick={this.focus( 'organizer[name]' )}>{__( 'Name:', 'the-events-calendar' )} </dt>
+					<dt onClick={this.focus( 'organizer[name]' )}>
+						{__( 'Name:', 'the-events-calendar' )}
+						{' '}
+					</dt>
 					<dd>
 						<Input
 							type='text'
@@ -158,7 +166,10 @@ class OrganizerForm extends Component {
 							required
 						/>
 					</dd>
-					<dt onClick={this.focus( 'organizer[phone]' )}>{__( 'Phone:', 'the-events-calendar' )} </dt>
+					<dt onClick={this.focus( 'organizer[phone]' )}>
+						{__( 'Phone:', 'the-events-calendar' )}
+						{' '}
+					</dt>
 					<dd>
 						<Input
 							type='phone'
@@ -169,7 +180,10 @@ class OrganizerForm extends Component {
 							validate
 						/>
 					</dd>
-					<dt onClick={this.focus( 'organizer[website]' )}>{__( 'Website:', 'the-events-calendar' )} </dt>
+					<dt onClick={this.focus( 'organizer[website]' )}>
+						{__( 'Website:', 'the-events-calendar' )}
+						{' '}
+					</dt>
 					<dd>
 						<Input
 							type='url'
@@ -180,7 +194,10 @@ class OrganizerForm extends Component {
 							validate
 						/>
 					</dd>
-					<dt onClick={this.focus( 'organizer[email]' )}>{__( 'Email:', 'the-events-calendar' )} </dt>
+					<dt onClick={this.focus( 'organizer[email]' )}>
+						{__( 'Email:', 'the-events-calendar' )}
+						{' '}
+					</dt>
 					<dd>
 						<Input
 							type='email'
@@ -197,7 +214,8 @@ class OrganizerForm extends Component {
 					type="button"
 					className="button-secondary"
 					onClick={ this.onSubmit }
-					disabled={! this.isValid()}>
+					disabled={! this.isValid()}
+				>
 					{ __( 'Create Organizer', 'the-events-calendar' ) }
 				</button>
 			</div>,

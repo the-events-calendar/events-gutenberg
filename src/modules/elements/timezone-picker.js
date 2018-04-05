@@ -136,7 +136,9 @@ class TimezonePicker extends Component {
 				role="menuitem"
 				className={ classNames( itemClasses ) }
 			>
-				<li className='tribe-element-timezone-picker-group-label'>{ group.text }</li>
+				<li className='tribe-element-timezone-picker-group-label'>
+					{ group.text }
+				</li>
 				{ group.options.map( this.renderItem, this ) }
 			</ul>
 		);

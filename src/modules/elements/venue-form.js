@@ -146,7 +146,9 @@ class VenueForm extends Component {
 				className="tribe-venue-form"
 				key='tribe-venue-form'
 			>
-				<h3 key="tribe-venue-form-title">{__( 'Create Venue' )}</h3>
+				<h3 key="tribe-venue-form-title">
+					{__( 'Create Venue' )}
+				</h3>
 				<div className="tribe-venue-fields-container">
 					<Input
 						type='text'
