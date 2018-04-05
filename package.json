@@ -19,6 +19,7 @@
 		"build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
 		"gettext-strings": "cross-env BABEL_ENV=gettext webpack",
 		"dev": "cross-env BABEL_ENV=default webpack --watch",
+		"test": "npm run lint",
 		"lint": "eslint --quiet --parser=babel-eslint src/modules/elements/*.js",
 		"lint-fix": "eslint --fix --quiet --parser=babel-eslint src/modules/elements/*.js"
 	},

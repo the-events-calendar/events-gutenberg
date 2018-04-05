@@ -4,7 +4,7 @@
 import { stringify } from 'querystringify';
 import { values } from 'lodash';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 
 /**
  * WordPress dependencies
@@ -140,11 +140,11 @@ class GoogleMap extends Component {
 		this.state = {
 			latitude: this.props.latitude,
 			longitude: this.props.longitude,
-		}
+		};
 	}
 
 	componentDidUpdate() {
-		this.loadMap()
+		this.loadMap();
 	}
 
 	loadMap() {
@@ -163,13 +163,13 @@ class GoogleMap extends Component {
 		const location = {
 			lat: parseFloat( latitude ),
 			lng: parseFloat( longitude ),
-		}
+		};
 
 		const mapConfig = {
 			center: location,
 			zoom: zoom,
 			mapTypeId: 'roadmap'
-		}
+		};
 
 		this.map = new maps.Map( node, mapConfig );
 		const marker = new google.maps.Marker( {
@@ -188,7 +188,7 @@ class GoogleMap extends Component {
 					<Spinner />
 				</Placeholder>
 			</div>
-		)
+		);
 	}
 
 	render() {
@@ -196,7 +196,7 @@ class GoogleMap extends Component {
 			<Placeholder style={{ height: '100%' }}>
 				<p>{ __( 'No map preview available', 'the-events-calendar' ) }</p>
 			</Placeholder>
-		)
+		);
 
 		const {
 			interactive,
@@ -210,7 +210,7 @@ class GoogleMap extends Component {
 						className='tribe-editor-map__element'
 						src={ this.mapUrl }
 					/>
-				)
+				);
 			} else {
 				mapElement = this.renderInteractive();
 			}
@@ -242,7 +242,7 @@ class GoogleMap extends Component {
 			zoom: zoom,
 			maptype: mapType,
 			key: apiKey,
-		}
+		};
 		let rootUrl = null;
 
 		if ( interactive ) {

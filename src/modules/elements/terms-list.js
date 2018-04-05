@@ -10,7 +10,7 @@ import { stringify } from 'querystringify';
  */
 import { Component, compose } from '@wordpress/element';
 import { Placeholder, Spinner, withAPIData } from '@wordpress/components';
-import { withSelect } from '@wordpress/data'
+import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -27,7 +27,7 @@ class TaxonomiesElement extends Component {
 
 		this.state = {
 			terms: null,
-		}
+		};
 	}
 
 	getTerms( parentId = null ) {
@@ -118,7 +118,7 @@ TaxonomiesElement.defaultProps = {
 const applySelect = withSelect( ( select, props ) => {
 	return {
 		terms: select( 'core/editor' ).getEditedPostAttribute( props.slug ),
-	}
+	};
 } );
 
 const applyWithAPIData = withAPIData( ( props ) => {

@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { isFunction, toString, mapValues } from 'lodash'
-import slug from 'slug'
+import { isFunction, toString, mapValues } from 'lodash';
+import slug from 'slug';
 
 /**
  * WordPress dependencies
@@ -31,7 +31,7 @@ import {
  * Module Code
  */
 
-const DATA = window.tribe_blocks_editor_google_maps_api
+const DATA = window.tribe_blocks_editor_google_maps_api;
 
 class VenueMap extends Component {
 	static defaultProps = {
@@ -42,22 +42,22 @@ class VenueMap extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.state = this.props
-		this.getCoordinates = this.getCoordinates.bind( this )
+		this.state = this.props;
+		this.getCoordinates = this.getCoordinates.bind( this );
 	}
 
 	componentDidMount() {
-		this.setState( { coordinates: this.getCoordinates() } )
+		this.setState( { coordinates: this.getCoordinates() } );
 		this.setState( {
 			apiKey: DATA.key,
 			zoom: parseInt( DATA.zoom, 10 ),
-		} )
+		} );
 	}
 
 	getCoordinates() {
-		const { venue } = this.state
+		const { venue } = this.state;
 		if ( ! venue ) {
-			return undefined
+			return undefined;
 		}
 
 		return mapValues( { lat: venue.meta._VenueLat, lng: venue.meta._VenueLng }, parseFloat );
@@ -65,10 +65,10 @@ class VenueMap extends Component {
 
 	render() {
 		const { zoom, apiKey } = this.state;
-		const coordinates = this.getCoordinates()
+		const coordinates = this.getCoordinates();
 
 		if ( ! coordinates ) {
-			return null
+			return null;
 		}
 
 		return (
@@ -84,4 +84,4 @@ class VenueMap extends Component {
 	}
 }
 
-export default VenueMap
+export default VenueMap;
