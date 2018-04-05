@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.1.6-alpha &mdash; 2018-04-05
+
+* Fix - Preventing Google Maps JavaScript API to re-render on block focus (performance)
+
 #### 0.1.5-alpha &mdash; 2018-04-04
 
 * Tweak - Add required Google JavaScript API into Location Block
