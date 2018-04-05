@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { withSelect } from '@wordpress/data'
+import { withSelect } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
 
 import {
@@ -24,16 +24,15 @@ import {
  * Internal dependencies
  */
 
-
 /**
  * Module Code
  */
 class SearchPosts extends Component {
 	static defaultProps = {
 		onHover: () => {},
-	};
+	}
 
-	constructor() {
+	constructor () {
 		super( ...arguments );
 		this.state = {
 			filterValue: '',
@@ -48,7 +47,7 @@ class SearchPosts extends Component {
 		this.renderToggle = this.renderToggle.bind( this );
 	}
 
-	getItems() {
+	getItems () {
 		if ( ! this.props.items ) {
 			return [];
 		}
@@ -61,14 +60,14 @@ class SearchPosts extends Component {
 		return items;
 	}
 
-	renderList() {
+	renderList () {
 		const { items, focus } = this.props;
 		const isLoading = items.isLoading;
 
 		if ( isLoading ) {
 			return (
 				<Placeholder key="placeholder">
-					<Spinner />
+					<Spinner/>
 				</Placeholder>
 			);
 		}
@@ -76,7 +75,7 @@ class SearchPosts extends Component {
 		return this.getItems().map( this.renderItem, this );
 	}
 
-	renderItem( item ) {
+	renderItem ( item ) {
 		const { current } = this.state;
 		const { onSelectItem, onHover } = this.props;
 
@@ -84,71 +83,71 @@ class SearchPosts extends Component {
 
 		return (
 			<button
-				key={ `post-${ item.id }` }
+				key={`post-${ item.id }`}
 				role="menuitem"
 				className="tribe-editor__search-item"
-				onClick={ () => {
-					onSelectItem( item )
-					this.onClose()
-				} }
-				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
-				disabled={ item.isDisabled }
-				onMouseEnter={ onHover( item ) }
-				onMouseLeave={ onHover( null ) }
+				onClick={() => {
+					onSelectItem( item );
+					this.onClose();
+				}}
+				tabIndex={isCurrent || item.isDisabled ? null : '-1'}
+				disabled={item.isDisabled}
+				onMouseEnter={onHover( item )}
+				onMouseLeave={onHover( null )}
 			>
-				{ item.title.rendered }
+				{item.title.rendered}
 			</button>
 		);
 	}
 
-	renderDropdown( { onToggle, isOpen, onClose } ) {
+	renderDropdown ( { onToggle, isOpen, onClose } ) {
 		const instanceId = uniqueId( 'search-' );
 		const { searchLabel } = this.props;
 		this.onClose = onClose.bind( this );
 
 		return (
-			<div className={ classNames( 'tribe-editor__search' ) }>
-			{
-			/**
-			 * @todo We need to add Search Later on, for now it adds unecessary complexity
-			 */
-			/*
-				<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
-					{ searchLabel }
-				</label>
-				<input
-					id={ `editor-inserter__${ instanceId }` }
-					type='search'
-					placeholder={ searchLabel }
-					className='editor-inserter__search'
-					onChange={ ( event ) => console.log( event.target.value ) }
-				/>
-			 */}
-				<div role="menu" className={ classNames( 'tribe-editor__search-results' ) }>
-					{ this.renderList() }
+			<div className={classNames( 'tribe-editor__search' )}>
+				{
+					/**
+					 * @todo We need to add Search Later on, for now it adds unecessary complexity
+					 */
+					/*
+						<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
+							{ searchLabel }
+						</label>
+						<input
+							id={ `editor-inserter__${ instanceId }` }
+							type='search'
+							placeholder={ searchLabel }
+							className='editor-inserter__search'
+							onChange={ ( event ) => console.log( event.target.value ) }
+						/>
+					 */}
+				<div role="menu" className={classNames( 'tribe-editor__search-results' )}>
+					{this.renderList()}
 				</div>
 			</div>
 		);
 	}
 
-	renderToggle( { onToggle, isOpen } ) {
+	renderToggle ( { onToggle, isOpen } ) {
 		const { iconLabel } = this.props;
 		const icon = (
-			<Dashicon icon='search' />
-		)
+			<Dashicon icon='search'/>
+		);
 
 		return (
 			<IconButton
 				className='tribe-editor-button'
-				label={ iconLabel }
-				onClick={ onToggle }
-				icon={ icon }
-				aria-expanded={ isOpen }
+				label={iconLabel}
+				onClick={onToggle}
+				icon={icon}
+				aria-expanded={isOpen}
 			/>
-		)
+		);
 	}
 
-	render() {
+	render () {
 		const { items, focus } = this.props;
 
 		if ( ! focus ) {
@@ -160,8 +159,8 @@ class SearchPosts extends Component {
 				className="tribe-editor-organizer-dropdown"
 				position="bottom center"
 				contentClassName="tribe-editor-dropdown__dialog"
-				renderToggle={ this.renderToggle }
-				renderContent={ this.renderDropdown }
+				renderToggle={this.renderToggle}
+				renderContent={this.renderDropdown}
 			/>
 		);
 	}
@@ -169,15 +168,15 @@ class SearchPosts extends Component {
 
 const applySelect = withSelect( ( select, props ) => {
 	const { metaKey } = props;
-	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' )
-	const items = meta[ metaKey ] ? meta[ metaKey ] : []
+	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
+	const items = meta[ metaKey ] ? meta[ metaKey ] : [];
 	return {
 		items: items,
-	}
+	};
 } );
 
 const applyWithAPIData = withAPIData( ( props ) => {
-	const { items, postType } = props
+	const { items, postType } = props;
 	let query = {
 		per_page: 100,
 		orderby: 'title',

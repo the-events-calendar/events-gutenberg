@@ -1,0 +1,87 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            "tab",
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "semi": [
+            "error"
+        ],
+        "no-unused-vars": [
+            "warn"
+        ],
+        "no-console": [
+            "error",
+            {
+                "allow": [ "warn", "warning", "error" ]
+            }
+        ],
+        "object-curly-spacing": [ "error", "always" ],
+        "space-in-parens": [ "error", "always" ],
+        "array-bracket-spacing": [
+            "error",
+            "always",
+            {
+                "objectsInArrays": false
+            }
+        ],
+        "eqeqeq": [ "error", "smart" ],
+        "computed-property-spacing": [ "error", "always" ],
+        "space-unary-ops": [
+            "error", 
+            {
+                "words": true,
+                "nonwords": true,
+                "overrides": {
+                    "--": false,
+                    "++": false
+                }
+            }
+        ],
+        "react/no-string-refs": "error",
+        "react/no-unused-prop-types": "error",
+        "react/jsx-first-prop-new-line": "error",
+        "react/jsx-one-expression-per-line": "error",
+        "react/jsx-max-props-per-line": [ 
+            "error", 
+            {
+                "maximum": 1,
+                "when": "multiline"
+            }
+        ],
+        "react/jsx-wrap-multilines": [ 
+            "error", 
+            {
+                "declaration": "parens-new-line"
+            }
+        ],
+        "react/jsx-closing-bracket-location": "error"
+    },
+    "globals": {
+        "wp": true,
+        "jQuery": true,
+        "tribe_blocks_editor_timezone_html": true
+    }
+}

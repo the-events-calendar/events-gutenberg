@@ -10,7 +10,7 @@ import { stringify } from 'querystringify';
  */
 import { Component, compose } from '@wordpress/element';
 import { Placeholder, Spinner, withAPIData } from '@wordpress/components';
-import { withSelect } from '@wordpress/data'
+import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -27,7 +27,7 @@ class TaxonomiesElement extends Component {
 
 		this.state = {
 			terms: null,
-		}
+		};
 	}
 
 	getTerms( parentId = null ) {
@@ -72,11 +72,18 @@ class TaxonomiesElement extends Component {
 
 	renderTermListItem( term, isLast, level ) {
 		const childTerms = this.getTerms( term.id );
-		const separator = ! isLast ? <span>{ this.props.termSeparator } </span> : null;
+		const separator = ! isLast ? (
+			<span>
+				{ this.props.termSeparator }
+				{' '}
+			</span>
+		) : null;
 
 		return (
 			<li key={ term.id }>
-				<a href={ term.link } target="_blank">{ this.renderTermName( term ) }</a>
+				<a href={ term.link } target="_blank">
+					{ this.renderTermName( term ) }
+				</a>
 				{ separator }
 			</li>
 		);
@@ -85,7 +92,12 @@ class TaxonomiesElement extends Component {
 	render() {
 		const { attributes, focus, setAttributes, slug } = this.props;
 		const terms = this.getTerms();
-		const label = <strong className='tribe-detail-label' key='terms-label'>{ this.props.label } </strong>;
+		const label = (
+			<strong className='tribe-detail-label' key='terms-label'>
+				{ this.props.label }
+				{' '}
+			</strong>
+		);
 		const key   = `tribe-terms-${slug}`;
 
 		if ( this.props.terms.isLoading ) {
@@ -118,7 +130,7 @@ TaxonomiesElement.defaultProps = {
 const applySelect = withSelect( ( select, props ) => {
 	return {
 		terms: select( 'core/editor' ).getEditedPostAttribute( props.slug ),
-	}
+	};
 } );
 
 const applyWithAPIData = withAPIData( ( props ) => {

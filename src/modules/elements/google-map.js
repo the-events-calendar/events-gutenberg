@@ -2,10 +2,10 @@
  * External dependencies
  */
 import { stringify } from 'querystringify';
-import { values } from 'lodash'
+import { values } from 'lodash';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom'
-import React from 'react'
+import ReactDOM from 'react-dom';
+import React from 'react';
 
 /**
  * WordPress dependencies
@@ -74,7 +74,7 @@ class GoogleMap extends Component {
 	/**
 	 * https://developers.google.com/maps/documentation/staticmaps/intro#api_key
 	 */
-	static ApiKey = null
+	static ApiKey = null;
 
 	static RootStaticUrl = 'https://maps.googleapis.com/maps/api/staticmap';
 	static RootEmbedUrl = 'https://www.google.com/maps/embed/v1/place';
@@ -142,13 +142,13 @@ class GoogleMap extends Component {
 			map: null,
 			marker: null,
 			google: window.google ? window.google : null
-		}
+		};
 
 		this.map = React.createRef();
 	}
 
 	componentDidUpdate() {
-		this.loadMap()
+		this.loadMap();
 	}
 
 	loadMap() {
@@ -174,13 +174,13 @@ class GoogleMap extends Component {
 		const location = {
 			lat: parseFloat( latitude ),
 			lng: parseFloat( longitude ),
-		}
+		};
 
 		const mapConfig = {
 			center: location,
 			zoom: zoom,
 			mapTypeId: mapType
-		}
+		};
 
 		if ( ! map ) {
 			map = new maps.Map( this.map.current, mapConfig )
@@ -209,15 +209,17 @@ class GoogleMap extends Component {
 					<Spinner />
 				</Placeholder>
 			</div>
-		)
+		);
 	}
 
 	render() {
 		let mapElement = (
 			<Placeholder style={{ height: '100%' }}>
-				<p>{ __( 'No map preview available', 'the-events-calendar' ) }</p>
+				<p>
+					{ __( 'No map preview available', 'the-events-calendar' ) }
+				</p>
 			</Placeholder>
-		)
+		);
 
 		const {
 			interactive,
@@ -231,7 +233,7 @@ class GoogleMap extends Component {
 						className='tribe-editor-map__element'
 						src={ this.mapUrl }
 					/>
-				)
+				);
 			} else {
 				mapElement = this.renderInteractive();
 			}
@@ -263,7 +265,7 @@ class GoogleMap extends Component {
 			zoom: zoom,
 			maptype: mapType,
 			key: apiKey,
-		}
+		};
 		let rootUrl = null;
 
 		if ( interactive ) {
