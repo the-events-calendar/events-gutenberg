@@ -108,7 +108,7 @@ class OrganizerForm extends Component {
 
 	focus ( name ) {
 		return () => {
-			let input = this.fields[name];
+			let input = this.fields[ name ];
 			if ( input ) {
 				input.focus();
 			}
@@ -119,7 +119,7 @@ class OrganizerForm extends Component {
 		if ( input ) {
 			const { props } = input;
 			const { name } = props || {};
-			this.fields[name] = input;
+			this.fields[ name ] = input;
 		}
 	}
 

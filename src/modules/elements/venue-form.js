@@ -116,7 +116,7 @@ class VenueForm extends Component {
 		if ( input ) {
 			const { props } = input;
 			const { name } = props || {};
-			this.fields[name] = input;
+			this.fields[ name ] = input;
 		}
 	}
 

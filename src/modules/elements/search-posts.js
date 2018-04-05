@@ -169,7 +169,7 @@ class SearchPosts extends Component {
 const applySelect = withSelect( ( select, props ) => {
 	const { metaKey } = props;
 	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
-	const items = meta[metaKey] ? meta[metaKey] : [];
+	const items = meta[ metaKey ] ? meta[ metaKey ] : [];
 	return {
 		items: items,
 	};
