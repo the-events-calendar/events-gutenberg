@@ -48,6 +48,7 @@
             }
         ],
         "eqeqeq": [ "error", "smart" ],
+        "computed-property-spacing": [ "error", "always" ],
         "space-unary-ops": [
             "error", 
             {
