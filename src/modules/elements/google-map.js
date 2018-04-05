@@ -5,6 +5,7 @@ import { stringify } from 'querystringify';
 import { values } from 'lodash'
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom'
+import React from 'react'
 
 /**
  * WordPress dependencies
@@ -140,7 +141,10 @@ class GoogleMap extends Component {
 		this.state = {
 			map: null,
 			marker: null,
+			google: window.google ? window.google : null
 		}
+
+		this.map = React.createRef();
 	}
 
 	componentDidUpdate() {
@@ -156,7 +160,15 @@ class GoogleMap extends Component {
 			mapType,
 		} = this.props
 
-		const google = window.google
+		let {
+			map,
+			marker,
+		} = this.state
+
+		const {
+			google,
+		} = this.state
+
 		const maps = google.maps
 
 		const location = {
@@ -170,21 +182,15 @@ class GoogleMap extends Component {
 			mapTypeId: mapType
 		}
 
-		let map;
-
-		if ( ! this.state.map ) {
-			const mapRef = this.refs.map;
-			const node = ReactDOM.findDOMNode( mapRef )
-			map = new maps.Map( node, mapConfig )
+		if ( ! map ) {
+			map = new maps.Map( this.map.current, mapConfig )
 
 			this.setState( { map: map } )
-		} else {
-			map = this.state.map
 		}
 
 		// Don't re-set it a bunch
-		if ( ! this.state.marker ) {
-			const marker = new maps.Marker( {
+		if ( map && ! marker ) {
+			marker = new maps.Marker( {
 				position: location,
 				map: map,
 			} )
@@ -197,7 +203,7 @@ class GoogleMap extends Component {
 		return (
 			<div
 				className='tribe-editor-map__element'
-				ref='map'
+				ref={ this.map }
 			>
 				<Placeholder key="placeholder">
 					<Spinner />
