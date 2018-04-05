@@ -27,6 +27,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 #### 0.1.6-alpha &mdash; 2018-04-05
 
 * Fix - Preventing Google Maps JavaScript API to re-render on block focus (performance)
+* Tweak - Added field validation to Location and Organizer creation dropdown forms
 
 #### 0.1.5-alpha &mdash; 2018-04-04
 
