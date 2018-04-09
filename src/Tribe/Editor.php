@@ -212,6 +212,14 @@ class Tribe__Events_Gutenberg__Editor {
 						'name' => 'tribe_date_settings',
 						'data' => array( $this, 'get_date_settings' ),
 					),
+					array(
+						'name' => 'tribe_data_countries',
+						'data' => tribe( 'languages.locations' )->get_countries(),
+					),
+					array(
+						'name' => 'tribe_data_us_states',
+						'data' => Tribe__View_Helpers::loadStates(),
+					)
 				),
 			)
 		);
