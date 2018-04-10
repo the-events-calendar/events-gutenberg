@@ -1,5 +1,10 @@
 import { get } from 'lodash';
 
+const list = {
+	countries: get( window, 'tribe_data_countries', {} ),
+	us_states: get( window, 'tribe_data_us_states', {} ),
+}
+
 /**
  * Convert data from an array with different keys and values into a unified shape of object.
  *
@@ -21,7 +26,7 @@ function toObject( data = {} ) {
  * @returns {{code: string, name: *}[]}
  */
 export function getCountries() {
-	return toObject( get( window, 'tribe_data_countries', {} ) );
+	return toObject( list.countries );
 }
 
 /**
@@ -33,7 +38,7 @@ export function getCountries() {
 export function getStates( countryCode ) {
 	switch ( countryCode ) {
 		case 'US':
-			return toObject( get( window, 'tribe_data_us_states', {} ) );
+			return toObject( list.us_states );
 			break;
 		default:
 			return [];
@@ -41,13 +46,4 @@ export function getStates( countryCode ) {
 	}
 }
 
-/**
- * Get name from a container object based on the code of the element otherwise an empty string.
- *
- * @param code
- * @param container
- * @returns {*|string}
- */
-export function getName( code, container ) {
-	return container[ code ] || '';
-}
+export default list;
