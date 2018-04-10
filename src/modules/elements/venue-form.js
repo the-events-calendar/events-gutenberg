@@ -5,7 +5,7 @@ import { get, isFunction, values } from 'lodash';
 import { stringify } from 'querystringify';
 import { Component } from '@wordpress/element';
 import Input from './input';
-import { getCountries, getStates, getName, getObject } from '../../utils/geo-data';
+import { getCountries, getStates, getName } from '../../utils/geo-data';
 
 /**
  * WordPress dependencies
@@ -80,8 +80,8 @@ class VenueForm extends Component {
 			meta: {
 				_VenueAddress: address,
 				_VenueCity: city,
-				_VenueCountry: getName( country, getObject( 'tribe_data_countries' ) ) || country,
-				_VenueProvince: getName( stateProvince, getObject( 'tribe_data_us_states' ) ) || stateProvince,
+				_VenueCountry: getName( country, get( window, 'tribe_data_countries', {} ) ) || country,
+				_VenueProvince: getName( stateProvince, get( window, 'tribe_data_us_states', {} ) ) || stateProvince,
 				_VenueZip: zip,
 				_VenuePhone: phone,
 				_VenueURL: website,

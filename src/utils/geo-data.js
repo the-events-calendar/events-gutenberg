@@ -1,3 +1,5 @@
+import { get } from 'lodash';
+
 /**
  * Convert data from an array with different keys and values into a unified shape of object.
  *
@@ -19,7 +21,7 @@ function toObject( data = {} ) {
  * @returns {{code: string, name: *}[]}
  */
 export function getCountries() {
-	return toObject( getObject( 'tribe_data_countries' ) );
+	return toObject( get( window, 'tribe_data_countries', {} ) );
 }
 
 /**
@@ -31,22 +33,12 @@ export function getCountries() {
 export function getStates( countryCode ) {
 	switch ( countryCode ) {
 		case 'US':
-			return toObject( getObject( 'tribe_data_us_states' ) );
+			return toObject( get( window, 'tribe_data_us_states', {} ) );
 			break;
 		default:
 			return [];
 			break;
 	}
-}
-
-/**
- * Return an object from the global namespace or empty object if does not exist
- *
- * @param name
- * @returns {*|{}}
- */
-export function getObject( name ) {
-	return window[ name ] || {};
 }
 
 /**
