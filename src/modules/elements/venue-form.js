@@ -2,9 +2,9 @@
  * External dependencies
  */
 import { get, isFunction, values } from 'lodash';
-import { stringify } from 'querystringify';
 import { Component } from '@wordpress/element';
 import Input from './input';
+import list, { getCountries, getStates } from '../../utils/geo-data';
 
 /**
  * WordPress dependencies
@@ -79,8 +79,8 @@ class VenueForm extends Component {
 			meta: {
 				_VenueAddress: address,
 				_VenueCity: city,
-				_VenueCountry: country,
-				_VenueProvince: stateProvince,
+				_VenueCountry: get( list.countries, country, '' ) || country,
+				_VenueProvince: get( list.us_states, stateProvince, '' ) || stateProvince,
 				_VenueZip: zip,
 				_VenuePhone: phone,
 				_VenueURL: website,
@@ -127,7 +127,64 @@ class VenueForm extends Component {
 		return fields.length === results.length;
 	}
 
+	renderOption ( element ) {
+		return ( <option value={element.code} key={element.code}>
+			{element.name}
+		</option> );
+	}
+
+	renderCountry () {
+		const { country } = this.state;
+		const placeholder = country ? null : (
+			<option value="" disabled selected="true">
+				Select a country:
+			</option>
+		);
+
+		return (
+			<select
+				value={country}
+				className='small tribe-venue-select'
+				onChange={( event ) => this.setState( { country: event.target.value } )}
+			>
+				{placeholder}
+				{getCountries().map( this.renderOption )}
+			</select>
+		);
+	}
+
+	renderState () {
+		const { stateProvince, country } = this.state;
+		const states = getStates( country );
+
+		if ( states.length === 0 ) {
+			return (
+				<Input
+					className='medium'
+					type='text'
+					name='venue[stateProvince]'
+					placeholder='State'
+					onComplete={() => this.setState( { isValid: this.isValid() } )}
+					ref={this.saveRef}
+					onChange={( event ) => this.setState( { stateProvince: event.target.value } )}
+				/>
+			);
+		} else {
+			delete this.fields[ 'venue[stateProvince]' ];
+			return (
+				<select
+					value={stateProvince}
+					onChange={( event ) => this.setState( { stateProvince: event.target.value } )}
+					className='medium tribe-venue-select'
+				>
+					{states.map( this.renderOption )}
+				</select>
+			);
+		}
+	}
+
 	render () {
+
 		if ( this.isCreating() ) {
 			return [
 				<div
@@ -158,7 +215,6 @@ class VenueForm extends Component {
 						ref={this.saveRef}
 						onChange={( next ) => this.setState( { title: next.target.value } )}
 						validate
-						required
 					/>
 					<Input
 						type='text'
@@ -177,24 +233,8 @@ class VenueForm extends Component {
 						onChange={( next ) => this.setState( { city: next.target.value } )}
 					/>
 					<div className="row">
-						<Input
-							className='small'
-							type='text'
-							name='venue[country]'
-							placeholder='Country'
-							onComplete={() => this.setState( { isValid: this.isValid() } )}
-							ref={this.saveRef}
-							onChange={( next ) => this.setState( { country: next.target.value } )}
-						/>
-						<Input
-							className='medium'
-							type='text'
-							name='venue[stateProvince]'
-							placeholder='State'
-							onComplete={() => this.setState( { isValid: this.isValid() } )}
-							ref={this.saveRef}
-							onChange={( next ) => this.setState( { stateProvince: next.target.value } )}
-						/>
+						{this.renderCountry()}
+						{this.renderState()}
 					</div>
 					<div className='row'>
 						<Input

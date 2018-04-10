@@ -163,7 +163,6 @@ class OrganizerForm extends Component {
 							onComplete={() => this.setState( { isValid: this.isValid() } )}
 							onChange={( next ) => this.setState( { title: next.target.value } )}
 							validate
-							required
 						/>
 					</dd>
 					<dt onClick={this.focus( 'organizer[phone]' )}>
