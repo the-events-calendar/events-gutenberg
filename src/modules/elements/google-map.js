@@ -158,18 +158,18 @@ class GoogleMap extends Component {
 			zoom,
 			size,
 			mapType,
-		} = this.props
+		} = this.props;
 
 		let {
 			map,
 			marker,
-		} = this.state
+		} = this.state;
 
 		const {
 			google,
-		} = this.state
+		} = this.state;
 
-		const maps = google.maps
+		const maps = google.maps;
 
 		const location = {
 			lat: parseFloat( latitude ),
@@ -183,9 +183,9 @@ class GoogleMap extends Component {
 		};
 
 		if ( ! map ) {
-			map = new maps.Map( this.map.current, mapConfig )
+			map = new maps.Map( this.map.current, mapConfig );
 
-			this.setState( { map: map } )
+			this.setState( { map: map } );
 		}
 
 		// Don't re-set it a bunch
@@ -193,9 +193,9 @@ class GoogleMap extends Component {
 			marker = new maps.Marker( {
 				position: location,
 				map: map,
-			} )
+			} );
 
-			this.setState( { marker: marker } )
+			this.setState( { marker: marker } );
 		}
 	}
 
