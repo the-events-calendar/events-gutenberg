@@ -63,7 +63,6 @@
         "react/no-string-refs": "error",
         "react/no-unused-prop-types": "error",
         "react/jsx-first-prop-new-line": "error",
-        "react/jsx-one-expression-per-line": "error",
         "react/jsx-max-props-per-line": [ 
             "error", 
             {
