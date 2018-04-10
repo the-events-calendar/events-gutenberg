@@ -171,7 +171,7 @@ class VenueForm extends Component {
 				/>
 			);
 		} else {
-			delete this.fields[ 'venue[stateProvince' ];
+			delete this.fields[ 'venue[stateProvince]' ];
 			return (
 				<select
 					value={stateProvince}
