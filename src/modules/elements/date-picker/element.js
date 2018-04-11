@@ -25,10 +25,11 @@ import { __ } from '@wordpress/i18n';
 import { toMomentFormat } from 'editor/utils/date';
 import { getSetting } from 'editor/settings';
 
+import './style.pcss';
+
 /**
  * Module Code
  */
-
 class DatePicker extends Component {
 	constructor() {
 		super( ...arguments );
@@ -96,9 +97,9 @@ class DatePicker extends Component {
 	render() {
 		return (
 			<Dropdown
-				className="tribe-editor-datetime"
+				className="tribe-element-datepicker"
 				position="bottom left"
-				contentClassName="tribe-editor-datetime__dialog"
+				contentClassName="tribe-element-datepicker-dialog"
 				renderToggle={ this.renderToggle }
 				renderContent={ this.renderContent }
 			/>

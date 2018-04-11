@@ -1,0 +1,25 @@
+/**
+ * Reset our Width of the Gutenberg Editor
+ */
+.gutenberg-editor-page.post-type-tribe_events {
+	.edit-post-visual-editor {
+		/**
+		 * On our elements we want 900px instead of the default
+		 * possibly keep an eye to how to do it on PHP
+		 */
+		.editor-block-list__block,
+		.editor-default-block-appender,
+		.editor-post-title {
+			max-width: 900px;
+		}
+
+		/**
+		 * Resets padding and move it to margin
+		 */
+		.editor-post-title,
+		.editor-post-permalink {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}

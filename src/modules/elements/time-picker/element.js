@@ -23,6 +23,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { toMomentFormat } from 'editor/utils/date';
+import './style.pcss';
 
 /**
  * Module Code

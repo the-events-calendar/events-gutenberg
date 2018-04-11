@@ -258,6 +258,17 @@ class Tribe__Events_Gutenberg__Editor {
 
 		tribe_asset(
 			$plugin,
+			'tribe-block-editor',
+			'editor.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+			)
+		);
+
+		tribe_asset(
+			$plugin,
 			'tribe-block-editor-blocks',
 			'blocks.css',
 			array(),

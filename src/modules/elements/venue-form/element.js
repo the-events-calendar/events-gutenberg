@@ -2,20 +2,27 @@
  * External dependencies
  */
 import { get, isFunction, values } from 'lodash';
-import { Component } from '@wordpress/element';
-import Input from './input';
-import list, { getCountries, getStates } from '../../utils/geo-data';
 
 /**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
+import { Component } from '@wordpress/element';
 import {
 	Spinner,
 	Placeholder,
 	withAPIData
 } from '@wordpress/components';
 
+/**
+ * Internal dependencies
+ */
+import { Input } from 'elements';
+import list, { getCountries, getStates } from 'editor/utils/geo-data';
+
+/**
+ * Module Code
+ */
 class VenueForm extends Component {
 	static defaultProps = {
 		postType: 'tribe_venue',

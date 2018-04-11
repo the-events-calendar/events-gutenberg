@@ -22,15 +22,16 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import './style.pcss';
 
+/**
+ * Module Code
+ */
 const options = 'tribe_blocks_editor_timezone_html' in window ? tribe_blocks_editor_timezone_html : '';
 const $timezoneOpts = jQuery( options );
 
 let timezoneOpts;
 
-/**
- * Module Code
- */
 class TimezonePicker extends Component {
 	constructor() {
 		super( ...arguments );

@@ -1,0 +1,80 @@
+.tribe-element-timezone-picker {
+	display: inline-block;
+}
+
+.tribe-element-timezone-picker-dialog {
+
+	ul,
+	li {
+		padding: 0;
+		margin: 0;
+	}
+
+	&.components-popover {
+		.components-popover__content {
+			min-width: 150px;
+		}
+	}
+
+	.tribe-element-timezone-picker-items {
+		height: 250px;
+		overflow: auto;
+
+		.components-placeholder {
+			height: inherit;
+		}
+	}
+
+	.tribe-element-timezone-picker-group {
+		.tribe-element-timezone-picker-group-label {
+			display: block;
+			width: 99%;
+			color: #555d66;
+			font-weight: bold;
+			padding: 5px 12px;
+			border: 0;
+			border-bottom: 1px solid #e2e4e7;
+			line-height: 20px;
+			background: transparent;
+			text-align: left;
+		}
+	}
+
+	.tribe-element-timezone-picker-item {
+
+		&.tribe-current {
+			button {
+				background-color: #edeff0;
+			}
+		}
+
+		button {
+			display: block;
+			width: 99%;
+			color: #555d66;
+			padding: 5px 12px 5px 24px;
+			cursor: pointer;
+			border: 0;
+			border-bottom: 1px solid #e2e4e7;
+			line-height: 20px;
+			background: transparent;
+			text-align: left;
+
+			&:disabled {
+
+			}
+
+			&:not(:disabled) {
+				&:hover {
+					background-color: #edeff0;
+				}
+
+				&:focus,
+				&:active,
+				&.is-active {
+					position: relative;
+				}
+			}
+		}
+	}
+}
