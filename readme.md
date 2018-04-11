@@ -24,7 +24,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-### 0.1.7-alpha — 2018-04-10
+#### 0.1.7-alpha — 2018-04-10
 
 * Tweak - Re-organized Module files to make Elements CSS more modularized and more performant
 * Tweak - Countries and US states are available as `<select>` element on Venue creation.
