@@ -76,7 +76,8 @@
                 "declaration": "parens-new-line"
             }
         ],
-        "react/jsx-closing-bracket-location": "error"
+        "react/jsx-closing-bracket-location": "error",
+        "wpcalypso/import-docblock": "warn"
     },
     "globals": {
         "wp": true,
