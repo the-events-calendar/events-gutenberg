@@ -115,7 +115,7 @@ class VenueDetails extends Component {
 
 		// If we don't have a title we say it's untitled
 		if ( ! venue.title ) {
-			return __( '(Untitled Venue)', 'the-events-calendar' );
+			return __( '(Untitled Venue)', 'events-gutenberg' );
 		}
 
 		return unescape( venue.title.rendered ).trim();
@@ -160,10 +160,10 @@ class VenueDetails extends Component {
 							<a
 								className="tribe-events-gmap"
 								href={ mapsUrl }
-								title={ __( 'Click to view a Google Map', 'the-events-calendar' ) }
+								title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
 								target="_blank"
 							>
-								{ __( '+ Google Map', 'the-events-calendar' ) }
+								{ __( '+ Google Map', 'events-gutenberg' ) }
 							</a>
 						}
 					</address>
@@ -171,14 +171,14 @@ class VenueDetails extends Component {
 
 				{ ! isEmpty( venue.meta._VenuePhone ) &&
 					<p className='tribe-editor__meta-field'>
-						<strong>{ __( 'Phone: ', 'the-events-calendar' ) }</strong><br />
+						<strong>{ __( 'Phone: ', 'events-gutenberg' ) }</strong><br />
 						<span>{ venue.meta._VenuePhone }</span>
 					</p>
 				}
 
 				{ ! isEmpty( venue.meta._VenueURL ) &&
 					<p className='tribe-editor__meta-field'>
-						<strong>{ __( 'Website: ', 'the-events-calendar' ) }</strong><br />
+						<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
 						<span>{ venue.meta._VenueURL }</span>
 					</p>
 				}
@@ -190,13 +190,13 @@ class VenueDetails extends Component {
 		const { focus, addVenue, removeVenue, venue } = this.props;
 
 		return (
-			<div key='venue-actions' className='tribe-editor-venue__actions'>
+			<div key='venue-actions' className='tribe-editor-venue-actions'>
 				<SearchPosts
 					key='venue-search-dropdown'
 					postType='tribe_venue'
 					metaKey='_EventVenueID'
-					searchLabel={ __( 'Search for an venue', 'the-events-calendar' ) }
-					iconLabel={ __( 'Add existing venue', 'the-events-calendar' ) }
+					searchLabel={ __( 'Search for an venue', 'events-gutenberg' ) }
+					iconLabel={ __( 'Add existing venue', 'events-gutenberg' ) }
 					focus={ focus }
 					onSelectItem={ addVenue }
 				/>

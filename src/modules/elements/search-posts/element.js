@@ -23,6 +23,7 @@ import {
 /**
  * Internal dependencies
  */
+import './style.pcss';
 
 /**
  * Module Code
@@ -32,7 +33,7 @@ class SearchPosts extends Component {
 		onHover: () => {},
 	}
 
-	constructor () {
+	constructor() {
 		super( ...arguments );
 		this.state = {
 			filterValue: '',
@@ -47,7 +48,7 @@ class SearchPosts extends Component {
 		this.renderToggle = this.renderToggle.bind( this );
 	}
 
-	getItems () {
+	getItems() {
 		if ( ! this.props.items ) {
 			return [];
 		}
@@ -60,7 +61,7 @@ class SearchPosts extends Component {
 		return items;
 	}
 
-	renderList () {
+	renderList() {
 		const { items, focus } = this.props;
 		const isLoading = items.isLoading;
 
@@ -75,7 +76,7 @@ class SearchPosts extends Component {
 		return this.getItems().map( this.renderItem, this );
 	}
 
-	renderItem ( item ) {
+	renderItem( item ) {
 		const { current } = this.state;
 		const { onSelectItem, onHover } = this.props;
 
@@ -83,30 +84,30 @@ class SearchPosts extends Component {
 
 		return (
 			<button
-				key={`post-${ item.id }`}
+				key={ `post-${ item.id }` }
 				role="menuitem"
-				className="tribe-editor__search-item"
-				onClick={() => {
+				className="tribe-element-search-posts-item"
+				onClick={ () => {
 					onSelectItem( item );
 					this.onClose();
-				}}
-				tabIndex={isCurrent || item.isDisabled ? null : '-1'}
-				disabled={item.isDisabled}
-				onMouseEnter={onHover( item )}
-				onMouseLeave={onHover( null )}
+				} }
+				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
+				disabled={ item.isDisabled }
+				onMouseEnter={ onHover( item ) }
+				onMouseLeave={ onHover( null ) }
 			>
-				{item.title.rendered}
+				{ item.title.rendered }
 			</button>
 		);
 	}
 
-	renderDropdown ( { onToggle, isOpen, onClose } ) {
+	renderDropdown( { onToggle, isOpen, onClose } ) {
 		const instanceId = uniqueId( 'search-' );
 		const { searchLabel } = this.props;
 		this.onClose = onClose.bind( this );
 
 		return (
-			<div className={classNames( 'tribe-editor__search' )}>
+			<div className={ classNames( 'tribe-element-search-posts' ) }>
 				{
 					/**
 					 * @todo We need to add Search Later on, for now it adds unecessary complexity
@@ -123,8 +124,8 @@ class SearchPosts extends Component {
 							onChange={ ( event ) => console.log( event.target.value ) }
 						/>
 					 */}
-				<div role="menu" className={classNames( 'tribe-editor__search-results' )}>
-					{this.renderList()}
+				<div role="menu" className={ classNames( 'tribe-element-search-posts-results' ) }>
+					{ this.renderList() }
 				</div>
 			</div>
 		);
@@ -139,10 +140,10 @@ class SearchPosts extends Component {
 		return (
 			<IconButton
 				className='tribe-editor-button'
-				label={iconLabel}
-				onClick={onToggle}
-				icon={icon}
-				aria-expanded={isOpen}
+				label={ iconLabel }
+				onClick={ onToggle }
+				icon={ icon }
+				aria-expanded={ isOpen }
 			/>
 		);
 	}
@@ -156,11 +157,11 @@ class SearchPosts extends Component {
 
 		return (
 			<Dropdown
-				className="tribe-editor-organizer-dropdown"
+				className="tribe-element-search-posts-dropdown"
 				position="bottom center"
-				contentClassName="tribe-editor-dropdown__dialog"
-				renderToggle={this.renderToggle}
-				renderContent={this.renderDropdown}
+				contentClassName="tribe-element-search-posts-dropdown-dialog"
+				renderToggle={ this.renderToggle }
+				renderContent={ this.renderDropdown }
 			/>
 		);
 	}

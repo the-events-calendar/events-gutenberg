@@ -228,7 +228,7 @@ class TimezonePicker extends Component {
 		let items = this.getItems( search );
 
 		if ( ! items ) {
-			return __( 'Invalid Timezone', 'the-events-calendar' );
+			return __( 'Invalid Timezone', 'events-gutenberg' );
 		}
 
 		return items.key;

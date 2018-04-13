@@ -10,7 +10,7 @@ $event_id = $this->get( 'post_id' );
 <div id="tribe-events-content" class="tribe-events-single tribe-blocks-editor">
 
 	<p class="tribe-events-back">
-		<a href="<?php echo esc_url( tribe_get_events_link() ); ?>"> <?php printf( '&laquo; ' . esc_html_x( 'All %s', '%s Events plural label', 'the-events-calendar' ), $events_label_plural ); ?></a>
+		<a href="<?php echo esc_url( tribe_get_events_link() ); ?>"> <?php printf( '&laquo; ' . esc_html_x( 'All %s', '%s Events plural label', 'events-gutenberg' ), $events_label_plural ); ?></a>
 	</p>
 
 	<?php tribe_the_notices() ?>
@@ -28,7 +28,7 @@ $event_id = $this->get( 'post_id' );
 	?>
 
 	<div id="tribe-events-footer">
-		<h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Navigation', 'the-events-calendar' ), $events_label_singular ); ?></h3>
+		<h3 class="tribe-events-visuallyhidden"><?php printf( esc_html__( '%s Navigation', 'events-gutenberg' ), $events_label_singular ); ?></h3>
 		<ul class="tribe-events-sub-nav">
 			<li class="tribe-events-nav-previous"><?php tribe_the_prev_event_link( '<span>&laquo;</span> %title%' ) ?></li>
 			<li class="tribe-events-nav-next"><?php tribe_the_next_event_link( '%title% <span>&raquo;</span>' ) ?></li>

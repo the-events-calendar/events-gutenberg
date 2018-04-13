@@ -13,7 +13,7 @@ class Tribe__Events_Gutenberg__I18n {
 	 * @return void
 	 */
 	public function hook() {
-		// add_action( 'admin_enqueue_scripts', array( $this, 'include_inline_script' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'include_inline_script' ) );
 	}
 
 	/**
@@ -24,11 +24,25 @@ class Tribe__Events_Gutenberg__I18n {
 	 * @return void
 	 */
 	public function include_inline_script( $value ) {
+		if ( ! tribe( 'admin.helpers' )->is_post_type_screen( Tribe__Events__Main::POSTTYPE ) ) {
+			return false;
+		}
+
+		$domain = 'events-gutenberg';
+		$translations = get_translations_for_domain( $domain );
+		$locale = array(
+			'' => (object) array(),
+			'prevent-empty' => 'prevent-empty',
+		);
+
+		foreach ( $translations->entries as $msgid => $entry ) {
+			$locale[ $msgid ] = $entry->translations;
+		}
+
 		// Prepare Jed locale data.
-		$locale_data = gutenberg_get_jed_locale_data( 'the-events-calendar' );
 		wp_add_inline_script(
-			'wp-edit-post',
-			'wp.i18n.setLocaleData( ' . json_encode( $locale_data ) . ' );',
+			'tribe-events-editor-elements',
+			'wp.i18n.setLocaleData( ' . json_encode( $locale ) . ', "' . $domain . '" );',
 			'before'
 		);
 	}

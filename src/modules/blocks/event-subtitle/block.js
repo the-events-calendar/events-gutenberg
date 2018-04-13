@@ -63,7 +63,7 @@ class EventSubtitle extends Component {
 				/>
 				{ ! attributes.allDay &&
 					<React.Fragment>
-						<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
+						<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>
 						<TimePicker
 							onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
 								if ( 'all-day' === date ) {
@@ -81,7 +81,7 @@ class EventSubtitle extends Component {
 						/>
 					</React.Fragment>
 				}
-				<span>{ getSetting( 'timeRangeSeparator', __( ' - ', 'the-events-calendar' ) ) }</span>
+				<span>{ getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ) }</span>
 				<DatePicker
 					changeDatetime={ ( date ) => {
 						setAttributes( { endDate: date } )
@@ -90,7 +90,7 @@ class EventSubtitle extends Component {
 				/>
 				{ ! attributes.allDay &&
 					<React.Fragment>
-						<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
+						<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>
 						<TimePicker
 							onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
 								if ( 'all-day' === date ) {
@@ -119,9 +119,9 @@ class EventSubtitle extends Component {
 			</h2>,
 			isSelected && (
 				<InspectorControls key="inspector">
-					<PanelBody title={ __( 'Date Time Settings', 'the-events-calendar' ) }>
+					<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
 						<ToggleControl
-							label={ __( 'Is All Day Event', 'the-events-calendar' ) }
+							label={ __( 'Is All Day Event', 'events-gutenberg' ) }
 							checked={ attributes.allDay }
 							onChange={ ( value ) => setAttributes( { allDay: value } ) }
 						/>

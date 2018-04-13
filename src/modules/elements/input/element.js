@@ -1,10 +1,23 @@
 /**
- * Dependencies
+ * External dependencies
  */
-import { Component } from '@wordpress/element';
 import { isFunction, noop } from 'lodash';
 import PropTypes from 'prop-types';
 import validator from 'validator';
+
+/**
+ * WordPress dependencies
+ */
+import { Component } from '@wordpress/element';
+
+/**
+ * Internal dependencies
+ */
+import './style.pcss'
+
+/**
+ * Module Code
+ */
 
 /**
  * Input element that adds two important properties:

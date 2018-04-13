@@ -79,13 +79,13 @@ class EventDetails extends Component {
 			currencyPosition = attributes.eventCurrencyPosition;
 		}
 
-		let eventCurrencySymbol = getSetting( 'defaultCurrencySymbol', __( '$', 'the-events-calendar' ) );
+		let eventCurrencySymbol = getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) );
 		if ( attributes.eventCurrencySymbol ) {
 			eventCurrencySymbol = attributes.eventCurrencySymbol;
 		}
 
 		const content = [
-			<div key="event-details-box" className="tribe-editor-block tribe-editor-event__details">
+			<div key="event-details-box" className="tribe-editor-block tribe-editor-event-details">
 				<MetaGroup groupKey='event-details'>
 					<RichText
 						tagName="h3"
@@ -94,12 +94,12 @@ class EventDetails extends Component {
 						onChange={ ( nextContent ) => setAttributes( { detailsTitle: nextContent } ) }
 						focus={ focus && 'detailsTitle' === focus.editable ? focus : undefined }
 						onFocus={ ( focusValue ) => setFocus( { editable: 'detailsTitle', ...focusValue } ) }
-						placeholder={ __( 'Details', 'the-events-calendar' ) }
+						placeholder={ __( 'Details', 'events-gutenberg' ) }
 						formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 					/>
 
 					<div>
-						<strong>{ __( 'Start: ', 'the-events-calendar' ) }</strong><br />
+						<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br />
 						<DatePicker
 							changeDatetime={ ( date ) => {
 								setAttributes( { startDate: date } )
@@ -108,7 +108,7 @@ class EventDetails extends Component {
 						/>
 						{ ! attributes.allDay &&
 							<React.Fragment>
-								<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
+								<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>
 								<TimePicker
 									onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
 										if ( 'all-day' === date ) {
@@ -129,7 +129,7 @@ class EventDetails extends Component {
 					</div>
 
 					<div>
-						<strong>{ __( 'End: ', 'the-events-calendar' ) }</strong><br />
+						<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
 						<DatePicker
 							changeDatetime={ ( date ) => {
 								setAttributes( { endDate: date } )
@@ -138,7 +138,7 @@ class EventDetails extends Component {
 						/>
 						{ ! attributes.allDay &&
 							<React.Fragment>
-								<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'the-events-calendar' ) ) }</span>
+								<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>
 								<TimePicker
 									onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
 										if ( 'all-day' === date ) {
@@ -159,24 +159,24 @@ class EventDetails extends Component {
 					</div>
 
 					<div>
-						<strong>{ __( 'Website: ', 'the-events-calendar' ) }</strong><br />
+						<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
 						<PlainText
 							id="tribe-event-url"
 							value={ attributes.eventUrl }
-							placeholder={ __( 'Enter url', 'the-events-calendar' ) }
+							placeholder={ __( 'Enter url', 'events-gutenberg' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventUrl: nextContent } ) }
 						/>
 					</div>
 
 					<div className='tribe-editor__event-cost'>
-						<strong>{ __( 'Price: ', 'the-events-calendar' ) }</strong><br />
+						<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
 						{ 'prefix' === currencyPosition &&
 							<span>{ eventCurrencySymbol }</span>
 						}
 						<PlainText
 							className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 							value={ attributes.eventCost }
-							placeholder={ __( 'Enter price', 'the-events-calendar' ) }
+							placeholder={ __( 'Enter price', 'events-gutenberg' ) }
 							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
 						/>
 						{ 'suffix' === currencyPosition &&
@@ -186,12 +186,12 @@ class EventDetails extends Component {
 
 					<TermsList
 						slug="tribe_events_cat"
-						label={ __( 'Event Category:', 'the-events-calendar' ) }
+						label={ __( 'Event Category:', 'events-gutenberg' ) }
 					/>
 
 					<TermsList
 						slug="tags"
-						label={ __( 'Event Tags:', 'the-events-calendar' ) }
+						label={ __( 'Event Tags:', 'events-gutenberg' ) }
 					/>
 				</MetaGroup>
 				<MetaGroup groupKey='organizer'>
@@ -202,7 +202,7 @@ class EventDetails extends Component {
 						onChange={ ( nextContent ) => setAttributes( { organizerTitle: nextContent } ) }
 						focus={ focus && 'organizerTitle' === focus.editable ? focus : undefined }
 						onFocus={ ( focusValue ) => setFocus( { editable: 'organizerTitle', ...focusValue } ) }
-						placeholder={ __( 'Organizer', 'the-events-calendar' ) }
+						placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 						formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 					/>
 
@@ -223,23 +223,23 @@ class EventDetails extends Component {
 			</div>,
 			isSelected && (
 				<InspectorControls key="inspector">
-					<PanelBody title={ __( 'Date Time Settings', 'the-events-calendar' ) }>
+					<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
 						<ToggleControl
-							label={ __( 'Is All Day Event', 'the-events-calendar' ) }
+							label={ __( 'Is All Day Event', 'events-gutenberg' ) }
 							checked={ attributes.allDay }
 							onChange={ ( value ) => setAttributes( { allDay: value } ) }
 						/>
 					</PanelBody>
-					<PanelBody title={ __( 'Price Settings', 'the-events-calendar' ) }>
+					<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 						<ToggleControl
-							label={ __( 'Show symbol before', 'the-events-calendar' ) }
+							label={ __( 'Show symbol before', 'events-gutenberg' ) }
 							checked={ 'prefix' === currencyPosition ? true : false  }
 							onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
 						/>
 						<TextControl
-							label={ __( ' Currency Symbol', 'the-events-calendar' ) }
+							label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 							value={ equals( attributes.eventCurrencySymbol, eventCurrencySymbol ) ? '' : attributes.eventCurrencySymbol }
-							placeholder={ __( 'E.g.: $', 'the-events-calendar' ) }
+							placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
 							onChange={ ( value ) => setAttributes( { eventCurrencySymbol: value } ) }
 						/>
 					</PanelBody>

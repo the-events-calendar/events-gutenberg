@@ -99,7 +99,7 @@ class Tribe__Events_Gutenberg__Editor {
 		$template[] = array(
 			'core/paragraph',
 			array(
-				'placeholder' => __( 'Add Description...', 'the-events-calendar' ),
+				'placeholder' => __( 'Add Description...', 'events-gutenberg' ),
 			),
 		);
 		$template[] = array( 'tribe/event-links' );

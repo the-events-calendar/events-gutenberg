@@ -72,7 +72,7 @@ class EventVenue extends Component {
 				value={ attributes.venueTitle }
 				onChange={ ( nextContent ) => {
 					if ( ! nextContent ) {
-						nextContent = __( 'Venue', 'the-events-calendar' );
+						nextContent = __( 'Venue', 'events-gutenberg' );
 					}
 
 					setAttributes( {
@@ -81,7 +81,7 @@ class EventVenue extends Component {
 				} }
 				focus={ focus && 'venueTitle' === focus.editable ? focus : undefined }
 				onFocus={ ( focusValue ) => setFocus( { editable: 'venueTitle', ...focusValue } ) }
-				placeholder={ __( 'Venue', 'the-events-calendar' ) }
+				placeholder={ __( 'Venue', 'events-gutenberg' ) }
 				formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 			/>
 		)
@@ -274,7 +274,7 @@ class EventVenue extends Component {
 		}
 
 		const content = [
-			<div key="event-venue-box" className="tribe-editor-block tribe-editor-event__venue">
+			<div key="event-venue-box" className="tribe-editor-block tribe-editor-event-venue">
 				{ block }
 			</div>,
 			isSelected && (
