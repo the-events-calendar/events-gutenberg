@@ -10,6 +10,7 @@ import classNames from 'classnames';
  */
 import { __ } from '@wordpress/i18n';
 import { Component, compose } from '@wordpress/element';
+import { store, STORE_NAME } from './../../data/venues';
 
 import {
 	Dropdown,
@@ -97,6 +98,9 @@ class VenueDetails extends Component {
 	constructor( props ) {
 		super( ...arguments );
 
+		this.state = {
+			isLoading: false,
+		}
 		this.renderVenueName = this.renderVenueName.bind( this )
 		this.renderVenue = this.renderVenue.bind( this )
 		this.renderActions = this.renderActions.bind( this )
@@ -199,6 +203,9 @@ class VenueDetails extends Component {
 					iconLabel={ __( 'Add existing venue', 'the-events-calendar' ) }
 					focus={ focus }
 					onSelectItem={ addVenue }
+					store={store}
+					storeName={STORE_NAME}
+					searchable
 				/>
 				<CreateDropdown
 					key='venue-create-dropdown'
@@ -218,7 +225,8 @@ class VenueDetails extends Component {
 	}
 
 	render() {
-		const { focus, addVenue, removeVenue, venue, isLoading } = this.props;
+		const { venue } = this.props;
+		const { isLoading } = this.state;
 
 		if ( isLoading ) {
 			return (
@@ -240,4 +248,4 @@ class VenueDetails extends Component {
 	}
 }
 
-export default VenueDetails
+export default VenueDetails;
