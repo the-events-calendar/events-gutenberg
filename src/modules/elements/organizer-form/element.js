@@ -222,23 +222,11 @@ class OrganizerForm extends Component {
 					onClick={ this.onSubmit }
 					disabled={! this.isValid()}
 				>
-					{ __( 'Create Organizer', 'the-events-calendar' ) }
+					{ __( 'Create Organizer', 'the-evgdents-calendar' ) }
 				</button>
 			</div>,
 		];
 	}
 }
-
-const applyWithAPIData = withAPIData( ( props ) => {
-	const query = stringify( {
-		per_page: 100,
-		orderby: 'menu_order',
-		order: 'asc',
-		_fields: [ 'id', 'parent', 'title' ],
-	} );
-	return {
-		pages: `/wp/v2/pages?${ query }`,
-	};
-} );
 
 export default OrganizerForm;
