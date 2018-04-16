@@ -3,7 +3,10 @@
         "browser": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "products/react"
+    ],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -11,9 +14,6 @@
         },
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
     "rules": {
         "indent": [
             "error",
@@ -76,7 +76,8 @@
                 "declaration": "parens-new-line"
             }
         ],
-        "react/jsx-closing-bracket-location": "error"
+        "react/jsx-closing-bracket-location": "error",
+        "wpcalypso/import-docblock": "warn"
     },
     "globals": {
         "wp": true,
