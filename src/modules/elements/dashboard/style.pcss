@@ -1,0 +1,34 @@
+.tribe-dashboard-container {
+    pointer-events: none;
+    display: none;
+    position: relative;
+
+    &--open {
+        display: block;
+        pointer-events: auto;
+        width: 100%;
+    }
+
+    &--up {
+        .tribe-dashboard {
+            bottom: 0;
+        }
+    }
+
+    &--down {
+        .tribe-dashboard {
+            top: 0;
+        }
+    }
+}
+
+.tribe-dashboard {
+    z-index: 100;
+    border: 1px solid #E3E4E8;
+    border-top: none;
+    padding: 24px 22px 20px;
+    background-color: #F1F2F4;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
