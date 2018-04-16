@@ -17,11 +17,11 @@ import EventVenue from './block'
  */
 export default {
 	id: 'event-venue',
-	title: __( 'Event Location', 'the-events-calendar' ),
-	description: __( 'Indicate where the event takes place.', 'the-events-calendar' ),
+	title: __( 'Event Location', 'events-gutenberg' ),
+	description: __( 'Indicate where the event takes place.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
-	keywords: [ 'event', 'the-events-calendar', 'tribe' ],
+	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {
 		html: false,

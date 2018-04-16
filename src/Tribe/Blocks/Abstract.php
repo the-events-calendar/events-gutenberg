@@ -54,7 +54,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	 * @return void
 	 */
 	public function ajax() {
-		wp_send_json_error( esc_attr__( 'Problem loading the block, please remove this block to restart.', 'the-events-calendar' ) );
+		wp_send_json_error( esc_attr__( 'Problem loading the block, please remove this block to restart.', 'events-gutenberg' ) );
 	}
 
 	/**

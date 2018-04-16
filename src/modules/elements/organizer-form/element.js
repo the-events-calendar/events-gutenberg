@@ -7,7 +7,7 @@ import { stringify } from 'querystringify';
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 import {
 	Spinner,
 	Placeholder,
@@ -155,11 +155,11 @@ class OrganizerForm extends Component {
 				<p
 					className='description'
 				>
-					{__( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'the-events-calendar' )}
+					{__( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'events-gutenberg' )}
 				</p>
 				<dl>
 					<dt onClick={this.focus( 'organizer[name]' )}>
-						{__( 'Name:', 'the-events-calendar' )}
+						{__( 'Name:', 'events-gutenberg' )}
 						{' '}
 					</dt>
 					<dd>
@@ -173,7 +173,7 @@ class OrganizerForm extends Component {
 						/>
 					</dd>
 					<dt onClick={this.focus( 'organizer[phone]' )}>
-						{__( 'Phone:', 'the-events-calendar' )}
+						{__( 'Phone:', 'events-gutenberg' )}
 						{' '}
 					</dt>
 					<dd>
@@ -187,7 +187,7 @@ class OrganizerForm extends Component {
 						/>
 					</dd>
 					<dt onClick={this.focus( 'organizer[website]' )}>
-						{__( 'Website:', 'the-events-calendar' )}
+						{__( 'Website:', 'events-gutenberg' )}
 						{' '}
 					</dt>
 					<dd>
@@ -201,7 +201,7 @@ class OrganizerForm extends Component {
 						/>
 					</dd>
 					<dt onClick={this.focus( 'organizer[email]' )}>
-						{__( 'Email:', 'the-events-calendar' )}
+						{__( 'Email:', 'events-gutenberg' )}
 						{' '}
 					</dt>
 					<dd>
@@ -222,7 +222,7 @@ class OrganizerForm extends Component {
 					onClick={ this.onSubmit }
 					disabled={! this.isValid()}
 				>
-					{ __( 'Create Organizer', 'the-evgdents-calendar' ) }
+					{ __( 'Create Organizer', 'events-gutenberg' ) }
 				</button>
 			</div>,
 		];

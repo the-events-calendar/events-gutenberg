@@ -37,24 +37,24 @@ class EventLinks extends Component {
 				<a
 					className="tribe-events-gcal tribe-events-button"
 					href="#gcal-link"
-					title={ __( 'Add to Google Calendar', 'the-events-calendar' ) }
+					title={ __( 'Add to Google Calendar', 'events-gutenberg' ) }
 				>
 					<PlainText
 						id="tribe-event-url"
 						value={ attributes.googleCalendarLabel }
-						placeholder={ __( '+ Google Calendar', 'the-events-calendar' ) }
+						placeholder={ __( '+ Google Calendar', 'events-gutenberg' ) }
 						onChange={ ( nextContent ) => setAttributes( { googleCalendarLabel: nextContent } ) }
 					/>
 				</a>
 				<a
 					className="tribe-events-ical tribe-events-button"
 					href="#ical-export-link"
-					title={ __( 'Download .ics file', 'the-events-calendar' ) }
+					title={ __( 'Download .ics file', 'events-gutenberg' ) }
 				>
 					<PlainText
 						id="tribe-event-url"
 						value={ attributes.icalExportLabel }
-						placeholder={ __( '+ iCal Export', 'the-events-calendar' ) }
+						placeholder={ __( '+ iCal Export', 'events-gutenberg' ) }
 						onChange={ ( nextContent ) => setAttributes( { icalExportLabel: nextContent } ) }
 					/>
 				</a>

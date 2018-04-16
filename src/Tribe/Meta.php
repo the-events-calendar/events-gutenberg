@@ -37,7 +37,7 @@ class Tribe__Events_Gutenberg__Meta {
 			'post',
 			'_EventOrganizerID',
 			array(
-				'description' => __( 'Event Organizers', 'the-events-calendar' ),
+				'description' => __( 'Event Organizers', 'events-gutenberg' ),
 				'auth_callback' => array( $this,'auth_callback' ),
 				'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
 				'type' => 'number',
@@ -49,7 +49,7 @@ class Tribe__Events_Gutenberg__Meta {
 			'post',
 			'_EventVenueID',
 			array(
-				'description' => __( 'Event Organizers', 'the-events-calendar' ),
+				'description' => __( 'Event Organizers', 'events-gutenberg' ),
 				'auth_callback' => array( $this,'auth_callback' ),
 				'sanitize_callback' => 'absint',
 				'type' => 'integer',

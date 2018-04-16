@@ -6,7 +6,7 @@ import { get, isFunction, values } from 'lodash';
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import {
 	Spinner,
@@ -279,7 +279,7 @@ class VenueForm extends Component {
 					onClick={this.onSubmit}
 					disabled={! this.isValid()}
 				>
-					{__( 'Create Venue', 'the-events-calendar' )}
+					{__( 'Create Venue', 'events-gutenberg' )}
 				</button>
 			</div>,
 		];

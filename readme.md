@@ -24,6 +24,12 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.1.8-alpha - 2018-04-12
+
+* Tweak - Improved the modularization of our CSS files to allow better extensibility
+* Tweak - Moved into using `events-gutenberg` domain
+* Fix - Actually load the text domain into the correct place for the JavaScript
+
 #### 0.1.7-alpha — 2018-04-10
 
 * Tweak - Re-organized Module files to make Elements CSS more modularized and more performant

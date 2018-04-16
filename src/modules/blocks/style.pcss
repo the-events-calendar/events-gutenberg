@@ -20,15 +20,6 @@
 	}
 }
 
-.tribe-editor-button {
-	display: inline-block;
-	&.components-icon-button {
-		border-radius: 4px;
-		padding-bottom: 4px;
-		padding-left: 4px;
-	}
-}
-
 .tribe-editor-events-subtitle {
 	display: inline-block;
 	font-size: 1.2em;
@@ -41,10 +32,6 @@
 	.button-link {
 		text-decoration: none;
 		color: #666;
-	}
-
-	.tribe-element__datetime {
-		display: inline-block;
 	}
 }
 
@@ -79,8 +66,8 @@
 	}
 }
 
-.tribe-editor-event__venue,
-.tribe-editor-event__details {
+.tribe-editor-event-venue,
+.tribe-editor-event-details {
 	background: #fafafa;
 	border: 1px solid #eee;
 	margin: 0;
@@ -149,7 +136,7 @@
 	}
 }
 
-.tribe-editor-event__details {
+.tribe-editor-event-details {
 	.tribe-editor__event-cost-value {
 		display: inline-block;
 		width: 105px;
@@ -172,28 +159,13 @@
 	}
 }
 
-.tribe-editor-venue__actions {
+.tribe-editor-venue-actions {
 	margin-top: 20px;
 }
 
 .tribe-events-address {
 	* {
 		display: inline-block;
-	}
-}
-
-.tribe-editor-map__container {
-	height: 353px;
-	padding: 5px;
-	margin: 0;
-	background: #eee;
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	vertical-align: top;
-	zoom: 1;
-
-	.tribe-editor-map__element {
-		height: 100%;
 	}
 }
 
@@ -210,48 +182,6 @@
 
 	li {
 		position: relative;
-	}
-}
-
-.tribe-editor__search {
-	width: 340px;
-
-	.tribe-editor__search-results {
-		height: 250px;
-		overflow: auto;
-
-		.components-placeholder {
-			height: inherit;
-		}
-	}
-
-	.tribe-editor__search-item {
-		display: block;
-		width: 100%;
-		color: #555d66;
-		padding: 12px;
-		cursor: pointer;
-		border: 0;
-		border-bottom: 1px solid #e2e4e7;
-		line-height: 20px;
-		background: transparent;
-		text-align: left;
-
-		&:disabled {
-
-		}
-
-		&:not(:disabled) {
-			&:hover {
-				background-color: #f8f9f9;
-			}
-
-			&:focus,
-			&:active,
-			&.is-active {
-				position: relative;
-			}
-		}
 	}
 }
 
@@ -321,15 +251,6 @@
 		dd {
 			flex: 0 0 65%;
 		}
-	}
-}
-
-input.tribe-is-invalid {
-	border: 1px solid #e62f2f;
-
-	&:focus {
-		border: 1px solid #e62f2f;
-		outline: none;
 	}
 }
 

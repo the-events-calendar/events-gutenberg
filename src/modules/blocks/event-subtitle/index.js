@@ -17,11 +17,11 @@ import EventSubtitle from './block'
  */
 export default {
 	id: 'event-subtitle',
-	title: __( 'Event Subtitle Classic', 'the-events-calendar' ),
-	description: __( 'The classic single event subtitle shows date, time, and price.', 'the-events-calendar' ),
+	title: __( 'Event Subtitle Classic', 'events-gutenberg' ),
+	description: __( 'The classic single event subtitle shows date, time, and price.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
-	keywords: [ 'event', 'the-events-calendar', 'tribe' ],
+	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {
 		html: false,

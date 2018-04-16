@@ -23,6 +23,7 @@ import {
 /**
  * Internal dependencies
  */
+import './style.pcss';
 
 /**
  * Module Code
@@ -34,7 +35,7 @@ class SearchPosts extends Component {
 		storeName: '',
 	}
 
-	constructor () {
+	constructor() {
 		super( ...arguments );
 		this.state = {
 			filterValue: '',
@@ -125,19 +126,19 @@ class SearchPosts extends Component {
 
 		return (
 			<button
-				key={`post-${ item.id }`}
+				key={ `post-${ item.id }` }
 				role="menuitem"
-				className="tribe-editor__search-item"
-				onClick={() => {
+				className="tribe-element-search-posts-item"
+				onClick={ () => {
 					onSelectItem( item );
 					this.onClose();
-				}}
-				tabIndex={isCurrent || item.isDisabled ? null : '-1'}
-				disabled={item.isDisabled}
-				onMouseEnter={onHover( item )}
-				onMouseLeave={onHover( null )}
+				} }
+				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
+				disabled={ item.isDisabled }
+				onMouseEnter={ onHover( item ) }
+				onMouseLeave={ onHover( null ) }
 			>
-				{item.title.rendered}
+				{ item.title.rendered }
 			</button>
 		);
 	}
@@ -146,9 +147,9 @@ class SearchPosts extends Component {
 		this.onClose = onClose.bind( this );
 
 		return (
-			<div className={classNames( 'tribe-editor__search' )} onScroll={this.onScroll}>
+			<div className={classNames( 'tribe-element-search-posts' )} onScroll={this.onScroll}>
 				{this.renderSearchInput()}
-				<div role="menu" className={classNames( 'tribe-editor__search-results' )}>
+				<div role="menu" className={classNames( 'tribe-element-search-posts-results' )}>
 					{this.renderList()}
 				</div>
 			</div>
@@ -188,10 +189,10 @@ class SearchPosts extends Component {
 		return (
 			<IconButton
 				className='tribe-editor-button'
-				label={iconLabel}
-				onClick={onToggle}
-				icon={icon}
-				aria-expanded={isOpen}
+				label={ iconLabel }
+				onClick={ onToggle }
+				icon={ icon }
+				aria-expanded={ isOpen }
 			/>
 		);
 	}
@@ -205,11 +206,11 @@ class SearchPosts extends Component {
 
 		return (
 			<Dropdown
-				className="tribe-editor-organizer-dropdown"
+				className="tribe-element-search-posts-dropdown"
 				position="bottom center"
-				contentClassName="tribe-editor-dropdown__dialog"
-				renderToggle={this.renderToggle}
-				renderContent={this.renderDropdown}
+				contentClassName="tribe-element-search-posts-dropdown-dialog"
+				renderToggle={ this.renderToggle }
+				renderContent={ this.renderDropdown }
 			/>
 		);
 	}

@@ -17,11 +17,11 @@ import EventLinks from './block'
  */
 export default {
 	id: 'event-links',
-	title: __( 'Event Sharing', 'the-events-calendar' ),
-	description: __( 'Display buttons so visitors can add this event to their calendar.', 'the-events-calendar' ),
+	title: __( 'Event Sharing', 'events-gutenberg' ),
+	description: __( 'Display buttons so visitors can add this event to their calendar.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
-	keywords: [ 'event', 'the-events-calendar', 'tribe' ],
+	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {
 		html: false,

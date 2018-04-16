@@ -54,7 +54,7 @@ class TaxonomiesElement extends Component {
 
 	renderTermName( term ) {
 		if ( ! term.name ) {
-			return __( '(Untitled)', 'the-events-calendar' );
+			return __( '(Untitled)', 'events-gutenberg' );
 		}
 
 		return unescape( term.name ).trim();
@@ -123,7 +123,7 @@ class TaxonomiesElement extends Component {
 }
 
 TaxonomiesElement.defaultProps = {
-	termSeparator: __( ', ', 'the-events-calendar' ),
+	termSeparator: __( ', ', 'events-gutenberg' ),
 	className: '',
 };
 

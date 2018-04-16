@@ -22,7 +22,7 @@ import {
 /**
  * Internal dependencies
  */
-
+import './style.pcss'
 
 /**
  * Module Code
@@ -202,7 +202,7 @@ class GoogleMap extends Component {
 	renderInteractive() {
 		return (
 			<div
-				className='tribe-editor-map__element'
+				className='tribe-element-map-object'
 				ref={ this.map }
 			>
 				<Placeholder key="placeholder">
@@ -216,7 +216,7 @@ class GoogleMap extends Component {
 		let mapElement = (
 			<Placeholder style={{ height: '100%' }}>
 				<p>
-					{ __( 'No map preview available', 'the-events-calendar' ) }
+					{ __( 'No map preview available', 'events-gutenberg' ) }
 				</p>
 			</Placeholder>
 		);
@@ -230,7 +230,7 @@ class GoogleMap extends Component {
 			if ( ! interactive ) {
 				mapElement = (
 					<img
-						className='tribe-editor-map__element'
+						className='tribe-element-map-object'
 						src={ this.mapUrl }
 					/>
 				);
@@ -240,7 +240,7 @@ class GoogleMap extends Component {
 		}
 
 		return (
-			<div className='tribe-editor-map__container'>
+			<div className='tribe-element-map-container'>
 				{ mapElement }
 			</div>
 		);

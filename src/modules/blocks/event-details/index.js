@@ -17,11 +17,11 @@ import EventDetails from './block'
  */
 export default {
 	id: 'event-details',
-	title: __( 'Event Details Classic', 'the-events-calendar' ),
-	description: __( 'Set your event’s date and time. You can also add price, event website, and organizers.', 'the-events-calendar' ),
+	title: __( 'Event Details Classic', 'events-gutenberg' ),
+	description: __( 'Set your event’s date and time. You can also add price, event website, and organizers.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
-	keywords: [ 'event', 'the-events-calendar', 'tribe' ],
+	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {
 		html: false,
