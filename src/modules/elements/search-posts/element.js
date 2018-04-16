@@ -1,14 +1,14 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId } from 'lodash';
+import { unescape, union, uniqueId, noop, throttle } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 
 /**
  * WordPress dependencies
  */
-import { withSelect } from '@wordpress/data';
+import { withSelect, dispatch, select } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
 
 import {
@@ -30,6 +30,8 @@ import {
 class SearchPosts extends Component {
 	static defaultProps = {
 		onHover: () => {},
+		store: {},
+		storeName: '',
 	}
 
 	constructor () {
@@ -37,45 +39,85 @@ class SearchPosts extends Component {
 		this.state = {
 			filterValue: '',
 			selectedItem: null,
+			posts: [],
+			loading: false,
+			search: '',
 		};
-
-		// this.searchItems = this.searchItems.bind( this );
-
-		this.renderList = this.renderList.bind( this );
-		this.renderItem = this.renderItem.bind( this );
-		this.renderDropdown = this.renderDropdown.bind( this );
-		this.renderToggle = this.renderToggle.bind( this );
+		this.unsubscribe = noop;
 	}
 
-	getItems () {
-		if ( ! this.props.items ) {
-			return [];
+	componentDidMount() {
+		const { store, storeName } = this.props;
+
+		select( storeName ).fetch();
+
+		if ( store.getState ) {
+			this.saveState();
 		}
 
-		const items = this.props.items.data;
-		if ( ! items || ! items.length ) {
-			return [];
-		}
-
-		return items;
+		this.unsubscribe = store.subscribe(this.saveState)
 	}
 
-	renderList () {
-		const { items, focus } = this.props;
-		const isLoading = items.isLoading;
+	saveState = () =>{
+		const { store } = this.props;
+		const { search, posts } = store.getState();
+		this.setState({ posts, search });
+	}
 
-		if ( isLoading ) {
+	componentWillUnmount() {
+		this.unsubscribe();
+	}
+
+	searchPosts = (event) => {
+		const { store, storeName } = this.props;
+		const value = event.target.value.trim();
+		const { search } = store.getState();
+
+		this.setState({ search: event.target.value })
+
+		if ( search === value ) {
+			return;
+		}
+
+		dispatch( storeName ).setPage( 1 );
+		dispatch( storeName ).unblock();
+		select( storeName ).fetch({
+			search: value,
+			orderBy: value ? 'relevance' : 'title',
+		});
+	}
+
+	onScroll = (event) => {
+		const { target } = event;
+		const { scrollHeight, scrollTop } = target;
+		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
+		if ( percentage > 0.10 ) {
+			const { store, storeName } = this.props;
+			const { page, search } = store.getState();
+			select( storeName ).fetch({
+				search,
+				page,
+				orderBy: search ? 'relevance' : 'title',
+			});
+		}
+	}
+
+	renderList = () => {
+		const { store } = this.props;
+		const { posts } = this.state;
+		const { page, fetching, search } = store.getState();
+
+		if ( 1 === page && fetching ) {
 			return (
 				<Placeholder key="placeholder">
 					<Spinner/>
 				</Placeholder>
 			);
 		}
-
-		return this.getItems().map( this.renderItem, this );
+		return posts.map( this.renderItem, this );
 	}
 
-	renderItem ( item ) {
+	renderItem = ( item ) => {
 		const { current } = this.state;
 		const { onSelectItem, onHover } = this.props;
 
@@ -100,29 +142,12 @@ class SearchPosts extends Component {
 		);
 	}
 
-	renderDropdown ( { onToggle, isOpen, onClose } ) {
-		const instanceId = uniqueId( 'search-' );
-		const { searchLabel } = this.props;
+	renderDropdown = ( { onToggle, isOpen, onClose } ) => {
 		this.onClose = onClose.bind( this );
 
 		return (
-			<div className={classNames( 'tribe-editor__search' )}>
-				{
-					/**
-					 * @todo We need to add Search Later on, for now it adds unecessary complexity
-					 */
-					/*
-						<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
-							{ searchLabel }
-						</label>
-						<input
-							id={ `editor-inserter__${ instanceId }` }
-							type='search'
-							placeholder={ searchLabel }
-							className='editor-inserter__search'
-							onChange={ ( event ) => console.log( event.target.value ) }
-						/>
-					 */}
+			<div className={classNames( 'tribe-editor__search' )} onScroll={this.onScroll}>
+				{this.renderSearchInput()}
 				<div role="menu" className={classNames( 'tribe-editor__search-results' )}>
 					{this.renderList()}
 				</div>
@@ -130,7 +155,31 @@ class SearchPosts extends Component {
 		);
 	}
 
-	renderToggle ( { onToggle, isOpen } ) {
+	renderSearchInput() {
+		const { searchable, searchLabel } = this.props;
+		const instanceId = uniqueId( 'search-' );
+
+		if ( ! searchable ) {
+			return null;
+		}
+
+		return <div>
+			<label htmlFor={`editor-inserter__${ instanceId }`} className="screen-reader-text">
+				{searchLabel}
+			</label>
+			<input
+				id={`editor-inserter__${ instanceId }`}
+				type='search'
+				placeholder={searchLabel}
+				value={this.state.search}
+				className='editor-inserter__search'
+				onChange={this.searchPosts}
+			/>
+		</div>
+	}
+
+	renderToggle = ( { onToggle, isOpen } ) => {
+
 		const { iconLabel } = this.props;
 		const icon = (
 			<Dashicon icon='search'/>
@@ -148,7 +197,7 @@ class SearchPosts extends Component {
 	}
 
 	render () {
-		const { items, focus } = this.props;
+		const { focus  } = this.props;
 
 		if ( ! focus ) {
 			return null;
@@ -175,25 +224,6 @@ const applySelect = withSelect( ( select, props ) => {
 	};
 } );
 
-const applyWithAPIData = withAPIData( ( props ) => {
-	const { items, postType } = props;
-	let query = {
-		per_page: 100,
-		orderby: 'title',
-		status: [ 'draft', 'publish' ],
-		order: 'asc',
-	};
-
-	if ( items && 0 !== items.length ) {
-		query.exclude = items;
-	}
-
-	return {
-		items: `/wp/v2/${ postType }?${ stringify( query ) }`,
-	};
-} );
-
 export default compose(
-	applySelect,
-	applyWithAPIData,
+	applySelect
 )( SearchPosts );
