@@ -14,8 +14,8 @@ const DEFAULT_STATE = {
 	search: '',
 };
 
-const STORE_NAME = 'tec.venues';
-const store = registerStore( STORE_NAME, {
+export const STORE_NAME = 'tec.venues';
+export const store = registerStore( STORE_NAME, {
 	reducer( state = DEFAULT_STATE, action ) {
 		switch ( action.type ) {
 			case 'SET_PAGE':
@@ -161,8 +161,3 @@ const store = registerStore( STORE_NAME, {
 		},
 	},
 } );
-
-export {
-	store,
-	STORE_NAME,
-};
