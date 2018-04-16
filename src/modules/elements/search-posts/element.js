@@ -30,7 +30,7 @@ import './style.pcss';
  */
 class SearchPosts extends Component {
 	static defaultProps = {
-		onHover: () => {},
+		onHover: noop,
 		store: {},
 		storeName: '',
 	}
