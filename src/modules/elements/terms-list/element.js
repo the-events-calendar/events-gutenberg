@@ -139,8 +139,6 @@ const applyWithAPIData = withAPIData( ( props ) => {
 		per_page: 100,
 		orderby: 'count',
 		order: 'desc',
-		// include: terms.length ? terms : false,
-		// _fields: [ 'id', 'name' ],
 	}
 	if ( terms && terms.length ) {
 		args['include'] = terms;
