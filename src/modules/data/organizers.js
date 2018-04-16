@@ -13,9 +13,9 @@ const DEFAULT_STATE = {
 	type: 'tribe_organizer',
 };
 
-const STORE_NAME = 'tec.organizers';
+export const STORE_NAME = 'tec.organizers';
 
-const store = registerStore( STORE_NAME, {
+export const store = registerStore( STORE_NAME, {
 	reducer( state = DEFAULT_STATE, action ) {
 		switch ( action.type ) {
 
@@ -124,8 +124,3 @@ const store = registerStore( STORE_NAME, {
 		},
 	},
 } );
-
-export {
-	store,
-	STORE_NAME
-};
