@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId } from 'lodash';
+import { unescape, union, uniqueId, noop } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 
@@ -9,7 +9,7 @@ import classNames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { withSelect } from '@wordpress/data'
+import { withSelect, select } from '@wordpress/data'
 import { Component, compose } from '@wordpress/element';
 
 import {
@@ -27,7 +27,8 @@ import {
 import {
 	OrganizerForm,
 	SearchPosts,
-} from 'elements'
+} from 'elements';
+import { store, STORE_NAME } from './../../data/organizers';
 
 function CreateDropdown( { ...props } ) {
 	const { focus, addOrganizer } = props;
@@ -102,7 +103,27 @@ class EventOrganizers extends Component {
 
 		this.state = {
 			overOrganizer: null,
+			organizers: [],
+			isLoading: false,
 		}
+		this.unsubscribe = noop;
+	}
+
+	componentDidMount() {
+		select( STORE_NAME ).fetch();
+		this.unsubscribe = store.subscribe( () => {
+			const { posts } = store.getState();
+			this.setState({ posts });
+		});
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		const { page } = store.getState();
+		select( STORE_NAME ).fetch({ page });
+	}
+
+	componentWillUnmount() {
+		this.unsubscribe();
 	}
 
 	renderOrganizerName( organizer ) {
@@ -111,23 +132,6 @@ class EventOrganizers extends Component {
 		}
 
 		return unescape( organizer.title.rendered ).trim();
-	}
-
-	getOrganizers( parentId = null ) {
-		if ( ! this.props.organizers ) {
-			return [];
-		}
-
-		const organizers = this.props.organizers.data;
-		if ( ! organizers || ! organizers.length ) {
-			return [];
-		}
-
-		if ( parentId === null ) {
-			return organizers;
-		}
-
-		return organizers.filter( organizer => organizer.parent === parentId );
 	}
 
 	renderOrganizerList() {
@@ -148,7 +152,6 @@ class EventOrganizers extends Component {
 			'tribe-current': focus && current
 		}
 
-		let renderButtons = null;
 		return (
 			<li
 				className={ classNames( classes ) }
@@ -168,7 +171,7 @@ class EventOrganizers extends Component {
 
 	render() {
 		const { focus, addOrganizer } = this.props;
-		const organizers = this.getOrganizers();
+		const { organizers, isLoading } = this.state
 		const hasOrganizers = 0 !== organizers.length
 		let list = null;
 		let actions = (
@@ -179,6 +182,8 @@ class EventOrganizers extends Component {
 					metaKey='_EventOrganizerID'
 					searchLabel={ __( 'Search for an organizer', 'the-events-calendar' ) }
 					iconLabel={ __( 'Add existing Organizer', 'the-events-calendar' ) }
+					store={store}
+					storeName={STORE_NAME}
 					focus={ hasOrganizers ? focus : true }
 					onSelectItem={ addOrganizer }
 				/>
@@ -190,7 +195,7 @@ class EventOrganizers extends Component {
 			</div>
 		)
 
-		if ( this.props.organizers.isLoading ) {
+		if ( isLoading ) {
 			list = (
 				<Placeholder style={{ minHeight: 50 }} key="placeholder">
 					<Spinner />
@@ -229,29 +234,6 @@ const applySelect = withSelect( ( select, props ) => {
 	}
 } );
 
-const applyWithAPIData = withAPIData( ( props ) => {
-	const { organizers } = props
-	let query = {
-		per_page: 100,
-		orderby: 'modified',
-		status: [ 'draft', 'publish' ],
-		order: 'desc',
-		include: organizers,
-	};
-
-	if ( ! organizers || 0 === organizers.length ) {
-		return {
-			organizers: [],
-		}
-	}
-
-	return {
-		organizers: `/wp/v2/tribe_organizer?${ stringify( query ) }`,
-	};
-} );
-
-
 export default compose(
 	applySelect,
-	applyWithAPIData,
 )( EventOrganizers );
