@@ -3,6 +3,7 @@
  */
 import { trim } from 'lodash';
 import PropTypes from 'prop-types'
+import classNames from 'classnames';
 
 /**
  * Internal dependencies
@@ -35,6 +36,12 @@ export class Dashboard extends Component {
 		open: false,
 		className: '',
 		direction: directions.down,
+	}
+	
+	static propTypes = {
+		open: PropTypes.bool,
+		className: PropTypes.string,
+		direction: PropTypes.oneOf( Object.keys( directions ) ),
 	}
 
 	constructor() {
@@ -165,17 +172,12 @@ export class Dashboard extends Component {
 	getContainerClass() {
 		const { className, direction } = this.props;
 
-		const containerClass = [
+		return classNames(
 			'tribe-dashboard-container',
-			this.state.open ? 'tribe-dashboard-container--open' : '',
 			`tribe-dashboard-container--${direction}`,
-			...className.split(' ')
-		];
-
-		return containerClass
-			.map( trim )
-			.filter( item => item && item.length )
-			.join( ' ' );
+			{ 'tribe-dashboard-container--open': this.state.open },
+			...className
+		);
 	}
 
 	render() {
@@ -187,10 +189,4 @@ export class Dashboard extends Component {
 			</div>
 		);
 	}
-}
-
-Dashboard.propTypes = {
-	open: PropTypes.bool,
-	className: PropTypes.string,
-	direction: PropTypes.oneOf( Object.keys( directions ) ),
 }
