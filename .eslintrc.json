@@ -60,6 +60,7 @@
                 }
             }
         ],
+        "camelcase": [ "error", { "properties": "never"} ],
         "react/no-string-refs": "error",
         "react/no-unused-prop-types": "error",
         "react/jsx-first-prop-new-line": "error",
