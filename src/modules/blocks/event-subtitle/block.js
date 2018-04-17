@@ -43,103 +43,116 @@ class EventSubtitle extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.state = this.props;
+		this.state = {
+			...this.props
+		};
 	}
 
-
-	start() {
-		return<React.Fragment>
-			{this.startDate()}
-			{this.startTime()}
-		</React.Fragment>
+	renderStart () {
+		return (
+			<React.Fragment>
+				{this.renderStartDate()}
+				{this.renderStartTime()}
+			</React.Fragment>
+		)
 	}
 
-	startDate() {
-		const { attributes, setAttributes } = this.props;
-		return <DatePicker
-			changeDatetime={ ( date ) => {
-				setAttributes( { startDate: date } )
-			} }
-			datetime={ attributes.startDate }
-		/>
+	renderStartDate () {
+		const {attributes, setAttributes} = this.props
+		return (
+			<DatePicker
+				changeDatetime={(date) => {
+					setAttributes({startDate: date})
+				}}
+				datetime={attributes.startDate}
+			/>
+		)
 	}
 
-	startTime() {
+	renderStartTime() {
 		const { attributes, setAttributes } = this.props;
 
 		if ( this.isAllDay() ) {
 			return null;
 		}
 
-		return <React.Fragment>
-			{this.separator('date-time')}
-			<TimePicker
-				onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
-					if ( 'all-day' === date ) {
-						setAttributes( {
-							allDay: true,
-							startDate: startAllDay,
-							endDate: endAllDay,
-						} )
-					} else {
-						setAttributes( { startDate: date } )
-					}
-				} }
-				current={ attributes.startDate }
-				timeFormat={ WPDateSettings.formats.time }
-			/>
-		</React.Fragment>
+		return (
+			<React.Fragment>
+				{this.renderSeparator('date-time')}
+				<TimePicker
+					onSelectItem={(date, startAllDay = false, endAllDay = false) => {
+						if ('all-day' === date) {
+							setAttributes({
+								allDay: true,
+								startDate: startAllDay,
+								endDate: endAllDay,
+							})
+						} else {
+							setAttributes({startDate: date})
+						}
+					}}
+					current={attributes.startDate}
+					timeFormat={WPDateSettings.formats.time}
+				/>
+			</React.Fragment>
+		)
 	}
 
-	end() {
-		return <React.Fragment>
-			{this.endDate()}
-			{this.endTime()}
-		</React.Fragment>
+	renderEnd() {
+		return (
+			<React.Fragment>
+				{this.renderEndDate()}
+				{this.renderEndTime()}
+			</React.Fragment>
+		)
 	}
 
-	endDate() {
+	renderEndDate() {
 		const { attributes, setAttributes } = this.props;
 
 		if ( this.isSameDay() ) {
 			return null;
 		}
 
-		return <DatePicker
-			changeDatetime={(date) => {
-				setAttributes({
-					endDate: date
-				})
-			}}
-			datetime={attributes.endDate}
-		/>
+		return (
+			<DatePicker
+				changeDatetime={(date) => {
+					setAttributes({
+						endDate: date
+					})
+				}}
+				datetime={attributes.endDate}
+			/>
+		)
 	}
 
-	endTime() {
+	renderEndTime() {
 		const { attributes, setAttributes } = this.props;
 
 		if ( this.isAllDay() ) {
 			return null;
 		}
 
-		return <React.Fragment>
-			{this.isSameDay() ? null : this.separator('date-time')}
-			<TimePicker
-				onSelectItem={ ( date, startAllDay = false, endAllDay = false, args = {}) => {
-					if ( 'all-day' === date ) {
-						setAttributes( {
-							allDay: true,
-							startDate: startAllDay,
-							endDate: endAllDay,
-						} )
-					} else {
-						setAttributes( { endDate: date } )
-					}
-				} }
-				current={ attributes.endDate }
-				timeFormat={ WPDateSettings.formats.time }
-			/>
-		</React.Fragment>
+		return (
+			<React.Fragment>
+				{this.isSameDay() ? null : this.renderSeparator('date-time')}
+				<TimePicker
+					onSelectItem={(date, startAllDay = false, endAllDay = false, args = {}) => {
+						if ('all-day' === date) {
+							setAttributes({
+								allDay: true,
+								startDate: startAllDay,
+								endDate: endAllDay,
+							})
+						} else {
+							setAttributes({endDate: date})
+						}
+					}}
+					current={attributes.endDate}
+					timeFormat={WPDateSettings.formats.time}
+				/>
+			</React.Fragment>
+		)
 	}
 
 	/**
@@ -151,7 +164,7 @@ class EventSubtitle extends Component {
 		const { attributes } = this.props;
 		const { startDate, endDate } = attributes;
 
-		return moment(startDate).isSame(endDate, 'day');
+		return moment(startDate).isSame(endDate, 'day')
 	}
 
 	/**
@@ -165,16 +178,18 @@ class EventSubtitle extends Component {
 		return allDay;
 	}
 
-	timezone() {
+	renderTimezone() {
 		const { attributes, setAttributes } = this.props;
 
-		return <TimezonePicker
-			onSelectItem={ ( value ) => {
-				setAttributes( { timezone: value } )
-			} }
-			current={ attributes.timezone }
-			siteTimezone={ WPDateSettings.timezone }
-		/>
+		return (
+			<TimezonePicker
+				onSelectItem={(value) => {
+					setAttributes({timezone: value})
+				}}
+				current={attributes.timezone}
+				siteTimezone={WPDateSettings.timezone}
+			/>
+		)
 	}
 
 	/**
@@ -184,7 +199,7 @@ class EventSubtitle extends Component {
 	 *
 	 * @returns {*}
 	 */
-	separator( type ) {
+	renderSeparator( type ) {
 		switch ( type ) {
 			case 'date-time':
 				return <span className='tribe-editor-events-subtitle__separator'>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>;
@@ -206,15 +221,17 @@ class EventSubtitle extends Component {
 	 *
 	 * @returns {*}
 	 */
-	label() {
-		return <h2 key="event-datetime" className="tribe-editor-block tribe-editor-events-subtitle">
-			{this.start()}
-			{this.isSameDay() && this.isAllDay() ? null : this.separator('time-range')}
-			{this.end()}
-			{this.isAllDay() ? this.separator('all-day') : null}
-			{this.separator('space')}
-			{this.timezone()}
-		</h2>
+	renderLabel () {
+		return (
+			<h2 key="event-datetime" className="tribe-editor-block tribe-editor-events-subtitle">
+				{this.renderStart()}
+				{this.isSameDay() && this.isAllDay() ? null : this.renderSeparator('time-range')}
+				{this.renderEnd()}
+				{this.isAllDay() ? this.renderSeparator('all-day') : null}
+				{this.renderSeparator('space')}
+				{this.renderTimezone()}
+			</h2>
+		)
 	}
 
 	/**
@@ -222,26 +239,28 @@ class EventSubtitle extends Component {
 	 *
 	 * @returns {*}
 	 */
-	controls() {
+	renderControls() {
 		const { setAttributes, isSelected } = this.props;
 
 		if ( ! isSelected ) {
 			return null;
 		}
 
-		return <InspectorControls key="inspector">
-			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
-				<ToggleControl
-					label={ __( 'Is All Day Event', 'events-gutenberg' ) }
-					checked={ this.isAllDay() }
-					onChange={ ( value ) => setAttributes( { allDay: value } ) }
-				/>
-			</PanelBody>
-		</InspectorControls>
+		return (
+			<InspectorControls key="inspector">
+				<PanelBody title={__('Date Time Settings', 'events-gutenberg')}>
+					<ToggleControl
+						label={__('Is All Day Event', 'events-gutenberg')}
+						checked={this.isAllDay()}
+						onChange={(value) => setAttributes({allDay: value})}
+					/>
+				</PanelBody>
+			</InspectorControls>
+		)
 	}
 
 	render() {
-		return [ this.label(), this.controls() ]
+		return [ this.renderLabel(), this.renderControls() ]
 	}
 }
 
