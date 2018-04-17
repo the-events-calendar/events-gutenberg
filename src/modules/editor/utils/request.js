@@ -1,8 +1,8 @@
 /**
- * Extract the heeaders from an XHR request object.
+ * Extract the headers from an XHR request object.
  *
- * @param xhr Ajax object
- * @returns object with key / value pairs: key is the name of the header and the value represents the header value
+ * @param {object} xhr Ajax object
+ * @returns {object} key / value pairs: key is the name of the header
  */
 export function getResponseHeaders( xhr ) {
 	return xhr.getAllResponseHeaders().trim()
@@ -11,11 +11,11 @@ export function getResponseHeaders( xhr ) {
 		// Create an array of key/value pais separated by: ; or space
 		.map( ( entry ) => entry.split( '\u003a\u0020' ) )
 		// Crate a single objects with key / value pairs
-		.reduce( (headers, values) => {
+		.reduce( ( headers, values ) => {
 			if ( values.length === 2 ) {
 				const [ key, value ] = values;
 				headers[ key ] = value;
 			}
 			return headers;
-		}, {})
+		}, {} );
 }
