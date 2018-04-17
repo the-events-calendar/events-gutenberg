@@ -4,7 +4,6 @@ export { default as OrganizerForm } from './organizer-form/element.js';
 export { default as VenueForm } from './venue-form/element.js';
 export { default as DatePicker } from './date-picker/element.js';
 export { default as TimePicker } from './time-picker/element.js';
-export { default as TimezonePicker } from './timezone-picker/element.js';
 export { default as MetaGroup } from './meta-group/element.js';
 export { default as SearchPosts } from './search-posts/element.js';
 export { default as VenueMap } from './venue-map/element.js';
