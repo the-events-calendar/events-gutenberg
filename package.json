@@ -20,8 +20,8 @@
 		"gettext-strings": "cross-env BABEL_ENV=gettext webpack",
 		"dev": "cross-env BABEL_ENV=default webpack --watch",
 		"test": "npm run lint",
-		"lint": "eslint --quiet --parser=babel-eslint src/modules/elements/*.js",
-		"lint-fix": "eslint --fix --quiet --parser=babel-eslint src/modules/elements/*.js"
+		"lint": "eslint --parser=babel-eslint src/modules/**/*.js",
+		"lint-fix": "eslint --fix --quiet --parser=babel-eslint src/modules/**/*.js"
 	},
 	"dependencies": {
 		"@wordpress/a11y": "1.0.3",
