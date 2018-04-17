@@ -37,7 +37,7 @@ export class Dashboard extends Component {
 		className: '',
 		direction: directions.down,
 	}
-	
+
 	static propTypes = {
 		open: PropTypes.bool,
 		className: PropTypes.string,
@@ -63,6 +63,10 @@ export class Dashboard extends Component {
 	 */
 	componentDidMount() {
 		this.setState({ open: this.props.open }, this.setupListeners );
+	}
+
+	componentWillUnMount() {
+		this.removeListeners();
 	}
 
 	/**
