@@ -17,7 +17,7 @@ import {
 	Dashicon,
 	Spinner,
 	Placeholder,
-	withAPIData
+	withAPIData,
 } from '@wordpress/components';
 
 /**
@@ -53,25 +53,25 @@ class SearchPosts extends Component {
 		select( storeName ).fetch();
 
 		this.saveState();
-		this.unsubscribe = store.subscribe(this.saveState)
+		this.unsubscribe = store.subscribe( this.saveState );
 	}
 
-	saveState = () =>{
+	saveState = () => {
 		const { store } = this.props;
 		const { search, posts } = store.getState();
-		this.setState({ posts, search });
+		this.setState( { posts, search } );
 	}
 
 	componentWillUnmount() {
 		this.unsubscribe();
 	}
 
-	searchPosts = (event) => {
+	searchPosts = ( event ) => {
 		const { store, storeName } = this.props;
 		const value = event.target.value.trim();
 		const { search } = store.getState();
 
-		this.setState({ search: event.target.value })
+		this.setState( { search: event.target.value } );
 
 		if ( search === value ) {
 			return;
@@ -79,24 +79,24 @@ class SearchPosts extends Component {
 
 		dispatch( storeName ).setPage( 1 );
 		dispatch( storeName ).unblock();
-		select( storeName ).fetch({
+		select( storeName ).fetch( {
 			search: value,
 			orderBy: value ? 'relevance' : 'title',
-		});
+		} );
 	}
 
-	onScroll = (event) => {
+	onScroll = ( event ) => {
 		const { target } = event;
 		const { scrollHeight, scrollTop } = target;
 		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
 		if ( percentage > 0.10 ) {
 			const { store, storeName } = this.props;
 			const { page, search } = store.getState();
-			select( storeName ).fetch({
+			select( storeName ).fetch( {
 				search,
 				page,
 				orderBy: search ? 'relevance' : 'title',
-			});
+			} );
 		}
 	}
 
@@ -108,7 +108,7 @@ class SearchPosts extends Component {
 		if ( 1 === page && fetching ) {
 			return (
 				<Placeholder key="placeholder">
-					<Spinner/>
+					<Spinner />
 				</Placeholder>
 			);
 		}
@@ -144,9 +144,9 @@ class SearchPosts extends Component {
 		this.onClose = onClose.bind( this );
 
 		return (
-			<div className={classNames( 'tribe-element-search-posts' )} onScroll={this.onScroll}>
+			<div className={ classNames( 'tribe-element-search-posts' ) } onScroll={ this.onScroll }>
 				{this.renderSearchInput()}
-				<div role="menu" className={classNames( 'tribe-element-search-posts-results' )}>
+				<div role="menu" className={ classNames( 'tribe-element-search-posts-results' ) }>
 					{this.renderList()}
 				</div>
 			</div>
@@ -161,31 +161,30 @@ class SearchPosts extends Component {
 			return null;
 		}
 
-		return <div>
-			<label htmlFor={`editor-inserter__${ instanceId }`} className="screen-reader-text">
+		return ( <div>
+			<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
 				{searchLabel}
 			</label>
 			<input
-				id={`editor-inserter__${ instanceId }`}
-				type='search'
-				placeholder={searchLabel}
-				value={this.state.search}
-				className='editor-inserter__search'
-				onChange={this.searchPosts}
+				id={ `editor-inserter__${ instanceId }` }
+				type="search"
+				placeholder={ searchLabel }
+				value={ this.state.search }
+				className="editor-inserter__search"
+				onChange={ this.searchPosts }
 			/>
-		</div>
+		</div> );
 	}
 
 	renderToggle = ( { onToggle, isOpen } ) => {
-
 		const { iconLabel } = this.props;
 		const icon = (
-			<Dashicon icon='search'/>
+			<Dashicon icon="search" />
 		);
 
 		return (
 			<IconButton
-				className='tribe-editor-button'
+				className="tribe-editor-button"
 				label={ iconLabel }
 				onClick={ onToggle }
 				icon={ icon }
@@ -194,8 +193,8 @@ class SearchPosts extends Component {
 		);
 	}
 
-	render () {
-		const { focus  } = this.props;
+	render() {
+		const { focus } = this.props;
 
 		if ( ! focus ) {
 			return null;

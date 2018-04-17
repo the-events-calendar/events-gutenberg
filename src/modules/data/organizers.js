@@ -18,33 +18,32 @@ export const STORE_NAME = 'tec.organizers';
 export const store = registerStore( STORE_NAME, {
 	reducer( state = DEFAULT_STATE, action ) {
 		switch ( action.type ) {
-
 			case 'SET_PAGE':
 				return {
 					...state,
-					page: action.page
-				}
+					page: action.page,
+				};
 
 			case 'SET_POSTS':
 				return {
 					...state,
 					posts: [
 						...state.posts,
-						...action.posts
+						...action.posts,
 					],
-				}
+				};
 
 			case 'SET_TOTAL':
 				return {
 					...state,
 					total: action.total,
-				}
+				};
 
 			case 'SET_FETCHING':
 				return {
 					...state,
 					fetching: action.fetching,
-				}
+				};
 		}
 		return state;
 	},
@@ -60,26 +59,26 @@ export const store = registerStore( STORE_NAME, {
 			return {
 				type: 'SET_TOTAL',
 				total,
-			}
+			};
 		},
 		addPosts( posts ) {
 			return {
 				type: 'SET_POSTS',
 				posts,
-			}
+			};
 		},
 		block( ) {
 			return {
 				type: 'SET_FETCHING',
 				fetching: true,
-			}
+			};
 		},
 		unblock() {
 			return {
 				type: 'SET_FETCHING',
 				fetching: false,
-			}
-		}
+			};
+		},
 	},
 
 	selectors: {
@@ -90,7 +89,6 @@ export const store = registerStore( STORE_NAME, {
 
 	resolvers: {
 		async fetch( state = {}, queryParams = {}, requestParams = {} ) {
-
 			const { page, total, fetching, type } = state;
 
 			if ( fetching || total && page > total ) {
@@ -105,14 +103,12 @@ export const store = registerStore( STORE_NAME, {
 				page,
 			}, queryParams );
 
-
 			dispatch( STORE_NAME ).block();
 
-			apiRequest({
-				path: `/wp/v2/${ type }?${ stringify(query) }`
-			}).then((body, status, xhr) => {
-
-				const headers = getResponseHeaders(xhr);
+			apiRequest( {
+				path: `/wp/v2/${ type }?${ stringify( query ) }`,
+			} ).then( ( body, status, xhr ) => {
+				const headers = getResponseHeaders( xhr );
 				let totalPages = parseInt( headers[ 'x-wp-totalpages' ], 10 );
 				totalPages = isNaN( totalPages ) ? 0 : totalPages;
 
@@ -120,7 +116,7 @@ export const store = registerStore( STORE_NAME, {
 				dispatch( STORE_NAME ).setTotal( totalPages );
 				dispatch( STORE_NAME ).addPosts( body );
 				dispatch( STORE_NAME ).unblock();
-			});
+			} );
 		},
 	},
 } );

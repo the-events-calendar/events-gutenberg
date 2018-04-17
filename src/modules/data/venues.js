@@ -21,53 +21,53 @@ export const store = registerStore( STORE_NAME, {
 			case 'SET_PAGE':
 				return {
 					...state,
-					page: action.page
-				}
+					page: action.page,
+				};
 
 			case 'ADD_POSTS':
 				return {
 					...state,
 					posts: [
 						...state.posts,
-						...action.posts
+						...action.posts,
 					],
-				}
+				};
 
 			case 'SET_POSTS':
 				return {
 					...state,
 					posts: [
-						...action.posts
+						...action.posts,
 					],
-				}
+				};
 
 			case 'SET_TOTAL':
 				return {
 					...state,
 					total: action.total,
-				}
+				};
 
 			case 'SET_FETCHING':
 				return {
 					...state,
 					fetching: action.fetching,
-				}
+				};
 
 			case 'SEARCH_POSTS':
 				return {
 					...state,
 					search: action.search.trim(),
-				}
+				};
 		}
 		return state;
 	},
 
 	actions: {
 		setSearch( search ) {
-				return {
-					type: 'SEARCH_POSTS',
-					search,
-				};
+			return {
+				type: 'SEARCH_POSTS',
+				search,
+			};
 		},
 		setPage( page ) {
 			return {
@@ -79,32 +79,32 @@ export const store = registerStore( STORE_NAME, {
 			return {
 				type: 'SET_TOTAL',
 				total,
-			}
+			};
 		},
 		setPosts( posts ) {
 			return {
 				type: 'SET_POSTS',
 				posts,
-			}
+			};
 		},
 		addPosts( posts ) {
 			return {
 				type: 'ADD_POSTS',
 				posts,
-			}
+			};
 		},
 		block( ) {
 			return {
 				type: 'SET_FETCHING',
 				fetching: true,
-			}
+			};
 		},
 		unblock() {
 			return {
 				type: 'SET_FETCHING',
 				fetching: false,
-			}
-		}
+			};
+		},
 	},
 
 	selectors: {
@@ -118,7 +118,6 @@ export const store = registerStore( STORE_NAME, {
 
 	resolvers: {
 		async fetch( state = {}, queryParams = {} ) {
-
 			const { page, total, fetching, type } = state;
 			if ( fetching || total && page > total ) {
 				return;
@@ -136,11 +135,10 @@ export const store = registerStore( STORE_NAME, {
 			dispatch( STORE_NAME ).setSearch( search );
 			dispatch( STORE_NAME ).block();
 
-			apiRequest({
-				path: `/wp/v2/${ type }?${ stringify(query) }`
-			}).then((body, status, xhr) => {
-
-				const headers = getResponseHeaders(xhr);
+			apiRequest( {
+				path: `/wp/v2/${ type }?${ stringify( query ) }`,
+			} ).then( ( body, status, xhr ) => {
+				const headers = getResponseHeaders( xhr );
 				let totalPages = parseInt( headers[ 'x-wp-totalpages' ], 10 );
 				totalPages = isNaN( totalPages ) ? 0 : totalPages;
 
@@ -157,7 +155,7 @@ export const store = registerStore( STORE_NAME, {
 					dispatch( STORE_NAME ).addPosts( body );
 				}
 				dispatch( STORE_NAME ).unblock();
-			});
+			} );
 		},
 	},
 } );
