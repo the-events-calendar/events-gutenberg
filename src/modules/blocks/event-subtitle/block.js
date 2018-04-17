@@ -13,6 +13,8 @@ import {
 	Dropdown,
 	ToggleControl,
 	PanelBody,
+	SelectControl,
+	TextControl,
 } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
@@ -27,9 +29,10 @@ import {
 import {
 	DatePicker,
 	TimePicker,
-	TimezonePicker,
 } from 'elements'
 import './style.pcss';
+
+import { getItems } from './../../elements/timezone-picker/element'
 
 import { getSetting } from 'editor/settings'
 
@@ -43,7 +46,18 @@ class EventSubtitle extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.state = this.props;
+		const { attributes, setAttributes } = this.props;
+
+		this.timezones = getItems()
+			.map( (group) => group.options || [])
+			.reduce( (prev, current) => [...prev, ...current], [] )
+
+		this.state = {
+			...this.props,
+			dateTimeRangeSeparator: getSetting('dateTimeSeparator', __(' @ ', 'events-gutenberg')),
+			timeRangeSeparator: getSetting('timeRangeSeparator', __(' - ', 'events-gutenberg')),
+			timezone: attributes.timezone || 'UTC',
+		}
 	}
 
 
@@ -166,15 +180,7 @@ class EventSubtitle extends Component {
 	}
 
 	timezone() {
-		const { attributes, setAttributes } = this.props;
-
-		return <TimezonePicker
-			onSelectItem={ ( value ) => {
-				setAttributes( { timezone: value } )
-			} }
-			current={ attributes.timezone }
-			siteTimezone={ WPDateSettings.timezone }
-		/>
+		return this.separator( 'timezone' );
 	}
 
 	/**
@@ -185,17 +191,20 @@ class EventSubtitle extends Component {
 	 * @returns {*}
 	 */
 	separator( type ) {
+		const { dateTimeRangeSeparator, timeRangeSeparator, timezone } = this.state;
 		switch ( type ) {
 			case 'date-time':
-				return <span className='tribe-editor-events-subtitle__separator'>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>;
+				return <span className='tribe-editor-events-subtitle__separator'>{ dateTimeRangeSeparator }</span>;
 			case 'time-range':
-				return <span className='tribe-editor-events-subtitle__separator'>{ getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ) }</span>;
+				return <span className='tribe-editor-events-subtitle__separator'>{ timeRangeSeparator }</span>;
 			case 'dash':
 				return <span className='tribe-editor-events-subtitle__separator'> &mdash; </span>;
 			case 'all-day':
 				return <span className='tribe-editor-events-subtitle__separator'> ALL DAY</span>
 			case 'space':
 				return <span className='tribe-editor-events-subtitle__separator'>&nbsp;</span>
+			case 'timezone':
+				return <span className='tribe-editor-events-subtitle__separator'> { timezone } </span>
 			default:
 				return null;
 		}
@@ -224,6 +233,7 @@ class EventSubtitle extends Component {
 	 */
 	controls() {
 		const { setAttributes, isSelected } = this.props;
+		const { timeRangeSeparator, dateTimeRangeSeparator, timezone } = this.state;
 
 		if ( ! isSelected ) {
 			return null;
@@ -231,6 +241,27 @@ class EventSubtitle extends Component {
 
 		return <InspectorControls key="inspector">
 			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
+				<TextControl
+					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
+					value={dateTimeRangeSeparator}
+					onChange={(value) => this.setState({ dateTimeRangeSeparator: value }) }
+					/>
+				<TextControl
+					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
+					value={timeRangeSeparator}
+					onChange={(value) => this.setState({ timeRangeSeparator: value })}
+				/>
+				<SelectControl
+					label={ __( 'Time Zone', 'events-gutenberg' ) }
+					value={timezone}
+					onChange={(timezone) => this.setState({ timezone }) }
+					options={this.timezones.map( (timezone) => {
+						return {
+							value: timezone.key,
+							label: timezone.text,
+						}
+					})}
+				/>
 				<ToggleControl
 					label={ __( 'Is All Day Event', 'events-gutenberg' ) }
 					checked={ this.isAllDay() }
