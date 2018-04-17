@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment';
-import { isString, find, flatten, map, equals } from 'lodash';
+import { isString, find, flatten, map, equals, noop } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 import { ScrollTo, ScrollArea } from "react-scroll-to";
@@ -46,9 +46,8 @@ class TimezonePicker extends Component {
 	}
 
 	static defaultProps = {
-		onHover: () => {},
-		onSelectItem: () => {},
-
+		onHover: noop,
+		onSelectItem: noop,
 		current: false,
 	}
 
@@ -203,7 +202,8 @@ class TimezonePicker extends Component {
 		);
 	}
 
-	scrollToCurrent() {}
+	scrollToCurrent() {
+	}
 
 	componentDidUpdate( nextProps, nextState ) {
 		const currentItem = this.getItems( { key: nextProps.current }, nextProps );
@@ -226,7 +226,7 @@ class TimezonePicker extends Component {
 		let timezone = siteTimezone.string ? siteTimezone.string : `UTC${ siteTimezone.offset }`;
 		let search = { key: timezone };
 		let items = this.getItems( search );
-
+		
 		if ( ! items ) {
 			return __( 'Invalid Timezone', 'events-gutenberg' );
 		}

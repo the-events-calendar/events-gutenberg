@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment';
-import { isString, find } from 'lodash';
+import { isString, find, noop } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 import { ScrollTo, ScrollArea } from "react-scroll-to";
@@ -49,8 +49,8 @@ class TimePicker extends Component {
 	}
 
 	static defaultProps = {
-		onHover: () => {},
-		onSelectItem: () => {},
+		onHover: noop,
+		onSelectItem: noop,
 
 		step: 30,
 		minTime: undefined,
@@ -237,7 +237,8 @@ class TimePicker extends Component {
 		);
 	}
 
-	scrollToCurrent() {}
+	scrollToCurrent() {
+	}
 
 	componentDidUpdate( nextProps, nextState ) {
 		const current = this.roundTime( this.getSeconds( nextProps.current ) );
