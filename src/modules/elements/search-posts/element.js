@@ -52,10 +52,7 @@ class SearchPosts extends Component {
 
 		select( storeName ).fetch();
 
-		if ( store.getState ) {
-			this.saveState();
-		}
-
+		this.saveState();
 		this.unsubscribe = store.subscribe(this.saveState)
 	}
 
