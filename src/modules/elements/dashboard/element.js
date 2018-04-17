@@ -65,7 +65,7 @@ export class Dashboard extends Component {
 		this.setState({ open: this.props.open }, this.setupListeners );
 	}
 
-	componentWillUnMount() {
+	componentWillUnmount() {
 		this.removeListeners();
 	}
 
