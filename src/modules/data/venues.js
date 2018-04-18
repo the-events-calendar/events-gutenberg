@@ -2,7 +2,7 @@ import { stringify } from 'querystringify';
 
 const { apiRequest } = wp;
 import { registerStore, dispatch, select } from '@wordpress/data';
-import { getResponseHeaders } from './../editor/utils/request';
+import { getResponseHeaders } from 'utils/request';
 import { find, uniqBy } from 'lodash';
 
 const DEFAULT_STATE = {

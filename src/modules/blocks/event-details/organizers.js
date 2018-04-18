@@ -28,7 +28,7 @@ import {
 	OrganizerForm,
 	SearchPosts,
 } from 'elements';
-import { store, STORE_NAME } from './../../data/organizers';
+import { store, STORE_NAME } from 'data/organizers';
 
 function CreateDropdown( { ...props } ) {
 	const { focus, addOrganizer } = props;

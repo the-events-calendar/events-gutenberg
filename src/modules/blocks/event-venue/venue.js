@@ -10,7 +10,7 @@ import classNames from 'classnames';
  */
 import { __ } from '@wordpress/i18n';
 import { Component, compose } from '@wordpress/element';
-import { store, STORE_NAME } from './../../data/venues';
+import { store, STORE_NAME } from 'data/venues';
 
 import {
 	Dropdown,
