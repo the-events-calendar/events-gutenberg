@@ -135,13 +135,15 @@ const applySelect = withSelect( ( select, props ) => {
 
 const applyWithAPIData = withAPIData( ( props ) => {
 	const { slug, terms } = props;
-	const query = stringify( {
+	const args = {
 		per_page: 100,
 		orderby: 'count',
 		order: 'desc',
-		include: terms,
-		// _fields: [ 'id', 'name' ],
-	} );
+	}
+	if ( terms && terms.length ) {
+		args['include'] = terms;
+	}
+	const query = stringify( args );
 	return {
 		terms: `/wp/v2/${slug}?${ query }`,
 	};
