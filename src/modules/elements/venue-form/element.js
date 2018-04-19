@@ -18,7 +18,7 @@ import {
  * Internal dependencies
  */
 import { Input } from 'elements';
-import list, { getCountries, getStates } from 'editor/utils/geo-data';
+import list, { getCountries, getStates } from 'utils/geo-data';
 
 /**
  * Module Code

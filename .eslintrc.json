@@ -60,6 +60,7 @@
                 }
             }
         ],
+        "camelcase": [ "error", { "properties": "never"} ],
         "react/no-string-refs": "error",
         "react/no-unused-prop-types": "error",
         "react/jsx-first-prop-new-line": "error",
@@ -77,6 +78,12 @@
             }
         ],
         "react/jsx-closing-bracket-location": "error",
+        "react/jsx-curly-spacing": [
+            "error", 
+            {
+                "when": "always"
+            }
+        ],
         "wpcalypso/import-docblock": "warn"
     },
     "globals": {

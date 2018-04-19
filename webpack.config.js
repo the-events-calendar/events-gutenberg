@@ -10,6 +10,17 @@ const cssExtractTextPlugin = new ExtractTextPlugin( {
 	filename: "src/resources/css/[name].css"
 } );
 
+const entryPointNames = [
+	'elements',
+	'editor',
+	'blocks',
+];
+
+const alias = entryPointNames.reduce( ( memo, entryPointName ) => {
+    memo[ entryPointName ] = path.resolve( __dirname, `src/modules/${ entryPointName }` );
+    return memo;
+}, {} );
+
 // Configuration for the ExtractTextPlugin.
 const extractConfig = {
 	fallback: 'style-loader',
@@ -31,12 +42,6 @@ const extractConfig = {
 		}
 	]
 };
-
-const entryPointNames = [
-	'elements',
-	'editor',
-	'blocks',
-];
 
 const externals = {};
 entryPointNames.forEach( entryPointName => {
@@ -78,12 +83,13 @@ const config = {
 	resolve: {
 		modules: [
 			__dirname,
-			'node_modules'
+			'node_modules',
 		],
-		alias: entryPointNames.reduce( ( memo, entryPointName ) => {
-			memo[ entryPointName ] = path.resolve( __dirname, `src/modules/${ entryPointName }` );
-			return memo;
-		}, {} )
+		alias: {
+			...alias,
+			data: path.resolve( __dirname, 'src/modules/data' ),
+			utils: path.resolve( __dirname, 'src/modules/editor/utils' ),
+		},
 	},
 	module: {
 		rules: [
