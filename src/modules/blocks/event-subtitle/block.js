@@ -191,17 +191,7 @@ class EventSubtitle extends Component {
 	}
 
 	renderTimezone() {
-		const { attributes, setAttributes } = this.props;
-
-		return (
-			<TimezonePicker
-				onSelectItem={ ( value ) => {
-					setAttributes( { timezone: value } );
-				} }
-				current={ attributes.timezone }
-				siteTimezone={ WPDateSettings.timezone }
-			/>
-		);
+		return this.renderSeparator( 'timezone' );
 	}
 
 	/**
@@ -212,6 +202,7 @@ class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type ) {
+		const { timezone } = this.state;
 		switch ( type ) {
 			case 'date-time':
 				return ( <span className="tribe-editor-events-subtitle__separator">{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span> );
