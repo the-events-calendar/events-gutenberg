@@ -19,7 +19,7 @@ import { __ } from '@wordpress/i18n';
 
 import {
 	InspectorControls,
-} from '@wordpress/blocks'
+} from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -28,10 +28,10 @@ import {
 	DatePicker,
 	TimePicker,
 	TimezonePicker,
-} from 'elements'
+} from 'elements';
 import './style.pcss';
 
-import { getSetting } from 'editor/settings'
+import { getSetting } from 'editor/settings';
 
 /**
  * Module Code
@@ -44,29 +44,29 @@ class EventSubtitle extends Component {
 		super( ...arguments );
 
 		this.state = {
-			...this.props
+			...this.props,
 		};
 	}
 
-	renderStart () {
+	renderStart() {
 		return (
 			<React.Fragment>
-				{this.renderStartDate()}
-				{this.renderStartTime()}
+				{ this.renderStartDate() }
+				{ this.renderStartTime() }
 			</React.Fragment>
-		)
+		);
 	}
 
-	renderStartDate () {
-		const {attributes, setAttributes} = this.props
+	renderStartDate() {
+		const { attributes, setAttributes } = this.props;
 		return (
 			<DatePicker
-				changeDatetime={(date) => {
-					setAttributes({startDate: date})
-				}}
-				datetime={attributes.startDate}
+				changeDatetime={ ( date ) => {
+					setAttributes( { startDate: date } );
+				} }
+				datetime={ attributes.startDate }
 			/>
-		)
+		);
 	}
 
 	renderStartTime() {
@@ -78,33 +78,33 @@ class EventSubtitle extends Component {
 
 		return (
 			<React.Fragment>
-				{this.renderSeparator('date-time')}
+				{ this.renderSeparator( 'date-time' ) }
 				<TimePicker
-					onSelectItem={(date, startAllDay = false, endAllDay = false) => {
-						if ('all-day' === date) {
-							setAttributes({
+					onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
+						if ( 'all-day' === date ) {
+							setAttributes( {
 								allDay: true,
 								startDate: startAllDay,
 								endDate: endAllDay,
-							})
+							} );
 						} else {
-							setAttributes({startDate: date})
+							setAttributes( { startDate: date } );
 						}
-					}}
-					current={attributes.startDate}
-					timeFormat={WPDateSettings.formats.time}
+					} }
+					current={ attributes.startDate }
+					timeFormat={ WPDateSettings.formats.time }
 				/>
 			</React.Fragment>
-		)
+		);
 	}
 
 	renderEnd() {
 		return (
 			<React.Fragment>
-				{this.renderEndDate()}
-				{this.renderEndTime()}
+				{ this.renderEndDate() }
+				{ this.renderEndTime() }
 			</React.Fragment>
-		)
+		);
 	}
 
 	renderEndDate() {
@@ -116,14 +116,14 @@ class EventSubtitle extends Component {
 
 		return (
 			<DatePicker
-				changeDatetime={(date) => {
-					setAttributes({
-						endDate: date
-					})
-				}}
-				datetime={attributes.endDate}
+				changeDatetime={ ( date ) => {
+					setAttributes( {
+						endDate: date,
+					} );
+				} }
+				datetime={ attributes.endDate }
 			/>
-		)
+		);
 	}
 
 	renderEndTime() {
@@ -135,42 +135,42 @@ class EventSubtitle extends Component {
 
 		return (
 			<React.Fragment>
-				{this.isSameDay() ? null : this.renderSeparator('date-time')}
+				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
 				<TimePicker
-					onSelectItem={(date, startAllDay = false, endAllDay = false, args = {}) => {
-						if ('all-day' === date) {
-							setAttributes({
+					onSelectItem={ ( date, startAllDay = false, endAllDay = false ) => {
+						if ( 'all-day' === date ) {
+							setAttributes( {
 								allDay: true,
 								startDate: startAllDay,
 								endDate: endAllDay,
-							})
+							} );
 						} else {
-							setAttributes({endDate: date})
+							setAttributes( { endDate: date } );
 						}
-					}}
-					current={attributes.endDate}
-					timeFormat={WPDateSettings.formats.time}
+					} }
+					current={ attributes.endDate }
+					timeFormat={ WPDateSettings.formats.time }
 				/>
 			</React.Fragment>
-		)
+		);
 	}
 
 	/**
 	 * Test if the current start and end date are happening on the same day.
 	 *
-	 * @returns {boolean}
+	 * @returns {boolean} if the event is happening on the same day
 	 */
 	isSameDay() {
 		const { attributes } = this.props;
 		const { startDate, endDate } = attributes;
 
-		return moment(startDate).isSame(endDate, 'day')
+		return moment( startDate ).isSame( endDate, 'day' );
 	}
 
 	/**
 	 * Test if the current event is happening all day.
 	 *
-	 * @returns {boolean}
+	 * @returns {boolean} true if is an all day event
 	 */
 	isAllDay() {
 		const { attributes } = this.props;
@@ -183,34 +183,34 @@ class EventSubtitle extends Component {
 
 		return (
 			<TimezonePicker
-				onSelectItem={(value) => {
-					setAttributes({timezone: value})
-				}}
-				current={attributes.timezone}
-				siteTimezone={WPDateSettings.timezone}
+				onSelectItem={ ( value ) => {
+					setAttributes( { timezone: value } );
+				} }
+				current={ attributes.timezone }
+				siteTimezone={ WPDateSettings.timezone }
 			/>
-		)
+		);
 	}
 
 	/**
 	 * Renders a separator based on the type called
 	 *
-	 * @param type
+	 * @param {string} type - The type of separator
 	 *
-	 * @returns {*}
+	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type ) {
 		switch ( type ) {
 			case 'date-time':
-				return <span className='tribe-editor-events-subtitle__separator'>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>;
+				return ( <span className="tribe-editor-events-subtitle__separator">{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span> );
 			case 'time-range':
-				return <span className='tribe-editor-events-subtitle__separator'>{ getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ) }</span>;
+				return ( <span className="tribe-editor-events-subtitle__separator">{ getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ) }</span> );
 			case 'dash':
-				return <span className='tribe-editor-events-subtitle__separator'> &mdash; </span>;
+				return <span className="tribe-editor-events-subtitle__separator"> &mdash; </span>;
 			case 'all-day':
-				return <span className='tribe-editor-events-subtitle__separator'> ALL DAY</span>
+				return <span className="tribe-editor-events-subtitle__separator"> ALL DAY</span>;
 			case 'space':
-				return <span className='tribe-editor-events-subtitle__separator'>&nbsp;</span>
+				return <span className="tribe-editor-events-subtitle__separator">&nbsp;</span>;
 			default:
 				return null;
 		}
@@ -219,25 +219,25 @@ class EventSubtitle extends Component {
 	/**
 	 * Main label used to display the event
 	 *
-	 * @returns {*}
+	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
-	renderLabel () {
+	renderLabel() {
 		return (
 			<h2 key="event-datetime" className="tribe-editor-block tribe-editor-events-subtitle">
-				{this.renderStart()}
-				{this.isSameDay() && this.isAllDay() ? null : this.renderSeparator('time-range')}
-				{this.renderEnd()}
-				{this.isAllDay() ? this.renderSeparator('all-day') : null}
-				{this.renderSeparator('space')}
-				{this.renderTimezone()}
+				{ this.renderStart() }
+				{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
+				{ this.renderEnd() }
+				{ this.isAllDay() ? this.renderSeparator( 'all-day' ) : null }
+				{ this.renderSeparator( 'space' ) }
+				{ this.renderTimezone() }
 			</h2>
-		)
+		);
 	}
 
 	/**
 	 * Controls being rendered on the sidebar.
 	 *
-	 * @returns {*}
+	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderControls() {
 		const { setAttributes, isSelected } = this.props;
@@ -248,19 +248,19 @@ class EventSubtitle extends Component {
 
 		return (
 			<InspectorControls key="inspector">
-				<PanelBody title={__('Date Time Settings', 'events-gutenberg')}>
+				<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
 					<ToggleControl
-						label={__('Is All Day Event', 'events-gutenberg')}
-						checked={this.isAllDay()}
-						onChange={(value) => setAttributes({allDay: value})}
+						label={ __( 'Is All Day Event', 'events-gutenberg' ) }
+						checked={ this.isAllDay() }
+						onChange={ ( value ) => setAttributes( { allDay: value } ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
-		)
+		);
 	}
 
 	render() {
-		return [ this.renderLabel(), this.renderControls() ]
+		return [ this.renderLabel(), this.renderControls() ];
 	}
 }
 
