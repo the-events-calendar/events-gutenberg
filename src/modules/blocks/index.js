@@ -1,19 +1,19 @@
-import { registerBlockType } from "@wordpress/blocks";
+import { registerBlockType } from '@wordpress/blocks';
 
-import eventDetails from  'blocks/event-details';
-import eventVenue from  'blocks/event-venue';
-import eventSubtitle from  'blocks/event-subtitle';
-import eventLinks from  'blocks/event-links';
+import eventDetails from 'blocks/event-details';
+import eventVenue from 'blocks/event-venue';
+import eventSubtitle from 'blocks/event-subtitle';
+import eventLinks from 'blocks/event-links';
 import './style.pcss';
 
 export default [
 	eventDetails,
 	eventVenue,
 	eventSubtitle,
-	eventLinks
+	eventLinks,
 ];
 
 this.default.forEach( block => {
-	const blockName = `tribe/${block.id}`;
+	const blockName = `tribe/${ block.id }`;
 	registerBlockType( blockName, block );
 } );
