@@ -30,15 +30,17 @@ export const directions = {
  *   <AnyComponent></AnyComponent>
  * </Dashboard
  */
-export class Dashboard extends Component {
+export default class Dashboard extends Component {
 	static defaultProps = {
 		open: false,
 		className: '',
 		direction: directions.down,
+		overflow: false,
 	}
 
 	static propTypes = {
 		open: PropTypes.bool,
+		overflow: PropTypes.bool,
 		className: PropTypes.string,
 		direction: PropTypes.oneOf( Object.keys( directions ) ),
 	}
@@ -147,16 +149,14 @@ export class Dashboard extends Component {
 	 * Outside method to open the <Dashboard /> component using a reference
 	 */
 	open() {
-		this.setState( { open: true } );
-		this.setupListeners();
+		this.setState( { open: true }, this.setupListeners );
 	}
 
 	/**
 	 * Outside method to class the component using a reference.
 	 */
 	close() {
-		this.setState( { open: false } );
-		this.removeListeners();
+		this.setState( { open: false }, this.removeListeners );
 	}
 
 	/**
@@ -178,11 +178,12 @@ export class Dashboard extends Component {
 	 * @returns {string} The generated class name for the container
 	 */
 	getContainerClass() {
-		const { className, direction } = this.props;
+		const { className, direction, overflow } = this.props;
 
 		return classNames(
 			'tribe-dashboard-container',
 			`tribe-dashboard-container--${ direction }`,
+			{ 'tribe-dashboard-container--overflow': overflow },
 			{ 'tribe-dashboard-container--open': this.state.open },
 			...className
 		);
