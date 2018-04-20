@@ -128,7 +128,7 @@ class EventOrganizers extends Component {
 
 	renderOrganizerName( organizer ) {
 		if ( ! organizer.title ) {
-			return __( '(Untitled)', 'the-events-calendar' );
+			return __( '(Untitled)', 'events-gutenberg' );
 		}
 
 		return unescape( organizer.title.rendered ).trim();
@@ -180,8 +180,8 @@ class EventOrganizers extends Component {
 					key='organizer-search-dropdown'
 					postType='tribe_organizer'
 					metaKey='_EventOrganizerID'
-					searchLabel={ __( 'Search for an organizer', 'the-events-calendar' ) }
-					iconLabel={ __( 'Add existing Organizer', 'the-events-calendar' ) }
+					searchLabel={ __( 'Search for an organizer', 'events-gutenberg' ) }
+					iconLabel={ __( 'Add existing Organizer', 'events-gutenberg' ) }
 					store={store}
 					storeName={STORE_NAME}
 					focus={ hasOrganizers ? focus : true }
