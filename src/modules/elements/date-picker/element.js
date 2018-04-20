@@ -62,7 +62,7 @@ class DatePicker extends Component {
 		}
 
 		if ( label ) {
-			format = `${ toMomentFormat( getSetting( 'dateWithYearFormat', __( 'F j, Y', 'events-gutenberg' ) ) ) }`;
+			format = `${ toMomentFormat( getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) ) ) }`;
 		}
 
 		return date.minutes( date.minutes() ).format( format );

@@ -81,7 +81,8 @@
         "react/jsx-curly-spacing": [
             "error", 
             {
-                "when": "always"
+                "when": "always",
+                "children": true
             }
         ],
         "wpcalypso/import-docblock": "warn"
