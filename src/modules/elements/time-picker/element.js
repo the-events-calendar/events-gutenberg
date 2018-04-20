@@ -58,11 +58,17 @@ class TimePicker extends Component {
 		show2400: false,
 		timeFormat: 'H:i',
 		current: NOW,
+		round: false,
 		allDay: true,
 	}
 
 	get currentLabel() {
-		return this.formatLabel( this.roundTime( this.getSeconds( this.props.current ) ) );
+		const { timeFormat, current, round } = this.props;
+		if ( round ) {
+			return this.formatLabel( this.roundTime( this.getSeconds( current ) ) );
+		} else {
+			return moment( current ).format( toMomentFormat( timeFormat ) );
+		}
 	}
 
 	getSeconds( datetime, onInvalid = moment() ) {
@@ -101,8 +107,9 @@ class TimePicker extends Component {
 			maxTime,
 			show2400,
 			timeFormat,
-			current,
+			current
 		} = props;
+
 
 		const currentValue = this.roundTime( this.getSeconds( current ) );
 		let start = minTime ? minTime : 0;
@@ -173,7 +180,6 @@ class TimePicker extends Component {
 
 	renderList() {
 		const { focus } = this.props;
-
 		return this.getItems().map( this.renderItem, this );
 	}
 
