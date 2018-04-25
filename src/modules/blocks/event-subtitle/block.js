@@ -31,6 +31,7 @@ import {
 	DatePicker,
 	TimePicker,
 	Dashboard,
+	CheckBox,
 } from 'elements';
 import './style.pcss';
 
@@ -76,6 +77,7 @@ class EventSubtitle extends Component {
 			startDate: startDate || this.getNow().format( toMomentFormat( datetime ) ),
 			endDate: endDate || this.getNow().add( 30, 'm' ).add( 1, 'd' ).format( toMomentFormat( datetime ) ),
 			allDay: false,
+			multiDay: false,
 		};
 	}
 
@@ -311,10 +313,13 @@ class EventSubtitle extends Component {
 	}
 
 	renderMultidayCheckbox() {
+		const { multiDay }  = this.state;
 		return (
-			<React.Fragment>
-				{ __( 'Multi-Day', 'events-gutenberg' ) }
-			</React.Fragment>
+			<CheckBox
+				label={__( 'Multi-Day', 'events-gutenberg' )}
+				checked={multiDay}
+				onChange={( multiDay ) => this.setState( { multiDay } )}
+			/>
 		);
 	}
 
