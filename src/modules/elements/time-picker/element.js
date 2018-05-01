@@ -15,6 +15,7 @@ import {
 	Placeholder,
 	Spinner,
 	Dropdown,
+	Dashicon,
 } from '@wordpress/components';
 import { query } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
@@ -269,6 +270,7 @@ class TimePicker extends Component {
 						aria-expanded={ isOpen }
 					>
 						{ this.currentLabel }
+						<Dashicon className='button--icon' icon={isOpen ? 'arrow-up' : 'arrow-down'} />
 					</button>
 				) }
 				renderContent={ this.renderDropdown }

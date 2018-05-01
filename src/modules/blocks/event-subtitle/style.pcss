@@ -15,10 +15,10 @@
 
 .event-subtitle-container {
      .tribe-dashboard {
-         .tribe-element-timepicker{
+         .tribe-element-timepicker {
             button {
                 background-color: #FEFFFE;
-                border-radius: 2px;
+                border-radius: 2px;tribe-element-timepicker-label
                 border: 2px solid #EAEBEC;
                 color: #545D66;
                 font-family: Helvetica, sans-serif;
@@ -27,19 +27,11 @@
                 padding: 12px 44px 12px 15px;
                 position: relative;
                 text-decoration: none;
+            }
 
-                &:after {
-                    content: '▼';
-                    display: block;
-                    font-size: 12px;
-                    position: absolute;
-                    right: 17px;
-                    top: 17px;
-                }
-
-                &[aria-expanded="true"]:after {
-                    transform: rotate(180deg) translateY(2px);
-                }
+            .button--icon {
+                position: absolute;
+                right: 20px;
             }
         }
     }
