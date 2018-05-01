@@ -13,6 +13,8 @@ import React from 'react';
 /**
  * Internal dependencies
  */
+import IconOn from 'icons/checkbox-on.svg';
+import IconOff from 'icons/checkbox-off.svg';
 import './style.pcss';
 
 /**
@@ -67,38 +69,7 @@ export default class CheckBox extends Component {
 
 	renderIcon() {
 		const { checked } = this.state;
-		return checked ? this.renderOffIcon() : this.renderOnIcon();
-	}
-
-	renderOnIcon() {
-		return (
-			<svg width="26" height="14" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink">
-				<defs>
-					<path d="M91 4h12a6 6 0 0 1 0 12H91a6 6 0 1 1 0-12z" id="a"/>
-					<path d="M102.333 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM91 13.333a3.333 3.333 0 1 1 0-6.666 3.333 3.333 0 0 1 0 6.666z" id="b"/>
-				</defs>
-				<g transform="translate(-84 -3)" fill="none" fillRule="evenodd">
-					<use stroke="#545D66" fill="#FFF" fillRule="nonzero" href="#a"/>
-					<use fill="#545D66" href="#b"/>
-				</g>
-			</svg>
-		);
-	}
-
-	renderOffIcon() {
-		return (
-			<svg width="26" height="14" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink">
-				<defs>
-					<path d="M91 4h12a6 6 0 0 1 0 12H91a6 6 0 1 1 0-12z" id="a"/>
-					<circle id="b" cx="103" cy="10" r="3.333"/>
-				</defs>
-				<g transform="translate(-84 -3)" fill="none" fillRule="evenodd">
-					<use stroke="#FFF" fill="#11A0D2" fillRule="nonzero" href="#a"/>
-					<path d="M91.5 8.5v3" stroke="#FFF" strokeLinecap="square"/>
-					<use fill="#FFF" transform="matrix(-1 0 0 1 206 0)" href="#b"/>
-				</g>
-			</svg>
-		);
+		return checked ? <IconOff /> : <IconOn />;
 	}
 
 	render() {
