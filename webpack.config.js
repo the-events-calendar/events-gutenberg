@@ -89,6 +89,7 @@ const config = {
 			...alias,
 			data: path.resolve( __dirname, 'src/modules/data' ),
 			utils: path.resolve( __dirname, 'src/modules/editor/utils' ),
+			icons: path.resolve( __dirname, 'src/resources/icons' ),
 		},
 	},
 	module: {
@@ -103,7 +104,14 @@ const config = {
 				use: cssExtractTextPlugin.extract( extractConfig )
 			},
 			{
-				test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+				test: /\.(svg)$/,
+				use: [
+					"babel-loader",
+					"react-svg-loader"
+				],
+			},
+			{
+				test: /\.(png|woff|woff2|eot|ttf)$/,
 				use: {
 					loader: 'url-loader',
 					options: {
