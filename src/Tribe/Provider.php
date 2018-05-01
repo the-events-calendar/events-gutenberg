@@ -1,4 +1,5 @@
 <?php
+
 class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 
 	/**
@@ -31,6 +32,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.blocks.event-details', 'Tribe__Events_Gutenberg__Blocks__Event_Details' );
 		$this->container->singleton( 'gutenberg.blocks.event-venue', 'Tribe__Events_Gutenberg__Blocks__Event_Venue' );
 		$this->container->singleton( 'gutenberg.blocks.event-links', 'Tribe__Events_Gutenberg__Blocks__Event_Links' );
+		$this->container->singleton( 'gutenberg.blocks.event-price', 'Tribe__Events_Gutenberg__Blocks__Event_Price' );
 
 		$this->hook();
 
@@ -74,6 +76,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-details', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-venue', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-links', 'register' ) );
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-price', 'register' ) );
 	}
 
 	/**
