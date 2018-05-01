@@ -316,9 +316,9 @@ class EventSubtitle extends Component {
 		const { multiDay }  = this.state;
 		return (
 			<CheckBox
-				label={__( 'Multi-Day', 'events-gutenberg' )}
-				checked={multiDay}
-				onChange={( multiDay ) => this.setState( { multiDay } )}
+				label={ __( 'Multi-Day', 'events-gutenberg' ) }
+				checked={ multiDay }
+				onChange={ ( multiDay ) => this.setState( { multiDay } ) }
 			/>
 		);
 	}
