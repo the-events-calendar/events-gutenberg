@@ -24,6 +24,16 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.1.9-alpha - TBD
+
+* Feature - Add store implementation to load multiple pages of `venues` and `organizers`
+* Feature - Add new `<Dashboard />` component
+* Feature - Add time selection inside of the `<Dashboard />` component
+* Feature - Add `MultiDay` checkbox
+* Tweak - Update label render based on factors like same day or all day events
+* Fix - Update all instances of domain into `events-gutenberg`
+
+
 #### 0.1.8-alpha - 2018-04-12
 
 * Tweak - Improved the modularization of our CSS files to allow better extensibility

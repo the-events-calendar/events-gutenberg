@@ -2,7 +2,7 @@
  * External Dependencies
  */
 import { trim } from 'lodash';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 /**
@@ -21,7 +21,7 @@ import { searchParent } from './../../editor/utils/dom';
 export const directions = {
 	up: 'up',
 	down: 'down',
-}
+};
 
 /**
  * Usage of this component:
@@ -30,16 +30,17 @@ export const directions = {
  *   <AnyComponent></AnyComponent>
  * </Dashboard
  */
-export class Dashboard extends Component {
-
+export default class Dashboard extends Component {
 	static defaultProps = {
 		open: false,
 		className: '',
 		direction: directions.down,
+		overflow: false,
 	}
 
 	static propTypes = {
 		open: PropTypes.bool,
+		overflow: PropTypes.bool,
 		className: PropTypes.string,
 		direction: PropTypes.oneOf( Object.keys( directions ) ),
 	}
@@ -48,21 +49,21 @@ export class Dashboard extends Component {
 		super( ...arguments );
 
 		this.state = {
-			open: false,
-		}
+			open: this.props.open,
+		};
 
 		this.listeners = {
 			added: false,
 			removed: false,
-		}
+		};
 	}
 
 	/**
-	 * Once the component is mounted make sure to set the state based on the property, after that make sure to setup
-	 * the listeners accordingly.
+	 * Once the component is mounted make sure to set the state based on the property, after
+	 * that make sure to setup the listeners accordingly.
 	 */
 	componentDidMount() {
-		this.setState({ open: this.props.open }, this.setupListeners );
+		this.setupListeners();
 	}
 
 	componentWillUnmount() {
@@ -70,7 +71,7 @@ export class Dashboard extends Component {
 	}
 
 	/**
-	 * Setup the listeners eiter: attach or remove them based on the status of the component.
+	 * Setup the listeners either: attach or remove them based on the status of the component.
 	 */
 	setupListeners = () => {
 		if ( this.state.open ) {
@@ -102,12 +103,13 @@ export class Dashboard extends Component {
 	}
 
 	/**
-	 * Detect the events associated with the keydown to close the <Dashboard> component when Escape is pressed.
+	 * Detect the events associated with the keydown to close the <Dashboard> component when
+	 * Escape key is pressed.
 	 *
-	 * @param event
+	 * @param {Event} event - The object event
 	 */
 	onKeyDown = ( event ) => {
-		const { keyCode, char } = event;
+		const { keyCode } = event;
 		const ESCAPE_KEY = 27;
 		if ( keyCode === ESCAPE_KEY ) {
 			this.close();
@@ -115,49 +117,51 @@ export class Dashboard extends Component {
 	}
 
 	/**
-	 * Detect clicks on the document and test if they are part of the <Dashboard> component if not close the component.
+	 * Detect clicks on the document and test if they are part of the <Dashboard> component
+	 * if not close the component.
 	 *
-	 * @param event
+	 * @param {Event} event - The object event
 	 */
-	onClickOutside = (event) => {
+	onClickOutside = ( event ) => {
 		const { target } = event;
-		if ( this.isPartOfDashboard( target) ) {
+		if ( this.isPartOfDashboard( target ) ) {
 			return;
 		}
 		this.close();
 	}
 
 	/**
-	 * Listen for a click on the document to see if the element is part of the Dashboard if not we should close
+	 * Listen for a click on the document to see if the element is part of the Dashboard
+	 * if not we should close
 	 *
-	 * @param node
-	 * @returns {boolean}
+	 * @param {DomNode} node - The element tested against
+	 * @returns {boolean} True if the element clicked is part of the dashboard
 	 */
 	isPartOfDashboard( node ) {
-		return searchParent( node, (testNode) => {
-			return testNode.classList.contains( 'tribe-dashboard-container' ) || testNode.classList.contains( 'tribe-dashboard' )
-		});
+		return searchParent( node, ( testNode ) => {
+			const isDashboardContainer = testNode.classList.contains( 'tribe-dashboard-container' );
+			const isDashboard = testNode.classList.contains( 'tribe-dashboard' );
+			return isDashboard || isDashboardContainer;
+		} );
 	}
 
 	/**
 	 * Outside method to open the <Dashboard /> component using a reference
 	 */
 	open() {
-		this.setState({ open: true })
-		this.setupListeners();
+		this.setState( { open: true }, this.setupListeners );
 	}
 
 	/**
 	 * Outside method to class the component using a reference.
 	 */
 	close() {
-		this.setState({ open: false })
-		this.removeListeners();
+		this.setState( { open: false }, this.removeListeners );
 	}
 
 	/**
-	 * External function to toggle the current state of the component, from open to false or opposite and making sure
-	 * calling `open` or `close` to remove / attach the listeners
+	 * External function to toggle the current state of the component, from open to false or
+	 * opposite and making sure calling `open` or `close` to remove / attach the listeners
 	 */
 	toggle() {
 		const { open } = this.state;
@@ -169,16 +173,17 @@ export class Dashboard extends Component {
 	}
 
 	/**
-	 * Construct a string with the appropiate classs for the main container of the component
+	 * Construct a string with the appropriate class for the main container of the component
 	 *
-	 * @returns {string}
+	 * @returns {string} The generated class name for the container
 	 */
 	getContainerClass() {
-		const { className, direction } = this.props;
+		const { className, direction, overflow } = this.props;
 
 		return classNames(
 			'tribe-dashboard-container',
-			`tribe-dashboard-container--${direction}`,
+			`tribe-dashboard-container--${ direction }`,
+			{ 'tribe-dashboard-container--overflow': overflow },
 			{ 'tribe-dashboard-container--open': this.state.open },
 			...className
 		);
@@ -186,7 +191,7 @@ export class Dashboard extends Component {
 
 	render() {
 		return (
-			<div className={this.getContainerClass()}>
+			<div className={ this.getContainerClass() }>
 				<div className="tribe-dashboard">
 					{this.props.children}
 				</div>
