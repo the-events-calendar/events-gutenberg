@@ -11,24 +11,45 @@
 
     &--up {
         .tribe-dashboard {
-            bottom: 0;
+            bottom: -14px;
         }
     }
 
     &--down {
         .tribe-dashboard {
-            top: 0;
+            top: 14px;
+        }
+    }
+
+    &--overflow {
+        .tribe-dashboard {
+            left: -15px;
+            width: calc(100% + 30px);
         }
     }
 }
 
 .tribe-dashboard {
-    z-index: 100;
-    border: 1px solid #E3E4E8;
-    border-top: none;
-    padding: 24px 22px 20px;
     background-color: #F1F2F4;
-    position: absolute;
+    border-top: none;
+    border: 1px solid #E3E4E8;
     left: 0;
+    padding: 24px 22px 20px;
+    position: absolute;
     right: 0;
+    z-index: 100;
+
+    .time-picker-separator {
+        color: #545D66;
+        margin-left: 8px;
+        margin-right: 6px;
+    }
+
+    .time-picker-date-label {
+        color: #545D66;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 1em;
+        font-weight: normal;
+        margin-right: 8px;
+    }
 }
