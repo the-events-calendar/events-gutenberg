@@ -32,6 +32,7 @@ import {
 	TimePicker,
 	Dashboard,
 	CheckBox,
+	Month,
 } from 'elements';
 import './style.pcss';
 
@@ -243,6 +244,9 @@ class EventSubtitle extends Component {
 	renderDashboard() {
 		return (
 			<Dashboard ref={ this.dashboardRef } overflow>
+				<section className="tribe-editor__calendars">
+					<Month />
+				</section>
 				<footer className="event-subtitle-dashboard-footer">
 					<section className="tribe-subtitle-dashboard-footer-picker-group">
 						{ this.renderStartTimePicker() }

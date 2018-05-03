@@ -1,0 +1,63 @@
+.tribe-calendar__month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+
+    .react-datepicker__month-container {
+        width: 46.2686567164%;
+    }
+
+    .react-datepicker__header {
+        background-color: #FFF;
+        border: none;
+    }
+
+    .react-datepicker__current-month,
+    .react-datepicker__day-name,
+    .react-datepicker__day {
+        color: #545D66;
+        font-family: 'Helvetica', 'sans-serif';
+        font-weight: normal;
+    }
+
+    .react-datepicker__current-month {
+        font-size: 0.75rem;
+    }
+
+    .react-datepicker__day,
+    .react-datepicker__day-name {
+        min-width: 28px;
+        margin: .166rem 0;
+        width: calc(100% / 7);
+        line-height: 2.1875rem;
+    }
+
+    .react-datepicker__day {
+        font-size: 0.875rem;
+        font-family: 'Helvetica Neue', 'Helvetica', 'san-serif';
+
+        &:hover {
+            color: #0E9FD6;
+            background-color: #FFF;
+        }
+    }
+
+
+    .react-datepicker__day--selected {
+        background-color: #11A0D2;
+        color: #FFF;
+    }
+
+    .react-datepicker__day--disabled {
+        color: #CCC;
+        &:hover {
+            color: #CCC;
+        }
+    }
+
+    .react-datepicker__current-month {
+        font-size: 1rem;
+        padding-bottom: 12px;
+    }
+}
