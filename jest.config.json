@@ -1,0 +1,7 @@
+{
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/lang/",
+    "/i18n/"
+  ]
+}
