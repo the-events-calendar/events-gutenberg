@@ -30,9 +30,9 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Feature - Add new `<Dashboard />` component
 * Feature - Add time selection inside of the `<Dashboard />` component
 * Feature - Add `MultiDay` checkbox
+* Feature - Event Price has his own block
 * Tweak - Update label render based on factors like same day or all day events
 * Fix - Update all instances of domain into `events-gutenberg`
-
 
 #### 0.1.8-alpha - 2018-04-12
 
