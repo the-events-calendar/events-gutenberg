@@ -9,7 +9,7 @@ import classNames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { withSelect, select } from '@wordpress/data'
+import { withSelect, select } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
 
 import {
@@ -18,7 +18,7 @@ import {
 	Dashicon,
 	Spinner,
 	Placeholder,
-	withAPIData
+	withAPIData,
 } from '@wordpress/components';
 
 /**
@@ -33,30 +33,30 @@ import { store, STORE_NAME } from 'data/organizers';
 function CreateDropdown( { ...props } ) {
 	const { focus, addOrganizer } = props;
 
-	if ( ! focus  ) {
+	if ( ! focus ) {
 		return null;
 	}
 
 	const icon = (
-		<Dashicon icon='plus' />
-	)
+		<Dashicon icon="plus" />
+	);
 
 	const dropdownToggle = ( { onToggle, isOpen } ) => (
 		<IconButton
-			className='tribe-editor-button'
+			className="tribe-editor-button"
 			label={ __( 'Create Organizer' ) }
 			onClick={ onToggle }
 			icon={ icon }
 			aria-expanded={ isOpen }
 		/>
-	)
+	);
 
 	const dropdownContent = ( { onToggle, isOpen, onClose } ) => (
 		<OrganizerForm
 			addOrganizer={ addOrganizer }
 			onClose={ onClose }
 		/>
-	)
+	);
 
 	const content = (
 		<Dropdown
@@ -66,32 +66,32 @@ function CreateDropdown( { ...props } ) {
 			renderToggle={ dropdownToggle }
 			renderContent={ dropdownContent }
 		/>
-	)
+	);
 
-	return content
+	return content;
 }
 
 function OrganizerActions( { ...props } ) {
 	const { focus, organizer, onClick } = props;
 
-	if ( ! focus  ) {
+	if ( ! focus ) {
 		return null;
 	}
 
 	const icon = (
-		<Dashicon icon='no' />
-	)
+		<Dashicon icon="no" />
+	);
 
 	return (
 		<IconButton
-			className='tribe-editor-button'
+			className="tribe-editor-button"
 			label={ __( 'Remove Organizer' ) }
 			onClick={ onClick }
 			icon={ icon }
 			aria-expanded={ focus }
-			style={{ position: 'absolute', right: 0, top: '-5px' }}
+			style={ { position: 'absolute', right: 0, top: '-5px' } }
 		/>
-	)
+	);
 }
 
 /**
@@ -105,7 +105,7 @@ class EventOrganizers extends Component {
 			overOrganizer: null,
 			organizers: [],
 			isLoading: false,
-		}
+		};
 		this.unsubscribe = noop;
 	}
 
@@ -113,13 +113,13 @@ class EventOrganizers extends Component {
 		select( STORE_NAME ).fetch();
 		this.unsubscribe = store.subscribe( () => {
 			const { posts } = store.getState();
-			this.setState({ posts });
-		});
+			this.setState( { posts } );
+		} );
 	}
 
-	componentDidUpdate(prevProps, prevState) {
+	componentDidUpdate( prevProps, prevState ) {
 		const { page } = store.getState();
-		select( STORE_NAME ).fetch({ page });
+		select( STORE_NAME ).fetch( { page } );
 	}
 
 	componentWillUnmount() {
@@ -149,15 +149,19 @@ class EventOrganizers extends Component {
 		const { overOrganizer } = this.state;
 		const current = overOrganizer === organizer.id;
 		const classes = {
-			'tribe-current': focus && current
-		}
+			'tribe-current': focus && current,
+		};
 
 		return (
 			<li
 				className={ classNames( classes ) }
 				key={ organizer.id }
-				onMouseEnter={ () => { this.setState( { overOrganizer: organizer.id } ) } }
-				onMouseLeave={ () => { this.setState( { overOrganizer: null } ) } }
+				onMouseEnter={ () => {
+					this.setState( { overOrganizer: organizer.id } );
+				} }
+				onMouseLeave={ () => {
+					this.setState( { overOrganizer: null } );
+				} }
 			>
 				{ this.renderOrganizerName( organizer ) }
 				<OrganizerActions
@@ -171,67 +175,67 @@ class EventOrganizers extends Component {
 
 	render() {
 		const { focus, addOrganizer } = this.props;
-		const { organizers, isLoading } = this.state
-		const hasOrganizers = 0 !== organizers.length
+		const { organizers, isLoading } = this.state;
+		const hasOrganizers = 0 !== organizers.length;
 		let list = null;
 		let actions = (
-			<div key='organizer-actions'>
+			<div key="organizer-actions">
 				<SearchPosts
-					key='organizer-search-dropdown'
-					postType='tribe_organizer'
-					metaKey='_EventOrganizerID'
+					key="organizer-search-dropdown"
+					postType="tribe_organizer"
+					metaKey="_EventOrganizerID"
 					searchLabel={ __( 'Search for an organizer', 'events-gutenberg' ) }
 					iconLabel={ __( 'Add existing Organizer', 'events-gutenberg' ) }
-					store={store}
-					storeName={STORE_NAME}
+					store={ store }
+					storeName={ STORE_NAME }
 					focus={ hasOrganizers ? focus : true }
 					onSelectItem={ addOrganizer }
 				/>
 				<CreateDropdown
-					key='organizer-create-dropdown'
+					key="organizer-create-dropdown"
 					focus={ hasOrganizers ? focus : true }
 					addOrganizer={ addOrganizer }
 				/>
 			</div>
-		)
+		);
 
 		if ( isLoading ) {
 			list = (
-				<Placeholder style={{ minHeight: 50 }} key="placeholder">
+				<Placeholder style={ { minHeight: 50 } } key="placeholder">
 					<Spinner />
 				</Placeholder>
-			)
+			);
 		}
 
 		if ( hasOrganizers ) {
 			list = (
-				<div key='organizer-list'>
+				<div key="organizer-list">
 					{ this.renderOrganizerList() }
 				</div>
 			);
 		} else {
 			actions = (
-				<Placeholder style={{ minHeight: 50 }} key="actions-placeholder">
+				<Placeholder style={ { minHeight: 50 } } key="actions-placeholder">
 					{ actions }
 				</Placeholder>
-			)
+			);
 		}
 
 		const content = [
 			list,
-			actions
-		]
+			actions,
+		];
 
-		return content
+		return content;
 	}
 }
 
 const applySelect = withSelect( ( select, props ) => {
-	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' )
-	const organizers = meta._EventOrganizerID ? meta._EventOrganizerID : []
+	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
+	const organizers = meta._EventOrganizerID ? meta._EventOrganizerID : [];
 	return {
 		organizers: organizers,
-	}
+	};
 } );
 
 export default compose(

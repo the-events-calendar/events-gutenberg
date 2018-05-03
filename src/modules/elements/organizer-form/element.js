@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	Spinner,
 	Placeholder,
-	withAPIData
+	withAPIData,
 } from '@wordpress/components';
 import { Component } from '@wordpress/element';
 
@@ -28,7 +28,7 @@ class OrganizerForm extends Component {
 		postType: 'tribe_organizer',
 	}
 
-	constructor () {
+	constructor() {
 		super( ...arguments );
 		this.updateOrganizer = this.updateOrganizer.bind( this );
 		this.onSubmit = this.onSubmit.bind( this );
@@ -45,7 +45,7 @@ class OrganizerForm extends Component {
 		this.fields = {};
 	}
 
-	isCreating () {
+	isCreating() {
 		if ( ! this.state.organizer ) {
 			return false;
 		}
@@ -57,7 +57,7 @@ class OrganizerForm extends Component {
 		return 'pending' === this.state.organizer.state();
 	}
 
-	onSubmit () {
+	onSubmit() {
 		const {
 			title,
 			phone,
@@ -73,11 +73,11 @@ class OrganizerForm extends Component {
 				_OrganizerEmail: email,
 				_OrganizerPhone: phone,
 				_OrganizerWebsite: website,
-			}
+			},
 		} );
 	}
 
-	updateOrganizer ( toSend ) {
+	updateOrganizer( toSend ) {
 		const basePath = wp.api.getPostTypeRoute( this.props.postType );
 		const request = wp.apiRequest( {
 			path: `/wp/v2/${ basePath }`,
@@ -100,22 +100,22 @@ class OrganizerForm extends Component {
 		} );
 	}
 
-	componentDidMount () {
+	componentDidMount() {
 		this.setState( {
-			isValid: this.isValid()
+			isValid: this.isValid(),
 		} );
 	}
 
-	isValid () {
+	isValid() {
 		const fields = values( this.fields );
 		const results = fields.filter( ( input ) => input.isValid() );
 
 		return fields.length === results.length;
 	}
 
-	focus ( name ) {
+	focus( name ) {
 		return () => {
-			let input = this.fields[ name ];
+			const input = this.fields[ name ];
 			if ( input ) {
 				input.focus();
 			}
@@ -130,87 +130,87 @@ class OrganizerForm extends Component {
 		}
 	}
 
-	render () {
+	render() {
 		if ( this.isCreating() ) {
 			return [
 				<div
 					className="tribe-organizer-form"
-					key='tribe-organizer-form'
+					key="tribe-organizer-form"
 				>
 					<Placeholder key="placeholder">
-						<Spinner/>
+						<Spinner />
 					</Placeholder>
-				</div>
+				</div>,
 			];
 		}
 
 		return [
 			<div
 				className="tribe-organizer-form"
-				key='tribe-organizer-form'
+				key="tribe-organizer-form"
 			>
 				<h3 key="tribe-organizer-form-title">
-					{__( 'Create Organizer' )}
+					{ __( 'Create Organizer' ) }
 				</h3>
 				<p
-					className='description'
+					className="description"
 				>
-					{__( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'events-gutenberg' )}
+					{ __( 'The e-mail address will be obfuscated on your site to avoid it getting harvested by spammers.', 'events-gutenberg' ) }
 				</p>
 				<dl>
-					<dt onClick={this.focus( 'organizer[name]' )}>
-						{__( 'Name:', 'events-gutenberg' )}
-						{' '}
+					<dt onClick={ this.focus( 'organizer[name]' ) }>
+						{ __( 'Name:', 'events-gutenberg' ) }
+						{ ' ' }
 					</dt>
 					<dd>
 						<Input
-							type='text'
-							ref={this.saveRef}
-							name='organizer[name]'
-							onComplete={() => this.setState( { isValid: this.isValid() } )}
-							onChange={( next ) => this.setState( { title: next.target.value } )}
+							type="text"
+							ref={ this.saveRef }
+							name="organizer[name]"
+							onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+							onChange={ ( next ) => this.setState( { title: next.target.value } ) }
 							validate
 						/>
 					</dd>
-					<dt onClick={this.focus( 'organizer[phone]' )}>
-						{__( 'Phone:', 'events-gutenberg' )}
-						{' '}
+					<dt onClick={ this.focus( 'organizer[phone]' ) }>
+						{ __( 'Phone:', 'events-gutenberg' ) }
+						{ ' ' }
 					</dt>
 					<dd>
 						<Input
-							type='phone'
-							ref={this.saveRef}
-							name='organizer[phone]'
-							onComplete={() => this.setState( { isValid: this.isValid() } )}
-							onChange={( next ) => this.setState( { phone: next.target.value } )}
+							type="phone"
+							ref={ this.saveRef }
+							name="organizer[phone]"
+							onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+							onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
 							validate
 						/>
 					</dd>
-					<dt onClick={this.focus( 'organizer[website]' )}>
-						{__( 'Website:', 'events-gutenberg' )}
-						{' '}
+					<dt onClick={ this.focus( 'organizer[website]' ) }>
+						{ __( 'Website:', 'events-gutenberg' ) }
+						{ ' ' }
 					</dt>
 					<dd>
 						<Input
-							type='url'
-							ref={this.saveRef}
-							onComplete={() => this.setState( { isValid: this.isValid() } )}
-							onChange={( next ) => this.setState( { website: next.target.value } )}
-							name='organizer[website]'
+							type="url"
+							ref={ this.saveRef }
+							onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+							onChange={ ( next ) => this.setState( { website: next.target.value } ) }
+							name="organizer[website]"
 							validate
 						/>
 					</dd>
-					<dt onClick={this.focus( 'organizer[email]' )}>
-						{__( 'Email:', 'events-gutenberg' )}
-						{' '}
+					<dt onClick={ this.focus( 'organizer[email]' ) }>
+						{ __( 'Email:', 'events-gutenberg' ) }
+						{ ' ' }
 					</dt>
 					<dd>
 						<Input
-							type='email'
-							ref={this.saveRef}
-							name='organizer[email]'
-							onComplete={() => this.setState( { isValid: this.isValid() } )}
-							onChange={( next ) => this.setState( { email: next.target.value } )}
+							type="email"
+							ref={ this.saveRef }
+							name="organizer[email]"
+							onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+							onChange={ ( next ) => this.setState( { email: next.target.value } ) }
 							validate
 						/>
 					</dd>
@@ -220,7 +220,7 @@ class OrganizerForm extends Component {
 					type="button"
 					className="button-secondary"
 					onClick={ this.onSubmit }
-					disabled={! this.isValid()}
+					disabled={ ! this.isValid() }
 				>
 					{ __( 'Create Organizer', 'events-gutenberg' ) }
 				</button>

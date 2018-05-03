@@ -21,7 +21,6 @@ import './style.pcss';
  * Module Code
  */
 export default class CheckBox extends Component {
-
 	/**
 	 * Default types for properties required for this component
 	 */
@@ -77,13 +76,14 @@ export default class CheckBox extends Component {
 		const { label, onChange, checked, ...properties } = this.props;
 		return (
 			<button
-				className='tribe-checkbox-container'
+				className="tribe-checkbox-container"
 				type="button"
-				onClick={ this.toggle }>
+				onClick={ this.toggle }
+			>
 				<label>{ label }</label>
 				{ this.renderIcon() }
 				<input
-					className='tribe-checkbox-input'
+					className="tribe-checkbox-input"
 					type="checkbox"
 					ref={ this.inputRef }
 					onChange={ this.onChange }

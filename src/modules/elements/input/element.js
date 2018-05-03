@@ -13,7 +13,7 @@ import { Component } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import './style.pcss'
+import './style.pcss';
 
 /**
  * Module Code
@@ -36,7 +36,6 @@ import './style.pcss'
  * - focus()
  */
 class Input extends Component {
-
 	/**
 	 * Default types for properties required for this component
 	 *
@@ -60,7 +59,7 @@ class Input extends Component {
 		validate: false,
 	}
 
-	constructor () {
+	constructor() {
 		super( ...arguments );
 
 		this.state = {
@@ -76,8 +75,8 @@ class Input extends Component {
 	 */
 	onChange = ( event ) => {
 		const { onChange, onComplete, validate } = this.props;
-		let callback = isFunction( onChange ) ? onChange : noop;
-		let completeCallback = isFunction( onComplete ) ? onComplete : noop;
+		const callback = isFunction( onChange ) ? onChange : noop;
+		const completeCallback = isFunction( onComplete ) ? onComplete : noop;
 
 		if ( validate ) {
 			this.setState( { isValid: this.validate( event.target.value ) }, completeCallback );
@@ -94,7 +93,7 @@ class Input extends Component {
 	 * @param value
 	 * @returns {boolean}
 	 */
-	validate ( value ) {
+	validate( value ) {
 		const { validateCallback } = this.props;
 		return isFunction( validateCallback ) ? validateCallback( value ) : this.maybeValidate( value );
 	}
@@ -136,14 +135,14 @@ class Input extends Component {
 	 *
 	 * @returns {boolean}
 	 */
-	isValid () {
+	isValid() {
 		return this.state.isValid;
 	}
 
 	/**
 	 * Focus to the current component input
 	 */
-	focus () {
+	focus() {
 		this.input.focus();
 	}
 
@@ -153,10 +152,10 @@ class Input extends Component {
 	 *
 	 * @returns {string|*}
 	 */
-	getClassName () {
+	getClassName() {
 		const { className, validate } = this.props;
 		const { isValid } = this.state;
-		let classes = className ? className.split( ' ' ) : [];
+		const classes = className ? className.split( ' ' ) : [];
 
 		if ( validate ) {
 			if ( isValid ) {
@@ -171,15 +170,15 @@ class Input extends Component {
 			.join( ' ' );
 	}
 
-	render () {
+	render() {
 		// Remove properties that are not part of the DOM.
 		const { onComplete, required, validate, ...properties } = this.props;
 		return (
 			<input
-				{...properties}
-				className={`${this.getClassName()}`}
-				ref={( input ) => this.input = input}
-				onChange={this.onChange}
+				{ ...properties }
+				className={ `${ this.getClassName() }` }
+				ref={ ( input ) => this.input = input }
+				onChange={ this.onChange }
 			/>
 		);
 	}
