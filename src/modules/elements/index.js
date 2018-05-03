@@ -10,3 +10,4 @@ export { default as VenueMap } from './venue-map/element.js';
 export { default as GoogleMap } from './google-map/element.js';
 export { default as Dashboard } from './dashboard/element';
 export { default as CheckBox } from './checkbox/element';
+export { default as Month } from './month/element';
