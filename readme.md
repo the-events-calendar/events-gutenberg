@@ -24,7 +24,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-#### 0.1.9-alpha - TBD
+#### 0.1.9-alpha - 2018-05-03
 
 * Feature - Add store implementation to load multiple pages of `venues` and `organizers`
 * Feature - Add new `<Dashboard />` component
