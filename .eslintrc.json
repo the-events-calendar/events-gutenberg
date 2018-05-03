@@ -50,7 +50,7 @@
         "eqeqeq": [ "error", "smart" ],
         "computed-property-spacing": [ "error", "always" ],
         "space-unary-ops": [
-            "error", 
+            "error",
             {
                 "words": true,
                 "nonwords": true,
@@ -64,22 +64,22 @@
         "react/no-string-refs": "error",
         "react/no-unused-prop-types": "error",
         "react/jsx-first-prop-new-line": "error",
-        "react/jsx-max-props-per-line": [ 
-            "error", 
+        "react/jsx-max-props-per-line": [
+            "error",
             {
                 "maximum": 1,
                 "when": "multiline"
             }
         ],
-        "react/jsx-wrap-multilines": [ 
-            "error", 
+        "react/jsx-wrap-multilines": [
+            "error",
             {
                 "declaration": "parens-new-line"
             }
         ],
         "react/jsx-closing-bracket-location": "error",
         "react/jsx-curly-spacing": [
-            "error", 
+            "error",
             {
                 "when": "always",
                 "children": true
@@ -92,6 +92,8 @@
         "jQuery": true,
         "tribe_blocks_editor_timezone_html": true,
         "tribe_data_countries": true,
-        "tribe_data_us_states": true
+        "tribe_data_us_states": true,
+        "expect": true,
+        "test": true
     }
 }
