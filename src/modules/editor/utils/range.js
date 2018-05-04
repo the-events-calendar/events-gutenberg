@@ -17,8 +17,9 @@ export function parser( input ) {
 	}
 
 	const [ a, b ] = extractParts( chars );
-	if ( ! b ) {
-		return trim( a );
+
+	if ( !b || b === a ) {
+		return a === 0 ? '' : trim( a );
 	}
 
 	return a >= b ? `${ trim( b ) } - ${ trim( a ) }` : `${ trim( a ) } - ${ trim( b ) }`;
@@ -45,8 +46,19 @@ export function extractParts( chars ) {
 			const result = re.exec( item.trim() );
 			return null === result ? '' : result[ 1 ];
 		} )
-		.filter( ( item ) => ! isEmpty( item ) )
+		.filter( ( item ) => !isEmpty( item ) )
 		.map( ( item ) => parseFloat( item ) )
-		.filter( ( item ) => ! isNaN( item ) )
+		.filter( ( item ) => !isNaN( item ) )
 		.slice( 0, 2 );
+}
+
+export function isFree( input ) {
+	const parts = input.split( '-' );
+
+	const test = parts
+		.map( ( item ) => parseFloat( item ) )
+		.filter( ( item ) => !isNaN( item ) )
+		.filter( ( item ) => item === 0 );
+
+	return parts.length === test.length;
 }
