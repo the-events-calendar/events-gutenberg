@@ -34,6 +34,7 @@ import {
 
 import { getSetting } from 'editor/settings';
 import './style.pcss';
+import { extractParts, parser, isFree } from 'utils/range';
 
 /**
  * Module Code
@@ -116,17 +117,13 @@ export default class EventPrice extends Component {
 		return isEmpty( trim( value ) );
 	}
 
-	isFree( eventCost ) {
-		const cost = parseFloat( eventCost );
-		return isNaN( cost ) || cost === 0;
-	}
-
 	renderCurrency() {
 		const currencySymbol = this.getCurrencySymbol();
 		const { attributes } = this.props;
 		const { eventCostDescription, eventCost } = attributes;
+		const cost = parser( eventCost );
 
-		const hasPrice = ! this.isEmpty( eventCost ) && ! this.isFree( eventCost );
+		const hasPrice = ! this.isEmpty( cost ) && ! isFree( cost );
 		const hideCurrency = ! hasPrice && ! this.isEmpty( eventCostDescription );
 
 		const currencyClassNames = classNames( [
@@ -163,16 +160,17 @@ export default class EventPrice extends Component {
 	renderCost() {
 		const { attributes } = this.props;
 		const { eventCost } = attributes;
+		const cost = parser( eventCost );
 
-		if ( this.isEmpty( eventCost ) ) {
+		if ( this.isEmpty( cost ) ) {
 			return null;
 		}
 
-		if ( this.isFree( eventCost ) ) {
+		if ( isFree( cost ) ) {
 			return null;
 		}
 
-		return <span className="event-price__cost">{ eventCost }</span>;
+		return <span className="event-price__cost">{ cost }</span>;
 	}
 
 	renderDescription() {
@@ -245,6 +243,11 @@ export default class EventPrice extends Component {
 
 	onOpenDashboard = () => {
 		this.setState( { open: true } );
+		const { setAttributes, attributes } = this.props;
+		const { eventCost } = attributes;
+		setAttributes({
+			eventCost: parser( eventCost )
+		})
 	};
 
 	renderControls() {
