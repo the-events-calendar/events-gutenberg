@@ -168,6 +168,22 @@ class EventDetails extends Component {
 						/>
 					</div>
 
+					<div className='tribe-editor__event-cost'>
+						<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
+						{ 'prefix' === currencyPosition &&
+						<span>{ eventCurrencySymbol }</span>
+						}
+						<PlainText
+							className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
+							value={ attributes.eventCost }
+							placeholder={ __( 'Enter price', 'events-gutenberg' ) }
+							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
+						/>
+						{ 'suffix' === currencyPosition &&
+						<span>{ eventCurrencySymbol }</span>
+						}
+					</div>
+
 					<TermsList
 						slug="tribe_events_cat"
 						label={ __( 'Event Category:', 'events-gutenberg' ) }
@@ -212,6 +228,19 @@ class EventDetails extends Component {
 							label={ __( 'Is All Day Event', 'events-gutenberg' ) }
 							checked={ attributes.allDay }
 							onChange={ ( value ) => setAttributes( { allDay: value } ) }
+						/>
+					</PanelBody>
+					<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
+						<ToggleControl
+							label={ __( 'Show symbol before', 'events-gutenberg' ) }
+							checked={ 'prefix' === currencyPosition ? true : false  }
+							onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
+						/>
+						<TextControl
+							label={ __( ' Currency Symbol', 'events-gutenberg' ) }
+							value={ equals( attributes.eventCurrencySymbol, eventCurrencySymbol ) ? '' : attributes.eventCurrencySymbol }
+							placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
+							onChange={ ( value ) => setAttributes( { eventCurrencySymbol: value } ) }
 						/>
 					</PanelBody>
 				</InspectorControls>
