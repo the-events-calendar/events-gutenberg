@@ -5,7 +5,7 @@ import moment from 'moment';
 import { isString, find, noop } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
-import { ScrollTo, ScrollArea } from "react-scroll-to";
+import { ScrollTo, ScrollArea } from 'react-scroll-to';
 
 /**
  * WordPress dependencies
@@ -67,9 +67,8 @@ class TimePicker extends Component {
 		const { timeFormat, current, round } = this.props;
 		if ( round ) {
 			return this.formatLabel( this.roundTime( this.getSeconds( current ) ) );
-		} else {
-			return moment( current ).format( toMomentFormat( timeFormat ) );
 		}
+		return moment( current ).format( toMomentFormat( timeFormat ) );
 	}
 
 	getSeconds( datetime, onInvalid = moment() ) {
@@ -96,7 +95,7 @@ class TimePicker extends Component {
 	}
 
 	getItems( searchFor, props ) {
-		let items = [];
+		const items = [];
 
 		if ( ! props ) {
 			props = this.props;
@@ -108,12 +107,11 @@ class TimePicker extends Component {
 			maxTime,
 			show2400,
 			timeFormat,
-			current
+			current,
 		} = props;
 
-
 		const currentValue = this.roundTime( this.getSeconds( current ) );
-		let start = minTime ? minTime : 0;
+		const start = minTime ? minTime : 0;
 		let end = maxTime ? maxTime : ( start + ONE_DAY - 1 );
 
 		// make sure the end time is greater than start time, otherwise there will be no list to show
@@ -146,7 +144,7 @@ class TimePicker extends Component {
 
 	formatLabel( seconds ) {
 		const {
-			timeFormat
+			timeFormat,
 		} = this.props;
 
 		return moment().startOf( 'day' ).add( seconds, 'seconds' ).format( toMomentFormat( timeFormat ) );
@@ -157,12 +155,12 @@ class TimePicker extends Component {
 			return null;
 		}
 
-		let {
+		const {
 			step,
 			show2400,
 		} = this.props;
 
-		let offset = seconds % ( step * 60 ); // step is in minutes
+		const offset = seconds % ( step * 60 ); // step is in minutes
 
 		if ( offset >= step * 30 ) {
 			// if offset is larger than a half step, round up
@@ -201,7 +199,7 @@ class TimePicker extends Component {
 				onClick={ () => {
 					if ( 'all-day' === item.value ) {
 						const startAllDay = this.changeTime( current, 0 );
-						const endAllDay = this.changeTime( current, ( 60 * 60 * 24 )-1 );
+						const endAllDay = this.changeTime( current, ( 60 * 60 * 24 ) - 1 );
 						this.onSelectItem( item.value, startAllDay, endAllDay );
 					} else {
 						this.onSelectItem( item.datetime );
@@ -231,13 +229,13 @@ class TimePicker extends Component {
 					return [
 						this.props.allDay && this.renderItem( { text: 'All Day', value: 'all-day' } ),
 						<ScrollArea
-							id='tribe-element-timepicker-items'
-							key='tribe-element-timepicker-items'
+							id="tribe-element-timepicker-items"
+							key="tribe-element-timepicker-items"
 							role="menu"
 							className={ classNames( 'tribe-element-timepicker-items' ) }
 						>
 							{ this.renderList() }
-						</ScrollArea>
+						</ScrollArea>,
 					];
 				} }
 			</ScrollTo>
@@ -249,7 +247,7 @@ class TimePicker extends Component {
 
 	componentDidUpdate( nextProps, nextState ) {
 		const current = this.roundTime( this.getSeconds( nextProps.current ) );
-		const currentItem = this.getItems( { 'value': current }, nextProps );
+		const currentItem = this.getItems( { value: current }, nextProps );
 
 		if ( currentItem && currentItem.index ) {
 			this.scrollToCurrent( currentItem.index );
@@ -270,7 +268,7 @@ class TimePicker extends Component {
 						aria-expanded={ isOpen }
 					>
 						{ this.currentLabel }
-						<Dashicon className='button--icon' icon={isOpen ? 'arrow-up' : 'arrow-down'} />
+						<Dashicon className="button--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
 					</button>
 				) }
 				renderContent={ this.renderDropdown }
@@ -279,11 +277,11 @@ class TimePicker extends Component {
 
 		return [
 			<div
-				key='tribe-element-timepicker'
-				className='tribe-element tribe-element-timepicker'
+				key="tribe-element-timepicker"
+				className="tribe-element tribe-element-timepicker"
 			>
 				{ dropdown }
-			</div>
+			</div>,
 		];
 	}
 }
