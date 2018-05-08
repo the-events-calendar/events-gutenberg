@@ -4,6 +4,7 @@ import eventDetails from 'blocks/event-details';
 import eventVenue from 'blocks/event-venue';
 import eventSubtitle from 'blocks/event-subtitle';
 import eventLinks from 'blocks/event-links';
+import eventPrice from 'blocks/event-price';
 import './style.pcss';
 
 export default [
@@ -11,6 +12,7 @@ export default [
 	eventVenue,
 	eventSubtitle,
 	eventLinks,
+	eventPrice,
 ];
 
 this.default.forEach( block => {

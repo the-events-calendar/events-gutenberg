@@ -105,6 +105,7 @@ class Tribe__Events_Gutenberg__Editor {
 		$template[] = array( 'tribe/event-links' );
 		$template[] = array( 'tribe/event-details' );
 		$template[] = array( 'tribe/event-venue' );
+		$template[] = array( 'tribe/event-price' );
 
 		/**
 		 * Allow modifying the default template for Events

@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+### 0.2.0-alpha - TBD
+
+* Feature - Event Price has his own block
+
 #### 0.1.9-alpha - 2018-05-03
 
 * Feature - Add store implementation to load multiple pages of `venues` and `organizers`
@@ -32,7 +36,6 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Feature - Add `MultiDay` checkbox
 * Tweak - Update label render based on factors like same day or all day events
 * Fix - Update all instances of domain into `events-gutenberg`
-
 
 #### 0.1.8-alpha - 2018-04-12
 

@@ -109,6 +109,12 @@ export default class EventLinks extends Component {
 
 	renderControls() {
 		const { hasGoogleCalendar, hasiCal } = this.state;
+		const { isSelected } = this.props;
+
+		if ( ! isSelected ) {
+			return null;
+		}
+
 		return (
 			<InspectorControls key="inspector">
 				<PanelBody title={ __( 'Share Settings', 'events-gutenberg' ) }>
