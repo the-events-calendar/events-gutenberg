@@ -39,11 +39,11 @@ $time_title = apply_filters( 'tribe_events_single_event_time_title', __( 'Time:'
 
 $website = tribe_get_event_website_link();
 ?>
-<div class="tribe-events-single-section tribe-events-event-cost tribe-clearfix">
-	<?php do_action( 'tribe_events_single_event_cost_section_start' ); ?>
+<div class="tribe-events-single-section tribe-events-event-meta primary tribe-clearfix">
+	<?php do_action( 'tribe_events_single_event_meta_primary_section_end' ); ?>
 
 	<?php $this->template( 'blocks/parts/details' ); ?>
 	<?php $this->template( 'blocks/parts/organizer' ); ?>
 
-	<?php do_action( 'tribe_events_single_event_cost_section_end' ); ?>
+	<?php do_action( 'tribe_events_single_event_meta_primary_section_end' ); ?>
 </div>

@@ -3,8 +3,8 @@ $event_id = $this->get( 'post_id' );
 
 $cost = tribe_get_formatted_cost();
 ?>
-<div class="tribe-events-single-section tribe-events-event-meta primary tribe-clearfix">
-	<?php do_action( 'tribe_events_single_event_meta_primary_section_start' ); ?>
+<div class="tribe-events-single-section tribe-events-event-cost tribe-clearfix">
+	<?php do_action( 'tribe_events_single_event_cost_section_start' ); ?>
     <?php
     // Event Cost
     if ( ! empty( $cost ) ) : ?>
@@ -12,5 +12,5 @@ $cost = tribe_get_formatted_cost();
         <dd class="tribe-events-event-cost"> <?php esc_html_e( $cost ); ?> </dd>
     <?php endif ?>
 
-	<?php do_action( 'tribe_events_single_event_meta_primary_section_end' ); ?>
+	<?php do_action( 'tribe_events_single_event_cost_section_end' ); ?>
 </div>

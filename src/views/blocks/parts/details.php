@@ -37,6 +37,7 @@ $time_formatted = apply_filters( 'tribe_events_single_event_time_formatted', $ti
  */
 $time_title = apply_filters( 'tribe_events_single_event_time_title', __( 'Time:', 'events-gutenberg' ), $event_id );
 
+$cost = tribe_get_formatted_cost();
 $website = tribe_get_event_website_link();
 ?>
 
@@ -113,6 +114,14 @@ $website = tribe_get_event_website_link();
 		<?php endif ?>
 
 		<?php
+		// Event Cost
+		if ( ! empty( $cost ) ) : ?>
+
+            <dt> <?php esc_html_e( 'Cost:', 'events-gutenberg' ) ?> </dt>
+            <dd class="tribe-events-event-cost"> <?php esc_html_e( $cost ); ?> </dd>
+		<?php endif ?>
+
+        <?php
 		echo tribe_get_event_categories(
 			get_the_id(), array(
 				'before'       => '',
