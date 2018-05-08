@@ -145,9 +145,9 @@ class SearchPosts extends Component {
 
 		return (
 			<div className={ classNames( 'tribe-element-search-posts' ) } onScroll={ this.onScroll }>
-				{this.renderSearchInput()}
+				{ this.renderSearchInput() }
 				<div role="menu" className={ classNames( 'tribe-element-search-posts-results' ) }>
-					{this.renderList()}
+					{ this.renderList() }
 				</div>
 			</div>
 		);
@@ -163,7 +163,7 @@ class SearchPosts extends Component {
 
 		return ( <div>
 			<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
-				{searchLabel}
+				{ searchLabel }
 			</label>
 			<input
 				id={ `editor-inserter__${ instanceId }` }

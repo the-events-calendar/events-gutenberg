@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventSubtitle from './block'
+import EventSubtitle from './block';
 
 /**
  * Module Code
@@ -47,7 +47,7 @@ export default {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventTimezone',
-		}
+		},
 	},
 
 	useOnce: true,
@@ -56,5 +56,5 @@ export default {
 
 	save( props ) {
 		return null;
-	}
+	},
 };

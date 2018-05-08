@@ -11,7 +11,7 @@ import { Component } from '@wordpress/element';
 import {
 	Spinner,
 	Placeholder,
-	withAPIData
+	withAPIData,
 } from '@wordpress/components';
 
 /**
@@ -28,7 +28,7 @@ class VenueForm extends Component {
 		postType: 'tribe_venue',
 	}
 
-	constructor () {
+	constructor() {
 		super( ...arguments );
 		this.updateVenue = this.updateVenue.bind( this );
 		this.onSubmit = this.onSubmit.bind( this );
@@ -49,13 +49,13 @@ class VenueForm extends Component {
 		this.fields = {};
 	}
 
-	componentDidMount () {
+	componentDidMount() {
 		this.setState( {
-			isValid: this.isValid()
+			isValid: this.isValid(),
 		} );
 	}
 
-	isCreating () {
+	isCreating() {
 		if ( ! this.state.venue ) {
 			return false;
 		}
@@ -67,7 +67,7 @@ class VenueForm extends Component {
 		return 'pending' === this.state.venue.state();
 	}
 
-	onSubmit () {
+	onSubmit() {
 		const {
 			title,
 			address,
@@ -92,11 +92,11 @@ class VenueForm extends Component {
 				_VenuePhone: phone,
 				_VenueURL: website,
 				_VenueStateProvince: stateProvince,
-			}
+			},
 		} );
 	}
 
-	updateVenue ( toSend ) {
+	updateVenue( toSend ) {
 		const basePath = wp.api.getPostTypeRoute( this.props.postType );
 		const request = wp.apiRequest( {
 			path: `/wp/v2/${ basePath }`,
@@ -127,20 +127,20 @@ class VenueForm extends Component {
 		}
 	}
 
-	isValid () {
+	isValid() {
 		const fields = values( this.fields );
 		const results = fields.filter( ( input ) => input.isValid() );
 
 		return fields.length === results.length;
 	}
 
-	renderOption ( element ) {
-		return ( <option value={element.code} key={element.code}>
-			{element.name}
+	renderOption( element ) {
+		return ( <option value={ element.code } key={ element.code }>
+			{ element.name }
 		</option> );
 	}
 
-	renderCountry () {
+	renderCountry() {
 		const { country } = this.state;
 		const placeholder = country ? null : (
 			<option value="" disabled selected="true">
@@ -150,136 +150,134 @@ class VenueForm extends Component {
 
 		return (
 			<select
-				value={country}
-				className='small tribe-venue-select'
-				onChange={( event ) => this.setState( { country: event.target.value } )}
+				value={ country }
+				className="small tribe-venue-select"
+				onChange={ ( event ) => this.setState( { country: event.target.value } ) }
 			>
-				{placeholder}
-				{getCountries().map( this.renderOption )}
+				{ placeholder }
+				{ getCountries().map( this.renderOption ) }
 			</select>
 		);
 	}
 
-	renderState () {
+	renderState() {
 		const { stateProvince, country } = this.state;
 		const states = getStates( country );
 
 		if ( states.length === 0 ) {
 			return (
 				<Input
-					className='medium'
-					type='text'
-					name='venue[stateProvince]'
-					placeholder='State'
-					onComplete={() => this.setState( { isValid: this.isValid() } )}
-					ref={this.saveRef}
-					onChange={( event ) => this.setState( { stateProvince: event.target.value } )}
+					className="medium"
+					type="text"
+					name="venue[stateProvince]"
+					placeholder="State"
+					onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+					ref={ this.saveRef }
+					onChange={ ( event ) => this.setState( { stateProvince: event.target.value } ) }
 				/>
 			);
-		} else {
-			delete this.fields[ 'venue[stateProvince]' ];
-			return (
-				<select
-					value={stateProvince}
-					onChange={( event ) => this.setState( { stateProvince: event.target.value } )}
-					className='medium tribe-venue-select'
-				>
-					{states.map( this.renderOption )}
-				</select>
-			);
 		}
+		delete this.fields[ 'venue[stateProvince]' ];
+		return (
+			<select
+				value={ stateProvince }
+				onChange={ ( event ) => this.setState( { stateProvince: event.target.value } ) }
+				className="medium tribe-venue-select"
+			>
+				{ states.map( this.renderOption ) }
+			</select>
+		);
 	}
 
-	render () {
-
+	render() {
 		if ( this.isCreating() ) {
 			return [
 				<div
 					className="tribe-venue-form"
-					key='tribe-venue-form'
+					key="tribe-venue-form"
 				>
 					<Placeholder key="placeholder">
-						<Spinner/>
+						<Spinner />
 					</Placeholder>
-				</div>
+				</div>,
 			];
 		}
 
 		return [
 			<div
 				className="tribe-venue-form"
-				key='tribe-venue-form'
+				key="tribe-venue-form"
 			>
 				<h3 key="tribe-venue-form-title">
-					{__( 'Create Venue' )}
+					{ __( 'Create Venue' ) }
 				</h3>
 				<div className="tribe-venue-fields-container">
 					<Input
-						type='text'
-						name='venue[title]'
-						placeholder='Name'
-						onComplete={() => this.setState( { isValid: this.isValid() } )}
-						ref={this.saveRef}
-						onChange={( next ) => this.setState( { title: next.target.value } )}
+						type="text"
+						name="venue[title]"
+						placeholder="Name"
+						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+						ref={ this.saveRef }
+						onChange={ ( next ) => this.setState( { title: next.target.value } ) }
 						validate
 					/>
 					<Input
-						type='text'
-						name='venue[address]'
-						placeholder='Street Address'
-						onComplete={() => this.setState( { isValid: this.isValid() } )}
-						ref={this.saveRef}
-						onChange={( next ) => this.setState( { address: next.target.value } )}
+						type="text"
+						name="venue[address]"
+						placeholder="Street Address"
+						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+						ref={ this.saveRef }
+						onChange={ ( next ) => this.setState( { address: next.target.value } ) }
 					/>
 					<Input
-						type='text'
-						name='venue[city]'
-						placeholder='City'
-						onComplete={() => this.setState( { isValid: this.isValid() } )}
-						ref={this.saveRef}
-						onChange={( next ) => this.setState( { city: next.target.value } )}
+						type="text"
+						name="venue[city]"
+						placeholder="City"
+						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+						ref={ this.saveRef }
+						onChange={ ( next ) => this.setState( { city: next.target.value } ) }
 					/>
 					<div className="row">
-						{this.renderCountry()}
-						{this.renderState()}
+						{ this.renderCountry() }
+						{ this.renderState() }
 					</div>
-					<div className='row'>
+					<div className="row">
 						<Input
-							className='small'
-							type='text'
-							name='venue[zip]'
-							placeholder='ZIP'
-							onComplete={() => this.setState( { isValid: this.isValid() } )}
-							ref={this.saveRef}
-							onChange={( next ) => this.setState( { zip: next.target.value } )}
+							className="small"
+							type="text"
+							name="venue[zip]"
+							placeholder="ZIP"
+							onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+							ref={ this.saveRef }
+							onChange={ ( next ) => this.setState( { zip: next.target.value } ) }
 						/>
 					</div>
 					<Input
-						type='phone'
-						name='venue[phone]'
-						placeholder='Phone number'
-						onComplete={() => this.setState( { isValid: this.isValid() } )}
-						ref={this.saveRef}
-						onChange={( next ) => this.setState( { phone: next.target.value } )}
+						type="phone"
+						name="venue[phone]"
+						placeholder="Phone number"
+						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+						ref={ this.saveRef }
+						onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
 						validate
 					/>
 					<Input
-						type='url'
-						name='venue[url]'
-						placeholder='Website'
-						onComplete={() => this.setState( { isValid: this.isValid() } )}
-						ref={this.saveRef}
-						onChange={( next ) => this.setState( { url: next.target.value } )}
+						type="url"
+						name="venue[url]"
+						placeholder="Website"
+						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
+						ref={ this.saveRef }
+						onChange={ ( next ) => this.setState( { url: next.target.value } ) }
 						validate
 					/>
 				</div>
 				<button
 					type="button"
 					className="button-secondary"
-					onClick={this.onSubmit}
-					disabled={! this.isValid()}
+					onClick={ this.onSubmit }
+					disabled={ ! this.isValid() }
 				>
-					{__( 'Create Venue', 'events-gutenberg' )}
+					{ __( 'Create Venue', 'events-gutenberg' ) }
 				</button>
 			</div>,
 		];

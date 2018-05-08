@@ -17,7 +17,6 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 
-
 /**
  * Module Code
  */
@@ -75,7 +74,7 @@ class TaxonomiesElement extends Component {
 		const separator = ! isLast ? (
 			<span>
 				{ this.props.termSeparator }
-				{' '}
+				{ ' ' }
 			</span>
 		) : null;
 
@@ -93,19 +92,19 @@ class TaxonomiesElement extends Component {
 		const { attributes, focus, setAttributes, slug } = this.props;
 		const terms = this.getTerms();
 		const label = (
-			<strong className='tribe-detail-label' key='terms-label'>
+			<strong className="tribe-detail-label" key="terms-label">
 				{ this.props.label }
-				{' '}
+				{ ' ' }
 			</strong>
 		);
-		const key   = `tribe-terms-${slug}`;
+		const key   = `tribe-terms-${ slug }`;
 
 		if ( this.props.terms.isLoading ) {
 			return [
 				<div key={ key } className="tribe-terms__block">
 					{ label }
-					<Spinner key='terms-spinner' />
-				</div>
+					<Spinner key="terms-spinner" />
+				</div>,
 			];
 		} else if ( ! terms.length ) {
 			return null;
@@ -117,7 +116,7 @@ class TaxonomiesElement extends Component {
 				<div key="terms" className={ this.props.className }>
 					{ this.renderTermList() }
 				</div>
-			</div>
+			</div>,
 		];
 	}
 }
@@ -139,13 +138,13 @@ const applyWithAPIData = withAPIData( ( props ) => {
 		per_page: 100,
 		orderby: 'count',
 		order: 'desc',
-	}
+	};
 	if ( terms && terms.length ) {
-		args['include'] = terms;
+		args.include = terms;
 	}
 	const query = stringify( args );
 	return {
-		terms: `/wp/v2/${slug}?${ query }`,
+		terms: `/wp/v2/${ slug }?${ query }`,
 	};
 } );
 

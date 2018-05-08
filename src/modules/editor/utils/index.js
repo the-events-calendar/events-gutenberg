@@ -1,2 +1,2 @@
-export * from './date'
-export * from './geo-data'
+export * from './date';
+export * from './geo-data';

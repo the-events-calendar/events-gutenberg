@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { select } from '@wordpress/data'
+import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { Component, compose } from '@wordpress/element';
 
@@ -25,7 +25,7 @@ import {
 	RichText,
 	PlainText,
 	InspectorControls,
-} from '@wordpress/blocks'
+} from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -36,10 +36,10 @@ import {
 	DatePicker,
 	TimePicker,
 	MetaGroup,
-} from 'elements'
+} from 'elements';
 
-import { default as EventOrganizers } from './organizers'
-import { getSetting } from 'editor/settings'
+import { default as EventOrganizers } from './organizers';
+import { getSetting } from 'editor/settings';
 
 /**
  * Module Code
@@ -52,15 +52,15 @@ class EventDetails extends Component {
 	}
 
 	changeTime( current, item ) {
-		let currentDate = moment( current, 'YYYY-MM-DD HH:mm:ss' )
+		let currentDate = moment( current, 'YYYY-MM-DD HH:mm:ss' );
 
 		// On invalid date we reset to today
 		if ( ! currentDate.isValid() ) {
-			currentDate = moment()
+			currentDate = moment();
 		}
 
-		const nextDatetime = currentDate.startOf( 'day' ).add( item.value, 'seconds' )
-		return nextDatetime.format( 'YYYY-MM-DD HH:mm:ss' )
+		const nextDatetime = currentDate.startOf( 'day' ).add( item.value, 'seconds' );
+		return nextDatetime.format( 'YYYY-MM-DD HH:mm:ss' );
 	}
 
 	render() {
@@ -69,7 +69,7 @@ class EventDetails extends Component {
 			setAttributes,
 			focus,
 			setFocus,
-			isSelected
+			isSelected,
 		} = this.props;
 
 		let currencyPosition = '1' == getSetting( 'reverseCurrencyPosition', 0 ) ? 'suffix' : 'prefix';
@@ -86,7 +86,7 @@ class EventDetails extends Component {
 
 		const content = [
 			<div key="event-details-box" className="tribe-editor-block tribe-editor-event-details">
-				<MetaGroup groupKey='event-details'>
+				<MetaGroup groupKey="event-details">
 					<RichText
 						tagName="h3"
 						className="tribe-events-single-section-title"
@@ -102,7 +102,7 @@ class EventDetails extends Component {
 						<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br />
 						<DatePicker
 							changeDatetime={ ( date ) => {
-								setAttributes( { startDate: date } )
+								setAttributes( { startDate: date } );
 							} }
 							datetime={ attributes.startDate }
 						/>
@@ -116,9 +116,9 @@ class EventDetails extends Component {
 												allDay: true,
 												startDate: startAllDay,
 												endDate: endAllDay,
-											} )
+											} );
 										} else {
-											setAttributes( { startDate: date } )
+											setAttributes( { startDate: date } );
 										}
 									} }
 									current={ attributes.startDate }
@@ -132,7 +132,7 @@ class EventDetails extends Component {
 						<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
 						<DatePicker
 							changeDatetime={ ( date ) => {
-								setAttributes( { endDate: date } )
+								setAttributes( { endDate: date } );
 							} }
 							datetime={ attributes.endDate }
 						/>
@@ -146,9 +146,9 @@ class EventDetails extends Component {
 												allDay: true,
 												startDate: startAllDay,
 												endDate: endAllDay,
-											} )
+											} );
 										} else {
-											setAttributes( { endDate: date } )
+											setAttributes( { endDate: date } );
 										}
 									} }
 									current={ attributes.startDate }
@@ -168,7 +168,7 @@ class EventDetails extends Component {
 						/>
 					</div>
 
-					<div className='tribe-editor__event-cost'>
+					<div className="tribe-editor__event-cost">
 						<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
 						{ 'prefix' === currencyPosition &&
 							<span>{ eventCurrencySymbol }</span>
@@ -194,7 +194,7 @@ class EventDetails extends Component {
 						label={ __( 'Event Tags:', 'events-gutenberg' ) }
 					/>
 				</MetaGroup>
-				<MetaGroup groupKey='organizer'>
+				<MetaGroup groupKey="organizer">
 					<RichText
 						tagName="h3"
 						className="tribe-events-single-section-title"
@@ -210,13 +210,13 @@ class EventDetails extends Component {
 						focus={ focus }
 						addOrganizer={ nextOrganizer => setAttributes( { eventOrganizers: union( attributes.eventOrganizers, [ nextOrganizer.id ] ) } ) }
 						removeOrganizer={ organizer => {
-							let organizers = without( attributes.eventOrganizers, organizer.id )
+							let organizers = without( attributes.eventOrganizers, organizer.id );
 
 							// If none are there we remove existing
 							if ( isEmpty( organizers ) ) {
-								organizers = [ 0 ]
+								organizers = [ 0 ];
 							}
-							setAttributes( { eventOrganizers: organizers } )
+							setAttributes( { eventOrganizers: organizers } );
 						} }
 					/>
 				</MetaGroup>
@@ -233,7 +233,7 @@ class EventDetails extends Component {
 					<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 						<ToggleControl
 							label={ __( 'Show symbol before', 'events-gutenberg' ) }
-							checked={ 'prefix' === currencyPosition ? true : false  }
+							checked={ 'prefix' === currencyPosition ? true : false }
 							onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
 						/>
 						<TextControl
@@ -244,10 +244,10 @@ class EventDetails extends Component {
 						/>
 					</PanelBody>
 				</InspectorControls>
-			)
-		]
+			),
+		];
 
-		return content
+		return content;
 	}
 }
 

@@ -2,8 +2,7 @@
  * External dependencies
  */
 import { isString, find, flatten, map, equals, noop } from 'lodash';
-import { ScrollTo, ScrollArea } from "react-scroll-to";
-
+import { ScrollTo, ScrollArea } from 'react-scroll-to';
 
 /**
  * Module Code
@@ -19,11 +18,11 @@ export function getTimezoneOpts() {
 		return timezoneOpts;
 	}
 
-	let groups = [];
+	const groups = [];
 	let number = 0;
 
 	$timezoneOpts.each( function( index, item ) {
-		let $group = jQuery( item );
+		const $group = jQuery( item );
 
 		if ( ! $group.is( 'optgroup' ) ) {
 			return;
@@ -31,17 +30,17 @@ export function getTimezoneOpts() {
 
 		number++;
 
-		let label = $group.attr( 'label' );
-		let group = {
+		const label = $group.attr( 'label' );
+		const group = {
 			key: label,
 			text: label,
-			options: []
+			options: [],
 		};
 
 		$group.find( 'option' ).each( function( optIndex, optionEl ) {
 			number++;
 
-			let $option = jQuery( optionEl );
+			const $option = jQuery( optionEl );
 			group.options.push( {
 				key: $option.val(),
 				text: $option.text(),
@@ -59,10 +58,10 @@ export function getTimezoneOpts() {
 }
 
 export function getItems( searchFor ) {
-	let groups = getTimezoneOpts();
+	const groups = getTimezoneOpts();
 
 	if ( searchFor ) {
-		let options = flatten( map( groups, 'options' ) );
+		const options = flatten( map( groups, 'options' ) );
 
 		return find( options, searchFor );
 	}
@@ -71,14 +70,13 @@ export function getItems( searchFor ) {
 }
 
 export function currentValue( current ) {
-
 	if ( current ) {
 		return current;
 	}
 
-	let timezone = siteTimezone.string ? siteTimezone.string : `UTC${ siteTimezone.offset }`;
-	let search = { key: timezone };
-	let items = this.getItems( search );
+	const timezone = siteTimezone.string ? siteTimezone.string : `UTC${ siteTimezone.offset }`;
+	const search = { key: timezone };
+	const items = this.getItems( search );
 
 	if ( ! items ) {
 		return __( 'Invalid Timezone', 'events-gutenberg' );

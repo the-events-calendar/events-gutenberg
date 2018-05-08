@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventVenue from './block'
+import EventVenue from './block';
 
 /**
  * Module Code
@@ -54,6 +54,6 @@ export default {
 
 	save( props ) {
 		return null;
-	}
+	},
 };
 
