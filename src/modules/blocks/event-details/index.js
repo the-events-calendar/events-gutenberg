@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventDetails from './block'
+import EventDetails from './block';
 
 /**
  * Module Code
@@ -67,6 +67,6 @@ export default {
 
 	save( props ) {
 		return null;
-	}
+	},
 };
 

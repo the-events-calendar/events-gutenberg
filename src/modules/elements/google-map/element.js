@@ -22,7 +22,7 @@ import {
 /**
  * Internal dependencies
  */
-import './style.pcss'
+import './style.pcss';
 
 /**
  * Module Code
@@ -70,7 +70,6 @@ const MAP_TYPES_VALUES = values( MAP_TYPES );
  * @example: http://staticmapmaker.com/google/
  */
 class GoogleMap extends Component {
-
 	/**
 	 * https://developers.google.com/maps/documentation/staticmaps/intro#api_key
 	 */
@@ -141,7 +140,7 @@ class GoogleMap extends Component {
 		this.state = {
 			map: null,
 			marker: null,
-			google: window.google ? window.google : null
+			google: window.google ? window.google : null,
 		};
 
 		this.map = React.createRef();
@@ -179,7 +178,7 @@ class GoogleMap extends Component {
 		const mapConfig = {
 			center: location,
 			zoom: zoom,
-			mapTypeId: mapType
+			mapTypeId: mapType,
 		};
 
 		if ( ! map ) {
@@ -202,7 +201,7 @@ class GoogleMap extends Component {
 	renderInteractive() {
 		return (
 			<div
-				className='tribe-element-map-object'
+				className="tribe-element-map-object"
 				ref={ this.map }
 			>
 				<Placeholder key="placeholder">
@@ -214,7 +213,7 @@ class GoogleMap extends Component {
 
 	render() {
 		let mapElement = (
-			<Placeholder style={{ height: '100%' }}>
+			<Placeholder style={ { height: '100%' } }>
 				<p>
 					{ __( 'No map preview available', 'events-gutenberg' ) }
 				</p>
@@ -230,7 +229,7 @@ class GoogleMap extends Component {
 			if ( ! interactive ) {
 				mapElement = (
 					<img
-						className='tribe-element-map-object'
+						className="tribe-element-map-object"
 						src={ this.mapUrl }
 					/>
 				);
@@ -240,7 +239,7 @@ class GoogleMap extends Component {
 		}
 
 		return (
-			<div className='tribe-element-map-container'>
+			<div className="tribe-element-map-container">
 				{ mapElement }
 			</div>
 		);
@@ -261,7 +260,7 @@ class GoogleMap extends Component {
 
 		const { width, height } = size;
 
-		let queryArgs = {
+		const queryArgs = {
 			zoom: zoom,
 			maptype: mapType,
 			key: apiKey,
@@ -271,18 +270,18 @@ class GoogleMap extends Component {
 		if ( interactive ) {
 			rootUrl = this.constructor.RootEmbedUrl;
 
-			queryArgs.q = `${latitude},${longitude}`;
+			queryArgs.q = `${ latitude },${ longitude }`;
 		} else {
 			rootUrl = this.constructor.RootStaticUrl;
 
-			queryArgs.center = `${latitude},${longitude}`;
+			queryArgs.center = `${ latitude },${ longitude }`;
 			queryArgs.scale = scale;
-			queryArgs.size = `${width}x${height}`;
+			queryArgs.size = `${ width }x${ height }`;
 			queryArgs.format = format;
 			queryArgs.markers = this.markerParams;
 		}
 
-		return `${rootUrl}?${ stringify( queryArgs ) }`;
+		return `${ rootUrl }?${ stringify( queryArgs ) }`;
 	}
 
 	get markerParams() {
@@ -292,7 +291,7 @@ class GoogleMap extends Component {
 			hasCenterMarker,
 		} = this.props;
 
-		const markerParams = `size:mid|color:0xff0000|label:|${latitude},${longitude}`;
+		const markerParams = `size:mid|color:0xff0000|label:|${ latitude },${ longitude }`;
 		return hasCenterMarker ? markerParams : '';
 	}
 }

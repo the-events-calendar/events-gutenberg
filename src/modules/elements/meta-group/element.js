@@ -25,7 +25,7 @@ class MetaGroup extends Component {
 
 		return (
 			<div
-				className={ `tribe-editor-meta-group tribe-editor-meta-group-${groupKey} ${className}` }
+				className={ `tribe-editor-meta-group tribe-editor-meta-group-${ groupKey } ${ className }` }
 				key={ groupKey }
 			>
 				{ children }

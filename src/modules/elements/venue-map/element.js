@@ -16,7 +16,7 @@ import {
 	Spinner,
 	Placeholder,
 	withAPIData,
-	withState
+	withState,
 } from '@wordpress/components';
 
 /**
@@ -74,7 +74,7 @@ class VenueMap extends Component {
 		return (
 			<GoogleMap
 				zoom={ zoom }
-				size={{ width: 450, height: 353 }}
+				size={ { width: 450, height: 353 } }
 				latitude={ toString( coordinates.lat ) }
 				longitude={ toString( coordinates.lng ) }
 				apiKey={ apiKey }

@@ -203,7 +203,7 @@ export default class Dashboard extends Component {
 		return (
 			<div className={ this.getContainerClass() }>
 				<div className="tribe-dashboard">
-					{this.props.children}
+					{ this.props.children }
 				</div>
 			</div>
 		);

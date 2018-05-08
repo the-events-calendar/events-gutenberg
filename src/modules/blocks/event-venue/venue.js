@@ -26,35 +26,35 @@ import {
 import {
 	VenueForm,
 	SearchPosts,
-} from 'elements'
+} from 'elements';
 
 function CreateDropdown( { ...props } ) {
 	const { focus, addVenue } = props;
 
-	if ( ! focus  ) {
+	if ( ! focus ) {
 		return null;
 	}
 
 	const icon = (
-		<Dashicon icon='plus' />
-	)
+		<Dashicon icon="plus" />
+	);
 
 	const dropdownToggle = ( { onToggle, isOpen } ) => (
 		<IconButton
-			className='tribe-editor-button'
+			className="tribe-editor-button"
 			label={ __( 'Create Venue' ) }
 			onClick={ onToggle }
 			icon={ icon }
 			aria-expanded={ isOpen }
 		/>
-	)
+	);
 
 	const dropdownContent = ( { onToggle, isOpen, onClose } ) => (
 		<VenueForm
 			addVenue={ addVenue }
 			onClose={ onClose }
 		/>
-	)
+	);
 
 	const content = (
 		<Dropdown
@@ -64,31 +64,31 @@ function CreateDropdown( { ...props } ) {
 			renderToggle={ dropdownToggle }
 			renderContent={ dropdownContent }
 		/>
-	)
+	);
 
-	return content
+	return content;
 }
 
 function VenueActions( { ...props } ) {
 	const { focus, venue, onClick } = props;
 
-	if ( ! focus  ) {
+	if ( ! focus ) {
 		return null;
 	}
 
 	const icon = (
-		<Dashicon icon='no' />
-	)
+		<Dashicon icon="no" />
+	);
 
 	return (
 		<IconButton
-			className='tribe-editor-button'
+			className="tribe-editor-button"
 			label={ __( 'Remove Venue' ) }
 			onClick={ onClick }
 			icon={ icon }
 			aria-expanded={ focus }
 		/>
-	)
+	);
 }
 
 /**
@@ -100,21 +100,21 @@ class VenueDetails extends Component {
 
 		this.state = {
 			isLoading: false,
-		}
-		this.renderVenueName = this.renderVenueName.bind( this )
-		this.renderVenue = this.renderVenue.bind( this )
-		this.renderActions = this.renderActions.bind( this )
+		};
+		this.renderVenueName = this.renderVenueName.bind( this );
+		this.renderVenue = this.renderVenue.bind( this );
+		this.renderActions = this.renderActions.bind( this );
 	}
 
 	renderVenueName( venue = null ) {
 		// If we don't have a venue we fetch the one in the state
 		if ( ! venue ) {
-			venue = this.props.venue
+			venue = this.props.venue;
 		}
 
 		// if we still don't have venue we don't have an address
 		if ( ! venue ) {
-			return false
+			return false;
 		}
 
 		// If we don't have a title we say it's untitled
@@ -126,25 +126,25 @@ class VenueDetails extends Component {
 	}
 
 	renderVenue() {
-		const venue = this.props.venue
+		const venue = this.props.venue;
 		const {
 			focus,
 			removeVenue,
 			showMap,
 			showMapLink,
-		} = this.props
+		} = this.props;
 		const classes = {
-			'tribe-current': true
-		}
+			'tribe-current': true,
+		};
 
-		const address = this.props.getAddress()
+		const address = this.props.getAddress();
 		const mapsUrlArgs = {
 			f: 'q',
 			source: 's_q',
 			geocode: '',
 			q: address,
-		}
-		const mapsUrl = `https://maps.google.com/maps?${ stringify( mapsUrlArgs ) }`
+		};
+		const mapsUrl = `https://maps.google.com/maps?${ stringify( mapsUrlArgs ) }`;
 
 		return (
 			<div
@@ -174,14 +174,14 @@ class VenueDetails extends Component {
 				}
 
 				{ ! isEmpty( venue.meta._VenuePhone ) &&
-					<p className='tribe-editor__meta-field'>
+					<p className="tribe-editor__meta-field">
 						<strong>{ __( 'Phone: ', 'events-gutenberg' ) }</strong><br />
 						<span>{ venue.meta._VenuePhone }</span>
 					</p>
 				}
 
 				{ ! isEmpty( venue.meta._VenueURL ) &&
-					<p className='tribe-editor__meta-field'>
+					<p className="tribe-editor__meta-field">
 						<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
 						<span>{ venue.meta._VenueURL }</span>
 					</p>
@@ -194,34 +194,34 @@ class VenueDetails extends Component {
 		const { focus, addVenue, removeVenue, venue } = this.props;
 
 		return (
-			<div key='venue-actions' className='tribe-editor-venue-actions'>
+			<div key="venue-actions" className="tribe-editor-venue-actions">
 				<SearchPosts
-					key='venue-search-dropdown'
-					postType='tribe_venue'
-					metaKey='_EventVenueID'
+					key="venue-search-dropdown"
+					postType="tribe_venue"
+					metaKey="_EventVenueID"
 					searchLabel={ __( 'Search for an venue', 'events-gutenberg' ) }
 					iconLabel={ __( 'Add existing venue', 'events-gutenberg' ) }
 					focus={ focus }
 					onSelectItem={ addVenue }
-					store={store}
-					storeName={STORE_NAME}
+					store={ store }
+					storeName={ STORE_NAME }
 					searchable
 				/>
 				<CreateDropdown
-					key='venue-create-dropdown'
+					key="venue-create-dropdown"
 					focus={ focus }
 					addVenue={ addVenue }
 				/>
 				{ venue &&
 					<VenueActions
-						key='venue-actions'
+						key="venue-actions"
 						focus={ focus }
 						venue={ venue }
 						onClick={ () => removeVenue( venue ) }
 					/>
 				}
 			</div>
-		)
+		);
 	}
 
 	render() {
@@ -230,21 +230,21 @@ class VenueDetails extends Component {
 
 		if ( isLoading ) {
 			return (
-				<Placeholder key='loading'>
+				<Placeholder key="loading">
 					<Spinner />
 				</Placeholder>
-			)
+			);
 		}
 
 		if ( venue ) {
-			return [ this.renderVenue(), this.renderActions() ]
+			return [ this.renderVenue(), this.renderActions() ];
 		}
 
 		return (
-			<Placeholder key='actions'>
+			<Placeholder key="actions">
 				{ this.renderActions() }
 			</Placeholder>
-		)
+		);
 	}
 }
 

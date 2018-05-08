@@ -3,7 +3,7 @@ import { get } from 'lodash';
 const list = {
 	countries: get( window, 'tribe_data_countries', {} ),
 	us_states: get( window, 'tribe_data_us_states', {} ),
-}
+};
 
 /**
  * Convert data from an array with different keys and values into a unified shape of object.
@@ -12,12 +12,12 @@ const list = {
  * @returns {{code: string, name: *}[]}
  */
 function toObject( data = {} ) {
-	return Object.keys( data ).map( (key) => {
+	return Object.keys( data ).map( ( key ) => {
 		return {
 			code: key,
-			name: data[key]
-		}
-	});
+			name: data[ key ],
+		};
+	} );
 }
 
 /**
