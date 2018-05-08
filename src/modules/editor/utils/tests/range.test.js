@@ -22,6 +22,7 @@ test( 'extractParts', () => {
 	expect( extractParts( '12.23 - - - - - 5,10' ) ).toEqual( [ 12.23, 5.1 ] );
 	expect( extractParts( '- - - - - 12.23 - 5,10' ) ).toEqual( [ 12.23, 5.1 ] );
 	expect( extractParts( '......,,,,12.23 - 5,10' ) ).toEqual( [ 12.23, 5.1 ] );
+	expect( extractParts( '.12.23 - 5,10.....,,,,' ) ).toEqual( [ 12.23, 5.1 ] );
 	expect( extractParts( '12.2.....3 ,-. 5,10' ) ).toEqual( [ 12.2, 5.1 ] );
 	expect( extractParts( '1-2-3-!"·$%&4-5-6$,.-' ) ).toEqual( [ 1, 2 ] );
 	expect( extractParts( '12.23 ,-. ----5,,,,,,10' ) ).toEqual( [ 12.23, 5 ] );
