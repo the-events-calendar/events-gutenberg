@@ -1,4 +1,8 @@
 {
+  "verbose": true,
+  "globals": {
+    "NODE_ENV": "test"
+  },
   "testPathIgnorePatterns": [
     "/node_modules/",
     "/lang/",
