@@ -134,7 +134,7 @@ export default class Dashboard extends Component {
 			return;
 		}
 		this.close();
-	}
+	};
 
 	/**
 	 * Listen for a click on the document to see if the element is part of the Dashboard
