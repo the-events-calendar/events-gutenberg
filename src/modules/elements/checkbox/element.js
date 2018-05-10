@@ -56,19 +56,22 @@ export default class CheckBox extends Component {
 	onChange = ( event ) => {
 		const { target } = event;
 		const { checked } = target;
-		this.setState( { checked } );
-		this.props.onChange( checked );
+		this.setState( { checked }, () => {
+			this.props.onChange( checked );
+		});
 	};
 
 	toggle = () => {
 		const { checked } = this.state;
 		this.inputRef.current.checked = ! checked;
-		this.setState( { checked: ! checked } );
+		this.setState( { checked: ! checked }, () => {
+			this.props.onChange( ! checked );
+		} );
 	};
 
 	renderIcon() {
 		const { checked } = this.state;
-		return checked ? <IconOff /> : <IconOn />;
+		return checked ? <IconOn /> : <IconOff />;
 	}
 
 	render() {
