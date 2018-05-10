@@ -19,7 +19,7 @@
 		"build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
 		"gettext-strings": "cross-env BABEL_ENV=gettext webpack",
 		"dev": "cross-env BABEL_ENV=default webpack --watch",
-		"test": "jest --config jest.config.json",
+		"test": "jest --no-cache --config jest.config.json ",
 		"lint": "eslint --quiet --parser=babel-eslint 'src/modules/**/*.js'",
 		"lint:fix": "eslint --fix --quiet --parser=babel-eslint 'src/modules/**/*.js'"
 	},
@@ -38,7 +38,7 @@
 		"prop-types": "^15.6.1",
 		"querystringify": "^1.0.0",
 		"react": "16.3.0",
-		"react-dates": "^16.6.1",
+		"react-day-picker": "^7.1.8",
 		"react-dom": "16.3.0",
 		"react-google-maps": "^9.4.5",
 		"react-places-autocomplete": "^6.1.2",
