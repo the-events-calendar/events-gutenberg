@@ -26,6 +26,7 @@
 	"dependencies": {
 		"@wordpress/a11y": "1.0.3",
 		"@wordpress/hooks": "1.1.1",
+		"@wordpress/i18n": "^1.1.0",
 		"@wordpress/url": "1.0.0",
 		"classnames": "^2.2.5",
 		"file-loader": "^1.1.6",
@@ -51,8 +52,8 @@
 	},
 	"devDependencies": {
 		"autoprefixer": "6.7.7",
-		"babel-eslint": "^8.2.3",
 		"babel-core": "^6.26.3",
+		"babel-eslint": "^8.2.3",
 		"babel-jest": "^22.4.3",
 		"babel-loader": "7.1.2",
 		"babel-plugin-import-glob": "2.0.0",
