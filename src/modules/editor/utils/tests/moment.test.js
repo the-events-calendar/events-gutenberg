@@ -107,5 +107,5 @@ test( 'setTimeInSeconds', () => {
 test( 'totalSeconds', () => {
 	expect( totalSeconds( null ) ).toEqual( 0 );
 	expect( totalSeconds( new Date() ) ).toEqual( 0 );
-	expect( totalSeconds( moment().startOf('day') ) ).toEqual( 0 );
+	expect( totalSeconds( moment().startOf( 'day' ) ) ).toEqual( 0 );
 } );

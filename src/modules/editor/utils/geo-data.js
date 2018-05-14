@@ -39,10 +39,8 @@ export function getStates( countryCode ) {
 	switch ( countryCode ) {
 		case 'US':
 			return toObject( list.us_states );
-			break;
 		default:
 			return [];
-			break;
 	}
 }
 

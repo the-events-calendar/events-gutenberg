@@ -5,11 +5,6 @@ import { escapeRegExp } from 'lodash';
 import moment from 'moment/moment';
 
 /**
- * Internal dependencies
- */
-import { FORMATS } from './date';
-
-/**
  * Make sure the format provided matches the spec used by moment.js
  *
  * @param {string} format The format to be converted to a moment format
@@ -74,7 +69,7 @@ export function toFormat( format ) {
  * @returns {moment} A moment object
  */
 export function roundTime( date ) {
-	if ( !( date instanceof moment ) ) {
+	if ( ! ( date instanceof moment ) ) {
 		return date;
 	}
 
@@ -96,7 +91,7 @@ export function roundTime( date ) {
  * @returns {moment} A moment object
  */
 export function toMoment( date ) {
-	if ( !( date instanceof Date ) ) {
+	if ( ! ( date instanceof Date ) ) {
 		throw new Error( 'Make sure your date is an instance of Date' );
 	}
 
@@ -119,7 +114,7 @@ export function toMoment( date ) {
  * @returns {moment} A moment object where the date is replaced
  */
 export function replaceDate( original, replaced ) {
-	if ( !( original instanceof moment ) || !( replaced instanceof moment ) ) {
+	if ( ! ( original instanceof moment ) || ! ( replaced instanceof moment ) ) {
 		throw new Error( 'Make sure your values are instances of moment' );
 	}
 
@@ -137,7 +132,7 @@ export function replaceDate( original, replaced ) {
  * @returns {moment} A moment object with the new date
  */
 export function setTimeInSeconds( original, seconds = 0 ) {
-	if ( !( original instanceof moment ) ) {
+	if ( ! ( original instanceof moment ) ) {
 		throw new Error( 'Make sure your values are instances of moment' );
 	}
 
@@ -157,7 +152,6 @@ export function setTimeInSeconds( original, seconds = 0 ) {
  * @returns {int} Total of seconds from start of the day to the current moment,
  */
 export function totalSeconds( date ) {
-
 	if ( ! date || ! ( date instanceof moment ) ) {
 		return 0;
 	}

@@ -1,13 +1,4 @@
 /**
- * WordPress dependencies
- */
-/**
-import { __ } from '@wordpress/i18n';
-import { getSetting } from './../settings';
-date: getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) ),
-	**/
-
-/**
  * Internal dependencies
  */
 
@@ -43,3 +34,4 @@ export function equalDates( ...params ) {
 		rest.every( ( item ) => item.getTime() === first.getTime() )
 	);
 }
+

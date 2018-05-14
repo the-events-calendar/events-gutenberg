@@ -173,19 +173,7 @@ export default class TimePicker extends Component {
 				this.onClose();
 			};
 
-			this.setState(state, callback )
-			/*
-			console.log(item);
-			const { value } = item;
-
-			const range = {
-				start: value,
-				end: false,
-			};
-			if ( 'all-day' === value ) {
-				range.start = 0;
-				range.end = DAY_IN_SECONDS - 1;
-			}*/
+			this.setState(state, callback );
 		}
 	}
 

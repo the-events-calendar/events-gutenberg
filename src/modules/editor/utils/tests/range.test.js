@@ -57,4 +57,4 @@ test( 'isFree', () => {
 	expect( isFree( '0.0' ) ).toEqual( true );
 	expect( isFree( '0 - 0' ) ).toEqual( true );
 	expect( isFree( '0.0 - 0.0' ) ).toEqual( true );
-});
+} );
