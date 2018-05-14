@@ -74,7 +74,7 @@ export function toFormat( format ) {
  * @returns {moment} A moment object
  */
 export function roundTime( date ) {
-	if ( ! ( date instanceof moment ) ) {
+	if ( !( date instanceof moment ) ) {
 		return date;
 	}
 
@@ -96,7 +96,7 @@ export function roundTime( date ) {
  * @returns {moment} A moment object
  */
 export function toMoment( date ) {
-	if ( ! ( date instanceof Date ) ) {
+	if ( !( date instanceof Date ) ) {
 		throw new Error( 'Make sure your date is an instance of Date' );
 	}
 
@@ -119,7 +119,7 @@ export function toMoment( date ) {
  * @returns {moment} A moment object where the date is replaced
  */
 export function replaceDate( original, replaced ) {
-	if ( ! ( original instanceof moment ) || ! ( replaced instanceof moment ) ) {
+	if ( !( original instanceof moment ) || !( replaced instanceof moment ) ) {
 		throw new Error( 'Make sure your values are instances of moment' );
 	}
 
@@ -137,7 +137,7 @@ export function replaceDate( original, replaced ) {
  * @returns {moment} A moment object with the new date
  */
 export function setTimeInSeconds( original, seconds = 0 ) {
-	if ( ! ( original instanceof moment ) ) {
+	if ( !( original instanceof moment ) ) {
 		throw new Error( 'Make sure your values are instances of moment' );
 	}
 
@@ -150,7 +150,17 @@ export function setTimeInSeconds( original, seconds = 0 ) {
 		.seconds( seconds || original.seconds() );
 }
 
+/**
+ * Total seconds of a current date from moment
+ *
+ * @param {moment} date The date to compare on the current day
+ * @returns {int} Total of seconds from start of the day to the current moment,
+ */
 export function totalSeconds( date ) {
+
+	if ( ! date || ! ( date instanceof moment ) ) {
+		return 0;
+	}
+
 	return date.diff( moment().startOf( 'day' ), 'seconds' );
-	return date.format( 'X' ) - moment( '00:00:00', FORMATS.TIME ).format( 'X' );
 }
