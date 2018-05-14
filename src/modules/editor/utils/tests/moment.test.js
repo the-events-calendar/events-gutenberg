@@ -6,7 +6,8 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import { replaceDate, setTimeInSeconds, roundTime, toMoment } from './../moment';
+import { replaceDate, setTimeInSeconds, roundTime, toMoment, totalSeconds } from './../moment';
+import { DAY_IN_SECONDS, HOUR_IN_SECONDS } from './../time';
 
 test( 'normalize', () => {
 	const FORMAT = 'MM-DD-YYYY HH:mm:ss';
@@ -101,4 +102,10 @@ test( 'setTimeInSeconds', () => {
 	expect( test2.minute() ).toEqual( 0 );
 	expect( test2.seconds() ).toEqual( 0 );
 	expect( test2.milliseconds() ).toEqual( 0 );
+} );
+
+test( 'totalSeconds', () => {
+	expect( totalSeconds( null ) ).toEqual( 0 );
+	expect( totalSeconds( new Date() ) ).toEqual( 0 );
+	expect( totalSeconds( moment().startOf('day') ) ).toEqual( 0 );
 } );
