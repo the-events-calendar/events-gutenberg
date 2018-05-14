@@ -39,13 +39,24 @@ export default class CheckBox extends Component {
 		id: uniqueid( 'tribe-checkbox' ),
 	};
 
-	constructor() {
+	constructor( props ) {
 		super( ...arguments );
 
 		this.inputRef = React.createRef();
 		this.state = {
-			checked: this.props.checked,
+			checked: props.checked,
 		};
+	}
+
+	static getDerivedStateFromProps( nextProps, prevState ) {
+		const { checked } = nextProps;
+		if ( checked === prevState.checked ) {
+			return null;
+		}
+
+		return {
+			checked
+		}
 	}
 
 	/**
