@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { trim } from 'lodash';
+import { trim, noop } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -36,6 +36,8 @@ export default class Dashboard extends Component {
 		className: '',
 		direction: directions.down,
 		overflow: false,
+		onOpen: noop,
+		onClose: noop,
 	}
 
 	static propTypes = {
@@ -43,6 +45,8 @@ export default class Dashboard extends Component {
 		overflow: PropTypes.bool,
 		className: PropTypes.string,
 		direction: PropTypes.oneOf( Object.keys( directions ) ),
+		onOpen: PropTypes.func,
+		onClose: PropTypes.func,
 	}
 
 	constructor() {
@@ -91,6 +95,7 @@ export default class Dashboard extends Component {
 		this.listeners.added = true;
 		document.addEventListener( 'keydown', this.onKeyDown );
 		document.addEventListener( 'click', this.onClickOutside );
+		this.props.onOpen();
 	}
 
 	/**
@@ -100,6 +105,7 @@ export default class Dashboard extends Component {
 		this.listeners.added = false;
 		document.removeEventListener( 'keydown', this.onKeyDown );
 		document.removeEventListener( 'click', this.onClickOutside );
+		this.props.onClose();
 	}
 
 	/**
@@ -164,12 +170,16 @@ export default class Dashboard extends Component {
 	 * opposite and making sure calling `open` or `close` to remove / attach the listeners
 	 */
 	toggle() {
-		const { open } = this.state;
-		if ( open ) {
+		if ( this.isOpen() ) {
 			this.close();
 		} else {
 			this.open();
 		}
+	}
+
+	isOpen() {
+		const { open } = this.state;
+		return open;
 	}
 
 	/**

@@ -168,10 +168,10 @@ class EventDetails extends Component {
 						/>
 					</div>
 
-					<div className="tribe-editor__event-cost">
+					<div className='tribe-editor__event-cost'>
 						<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
 						{ 'prefix' === currencyPosition &&
-							<span>{ eventCurrencySymbol }</span>
+						<span>{ eventCurrencySymbol }</span>
 						}
 						<PlainText
 							className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
@@ -180,7 +180,7 @@ class EventDetails extends Component {
 							onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
 						/>
 						{ 'suffix' === currencyPosition &&
-							<span>{ eventCurrencySymbol }</span>
+						<span>{ eventCurrencySymbol }</span>
 						}
 					</div>
 
@@ -233,7 +233,7 @@ class EventDetails extends Component {
 					<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 						<ToggleControl
 							label={ __( 'Show symbol before', 'events-gutenberg' ) }
-							checked={ 'prefix' === currencyPosition ? true : false }
+							checked={ 'prefix' === currencyPosition ? true : false  }
 							onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
 						/>
 						<TextControl

@@ -117,11 +117,11 @@ $website = tribe_get_event_website_link();
 		// Event Cost
 		if ( ! empty( $cost ) ) : ?>
 
-			<dt> <?php esc_html_e( 'Cost:', 'events-gutenberg' ) ?> </dt>
-			<dd class="tribe-events-event-cost"> <?php esc_html_e( $cost ); ?> </dd>
+            <dt> <?php esc_html_e( 'Cost:', 'events-gutenberg' ) ?> </dt>
+            <dd class="tribe-events-event-cost"> <?php esc_html_e( $cost ); ?> </dd>
 		<?php endif ?>
 
-		<?php
+        <?php
 		echo tribe_get_event_categories(
 			get_the_id(), array(
 				'before'       => '',
