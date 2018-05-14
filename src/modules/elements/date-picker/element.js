@@ -3,7 +3,6 @@
  */
 import moment from 'moment';
 import { times, unescape, get, escapeRegExp } from 'lodash';
-import { stringify } from 'querystringify';
 
 /**
  * WordPress dependencies
@@ -22,7 +21,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { toMomentFormat } from 'editor/utils/date';
+import { toFormat } from 'editor/utils/moment';
 import { getSetting } from 'editor/settings';
 
 import './style.pcss';
@@ -62,7 +61,7 @@ class DatePicker extends Component {
 		}
 
 		if ( label ) {
-			format = `${ toMomentFormat( getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) ) ) }`;
+			format = `${ toFormat( getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) ) ) }`;
 		}
 
 		return date.minutes( date.minutes() ).format( format );
