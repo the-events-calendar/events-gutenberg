@@ -24,7 +24,7 @@ export function parser( input ) {
 
 	const [ a, b ] = extractParts( chars );
 
-	if ( !b || b === a ) {
+	if ( ! b || b === a ) {
 		return a === 0 ? '' : trim( a );
 	}
 
@@ -64,9 +64,9 @@ export function extractParts( chars ) {
 			const result = re.exec( item.trim() );
 			return null === result ? '' : result[ 1 ];
 		} )
-		.filter( ( item ) => !isEmpty( item ) )
+		.filter( ( item ) => ! isEmpty( item ) )
 		.map( ( item ) => parseFloat( item ) )
-		.filter( ( item ) => !isNaN( item ) )
+		.filter( ( item ) => ! isNaN( item ) )
 		.slice( 0, 2 );
 }
 
@@ -81,7 +81,7 @@ export function isFree( input ) {
 
 	const test = parts
 		.map( ( item ) => parseFloat( item ) )
-		.filter( ( item ) => !isNaN( item ) )
+		.filter( ( item ) => ! isNaN( item ) )
 		.filter( ( item ) => item === 0 );
 
 	return parts.length === test.length;

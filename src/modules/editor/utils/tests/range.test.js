@@ -49,12 +49,12 @@ test( 'parser', () => {
 } );
 
 test( 'isFree', () => {
-	expect( isFree( '' ) ).toBeFalsy();
-	expect( isFree( '0.12' ) ).toBeFalsy();
-	expect( isFree( '0 - 0.12' ) ).toBeFalsy();
-	expect( isFree( '0.12 - 0' ) ).toBeFalsy();
-	expect( isFree( '0' ) ).toBeTruthy();
-	expect( isFree( '0.0' ) ).toBeTruthy();
-	expect( isFree( '0 - 0' ) ).toBeTruthy();
-	expect( isFree( '0.0 - 0.0' ) ).toBeTruthy();
-});
+	expect( isFree( '' ) ).toEqual( false );
+	expect( isFree( '0.12' ) ).toEqual( false );
+	expect( isFree( '0 - 0.12' ) ).toEqual( false );
+	expect( isFree( '0.12 - 0' ) ).toEqual( false );
+	expect( isFree( '0' ) ).toEqual( true );
+	expect( isFree( '0.0' ) ).toEqual( true );
+	expect( isFree( '0 - 0' ) ).toEqual( true );
+	expect( isFree( '0.0 - 0.0' ) ).toEqual( true );
+} );

@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventPrice from './block'
+import EventPrice from './block';
 
 /**
  * Module Code
@@ -49,6 +49,6 @@ export default {
 	edit: EventPrice,
 	save( props ) {
 		return null;
-	}
+	},
 };
 

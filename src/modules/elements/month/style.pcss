@@ -1,0 +1,87 @@
+.tribe-calendar__month {
+    .react-datepicker__day,
+    .react-datepicker__day-name {
+        min-width: 28px;
+        margin: .166rem 0;
+        width: calc(100% / 7);
+        line-height: 2.1875rem;
+    }
+}
+
+.tribe-editor__calendars {
+    .DayPicker {
+        width: 100%;
+    }
+
+    .DayPicker-Months {
+        justify-content: space-between;
+    }
+
+    .DayPicker-Month {
+        width: 46.2686567164%;
+        margin: 0;
+    }
+
+    .DayPicker-Caption > div,
+    .DayPicker-Weekday,
+    .DayPicker-Day {
+        color: #545D66;
+        font-family: 'Helvetica', 'sans-serif';
+        font-weight: normal;
+    }
+
+    .DayPicker-Caption > div {
+        font-size: 1rem;
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .DayPicker-Weekday {
+        font-size: 0.75rem;
+    }
+
+    .DayPicker-Day {
+        font-size: 0.875rem;
+
+        &:hover {
+            color: #11A0D2;
+        }
+    }
+
+    .DayPicker-Day--today {
+        color: #545D66;
+    }
+
+    .DayPicker-Day--disabled {
+        pointer-events: none;
+        color: #CCC;
+    }
+
+    .DayPicker-Day--selected:not(.DayPicker-Day--outside) {
+        border-radius: 0;
+        background-color: #11A0D2;
+        color: #FFF;
+
+        &:hover {
+            background-color: #11A0D2;
+            color: #FFF;
+        }
+    }
+
+    .DayPicker-NavButton--prev {
+        left: 0;
+        top: 0;
+    }
+
+    .DayPicker-NavButton--next {
+        right: 0;
+        top: 0;
+    }
+}
+
+.tribe-editor__calendars--range {
+    .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end){
+        background-color: #E7F5FA;
+        color: #545D66;
+    }
+}

@@ -1,66 +1,37 @@
 /**
- * External dependencies
- */
-import { escapeRegExp } from 'lodash';
-
-/**
- * WordPress dependencies
- */
-
-/**
  * Internal dependencies
  */
 
+const WPDateSettings = window.tribe_date_settings || {};
+const { formats } = WPDateSettings;
+
+export const FORMATS = {
+	TIME: 'HH:mm:ss',
+	DATE_TIME: 'YYYY-MM-DD HH:mm:ss',
+	WP: {
+		datetime: 'F j, Y g:i a',
+		time: 'g:i a',
+		...formats,
+	},
+};
+
 /**
- * Module Code
+ * Make sure all the Dates objects are on the same time
+ *
+ * @param {Date} params 0 to N set of Dates params
+ * @returns {boolean} true if all the dates have the same timestamp
  */
-export function toMomentFormat( format ) {
-	const strtr = ( str, pairs ) => {
-		const substrs = Object.keys( pairs ).map( escapeRegExp );
-		return str.split( RegExp( `(${ substrs.join( '|' ) })` ) )
-			.map( part => pairs[ part ] || part )
-			.join( '' );
-	};
+export function equalDates( ...params ) {
+	if ( params.length === 0 ) {
+		return false;
+	}
 
-	const replacements = {
-		d: 'DD',
-		D: 'ddd',
-		j: 'D',
-		l: 'dddd',
-		N: 'E',
-		S: 'o',
-		w: 'e',
-		z: 'DDD',
-		W: 'W',
-		F: 'MMMM',
-		m: 'MM',
-		M: 'MMM',
-		n: 'M',
-		t: '', // no equivalent
-		L: '', // no equivalent
-		o: 'YYYY',
-		Y: 'YYYY',
-		y: 'YY',
-		a: 'a',
-		A: 'A',
-		B: '', // no equivalent
-		g: 'h',
-		G: 'H',
-		h: 'hh',
-		H: 'HH',
-		i: 'mm',
-		s: 'ss',
-		u: 'SSS',
-		e: 'zz', // deprecated since version 1.6.0 of moment.js
-		I: '', // no equivalent
-		O: '', // no equivalent
-		P: '', // no equivalent
-		T: '', // no equivalent
-		Z: '', // no equivalent
-		c: '', // no equivalent
-		r: '', // no equivalent
-		U: 'X',
-	};
+	const dates = params.filter( ( item ) => item instanceof Date );
+	const [ first, ...rest ] = dates;
 
-	return strtr( format, replacements );
+	return (
+		dates.length === params.length &&
+		rest.every( ( item ) => item.getTime() === first.getTime() )
+	);
 }
+

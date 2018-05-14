@@ -13,8 +13,10 @@ export function searchParent( node, callback ) {
 		if ( testNode ) {
 			found = callback( testNode );
 		}
-		testNode = ! found && testNode && testNode.parentElement ? testNode.parentElement : null;
-	} while ( testNode );
+		testNode = testNode && testNode.parentNode
+			? testNode.parentNode
+			: null;
+	} while ( ! found && testNode !== null );
 
 	return found;
 }

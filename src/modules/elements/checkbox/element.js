@@ -39,13 +39,24 @@ export default class CheckBox extends Component {
 		id: uniqueid( 'tribe-checkbox' ),
 	};
 
-	constructor() {
+	constructor( props ) {
 		super( ...arguments );
 
 		this.inputRef = React.createRef();
 		this.state = {
-			checked: this.props.checked,
+			checked: props.checked,
 		};
+	}
+
+	static getDerivedStateFromProps( nextProps, prevState ) {
+		const { checked } = nextProps;
+		if ( checked === prevState.checked ) {
+			return null;
+		}
+
+		return {
+			checked
+		}
 	}
 
 	/**
@@ -56,19 +67,22 @@ export default class CheckBox extends Component {
 	onChange = ( event ) => {
 		const { target } = event;
 		const { checked } = target;
-		this.setState( { checked } );
-		this.props.onChange( checked );
+		this.setState( { checked }, () => {
+			this.props.onChange( checked );
+		});
 	};
 
 	toggle = () => {
 		const { checked } = this.state;
 		this.inputRef.current.checked = ! checked;
-		this.setState( { checked: ! checked } );
+		this.setState( { checked: ! checked }, () => {
+			this.props.onChange( ! checked );
+		} );
 	};
 
 	renderIcon() {
 		const { checked } = this.state;
-		return checked ? <IconOff /> : <IconOn />;
+		return checked ? <IconOn /> : <IconOff />;
 	}
 
 	render() {
