@@ -1,7 +1,7 @@
 import { stringify } from 'querystringify';
 
-const { apiRequest } = wp;
-import { registerStore, dispatch } from '@wordpress/data';
+const { data, apiRequest } = wp;
+const { registerStore, dispatch } = data;
 import { getResponseHeaders } from 'utils/request';
 
 const DEFAULT_STATE = {
