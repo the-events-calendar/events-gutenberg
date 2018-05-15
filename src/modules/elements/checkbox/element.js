@@ -68,7 +68,7 @@ export default class CheckBox extends Component {
 		const { target } = event;
 		const { checked } = target;
 		this.setState( { checked }, () => {
-			this.props.onChange( checked );
+			this.props.onChange( this.state.checked );
 		});
 	};
 
@@ -76,7 +76,7 @@ export default class CheckBox extends Component {
 		const { checked } = this.state;
 		this.inputRef.current.checked = ! checked;
 		this.setState( { checked: ! checked }, () => {
-			this.props.onChange( ! checked );
+			this.props.onChange( this.state.checked );
 		} );
 	};
 
