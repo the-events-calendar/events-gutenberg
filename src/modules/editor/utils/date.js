@@ -1,8 +1,11 @@
+import { getItems } from './../../elements/timezone-picker/element';
+import { get } from 'lodash';
+
 /**
  * Internal dependencies
  */
 
-const WPDateSettings = window.tribe_date_settings || {};
+const WPDateSettings = get( window, 'ribe_date_settings', {} );
 const { formats } = WPDateSettings;
 
 export const FORMATS = {
@@ -35,3 +38,17 @@ export function equalDates( ...params ) {
 	);
 }
 
+export function timezonesAsSelectData() {
+	return this.timezones.map( ( tzone ) => {
+		return {
+			value: tzone.key,
+			label: tzone.text,
+		};
+	} );
+}
+
+export function timezones() {
+	this.timezones = getItems()
+		.map( ( group ) => group.options || [] )
+		.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
+}
