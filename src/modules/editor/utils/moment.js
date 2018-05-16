@@ -3,7 +3,7 @@
  */
 import { escapeRegExp } from 'lodash';
 import moment from 'moment/moment';
-import { FORMATS } from 'editor/utils/date';
+import { FORMATS } from './date';
 
 /**
  * Make sure the format provided matches the spec used by moment.js
