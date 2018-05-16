@@ -2,6 +2,7 @@
  * External Dependencies
  */
 import moment from 'moment/moment';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Wordpress dependencies
@@ -16,6 +17,7 @@ import { roundTime, toDateTime } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 
 import * as reducers from './reducers';
+import { getSetting } from 'editor/settings';
 
 export const DEFAULT_STATE = {
 	multiDay: false,
@@ -23,6 +25,8 @@ export const DEFAULT_STATE = {
 	startDate: toDateTime( roundTime( moment() ) ),
 	endDate: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
 	timezone: 'UTC',
+	dateTimeRangeSeparator: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
+	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
 };
 
 export const STORE_NAME = 'tec.details';

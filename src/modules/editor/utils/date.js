@@ -12,9 +12,9 @@ export const FORMATS = {
 	TIME: 'HH:mm:ss',
 	DATE_TIME: 'YYYY-MM-DD HH:mm:ss',
 	WP: {
-		datetime: 'F j, Y g:i a',
 		time: 'g:i a',
 		date: 'F j',
+		datetime: 'F j, Y g:i a',
 		...formats,
 	},
 };
