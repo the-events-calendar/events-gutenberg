@@ -10,8 +10,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventSubtitle from './block';
-import { store, STORE_NAME, DEFAULT_STATE } from 'data/details';
+import EventSubtitle, { VALID_PROPS } from './block';
+import { store } from 'data/details';
+import { removeEmptyStrings, castBooleanStrings } from 'utils/object';
 import { noop, pick, get } from 'lodash';
 
 /**
@@ -61,12 +62,15 @@ export default {
 		const setAttributes = get( props, 'setAttributes', noop );
 		store.subscribe( () => {
 			const state = store.getState();
-			const keys = [ 'timezone', 'startDate', 'endDate', 'allDay' ];
-			setAttributes( pick( state, keys ) );
+			setAttributes( pick( state, VALID_PROPS ) );
 		} );
 
 		const allowedProperties = pick( props, [ 'isSelected' ] );
-		const attributes = get( props, 'attributes', {} );
+		const attributes = castBooleanStrings(
+			removeEmptyStrings(
+				get( props, 'attributes', {} )
+			)
+		);
 
 		const properties = {
 			...allowedProperties,
