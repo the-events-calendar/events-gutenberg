@@ -4,6 +4,8 @@
 import moment from 'moment';
 import React from 'react';
 
+import { noop, pick } from 'lodash';
+
 /**
  * WordPress dependencies
  */
@@ -24,6 +26,9 @@ import {
 	InspectorControls,
 } from '@wordpress/blocks';
 
+const { data } = wp;
+const { select } = data;
+
 /**
  * Internal dependencies
  */
@@ -40,19 +45,26 @@ import { getItems } from './../../elements/timezone-picker/element';
 
 import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
-import { replaceDate, toFormat, setTimeInSeconds, toMoment, roundTime } from 'utils/moment';
+import { toFormat, toMoment } from 'utils/moment';
 import { FORMATS } from 'utils/date';
-import { DAY_IN_SECONDS, HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from 'editor/utils/time';
-import { totalSeconds } from 'editor/utils/moment';
+import { HALF_HOUR_IN_SECONDS } from 'editor/utils/time';
+import { totalSeconds, toDateTime } from 'editor/utils/moment';
+import { store, DEFAULT_STATE } from 'data/details';
+
+export const VALID_PROPS = [ 'timezone', 'startDate', 'endDate', 'allDay', 'multiDay' ];
 
 /**
  * Module Code
  */
 class EventSubtitle extends Component {
-	constructor() {
-		super( ...arguments );
 
-		const { attributes } = this.props;
+	static defaultProps = pick(
+		DEFAULT_STATE,
+		VALID_PROPS,
+	);
+
+	constructor( props ) {
+		super( ...arguments );
 
 		this.dashboardRef = React.createRef();
 
@@ -60,26 +72,30 @@ class EventSubtitle extends Component {
 			.map( ( group ) => group.options || [] )
 			.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
 
-		const { timezone, startDate, endDate } = attributes;
-
-		const now = roundTime( moment() );
 		this.state = {
-			...this.props,
+			...props,
 			dateTimeRangeSeparator: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
 			timeRangeSeparator: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
-			timezone: timezone || 'UTC',
-			startDate: startDate || this.format( now ),
-			endDate: endDate || this.format( now.add( 30, 'm' ) ),
-			allDay: false,
-			multiDay: false,
-			isDashboardOpen: false,
 		};
+		this.storeListener = noop;
 	}
 
-	format = ( date ) => {
-		const { datetime } = FORMATS.WP;
-		return date.format( toFormat( datetime ) );
-	};
+	componentDidMount() {
+		this.storeListener = store.subscribe( () => {
+			const state = store.getState();
+			this.setState( pick( state, VALID_PROPS ) );
+		});
+
+		const state = pick( this.state, VALID_PROPS  );
+		store.dispatch( {
+			type: 'SET_INITIAL_STATE',
+			values: state,
+		} );
+	}
+
+	componentWillUnmount() {
+		this.storeListener();
+	}
 
 	renderStart() {
 		return (
@@ -237,8 +253,6 @@ class EventSubtitle extends Component {
 		return (
 			<Dashboard
 				ref={ this.dashboardRef }
-				onClose={ () => this.setState( { isDashboardOpen: false } ) }
-				onOpen={ () => this.setState( { isDashboardOpen: true } ) }
 				overflow>
 				<section className="tribe-editor__calendars">
 					{ this.renderCalendars() }
@@ -258,76 +272,67 @@ class EventSubtitle extends Component {
 	}
 
 	renderCalendars() {
-		const { isDashboardOpen, multiDay, startDate, endDate } = this.state;
+		const { multiDay, startDate, endDate } = this.state;
+		const monthProps = {
+			onSelectDay: this.setDays,
+			withRange: multiDay,
+			from: moment( startDate ).toDate(),
+		};
+
+		if ( ! this.isSameDay() ) {
+			monthProps.to = moment( endDate ).toDate();
+		}
 
 		return (
-			<Month
-				withRange={ multiDay }
-				from={ moment( startDate ).toDate() }
-				to={ this.isSameDay() ? undefined : moment( endDate ).toDate() }
-				onSelectDay={ ( data ) => {
-					const { startDate, endDate, multiDay } = this.state;
-					const { from, to } = data;
-					const state = {
-						startDate: this.format( replaceDate( moment( startDate ), toMoment( from ) ) ),
-						endDate: this.format( replaceDate( moment( startDate ).add( 30, 'minutes' ), toMoment( from ) ) ),
-					};
-
-					if ( multiDay && to ) {
-						state.endDate = this.format( replaceDate( moment( endDate ), toMoment( to ) ) );
-					}
-
-					if ( moment( state.endDate ).isSameOrBefore( state.startDate ) ) {
-						state.endDate = this.format( moment( state.startDate ).add( 30, 'minutes' ) );
-						state.multiDay = ! this.isSameDay( state.startDate, state.endDate );
-					}
-
-					this.setState( state );
-				} }
-			/>
+			<Month { ...monthProps } />
 		);
 	}
+
+	setDays = ( data ) => {
+		const { from, to } = data;
+
+		store.dispatch( {
+			type: 'SET_START_DATE',
+			date: toDateTime( toMoment( from ) ),
+		} );
+
+		store.dispatch( {
+			type: 'SET_END_DATE',
+			date: to ? toDateTime( toMoment( to ) ) : to,
+		} );
+	};
 
 	renderStartTimePicker() {
 		const { startDate, allDay } = this.state;
 		const { time, date } = FORMATS.WP;
 		const start = moment( startDate );
+		const pickerProps = {
+			onSelectItem: this.setStartTime,
+			current: start,
+			timeFormat: time,
+		};
+
+		if ( allDay ) {
+			pickerProps.allDay = true;
+		}
+
 		return (
 			<React.Fragment>
 				<span className="time-picker-date-label">{ start.format( toFormat( date ) ) }</span>
-				<TimePicker
-					onSelectItem={ ( data ) => {
-						const { seconds, allDay } = data;
-						const { startDate, endDate } = this.state;
-						const from = setTimeInSeconds( moment( startDate ), seconds );
-						const state = {
-							allDay,
-							startDate: this.format( from ),
-						}
-
-						if ( allDay ) {
-							// state.endDate = this.format( setTimeInSeconds( from, seconds + (MINUTE_IN_SECONDS * 30) ) );
-							state.endDate = this.format( moment( from ).endOf( 'day' ) );
-							state.multiDay = false;
-						} else {
-							state.multiDay = ! this.isSameDay( from );
-							state.endDate = roundTime( moment( endDate ) );
-						}
-
-						if ( state.endDate && moment( state.endDate ).isSameOrBefore( from ) ) {
-							state.endDate = this.format( setTimeInSeconds( from, seconds + (MINUTE_IN_SECONDS * 30) ) );
-							state.multiDay = ! this.isSameDay( state.startDate, state.endDate );
-						}
-
-						this.setState( state );
-					} }
-					current={ start }
-					allDay={ allDay }
-					timeFormat={ time }
-				/>
+				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
 	}
+
+	setStartTime = ( data ) => {
+		const { seconds, allDay } = data;
+		this.setAllDay( allDay );
+
+		store.dispatch( {
+			type: 'SET_START_TIME',
+			seconds,
+		} );
+	};
 
 	renderEndTimePicker() {
 
@@ -336,29 +341,31 @@ class EventSubtitle extends Component {
 		}
 
 		const { time, date } = FORMATS.WP;
-
-		const end = moment( this.state.endDate );
 		const start = moment( this.state.startDate );
+		const end = moment( this.state.endDate );
+		const pickerProps = {
+			current: end,
+			onSelectItem: this.setEndTime,
+			minTime: totalSeconds( start.add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
+			timeFormat: time,
+		};
+
 		return (
 			<React.Fragment>
-				{ !this.isSameDay() && <span className="time-picker-date-label">{ end.format( toFormat( date ) ) }</span> }
-				<TimePicker
-					onSelectItem={ ( state ) => {
-						const { seconds, allDay } = state;
-						const { startDate } = this.state;
-						const to = setTimeInSeconds( moment( startDate ), seconds );
-						this.setState( {
-							allDay,
-							endDate: this.format( to ),
-							multiDay: ! this.isSameDay( startDate, to ),
-						} );
-					} }
-					current={ end }
-					minTime={ totalSeconds( start.add( 30, 'minutes' ) ) }
-					timeFormat={ time }
-				/>
+				{ ! this.isSameDay() && <span className="time-picker-date-label">{ end.format( toFormat( date ) ) }</span> }
+				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
+	}
+
+	setEndTime = ( data ) => {
+		const { seconds, allDay } = data;
+		this.setAllDay( allDay );
+
+		store.dispatch({
+			type: 'SET_END_TIME',
+			seconds,
+		});
 	}
 
 	renderMultidayCheckbox() {
@@ -367,21 +374,16 @@ class EventSubtitle extends Component {
 			<CheckBox
 				label={ __( 'Multi-Day', 'events-gutenberg' ) }
 				checked={ multiDay }
-				onChange={ ( multiDay ) => {
-					const { startDate } = this.state;
-					const start = moment( startDate );
-					const isLastBlock = start.hour() === 23 && start.minute() === 30;
-					const state = {
-						multiDay
-					};
-					if ( ! multiDay && isLastBlock ) {
-						state.startDate = this.format( start.subtract( 30, 'minutes' ) );
-						state.endDate = this.format( moment( startDate ) );
-					}
-					this.setState( state );
-				} }
+				onChange={ this.setMultiDay }
 			/>
 		);
+	}
+
+	setMultiDay = (multiDay) => {
+		store.dispatch({
+			type: 'SET_MULTI_DAY',
+			multiDay,
+		});
 	}
 
 	/**
@@ -393,7 +395,7 @@ class EventSubtitle extends Component {
 		const { isSelected } = this.props;
 		const { timeRangeSeparator, dateTimeRangeSeparator, timezone } = this.state;
 
-		if ( !isSelected ) {
+		if ( ! isSelected ) {
 			return null;
 		}
 
@@ -412,7 +414,7 @@ class EventSubtitle extends Component {
 				<SelectControl
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
 					value={ timezone }
-					onChange={ ( tzone ) => this.setState( { timezone: tzone } ) }
+					onChange={ this.setTimeZone }
 					options={ this.timezones.map( ( tzone ) => {
 						return {
 							value: tzone.key,
@@ -423,10 +425,24 @@ class EventSubtitle extends Component {
 				<ToggleControl
 					label={ __( 'Is All Day Event', 'events-gutenberg' ) }
 					checked={ this.isAllDay() }
-					onChange={ ( value ) => this.setState( { allDay: value } ) }
+					onChange={ this.setAllDay }
 				/>
 			</PanelBody>
 		</InspectorControls> );
+	}
+
+	setTimeZone( timezone ) {
+		store.dispatch( {
+			type: 'SET_TIME_ZONE',
+			timezone,
+		} );
+	};
+
+	setAllDay( allDay ) {
+		store.dispatch( {
+			type: 'SET_ALL_DAY',
+			allDay,
+		} );
 	}
 
 	render() {
