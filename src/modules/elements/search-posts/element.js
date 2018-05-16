@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId, noop, throttle } from 'lodash';
-import { stringify } from 'querystringify';
+import { uniqueId, noop } from 'lodash';
 import classNames from 'classnames';
 
 /**
@@ -17,7 +16,6 @@ import {
 	Dashicon,
 	Spinner,
 	Placeholder,
-	withAPIData,
 } from '@wordpress/components';
 
 /**
@@ -28,12 +26,13 @@ import './style.pcss';
 /**
  * Module Code
  */
+
 class SearchPosts extends Component {
 	static defaultProps = {
 		onHover: noop,
 		store: {},
 		storeName: '',
-	}
+	};
 
 	constructor() {
 		super( ...arguments );

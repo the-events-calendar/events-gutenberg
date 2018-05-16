@@ -1,13 +1,22 @@
 /**
  * External dependencies
  */
-import { isString, find, flatten, map, equals, noop } from 'lodash';
-import { ScrollTo, ScrollArea } from 'react-scroll-to';
+import {
+	find,
+	flatten,
+	map,
+	get,
+} from 'lodash';
+
+/**
+ * Wordpress Dependencies
+ */
+import { __ } from '@wordpress/i18n';
 
 /**
  * Module Code
  */
-const options = 'tribe_blocks_editor_timezone_html' in window ? tribe_blocks_editor_timezone_html : '';
+const options = get( window, 'tribe_blocks_editor_timezone_html', '' );
 const $timezoneOpts = jQuery( options );
 
 let timezoneOpts;
@@ -61,9 +70,8 @@ export function getItems( searchFor ) {
 	const groups = getTimezoneOpts();
 
 	if ( searchFor ) {
-		const options = flatten( map( groups, 'options' ) );
-
-		return find( options, searchFor );
+		const opts = flatten( map( groups, 'options' ) );
+		return find( opts, searchFor );
 	}
 
 	return groups;
