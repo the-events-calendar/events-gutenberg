@@ -49,7 +49,15 @@ import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { store, DEFAULT_STATE } from 'data/details';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
-export const VALID_PROPS = [ 'timezone', 'startDate', 'endDate', 'allDay', 'multiDay' ];
+export const VALID_PROPS = [
+	'timezone',
+	'startDate',
+	'endDate',
+	'allDay',
+	'multiDay',
+	'dateTimeRangeSeparator',
+	'timeRangeSeparator',
+];
 
 /**
  * Module Code
@@ -309,7 +317,7 @@ class EventSubtitle extends Component {
 
 		return (
 			<React.Fragment>
-				<span className="time-picker-date-label">{ toFormat( date ) }</span>
+				<span className="time-picker-date-label">{ start.format( toFormat( date ) ) }</span>
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
