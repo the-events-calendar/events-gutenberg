@@ -122,6 +122,7 @@ export function setEndTime( prevState, seconds ) {
 
 export function setInitialState( prevState, values ) {
 	const state = setInitialDates( values, values.startDate, values.endDate );
+
 	return {
 		...prevState,
 		...state,
@@ -144,7 +145,7 @@ export function setInitialDates( prevState = {}, startDate = '', endDate = '' ) 
 		...prevState,
 		endDate: toDateTime( end ),
 	};
-	return setStartDate( state, toDateTime( start ) );
+	return state.allDay ? state : setStartDate( state, toDateTime( start ) );
 }
 
 export function setOnlyDateForStart( prevState, date ) {
