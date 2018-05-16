@@ -41,16 +41,14 @@ import {
 } from 'elements';
 import './style.pcss';
 
-import { getItems } from './../../elements/timezone-picker/element';
-
 import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
-import { toFormat, toMoment } from 'utils/moment';
-import { FORMATS } from 'utils/date';
-import { HALF_HOUR_IN_SECONDS } from 'editor/utils/time';
-import { totalSeconds, toDateTime } from 'editor/utils/moment';
+import { toFormat, toMoment, totalSeconds, toDateTime } from 'utils/moment';
+import { FORMATS, timezonesAsSelectData } from 'utils/date';
+import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { store, DEFAULT_STATE } from 'data/details';
 
+FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 export const VALID_PROPS = [ 'timezone', 'startDate', 'endDate', 'allDay', 'multiDay' ];
 
 /**
@@ -68,15 +66,7 @@ class EventSubtitle extends Component {
 
 		this.dashboardRef = React.createRef();
 
-		this.timezones = getItems()
-			.map( ( group ) => group.options || [] )
-			.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
-
-		this.state = {
-			...props,
-			dateTimeRangeSeparator: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
-			timeRangeSeparator: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
-		};
+		this.state = props;
 		this.storeListener = noop;
 	}
 
@@ -86,7 +76,8 @@ class EventSubtitle extends Component {
 			this.setState( pick( state, VALID_PROPS ) );
 		});
 
-		const state = pick( this.state, VALID_PROPS  );
+		const state = pick( this.state, VALID_PROPS );
+
 		store.dispatch( {
 			type: 'SET_INITIAL_STATE',
 			values: state,
@@ -318,7 +309,7 @@ class EventSubtitle extends Component {
 
 		return (
 			<React.Fragment>
-				<span className="time-picker-date-label">{ start.format( toFormat( date ) ) }</span>
+				<span className="time-picker-date-label">{ toFormat( date ) }</span>
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -362,11 +353,11 @@ class EventSubtitle extends Component {
 		const { seconds, allDay } = data;
 		this.setAllDay( allDay );
 
-		store.dispatch({
+		store.dispatch( {
 			type: 'SET_END_TIME',
 			seconds,
-		});
-	}
+		} );
+	};
 
 	renderMultidayCheckbox() {
 		const { multiDay } = this.state;
@@ -379,12 +370,12 @@ class EventSubtitle extends Component {
 		);
 	}
 
-	setMultiDay = (multiDay) => {
-		store.dispatch({
+	setMultiDay = ( multiDay ) => {
+		store.dispatch( {
 			type: 'SET_MULTI_DAY',
 			multiDay,
-		});
-	}
+		} );
+	};
 
 	/**
 	 * Controls being rendered on the sidebar.
@@ -415,12 +406,7 @@ class EventSubtitle extends Component {
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
 					value={ timezone }
 					onChange={ this.setTimeZone }
-					options={ this.timezones.map( ( tzone ) => {
-						return {
-							value: tzone.key,
-							label: tzone.text,
-						};
-					} ) }
+					options={ timezonesAsSelectData() }
 				/>
 				<ToggleControl
 					label={ __( 'Is All Day Event', 'events-gutenberg' ) }
