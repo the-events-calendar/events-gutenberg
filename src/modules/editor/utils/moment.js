@@ -171,6 +171,10 @@ export function toDateTime( date ) {
 	return date.format( toFormat( datetime ) );
 }
 
+export function toDate( date ) {
+	return date.format( toFormat( FORMATS.WP.date ) );
+}
+
 /**
  * Test if the current start and end date are happening on the same day.
  *
