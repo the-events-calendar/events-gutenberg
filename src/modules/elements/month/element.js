@@ -51,10 +51,6 @@ export default class Month extends Component {
 		};
 	}
 
-	componentDidMount() {
-		this.onSelectCallback();
-	}
-
 	selectDay = ( day, { selected } ) => {
 		const { withRange } = this.state;
 		const { from, to } = this.state;
