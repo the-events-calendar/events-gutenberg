@@ -14,6 +14,7 @@ export const FORMATS = {
 	WP: {
 		datetime: 'F j, Y g:i a',
 		time: 'g:i a',
+		date: 'F j',
 		...formats,
 	},
 };
@@ -39,7 +40,7 @@ export function equalDates( ...params ) {
 }
 
 export function timezonesAsSelectData() {
-	return this.timezones.map( ( tzone ) => {
+	return timezones().map( ( tzone ) => {
 		return {
 			value: tzone.key,
 			label: tzone.text,
@@ -48,7 +49,7 @@ export function timezonesAsSelectData() {
 }
 
 export function timezones() {
-	this.timezones = getItems()
+	return getItems()
 		.map( ( group ) => group.options || [] )
 		.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
 }
