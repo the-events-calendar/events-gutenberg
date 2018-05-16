@@ -7,7 +7,7 @@ import eventLinks from 'blocks/event-links';
 import eventPrice from 'blocks/event-price';
 import './style.pcss';
 
-export default [
+const blocks = [
 	eventDetails,
 	eventVenue,
 	eventSubtitle,
@@ -15,7 +15,10 @@ export default [
 	eventPrice,
 ];
 
-this.default.forEach( block => {
+blocks.forEach( block => {
 	const blockName = `tribe/${ block.id }`;
 	registerBlockType( blockName, block );
 } );
+
+export default blocks;
+
