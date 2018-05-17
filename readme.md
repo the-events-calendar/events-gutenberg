@@ -24,13 +24,14 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-### 0.2.0-alpha - TBD
+### 0.2.0-alpha - 2018-05-17
 
 * Feature - Event Price has his own block
 * Feature - Event Subtitle has a range selector with calendars to select multiple days
 * Feature - Event Subtitle has the option to set the Multiday or All day values
 * Feature - Event Details data has a Redux Store where the data is centralized
 * Fix - Event Details fix issues when selecting the data from the dashboard using the Store
+* Fix - Resolve a few warnings due to Gutenberg changes in the past few releases, using now `wp.editor` instead of `wp.blocks`
 
 #### 0.1.9-alpha - 2018-05-03
 

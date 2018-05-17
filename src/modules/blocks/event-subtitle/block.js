@@ -22,7 +22,7 @@ import { __ } from '@wordpress/i18n';
 
 import {
 	InspectorControls,
-} from '@wordpress/blocks';
+} from '@wordpress/editor';
 
 /**
  * Internal dependencies
