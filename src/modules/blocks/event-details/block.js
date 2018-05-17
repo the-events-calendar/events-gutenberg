@@ -44,6 +44,7 @@ import { default as EventOrganizers } from './organizers';
 import { getSetting } from 'editor/settings';
 import { totalSeconds } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
+import { toDateTime } from 'editor/utils/moment';
 
 /**
  * Module Code
@@ -162,14 +163,19 @@ class EventDetails extends Component {
 			<div>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
 				<DatePicker
-					changeDatetime={ ( date ) => {
-						setAttributes( { startDate: date } );
-					} }
+					changeDatetime={ this.setStartDay }
 					datetime={ startDate }
 				/>
 				{ this.renderStartTime() }
 			</div>
 		);
+	}
+
+	setStartDay( date ) {
+		store.dispatch( {
+			type: 'SET_START_DATE',
+			date: toDateTime( moment( date ) ),
+		} );
 	}
 
 	renderStartTime() {
@@ -205,19 +211,24 @@ class EventDetails extends Component {
 	};
 
 	renderEnd() {
-		const { endDate, setAttributes } = this.state;
+		const { endDate } = this.state;
 		return (
 			<div>
 				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
 				<DatePicker
-					changeDatetime={ ( date ) => {
-						setAttributes( { endDate: date } );
-					} }
+					changeDatetime={ this.setEndDate }
 					datetime={ endDate }
 				/>
 				{ this.renderEndTime() }
 			</div>
 		);
+	}
+
+	setEndDate( date ) {
+		store.dispatch( {
+			type: 'SET_END_DATE',
+			date: toDateTime( moment( date ) ),
+		} );
 	}
 
 	renderEndTime() {
