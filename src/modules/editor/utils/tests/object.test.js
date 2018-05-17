@@ -12,4 +12,4 @@ test( 'castBooleanStrings', () => {
 	expect( castBooleanStrings( {} ) ).toEqual( {} );
 	expect( castBooleanStrings( { a: '0', b: 'no', c: 'false', d: true } ) ).toEqual( { a: false, b: false, c: false, d: true } );
 	expect( castBooleanStrings( { a: '1', b: 'yes', c: 'true', d: false } ) ).toEqual( { a: true, b: true, c: true, d: false } );
-});
+} );

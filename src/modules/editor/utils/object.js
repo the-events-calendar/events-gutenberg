@@ -10,7 +10,6 @@ export function removeEmptyStrings( object ) {
 
 		// Return only values that are not empty
 		return ! isEmpty( item );
-
 	} );
 }
 

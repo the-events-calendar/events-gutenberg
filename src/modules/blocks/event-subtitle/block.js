@@ -56,6 +56,7 @@ export const VALID_PROPS = [
 /**
  * Module Code
  */
+
 export default class EventSubtitle extends Component {
 
 	static defaultProps = pick(

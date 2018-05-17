@@ -56,7 +56,6 @@ export const VALID_PROPS = [
  */
 
 export default class EventDetails extends Component {
-
 	constructor( props ) {
 		super( ...arguments );
 
@@ -358,6 +357,6 @@ export default class EventDetails extends Component {
 					/>
 				</PanelBody>
 			</InspectorControls>
-		)
+		);
 	}
 }

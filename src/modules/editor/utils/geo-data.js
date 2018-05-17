@@ -8,8 +8,8 @@ const list = {
 /**
  * Convert data from an array with different keys and values into a unified shape of object.
  *
- * @param data
- * @returns {{code: string, name: *}[]}
+ * @param {object} data An object with the data used to retrieve the data
+ * @returns {{code: string, name: *}[]} Return an object with code, name values
  */
 function toObject( data = {} ) {
 	return Object.keys( data ).map( ( key ) => {
@@ -23,7 +23,7 @@ function toObject( data = {} ) {
 /**
  * Return the list of all the countries presented by the localized variable: tribe_data_countries
  *
- * @returns {{code: string, name: *}[]}
+ * @returns {{code: string, name: *}[]} An object with the list of countries
  */
 export function getCountries() {
 	return toObject( list.countries );
@@ -32,8 +32,8 @@ export function getCountries() {
 /**
  * Return the list of al the states based on the country code
  *
- * @param countryCode
- * @returns {{code: string, name: *}[]}
+ * @param {string} countryCode The code of the country from where the states are going to be returned
+ * @returns {{code: string, name: *}[]} An object with the list of the States
  */
 export function getStates( countryCode ) {
 	switch ( countryCode ) {
