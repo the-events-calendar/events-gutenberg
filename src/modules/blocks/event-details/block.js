@@ -2,15 +2,14 @@
  * External dependencies
  */
 import moment from 'moment';
-import { union, without, isEmpty, noop, equals } from 'lodash';
+import { union, without, isEmpty, noop, pick } from 'lodash';
 import classNames from 'classnames';
 
 /**
  * WordPress dependencies
  */
-import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 
 import {
 	Dropdown,
@@ -20,8 +19,6 @@ import {
 	TextControl,
 	PanelBody,
 } from '@wordpress/components';
-
-import { store } from 'data/details';
 
 import {
 	RichText,
@@ -42,17 +39,24 @@ import {
 
 import { default as EventOrganizers } from './organizers';
 import { getSetting } from 'editor/settings';
-import { totalSeconds } from 'utils/moment';
+import { totalSeconds, toDateTime } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
-import { toDateTime } from 'editor/utils/moment';
+import { FORMATS } from 'utils/date';
+import { store } from 'data/details';
+import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-subtitle/block';
+
+export const VALID_PROPS = [
+	...SUBTITLE_PROPS,
+	'eventOrganizers',
+	'eventCurrencySymbol',
+	'currencyPosition',
+];
 
 /**
  * Module Code
  */
-const WPDateSettings = window.tribe_date_settings;
 
-class EventDetails extends Component {
-
+export default class EventDetails extends Component {
 	static defaultProps = {
 		currencyPosition: '1' == getSetting( 'reverseCurrencyPosition', 0 ) ? 'suffix' : 'prefix',
 		eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
@@ -67,7 +71,13 @@ class EventDetails extends Component {
 
 	componentDidMount() {
 		this.unsubscribe = store.subscribe( () => {
-			this.setState( store.getState() );
+			const state = store.getState();
+			this.setState( pick( state, VALID_PROPS ) );
+		} );
+
+		store.dispatch( {
+			type: 'SET_INITIAL_STATE',
+			values: pick( this.state, VALID_PROPS ),
 		} );
 	}
 
@@ -179,13 +189,13 @@ class EventDetails extends Component {
 	}
 
 	renderStartTime() {
-		const { allDay, startDate } = this.state;
-
+		const { allDay, startDate, dateTimeRangeSeparator } = this.state;
+		const { time } = FORMATS.WP;
 		const start = moment( startDate );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
 			current: start,
-			timeFormat: WPDateSettings.formats.time,
+			timeFormat: time,
 		};
 
 		if ( allDay ) {
@@ -194,7 +204,7 @@ class EventDetails extends Component {
 
 		return (
 			<React.Fragment>
-				<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>
+				<span>{ dateTimeRangeSeparator }</span>
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -232,23 +242,25 @@ class EventDetails extends Component {
 	}
 
 	renderEndTime() {
-		const { allDay, startDate, endDate } = this.state;
+		const { allDay } = this.state;
 
 		if ( allDay ) {
 			return null;
 		}
 
+		const { startDate, endDate, dateTimeRangeSeparator } = this.state;
 		const start = moment( startDate );
 		const end = moment( endDate );
+		const { time } = FORMATS.WP;
 
 		return (
 			<React.Fragment>
-				<span>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span>
+				<span>{ dateTimeRangeSeparator }</span>
 				<TimePicker
 					onSelectItem={ this.setEndTime }
 					current={ end }
 					minTime={ totalSeconds( start.add( HALF_HOUR_IN_SECONDS, 'seconds' ) ) }
-					timeFormat={ WPDateSettings.formats.time }
+					timeFormat={ time }
 				/>
 			</React.Fragment>
 		);
@@ -354,5 +366,3 @@ class EventDetails extends Component {
 		)
 	}
 }
-
-export default EventDetails;
