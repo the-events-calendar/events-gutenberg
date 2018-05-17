@@ -30,6 +30,7 @@ export const DEFAULT_STATE = {
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
 	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
 	eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
+	eventOrganizers: [],
 };
 
 export const STORE_NAME = 'tec.details';
@@ -37,6 +38,10 @@ export const STORE_NAME = 'tec.details';
 const details = {
 	reducer( state = DEFAULT_STATE, action ) {
 		switch ( action.type ) {
+			case 'SET_INITIAL_STATE': {
+				return reducers.setInitialState( state, action.values );
+			}
+
 			case 'SET_MULTI_DAY': {
 				return reducers.setMultiDay( state, action.multiDay );
 			}
@@ -68,8 +73,24 @@ const details = {
 				return reducers.setEndTime( state, action.seconds );
 			}
 
-			case 'SET_INITIAL_STATE': {
-				return reducers.setInitialState( state, action.values );
+			case 'SET_ORGANIZERS': {
+				return reducers.setOrganizers( state, action.organizers );
+			}
+
+			case 'ADD_ORGANIZERS': {
+				return reducers.addOrganizers( state, action.organizers );
+			}
+
+			case 'SET_CURRENCY_SYMBOL': {
+				return reducers.setCurrencySymbol( state, action.symbol );
+			}
+
+			case 'SET_CURRENCY_POSITION': {
+				return reducers.setCurrencyPosition( state, action.position );
+			}
+
+			default: {
+				return state;
 			}
 		}
 	},

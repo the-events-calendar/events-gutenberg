@@ -20,6 +20,8 @@ import {
 	DAY_IN_SECONDS,
 } from 'utils/time';
 
+import { isTruthy } from 'utils/string';
+
 /**
  * Set the event to be a multi day event
  *
@@ -188,14 +190,9 @@ export function setStartDate( prevState, date ) {
 		state.endDate = start.add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
 
-	state.multiDay = ! isSameDay( state.startDate, state.endDate );
-	state.allDay = isAllDay( state.startDate, state.endDate );
-	state.startDate = toDateTime( state.startDate );
-	state.endDate = toDateTime( state.endDate );
-
 	return {
 		...prevState,
-		...state,
+		...adjustEventPropertiesFromMoment( state ),
 	};
 }
 
@@ -229,14 +226,19 @@ function setEndDate( prevState, date ) {
 		state.endDate = moment( state.startDate ).add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
 
-	state.multiDay = ! isSameDay( state.endDate, state.startDate );
-	state.allDay = isAllDay( state.startDate, state.endDate );
-	state.startDate = toDateTime( state.startDate );
-	state.endDate = toDateTime( state.endDate );
-
 	return {
 		...prevState,
+		...adjustEventPropertiesFromMoment( state ),
+	};
+}
+
+function adjustEventPropertiesFromMoment( state ) {
+	return {
 		...state,
+		multiDay: ! isSameDay( state.endDate, state.startDate ),
+		allDay: isAllDay( state.startDate, state.endDate ),
+		startDate: toDateTime( state.startDate ),
+		endDate: toDateTime( state.endDate ),
 	};
 }
 
@@ -277,4 +279,34 @@ function getMultiDayDates( prevState ) {
 	}
 
 	return state;
+}
+
+export function setOrganizers( prevState, organizer ) {
+	return {
+		...prevState,
+		eventOrganizers: organizer,
+	}
+}
+
+export function addOrganizers( prevState, organizer ) {
+	const { eventOrganizers } = prevState;
+	return {
+		...prevState,
+		eventOrganizers: [ ...eventOrganizers, organizer ],
+	};
+}
+
+export function setCurrencySymbol( prevState, symbol ) {
+	return {
+		...prevState,
+		eventCurrencySymbol: symbol,
+	};
+}
+
+export function setCurrencyPosition( prevState, hasPosition ) {
+	const position = isTruthy( hasPosition ) ? 'suffix' : 'prefix';
+	return {
+		...prevState,
+		setCurrencyPosition: position,
+	};
 }
