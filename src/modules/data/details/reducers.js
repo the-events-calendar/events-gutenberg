@@ -214,20 +214,19 @@ function isAllDay( startDate, endDate ) {
 function setEndDate( prevState, date ) {
 	const { startDate } = prevState;
 	const state = {
-		endDate: roundTime( moment( date ) ),
 		startDate: roundTime( moment( startDate ) ),
+		endDate: roundTime( moment( date ) ),
 	};
 
-	const now = roundTime( moment() );
-	if ( state.endDate.isSameOrBefore( state.startDate ) ) {
-		// Remove 30 minutes from the start date if  End Date is lower or equal than Start date
-		state.startDate = moment( startDate ).subtract( HALF_HOUR_IN_SECONDS, 'seconds' );
+	if ( state.endDate.isBefore( state.startDate ) ) {
+		// Swap dates if end date is before start date
+		const [ end, start ] = [ state.startDate, state.endDate ];
+		state.startDate = start;
+		state.endDate = end;
+	}
 
-		// New start date does not fit on the bounds
-		if ( state.startDate.isSameOrBefore( now ) ) {
-			state.startDate = now;
-			state.endDate = roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' );
-		}
+	if ( state.endDate.isSame( state.startDate ) ) {
+		state.endDate = moment( state.startDate ).add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
 
 	state.multiDay = ! isSameDay( state.endDate, state.startDate );
