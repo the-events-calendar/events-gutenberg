@@ -56,7 +56,7 @@ export const VALID_PROPS = [
 /**
  * Module Code
  */
-class EventSubtitle extends Component {
+export default class EventSubtitle extends Component {
 
 	static defaultProps = pick(
 		DEFAULT_STATE,
@@ -430,5 +430,3 @@ class EventSubtitle extends Component {
 		return [ this.renderLabel(), this.renderControls() ];
 	}
 }
-
-export default EventSubtitle;
