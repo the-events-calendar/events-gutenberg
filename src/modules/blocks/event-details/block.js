@@ -51,22 +51,17 @@ import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 const WPDateSettings = window.tribe_date_settings;
 
 class EventDetails extends Component {
+
+	static defaultProps = {
+		currencyPosition: '1' == getSetting( 'reverseCurrencyPosition', 0 ) ? 'suffix' : 'prefix',
+		eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
+	}
+
 	constructor( props ) {
 		super( ...arguments );
+
 		this.state = props;
 		this.unsubscribe = noop;
-
-		this.currencyPosition = '1' == getSetting( 'reverseCurrencyPosition', 0 ) ? 'suffix' : 'prefix';
-
-		// If we have it saved we replace it
-		if ( props.eventCurrencyPosition ) {
-			this.currencyPosition = props.eventCurrencyPosition;
-		}
-
-		this.eventCurrencySymbol = getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) );
-		if ( props.eventCurrencySymbol ) {
-			this.eventCurrencySymbol = props.eventCurrencySymbol;
-		}
 	}
 
 	componentDidMount() {
@@ -281,22 +276,18 @@ class EventDetails extends Component {
 	}
 
 	renderCost() {
-		const { setAttributes, eventCost } = this.state;
+		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.state;
 		return (
 			<div className='tribe-editor__event-cost'>
 				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
-				{ 'prefix' === this.currencyPosition &&
-				<span>{ this.eventCurrencySymbol }</span>
-				}
+				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
 				<PlainText
-					className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ this.currencyPosition }` ) }
+					className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 					value={ eventCost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
 					onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
 				/>
-				{ 'suffix' === this.currencyPosition &&
-				<span>{ this.eventCurrencySymbol }</span>
-				}
+				{ 'suffix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
 			</div>
 		);
 	}
@@ -320,7 +311,7 @@ class EventDetails extends Component {
 	}
 
 	renderControls() {
-		const { isSelected, allDay, setAttributes } = this.state;
+		const { isSelected, allDay, setAttributes, currencyPosition, eventCurrencySymbol } = this.state;
 
 		if ( ! isSelected ) {
 			return null;
@@ -338,12 +329,12 @@ class EventDetails extends Component {
 				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
-						checked={ 'prefix' === this.currencyPosition }
+						checked={ 'prefix' === currencyPosition }
 						onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
 					/>
 					<TextControl
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
-						value={ equals( this.eventCurrencySymbol, this.eventCurrencySymbol ) ? '' : this.eventCurrencySymbol }
+						value={ eventCurrencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
 						onChange={ ( value ) => setAttributes( { eventCurrencySymbol: value } ) }
 					/>
