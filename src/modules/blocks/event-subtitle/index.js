@@ -10,7 +10,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventSubtitle from './block';
+import EventSubtitle, { VALID_PROPS } from './block';
+import { store } from 'data/details';
+import { removeEmptyStrings, castBooleanStrings } from 'utils/object';
+import { noop, pick, get } from 'lodash';
 
 /**
  * Module Code
@@ -55,7 +58,27 @@ export default {
 
 	useOnce: true,
 
-	edit: EventSubtitle,
+	edit: ( props ) => {
+		const setAttributes = get( props, 'setAttributes', noop );
+		store.subscribe( () => {
+			const state = store.getState();
+			setAttributes( pick( state, VALID_PROPS ) );
+		} );
+
+		const allowedProperties = pick( props, [ 'isSelected' ] );
+		const attributes = castBooleanStrings(
+			removeEmptyStrings(
+				get( props, 'attributes', {} )
+			)
+		);
+
+		const properties = {
+			...allowedProperties,
+			...attributes,
+		};
+
+		return <EventSubtitle { ...properties } />;
+	},
 
 	save( props ) {
 		return null;

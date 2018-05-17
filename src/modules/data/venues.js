@@ -1,9 +1,8 @@
 import { stringify } from 'querystringify';
 
-const { apiRequest } = wp;
-import { registerStore, dispatch, select } from '@wordpress/data';
+const { data, apiRequest } = wp;
+const { registerStore, dispatch, select } = data;
 import { getResponseHeaders } from 'utils/request';
-import { find, uniqBy } from 'lodash';
 
 const DEFAULT_STATE = {
 	posts: [],

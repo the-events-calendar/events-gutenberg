@@ -13,10 +13,19 @@ export function searchParent( node, callback ) {
 		if ( testNode ) {
 			found = callback( testNode );
 		}
-		testNode = testNode && testNode.parentNode
-			? testNode.parentNode
-			: null;
+		const nextNode = testNode && testNode.parentNode ? testNode.parentNode : null;
+		testNode = isRootNode( nextNode ) ? null : nextNode;
 	} while ( ! found && testNode !== null );
 
 	return found;
+}
+
+/**
+ * Test if a node is the same as the root element or the base node of the document.
+ *
+ * @param {Element} node A Document Node
+ * @returns {boolean} true if node is the root Node Document
+ */
+export function isRootNode( node ) {
+	return node === window.top.document;
 }

@@ -20,13 +20,14 @@ import { equalDates } from 'utils/date';
 import './style.pcss';
 
 export default class Month extends Component {
+
 	static propTypes = {
 		withRange: PropTypes.bool,
 		onSelectDay: PropTypes.func,
 		initialRangeDays: PropTypes.number,
 		from: PropTypes.instanceOf( Date ),
 		to: PropTypes.instanceOf( Date ),
-	}
+	};
 
 	static defaultProps = {
 		withRange: false,
@@ -36,24 +37,9 @@ export default class Month extends Component {
 		to: undefined,
 	};
 
-	static getDerivedStateFromProps( nextProps, prevState ) {
-		const { withRange, to, from } = nextProps;
-		const { initialRangeDays } = prevState;
-
-		if ( equalDates( from, prevState.from ) && equalDates( to, prevState.to ) ) {
-			return null;
-		}
-
-		let start;
-		if ( withRange ) {
-			start = new Date( from || prevState.from );
-			start.setDate( start.getDate() + initialRangeDays );
-		}
-
+	static getDerivedStateFromProps( nextProps ) {
 		return {
-			withRange,
-			from: from || prevState.from,
-			to: to || start,
+			...nextProps,
 		};
 	}
 
@@ -61,15 +47,8 @@ export default class Month extends Component {
 		super( ...arguments );
 
 		this.state = {
-			withRange: props.withRange,
-			initialRangeDays: props.initialRangeDays,
-			from: props.from,
-			to: undefined,
+			...props,
 		};
-	}
-
-	componentDidMount() {
-		this.onSelectCallback();
 	}
 
 	selectDay = ( day, { selected } ) => {
@@ -123,6 +102,7 @@ export default class Month extends Component {
 		const { withRange, from, to } = this.state;
 		const modifiers = withRange ? { start: from, end: to } : {};
 		const containerClass = classNames( { 'tribe-editor__calendars--range': withRange } );
+
 		return (
 			<DayPicker
 				className={ containerClass }
