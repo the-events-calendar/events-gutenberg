@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import moment from 'moment';
 import { union, without, isEmpty, noop, pick } from 'lodash';
 import classNames from 'classnames';
@@ -158,11 +159,11 @@ export default class EventDetails extends Component {
 				placeholder={ __( 'Details', 'events-gutenberg' ) }
 				formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 			/>
-		)
+		);
 	}
 
 	renderStart() {
-		const { setAttributes, startDate } = this.state;
+		const { startDate } = this.state;
 		return (
 			<div>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
