@@ -157,7 +157,7 @@ export function totalSeconds( date ) {
 		return 0;
 	}
 
-	return date.diff( moment().startOf( 'day' ), 'seconds' );
+	return date.diff( moment( date ).startOf( 'day' ), 'seconds' );
 }
 
 /**
