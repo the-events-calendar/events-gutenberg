@@ -38,7 +38,6 @@ import {
 } from 'elements';
 
 import { default as EventOrganizers } from './organizers';
-import { getSetting } from 'editor/settings';
 import { totalSeconds, toDateTime } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { FORMATS } from 'utils/date';
@@ -57,10 +56,6 @@ export const VALID_PROPS = [
  */
 
 export default class EventDetails extends Component {
-	static defaultProps = {
-		currencyPosition: '1' == getSetting( 'reverseCurrencyPosition', 0 ) ? 'suffix' : 'prefix',
-		eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
-	}
 
 	constructor( props ) {
 		super( ...arguments );
