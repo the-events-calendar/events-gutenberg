@@ -12,12 +12,10 @@ import { noop, pick } from 'lodash';
 import { Component } from '@wordpress/element';
 
 import {
-	Dropdown,
 	ToggleControl,
 	PanelBody,
 	SelectControl,
 	TextControl,
-	FormToggle,
 } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
@@ -26,14 +24,10 @@ import {
 	InspectorControls,
 } from '@wordpress/blocks';
 
-const { data } = wp;
-const { select } = data;
-
 /**
  * Internal dependencies
  */
 import {
-	DatePicker,
 	TimePicker,
 	Dashboard,
 	CheckBox,
@@ -43,7 +37,7 @@ import './style.pcss';
 
 import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
-import { toFormat, toMoment, totalSeconds, toDateTime } from 'utils/moment';
+import { toFormat, toMoment, totalSeconds, toDateTime, toDate } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { store, DEFAULT_STATE } from 'data/details';
@@ -82,7 +76,7 @@ class EventSubtitle extends Component {
 		this.storeListener = store.subscribe( () => {
 			const state = store.getState();
 			this.setState( pick( state, VALID_PROPS ) );
-		});
+		} );
 
 		const state = pick( this.state, VALID_PROPS );
 
@@ -108,10 +102,7 @@ class EventSubtitle extends Component {
 	renderStartDate() {
 		const { startDate } = this.state;
 		return (
-			<DatePicker
-				changeDatetime={ ( date ) => this.setState( { startDate: date } ) }
-				datetime={ startDate }
-			/>
+			<span>{ toDate( moment( startDate ) ) }</span>
 		);
 	}
 
@@ -143,17 +134,13 @@ class EventSubtitle extends Component {
 	}
 
 	renderEndDate() {
-		const { endDate } = this.state;
-
 		if ( this.isSameDay() ) {
 			return null;
 		}
 
+		const { endDate } = this.state;
 		return (
-			<DatePicker
-				changeDatetime={ ( date ) => this.setState( { endDate: date } ) }
-				datetime={ endDate }
-			/>
+			<span>{ toDate( moment( endDate ) ) }</span>
 		);
 	}
 

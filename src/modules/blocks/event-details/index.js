@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { get, noop, pick } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -11,6 +12,9 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventDetails from './block';
+import { store } from 'data/details';
+import { VALID_PROPS } from 'blocks/event-subtitle/block';
+import { castBooleanStrings, removeEmptyStrings } from 'editor/utils/object';
 
 /**
  * Module Code
@@ -81,7 +85,29 @@ export default {
 
 	useOnce: true,
 
-	edit: EventDetails,
+	edit: ( props ) => {
+		const setAttributes = get( props, 'setAttributes', noop );
+		store.subscribe( () => {
+			const state = store.getState();
+			setAttributes( state );
+		} );
+
+		const allowedProperties = pick(
+			props, [ 'isSelected', 'setFocus', 'setAttributes', 'focus' ]
+		);
+		const attributes = castBooleanStrings(
+			removeEmptyStrings(
+				get( props, 'attributes', {} )
+			)
+		);
+
+		const properties = {
+			...allowedProperties,
+			...attributes,
+		};
+
+		return <EventDetails { ...properties } />;
+	},
 
 	save( props ) {
 		return null;
