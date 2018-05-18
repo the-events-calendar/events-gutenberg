@@ -40,15 +40,10 @@ export default class DatePicker extends Component {
 		if ( datetime === prevState.datetime ) {
 			return null;
 		}
-		console.log( nextProps, prevState );
 
 		return {
 			datetime: toDatePicker( toMoment( datetime ) ),
 		};
-	}
-
-	componentDidUpdate() {
-		console.log(this.state);
 	}
 
 	constructor( props ) {
