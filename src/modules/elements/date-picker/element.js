@@ -2,80 +2,88 @@
  * External dependencies
  */
 import moment from 'moment';
-import { times, unescape, get, escapeRegExp } from 'lodash';
+import { noop } from 'lodash';
+import { PropTypes } from 'prop-types';
 
 /**
  * WordPress dependencies
  */
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import {
-	Placeholder,
-	Spinner,
 	DatePicker as WPDatePicker,
 	Dropdown,
-	withAPIData,
 } from '@wordpress/components';
-import { query } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { toFormat } from 'editor/utils/moment';
-import { getSetting } from 'editor/settings';
+import { toMoment, toDate, toDatePicker, toDateTime } from 'utils/moment';
 
 import './style.pcss';
 
 /**
  * Module Code
  */
-class DatePicker extends Component {
-	constructor() {
+export default class DatePicker extends Component {
+	static propTypes = {
+		changeDatetime: PropTypes.func,
+		datetime: PropTypes.string,
+	};
+
+	static defaultProps = {
+		changeDatetime: noop,
+		datetime: toDatePicker(),
+	};
+
+	static getDerivedStateFromProps( nextProps, prevState ) {
+		const { datetime } = nextProps;
+		if ( datetime === prevState.datetime ) {
+			return null;
+		}
+		console.log( nextProps, prevState );
+
+		return {
+			datetime: toDatePicker( toMoment( datetime ) ),
+		};
+	}
+
+	componentDidUpdate() {
+		console.log(this.state);
+	}
+
+	constructor( props ) {
 		super( ...arguments );
 
-		this.changeDatetime = this.props.changeDatetime.bind( this );
+		this.changeDatetime = props.changeDatetime.bind( this );
 
-		this.onChange = this.onChange.bind( this );
-		this.formatDate = this.formatDate.bind( this );
-
-		this.renderToggle = this.renderToggle.bind( this );
-		this.renderContent = this.renderContent.bind( this );
+		this.state = {
+			...props,
+			datetime: toDatePicker( toMoment( props.datetime ) ),
+		};
 	}
 
-	formatDate( date, label = false ) {
-		// Defaults to the non-label format
-		let format = 'YYYY-MM-DD HH:mm:00';
-
-		if ( ! date ) {
-			date = moment();
-		}
-
+	normalize = ( date = moment() ) => {
 		// Convert to moment
-		if ( 'string' === typeof date ) {
-			date = moment( date );
-		}
+		const current = moment( date );
+		return current.isValid() ? current : moment();
+	};
 
-		// on Invalid date we reset to now
-		if ( ! date.isValid() ) {
-			date = moment();
-		}
-
-		if ( label ) {
-			format = `${ toFormat( getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) ) ) }`;
-		}
-
-		return date.minutes( date.minutes() ).format( format );
-	}
-
-	renderContent( { onToggle, isOpen, onClose } ) {
+	renderContent = ( { onToggle, isOpen, onClose } ) => {
 		this.onClose = onClose.bind( this );
+		const { datetime } = this.state;
 
 		return (
-			<WPDatePicker key="date-picker" currentDate={ this.props.datetime } onChange={ this.onChange } />
+			<WPDatePicker
+				key="date-picker"
+				currentDate={ moment( datetime ) }
+				onChange={ this.onChange }
+			/>
 		);
-	}
+	};
 
-	renderToggle( { onToggle, isOpen, onClose } ) {
+	renderToggle = ( { onToggle, isOpen, onClose } ) => {
+		const { datetime } = this.state;
+
 		return (
 			<button
 				type="button"
@@ -83,15 +91,15 @@ class DatePicker extends Component {
 				onClick={ onToggle }
 				aria-expanded={ isOpen }
 			>
-				{ this.formatDate( this.props.datetime, true ) }
+				{ toDate( this.normalize( datetime ) ) }
 			</button>
 		);
-	}
+	};
 
-	onChange( date ) {
-		this.changeDatetime( this.formatDate( date ) );
+	onChange = ( date ) => {
+		this.changeDatetime( toDateTime( this.normalize( date ) ) );
 		this.onClose();
-	}
+	};
 
 	render() {
 		return (
@@ -105,5 +113,3 @@ class DatePicker extends Component {
 		);
 	}
 }
-
-export default DatePicker;
