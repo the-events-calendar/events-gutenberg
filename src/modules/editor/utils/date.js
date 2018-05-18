@@ -5,7 +5,7 @@ import { get } from 'lodash';
  * Internal dependencies
  */
 
-const WPDateSettings = get( window, 'ribe_date_settings', {} );
+const WPDateSettings = get( window, 'tribe_date_settings', {} );
 const { formats } = WPDateSettings;
 
 export const FORMATS = {

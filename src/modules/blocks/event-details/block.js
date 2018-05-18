@@ -42,9 +42,9 @@ import {
 
 import { default as EventOrganizers } from './organizers';
 import { getSetting } from 'editor/settings';
-import { totalSeconds } from 'utils/moment';
+import { totalSeconds, toMoment, toDatePicker } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
-import { toDateTime } from 'editor/utils/moment';
+import { FORMATS } from 'editor/utils';
 
 /**
  * Module Code
@@ -156,7 +156,8 @@ class EventDetails extends Component {
 	}
 
 	renderStart() {
-		const { setAttributes, startDate } = this.state;
+		const { startDate } = this.state;
+
 		return (
 			<div>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
@@ -172,18 +173,18 @@ class EventDetails extends Component {
 	setStartDay( date ) {
 		store.dispatch( {
 			type: 'SET_START_DATE',
-			date: toDateTime( moment( date ) ),
+			date,
 		} );
 	}
 
 	renderStartTime() {
 		const { allDay, startDate } = this.state;
 
-		const start = moment( startDate );
+		const start = toMoment( startDate );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
 			current: start,
-			timeFormat: WPDateSettings.formats.time,
+			timeFormat: FORMATS.WP.time,
 		};
 
 		if ( allDay ) {
@@ -225,7 +226,7 @@ class EventDetails extends Component {
 	setEndDate( date ) {
 		store.dispatch( {
 			type: 'SET_END_DATE',
-			date: toDateTime( moment( date ) ),
+			date,
 		} );
 	}
 
@@ -236,8 +237,8 @@ class EventDetails extends Component {
 			return null;
 		}
 
-		const start = moment( startDate );
-		const end = moment( endDate );
+		const start = toMoment( startDate );
+		const end = toMoment( endDate );
 
 		return (
 			<React.Fragment>
