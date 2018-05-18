@@ -26,9 +26,8 @@ import {
 
 import {
 	RichText,
-	PlainText,
 	InspectorControls,
-} from '@wordpress/blocks';
+} from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -80,7 +79,6 @@ class EventVenue extends Component {
 					} );
 				} }
 				focus={ focus && 'venueTitle' === focus.editable ? focus : undefined }
-				onFocus={ ( focusValue ) => setFocus( { editable: 'venueTitle', ...focusValue } ) }
 				placeholder={ __( 'Venue', 'events-gutenberg' ) }
 				formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 			/>
@@ -277,22 +275,20 @@ class EventVenue extends Component {
 			<div key="event-venue-box" className="tribe-editor-block tribe-editor-event-venue">
 				{ block }
 			</div>,
-			isSelected && (
-				<InspectorControls key="inspector">
-					<PanelBody title={ __( 'Venue Map Settings' ) }>
-						<ToggleControl
-							label={ __( 'Show Google Maps Link' ) }
-							checked={ !! showMapLink }
-							onChange={ ( value ) => setAttributes( { showMapLink: value } ) }
-						/>
-						<ToggleControl
-							label={ __( 'Show Google Maps Embed' ) }
-							checked={ !! showMap }
-							onChange={ ( value ) => setAttributes( { showMap: value } ) }
-						/>
-					</PanelBody>
-				</InspectorControls>
-			),
+			<InspectorControls key="inspector">
+				<PanelBody title={ __( 'Venue Map Settings' ) }>
+					<ToggleControl
+						label={ __( 'Show Google Maps Link' ) }
+						checked={ !! showMapLink }
+						onChange={ ( value ) => setAttributes( { showMapLink: value } ) }
+					/>
+					<ToggleControl
+						label={ __( 'Show Google Maps Embed' ) }
+						checked={ !! showMap }
+						onChange={ ( value ) => setAttributes( { showMap: value } ) }
+					/>
+				</PanelBody>
+			</InspectorControls>
 		];
 
 		return content;

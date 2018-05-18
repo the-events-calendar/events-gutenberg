@@ -21,9 +21,9 @@ import {
 } from '@wordpress/components';
 
 import {
-	PlainText,
 	InspectorControls,
-} from '@wordpress/blocks';
+	PlainText,
+} from '@wordpress/editor';
 
 /**
  * Internal dependencies

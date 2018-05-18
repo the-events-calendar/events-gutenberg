@@ -4,7 +4,7 @@ Contributors: ModernTribe, borkweb, barry.hughes, bordoni, brianjessee, cliffpau
 Tags: events, calendar, event, venue, organizer, blocks editor, gutenberg
 Donate link: http://m.tri.be/29
 Requires at least: 5.0
-Stable tag: 0.1.9-alpha
+Stable tag: 0.2.0-alpha
 Tested up to: 5.0
 Requires PHP: 5.2.4
 License: GPLv2 or later

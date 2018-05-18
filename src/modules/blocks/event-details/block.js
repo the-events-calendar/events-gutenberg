@@ -21,7 +21,7 @@ import {
 	RichText,
 	PlainText,
 	InspectorControls,
-} from '@wordpress/blocks';
+} from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -121,7 +121,6 @@ export default class EventDetails extends Component {
 					value={ organizerTitle }
 					onChange={ ( nextContent ) => setAttributes( { organizerTitle: nextContent } ) }
 					focus={ focus && 'organizerTitle' === focus.editable ? focus : undefined }
-					onFocus={ ( focusValue ) => setFocus( { editable: 'organizerTitle', ...focusValue } ) }
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 					formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 				/>
@@ -152,7 +151,6 @@ export default class EventDetails extends Component {
 				value={ detailsTitle }
 				onChange={ ( nextContent ) => setAttributes( { detailsTitle: nextContent } ) }
 				focus={ focus && 'detailsTitle' === focus.editable ? focus : undefined }
-				onFocus={ ( focusValue ) => setFocus( { editable: 'detailsTitle', ...focusValue } ) }
 				placeholder={ __( 'Details', 'events-gutenberg' ) }
 				formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 			/>

@@ -6,9 +6,9 @@ import { PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import {
-	PlainText,
 	InspectorControls,
-} from '@wordpress/blocks';
+	PlainText,
+} from '@wordpress/editor';
 
 /**
  * Internal dependencies
