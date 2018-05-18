@@ -23,7 +23,15 @@ class Tribe__Events_Gutenberg__Meta {
 			'show_in_rest' => true,
 		);
 
-		register_meta( 'post', '_EventAllDay', $args->text );
+		$args->bool = array(
+			'auth_callback' => array( $this,'auth_callback' ),
+			'sanitize_callback' => 'boolval',
+			'type' => 'boolean',
+			'single' => true,
+			'show_in_rest' => true,
+		);
+
+		register_meta( 'post', '_EventAllDay', $args->bool );
 		register_meta( 'post', '_EventTimezone', $args->text );
 		register_meta( 'post', '_EventStartDate', $args->text );
 		register_meta( 'post', '_EventEndDate', $args->text );
