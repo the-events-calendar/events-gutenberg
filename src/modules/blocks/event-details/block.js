@@ -2,7 +2,6 @@
  * External dependencies
  */
 import React from 'react';
-import moment from 'moment';
 import { union, without, isEmpty, noop, pick } from 'lodash';
 import classNames from 'classnames';
 
@@ -13,9 +12,6 @@ import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 
 import {
-	Dropdown,
-	IconButton,
-	Dashicon,
 	ToggleControl,
 	TextControl,
 	PanelBody,
@@ -39,7 +35,8 @@ import {
 } from 'elements';
 
 import { default as EventOrganizers } from './organizers';
-import { totalSeconds, toDateTime } from 'utils/moment';
+
+import { totalSeconds,  toMoment } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { FORMATS } from 'utils/date';
 import { store } from 'data/details';
@@ -164,6 +161,7 @@ export default class EventDetails extends Component {
 
 	renderStart() {
 		const { startDate } = this.state;
+
 		return (
 			<div>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
@@ -179,14 +177,15 @@ export default class EventDetails extends Component {
 	setStartDay( date ) {
 		store.dispatch( {
 			type: 'SET_START_DATE',
-			date: toDateTime( moment( date ) ),
+			date,
 		} );
 	}
 
 	renderStartTime() {
 		const { allDay, startDate, dateTimeRangeSeparator } = this.state;
 		const { time } = FORMATS.WP;
-		const start = moment( startDate );
+
+		const start = toMoment( startDate );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
 			current: start,
@@ -232,7 +231,7 @@ export default class EventDetails extends Component {
 	setEndDate( date ) {
 		store.dispatch( {
 			type: 'SET_END_DATE',
-			date: toDateTime( moment( date ) ),
+			date,
 		} );
 	}
 
@@ -244,8 +243,8 @@ export default class EventDetails extends Component {
 		}
 
 		const { startDate, endDate, dateTimeRangeSeparator } = this.state;
-		const start = moment( startDate );
-		const end = moment( endDate );
+		const start = toMoment( startDate );
+		const end = toMoment( endDate );
 		const { time } = FORMATS.WP;
 
 		return (

@@ -13,6 +13,7 @@ import {
 	setTimeInSeconds,
 	totalSeconds,
 	replaceDate,
+	toMoment,
 } from 'utils/moment';
 
 import {
@@ -42,14 +43,14 @@ export function setMultiDay( prevState, multiDay ) {
 	 *
 	 * after this point we can assure we are setting multiday to off
 	 */
-	const start = moment( startDate );
+	const start = toMoment( startDate );
 	const state = {
 		multiDay,
 		startDate,
 		endDate,
 	};
 
-	const sameDay = isSameDay( start, endDate );
+	const sameDay = isSameDay( start, toMoment( endDate ) );
 	if ( ! sameDay ) {
 		const lastBlockOfTheDay = DAY_IN_SECONDS - HALF_HOUR_IN_SECONDS;
 		// Make sure we don't overflow if start is on the last block of the day which is 11:30
@@ -58,11 +59,11 @@ export function setMultiDay( prevState, multiDay ) {
 			state.startDate = toDateTime( start.subtract( HALF_HOUR_IN_SECONDS, 'seconds' ) );
 		}
 		state.endDate = toDateTime(
-			moment( state.startDate ).add( HALF_HOUR_IN_SECONDS, 'seconds' ),
+			toMoment( state.startDate ).add( HALF_HOUR_IN_SECONDS, 'seconds' ),
 		);
 	}
 
-	state.allDay = isAllDay( moment( state.startDate ), moment( state.endDate ) );
+	state.allDay = isAllDay( toMoment( state.startDate ), toMoment( state.endDate ) );
 
 	return {
 		...prevState,
@@ -100,7 +101,7 @@ export function setStartTime( prevState, seconds ) {
 	}
 
 	const { startDate } = prevState;
-	const start = setTimeInSeconds( moment( startDate ), seconds );
+	const start = setTimeInSeconds( toMoment( startDate ), seconds );
 	return setStartDate( prevState, toDateTime( start ) );
 }
 
@@ -118,7 +119,7 @@ export function setEndTime( prevState, seconds ) {
 	}
 
 	const { startDate } = prevState;
-	const end = setTimeInSeconds( moment( startDate ), seconds );
+	const end = setTimeInSeconds( toMoment( startDate ), seconds );
 	return setEndDate( prevState, toDateTime( end ) );
 }
 
@@ -132,8 +133,8 @@ export function setInitialState( prevState, values ) {
 }
 
 export function setInitialDates( prevState = {}, startDate = '', endDate = '' ) {
-	let start = moment( startDate );
-	let end = moment( endDate );
+	let start = toMoment( startDate );
+	let end = toMoment( endDate );
 
 	if ( ! start.isValid() ) {
 		start = roundTime( moment() );
@@ -157,8 +158,8 @@ export function setOnlyDateForStart( prevState, date ) {
 
 	const { startDate } = prevState;
 	const start = replaceDate(
-		moment( startDate ),
-		roundTime( moment( date ) ),
+		toMoment( startDate ),
+		roundTime( toMoment( date ) ),
 	);
 
 	return setStartDate( prevState, toDateTime( start ) );
@@ -171,8 +172,8 @@ export function setOnlyDateForEnd( prevState, date ) {
 
 	const { endDate } = prevState;
 	const end = replaceDate(
-		moment( endDate ),
-		roundTime( moment( date ) ),
+		toMoment( endDate ),
+		roundTime( toMoment( date ) ),
 	);
 
 	return setEndDate( prevState, toDateTime( end ) );
@@ -181,11 +182,11 @@ export function setOnlyDateForEnd( prevState, date ) {
 export function setStartDate( prevState, date ) {
 	const { endDate } = prevState;
 	const state = {
-		startDate: roundTime( moment( date ) ),
-		endDate: roundTime( moment( endDate ) ),
+		startDate: roundTime( toMoment( date ) ),
+		endDate: roundTime( toMoment( endDate ) ),
 	};
 
-	const start = roundTime( moment( date ) );
+	const start = roundTime( toMoment( date ) );
 	if ( state.endDate.isSameOrBefore( start ) ) {
 		state.endDate = start.add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
@@ -197,7 +198,7 @@ export function setStartDate( prevState, date ) {
 }
 
 function isAllDay( startDate, endDate ) {
-	const sameDay = isSameDay( startDate, endDate );
+	const sameDay = isSameDay( toMoment( startDate ), toMoment( endDate ) );
 
 	if ( ! sameDay ) {
 		return false;
@@ -211,8 +212,8 @@ function isAllDay( startDate, endDate ) {
 function setEndDate( prevState, date ) {
 	const { startDate } = prevState;
 	const state = {
-		startDate: roundTime( moment( startDate ) ),
-		endDate: roundTime( moment( date ) ),
+		startDate: roundTime( toMoment( startDate ) ),
+		endDate: roundTime( toMoment( date ) ),
 	};
 
 	if ( state.endDate.isBefore( state.startDate ) ) {
@@ -223,7 +224,7 @@ function setEndDate( prevState, date ) {
 	}
 
 	if ( state.endDate.isSame( state.startDate ) ) {
-		state.endDate = moment( state.startDate ).add( HALF_HOUR_IN_SECONDS, 'seconds' );
+		state.endDate = toMoment( state.startDate ).add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
 
 	return {
@@ -244,8 +245,8 @@ function adjustEventPropertiesFromMoment( state ) {
 
 function getAllDayDates( prevState ) {
 	const { startDate } = prevState;
-	const start = setTimeInSeconds( moment( startDate ), 0 );
-	const end = moment( startDate ).endOf( 'day' );
+	const start = setTimeInSeconds( toMoment( startDate ), 0 );
+	const end = toMoment( startDate ).endOf( 'day' );
 	const state = {
 		startDate: toDateTime( start ),
 		allDay: true,
@@ -261,7 +262,7 @@ function getAllDayDates( prevState ) {
 
 function getMultiDayDates( prevState ) {
 	const { startDate, endDate } = prevState;
-	const start = moment( startDate );
+	const start = toMoment( startDate );
 	const state = {
 		...prevState,
 		multiDay: true,
@@ -270,11 +271,11 @@ function getMultiDayDates( prevState ) {
 		endDate,
 	};
 
-	if ( isSameDay( start, state.endDate ) ) {
+	if ( isSameDay( start, toMoment( state.endDate ) ) ) {
 		// Add 3 days if we are going to set a dynamic range when start and end are on the same day
 		const range = DAY_IN_SECONDS * 3;
 		state.endDate = toDateTime(
-			moment( startDate ).add( range, 'seconds' ),
+			toMoment( startDate ).add( range, 'seconds' ),
 		);
 	}
 

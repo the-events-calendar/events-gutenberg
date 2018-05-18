@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import moment from 'moment';
 import React from 'react';
 
 import { noop, pick } from 'lodash';
@@ -102,8 +101,9 @@ export default class EventSubtitle extends Component {
 
 	renderStartDate() {
 		const { startDate } = this.state;
+
 		return (
-			<span>{ toDate( moment( startDate ) ) }</span>
+			<span>{ toDate( toMoment( startDate ) ) }</span>
 		);
 	}
 
@@ -115,7 +115,7 @@ export default class EventSubtitle extends Component {
 			return null;
 		}
 
-		const start = moment( startDate );
+		const start = toMoment( startDate );
 
 		return (
 			<React.Fragment>
@@ -141,7 +141,7 @@ export default class EventSubtitle extends Component {
 
 		const { endDate } = this.state;
 		return (
-			<span>{ toDate( moment( endDate ) ) }</span>
+			<span>{ toDate( toMoment( endDate ) ) }</span>
 		);
 	}
 
@@ -156,7 +156,7 @@ export default class EventSubtitle extends Component {
 		return (
 			<React.Fragment>
 				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
-				{ moment( endDate ).format( toFormat( time ) ) }
+				{ toMoment( endDate ).format( toFormat( time ) ) }
 			</React.Fragment>
 		);
 	}
@@ -168,7 +168,8 @@ export default class EventSubtitle extends Component {
 	 */
 	isSameDay( start, end ) {
 		const { startDate, endDate } = this.state;
-		return moment( start || startDate ).isSame( end || endDate, 'day' );
+		return toMoment( start || startDate )
+			.isSame( toMoment( end || endDate ), 'day' );
 	}
 
 	/**
@@ -263,11 +264,11 @@ export default class EventSubtitle extends Component {
 		const monthProps = {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
-			from: moment( startDate ).toDate(),
+			from: toMoment( startDate ).toDate(),
 		};
 
 		if ( ! this.isSameDay() ) {
-			monthProps.to = moment( endDate ).toDate();
+			monthProps.to = toMoment( endDate ).toDate();
 		}
 
 		return (
@@ -292,7 +293,7 @@ export default class EventSubtitle extends Component {
 	renderStartTimePicker() {
 		const { startDate, allDay } = this.state;
 		const { time, date } = FORMATS.WP;
-		const start = moment( startDate );
+		const start = toMoment( startDate );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
 			current: start,
@@ -328,8 +329,8 @@ export default class EventSubtitle extends Component {
 		}
 
 		const { time, date } = FORMATS.WP;
-		const start = moment( this.state.startDate );
-		const end = moment( this.state.endDate );
+		const start = toMoment( this.state.startDate );
+		const end = toMoment( this.state.endDate );
 		const pickerProps = {
 			current: end,
 			onSelectItem: this.setEndTime,
