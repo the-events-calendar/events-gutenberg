@@ -25,7 +25,7 @@ class Tribe__Events_Gutenberg__Meta {
 
 		$args->bool = array(
 			'auth_callback' => array( $this,'auth_callback' ),
-			'sanitize_callback' => 'boolval',
+			'sanitize_callback' => array( $this, 'sanitize_boolean' ),
 			'type' => 'boolean',
 			'single' => true,
 			'show_in_rest' => true,
@@ -121,5 +121,18 @@ class Tribe__Events_Gutenberg__Meta {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Make sure sanitization on boolean does not triggered warnings when multiple values are passed
+	 * to the function
+	 *
+	 * @since TBD
+	 * @param $value
+	 *
+	 * @return bool
+	 */
+	public function sanitize_boolean( $value ) {
+		return boolval( $value );
 	}
 }
