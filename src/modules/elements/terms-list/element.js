@@ -88,31 +88,51 @@ class TaxonomiesElement extends Component {
 		);
 	}
 
-	render() {
-		const { attributes, focus, setAttributes, slug } = this.props;
-		const terms = this.getTerms();
+	renderEmpty() {
+		const { renderEmpty, slug } = this.props;
+		const key   = `tribe-terms-${ slug }`;
+		if ( ! renderEmpty ) {
+			return null;
+		}
+
+		return [
+			<div key={ key } className="tribe-terms__block tribe-is-empty">
+				{ this.renderLabel() }
+				{ renderEmpty }
+			</div>,
+		]
+	}
+
+	renderLabel() {
 		const label = (
 			<strong className="tribe-detail-label" key="terms-label">
 				{ this.props.label }
 				{ ' ' }
 			</strong>
 		);
+
+		return label;
+	}
+
+	render() {
+		const { attributes, focus, setAttributes, slug } = this.props;
+		const terms = this.getTerms();
 		const key   = `tribe-terms-${ slug }`;
 
 		if ( this.props.terms.isLoading ) {
 			return [
 				<div key={ key } className="tribe-terms__block">
-					{ label }
+					{ this.renderLabel() }
 					<Spinner key="terms-spinner" />
 				</div>,
 			];
 		} else if ( ! terms.length ) {
-			return null;
+			return this.renderEmpty();
 		}
 
 		return [
 			<div key={ key } className="tribe-terms__block">
-				{ label }
+				{ this.renderLabel() }
 				<div key="terms" className={ this.props.className }>
 					{ this.renderTermList() }
 				</div>
@@ -139,10 +159,17 @@ const applyWithAPIData = withAPIData( ( props ) => {
 		orderby: 'count',
 		order: 'desc',
 	};
-	if ( terms && terms.length ) {
-		args.include = terms;
+
+	if ( ! terms || ! terms.length ) {
+		return {
+			terms: []
+		}
 	}
+
+	args.include = terms;
+
 	const query = stringify( args );
+
 	return {
 		terms: `/wp/v2/${ slug }?${ query }`,
 	};
