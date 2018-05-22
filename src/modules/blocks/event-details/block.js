@@ -43,7 +43,6 @@ import { store } from 'data/details';
 import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-subtitle/block';
 
 export const VALID_PROPS = [
-	...SUBTITLE_PROPS,
 	'eventOrganizers',
 	'eventCurrencySymbol',
 	'currencyPosition',
@@ -64,7 +63,7 @@ export default class EventDetails extends Component {
 	componentDidMount() {
 		this.unsubscribe = store.subscribe( () => {
 			const state = store.getState();
-			this.setState( pick( state, VALID_PROPS ) );
+			this.setState( pick( state, [ ...SUBTITLE_PROPS, ...VALID_PROPS ] ) );
 		} );
 
 		store.dispatch( {
