@@ -286,7 +286,7 @@ export function setOrganizers( prevState, organizer ) {
 	return {
 		...prevState,
 		eventOrganizers: organizer,
-	}
+	};
 }
 
 export function addOrganizers( prevState, organizer ) {

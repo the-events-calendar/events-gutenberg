@@ -149,7 +149,7 @@ export default class VenueDetails extends Component {
 		);
 	}
 
-	getVenueName( venue = this.props.venue  ) {
+	getVenueName( venue = this.props.venue ) {
 		// if we still don't have venue we don't have an address
 		if ( ! venue ) {
 			return false;
@@ -182,7 +182,7 @@ export default class VenueDetails extends Component {
 		return (
 			<address className="tribe-venue__address">
 				<span className="tribe-venue__street-address">{ _VenueAddress }</span>
-				<br/>
+				<br />
 				{ _VenueCity && <span className="tribe-venue__locality">{ _VenueCity }</span> }
 				{ _VenueCity && <span className="tribe-venue__delimiter">, </span> }
 				{ _VenueProvince && <span className="tribe-venue__region">{ _VenueProvince }</span> }

@@ -148,7 +148,7 @@ class EventVenue extends Component {
 				console.warning( 'Invalid update of venue coordinates:', newPost );
 			}
 		} ).fail( ( err ) => {
-			console.log( err );
+			console.error( err );
 		} );
 	};
 
