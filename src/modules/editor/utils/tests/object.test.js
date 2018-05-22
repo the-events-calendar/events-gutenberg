@@ -1,4 +1,7 @@
-import { removeEmptyStrings, castBooleanStrings } from './../object';
+/**
+ * Internal dependencies
+ */
+import { removeEmptyStrings, castBooleanStrings, diff } from './../object';
 
 test( 'removeEmptyStrings', () => {
 	expect( removeEmptyStrings( {} ) ).toEqual( {} );
@@ -16,4 +19,15 @@ test( 'castBooleanStrings', () => {
 		.toEqual( { a: false, b: false, c: false, d: true } );
 	expect( castBooleanStrings( { a: '1', b: 'yes', c: 'true', d: false } ) )
 		.toEqual( { a: true, b: true, c: true, d: false } );
+} );
+
+test( 'diff', () => {
+	expect( diff( {}, {} ) ).toEqual( {} );
+	expect( diff( { a: 1 }, { b: 2 } ) ).toEqual( { a: 1 } );
+	expect( diff( { a: 1, b: 2 }, { a: 1 } ) ).toEqual( { b: 2 } );
+	expect( diff( { a: [ 1, 2 ] }, { a: [] } ) ).toEqual( { a: [ 1, 2 ] } );
+	expect( diff( { a: true, b: false, c: false }, { a: false, b: true, c: false } ) )
+		.toEqual( { a: true, b: false } );
+	expect( diff( { a: true, b: { c: false } }, { a: true, b: { c: true } } ) )
+		.toEqual( { b: { c: false } } );
 } );
