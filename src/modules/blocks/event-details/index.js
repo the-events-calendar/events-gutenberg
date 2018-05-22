@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, noop, pick } from 'lodash';
+import { get, noop, pick, isEqual } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -13,8 +13,8 @@ import { __ } from '@wordpress/i18n';
  */
 import EventDetails from './block';
 import { store } from 'data/details';
-import { VALID_PROPS } from 'blocks/event-subtitle/block';
-import { castBooleanStrings, removeEmptyStrings } from 'editor/utils/object';
+import { VALID_PROPS } from './block';
+import { castBooleanStrings, removeEmptyStrings, diff } from 'utils/object';
 
 /**
  * Module Code
@@ -86,10 +86,20 @@ export default {
 	useOnce: true,
 
 	edit: ( props ) => {
-		const setAttributes = get( props, 'setAttributes', noop );
-		store.subscribe( () => {
+		// Remove any old subscription if component is rendered again
+		if ( typeof this.unsubscribe === 'function' ) {
+			this.unsubscribe();
+		}
+
+		this.unsubscribe = store.subscribe( () => {
+			const setAttributes = get( props, 'setAttributes', noop );
 			const state = store.getState();
-			setAttributes( state );
+			// Pick relevant ones from store
+			const attributes = pick( state, VALID_PROPS );
+			// Pick relevant ones from the current attributes
+			const prevAttributes = pick( get( props, 'attributes', {} ), VALID_PROPS );
+			// Updates the attributes with changes
+			setAttributes( diff( attributes, prevAttributes ) );
 		} );
 
 		const allowedProperties = pick(
