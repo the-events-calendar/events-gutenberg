@@ -10,6 +10,7 @@ import { get, has } from 'lodash';
 /**
  * Internal dependencies
  */
+import { settings } from 'utils/globals';
 
 /**
  * Module Code
@@ -17,8 +18,6 @@ import { get, has } from 'lodash';
  * @return {object} An object with the global settings
  */
 export function getSettings() {
-	const settings = window.tribe_blocks_editor_settings || {};
-
 	return settings;
 }
 

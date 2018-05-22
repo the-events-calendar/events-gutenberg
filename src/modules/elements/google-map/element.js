@@ -4,7 +4,6 @@
 import { stringify } from 'querystringify';
 import { values } from 'lodash';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import React from 'react';
 
 /**
@@ -23,6 +22,7 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
+import { google } from 'utils/globals';
 
 /**
  * Module Code
@@ -140,7 +140,7 @@ class GoogleMap extends Component {
 		this.state = {
 			map: null,
 			marker: null,
-			google: window.google ? window.google : null,
+			google: google,
 		};
 
 		this.map = React.createRef();
@@ -239,7 +239,7 @@ class GoogleMap extends Component {
 		}
 
 		return (
-			<div className="tribe-element-map-container">
+			<div className="tribe-element__map-container">
 				{ mapElement }
 			</div>
 		);
