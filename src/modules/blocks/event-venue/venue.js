@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId, trim, isEmpty, mapValues } from 'lodash';
+import { unescape, isEmpty } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 
@@ -9,7 +9,7 @@ import classNames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import { store, STORE_NAME } from 'data/venues';
 
 import {
@@ -70,7 +70,7 @@ function CreateDropdown( { ...props } ) {
 }
 
 function VenueActions( { ...props } ) {
-	const { focus, venue, onClick } = props;
+	const { focus, onClick } = props;
 
 	if ( ! focus ) {
 		return null;
@@ -94,134 +94,13 @@ function VenueActions( { ...props } ) {
 /**
  * Module Code
  */
-class VenueDetails extends Component {
+export default class VenueDetails extends Component {
 	constructor( props ) {
 		super( ...arguments );
 
 		this.state = {
 			isLoading: false,
 		};
-		this.renderVenueName = this.renderVenueName.bind( this );
-		this.renderVenue = this.renderVenue.bind( this );
-		this.renderActions = this.renderActions.bind( this );
-	}
-
-	renderVenueName( venue = null ) {
-		// If we don't have a venue we fetch the one in the state
-		if ( ! venue ) {
-			venue = this.props.venue;
-		}
-
-		// if we still don't have venue we don't have an address
-		if ( ! venue ) {
-			return false;
-		}
-
-		// If we don't have a title we say it's untitled
-		if ( ! venue.title ) {
-			return __( '(Untitled Venue)', 'events-gutenberg' );
-		}
-
-		return unescape( venue.title.rendered ).trim();
-	}
-
-	renderVenue() {
-		const venue = this.props.venue;
-		const {
-			focus,
-			removeVenue,
-			showMap,
-			showMapLink,
-		} = this.props;
-		const classes = {
-			'tribe-current': true,
-		};
-
-		const address = this.props.getAddress();
-		const mapsUrlArgs = {
-			f: 'q',
-			source: 's_q',
-			geocode: '',
-			q: address,
-		};
-		const mapsUrl = `https://maps.google.com/maps?${ stringify( mapsUrlArgs ) }`;
-
-		return (
-			<div
-				className={ classNames( classes ) }
-				key={ venue.id }
-			>
-				<h4>{ this.renderVenueName() }</h4>
-				{ ! isEmpty( address ) &&
-					<address className="tribe-events-address">
-						<span className="tribe-street-address">{ venue.meta._VenueAddress }</span>
-						<br />
-						<span className="tribe-locality">{ venue.meta._VenueCity }</span><span className="tribe-delimiter">,</span>&nbsp;
-						<abbr className="tribe-region tribe-events-abbr" title={ venue.meta._VenueProvince }>{ venue.meta._VenueProvince }</abbr>&nbsp;
-						<span className="tribe-postal-code">{ venue.meta._VenueZip }</span>&nbsp;
-						<span className="tribe-country-name">{ venue.meta._VenueCountry }</span>&nbsp;
-						{ ! isEmpty( address ) && showMapLink &&
-							<a
-								className="tribe-events-gmap"
-								href={ mapsUrl }
-								title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
-								target="_blank"
-							>
-								{ __( '+ Google Map', 'events-gutenberg' ) }
-							</a>
-						}
-					</address>
-				}
-
-				{ ! isEmpty( venue.meta._VenuePhone ) &&
-					<p className="tribe-editor__meta-field">
-						<strong>{ __( 'Phone: ', 'events-gutenberg' ) }</strong><br />
-						<span>{ venue.meta._VenuePhone }</span>
-					</p>
-				}
-
-				{ ! isEmpty( venue.meta._VenueURL ) &&
-					<p className="tribe-editor__meta-field">
-						<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
-						<span>{ venue.meta._VenueURL }</span>
-					</p>
-				}
-			</div>
-		);
-	}
-
-	renderActions() {
-		const { focus, addVenue, removeVenue, venue } = this.props;
-
-		return (
-			<div key="venue-actions" className="tribe-editor-venue-actions">
-				<SearchPosts
-					key="venue-search-dropdown"
-					postType="tribe_venue"
-					metaKey="_EventVenueID"
-					searchLabel={ __( 'Search for an venue', 'events-gutenberg' ) }
-					iconLabel={ __( 'Add existing venue', 'events-gutenberg' ) }
-					focus={ focus }
-					onSelectItem={ addVenue }
-					store={ store }
-					storeName={ STORE_NAME }
-					searchable
-				/>
-				<CreateDropdown
-					key="venue-create-dropdown"
-					focus={ focus }
-					addVenue={ addVenue }
-				/>
-				{ venue &&
-					<VenueActions
-						key="venue-actions"
-						focus={ focus }
-						venue={ venue }
-						onClick={ () => removeVenue( venue ) }
-					/>
-				}
-			</div>
-		);
 	}
 
 	render() {
@@ -246,6 +125,155 @@ class VenueDetails extends Component {
 			</Placeholder>
 		);
 	}
-}
 
-export default VenueDetails;
+	renderVenue = () => {
+		const { venue } = this.props;
+		const classes = {
+			'tribe-current': true,
+		};
+
+		return (
+			<div
+				className={ classNames( classes ) }
+				key={ venue.id }
+			>
+				{ this.renderVenueName() }
+				{ this.renderAddress() }
+				{ this.renderPhone() }
+				{ this.renderURL() }
+			</div>
+		);
+	}
+
+	renderVenueName() {
+		return (
+			<h4>{ this.getVenueName() }</h4>
+		);
+	}
+
+	getVenueName( venue = this.props.venue  ) {
+		// if we still don't have venue we don't have an address
+		if ( ! venue ) {
+			return false;
+		}
+
+		// If we don't have a title we say it's untitled
+		if ( ! venue.title ) {
+			return __( '(Untitled Venue)', 'events-gutenberg' );
+		}
+
+		return unescape( venue.title.rendered ).trim();
+	}
+
+	renderAddress() {
+		const address = this.props.getAddress();
+		if ( isEmpty( address ) ) {
+			return null;
+		}
+
+		const { venue } = this.props;
+		const { meta } = venue;
+
+		return (
+			<address className="tribe-events-address">
+				<span className="tribe-street-address">{ meta._VenueAddress }</span>
+				<br/>
+				<span className="tribe-locality">{ meta._VenueCity }</span><span className="tribe-delimiter">,</span>&nbsp;
+				<abbr className="tribe-region tribe-events-abbr" title={ meta._VenueProvince }>{ meta._VenueProvince }</abbr>&nbsp;
+				<span className="tribe-postal-code">{ meta._VenueZip }</span>&nbsp;
+				<span className="tribe-country-name">{ meta._VenueCountry }</span>&nbsp;
+				{ this.renderGoogleMapLink() }
+			</address>
+		);
+	}
+
+	renderGoogleMapLink() {
+		const address = this.props.getAddress();
+		const mapsUrlArgs = {
+			f: 'q',
+			source: 's_q',
+			geocode: '',
+			q: address,
+		};
+		const mapsUrl = `https://maps.google.com/maps?${ stringify( mapsUrlArgs ) }`;
+		const { showMapLink } = this.props;
+
+		if ( ! showMapLink ) {
+			return null;
+		}
+
+		return (
+			<a
+				className="tribe-events-gmap"
+				href={ mapsUrl }
+				title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
+				target="_blank"
+			>
+				{ __( '+ Google Map', 'events-gutenberg' ) }
+			</a>
+		);
+	}
+
+	renderPhone() {
+		const { venue } = this.props;
+
+		if ( isEmpty( venue.meta._VenuePhone ) ) {
+			return null;
+		}
+
+		return (
+			<p className="tribe-editor__meta-field">
+				<strong>{ __( 'Phone: ', 'events-gutenberg' ) }</strong><br/>
+				<span>{ venue.meta._VenuePhone }</span>
+			</p>
+		)
+	}
+
+	renderURL() {
+		const { venue } = this.props;
+		if ( isEmpty( venue.meta._VenueURL ) ) {
+			return null;
+		}
+
+		return (
+			<p className="tribe-editor__meta-field">
+				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
+				<span>{ venue.meta._VenueURL }</span>
+			</p>
+		);
+	}
+
+	renderActions = () => {
+		const { focus, addVenue, removeVenue, venue } = this.props;
+
+		return (
+			<div key="venue-actions" className="tribe-editor-venue-actions">
+				<SearchPosts
+					key="venue-search-dropdown"
+					postType="tribe_venue"
+					metaKey="_EventVenueID"
+					searchLabel={ __( 'Search for an venue', 'events-gutenberg' ) }
+					iconLabel={ __( 'Add existing venue', 'events-gutenberg' ) }
+					focus={ focus }
+					onSelectItem={ addVenue }
+					store={ store }
+					storeName={ STORE_NAME }
+					searchable
+				/>
+				<CreateDropdown
+					key="venue-create-dropdown"
+					focus={ focus }
+					addVenue={ addVenue }
+				/>
+				{ venue &&
+				<VenueActions
+					key="venue-actions"
+					focus={ focus }
+					venue={ venue }
+					onClick={ () => removeVenue( venue ) }
+				/>
+				}
+			</div>
+		);
+	}
+}
