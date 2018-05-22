@@ -45,13 +45,6 @@ class EventVenue extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.getVenue = this.getVenue.bind( this );
-		this.getAddress = this.getAddress.bind( this );
-		this.isLoading = this.isLoading.bind( this );
-
-		this.updateCoodinates = this.updateCoodinates.bind( this );
-		this.updateAddress = this.updateAddress.bind( this );
-
 		this.state = {
 			venue: undefined,
 		};
@@ -81,7 +74,7 @@ class EventVenue extends Component {
 		);
 	}
 
-	getVenue() {
+	getVenue = () => {
 		if ( ! this.props.venue ) {
 			return null;
 		}
@@ -98,15 +91,16 @@ class EventVenue extends Component {
 		return venues[ 0 ];
 	}
 
-	isLoading() {
-		if ( ! this.props.venue || this.props.venue.id ) {
+	isLoading = () => {
+		const { venue } = this.props;
+		if ( ! venue || venue.id ) {
 			return false;
 		}
 
-		return this.props.venue.isLoading;
+		return venue.isLoading;
 	}
 
-	getAddress( venue = null ) {
+	getAddress = ( venue = null ) => {
 		// If we don't have a venue we fetch the one in the state
 		if ( ! venue ) {
 			venue = this.getVenue();
@@ -143,7 +137,7 @@ class EventVenue extends Component {
 		return address;
 	}
 
-	updateCoodinates( venue, center ) {
+	updateCoodinates = ( venue, center ) => {
 		if ( isPlainObject( center ) ) {
 			center = mapValues( center, parseFloat );
 		}
@@ -177,7 +171,7 @@ class EventVenue extends Component {
 		} );
 	}
 
-	updateAddress( address ) {
+	updateAddress = ( address ) => {
 		if ( ! address ) {
 			return;
 		}
