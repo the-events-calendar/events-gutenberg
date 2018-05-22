@@ -38,7 +38,6 @@ import { default as VenueDetails } from './venue';
 /**
  * Module Code
  */
-
 const POST_TYPE = 'tribe_venue';
 
 class EventVenue extends Component {
@@ -89,7 +88,7 @@ class EventVenue extends Component {
 		}
 
 		return venues[ 0 ];
-	}
+	};
 
 	isLoading = () => {
 		const { venue } = this.props;
@@ -98,7 +97,7 @@ class EventVenue extends Component {
 		}
 
 		return venue.isLoading;
-	}
+	};
 
 	getAddress = ( venue = null ) => {
 		// If we don't have a venue we fetch the one in the state
@@ -135,7 +134,7 @@ class EventVenue extends Component {
 		}
 
 		return address;
-	}
+	};
 
 	updateCoodinates = ( venue, center ) => {
 		if ( isPlainObject( center ) ) {
@@ -169,7 +168,7 @@ class EventVenue extends Component {
 		} ).fail( ( err ) => {
 			console.log( err );
 		} );
-	}
+	};
 
 	updateAddress = ( address ) => {
 		if ( ! address ) {
@@ -188,9 +187,13 @@ class EventVenue extends Component {
 			.catch( error => {
 				console.debug( 'Error on Geocoding Address', error, address, venue );
 			} );
-	}
+	};
 
 	render() {
+		return [ this.renderBlock(), this.renderControls() ];
+	}
+
+	renderBlock() {
 		const {
 			attributes,
 			setAttributes,
@@ -230,7 +233,7 @@ class EventVenue extends Component {
 		if ( this.isLoading() ) {
 			venueContainer = (
 				<Placeholder key="loading">
-					<Spinner />
+					<Spinner/>
 				</Placeholder>
 			);
 		}
@@ -259,27 +262,40 @@ class EventVenue extends Component {
 			);
 		}
 
-		const content = [
+		return (
 			<div key="event-venue-box" className="tribe-editor-block tribe-editor-event-venue">
 				{ block }
-			</div>,
+			</div>
+		);
+	}
+
+	renderControls() {
+		const {
+			attributes,
+			setAttributes,
+		} = this.props;
+
+		const {
+			showMapLink,
+			showMap,
+		} = attributes;
+
+		return (
 			<InspectorControls key="inspector">
 				<PanelBody title={ __( 'Venue Map Settings' ) }>
 					<ToggleControl
 						label={ __( 'Show Google Maps Link' ) }
-						checked={ !! showMapLink }
+						checked={ ! ! showMapLink }
 						onChange={ ( value ) => setAttributes( { showMapLink: value } ) }
 					/>
 					<ToggleControl
 						label={ __( 'Show Google Maps Embed' ) }
-						checked={ !! showMap }
+						checked={ ! ! showMap }
 						onChange={ ( value ) => setAttributes( { showMap: value } ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
-		];
-
-		return content;
+		);
 	}
 }
 
