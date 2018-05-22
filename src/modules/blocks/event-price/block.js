@@ -245,9 +245,9 @@ export default class EventPrice extends Component {
 		this.setState( { open: true } );
 		const { setAttributes, attributes } = this.props;
 		const { eventCost } = attributes;
-		setAttributes({
-			eventCost: parser( eventCost )
-		})
+		setAttributes( {
+			eventCost: parser( eventCost ),
+		} );
 	};
 
 	renderControls() {

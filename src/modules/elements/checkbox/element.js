@@ -54,9 +54,7 @@ export default class CheckBox extends Component {
 			return null;
 		}
 
-		return {
-			checked
-		}
+		return { checked };
 	}
 
 	/**
@@ -69,7 +67,7 @@ export default class CheckBox extends Component {
 		const { checked } = target;
 		this.setState( { checked }, () => {
 			this.props.onChange( this.state.checked );
-		});
+		} );
 	};
 
 	toggle = () => {
