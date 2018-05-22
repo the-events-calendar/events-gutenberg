@@ -12,8 +12,8 @@ import { __ } from '@wordpress/i18n';
  */
 import EventSubtitle, { VALID_PROPS } from './block';
 import { store } from 'data/details';
-import { removeEmptyStrings, castBooleanStrings } from 'utils/object';
-import { noop, pick, get } from 'lodash';
+import { removeEmptyStrings, castBooleanStrings, diff } from 'utils/object';
+import { noop, pick, get, isEqual } from 'lodash';
 
 /**
  * Module Code
@@ -54,15 +54,36 @@ export default {
 			source: 'meta',
 			meta: '_EventTimezone',
 		},
+		dateTimeRangeSeparator: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventDateTimeSeparator',
+		},
+		timeRangeSeparator: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventTimeRangeSeparator',
+		},
 	},
 
 	useOnce: true,
 
 	edit: ( props ) => {
-		const setAttributes = get( props, 'setAttributes', noop );
-		store.subscribe( () => {
+
+		// Remove old subscription to avoid multiple renders of old references
+		if ( typeof this.unsubscribe === 'function' ) {
+			this.unsubscribe();
+		}
+
+		this.unsubscribe = store.subscribe( () => {
+			const setAttributes = get( props, 'setAttributes', noop );
 			const state = store.getState();
-			setAttributes( pick( state, VALID_PROPS ) );
+			// Filter to only the ones that are valid for this component
+			const attributes = pick( state, VALID_PROPS );
+			// Filter the attributes as well to the ones relevant to this component
+			const prevAttributes = pick( get( props, 'attributes', {} ), VALID_PROPS );
+			// Update only the attributes with changes
+			setAttributes( diff( attributes, prevAttributes ) );
 		} );
 
 		const allowedProperties = pick( props, [ 'isSelected' ] );
