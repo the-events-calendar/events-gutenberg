@@ -89,6 +89,20 @@ const details = {
 				return reducers.setCurrencyPosition( state, action.position );
 			}
 
+			case 'SET_DATE_TIME_SEPARATOR': {
+				return {
+					...state,
+					dateTimeRangeSeparator: action.separator,
+				};
+			}
+
+			case 'SET_TIME_RANGE_SEPARATOR': {
+				return {
+					...state,
+					timeRangeSeparator: action.separator,
+				};
+			}
+
 			default: {
 				return state;
 			}
