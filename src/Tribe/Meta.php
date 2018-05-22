@@ -39,8 +39,30 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_EventShowMapLink', $args->text );
 		register_meta( 'post', '_EventURL', $args->text );
 		register_meta( 'post', '_EventCost', $args->text );
+		register_meta( 'post', '_EventCostDescription', $args->text );
 		register_meta( 'post', '_EventCurrencySymbol', $args->text );
 		register_meta( 'post', '_EventCurrencyPosition', $args->text );
+		// Use sanitize_textarea_field to allow whitespaces
+		register_meta(
+			'post',
+			'_EventDateTimeSeparator',
+			array_merge(
+				$args->text,
+				array(
+					'sanitize_callback' => array( $this, 'sanitize_separator' ),
+				)
+			)
+		);
+		register_meta(
+			'post',
+			'_EventTimeRangeSeparator',
+			array_merge(
+				$args->text,
+				array(
+					'sanitize_callback' => array( $this, 'sanitize_separator' ),
+				)
+			)
+		);
 		register_meta(
 			'post',
 			'_EventOrganizerID',
@@ -134,5 +156,18 @@ class Tribe__Events_Gutenberg__Meta {
 	 */
 	public function sanitize_boolean( $value ) {
 		return boolval( $value );
+	}
+
+	/**
+	 * Sanitize strings allowing the usage of white spaces before or after the separators, as
+	 * - sanitize_text_field removes any whitespace
+	 *
+	 * @since TBD
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	public function sanitize_separator( $value ) {
+		return filter_var( $value, FILTER_SANITIZE_STRING );
 	}
 }
