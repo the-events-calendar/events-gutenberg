@@ -23,6 +23,7 @@ test( 'castBooleanStrings', () => {
 
 test( 'diff', () => {
 	expect( diff( {}, {} ) ).toEqual( {} );
+	expect( diff( { a: 1, b: 2 }, { a: 1, b: 2 } ) ).toEqual( {} );
 	expect( diff( { a: 1 }, { b: 2 } ) ).toEqual( { a: 1 } );
 	expect( diff( { a: 1, b: 2 }, { a: 1 } ) ).toEqual( { b: 2 } );
 	expect( diff( { a: [ 1, 2 ] }, { a: [] } ) ).toEqual( { a: [ 1, 2 ] } );
