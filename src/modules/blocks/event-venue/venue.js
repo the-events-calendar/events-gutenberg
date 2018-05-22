@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import { unescape, isEmpty } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
@@ -116,7 +117,7 @@ export default class VenueDetails extends Component {
 		}
 
 		if ( venue ) {
-			return [ this.renderVenue(), this.renderActions() ];
+			return this.renderVenue();
 		}
 
 		return (
@@ -128,26 +129,23 @@ export default class VenueDetails extends Component {
 
 	renderVenue = () => {
 		const { venue } = this.props;
-		const classes = {
-			'tribe-current': true,
-		};
 
 		return (
 			<div
-				className={ classNames( classes ) }
+				className="tribe-venue--current"
 				key={ venue.id }
 			>
 				{ this.renderVenueName() }
 				{ this.renderAddress() }
 				{ this.renderPhone() }
-				{ this.renderURL() }
+				{ this.renderWebsite() }
 			</div>
 		);
 	}
 
 	renderVenueName() {
 		return (
-			<h4>{ this.getVenueName() }</h4>
+			<h3 className="tribe-venue__name">{ this.getVenueName() }</h3>
 		);
 	}
 
@@ -173,15 +171,23 @@ export default class VenueDetails extends Component {
 
 		const { venue } = this.props;
 		const { meta } = venue;
+		const {
+			_VenueCity,
+			_VenueAddress,
+			_VenueProvince,
+			_VenueZip,
+			_VenueCountry,
+		} = meta;
 
 		return (
-			<address className="tribe-events-address">
-				<span className="tribe-street-address">{ meta._VenueAddress }</span>
+			<address className="tribe-venue__address">
+				<span className="tribe-venue__street-address">{ _VenueAddress }</span>
 				<br/>
-				<span className="tribe-locality">{ meta._VenueCity }</span><span className="tribe-delimiter">,</span>&nbsp;
-				<abbr className="tribe-region tribe-events-abbr" title={ meta._VenueProvince }>{ meta._VenueProvince }</abbr>&nbsp;
-				<span className="tribe-postal-code">{ meta._VenueZip }</span>&nbsp;
-				<span className="tribe-country-name">{ meta._VenueCountry }</span>&nbsp;
+				{ _VenueCity && <span className="tribe-venue__locality">{ _VenueCity }</span> }
+				{ _VenueCity && <span className="tribe-venue__delimiter">, </span> }
+				{ _VenueProvince && <span className="tribe-venue__region">{ _VenueProvince }</span> }
+				{ _VenueZip && <span className="tribe-venue__postal-code"> { _VenueZip }</span> }
+				{ _VenueCountry && <span className="tribe-venue__country-name"> { _VenueCountry }</span> }
 				{ this.renderGoogleMapLink() }
 			</address>
 		);
@@ -204,7 +210,7 @@ export default class VenueDetails extends Component {
 
 		return (
 			<a
-				className="tribe-events-gmap"
+				className="tribe-venue__map-link"
 				href={ mapsUrl }
 				title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
 				target="_blank"
@@ -222,29 +228,29 @@ export default class VenueDetails extends Component {
 		}
 
 		return (
-			<p className="tribe-editor__meta-field">
-				<strong>{ __( 'Phone: ', 'events-gutenberg' ) }</strong><br/>
-				<span>{ venue.meta._VenuePhone }</span>
-			</p>
-		)
+			<React.Fragment>
+				<span className="tribe-venue__phone">{ venue.meta._VenuePhone }</span>
+				<br />
+			</React.Fragment>
+		);
 	}
 
-	renderURL() {
+	renderWebsite() {
 		const { venue } = this.props;
 		if ( isEmpty( venue.meta._VenueURL ) ) {
 			return null;
 		}
 
 		return (
-			<p className="tribe-editor__meta-field">
-				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
-				<span>{ venue.meta._VenueURL }</span>
-			</p>
+			<React.Fragment>
+				<span className="tribe-venue__website">{ venue.meta._VenueURL }</span>
+				<br />
+			</React.Fragment>
 		);
 	}
 
 	renderActions = () => {
-		const { focus, addVenue, removeVenue, venue } = this.props;
+		const { focus, addVenue, venue } = this.props;
 
 		return (
 			<div key="venue-actions" className="tribe-editor-venue-actions">
@@ -270,7 +276,6 @@ export default class VenueDetails extends Component {
 					key="venue-actions"
 					focus={ focus }
 					venue={ venue }
-					onClick={ () => removeVenue( venue ) }
 				/>
 				}
 			</div>
