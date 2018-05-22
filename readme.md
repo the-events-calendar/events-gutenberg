@@ -24,6 +24,11 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+### 0.2.1-alpha - 2018-05-24
+
+* Feature - Event Categories is now a standalone block
+* Feature - Event Tags is now a standalone block
+
 ### 0.2.0-alpha - 2018-05-17
 
 * Feature - Event Price has his own block
