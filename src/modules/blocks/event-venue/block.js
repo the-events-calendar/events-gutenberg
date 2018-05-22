@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import { stringify } from 'querystringify';
 import { isEmpty, trim, isPlainObject, mapValues, isEqual } from 'lodash';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
@@ -29,7 +30,6 @@ import {
  * Internal dependencies
  */
 import {
-	MetaGroup,
 	VenueMap,
 } from 'elements';
 
@@ -74,15 +74,16 @@ class EventVenue extends Component {
 	}
 
 	getVenue = () => {
-		if ( ! this.props.venue ) {
+		const { venue } = this.props;
+		if ( ! venue ) {
 			return null;
 		}
 
-		if ( this.props.venue.id ) {
-			return this.props.venue;
+		if ( venue.id ) {
+			return venue;
 		}
 
-		const venues = this.props.venue.data;
+		const venues = venue.data;
 		if ( ! venues || ! venues.length ) {
 			return null;
 		}
@@ -194,19 +195,59 @@ class EventVenue extends Component {
 	}
 
 	renderBlock() {
+		const venue = this.getVenue();
+		const venueContainer = this.getContainer();
+
+		let block = (
+			<section className="column-full-width">
+				{ this.renderTitle() }
+				{ venueContainer }
+			</section>
+		);
+
+		if ( this.hasVenue() ) {
+			block = (
+				<section>
+					<div className="column-1-3">
+						{ this.renderTitle() }
+						{ venueContainer }
+					</div>
+					<div className="column-2-3">
+						<VenueMap
+							key={ `venue-map-${ venue.id }` }
+							venue={ this.getVenue() }
+						/>
+					</div>
+				</section>
+			);
+		}
+
+		return (
+			<div key="event-venue-box" className="tribe-editor-block tribe-editor-event-venue">
+				{ block }
+			</div>
+		);
+	}
+
+	getContainer() {
+
+		if ( this.isLoading() ) {
+			return (
+				<Placeholder key="loading">
+					<Spinner/>
+				</Placeholder>
+			);
+		}
+
 		const {
-			attributes,
 			setAttributes,
+			attributes,
 			focus,
 		} = this.props;
-
-		const {
-			showMapLink,
-			showMap,
-		} = attributes;
-
+		const { showMap, showMapLink } = attributes;
 		const venue = this.getVenue();
-		let venueContainer = (
+
+		return (
 			<VenueDetails
 				focus={ ! venue ? true : focus }
 				venue={ this.getVenue() }
@@ -229,44 +270,12 @@ class EventVenue extends Component {
 				showMapLink={ showMapLink }
 			/>
 		);
+	}
 
-		if ( this.isLoading() ) {
-			venueContainer = (
-				<Placeholder key="loading">
-					<Spinner/>
-				</Placeholder>
-			);
-		}
-
-		let block = (
-			<MetaGroup groupKey="event-venue-map" className="column-full-width">
-				{ this.renderTitle() }
-				{ venueContainer }
-			</MetaGroup>
-		);
-
-		if ( venue && this.getAddress() && showMap ) {
-			block = (
-				<div>
-					<MetaGroup groupKey="event-venue-details" className="column-1-3">
-						{ this.renderTitle() }
-						{ venueContainer }
-					</MetaGroup>
-					<MetaGroup groupKey="event-venue-map" className="column-2-3">
-						<VenueMap
-							key={ `venue-map-${ venue.id }` }
-							venue={ this.getVenue() }
-						/>
-					</MetaGroup>
-				</div>
-			);
-		}
-
-		return (
-			<div key="event-venue-box" className="tribe-editor-block tribe-editor-event-venue">
-				{ block }
-			</div>
-		);
+	hasVenue() {
+		const { attributes } = this.props;
+		const { showMap } = attributes;
+		return ( this.getVenue() && this.getAddress() && showMap );
 	}
 
 	renderControls() {
