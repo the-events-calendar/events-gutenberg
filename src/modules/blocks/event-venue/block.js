@@ -3,8 +3,9 @@
  */
 import React from 'react';
 import { stringify } from 'querystringify';
-import { isEmpty, trim, isPlainObject, mapValues, isEqual } from 'lodash';
+import { isEmpty, trim, isPlainObject, mapValues, isEqual, isUndefined } from 'lodash';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -12,6 +13,7 @@ import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { __ } from '@wordpress/i18n';
 import { withSelect } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
+import './style.pcss';
 
 import {
 	withAPIData,
@@ -19,6 +21,7 @@ import {
 	Placeholder,
 	ToggleControl,
 	PanelBody,
+	Dashicon,
 } from '@wordpress/components';
 
 import {
@@ -47,30 +50,6 @@ class EventVenue extends Component {
 		this.state = {
 			venue: undefined,
 		};
-	}
-
-	renderTitle() {
-		const { attributes, setAttributes, focus } = this.props;
-
-		return (
-			<RichText
-				tagName="h3"
-				className="tribe-events-single-section-title"
-				value={ attributes.venueTitle }
-				onChange={ ( nextContent ) => {
-					if ( ! nextContent ) {
-						nextContent = __( 'Venue', 'events-gutenberg' );
-					}
-
-					setAttributes( {
-						venueTitle: nextContent,
-					} );
-				} }
-				focus={ focus && 'venueTitle' === focus.editable ? focus : undefined }
-				placeholder={ __( 'Venue', 'events-gutenberg' ) }
-				formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-			/>
-		);
 	}
 
 	getVenue = () => {
@@ -127,7 +106,9 @@ class EventVenue extends Component {
 			_VenueCountry,
 		} = meta;
 
-		const address = trim( `${ _VenueAddress } ${ _VenueCity } ${ _VenueProvince } ${ _VenueZip } ${ _VenueCountry }` );
+		const address = trim(
+			`${ _VenueAddress } ${ _VenueCity } ${ _VenueProvince } ${ _VenueZip } ${ _VenueCountry }`
+		);
 
 		// If it's an empty string we return boolean
 		if ( isEmpty( address ) ) {
@@ -195,42 +176,28 @@ class EventVenue extends Component {
 	}
 
 	renderBlock() {
-		const venue = this.getVenue();
-		const venueContainer = this.getContainer();
+		const { attributes } = this.props;
+		const { showMap } = attributes;
 
-		let block = (
-			<section className="column-full-width">
-				{ this.renderTitle() }
-				{ venueContainer }
-			</section>
+		const containerClass = classNames(
+			'tribe-editor-block',
+			'tribe-venue__block',
+			{
+				'tribe-venue__block-container': this.hasVenue(),
+				'tribe-venue__container--has-map': this.hasVenue() && showMap,
+			},
 		);
 
-		if ( this.hasVenue() ) {
-			block = (
-				<section>
-					<div className="column-1-3">
-						{ this.renderTitle() }
-						{ venueContainer }
-					</div>
-					<div className="column-2-3">
-						<VenueMap
-							key={ `venue-map-${ venue.id }` }
-							venue={ this.getVenue() }
-						/>
-					</div>
-				</section>
-			);
-		}
-
 		return (
-			<div key="event-venue-box" className="tribe-editor-block tribe-editor-event-venue">
-				{ block }
+			<div key="event-venue-box" className={ containerClass }>
+				{ this.getContainer() }
+				{ this.renderMap() }
+				{ this.editActions() }
 			</div>
 		);
 	}
 
 	getContainer() {
-
 		if ( this.isLoading() ) {
 			return (
 				<Placeholder key="loading">
@@ -244,7 +211,7 @@ class EventVenue extends Component {
 			attributes,
 			focus,
 		} = this.props;
-		const { showMap, showMapLink } = attributes;
+		const { showMapLink } = attributes;
 		const venue = this.getVenue();
 
 		return (
@@ -262,20 +229,53 @@ class EventVenue extends Component {
 					this.setState( { venue: next } );
 					this.updateAddress( this.getAddress() );
 				} }
-				removeVenue={ () => {
-					setAttributes( { eventVenueId: 0 } );
-					this.setState( { venue: undefined } );
-				} }
-				showMap={ showMap }
 				showMapLink={ showMapLink }
 			/>
 		);
 	}
 
 	hasVenue() {
+		return this.getVenue() && this.getAddress();
+	}
+
+	renderMap() {
 		const { attributes } = this.props;
 		const { showMap } = attributes;
-		return ( this.getVenue() && this.getAddress() && showMap );
+		if ( ! showMap ) {
+			return null;
+		}
+
+		const venue = this.getVenue();
+		return (
+			<VenueMap
+				key={ `venue-map-${ venue.id }` }
+				venue={ this.getVenue() }
+			/>
+		);
+	}
+
+	editActions() {
+		const { isSelected } = this.props;
+		if ( ! this.hasVenue() || ! isSelected ) {
+			return null;
+		}
+
+		return (
+			<div className="tribe-venue__actions">
+				<button><Dashicon icon="edit" /></button>
+				<button onClick={ this.removeVenue }><Dashicon icon="trash" /></button>
+			</div>
+		);
+	}
+
+	removeVenue = () => {
+		const { setAttributes } = this.props;
+		setAttributes( { eventVenueId: 0 } );
+		this.setState( { venue: undefined } );
+	}
+
+	componentDidUpdate() {
+		console.log('RENDER');
 	}
 
 	renderControls() {
