@@ -49,8 +49,6 @@ export default class EventTags extends Component {
 	}
 
 	renderList() {
-		const { attributes } = this.props;
-
 		return (
 			<TermsList
 				slug="tags"

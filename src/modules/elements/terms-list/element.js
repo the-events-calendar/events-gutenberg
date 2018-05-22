@@ -90,7 +90,7 @@ class TaxonomiesElement extends Component {
 
 	renderEmpty() {
 		const { renderEmpty, slug } = this.props;
-		const key   = `tribe-terms-${ slug }`;
+		const key = `tribe-terms-${ slug }`;
 		if ( ! renderEmpty ) {
 			return null;
 		}

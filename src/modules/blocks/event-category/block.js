@@ -49,8 +49,6 @@ export default class EventCategory extends Component {
 	}
 
 	renderList() {
-		const { attributes } = this.props;
-
 		return (
 			<TermsList
 				slug="tribe_events_cat"
