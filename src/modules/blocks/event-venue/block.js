@@ -1,9 +1,8 @@
 /**
  * External dependencies
  */
-import moment from 'moment';
 import { stringify } from 'querystringify';
-import { union, without, isEmpty, trim, isPlainObject, mapValues, isEqual } from 'lodash';
+import { isEmpty, trim, isPlainObject, mapValues, isEqual } from 'lodash';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 /**
@@ -14,9 +13,6 @@ import { withSelect } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
 
 import {
-	Dropdown,
-	IconButton,
-	Dashicon,
 	withAPIData,
 	Spinner,
 	Placeholder,
@@ -62,7 +58,7 @@ class EventVenue extends Component {
 	}
 
 	renderTitle() {
-		const { attributes, setAttributes, focus, setFocus } = this.props;
+		const { attributes, setAttributes, focus } = this.props;
 
 		return (
 			<RichText
@@ -205,8 +201,6 @@ class EventVenue extends Component {
 			attributes,
 			setAttributes,
 			focus,
-			setFocus,
-			isSelected,
 		} = this.props;
 
 		const {
