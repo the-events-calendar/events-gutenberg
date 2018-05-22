@@ -1,24 +1,13 @@
 /**
  * External dependencies
  */
-import { noop, trim, isEmpty } from 'lodash';
 import classNames from 'classnames';
-import React from 'react';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-
-import {
-	Dropdown,
-	IconButton,
-	Dashicon,
-	ToggleControl,
-	TextControl,
-	PanelBody,
-} from '@wordpress/components';
 
 import {
 	InspectorControls,
