@@ -2,7 +2,8 @@
  * External dependencies
  */
 import { stringify } from 'querystringify';
-import { values } from 'lodash';
+import { values, noop, isArray, isEmpty } from 'lodash';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -69,7 +70,7 @@ const MAP_TYPES_VALUES = values( MAP_TYPES );
  *
  * @example: http://staticmapmaker.com/google/
  */
-class GoogleMap extends Component {
+export default class GoogleMap extends Component {
 	/**
 	 * https://developers.google.com/maps/documentation/staticmaps/intro#api_key
 	 */
@@ -134,115 +135,217 @@ class GoogleMap extends Component {
 		interactive: false,
 	}
 
-	constructor() {
+	constructor( props ) {
 		super( ...arguments );
 
 		this.state = {
-			map: null,
-			marker: null,
-			google: google,
+			...props,
+			error: '',
+			loading: true,
 		};
 
-		this.map = React.createRef();
+		this.interactiveMapContainer = React.createRef();
+		this.map = {
+			instance: null,
+			marker: null,
+		};
+		this.interval = noop;
+		this.tries = 0;
+		this.MAX_TRIES = 5;
 	}
 
-	componentDidUpdate() {
+	componentDidMount() {
 		this.loadMap();
 	}
 
 	loadMap() {
+		const { address } = this.props;
+		const { maps } = google;
+		// Try to fetch the library 0.5 seconds later
+		if ( ! google || ! maps ) {
+			this.tryAgain();
+			return;
+		}
+
+		// There's no valid coordinatees fallback to the image map.
+		if ( this.invalidLocation() ) {
+			if ( isEmpty( address ) ) {
+				this.setState( {
+					interactive: false,
+					loading: false,
+					error: __(
+						'The map does not have valid coordinates neither a valid address',
+						'events-gutenberg',
+					),
+				} );
+				return;
+			}
+
+			console.warn(
+				__(
+					'The coordinates of this map are not correct, fallback to an image instead',
+					'events-gutenberg',
+				)
+			);
+			this.setState( {
+				interactive: false,
+				loading: false,
+			} );
+			return;
+		}
+
+		this.setState( {
+			loading: false,
+			interactive: true,
+		}, this.attachInteractiveMap );
+	}
+
+	getMapConfig() {
 		const {
-			latitude,
-			longitude,
 			zoom,
-			size,
 			mapType,
 		} = this.props;
 
-		let {
-			map,
-			marker,
-		} = this.state;
+		const type = isArray( mapType ) ? mapType : [ mapType ];
 
+		return {
+			center: this.getLocation(),
+			zoom: zoom,
+			mapTypeControl: type.length > 1,
+			mapTypeControlOptions: {
+				mapTypeIds: type,
+			},
+			streetViewControl: false,
+			fullscreenControl: false,
+		};
+	}
+
+	invalidLocation( lat = null, lng = null ) {
+
+		if ( lat === null && lng === null ) {
+			const location  = this.getLocation();
+			return isNaN( location.lat ) || isNaN( location.lng );
+		}
+
+		return isNaN( lat ) || isNaN( lng );
+	}
+
+	getLocation() {
 		const {
-			google,
-		} = this.state;
+			latitude,
+			longitude,
+		} = this.props;
 
-		const maps = google.maps;
-
-		const location = {
+		return {
 			lat: parseFloat( latitude ),
 			lng: parseFloat( longitude ),
 		};
+	}
 
-		const mapConfig = {
-			center: location,
-			zoom: zoom,
-			mapTypeId: mapType,
-		};
-
-		if ( ! map ) {
-			map = new maps.Map( this.map.current, mapConfig );
-
-			this.setState( { map: map } );
+	tryAgain = () => {
+		if ( this.interval ) {
+			clearInterval( this.interval );
 		}
 
-		// Don't re-set it a bunch
-		if ( map && ! marker ) {
-			marker = new maps.Marker( {
-				position: location,
-				map: map,
+		if ( this.tries >= this.MAX_TRIES ) {
+			this.setState( {
+				loading: false,
+				error: __( 'Make sure Google Maps Library is included on this page.', 'events-gutenberg' )
 			} );
-
-			this.setState( { marker: marker } );
+			return;
 		}
+
+		this.interval = setInterval( () => {
+			this.loadMap();
+		}, 500 );
+
+		this.tries += 1;
+	}
+
+	render() {
+		const { loading } = this.state;
+		const containerClass = classNames( 'tribe-element__map-container', {
+			'tribe-element__map-container--loading': loading,
+		} );
+
+		return (
+			<div className={ containerClass }>
+				{ this.renderMap() }
+			</div>
+		);
+	}
+
+	renderMap() {
+		const { loading, error, interactive, apiKey } = this.state;
+
+		if ( loading ) {
+			return <Spinner />;
+		}
+
+		if ( error ) {
+			return ( <h4>{ error }</h4> );
+		}
+
+		if ( ! apiKey ) {
+			return (
+				<h4> { __( 'A Google Map API KEY is required to view the map', 'events-gutenberg' ) }</h4>
+			);
+		}
+
+		if ( interactive ) {
+			return this.renderInteractive();
+		}
+
+		return this.renderImage();
+	}
+
+	renderImage() {
+		return (
+			<picture className="tribe-map__container--static">
+				<img
+					className="tribe-element-map-object"
+					src={ this.mapUrl }
+				/>
+				<div className="spinner__container">
+					<Spinner/>
+				</div>
+			</picture>
+		);
 	}
 
 	renderInteractive() {
 		return (
-			<div
-				className="tribe-element-map-object"
-				ref={ this.map }
-			>
-				<Placeholder key="placeholder">
+			<section className="tribe-map__container--interactive">
+				<div className="tribe_map__container--dynamic" ref={ this.interactiveMapContainer }>
+				</div>
+				<div className="spinner__container">
 					<Spinner />
-				</Placeholder>
-			</div>
+				</div>
+			</section>
 		);
 	}
 
-	render() {
-		let mapElement = (
-			<Placeholder style={ { height: '100%' } }>
-				<p>
-					{ __( 'No map preview available', 'events-gutenberg' ) }
-				</p>
-			</Placeholder>
-		);
+	attachInteractiveMap = () => {
+		const { interactive } = this.state;
+		const { interactiveMapContainer, map } = this;
 
-		const {
-			interactive,
-			apiKey,
-		} = this.props;
-
-		if ( apiKey ) {
-			if ( ! interactive ) {
-				mapElement = (
-					<img
-						className="tribe-element-map-object"
-						src={ this.mapUrl }
-					/>
-				);
-			} else {
-				mapElement = this.renderInteractive();
-			}
+		if ( ! interactive || ! interactiveMapContainer.current ) {
+			return this.renderImage();
 		}
 
-		return (
-			<div className="tribe-element__map-container">
-				{ mapElement }
-			</div>
+		const { maps } = google;
+
+		map.instance = new maps.Map(
+			interactiveMapContainer.current,
+			this.getMapConfig()
 		);
+
+		if ( map.instance ) {
+			map.marker = new maps.Marker( {
+				position: this.getLocation(),
+				map: map.instance,
+			} );
+		}
 	}
 
 	get mapUrl() {
@@ -255,7 +358,7 @@ class GoogleMap extends Component {
 			format,
 			mapType,
 			apiKey,
-			interactive,
+			address,
 		} = this.props;
 
 		const { width, height } = size;
@@ -266,6 +369,7 @@ class GoogleMap extends Component {
 			key: apiKey,
 		};
 		let rootUrl = null;
+		const { interactive } = this.state;
 
 		if ( interactive ) {
 			rootUrl = this.constructor.RootEmbedUrl;
@@ -274,10 +378,16 @@ class GoogleMap extends Component {
 		} else {
 			rootUrl = this.constructor.RootStaticUrl;
 
-			queryArgs.center = `${ latitude },${ longitude }`;
 			queryArgs.scale = scale;
 			queryArgs.size = `${ width }x${ height }`;
 			queryArgs.format = format;
+
+			const invalid = this.invalidLocation( latitude, longitude );
+			if ( invalid && ! isEmpty( address ) ) {
+				queryArgs.center = address;
+			} else {
+				queryArgs.center = `${ latitude },${ longitude }`;
+			}
 			queryArgs.markers = this.markerParams;
 		}
 
@@ -288,12 +398,13 @@ class GoogleMap extends Component {
 		const {
 			latitude,
 			longitude,
+			address,
 			hasCenterMarker,
 		} = this.props;
 
-		const markerParams = `size:mid|color:0xff0000|label:|${ latitude },${ longitude }`;
+		const invalid = this.invalidLocation( latitude, longitude );
+		const marker = invalid ? address : `${ latitude },${ longitude }`;
+		const markerParams = `size:mid|color:0xff0000|label:|${marker}`;
 		return hasCenterMarker ? markerParams : '';
 	}
 }
-
-export default GoogleMap;
