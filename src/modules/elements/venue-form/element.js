@@ -23,7 +23,8 @@ import list, { getCountries, getStates } from 'utils/geo-data';
 /**
  * Module Code
  */
-class VenueForm extends Component {
+
+export default class VenueForm extends Component {
 	static defaultProps = {
 		postType: 'tribe_venue',
 	}
@@ -144,7 +145,7 @@ class VenueForm extends Component {
 		const { country } = this.state;
 		const placeholder = country ? null : (
 			<option value="" disabled selected="true">
-				Select a country:
+				{ __( 'Country', 'events-gutenberg' ) }
 			</option>
 		);
 
@@ -283,5 +284,3 @@ class VenueForm extends Component {
 		];
 	}
 }
-
-export default VenueForm;
