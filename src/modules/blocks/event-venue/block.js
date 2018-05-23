@@ -118,6 +118,33 @@ class EventVenue extends Component {
 		return address;
 	};
 
+	getMapAddress() {
+		const venue = this.getVenue();
+
+		// if we still don't have venue we don't have an address
+		if ( ! venue ) {
+			return '';
+		}
+
+		// Get the meta for us to work with
+		const { meta } = venue;
+		// Validate meta before using it
+		if ( isEmpty( meta ) ) {
+			return '';
+		}
+
+		const {
+			_VenueAddress,
+			_VenueCity,
+			_VenueProvince,
+			_VenueCountry,
+		} = meta;
+
+		return trim(
+			`${ _VenueAddress }, ${ _VenueCity }, ${ _VenueProvince }, ${_VenueCountry}`
+		);
+	}
+
 	updateCoodinates = ( venue, center ) => {
 		if ( isPlainObject( center ) ) {
 			center = mapValues( center, parseFloat );
@@ -250,6 +277,7 @@ class EventVenue extends Component {
 			<VenueMap
 				key={ `venue-map-${ venue.id }` }
 				venue={ this.getVenue() }
+				address={ this.getMapAddress() }
 			/>
 		);
 	}
@@ -272,10 +300,6 @@ class EventVenue extends Component {
 		const { setAttributes } = this.props;
 		setAttributes( { eventVenueId: 0 } );
 		this.setState( { venue: undefined } );
-	}
-
-	componentDidUpdate() {
-		console.log('RENDER');
 	}
 
 	renderControls() {
