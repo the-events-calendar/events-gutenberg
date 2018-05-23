@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import moment from 'moment';
 import React from 'react';
 
 import { noop, pick } from 'lodash';
@@ -44,19 +43,20 @@ import { store, DEFAULT_STATE } from 'data/details';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 export const VALID_PROPS = [
-	'timezone',
 	'startDate',
 	'endDate',
-	'allDay',
 	'multiDay',
 	'dateTimeRangeSeparator',
 	'timeRangeSeparator',
+	'timezone',
+	'allDay',
 ];
 
 /**
  * Module Code
  */
-class EventSubtitle extends Component {
+
+export default class EventSubtitle extends Component {
 
 	static defaultProps = pick(
 		DEFAULT_STATE,
@@ -79,7 +79,6 @@ class EventSubtitle extends Component {
 		} );
 
 		const state = pick( this.state, VALID_PROPS );
-
 		store.dispatch( {
 			type: 'SET_INITIAL_STATE',
 			values: state,
@@ -101,8 +100,9 @@ class EventSubtitle extends Component {
 
 	renderStartDate() {
 		const { startDate } = this.state;
+
 		return (
-			<span>{ toDate( moment( startDate ) ) }</span>
+			<span>{ toDate( toMoment( startDate ) ) }</span>
 		);
 	}
 
@@ -114,7 +114,7 @@ class EventSubtitle extends Component {
 			return null;
 		}
 
-		const start = moment( startDate );
+		const start = toMoment( startDate );
 
 		return (
 			<React.Fragment>
@@ -140,7 +140,7 @@ class EventSubtitle extends Component {
 
 		const { endDate } = this.state;
 		return (
-			<span>{ toDate( moment( endDate ) ) }</span>
+			<span>{ toDate( toMoment( endDate ) ) }</span>
 		);
 	}
 
@@ -155,7 +155,7 @@ class EventSubtitle extends Component {
 		return (
 			<React.Fragment>
 				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
-				{ moment( endDate ).format( toFormat( time ) ) }
+				{ toMoment( endDate ).format( toFormat( time ) ) }
 			</React.Fragment>
 		);
 	}
@@ -167,7 +167,8 @@ class EventSubtitle extends Component {
 	 */
 	isSameDay( start, end ) {
 		const { startDate, endDate } = this.state;
-		return moment( start || startDate ).isSame( end || endDate, 'day' );
+		return toMoment( start || startDate )
+			.isSame( toMoment( end || endDate ), 'day' );
 	}
 
 	/**
@@ -192,14 +193,14 @@ class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type, className ) {
-		const { timezone } = this.state;
+		const { timezone, dateTimeRangeSeparator, timeRangeSeparator } = this.state;
 		switch ( type ) {
 			case 'date-time':
 				return (
-					<span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }>{ getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ) }</span> );
+					<span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }>{ dateTimeRangeSeparator }</span> );
 			case 'time-range':
 				return (
-					<span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }>{ getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ) }</span> );
+					<span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }>{ timeRangeSeparator }</span> );
 			case 'dash':
 				return <span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }> &mdash; </span>;
 			case 'all-day':
@@ -262,11 +263,11 @@ class EventSubtitle extends Component {
 		const monthProps = {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
-			from: moment( startDate ).toDate(),
+			from: toMoment( startDate ).toDate(),
 		};
 
 		if ( ! this.isSameDay() ) {
-			monthProps.to = moment( endDate ).toDate();
+			monthProps.to = toMoment( endDate ).toDate();
 		}
 
 		return (
@@ -291,7 +292,7 @@ class EventSubtitle extends Component {
 	renderStartTimePicker() {
 		const { startDate, allDay } = this.state;
 		const { time, date } = FORMATS.WP;
-		const start = moment( startDate );
+		const start = toMoment( startDate );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
 			current: start,
@@ -327,8 +328,8 @@ class EventSubtitle extends Component {
 		}
 
 		const { time, date } = FORMATS.WP;
-		const start = moment( this.state.startDate );
-		const end = moment( this.state.endDate );
+		const start = toMoment( this.state.startDate );
+		const end = toMoment( this.state.endDate );
 		const pickerProps = {
 			current: end,
 			onSelectItem: this.setEndTime,
@@ -381,21 +382,19 @@ class EventSubtitle extends Component {
 		const { isSelected } = this.props;
 		const { timeRangeSeparator, dateTimeRangeSeparator, timezone } = this.state;
 
-		if ( ! isSelected ) {
-			return null;
-		}
-
 		return ( <InspectorControls key="inspector">
 			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
 				<TextControl
 					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
 					value={ dateTimeRangeSeparator }
 					onChange={ ( value ) => this.setState( { dateTimeRangeSeparator: value } ) }
+					onBlur={ this.setDateTimeSeparator }
 				/>
 				<TextControl
 					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
 					value={ timeRangeSeparator }
 					onChange={ ( value ) => this.setState( { timeRangeSeparator: value } ) }
+					onBlur={ this.setTimeRangeSeparator }
 				/>
 				<SelectControl
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
@@ -410,6 +409,20 @@ class EventSubtitle extends Component {
 				/>
 			</PanelBody>
 		</InspectorControls> );
+	}
+
+	setDateTimeSeparator = () => {
+		store.dispatch( {
+			type: 'SET_DATE_TIME_SEPARATOR',
+			separator: this.state.dateTimeRangeSeparator,
+		} );
+	}
+
+	setTimeRangeSeparator = () => {
+		store.dispatch( {
+			type: 'SET_TIME_RANGE_SEPARATOR',
+			separator: this.state.timeRangeSeparator,
+		})
 	}
 
 	setTimeZone( timezone ) {
@@ -430,5 +443,3 @@ class EventSubtitle extends Component {
 		return [ this.renderLabel(), this.renderControls() ];
 	}
 }
-
-export default EventSubtitle;

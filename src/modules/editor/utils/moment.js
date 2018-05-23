@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { escapeRegExp } from 'lodash';
+import { escapeRegExp, isString } from 'lodash';
 import moment from 'moment/moment';
 import { FORMATS } from './date';
 
@@ -89,9 +89,22 @@ export function roundTime( date ) {
  * used by Date
  *
  * @param {Date} date The date to be converted.
+ * @param {string} format The format of the data to be used
  * @returns {Moment} A moment object
  */
-export function toMoment( date ) {
+export function toMoment( date, format = FORMATS.WP.datetime ) {
+	if ( date instanceof moment ) {
+		return moment( date );
+	} else if ( date instanceof Date ) {
+		return toMomentFromDate( date );
+	} else if ( isString( date ) ) {
+		return moment( date, toFormat( format ) );
+	}
+
+	return moment();
+}
+
+function toMomentFromDate( date ) {
 	if ( ! ( date instanceof Date ) ) {
 		throw new Error( 'Make sure your date is an instance of Date' );
 	}
@@ -168,11 +181,16 @@ export function totalSeconds( date ) {
  */
 export function toDateTime( date ) {
 	const { datetime } = FORMATS.WP;
+
 	return date.format( toFormat( datetime ) );
 }
 
 export function toDate( date ) {
 	return date.format( toFormat( FORMATS.WP.date ) );
+}
+
+export function toDatePicker( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) {
+	return date.format( format );
 }
 
 /**

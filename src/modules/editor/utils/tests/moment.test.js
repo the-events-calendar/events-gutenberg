@@ -48,7 +48,6 @@ test( 'toMoment', () => {
 	const input = toMoment( new Date( 'January 2, 2015 08:01:59' ) );
 	const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 
-	expect( () => toMoment( 'Sample string' ) ).toThrowError();
 	expect( input ).toBeInstanceOf( moment );
 	expect( input.date() ).toEqual( 2 );
 	expect( input.month() ).toEqual( 0 );

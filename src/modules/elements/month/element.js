@@ -20,7 +20,6 @@ import { equalDates } from 'utils/date';
 import './style.pcss';
 
 export default class Month extends Component {
-
 	static propTypes = {
 		withRange: PropTypes.bool,
 		onSelectDay: PropTypes.func,
