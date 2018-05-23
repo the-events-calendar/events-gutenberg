@@ -241,11 +241,11 @@ class EventVenue extends Component {
 	renderMap() {
 		const { attributes } = this.props;
 		const { showMap } = attributes;
-		if ( ! showMap ) {
+		const venue = this.getVenue();
+		if ( ! showMap || ! venue ) {
 			return null;
 		}
 
-		const venue = this.getVenue();
 		return (
 			<VenueMap
 				key={ `venue-map-${ venue.id }` }
