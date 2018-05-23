@@ -36,6 +36,7 @@ class VenueMap extends Component {
 	static defaultProps = {
 		venue: undefined,
 		zoom: 14,
+		address: '',
 	};
 
 	constructor( props ) {
@@ -57,7 +58,7 @@ class VenueMap extends Component {
 	}
 
 	render() {
-		const { zoom, apiKey, venue } = this.state;
+		const { zoom, apiKey, venue, address } = this.state;
 		const coordinates = this.getCoordinates( venue );
 
 		if ( ! coordinates ) {
@@ -70,6 +71,7 @@ class VenueMap extends Component {
 				size={ { width: 450, height: 353 } }
 				latitude={ toString( coordinates.lat ) }
 				longitude={ toString( coordinates.lng ) }
+				address={ address }
 				apiKey={ apiKey }
 				interactive={ true }
 			/>
