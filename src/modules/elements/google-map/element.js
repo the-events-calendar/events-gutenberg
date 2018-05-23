@@ -70,6 +70,7 @@ const MAP_TYPES_VALUES = values( MAP_TYPES );
  *
  * @example: http://staticmapmaker.com/google/
  */
+
 export default class GoogleMap extends Component {
 	/**
 	 * https://developers.google.com/maps/documentation/staticmaps/intro#api_key
@@ -221,7 +222,6 @@ export default class GoogleMap extends Component {
 	}
 
 	invalidLocation( lat = null, lng = null ) {
-
 		if ( lat === null && lng === null ) {
 			const location  = this.getLocation();
 			return isNaN( location.lat ) || isNaN( location.lng );
@@ -250,7 +250,7 @@ export default class GoogleMap extends Component {
 		if ( this.tries >= this.MAX_TRIES ) {
 			this.setState( {
 				loading: false,
-				error: __( 'Make sure Google Maps Library is included on this page.', 'events-gutenberg' )
+				error: __( 'Make sure Google Maps Library is included on this page.', 'events-gutenberg' ),
 			} );
 			return;
 		}
@@ -304,10 +304,11 @@ export default class GoogleMap extends Component {
 			<picture className="tribe-map__container--static">
 				<img
 					className="tribe-element-map-object"
+					alt="map"
 					src={ this.mapUrl }
 				/>
 				<div className="spinner__container">
-					<Spinner/>
+					<Spinner />
 				</div>
 			</picture>
 		);
@@ -404,7 +405,7 @@ export default class GoogleMap extends Component {
 
 		const invalid = this.invalidLocation( latitude, longitude );
 		const marker = invalid ? address : `${ latitude },${ longitude }`;
-		const markerParams = `size:mid|color:0xff0000|label:|${marker}`;
+		const markerParams = `size:mid|color:0xff0000|label:|${ marker }`;
 		return hasCenterMarker ? markerParams : '';
 	}
 }
