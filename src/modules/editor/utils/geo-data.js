@@ -1,4 +1,5 @@
-import { get } from 'lodash';
+import { get, identity, trim } from 'lodash';
+import { stringify } from 'querystringify';
 
 const list = {
 	countries: get( window, 'tribe_data_countries', {} ),
@@ -45,3 +46,41 @@ export function getStates( countryCode ) {
 }
 
 export default list;
+
+export function addressToMapString( address = {} ) {
+	const {
+		city,
+		street,
+		province,
+		country,
+	} = address;
+	const components = [ city, street, province, country ];
+	return components
+		.filter( identity )
+		.map( trim )
+		.join( ', ' );
+}
+
+export function mapLink( address = {} ) {
+	const {
+		city,
+		street,
+		province,
+		zip,
+		country,
+	} = address;
+
+	const query = [ city, street, province, zip, country ]
+		.filter( identity )
+		.map( trim )
+		.join( ', ' );
+
+	const args = {
+		f: 'q',
+		source: 's_q',
+		geocode: '',
+		q: query,
+	};
+
+	return `https://maps.google.com/maps?${ stringify( args ) }`;
+}
