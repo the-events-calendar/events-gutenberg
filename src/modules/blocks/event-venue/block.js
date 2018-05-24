@@ -192,10 +192,16 @@ class EventVenue extends Component {
 
 		return (
 			<div className="tribe-venue__actions">
-				<button><Dashicon icon="edit" /></button>
+				{ this.isDraft() && <button><Dashicon icon="edit" /></button> }
 				<button onClick={ this.removeVenue }><Dashicon icon="trash" /></button>
 			</div>
 		);
+	}
+
+	isDraft() {
+		const { details } = this.state;
+		const { status } = details;
+		return 'draft' === status;
 	}
 
 	removeVenue = () => {
