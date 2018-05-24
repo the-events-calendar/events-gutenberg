@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { stringify } from 'querystringify';
-import { values, noop, isArray, isEmpty } from 'lodash';
+import { values, noop, isArray, isEmpty, get } from 'lodash';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -16,7 +16,6 @@ import { Component } from '@wordpress/element';
 
 import {
 	Spinner,
-	Placeholder,
 } from '@wordpress/components';
 
 /**
@@ -63,6 +62,10 @@ const MAP_TYPES = {
 const IMAGE_FORMATS_VALUES = values( IMAGE_FORMATS );
 const MAP_TYPES_VALUES = values( MAP_TYPES );
 
+import { mapsAPI } from 'utils/globals';
+const API_KEY = get( mapsAPI, 'key', '' );
+const DEFAULT_ZOOM = parseInt( get( mapsAPI, 'zoom', 14 ), 10 );
+
 /**
  * A wrapper for Google's Static Maps
  *
@@ -72,10 +75,6 @@ const MAP_TYPES_VALUES = values( MAP_TYPES );
  */
 
 export default class GoogleMap extends Component {
-	/**
-	 * https://developers.google.com/maps/documentation/staticmaps/intro#api_key
-	 */
-	static ApiKey = null;
 
 	static RootStaticUrl = 'https://maps.googleapis.com/maps/api/staticmap';
 	static RootEmbedUrl = 'https://www.google.com/maps/embed/v1/place';
@@ -85,10 +84,8 @@ export default class GoogleMap extends Component {
 	static MapTypes = MAP_TYPES
 
 	static propTypes = {
-		latitude: PropTypes.string.isRequired,
-
-		longitude: PropTypes.string.isRequired,
-
+		coordinates: PropTypes.object.isRequired,
+		address: PropTypes.string,
 		size: PropTypes.shape( {
 			width: PropTypes.number.isRequired,
 			height: PropTypes.number.isRequired,
@@ -125,6 +122,7 @@ export default class GoogleMap extends Component {
 		 * Add a marker on the center
 		 */
 		hasCenterMarker: PropTypes.bool,
+		apiKey: PropTypes.string,
 	}
 
 	static defaultProps = {
@@ -134,6 +132,10 @@ export default class GoogleMap extends Component {
 		style: {},
 		scale: 2,
 		interactive: false,
+		apiKey: API_KEY,
+		zoom: DEFAULT_ZOOM,
+		coordinates: {},
+		address: {},
 	}
 
 	constructor( props ) {
@@ -160,7 +162,6 @@ export default class GoogleMap extends Component {
 	}
 
 	loadMap() {
-		const { address } = this.props;
 		const { maps } = google;
 		// Try to fetch the library 0.5 seconds later
 		if ( ! google || ! maps ) {
@@ -170,6 +171,7 @@ export default class GoogleMap extends Component {
 
 		// There's no valid coordinatees fallback to the image map.
 		if ( this.invalidLocation() ) {
+			const { address } = this.props;
 			if ( isEmpty( address ) ) {
 				this.setState( {
 					interactive: false,
@@ -221,24 +223,18 @@ export default class GoogleMap extends Component {
 		};
 	}
 
-	invalidLocation( lat = null, lng = null ) {
-		if ( lat === null && lng === null ) {
-			const location  = this.getLocation();
-			return isNaN( location.lat ) || isNaN( location.lng );
-		}
-
-		return isNaN( lat ) || isNaN( lng );
+	invalidLocation() {
+		const location = this.getLocation();
+		const { lat, lng } = location;
+		return ! lat || ! lng;
 	}
 
 	getLocation() {
-		const {
-			latitude,
-			longitude,
-		} = this.props;
-
+		const { coordinates } = this.props;
+		const { lat, lng } = coordinates;
 		return {
-			lat: parseFloat( latitude ),
-			lng: parseFloat( longitude ),
+			lat,
+			lng,
 		};
 	}
 
@@ -347,12 +343,11 @@ export default class GoogleMap extends Component {
 				map: map.instance,
 			} );
 		}
+
 	}
 
 	get mapUrl() {
 		const {
-			latitude,
-			longitude,
 			zoom,
 			size,
 			scale,
@@ -372,10 +367,12 @@ export default class GoogleMap extends Component {
 		let rootUrl = null;
 		const { interactive } = this.state;
 
+		const coordinates = this.getLocation();
+		const { lat, lng } = coordinates;
 		if ( interactive ) {
 			rootUrl = this.constructor.RootEmbedUrl;
 
-			queryArgs.q = `${ latitude },${ longitude }`;
+			queryArgs.q = `${ lat },${ lng }`;
 		} else {
 			rootUrl = this.constructor.RootStaticUrl;
 
@@ -383,11 +380,11 @@ export default class GoogleMap extends Component {
 			queryArgs.size = `${ width }x${ height }`;
 			queryArgs.format = format;
 
-			const invalid = this.invalidLocation( latitude, longitude );
+			const invalid = this.invalidLocation();
 			if ( invalid && ! isEmpty( address ) ) {
 				queryArgs.center = address;
 			} else {
-				queryArgs.center = `${ latitude },${ longitude }`;
+				queryArgs.center = `${ lat },${ lng }`;
 			}
 			queryArgs.markers = this.markerParams;
 		}
@@ -396,15 +393,13 @@ export default class GoogleMap extends Component {
 	}
 
 	get markerParams() {
-		const {
-			latitude,
-			longitude,
-			address,
-			hasCenterMarker,
-		} = this.props;
+		const { hasCenterMarker, address } = this.props;
 
-		const invalid = this.invalidLocation( latitude, longitude );
-		const marker = invalid ? address : `${ latitude },${ longitude }`;
+		const coordinates = this.getLocation();
+		const { lat, lng } = coordinates;
+
+		const invalid = this.invalidLocation();
+		const marker = invalid ? address : `${ lat },${ lng }`;
 		const markerParams = `size:mid|color:0xff0000|label:|${ marker }`;
 		return hasCenterMarker ? markerParams : '';
 	}
