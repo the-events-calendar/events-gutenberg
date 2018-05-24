@@ -2,21 +2,16 @@
  * External dependencies
  */
 import React from 'react';
-import { unescape, isEmpty } from 'lodash';
-import { stringify } from 'querystringify';
-import classNames from 'classnames';
+import { isEmpty } from 'lodash';
+import { mapLink } from 'utils/geo-data';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-import { store, STORE_NAME } from 'data/venues';
 
 import {
-	Dropdown,
-	IconButton,
-	Dashicon,
 	Spinner,
 	Placeholder,
 } from '@wordpress/components';
@@ -24,73 +19,6 @@ import {
 /**
  * Internal dependencies
  */
-import {
-	VenueForm,
-	SearchPosts,
-} from 'elements';
-
-function CreateDropdown( { ...props } ) {
-	const { focus, addVenue } = props;
-
-	if ( ! focus ) {
-		return null;
-	}
-
-	const icon = (
-		<Dashicon icon="plus" />
-	);
-
-	const dropdownToggle = ( { onToggle, isOpen } ) => (
-		<IconButton
-			className="tribe-editor-button"
-			label={ __( 'Create Venue' ) }
-			onClick={ onToggle }
-			icon={ icon }
-			aria-expanded={ isOpen }
-		/>
-	);
-
-	const dropdownContent = ( { onToggle, isOpen, onClose } ) => (
-		<VenueForm
-			addVenue={ addVenue }
-			onClose={ onClose }
-		/>
-	);
-
-	const content = (
-		<Dropdown
-			className="tribe-editor-venue-dropdown"
-			position="bottom center"
-			contentClassName="tribe-editor-dropdown__dialog"
-			renderToggle={ dropdownToggle }
-			renderContent={ dropdownContent }
-		/>
-	);
-
-	return content;
-}
-
-function VenueActions( { ...props } ) {
-	const { focus, onClick } = props;
-
-	if ( ! focus ) {
-		return null;
-	}
-
-	const icon = (
-		<Dashicon icon="no" />
-	);
-
-	return (
-		<IconButton
-			className="tribe-editor-button"
-			label={ __( 'Remove Venue' ) }
-			onClick={ onClick }
-			icon={ icon }
-			aria-expanded={ focus }
-		/>
-	);
-}
 
 /**
  * Module Code
@@ -120,11 +48,7 @@ export default class VenueDetails extends Component {
 			return this.renderVenue();
 		}
 
-		return (
-			<Placeholder key="actions">
-				{ this.renderActions() }
-			</Placeholder>
-		);
+		return null;
 	}
 
 	renderVenue = () => {
@@ -145,64 +69,55 @@ export default class VenueDetails extends Component {
 
 	renderVenueName() {
 		return (
-			<h3 className="tribe-venue__name">{ this.getVenueName() }</h3>
+			<h3
+				className="tribe-venue__name"
+				dangerouslySetInnerHTML={ this.getVenueName() }>
+			</h3>
 		);
 	}
 
 	getVenueName( venue = this.props.venue ) {
 		// if we still don't have venue we don't have an address
-		if ( ! venue ) {
-			return false;
+		let name = '';
+		if ( venue ) {
+			if ( ! venue.title ) {
+				name = __( '(Untitled Venue)', 'events-gutenberg' );
+			}
+			name = venue.title.rendered;
 		}
-
-		// If we don't have a title we say it's untitled
-		if ( ! venue.title ) {
-			return __( '(Untitled Venue)', 'events-gutenberg' );
-		}
-
-		return unescape( venue.title.rendered ).trim();
+		return { __html: name };
 	}
 
 	renderAddress() {
-		const address = this.props.getAddress();
+		const address = this.props.address;
 		if ( isEmpty( address ) ) {
 			return null;
 		}
 
-		const { venue } = this.props;
-		const { meta } = venue;
 		const {
-			_VenueCity,
-			_VenueAddress,
-			_VenueProvince,
-			_VenueZip,
-			_VenueCountry,
-		} = meta;
+			city,
+			street,
+			province,
+			zip,
+			country,
+		} = address;
 
 		return (
 			<address className="tribe-venue__address">
-				<span className="tribe-venue__street-address">{ _VenueAddress }</span>
+				<span className="tribe-venue__street-address">{ street }</span>
 				<br />
-				{ _VenueCity && <span className="tribe-venue__locality">{ _VenueCity }</span> }
-				{ _VenueCity && <span className="tribe-venue__delimiter">, </span> }
-				{ _VenueProvince && <span className="tribe-venue__region">{ _VenueProvince }</span> }
-				{ _VenueZip && <span className="tribe-venue__postal-code"> { _VenueZip }</span> }
-				{ _VenueCountry && <span className="tribe-venue__country-name"> { _VenueCountry }</span> }
+				{ city && <span className="tribe-venue__locality">{ city }</span> }
+				{ city && <span className="tribe-venue__delimiter">, </span> }
+				{ province && <span className="tribe-venue__region">{ province }</span> }
+				{ zip && <span className="tribe-venue__postal-code"> { zip }</span> }
+				{ country && <span className="tribe-venue__country-name"> { country }</span> }
 				{ this.renderGoogleMapLink() }
 			</address>
 		);
 	}
 
 	renderGoogleMapLink() {
-		const address = this.props.getAddress();
-		const mapsUrlArgs = {
-			f: 'q',
-			source: 's_q',
-			geocode: '',
-			q: address,
-		};
-		const mapsUrl = `https://maps.google.com/maps?${ stringify( mapsUrlArgs ) }`;
-		const { showMapLink } = this.props;
+		const { showMapLink, address } = this.props;
 
 		if ( ! showMapLink ) {
 			return null;
@@ -211,7 +126,7 @@ export default class VenueDetails extends Component {
 		return (
 			<a
 				className="tribe-venue__map-link"
-				href={ mapsUrl }
+				href={ mapLink( address ) }
 				title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
 				target="_blank"
 			>
@@ -246,39 +161,6 @@ export default class VenueDetails extends Component {
 				<span className="tribe-venue__website">{ venue.meta._VenueURL }</span>
 				<br />
 			</React.Fragment>
-		);
-	}
-
-	renderActions = () => {
-		const { focus, addVenue, venue } = this.props;
-
-		return (
-			<div key="venue-actions" className="tribe-editor-venue-actions">
-				<SearchPosts
-					key="venue-search-dropdown"
-					postType="tribe_venue"
-					metaKey="_EventVenueID"
-					searchLabel={ __( 'Search for an venue', 'events-gutenberg' ) }
-					iconLabel={ __( 'Add existing venue', 'events-gutenberg' ) }
-					focus={ focus }
-					onSelectItem={ addVenue }
-					store={ store }
-					storeName={ STORE_NAME }
-					searchable
-				/>
-				<CreateDropdown
-					key="venue-create-dropdown"
-					focus={ focus }
-					addVenue={ addVenue }
-				/>
-				{ venue &&
-				<VenueActions
-					key="venue-actions"
-					focus={ focus }
-					venue={ venue }
-				/>
-				}
-			</div>
 		);
 	}
 }
