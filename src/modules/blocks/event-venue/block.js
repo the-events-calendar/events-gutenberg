@@ -3,15 +3,16 @@
  */
 import React from 'react';
 import { stringify } from 'querystringify';
-import { isEmpty, trim, isPlainObject, mapValues, isEqual, isUndefined } from 'lodash';
+import { isEmpty, trim, isPlainObject, mapValues, isEqual, noop } from 'lodash';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { addressToMapString } from 'utils/geo-data';
 import classNames from 'classnames';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { withSelect } from '@wordpress/data';
+import { withSelect, select, dispatch } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
 import './style.pcss';
 
@@ -33,170 +34,57 @@ import {
  * Internal dependencies
  */
 import {
-	VenueMap,
+	SearchOrCreate,
 } from 'elements';
 
-import { default as VenueDetails } from './venue';
+import VenueDetails from './venue';
+import { store } from 'data/venues';
+import { store as VenueStore, STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
+import { GoogleMap } from 'elements';
 
 /**
  * Module Code
  */
-const POST_TYPE = 'tribe_venue';
 
 class EventVenue extends Component {
-	constructor() {
+	constructor( props ) {
 		super( ...arguments );
 
+		const { attributes } = this.props;
+		const { eventVenueId } = attributes;
+
 		this.state = {
-			venue: undefined,
+			loading: eventVenueId,
+			details: {},
+			coordinates: {},
+			address: '',
 		};
+		this.unsubscribe = noop;
 	}
 
-	getVenue = () => {
-		const { venue } = this.props;
-		if ( ! venue ) {
-			return null;
+	componentDidMount() {
+		const { attributes } = this.props;
+		const { eventVenueId } = attributes;
+		if ( eventVenueId ) {
+			select( VENUE_STORE_NAME ).getDetails( eventVenueId );
 		}
-
-		if ( venue.id ) {
-			return venue;
-		}
-
-		const venues = venue.data;
-		if ( ! venues || ! venues.length ) {
-			return null;
-		}
-
-		return venues[ 0 ];
-	};
-
-	isLoading = () => {
-		const { venue } = this.props;
-		if ( ! venue || venue.id ) {
-			return false;
-		}
-
-		return venue.isLoading;
-	};
-
-	getAddress = ( venue = null ) => {
-		// If we don't have a venue we fetch the one in the state
-		if ( ! venue ) {
-			venue = this.getVenue();
-		}
-
-		// if we still don't have venue we don't have an address
-		if ( ! venue ) {
-			return false;
-		}
-
-		// Get the meta for us to work with
-		const { meta } = venue;
-
-		// Validate meta before using it
-		if ( isEmpty( meta ) ) {
-			return false;
-		}
-
-		const {
-			_VenueAddress,
-			_VenueCity,
-			_VenueProvince,
-			_VenueZip,
-			_VenueCountry,
-		} = meta;
-
-		const address = trim(
-			`${ _VenueAddress } ${ _VenueCity } ${ _VenueProvince } ${ _VenueZip } ${ _VenueCountry }`
-		);
-
-		// If it's an empty string we return boolean
-		if ( isEmpty( address ) ) {
-			return false;
-		}
-
-		return address;
-	};
-
-	getMapAddress() {
-		const venue = this.getVenue();
-
-		// if we still don't have venue we don't have an address
-		if ( ! venue ) {
-			return '';
-		}
-
-		// Get the meta for us to work with
-		const { meta } = venue;
-		// Validate meta before using it
-		if ( isEmpty( meta ) ) {
-			return '';
-		}
-
-		const {
-			_VenueAddress,
-			_VenueCity,
-			_VenueProvince,
-			_VenueCountry,
-		} = meta;
-
-		return trim(
-			`${ _VenueAddress }, ${ _VenueCity }, ${ _VenueProvince }, ${_VenueCountry}`
-		);
+		this.unsubscribe = VenueStore.subscribe( this.listenStore );
 	}
 
-	updateCoodinates = ( venue, center ) => {
-		if ( isPlainObject( center ) ) {
-			center = mapValues( center, parseFloat );
-		}
+	componentWillUnmount() {
+		this.unsubscribe();
+	}
 
-		if ( ! venue.meta._VenueLat || ! venue.meta._VenueLng ) {
-			const currentCenter = mapValues( { lat: venue.meta._VenueLat, lng: venue.meta._VenueLng }, parseFloat );
-
-			if ( isEqual( center, currentCenter ) ) {
-				return null;
-			}
-		}
-
-		const basePath = wp.api.getPostTypeRoute( POST_TYPE );
-		const request = wp.apiRequest( {
-			path: `/wp/v2/${ basePath }/${ venue.id }`,
-			method: 'POST',
-			data: {
-				meta: {
-					_VenueLat: center.lat,
-					_VenueLng: center.lng,
-				},
-			},
+	listenStore = () => {
+		const state = VenueStore.getState();
+		const { details, address, coordinates } = state;
+		this.setState( {
+			details,
+			address,
+			coordinates,
+			loading: false,
 		} );
-
-		request.done( ( newPost ) => {
-			if ( ! newPost.id ) {
-				console.warning( 'Invalid update of venue coordinates:', newPost );
-			}
-		} ).fail( ( err ) => {
-			console.error( err );
-		} );
-	};
-
-	updateAddress = ( address ) => {
-		if ( ! address ) {
-			return;
-		}
-
-		const venue = this.getVenue();
-
-		geocodeByAddress( address )
-			.then( results => getLatLng( results[ 0 ] ) )
-			.then( latLng => {
-				this.setState( { coordinates: latLng, address: address } );
-				this.updateCoodinates( venue, latLng );
-				console.debug( 'Successfully Geocoded Address', latLng, address, venue );
-			} )
-			.catch( error => {
-				console.debug( 'Error on Geocoding Address', error, address, venue );
-			} );
-	};
+	}
 
 	render() {
 		return [ this.renderBlock(), this.renderControls() ];
@@ -225,59 +113,73 @@ class EventVenue extends Component {
 	}
 
 	getContainer() {
-		if ( this.isLoading() ) {
+		const { loading } = this.state;
+		if ( loading ) {
 			return (
 				<Placeholder key="loading">
 					<Spinner/>
 				</Placeholder>
 			);
 		}
+		return this.hasVenue() ? this.renderDetails() : this.renderSearchOrCreate();
+	}
 
-		const {
-			setAttributes,
-			attributes,
-			focus,
-		} = this.props;
+	renderDetails() {
+		const { attributes } = this.props;
 		const { showMapLink } = attributes;
-		const venue = this.getVenue();
-
+		const { details, address } = this.state;
 		return (
 			<VenueDetails
-				focus={ ! venue ? true : focus }
-				venue={ this.getVenue() }
-				isLoading={ this.isLoading() }
-				getAddress={ this.getAddress }
-				addVenue={ next => {
-					if ( ! next ) {
-						return;
-					}
-
-					setAttributes( { eventVenueId: next.id } );
-					this.setState( { venue: next } );
-					this.updateAddress( this.getAddress() );
-				} }
+				venue={ details }
+				address={ address }
 				showMapLink={ showMapLink }
 			/>
 		);
 	}
 
+	renderSearchOrCreate() {
+		const { isSelected } = this.props;
+		return (
+			<SearchOrCreate
+				icon={ <Dashicon icon="location" size={ 22 } /> }
+				store={ store }
+				selected={ isSelected }
+				onSelection={ this.setVenue }
+			/>
+		);
+	}
+
+	setVenue = ( venue ) => {
+		VenueStore.dispatch( {
+			type: 'SET_DETAILS',
+			id: venue.id,
+			details: venue,
+		} );
+
+		const { setAttributes } = this.props;
+		setAttributes( { eventVenueId: venue.id } );
+	}
+
 	hasVenue() {
-		return this.getVenue() && this.getAddress();
+		const { details } = this.state;
+		return ! isEmpty( details );
 	}
 
 	renderMap() {
 		const { attributes } = this.props;
 		const { showMap } = attributes;
-		const venue = this.getVenue();
-		if ( ! showMap || ! venue ) {
+		const { details, address, coordinates } = this.state;
+
+		if ( ! showMap || isEmpty( details ) ) {
 			return null;
 		}
 
 		return (
-			<VenueMap
-				key={ `venue-map-${ venue.id }` }
-				venue={ this.getVenue() }
-				address={ this.getMapAddress() }
+			<GoogleMap
+				size={ { width: 450, height: 353 } }
+				coordinates={ coordinates }
+				address={ addressToMapString( address ) }
+				interactive={ true }
 			/>
 		);
 	}
@@ -297,9 +199,11 @@ class EventVenue extends Component {
 	}
 
 	removeVenue = () => {
+		VenueStore.dispatch({
+			type: 'CLEAR',
+		});
 		const { setAttributes } = this.props;
 		setAttributes( { eventVenueId: 0 } );
-		this.setState( { venue: undefined } );
 	}
 
 	renderControls() {
@@ -332,6 +236,7 @@ class EventVenue extends Component {
 	}
 }
 
+/*
 const applySelect = withSelect( ( select, props ) => {
 	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
 	const venue = meta._EventVenueID ? meta._EventVenueID : null;
@@ -365,4 +270,63 @@ const applyWithAPIData = withAPIData( ( props ) => {
 export default compose(
 	applySelect,
 	applyWithAPIData,
-)( EventVenue );
+)( EventVenue );*/
+
+/**
+ * Code that is used to create a new venue
+ *
+ *
+ updateAddress = ( address ) => {
+		if ( ! address ) {
+			return;
+		}
+
+		const venue = this.getVenue();
+
+		geocodeByAddress( address )
+			.then( results => getLatLng( results[ 0 ] ) )
+			.then( latLng => {
+				this.setState( { coordinates: latLng, address: address } );
+				this.updateCoodinates( venue, latLng );
+				console.debug( 'Successfully Geocoded Address', latLng, address, venue );
+			} )
+			.catch( error => {
+				console.debug( 'Error on Geocoding Address', error, address, venue );
+			} );
+	};
+
+ updateCoodinates = ( venue, center ) => {
+		if ( isPlainObject( center ) ) {
+			center = mapValues( center, parseFloat );
+		}
+
+		if ( ! venue.meta._VenueLat || ! venue.meta._VenueLng ) {
+			const currentCenter = mapValues( { lat: venue.meta._VenueLat, lng: venue.meta._VenueLng }, parseFloat );
+
+			if ( isEqual( center, currentCenter ) ) {
+				return null;
+			}
+		}
+
+		const basePath = wp.api.getPostTypeRoute( POST_TYPE );
+		const request = wp.apiRequest( {
+			path: `/wp/v2/${ basePath }/${ venue.id }`,
+			method: 'POST',
+			data: {
+				meta: {
+					_VenueLat: center.lat,
+					_VenueLng: center.lng,
+				},
+			},
+		} );
+
+		request.done( ( newPost ) => {
+			if ( ! newPost.id ) {
+				console.warning( 'Invalid update of venue coordinates:', newPost );
+			}
+		} ).fail( ( err ) => {
+			console.error( err );
+		} );
+	};
+ */
+export default EventVenue;
