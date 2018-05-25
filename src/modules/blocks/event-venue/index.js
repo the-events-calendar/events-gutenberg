@@ -46,6 +46,11 @@ export default {
 			source: 'meta',
 			meta: '_EventShowMap',
 		},
+		tempVenues: {
+			type: 'array',
+			source: 'meta',
+			meta: '_EventTempVenues',
+		},
 	},
 
 	useOnce: true,
