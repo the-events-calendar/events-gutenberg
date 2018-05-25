@@ -1,4 +1,4 @@
-import { get, identity, trim } from 'lodash';
+import { get, identity, trim, find } from 'lodash';
 import { stringify } from 'querystringify';
 
 const list = {
@@ -28,6 +28,17 @@ function toObject( data = {} ) {
  */
 export function getCountries() {
 	return toObject( list.countries );
+}
+
+export function getCountryCode( name ) {
+	const result = find( getCountries(), ( country ) => country.name === name );
+	return get( result, 'code', 'US' );
+}
+
+export function getStateCode( countryCode, name ) {
+	const states = getStates( countryCode );
+	const result = find( states, ( state ) => state.name === name );
+	return get( result, 'code', '' );
 }
 
 /**
