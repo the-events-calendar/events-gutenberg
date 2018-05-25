@@ -1,7 +1,7 @@
 export { default as Input } from './input/element.js';
 export { default as TermsList } from './terms-list/element.js';
 export { default as OrganizerForm } from './organizer-form/element.js';
-export { default as VenueForm } from './venue-form/element.js';
+export { default as VenueForm, toFields, toVenue } from './venue-form/element.js';
 export { default as DatePicker } from './date-picker/element.js';
 export { default as TimePicker } from './time-picker/element.js';
 export { default as MetaGroup } from './meta-group/element.js';
