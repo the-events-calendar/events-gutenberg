@@ -1,17 +1,15 @@
 /**
  * External imports
  */
-import { stringify } from 'querystringify';
-import { isEmpty, identity, get } from 'lodash';
+import { isEmpty, get } from 'lodash';
 
 /**
  * Wordpress Imports
  */
-import { dispatch, select } from '@wordpress/data';
+import { dispatch } from '@wordpress/data';
 
 const { data, apiRequest } = wp;
 const { registerStore } = data;
-import { getResponseHeaders } from 'utils/request';
 
 const POST_TYPE = 'tribe_venue';
 export const STORE_NAME = 'tec.venue';
@@ -25,10 +23,11 @@ const DEFAULT_STATE = {
 	create: false,
 	loading: false,
 	submit: false,
+	created: [],
 };
 
 const reducer = ( state = DEFAULT_STATE, action ) => {
-	console.log(action.type);
+
 	switch ( action.type ) {
 		case 'SET_DETAILS': {
 			return setDetails( state, action.id, action.details );
@@ -66,10 +65,17 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 		case 'EDIT_DRAFT': {
 			return editDraft( state, action.id, action.fields );
 		}
+		case 'REGISTER_VENUE': {
+			return {
+				...state,
+				created: [ ...state.created, action.id ],
+			};
+		}
 		case 'CLEAR': {
 			return {
 				...state,
 				...DEFAULT_STATE,
+				created: state.created,
 			};
 		}
 		default: {
@@ -99,8 +105,9 @@ const createDraft = ( state, fields ) => {
 		method: 'POST',
 		data: fields,
 	} ).then( (body) => {
-		console.log(body);
-		dispatch( STORE_NAME ).setDetails( body.id, body );
+		const { id } = body;
+		dispatch( STORE_NAME ).registerVenue( id );
+		dispatch( STORE_NAME ).setDetails( id, body );
 	} );
 
 	return {
@@ -167,6 +174,12 @@ const actions = {
 			details,
 		};
 	},
+	registerVenue( id ) {
+		return {
+			type: 'REGISTER_VENUE',
+			id,
+		};
+	}
 };
 
 const selectors = {
