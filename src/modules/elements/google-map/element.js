@@ -22,7 +22,7 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
-import { google } from 'utils/globals';
+import { google, mapsAPI } from 'utils/globals';
 
 /**
  * Module Code
@@ -62,7 +62,6 @@ const MAP_TYPES = {
 const IMAGE_FORMATS_VALUES = values( IMAGE_FORMATS );
 const MAP_TYPES_VALUES = values( MAP_TYPES );
 
-import { mapsAPI } from 'utils/globals';
 const API_KEY = get( mapsAPI, 'key', '' );
 const DEFAULT_ZOOM = parseInt( get( mapsAPI, 'zoom', 14 ), 10 );
 
@@ -75,7 +74,6 @@ const DEFAULT_ZOOM = parseInt( get( mapsAPI, 'zoom', 14 ), 10 );
  */
 
 export default class GoogleMap extends Component {
-
 	static RootStaticUrl = 'https://maps.googleapis.com/maps/api/staticmap';
 	static RootEmbedUrl = 'https://www.google.com/maps/embed/v1/place';
 
@@ -343,7 +341,6 @@ export default class GoogleMap extends Component {
 				map: map.instance,
 			} );
 		}
-
 	}
 
 	get mapUrl() {

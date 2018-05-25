@@ -14,7 +14,6 @@ import { Spinner } from '@wordpress/components';
 import './style.pcss';
 
 export default class SearchOrCreate extends Component {
-
 	static defaultProps = {
 		placeholder: __( 'Add or Find', 'events-gutenberg' ),
 		icon: null,
@@ -102,10 +101,10 @@ export default class SearchOrCreate extends Component {
 		const storeState = store.getState();
 
 		if ( search === '' ) {
-			store.dispatch({
+			store.dispatch( {
 				type: 'CLEAR',
 				posts: [],
-			});
+			} );
 		}
 
 		if ( search.trim() === storeState.search.trim() ) {
@@ -146,7 +145,7 @@ export default class SearchOrCreate extends Component {
 			<nav className="tribe-soc__results">
 				{ this.renderItems() }
 			</nav>
-		)
+		);
 	}
 
 	renderItems() {

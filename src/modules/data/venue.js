@@ -27,7 +27,6 @@ const DEFAULT_STATE = {
 };
 
 const reducer = ( state = DEFAULT_STATE, action ) => {
-
 	switch ( action.type ) {
 		case 'SET_DETAILS': {
 			return setDetails( state, action.id, action.details );
@@ -56,8 +55,8 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 				draft: {
 					...state.draft,
 					...action.draft,
-				}
-			}
+				},
+			};
 		}
 		case 'CREATE_DRAFT': {
 			return createDraft( state, action.fields );
@@ -82,9 +81,9 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 			return state;
 		}
 	}
-}
+};
 
-const setDetails = (prevState, id, details) => {
+const setDetails = ( prevState, id, details ) => {
 	const meta = get( details, 'meta', {} );
 	return {
 		...prevState,
@@ -104,7 +103,7 @@ const createDraft = ( state, fields ) => {
 		path: `/wp/v2/${ POST_TYPE }`,
 		method: 'POST',
 		data: fields,
-	} ).then( (body) => {
+	} ).then( ( body ) => {
 		const { id } = body;
 		dispatch( STORE_NAME ).registerVenue( id );
 		dispatch( STORE_NAME ).setDetails( id, body );
@@ -119,10 +118,10 @@ const createDraft = ( state, fields ) => {
 
 const editDraft = ( state, id, fields ) => {
 	apiRequest( {
-		path: `/wp/v2/${ POST_TYPE }/${id}`,
+		path: `/wp/v2/${ POST_TYPE }/${ id }`,
 		method: 'PUT',
 		data: fields,
-	} ).then( (body) => {
+	} ).then( ( body ) => {
 		dispatch( STORE_NAME ).setDetails( body.id, body );
 	} );
 
@@ -130,8 +129,8 @@ const editDraft = ( state, id, fields ) => {
 		...state,
 		loading: true,
 		submit: true,
-	}
-}
+	};
+};
 
 const getAddress = ( meta = {} ) => {
 	if ( isEmpty( meta ) ) {
@@ -164,7 +163,7 @@ const getCoordinates = ( meta = {} ) => {
 		lat: isNaN( lat ) ? null : lat,
 		lng: isNaN( lng ) ? null : lat,
 	};
-}
+};
 
 const actions = {
 	setDetails( id, details ) {
@@ -179,7 +178,7 @@ const actions = {
 			type: 'REGISTER_VENUE',
 			id,
 		};
-	}
+	},
 };
 
 const selectors = {
@@ -194,7 +193,7 @@ const resolvers = {
 			return state.details;
 		}
 
-		apiRequest( { path: `/wp/v2/${ POST_TYPE }/${id}` } )
+		apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ id }` } )
 			.then( ( body ) => {
 				dispatch( STORE_NAME ).setDetails( body.id, body );
 			} );
@@ -202,7 +201,7 @@ const resolvers = {
 		return {
 			...state,
 			loading: true,
-		}
+		};
 	},
 };
 

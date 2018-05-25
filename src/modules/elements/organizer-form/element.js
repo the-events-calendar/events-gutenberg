@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import { get, isFunction, values } from 'lodash';
-import { stringify } from 'querystringify';
+import { isFunction, values } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -11,7 +10,6 @@ import { __ } from '@wordpress/i18n';
 import {
 	Spinner,
 	Placeholder,
-	withAPIData,
 } from '@wordpress/components';
 import { Component } from '@wordpress/element';
 
@@ -23,6 +21,7 @@ import { Input } from 'elements';
 /**
  * Module Code
  */
+
 class OrganizerForm extends Component {
 	static defaultProps = {
 		postType: 'tribe_organizer',
