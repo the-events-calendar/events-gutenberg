@@ -21,6 +21,7 @@ export default class SearchOrCreate extends Component {
 		store: null,
 		selected: false,
 		onSelection: noop,
+		onSetCreation: noop,
 	}
 
 	constructor( props ) {
@@ -29,7 +30,6 @@ export default class SearchOrCreate extends Component {
 			search: '',
 			posts: [],
 			fetching: false,
-			idle: false,
 		};
 		this.inputRef = React.createRef();
 	}
@@ -51,11 +51,9 @@ export default class SearchOrCreate extends Component {
 
 	render() {
 		const { selected } = this.props;
-		const { idle } = this.state;
 		const containerClass = classNames( 'tribe-soc__input-container', {
 			'tribe-soc__input-container--active': selected,
 		} );
-
 
 		return (
 			<section className="tribe-soc__container">
@@ -165,6 +163,7 @@ export default class SearchOrCreate extends Component {
 
 	setCreation = () => {
 		const { search } = this.state;
+		this.props.onSetCreation( search );
 	}
 
 	renderItem = ( item ) => {
