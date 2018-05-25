@@ -86,6 +86,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 		add_action( 'wp_ajax_' . $this->get_ajax_action(), array( $this, 'ajax' ) );
 
 		$this->assets();
+		$this->hook();
 	}
 
 	/**
@@ -108,7 +109,14 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	 * @return void
 	 */
 	public function assets() {
+	}
 
+	/**
+	 * Attach any particular hook for the specif block.
+	 *
+	 * @since TBD
+	 */
+	public function hook() {
 	}
 }
 
