@@ -7,7 +7,7 @@ import { isEmpty, identity, get } from 'lodash';
 /**
  * Wordpress Imports
  */
-import { dispatch } from '@wordpress/data';
+import { dispatch, select } from '@wordpress/data';
 
 const { data, apiRequest } = wp;
 const { registerStore } = data;
@@ -20,18 +20,56 @@ const DEFAULT_STATE = {
 	details: {},
 	address: {},
 	coordinates: {},
+	draft: {},
+	edit: false,
+	create: false,
+	loading: false,
+	submit: false,
 };
 
 const reducer = ( state = DEFAULT_STATE, action ) => {
+	console.log(action.type);
 	switch ( action.type ) {
 		case 'SET_DETAILS': {
 			return setDetails( state, action.id, action.details );
 		}
+		case 'SET_DRAFT_TITLE': {
+			return {
+				...state,
+				edit: false,
+				create: true,
+				details: {},
+				draft: {
+					...state.draft,
+					title: {
+						rendered: action.title,
+					},
+				},
+			};
+		}
+		case 'SET_DRAFT_DETAILS': {
+			return {
+				...state,
+				details: {},
+				edit: true,
+				create: false,
+				submit: false,
+				draft: {
+					...state.draft,
+					...action.draft,
+				}
+			}
+		}
+		case 'CREATE_DRAFT': {
+			return createDraft( state, action.fields );
+		}
+		case 'EDIT_DRAFT': {
+			return editDraft( state, action.id, action.fields );
+		}
 		case 'CLEAR': {
 			return {
 				...state,
-				id: 0,
-				details: {},
+				...DEFAULT_STATE,
 			};
 		}
 		default: {
@@ -48,7 +86,44 @@ const setDetails = (prevState, id, details) => {
 		details,
 		address: getAddress( meta ),
 		coordinates: getCoordinates( meta ),
+		edit: false,
+		create: false,
+		loading: false,
+		submit: false,
 	};
+};
+
+const createDraft = ( state, fields ) => {
+	apiRequest( {
+		path: `/wp/v2/${ POST_TYPE }`,
+		method: 'POST',
+		data: fields,
+	} ).then( (body) => {
+		console.log(body);
+		dispatch( STORE_NAME ).setDetails( body.id, body );
+	} );
+
+	return {
+		...state,
+		loading: true,
+		submit: true,
+	};
+};
+
+const editDraft = ( state, id, fields ) => {
+	apiRequest( {
+		path: `/wp/v2/${ POST_TYPE }/${id}`,
+		method: 'PUT',
+		data: fields,
+	} ).then( (body) => {
+		dispatch( STORE_NAME ).setDetails( body.id, body );
+	} );
+
+	return {
+		...state,
+		loading: true,
+		submit: true,
+	}
 }
 
 const getAddress = ( meta = {} ) => {
@@ -110,6 +185,11 @@ const resolvers = {
 			.then( ( body ) => {
 				dispatch( STORE_NAME ).setDetails( body.id, body );
 			} );
+
+		return {
+			...state,
+			loading: true,
+		}
 	},
 };
 
