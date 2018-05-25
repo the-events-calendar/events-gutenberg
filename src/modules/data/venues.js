@@ -1,4 +1,5 @@
 import { stringify } from 'querystringify';
+import { get } from 'lodash';
 
 const { data, apiRequest } = wp;
 const { registerStore } = data;
@@ -69,8 +70,8 @@ function search( state, term, params = {} ) {
 		totalPages = isNaN( totalPages ) ? 0 : totalPages;
 
 		// Prevent responses from old searches to be stored.
-		const { search } = store.getState();
-		if ( search.trim() !== term.trim() ) {
+		const currentTerm = get( store.getState(), 'search', '' );
+		if ( currentTerm.trim() !== term.trim() ) {
 			return;
 		}
 
