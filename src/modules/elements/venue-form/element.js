@@ -10,17 +10,12 @@ import { __ } from '@wordpress/i18n';
 import { select } from '@wordpress/data';
 import { Component } from '@wordpress/element';
 import { RichText } from '@wordpress/editor';
-import {
-	Spinner,
-	Placeholder,
-} from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
 import { Input } from 'elements';
 import list, { getCountries, getStates, getCountryCode, getStateCode } from 'utils/geo-data';
-import { store, STORE_NAME } from 'data/venue';
 import './style.pcss';
 
 export function toFields( venue ) {
@@ -72,9 +67,8 @@ export function toVenue( fields ) {
 
 export default class VenueForm extends Component {
 	static defaultProps = {
-		postType: 'tribe_venue',
 		onSubmit: noop,
-	}
+	};
 
 	constructor( props ) {
 		super( ...arguments );
@@ -88,11 +82,8 @@ export default class VenueForm extends Component {
 			phone: '',
 			url: '',
 			stateProvince: '',
-			venue: null,
-			isValid: this.isValid(),
 			...props,
 		};
-		console.log( this.state );
 		this.fields = {};
 	}
 
@@ -112,13 +103,6 @@ export default class VenueForm extends Component {
 			const { name } = props || {};
 			this.fields[ name ] = input;
 		}
-	}
-
-	isValid() {
-		const fields = values( this.fields );
-		const results = fields.filter( ( input ) => input.isValid() );
-
-		return fields.length === results.length;
 	}
 
 	renderOption( element ) {
@@ -158,7 +142,6 @@ export default class VenueForm extends Component {
 					type="text"
 					name="venue[stateProvince]"
 					placeholder="State"
-					onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 					ref={ this.saveRef }
 					onChange={ ( event ) => this.setState( { stateProvince: event.target.value } ) }
 					value={ stateProvince }
@@ -178,17 +161,6 @@ export default class VenueForm extends Component {
 	}
 
 	render() {
-		return (
-			<div
-				className="tribe-venue__form"
-				key="tribe-venue-form"
-			>
-				{ this.renderFields() }
-			</div>
-		);
-	}
-
-	renderFields() {
 		const {
 			title,
 			address,
@@ -197,8 +169,12 @@ export default class VenueForm extends Component {
 			phone,
 			url,
 		} = this.state;
+
 		return (
-			<React.Fragment>
+			<div
+				className="tribe-venue__form"
+				key="tribe-venue-form"
+			>
 				<RichText
 					tagName="h3"
 					format="string"
@@ -210,7 +186,6 @@ export default class VenueForm extends Component {
 						type="text"
 						name="venue[address]"
 						placeholder="Street Address"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 						ref={ this.saveRef }
 						value={ address }
 						onChange={ ( next ) => this.setState( { address: next.target.value } ) }
@@ -219,7 +194,6 @@ export default class VenueForm extends Component {
 						type="text"
 						name="venue[city]"
 						placeholder="City"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 						ref={ this.saveRef }
 						onChange={ ( next ) => this.setState( { city: next.target.value } ) }
 						value={ city }
@@ -234,7 +208,6 @@ export default class VenueForm extends Component {
 							type="text"
 							name="venue[zip]"
 							placeholder="ZIP"
-							onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 							ref={ this.saveRef }
 							onChange={ ( next ) => this.setState( { zip: next.target.value } ) }
 							value={ zip }
@@ -244,7 +217,6 @@ export default class VenueForm extends Component {
 						type="tel"
 						name="venue[phone]"
 						placeholder="Phone number"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 						ref={ this.saveRef }
 						onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
 						value={ phone }
@@ -253,13 +225,12 @@ export default class VenueForm extends Component {
 						type="url"
 						name="venue[url]"
 						placeholder="Website"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 						ref={ this.saveRef }
 						onChange={ ( next ) => this.setState( { url: next.target.value } ) }
 						value={ url }
 					/>
 				</div>
-			</React.Fragment>
+			</div>
 		);
 	}
 }
