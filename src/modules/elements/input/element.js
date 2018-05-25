@@ -114,7 +114,7 @@ class Input extends Component {
 
 		let isValid = true;
 		switch ( type ) {
-			case 'phone':
+			case 'tel':
 				isValid = validator.isMobilePhone( value, 'any' );
 				break;
 			case 'email':
