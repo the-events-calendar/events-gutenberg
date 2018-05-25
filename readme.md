@@ -29,6 +29,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Feature - Event Categories is now a standalone block
 * Feature - Event Tags is now a standalone block
 * Feature - Event Website is now a standalone block
+* Feature - Event can set a unique separator for Date and Time instead of using a global value for all events.
 
 ### 0.2.0-alpha - 2018-05-17
 
