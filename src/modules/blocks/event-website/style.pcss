@@ -32,6 +32,13 @@
 		}
 	}
 
+	.is-selected,
+	.is-typing {
+		.tribe-events-website-link {
+			margin-bottom: 10px;
+		}
+	}
+
 	.tribe-events-website-link--placeholder {
 		border: 2px dashed #E1E3E6;
 		color: #8D949B;
@@ -44,13 +51,22 @@
 
 		.dashicon {
 			display: inline-block;
-			margin-right: 5px;
+			margin-right: 10px;
+			position: relative;
+			top: -5px;
 		}
 
 		input,
 		textarea {
 			width: 240px;
 			display: inline-block;
+			border: 1px solid #ccd0d4;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+			font-size: 13px;
+			padding: 6px 8px;
+			outline-offset: -1px;
+			box-shadow: 0 0 0 transparent;
+			transition: box-shadow .05s linear;
 		}
 	}
 }

@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classNames from 'classnames';
+import { union, without, isEmpty, noop, pick } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -25,22 +26,40 @@ import {
  * Internal dependencies
  */
 
+import { store } from 'data/details';
 import './style.pcss';
 
 /**
  * Module Code
  */
+
+export const VALID_PROPS = [
+	'label',
+	'eventUrl',
+];
+
 export default class EventWebsite extends Component {
-	constructor() {
+	constructor( props ) {
 		super( ...arguments );
 
-		const { attributes } = this.props;
-		const { label, eventUrl } = attributes;
+		this.state = props;
+		this.unsubscribe = noop;
+	}
 
-		this.state = {
-			label: label || undefined,
-			eventUrl: eventUrl || undefined,
-		};
+	componentDidMount() {
+		this.unsubscribe = store.subscribe( () => {
+			const state = store.getState();
+			this.setState( pick( state, VALID_PROPS ) );
+		} );
+
+		store.dispatch( {
+			type: 'SET_INITIAL_STATE',
+			values: pick( this.state, VALID_PROPS ),
+		} );
+	}
+
+	componentWillUnmount() {
+		this.unsubscribe();
 	}
 
 	render() {
@@ -71,10 +90,14 @@ export default class EventWebsite extends Component {
 	}
 
 	renderUrlInput() {
-		const { attributes } = this.props;
-		const { eventUrl } = attributes
+		const { eventUrl, setAttributes } = this.state;
+		const { isSelected } = this.props;
 
-		const buttonLabel = eventUrl ? __( 'Edit Website' ) : __( 'Insert Website' );
+		const buttonLabel = eventUrl ? __( 'Edit Website', 'events-gutenberg' ) : __( 'Insert Website', 'events-gutenberg' );
+
+		if ( ! isSelected ) {
+			return null;
+		}
 
 		return (
 			<div key='tribe-events-website-url' className="tribe-events-website-url">
@@ -82,7 +105,7 @@ export default class EventWebsite extends Component {
 				<PlainText
 					id="tribe-events-website-link"
 					value={ eventUrl }
-					onChange={ ( nextContent ) => this.setState( { eventUrl: nextContent } ) }
+					onChange={ ( nextContent ) => setAttributes( { eventUrl: nextContent } ) }
 					placeholder={ __( 'Website URL', 'events-gutenberg' ) }
 				/>
 			</div>
@@ -90,7 +113,7 @@ export default class EventWebsite extends Component {
 	}
 
 	renderLabelInput( placeholder ) {
-		const { label } = this.state;
+		const { label, setAttributes } = this.state;
 		const { isSelected } = this.props;
 
 		return (
@@ -98,7 +121,7 @@ export default class EventWebsite extends Component {
 				<PlainText
 					id="tribe-events-website-link"
 					value={ label }
-					onChange={ ( nextContent ) => this.setState( { label: nextContent } ) }
+					onChange={ ( nextContent ) => setAttributes( { label: nextContent } ) }
 					placeholder={ __( 'Add Event Website', 'events-gutenberg' ) }
 				/>
 			</div>
