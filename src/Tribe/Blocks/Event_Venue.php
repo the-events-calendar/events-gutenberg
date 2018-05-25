@@ -30,4 +30,51 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		return tribe( 'gutenberg.template' )->template( array( 'blocks', $this->slug() ), $args, false );
 	}
+
+	/**
+	 * Attach hooks associated with this block
+	 *
+	 * @return mixed|void
+	 */
+	public function hook() {
+		if ( class_exists( 'Tribe__Events__Main' ) ) {
+			$post_type = Tribe__Events__Main::POSTTYPE;
+			add_action( "save_post_{$post_type}", array( $this, 'clear_venues' ) );
+		}
+	}
+
+	/**
+	 * Remove venues associated to an event that are no longer relevant
+	 *
+	 * @since TBD
+	 *
+	 * @param $post_id
+	 */
+	public function clear_venues( $post_id ) {
+		$status = get_post_status( $post_id );
+		if ( 'publish' !== $status ) {
+			return;
+		}
+
+		$key = '_EventTempVenues';
+		$venues = get_post_meta( $post_id, $key );
+
+		if ( empty( $venues ) || ! is_array( $venues ) ) {
+			return;
+		}
+
+		$current_venue = absint( get_post_meta( $post_id, '_EventVenueID', true ) );
+		foreach ( $venues as $venue_id ) {
+
+			if ( $current_venue === absint( $venue_id ) ) {
+				continue;
+			}
+
+			if ( 'draft' === get_post_status( $venue_id ) ) {
+				wp_delete_post( $venue_id );
+			}
+		}
+
+		delete_post_meta( $post_id, $key );
+	}
 }
