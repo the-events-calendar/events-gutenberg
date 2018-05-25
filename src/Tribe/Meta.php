@@ -24,6 +24,16 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_EventCostDescription', $this->text() );
 		register_meta( 'post', '_EventCurrencySymbol', $this->text() );
 		register_meta( 'post', '_EventCurrencyPosition', $this->text() );
+		register_meta(
+			'post',
+			'_EventTempVenues',
+			array_merge(
+				$this->numeric_array(),
+				array(
+					'description' => __( 'Event Temporarily Venues', 'events-gutenberg' ),
+				)
+			)
+		);
 		// Use sanitize_textarea_field to allow whitespaces
 		register_meta(
 			'post',
@@ -48,13 +58,11 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta(
 			'post',
 			'_EventOrganizerID',
-			array(
-				'description' => __( 'Event Organizers', 'events-gutenberg' ),
-				'auth_callback' => array( $this,'auth_callback' ),
-				'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
-				'type' => 'number',
-				'single' => false,
-				'show_in_rest' => true,
+			array_merge(
+				$this->numeric_array(),
+				array(
+					'description' => __( 'Event Organizers', 'events-gutenberg' ),
+				)
 			)
 		);
 		register_meta(
@@ -118,6 +126,24 @@ class Tribe__Events_Gutenberg__Meta {
 			'sanitize_callback' => array( $this, 'sanitize_boolean' ),
 			'type' => 'boolean',
 			'single' => true,
+			'show_in_rest' => true,
+		);
+	}
+
+	/**
+	 * Register a numeric type of array
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	private function numeric_array() {
+		return array(
+			'description' => __( 'Array block', 'events-gutenberg' ),
+			'auth_callback' => array( $this, 'auth_callback' ),
+			'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
+			'type' => 'number',
+			'single' => false,
 			'show_in_rest' => true,
 		);
 	}
