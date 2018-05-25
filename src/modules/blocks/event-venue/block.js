@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { stringify } from 'querystringify';
-import { isEmpty, trim, isPlainObject, mapValues, isEqual, noop } from 'lodash';
+import { isEmpty, trim, isPlainObject, mapValues, isEqual, noop, pick } from 'lodash';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { addressToMapString } from 'utils/geo-data';
 import classNames from 'classnames';
@@ -35,6 +35,9 @@ import {
  */
 import {
 	SearchOrCreate,
+	VenueForm,
+	toFields,
+	toVenue,
 } from 'elements';
 
 import VenueDetails from './venue';
@@ -54,12 +57,27 @@ class EventVenue extends Component {
 		const { eventVenueId } = attributes;
 
 		this.state = {
-			loading: eventVenueId,
+			loading: !! eventVenueId,
 			details: {},
 			coordinates: {},
 			address: '',
+			edit: false,
+			create: false,
+			submit: false,
+			draft: {},
 		};
 		this.unsubscribe = noop;
+	}
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		const { isSelected } = nextProps;
+		const { edit, create } = prevState;
+
+		if ( ! isSelected && ( edit || create ) ) {
+			return { submit: true };
+			// return { edit: false, create: false };
+		}
+		return null;
 	}
 
 	componentDidMount() {
@@ -77,13 +95,8 @@ class EventVenue extends Component {
 
 	listenStore = () => {
 		const state = VenueStore.getState();
-		const { details, address, coordinates } = state;
-		this.setState( {
-			details,
-			address,
-			coordinates,
-			loading: false,
-		} );
+		const VALID_FIELDS = [ 'details', 'address', 'coordinate', 'draft', 'edit', 'create', 'loading', 'submit' ];
+		this.setState( pick( state, VALID_FIELDS ) );
 	}
 
 	render() {
@@ -113,14 +126,20 @@ class EventVenue extends Component {
 	}
 
 	getContainer() {
-		const { loading } = this.state;
-		if ( loading ) {
+		const { loading, edit, create, submit } = this.state;
+
+		if ( loading || submit ) {
 			return (
 				<Placeholder key="loading">
-					<Spinner/>
+					<Spinner />
 				</Placeholder>
 			);
 		}
+
+		if ( edit || create ) {
+			return this.renderForm();
+		}
+
 		return this.hasVenue() ? this.renderDetails() : this.renderSearchOrCreate();
 	}
 
@@ -128,6 +147,7 @@ class EventVenue extends Component {
 		const { attributes } = this.props;
 		const { showMapLink } = attributes;
 		const { details, address } = this.state;
+
 		return (
 			<VenueDetails
 				venue={ details }
@@ -145,8 +165,36 @@ class EventVenue extends Component {
 				store={ store }
 				selected={ isSelected }
 				onSelection={ this.setVenue }
+				onSetCreation={ this.setDraftTitle }
 			/>
 		);
+	}
+
+	renderForm = () => {
+		const { draft } = this.state;
+		return (
+			<VenueForm
+				{ ...toFields( draft ) }
+				onSubmit={ this.onSubmit }
+			/>
+		);
+	}
+
+	onSubmit = ( fields ) => {
+		const { edit, create, draft } = this.state;
+		if ( edit ) {
+			const { id } = draft;
+			VenueStore.dispatch( {
+				type: 'EDIT_DRAFT',
+				id: id,
+				fields: toVenue( fields ),
+			} );
+		} else if ( create ) {
+			VenueStore.dispatch( {
+				type: 'CREATE_DRAFT',
+				fields: toVenue( fields ),
+			} );
+		}
 	}
 
 	setVenue = ( venue ) => {
@@ -160,6 +208,14 @@ class EventVenue extends Component {
 		setAttributes( { eventVenueId: venue.id } );
 	}
 
+	setDraftTitle = ( title ) => {
+		VenueStore.dispatch({ type: 'CLEAR' });
+		VenueStore.dispatch({
+			type: 'SET_DRAFT_TITLE',
+			title: title,
+		});
+	}
+
 	hasVenue() {
 		const { details } = this.state;
 		return ! isEmpty( details );
@@ -168,9 +224,9 @@ class EventVenue extends Component {
 	renderMap() {
 		const { attributes } = this.props;
 		const { showMap } = attributes;
-		const { details, address, coordinates } = this.state;
+		const { details, address, coordinates, edit, create } = this.state;
 
-		if ( ! showMap || isEmpty( details ) ) {
+		if ( ! showMap || isEmpty( details ) || edit || create ) {
 			return null;
 		}
 
@@ -186,13 +242,14 @@ class EventVenue extends Component {
 
 	editActions() {
 		const { isSelected } = this.props;
-		if ( ! this.hasVenue() || ! isSelected ) {
+		const { edit, create } = this.state;
+		if ( ! this.hasVenue() || ! isSelected || edit || create ) {
 			return null;
 		}
 
 		return (
 			<div className="tribe-venue__actions">
-				{ this.isDraft() && <button><Dashicon icon="edit" /></button> }
+				{ this.isDraft() && <button onClick={ this.edit }><Dashicon icon="edit" /></button> }
 				<button onClick={ this.removeVenue }><Dashicon icon="trash" /></button>
 			</div>
 		);
@@ -205,12 +262,20 @@ class EventVenue extends Component {
 	}
 
 	removeVenue = () => {
-		VenueStore.dispatch({
+		VenueStore.dispatch( {
 			type: 'CLEAR',
-		});
+		} );
 		const { setAttributes } = this.props;
 		setAttributes( { eventVenueId: 0 } );
 	}
+
+	edit = () => {
+		const { details } = this.state;
+		VenueStore.dispatch( {
+			type: 'SET_DRAFT_DETAILS',
+			draft: details,
+		} );
+	};
 
 	renderControls() {
 		const {
@@ -252,31 +317,9 @@ const applySelect = withSelect( ( select, props ) => {
 	};
 } );
 
-const applyWithAPIData = withAPIData( ( props ) => {
-	const { venue } = props;
-	const query = {
-		per_page: 1,
-		orderby: 'modified',
-		status: [ 'draft', 'publish' ],
-		order: 'desc',
-		include: venue,
-	};
 
-	if ( ! venue ) {
-		return {
-			venue: null,
-		};
-	}
 
-	return {
-		venue: `/wp/v2/${ POST_TYPE }?${ stringify( query ) }`,
-	};
-} );
-
-export default compose(
-	applySelect,
-	applyWithAPIData,
-)( EventVenue );*/
+*/
 
 /**
  * Code that is used to create a new venue
