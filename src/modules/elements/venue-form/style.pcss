@@ -3,6 +3,13 @@
   background-color: #F8F9F9;
   border: 1px solid #E0E5E9;
   border-top: none;
+
+  h3 {
+	font-size: 1.3125rem;
+	margin-bottom: 14px;
+	font-weight: bold;
+	font-family: 'Helvetica', 'Arial', 'sans-serif';
+  }
 }
 
 .tribe-venue__fields-container {
@@ -15,21 +22,30 @@
 
   input[type="text"],
   input[type="tel"],
-  input[type="url"]{
+  input[type="url"],
+  select {
 	width: 100%;
 	background-color: #FFF;
 	border: 1px solid #E0E5E9;
 	border-radius: 4px;
 	margin-bottom: 10px;
 	padding: 12px 10px;
+	font-size: 1rem;
+	color: #86909B;
+	font-family: 'Helvetica', 'Arial', 'sans-serif';
   }
 
-  .medium {
-	width: 56.25%;
-  }
+  input[type="text"],
+  input[type="tel"],
+  input[type="url"],
+  select {
+	&.small {
+	  width: 40.625%;
+	}
 
-  .small {
-	width: 40.625%;
+	&.medium {
+	  width: 56.25%;
+	}
   }
 }
 
