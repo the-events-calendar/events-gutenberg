@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { union, without, isEmpty, noop, pick } from 'lodash';
+import { union, without, isEmpty, noop, pick, identity } from 'lodash';
 import classNames from 'classnames';
 
 /**
@@ -10,6 +10,7 @@ import classNames from 'classnames';
  */
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
+import { select } from '@wordpress/data';
 
 import {
 	ToggleControl,
@@ -39,7 +40,7 @@ import { default as EventOrganizers } from './organizers';
 import { totalSeconds, toMoment } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { FORMATS } from 'utils/date';
-import { store } from 'data/details';
+import { store, STORE_NAME } from 'data/details';
 import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-subtitle/block';
 
 export const VALID_PROPS = [
@@ -112,6 +113,8 @@ export default class EventDetails extends Component {
 			focus,
 		} = this.state;
 
+		const organizers = select( STORE_NAME ).getOrganizersDetails();
+
 		return (
 			<MetaGroup groupKey="organizer">
 				<RichText
@@ -126,15 +129,18 @@ export default class EventDetails extends Component {
 
 				<EventOrganizers
 					focus={ focus }
-					addOrganizer={ nextOrganizer => setAttributes( { eventOrganizers: union( eventOrganizers, [ nextOrganizer.id ] ) } ) }
+					organizers={ organizers }
+					addOrganizer={ nextOrganizer => {
+						store.dispatch( {
+							type: 'ADD_ORGANIZER',
+							organizer: nextOrganizer,
+						} );
+					} }
 					removeOrganizer={ organizer => {
-						let organizers = without( eventOrganizers, organizer.id );
-
-						// If none are there we remove existing
-						if ( isEmpty( organizers ) ) {
-							organizers = [ 0 ];
-						}
-						setAttributes( { eventOrganizers: organizers } );
+						store.dispatch( {
+							type: 'REMOVE_ORGANIZER',
+							organizer: organizer,
+						} );
 					} }
 				/>
 			</MetaGroup>
