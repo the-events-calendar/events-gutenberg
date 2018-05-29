@@ -7,12 +7,13 @@ import { get, noop, pick, isEqual } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { select } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
 import EventDetails, { VALID_PROPS } from './block';
-import { store } from 'data/details';
+import { store, STORE_NAME } from 'data/details';
 import { castBooleanStrings, removeEmptyStrings, diff } from 'utils/object';
 
 /**
@@ -94,10 +95,15 @@ export default {
 			const setAttributes = get( props, 'setAttributes', noop );
 			const state = store.getState();
 			// Pick relevant ones from store
-			const attributes = pick( state, VALID_PROPS );
+			const attributes = {
+				...pick( state, VALID_PROPS ),
+				eventOrganizers: select( STORE_NAME ).getOrganizers(),
+			};
+
 			// Pick relevant ones from the current attributes
 			const prevAttributes = pick( get( props, 'attributes', {} ), VALID_PROPS );
 			// Updates the attributes with changes
+
 			setAttributes( diff( attributes, prevAttributes ) );
 		} );
 
