@@ -38,7 +38,7 @@ import {
 } from 'elements';
 
 import VenueDetails from './venue';
-import { store } from 'data/venues';
+import { store, STORE_NAME } from 'data/venues';
 import { store as VenueStore, STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
 
 /**
@@ -175,6 +175,7 @@ class EventVenue extends Component {
 			<SearchOrCreate
 				icon={ <Dashicon icon="location" size={ 22 } /> }
 				store={ store }
+				storeName={ STORE_NAME }
 				selected={ isSelected }
 				onSelection={ this.setVenue }
 				onSetCreation={ this.setDraftTitle }
