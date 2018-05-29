@@ -105,7 +105,7 @@ export default class EventWebsite extends Component {
 				<PlainText
 					id="tribe-events-website-link"
 					value={ eventUrl }
-					onChange={ ( nextContent ) => setWebsiteUrl( { eventUrl: nextContent } ) }
+					onChange={ ( nextContent ) => this.setWebsiteUrl( { eventUrl: nextContent } ) }
 					placeholder={ buttonLabel }
 				/>
 			</div>
