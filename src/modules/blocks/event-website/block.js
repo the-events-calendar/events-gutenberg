@@ -2,7 +2,7 @@
  * External dependencies
  */
 import classNames from 'classnames';
-import { union, without, isEmpty, noop, pick } from 'lodash';
+import { noop, pick } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -34,7 +34,7 @@ import './style.pcss';
  */
 
 export const VALID_PROPS = [
-	'label',
+	'eventUrlLabel',
 	'eventUrl',
 ];
 
@@ -75,11 +75,11 @@ export default class EventWebsite extends Component {
 	}
 
 	renderLink() {
-		const { label } = this.state;
+		const { eventUrlLabel } = this.state;
 		const { isSelected } = this.props;
 		const placeholder = __( 'Add Event Website', 'events-gutenberg' );
 
-		if ( ! isSelected && ! label ) {
+		if ( ! isSelected && ! eventUrlLabel ) {
 			return this.renderPlaceholder( placeholder );
 		}
 
@@ -105,39 +105,47 @@ export default class EventWebsite extends Component {
 				<PlainText
 					id="tribe-events-website-link"
 					value={ eventUrl }
-					onChange={ ( nextContent ) => setAttributes( { eventUrl: nextContent } ) }
-					placeholder={ __( 'Website URL', 'events-gutenberg' ) }
+					onChange={ ( nextContent ) => setWebsiteUrl( { eventUrl: nextContent } ) }
+					placeholder={ buttonLabel }
 				/>
 			</div>
 		);
 	}
 
 	renderLabelInput( placeholder ) {
-		const { label, setAttributes } = this.state;
-		const { isSelected } = this.props;
+		const { eventUrlLabel, setAttributes } = this.state;
 
 		return (
 			<div key='tribe-events-website-label' className="tribe-events-website-link tribe-events-website">
 				<PlainText
 					id="tribe-events-website-link"
-					value={ label }
-					onChange={ ( nextContent ) => setAttributes( { label: nextContent } ) }
+					value={ eventUrlLabel }
+					onChange={ ( nextContent ) => setAttributes( { eventUrlLabel: nextContent } ) }
 					placeholder={ __( 'Add Event Website', 'events-gutenberg' ) }
 				/>
 			</div>
 		)
 	}
 
-	renderPlaceholder( label ) {
+	renderPlaceholder( eventUrlLabel ) {
 		return (
 			<button className="tribe-events-website-link tribe-events-website-link--placeholder" disabled>
-				{ label }
+				{ eventUrlLabel }
 			</button>
 		);
 	}
 
+	setWebsiteUrl = ( data ) => {
+		const { eventUrl } = data;
+
+		store.dispatch( {
+			type: 'SET_WEBSITE_URL',
+			eventUrl,
+		} );
+	};
+
 	renderControls() {
-		const { label } = this.state;
+		const { eventUrlLabel } = this.state;
 		const { isSelected } = this.props;
 
 		if ( ! isSelected ) {
