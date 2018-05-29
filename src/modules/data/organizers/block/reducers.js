@@ -13,22 +13,11 @@ const { apiRequest } = wp;
  * Internal dependencies
  */
 import { apiArgs } from 'utils/request';
-import { store, STORE_NAME } from './index';
+import { store, STORE_NAME, POST_TYPE } from './index';
 import { toFields, toOrganizer } from 'elements/organizer-form/utils';
 
-export function order( state = [], action ) {
-	switch ( action.type ) {
-		case 'ADD_BLOCK_ID':
-			return [ ...state, action.id ];
-		case 'REMOVE_BLOCK_ID':
-			return state.filter( ( item ) => item !== action.id );
-		default:
-			return state;
-	}
-}
-
-const POST_TYPE = 'tribe_organizer';
 const DEFAULT_BLOCK = {
+	organizer: 0,
 	edit: false,
 	create: false,
 	loading: false,
@@ -48,6 +37,7 @@ export function blocks( state = {}, action ) {
 				...state,
 				[ action.id ]: {
 					...DEFAULT_BLOCK,
+					organizer: action.organizer,
 				},
 			};
 		case 'REMOVE_BLOCK': {
@@ -77,6 +67,7 @@ export function blocks( state = {}, action ) {
 				[ action.id ]: {
 					...current,
 					...DEFAULT_BLOCK,
+					organizer: action.payload.id,
 					post: {
 						...current.post,
 						...action.payload,
@@ -248,23 +239,4 @@ function editPost( prevState, id, payload ) {
 			loading: true,
 		},
 	};
-}
-
-export function organizers( state = [], action ) {
-	switch ( action.type ) {
-		case 'ADD_ORGANIZER':
-			return [
-				...state,
-				{
-					id: action.block,
-					organizer: action.organizer,
-				},
-			];
-		case 'REMOVE_ORGANIZER':
-			return state.filter( ( item ) => {
-				return action.block !== item.id && action.organizer !== item.organizers;
-			} );
-		default:
-			return state;
-	}
 }
