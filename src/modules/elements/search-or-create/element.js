@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty, noop } from 'lodash';
 
@@ -10,6 +11,7 @@ import { isEmpty, noop } from 'lodash';
  */
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
+import { select } from '@wordpress/data';
 import { Spinner } from '@wordpress/components';
 import './style.pcss';
 
@@ -18,17 +20,28 @@ export default class SearchOrCreate extends Component {
 		placeholder: __( 'Add or Find', 'events-gutenberg' ),
 		icon: null,
 		store: null,
+		storeName: '',
 		selected: false,
 		onSelection: noop,
 		onSetCreation: noop,
+		results: 5,
+		id: '',
+	}
+
+	static propTypes = {
+		store: PropTypes.object.isRequired,
+		storeName: PropTypes.string,
+		id: PropTypes.string,
+		placeholder: PropTypes.string,
+		results: PropTypes.number,
 	}
 
 	constructor( props ) {
 		super( ...arguments );
 		this.state = {
 			search: '',
-			posts: [],
-			fetching: false,
+			results: [],
+			loading: false,
 		};
 		this.inputRef = React.createRef();
 	}
@@ -39,9 +52,8 @@ export default class SearchOrCreate extends Component {
 	}
 
 	saveState = () => {
-		const { store } = this.props;
-		const { posts, fetching } = store.getState();
-		this.setState( { posts, fetching } );
+		const { storeName, id } = this.props;
+		this.setState( select( storeName ).getPosts( id ) );
 	}
 
 	componentWillUnmount() {
@@ -53,6 +65,8 @@ export default class SearchOrCreate extends Component {
 		const containerClass = classNames( 'tribe-soc__input-container', {
 			'tribe-soc__input-container--active': selected,
 		} );
+
+		this.maybeFocus();
 
 		return (
 			<section className="tribe-soc__container">
@@ -96,33 +110,37 @@ export default class SearchOrCreate extends Component {
 	}
 
 	search = () => {
-		const { store } = this.props;
+		const { store, results, id, storeName } = this.props;
 		const { search } = this.state;
-		const storeState = store.getState();
 
 		if ( search === '' ) {
 			store.dispatch( {
 				type: 'CLEAR',
-				posts: [],
+				results: [],
+				id,
 			} );
 		}
 
-		if ( search.trim() === storeState.search.trim() ) {
+		const current = select( storeName ).getSearch( id );
+		if ( search.trim() === current.trim() ) {
 			return;
 		}
 
 		store.dispatch( {
 			type: 'SEARCH',
-			search,
-			params: {
-				orderBy: 'relevance',
-				per_page: 5,
+			id,
+			payload: {
+				search,
+				params: {
+					orderby: 'relevance',
+					per_page: results,
+				},
 			},
 		} );
 	}
 
 	renderResults() {
-		const { search, fetching } = this.state;
+		const { search, loading } = this.state;
 		const { selected } = this.props;
 
 		if ( ! selected ) {
@@ -133,7 +151,7 @@ export default class SearchOrCreate extends Component {
 			return null;
 		}
 
-		if ( fetching ) {
+		if ( loading ) {
 			return (
 				<div className="tribe-soc__results--loading">
 					<Spinner />
@@ -149,15 +167,15 @@ export default class SearchOrCreate extends Component {
 	}
 
 	renderItems() {
-		const { posts, search } = this.state;
+		const { results, search } = this.state;
 
-		if ( posts.length === 0 ) {
+		if ( results.length === 0 ) {
 			return (
 				<li onClick={ this.setCreation }><strong>Create</strong>: { search } </li>
 			);
 		}
 
-		return ( posts.map( this.renderItem ) );
+		return ( results.map( this.renderItem ) );
 	}
 
 	setCreation = () => {
