@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import { uniqueId, noop } from 'lodash';
 import classNames from 'classnames';
 
@@ -80,7 +81,7 @@ class SearchPosts extends Component {
 		dispatch( storeName ).unblock();
 		select( storeName ).fetch( {
 			search: value,
-			orderBy: value ? 'relevance' : 'title',
+			orderby: value ? 'relevance' : 'title',
 		} );
 	}
 
@@ -94,7 +95,7 @@ class SearchPosts extends Component {
 			select( storeName ).fetch( {
 				search,
 				page,
-				orderBy: search ? 'relevance' : 'title',
+				orderby: search ? 'relevance' : 'title',
 			} );
 		}
 	}
@@ -102,7 +103,7 @@ class SearchPosts extends Component {
 	renderList = () => {
 		const { store } = this.props;
 		const { posts } = this.state;
-		const { page, fetching, search } = store.getState();
+		const { page, fetching } = store.getState();
 
 		if ( 1 === page && fetching ) {
 			return (
