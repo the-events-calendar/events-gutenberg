@@ -13,10 +13,9 @@ import {
 	Spinner,
 	PanelBody,
 	Dashicon,
-	QueryControls,
 } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/editor';
-import { select, subscribe } from '@wordpress/data';
+import { select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -72,35 +71,35 @@ export default class EventOrganizer extends Component {
 
 	componentDidMount() {
 		this.unsubscribe = store.subscribe( this.storeListener );
-		store.dispatch( {
-			type: 'ADD_BLOCK',
-			id: this.props.id,
-		} );
+
+		const { id, organizer } = this.props;
 
 		store.dispatch( {
-			type: 'ADD_BLOCK_ID',
-			id: this.props.id,
+			type: 'ADD_BLOCK',
+			id,
+			organizer,
 		} );
+
+		select( STORE_NAME ).getDetails( id, organizer );
 	}
 
 	storeListener = () => {
-		const { id } = this.props;
+		const { id, setAttributes } = this.props;
+
+		const organizers = select( STORE_NAME ).getOrganizers();
+		setAttributes( { organizers: JSON.stringify( organizers ) } );
+
 		const block = select( STORE_NAME ).getBlock( id );
 		const VALID_STATE = [ 'edit', 'create', 'post', 'draft', 'submit' ];
-		const state = pick( block, VALID_STATE );
+		let state = pick( block, VALID_STATE );
+		if ( this.state.loading && this.props.organizer && ! isEmpty( state.post ) ) {
+			state = {
+				...state,
+				loading: false,
+			};
+		}
 
-		console.log( store.getState() );
-		const organizers = select( STORE_NAME ).getOrganizers();
-		const { setAttributes } = this.props;
-		setAttributes({ organizers: JSON.stringify( organizers ) });
 		this.setState( state );
-
-		const ROOT_ID = select( 'core/editor' ).getBlockRootUID( this.props.id );
-		console.log( 'ROOT: ' + ROOT_ID);
-			// You could use this opportunity to test whether the derived result of a
-			// selector has subsequently changed as the result of a state update.
-		console.log( select( 'core/editor').getBlockOrder( this.props.id ) );
-		console.log( select( 'core/editor').getBlockOrder( ) );
 	};
 
 	componentWillUnmount() {
@@ -110,13 +109,6 @@ export default class EventOrganizer extends Component {
 			type: 'REMOVE_BLOCK',
 			id: this.props.id,
 		} );
-
-		store.dispatch( {
-			type: 'REMOVE_BLOCK_ID',
-			id: this.props.id,
-		} );
-
-		// TODO: remove block manually from attributes.
 	}
 
 	render() {
@@ -133,7 +125,11 @@ export default class EventOrganizer extends Component {
 	}
 
 	renderContent() {
-		const { post, edit, create } = this.state;
+		const { post, edit, create, loading } = this.state;
+
+		if ( loading ) {
+			return this.renderLoading();
+		}
 
 		if ( edit || create ) {
 			return this.renderForm();
@@ -150,11 +146,7 @@ export default class EventOrganizer extends Component {
 		const { draft, submit } = this.state;
 
 		if ( submit ) {
-			return (
-				<div className="tribe-event-organizer__loader-container">
-					<Spinner />
-				</div>
-			);
+			return this.renderLoading();
 		}
 
 		return (
@@ -162,6 +154,14 @@ export default class EventOrganizer extends Component {
 				{ ...draft }
 				submit={ this.submit }
 			/>
+		);
+	}
+
+	renderLoading() {
+		return (
+			<div className="tribe-event-organizer__loader-container">
+				<Spinner />
+			</div>
 		);
 	}
 
@@ -265,12 +265,6 @@ export default class EventOrganizer extends Component {
 					<button { ...buttonProps }>
 						{ __( 'Remove Organizer', 'events-gutenberg' ) }
 					</button>
-					<QueryControls
-						onOrderChange={ ( value ) => console.log( value )  }
-						onOrderByChange={ ( value ) => console.log( value )  }
-						onCategoryChange={ ( value ) => console.log( value )  }
-						onNumberOfItemsChange={ ( value ) => console.log( value ) }
-					/>
 				</PanelBody>
 			</InspectorControls>
 		);
