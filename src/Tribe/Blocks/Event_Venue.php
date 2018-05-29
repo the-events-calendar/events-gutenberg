@@ -37,10 +37,11 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return mixed|void
 	 */
 	public function hook() {
-		if ( class_exists( 'Tribe__Events__Main' ) ) {
-			$post_type = Tribe__Events__Main::POSTTYPE;
-			add_action( "save_post_{$post_type}", array( $this, 'clear_venues' ) );
+		if ( ! class_exists( 'Tribe__Events__Main' ) ) {
+			return;
 		}
+		$post_type = Tribe__Events__Main::POSTTYPE;
+		add_action( "save_post_{$post_type}", array( $this, 'clear_venues' ) );
 	}
 
 	/**
@@ -49,18 +50,19 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @since TBD
 	 *
 	 * @param $post_id
+	 * @return boolean
 	 */
 	public function clear_venues( $post_id ) {
 		$status = get_post_status( $post_id );
 		if ( 'publish' !== $status ) {
-			return;
+			return false;
 		}
 
 		$key = '_EventTempVenues';
 		$venues = get_post_meta( $post_id, $key );
 
 		if ( empty( $venues ) || ! is_array( $venues ) ) {
-			return;
+			return false;
 		}
 
 		$current_venue = absint( get_post_meta( $post_id, '_EventVenueID', true ) );
@@ -75,6 +77,6 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 			}
 		}
 
-		delete_post_meta( $post_id, $key );
+		return delete_post_meta( $post_id, $key );
 	}
 }
