@@ -65,6 +65,9 @@ class Tribe__Events_Gutenberg__Meta {
 				)
 			)
 		);
+
+		register_meta( 'post', '_EventOrganizerBlocks', $this->text() );
+
 		register_meta(
 			'post',
 			'_EventVenueID',
