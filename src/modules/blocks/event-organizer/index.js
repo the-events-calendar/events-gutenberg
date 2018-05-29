@@ -6,11 +6,12 @@ import { __ } from '@wordpress/i18n';
 /**
  *
  * Internal dependencies
- * */
+ */
+import EventOrganizer from './block';
 
 export default {
 	id: 'event-organizer',
-	title: __(  'Event Organizer', 'events-gutenberg' ),
+	title: __( 'Event Organizer', 'events-gutenberg' ),
 	description: __( 'Add multiple organizers to the Event', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
@@ -21,17 +22,24 @@ export default {
 	},
 
 	attributes: {
-		name: {
-			type: 'array',
+		organizers: {
+			type: 'object',
 			source: 'meta',
 			meta: '_EventOrganizerBlocks',
+			default: 'no Name',
 		},
 	},
 
-	useOnce: true,
-
-	edit: () => {
-		return <span>This is my block</span>;
+	edit: ( { attributes, setAttributes, isSelected, id } ) => {
+		const { organizers } = attributes;
+		return (
+			<EventOrganizer
+				id={ id }
+				selected={ isSelected }
+				set={ setAttributes }
+				{ ...attributes }
+			/>
+		);
 	},
 
 	save() {
