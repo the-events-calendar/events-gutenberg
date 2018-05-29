@@ -1,13 +1,25 @@
-import { get, pick } from 'lodash';
+import { get, pick, map } from 'lodash';
 
-const { data } = wp;
+import { select, dispatch } from '@wordpress/data';
+
+const { apiRequest, data } = wp;
 const { registerStore, combineReducers } = data;
 
 import * as reducers from './reducers';
+export const POST_TYPE = 'tribe_organizer';
 
 export const STORE_NAME = 'tec.organizer.blocks';
 const details = {
 	reducer: combineReducers( reducers ),
+	actions: {
+		setPost( id, payload ) {
+			return {
+				type: 'SET_POST',
+				id,
+				payload,
+			};
+		},
+	},
 	selectors: {
 		getBlock( state, id ) {
 			const { blocks } = state;
@@ -29,9 +41,32 @@ const details = {
 			};
 		},
 		getOrganizers( state ) {
-			const { organizers } = state;
-			return organizers;
+			const { blocks } = state;
+			return map( blocks, ( block, id ) => {
+				return {
+					organizer: get( block, 'organizer', 0 ),
+					index: select( 'core/editor' ).getBlockIndex( id ),
+				};
+			} );
 		},
+		getDetails( state, id, organizer ) {
+			const block = state[ id ] || {};
+			return block.post || {};
+		}
 	},
+	resolvers: {
+		async getDetails( state, id, organizer ) {
+			if ( ! organizer ) {
+				return state;
+			}
+
+			apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ organizer }` } )
+				.then( ( body ) => {
+					dispatch( STORE_NAME ).setPost( id, body );
+				} );
+
+			return state;
+		}
+	}
 };
 export const store = registerStore( STORE_NAME, details );
