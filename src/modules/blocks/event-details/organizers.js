@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId, noop } from 'lodash';
+import { unescape, union, uniqueId, noop, identity } from 'lodash';
 import { stringify } from 'querystringify';
 import classNames from 'classnames';
 
@@ -31,11 +31,7 @@ import {
 import { store, STORE_NAME } from 'data/organizers';
 
 function CreateDropdown( { ...props } ) {
-	const { focus, addOrganizer } = props;
-
-	if ( ! focus ) {
-		return null;
-	}
+	const { addOrganizer } = props;
 
 	const icon = (
 		<Dashicon icon="plus" />
@@ -72,11 +68,7 @@ function CreateDropdown( { ...props } ) {
 }
 
 function OrganizerActions( { ...props } ) {
-	const { focus, organizer, onClick } = props;
-
-	if ( ! focus ) {
-		return null;
-	}
+	const { organizer, onClick } = props;
 
 	const icon = (
 		<Dashicon icon="no" />
@@ -97,33 +89,18 @@ function OrganizerActions( { ...props } ) {
 /**
  * Module Code
  */
-class EventOrganizers extends Component {
+export default class EventOrganizers extends Component {
 	constructor( props ) {
 		super( ...arguments );
 
 		this.state = {
 			overOrganizer: null,
-			organizers: [],
 			isLoading: false,
 		};
-		this.unsubscribe = noop;
 	}
 
 	componentDidMount() {
 		select( STORE_NAME ).fetch();
-		this.unsubscribe = store.subscribe( () => {
-			const { posts } = store.getState();
-			this.setState( { posts } );
-		} );
-	}
-
-	componentDidUpdate( prevProps, prevState ) {
-		const { page } = store.getState();
-		select( STORE_NAME ).fetch( { page } );
-	}
-
-	componentWillUnmount() {
-		this.unsubscribe();
 	}
 
 	renderOrganizerName( organizer ) {
@@ -135,7 +112,7 @@ class EventOrganizers extends Component {
 	}
 
 	renderOrganizerList() {
-		const organizers = this.getOrganizers();
+		const { organizers } = this.props;
 
 		return (
 			<ul className={ classNames( 'tribe-editor-organizer-list' ) }>
@@ -144,18 +121,19 @@ class EventOrganizers extends Component {
 		);
 	}
 
+
 	renderOrganizerListItem( organizer, isLast, level ) {
-		const { focus, removeOrganizer } = this.props;
+		const { removeOrganizer } = this.props;
 		const { overOrganizer } = this.state;
 		const current = overOrganizer === organizer.id;
 		const classes = {
-			'tribe-current': focus && current,
+			'tribe-current': current,
 		};
 
 		return (
 			<li
 				className={ classNames( classes ) }
-				key={ organizer.id }
+				key={ organizer.id || organizer }
 				onMouseEnter={ () => {
 					this.setState( { overOrganizer: organizer.id } );
 				} }
@@ -165,7 +143,6 @@ class EventOrganizers extends Component {
 			>
 				{ this.renderOrganizerName( organizer ) }
 				<OrganizerActions
-					focus={ focus && current }
 					organizer={ organizer }
 					onClick={ () => removeOrganizer( organizer ) }
 				/>
@@ -175,7 +152,7 @@ class EventOrganizers extends Component {
 
 	render() {
 		const { focus, addOrganizer } = this.props;
-		const { organizers, isLoading } = this.state;
+		const { organizers, isLoading } = this.props;
 		const hasOrganizers = 0 !== organizers.length;
 		let list = null;
 		let actions = (
@@ -188,8 +165,9 @@ class EventOrganizers extends Component {
 					iconLabel={ __( 'Add existing Organizer', 'events-gutenberg' ) }
 					store={ store }
 					storeName={ STORE_NAME }
-					focus={ hasOrganizers ? focus : true }
+					focus={ true }
 					onSelectItem={ addOrganizer }
+					searchable={ true }
 				/>
 				<CreateDropdown
 					key="organizer-create-dropdown"
@@ -221,23 +199,23 @@ class EventOrganizers extends Component {
 			);
 		}
 
-		const content = [
+		return [
 			list,
 			actions,
 		];
-
-		return content;
 	}
 }
 
+/*
 const applySelect = withSelect( ( select, props ) => {
 	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
 	const organizers = meta._EventOrganizerID ? meta._EventOrganizerID : [];
 	return {
-		organizers: organizers,
+		organizers: organizers.filter( identity ),
 	};
 } );
 
 export default compose(
 	applySelect,
 )( EventOrganizers );
+*/
