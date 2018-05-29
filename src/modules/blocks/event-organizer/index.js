@@ -1,7 +1,13 @@
 /**
+ * External dependencies
+ */
+import { get } from 'lodash';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { select } from '@wordpress/data';
 
 /**
  *
@@ -23,20 +29,31 @@ export default {
 
 	attributes: {
 		organizers: {
-			type: 'object',
+			type: 'string',
 			source: 'meta',
 			meta: '_EventOrganizerBlocks',
-			default: 'no Name',
 		},
 	},
 
 	edit: ( { attributes, setAttributes, isSelected, id } ) => {
 		const { organizers } = attributes;
+		const index = select( 'core/editor' ).getBlockIndex( id );
+		let organizer = 0;
+		try {
+			const blocks = JSON.parse( organizers );
+			const results = blocks.filter( ( b ) => b.index === index );
+			const block = results.length ? results[ 0 ] : {};
+			organizer = get( block, 'organizer', 0 );
+		} catch ( error ) {
+			organizer = 0;
+		}
+
 		return (
 			<EventOrganizer
 				id={ id }
 				selected={ isSelected }
-				set={ setAttributes }
+				setAttributes={ setAttributes }
+				organizer={ organizer }
 				{ ...attributes }
 			/>
 		);
