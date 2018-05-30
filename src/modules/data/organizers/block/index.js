@@ -6,6 +6,7 @@ const { apiRequest, data } = wp;
 const { registerStore, combineReducers } = data;
 
 import * as reducers from './reducers';
+import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 export const POST_TYPE = 'tribe_organizer';
 
 export const STORE_NAME = 'tec.organizer.blocks';
@@ -62,6 +63,10 @@ const details = {
 
 			apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ organizer }` } )
 				.then( ( body ) => {
+					dispatch( EVENT_DETAILS_STORE ).addOrganizer( {
+						...body,
+						block: 'individual',
+					} );
 					dispatch( STORE_NAME ).setPost( id, body );
 				} );
 
