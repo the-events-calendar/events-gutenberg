@@ -35,7 +35,7 @@ export default {
 	},
 
 	attributes: {
-		label: {
+		eventUrlLabel: {
 			type: 'html',
 		},
 		eventUrl: {

@@ -75,8 +75,7 @@ export default class EventWebsite extends Component {
 	}
 
 	renderLink() {
-		const { eventUrlLabel } = this.state;
-		const { isSelected } = this.props;
+		const { isSelected, eventUrlLabel } = this.props;
 		const placeholder = __( 'Add Event Website', 'events-gutenberg' );
 
 		if ( ! isSelected && ! eventUrlLabel ) {
@@ -90,8 +89,8 @@ export default class EventWebsite extends Component {
 	}
 
 	renderUrlInput() {
-		const { eventUrl, setAttributes } = this.state;
-		const { isSelected } = this.props;
+		const { setAttributes } = this.state;
+		const { isSelected, eventUrl } = this.props;
 
 		const buttonLabel = eventUrl ? __( 'Edit Website', 'events-gutenberg' ) : __( 'Insert Website', 'events-gutenberg' );
 
@@ -113,7 +112,8 @@ export default class EventWebsite extends Component {
 	}
 
 	renderLabelInput( placeholder ) {
-		const { eventUrlLabel, setAttributes } = this.state;
+		const { setAttributes } = this.state;
+		const { eventUrlLabel } = this.props;
 
 		return (
 			<div key='tribe-events-website-label' className="tribe-events-website-link tribe-events-website">
@@ -145,7 +145,6 @@ export default class EventWebsite extends Component {
 	};
 
 	renderControls() {
-		const { eventUrlLabel } = this.state;
 		const { isSelected } = this.props;
 
 		if ( ! isSelected ) {
