@@ -66,22 +66,28 @@ export default class EventSubtitle extends Component {
 	constructor( props ) {
 		super( ...arguments );
 
-		this.dashboardRef = React.createRef();
-
-		this.state = props;
+		this.state = {
+			...props,
+			dashboardOpen: false,
+		};
 		this.storeListener = noop;
 	}
 
 	componentDidMount() {
-		this.storeListener = store.subscribe( () => {
-			const state = store.getState();
-			this.setState( pick( state, VALID_PROPS ) );
-		} );
+		this.storeListener = store.subscribe( this.listener );
 
 		const state = pick( this.state, VALID_PROPS );
 		store.dispatch( {
 			type: 'SET_INITIAL_STATE',
 			values: state,
+		} );
+	}
+
+	listener = () => {
+		const state = store.getState();
+		this.setState( {
+			...pick( state, VALID_PROPS ),
+			dashboardOpen: state.dashboardOpen,
 		} );
 	}
 
@@ -222,7 +228,7 @@ export default class EventSubtitle extends Component {
 	renderLabel() {
 		return (
 			<div key="event-datetime" className="event-subtitle-container">
-				<h2 className="tribe-editor-block tribe-editor-events-subtitle" onClick={ () => this.dashboardRef.current.toggle() }>
+				<h2 className="tribe-editor-block tribe-editor-events-subtitle" onClick={ this.toggleDashboard }>
 					{ this.renderStart() }
 					{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
 					{ this.renderEnd() }
@@ -235,11 +241,20 @@ export default class EventSubtitle extends Component {
 		);
 	}
 
-	renderDashboard() {
+	toggleDashboard = () => {
+		store.dispatch( { type: 'TOGGLE_DASHBOARD' } );
+	}
 
+	closeDashboard = () => {
+		store.dispatch( { type: 'CLOSE_DASHBOARD' } );
+	}
+
+	renderDashboard() {
+		const { dashboardOpen } = this.state;
 		return (
 			<Dashboard
-				ref={ this.dashboardRef }
+				open={ dashboardOpen }
+				onClose={ this.closeDashboard }
 				overflow>
 				<section className="tribe-editor__calendars">
 					{ this.renderCalendars() }
