@@ -39,7 +39,7 @@ import {
 
 import { default as EventOrganizers } from './organizers';
 
-import { totalSeconds, toMoment } from 'utils/moment';
+import { totalSeconds, toMoment, toDate, toTime } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { FORMATS } from 'utils/date';
 import { store, STORE_NAME } from 'data/details';
@@ -176,76 +176,38 @@ export default class EventDetails extends Component {
 		const { startDate } = this.state;
 
 		return (
-			<div>
+			<div onClick={ this.toggleDashboard }>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br />
-				<DatePicker
-					changeDatetime={ this.setStartDay }
-					datetime={ startDate }
-				/>
+				{ toDate( toMoment( startDate ) ) }
 				{ this.renderStartTime() }
 			</div>
 		);
 	}
 
-	setStartDay( date ) {
-		store.dispatch( {
-			type: 'SET_START_DATE',
-			date,
-		} );
-	}
-
 	renderStartTime() {
 		const { allDay, startDate, dateTimeRangeSeparator } = this.state;
-		const { time } = FORMATS.WP;
-
-		const start = toMoment( startDate );
-		const pickerProps = {
-			onSelectItem: this.setStartTime,
-			current: start,
-			timeFormat: time,
-		};
 
 		if ( allDay ) {
-			pickerProps.allDay = true;
+			return null;
 		}
 
 		return (
 			<React.Fragment>
 				<span>{ dateTimeRangeSeparator }</span>
-				<TimePicker { ...pickerProps } />
+				<span>{ toTime( toMoment( startDate ) ) }</span>
 			</React.Fragment>
 		);
 	}
 
-	setStartTime = ( data ) => {
-		const { seconds, allDay } = data;
-		this.setAllDay( allDay );
-
-		store.dispatch( {
-			type: 'SET_START_TIME',
-			seconds,
-		} );
-	};
-
 	renderEnd() {
 		const { endDate } = this.state;
 		return (
-			<div>
+			<div onClick={ this.toggleDashboard }>
 				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
-				<DatePicker
-					changeDatetime={ this.setEndDate }
-					datetime={ endDate }
-				/>
+				{ toDate( toMoment( endDate ) ) }
 				{ this.renderEndTime() }
 			</div>
 		);
-	}
-
-	setEndDate( date ) {
-		store.dispatch( {
-			type: 'SET_END_DATE',
-			date,
-		} );
 	}
 
 	renderEndTime() {
@@ -255,39 +217,18 @@ export default class EventDetails extends Component {
 			return null;
 		}
 
-		const { startDate, endDate, dateTimeRangeSeparator } = this.state;
-		const start = toMoment( startDate );
-		const end = toMoment( endDate );
-		const { time } = FORMATS.WP;
+		const { endDate, dateTimeRangeSeparator } = this.state;
 
 		return (
 			<React.Fragment>
 				<span>{ dateTimeRangeSeparator }</span>
-				<TimePicker
-					onSelectItem={ this.setEndTime }
-					current={ end }
-					minTime={ totalSeconds( start.add( HALF_HOUR_IN_SECONDS, 'seconds' ) ) }
-					timeFormat={ time }
-				/>
+				{ toTime( toMoment( endDate ) ) }
 			</React.Fragment>
 		);
 	}
 
-	setEndTime = ( data ) => {
-		const { seconds, allDay } = data;
-		this.setAllDay( allDay );
-
-		store.dispatch( {
-			type: 'SET_END_TIME',
-			seconds,
-		} );
-	};
-
-	setAllDay( allDay ) {
-		store.dispatch( {
-			type: 'SET_ALL_DAY',
-			allDay,
-		} );
+	toggleDashboard = () => {
+		store.dispatch( { type: 'TOGGLE_DASHBOARD' } );
 	}
 
 	renderWebsite() {
