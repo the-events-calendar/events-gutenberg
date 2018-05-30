@@ -32,6 +32,7 @@ export const DEFAULT_STATE = {
 	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
 	eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
 	eventOrganizers: [],
+	dashboardOpen: false,
 };
 
 export const STORE_NAME = 'tec.details';
@@ -112,6 +113,20 @@ const details = {
 				};
 			}
 
+			case 'TOGGLE_DASHBOARD': {
+				return {
+					...state,
+					dashboardOpen: ! state.dashboardOpen,
+				};
+			}
+
+			case 'CLOSE_DASHBOARD': {
+				return {
+					...state,
+					dashboardOpen: false,
+				};
+			}
+
 			default: {
 				return state;
 			}
@@ -142,14 +157,9 @@ const details = {
 			const { eventOrganizers } = state;
 			return eventOrganizers
 				.filter( isObject )
-				.map( ( item ) => {
-					return item.id;
-				} );
-		},
-		getOrganizersDetails( state ) {
-			return state.eventOrganizers.filter( identity );
-		},
-	}
+				.map( ( item ) => item.id );
+		}
+	},
 };
 
 export const store = registerStore( STORE_NAME, details );
