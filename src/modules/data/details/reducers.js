@@ -2,6 +2,7 @@
  * External dependencies
  */
 import moment from 'moment/moment';
+import { isNumber, isObject } from 'lodash';
 
 /**
  * Internal dependencies
@@ -301,6 +302,21 @@ export function removeOrganizer( prevState, organizer ) {
 	return {
 		...prevState,
 		eventOrganizers: prevState.eventOrganizers.filter( ( item ) => item.id !== organizer.id ),
+	};
+}
+
+export function replaceOrganizers( prevState, organizers ) {
+	const { eventOrganizers } = prevState;
+	const current = eventOrganizers.map( ( item ) => {
+		if ( isObject( item ) ) {
+			return item;
+		}
+		const search = organizers.filter( ( organizer ) => organizer.id === item );
+		return search.length ? search[ 0 ] : item;
+	} );
+	return {
+		...prevState,
+		eventOrganizers: current,
 	};
 }
 
