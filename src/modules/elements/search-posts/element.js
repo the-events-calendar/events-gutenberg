@@ -60,7 +60,7 @@ class SearchPosts extends Component {
 
 	componentDidUpdate() {
 		const { fetching } = this.state;
-		if ( ! fetching && this.scrollPosition ) {
+		if ( ! fetching && this.scrollPosition && this.dropdownEl.current ) {
 				this.dropdownEl.current.scrollTop = this.scrollPosition;
 				this.scrollPosition = 0;
 		}
