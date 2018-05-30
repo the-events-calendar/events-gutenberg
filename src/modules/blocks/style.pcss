@@ -74,6 +74,14 @@
 	margin: 0;
 	zoom: 1;
 
+	.editor-plain-text {
+		background-color: transparent;
+	}
+
+	.components-placeholder {
+		background-color: transparent;
+	}
+
 	&::before,
 	&::after {
 		clear: both;
@@ -138,6 +146,13 @@
 }
 
 .tribe-editor-event-details {
+	.tribe-editor__event-cost {
+		span {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+
 	.tribe-editor__event-cost-value {
 		display: inline-block;
 		width: 105px;
