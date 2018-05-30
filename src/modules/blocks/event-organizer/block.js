@@ -15,13 +15,14 @@ import {
 	Dashicon,
 } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/editor';
-import { select } from '@wordpress/data';
+import { select, dispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependendencies
  */
 import { store, STORE_NAME } from 'data/organizers/block';
+import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 import {
 	SearchOrCreate,
 } from 'elements';
@@ -221,12 +222,10 @@ export default class EventOrganizer extends Component {
 	};
 
 	selectItem = ( item ) => {
-		store.dispatch( {
-			type: 'ADD_ORGANIZER',
-			block: this.props.id,
-			organizer: item.id,
+		dispatch( EVENT_DETAILS_STORE ).addOrganizer( {
+			...item,
+			block: 'individual',
 		} );
-
 		store.dispatch( {
 			type: 'SET_POST',
 			id: this.props.id,
@@ -273,11 +272,7 @@ export default class EventOrganizer extends Component {
 	clear = () => {
 		const { post } = this.state;
 		if ( post && post.id ) {
-			store.dispatch( {
-				type: 'REMOVE_ORGANIZER',
-				block: this.props.id,
-				organizer: post.id,
-			} );
+			dispatch( EVENT_DETAILS_STORE ).removeOrganizer( post );
 		}
 
 		store.dispatch( {
