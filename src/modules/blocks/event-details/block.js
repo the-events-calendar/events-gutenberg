@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { union, without, isEmpty, noop, pick, identity } from 'lodash';
+import { noop, pick } from 'lodash';
 import classNames from 'classnames';
 
 /**
@@ -11,12 +11,10 @@ import classNames from 'classnames';
  */
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-import { select } from '@wordpress/data';
 
 import {
 	ToggleControl,
 	TextControl,
-	Spinner,
 	PanelBody,
 } from '@wordpress/components';
 
@@ -31,18 +29,13 @@ import {
  */
 import {
 	TermsList,
-	OrganizerForm,
-	DatePicker,
-	TimePicker,
 	MetaGroup,
 } from 'elements';
 
 import { default as EventOrganizers } from './organizers';
 
-import { totalSeconds, toMoment, toDate, toTime } from 'utils/moment';
-import { HALF_HOUR_IN_SECONDS } from 'utils/time';
-import { FORMATS } from 'utils/date';
-import { store, STORE_NAME } from 'data/details';
+import { toMoment, toDate, toTime } from 'utils/moment';
+import { store } from 'data/details';
 import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-subtitle/block';
 
 export const VALID_PROPS = [
