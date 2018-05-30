@@ -3,7 +3,7 @@
  */
 import moment from 'moment/moment';
 import { __ } from '@wordpress/i18n';
-import { identity } from 'lodash';
+import { identity, isObject } from 'lodash';
 
 /**
  * Wordpress dependencies
@@ -86,6 +86,10 @@ const details = {
 				return reducers.removeOrganizer( state, action.organizer );
 			}
 
+			case 'REPLACE_ORGANIZERS': {
+				return reducers.replaceOrganizers( state, action.organizers );
+			}
+
 			case 'SET_CURRENCY_SYMBOL': {
 				return reducers.setCurrencySymbol( state, action.symbol );
 			}
@@ -113,12 +117,34 @@ const details = {
 			}
 		}
 	},
+	actions: {
+		addOrganizer( organizer ) {
+			return {
+				type: 'ADD_ORGANIZER',
+				organizer,
+			};
+		},
+		removeOrganizer( organizer ) {
+			return {
+				type: 'REMOVE_ORGANIZER',
+				organizer,
+			};
+		},
+		replaceOrganizers( organizers ) {
+			return {
+				type: 'REPLACE_ORGANIZERS',
+				organizers,
+			};
+		},
+	},
 	selectors: {
 		getOrganizers( state ) {
 			const { eventOrganizers } = state;
-			return eventOrganizers.map( ( item ) => {
-				return item.id;
-			} ).filter( identity );
+			return eventOrganizers
+				.filter( isObject )
+				.map( ( item ) => {
+					return item.id;
+				} );
 		},
 		getOrganizersDetails( state ) {
 			return state.eventOrganizers.filter( identity );
