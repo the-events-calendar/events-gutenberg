@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { union, without, isEmpty, noop, pick, identity } from 'lodash';
 import classNames from 'classnames';
 
@@ -15,6 +16,7 @@ import { select } from '@wordpress/data';
 import {
 	ToggleControl,
 	TextControl,
+	Spinner,
 	PanelBody,
 } from '@wordpress/components';
 
@@ -54,10 +56,21 @@ export const VALID_PROPS = [
  */
 
 export default class EventDetails extends Component {
+	static defaultProps = {
+		eventOrganizers: [],
+	}
+
+	static propTypes = {
+		eventOrganizers: PropTypes.array,
+	}
+
 	constructor( props ) {
 		super( ...arguments );
 
-		this.state = props;
+		this.state = {
+			...props,
+			loading: !! props.eventOrganizers.length,
+		};
 		this.unsubscribe = noop;
 	}
 
@@ -113,8 +126,6 @@ export default class EventDetails extends Component {
 			focus,
 		} = this.state;
 
-		const organizers = select( STORE_NAME ).getOrganizersDetails();
-
 		return (
 			<MetaGroup groupKey="organizer">
 				<RichText
@@ -126,10 +137,9 @@ export default class EventDetails extends Component {
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 					formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 				/>
-
 				<EventOrganizers
 					focus={ focus }
-					organizers={ organizers }
+					organizers={ eventOrganizers }
 					addOrganizer={ nextOrganizer => {
 						store.dispatch( {
 							type: 'ADD_ORGANIZER',
