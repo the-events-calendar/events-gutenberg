@@ -1,8 +1,11 @@
+import { isNumber } from 'lodash';
 import { stringify } from 'querystringify';
 
 const { data, apiRequest } = wp;
 const { registerStore, dispatch } = data;
 import { getResponseHeaders } from 'utils/request';
+import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
+import { POST_TYPE } from 'data/organizers/block';
 
 const DEFAULT_STATE = {
 	posts: [],
@@ -91,13 +94,16 @@ export const store = registerStore( STORE_NAME, {
 				type: 'SET_SEARCH_TERM',
 				search: term,
 			};
-		}
+		},
 	},
 
 	selectors: {
 		fetch( state, queryParams, requestParams ) {
 			return state.posts;
 		},
+		fetchDetails( state, organizers ) {
+			return state;
+		}
 	},
 
 	resolvers: {
@@ -132,5 +138,19 @@ export const store = registerStore( STORE_NAME, {
 				dispatch( STORE_NAME ).unblock();
 			} );
 		},
+		async fetchDetails( state = {}, organizers ) {
+			const filtered = organizers.filter( isNumber );
+			Promise.all( filtered.map( toPromise ) )
+				.then( ( result ) => {
+					dispatch( EVENT_DETAILS_STORE ).replaceOrganizers( result );
+				} );
+			return state;
+		}
 	},
 } );
+
+function toPromise( id ) {
+	return apiRequest( {
+		path: `/wp/v2/${ POST_TYPE }/${ id }`,
+	} );
+}
