@@ -92,19 +92,32 @@ class Tribe__Events_Gutenberg__Editor {
 	public function add_event_template_blocks( $args = array() ) {
 		$template = array();
 
-		/**
-		 * @todo Have a good method from the block class to em here
-		 */
-		$template[] = array( 'tribe/event-subtitle' );
-		$template[] = array(
-			'core/paragraph',
-			array(
-				'placeholder' => __( 'Add Description...', 'events-gutenberg' ),
-			),
-		);
-		$template[] = array( 'tribe/event-links' );
-		$template[] = array( 'tribe/event-details' );
-		$template[] = array( 'tribe/event-venue' );
+		$post = tribe_get_request_var( 'post' );
+		$is_classic_editor = ! empty( $post ) && is_numeric( $post ) && ! gutenberg_post_has_blocks( $post );
+
+		// Basically setups up a diferent template if is a classic event
+		if ( $is_classic_editor ) {
+			$template[] = array( 'tribe/event-subtitle' );
+			$template[] = array(
+				'core/paragraph',
+				array(
+					'placeholder' => __( 'Add Description...', 'events-gutenberg' ),
+				),
+			);
+			$template[] = array( 'tribe/event-links' );
+			$template[] = array( 'tribe/event-details' );
+			$template[] = array( 'tribe/event-venue' );
+		} else {
+			$template[] = array(
+				'core/paragraph',
+				array(
+					'placeholder' => __( 'Add Description...', 'events-gutenberg' ),
+				),
+			);
+			$template[] = array( 'tribe/event-price' );
+			$template[] = array( 'tribe/event-website' );
+			$template[] = array( 'tribe/event-links' );
+		}
 
 		/**
 		 * Allow modifying the default template for Events
@@ -219,7 +232,7 @@ class Tribe__Events_Gutenberg__Editor {
 					array(
 						'name' => 'tribe_data_us_states',
 						'data' => Tribe__View_Helpers::loadStates(),
-					)
+					),
 				),
 			)
 		);

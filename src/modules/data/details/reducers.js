@@ -318,3 +318,10 @@ export function setCurrencyPosition( prevState, hasPosition ) {
 		setCurrencyPosition: position,
 	};
 }
+
+export function setWebsiteUrl( prevState, url ) {
+	return {
+		...prevState,
+		eventUrl: url,
+	};
+}
