@@ -34,7 +34,6 @@ import './style.pcss';
  */
 
 export const VALID_PROPS = [
-	'eventUrlLabel',
 	'eventUrl',
 ];
 
