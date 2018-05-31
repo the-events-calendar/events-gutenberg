@@ -31,6 +31,7 @@ export const DEFAULT_STATE = {
 	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
 	eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
 	eventOrganizers: [],
+	eventUrl: undefined,
 };
 
 export const STORE_NAME = 'tec.details';
@@ -87,6 +88,10 @@ const details = {
 
 			case 'SET_CURRENCY_POSITION': {
 				return reducers.setCurrencyPosition( state, action.position );
+			}
+
+			case 'SET_WEBSITE_URL': {
+				return reducers.setWebsiteUrl( state, action.eventUrl );
 			}
 
 			case 'SET_DATE_TIME_SEPARATOR': {
