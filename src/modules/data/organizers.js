@@ -11,6 +11,7 @@ const DEFAULT_STATE = {
 	fetching: false,
 	details: [],
 	type: 'tribe_organizer',
+	search: '',
 };
 
 export const STORE_NAME = 'tec.organizers';
@@ -44,6 +45,12 @@ export const store = registerStore( STORE_NAME, {
 					...state,
 					fetching: action.fetching,
 				};
+
+			case 'SET_SEARCH_TERM':
+				return {
+					...state,
+					search: action.search,
+				}
 		}
 		return state;
 	},
@@ -79,6 +86,12 @@ export const store = registerStore( STORE_NAME, {
 				fetching: false,
 			};
 		},
+		setSearch( term ) {
+			return {
+				type: 'SET_SEARCH_TERM',
+				search: term,
+			};
+		}
 	},
 
 	selectors: {
@@ -96,7 +109,7 @@ export const store = registerStore( STORE_NAME, {
 			}
 
 			const query = Object.assign( {}, {
-				per_page: 100,
+				per_page: 25,
 				orderby: 'title',
 				status: [ 'draft', 'publish' ],
 				order: 'asc',
@@ -104,6 +117,7 @@ export const store = registerStore( STORE_NAME, {
 			}, queryParams );
 
 			dispatch( STORE_NAME ).block();
+			dispatch( STORE_NAME ).setSearch( query.search || '' );
 
 			apiRequest( {
 				path: `/wp/v2/${ type }?${ stringify( query ) }`,

@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import { uniqueId, noop } from 'lodash';
 import classNames from 'classnames';
 
@@ -44,6 +45,8 @@ class SearchPosts extends Component {
 			search: '',
 		};
 		this.unsubscribe = noop;
+		this.scrollPosition = 0;
+		this.dropdownEl = React.createRef();
 	}
 
 	componentDidMount() {
@@ -55,10 +58,18 @@ class SearchPosts extends Component {
 		this.unsubscribe = store.subscribe( this.saveState );
 	}
 
+	componentDidUpdate() {
+		const { fetching } = this.state;
+		if ( ! fetching && this.scrollPosition ) {
+				this.dropdownEl.current.scrollTop = this.scrollPosition;
+				this.scrollPosition = 0;
+		}
+	}
+
 	saveState = () => {
 		const { store } = this.props;
-		const { search, posts } = store.getState();
-		this.setState( { posts, search } );
+		const { search, posts, fetching } = store.getState();
+		this.setState( { posts, search, fetching } );
 	}
 
 	componentWillUnmount() {
@@ -66,21 +77,16 @@ class SearchPosts extends Component {
 	}
 
 	searchPosts = ( event ) => {
-		const { store, storeName } = this.props;
+		const { storeName } = this.props;
 		const value = event.target.value.trim();
-		const { search } = store.getState();
 
-		this.setState( { search: event.target.value } );
-
-		if ( search === value ) {
-			return;
-		}
-
-		dispatch( storeName ).setPage( 1 );
-		dispatch( storeName ).unblock();
-		select( storeName ).fetch( {
-			search: value,
-			orderBy: value ? 'relevance' : 'title',
+		this.setState( { search: event.target.value }, () => {
+			dispatch( storeName ).setPage( 1 );
+			dispatch( storeName ).unblock();
+			select( storeName ).fetch( {
+				search: value,
+				orderby: value ? 'relevance' : 'title',
+			} );
 		} );
 	}
 
@@ -88,23 +94,25 @@ class SearchPosts extends Component {
 		const { target } = event;
 		const { scrollHeight, scrollTop } = target;
 		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
-		if ( percentage > 0.10 ) {
+		const { fetching } = this.state;
+		if ( ! fetching ) {
+			this.scrollPosition = scrollTop;
+		}
+		if ( percentage > 0.75 ) {
 			const { store, storeName } = this.props;
 			const { page, search } = store.getState();
 			select( storeName ).fetch( {
 				search,
 				page,
-				orderBy: search ? 'relevance' : 'title',
+				orderby: search ? 'relevance' : 'title',
 			} );
 		}
 	}
 
 	renderList = () => {
-		const { store } = this.props;
-		const { posts } = this.state;
-		const { page, fetching, search } = store.getState();
+		const { posts, fetching } = this.state;
 
-		if ( 1 === page && fetching ) {
+		if ( fetching ) {
 			return (
 				<Placeholder key="placeholder">
 					<Spinner />
@@ -143,9 +151,14 @@ class SearchPosts extends Component {
 		this.onClose = onClose.bind( this );
 
 		return (
-			<div className={ classNames( 'tribe-element-search-posts' ) } onScroll={ this.onScroll }>
+			<div
+				className={ classNames( 'tribe-element-search-posts' ) }
+				onScroll={ this.onScroll }>
 				{ this.renderSearchInput() }
-				<div role="menu" className={ classNames( 'tribe-element-search-posts-results' ) }>
+				<div
+					role="menu"
+					className={ classNames( 'tribe-element-search-posts-results' ) }
+				     ref={ this.dropdownEl }>
 					{ this.renderList() }
 				</div>
 			</div>

@@ -3,6 +3,7 @@
  */
 import moment from 'moment/moment';
 import { __ } from '@wordpress/i18n';
+import { identity } from 'lodash';
 
 /**
  * Wordpress dependencies
@@ -78,8 +79,12 @@ const details = {
 				return reducers.setOrganizers( state, action.organizers );
 			}
 
-			case 'ADD_ORGANIZERS': {
-				return reducers.addOrganizers( state, action.organizers );
+			case 'ADD_ORGANIZER': {
+				return reducers.addOrganizers( state, action.organizer );
+			}
+
+			case 'REMOVE_ORGANIZER': {
+				return reducers.removeOrganizer( state, action.organizer );
 			}
 
 			case 'SET_CURRENCY_SYMBOL': {
@@ -113,6 +118,17 @@ const details = {
 			}
 		}
 	},
+	selectors: {
+		getOrganizers( state ) {
+			const { eventOrganizers } = state;
+			return eventOrganizers.map( ( item ) => {
+				return item.id;
+			} ).filter( identity );
+		},
+		getOrganizersDetails( state ) {
+			return state.eventOrganizers.filter( identity );
+		},
+	}
 };
 
 export const store = registerStore( STORE_NAME, details );

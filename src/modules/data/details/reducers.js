@@ -297,6 +297,13 @@ export function addOrganizers( prevState, organizer ) {
 	};
 }
 
+export function removeOrganizer( prevState, organizer ) {
+	return {
+		...prevState,
+		eventOrganizers: prevState.eventOrganizers.filter( ( item ) => item.id !== organizer.id ),
+	};
+}
+
 export function setCurrencySymbol( prevState, symbol ) {
 	return {
 		...prevState,

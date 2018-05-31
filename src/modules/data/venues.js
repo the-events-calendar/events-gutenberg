@@ -1,15 +1,16 @@
 import { stringify } from 'querystringify';
 import { get } from 'lodash';
 
+import { select } from '@wordpress/data';
 const { data, apiRequest } = wp;
 const { registerStore } = data;
 import { getResponseHeaders } from 'utils/request';
 
 const DEFAULT_STATE = {
-	posts: [],
+	results: [],
 	page: 1,
 	total: 0,
-	fetching: false,
+	loading: false,
 	type: 'tribe_venue',
 	search: '',
 };
@@ -19,13 +20,13 @@ export const store = registerStore( STORE_NAME, {
 	reducer( state = DEFAULT_STATE, action ) {
 		switch ( action.type ) {
 			case 'SEARCH': {
-				return search( state, action.search, action.params );
+				return search( state, action.payload );
 			}
 			case 'CLEAR': {
 				return {
 					...state,
-					posts: [],
-					fetching: false,
+					results: [],
+					loading: false,
 					search: '',
 				};
 			}
@@ -40,10 +41,25 @@ export const store = registerStore( STORE_NAME, {
 			}
 		}
 	},
+	selectors: {
+		getSearch( state ) {
+			return state.search || '';
+		},
+		getPosts( state ) {
+			const { results, loading } = state;
+			return {
+				results,
+				loading,
+			};
+		},
+	},
 
 } );
 
-function search( state, term, params = {} ) {
+function search( state, payload ) {
+	const { params } = payload;
+	const term = payload.search;
+
 	if ( state.search === term ) {
 		return state;
 	}
@@ -70,7 +86,7 @@ function search( state, term, params = {} ) {
 		totalPages = isNaN( totalPages ) ? 0 : totalPages;
 
 		// Prevent responses from old searches to be stored.
-		const currentTerm = get( store.getState(), 'search', '' );
+		const currentTerm = select( STORE_NAME ).getSearch();
 		if ( currentTerm.trim() !== term.trim() ) {
 			return;
 		}
@@ -80,8 +96,8 @@ function search( state, term, params = {} ) {
 			response: {
 				total: totalPages,
 				page: 1,
-				posts: body,
-				fetching: false,
+				results: body,
+				loading: false,
 			},
 		} );
 	} );
@@ -89,6 +105,6 @@ function search( state, term, params = {} ) {
 	return {
 		...state,
 		search: term,
-		fetching: true,
+		loading: true,
 	};
 }

@@ -19,3 +19,18 @@ export function getResponseHeaders( xhr ) {
 			return headers;
 		}, {} );
 }
+
+export function apiArgs( args = {} ) {
+	const DEFAULT = {
+		per_page: 10,
+		orderby: 'title',
+		status: [ 'draft', 'publish' ],
+		order: 'asc',
+		page: 1,
+	};
+
+	return {
+		...DEFAULT,
+		...args,
+	};
+}
