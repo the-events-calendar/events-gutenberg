@@ -379,7 +379,6 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderControls() {
-		const { isSelected } = this.props;
 		const { timeRangeSeparator, dateTimeRangeSeparator, timezone } = this.state;
 
 		return ( <InspectorControls key="inspector">

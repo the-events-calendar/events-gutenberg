@@ -67,6 +67,9 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		add_filter( 'tribe_events_register_venue_type_args', tribe_callback( 'gutenberg.editor', 'add_rest_support' ) );
 		add_filter( 'tribe_events_register_organizer_type_args', tribe_callback( 'gutenberg.editor', 'add_rest_support' ) );
 
+		// Remove assets that are not relevant for Gutenberg Editor
+		add_action( 'wp_print_scripts', tribe_callback( 'gutenberg.editor', 'deregister_scripts' ) );
+
 		// Setup the Meta registration
 		add_action( 'init', tribe_callback( 'gutenberg.meta', 'register' ), 25 );
 

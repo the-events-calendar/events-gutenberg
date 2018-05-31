@@ -1,40 +1,80 @@
 /**
  * External dependencies
  */
-import { get, isFunction, values } from 'lodash';
+import { get, values, noop, pick } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { select } from '@wordpress/data';
 import { Component } from '@wordpress/element';
-import {
-	Spinner,
-	Placeholder,
-	withAPIData,
-} from '@wordpress/components';
+import { RichText } from '@wordpress/editor';
 
 /**
  * Internal dependencies
  */
 import { Input } from 'elements';
-import list, { getCountries, getStates } from 'utils/geo-data';
+import list, { getCountries, getStates, getCountryCode, getStateCode } from 'utils/geo-data';
+import './style.pcss';
+
+export function toFields( venue ) {
+	const title = get( venue, 'title', {} );
+	const meta = get( venue, 'meta', {} );
+	const address = get( meta, '_VenueAddress', '' );
+	const city = get( meta, '_VenueCity', '' );
+	const country = get( meta, '_VenueCountry', '' );
+	const stateProvince = get( meta, '_VenueStateProvince', '' );
+	const zip = get( meta, '_VenueZip', '' );
+	const phone = get( meta, '_VenuePhone', '' );
+	const url = get( meta, '_VenueURL', '' );
+
+	const countryCode = getCountryCode( country );
+	return {
+		title: get( title, 'rendered', '' ),
+		address,
+		city,
+		country: countryCode,
+		zip,
+		phone,
+		url,
+		stateProvince: getStateCode( countryCode, stateProvince ),
+	};
+}
+
+export function toVenue( fields ) {
+	const { title, address, city, country, zip, phone, url, stateProvince } = fields;
+
+	return {
+		title,
+		status: 'draft',
+		meta: {
+			_VenueAddress: address,
+			_VenueCity: city,
+			_VenueCountry: get( list.countries, country, '' ) || country,
+			_VenueProvince: get( list.us_states, stateProvince, '' ) || stateProvince,
+			_VenueZip: zip,
+			_VenuePhone: phone,
+			_VenueURL: url,
+			_VenueStateProvince: stateProvince,
+		},
+	}
+}
 
 /**
  * Module Code
  */
-class VenueForm extends Component {
-	static defaultProps = {
-		postType: 'tribe_venue',
-	}
 
-	constructor() {
+export default class VenueForm extends Component {
+	static defaultProps = {
+		onSubmit: noop,
+	};
+
+	constructor( props ) {
 		super( ...arguments );
-		this.updateVenue = this.updateVenue.bind( this );
-		this.onSubmit = this.onSubmit.bind( this );
 
 		this.state = {
-			title: null,
+			title: '',
 			address: '',
 			city: '',
 			country: '',
@@ -42,81 +82,19 @@ class VenueForm extends Component {
 			phone: '',
 			url: '',
 			stateProvince: '',
-			venue: null,
-			isValid: false,
+			...props,
 		};
-
 		this.fields = {};
 	}
 
-	componentDidMount() {
-		this.setState( {
-			isValid: this.isValid(),
-		} );
-	}
-
-	isCreating() {
-		if ( ! this.state.venue ) {
-			return false;
-		}
-
-		if ( ! isFunction( this.state.venue.state ) ) {
-			return false;
-		}
-
-		return 'pending' === this.state.venue.state();
-	}
-
-	onSubmit() {
-		const {
-			title,
-			address,
-			city,
-			country,
-			zip,
-			phone,
-			website,
-			stateProvince,
-		} = this.state;
-
-		this.updateVenue( {
-			title: title,
-			// For now every Venue goes are publish
-			status: 'publish',
-			meta: {
-				_VenueAddress: address,
-				_VenueCity: city,
-				_VenueCountry: get( list.countries, country, '' ) || country,
-				_VenueProvince: get( list.us_states, stateProvince, '' ) || stateProvince,
-				_VenueZip: zip,
-				_VenuePhone: phone,
-				_VenueURL: website,
-				_VenueStateProvince: stateProvince,
-			},
-		} );
-	}
-
-	updateVenue( toSend ) {
-		const basePath = wp.api.getPostTypeRoute( this.props.postType );
-		const request = wp.apiRequest( {
-			path: `/wp/v2/${ basePath }`,
-			method: 'POST',
-			data: toSend,
-		} );
-
-		// Set the venue state
-		this.setState( { venue: request } );
-
-		request.done( ( newPost ) => {
-			if ( ! newPost.id ) {
-				console.warning( 'Invalid creation of venue:', newPost );
-			}
-
-			this.props.addVenue( newPost );
-			this.props.onClose();
-		} ).fail( ( err ) => {
-			console.warn( err );
-		} );
+	componentWillUnmount() {
+		const FIELDS = [
+			'title', 'address', 'city', 'country', 'zip', 'phone', 'url', 'stateProvince',
+		];
+		const fields = pick( this.state, FIELDS );
+		fields.country = get( list.countries, fields.country, '' ) || fields.country;
+		fields.stateProvince = get( list.us_states, fields.stateProvince, '' ) || fields.stateProvince;
+		this.props.onSubmit( fields );
 	}
 
 	saveRef = ( input ) => {
@@ -125,13 +103,6 @@ class VenueForm extends Component {
 			const { name } = props || {};
 			this.fields[ name ] = input;
 		}
-	}
-
-	isValid() {
-		const fields = values( this.fields );
-		const results = fields.filter( ( input ) => input.isValid() );
-
-		return fields.length === results.length;
 	}
 
 	renderOption( element ) {
@@ -143,8 +114,8 @@ class VenueForm extends Component {
 	renderCountry() {
 		const { country } = this.state;
 		const placeholder = country ? null : (
-			<option value="" disabled selected="true">
-				Select a country:
+			<option value="" disabled>
+				{ __( 'Country', 'events-gutenberg' ) }
 			</option>
 		);
 
@@ -171,9 +142,9 @@ class VenueForm extends Component {
 					type="text"
 					name="venue[stateProvince]"
 					placeholder="State"
-					onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 					ref={ this.saveRef }
 					onChange={ ( event ) => this.setState( { stateProvince: event.target.value } ) }
+					value={ stateProvince }
 				/>
 			);
 		}
@@ -190,52 +161,42 @@ class VenueForm extends Component {
 	}
 
 	render() {
-		if ( this.isCreating() ) {
-			return [
-				<div
-					className="tribe-venue-form"
-					key="tribe-venue-form"
-				>
-					<Placeholder key="placeholder">
-						<Spinner />
-					</Placeholder>
-				</div>,
-			];
-		}
+		const {
+			title,
+			address,
+			city,
+			zip,
+			phone,
+			url,
+		} = this.state;
 
-		return [
+		return (
 			<div
-				className="tribe-venue-form"
+				className="tribe-venue__form"
 				key="tribe-venue-form"
 			>
-				<h3 key="tribe-venue-form-title">
-					{ __( 'Create Venue' ) }
-				</h3>
-				<div className="tribe-venue-fields-container">
-					<Input
-						type="text"
-						name="venue[title]"
-						placeholder="Name"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
-						ref={ this.saveRef }
-						onChange={ ( next ) => this.setState( { title: next.target.value } ) }
-						validate
-					/>
+				<RichText
+					tagName="h3"
+					format="string"
+					value={ title }
+					onChange={ ( value ) => { this.setState( { title: value } ) } }
+				/>
+				<div className="tribe-venue__fields-container">
 					<Input
 						type="text"
 						name="venue[address]"
 						placeholder="Street Address"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 						ref={ this.saveRef }
+						value={ address }
 						onChange={ ( next ) => this.setState( { address: next.target.value } ) }
 					/>
 					<Input
 						type="text"
 						name="venue[city]"
 						placeholder="City"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 						ref={ this.saveRef }
 						onChange={ ( next ) => this.setState( { city: next.target.value } ) }
+						value={ city }
 					/>
 					<div className="row">
 						{ this.renderCountry() }
@@ -247,41 +208,29 @@ class VenueForm extends Component {
 							type="text"
 							name="venue[zip]"
 							placeholder="ZIP"
-							onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 							ref={ this.saveRef }
 							onChange={ ( next ) => this.setState( { zip: next.target.value } ) }
+							value={ zip }
 						/>
 					</div>
 					<Input
-						type="phone"
+						type="tel"
 						name="venue[phone]"
 						placeholder="Phone number"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 						ref={ this.saveRef }
 						onChange={ ( next ) => this.setState( { phone: next.target.value } ) }
-						validate
+						value={ phone }
 					/>
 					<Input
 						type="url"
 						name="venue[url]"
 						placeholder="Website"
-						onComplete={ () => this.setState( { isValid: this.isValid() } ) }
 						ref={ this.saveRef }
 						onChange={ ( next ) => this.setState( { url: next.target.value } ) }
-						validate
+						value={ url }
 					/>
 				</div>
-				<button
-					type="button"
-					className="button-secondary"
-					onClick={ this.onSubmit }
-					disabled={ ! this.isValid() }
-				>
-					{ __( 'Create Venue', 'events-gutenberg' ) }
-				</button>
-			</div>,
-		];
+			</div>
+		);
 	}
 }
-
-export default VenueForm;

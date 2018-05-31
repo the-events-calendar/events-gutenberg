@@ -11,9 +11,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventDetails from './block';
+import EventDetails, { VALID_PROPS } from './block';
 import { store } from 'data/details';
-import { VALID_PROPS } from './block';
 import { castBooleanStrings, removeEmptyStrings, diff } from 'utils/object';
 
 /**

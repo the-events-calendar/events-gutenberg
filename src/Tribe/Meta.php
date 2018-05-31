@@ -13,41 +13,33 @@ class Tribe__Events_Gutenberg__Meta {
 	 * @return void
 	 */
 	public function register() {
-		$args = (object) array();
-
-		$args->text = array(
-			'auth_callback' => array( $this,'auth_callback' ),
-			'sanitize_callback' => 'sanitize_text_field',
-			'type' => 'string',
-			'single' => true,
-			'show_in_rest' => true,
+		register_meta( 'post', '_EventAllDay', $this->boolean() );
+		register_meta( 'post', '_EventTimezone', $this->text() );
+		register_meta( 'post', '_EventStartDate', $this->text() );
+		register_meta( 'post', '_EventEndDate', $this->text() );
+		register_meta( 'post', '_EventShowMap', $this->boolean() );
+		register_meta( 'post', '_EventShowMapLink', $this->text() );
+		register_meta( 'post', '_EventURL', $this->text() );
+		register_meta( 'post', '_EventCost', $this->text() );
+		register_meta( 'post', '_EventCostDescription', $this->text() );
+		register_meta( 'post', '_EventCurrencySymbol', $this->text() );
+		register_meta( 'post', '_EventCurrencyPosition', $this->text() );
+		register_meta(
+			'post',
+			'_EventTempVenues',
+			array_merge(
+				$this->numeric_array(),
+				array(
+					'description' => __( 'Event Temporarily Venues', 'events-gutenberg' ),
+				)
+			)
 		);
-
-		$args->bool = array(
-			'auth_callback' => array( $this,'auth_callback' ),
-			'sanitize_callback' => array( $this, 'sanitize_boolean' ),
-			'type' => 'boolean',
-			'single' => true,
-			'show_in_rest' => true,
-		);
-
-		register_meta( 'post', '_EventAllDay', $args->bool );
-		register_meta( 'post', '_EventTimezone', $args->text );
-		register_meta( 'post', '_EventStartDate', $args->text );
-		register_meta( 'post', '_EventEndDate', $args->text );
-		register_meta( 'post', '_EventShowMap', $args->text );
-		register_meta( 'post', '_EventShowMapLink', $args->text );
-		register_meta( 'post', '_EventURL', $args->text );
-		register_meta( 'post', '_EventCost', $args->text );
-		register_meta( 'post', '_EventCostDescription', $args->text );
-		register_meta( 'post', '_EventCurrencySymbol', $args->text );
-		register_meta( 'post', '_EventCurrencyPosition', $args->text );
 		// Use sanitize_textarea_field to allow whitespaces
 		register_meta(
 			'post',
 			'_EventDateTimeSeparator',
 			array_merge(
-				$args->text,
+				$this->text(),
 				array(
 					'sanitize_callback' => array( $this, 'sanitize_separator' ),
 				)
@@ -57,7 +49,7 @@ class Tribe__Events_Gutenberg__Meta {
 			'post',
 			'_EventTimeRangeSeparator',
 			array_merge(
-				$args->text,
+				$this->text(),
 				array(
 					'sanitize_callback' => array( $this, 'sanitize_separator' ),
 				)
@@ -66,13 +58,11 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta(
 			'post',
 			'_EventOrganizerID',
-			array(
-				'description' => __( 'Event Organizers', 'events-gutenberg' ),
-				'auth_callback' => array( $this,'auth_callback' ),
-				'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
-				'type' => 'number',
-				'single' => false,
-				'show_in_rest' => true,
+			array_merge(
+				$this->numeric_array(),
+				array(
+					'description' => __( 'Event Organizers', 'events-gutenberg' ),
+				)
 			)
 		);
 		register_meta(
@@ -89,21 +79,73 @@ class Tribe__Events_Gutenberg__Meta {
 		);
 
 		// Organizers Meta
-		register_meta( 'post', '_OrganizerEmail', $args->text );
-		register_meta( 'post', '_OrganizerPhone', $args->text );
-		register_meta( 'post', '_OrganizerWebsite', $args->text );
+		register_meta( 'post', '_OrganizerEmail', $this->text() );
+		register_meta( 'post', '_OrganizerPhone', $this->text() );
+		register_meta( 'post', '_OrganizerWebsite', $this->text() );
 
 		// Venue Meta
-		register_meta( 'post', '_VenueAddress', $args->text );
-		register_meta( 'post', '_VenueCity', $args->text );
-		register_meta( 'post', '_VenueCountry', $args->text );
-		register_meta( 'post', '_VenueProvince', $args->text );
-		register_meta( 'post', '_VenueZip', $args->text );
-		register_meta( 'post', '_VenuePhone', $args->text );
-		register_meta( 'post', '_VenueURL', $args->text );
-		register_meta( 'post', '_VenueStateProvince', $args->text );
-		register_meta( 'post', '_VenueLat', $args->text );
-		register_meta( 'post', '_VenueLng', $args->text );
+		register_meta( 'post', '_VenueAddress', $this->text() );
+		register_meta( 'post', '_VenueCity', $this->text() );
+		register_meta( 'post', '_VenueCountry', $this->text() );
+		register_meta( 'post', '_VenueProvince', $this->text() );
+		register_meta( 'post', '_VenueZip', $this->text() );
+		register_meta( 'post', '_VenuePhone', $this->text() );
+		register_meta( 'post', '_VenueURL', $this->text() );
+		register_meta( 'post', '_VenueStateProvince', $this->text() );
+		register_meta( 'post', '_VenueLat', $this->text() );
+		register_meta( 'post', '_VenueLng', $this->text() );
+	}
+
+	/**
+	 * Default definition for an attribute of type text
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	private function text() {
+		return array(
+			'auth_callback' => array( $this,'auth_callback' ),
+			'sanitize_callback' => 'sanitize_text_field',
+			'type' => 'string',
+			'single' => true,
+			'show_in_rest' => true,
+		);
+	}
+
+	/***
+	 * Default definition for an attribute of type boolean
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	private function boolean() {
+		return array(
+			'auth_callback' => array( $this, 'auth_callback' ),
+			'sanitize_callback' => array( $this, 'sanitize_boolean' ),
+			'type' => 'boolean',
+			'single' => true,
+			'show_in_rest' => true,
+		);
+	}
+
+	/**
+	 * Register a numeric type of array
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	private function numeric_array() {
+		return array(
+			'description' => __( 'Array block', 'events-gutenberg' ),
+			'auth_callback' => array( $this, 'auth_callback' ),
+			'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
+			'type' => 'number',
+			'single' => false,
+			'show_in_rest' => true,
+		);
 	}
 
 	/**

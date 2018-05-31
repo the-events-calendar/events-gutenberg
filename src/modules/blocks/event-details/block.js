@@ -36,7 +36,7 @@ import {
 
 import { default as EventOrganizers } from './organizers';
 
-import { totalSeconds,  toMoment } from 'utils/moment';
+import { totalSeconds, toMoment } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { FORMATS } from 'utils/date';
 import { store } from 'data/details';
@@ -161,7 +161,7 @@ export default class EventDetails extends Component {
 
 		return (
 			<div>
-				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
+				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br />
 				<DatePicker
 					changeDatetime={ this.setStartDay }
 					datetime={ startDate }
@@ -215,7 +215,7 @@ export default class EventDetails extends Component {
 		const { endDate } = this.state;
 		return (
 			<div>
-				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
+				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
 				<DatePicker
 					changeDatetime={ this.setEndDate }
 					datetime={ endDate }
@@ -278,7 +278,7 @@ export default class EventDetails extends Component {
 		const { eventUrl, setAttributes } = this.state;
 		return (
 			<div>
-				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
+				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
 				<PlainText
 					id="tribe-event-url"
 					value={ eventUrl }
@@ -292,8 +292,8 @@ export default class EventDetails extends Component {
 	renderCost() {
 		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.state;
 		return (
-			<div className='tribe-editor__event-cost'>
-				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
+			<div className="tribe-editor__event-cost">
+				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
 				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }

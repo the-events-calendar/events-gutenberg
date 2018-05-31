@@ -292,6 +292,16 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
+	 * Remove scripts that are not relevant for the Gutenberg editor or conflict with the scripts
+	 * used on gutenberg
+	 *
+	 * @since TBD
+	 */
+	public function deregister_scripts() {
+		wp_deregister_script( 'tribe_events_google_maps_api' );
+	}
+
+	/**
 	 * Get Localization data for Date settings
 	 *
 	 * @since  0.1.6-alpha

@@ -58,4 +58,13 @@ interface Tribe__Events_Gutenberg__Blocks__Interface {
 	 * @return mixed
 	 */
 	public function plugin();
+
+	/**
+	 * Attach any specific hook to the current block.
+	 *
+	 * @since TBD
+	 *
+	 * @return mixed
+	 */
+	public function hook();
 }
