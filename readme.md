@@ -24,7 +24,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-### 0.2.1-alpha - 2018-06-01
+#### 0.2.1-alpha - 2018-06-01
 
 * Feature - Event Organizer is now a standalone block
 * Feature - Event Categories is now a standalone block
@@ -37,7 +37,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Improved compatibility with the Classic Block users
 * Fix - Fixing some CSS for all of the PlainText input fields on Event Details
 
-### 0.2.0-alpha - 2018-05-17
+#### 0.2.0-alpha - 2018-05-17
 
 * Feature - Event Price has his own block
 * Feature - Event Subtitle has a range selector with calendars to select multiple days
