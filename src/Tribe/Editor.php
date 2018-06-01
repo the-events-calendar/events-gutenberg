@@ -6,6 +6,16 @@
  * @since 0.1.0-alpha
  */
 class Tribe__Events_Gutenberg__Editor {
+
+	/**
+	 * Meta key for flaging if a post is from classic editor
+	 *
+	 * @since  0.2.1-alpha
+	 *
+	 * @var string
+	 */
+	public $key_flag_classic_editor = '_tribe_is_classic_editor';
+
 	/**
 	 * Checks if we have Gutenberg Project online, only useful while
 	 * its a external plugin
@@ -97,7 +107,7 @@ class Tribe__Events_Gutenberg__Editor {
 
 		// Basically setups up a diferent template if is a classic event
 		if ( $is_classic_editor ) {
-			$template[] = array( 'tribe/event-subtitle' );
+			$template[] = array( 'tribe/event-datetime' );
 			$template[] = array(
 				'core/paragraph',
 				array(
@@ -105,9 +115,10 @@ class Tribe__Events_Gutenberg__Editor {
 				),
 			);
 			$template[] = array( 'tribe/event-links' );
-			$template[] = array( 'tribe/event-details' );
+			$template[] = array( 'tribe/classic-event-details' );
 			$template[] = array( 'tribe/event-venue' );
 		} else {
+			$template[] = array( 'tribe/event-datetime' );
 			$template[] = array(
 				'core/paragraph',
 				array(
@@ -115,8 +126,10 @@ class Tribe__Events_Gutenberg__Editor {
 				),
 			);
 			$template[] = array( 'tribe/event-price' );
-			$template[] = array( 'tribe/event-website' );
+			$template[] = array( 'tribe/event-organizer' );
+			$template[] = array( 'tribe/event-venue' );
 			$template[] = array( 'tribe/event-links' );
+			$template[] = array( 'tribe/event-website' );
 		}
 
 		/**
@@ -149,6 +162,39 @@ class Tribe__Events_Gutenberg__Editor {
 		 * @since  0.1.0-alpha
 		 */
 		do_action( 'tribe_events_editor_register_blocks' );
+	}
+
+	/**
+	 * When initially loading a post in gutenberg flags if came from classic editor
+	 *
+	 * @since  0.2.1-alpha
+	 *
+	 * @return bool
+	 */
+	public function flag_post_from_classic_editor() {
+		$post = tribe_get_request_var( 'post' );
+
+		// Bail on empty post
+		if ( empty( $post ) ) {
+			return false;
+		}
+
+		// Bail on non numeric post
+		if ( ! is_numeric( $post ) ) {
+			return false;
+		}
+
+		// Bail if not an event
+		if ( ! tribe_is_event( $post ) ) {
+			return false;
+		}
+
+		// Bail if it already has Blocks
+		if ( gutenberg_post_has_blocks( $post ) ) {
+			return false;
+		}
+
+		return update_post_meta( $post, $this->key_flag_classic_editor, 1 );
 	}
 
 	/**
@@ -237,6 +283,27 @@ class Tribe__Events_Gutenberg__Editor {
 			)
 		);
 
+
+		$localize_blocks = array(
+			array(
+				'name' => 'tribe_blocks_editor_settings',
+				'data' => tribe( 'gutenberg.settings' )->get_options(),
+			),
+			array(
+				'name' => 'tribe_blocks_editor_timezone_html',
+				'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
+			),
+		);
+
+		$is_classic_editor = (bool) get_post_meta( tribe_get_request_var( 'post', 0 ), $this->key_flag_classic_editor, true );
+
+		$localize_blocks[] = array(
+			'name' => 'tribe_blocks_editor',
+			'data' => array(
+				'is_classic' => $is_classic_editor,
+			),
+		);
+
 		tribe_asset(
 			$plugin,
 			'tribe-events-editor-blocks',
@@ -245,16 +312,7 @@ class Tribe__Events_Gutenberg__Editor {
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,
-				'localize'  => array(
-					array(
-						'name' => 'tribe_blocks_editor_settings',
-						'data' => tribe( 'gutenberg.settings' )->get_options(),
-					),
-					array(
-						'name' => 'tribe_blocks_editor_timezone_html',
-						'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
-					),
-				),
+				'localize'  => $localize_blocks,
 			)
 		);
 

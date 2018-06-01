@@ -1,22 +1,22 @@
 <?php
-class Tribe__Events_Gutenberg__Blocks__Event_Subtitle
+class Tribe__Events_Gutenberg__Blocks__Classic_Event_Details
 extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 	/**
 	 * Which is the name/slug of this block
 	 *
-	 * @since  0.1.1-alpha
+	 * @since  0.2.1-alpha
 	 *
 	 * @return string
 	 */
 	public function slug() {
-		return 'event-subtitle';
+		return 'classic-event-details';
 	}
 
 	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
-	 * @since  0.1.0-alpha
+	 * @since  0.2.1-alpha
 	 *
 	 * @param  array $attributes
 	 *

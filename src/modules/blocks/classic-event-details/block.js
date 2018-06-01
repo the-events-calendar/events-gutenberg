@@ -41,7 +41,7 @@ import { totalSeconds, toMoment } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { FORMATS } from 'utils/date';
 import { store, STORE_NAME } from 'data/details';
-import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-subtitle/block';
+import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-datetime/block';
 
 export const VALID_PROPS = [
 	'eventOrganizers',
@@ -53,7 +53,7 @@ export const VALID_PROPS = [
  * Module Code
  */
 
-export default class EventDetails extends Component {
+export default class ClassicEventDetails extends Component {
 	constructor( props ) {
 		super( ...arguments );
 
