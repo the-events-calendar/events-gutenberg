@@ -23,12 +23,13 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
+import { STORE_NAME } from 'data/organizers';
 
 /**
  * Module Code
  */
 
-class SearchPosts extends Component {
+export default class SearchPosts extends Component {
 	static defaultProps = {
 		onHover: noop,
 		store: {},
@@ -52,7 +53,9 @@ class SearchPosts extends Component {
 	componentDidMount() {
 		const { store, storeName } = this.props;
 
-		select( storeName ).fetch();
+		dispatch( storeName ).fetch( {
+			exclude: this.props.exclude,
+		} );
 
 		this.saveState();
 		this.unsubscribe = store.subscribe( this.saveState );
@@ -80,13 +83,9 @@ class SearchPosts extends Component {
 		const { storeName } = this.props;
 		const value = event.target.value.trim();
 
-		this.setState( { search: event.target.value }, () => {
-			dispatch( storeName ).setPage( 1 );
-			dispatch( storeName ).unblock();
-			select( storeName ).fetch( {
-				search: value,
-				orderby: value ? 'relevance' : 'title',
-			} );
+		this.scrollPosition = 0;
+		dispatch( storeName ).search( value, {
+			exclude: this.props.exclude,
 		} );
 	}
 
@@ -100,11 +99,10 @@ class SearchPosts extends Component {
 		}
 		if ( percentage > 0.75 ) {
 			const { store, storeName } = this.props;
-			const { page, search } = store.getState();
-			select( storeName ).fetch( {
-				search,
-				page,
-				orderby: search ? 'relevance' : 'title',
+			const { page } = store.getState();
+			dispatch( storeName ).fetch( {
+				page: page + 1,
+				exclude: this.props.exclude,
 			} );
 		}
 	}
@@ -141,9 +139,8 @@ class SearchPosts extends Component {
 				disabled={ item.isDisabled }
 				onMouseEnter={ onHover( item ) }
 				onMouseLeave={ onHover( null ) }
-			>
-				{ item.title.rendered }
-			</button>
+				dangerouslySetInnerHTML={ { __html: item.title.rendered }}
+			/>
 		);
 	}
 
@@ -224,6 +221,7 @@ class SearchPosts extends Component {
 	}
 }
 
+/*
 const applySelect = withSelect( ( select, props ) => {
 	const { metaKey } = props;
 	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
@@ -236,3 +234,4 @@ const applySelect = withSelect( ( select, props ) => {
 export default compose(
 	applySelect
 )( SearchPosts );
+*/
