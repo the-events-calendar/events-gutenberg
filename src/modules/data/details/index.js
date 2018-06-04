@@ -33,6 +33,7 @@ export const DEFAULT_STATE = {
 	eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
 	dashboardOpen: false,
 	eventOrganizers: [],
+	eventUrl: undefined,
 };
 
 export const STORE_NAME = 'tec.details';
@@ -101,6 +102,10 @@ const details = {
 
 			case 'SET_CURRENCY_POSITION': {
 				return reducers.setCurrencyPosition( state, action.position );
+			}
+
+			case 'SET_WEBSITE_URL': {
+				return reducers.setWebsiteUrl( state, action.eventUrl );
 			}
 
 			case 'SET_DATE_TIME_SEPARATOR': {

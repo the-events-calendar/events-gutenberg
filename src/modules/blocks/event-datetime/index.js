@@ -19,10 +19,10 @@ import { noop, pick, get, isEqual } from 'lodash';
  * Module Code
  */
 export default {
-	id: 'event-subtitle',
-	title: __( 'Event Subtitle Classic', 'events-gutenberg' ),
+	id: 'event-datetime',
+	title: __( 'Event Date Time', 'events-gutenberg' ),
 	description: __(
-		'The classic single event subtitle shows date, time, and price.',
+		'The single event shows date and time',
 		'events-gutenberg'
 	),
 	icon: 'calendar',
@@ -63,6 +63,23 @@ export default {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventTimeRangeSeparator',
+		},
+
+		// Only Avail for classic users
+		eventCost: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventCost',
+		},
+		eventCurrencySymbol: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventCurrencySymbol',
+		},
+		eventCurrencyPosition: {
+			type: 'string',
+			source: 'meta',
+			meta: '_EventCurrencyPosition',
 		},
 	},
 

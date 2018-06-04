@@ -21,6 +21,7 @@ import { __ } from '@wordpress/i18n';
 
 import {
 	InspectorControls,
+	PlainText,
 } from '@wordpress/editor';
 
 /**
@@ -50,6 +51,9 @@ export const VALID_PROPS = [
 	'timeRangeSeparator',
 	'timezone',
 	'allDay',
+
+	'eventCurrencySymbol',
+	'currencyPosition',
 ];
 
 /**
@@ -101,6 +105,33 @@ export default class EventSubtitle extends Component {
 				{ this.renderStartDate() }
 				{ this.renderStartTime() }
 			</React.Fragment>
+		);
+	}
+
+	renderPrice() {
+		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.state;
+
+		// Bail when not classic
+		if ( ! tribe_blocks_editor ) {
+			return null;
+		}
+
+		// Bail when not classic
+		if ( ! tribe_blocks_editor.is_classic ) {
+			return null;
+		}
+
+		return (
+			<div className="tribe-editor__event-cost">
+				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				<PlainText
+					className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
+					value={ eventCost }
+					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
+					onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
+				/>
+				{ 'suffix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+			</div>
 		);
 	}
 
@@ -235,6 +266,7 @@ export default class EventSubtitle extends Component {
 					{ this.isAllDay() ? this.renderSeparator( 'all-day' ) : null }
 					{ this.renderSeparator( 'space' ) }
 					{ this.renderTimezone() }
+					{ this.renderPrice() }
 				</h2>
 				{ this.renderDashboard() }
 			</div>

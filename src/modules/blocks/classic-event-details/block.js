@@ -36,8 +36,11 @@ import {
 
 import { default as EventOrganizers } from './organizers';
 
-import { toMoment, toDate, toTime } from 'utils/moment';
-import { store, STORE_NAME as DETAILS_STORE } from 'data/details';
+import { totalSeconds, toMoment } from 'utils/moment';
+import { HALF_HOUR_IN_SECONDS } from 'utils/time';
+import { FORMATS } from 'utils/date';
+import { store, STORE_NAME } from 'data/details';
+import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-datetime/block';
 import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers/block';
 
 export const VALID_PROPS = [

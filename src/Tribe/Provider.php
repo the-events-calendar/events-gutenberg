@@ -28,14 +28,15 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.template', 'Tribe__Events_Gutenberg__Template' );
 		$this->container->singleton( 'gutenberg.template.overwrite', 'Tribe__Events_Gutenberg__Template__Overwrite', array( 'hook' ) );
 
-		$this->container->singleton( 'gutenberg.blocks.event-subtitle', 'Tribe__Events_Gutenberg__Blocks__Event_Subtitle' );
-		$this->container->singleton( 'gutenberg.blocks.event-details', 'Tribe__Events_Gutenberg__Blocks__Event_Details' );
+		$this->container->singleton( 'gutenberg.blocks.classic-event-details', 'Tribe__Events_Gutenberg__Blocks__Classic_Event_Details' );
+		$this->container->singleton( 'gutenberg.blocks.event-datetime', 'Tribe__Events_Gutenberg__Blocks__Event_Datetime' );
 		$this->container->singleton( 'gutenberg.blocks.event-venue', 'Tribe__Events_Gutenberg__Blocks__Event_Venue' );
 		$this->container->singleton( 'gutenberg.blocks.event-organizer', 'Tribe__Events_Gutenberg__Blocks__Event_Organizer' );
 		$this->container->singleton( 'gutenberg.blocks.event-links', 'Tribe__Events_Gutenberg__Blocks__Event_Links' );
 		$this->container->singleton( 'gutenberg.blocks.event-price', 'Tribe__Events_Gutenberg__Blocks__Event_Price' );
 		$this->container->singleton( 'gutenberg.blocks.event-category', 'Tribe__Events_Gutenberg__Blocks__Event_Category' );
 		$this->container->singleton( 'gutenberg.blocks.event-tags', 'Tribe__Events_Gutenberg__Blocks__Event_Tags' );
+		$this->container->singleton( 'gutenberg.blocks.event-website', 'Tribe__Events_Gutenberg__Blocks__Event_Website' );
 
 		$this->hook();
 
@@ -77,15 +78,19 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		// Setup the registration of Blocks
 		add_action( 'init', tribe_callback( 'gutenberg.editor', 'register_blocks' ), 20 );
 
+		// Maybe add flag from classic editor
+		add_action( 'enqueue_block_editor_assets', tribe_callback( 'gutenberg.editor', 'flag_post_from_classic_editor' ), 0 );
+
 		// Register blocks to own own action
-		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-subtitle', 'register' ) );
-		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-details', 'register' ) );
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.classic-event-details', 'register' ) );
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-datetime', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-venue', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-organizer', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-links', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-price', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-category', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-tags', 'register' ) );
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-website', 'register' ) );
 	}
 
 	/**
