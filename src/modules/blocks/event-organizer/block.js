@@ -36,6 +36,7 @@ export default class EventOrganizer extends Component {
 		id: '',
 		setAttributes: noop,
 		organizer: 0,
+		current: '',
 	};
 
 	static propTypes = {
@@ -43,6 +44,7 @@ export default class EventOrganizer extends Component {
 		id: PropTypes.string,
 		setAttributes: PropTypes.func,
 		organizer: PropTypes.number,
+		current: PropTypes.string,
 	};
 
 	static getDerivedStateFromProps( nextProps, prevState ) {
@@ -86,9 +88,8 @@ export default class EventOrganizer extends Component {
 
 	storeListener = () => {
 		const { id, setAttributes } = this.props;
-
-		const organizers = select( STORE_NAME ).getOrganizers();
-		setAttributes( { organizers: JSON.stringify( organizers ) } );
+		const organizers = JSON.stringify( select( STORE_NAME ).getOrganizers() );
+		setAttributes( { organizers } );
 
 		const block = select( STORE_NAME ).getBlock( id );
 		const VALID_STATE = [ 'edit', 'create', 'post', 'draft', 'submit' ];
@@ -271,8 +272,9 @@ export default class EventOrganizer extends Component {
 
 	clear = () => {
 		const { post } = this.state;
+
 		if ( post && post.id ) {
-			dispatch( EVENT_DETAILS_STORE ).removeOrganizer( post );
+			dispatch( EVENT_DETAILS_STORE ).maybeRemoveOrganizer( post );
 		}
 
 		store.dispatch( {
