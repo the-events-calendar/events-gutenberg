@@ -1,4 +1,4 @@
-import { get, pick, map } from 'lodash';
+import { get, pick, map, identity } from 'lodash';
 
 import { select, dispatch } from '@wordpress/data';
 
@@ -50,6 +50,10 @@ const details = {
 				};
 			} );
 		},
+		getOrganizersIds( state ) {
+			const { blocks } = state;
+			return map( blocks, ( block ) => get( block, 'organizer', 0 ) ).filter( identity );
+		},
 		getDetails( state, id, organizer ) {
 			const block = state[ id ] || {};
 			return block.post || {};
@@ -63,10 +67,6 @@ const details = {
 
 			apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ organizer }` } )
 				.then( ( body ) => {
-					dispatch( EVENT_DETAILS_STORE ).addOrganizer( {
-						...body,
-						block: 'individual',
-					} );
 					dispatch( STORE_NAME ).setPost( id, body );
 				} );
 

@@ -83,7 +83,8 @@ export default {
 			// Filter the attributes as well to the ones relevant to this component
 			const prevAttributes = pick( get( props, 'attributes', {} ), VALID_PROPS );
 			// Update only the attributes with changes
-			setAttributes( diff( attributes, prevAttributes ) );
+			console.log( diff( attributes, prevAttributes )  );
+			// setAttributes( diff( attributes, prevAttributes ) );
 		} );
 
 		const allowedProperties = pick( props, [ 'isSelected' ] );
