@@ -86,26 +86,6 @@ export default {
 	useOnce: true,
 
 	edit: ( props ) => {
-		// Remove any old subscription if component is rendered again
-		if ( typeof this.unsubscribe === 'function' ) {
-			this.unsubscribe();
-		}
-
-		this.unsubscribe = store.subscribe( () => {
-			const setAttributes = get( props, 'setAttributes', noop );
-			const state = store.getState();
-			// Pick relevant ones from store
-			const attributes = {
-				...pick( state, VALID_PROPS ),
-				eventOrganizers: select( STORE_NAME ).getOrganizers(),
-			};
-
-			// Pick relevant ones from the current attributes
-			const prevAttributes = pick( get( props, 'attributes', {} ), VALID_PROPS );
-			// Updates the attributes with changes
-
-			setAttributes( diff( attributes, prevAttributes ) );
-		} );
 
 		const allowedProperties = pick(
 			props, [ 'isSelected', 'setFocus', 'setAttributes', 'focus' ]
@@ -115,7 +95,6 @@ export default {
 				get( props, 'attributes', {} )
 			)
 		);
-
 		const properties = {
 			...allowedProperties,
 			...attributes,
