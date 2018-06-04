@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId, noop, identity, isObject, isEmpty, isNumber } from 'lodash';
-import { stringify } from 'querystringify';
+import { unescape, union, uniqueId, noop, identity, find, isEmpty, isNumber, difference } from 'lodash';
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -102,13 +101,14 @@ export default class EventOrganizers extends Component {
 
 	static propTypes = {
 		organizers: PropTypes.array,
-	}
+	};
 
 	constructor( props ) {
 		super( ...arguments );
 		this.state = {
 			loading: isLoading( props.organizers ),
 		};
+		this.skip = [];
 	}
 
 	static getDerivedStateFromProps( props, state ) {
@@ -127,8 +127,11 @@ export default class EventOrganizers extends Component {
 	}
 
 	componentDidMount() {
-		select( STORE_NAME ).fetch();
 		select( STORE_NAME ).fetchDetails( this.props.organizers );
+	}
+
+	componentDidUpdate() {
+		this.skip = [];
 	}
 
 	renderOrganizerName( organizer ) {
@@ -148,37 +151,38 @@ export default class EventOrganizers extends Component {
 		);
 	}
 
-
 	renderOrganizerListItem( organizer, isLast, level ) {
 		const { removeOrganizer } = this.props;
-		const { overOrganizer } = this.state;
-		const current = overOrganizer === organizer.id;
-		const classes = {
-			'tribe-current': current,
-		};
-
-		const { block } = organizer;
-		const isFromBlock = block && block === 'individual';
-
 		return (
 			<li
-				className={ classNames( classes ) }
-				key={ organizer.id || organizer }
-				onMouseEnter={ () => {
-					this.setState( { overOrganizer: organizer.id } );
-				} }
-				onMouseLeave={ () => {
-					this.setState( { overOrganizer: null } );
-				} }
+				key={ uniqueId( organizer.id || organizer ) }
 			>
 				{ this.renderOrganizerName( organizer ) }
 				<OrganizerActions
-					visible={ ! isFromBlock }
+					visible={ ! this.isFromBlock( organizer ) }
 					organizer={ organizer }
 					onClick={ () => removeOrganizer( organizer ) }
 				/>
 			</li>
 		);
+	}
+
+	isFromBlock = ( organizer ) => {
+		const { block, id } = organizer;
+
+		// Recent created block
+		if ( block && block === 'individual' ) {
+			return true;
+		}
+
+		const { organizersBlocks } = this.props;
+		const valid = difference( organizersBlocks, this.skip );
+		const found = find( valid, ( item ) => item === id );
+		if ( found ) {
+			this.skip.push( found );
+			return true;
+		}
+		return false;
 	}
 
 	render() {
@@ -216,7 +220,6 @@ export default class EventOrganizers extends Component {
 				<SearchPosts
 					key="organizer-search-dropdown"
 					postType="tribe_organizer"
-					metaKey="_EventOrganizerID"
 					searchLabel={ __( 'Search for an organizer', 'events-gutenberg' ) }
 					iconLabel={ __( 'Add existing Organizer', 'events-gutenberg' ) }
 					store={ store }
@@ -224,6 +227,7 @@ export default class EventOrganizers extends Component {
 					focus={ true }
 					onSelectItem={ addOrganizer }
 					searchable={ true }
+					exclude={ this.normalizeOrganizers() }
 				/>
 				<CreateDropdown
 					key="organizer-create-dropdown"
@@ -238,6 +242,13 @@ export default class EventOrganizers extends Component {
 		const { organizers } = this.props;
 		return ! isEmpty( organizers );
 	};
+
+	normalizeOrganizers = () => {
+		const { organizers } = this.props;
+		return organizers.map( ( item ) => {
+			return ( isNumber( item ) ) ? item : item.id;
+		} );
+	}
 }
 
 const isLoading = ( organizers ) => {
