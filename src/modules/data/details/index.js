@@ -31,8 +31,8 @@ export const DEFAULT_STATE = {
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
 	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
 	eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
-	eventOrganizers: [],
 	dashboardOpen: false,
+	eventOrganizers: [],
 };
 
 export const STORE_NAME = 'tec.details';
@@ -85,6 +85,10 @@ const details = {
 
 			case 'REMOVE_ORGANIZER': {
 				return reducers.removeOrganizer( state, action.organizer );
+			}
+
+			case 'MAYBE_REMOVE_ORGANIZER': {
+				return reducers.maybeRemoveOrganizer( state, action.organizer );
 			}
 
 			case 'REPLACE_ORGANIZERS': {
@@ -145,6 +149,12 @@ const details = {
 				organizer,
 			};
 		},
+		maybeRemoveOrganizer( organizer ) {
+			return {
+				type: 'MAYBE_REMOVE_ORGANIZER',
+				organizer,
+			}
+		},
 		replaceOrganizers( organizers ) {
 			return {
 				type: 'REPLACE_ORGANIZERS',
@@ -158,7 +168,7 @@ const details = {
 			return eventOrganizers
 				.filter( isObject )
 				.map( ( item ) => item.id );
-		}
+		},
 	},
 };
 
