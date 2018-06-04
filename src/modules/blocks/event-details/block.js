@@ -12,6 +12,8 @@ import classNames from 'classnames';
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 
+import { select } from '@wordpress/data';
+
 import {
 	ToggleControl,
 	TextControl,
@@ -35,8 +37,8 @@ import {
 import { default as EventOrganizers } from './organizers';
 
 import { toMoment, toDate, toTime } from 'utils/moment';
-import { store } from 'data/details';
-import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-subtitle/block';
+import { store, STORE_NAME as DETAILS_STORE } from 'data/details';
+import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers/block';
 
 export const VALID_PROPS = [
 	'eventOrganizers',
@@ -51,26 +53,33 @@ export const VALID_PROPS = [
 export default class EventDetails extends Component {
 	static defaultProps = {
 		eventOrganizers: [],
-	}
+	};
 
 	static propTypes = {
 		eventOrganizers: PropTypes.array,
-	}
+	};
 
 	constructor( props ) {
 		super( ...arguments );
 
 		this.state = {
 			...props,
-			loading: !! props.eventOrganizers.length,
+			loading: ! ! props.eventOrganizers.length,
 		};
 		this.unsubscribe = noop;
 	}
 
 	componentDidMount() {
 		this.unsubscribe = store.subscribe( () => {
+			const { setAttributes } = this.props;
 			const state = store.getState();
-			this.setState( pick( state, [ ...SUBTITLE_PROPS, ...VALID_PROPS ] ) );
+			// Pick relevant ones from store
+			const attributes = {
+				...pick( state, VALID_PROPS ),
+				eventOrganizers: select( DETAILS_STORE ).getOrganizers(),
+			};
+			console.log( attributes );
+			setAttributes( { eventOrganizers: select( DETAILS_STORE ).getOrganizers() } );
 		} );
 
 		store.dispatch( {
@@ -117,7 +126,11 @@ export default class EventDetails extends Component {
 			setAttributes,
 			setFocus,
 			focus,
-		} = this.state;
+		} = this.props;
+
+		console.log( eventOrganizers );
+		const organizersBlocks = select( ORGANIZER_STORE ).getOrganizersIds();
+		console.log( organizersBlocks );
 
 		return (
 			<MetaGroup groupKey="organizer">
@@ -133,6 +146,7 @@ export default class EventDetails extends Component {
 				<EventOrganizers
 					focus={ focus }
 					organizers={ eventOrganizers }
+					organizersBlocks={ organizersBlocks }
 					addOrganizer={ nextOrganizer => {
 						store.dispatch( {
 							type: 'ADD_ORGANIZER',
@@ -151,7 +165,7 @@ export default class EventDetails extends Component {
 	}
 
 	renderTitle() {
-		const { detailsTitle, setAttributes, setFocus } = this.state;
+		const { detailsTitle, setAttributes, setFocus } = this.props;
 		return (
 			<RichText
 				tagName="h3"
@@ -166,11 +180,11 @@ export default class EventDetails extends Component {
 	}
 
 	renderStart() {
-		const { startDate } = this.state;
+		const { startDate } = this.props;
 
 		return (
 			<div onClick={ this.toggleDashboard }>
-				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br />
+				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
 				{ toDate( toMoment( startDate ) ) }
 				{ this.renderStartTime() }
 			</div>
@@ -178,7 +192,7 @@ export default class EventDetails extends Component {
 	}
 
 	renderStartTime() {
-		const { allDay, startDate, dateTimeRangeSeparator } = this.state;
+		const { allDay, startDate, dateTimeRangeSeparator } = this.props;
 
 		if ( allDay ) {
 			return null;
@@ -193,10 +207,10 @@ export default class EventDetails extends Component {
 	}
 
 	renderEnd() {
-		const { endDate } = this.state;
+		const { endDate } = this.props;
 		return (
 			<div onClick={ this.toggleDashboard }>
-				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
+				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
 				{ toDate( toMoment( endDate ) ) }
 				{ this.renderEndTime() }
 			</div>
@@ -204,13 +218,13 @@ export default class EventDetails extends Component {
 	}
 
 	renderEndTime() {
-		const { allDay } = this.state;
+		const { allDay } = this.props;
 
 		if ( allDay ) {
 			return null;
 		}
 
-		const { endDate, dateTimeRangeSeparator } = this.state;
+		const { endDate, dateTimeRangeSeparator } = this.props;
 
 		return (
 			<React.Fragment>
@@ -222,13 +236,13 @@ export default class EventDetails extends Component {
 
 	toggleDashboard = () => {
 		store.dispatch( { type: 'TOGGLE_DASHBOARD' } );
-	}
+	};
 
 	renderWebsite() {
-		const { eventUrl, setAttributes } = this.state;
+		const { eventUrl, setAttributes } = this.props;
 		return (
 			<div>
-				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
+				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
 				<PlainText
 					id="tribe-event-url"
 					value={ eventUrl }
@@ -240,10 +254,10 @@ export default class EventDetails extends Component {
 	}
 
 	renderCost() {
-		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.state;
+		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.props;
 		return (
 			<div className="tribe-editor__event-cost">
-				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
+				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
 				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
@@ -275,7 +289,7 @@ export default class EventDetails extends Component {
 	}
 
 	renderControls() {
-		const { isSelected, allDay, setAttributes, currencyPosition, eventCurrencySymbol } = this.state;
+		const { isSelected, allDay, setAttributes, currencyPosition, eventCurrencySymbol } = this.props;
 
 		if ( ! isSelected ) {
 			return null;
