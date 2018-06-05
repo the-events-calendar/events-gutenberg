@@ -133,7 +133,7 @@ class OrganizerForm extends Component {
 		if ( this.isCreating() ) {
 			return [
 				<div
-					className="tribe-organizer-form"
+					className="tribe-editor__organizer__form"
 					key="tribe-organizer-form"
 				>
 					<Placeholder key="placeholder">
@@ -145,7 +145,7 @@ class OrganizerForm extends Component {
 
 		return [
 			<div
-				className="tribe-organizer-form"
+				className="tribe_editor__organizer__form"
 				key="tribe-organizer-form"
 			>
 				<h3 key="tribe-organizer-form-title">

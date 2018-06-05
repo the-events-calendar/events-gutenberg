@@ -99,9 +99,9 @@ export default class DatePicker extends Component {
 	render() {
 		return (
 			<Dropdown
-				className="tribe-element-datepicker"
+				className="tribe-editor__datepicker"
 				position="bottom left"
-				contentClassName="tribe-element-datepicker-dialog"
+				contentClassName="tribe-editor__datepicker-dialog"
 				renderToggle={ this.renderToggle }
 				renderContent={ this.renderContent }
 			/>

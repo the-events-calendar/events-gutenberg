@@ -131,8 +131,8 @@ export default class TimePicker extends Component {
 	renderItem = ( item ) => {
 		const { allDay } = this.state;
 		const itemClasses = {
-			'tribe-element-timepicker-item': true,
-			'tribe-current': item.isCurrent && ! allDay,
+			'tribe-editor__timepicker__item': true,
+			'tribe-editor__timepicker__item--current': item.isCurrent && ! allDay,
 		};
 
 		return (
@@ -184,7 +184,7 @@ export default class TimePicker extends Component {
 							id="tribe-element-timepicker-items"
 							key="tribe-element-timepicker-items"
 							role="menu"
-							className={ classNames( 'tribe-element-timepicker-items' ) }
+							className={ classNames( 'tribe-editor__timepicker__items' ) }
 						>
 							{ this.renderList() }
 						</ScrollArea>,
@@ -199,7 +199,7 @@ export default class TimePicker extends Component {
 			<Dropdown
 				className="tribe-element-timepicker-label"
 				position="bottom center"
-				contentClassName="tribe-element-timepicker-dialog"
+				contentClassName="tribe-editor__timepicker__dialog"
 				renderToggle={ ( { onToggle, isOpen } ) => (
 					<button
 						type="button"
@@ -208,7 +208,7 @@ export default class TimePicker extends Component {
 						aria-expanded={ isOpen }
 					>
 						{ this.currentLabel }
-						<Dashicon className="button--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
+						<Dashicon className="btn--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
 					</button>
 				) }
 				renderContent={ this.renderDropdown }
@@ -218,7 +218,7 @@ export default class TimePicker extends Component {
 		return [
 			<div
 				key="tribe-element-timepicker"
-				className="tribe-element tribe-element-timepicker"
+				className="tribe_editor__timepicker"
 			>
 				{ dropdown }
 			</div>,

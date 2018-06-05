@@ -48,7 +48,7 @@ class TaxonomiesElement extends Component {
 
 	getTermListClassName( level ) {
 		const { className } = this.props;
-		return `tribe-terms__list tribe-terms__list-level-${ level } ${ className }`;
+		return `tribe-editor__terms__list tribe-terms__list-level-${ level } ${ className }`;
 	}
 
 	renderTermName( term ) {
@@ -96,7 +96,7 @@ class TaxonomiesElement extends Component {
 		}
 
 		return [
-			<div key={ key } className="tribe-terms__block tribe-is-empty">
+			<div key={ key } className="tribe-editor__terms tribe-editor--empty">
 				{ this.renderLabel() }
 				{ renderEmpty }
 			</div>,
@@ -105,7 +105,7 @@ class TaxonomiesElement extends Component {
 
 	renderLabel() {
 		const label = (
-			<strong className="tribe-detail-label" key="terms-label">
+			<strong className="tribe-editor__details__label" key="terms-label">
 				{ this.props.label }
 				{ ' ' }
 			</strong>
@@ -121,7 +121,7 @@ class TaxonomiesElement extends Component {
 
 		if ( this.props.terms.isLoading ) {
 			return [
-				<div key={ key } className="tribe-terms__block">
+				<div key={ key } className="tribe-editor__terms">
 					{ this.renderLabel() }
 					<Spinner key="terms-spinner" />
 				</div>,
@@ -131,7 +131,7 @@ class TaxonomiesElement extends Component {
 		}
 
 		return [
-			<div key={ key } className="tribe-terms__block">
+			<div key={ key } className="tribe-editor__terms">
 				{ this.renderLabel() }
 				<div key="terms" className={ this.props.className }>
 					{ this.renderTermList() }

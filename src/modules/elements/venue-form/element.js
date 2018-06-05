@@ -122,7 +122,7 @@ export default class VenueForm extends Component {
 		return (
 			<select
 				value={ country }
-				className="small tribe-venue-select"
+				className="small tribe-editor__venue__select"
 				onChange={ ( event ) => this.setState( { country: event.target.value } ) }
 			>
 				{ placeholder }
@@ -153,7 +153,7 @@ export default class VenueForm extends Component {
 			<select
 				value={ stateProvince }
 				onChange={ ( event ) => this.setState( { stateProvince: event.target.value } ) }
-				className="medium tribe-venue-select"
+				className="medium tribe-editor__venue__select"
 			>
 				{ states.map( this.renderOption ) }
 			</select>
@@ -172,7 +172,7 @@ export default class VenueForm extends Component {
 
 		return (
 			<div
-				className="tribe-venue__form"
+				className="tribe-editor__venue__form"
 				key="tribe-venue-form"
 			>
 				<RichText
@@ -181,7 +181,7 @@ export default class VenueForm extends Component {
 					value={ title }
 					onChange={ ( value ) => { this.setState( { title: value } ) } }
 				/>
-				<div className="tribe-venue__fields-container">
+				<div className="tribe-editor__venue__fields">
 					<Input
 						type="text"
 						name="venue[address]"

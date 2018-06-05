@@ -60,7 +60,7 @@ export default class EventPrice extends Component {
 
 	renderUI() {
 		return (
-			<section key="event-price-box" className="tribe-editor-block">
+			<section key="event-price-box" className="tribe-editor__block">
 				<div className="tribe-editor__event-cost">
 					{ this.renderLabel() }
 					{ this.renderDashboard() }
@@ -73,8 +73,8 @@ export default class EventPrice extends Component {
 		const currencyPosition = this.getCurrencyPosition();
 
 		const containerClass = classNames(
-			'event-price__label-container',
-			`event-price__label-container--${ currencyPosition }`,
+			'tribe-editor__event-price',
+			`tribe-editor__event-price--${ currencyPosition }`,
 		);
 
 		return (
@@ -127,10 +127,10 @@ export default class EventPrice extends Component {
 		const hideCurrency = ! hasPrice && ! this.isEmpty( eventCostDescription );
 
 		const currencyClassNames = classNames( [
-			'event-price__currency',
+			'tribe-editor__event-price__currency',
 			{
-				'event-price__currency--active': hasPrice,
-				'event-price__currency--disabled': hideCurrency,
+				'tribe-editor__event-price__currency--active': hasPrice,
+				'tribe-editor__event-price__currency--disabled': hideCurrency,
 			},
 		] );
 
@@ -153,7 +153,7 @@ export default class EventPrice extends Component {
 		}
 
 		return (
-			<span className="event-price__label">{ placeholder }</span>
+			<span className="tribe-editor__event-price__label">{ placeholder }</span>
 		);
 	}
 
@@ -170,7 +170,7 @@ export default class EventPrice extends Component {
 			return null;
 		}
 
-		return <span className="event-price__cost">{ cost }</span>;
+		return <span className="tribe-editor__event-price__cost">{ cost }</span>;
 	}
 
 	renderDescription() {
@@ -181,7 +181,7 @@ export default class EventPrice extends Component {
 			return null;
 		}
 
-		return <span className="event-price__description">{ eventCostDescription }</span>;
+		return <span className="tribe-editor__event-price__description">{ eventCostDescription }</span>;
 	}
 
 	toggleDashboard = () => {
@@ -205,9 +205,9 @@ export default class EventPrice extends Component {
 				onClose={ this.onCloseDashboard }
 				onOpen={ this.onOpenDashboard }
 			>
-				<section className="event-price__dashboard-container">
+				<section className="tribe-editor__event-price__dashboard">
 					<input
-						className={ classNames( 'event-price__input', 'event-price__input--price' ) }
+						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
 						name="description"
 						type="text"
 						placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
@@ -215,7 +215,7 @@ export default class EventPrice extends Component {
 						value={ eventCost }
 					/>
 					<input
-						className={ classNames( 'event-price__input', 'event-price__input--description' ) }
+						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
 						name="description"
 						type="text"
 						placeholder={ __( 'Description', 'events-gutenberg' ) }
@@ -223,7 +223,7 @@ export default class EventPrice extends Component {
 						value={ eventCostDescription || '' }
 					/>
 				</section>
-				<footer className="event-price__dashboard-footer">
+				<footer className="tribe-editor__event-price__dashboard__footer">
 					{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
 				</footer>
 			</Dashboard>

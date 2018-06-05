@@ -10,7 +10,7 @@
 	}
 }
 
-.tribe-editor-block {
+.tribe-editor__block {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 14px;
 
@@ -20,22 +20,7 @@
 	}
 }
 
-.tribe-editor-events-subtitle {
-	display: inline-block;
-	font-size: 1.2em;
-	font-style: normal;
-	font-weight: bold;
-	line-height: normal;
-	margin-bottom: 0;
-	margin-top: 0;
-
-	.button-link {
-		color: #060606;
-		font-size: 1.1em;
-		text-decoration: none;
-	}
-}
-
+// PHP view
 .tribe-editor-events-link {
 	.tribe-events-button {
 		background-color: #21759b;
@@ -67,7 +52,7 @@
 	}
 }
 
-.tribe-editor-event-details {
+.tribe-editor__event-details {
 	background: #fafafa;
 	border: 1px solid #eee;
 	margin: 0;
@@ -88,11 +73,11 @@
 		display: table;
 	}
 
-	.tribe-detail-label {
+	.tribe-editor__details__label {
 		display: block;
 	}
 
-	.tribe-editor-meta-group {
+	.tribe-editor__meta-group {
 		box-sizing: border-box;
 		display: inline-block;
 		float: left;
@@ -113,20 +98,20 @@
 			width: 100%;
 		}
 
-		.tribe-events-single-section-title {
+		.tribe-editor__events-section__headline {
 			font-size: 17px;
 			font-weight: bold;
 			padding: 0 0 10px;
 			word-wrap: break-word;
 		}
 
-		.tribe-terms__block {
+		.tribe-editor__terms {
 			.spinner {
 				float: none;
 			}
 		}
 
-		.tribe-terms__list {
+		.tribe-editor__terms__list {
 			list-style: none;
 
 			li {
@@ -142,9 +127,7 @@
 	.tribe-editor__meta-field {
 		line-height: 1.4em;
 	}
-}
 
-.tribe-editor-event-details {
 	.tribe-editor__event-cost {
 		span {
 			display: inline-block;
@@ -152,7 +135,7 @@
 		}
 	}
 
-	.tribe-editor__event-cost-value {
+	.tribe-editor__event-cost__value {
 		display: inline-block;
 		width: 105px;
 	}
@@ -165,44 +148,32 @@
 	.blocks-plain-text {
 		display: inline-block;
 		vertical-align: top;
-		&.tribe-editor-cost-symbol-position-prefix {
-			padding-left: 4px;
-		}
-		&.tribe-editor-cost-symbol-position-suffix {
-			padding-right: 4px;
-		}
 	}
 }
 
-.tribe-editor-venue-actions {
-	margin-top: 20px;
-}
-
+// PHP
 .tribe-events-address {
     font-style: normal;
 }
 
-.tribe-editor-organizer-dropdown,
-.tribe-editor-venue-dropdown {
+.tribe-editor__organizer__dropdown {
 	display: inline-block;
 	font-size: 14px;
 	margin-right: 15px;
 }
 
-.edit-post-layout__content ul.tribe-editor-organizer-list {
-	list-style: none;
-	margin-bottom: 15px;
+.tribe-editor__meta-group {
+	ul.tribe-editor__organizer__list {
+		list-style: none;
+		margin-bottom: 15px;
 
-	li {
-		position: relative;
+		li {
+			position: relative;
+		}
 	}
 }
 
-.tribe-organizer-form,
-.tribe-venue-form {
-	margin: 20px 30px;
-	width: 360px;
-
+.tribe-editor__organizer__form {
 	.components-placeholder {
 		background-color: transparent;
 	}
@@ -229,4 +200,12 @@
 			}
 		}
 	}
+}
+
+.tribe-editor__loader {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
 }

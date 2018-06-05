@@ -62,8 +62,8 @@ export default class SearchOrCreate extends Component {
 
 	render() {
 		const { selected } = this.props;
-		const containerClass = classNames( 'tribe-soc__input-container', {
-			'tribe-soc__input-container--active': selected,
+		const containerClass = classNames( 'tribe-editor__soc__input__container', {
+			'tribe-editor__soc__input__container--active': selected,
 		} );
 
 		this.maybeFocus();
@@ -93,7 +93,7 @@ export default class SearchOrCreate extends Component {
 
 		return (
 			<input
-				className="tribe-soc__input"
+				className="tribe-editor__soc__input"
 				ref={ this.inputRef }
 				value={ search }
 				placeholder={ placeholder }
@@ -153,14 +153,14 @@ export default class SearchOrCreate extends Component {
 
 		if ( loading ) {
 			return (
-				<div className="tribe-soc__results--loading">
+				<div className="tribe-editor__soc__results--loading">
 					<Spinner />
 				</div>
 			);
 		}
 
 		return (
-			<nav className="tribe-soc__results">
+			<nav className="tribe-editor__soc__results">
 				{ this.renderItems() }
 			</nav>
 		);
