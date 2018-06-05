@@ -24,16 +24,6 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_EventCostDescription', $this->text() );
 		register_meta( 'post', '_EventCurrencySymbol', $this->text() );
 		register_meta( 'post', '_EventCurrencyPosition', $this->text() );
-		register_meta(
-			'post',
-			'_EventTempVenues',
-			array_merge(
-				$this->numeric_array(),
-				array(
-					'description' => __( 'Event Temporarily Venues', 'events-gutenberg' ),
-				)
-			)
-		);
 		// Use sanitize_textarea_field to allow whitespaces
 		register_meta(
 			'post',
