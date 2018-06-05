@@ -149,8 +149,8 @@ export default class Dashboard extends Component {
 	 */
 	isPartOfDashboard( node ) {
 		return searchParent( node, ( testNode ) => {
-			const isDashboardContainer = testNode.classList.contains( 'tribe-dashboard-container' );
-			const isDashboard = testNode.classList.contains( 'tribe-dashboard' );
+			const isDashboardContainer = testNode.classList.contains( 'tribe-editor__dashboard__container' );
+			const isDashboard = testNode.classList.contains( 'tribe-editor__dashboard' );
 			return isDashboard || isDashboardContainer;
 		} );
 	}
@@ -194,10 +194,10 @@ export default class Dashboard extends Component {
 		const { className, direction, overflow } = this.props;
 
 		return classNames(
-			'tribe-dashboard-container',
-			`tribe-dashboard-container--${ direction }`,
-			{ 'tribe-dashboard-container--overflow': overflow },
-			{ 'tribe-dashboard-container--open': this.props.open },
+			'tribe-editor__dashboard__container',
+			`tribe-editor__dashboard__container--${ direction }`,
+			{ 'tribe-editor__dashboard__container--overflow': overflow },
+			{ 'tribe-editor__dashboard__container--open': this.state.open },
 			...className
 		);
 	}
@@ -205,7 +205,7 @@ export default class Dashboard extends Component {
 	render() {
 		return (
 			<div className={ this.getContainerClass() }>
-				<div className="tribe-dashboard">
+				<div className="tribe-editor__dashboard">
 					{ this.props.children }
 				</div>
 			</div>

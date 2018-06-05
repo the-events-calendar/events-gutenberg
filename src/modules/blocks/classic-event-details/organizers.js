@@ -40,7 +40,7 @@ function CreateDropdown( { ...props } ) {
 
 	const dropdownToggle = ( { onToggle, isOpen } ) => (
 		<IconButton
-			className="tribe-editor-button"
+			className="tribe-editor__btn"
 			label={ __( 'Create Organizer' ) }
 			onClick={ onToggle }
 			icon={ icon }
@@ -57,7 +57,7 @@ function CreateDropdown( { ...props } ) {
 
 	const content = (
 		<Dropdown
-			className="tribe-editor-organizer-dropdown"
+			className="tribe-editor__organizer__dropdown"
 			position="bottom center"
 			contentClassName="tribe-editor-dropdown__dialog"
 			renderToggle={ dropdownToggle }
@@ -81,7 +81,7 @@ function OrganizerActions( { ...props } ) {
 
 	return (
 		<IconButton
-			className="tribe-editor-button"
+			className="tribe-editor__btn"
 			label={ __( 'Remove Organizer' ) }
 			onClick={ onClick }
 			icon={ icon }
@@ -145,7 +145,7 @@ export default class EventOrganizers extends Component {
 	renderOrganizerList() {
 		const { organizers } = this.props;
 		return (
-			<ul className={ classNames( 'tribe-editor-organizer-list' ) }>
+			<ul className={ classNames( 'tribe-editor__organizer__list' ) }>
 				{ organizers.map( ( organizer, index ) => this.renderOrganizerListItem( organizer, index + 1 === organizers.length, 0 ) ) }
 			</ul>
 		);

@@ -56,7 +56,7 @@ export default class VenueDetails extends Component {
 
 		return (
 			<div
-				className="tribe-venue--current"
+				className="tribe-editor__venue--current"
 				key={ venue.id }
 			>
 				{ this.renderVenueName() }
@@ -70,7 +70,7 @@ export default class VenueDetails extends Component {
 	renderVenueName() {
 		return (
 			<h3
-				className="tribe-venue__name"
+				className="tribe_editor__venue__name"
 				dangerouslySetInnerHTML={ this.getVenueName() }>
 			</h3>
 		);
@@ -103,7 +103,7 @@ export default class VenueDetails extends Component {
 		} = address;
 
 		return (
-			<address className="tribe-venue__address">
+			<address className="tribe-editor__venue__address">
 				<span className="tribe-venue__street-address">{ street }</span>
 				<br />
 				{ city && <span className="tribe-venue__locality">{ city }</span> }
@@ -125,7 +125,6 @@ export default class VenueDetails extends Component {
 
 		return (
 			<a
-				className="tribe-venue__map-link"
 				href={ mapLink( address ) }
 				title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
 				target="_blank"
@@ -144,7 +143,7 @@ export default class VenueDetails extends Component {
 
 		return (
 			<React.Fragment>
-				<span className="tribe-venue__phone">{ venue.meta._VenuePhone }</span>
+				<span className="tribe-editor__venue__phone">{ venue.meta._VenuePhone }</span>
 				<br />
 			</React.Fragment>
 		);
@@ -158,7 +157,7 @@ export default class VenueDetails extends Component {
 
 		return (
 			<React.Fragment>
-				<span className="tribe-venue__website">{ venue.meta._VenueURL }</span>
+				<span className="tribe-editor__venue__website">{ venue.meta._VenueURL }</span>
 				<br />
 			</React.Fragment>
 		);

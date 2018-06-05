@@ -130,7 +130,7 @@ export default class SearchPosts extends Component {
 			<button
 				key={ `post-${ item.id }` }
 				role="menuitem"
-				className="tribe-element-search-posts-item"
+				className="tribe-editor__search-posts__item"
 				onClick={ () => {
 					onSelectItem( item );
 					this.onClose();
@@ -149,12 +149,12 @@ export default class SearchPosts extends Component {
 
 		return (
 			<div
-				className={ classNames( 'tribe-element-search-posts' ) }
+				className={ classNames( 'tribe-editor__search-posts' ) }
 				onScroll={ this.onScroll }>
 				{ this.renderSearchInput() }
 				<div
 					role="menu"
-					className={ classNames( 'tribe-element-search-posts-results' ) }
+					className={ classNames( 'tribe-editor__search-posts__results' ) }
 				     ref={ this.dropdownEl }>
 					{ this.renderList() }
 				</div>
@@ -193,7 +193,7 @@ export default class SearchPosts extends Component {
 
 		return (
 			<IconButton
-				className="tribe-editor-button"
+				className="tribe-editor__btn"
 				label={ iconLabel }
 				onClick={ onToggle }
 				icon={ icon }
@@ -211,9 +211,9 @@ export default class SearchPosts extends Component {
 
 		return (
 			<Dropdown
-				className="tribe-element-search-posts-dropdown"
+				className="tribe-editor__dropdown"
 				position="bottom center"
-				contentClassName="tribe-element-search-posts-dropdown-dialog"
+				contentClassName="tribe-editor__dropdown-dialog"
 				renderToggle={ this.renderToggle }
 				renderContent={ this.renderDropdown }
 			/>

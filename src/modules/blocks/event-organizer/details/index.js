@@ -41,7 +41,7 @@ export default class OrganizerDetails extends Component {
 
 	render() {
 		return (
-			<div className="tribe-event-organizer__details">
+			<div className="tribe-editor__organizer__details">
 				{ this.renderDetails() }
 				{ this.renderActions() }
 			</div>
@@ -70,7 +70,7 @@ export default class OrganizerDetails extends Component {
 		}
 
 		return (
-			<div className="tribe-event-organizer__actions">
+			<div className="tribe-editor__organizer__actions">
 				{ this.isDraft() && <button onClick={ edit }><Dashicon icon="edit" /></button> }
 				<button onClick={ remove }><Dashicon icon="trash" /></button>
 			</div>

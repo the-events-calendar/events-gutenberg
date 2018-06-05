@@ -120,11 +120,10 @@ class EventVenue extends Component {
 		const { showMap } = attributes;
 
 		const containerClass = classNames(
-			'tribe-editor-block',
-			'tribe-venue__block',
+			'tribe-editor__block',
 			{
-				'tribe-venue__block-container': this.hasVenue(),
-				'tribe-venue__container--has-map': this.hasVenue() && showMap,
+				'tribe-editor__venue': this.hasVenue(),
+				'tribe-editor__venue--has-map': this.hasVenue() && showMap,
 			},
 		);
 
@@ -261,7 +260,7 @@ class EventVenue extends Component {
 		}
 
 		return (
-			<div className="tribe-venue__actions">
+			<div className="tribe-editor__venue__actions">
 				{ this.isDraft() && <button onClick={ this.edit }><Dashicon icon="edit" /></button> }
 				<button onClick={ this.removeVenue }><Dashicon icon="trash" /></button>
 			</div>

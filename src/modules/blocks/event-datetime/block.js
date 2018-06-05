@@ -93,7 +93,7 @@ export default class EventSubtitle extends Component {
 			...pick( state, VALID_PROPS ),
 			dashboardOpen: state.dashboardOpen,
 		} );
-	}
+	};
 
 	componentWillUnmount() {
 		this.storeListener();
@@ -125,7 +125,7 @@ export default class EventSubtitle extends Component {
 			<div className="tribe-editor__event-cost">
 				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
 				<PlainText
-					className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
+					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 					value={ eventCost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
 					onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
@@ -234,18 +234,18 @@ export default class EventSubtitle extends Component {
 		switch ( type ) {
 			case 'date-time':
 				return (
-					<span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }>{ dateTimeRangeSeparator }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }>{ dateTimeRangeSeparator }</span> );
 			case 'time-range':
 				return (
-					<span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }>{ timeRangeSeparator }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }>{ timeRangeSeparator }</span> );
 			case 'dash':
-				return <span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }> &mdash; </span>;
+				return <span className={ classNames( 'tribe-editor__separator', className ) }> &mdash; </span>;
 			case 'all-day':
-				return <span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }> ALL DAY</span>;
+				return <span className={ classNames( 'tribe-editor__separator', className ) }> ALL DAY</span>;
 			case 'space':
-				return <span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }>&nbsp;</span>;
+				return <span className={ classNames( 'tribe-editor__separator', className ) }>&nbsp;</span>;
 			case 'timezone':
-				return <span className={ classNames( 'tribe-editor-events-subtitle__separator', className ) }> { timezone } </span>;
+				return <span className={ classNames( 'tribe-editor__separator', className ) }> { timezone } </span>;
 			default:
 				return null;
 		}
@@ -258,8 +258,8 @@ export default class EventSubtitle extends Component {
 	 */
 	renderLabel() {
 		return (
-			<div key="event-datetime" className="event-subtitle-container">
-				<h2 className="tribe-editor-block tribe-editor-events-subtitle" onClick={ this.toggleDashboard }>
+			<div key="event-datetime" className="tribe-editor__subtitle">
+				<h2 className="tribe-editor__subtitle__headline" onClick={ this.toggleDashboard }>
 					{ this.renderStart() }
 					{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
 					{ this.renderEnd() }
@@ -275,11 +275,11 @@ export default class EventSubtitle extends Component {
 
 	toggleDashboard = () => {
 		store.dispatch( { type: 'TOGGLE_DASHBOARD' } );
-	}
+	};
 
 	closeDashboard = () => {
 		store.dispatch( { type: 'CLOSE_DASHBOARD' } );
-	}
+	};
 
 	renderDashboard() {
 		const { dashboardOpen } = this.state;
@@ -291,10 +291,10 @@ export default class EventSubtitle extends Component {
 				<section className="tribe-editor__calendars">
 					{ this.renderCalendars() }
 				</section>
-				<footer className="event-subtitle-dashboard-footer">
-					<section className="tribe-subtitle-dashboard-footer-picker-group">
+				<footer className="tribe-editor__subtitle__footer">
+					<section>
 						{ this.renderStartTimePicker() }
-						{ this.renderSeparator( 'time-range', 'time-picker-separator' ) }
+						{ this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
 						{ this.renderEndTimePicker() }
 					</section>
 					<section>
@@ -352,7 +352,7 @@ export default class EventSubtitle extends Component {
 
 		return (
 			<React.Fragment>
-				<span className="time-picker-date-label">{ start.format( toFormat( date ) ) }</span>
+				<span className="tribe-editor__time-picker__label">{ start.format( toFormat( date ) ) }</span>
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -386,7 +386,7 @@ export default class EventSubtitle extends Component {
 
 		return (
 			<React.Fragment>
-				{ ! this.isSameDay() && <span className="time-picker-date-label">{ end.format( toFormat( date ) ) }</span> }
+				{ ! this.isSameDay() && <span className="tribe-editor__time-picker__label">{ end.format( toFormat( date ) ) }</span> }
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -462,14 +462,14 @@ export default class EventSubtitle extends Component {
 			type: 'SET_DATE_TIME_SEPARATOR',
 			separator: this.state.dateTimeRangeSeparator,
 		} );
-	}
+	};
 
 	setTimeRangeSeparator = () => {
 		store.dispatch( {
 			type: 'SET_TIME_RANGE_SEPARATOR',
 			separator: this.state.timeRangeSeparator,
-		})
-	}
+		} );
+	};
 
 	setTimeZone( timezone ) {
 		store.dispatch( {

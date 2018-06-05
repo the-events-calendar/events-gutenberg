@@ -1,24 +1,24 @@
-.tribe-map__container--static {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.tribe-editor__map--static {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-  img {
+	img {
+		z-index: 2;
+	}
+}
+
+.tribe-editor__map--interactive {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	flex: 1;
+}
+
+.tribe-editor__map--dynamic {
+	width: 100%;
+	height: 100%;
 	z-index: 2;
-  }
-}
-
-.tribe-map__container--interactive {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  flex: 1;
-}
-
-.tribe_map__container--dynamic {
-  width: 100%;
-  height: 100%;
-  z-index: 2;
 }

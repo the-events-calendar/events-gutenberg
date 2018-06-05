@@ -1,86 +1,85 @@
-.event-price__label-container {
-    display: flex;
-    align-items: center;
-    font-family: 'Helvetica', 'sans-serif';
-    font-weight: bold;
+.tribe-editor__event-price {
+	display: flex;
+	align-items: center;
+	font-family: 'Helvetica', 'sans-serif';
+	font-weight: bold;
 
-    .event-price__currency {
-        color: #E1E3E6;
-        font-size: 1.3125rem;
+	&--prefix {
+		.tribe-editor__event-price__currency {
+			margin-right: 8px;
+		}
+	}
 
-        &--active {
-            color: #000;
-        }
+	&--suffix {
+		.tribe-editor__event-price__cost {
+			margin-right: 8px;
+		}
 
-        &--disabled {
-                 opacity: 0;
-        }
-    }
-
-    .event-price__label {
-        color: #8D949B;
-        font-size: 1.125rem;
-    }
+		.tribe-editor__event-price__currency {
+			order: 2;
+		}
+	}
 }
 
-.event-price__label-container--prefix {
-    .event-price__currency {
-        margin-right: 8px;
-    }
+.tribe-editor__event-price__currency {
+	color: #E1E3E6;
+	font-size: 1.3125rem;
+
+	&--active {
+		color: #000;
+	}
+
+	&--disabled {
+		opacity: 0;
+	}
 }
 
-.event-price__label-container--suffix {
-
-    .event-price__cost {
-        margin-right: 8px;
-    }
-
-    .event-price__currency {
-        order: 2;
-    }
+.tribe-editor__event-price__label {
+	color: #8D949B;
+	font-size: 1.125rem;
 }
 
-.event-price__cost {
-    font-size: 1.3125rem;
-    font-weight: bold;
+.tribe-editor__event-price__cost {
+	font-size: 1.3125rem;
+	font-weight: bold;
 }
 
-.event-price__description,
-.event-price__cost {
-    color: #000;
+.tribe-editor__event-price__description,
+.tribe-editor__event-price__cost {
+	color: #000;
 }
 
-.event-price__description {
-    font-size: 1rem;
-    font-weight: normal;
-    order: 4;
-    margin-left: 12px;
+.tribe-editor__event-price__description {
+	font-size: 1rem;
+	font-weight: normal;
+	order: 4;
+	margin-left: 12px;
 }
 
-.event-price__dashboard-container {
-    display: flex;
-    align-itrems: center;
-    justify-content: space-between;
+.tribe-editor__event-price__dashboard {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	input.tribe-editor__event-price__input {
+		border: 1px solid #E1E3E6;
+		border-radius: 4px;
+		font-size: 1rem;
+		color: #8D949B;
+		padding: 10px 15px 13px;
+	}
+
+	&__footer {
+		color: #8D949B;
+		font-size: 0.75rem;
+		padding: 8px 11px;
+	}
 }
 
-input.event-price__input {
-    border: 1px solid #E1E3E6;
-    border-radius: 4px;
-    font-size: 1rem;
-    color: #8D949B;
-    padding: 10px 15px 13px;
+.tribe-editor__event-price__input--price {
+	width: 37.74%;
 }
 
-.event-price__input--price {
-    width: 37.74%;
-}
-
-.event-price__input--description {
-    width: 59.96%;
-}
-
-.event-price__dashboard-footer {
-    color: #8D949B;
-    font-size: 0.75rem;
-    padding: 8px 11px;
+.tribe-editor__event-price__input--description {
+	width: 59.96%;
 }

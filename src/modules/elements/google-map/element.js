@@ -258,8 +258,8 @@ export default class GoogleMap extends Component {
 
 	render() {
 		const { loading } = this.state;
-		const containerClass = classNames( 'tribe-element__map-container', {
-			'tribe-element__map-container--loading': loading,
+		const containerClass = classNames( 'tribe-editor__map', {
+			'tribe-editor__map--loading': loading,
 		} );
 
 		return (
@@ -295,13 +295,13 @@ export default class GoogleMap extends Component {
 
 	renderImage() {
 		return (
-			<picture className="tribe-map__container--static">
+			<picture className="tribe-editor__map--static">
 				<img
 					className="tribe-element-map-object"
 					alt="map"
 					src={ this.mapUrl }
 				/>
-				<div className="spinner__container">
+				<div className="trie-editor__spinner__container">
 					<Spinner />
 				</div>
 			</picture>
@@ -310,10 +310,10 @@ export default class GoogleMap extends Component {
 
 	renderInteractive() {
 		return (
-			<section className="tribe-map__container--interactive">
-				<div className="tribe_map__container--dynamic" ref={ this.interactiveMapContainer }>
+			<section className="tribe-editor__map--interactive">
+				<div className="tribe-editor__map--dynamic" ref={ this.interactiveMapContainer }>
 				</div>
-				<div className="spinner__container">
+				<div className="trie-editor__spinner__container">
 					<Spinner />
 				</div>
 			</section>

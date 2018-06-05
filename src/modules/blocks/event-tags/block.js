@@ -40,7 +40,7 @@ export default class EventTags extends Component {
 
 	renderUI() {
 		return (
-			<section key="event-tags-box" className="tribe-editor-block">
+			<section key="event-tags-box" className="tribe-editor__block">
 				<div className="tribe-editor__event-tags">
 					{ this.renderList() }
 				</div>

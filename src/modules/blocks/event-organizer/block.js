@@ -28,7 +28,6 @@ import {
 } from 'elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
-import './style.pcss';
 
 export default class EventOrganizer extends Component {
 	static defaultProps = {
@@ -161,7 +160,7 @@ export default class EventOrganizer extends Component {
 
 	renderLoading() {
 		return (
-			<div className="tribe-event-organizer__loader-container">
+			<div className="tribe-editor__loader">
 				<Spinner />
 			</div>
 		);
