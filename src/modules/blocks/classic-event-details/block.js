@@ -81,7 +81,6 @@ export default class EventDetails extends Component {
 				...pick( state, VALID_PROPS ),
 				eventOrganizers: select( DETAILS_STORE ).getOrganizers(),
 			};
-			console.log( attributes );
 			setAttributes( { eventOrganizers: select( DETAILS_STORE ).getOrganizers() } );
 		} );
 
@@ -131,9 +130,7 @@ export default class EventDetails extends Component {
 			focus,
 		} = this.props;
 
-		console.log( eventOrganizers );
 		const organizersBlocks = select( ORGANIZER_STORE ).getOrganizersIds();
-		console.log( organizersBlocks );
 
 		return (
 			<MetaGroup groupKey="organizer">
