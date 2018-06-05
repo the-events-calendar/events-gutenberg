@@ -40,7 +40,7 @@ export default class EventLinks extends Component {
 
 	renderButtons() {
 		return (
-			<div key="event-links" className="tribe-editor-block tribe-editor-events-link">
+			<div key="event-links" className="tribe-editor__block tribe-editor__events-link">
 				{ this.renderGoogleCalendar() }
 				{ this.renderiCal() }
 			</div>
@@ -55,7 +55,7 @@ export default class EventLinks extends Component {
 		}
 
 		return (
-			<div className="tribe-events-btn-link tribe-events-gcal">
+			<div className="tribe-editor__btn--link tribe-events-gcal">
 				{ this.renderIcon() }
 				<PlainText
 					id="tribe-event-google-calendar"
@@ -74,7 +74,7 @@ export default class EventLinks extends Component {
 		}
 
 		return (
-			<div className="tribe-events-btn-link tribe-events-ical">
+			<div className="tribe-editor__btn--link tribe-events-ical">
 				{ this.renderIcon() }
 				<PlainText
 					type="text"
@@ -88,7 +88,7 @@ export default class EventLinks extends Component {
 
 	renderPlaceholder( label ) {
 		return (
-			<button className="tribe-events-btn-link tribe-events-btn-link--placeholder" disabled>
+			<button className="tribe-editor__btn--link tribe-editor__btn--placeholder" disabled>
 				{ this.renderIcon() }
 				{ label }
 			</button>

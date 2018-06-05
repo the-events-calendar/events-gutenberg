@@ -83,7 +83,7 @@ export default class ClassicEventDetails extends Component {
 
 	renderBlock() {
 		return (
-			<div key="event-details-box" className="tribe-editor-block tribe-editor-event-details">
+			<div key="event-details-box" className="tribe-editor__block tribe-editor__event-details">
 				{ this.renderDetails() }
 				{ this.renderOrganizer() }
 			</div>
@@ -119,7 +119,7 @@ export default class ClassicEventDetails extends Component {
 			<MetaGroup groupKey="organizer">
 				<RichText
 					tagName="h3"
-					className="tribe-events-single-section-title"
+					className="tribe-editor__events-section__headline"
 					value={ organizerTitle }
 					onChange={ ( nextContent ) => setAttributes( { organizerTitle: nextContent } ) }
 					focus={ focus && 'organizerTitle' === focus.editable ? focus : undefined }
@@ -152,7 +152,7 @@ export default class ClassicEventDetails extends Component {
 		return (
 			<RichText
 				tagName="h3"
-				className="tribe-events-single-section-title"
+				className="tribe-editor__events-section__headline"
 				value={ detailsTitle }
 				onChange={ ( nextContent ) => setAttributes( { detailsTitle: nextContent } ) }
 				focus={ focus && 'detailsTitle' === focus.editable ? focus : undefined }
@@ -302,7 +302,7 @@ export default class ClassicEventDetails extends Component {
 				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
 				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
 				<PlainText
-					className={ classNames( 'tribe-editor__event-cost-value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
+					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 					value={ eventCost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
 					onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }

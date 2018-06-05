@@ -67,7 +67,7 @@ export default class EventWebsite extends Component {
 
 	renderButton() {
 		return (
-			<div key="event-website" className="tribe-editor-block tribe-editor-event-website">
+			<div key="event-website" className="tribe-editor__block tribe-editor-event-website">
 				{ this.renderLink() }
 			</div>
 		);
@@ -98,7 +98,7 @@ export default class EventWebsite extends Component {
 		}
 
 		return (
-			<div key='tribe-events-website-url' className="tribe-events-website-url">
+			<div key='tribe-events-website-url' className="tribe-editor__event-website__url">
 				<Dashicon icon="admin-links" />
 				<PlainText
 					id="tribe-events-website-link"
@@ -115,7 +115,7 @@ export default class EventWebsite extends Component {
 		const { eventUrlLabel } = this.props;
 
 		return (
-			<div key='tribe-events-website-label' className="tribe-events-website-link tribe-events-website">
+			<div key='tribe-events-website-label' className="tribe-editor__event-website">
 				<PlainText
 					id="tribe-events-website-link"
 					value={ eventUrlLabel }
@@ -128,7 +128,7 @@ export default class EventWebsite extends Component {
 
 	renderPlaceholder( eventUrlLabel ) {
 		return (
-			<button className="tribe-events-website-link tribe-events-website-link--placeholder" disabled>
+			<button className="tribe-editor__event-website tribe-editor__event-website--placeholder" disabled>
 				{ eventUrlLabel }
 			</button>
 		);

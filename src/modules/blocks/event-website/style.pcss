@@ -1,72 +1,71 @@
-.edit-post-layout {
-	.tribe-events-website-link {
-		align-items: center;
+.tribe-editor__event-website {
+	align-items: center;
+	border: 1px solid #E1E3E6;
+	display: inline-flex;
+	font-family: 'Helvetica', 'sans-serif';
+	font-weight: bold;
+	justify-content: center;
+	margin-right: 15px;
+	min-height: 54px;
+	padding: 0 20px;
+	font-size: 1.2rem;
+	background-color: #009FD4;
+
+	input,
+	textarea,
+	.editor-plain-text {
+		border: 0;
+		color: #fff;
 		background-color: transparent;
-		border: 1px solid #E1E3E6;
-		display: inline-flex;
-		font-family: 'Helvetica', 'sans-serif';
-		font-weight: bold;
-		justify-content: center;
-		margin-right: 15px;
-		min-height: 54px;
-		padding: 0 20px;
-		font-size: 1.2rem;
-		background-color: #009FD4;
+		flex-grow: 1;
 
-		input,
-		textarea {
+		&:focus {
 			border: 0;
-			color: #fff;
-			background-color: transparent;
-			flex-grow: 1;
+			outline: 0;
+			box-shadow: none;
+		}
 
-			&:focus {
-				border: 0;
-				outline: 0;
-				box-shadow: none;
-			}
-
-			&::-moz-placeholder {
-				color: rgba( 255, 255, 255, 0.7 );
-			}
+		&::placeholder {
+			color: rgba(255, 255, 255, 0.7);
 		}
 	}
 
-	.is-selected,
-	.is-typing {
-		.tribe-events-website-link {
-			margin-bottom: 10px;
-		}
-	}
-
-	.tribe-events-website-link--placeholder {
+	&--placeholder {
 		border: 2px dashed #E1E3E6;
 		color: #8D949B;
 		cursor: text;
 		background-color: transparent;
 	}
+}
 
-	.tribe-events-website-url {
-		display: block;
+.is-selected,
+.is-typing {
+	.tribe-editor__event-website {
+		margin-bottom: 10px;
+	}
+}
 
-		.dashicon {
-			display: inline-block;
-			margin-right: 10px;
-			position: relative;
-			top: -5px;
-		}
+.tribe-editor__event-website__url {
+	display: block;
 
-		input,
-		textarea {
-			width: 240px;
-			display: inline-block;
-			border: 1px solid #ccd0d4;
-			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-			font-size: 13px;
-			padding: 6px 8px;
-			outline-offset: -1px;
-			box-shadow: 0 0 0 transparent;
-			transition: box-shadow .05s linear;
-		}
+	.dashicon {
+		display: inline-block;
+		margin-right: 10px;
+		position: relative;
+		top: -5px;
+	}
+
+	input,
+	textarea,
+	.editor-plain-text {
+		width: 240px;
+		display: inline-block;
+		border: 1px solid #ccd0d4;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+		font-size: 13px;
+		padding: 6px 8px;
+		outline-offset: -1px;
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow .05s linear;
 	}
 }

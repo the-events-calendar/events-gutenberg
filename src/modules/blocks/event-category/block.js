@@ -40,7 +40,7 @@ export default class EventCategory extends Component {
 
 	renderUI() {
 		return (
-			<section key="event-category-box" className="tribe-editor-block">
+			<section key="event-category-box" className="tribe-editor__block">
 				<div className="tribe-editor__event-category">
 					{ this.renderList() }
 				</div>
