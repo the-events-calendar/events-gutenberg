@@ -197,7 +197,7 @@ export default class Dashboard extends Component {
 			'tribe-editor__dashboard__container',
 			`tribe-editor__dashboard__container--${ direction }`,
 			{ 'tribe-editor__dashboard__container--overflow': overflow },
-			{ 'tribe-editor__dashboard__container--open': this.state.open },
+			{ 'tribe-editor__dashboard__container--open': this.props.open },
 			...className
 		);
 	}
