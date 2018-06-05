@@ -88,14 +88,14 @@ export default class CheckBox extends Component {
 		const { label, onChange, checked, ...properties } = this.props;
 		return (
 			<button
-				className="tribe-checkbox-container"
+				className="tribe-editor__checkbox"
 				type="button"
 				onClick={ this.toggle }
 			>
 				<label>{ label }</label>
 				{ this.renderIcon() }
 				<input
-					className="tribe-checkbox-input"
+					className="tribe-editor__checkbox"
 					type="checkbox"
 					ref={ this.inputRef }
 					onChange={ this.onChange }

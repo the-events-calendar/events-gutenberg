@@ -159,9 +159,9 @@ class Input extends Component {
 
 		if ( validate ) {
 			if ( isValid ) {
-				classes.push( 'tribe-is-valid' );
+				classes.push( 'tribe-editor--valid' );
 			} else {
-				classes.push( 'tribe-is-invalid' );
+				classes.push( 'tribe-editor--valid' );
 			}
 		}
 

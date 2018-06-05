@@ -1,55 +1,54 @@
-.tribe-dashboard-container {
-    pointer-events: none;
-    display: none;
-    position: relative;
+.tribe-editor__dashboard__container {
+	pointer-events: none;
+	display: none;
+	position: relative;
 
-    &--open {
-        display: block;
-        pointer-events: auto;
-        width: 100%;
-    }
+	&--open {
+		display: block;
+		pointer-events: auto;
+		width: 100%;
+	}
 
-    &--up {
-        .tribe-dashboard {
-            bottom: -14px;
-        }
-    }
+	&--up {
+		.tribe-editor__dashboard {
+			bottom: -14px;
+		}
+	}
 
-    &--down {
-        .tribe-dashboard {
-            top: 14px;
-        }
-    }
+	&--down {
+		.tribe-editor__dashboard {
+			top: 14px;
+		}
+	}
 
-    &--overflow {
-        .tribe-dashboard {
-            left: -15px;
-            width: calc(100% + 30px);
-        }
-    }
+	&--overflow {
+		.tribe-editor__dashboard {
+			left: -15px;
+			width: calc(100% + 30px);
+		}
+	}
 }
 
-.tribe-dashboard {
-    background-color: #F1F2F4;
-    border-top: none;
-    border: 1px solid #E3E4E8;
-    left: 0;
-    padding: 24px 22px 20px;
-    position: absolute;
-    right: 0;
-    z-index: 100;
+.tribe-editor__dashboard {
+	background-color: #F1F2F4;
+	border: 1px solid #E3E4E8;
+	left: 0;
+	padding: 24px 22px 20px;
+	position: absolute;
+	right: 0;
+	z-index: 100;
 
-    .time-picker-separator {
-        color: #545D66;
-        margin-left: 8px;
-        margin-right: 6px;
-    }
+	.tribe-editor__time-picker__separator {
+		color: #545D66;
+		margin-left: 8px;
+		margin-right: 6px;
+	}
 
-    .time-picker-date-label {
-        color: #545D66;
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 1em;
-        font-weight: normal;
-        margin-right: 8px;
-    }
+	.tribe-editor__time-picker__label {
+		color: #545D66;
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 1em;
+		font-weight: normal;
+		margin-right: 8px;
+	}
 }
