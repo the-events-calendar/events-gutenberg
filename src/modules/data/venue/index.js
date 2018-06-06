@@ -28,7 +28,6 @@ const DEFAULT_STATE = {
 	create: false,
 	loading: false,
 	submit: false,
-	created: [],
 };
 
 const reducer = ( state = DEFAULT_STATE, action ) => {
@@ -64,22 +63,18 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 			};
 		}
 		case 'CREATE_DRAFT': {
-			return reducers.createDraft(state, action.fields );
+			return reducers.createDraft( state, action.fields );
 		}
 		case 'EDIT_DRAFT': {
 			return reducers.editDraft( state, action.id, action.fields );
 		}
-		case 'REGISTER_VENUE': {
-			return {
-				...state,
-				created: [ ...state.created, action.id ],
-			};
+		case 'REMOVE_DRAFT': {
+			return reducers.removeDraft( state, action.id );
 		}
 		case 'CLEAR': {
 			return {
 				...state,
 				...DEFAULT_STATE,
-				created: state.created,
 			};
 		}
 		default: {
@@ -100,6 +95,11 @@ const actions = {
 		return {
 			type: 'REGISTER_VENUE',
 			id,
+		};
+	},
+	clear() {
+		return {
+			type: 'CLEAR',
 		};
 	},
 };

@@ -95,18 +95,16 @@ class EventVenue extends Component {
 		const VALID_FIELDS = [
 			'details', 'address', 'coordinate', 'draft', 'edit', 'create', 'loading', 'submit',
 		];
-		this.setState( pick( state, VALID_FIELDS ), this.saveCreated( state.created ) );
+		this.setState( pick( state, VALID_FIELDS ), this.saveCreated() );
 	}
 
-	saveCreated( venues = [] ) {
+	saveCreated() {
 		return () => {
 			const { setAttributes } = this.props;
 			const { details } = this.state;
 			const id = get( details, 'id', 0 );
-			const selected_drafts = venues.filter( ( venue_id ) => venue_id !== id );
 			setAttributes( {
 				eventVenueId: id,
-				tempVenues: selected_drafts,
 			} );
 		};
 	}
@@ -236,9 +234,9 @@ class EventVenue extends Component {
 	renderMap() {
 		const { attributes } = this.props;
 		const { showMap } = attributes;
-		const { details, address, coordinates, edit, create } = this.state;
+		const { details, address, coordinates, edit, create, loading, submit } = this.state;
 
-		if ( ! showMap || isEmpty( details ) || edit || create ) {
+		if ( ! showMap || isEmpty( details ) || edit || create || loading || submit ) {
 			return null;
 		}
 
@@ -254,8 +252,8 @@ class EventVenue extends Component {
 
 	editActions() {
 		const { isSelected } = this.props;
-		const { edit, create } = this.state;
-		if ( ! this.hasVenue() || ! isSelected || edit || create ) {
+		const { edit, create, loading, submit } = this.state;
+		if ( ! this.hasVenue() || ! isSelected || edit || create || loading || submit ) {
 			return null;
 		}
 
@@ -269,14 +267,25 @@ class EventVenue extends Component {
 
 	isDraft() {
 		const { details } = this.state;
-		const { status } = details;
-		return 'draft' === status;
+		const { status, volatile } = details;
+		return 'draft' === status && volatile;
 	}
 
 	removeVenue = () => {
-		VenueStore.dispatch( {
-			type: 'CLEAR',
-		} );
+		const { details } = this.state;
+		const { id, volatile } = details;
+
+		if ( id && volatile ) {
+			VenueStore.dispatch( {
+				type: 'REMOVE_DRAFT',
+				id,
+			} );
+		} else {
+			VenueStore.dispatch( {
+				type: 'CLEAR',
+			} );
+		}
+
 		const { setAttributes } = this.props;
 		setAttributes( { eventVenueId: 0 } );
 	}

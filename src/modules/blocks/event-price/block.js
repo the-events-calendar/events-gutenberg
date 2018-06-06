@@ -185,14 +185,11 @@ export default class EventPrice extends Component {
 	}
 
 	toggleDashboard = () => {
-		const { dashboardRef } = this;
-		const { current } = dashboardRef;
-
-		if ( ! current ) {
-			return noop();
-		}
-
-		current.toggle();
+		this.setState( ( state ) => {
+			return {
+				open: ! state.open,
+			};
+		} );
 	};
 
 	renderDashboard() {
@@ -202,6 +199,7 @@ export default class EventPrice extends Component {
 		return (
 			<Dashboard
 				ref={ this.dashboardRef }
+				open={ this.state.open }
 				onClose={ this.onCloseDashboard }
 				onOpen={ this.onOpenDashboard }
 			>
@@ -242,7 +240,6 @@ export default class EventPrice extends Component {
 	};
 
 	onOpenDashboard = () => {
-		this.setState( { open: true } );
 		const { setAttributes, attributes } = this.props;
 		const { eventCost } = attributes;
 		setAttributes( {

@@ -52,7 +52,7 @@ export const createDraft = ( state, fields ) => {
 	} ).then( ( body ) => {
 		const { id } = body;
 		dispatch( STORE_NAME ).registerVenue( id );
-		dispatch( STORE_NAME ).setDetails( id, body );
+		dispatch( STORE_NAME ).setDetails( id, { ...body, volatile: true } );
 	} );
 
 	return {
@@ -68,13 +68,27 @@ export const editDraft = ( state, id, fields ) => {
 		method: 'PUT',
 		data: fields,
 	} ).then( ( body ) => {
-		dispatch( STORE_NAME ).setDetails( body.id, body );
+		dispatch( STORE_NAME ).setDetails( body.id, { ...body, volatile: true } );
 	} );
 
 	return {
 		...state,
 		loading: true,
 		submit: true,
+	};
+};
+
+export const removeDraft = ( state, id ) => {
+	apiRequest( {
+		path: `/wp/v2/${ POST_TYPE }/${ id }`,
+		method: 'DELETE',
+	} ).then( () => {
+		dispatch( STORE_NAME ).clear();
+	} );
+
+	return {
+		...state,
+		loading: true,
 	};
 };
 
