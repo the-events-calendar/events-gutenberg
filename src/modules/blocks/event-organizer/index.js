@@ -53,6 +53,7 @@ export default {
 				id={ id }
 				selected={ isSelected }
 				setAttributes={ setAttributes }
+				current={ organizers }
 				organizer={ organizer }
 				{ ...attributes }
 			/>

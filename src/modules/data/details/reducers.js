@@ -2,6 +2,7 @@
  * External dependencies
  */
 import moment from 'moment/moment';
+import { find, isObject } from 'lodash';
 
 /**
  * Internal dependencies
@@ -290,10 +291,9 @@ export function setOrganizers( prevState, organizer ) {
 }
 
 export function addOrganizers( prevState, organizer ) {
-	const { eventOrganizers } = prevState;
 	return {
 		...prevState,
-		eventOrganizers: [ ...eventOrganizers, organizer ],
+		eventOrganizers: [ ...prevState.eventOrganizers, organizer ],
 	};
 }
 
@@ -301,6 +301,39 @@ export function removeOrganizer( prevState, organizer ) {
 	return {
 		...prevState,
 		eventOrganizers: prevState.eventOrganizers.filter( ( item ) => item.id !== organizer.id ),
+	};
+}
+
+export function maybeRemoveOrganizer( prevState, organizer ) {
+	const { eventOrganizers } = prevState;
+	const result = find( eventOrganizers, ( item ) => {
+		const { id, block } = item;
+		return block === 'individual' && id === organizer.id;
+	} );
+
+	let organizers = [ ...eventOrganizers ];
+	if ( result && result.id ) {
+		organizers = organizers.filter( ( item ) => item.id !== result.id );
+	}
+
+	return {
+		...prevState,
+		eventOrganizers: organizers,
+	};
+}
+
+export function replaceOrganizers( prevState, organizers ) {
+	const { eventOrganizers } = prevState;
+	const current = eventOrganizers.map( ( item ) => {
+		if ( isObject( item ) ) {
+			return item;
+		}
+		const search = organizers.filter( ( organizer ) => organizer.id === item );
+		return search.length ? search[ 0 ] : item;
+	} );
+	return {
+		...prevState,
+		eventOrganizers: current,
 	};
 }
 

@@ -2,7 +2,8 @@
  * External dependencies
  */
 import React from 'react';
-import { union, without, isEmpty, noop, pick, identity } from 'lodash';
+import PropTypes from 'prop-types';
+import { noop, pick } from 'lodash';
 import classNames from 'classnames';
 
 /**
@@ -10,6 +11,7 @@ import classNames from 'classnames';
  */
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
+
 import { select } from '@wordpress/data';
 
 import {
@@ -29,19 +31,14 @@ import {
  */
 import {
 	TermsList,
-	OrganizerForm,
-	DatePicker,
-	TimePicker,
 	MetaGroup,
 } from 'elements';
 
 import { default as EventOrganizers } from './organizers';
 
-import { totalSeconds, toMoment } from 'utils/moment';
-import { HALF_HOUR_IN_SECONDS } from 'utils/time';
-import { FORMATS } from 'utils/date';
-import { store, STORE_NAME } from 'data/details';
-import { VALID_PROPS as SUBTITLE_PROPS } from 'blocks/event-datetime/block';
+import { toMoment, toDate, toTime } from 'utils/moment';
+import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers/block';
+import { store, STORE_NAME as DETAILS_STORE } from 'data/details';
 
 export const VALID_PROPS = [
 	'eventOrganizers',
@@ -53,18 +50,35 @@ export const VALID_PROPS = [
  * Module Code
  */
 
-export default class ClassicEventDetails extends Component {
+export default class EventDetails extends Component {
+	static defaultProps = {
+		eventOrganizers: [],
+	};
+
+	static propTypes = {
+		eventOrganizers: PropTypes.array,
+	};
+
 	constructor( props ) {
 		super( ...arguments );
 
-		this.state = props;
+		this.state = {
+			...props,
+			loading: ! ! props.eventOrganizers.length,
+		};
 		this.unsubscribe = noop;
 	}
 
 	componentDidMount() {
 		this.unsubscribe = store.subscribe( () => {
+			const { setAttributes } = this.props;
 			const state = store.getState();
-			this.setState( pick( state, [ ...SUBTITLE_PROPS, ...VALID_PROPS ] ) );
+			// Pick relevant ones from store
+			const attributes = {
+				...pick( state, VALID_PROPS ),
+				eventOrganizers: select( DETAILS_STORE ).getOrganizers(),
+			};
+			setAttributes( { eventOrganizers: select( DETAILS_STORE ).getOrganizers() } );
 		} );
 
 		store.dispatch( {
@@ -111,9 +125,9 @@ export default class ClassicEventDetails extends Component {
 			setAttributes,
 			setFocus,
 			focus,
-		} = this.state;
+		} = this.props;
 
-		const organizers = select( STORE_NAME ).getOrganizersDetails();
+		const organizersBlocks = select( ORGANIZER_STORE ).getOrganizersIds();
 
 		return (
 			<MetaGroup groupKey="organizer">
@@ -126,10 +140,10 @@ export default class ClassicEventDetails extends Component {
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 					formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
 				/>
-
 				<EventOrganizers
 					focus={ focus }
-					organizers={ organizers }
+					organizers={ eventOrganizers }
+					organizersBlocks={ organizersBlocks }
 					addOrganizer={ nextOrganizer => {
 						store.dispatch( {
 							type: 'ADD_ORGANIZER',
@@ -148,7 +162,7 @@ export default class ClassicEventDetails extends Component {
 	}
 
 	renderTitle() {
-		const { detailsTitle, setAttributes, setFocus } = this.state;
+		const { detailsTitle, setAttributes, setFocus } = this.props;
 		return (
 			<RichText
 				tagName="h3"
@@ -163,128 +177,69 @@ export default class ClassicEventDetails extends Component {
 	}
 
 	renderStart() {
-		const { startDate } = this.state;
+		const { startDate } = this.props;
 
 		return (
-			<div>
-				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br />
-				<DatePicker
-					changeDatetime={ this.setStartDay }
-					datetime={ startDate }
-				/>
+			<div onClick={ this.toggleDashboard }>
+				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
+				{ toDate( toMoment( startDate ) ) }
 				{ this.renderStartTime() }
 			</div>
 		);
 	}
 
-	setStartDay( date ) {
-		store.dispatch( {
-			type: 'SET_START_DATE',
-			date,
-		} );
-	}
-
 	renderStartTime() {
-		const { allDay, startDate, dateTimeRangeSeparator } = this.state;
-		const { time } = FORMATS.WP;
-
-		const start = toMoment( startDate );
-		const pickerProps = {
-			onSelectItem: this.setStartTime,
-			current: start,
-			timeFormat: time,
-		};
-
-		if ( allDay ) {
-			pickerProps.allDay = true;
-		}
-
-		return (
-			<React.Fragment>
-				<span>{ dateTimeRangeSeparator }</span>
-				<TimePicker { ...pickerProps } />
-			</React.Fragment>
-		);
-	}
-
-	setStartTime = ( data ) => {
-		const { seconds, allDay } = data;
-		this.setAllDay( allDay );
-
-		store.dispatch( {
-			type: 'SET_START_TIME',
-			seconds,
-		} );
-	};
-
-	renderEnd() {
-		const { endDate } = this.state;
-		return (
-			<div>
-				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
-				<DatePicker
-					changeDatetime={ this.setEndDate }
-					datetime={ endDate }
-				/>
-				{ this.renderEndTime() }
-			</div>
-		);
-	}
-
-	setEndDate( date ) {
-		store.dispatch( {
-			type: 'SET_END_DATE',
-			date,
-		} );
-	}
-
-	renderEndTime() {
-		const { allDay } = this.state;
+		const { allDay, startDate, dateTimeRangeSeparator } = this.props;
 
 		if ( allDay ) {
 			return null;
 		}
 
-		const { startDate, endDate, dateTimeRangeSeparator } = this.state;
-		const start = toMoment( startDate );
-		const end = toMoment( endDate );
-		const { time } = FORMATS.WP;
-
 		return (
 			<React.Fragment>
 				<span>{ dateTimeRangeSeparator }</span>
-				<TimePicker
-					onSelectItem={ this.setEndTime }
-					current={ end }
-					minTime={ totalSeconds( start.add( HALF_HOUR_IN_SECONDS, 'seconds' ) ) }
-					timeFormat={ time }
-				/>
+				<span>{ toTime( toMoment( startDate ) ) }</span>
 			</React.Fragment>
 		);
 	}
 
-	setEndTime = ( data ) => {
-		const { seconds, allDay } = data;
-		this.setAllDay( allDay );
-
-		store.dispatch( {
-			type: 'SET_END_TIME',
-			seconds,
-		} );
-	};
-
-	setAllDay( allDay ) {
-		store.dispatch( {
-			type: 'SET_ALL_DAY',
-			allDay,
-		} );
+	renderEnd() {
+		const { endDate } = this.props;
+		return (
+			<div onClick={ this.toggleDashboard }>
+				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
+				{ toDate( toMoment( endDate ) ) }
+				{ this.renderEndTime() }
+			</div>
+		);
 	}
 
+	renderEndTime() {
+		const { allDay } = this.props;
+
+		if ( allDay ) {
+			return null;
+		}
+
+		const { endDate, dateTimeRangeSeparator } = this.props;
+
+		return (
+			<React.Fragment>
+				<span>{ dateTimeRangeSeparator }</span>
+				{ toTime( toMoment( endDate ) ) }
+			</React.Fragment>
+		);
+	}
+
+	toggleDashboard = () => {
+		store.dispatch( { type: 'TOGGLE_DASHBOARD' } );
+	};
+
 	renderWebsite() {
-		const { eventUrl, setAttributes } = this.state;
+		const { eventUrl, setAttributes } = this.props;
 		return (
 			<div>
-				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
+				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
 				<PlainText
 					id="tribe-event-url"
 					value={ eventUrl }
@@ -296,10 +251,10 @@ export default class ClassicEventDetails extends Component {
 	}
 
 	renderCost() {
-		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.state;
+		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.props;
 		return (
 			<div className="tribe-editor__event-cost">
-				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
+				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
 				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
@@ -331,7 +286,7 @@ export default class ClassicEventDetails extends Component {
 	}
 
 	renderControls() {
-		const { isSelected, allDay, setAttributes, currencyPosition, eventCurrencySymbol } = this.state;
+		const { isSelected, allDay, setAttributes, currencyPosition, eventCurrencySymbol } = this.props;
 
 		if ( ! isSelected ) {
 			return null;

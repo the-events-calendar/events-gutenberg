@@ -31,4 +31,10 @@ test( 'diff', () => {
 		.toEqual( { a: true, b: false } );
 	expect( diff( { a: true, b: { c: false } }, { a: true, b: { c: true } } ) )
 		.toEqual( { b: { c: false } } );
+	expect( diff( { a: [ 1, 2 ] }, { a: [ 2, 4 ] } ) )
+		.toEqual( { a: [ 1 ] } );
+	expect( diff( { a: [ 1, 2 ] }, { a: [ 2 ] } ) )
+		.toEqual( { a: [ 1 ] } );
+	expect( diff( { a: { b: [ 1, 2 ], c: [ 4 ] } }, { a: { b: [ 2 ], c: [ 5 ] } } ) )
+		.toEqual( { a: { b: [ 1 ], c: [ 4 ] } } );
 } );

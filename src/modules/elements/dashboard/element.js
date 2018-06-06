@@ -52,10 +52,6 @@ export default class Dashboard extends Component {
 	constructor() {
 		super( ...arguments );
 
-		this.state = {
-			open: this.props.open,
-		};
-
 		this.listeners = {
 			added: false,
 			removed: false,
@@ -74,11 +70,19 @@ export default class Dashboard extends Component {
 		this.removeListeners();
 	}
 
+	componentDidUpdate() {
+		this.setupListeners();
+	}
+
+	shouldComponentUpdate( nextProps ) {
+		return this.props.open !== nextProps.open;
+	}
+
 	/**
 	 * Setup the listeners either: attach or remove them based on the status of the component.
 	 */
 	setupListeners = () => {
-		if ( this.state.open ) {
+		if ( this.props.open ) {
 			this.addListeners();
 		} else {
 			this.removeListeners();
@@ -178,8 +182,7 @@ export default class Dashboard extends Component {
 	}
 
 	isOpen() {
-		const { open } = this.state;
-		return open;
+		return this.props.open;
 	}
 
 	/**
@@ -194,7 +197,7 @@ export default class Dashboard extends Component {
 			'tribe-editor__dashboard__container',
 			`tribe-editor__dashboard__container--${ direction }`,
 			{ 'tribe-editor__dashboard__container--overflow': overflow },
-			{ 'tribe-editor__dashboard__container--open': this.state.open },
+			{ 'tribe-editor__dashboard__container--open': this.props.open },
 			...className
 		);
 	}

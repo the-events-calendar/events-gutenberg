@@ -1,9 +1,10 @@
 /**
  * External dependencies
  */
-import { unescape, union, uniqueId, noop, identity } from 'lodash';
-import { stringify } from 'querystringify';
+import { unescape, union, uniqueId, noop, identity, find, isEmpty, isNumber, difference } from 'lodash';
 import classNames from 'classnames';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * WordPress dependencies
@@ -68,10 +69,14 @@ function CreateDropdown( { ...props } ) {
 }
 
 function OrganizerActions( { ...props } ) {
-	const { organizer, onClick } = props;
+	const { visible, organizer, onClick } = props;
+
+	if ( ! visible ) {
+		return null;
+	}
 
 	const icon = (
-		<Dashicon icon="no" />
+		<Dashicon icon="no"/>
 	);
 
 	return (
@@ -90,17 +95,43 @@ function OrganizerActions( { ...props } ) {
  * Module Code
  */
 export default class EventOrganizers extends Component {
+	static defaultProps = {
+		organizers: [],
+	};
+
+	static propTypes = {
+		organizers: PropTypes.array,
+	};
+
 	constructor( props ) {
 		super( ...arguments );
-
 		this.state = {
-			overOrganizer: null,
-			isLoading: false,
+			loading: isLoading( props.organizers ),
+		};
+		this.skip = [];
+	}
+
+	static getDerivedStateFromProps( props, state ) {
+		const { organizers } = props;
+		if ( ! organizers ) {
+			return null;
+		}
+
+		if ( ! state.loading ) {
+			return null;
+		}
+
+		return {
+			loading: isLoading( organizers ),
 		};
 	}
 
 	componentDidMount() {
-		select( STORE_NAME ).fetch();
+		select( STORE_NAME ).fetchDetails( this.props.organizers );
+	}
+
+	componentDidUpdate() {
+		this.skip = [];
 	}
 
 	renderOrganizerName( organizer ) {
@@ -113,7 +144,6 @@ export default class EventOrganizers extends Component {
 
 	renderOrganizerList() {
 		const { organizers } = this.props;
-
 		return (
 			<ul className={ classNames( 'tribe-editor__organizer__list' ) }>
 				{ organizers.map( ( organizer, index ) => this.renderOrganizerListItem( organizer, index + 1 === organizers.length, 0 ) ) }
@@ -121,28 +151,15 @@ export default class EventOrganizers extends Component {
 		);
 	}
 
-
 	renderOrganizerListItem( organizer, isLast, level ) {
 		const { removeOrganizer } = this.props;
-		const { overOrganizer } = this.state;
-		const current = overOrganizer === organizer.id;
-		const classes = {
-			'tribe-current': current,
-		};
-
 		return (
 			<li
-				className={ classNames( classes ) }
-				key={ organizer.id || organizer }
-				onMouseEnter={ () => {
-					this.setState( { overOrganizer: organizer.id } );
-				} }
-				onMouseLeave={ () => {
-					this.setState( { overOrganizer: null } );
-				} }
+				key={ uniqueId( organizer.id || organizer ) }
 			>
 				{ this.renderOrganizerName( organizer ) }
 				<OrganizerActions
+					visible={ ! this.isFromBlock( organizer ) }
 					organizer={ organizer }
 					onClick={ () => removeOrganizer( organizer ) }
 				/>
@@ -150,17 +167,59 @@ export default class EventOrganizers extends Component {
 		);
 	}
 
+	isFromBlock = ( organizer ) => {
+		const { block, id } = organizer;
+
+		// Recent created block
+		if ( block && block === 'individual' ) {
+			return true;
+		}
+
+		const { organizersBlocks } = this.props;
+		const valid = difference( organizersBlocks, this.skip );
+		const found = find( valid, ( item ) => item === id );
+		if ( found ) {
+			this.skip.push( found );
+			return true;
+		}
+		return false;
+	}
+
 	render() {
+		return [ this.renderList(), this.renderActions() ];
+	}
+
+	renderList() {
+		const { loading } = this.state;
+
+		if ( loading ) {
+			return (
+				<Placeholder style={ { minHeight: 50 } } key="placeholder">
+					<Spinner/>
+				</Placeholder>
+			);
+		}
+
+		return (
+			<div key="organizer-list">
+				{ this.renderOrganizerList() }
+			</div>
+		);
+	}
+
+	renderActions() {
 		const { focus, addOrganizer } = this.props;
-		const { organizers, isLoading } = this.props;
-		const hasOrganizers = 0 !== organizers.length;
-		let list = null;
-		let actions = (
+		const { loading } = this.state;
+
+		if ( loading ) {
+			return null;
+		}
+
+		return (
 			<div key="organizer-actions">
 				<SearchPosts
 					key="organizer-search-dropdown"
 					postType="tribe_organizer"
-					metaKey="_EventOrganizerID"
 					searchLabel={ __( 'Search for an organizer', 'events-gutenberg' ) }
 					iconLabel={ __( 'Add existing Organizer', 'events-gutenberg' ) }
 					store={ store }
@@ -168,54 +227,31 @@ export default class EventOrganizers extends Component {
 					focus={ true }
 					onSelectItem={ addOrganizer }
 					searchable={ true }
+					exclude={ this.normalizeOrganizers() }
 				/>
 				<CreateDropdown
 					key="organizer-create-dropdown"
-					focus={ hasOrganizers ? focus : true }
+					focus={ this.hasOrganizers() ? focus : true }
 					addOrganizer={ addOrganizer }
 				/>
 			</div>
 		);
+	}
 
-		if ( isLoading ) {
-			list = (
-				<Placeholder style={ { minHeight: 50 } } key="placeholder">
-					<Spinner />
-				</Placeholder>
-			);
-		}
+	hasOrganizers = () => {
+		const { organizers } = this.props;
+		return ! isEmpty( organizers );
+	};
 
-		if ( hasOrganizers ) {
-			list = (
-				<div key="organizer-list">
-					{ this.renderOrganizerList() }
-				</div>
-			);
-		} else {
-			actions = (
-				<Placeholder style={ { minHeight: 50 } } key="actions-placeholder">
-					{ actions }
-				</Placeholder>
-			);
-		}
-
-		return [
-			list,
-			actions,
-		];
+	normalizeOrganizers = () => {
+		const { organizers } = this.props;
+		return organizers.map( ( item ) => {
+			return ( isNumber( item ) ) ? item : item.id;
+		} );
 	}
 }
 
-/*
-const applySelect = withSelect( ( select, props ) => {
-	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
-	const organizers = meta._EventOrganizerID ? meta._EventOrganizerID : [];
-	return {
-		organizers: organizers.filter( identity ),
-	};
-} );
-
-export default compose(
-	applySelect,
-)( EventOrganizers );
-*/
+const isLoading = ( organizers ) => {
+	const results = organizers.filter( isNumber );
+	return ! ! results.length;
+};

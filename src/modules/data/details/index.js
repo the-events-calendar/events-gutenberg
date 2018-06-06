@@ -3,7 +3,7 @@
  */
 import moment from 'moment/moment';
 import { __ } from '@wordpress/i18n';
-import { identity } from 'lodash';
+import { identity, isObject } from 'lodash';
 
 /**
  * Wordpress dependencies
@@ -31,6 +31,7 @@ export const DEFAULT_STATE = {
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
 	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
 	eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
+	dashboardOpen: false,
 	eventOrganizers: [],
 	eventUrl: undefined,
 };
@@ -87,6 +88,14 @@ const details = {
 				return reducers.removeOrganizer( state, action.organizer );
 			}
 
+			case 'MAYBE_REMOVE_ORGANIZER': {
+				return reducers.maybeRemoveOrganizer( state, action.organizer );
+			}
+
+			case 'REPLACE_ORGANIZERS': {
+				return reducers.replaceOrganizers( state, action.organizers );
+			}
+
 			case 'SET_CURRENCY_SYMBOL': {
 				return reducers.setCurrencySymbol( state, action.symbol );
 			}
@@ -113,22 +122,59 @@ const details = {
 				};
 			}
 
+			case 'TOGGLE_DASHBOARD': {
+				return {
+					...state,
+					dashboardOpen: ! state.dashboardOpen,
+				};
+			}
+
+			case 'CLOSE_DASHBOARD': {
+				return {
+					...state,
+					dashboardOpen: false,
+				};
+			}
+
 			default: {
 				return state;
 			}
 		}
 	},
+	actions: {
+		addOrganizer( organizer ) {
+			return {
+				type: 'ADD_ORGANIZER',
+				organizer,
+			};
+		},
+		removeOrganizer( organizer ) {
+			return {
+				type: 'REMOVE_ORGANIZER',
+				organizer,
+			};
+		},
+		maybeRemoveOrganizer( organizer ) {
+			return {
+				type: 'MAYBE_REMOVE_ORGANIZER',
+				organizer,
+			}
+		},
+		replaceOrganizers( organizers ) {
+			return {
+				type: 'REPLACE_ORGANIZERS',
+				organizers,
+			};
+		},
+	},
 	selectors: {
 		getOrganizers( state ) {
 			const { eventOrganizers } = state;
-			return eventOrganizers.map( ( item ) => {
-				return item.id;
-			} ).filter( identity );
+			return eventOrganizers
+				.filter( isObject )
+				.map( ( item ) => item.id );
 		},
-		getOrganizersDetails( state ) {
-			return state.eventOrganizers.filter( identity );
-		},
-	}
+	},
 };
 
 export const store = registerStore( STORE_NAME, details );

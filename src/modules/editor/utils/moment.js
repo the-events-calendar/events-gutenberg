@@ -189,6 +189,10 @@ export function toDate( date ) {
 	return date.format( toFormat( FORMATS.WP.date ) );
 }
 
+export function toTime( date ) {
+	return date.format( toFormat( FORMATS.WP.time ) );
+}
+
 export function toDatePicker( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) {
 	return date.format( format );
 }

@@ -6,7 +6,7 @@ import { stringify } from 'querystringify';
 /**
  * WordPress dependencies
  */
-import { select } from '@wordpress/data';
+import { select, dispatch } from '@wordpress/data';
 const { apiRequest } = wp;
 
 /**
@@ -14,6 +14,7 @@ const { apiRequest } = wp;
  */
 import { apiArgs } from 'utils/request';
 import { store, STORE_NAME, POST_TYPE } from './index';
+import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 import { toFields, toOrganizer } from 'elements/organizer-form/utils';
 
 const DEFAULT_BLOCK = {
@@ -175,12 +176,10 @@ function createDraft( prevState, id, payload ) {
 		method: 'POST',
 		data: toOrganizer( payload ),
 	} ).then( ( body ) => {
-		store.dispatch( {
-			type: 'ADD_ORGANIZER',
-			block: id,
-			organizer: body.id,
+		dispatch( EVENT_DETAILS_STORE ).addOrganizer( {
+			...body,
+			block: 'individual',
 		} );
-
 		store.dispatch( {
 			type: 'SET_POST',
 			id,
@@ -215,12 +214,10 @@ function editPost( prevState, id, payload ) {
 		method: 'PUT',
 		data: toOrganizer( payload ),
 	} ).then( ( body ) => {
-		store.dispatch( {
-			type: 'ADD_ORGANIZER',
-			block: id,
-			organizer: body.id,
+		dispatch( EVENT_DETAILS_STORE ).addOrganizer( {
+			...body,
+			block: 'individual',
 		} );
-
 		store.dispatch( {
 			type: 'SET_POST',
 			id,

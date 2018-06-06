@@ -15,13 +15,14 @@ import {
 	Dashicon,
 } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/editor';
-import { select } from '@wordpress/data';
+import { select, dispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependendencies
  */
 import { store, STORE_NAME } from 'data/organizers/block';
+import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 import {
 	SearchOrCreate,
 } from 'elements';
@@ -34,6 +35,7 @@ export default class EventOrganizer extends Component {
 		id: '',
 		setAttributes: noop,
 		organizer: 0,
+		current: '',
 	};
 
 	static propTypes = {
@@ -41,6 +43,7 @@ export default class EventOrganizer extends Component {
 		id: PropTypes.string,
 		setAttributes: PropTypes.func,
 		organizer: PropTypes.number,
+		current: PropTypes.string,
 	};
 
 	static getDerivedStateFromProps( nextProps, prevState ) {
@@ -84,9 +87,8 @@ export default class EventOrganizer extends Component {
 
 	storeListener = () => {
 		const { id, setAttributes } = this.props;
-
-		const organizers = select( STORE_NAME ).getOrganizers();
-		setAttributes( { organizers: JSON.stringify( organizers ) } );
+		const organizers = JSON.stringify( select( STORE_NAME ).getOrganizers() );
+		setAttributes( { organizers } );
 
 		const block = select( STORE_NAME ).getBlock( id );
 		const VALID_STATE = [ 'edit', 'create', 'post', 'draft', 'submit' ];
@@ -220,12 +222,10 @@ export default class EventOrganizer extends Component {
 	};
 
 	selectItem = ( item ) => {
-		store.dispatch( {
-			type: 'ADD_ORGANIZER',
-			block: this.props.id,
-			organizer: item.id,
+		dispatch( EVENT_DETAILS_STORE ).addOrganizer( {
+			...item,
+			block: 'individual',
 		} );
-
 		store.dispatch( {
 			type: 'SET_POST',
 			id: this.props.id,
@@ -271,12 +271,9 @@ export default class EventOrganizer extends Component {
 
 	clear = () => {
 		const { post } = this.state;
+
 		if ( post && post.id ) {
-			store.dispatch( {
-				type: 'REMOVE_ORGANIZER',
-				block: this.props.id,
-				organizer: post.id,
-			} );
+			dispatch( EVENT_DETAILS_STORE ).maybeRemoveOrganizer( post );
 		}
 
 		store.dispatch( {

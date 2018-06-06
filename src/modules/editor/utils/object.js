@@ -1,4 +1,14 @@
-import { pickBy, isString, isEmpty, mapValues, transform, isEqual, isObject } from 'lodash';
+import {
+	pickBy,
+	isString,
+	isEmpty,
+	mapValues,
+	transform,
+	isEqual,
+	isObject,
+	isArray,
+	differenceWith,
+} from 'lodash';
 import { isTruthy, isFalsy } from './string';
 
 export function removeEmptyStrings( object ) {
@@ -41,8 +51,12 @@ export function diff( object, base ) {
 function changes( object, base ) {
 	return transform( object, ( result, value, key ) => {
 		if ( ! isEqual( value, base[ key ] ) ) {
-			const isAnObject = isObject( value ) && isObject( base[ key ] );
-			result[ key ] = isAnObject ? changes( value, base[ key ] ) : value;
+			result[ key ] = value;
+			if ( isArray( value ) && isArray( base[ key ] ) ) {
+				result[ key ] = differenceWith( value, base[ key ], isEqual );
+			} else if ( isObject( value ) && isObject( base[ key ] ) ) {
+				result[ key ] = changes( value, base[ key ] );
+			}
 		}
 	} );
 }

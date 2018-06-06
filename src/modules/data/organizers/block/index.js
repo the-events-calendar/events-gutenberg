@@ -1,4 +1,4 @@
-import { get, pick, map } from 'lodash';
+import { get, pick, map, identity } from 'lodash';
 
 import { select, dispatch } from '@wordpress/data';
 
@@ -6,6 +6,7 @@ const { apiRequest, data } = wp;
 const { registerStore, combineReducers } = data;
 
 import * as reducers from './reducers';
+import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 export const POST_TYPE = 'tribe_organizer';
 
 export const STORE_NAME = 'tec.organizer.blocks';
@@ -48,6 +49,10 @@ const details = {
 					index: select( 'core/editor' ).getBlockIndex( id ),
 				};
 			} );
+		},
+		getOrganizersIds( state ) {
+			const { blocks } = state;
+			return map( blocks, ( block ) => get( block, 'organizer', 0 ) ).filter( identity );
 		},
 		getDetails( state, id, organizer ) {
 			const block = state[ id ] || {};
