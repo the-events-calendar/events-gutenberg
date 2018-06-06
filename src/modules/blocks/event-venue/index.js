@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { pick } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -11,6 +12,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventVenue from './block';
+import { castBooleanStrings } from 'utils/object';
 
 /**
  * Module Code
@@ -50,7 +52,17 @@ export default {
 
 	useOnce: true,
 
-	edit: EventVenue,
+	edit: ( { attributes, ...rest } ) => {
+		const properties = {
+			...attributes,
+			...pick( rest, [ 'setAttributes', 'isSelected' ] ),
+			loading: !! attributes.eventVenueId,
+		};
+
+		return (
+			<EventVenue { ...properties } />
+		);
+	},
 
 	save( props ) {
 		return null;
