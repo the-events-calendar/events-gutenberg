@@ -86,10 +86,8 @@ class EventVenue extends Component {
 
 		const { eventVenueId, venueID, setAttributes } = this.props;
 		if ( venueID !== eventVenueId ) {
-			console.log( 'are different');
 			setAttributes( { eventVenueId: venueID } );
 		}
-		console.log( eventVenueId, venueID );
 	}
 
 	render() {

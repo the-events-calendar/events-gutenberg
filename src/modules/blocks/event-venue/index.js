@@ -12,7 +12,6 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventVenue from './block';
-import { castBooleanStrings } from 'utils/object';
 
 /**
  * Module Code
