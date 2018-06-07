@@ -1,20 +1,18 @@
 /**
  * External dependencies
  */
-import { get, noop, pick, isEqual } from 'lodash';
+import { get, pick } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { select } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
-import EventDetails, { VALID_PROPS } from './block';
-import { store, STORE_NAME } from 'data/details';
-import { castBooleanStrings, removeEmptyStrings, diff } from 'utils/object';
+import EventDetails from './block';
+import { castBooleanStrings, removeEmptyStrings } from 'utils/object';
 
 /**
  * Module Code
