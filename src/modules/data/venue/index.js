@@ -62,6 +62,12 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 				},
 			};
 		}
+		case 'SUBMIT': {
+			return {
+				...state,
+				submit: true,
+			};
+		}
 		case 'CREATE_DRAFT': {
 			return reducers.createDraft( state, action.fields );
 		}
@@ -91,10 +97,46 @@ const actions = {
 			details,
 		};
 	},
+	setDraftTitle( title ) {
+		return {
+			type: 'SET_DRAFT_TITLE',
+			title,
+		};
+	},
+	setDraftDetails( details ) {
+		return {
+			type: 'SET_DRAFT_DETAILS',
+			draft: details,
+		};
+	},
+	editDraft( id, fields ) {
+		return {
+			type: 'EDIT_DRAFT',
+			id,
+			fields,
+		};
+	},
+	createDraft( fields ) {
+		return {
+			type: 'CREATE_DRAFT',
+			fields,
+		};
+	},
+	removeDraft( id ) {
+		return {
+			type: 'REMOVE_DRAFT',
+			id,
+		};
+	},
 	registerVenue( id ) {
 		return {
 			type: 'REGISTER_VENUE',
 			id,
+		};
+	},
+	submit() {
+		return {
+			type: 'SUBMIT',
 		};
 	},
 	clear() {
@@ -108,12 +150,36 @@ const selectors = {
 	getDetails( state, id ) {
 		return state.details;
 	},
+	getAddress( state ) {
+		return state.address;
+	},
+	getCoordinates( state ) {
+		return state.coordinates;
+	},
+	getDraft( state ) {
+		return state.draft;
+	},
+	getEdit( state ) {
+		return state.edit;
+	},
+	getCreate( state ) {
+		return state.create;
+	},
+	getLoading( state ) {
+		return state.loading;
+	},
+	getSubmit( state ) {
+		return state.submit;
+	},
+	getVenueID( state ) {
+		return state.id;
+	},
 };
 
 const resolvers = {
 	async getDetails( state, id ) {
 		if ( state.id === id ) {
-			return state.details;
+			return state;
 		}
 
 		apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ id }` } )
