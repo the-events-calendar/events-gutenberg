@@ -10,12 +10,12 @@ import { isEmpty, noop } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
-import { select } from '@wordpress/data';
+import { Component, compose } from '@wordpress/element';
+import { withDispatch, withSelect } from '@wordpress/data';
 import { Spinner } from '@wordpress/components';
 import './style.pcss';
 
-export default class SearchOrCreate extends Component {
+class SearchOrCreate extends Component {
 	static defaultProps = {
 		placeholder: __( 'Add or Find', 'events-gutenberg' ),
 		icon: null,
@@ -26,38 +26,25 @@ export default class SearchOrCreate extends Component {
 		onSetCreation: noop,
 		results: 5,
 		id: '',
-	}
+		search: '',
+		posts: [],
+		loading: false,
+	};
 
 	static propTypes = {
-		store: PropTypes.object.isRequired,
 		storeName: PropTypes.string,
 		id: PropTypes.string,
 		placeholder: PropTypes.string,
 		results: PropTypes.number,
-	}
+		search: PropTypes.string,
+		posts: PropTypes.array,
+		loading: PropTypes.bool,
+		onSetCreation: PropTypes.func,
+	};
 
-	constructor( props ) {
+	constructor() {
 		super( ...arguments );
-		this.state = {
-			search: '',
-			results: [],
-			loading: false,
-		};
 		this.inputRef = React.createRef();
-	}
-
-	componentDidMount() {
-		const { store } = this.props;
-		this.unsubscribe = store.subscribe( this.saveState );
-	}
-
-	saveState = () => {
-		const { storeName, id } = this.props;
-		this.setState( select( storeName ).getPosts( id ) );
-	}
-
-	componentWillUnmount() {
-		this.unsubscribe();
 	}
 
 	render() {
@@ -85,11 +72,10 @@ export default class SearchOrCreate extends Component {
 		if ( selected && this.inputRef.current ) {
 			this.inputRef.current.focus();
 		}
-	}
+	};
 
 	renderInput() {
-		const { search } = this.state;
-		const { placeholder } = this.props;
+		const { placeholder, search } = this.props;
 
 		return (
 			<input
@@ -104,44 +90,12 @@ export default class SearchOrCreate extends Component {
 
 	onChange = ( event ) => {
 		const { target } = event;
-		this.setState( {
-			search: target.value,
-		}, this.search );
-	}
-
-	search = () => {
-		const { store, results, id, storeName } = this.props;
-		const { search } = this.state;
-
-		if ( search === '' ) {
-			store.dispatch( {
-				type: 'CLEAR',
-				results: [],
-				id,
-			} );
-		}
-
-		const current = select( storeName ).getSearch( id );
-		if ( search.trim() === current.trim() ) {
-			return;
-		}
-
-		store.dispatch( {
-			type: 'SEARCH',
-			id,
-			payload: {
-				search,
-				params: {
-					orderby: 'relevance',
-					per_page: results,
-				},
-			},
-		} );
-	}
+		const { setTerm } = this.props;
+		setTerm( target.value );
+	};
 
 	renderResults() {
-		const { search, loading } = this.state;
-		const { selected } = this.props;
+		const { selected, search, loading } = this.props;
 
 		if ( ! selected ) {
 			return null;
@@ -154,7 +108,7 @@ export default class SearchOrCreate extends Component {
 		if ( loading ) {
 			return (
 				<div className="tribe-editor__soc__results--loading">
-					<Spinner />
+					<Spinner/>
 				</div>
 			);
 		}
@@ -167,21 +121,21 @@ export default class SearchOrCreate extends Component {
 	}
 
 	renderItems() {
-		const { results, search } = this.state;
+		const { posts, search } = this.props;
 
-		if ( results.length === 0 ) {
+		if ( posts.length === 0 ) {
 			return (
 				<li onClick={ this.setCreation }><strong>Create</strong>: { search } </li>
 			);
 		}
 
-		return ( results.map( this.renderItem ) );
+		return ( posts.map( this.renderItem ) );
 	}
 
 	setCreation = () => {
-		const { search } = this.state;
+		const { search } = this.props;
 		this.props.onSetCreation( search );
-	}
+	};
 
 	renderItem = ( item ) => {
 		const { title, id } = item;
@@ -196,11 +150,54 @@ export default class SearchOrCreate extends Component {
 				}
 			/>
 		);
-	}
+	};
 
 	setSelection = ( item ) => {
 		return () => {
-			this.setState( { idle: true }, () => this.props.onSelection( item ) );
+			const { id, clearSearch, onSelection } = this.props;
+			onSelection( item );
+			clearSearch( id );
 		};
 	};
 }
+
+export default compose( [
+	withSelect( ( select, props ) => {
+		const {
+			getSearch,
+			getLoading,
+			getResults,
+		} = select( props.storeName );
+		const { id } = props;
+		return {
+			loading: getLoading( id ),
+			posts: getResults( id ),
+			search: getSearch( id ),
+		};
+	} ),
+	withDispatch( ( dispatch, props ) => {
+		const {
+			setTerm,
+			clearSearch,
+			search,
+		} = dispatch( props.storeName );
+		return {
+			clearSearch,
+			setTerm( term ) {
+				const { id, results = 5 } = props;
+				setTerm( id, term );
+				if ( term === '' ) {
+					clearSearch( id );
+				}
+
+				search( id, {
+					search: term,
+					params: {
+						orderby: 'relevance',
+						per_page: results,
+					},
+				} );
+			},
+		};
+	} ),
+] )( SearchOrCreate );
