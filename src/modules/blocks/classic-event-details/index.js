@@ -64,17 +64,17 @@ export default {
 			source: 'meta',
 			meta: '_EventURL',
 		},
-		eventCost: {
+		cost: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCost',
 		},
-		eventCurrencySymbol: {
+		currencySymbol: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCurrencySymbol',
 		},
-		eventCurrencyPosition: {
+		currencyPosition: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCurrencyPosition',

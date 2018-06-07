@@ -340,7 +340,7 @@ export function replaceOrganizers( prevState, organizers ) {
 export function setCurrencySymbol( prevState, symbol ) {
 	return {
 		...prevState,
-		eventCurrencySymbol: symbol,
+		currencySymbol: symbol,
 	};
 }
 

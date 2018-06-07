@@ -66,17 +66,17 @@ export default {
 		},
 
 		// Only Avail for classic users
-		eventCost: {
+		cost: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCost',
 		},
-		eventCurrencySymbol: {
+		currencySymbol: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCurrencySymbol',
 		},
-		eventCurrencyPosition: {
+		currencyPosition: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCurrencyPosition',

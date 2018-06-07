@@ -52,7 +52,7 @@ export const VALID_PROPS = [
 	'timezone',
 	'allDay',
 
-	'eventCurrencySymbol',
+	'currencySymbol',
 	'currencyPosition',
 ];
 
@@ -109,7 +109,7 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderPrice() {
-		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.state;
+		const { setAttributes, cost, currencyPosition, currencySymbol } = this.state;
 
 		// Bail when not classic
 		if ( ! tribe_blocks_editor ) {
@@ -123,14 +123,14 @@ export default class EventSubtitle extends Component {
 
 		return (
 			<div className="tribe-editor__event-cost">
-				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
-					value={ eventCost }
+					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
+					onChange={ ( nextContent ) => setAttributes( { cost: nextContent } ) }
 				/>
-				{ 'suffix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
 		);
 	}

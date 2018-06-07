@@ -42,7 +42,7 @@ import { store, STORE_NAME as DETAILS_STORE } from 'data/details';
 
 export const VALID_PROPS = [
 	'eventOrganizers',
-	'eventCurrencySymbol',
+	'currencySymbol',
 	'currencyPosition',
 ];
 
@@ -251,18 +251,18 @@ export default class EventDetails extends Component {
 	}
 
 	renderCost() {
-		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.props;
+		const { setAttributes, cost, currencyPosition, currencySymbol } = this.props;
 		return (
 			<div className="tribe-editor__event-cost">
 				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
-				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
-					value={ eventCost }
+					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
+					onChange={ ( nextContent ) => setAttributes( { cost: nextContent } ) }
 				/>
-				{ 'suffix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
 		);
 	}
@@ -286,7 +286,7 @@ export default class EventDetails extends Component {
 	}
 
 	renderControls() {
-		const { isSelected, allDay, setAttributes, currencyPosition, eventCurrencySymbol } = this.props;
+		const { isSelected, allDay, setAttributes, currencyPosition, currencySymbol } = this.props;
 
 		if ( ! isSelected ) {
 			return null;
@@ -305,13 +305,13 @@ export default class EventDetails extends Component {
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
 						checked={ 'prefix' === currencyPosition }
-						onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
+						onChange={ ( value ) => setAttributes( { currencyPosition: value ? 'prefix' : 'suffix' } ) }
 					/>
 					<TextControl
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
-						value={ eventCurrencySymbol }
+						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ ( value ) => setAttributes( { eventCurrencySymbol: value } ) }
+						onChange={ ( value ) => setAttributes( { currencySymbol: value } ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
