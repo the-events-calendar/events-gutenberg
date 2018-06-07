@@ -152,7 +152,7 @@ function searchByTerm( prevState, id, payload ) {
 	const { params, search } = payload;
 	const block = prevState[ id ];
 
-	if ( ! block ) {
+	if ( ! block || search === '' ) {
 		return prevState;
 	}
 

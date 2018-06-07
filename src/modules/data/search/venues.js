@@ -100,18 +100,19 @@ function search( state, payload ) {
 	const term = payload.search;
 
 	const { page, total, type } = state;
-	if ( total && page > total ) {
+	if ( total && page > total || term === '' ) {
 		return state;
 	}
 
-	const query = Object.assign( {}, {
+	const query = {
 		per_page: 30,
 		orderby: 'title',
 		status: [ 'draft', 'publish' ],
 		order: 'asc',
 		page,
 		search: term,
-	}, params );
+		...params,
+	};
 
 	apiRequest( {
 		path: `/wp/v2/${ type }?${ stringify( query ) }`,
