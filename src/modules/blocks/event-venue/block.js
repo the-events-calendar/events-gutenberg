@@ -149,7 +149,6 @@ class EventVenue extends Component {
 		return (
 			<SearchOrCreate
 				icon={ <Dashicon icon="location" size={ 22 }/> }
-				store={ store }
 				storeName={ STORE_NAME }
 				selected={ isSelected }
 				onSelection={ this.setVenue }

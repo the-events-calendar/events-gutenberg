@@ -189,7 +189,6 @@ export default class EventOrganizer extends Component {
 		return (
 			<SearchOrCreate
 				id={ id }
-				store={ store }
 				storeName={ STORE_NAME }
 				selected={ selected }
 				icon={ <Dashicon icon="admin-users" size={ 22 } /> }
