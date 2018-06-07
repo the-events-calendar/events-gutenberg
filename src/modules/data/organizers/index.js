@@ -107,7 +107,6 @@ const details = {
 				.then( ( body ) => {
 					dispatch( STORE_NAME ).setPost( id, body );
 				} );
-
 			return state;
 		}
 	}

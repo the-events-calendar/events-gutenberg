@@ -37,7 +37,7 @@ import {
 import { default as EventOrganizers } from './organizers';
 
 import { toMoment, toDate, toTime } from 'utils/moment';
-import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers/block';
+import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers';
 import { store, STORE_NAME as DETAILS_STORE } from 'data/details';
 
 export const VALID_PROPS = [

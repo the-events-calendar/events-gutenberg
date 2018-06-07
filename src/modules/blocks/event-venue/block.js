@@ -39,7 +39,7 @@ import {
 } from 'elements';
 
 import VenueDetails from './venue';
-import { store, STORE_NAME } from 'data/venues';
+import { STORE_NAME } from 'data/search/venues';
 import { STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
 
 /**
