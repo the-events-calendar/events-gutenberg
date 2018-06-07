@@ -3,7 +3,7 @@
  */
 import moment from 'moment/moment';
 import { __ } from '@wordpress/i18n';
-import { identity, isObject } from 'lodash';
+import { isObject } from 'lodash';
 
 /**
  * Wordpress dependencies

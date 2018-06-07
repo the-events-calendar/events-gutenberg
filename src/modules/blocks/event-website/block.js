@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import classNames from 'classnames';
 import { noop, pick } from 'lodash';
 
 /**
@@ -10,8 +9,6 @@ import { noop, pick } from 'lodash';
 import { Component } from '@wordpress/element';
 import {
 	PanelBody,
-	ToggleControl,
-	IconButton,
 	Dashicon,
 } from '@wordpress/components';
 
