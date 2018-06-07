@@ -248,7 +248,11 @@ class EventVenue extends Component {
 	};
 
 	renderControls() {
-		const { setAttributes, showMapLink, showMap } = this.props;
+		const { setAttributes, showMapLink, showMap, eventVenueId } = this.props;
+
+		if ( ! this.hasVenue() ) {
+			return null;
+		}
 
 		return (
 			<InspectorControls key="inspector">
