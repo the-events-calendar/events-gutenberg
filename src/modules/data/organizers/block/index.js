@@ -20,6 +20,32 @@ const details = {
 				payload,
 			};
 		},
+		setTerm( id, term ) {
+			return {
+				type: 'SET_TERM',
+				id,
+				term,
+			};
+		},
+		clear( id ) {
+			return {
+				type: 'CLEAR',
+				id,
+			};
+		},
+		clearSearch( id ) {
+			return {
+				type: 'CLEAR_SEARCH',
+				id,
+			};
+		},
+		search( id, payload ) {
+			return {
+				type: 'SEARCH',
+				id,
+				payload,
+			};
+		},
 	},
 	selectors: {
 		getBlock( state, id ) {
@@ -28,13 +54,13 @@ const details = {
 		},
 		getSearch( state, id ) {
 			const { blocks } = state;
-			const block = blocks[ id ];
+			const block = blocks[ id ] || {};
 			const searches = get( block, 'searches', {} );
 			return get( searches, 'search', '' );
 		},
 		getPosts( state, id ) {
 			const { blocks } = state;
-			const block = blocks[ id ];
+			const block = blocks[ id ] || {};
 			const searches = get( block, 'searches', {} );
 			return {
 				...pick( block, [ 'loading' ] ),
@@ -55,9 +81,21 @@ const details = {
 			return map( blocks, ( block ) => get( block, 'organizer', 0 ) ).filter( identity );
 		},
 		getDetails( state, id, organizer ) {
-			const block = state[ id ] || {};
+			const { blocks } = state;
+			const block = blocks[ id ] || {};
 			return block.post || {};
-		}
+		},
+		getLoading( state, id ) {
+			const { blocks } = state;
+			const block = blocks[ id ] || {};
+			return block.loading;
+		},
+		getResults( state, id ) {
+			const { blocks } = state;
+			const block = blocks[ id ] || {};
+			const { searches = {} } = block;
+			return searches.results;
+		},
 	},
 	resolvers: {
 		async getDetails( state, id, organizer ) {
