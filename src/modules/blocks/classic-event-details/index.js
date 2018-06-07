@@ -59,7 +59,7 @@ export default {
 			source: 'meta',
 			meta: '_EventEndDate',
 		},
-		eventUrl: {
+		url: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventURL',

@@ -34,7 +34,7 @@ import './style.pcss';
  */
 
 export const VALID_PROPS = [
-	'eventUrl',
+	'url',
 ];
 
 export default class EventWebsite extends Component {
@@ -89,9 +89,9 @@ export default class EventWebsite extends Component {
 
 	renderUrlInput() {
 		const { setAttributes } = this.state;
-		const { isSelected, eventUrl } = this.props;
+		const { isSelected, url } = this.props;
 
-		const buttonLabel = eventUrl ? __( 'Edit Website', 'events-gutenberg' ) : __( 'Insert Website', 'events-gutenberg' );
+		const buttonLabel = url ? __( 'Edit Website', 'events-gutenberg' ) : __( 'Insert Website', 'events-gutenberg' );
 
 		if ( ! isSelected ) {
 			return null;
@@ -102,8 +102,8 @@ export default class EventWebsite extends Component {
 				<Dashicon icon="admin-links" />
 				<PlainText
 					id="tribe-events-website-link"
-					value={ eventUrl }
-					onChange={ ( nextContent ) => this.setWebsiteUrl( { eventUrl: nextContent } ) }
+					value={ url }
+					onChange={ ( nextContent ) => this.setWebsiteUrl( { url: nextContent } ) }
 					placeholder={ buttonLabel }
 				/>
 			</div>
@@ -135,11 +135,11 @@ export default class EventWebsite extends Component {
 	}
 
 	setWebsiteUrl = ( data ) => {
-		const { eventUrl } = data;
+		const { url } = data;
 
 		store.dispatch( {
 			type: 'SET_WEBSITE_URL',
-			eventUrl,
+			url,
 		} );
 	};
 

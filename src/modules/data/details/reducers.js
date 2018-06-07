@@ -355,6 +355,6 @@ export function setCurrencyPosition( prevState, hasPosition ) {
 export function setWebsiteUrl( prevState, url ) {
 	return {
 		...prevState,
-		eventUrl: url,
+		url,
 	};
 }

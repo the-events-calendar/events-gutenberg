@@ -38,7 +38,7 @@ export default {
 		eventUrlLabel: {
 			type: 'html',
 		},
-		eventUrl: {
+		url: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventURL',

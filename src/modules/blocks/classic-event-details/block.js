@@ -236,15 +236,15 @@ export default class EventDetails extends Component {
 	};
 
 	renderWebsite() {
-		const { eventUrl, setAttributes } = this.props;
+		const { url, setAttributes } = this.props;
 		return (
 			<div>
 				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
 				<PlainText
 					id="tribe-event-url"
-					value={ eventUrl }
+					value={ url }
 					placeholder={ __( 'Enter url', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { eventUrl: nextContent } ) }
+					onChange={ ( nextContent ) => setAttributes( { url: nextContent } ) }
 				/>
 			</div>
 		);
