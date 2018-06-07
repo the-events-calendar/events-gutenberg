@@ -71,10 +71,10 @@ export default class EventWebsite extends Component {
 	}
 
 	renderLink() {
-		const { isSelected, eventUrlLabel } = this.props;
+		const { isSelected, urlLabel } = this.props;
 		const placeholder = __( 'Add Event Website', 'events-gutenberg' );
 
-		if ( ! isSelected && ! eventUrlLabel ) {
+		if ( ! isSelected && ! urlLabel ) {
 			return this.renderPlaceholder( placeholder );
 		}
 
@@ -109,24 +109,24 @@ export default class EventWebsite extends Component {
 
 	renderLabelInput( placeholder ) {
 		const { setAttributes } = this.state;
-		const { eventUrlLabel } = this.props;
+		const { urlLabel } = this.props;
 
 		return (
 			<div key='tribe-events-website-label' className="tribe-editor__event-website">
 				<PlainText
 					id="tribe-events-website-link"
-					value={ eventUrlLabel }
-					onChange={ ( nextContent ) => setAttributes( { eventUrlLabel: nextContent } ) }
+					value={ urlLabel }
+					onChange={ ( nextContent ) => setAttributes( { urlLabel: nextContent } ) }
 					placeholder={ __( 'Add Event Website', 'events-gutenberg' ) }
 				/>
 			</div>
 		)
 	}
 
-	renderPlaceholder( eventUrlLabel ) {
+	renderPlaceholder( urlLabel ) {
 		return (
 			<button className="tribe-editor__event-website tribe-editor__event-website--placeholder" disabled>
-				{ eventUrlLabel }
+				{ urlLabel }
 			</button>
 		);
 	}
