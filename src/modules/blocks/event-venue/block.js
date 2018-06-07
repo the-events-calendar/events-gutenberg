@@ -49,7 +49,7 @@ import { STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
 class EventVenue extends Component {
 
 	static propTypes = {
-		eventVenueId: PropTypes.number,
+		venue: PropTypes.number,
 		venueID: PropTypes.number,
 		isSelected: PropTypes.bool,
 		loading: PropTypes.bool,
@@ -84,9 +84,9 @@ class EventVenue extends Component {
 			sendForm();
 		}
 
-		const { eventVenueId, venueID, setAttributes } = this.props;
-		if ( venueID !== eventVenueId ) {
-			setAttributes( { eventVenueId: venueID } );
+		const { venue, venueID, setAttributes } = this.props;
+		if ( venueID !== venue ) {
+			setAttributes( { venue: venueID } );
 		}
 	}
 
@@ -274,7 +274,7 @@ class EventVenue extends Component {
 
 export default compose( [
 	withSelect( ( select, props ) => {
-		const { eventVenueId } = props;
+		const { venue } = props;
 		const {
 			getDetails,
 			getAddress,
@@ -288,7 +288,7 @@ export default compose( [
 		} = select( VENUE_STORE_NAME );
 
 		return {
-			details: getDetails( eventVenueId ),
+			details: getDetails( venue ),
 			address: getAddress(),
 			coordinates: getCoordinates(),
 			draft: getDraft(),
