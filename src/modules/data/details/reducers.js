@@ -286,49 +286,49 @@ function getMultiDayDates( prevState ) {
 export function setOrganizers( prevState, organizer ) {
 	return {
 		...prevState,
-		eventOrganizers: organizer,
+		organizers: organizer,
 	};
 }
 
 export function addOrganizers( prevState, organizer ) {
 	return {
 		...prevState,
-		eventOrganizers: [ ...prevState.eventOrganizers, organizer ],
+		organizers: [ ...prevState.organizers, organizer ],
 	};
 }
 
 export function removeOrganizer( prevState, organizer ) {
 	return {
 		...prevState,
-		eventOrganizers: prevState.eventOrganizers.filter( ( item ) => item.id !== organizer.id ),
+		organizers: prevState.organizers.filter( ( item ) => item.id !== organizer.id ),
 	};
 }
 
 export function maybeRemoveOrganizer( prevState, organizer ) {
-	const { eventOrganizers } = prevState;
-	const result = find( eventOrganizers, ( item ) => {
+	const { organizers } = prevState;
+	const result = find( organizers, ( item ) => {
 		const { id, block } = item;
 		return block === 'individual' && id === organizer.id;
 	} );
 
-	let organizers = [ ...eventOrganizers ];
+	let selectedOrganizers = [ ...organizers ];
 	if ( result && result.id ) {
-		organizers = organizers.filter( ( item ) => item.id !== result.id );
+		selectedOrganizers = selectedOrganizers.filter( ( item ) => item.id !== result.id );
 	}
 
 	return {
 		...prevState,
-		eventOrganizers: organizers,
+		organizers: selectedOrganizers,
 	};
 }
 
-export function replaceOrganizers( prevState, organizers ) {
-	const { eventOrganizers } = prevState;
-	const current = eventOrganizers.map( ( item ) => {
+export function replaceOrganizers( prevState, newOrganizers ) {
+	const { organizers } = prevState;
+	const current = organizers.map( ( item ) => {
 		if ( isObject( item ) ) {
 			return item;
 		}
-		const search = organizers.filter( ( organizer ) => organizer.id === item );
+		const search = newOrganizers.filter( ( organizer ) => organizer.id === item );
 		return search.length ? search[ 0 ] : item;
 	} );
 	return {
