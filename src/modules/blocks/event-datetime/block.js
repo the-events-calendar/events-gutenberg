@@ -11,7 +11,6 @@ import { noop, pick } from 'lodash';
 import { Component } from '@wordpress/element';
 
 import {
-	ToggleControl,
 	PanelBody,
 	SelectControl,
 	TextControl,
@@ -447,11 +446,6 @@ export default class EventSubtitle extends Component {
 					value={ timezone }
 					onChange={ this.setTimeZone }
 					options={ timezonesAsSelectData() }
-				/>
-				<ToggleControl
-					label={ __( 'Is All Day Event', 'events-gutenberg' ) }
-					checked={ this.isAllDay() }
-					onChange={ this.setAllDay }
 				/>
 			</PanelBody>
 		</InspectorControls> );
