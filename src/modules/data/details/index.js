@@ -3,7 +3,7 @@
  */
 import moment from 'moment/moment';
 import { __ } from '@wordpress/i18n';
-import { isObject } from 'lodash';
+import { isObject, get } from 'lodash';
 
 /**
  * Wordpress dependencies
@@ -166,6 +166,12 @@ const details = {
 				organizers,
 			};
 		},
+		setWebsiteUrl( url ) {
+			return {
+				type: 'SET_WEBSITE_URL',
+				url,
+			};
+		},
 	},
 	selectors: {
 		getOrganizers( state ) {
@@ -173,6 +179,9 @@ const details = {
 			return organizers
 				.filter( isObject )
 				.map( ( item ) => item.id );
+		},
+		get( state, key, defaultValue ) {
+			return get( state, key, defaultValue );
 		},
 	},
 };
