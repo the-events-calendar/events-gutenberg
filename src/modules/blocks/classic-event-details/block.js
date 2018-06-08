@@ -41,7 +41,7 @@ import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers';
 import { store, STORE_NAME as DETAILS_STORE } from 'data/details';
 
 export const VALID_PROPS = [
-	'eventOrganizers',
+	'organizers',
 	'currencySymbol',
 	'currencyPosition',
 ];
@@ -52,11 +52,11 @@ export const VALID_PROPS = [
 
 export default class EventDetails extends Component {
 	static defaultProps = {
-		eventOrganizers: [],
+		organizers: [],
 	};
 
 	static propTypes = {
-		eventOrganizers: PropTypes.array,
+		organizers: PropTypes.array,
 	};
 
 	constructor( props ) {
@@ -64,7 +64,7 @@ export default class EventDetails extends Component {
 
 		this.state = {
 			...props,
-			loading: ! ! props.eventOrganizers.length,
+			loading: ! ! props.organizers.length,
 		};
 		this.unsubscribe = noop;
 	}
@@ -76,9 +76,9 @@ export default class EventDetails extends Component {
 			// Pick relevant ones from store
 			const attributes = {
 				...pick( state, VALID_PROPS ),
-				eventOrganizers: select( DETAILS_STORE ).getOrganizers(),
+				organizers: select( DETAILS_STORE ).getOrganizers(),
 			};
-			setAttributes( { eventOrganizers: select( DETAILS_STORE ).getOrganizers() } );
+			setAttributes( { organizers: select( DETAILS_STORE ).getOrganizers() } );
 		} );
 
 		store.dispatch( {
@@ -121,7 +121,7 @@ export default class EventDetails extends Component {
 	renderOrganizer() {
 		const {
 			organizerTitle,
-			eventOrganizers,
+			organizers,
 			setAttributes,
 			setFocus,
 			focus,
@@ -142,7 +142,7 @@ export default class EventDetails extends Component {
 				/>
 				<EventOrganizers
 					focus={ focus }
-					organizers={ eventOrganizers }
+					organizers={ organizers }
 					organizersBlocks={ organizersBlocks }
 					addOrganizer={ nextOrganizer => {
 						store.dispatch( {

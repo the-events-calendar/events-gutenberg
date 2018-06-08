@@ -333,7 +333,7 @@ export function replaceOrganizers( prevState, organizers ) {
 	} );
 	return {
 		...prevState,
-		eventOrganizers: current,
+		organizers: current,
 	};
 }
 

@@ -32,7 +32,7 @@ export const DEFAULT_STATE = {
 	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
 	currencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
 	dashboardOpen: false,
-	eventOrganizers: [],
+	organizers: [],
 	url: undefined,
 };
 
@@ -169,8 +169,8 @@ const details = {
 	},
 	selectors: {
 		getOrganizers( state ) {
-			const { eventOrganizers } = state;
-			return eventOrganizers
+			const { organizers } = state;
+			return organizers
 				.filter( isObject )
 				.map( ( item ) => item.id );
 		},
