@@ -45,7 +45,7 @@ import { store, DEFAULT_STATE } from 'data/details';
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 export const VALID_PROPS = [
 	'startDate',
-	'endDate',
+	'end',
 	'multiDay',
 	'dateTimeRangeSeparator',
 	'timeRangeSeparator',
@@ -175,14 +175,14 @@ export default class EventSubtitle extends Component {
 			return null;
 		}
 
-		const { endDate } = this.state;
+		const { end } = this.state;
 		return (
-			<span>{ toDate( toMoment( endDate ) ) }</span>
+			<span>{ toDate( toMoment( end ) ) }</span>
 		);
 	}
 
 	renderEndTime() {
-		const { endDate } = this.state;
+		const { end } = this.state;
 		const { time } = FORMATS.WP;
 
 		if ( this.isAllDay() ) {
@@ -192,7 +192,7 @@ export default class EventSubtitle extends Component {
 		return (
 			<React.Fragment>
 				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
-				{ toMoment( endDate ).format( toFormat( time ) ) }
+				{ toMoment( end ).format( toFormat( time ) ) }
 			</React.Fragment>
 		);
 	}
@@ -306,7 +306,7 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderCalendars() {
-		const { multiDay, startDate, endDate } = this.state;
+		const { multiDay, startDate, end } = this.state;
 		const monthProps = {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
@@ -314,7 +314,7 @@ export default class EventSubtitle extends Component {
 		};
 
 		if ( ! this.isSameDay() ) {
-			monthProps.to = toMoment( endDate ).toDate();
+			monthProps.to = toMoment( end ).toDate();
 		}
 
 		return (
@@ -376,7 +376,7 @@ export default class EventSubtitle extends Component {
 
 		const { time, date } = FORMATS.WP;
 		const start = toMoment( this.state.startDate );
-		const end = toMoment( this.state.endDate );
+		const end = toMoment( this.state.end );
 		const pickerProps = {
 			current: end,
 			onSelectItem: this.setEndTime,

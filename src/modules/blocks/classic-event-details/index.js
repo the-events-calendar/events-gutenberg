@@ -54,7 +54,7 @@ export default {
 			source: 'meta',
 			meta: '_EventStartDate',
 		},
-		endDate: {
+		end: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventEndDate',

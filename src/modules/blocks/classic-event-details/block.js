@@ -204,11 +204,11 @@ export default class EventDetails extends Component {
 	}
 
 	renderEnd() {
-		const { endDate } = this.props;
+		const { end } = this.props;
 		return (
 			<div onClick={ this.toggleDashboard }>
 				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
-				{ toDate( toMoment( endDate ) ) }
+				{ toDate( toMoment( end ) ) }
 				{ this.renderEndTime() }
 			</div>
 		);
@@ -221,12 +221,12 @@ export default class EventDetails extends Component {
 			return null;
 		}
 
-		const { endDate, dateTimeRangeSeparator } = this.props;
+		const { end, dateTimeRangeSeparator } = this.props;
 
 		return (
 			<React.Fragment>
 				<span>{ dateTimeRangeSeparator }</span>
-				{ toTime( toMoment( endDate ) ) }
+				{ toTime( toMoment( end ) ) }
 			</React.Fragment>
 		);
 	}
