@@ -133,23 +133,23 @@ export function setInitialState( prevState, values ) {
 	};
 }
 
-export function setInitialDates( prevState = {}, startDate = '', endDate = '' ) {
-	let start = toMoment( startDate );
-	let end = toMoment( endDate );
+export function setInitialDates( prevState = {}, startDate = '', end = '' ) {
+	let startMoment = toMoment( startDate );
+	let endMoment = toMoment( end );
 
-	if ( ! start.isValid() ) {
-		start = roundTime( moment() );
+	if ( ! startMoment.isValid() ) {
+		startMoment = roundTime( moment() );
 	}
 
-	if ( ! end.isValid() ) {
-		end = roundTime( moment() );
+	if ( ! endMoment.isValid() ) {
+		endMoment = roundTime( moment() );
 	}
 
 	const state = {
 		...prevState,
-		end: toDateTime( end ),
+		end: toDateTime( endMoment ),
 	};
-	return state.allDay ? state : setStartDate( state, toDateTime( start ) );
+	return state.allDay ? state : setStartDate( state, toDateTime( startMoment ) );
 }
 
 export function setOnlyDateForStart( prevState, date ) {
@@ -198,15 +198,15 @@ export function setStartDate( prevState, date ) {
 	};
 }
 
-function isAllDay( startDate, endDate ) {
-	const sameDay = isSameDay( toMoment( startDate ), toMoment( endDate ) );
+function isAllDay( startDate, end ) {
+	const sameDay = isSameDay( toMoment( startDate ), toMoment( end ) );
 
 	if ( ! sameDay ) {
 		return false;
 	}
 
 	const isStartOfTheDay = totalSeconds( startDate ) === 0;
-	const isEndOfTheDay = totalSeconds( endDate ) === ( DAY_IN_SECONDS - 1 );
+	const isEndOfTheDay = totalSeconds( end ) === ( DAY_IN_SECONDS - 1 );
 	return isStartOfTheDay && isEndOfTheDay;
 }
 

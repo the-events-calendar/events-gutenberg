@@ -203,9 +203,8 @@ export default class EventSubtitle extends Component {
 	 * @returns {boolean} if the event is happening on the same day
 	 */
 	isSameDay( start, end ) {
-		const { startDate, endDate } = this.state;
-		return toMoment( start || startDate )
-			.isSame( toMoment( end || endDate ), 'day' );
+		return toMoment( start || this.state.startDate )
+			.isSame( toMoment( end || this.state.end ), 'day' );
 	}
 
 	/**
