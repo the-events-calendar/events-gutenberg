@@ -59,7 +59,7 @@ export default {
 			source: 'meta',
 			meta: '_EventDateTimeSeparator',
 		},
-		timeRangeSeparator: {
+		separatorTime: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventTimeRangeSeparator',

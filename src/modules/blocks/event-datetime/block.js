@@ -48,7 +48,7 @@ export const VALID_PROPS = [
 	'end',
 	'multiDay',
 	'dateTimeRangeSeparator',
-	'timeRangeSeparator',
+	'separatorTime',
 	'timezone',
 	'allDay',
 
@@ -229,14 +229,14 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type, className ) {
-		const { timezone, dateTimeRangeSeparator, timeRangeSeparator } = this.state;
+		const { timezone, dateTimeRangeSeparator, separatorTime } = this.state;
 		switch ( type ) {
 			case 'date-time':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>{ dateTimeRangeSeparator }</span> );
 			case 'time-range':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>{ timeRangeSeparator }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorTime }</span> );
 			case 'dash':
 				return <span className={ classNames( 'tribe-editor__separator', className ) }> &mdash; </span>;
 			case 'all-day':
@@ -425,7 +425,7 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderControls() {
-		const { timeRangeSeparator, dateTimeRangeSeparator, timezone } = this.state;
+		const { separatorTime, dateTimeRangeSeparator, timezone } = this.state;
 
 		return ( <InspectorControls key="inspector">
 			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
@@ -437,8 +437,8 @@ export default class EventSubtitle extends Component {
 				/>
 				<TextControl
 					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
-					value={ timeRangeSeparator }
-					onChange={ ( value ) => this.setState( { timeRangeSeparator: value } ) }
+					value={ separatorTime }
+					onChange={ ( value ) => this.setState( { separatorTime: value } ) }
 					onBlur={ this.setTimeRangeSeparator }
 				/>
 				<SelectControl
@@ -466,7 +466,7 @@ export default class EventSubtitle extends Component {
 	setTimeRangeSeparator = () => {
 		store.dispatch( {
 			type: 'SET_TIME_RANGE_SEPARATOR',
-			separator: this.state.timeRangeSeparator,
+			separator: this.state.separatorTime,
 		} );
 	};
 
