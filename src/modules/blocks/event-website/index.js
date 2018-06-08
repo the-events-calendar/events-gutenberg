@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, noop, pick } from 'lodash';
+import { pick } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -11,9 +11,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventWebsite, { VALID_PROPS } from './block';
-import { store } from 'data/details';
-import { castBooleanStrings, removeEmptyStrings, diff } from 'utils/object';
+import EventWebsite from './block';
 
 /**
  * Module Code
@@ -47,34 +45,9 @@ export default {
 	useOnce: true,
 
 	edit: ( props ) => {
-		// Remove any old subscription if component is rendered again
-		if ( typeof this.unsubscribe === 'function' ) {
-			this.unsubscribe();
-		}
-
-		this.unsubscribe = store.subscribe( () => {
-			const setAttributes = get( props, 'setAttributes', noop );
-			const state = store.getState();
-			// Pick relevant ones from store
-			const attributes = pick( state, VALID_PROPS );
-			// Pick relevant ones from the current attributes
-			const prevAttributes = pick( get( props, 'attributes', {} ), VALID_PROPS );
-			// Updates the attributes with changes
-			setAttributes( diff( attributes, prevAttributes ) );
-		} );
-
-		const allowedProperties = pick(
-			props, [ 'isSelected', 'setFocus', 'setAttributes', 'focus' ]
-		);
-		const attributes = castBooleanStrings(
-			removeEmptyStrings(
-				get( props, 'attributes', {} )
-			)
-		);
 
 		const properties = {
-			...allowedProperties,
-			...attributes,
+			...pick( props, [ 'isSelected', 'setAttributes', 'attributes' ] ),
 		};
 
 		return <EventWebsite { ...properties } />;
