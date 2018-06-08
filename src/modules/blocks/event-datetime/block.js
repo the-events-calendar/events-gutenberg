@@ -12,7 +12,6 @@ import { Component, compose } from '@wordpress/element';
 import { withDispatch, withSelect } from '@wordpress/data';
 
 import {
-	ToggleControl,
 	PanelBody,
 	SelectControl,
 	TextControl,
@@ -448,11 +447,6 @@ class EventDateTime extends Component {
 					value={ timezone }
 					onChange={ this.setTimeZone }
 					options={ timezonesAsSelectData() }
-				/>
-				<ToggleControl
-					label={ __( 'Is All Day Event', 'events-gutenberg' ) }
-					checked={ this.isAllDay() }
-					onChange={ this.setAllDay }
 				/>
 			</PanelBody>
 		</InspectorControls> );
