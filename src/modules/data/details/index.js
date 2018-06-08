@@ -24,7 +24,7 @@ import { isTruthy } from 'utils/string';
 export const DEFAULT_STATE = {
 	multiDay: false,
 	allDay: false,
-	startDate: toDateTime( roundTime( moment() ) ),
+	start: toDateTime( roundTime( moment() ) ),
 	end: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
 	timezone: 'UTC',
 	dateTimeRangeSeparator: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),

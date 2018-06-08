@@ -49,7 +49,7 @@ export default {
 			source: 'meta',
 			meta: '_EventAllDay',
 		},
-		startDate: {
+		start: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventStartDate',

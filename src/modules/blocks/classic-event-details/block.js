@@ -177,19 +177,19 @@ export default class EventDetails extends Component {
 	}
 
 	renderStart() {
-		const { startDate } = this.props;
+		const { start } = this.props;
 
 		return (
 			<div onClick={ this.toggleDashboard }>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
-				{ toDate( toMoment( startDate ) ) }
+				{ toDate( toMoment( start ) ) }
 				{ this.renderStartTime() }
 			</div>
 		);
 	}
 
 	renderStartTime() {
-		const { allDay, startDate, dateTimeRangeSeparator } = this.props;
+		const { allDay, start, dateTimeRangeSeparator } = this.props;
 
 		if ( allDay ) {
 			return null;
@@ -198,7 +198,7 @@ export default class EventDetails extends Component {
 		return (
 			<React.Fragment>
 				<span>{ dateTimeRangeSeparator }</span>
-				<span>{ toTime( toMoment( startDate ) ) }</span>
+				<span>{ toTime( toMoment( start ) ) }</span>
 			</React.Fragment>
 		);
 	}

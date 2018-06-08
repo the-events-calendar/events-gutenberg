@@ -44,7 +44,7 @@ import { store, DEFAULT_STATE } from 'data/details';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 export const VALID_PROPS = [
-	'startDate',
+	'start',
 	'end',
 	'multiDay',
 	'dateTimeRangeSeparator',
@@ -136,27 +136,27 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderStartDate() {
-		const { startDate } = this.state;
+		const { start } = this.state;
 
 		return (
-			<span>{ toDate( toMoment( startDate ) ) }</span>
+			<span>{ toDate( toMoment( start ) ) }</span>
 		);
 	}
 
 	renderStartTime() {
-		const { startDate } = this.state;
+		const { start } = this.state;
 		const { time } = FORMATS.WP;
 
 		if ( this.isAllDay() ) {
 			return null;
 		}
 
-		const start = toMoment( startDate );
+		const startMoment = toMoment( start );
 
 		return (
 			<React.Fragment>
 				{ this.renderSeparator( 'date-time' ) }
-				{ start.format( toFormat( time ) ) }
+				{ startMoment.format( toFormat( time ) ) }
 			</React.Fragment>
 		);
 	}
@@ -203,7 +203,7 @@ export default class EventSubtitle extends Component {
 	 * @returns {boolean} if the event is happening on the same day
 	 */
 	isSameDay( start, end ) {
-		return toMoment( start || this.state.startDate )
+		return toMoment( start || this.state.start )
 			.isSame( toMoment( end || this.state.end ), 'day' );
 	}
 
@@ -305,11 +305,11 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderCalendars() {
-		const { multiDay, startDate, end } = this.state;
+		const { multiDay, start, end } = this.state;
 		const monthProps = {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
-			from: toMoment( startDate ).toDate(),
+			from: toMoment( start ).toDate(),
 		};
 
 		if ( ! this.isSameDay() ) {
@@ -336,12 +336,12 @@ export default class EventSubtitle extends Component {
 	};
 
 	renderStartTimePicker() {
-		const { startDate, allDay } = this.state;
+		const { start, allDay } = this.state;
 		const { time, date } = FORMATS.WP;
-		const start = toMoment( startDate );
+		const startMoment = toMoment( start );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
-			current: start,
+			current: startMoment,
 			timeFormat: time,
 		};
 
@@ -351,7 +351,7 @@ export default class EventSubtitle extends Component {
 
 		return (
 			<React.Fragment>
-				<span className="tribe-editor__time-picker__label">{ start.format( toFormat( date ) ) }</span>
+				<span className="tribe-editor__time-picker__label">{ startMoment.format( toFormat( date ) ) }</span>
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -374,7 +374,7 @@ export default class EventSubtitle extends Component {
 		}
 
 		const { time, date } = FORMATS.WP;
-		const start = toMoment( this.state.startDate );
+		const start = toMoment( this.state.start );
 		const end = toMoment( this.state.end );
 		const pickerProps = {
 			current: end,

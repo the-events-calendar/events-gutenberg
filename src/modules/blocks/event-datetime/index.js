@@ -34,7 +34,7 @@ export default {
 	},
 
 	attributes: {
-		startDate: {
+		start: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventStartDate',
