@@ -27,7 +27,7 @@ export const DEFAULT_STATE = {
 	start: toDateTime( roundTime( moment() ) ),
 	end: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
 	timezone: 'UTC',
-	dateTimeRangeSeparator: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
+	separatorDate: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
 	separatorTime: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
 	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
 	currencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
@@ -111,7 +111,7 @@ const details = {
 			case 'SET_DATE_TIME_SEPARATOR': {
 				return {
 					...state,
-					dateTimeRangeSeparator: action.separator,
+					separatorDate: action.separator,
 				};
 			}
 

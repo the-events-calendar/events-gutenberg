@@ -54,7 +54,7 @@ export default {
 			source: 'meta',
 			meta: '_EventTimezone',
 		},
-		dateTimeRangeSeparator: {
+		separatorDate: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventDateTimeSeparator',

@@ -47,7 +47,7 @@ export const VALID_PROPS = [
 	'start',
 	'end',
 	'multiDay',
-	'dateTimeRangeSeparator',
+	'separatorDate',
 	'separatorTime',
 	'timezone',
 	'allDay',
@@ -229,11 +229,11 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type, className ) {
-		const { timezone, dateTimeRangeSeparator, separatorTime } = this.state;
+		const { timezone, separatorDate, separatorTime } = this.state;
 		switch ( type ) {
 			case 'date-time':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>{ dateTimeRangeSeparator }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorDate }</span> );
 			case 'time-range':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorTime }</span> );
@@ -425,14 +425,14 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderControls() {
-		const { separatorTime, dateTimeRangeSeparator, timezone } = this.state;
+		const { separatorTime, separatorDate, timezone } = this.state;
 
 		return ( <InspectorControls key="inspector">
 			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
 				<TextControl
 					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
-					value={ dateTimeRangeSeparator }
-					onChange={ ( value ) => this.setState( { dateTimeRangeSeparator: value } ) }
+					value={ separatorDate }
+					onChange={ ( value ) => this.setState( { separatorDate: value } ) }
 					onBlur={ this.setDateTimeSeparator }
 				/>
 				<TextControl
@@ -459,7 +459,7 @@ export default class EventSubtitle extends Component {
 	setDateTimeSeparator = () => {
 		store.dispatch( {
 			type: 'SET_DATE_TIME_SEPARATOR',
-			separator: this.state.dateTimeRangeSeparator,
+			separator: this.state.separatorDate,
 		} );
 	};
 

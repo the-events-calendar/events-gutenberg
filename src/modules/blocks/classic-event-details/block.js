@@ -189,7 +189,7 @@ export default class EventDetails extends Component {
 	}
 
 	renderStartTime() {
-		const { allDay, start, dateTimeRangeSeparator } = this.props;
+		const { allDay, start, separatorDate } = this.props;
 
 		if ( allDay ) {
 			return null;
@@ -197,7 +197,7 @@ export default class EventDetails extends Component {
 
 		return (
 			<React.Fragment>
-				<span>{ dateTimeRangeSeparator }</span>
+				<span>{ separatorDate }</span>
 				<span>{ toTime( toMoment( start ) ) }</span>
 			</React.Fragment>
 		);
@@ -221,11 +221,11 @@ export default class EventDetails extends Component {
 			return null;
 		}
 
-		const { end, dateTimeRangeSeparator } = this.props;
+		const { end, separatorDate } = this.props;
 
 		return (
 			<React.Fragment>
-				<span>{ dateTimeRangeSeparator }</span>
+				<span>{ separatorDate }</span>
 				{ toTime( toMoment( end ) ) }
 			</React.Fragment>
 		);
