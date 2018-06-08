@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { noop, trim, isEmpty } from 'lodash';
+import { trim, isEmpty } from 'lodash';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -12,9 +12,6 @@ import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 
 import {
-	Dropdown,
-	IconButton,
-	Dashicon,
 	ToggleControl,
 	TextControl,
 	PanelBody,
@@ -22,7 +19,6 @@ import {
 
 import {
 	InspectorControls,
-	PlainText,
 } from '@wordpress/editor';
 
 /**
@@ -34,7 +30,7 @@ import {
 
 import { getSetting } from 'editor/settings';
 import './style.pcss';
-import { extractParts, parser, isFree } from 'utils/range';
+import { parser, isFree } from 'utils/range';
 
 /**
  * Module Code
