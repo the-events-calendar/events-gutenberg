@@ -121,9 +121,9 @@ export default class EventPrice extends Component {
 		const currencySymbol = this.getCurrencySymbol();
 		const { attributes } = this.props;
 		const { costDescription, cost } = attributes;
-		const cost = parser( cost );
+		const parsed = parser( cost );
 
-		const hasPrice = ! this.isEmpty( cost ) && ! isFree( cost );
+		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( parsed );
 		const hideCurrency = ! hasPrice && ! this.isEmpty( costDescription );
 
 		const currencyClassNames = classNames( [
@@ -160,17 +160,17 @@ export default class EventPrice extends Component {
 	renderCost() {
 		const { attributes } = this.props;
 		const { cost } = attributes;
-		const cost = parser( cost );
+		const parsed = parser( cost );
 
-		if ( this.isEmpty( cost ) ) {
+		if ( this.isEmpty( parsed ) ) {
 			return null;
 		}
 
-		if ( isFree( cost ) ) {
+		if ( isFree( parsed ) ) {
 			return null;
 		}
 
-		return <span className="tribe-editor__event-price__cost">{ cost }</span>;
+		return <span className="tribe-editor__event-price__cost">{ parsed }</span>;
 	}
 
 	renderDescription() {
