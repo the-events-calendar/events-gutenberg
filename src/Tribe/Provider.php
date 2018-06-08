@@ -37,6 +37,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.blocks.event-category', 'Tribe__Events_Gutenberg__Blocks__Event_Category' );
 		$this->container->singleton( 'gutenberg.blocks.event-tags', 'Tribe__Events_Gutenberg__Blocks__Event_Tags' );
 		$this->container->singleton( 'gutenberg.blocks.event-website', 'Tribe__Events_Gutenberg__Blocks__Event_Website' );
+		$this->container->singleton( 'gutenberg.blocks.featured-image', 'Tribe__Events_Gutenberg__Blocks__Featured_Image' );
 
 		$this->hook();
 
@@ -91,6 +92,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-category', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-tags', 'register' ) );
 		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.event-website', 'register' ) );
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.blocks.featured-image', 'register' ) );
 	}
 
 	/**

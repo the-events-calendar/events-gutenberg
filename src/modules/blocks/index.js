@@ -10,6 +10,7 @@ import eventPrice from 'blocks/event-price';
 import eventCategory from 'blocks/event-category';
 import eventTags from 'blocks/event-tags';
 import eventWebsite from 'blocks/event-website';
+import FeaturedImage from 'blocks/featured-image';
 
 import './style.pcss';
 
@@ -24,6 +25,7 @@ const blocks = [
 	eventCategory,
 	eventTags,
 	eventWebsite,
+	FeaturedImage,
 ];
 
 blocks.forEach( block => {
