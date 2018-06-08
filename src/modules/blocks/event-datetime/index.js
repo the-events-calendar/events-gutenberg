@@ -10,10 +10,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventSubtitle, { VALID_PROPS } from './block';
-import { store } from 'data/details';
-import { removeEmptyStrings, castBooleanStrings, diff } from 'utils/object';
-import { noop, pick, get } from 'lodash';
+import EventSubtitle from './block';
+import { pick } from 'lodash';
 
 /**
  * Module Code
@@ -87,32 +85,8 @@ export default {
 
 	edit: ( props ) => {
 
-		// Remove old subscription to avoid multiple renders of old references
-		if ( typeof this.unsubscribe === 'function' ) {
-			this.unsubscribe();
-		}
-
-		this.unsubscribe = store.subscribe( () => {
-			const setAttributes = get( props, 'setAttributes', noop );
-			const state = store.getState();
-			// Filter to only the ones that are valid for this component
-			const attributes = pick( state, VALID_PROPS );
-			// Filter the attributes as well to the ones relevant to this component
-			const prevAttributes = pick( get( props, 'attributes', {} ), VALID_PROPS );
-			// Update only the attributes with changes
-			setAttributes( diff( attributes, prevAttributes ) );
-		} );
-
-		const allowedProperties = pick( props, [ 'isSelected' ] );
-		const attributes = castBooleanStrings(
-			removeEmptyStrings(
-				get( props, 'attributes', {} )
-			)
-		);
-
 		const properties = {
-			...allowedProperties,
-			...attributes,
+			...pick( props, [ 'isSelected', 'attributes' ] ),
 		};
 
 		return <EventSubtitle { ...properties } />;
