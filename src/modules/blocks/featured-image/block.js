@@ -18,8 +18,6 @@ import {
 /**
  * Internal dependencies
  */
-import { getSetting } from 'editor/settings';
-import './style.pcss';
 
 /**
  * Module Code
@@ -46,15 +44,18 @@ class FeaturedImage extends Component {
 		);
 	}
 
-	renderLoading() {
+	renderImage() {
+		const { image } = this.props;
+		if ( null === image ) {
+			return this.renderPlaceholder();
+		}
+
+		if ( undefined === image ) {
+			return this.renderLoading();
+		}
+
 		return (
-			<Placeholder
-				style={ { minHeight: 150 } }
-				key="placeholder"
-				instructions={ __( 'Loading the Image', 'events-gutenberg' ) }
-			>
-				<Spinner/>
-			</Placeholder>
+			<img src={ image.source_url } />
 		);
 	}
 
@@ -70,18 +71,15 @@ class FeaturedImage extends Component {
 		);
 	}
 
-	renderImage() {
-		const { image } = this.props;
-		if ( null === image ) {
-			return this.renderPlaceholder();
-		}
-
-		if ( undefined === image ) {
-			return this.renderLoading();
-		}
-
+	renderLoading() {
 		return (
-			<img src={ image.source_url } />
+			<Placeholder
+				style={ { minHeight: 150 } }
+				key="placeholder"
+				instructions={ __( 'Loading the Image', 'events-gutenberg' ) }
+			>
+				<Spinner/>
+			</Placeholder>
 		);
 	}
 }
@@ -96,6 +94,4 @@ const applySelect = withSelect( ( select, props ) => {
 	};
 } );
 
-export default compose(
-	applySelect,
-)( FeaturedImage );
+export default applySelect( FeaturedImage );
