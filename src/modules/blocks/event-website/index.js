@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, noop, pick, isEqual } from 'lodash';
+import { get, noop, pick } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -11,9 +11,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventWebsite from './block';
+import EventWebsite, { VALID_PROPS } from './block';
 import { store } from 'data/details';
-import { VALID_PROPS } from './block';
 import { castBooleanStrings, removeEmptyStrings, diff } from 'utils/object';
 
 /**
@@ -35,10 +34,10 @@ export default {
 	},
 
 	attributes: {
-		eventUrlLabel: {
+		urlLabel: {
 			type: 'html',
 		},
-		eventUrl: {
+		url: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventURL',

@@ -1,20 +1,18 @@
 /**
  * External dependencies
  */
-import { get, noop, pick, isEqual } from 'lodash';
+import { get, pick } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { select } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
-import EventDetails, { VALID_PROPS } from './block';
-import { store, STORE_NAME } from 'data/details';
-import { castBooleanStrings, removeEmptyStrings, diff } from 'utils/object';
+import EventDetails from './block';
+import { castBooleanStrings, removeEmptyStrings } from 'utils/object';
 
 /**
  * Module Code
@@ -38,7 +36,7 @@ export default {
 		organizerTitle: {
 			type: 'html',
 		},
-		eventOrganizers: {
+		organizers: {
 			type: 'array',
 			source: 'meta',
 			meta: '_EventOrganizerID',
@@ -51,32 +49,32 @@ export default {
 			source: 'meta',
 			meta: '_EventAllDay',
 		},
-		startDate: {
+		start: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventStartDate',
 		},
-		endDate: {
+		end: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventEndDate',
 		},
-		eventUrl: {
+		url: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventURL',
 		},
-		eventCost: {
+		cost: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCost',
 		},
-		eventCurrencySymbol: {
+		currencySymbol: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCurrencySymbol',
 		},
-		eventCurrencyPosition: {
+		currencyPosition: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCurrencyPosition',

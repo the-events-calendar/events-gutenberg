@@ -43,15 +43,15 @@ import { store, DEFAULT_STATE } from 'data/details';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 export const VALID_PROPS = [
-	'startDate',
-	'endDate',
+	'start',
+	'end',
 	'multiDay',
-	'dateTimeRangeSeparator',
-	'timeRangeSeparator',
+	'separatorDate',
+	'separatorTime',
 	'timezone',
 	'allDay',
 
-	'eventCurrencySymbol',
+	'currencySymbol',
 	'currencyPosition',
 ];
 
@@ -108,7 +108,7 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderPrice() {
-		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.state;
+		const { setAttributes, cost, currencyPosition, currencySymbol } = this.state;
 
 		// Bail when not classic
 		if ( ! tribe_blocks_editor ) {
@@ -122,40 +122,40 @@ export default class EventSubtitle extends Component {
 
 		return (
 			<div className="tribe-editor__event-cost">
-				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
-					value={ eventCost }
+					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
+					onChange={ ( nextContent ) => setAttributes( { cost: nextContent } ) }
 				/>
-				{ 'suffix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
 		);
 	}
 
 	renderStartDate() {
-		const { startDate } = this.state;
+		const { start } = this.state;
 
 		return (
-			<span>{ toDate( toMoment( startDate ) ) }</span>
+			<span>{ toDate( toMoment( start ) ) }</span>
 		);
 	}
 
 	renderStartTime() {
-		const { startDate } = this.state;
+		const { start } = this.state;
 		const { time } = FORMATS.WP;
 
 		if ( this.isAllDay() ) {
 			return null;
 		}
 
-		const start = toMoment( startDate );
+		const startMoment = toMoment( start );
 
 		return (
 			<React.Fragment>
 				{ this.renderSeparator( 'date-time' ) }
-				{ start.format( toFormat( time ) ) }
+				{ startMoment.format( toFormat( time ) ) }
 			</React.Fragment>
 		);
 	}
@@ -174,14 +174,14 @@ export default class EventSubtitle extends Component {
 			return null;
 		}
 
-		const { endDate } = this.state;
+		const { end } = this.state;
 		return (
-			<span>{ toDate( toMoment( endDate ) ) }</span>
+			<span>{ toDate( toMoment( end ) ) }</span>
 		);
 	}
 
 	renderEndTime() {
-		const { endDate } = this.state;
+		const { end } = this.state;
 		const { time } = FORMATS.WP;
 
 		if ( this.isAllDay() ) {
@@ -191,7 +191,7 @@ export default class EventSubtitle extends Component {
 		return (
 			<React.Fragment>
 				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
-				{ toMoment( endDate ).format( toFormat( time ) ) }
+				{ toMoment( end ).format( toFormat( time ) ) }
 			</React.Fragment>
 		);
 	}
@@ -202,9 +202,8 @@ export default class EventSubtitle extends Component {
 	 * @returns {boolean} if the event is happening on the same day
 	 */
 	isSameDay( start, end ) {
-		const { startDate, endDate } = this.state;
-		return toMoment( start || startDate )
-			.isSame( toMoment( end || endDate ), 'day' );
+		return toMoment( start || this.state.start )
+			.isSame( toMoment( end || this.state.end ), 'day' );
 	}
 
 	/**
@@ -229,14 +228,14 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type, className ) {
-		const { timezone, dateTimeRangeSeparator, timeRangeSeparator } = this.state;
+		const { timezone, separatorDate, separatorTime } = this.state;
 		switch ( type ) {
 			case 'date-time':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>{ dateTimeRangeSeparator }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorDate }</span> );
 			case 'time-range':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>{ timeRangeSeparator }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorTime }</span> );
 			case 'dash':
 				return <span className={ classNames( 'tribe-editor__separator', className ) }> &mdash; </span>;
 			case 'all-day':
@@ -305,15 +304,15 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderCalendars() {
-		const { multiDay, startDate, endDate } = this.state;
+		const { multiDay, start, end } = this.state;
 		const monthProps = {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
-			from: toMoment( startDate ).toDate(),
+			from: toMoment( start ).toDate(),
 		};
 
 		if ( ! this.isSameDay() ) {
-			monthProps.to = toMoment( endDate ).toDate();
+			monthProps.to = toMoment( end ).toDate();
 		}
 
 		return (
@@ -336,12 +335,12 @@ export default class EventSubtitle extends Component {
 	};
 
 	renderStartTimePicker() {
-		const { startDate, allDay } = this.state;
+		const { start, allDay } = this.state;
 		const { time, date } = FORMATS.WP;
-		const start = toMoment( startDate );
+		const startMoment = toMoment( start );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
-			current: start,
+			current: startMoment,
 			timeFormat: time,
 		};
 
@@ -351,7 +350,7 @@ export default class EventSubtitle extends Component {
 
 		return (
 			<React.Fragment>
-				<span className="tribe-editor__time-picker__label">{ start.format( toFormat( date ) ) }</span>
+				<span className="tribe-editor__time-picker__label">{ startMoment.format( toFormat( date ) ) }</span>
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -374,8 +373,8 @@ export default class EventSubtitle extends Component {
 		}
 
 		const { time, date } = FORMATS.WP;
-		const start = toMoment( this.state.startDate );
-		const end = toMoment( this.state.endDate );
+		const start = toMoment( this.state.start );
+		const end = toMoment( this.state.end );
 		const pickerProps = {
 			current: end,
 			onSelectItem: this.setEndTime,
@@ -425,20 +424,20 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderControls() {
-		const { timeRangeSeparator, dateTimeRangeSeparator, timezone } = this.state;
+		const { separatorTime, separatorDate, timezone } = this.state;
 
 		return ( <InspectorControls key="inspector">
 			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
 				<TextControl
 					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
-					value={ dateTimeRangeSeparator }
-					onChange={ ( value ) => this.setState( { dateTimeRangeSeparator: value } ) }
+					value={ separatorDate }
+					onChange={ ( value ) => this.setState( { separatorDate: value } ) }
 					onBlur={ this.setDateTimeSeparator }
 				/>
 				<TextControl
 					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
-					value={ timeRangeSeparator }
-					onChange={ ( value ) => this.setState( { timeRangeSeparator: value } ) }
+					value={ separatorTime }
+					onChange={ ( value ) => this.setState( { separatorTime: value } ) }
 					onBlur={ this.setTimeRangeSeparator }
 				/>
 				<SelectControl
@@ -454,14 +453,14 @@ export default class EventSubtitle extends Component {
 	setDateTimeSeparator = () => {
 		store.dispatch( {
 			type: 'SET_DATE_TIME_SEPARATOR',
-			separator: this.state.dateTimeRangeSeparator,
+			separator: this.state.separatorDate,
 		} );
 	};
 
 	setTimeRangeSeparator = () => {
 		store.dispatch( {
 			type: 'SET_TIME_RANGE_SEPARATOR',
-			separator: this.state.timeRangeSeparator,
+			separator: this.state.separatorTime,
 		} );
 	};
 

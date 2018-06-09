@@ -21,7 +21,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependendencies
  */
-import { store, STORE_NAME } from 'data/organizers/block';
+import { store, STORE_NAME } from 'data/organizers';
 import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 import {
 	SearchOrCreate,
@@ -189,7 +189,6 @@ export default class EventOrganizer extends Component {
 		return (
 			<SearchOrCreate
 				id={ id }
-				store={ store }
 				storeName={ STORE_NAME }
 				selected={ selected }
 				icon={ <Dashicon icon="admin-users" size={ 22 } /> }

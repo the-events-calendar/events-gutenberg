@@ -45,6 +45,19 @@ export function blocks( state = {}, action ) {
 			const { [ action.id ]: deletedValue, ...rest } = state;
 			return rest;
 		}
+		case 'SET_TERM': {
+			const current = state[ action.id ];
+			return {
+				...state,
+				[ action.id ]: {
+					...current,
+					searches: {
+						search: action.term,
+						results: [],
+					},
+				},
+			};
+		}
 		case 'SEARCH':
 			return searchByTerm( state, action.id, action.payload );
 		case 'SET_RESULTS': {
@@ -117,6 +130,19 @@ export function blocks( state = {}, action ) {
 					...DEFAULT_BLOCK,
 				},
 			};
+		case 'CLEAR_SEARCH': {
+			const current = state[ action.id ];
+			return {
+				...state,
+				[ action.id ]: {
+					...current,
+					searches: {
+						search: '',
+						results: [],
+					},
+				},
+			};
+		}
 		default:
 			return state;
 	}
@@ -126,7 +152,7 @@ function searchByTerm( prevState, id, payload ) {
 	const { params, search } = payload;
 	const block = prevState[ id ];
 
-	if ( ! block ) {
+	if ( ! block || search === '' ) {
 		return prevState;
 	}
 

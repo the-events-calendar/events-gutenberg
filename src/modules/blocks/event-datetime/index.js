@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 import EventSubtitle, { VALID_PROPS } from './block';
 import { store } from 'data/details';
 import { removeEmptyStrings, castBooleanStrings, diff } from 'utils/object';
-import { noop, pick, get, isEqual } from 'lodash';
+import { noop, pick, get } from 'lodash';
 
 /**
  * Module Code
@@ -34,12 +34,12 @@ export default {
 	},
 
 	attributes: {
-		startDate: {
+		start: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventStartDate',
 		},
-		endDate: {
+		end: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventEndDate',
@@ -54,29 +54,29 @@ export default {
 			source: 'meta',
 			meta: '_EventTimezone',
 		},
-		dateTimeRangeSeparator: {
+		separatorDate: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventDateTimeSeparator',
 		},
-		timeRangeSeparator: {
+		separatorTime: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventTimeRangeSeparator',
 		},
 
 		// Only Avail for classic users
-		eventCost: {
+		cost: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCost',
 		},
-		eventCurrencySymbol: {
+		currencySymbol: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCurrencySymbol',
 		},
-		eventCurrencyPosition: {
+		currencyPosition: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventCurrencyPosition',

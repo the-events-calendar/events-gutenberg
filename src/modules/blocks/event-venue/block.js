@@ -39,7 +39,7 @@ import {
 } from 'elements';
 
 import VenueDetails from './venue';
-import { store, STORE_NAME } from 'data/venues';
+import { STORE_NAME } from 'data/search/venues';
 import { STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
 
 /**
@@ -49,7 +49,7 @@ import { STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
 class EventVenue extends Component {
 
 	static propTypes = {
-		eventVenueId: PropTypes.number,
+		venue: PropTypes.number,
 		venueID: PropTypes.number,
 		isSelected: PropTypes.bool,
 		loading: PropTypes.bool,
@@ -84,9 +84,9 @@ class EventVenue extends Component {
 			sendForm();
 		}
 
-		const { eventVenueId, venueID, setAttributes } = this.props;
-		if ( venueID !== eventVenueId ) {
-			setAttributes( { eventVenueId: venueID } );
+		const { venue, venueID, setAttributes } = this.props;
+		if ( venueID !== venue ) {
+			setAttributes( { venue: venueID } );
 		}
 	}
 
@@ -149,7 +149,6 @@ class EventVenue extends Component {
 		return (
 			<SearchOrCreate
 				icon={ <Dashicon icon="location" size={ 22 }/> }
-				store={ store }
 				storeName={ STORE_NAME }
 				selected={ isSelected }
 				onSelection={ this.setVenue }
@@ -250,6 +249,10 @@ class EventVenue extends Component {
 	renderControls() {
 		const { setAttributes, showMapLink, showMap } = this.props;
 
+		if ( ! this.hasVenue() ) {
+			return null;
+		}
+
 		return (
 			<InspectorControls key="inspector">
 				<PanelBody title={ __( 'Venue Map Settings' ) }>
@@ -271,7 +274,7 @@ class EventVenue extends Component {
 
 export default compose( [
 	withSelect( ( select, props ) => {
-		const { eventVenueId } = props;
+		const { venue } = props;
 		const {
 			getDetails,
 			getAddress,
@@ -285,7 +288,7 @@ export default compose( [
 		} = select( VENUE_STORE_NAME );
 
 		return {
-			details: getDetails( eventVenueId ),
+			details: getDetails( venue ),
 			address: getAddress(),
 			coordinates: getCoordinates(),
 			draft: getDraft(),

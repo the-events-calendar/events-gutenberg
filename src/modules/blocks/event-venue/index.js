@@ -32,7 +32,7 @@ export default {
 		venueTitle: {
 			type: 'html',
 		},
-		eventVenueId: {
+		venue: {
 			type: 'integer',
 			source: 'meta',
 			meta: '_EventVenueID',
@@ -55,7 +55,7 @@ export default {
 		const properties = {
 			...attributes,
 			...pick( rest, [ 'setAttributes', 'isSelected' ] ),
-			loading: !! attributes.eventVenueId,
+			loading: !! attributes.venue,
 		};
 
 		return (

@@ -37,12 +37,12 @@ import {
 import { default as EventOrganizers } from './organizers';
 
 import { toMoment, toDate, toTime } from 'utils/moment';
-import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers/block';
+import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers';
 import { store, STORE_NAME as DETAILS_STORE } from 'data/details';
 
 export const VALID_PROPS = [
-	'eventOrganizers',
-	'eventCurrencySymbol',
+	'organizers',
+	'currencySymbol',
 	'currencyPosition',
 ];
 
@@ -52,11 +52,11 @@ export const VALID_PROPS = [
 
 export default class EventDetails extends Component {
 	static defaultProps = {
-		eventOrganizers: [],
+		organizers: [],
 	};
 
 	static propTypes = {
-		eventOrganizers: PropTypes.array,
+		organizers: PropTypes.array,
 	};
 
 	constructor( props ) {
@@ -64,7 +64,7 @@ export default class EventDetails extends Component {
 
 		this.state = {
 			...props,
-			loading: ! ! props.eventOrganizers.length,
+			loading: ! ! props.organizers.length,
 		};
 		this.unsubscribe = noop;
 	}
@@ -76,9 +76,9 @@ export default class EventDetails extends Component {
 			// Pick relevant ones from store
 			const attributes = {
 				...pick( state, VALID_PROPS ),
-				eventOrganizers: select( DETAILS_STORE ).getOrganizers(),
+				organizers: select( DETAILS_STORE ).getOrganizers(),
 			};
-			setAttributes( { eventOrganizers: select( DETAILS_STORE ).getOrganizers() } );
+			setAttributes( { organizers: select( DETAILS_STORE ).getOrganizers() } );
 		} );
 
 		store.dispatch( {
@@ -121,7 +121,7 @@ export default class EventDetails extends Component {
 	renderOrganizer() {
 		const {
 			organizerTitle,
-			eventOrganizers,
+			organizers,
 			setAttributes,
 			setFocus,
 			focus,
@@ -142,7 +142,7 @@ export default class EventDetails extends Component {
 				/>
 				<EventOrganizers
 					focus={ focus }
-					organizers={ eventOrganizers }
+					organizers={ organizers }
 					organizersBlocks={ organizersBlocks }
 					addOrganizer={ nextOrganizer => {
 						store.dispatch( {
@@ -177,19 +177,19 @@ export default class EventDetails extends Component {
 	}
 
 	renderStart() {
-		const { startDate } = this.props;
+		const { start } = this.props;
 
 		return (
 			<div onClick={ this.toggleDashboard }>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
-				{ toDate( toMoment( startDate ) ) }
+				{ toDate( toMoment( start ) ) }
 				{ this.renderStartTime() }
 			</div>
 		);
 	}
 
 	renderStartTime() {
-		const { allDay, startDate, dateTimeRangeSeparator } = this.props;
+		const { allDay, start, separatorDate } = this.props;
 
 		if ( allDay ) {
 			return null;
@@ -197,18 +197,18 @@ export default class EventDetails extends Component {
 
 		return (
 			<React.Fragment>
-				<span>{ dateTimeRangeSeparator }</span>
-				<span>{ toTime( toMoment( startDate ) ) }</span>
+				<span>{ separatorDate }</span>
+				<span>{ toTime( toMoment( start ) ) }</span>
 			</React.Fragment>
 		);
 	}
 
 	renderEnd() {
-		const { endDate } = this.props;
+		const { end } = this.props;
 		return (
 			<div onClick={ this.toggleDashboard }>
 				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
-				{ toDate( toMoment( endDate ) ) }
+				{ toDate( toMoment( end ) ) }
 				{ this.renderEndTime() }
 			</div>
 		);
@@ -221,12 +221,12 @@ export default class EventDetails extends Component {
 			return null;
 		}
 
-		const { endDate, dateTimeRangeSeparator } = this.props;
+		const { end, separatorDate } = this.props;
 
 		return (
 			<React.Fragment>
-				<span>{ dateTimeRangeSeparator }</span>
-				{ toTime( toMoment( endDate ) ) }
+				<span>{ separatorDate }</span>
+				{ toTime( toMoment( end ) ) }
 			</React.Fragment>
 		);
 	}
@@ -236,33 +236,33 @@ export default class EventDetails extends Component {
 	};
 
 	renderWebsite() {
-		const { eventUrl, setAttributes } = this.props;
+		const { url, setAttributes } = this.props;
 		return (
 			<div>
 				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
 				<PlainText
 					id="tribe-event-url"
-					value={ eventUrl }
+					value={ url }
 					placeholder={ __( 'Enter url', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { eventUrl: nextContent } ) }
+					onChange={ ( nextContent ) => setAttributes( { url: nextContent } ) }
 				/>
 			</div>
 		);
 	}
 
 	renderCost() {
-		const { setAttributes, eventCost, currencyPosition, eventCurrencySymbol } = this.props;
+		const { setAttributes, cost, currencyPosition, currencySymbol } = this.props;
 		return (
 			<div className="tribe-editor__event-cost">
 				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
-				{ 'prefix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
-					value={ eventCost }
+					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { eventCost: nextContent } ) }
+					onChange={ ( nextContent ) => setAttributes( { cost: nextContent } ) }
 				/>
-				{ 'suffix' === currencyPosition && <span>{ eventCurrencySymbol }</span> }
+				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
 		);
 	}
@@ -286,7 +286,7 @@ export default class EventDetails extends Component {
 	}
 
 	renderControls() {
-		const { isSelected, allDay, setAttributes, currencyPosition, eventCurrencySymbol } = this.props;
+		const { isSelected, allDay, setAttributes, currencyPosition, currencySymbol } = this.props;
 
 		if ( ! isSelected ) {
 			return null;
@@ -305,13 +305,13 @@ export default class EventDetails extends Component {
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
 						checked={ 'prefix' === currencyPosition }
-						onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
+						onChange={ ( value ) => setAttributes( { currencyPosition: value ? 'prefix' : 'suffix' } ) }
 					/>
 					<TextControl
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
-						value={ eventCurrencySymbol }
+						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ ( value ) => setAttributes( { eventCurrencySymbol: value } ) }
+						onChange={ ( value ) => setAttributes( { currencySymbol: value } ) }
 					/>
 				</PanelBody>
 			</InspectorControls>

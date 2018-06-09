@@ -32,7 +32,7 @@ import { isTruthy } from 'utils/string';
  * @returns {object} new state object
  */
 export function setMultiDay( prevState, multiDay ) {
-	const { startDate, endDate } = prevState;
+	const { start, end } = prevState;
 
 	if ( multiDay ) {
 		return getMultiDayDates( prevState );
@@ -44,27 +44,27 @@ export function setMultiDay( prevState, multiDay ) {
 	 *
 	 * after this point we can assure we are setting multiday to off
 	 */
-	const start = toMoment( startDate );
+	const startMoment = toMoment( start );
 	const state = {
 		multiDay,
-		startDate,
-		endDate,
+		start,
+		end,
 	};
 
-	const sameDay = isSameDay( start, toMoment( endDate ) );
+	const sameDay = isSameDay( startMoment, toMoment( end ) );
 	if ( ! sameDay ) {
 		const lastBlockOfTheDay = DAY_IN_SECONDS - HALF_HOUR_IN_SECONDS;
 		// Make sure we don't overflow if start is on the last block of the day which is 11:30
 		// As if we just add 30 more minutes we are going to overflow again.
-		if ( totalSeconds( start ) === lastBlockOfTheDay ) {
-			state.startDate = toDateTime( start.subtract( HALF_HOUR_IN_SECONDS, 'seconds' ) );
+		if ( totalSeconds( startMoment ) === lastBlockOfTheDay ) {
+			state.start = toDateTime( startMoment.subtract( HALF_HOUR_IN_SECONDS, 'seconds' ) );
 		}
-		state.endDate = toDateTime(
-			toMoment( state.startDate ).add( HALF_HOUR_IN_SECONDS, 'seconds' ),
+		state.end = toDateTime(
+			toMoment( state.start ).add( HALF_HOUR_IN_SECONDS, 'seconds' ),
 		);
 	}
 
-	state.allDay = isAllDay( toMoment( state.startDate ), toMoment( state.endDate ) );
+	state.allDay = isAllDay( toMoment( state.start ), toMoment( state.end ) );
 
 	return {
 		...prevState,
@@ -84,8 +84,8 @@ export function setAllDay( prevState, allDay ) {
 		return getAllDayDates( prevState );
 	}
 
-	const { startDate } = prevState;
-	return setStartDate( prevState, startDate );
+	const { start } = prevState;
+	return setStartDate( prevState, start );
 }
 
 /**
@@ -101,9 +101,9 @@ export function setStartTime( prevState, seconds ) {
 		return getAllDayDates( prevState );
 	}
 
-	const { startDate } = prevState;
-	const start = setTimeInSeconds( toMoment( startDate ), seconds );
-	return setStartDate( prevState, toDateTime( start ) );
+	const { start } = prevState;
+	const startSeconds = setTimeInSeconds( toMoment( start ), seconds );
+	return setStartDate( prevState, toDateTime( startSeconds ) );
 }
 
 /**
@@ -119,13 +119,13 @@ export function setEndTime( prevState, seconds ) {
 		return getAllDayDates( prevState );
 	}
 
-	const { startDate } = prevState;
-	const end = setTimeInSeconds( toMoment( startDate ), seconds );
+	const { start } = prevState;
+	const end = setTimeInSeconds( toMoment( start ), seconds );
 	return setEndDate( prevState, toDateTime( end ) );
 }
 
 export function setInitialState( prevState, values ) {
-	const state = setInitialDates( values, values.startDate, values.endDate );
+	const state = setInitialDates( values, values.start, values.end );
 
 	return {
 		...prevState,
@@ -133,23 +133,23 @@ export function setInitialState( prevState, values ) {
 	};
 }
 
-export function setInitialDates( prevState = {}, startDate = '', endDate = '' ) {
-	let start = toMoment( startDate );
-	let end = toMoment( endDate );
+export function setInitialDates( prevState = {}, start = '', end = '' ) {
+	let startMoment = toMoment( start );
+	let endMoment = toMoment( end );
 
-	if ( ! start.isValid() ) {
-		start = roundTime( moment() );
+	if ( ! startMoment.isValid() ) {
+		startMoment = roundTime( moment() );
 	}
 
-	if ( ! end.isValid() ) {
-		end = roundTime( moment() );
+	if ( ! endMoment.isValid() ) {
+		endMoment = roundTime( moment() );
 	}
 
 	const state = {
 		...prevState,
-		endDate: toDateTime( end ),
+		end: toDateTime( endMoment ),
 	};
-	return state.allDay ? state : setStartDate( state, toDateTime( start ) );
+	return state.allDay ? state : setStartDate( state, toDateTime( startMoment ) );
 }
 
 export function setOnlyDateForStart( prevState, date ) {
@@ -157,13 +157,13 @@ export function setOnlyDateForStart( prevState, date ) {
 		return prevState;
 	}
 
-	const { startDate } = prevState;
-	const start = replaceDate(
-		toMoment( startDate ),
+	const { start } = prevState;
+	const startMoment = replaceDate(
+		toMoment( start ),
 		roundTime( toMoment( date ) ),
 	);
 
-	return setStartDate( prevState, toDateTime( start ) );
+	return setStartDate( prevState, toDateTime( startMoment ) );
 }
 
 export function setOnlyDateForEnd( prevState, date ) {
@@ -171,25 +171,25 @@ export function setOnlyDateForEnd( prevState, date ) {
 		return prevState;
 	}
 
-	const { endDate } = prevState;
-	const end = replaceDate(
-		toMoment( endDate ),
+	const { end } = prevState;
+	const endMoment = replaceDate(
+		toMoment( end ),
 		roundTime( toMoment( date ) ),
 	);
 
-	return setEndDate( prevState, toDateTime( end ) );
+	return setEndDate( prevState, toDateTime( endMoment ) );
 }
 
 export function setStartDate( prevState, date ) {
-	const { endDate } = prevState;
+	const { end } = prevState;
 	const state = {
-		startDate: roundTime( toMoment( date ) ),
-		endDate: roundTime( toMoment( endDate ) ),
+		start: roundTime( toMoment( date ) ),
+		end: roundTime( toMoment( end ) ),
 	};
 
 	const start = roundTime( toMoment( date ) );
-	if ( state.endDate.isSameOrBefore( start ) ) {
-		state.endDate = start.add( HALF_HOUR_IN_SECONDS, 'seconds' );
+	if ( state.end.isSameOrBefore( start ) ) {
+		state.end = start.add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
 
 	return {
@@ -198,34 +198,34 @@ export function setStartDate( prevState, date ) {
 	};
 }
 
-function isAllDay( startDate, endDate ) {
-	const sameDay = isSameDay( toMoment( startDate ), toMoment( endDate ) );
+function isAllDay( start, end ) {
+	const sameDay = isSameDay( toMoment( start ), toMoment( end ) );
 
 	if ( ! sameDay ) {
 		return false;
 	}
 
-	const isStartOfTheDay = totalSeconds( startDate ) === 0;
-	const isEndOfTheDay = totalSeconds( endDate ) === ( DAY_IN_SECONDS - 1 );
+	const isStartOfTheDay = totalSeconds( start ) === 0;
+	const isEndOfTheDay = totalSeconds( end ) === ( DAY_IN_SECONDS - 1 );
 	return isStartOfTheDay && isEndOfTheDay;
 }
 
 function setEndDate( prevState, date ) {
-	const { startDate } = prevState;
+	const { start } = prevState;
 	const state = {
-		startDate: roundTime( toMoment( startDate ) ),
-		endDate: roundTime( toMoment( date ) ),
+		start: roundTime( toMoment( start ) ),
+		end: roundTime( toMoment( date ) ),
 	};
 
-	if ( state.endDate.isBefore( state.startDate ) ) {
+	if ( state.end.isBefore( state.start ) ) {
 		// Swap dates if end date is before start date
-		const [ end, start ] = [ state.startDate, state.endDate ];
-		state.startDate = start;
-		state.endDate = end;
+		const [ end, start ] = [ state.start, state.end ];
+		state.start = start;
+		state.end = end;
 	}
 
-	if ( state.endDate.isSame( state.startDate ) ) {
-		state.endDate = toMoment( state.startDate ).add( HALF_HOUR_IN_SECONDS, 'seconds' );
+	if ( state.end.isSame( state.start ) ) {
+		state.end = toMoment( state.start ).add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
 
 	return {
@@ -237,22 +237,22 @@ function setEndDate( prevState, date ) {
 function adjustEventPropertiesFromMoment( state ) {
 	return {
 		...state,
-		multiDay: ! isSameDay( state.endDate, state.startDate ),
-		allDay: isAllDay( state.startDate, state.endDate ),
-		startDate: toDateTime( state.startDate ),
-		endDate: toDateTime( state.endDate ),
+		multiDay: ! isSameDay( state.end, state.start ),
+		allDay: isAllDay( state.start, state.end ),
+		start: toDateTime( state.start ),
+		end: toDateTime( state.end ),
 	};
 }
 
 function getAllDayDates( prevState ) {
-	const { startDate } = prevState;
-	const start = setTimeInSeconds( toMoment( startDate ), 0 );
-	const end = toMoment( startDate ).endOf( 'day' );
+	const { start } = prevState;
+	const startSeconds = setTimeInSeconds( toMoment( start ), 0 );
+	const end = toMoment( start ).endOf( 'day' );
 	const state = {
-		startDate: toDateTime( start ),
+		start: toDateTime( startSeconds ),
 		allDay: true,
 		multiDay: false,
-		endDate: toDateTime( end ),
+		end: toDateTime( end ),
 	};
 
 	return {
@@ -262,21 +262,21 @@ function getAllDayDates( prevState ) {
 }
 
 function getMultiDayDates( prevState ) {
-	const { startDate, endDate } = prevState;
-	const start = toMoment( startDate );
+	const { start, end } = prevState;
+	const startMoment = toMoment( start );
 	const state = {
 		...prevState,
 		multiDay: true,
 		allDay: false,
-		startDate,
-		endDate,
+		start,
+		end,
 	};
 
-	if ( isSameDay( start, toMoment( state.endDate ) ) ) {
+	if ( isSameDay( startMoment, toMoment( state.end ) ) ) {
 		// Add 3 days if we are going to set a dynamic range when start and end are on the same day
 		const range = DAY_IN_SECONDS * 3;
-		state.endDate = toDateTime(
-			toMoment( startDate ).add( range, 'seconds' ),
+		state.end = toDateTime(
+			toMoment( start ).add( range, 'seconds' ),
 		);
 	}
 
@@ -286,61 +286,61 @@ function getMultiDayDates( prevState ) {
 export function setOrganizers( prevState, organizer ) {
 	return {
 		...prevState,
-		eventOrganizers: organizer,
+		organizers: organizer,
 	};
 }
 
 export function addOrganizers( prevState, organizer ) {
 	return {
 		...prevState,
-		eventOrganizers: [ ...prevState.eventOrganizers, organizer ],
+		organizers: [ ...prevState.organizers, organizer ],
 	};
 }
 
 export function removeOrganizer( prevState, organizer ) {
 	return {
 		...prevState,
-		eventOrganizers: prevState.eventOrganizers.filter( ( item ) => item.id !== organizer.id ),
+		organizers: prevState.organizers.filter( ( item ) => item.id !== organizer.id ),
 	};
 }
 
 export function maybeRemoveOrganizer( prevState, organizer ) {
-	const { eventOrganizers } = prevState;
-	const result = find( eventOrganizers, ( item ) => {
+	const { organizers } = prevState;
+	const result = find( organizers, ( item ) => {
 		const { id, block } = item;
 		return block === 'individual' && id === organizer.id;
 	} );
 
-	let organizers = [ ...eventOrganizers ];
+	let selectedOrganizers = [ ...organizers ];
 	if ( result && result.id ) {
-		organizers = organizers.filter( ( item ) => item.id !== result.id );
+		selectedOrganizers = selectedOrganizers.filter( ( item ) => item.id !== result.id );
 	}
 
 	return {
 		...prevState,
-		eventOrganizers: organizers,
+		organizers: selectedOrganizers,
 	};
 }
 
-export function replaceOrganizers( prevState, organizers ) {
-	const { eventOrganizers } = prevState;
-	const current = eventOrganizers.map( ( item ) => {
+export function replaceOrganizers( prevState, newOrganizers ) {
+	const { organizers } = prevState;
+	const current = organizers.map( ( item ) => {
 		if ( isObject( item ) ) {
 			return item;
 		}
-		const search = organizers.filter( ( organizer ) => organizer.id === item );
+		const search = newOrganizers.filter( ( organizer ) => organizer.id === item );
 		return search.length ? search[ 0 ] : item;
 	} );
 	return {
 		...prevState,
-		eventOrganizers: current,
+		organizers: current,
 	};
 }
 
 export function setCurrencySymbol( prevState, symbol ) {
 	return {
 		...prevState,
-		eventCurrencySymbol: symbol,
+		currencySymbol: symbol,
 	};
 }
 
@@ -355,6 +355,6 @@ export function setCurrencyPosition( prevState, hasPosition ) {
 export function setWebsiteUrl( prevState, url ) {
 	return {
 		...prevState,
-		eventUrl: url,
+		url,
 	};
 }

@@ -92,11 +92,11 @@ export default class EventPrice extends Component {
 
 	getCurrencyPosition() {
 		const { attributes } = this.props;
-		const { eventCurrencyPosition } = attributes;
+		const { currencyPosition } = attributes;
 
 		// If we have it saved we replace it
-		if ( eventCurrencyPosition ) {
-			return eventCurrencyPosition;
+		if ( currencyPosition ) {
+			return currencyPosition;
 		}
 
 		return '1' === getSetting( 'reverseCurrencyPosition', 0 ) ? 'suffix' : 'prefix';
@@ -104,10 +104,10 @@ export default class EventPrice extends Component {
 
 	getCurrencySymbol() {
 		const { attributes } = this.props;
-		const { eventCurrencySymbol } = attributes;
+		const { currencySymbol } = attributes;
 
-		if ( eventCurrencySymbol ) {
-			return eventCurrencySymbol;
+		if ( currencySymbol ) {
+			return currencySymbol;
 		}
 
 		return getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) );
@@ -120,11 +120,11 @@ export default class EventPrice extends Component {
 	renderCurrency() {
 		const currencySymbol = this.getCurrencySymbol();
 		const { attributes } = this.props;
-		const { eventCostDescription, eventCost } = attributes;
-		const cost = parser( eventCost );
+		const { costDescription, cost } = attributes;
+		const parsed = parser( cost );
 
-		const hasPrice = ! this.isEmpty( cost ) && ! isFree( cost );
-		const hideCurrency = ! hasPrice && ! this.isEmpty( eventCostDescription );
+		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( parsed );
+		const hideCurrency = ! hasPrice && ! this.isEmpty( costDescription );
 
 		const currencyClassNames = classNames( [
 			'tribe-editor__event-price__currency',
@@ -146,9 +146,9 @@ export default class EventPrice extends Component {
 		}
 
 		const { attributes } = this.props;
-		const { eventCost } = attributes;
+		const { cost } = attributes;
 
-		if ( ! this.isEmpty( eventCost ) ) {
+		if ( ! this.isEmpty( cost ) ) {
 			return null;
 		}
 
@@ -159,29 +159,29 @@ export default class EventPrice extends Component {
 
 	renderCost() {
 		const { attributes } = this.props;
-		const { eventCost } = attributes;
-		const cost = parser( eventCost );
+		const { cost } = attributes;
+		const parsed = parser( cost );
 
-		if ( this.isEmpty( cost ) ) {
+		if ( this.isEmpty( parsed ) ) {
 			return null;
 		}
 
-		if ( isFree( cost ) ) {
+		if ( isFree( parsed ) ) {
 			return null;
 		}
 
-		return <span className="tribe-editor__event-price__cost">{ cost }</span>;
+		return <span className="tribe-editor__event-price__cost">{ parsed }</span>;
 	}
 
 	renderDescription() {
 		const { attributes } = this.props;
-		const { eventCostDescription } = attributes;
+		const { costDescription } = attributes;
 
-		if ( this.isEmpty( eventCostDescription ) ) {
+		if ( this.isEmpty( costDescription ) ) {
 			return null;
 		}
 
-		return <span className="tribe-editor__event-price__description">{ eventCostDescription }</span>;
+		return <span className="tribe-editor__event-price__description">{ costDescription }</span>;
 	}
 
 	toggleDashboard = () => {
@@ -194,7 +194,7 @@ export default class EventPrice extends Component {
 
 	renderDashboard() {
 		const { attributes } = this.props;
-		const { eventCost, eventCostDescription } = attributes;
+		const { cost, costDescription } = attributes;
 
 		return (
 			<Dashboard
@@ -209,16 +209,16 @@ export default class EventPrice extends Component {
 						name="description"
 						type="text"
 						placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-						onChange={ ( event ) => this.saveAttribute( event.target.value, 'eventCost' ) }
-						value={ eventCost }
+						onChange={ ( event ) => this.saveAttribute( event.target.value, 'cost' ) }
+						value={ cost }
 					/>
 					<input
 						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
 						name="description"
 						type="text"
 						placeholder={ __( 'Description', 'events-gutenberg' ) }
-						onChange={ ( event ) => this.saveAttribute( event.target.value, 'eventCostDescription' ) }
-						value={ eventCostDescription || '' }
+						onChange={ ( event ) => this.saveAttribute( event.target.value, 'costDescription' ) }
+						value={ costDescription || '' }
 					/>
 				</section>
 				<footer className="tribe-editor__event-price__dashboard__footer">
@@ -241,9 +241,9 @@ export default class EventPrice extends Component {
 
 	onOpenDashboard = () => {
 		const { setAttributes, attributes } = this.props;
-		const { eventCost } = attributes;
+		const { cost } = attributes;
 		setAttributes( {
-			eventCost: parser( eventCost ),
+			cost: parser( cost ),
 		} );
 	};
 
@@ -261,12 +261,12 @@ export default class EventPrice extends Component {
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ this.getCurrencySymbol() }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ ( value ) => setAttributes( { eventCurrencySymbol: value } ) }
+						onChange={ ( value ) => setAttributes( { currencySymbol: value } ) }
 					/>
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
 						checked={ 'prefix' === this.getCurrencyPosition() }
-						onChange={ ( value ) => setAttributes( { eventCurrencyPosition: value ? 'prefix' : 'suffix' } ) }
+						onChange={ ( value ) => setAttributes( { currencyPosition: value ? 'prefix' : 'suffix' } ) }
 					/>
 				</PanelBody>
 			</InspectorControls>

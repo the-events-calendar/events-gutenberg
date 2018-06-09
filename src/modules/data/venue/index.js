@@ -144,6 +144,11 @@ const actions = {
 			type: 'CLEAR',
 		};
 	},
+	clearSearch() {
+		return {
+			type: 'CLEAR_SEARCH',
+		}
+	},
 };
 
 const selectors = {

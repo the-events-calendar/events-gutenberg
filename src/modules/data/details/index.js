@@ -3,7 +3,7 @@
  */
 import moment from 'moment/moment';
 import { __ } from '@wordpress/i18n';
-import { identity, isObject } from 'lodash';
+import { isObject } from 'lodash';
 
 /**
  * Wordpress dependencies
@@ -24,16 +24,16 @@ import { isTruthy } from 'utils/string';
 export const DEFAULT_STATE = {
 	multiDay: false,
 	allDay: false,
-	startDate: toDateTime( roundTime( moment() ) ),
-	endDate: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
+	start: toDateTime( roundTime( moment() ) ),
+	end: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
 	timezone: 'UTC',
-	dateTimeRangeSeparator: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
-	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
+	separatorDate: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
+	separatorTime: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
 	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
-	eventCurrencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
+	currencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
 	dashboardOpen: false,
-	eventOrganizers: [],
-	eventUrl: undefined,
+	organizers: [],
+	url: undefined,
 };
 
 export const STORE_NAME = 'tec.details';
@@ -105,20 +105,20 @@ const details = {
 			}
 
 			case 'SET_WEBSITE_URL': {
-				return reducers.setWebsiteUrl( state, action.eventUrl );
+				return reducers.setWebsiteUrl( state, action.url );
 			}
 
 			case 'SET_DATE_TIME_SEPARATOR': {
 				return {
 					...state,
-					dateTimeRangeSeparator: action.separator,
+					separatorDate: action.separator,
 				};
 			}
 
 			case 'SET_TIME_RANGE_SEPARATOR': {
 				return {
 					...state,
-					timeRangeSeparator: action.separator,
+					separatorTime: action.separator,
 				};
 			}
 
@@ -169,8 +169,8 @@ const details = {
 	},
 	selectors: {
 		getOrganizers( state ) {
-			const { eventOrganizers } = state;
-			return eventOrganizers
+			const { organizers } = state;
+			return organizers
 				.filter( isObject )
 				.map( ( item ) => item.id );
 		},

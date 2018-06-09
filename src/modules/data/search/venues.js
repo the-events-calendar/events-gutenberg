@@ -1,7 +1,7 @@
 import { stringify } from 'querystringify';
-import { get } from 'lodash';
 
 import { select } from '@wordpress/data';
+
 const { data, apiRequest } = wp;
 const { registerStore } = data;
 import { getResponseHeaders } from 'utils/request';
@@ -22,6 +22,13 @@ export const store = registerStore( STORE_NAME, {
 			case 'SEARCH': {
 				return search( state, action.payload );
 			}
+			case 'SET_TERM': {
+				return {
+					...state,
+					search: action.term,
+				};
+			}
+			case 'CLEAR_SEARCH':
 			case 'CLEAR': {
 				return {
 					...state,
@@ -34,7 +41,7 @@ export const store = registerStore( STORE_NAME, {
 				return {
 					...state,
 					...action.response,
-				}
+				};
 			}
 			default: {
 				return state;
@@ -52,31 +59,60 @@ export const store = registerStore( STORE_NAME, {
 				loading,
 			};
 		},
+		getLoading( state ) {
+			return state.loading;
+		},
+		getResults( state ) {
+			return state.results;
+		},
 	},
-
+	actions: {
+		setTerm( id, term ) {
+			return {
+				type: 'SET_TERM',
+				term,
+			};
+		},
+		clear( id ) {
+			return {
+				type: 'CLEAR',
+				results: [],
+				id,
+			};
+		},
+		clearSearch() {
+			return {
+				type: 'CLEAR_SEARCH',
+			};
+		},
+		search( id, payload ) {
+			return {
+				type: 'SEARCH',
+				id,
+				payload,
+			};
+		},
+	},
 } );
 
 function search( state, payload ) {
 	const { params } = payload;
 	const term = payload.search;
 
-	if ( state.search === term ) {
-		return state;
-	}
-
 	const { page, total, type } = state;
-	if ( total && page > total ) {
+	if ( total && page > total || term === '' ) {
 		return state;
 	}
 
-	const query = Object.assign( {}, {
+	const query = {
 		per_page: 30,
 		orderby: 'title',
 		status: [ 'draft', 'publish' ],
 		order: 'asc',
 		page,
 		search: term,
-	}, params );
+		...params,
+	};
 
 	apiRequest( {
 		path: `/wp/v2/${ type }?${ stringify( query ) }`,
