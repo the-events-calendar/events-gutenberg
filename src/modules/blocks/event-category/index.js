@@ -18,7 +18,7 @@ import EventCategory from './block';
 export default {
 	id: 'event-category',
 	title: __( 'Event Category', 'events-gutenberg' ),
-	description: __( 'Display your Event Categories.', 'events-gutenberg' ),
+	description: __( 'Show assigned event categories as links to their respective archives.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
