@@ -19,7 +19,7 @@ export default {
 	id: 'event-links',
 	title: __( 'Event Sharing', 'events-gutenberg' ),
 	description: __(
-		'Display buttons so visitors can add this event to their calendar.',
+		'Encourage visitors to add your event to their calendars with handy sharing buttons.',
 		'events-gutenberg'
 	),
 	icon: 'calendar',
