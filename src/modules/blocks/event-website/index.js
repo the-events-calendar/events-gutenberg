@@ -22,7 +22,7 @@ export default {
 	id: 'event-website',
 	title: __( 'Event Website', 'events-gutenberg' ),
 	description: __(
-		'Display a button to control the Event Website link.',
+		'Is there another website for this event? Link to it with a button!',
 		'events-gutenberg'
 	),
 	icon: 'calendar',
