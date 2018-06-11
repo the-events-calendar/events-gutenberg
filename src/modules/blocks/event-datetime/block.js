@@ -54,6 +54,7 @@ class EventDateTime extends Component {
 		allDay: PropTypes.bool,
 		multiDay: PropTypes.bool,
 		dashboardOpen: PropTypes.bool,
+		cost: PropTypes.string,
 		start: PropTypes.string,
 		end: PropTypes.string,
 		separatorDate: PropTypes.string,
@@ -62,6 +63,17 @@ class EventDateTime extends Component {
 		currencySymbol: PropTypes.string,
 		currencyPosition: PropTypes.string,
 		setInitialState: PropTypes.func,
+		setCost: PropTypes.func,
+		setAllDay: PropTypes.func,
+		toggleDashboard: PropTypes.func,
+		setStartDate: PropTypes.func,
+		setEndDate: PropTypes.func,
+		setStartTime: PropTypes.func,
+		setEndTime: PropTypes.func,
+		setMultiDay: PropTypes.func,
+		setTimeZone: PropTypes.func,
+		setSeparatorTime: PropTypes.func,
+		setSeparatorDate: PropTypes.func,
 	};
 
 	constructor() {
