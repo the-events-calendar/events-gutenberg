@@ -20,7 +20,6 @@ import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import * as reducers from './reducers';
 import { getSetting } from 'editor/settings';
 import { isTruthy } from 'utils/string';
-import { toMoment } from 'editor/utils/moment';
 
 export const DEFAULT_STATE = {
 	multiDay: false,
@@ -35,7 +34,7 @@ export const DEFAULT_STATE = {
 	dashboardOpen: false,
 	organizers: [],
 	url: undefined,
-	cost: undefined,
+	cost: '',
 };
 
 export const STORE_NAME = 'tec.details';
@@ -104,6 +103,13 @@ const details = {
 
 			case 'SET_CURRENCY_POSITION': {
 				return reducers.setCurrencyPosition( state, action.position );
+			}
+
+			case 'SET_COST': {
+				return {
+					...state,
+					cost: action.cost,
+				};
 			}
 
 			case 'SET_WEBSITE_URL': {
