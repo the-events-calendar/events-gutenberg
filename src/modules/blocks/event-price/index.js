@@ -33,6 +33,9 @@ export default {
 			source: 'meta',
 			meta: '_EventCost',
 		},
+		costDescription: {
+			type: 'html',
+		},
 		currencySymbol: {
 			type: 'string',
 			source: 'meta',
