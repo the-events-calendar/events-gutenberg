@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventSubtitle from './block';
+import EventDateTime from './block';
 import { pick } from 'lodash';
 
 /**
@@ -62,8 +62,7 @@ export default {
 			source: 'meta',
 			meta: '_EventTimeRangeSeparator',
 		},
-
-		// Only Avail for classic users
+		// Only Available for classic users
 		cost: {
 			type: 'string',
 			source: 'meta',
@@ -83,14 +82,7 @@ export default {
 
 	useOnce: true,
 
-	edit: ( props ) => {
-
-		const properties = {
-			...pick( props, [ 'isSelected', 'attributes' ] ),
-		};
-
-		return <EventSubtitle { ...properties } />;
-	},
+	edit: EventDateTime,
 
 	save( props ) {
 		return null;
