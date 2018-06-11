@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { Component, compose } from '@wordpress/element';
 
 import { withDispatch, withSelect } from '@wordpress/data';
-import saveData from 'utils/save-data';
+import withSaveData from 'utils/with-save-data';
 
 import {
 	ToggleControl,
@@ -326,5 +326,5 @@ export default compose( [
 			removeOrganizer,
 		};
 	} ),
-	saveData(),
+	withSaveData(),
 ] )( EventDetails );
