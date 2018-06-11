@@ -88,7 +88,7 @@ export function roundTime( date ) {
  * Convert a Date() object into a Moment.js object avoiding warnings of different formats
  * used by Date
  *
- * @param {Date} date The date to be converted.
+ * @param {(Date|moment|string)} date The date to be converted.
  * @param {string} format The format of the data to be used
  * @returns {Moment} A moment object
  */
