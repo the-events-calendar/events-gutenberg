@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.2.2-alpha - TBD
+
+* Feature - Featured Image Block for Events
+
 #### 0.2.1-alpha - 2018-06-01
 
 * Feature - Event Organizer is now a standalone block

@@ -108,6 +108,7 @@ class Tribe__Events_Gutenberg__Editor {
 		// Basically setups up a diferent template if is a classic event
 		if ( $is_classic_editor ) {
 			$template[] = array( 'tribe/event-datetime' );
+			$template[] = array( 'tribe/featured-image' );
 			$template[] = array(
 				'core/paragraph',
 				array(
@@ -119,6 +120,7 @@ class Tribe__Events_Gutenberg__Editor {
 			$template[] = array( 'tribe/event-venue' );
 		} else {
 			$template[] = array( 'tribe/event-datetime' );
+			$template[] = array( 'tribe/featured-image' );
 			$template[] = array(
 				'core/paragraph',
 				array(
