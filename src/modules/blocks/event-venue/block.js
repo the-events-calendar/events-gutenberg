@@ -277,26 +277,19 @@ export default compose( [
 		const { venue } = props;
 		const {
 			getDetails,
-			getAddress,
-			getCoordinates,
-			getDraft,
-			getEdit,
-			getCreate,
-			getLoading,
-			getSubmit,
-			getVenueID,
+			get,
 		} = select( VENUE_STORE_NAME );
 
 		return {
 			details: getDetails( venue ),
-			address: getAddress(),
-			coordinates: getCoordinates(),
-			draft: getDraft(),
-			edit: getEdit(),
-			create: getCreate(),
-			loading: getLoading(),
-			submit: getSubmit(),
-			venueID: getVenueID(),
+			address: get( 'address' ),
+			coordinates: get( 'coordinates' ),
+			draft: get( 'draft' ),
+			edit: get( 'edit' ),
+			create: get( 'create' ),
+			loading: get( 'loading' ),
+			submit: get( 'submit' ),
+			venueID: get( 'id' ),
 		};
 	} ),
 	withDispatch( ( dispatch, props ) => {

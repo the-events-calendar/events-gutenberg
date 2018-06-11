@@ -1,6 +1,7 @@
 /**
  * External imports
  */
+import { get } from 'lodash';
 
 /**
  * Wordpress Imports
@@ -155,29 +156,8 @@ const selectors = {
 	getDetails( state, id ) {
 		return state.details;
 	},
-	getAddress( state ) {
-		return state.address;
-	},
-	getCoordinates( state ) {
-		return state.coordinates;
-	},
-	getDraft( state ) {
-		return state.draft;
-	},
-	getEdit( state ) {
-		return state.edit;
-	},
-	getCreate( state ) {
-		return state.create;
-	},
-	getLoading( state ) {
-		return state.loading;
-	},
-	getSubmit( state ) {
-		return state.submit;
-	},
-	getVenueID( state ) {
-		return state.id;
+	get( state, key, defaultValue ) {
+		return get( state, key, defaultValue );
 	},
 };
 
