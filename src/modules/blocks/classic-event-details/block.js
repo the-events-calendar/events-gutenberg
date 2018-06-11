@@ -50,6 +50,8 @@ class EventDetails extends Component {
 
 	static propTypes = {
 		organizers: PropTypes.array,
+		organizerTitle: PropTypes.string,
+		setAttributes: PropTypes.func,
 	};
 
 	constructor() {
@@ -203,7 +205,7 @@ class EventDetails extends Component {
 	}
 
 	renderCost() {
-		const { setAttributes, cost, currencyPosition, currencySymbol } = this.props;
+		const { setCost, cost, currencyPosition, currencySymbol } = this.props;
 		return (
 			<div className="tribe-editor__event-cost">
 				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
@@ -212,7 +214,7 @@ class EventDetails extends Component {
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { cost: nextContent } ) }
+					onChange={ setCost }
 				/>
 				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
@@ -297,6 +299,7 @@ export default compose( [
 			url: get( 'url' ),
 			currencyPosition: get( 'currencyPosition' ),
 			currencySymbol: get( 'currencySymbol' ),
+			cost: get( 'cost' ),
 		};
 	} ),
 	withDispatch( ( dispatch, props ) => {
