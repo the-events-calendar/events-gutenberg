@@ -20,6 +20,7 @@ import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import * as reducers from './reducers';
 import { getSetting } from 'editor/settings';
 import { isTruthy } from 'utils/string';
+import { toMoment } from 'editor/utils/moment';
 
 export const DEFAULT_STATE = {
 	multiDay: false,
@@ -34,6 +35,7 @@ export const DEFAULT_STATE = {
 	dashboardOpen: false,
 	organizers: [],
 	url: undefined,
+	cost: undefined,
 };
 
 export const STORE_NAME = 'tec.details';
@@ -170,6 +172,90 @@ const details = {
 			return {
 				type: 'SET_WEBSITE_URL',
 				url,
+			};
+		},
+		setInitialState( values ) {
+			return {
+				type: 'SET_INITIAL_STATE',
+				values,
+			};
+		},
+		toggleDashboard() {
+			return { type: 'TOGGLE_DASHBOARD' };
+		},
+		closeDashboard() {
+			return { type: 'CLOSE_DASHBOARD' };
+		},
+		setMultiDay( multiDay ) {
+			return {
+				type: 'SET_MULTI_DAY',
+				multiDay,
+			};
+		},
+		setAllDay( allDay ) {
+			return {
+				type: 'SET_ALL_DAY',
+				allDay,
+			};
+		},
+		setTimeZone( timezone ) {
+			return {
+				type: 'SET_TIME_ZONE',
+				timezone,
+			};
+		},
+		setStartDate( date ) {
+			return {
+				type: 'SET_START_DATE',
+				date,
+			};
+		},
+		setEndDate( date ) {
+			return {
+				type: 'SET_END_DATE',
+				date,
+			};
+		},
+		setStartTime( seconds ) {
+			return {
+				type: 'SET_START_TIME',
+				seconds,
+			};
+		},
+		setEndTime( seconds ) {
+			return {
+				type: 'SET_END_TIME',
+				seconds,
+			};
+		},
+		setSeparatorDate( separator ) {
+			return {
+				type: 'SET_DATE_TIME_SEPARATOR',
+				separator,
+			};
+		},
+		setSeparatorTime( separator ) {
+			return {
+				type: 'SET_TIME_RANGE_SEPARATOR',
+				separator,
+			};
+		},
+		setCurrencySymbol( symbol ) {
+			return {
+				type: 'SET_CURRENCY_SYMBOL',
+				symbol,
+			};
+		},
+		setCurrencyPosition( position ) {
+			return {
+				type: 'SET_CURRENCY_POSITION',
+				position,
+			};
+		},
+		setCost( cost ) {
+			return {
+				type: 'SET_COST',
+				cost,
 			};
 		},
 	},
