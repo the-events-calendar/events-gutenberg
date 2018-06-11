@@ -166,7 +166,7 @@ const details = {
 			return {
 				type: 'MAYBE_REMOVE_ORGANIZER',
 				organizer,
-			}
+			};
 		},
 		replaceOrganizers( organizers ) {
 			return {

@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import moment from 'moment';
-import { times, unescape, get } from 'lodash';
+import React from 'react';
+import { unescape } from 'lodash';
 import { stringify } from 'querystringify';
 
 /**
@@ -64,7 +64,9 @@ class TaxonomiesElement extends Component {
 
 		return (
 			<ul className={ this.getTermListClassName( 0 ) }>
-				{ terms.map( ( term, index ) => this.renderTermListItem( term, index + 1 === terms.length, 0 ) ) }
+				{ terms.map( ( term, index ) => {
+					this.renderTermListItem( term, index + 1 === terms.length, 0 );
+				} ) }
 			</ul>
 		);
 	}
@@ -100,7 +102,7 @@ class TaxonomiesElement extends Component {
 				{ this.renderLabel() }
 				{ renderEmpty }
 			</div>,
-		]
+		];
 	}
 
 	renderLabel() {
@@ -117,7 +119,7 @@ class TaxonomiesElement extends Component {
 	render() {
 		const { attributes, focus, setAttributes, slug } = this.props;
 		const terms = this.getTerms();
-		const key   = `tribe-terms-${ slug }`;
+		const key = `tribe-terms-${ slug }`;
 
 		if ( this.props.terms.isLoading ) {
 			return [
@@ -162,8 +164,8 @@ const applyWithAPIData = withAPIData( ( props ) => {
 
 	if ( ! terms || ! terms.length ) {
 		return {
-			terms: []
-		}
+			terms: [],
+		};
 	}
 
 	args.include = terms;

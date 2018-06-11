@@ -148,7 +148,7 @@ const actions = {
 	clearSearch() {
 		return {
 			type: 'CLEAR_SEARCH',
-		}
+		};
 	},
 };
 

@@ -7,6 +7,7 @@ const { registerStore, combineReducers } = data;
 
 import * as reducers from './reducers';
 import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
+
 export const POST_TYPE = 'tribe_organizer';
 
 export const STORE_NAME = 'tec.organizer.blocks';
@@ -108,7 +109,7 @@ const details = {
 					dispatch( STORE_NAME ).setPost( id, body );
 				} );
 			return state;
-		}
-	}
+		},
+	},
 };
 export const store = registerStore( STORE_NAME, details );

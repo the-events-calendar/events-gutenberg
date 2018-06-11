@@ -148,9 +148,9 @@ export default class Dashboard extends Component {
 	 */
 	isPartOfDashboard( node ) {
 		return searchParent( node, ( testNode ) => {
-			const isDashboardContainer = testNode.classList.contains( 'tribe-editor__dashboard__container' );
+			const isContainer = testNode.classList.contains( 'tribe-editor__dashboard__container' );
 			const isDashboard = testNode.classList.contains( 'tribe-editor__dashboard' );
-			return isDashboard || isDashboardContainer;
+			return isDashboard || isContainer;
 		} );
 	}
 
