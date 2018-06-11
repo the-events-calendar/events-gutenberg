@@ -90,7 +90,7 @@ class EventDateTime extends Component {
 	}
 
 	renderPrice() {
-		const { setAttributes, cost, currencyPosition, currencySymbol } = this.props;
+		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
 		// Bail when not classic
 		if ( ! tribe_blocks_editor ) {
@@ -109,7 +109,7 @@ class EventDateTime extends Component {
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { cost: nextContent } ) }
+					onChange={ setCost }
 				/>
 				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
@@ -335,7 +335,6 @@ class EventDateTime extends Component {
 	};
 
 	renderEndTimePicker() {
-
 		if ( this.isAllDay() ) {
 			return null;
 		}
@@ -431,6 +430,7 @@ export default compose( [
 			timezone: get( 'timezone' ),
 			allDay: get( 'allDay' ),
 			dashboardOpen: get( 'dashboardOpen' ),
+			cost: get( 'cost' ),
 		};
 	} ),
 	withDispatch( ( dispatch, props ) => {
@@ -447,6 +447,7 @@ export default compose( [
 			setEndTime,
 			setSeparatorDate,
 			setSeparatorTime,
+			setCost,
 		} = dispatch( STORE_NAME );
 
 		return {
@@ -464,6 +465,7 @@ export default compose( [
 			setEndTime,
 			setSeparatorDate,
 			setSeparatorTime,
+			setCost,
 		};
 	} ),
 	withSaveData(),
