@@ -24,7 +24,7 @@ import {
 /**
  * Internal dependencies
  */
-
+import withSaveData from 'utils/with-save-data';
 import { STORE_NAME } from 'data/details';
 import './style.pcss';
 
@@ -44,19 +44,6 @@ class EventWebsite extends Component {
 
 	constructor() {
 		super( ...arguments );
-	}
-
-	componentDidMount() {
-		const { attributes, setUrl } = this.props;
-		const { url } = attributes;
-		setUrl( url );
-	}
-
-	componentDidUpdate( prevProps ) {
-		const { url, setAttributes } = this.props;
-		if ( prevProps.url !== url ) {
-			setAttributes( { url } );
-		}
 	}
 
 	render() {
@@ -166,10 +153,16 @@ export default compose( [
 			urlLabel,
 		};
 	} ),
-	withDispatch( ( dispatch ) => {
+	withDispatch( ( dispatch, props ) => {
 		const { setWebsiteUrl } = dispatch( STORE_NAME );
 		return {
 			setUrl: setWebsiteUrl,
+			setInitialState() {
+				const { attributes } = props;
+				const { url } = attributes;
+				setWebsiteUrl( url );
+			},
 		};
 	} ),
+	withSaveData(),
 ] )( EventWebsite );

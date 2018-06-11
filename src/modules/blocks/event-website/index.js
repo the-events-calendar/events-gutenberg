@@ -44,14 +44,7 @@ export default {
 
 	useOnce: true,
 
-	edit: ( props ) => {
-
-		const properties = {
-			...pick( props, [ 'isSelected', 'setAttributes', 'attributes' ] ),
-		};
-
-		return <EventWebsite { ...properties } />;
-	},
+	edit: EventWebsite,
 
 	save( props ) {
 		return null;
