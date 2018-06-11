@@ -3,7 +3,7 @@
  */
 import { trim, isEmpty } from 'lodash';
 import classNames from 'classnames';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 /**
  * WordPress dependencies
@@ -199,27 +199,29 @@ export default class EventPrice extends Component {
 				onClose={ this.onCloseDashboard }
 				onOpen={ this.onOpenDashboard }
 			>
-				<section className="tribe-editor__event-price__dashboard">
-					<input
-						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
-						name="description"
-						type="text"
-						placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-						onChange={ ( event ) => this.saveAttribute( event.target.value, 'cost' ) }
-						value={ cost }
-					/>
-					<input
-						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
-						name="description"
-						type="text"
-						placeholder={ __( 'Description', 'events-gutenberg' ) }
-						onChange={ ( event ) => this.saveAttribute( event.target.value, 'costDescription' ) }
-						value={ costDescription || '' }
-					/>
-				</section>
-				<footer className="tribe-editor__event-price__dashboard__footer">
-					{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
-				</footer>
+				<Fragment>
+					<section className="tribe-editor__event-price__dashboard">
+						<input
+							className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
+							name="description"
+							type="text"
+							placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
+							onChange={ ( event ) => this.saveAttribute( event.target.value, 'cost' ) }
+							value={ cost }
+						/>
+						<input
+							className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
+							name="description"
+							type="text"
+							placeholder={ __( 'Description', 'events-gutenberg' ) }
+							onChange={ ( event ) => this.saveAttribute( event.target.value, 'costDescription' ) }
+							value={ costDescription || '' }
+						/>
+					</section>
+					<footer className="tribe-editor__event-price__dashboard__footer">
+						{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
+					</footer>
+				</Fragment>
 			</Dashboard>
 		);
 	}
@@ -232,7 +234,13 @@ export default class EventPrice extends Component {
 	};
 
 	onCloseDashboard = () => {
-		this.setState( { open: false } );
+		this.setState( ( state ) => {
+			const { open } = state;
+			if ( ! open ) {
+				return null;
+			}
+			return { open: false };
+		} );
 	};
 
 	onOpenDashboard = () => {
