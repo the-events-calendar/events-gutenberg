@@ -31,7 +31,7 @@ import {
  * @returns {function} Return a new HOC
  */
 export default ( attributes = null ) => createHigherOrderComponent( ( WrappedComponent ) => {
-	return class SaveData extends Component {
+	return class WithSaveData extends Component {
 			static defaultProps = {
 				setAttributes: noop,
 				setInitialState: noop,
