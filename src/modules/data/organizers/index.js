@@ -23,6 +23,12 @@ const details = {
 				payload,
 			};
 		},
+		removeDraft( id ) {
+			return {
+				type: 'REMOVE_DRAFT',
+				id,
+			};
+		},
 		editPost( id, payload ) {
 			return {
 				type: 'EDIT_POST',
@@ -83,6 +89,13 @@ const details = {
 				id,
 			};
 		},
+		setOrganizer( id, organizer ) {
+			return {
+				type: 'SET_ORGANIZER',
+				id,
+				organizer,
+			};
+		},
 	},
 	selectors: {
 		getPosts( state, id ) {
@@ -137,12 +150,8 @@ const details = {
 				return post;
 			}
 
-			apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ organizer }` } )
-				.then( ( body ) => {
-					dispatch( STORE_NAME ).setPost( id, body );
-				} );
-
-			return post;
+			const body = await apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ organizer }` } );
+			dispatch( STORE_NAME ).setPost( id, body );
 		},
 	},
 };
