@@ -19,7 +19,7 @@ import EventVenue from './block';
 export default {
 	id: 'event-venue',
 	title: __( 'Event Location', 'events-gutenberg' ),
-	description: __( 'Indicate where the event takes place.', 'events-gutenberg' ),
+	description: __( 'Where is this event happening? Select or create a location.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
