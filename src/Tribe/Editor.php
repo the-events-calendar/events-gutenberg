@@ -199,15 +199,26 @@ class Tribe__Events_Gutenberg__Editor {
 		return update_post_meta( $post, $this->key_flag_classic_editor, 1 );
 	}
 
+	/**
+	 * Check if post type is tribe events
+	 *
+	 * @since  0.2.2-alpha
+	 *
+	 * @return bool
+	 */
 	public function is_events_post_type() {
 		global $post, $typenow, $current_screen;
 
 		if ( $post && $post->post_type ) {
 			return $post->post_type === Tribe__Events__Main::POSTTYPE;
-		} elseif ( $typenow ) {
+		}
+
+		if ( $typenow ) {
 			return $typenow === Tribe__Events__Main::POSTTYPE;
-		} elseif ( $current_screen && $current_screen->post_type ) {
-			$current_screen->post_type === Tribe__Events__Main::POSTTYPE;
+		}
+
+		if ( $current_screen && $current_screen->post_type ) {
+			return $current_screen->post_type === Tribe__Events__Main::POSTTYPE;
 		}
 
 		return false;
