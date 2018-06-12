@@ -111,14 +111,15 @@ export default class Month extends Component {
 	}
 
 	render() {
-		const { withRange, from, to } = this.state;
+		const { withRange, from, to, month } = this.state;
 		const modifiers = withRange ? { start: from, end: to } : {};
 		const containerClass = classNames( { 'tribe-editor__calendars--range': withRange } );
+		const captionClass = 'DayPicker-Caption';
 
 		return (
 			<DayPicker
 				className={ containerClass }
-				month={ this.state.month }
+				month={ month }
 				fromMonth={ fromMonth }
 				toMonth={ toMonth }
 				numberOfMonths={ 2 }
@@ -131,15 +132,25 @@ export default class Month extends Component {
 						before: today,
 					}
 				}
-				captionElement={
-					({ date, localeUtils }) => (
+				captionElement={ ({ date, localeUtils }) => {
+					if ( date.getMonth() !== month.getMonth()) {
+						return (
+							<div className={'DayPicker-Caption'} role="heading">
+								<div>
+									{ localeUtils.formatMonthTitle( date ) }
+								</div>
+							</div>
+						);
+					}
+
+					return (
 						<YearMonthForm
 							date={ date }
 							localeUtils={ localeUtils }
 							onChange={ this.handleYearMonthChange }
 						/>
-					)
-				}
+					);
+				} }
 			/>
 		);
 	}
