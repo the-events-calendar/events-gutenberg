@@ -28,37 +28,12 @@ export default {
 	},
 
 	attributes: {
-		organizers: {
-			type: 'string',
-			source: 'meta',
-			meta: '_EventOrganizerBlocks',
+		organizer: {
+			type: 'html',
 		},
 	},
 
-	edit: ( { attributes, setAttributes, isSelected, id } ) => {
-		const { organizers } = attributes;
-		const index = select( 'core/editor' ).getBlockIndex( id );
-		let organizer = 0;
-		try {
-			const blocks = JSON.parse( organizers );
-			const results = blocks.filter( ( b ) => b.index === index );
-			const block = results.length ? results[ 0 ] : {};
-			organizer = get( block, 'organizer', 0 );
-		} catch ( error ) {
-			organizer = 0;
-		}
-
-		return (
-			<EventOrganizer
-				id={ id }
-				selected={ isSelected }
-				setAttributes={ setAttributes }
-				current={ organizers }
-				organizer={ organizer }
-				{ ...attributes }
-			/>
-		);
-	},
+	edit: EventOrganizer,
 
 	save() {
 		return null;
