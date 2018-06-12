@@ -267,7 +267,7 @@ class EventDateTime extends Component {
 					<footer className="tribe-editor__subtitle__footer">
 						<section>
 							{ this.renderStartTimePicker() }
-							{ this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
+							{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
 							{ this.renderEndTimePicker() }
 						</section>
 						<section>
