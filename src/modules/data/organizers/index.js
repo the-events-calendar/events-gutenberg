@@ -1,3 +1,6 @@
+/**
+ * External dependencies
+ */
 import { get, pick, map, identity } from 'lodash';
 
 import { select, dispatch } from '@wordpress/data';
@@ -6,7 +9,6 @@ const { apiRequest, data } = wp;
 const { registerStore, combineReducers } = data;
 
 import * as reducers from './reducers';
-import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 
 export const POST_TYPE = 'tribe_organizer';
 
@@ -17,6 +19,34 @@ const details = {
 		setPost( id, payload ) {
 			return {
 				type: 'SET_POST',
+				id,
+				payload,
+			};
+		},
+		editPost( id, payload ) {
+			return {
+				type: 'EDIT_POST',
+				id,
+				payload,
+			};
+		},
+		createDraft( id, payload ) {
+			return {
+				type: 'CREATE_DRAFT',
+				id,
+				payload,
+			};
+		},
+		setDraftTitle( id, title ) {
+			return {
+				type: 'SET_DRAFT_TITLE',
+				id,
+				title,
+			};
+		},
+		setDraftPost( id, payload ) {
+			return {
+				type: 'SET_DRAFT_POST',
 				id,
 				payload,
 			};
@@ -47,18 +77,14 @@ const details = {
 				payload,
 			};
 		},
+		submit( id ) {
+			return {
+				type: 'SUBMIT',
+				id,
+			};
+		},
 	},
 	selectors: {
-		getBlock( state, id ) {
-			const { blocks } = state;
-			return blocks[ id ] || {};
-		},
-		getSearch( state, id ) {
-			const { blocks } = state;
-			const block = blocks[ id ] || {};
-			const searches = get( block, 'searches', {} );
-			return get( searches, 'search', '' );
-		},
 		getPosts( state, id ) {
 			const { blocks } = state;
 			const block = blocks[ id ] || {};
@@ -68,28 +94,27 @@ const details = {
 				...searches,
 			};
 		},
-		getOrganizers( state ) {
+		getSearch( state, id ) {
 			const { blocks } = state;
-			return map( blocks, ( block, id ) => {
-				return {
-					organizer: get( block, 'organizer', 0 ),
-					index: select( 'core/editor' ).getBlockIndex( id ),
-				};
-			} );
-		},
-		getOrganizersIds( state ) {
-			const { blocks } = state;
-			return map( blocks, ( block ) => get( block, 'organizer', 0 ) ).filter( identity );
+			const block = blocks[ id ] || {};
+			const searches = get( block, 'searches', {} );
+			return get( searches, 'search', '' );
 		},
 		getDetails( state, id, organizer ) {
 			const { blocks } = state;
 			const block = blocks[ id ] || {};
-			return block.post || {};
+			return get( block, 'post', {} );
 		},
 		getLoading( state, id ) {
 			const { blocks } = state;
 			const block = blocks[ id ] || {};
 			return block.loading;
+		},
+		getSearchLoading( state, id ) {
+			const { blocks } = state;
+			const block = blocks[ id ] || {};
+			const { searches = {} } = block;
+			return searches.loading;
 		},
 		getResults( state, id ) {
 			const { blocks } = state;
@@ -97,18 +122,27 @@ const details = {
 			const { searches = {} } = block;
 			return searches.results;
 		},
+		getByID( state, id, key, defaultValue ) {
+			const { blocks } = state;
+			const block = blocks[ id ] || {};
+			return get( block, key, defaultValue );
+		},
 	},
 	resolvers: {
 		async getDetails( state, id, organizer ) {
+			const { blocks } = state;
+			const block = blocks[ id ] || {};
+			const post = get( block, 'post', {} );
 			if ( ! organizer ) {
-				return state;
+				return post;
 			}
 
 			apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ organizer }` } )
 				.then( ( body ) => {
 					dispatch( STORE_NAME ).setPost( id, body );
 				} );
-			return state;
+
+			return post;
 		},
 	},
 };
