@@ -57,7 +57,6 @@ export default class Month extends Component {
 		this.state = {
 			...props,
 		};
-		console.log(this.state);
 	}
 
 	selectDay = ( day, { selected } ) => {

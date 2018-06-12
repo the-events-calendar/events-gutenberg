@@ -1,37 +1,58 @@
 import React from 'react';
 
-const currentYear = new Date().getFullYear();
-const fromMonth = new Date(currentYear, 0);
+const today = new Date();
+const currentYear = today.getFullYear();
+const currentMonth = today.getMonth();
 const toMonth = new Date(currentYear + 10, 11);
 
 const YearMonthForm = ({ date, localeUtils, onChange }) => {
 	const months = localeUtils.getMonths();
 	const years = [];
 
-	for (let i = fromMonth.getFullYear(); i <= toMonth.getFullYear(); i += 1) {
-		years.push(i);
+	for ( let i = currentYear; i <= toMonth.getFullYear(); i += 1 ) {
+		years.push( i );
 	}
 
-	const handleChange = (e) => {
+	const handleChange = ( e ) => {
 		const { year, month } = e.target.form;
-		onChange(new Date(year.value, month.value));
+		onChange( new Date( year.value, month.value ) );
 	};
 
 	return (
 		<form className="DayPicker-Caption">
-			<select name="month" onChange={handleChange} value={date.getMonth()}>
-				{months.map((month, i) => (
-					<option key={month} value={i}>
-						{month}
-					</option>
-				))}
+			<select name="month" onChange={ handleChange } value={ date.getMonth() }>
+				{ months.map( ( month, monthNum ) => {
+					if ( date.getFullYear() === currentYear && monthNum < currentMonth ) {
+						return (
+							<option key={ month } value={ monthNum } disabled>
+								{ month }
+							</option>
+						);
+					}
+
+					return (
+						<option key={ month } value={ monthNum }>
+							{ month }
+						</option>
+					);
+				} ) }
 			</select>
-			<select name="year" onChange={handleChange} value={date.getFullYear()}>
-				{years.map(year => (
-					<option key={year} value={year}>
-						{year}
-					</option>
-				))}
+			<select name="year" onChange={ handleChange } value={ date.getFullYear() }>
+				{ years.map( year => {
+					if ( date.getMonth() < currentMonth && year === currentYear ) {
+						return (
+							<option key={ year } value={ year } disabled>
+								{ year }
+							</option>
+						)
+					}
+
+					return (
+						<option key={ year } value={ year }>
+							{ year }
+						</option>
+					)
+				} ) }
 			</select>
 		</form>
 	);
