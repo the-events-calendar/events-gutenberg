@@ -1,19 +1,17 @@
 /**
  * External dependencies
  */
-import { get } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { select } from '@wordpress/data';
 
 /**
  *
  * Internal dependencies
  */
-import EventOrganizer from './block';
+import Organizer from './block';
 
 export default {
 	id: 'event-organizer',
@@ -30,10 +28,11 @@ export default {
 	attributes: {
 		organizer: {
 			type: 'html',
+			default: '',
 		},
 	},
 
-	edit: EventOrganizer,
+	edit: Organizer,
 
 	save() {
 		return null;
