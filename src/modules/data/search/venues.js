@@ -62,6 +62,9 @@ export const store = registerStore( STORE_NAME, {
 		getLoading( state ) {
 			return state.loading;
 		},
+		getSearchLoading( state ) {
+			return state.loading;
+		},
 		getResults( state ) {
 			return state.results;
 		},

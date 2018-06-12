@@ -165,12 +165,12 @@ export default compose( [
 	withSelect( ( select, props ) => {
 		const {
 			getSearch,
-			getLoading,
+			getSearchLoading,
 			getResults,
 		} = select( props.storeName );
 		const { id } = props;
 		return {
-			loading: getLoading( id ),
+			loading: getSearchLoading( id ),
 			posts: getResults( id ),
 			search: getSearch( id ),
 		};
