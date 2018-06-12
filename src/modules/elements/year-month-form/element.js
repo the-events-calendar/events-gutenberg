@@ -1,4 +1,12 @@
+/**
+ * External dependencies
+ */
 import React from 'react';
+
+/**
+ * Internal dependencies
+ */
+import './style.pcss';
 
 const today = new Date();
 const currentYear = today.getFullYear();
@@ -20,7 +28,7 @@ const YearMonthForm = ({ date, localeUtils, onChange }) => {
 
 	return (
 		<form className="DayPicker-Caption">
-			<select name="month" onChange={ handleChange } value={ date.getMonth() }>
+			<select className="DayPicker-Caption__month" name="month" onChange={ handleChange } value={ date.getMonth() }>
 				{ months.map( ( month, monthNum ) => {
 					if ( date.getFullYear() === currentYear && monthNum < currentMonth ) {
 						return (
@@ -37,7 +45,7 @@ const YearMonthForm = ({ date, localeUtils, onChange }) => {
 					);
 				} ) }
 			</select>
-			<select name="year" onChange={ handleChange } value={ date.getFullYear() }>
+			<select className="DayPicker-Caption__year" name="year" onChange={ handleChange } value={ date.getFullYear() }>
 				{ years.map( year => {
 					if ( date.getMonth() < currentMonth && year === currentYear ) {
 						return (
