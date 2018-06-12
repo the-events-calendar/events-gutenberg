@@ -18,7 +18,7 @@ import EventOrganizer from './block';
 export default {
 	id: 'event-organizer',
 	title: __( 'Event Organizer', 'events-gutenberg' ),
-	description: __( 'Add multiple organizers to the Event', 'events-gutenberg' ),
+	description: __( 'List a host or coordinator for this event.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],

@@ -18,7 +18,7 @@ import EventTags from './block';
 export default {
 	id: 'event-tags',
 	title: __( 'Event Tags', 'events-gutenberg' ),
-	description: __( 'Display your Event Tags.', 'events-gutenberg' ),
+	description: __( 'Add keywords by displaying linked tags.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
