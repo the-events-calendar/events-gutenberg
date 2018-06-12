@@ -26,6 +26,7 @@ const DEFAULT_BLOCK = {
 	searches: {
 		search: '',
 		results: [],
+		loading: false,
 	},
 	post: {},
 	draft: {},
@@ -33,17 +34,15 @@ const DEFAULT_BLOCK = {
 
 export function blocks( state = {}, action ) {
 	switch ( action.type ) {
-		case 'ADD_BLOCK':
+		case 'SUBMIT': {
+			const current = state[ action.id ];
 			return {
 				...state,
 				[ action.id ]: {
-					...DEFAULT_BLOCK,
-					organizer: action.organizer,
+					...current,
+					submit: true,
 				},
 			};
-		case 'REMOVE_BLOCK': {
-			const { [ action.id ]: deletedValue, ...rest } = state;
-			return rest;
 		}
 		case 'SET_TERM': {
 			const current = state[ action.id ];
@@ -58,8 +57,9 @@ export function blocks( state = {}, action ) {
 				},
 			};
 		}
-		case 'SEARCH':
+		case 'SEARCH': {
 			return searchByTerm( state, action.id, action.payload );
+		}
 		case 'SET_RESULTS': {
 			const current = state[ action.id ];
 			return {
@@ -69,8 +69,8 @@ export function blocks( state = {}, action ) {
 					searches: {
 						...current.searches,
 						...action.payload,
+						loading: false,
 					},
-					loading: false,
 				},
 			};
 		}
@@ -101,6 +101,7 @@ export function blocks( state = {}, action ) {
 					submit: false,
 					draft: {
 						title: action.title,
+						loading: false,
 					},
 				},
 			};
@@ -185,10 +186,10 @@ function searchByTerm( prevState, id, payload ) {
 		...prevState,
 		[ id ]: {
 			...current,
-			loading: true,
 			searches: {
 				results: [],
 				search,
+				loading: true,
 			},
 		},
 	};
