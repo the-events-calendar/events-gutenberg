@@ -8,12 +8,10 @@ import React from 'react';
  */
 import './style.pcss';
 
-const today = new Date();
-const currentYear = today.getFullYear();
-const currentMonth = today.getMonth();
-const toMonth = new Date(currentYear + 10, 11);
-
-const YearMonthForm = ({ date, localeUtils, onChange }) => {
+const YearMonthForm = ({ today, date, localeUtils, onChange }) => {
+	const currentYear = today.getFullYear();
+	const currentMonth = today.getMonth();
+	const toMonth = new Date( currentYear + 10, 11 )
 	const months = localeUtils.getMonths();
 	const years = [];
 
