@@ -20,7 +20,7 @@ export default {
 	id: 'event-details',
 	title: __( 'Event Details Classic', 'events-gutenberg' ),
 	description: __(
-		'Set your event’s date and time. You can also add price, event website, and organizers.',
+		'Display your event info together in one place -- just like in the Classic Editor..',
 		'events-gutenberg'
 	),
 	icon: 'calendar',

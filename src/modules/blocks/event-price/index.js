@@ -18,7 +18,7 @@ import EventPrice from './block';
 export default {
 	id: 'event-price',
 	title: __( 'Event Price', 'events-gutenberg' ),
-	description: __( 'Set your event’s price and price description.', 'events-gutenberg' ),
+	description: __( 'Let visitors know the cost of this event or if it’s free to attend.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],

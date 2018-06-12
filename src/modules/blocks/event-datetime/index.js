@@ -20,7 +20,7 @@ export default {
 	id: 'event-datetime',
 	title: __( 'Event Date Time', 'events-gutenberg' ),
 	description: __(
-		'The single event shows date and time',
+		'Define the date, time, and duration for your event.',
 		'events-gutenberg'
 	),
 	icon: 'calendar',

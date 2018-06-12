@@ -18,7 +18,7 @@ import FeaturedImage from './block';
 export default {
 	id: 'featured-image',
 	title: __( 'Featured Image', 'events-gutenberg' ),
-	description: __( 'Display your Event or Post featured Image', 'events-gutenberg' ),
+	description: __( 'Display the featured image in the post content.', 'events-gutenberg' ),
 	icon: 'calendar',
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
