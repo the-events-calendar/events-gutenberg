@@ -25,8 +25,8 @@ const YearMonthForm = ({ today, date, localeUtils, onChange }) => {
 	};
 
 	return (
-		<form className="DayPicker-Caption">
-			<select className="DayPicker-Caption__month" name="month" onChange={ handleChange } value={ date.getMonth() }>
+		<form className="tribe-editor__year-month-form">
+			<select className="tribe-editor__year-month-form__month" name="month" onChange={ handleChange } value={ date.getMonth() }>
 				{ months.map( ( month, monthNum ) => {
 					if ( date.getFullYear() === currentYear && monthNum < currentMonth ) {
 						return (
@@ -43,7 +43,7 @@ const YearMonthForm = ({ today, date, localeUtils, onChange }) => {
 					);
 				} ) }
 			</select>
-			<select className="DayPicker-Caption__year" name="year" onChange={ handleChange } value={ date.getFullYear() }>
+			<select className="tribe-editor__year-month-form__year" name="year" onChange={ handleChange } value={ date.getFullYear() }>
 				{ years.map( year => {
 					if ( date.getMonth() < currentMonth && year === currentYear ) {
 						return (
