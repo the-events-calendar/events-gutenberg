@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 
 /**
  * WordPress dependencies
@@ -23,9 +24,14 @@ class MetaGroup extends Component {
 	render() {
 		const { groupKey, className, children } = this.props;
 
+		const classNames = [
+			'tribe-editor__meta-group',
+			`tribe-editor__meta-group--${ groupKey }`,
+			className,
+		];
 		return (
 			<div
-				className={ `tribe-editor__meta-group tribe-editor__meta-group--${ groupKey } ${ className }` }
+				className={ classNames }
 				key={ groupKey }
 			>
 				{ children }
