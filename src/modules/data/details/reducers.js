@@ -22,8 +22,6 @@ import {
 	DAY_IN_SECONDS,
 } from 'utils/time';
 
-import { isTruthy } from 'utils/string';
-
 /**
  * Set the event to be a multi day event
  *
@@ -345,10 +343,9 @@ export function setCurrencySymbol( prevState, symbol ) {
 }
 
 export function setCurrencyPosition( prevState, hasPosition ) {
-	const position = isTruthy( hasPosition ) ? 'suffix' : 'prefix';
 	return {
 		...prevState,
-		setCurrencyPosition: position,
+		currencyPosition: hasPosition ? 'prefix' : 'suffix',
 	};
 }
 

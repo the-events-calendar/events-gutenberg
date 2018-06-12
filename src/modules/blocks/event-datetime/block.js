@@ -1,14 +1,14 @@
 /**
  * External dependencies
  */
-import React from 'react';
-
-import { noop, pick } from 'lodash';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * WordPress dependencies
  */
-import { Component } from '@wordpress/element';
+import { Component, compose } from '@wordpress/element';
+import { withDispatch, withSelect } from '@wordpress/data';
 
 import {
 	PanelBody,
@@ -39,63 +39,45 @@ import classNames from 'classnames';
 import { toFormat, toMoment, totalSeconds, toDateTime, toDate } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
-import { store, DEFAULT_STATE } from 'data/details';
+import { store, STORE_NAME } from 'data/details';
+import withSaveData from 'utils/with-save-data';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
-export const VALID_PROPS = [
-	'start',
-	'end',
-	'multiDay',
-	'separatorDate',
-	'separatorTime',
-	'timezone',
-	'allDay',
-
-	'currencySymbol',
-	'currencyPosition',
-];
 
 /**
  * Module Code
  */
 
-export default class EventSubtitle extends Component {
+class EventDateTime extends Component {
 
-	static defaultProps = pick(
-		DEFAULT_STATE,
-		VALID_PROPS,
-	);
-
-	constructor( props ) {
-		super( ...arguments );
-
-		this.state = {
-			...props,
-			dashboardOpen: false,
-		};
-		this.storeListener = noop;
-	}
-
-	componentDidMount() {
-		this.storeListener = store.subscribe( this.listener );
-
-		const state = pick( this.state, VALID_PROPS );
-		store.dispatch( {
-			type: 'SET_INITIAL_STATE',
-			values: state,
-		} );
-	}
-
-	listener = () => {
-		const state = store.getState();
-		this.setState( {
-			...pick( state, VALID_PROPS ),
-			dashboardOpen: state.dashboardOpen,
-		} );
+	static propTypes = {
+		allDay: PropTypes.bool,
+		multiDay: PropTypes.bool,
+		dashboardOpen: PropTypes.bool,
+		cost: PropTypes.string,
+		start: PropTypes.string,
+		end: PropTypes.string,
+		separatorDate: PropTypes.string,
+		separatorTime: PropTypes.string,
+		timezone: PropTypes.string,
+		currencySymbol: PropTypes.string,
+		currencyPosition: PropTypes.string,
+		setInitialState: PropTypes.func,
+		setCost: PropTypes.func,
+		setAllDay: PropTypes.func,
+		toggleDashboard: PropTypes.func,
+		setStartDate: PropTypes.func,
+		setEndDate: PropTypes.func,
+		setStartTime: PropTypes.func,
+		setEndTime: PropTypes.func,
+		setMultiDay: PropTypes.func,
+		setTimeZone: PropTypes.func,
+		setSeparatorTime: PropTypes.func,
+		setSeparatorDate: PropTypes.func,
 	};
 
-	componentWillUnmount() {
-		this.storeListener();
+	constructor() {
+		super( ...arguments );
 	}
 
 	renderStart() {
@@ -108,7 +90,7 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderPrice() {
-		const { setAttributes, cost, currencyPosition, currencySymbol } = this.state;
+		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
 		// Bail when not classic
 		if ( ! tribe_blocks_editor ) {
@@ -127,7 +109,7 @@ export default class EventSubtitle extends Component {
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { cost: nextContent } ) }
+					onChange={ setCost }
 				/>
 				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
@@ -135,7 +117,7 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderStartDate() {
-		const { start } = this.state;
+		const { start } = this.props;
 
 		return (
 			<span>{ toDate( toMoment( start ) ) }</span>
@@ -143,7 +125,7 @@ export default class EventSubtitle extends Component {
 	}
 
 	renderStartTime() {
-		const { start } = this.state;
+		const { start } = this.props;
 		const { time } = FORMATS.WP;
 
 		if ( this.isAllDay() ) {
@@ -174,14 +156,14 @@ export default class EventSubtitle extends Component {
 			return null;
 		}
 
-		const { end } = this.state;
+		const { end } = this.props;
 		return (
 			<span>{ toDate( toMoment( end ) ) }</span>
 		);
 	}
 
 	renderEndTime() {
-		const { end } = this.state;
+		const { end } = this.props;
 		const { time } = FORMATS.WP;
 
 		if ( this.isAllDay() ) {
@@ -202,8 +184,8 @@ export default class EventSubtitle extends Component {
 	 * @returns {boolean} if the event is happening on the same day
 	 */
 	isSameDay( start, end ) {
-		return toMoment( start || this.state.start )
-			.isSame( toMoment( end || this.state.end ), 'day' );
+		return toMoment( start || this.props.start )
+			.isSame( toMoment( end || this.props.end ), 'day' );
 	}
 
 	/**
@@ -212,7 +194,7 @@ export default class EventSubtitle extends Component {
 	 * @returns {boolean} true if is an all day event
 	 */
 	isAllDay() {
-		const { allDay } = this.state;
+		const { allDay } = this.props;
 		return allDay;
 	}
 
@@ -228,7 +210,7 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type, className ) {
-		const { timezone, separatorDate, separatorTime } = this.state;
+		const { timezone, separatorDate, separatorTime } = this.props;
 		switch ( type ) {
 			case 'date-time':
 				return (
@@ -257,7 +239,7 @@ export default class EventSubtitle extends Component {
 	renderLabel() {
 		return (
 			<div key="event-datetime" className="tribe-editor__subtitle">
-				<h2 className="tribe-editor__subtitle__headline" onClick={ this.toggleDashboard }>
+				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.toggleDashboard }>
 					{ this.renderStart() }
 					{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
 					{ this.renderEnd() }
@@ -271,40 +253,34 @@ export default class EventSubtitle extends Component {
 		);
 	}
 
-	toggleDashboard = () => {
-		store.dispatch( { type: 'TOGGLE_DASHBOARD' } );
-	};
-
-	closeDashboard = () => {
-		store.dispatch( { type: 'CLOSE_DASHBOARD' } );
-	};
-
 	renderDashboard() {
-		const { dashboardOpen } = this.state;
+		const { dashboardOpen } = this.props;
 		return (
 			<Dashboard
 				open={ dashboardOpen }
-				onClose={ this.closeDashboard }
+				onClose={ this.props.closeDashboard }
 				overflow>
-				<section className="tribe-editor__calendars">
-					{ this.renderCalendars() }
-				</section>
-				<footer className="tribe-editor__subtitle__footer">
-					<section>
-						{ this.renderStartTimePicker() }
-						{ this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
-						{ this.renderEndTimePicker() }
+				<Fragment>
+					<section className="tribe-editor__calendars">
+						{ this.renderCalendars() }
 					</section>
-					<section>
-						{ this.renderMultidayCheckbox() }
-					</section>
-				</footer>
+					<footer className="tribe-editor__subtitle__footer">
+						<section>
+							{ this.renderStartTimePicker() }
+							{ this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
+							{ this.renderEndTimePicker() }
+						</section>
+						<section>
+							{ this.renderMultidayCheckbox() }
+						</section>
+					</footer>
+				</Fragment>
 			</Dashboard>
 		);
 	}
 
 	renderCalendars() {
-		const { multiDay, start, end } = this.state;
+		const { multiDay, start, end } = this.props;
 		const monthProps = {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
@@ -322,20 +298,14 @@ export default class EventSubtitle extends Component {
 
 	setDays = ( data ) => {
 		const { from, to } = data;
+		const { setStartDate, setEndDate } = this.props;
 
-		store.dispatch( {
-			type: 'SET_START_DATE',
-			date: toDateTime( toMoment( from ) ),
-		} );
-
-		store.dispatch( {
-			type: 'SET_END_DATE',
-			date: to ? toDateTime( toMoment( to ) ) : to,
-		} );
+		setStartDate( toDateTime( toMoment( from ) ) );
+		setEndDate( to ? toDateTime( toMoment( to ) ) : to );
 	};
 
 	renderStartTimePicker() {
-		const { start, allDay } = this.state;
+		const { start, allDay } = this.props;
 		const { time, date } = FORMATS.WP;
 		const startMoment = toMoment( start );
 		const pickerProps = {
@@ -358,23 +328,20 @@ export default class EventSubtitle extends Component {
 
 	setStartTime = ( data ) => {
 		const { seconds, allDay } = data;
-		this.setAllDay( allDay );
+		const { setAllDay, setStartTime } = this.props;
 
-		store.dispatch( {
-			type: 'SET_START_TIME',
-			seconds,
-		} );
+		setAllDay( allDay );
+		setStartTime( seconds );
 	};
 
 	renderEndTimePicker() {
-
 		if ( this.isAllDay() ) {
 			return null;
 		}
 
 		const { time, date } = FORMATS.WP;
-		const start = toMoment( this.state.start );
-		const end = toMoment( this.state.end );
+		const start = toMoment( this.props.start );
+		const end = toMoment( this.props.end );
 		const pickerProps = {
 			current: end,
 			onSelectItem: this.setEndTime,
@@ -392,31 +359,22 @@ export default class EventSubtitle extends Component {
 
 	setEndTime = ( data ) => {
 		const { seconds, allDay } = data;
-		this.setAllDay( allDay );
+		const { setAllDay, setEndTime } = this.props;
 
-		store.dispatch( {
-			type: 'SET_END_TIME',
-			seconds,
-		} );
+		setAllDay( allDay );
+		setEndTime( seconds );
 	};
 
 	renderMultidayCheckbox() {
-		const { multiDay } = this.state;
+		const { multiDay, setMultiDay } = this.props;
 		return (
 			<CheckBox
 				label={ __( 'Multi-Day', 'events-gutenberg' ) }
 				checked={ multiDay }
-				onChange={ this.setMultiDay }
+				onChange={ setMultiDay }
 			/>
 		);
 	}
-
-	setMultiDay = ( multiDay ) => {
-		store.dispatch( {
-			type: 'SET_MULTI_DAY',
-			multiDay,
-		} );
-	};
 
 	/**
 	 * Controls being rendered on the sidebar.
@@ -424,61 +382,91 @@ export default class EventSubtitle extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderControls() {
-		const { separatorTime, separatorDate, timezone } = this.state;
+		const {
+			separatorTime,
+			separatorDate,
+			timezone,
+			setTimeZone,
+			setSeparatorTime,
+			setSeparatorDate,
+		} = this.props;
 
 		return ( <InspectorControls key="inspector">
 			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
 				<TextControl
 					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
 					value={ separatorDate }
-					onChange={ ( value ) => this.setState( { separatorDate: value } ) }
-					onBlur={ this.setDateTimeSeparator }
+					onChange={ setSeparatorDate }
 				/>
 				<TextControl
 					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
 					value={ separatorTime }
-					onChange={ ( value ) => this.setState( { separatorTime: value } ) }
-					onBlur={ this.setTimeRangeSeparator }
+					onChange={ setSeparatorTime }
 				/>
 				<SelectControl
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
 					value={ timezone }
-					onChange={ this.setTimeZone }
+					onChange={ setTimeZone }
 					options={ timezonesAsSelectData() }
 				/>
 			</PanelBody>
 		</InspectorControls> );
 	}
 
-	setDateTimeSeparator = () => {
-		store.dispatch( {
-			type: 'SET_DATE_TIME_SEPARATOR',
-			separator: this.state.separatorDate,
-		} );
-	};
-
-	setTimeRangeSeparator = () => {
-		store.dispatch( {
-			type: 'SET_TIME_RANGE_SEPARATOR',
-			separator: this.state.separatorTime,
-		} );
-	};
-
-	setTimeZone( timezone ) {
-		store.dispatch( {
-			type: 'SET_TIME_ZONE',
-			timezone,
-		} );
-	};
-
-	setAllDay( allDay ) {
-		store.dispatch( {
-			type: 'SET_ALL_DAY',
-			allDay,
-		} );
-	}
-
 	render() {
 		return [ this.renderLabel(), this.renderControls() ];
 	}
 }
+
+export default compose( [
+	withSelect( ( select ) => {
+		const { get } = select( STORE_NAME );
+		return {
+			start: get( 'start' ),
+			end: get( 'end' ),
+			multiDay: get( 'multiDay' ),
+			separatorDate: get( 'separatorDate' ),
+			separatorTime: get( 'separatorTime' ),
+			timezone: get( 'timezone' ),
+			allDay: get( 'allDay' ),
+			dashboardOpen: get( 'dashboardOpen' ),
+			cost: get( 'cost' ),
+		};
+	} ),
+	withDispatch( ( dispatch, props ) => {
+		const {
+			setInitialState,
+			toggleDashboard,
+			closeDashboard,
+			setMultiDay,
+			setAllDay,
+			setTimezone,
+			setStartDate,
+			setEndDate,
+			setStartTime,
+			setEndTime,
+			setSeparatorDate,
+			setSeparatorTime,
+			setCost,
+		} = dispatch( STORE_NAME );
+
+		return {
+			setInitialState() {
+				setInitialState( props.attributes );
+			},
+			toggleDashboard,
+			closeDashboard,
+			setMultiDay,
+			setAllDay,
+			setTimezone,
+			setStartDate,
+			setEndDate,
+			setStartTime,
+			setEndTime,
+			setSeparatorDate,
+			setSeparatorTime,
+			setCost,
+		};
+	} ),
+	withSaveData(),
+] )( EventDateTime );

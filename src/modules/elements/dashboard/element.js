@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { trim, noop } from 'lodash';
+import { noop } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -74,10 +74,6 @@ export default class Dashboard extends Component {
 		this.setupListeners();
 	}
 
-	shouldComponentUpdate( nextProps ) {
-		return this.props.open !== nextProps.open;
-	}
-
 	/**
 	 * Setup the listeners either: attach or remove them based on the status of the component.
 	 */
@@ -106,6 +102,9 @@ export default class Dashboard extends Component {
 	 * Remove all listeners associated with this component.
 	 */
 	removeListeners() {
+		if ( ! this.listeners.added ) {
+			return;
+		}
 		this.listeners.added = false;
 		document.removeEventListener( 'keydown', this.onKeyDown );
 		document.removeEventListener( 'click', this.onClickOutside );

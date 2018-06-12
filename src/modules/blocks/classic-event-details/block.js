@@ -3,16 +3,16 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop, pick } from 'lodash';
 import classNames from 'classnames';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
+import { Component, compose } from '@wordpress/element';
 
-import { select } from '@wordpress/data';
+import { withDispatch, withSelect } from '@wordpress/data';
+import withSaveData from 'utils/with-save-data';
 
 import {
 	ToggleControl,
@@ -37,58 +37,25 @@ import {
 import { default as EventOrganizers } from './organizers';
 
 import { toMoment, toDate, toTime } from 'utils/moment';
-import { STORE_NAME as ORGANIZER_STORE } from 'data/organizers';
-import { store, STORE_NAME as DETAILS_STORE } from 'data/details';
-
-export const VALID_PROPS = [
-	'organizers',
-	'currencySymbol',
-	'currencyPosition',
-];
+import { STORE_NAME as DETAILS_STORE } from 'data/details';
 
 /**
  * Module Code
  */
 
-export default class EventDetails extends Component {
+class EventDetails extends Component {
 	static defaultProps = {
 		organizers: [],
 	};
 
 	static propTypes = {
 		organizers: PropTypes.array,
+		organizerTitle: PropTypes.string,
+		setAttributes: PropTypes.func,
 	};
 
-	constructor( props ) {
+	constructor() {
 		super( ...arguments );
-
-		this.state = {
-			...props,
-			loading: ! ! props.organizers.length,
-		};
-		this.unsubscribe = noop;
-	}
-
-	componentDidMount() {
-		this.unsubscribe = store.subscribe( () => {
-			const { setAttributes } = this.props;
-			const state = store.getState();
-			// Pick relevant ones from store
-			const attributes = {
-				...pick( state, VALID_PROPS ),
-				organizers: select( DETAILS_STORE ).getOrganizers(),
-			};
-			setAttributes( { organizers: select( DETAILS_STORE ).getOrganizers() } );
-		} );
-
-		store.dispatch( {
-			type: 'SET_INITIAL_STATE',
-			values: pick( this.state, VALID_PROPS ),
-		} );
-	}
-
-	componentWillUnmount() {
-		this.unsubscribe();
 	}
 
 	render() {
@@ -123,11 +90,12 @@ export default class EventDetails extends Component {
 			organizerTitle,
 			organizers,
 			setAttributes,
-			setFocus,
 			focus,
+			addOrganizer,
+			removeOrganizers,
 		} = this.props;
 
-		const organizersBlocks = select( ORGANIZER_STORE ).getOrganizersIds();
+		const organizersBlocks = [];
 
 		return (
 			<MetaGroup groupKey="organizer">
@@ -144,25 +112,15 @@ export default class EventDetails extends Component {
 					focus={ focus }
 					organizers={ organizers }
 					organizersBlocks={ organizersBlocks }
-					addOrganizer={ nextOrganizer => {
-						store.dispatch( {
-							type: 'ADD_ORGANIZER',
-							organizer: nextOrganizer,
-						} );
-					} }
-					removeOrganizer={ organizer => {
-						store.dispatch( {
-							type: 'REMOVE_ORGANIZER',
-							organizer: organizer,
-						} );
-					} }
+					addOrganizer={ addOrganizer }
+					removeOrganizer={ removeOrganizers }
 				/>
 			</MetaGroup>
 		);
 	}
 
 	renderTitle() {
-		const { detailsTitle, setAttributes, setFocus } = this.props;
+		const { detailsTitle, setAttributes } = this.props;
 		return (
 			<RichText
 				tagName="h3"
@@ -177,10 +135,10 @@ export default class EventDetails extends Component {
 	}
 
 	renderStart() {
-		const { start } = this.props;
+		const { start, toggleDashboard } = this.props;
 
 		return (
-			<div onClick={ this.toggleDashboard }>
+			<div onClick={ toggleDashboard }>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
 				{ toDate( toMoment( start ) ) }
 				{ this.renderStartTime() }
@@ -204,9 +162,9 @@ export default class EventDetails extends Component {
 	}
 
 	renderEnd() {
-		const { end } = this.props;
+		const { end, toggleDashboard } = this.props;
 		return (
-			<div onClick={ this.toggleDashboard }>
+			<div onClick={ toggleDashboard }>
 				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
 				{ toDate( toMoment( end ) ) }
 				{ this.renderEndTime() }
@@ -231,12 +189,8 @@ export default class EventDetails extends Component {
 		);
 	}
 
-	toggleDashboard = () => {
-		store.dispatch( { type: 'TOGGLE_DASHBOARD' } );
-	};
-
 	renderWebsite() {
-		const { url, setAttributes } = this.props;
+		const { url, setUrl } = this.props;
 		return (
 			<div>
 				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
@@ -244,14 +198,14 @@ export default class EventDetails extends Component {
 					id="tribe-event-url"
 					value={ url }
 					placeholder={ __( 'Enter url', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { url: nextContent } ) }
+					onChange={ setUrl }
 				/>
 			</div>
 		);
 	}
 
 	renderCost() {
-		const { setAttributes, cost, currencyPosition, currencySymbol } = this.props;
+		const { setCost, cost, currencyPosition, currencySymbol } = this.props;
 		return (
 			<div className="tribe-editor__event-cost">
 				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
@@ -260,7 +214,7 @@ export default class EventDetails extends Component {
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
 					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ ( nextContent ) => setAttributes( { cost: nextContent } ) }
+					onChange={ setCost }
 				/>
 				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
@@ -286,7 +240,15 @@ export default class EventDetails extends Component {
 	}
 
 	renderControls() {
-		const { isSelected, allDay, setAttributes, currencyPosition, currencySymbol } = this.props;
+		const {
+			isSelected,
+			allDay,
+			currencyPosition,
+			currencySymbol,
+			setCurrencySymbol,
+			setAllDay,
+			setCurrencyPosition,
+		} = this.props;
 
 		if ( ! isSelected ) {
 			return null;
@@ -298,23 +260,74 @@ export default class EventDetails extends Component {
 					<ToggleControl
 						label={ __( 'Is All Day Event', 'events-gutenberg' ) }
 						checked={ allDay }
-						onChange={ ( value ) => setAttributes( { allDay: value } ) }
+						onChange={ setAllDay }
 					/>
 				</PanelBody>
 				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
 						checked={ 'prefix' === currencyPosition }
-						onChange={ ( value ) => setAttributes( { currencyPosition: value ? 'prefix' : 'suffix' } ) }
+						onChange={ setCurrencyPosition }
 					/>
 					<TextControl
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ ( value ) => setAttributes( { currencySymbol: value } ) }
+						onChange={ setCurrencySymbol }
 					/>
 				</PanelBody>
 			</InspectorControls>
 		);
 	}
 }
+
+export default compose( [
+	withSelect( ( select, props ) => {
+		const { get } = select( DETAILS_STORE );
+		const { attributes } = props;
+		const { detailsTitle, organizerTitle } = attributes;
+		return {
+			detailsTitle,
+			organizerTitle,
+			start: get( 'start' ),
+			end: get( 'end' ),
+			multiDay: get( 'multiDay' ),
+			separatorDate: get( 'separatorDate' ),
+			separatorTime: get( 'separatorTime' ),
+			timezone: get( 'timezone' ),
+			allDay: get( 'allDay' ),
+			url: get( 'url' ),
+			currencyPosition: get( 'currencyPosition' ),
+			currencySymbol: get( 'currencySymbol' ),
+			cost: get( 'cost' ),
+		};
+	} ),
+	withDispatch( ( dispatch, props ) => {
+		const {
+			setInitialState,
+			setWebsiteUrl,
+			setAllDay,
+			setCost,
+			setCurrencySymbol,
+			setCurrencyPosition,
+			toggleDashboard,
+			addOrganizer,
+			removeOrganizer,
+		} = dispatch( DETAILS_STORE );
+
+		return {
+			setInitialState() {
+				setInitialState( props.attributes );
+			},
+			setUrl: setWebsiteUrl,
+			setAllDay,
+			setCurrencySymbol,
+			setCurrencyPosition,
+			setCost,
+			toggleDashboard,
+			addOrganizer,
+			removeOrganizer,
+		};
+	} ),
+	withSaveData(),
+] )( EventDetails );

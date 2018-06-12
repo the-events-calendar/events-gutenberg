@@ -1,20 +1,17 @@
 /**
  * External dependencies
  */
-import { noop, trim, isEmpty } from 'lodash';
+import { trim, isEmpty, get as getFromObject } from 'lodash';
 import classNames from 'classnames';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
-
+import { Component, compose } from '@wordpress/element';
+import { withDispatch, withSelect } from '@wordpress/data';
 import {
-	Dropdown,
-	IconButton,
-	Dashicon,
 	ToggleControl,
 	TextControl,
 	PanelBody,
@@ -22,7 +19,6 @@ import {
 
 import {
 	InspectorControls,
-	PlainText,
 } from '@wordpress/editor';
 
 /**
@@ -32,15 +28,16 @@ import {
 	Dashboard,
 } from 'elements';
 
-import { getSetting } from 'editor/settings';
 import './style.pcss';
-import { extractParts, parser, isFree } from 'utils/range';
+import { parser, isFree } from 'utils/range';
+import { STORE_NAME as DETAILS_STORE } from 'data/details';
+import withSaveData from 'utils/with-save-data';
 
 /**
  * Module Code
  */
 
-export default class EventPrice extends Component {
+class EventPrice extends Component {
 	constructor() {
 		super( ...arguments );
 
@@ -70,7 +67,7 @@ export default class EventPrice extends Component {
 	}
 
 	renderLabel() {
-		const currencyPosition = this.getCurrencyPosition();
+		const { currencyPosition } = this.props;
 
 		const containerClass = classNames(
 			'tribe-editor__event-price',
@@ -90,37 +87,12 @@ export default class EventPrice extends Component {
 		);
 	}
 
-	getCurrencyPosition() {
-		const { attributes } = this.props;
-		const { currencyPosition } = attributes;
-
-		// If we have it saved we replace it
-		if ( currencyPosition ) {
-			return currencyPosition;
-		}
-
-		return '1' === getSetting( 'reverseCurrencyPosition', 0 ) ? 'suffix' : 'prefix';
-	}
-
-	getCurrencySymbol() {
-		const { attributes } = this.props;
-		const { currencySymbol } = attributes;
-
-		if ( currencySymbol ) {
-			return currencySymbol;
-		}
-
-		return getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) );
-	}
-
 	isEmpty( value ) {
 		return isEmpty( trim( value ) );
 	}
 
 	renderCurrency() {
-		const currencySymbol = this.getCurrencySymbol();
-		const { attributes } = this.props;
-		const { costDescription, cost } = attributes;
+		const { costDescription, cost, currencySymbol } = this.props;
 		const parsed = parser( cost );
 
 		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( parsed );
@@ -145,8 +117,7 @@ export default class EventPrice extends Component {
 			return null;
 		}
 
-		const { attributes } = this.props;
-		const { cost } = attributes;
+		const { cost } = this.props;
 
 		if ( ! this.isEmpty( cost ) ) {
 			return null;
@@ -158,8 +129,7 @@ export default class EventPrice extends Component {
 	}
 
 	renderCost() {
-		const { attributes } = this.props;
-		const { cost } = attributes;
+		const { cost } = this.props;
 		const parsed = parser( cost );
 
 		if ( this.isEmpty( parsed ) ) {
@@ -174,8 +144,7 @@ export default class EventPrice extends Component {
 	}
 
 	renderDescription() {
-		const { attributes } = this.props;
-		const { costDescription } = attributes;
+		const { costDescription } = this.props;
 
 		if ( this.isEmpty( costDescription ) ) {
 			return null;
@@ -193,62 +162,66 @@ export default class EventPrice extends Component {
 	};
 
 	renderDashboard() {
-		const { attributes } = this.props;
-		const { cost, costDescription } = attributes;
+		const { cost, costDescription, setCost } = this.props;
 
 		return (
 			<Dashboard
 				ref={ this.dashboardRef }
 				open={ this.state.open }
 				onClose={ this.onCloseDashboard }
-				onOpen={ this.onOpenDashboard }
 			>
-				<section className="tribe-editor__event-price__dashboard">
-					<input
-						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
-						name="description"
-						type="text"
-						placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-						onChange={ ( event ) => this.saveAttribute( event.target.value, 'cost' ) }
-						value={ cost }
-					/>
-					<input
-						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
-						name="description"
-						type="text"
-						placeholder={ __( 'Description', 'events-gutenberg' ) }
-						onChange={ ( event ) => this.saveAttribute( event.target.value, 'costDescription' ) }
-						value={ costDescription || '' }
-					/>
-				</section>
-				<footer className="tribe-editor__event-price__dashboard__footer">
-					{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
-				</footer>
+				<Fragment>
+					<section className="tribe-editor__event-price__dashboard">
+						<input
+							className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
+							name="description"
+							type="text"
+							placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
+							onChange={ setCost }
+							value={ cost }
+						/>
+						<input
+							className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
+							name="description"
+							type="text"
+							placeholder={ __( 'Description', 'events-gutenberg' ) }
+							onChange={ this.savePriceDescription }
+							value={ costDescription }
+						/>
+					</section>
+					<footer className="tribe-editor__event-price__dashboard__footer">
+						{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
+					</footer>
+				</Fragment>
 			</Dashboard>
 		);
 	}
 
-	saveAttribute = ( value, attribute ) => {
+	savePriceDescription = ( event ) => {
+		const { target } = event;
+		const { value } = target;
 		const { setAttributes } = this.props;
-		const toSave = {};
-		toSave[ attribute ] = value;
-		setAttributes( toSave );
+		setAttributes( { costDescription: value } );
 	};
 
 	onCloseDashboard = () => {
-		this.setState( { open: false } );
-	};
-
-	onOpenDashboard = () => {
-		const { setAttributes, attributes } = this.props;
-		const { cost } = attributes;
-		setAttributes( {
-			cost: parser( cost ),
+		this.setState( ( state ) => {
+			const { open } = state;
+			if ( ! open ) {
+				return null;
+			}
+			return { open: false };
 		} );
 	};
 
 	renderControls() {
-		const { isSelected, setAttributes } = this.props;
+		const {
+			isSelected,
+			setCurrencySymbol,
+			setCurrencyPosition,
+			currencySymbol,
+			currencyPosition,
+		} = this.props;
 
 		if ( ! isSelected ) {
 			return null;
@@ -259,18 +232,54 @@ export default class EventPrice extends Component {
 				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 					<TextControl
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
-						value={ this.getCurrencySymbol() }
+						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ ( value ) => setAttributes( { currencySymbol: value } ) }
+						onChange={ setCurrencySymbol }
 					/>
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
-						checked={ 'prefix' === this.getCurrencyPosition() }
-						onChange={ ( value ) => setAttributes( { currencyPosition: value ? 'prefix' : 'suffix' } ) }
+						checked={ 'prefix' === currencyPosition }
+						onChange={ setCurrencyPosition }
 					/>
 				</PanelBody>
 			</InspectorControls>
 		);
 	}
 }
+
+export default compose( [
+	withSelect( ( select, props ) => {
+		const { get } = select( DETAILS_STORE );
+		const { attributes } = props;
+		return {
+			currencyPosition: get( 'currencyPosition' ),
+			currencySymbol: get( 'currencySymbol' ),
+			cost: get( 'cost' ),
+			costDescription: getFromObject( attributes, 'costDescription', '' ),
+		};
+	} ),
+	withDispatch( ( dispatch, props ) => {
+		const {
+			setCost,
+			setCurrencySymbol,
+			setCurrencyPosition,
+		} = dispatch( DETAILS_STORE );
+
+		return {
+			setInitialState() {
+				const { attributes } = props;
+				const { cost } = attributes;
+				setCost( cost );
+			},
+			setCurrencySymbol,
+			setCurrencyPosition,
+			setCost( event ) {
+				const { target } = event;
+				const { value } = target;
+				setCost( value );
+			},
+		};
+	} ),
+	withSaveData(),
+] )( EventPrice );
 

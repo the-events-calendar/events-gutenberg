@@ -1,12 +1,14 @@
 /**
  * External dependencies
  */
-import { noop, pick } from 'lodash';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * WordPress dependencies
  */
-import { Component } from '@wordpress/element';
+import { withDispatch, withSelect } from '@wordpress/data';
+import { Component, compose } from '@wordpress/element';
 import {
 	PanelBody,
 	Dashicon,
@@ -22,40 +24,26 @@ import {
 /**
  * Internal dependencies
  */
-
-import { store } from 'data/details';
+import withSaveData from 'utils/with-save-data';
+import { STORE_NAME } from 'data/details';
 import './style.pcss';
 
 /**
  * Module Code
  */
 
-export const VALID_PROPS = [
-	'url',
-];
+class EventWebsite extends Component {
+	static propTypes = {
+		isSelected: PropTypes.bool,
+		setAttributes: PropTypes.func,
+		setUrl: PropTypes.func,
+		attributes: PropTypes.object,
+		url: PropTypes.string,
+		urlLabel: PropTypes.string,
+	};
 
-export default class EventWebsite extends Component {
-	constructor( props ) {
+	constructor() {
 		super( ...arguments );
-
-		this.state = props;
-		this.unsubscribe = noop;
-	}
-
-	componentDidMount() {
-		this.unsubscribe = store.subscribe( () => {
-			const state = store.getState();
-			this.setState( pick( state, VALID_PROPS ) );
-		} );
-
-		store.dispatch( {
-			type: 'SET_INITIAL_STATE',
-			values: pick( this.state, VALID_PROPS ),
-		} );
-	}
-
-	componentWillUnmount() {
-		this.unsubscribe();
 	}
 
 	render() {
@@ -80,22 +68,23 @@ export default class EventWebsite extends Component {
 
 		return [
 			this.renderLabelInput( placeholder ),
-			this.renderUrlInput()
+			this.renderUrlInput(),
 		];
 	}
 
 	renderUrlInput() {
-		const { setAttributes } = this.state;
 		const { isSelected, url } = this.props;
 
-		const buttonLabel = url ? __( 'Edit Website', 'events-gutenberg' ) : __( 'Insert Website', 'events-gutenberg' );
+		const buttonLabel = url
+			? __( 'Edit Website', 'events-gutenberg' )
+			: __( 'Insert Website', 'events-gutenberg' );
 
 		if ( ! isSelected ) {
 			return null;
 		}
 
 		return (
-			<div key='tribe-events-website-url' className="tribe-editor__event-website__url">
+			<div key="tribe-events-website-url" className="tribe-editor__event-website__url">
 				<Dashicon icon="admin-links" />
 				<PlainText
 					id="tribe-events-website-link"
@@ -107,9 +96,8 @@ export default class EventWebsite extends Component {
 		);
 	}
 
-	renderLabelInput( placeholder ) {
-		const { setAttributes } = this.state;
-		const { urlLabel } = this.props;
+	renderLabelInput() {
+		const { urlLabel, setAttributes } = this.props;
 
 		return (
 			<div key='tribe-events-website-label' className="tribe-editor__event-website">
@@ -120,12 +108,14 @@ export default class EventWebsite extends Component {
 					placeholder={ __( 'Add Event Website', 'events-gutenberg' ) }
 				/>
 			</div>
-		)
+		);
 	}
 
 	renderPlaceholder( urlLabel ) {
 		return (
-			<button className="tribe-editor__event-website tribe-editor__event-website--placeholder" disabled>
+			<button
+				className="tribe-editor__event-website tribe-editor__event-website--placeholder"
+				disabled>
 				{ urlLabel }
 			</button>
 		);
@@ -133,11 +123,8 @@ export default class EventWebsite extends Component {
 
 	setWebsiteUrl = ( data ) => {
 		const { url } = data;
-
-		store.dispatch( {
-			type: 'SET_WEBSITE_URL',
-			url,
-		} );
+		const { setUrl } = this.props;
+		setUrl( url );
 	};
 
 	renderControls() {
@@ -156,3 +143,26 @@ export default class EventWebsite extends Component {
 		);
 	}
 }
+
+export default compose( [
+	withSelect( ( select, props ) => {
+		const { get } = select( STORE_NAME );
+		const { urlLabel } = props.attributes;
+		return {
+			url: get( 'url' ),
+			urlLabel,
+		};
+	} ),
+	withDispatch( ( dispatch, props ) => {
+		const { setWebsiteUrl } = dispatch( STORE_NAME );
+		return {
+			setUrl: setWebsiteUrl,
+			setInitialState() {
+				const { attributes } = props;
+				const { url } = attributes;
+				setWebsiteUrl( url );
+			},
+		};
+	} ),
+	withSaveData(),
+] )( EventWebsite );

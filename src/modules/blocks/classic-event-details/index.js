@@ -12,7 +12,6 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventDetails from './block';
-import { castBooleanStrings, removeEmptyStrings } from 'utils/object';
 
 /**
  * Module Code
@@ -83,23 +82,7 @@ export default {
 
 	useOnce: true,
 
-	edit: ( props ) => {
-
-		const allowedProperties = pick(
-			props, [ 'isSelected', 'setFocus', 'setAttributes', 'focus' ]
-		);
-		const attributes = castBooleanStrings(
-			removeEmptyStrings(
-				get( props, 'attributes', {} )
-			)
-		);
-		const properties = {
-			...allowedProperties,
-			...attributes,
-		};
-
-		return <EventDetails { ...properties } />;
-	},
+	edit: EventDetails,
 
 	save( props ) {
 		return null;
