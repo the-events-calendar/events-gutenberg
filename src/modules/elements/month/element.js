@@ -16,8 +16,15 @@ import { Component } from '@wordpress/element';
 /**
  * Internal dependencies
  */
+import { YearMonthForm } from 'elements';
 import { equalDates } from 'utils/date';
 import './style.pcss';
+
+const today = new Date();
+const currentYear = today.getFullYear();
+const currentMonth = today.getMonth();
+const fromMonth = new Date(currentYear, currentMonth);
+const toMonth = new Date(currentYear + 10, 11);
 
 export default class Month extends Component {
 	static propTypes = {
@@ -32,8 +39,9 @@ export default class Month extends Component {
 		withRange: false,
 		onSelectDay: noop,
 		initialRangeDays: 3,
-		from: new Date(),
+		from: today,
 		to: undefined,
+		month: fromMonth,
 	};
 
 	static getDerivedStateFromProps( nextProps ) {
@@ -44,10 +52,12 @@ export default class Month extends Component {
 
 	constructor( props ) {
 		super( ...arguments );
+		this.handleYearMonthChange = this.handleYearMonthChange.bind(this);
 
 		this.state = {
 			...props,
 		};
+		console.log(this.state);
 	}
 
 	selectDay = ( day, { selected } ) => {
@@ -63,7 +73,7 @@ export default class Month extends Component {
 
 			// if the range was unselected we fallback to the first available day
 			if ( range.from === null && range.to === null ) {
-				range.from = new Date();
+				range.from = today;
 				range.to = undefined;
 			}
 
@@ -76,7 +86,7 @@ export default class Month extends Component {
 			} );
 		} else {
 			this.setState( {
-				from: selected ? new Date() : day,
+				from: selected ? today : day,
 				to: undefined,
 			}, () => {
 				this.onSelectCallback();
@@ -97,6 +107,10 @@ export default class Month extends Component {
 		return from;
 	}
 
+	handleYearMonthChange( month ) {
+		this.setState({ month });
+	}
+
 	render() {
 		const { withRange, from, to } = this.state;
 		const modifiers = withRange ? { start: from, end: to } : {};
@@ -105,14 +119,27 @@ export default class Month extends Component {
 		return (
 			<DayPicker
 				className={ containerClass }
+				month={ this.state.month }
+				fromMonth={ fromMonth }
+				toMonth={ toMonth }
 				numberOfMonths={ 2 }
 				modifiers={ modifiers }
 				selectedDays={ this.getSelectedDays() }
 				onDayClick={ this.selectDay }
+				onMonthChange={ this.handleYearMonthChange }
 				disabledDays={
 					{
-						before: new Date(),
+						before: today,
 					}
+				}
+				captionElement={
+					({ date, localeUtils }) => (
+						<YearMonthForm
+							date={ date }
+							localeUtils={ localeUtils }
+							onChange={ this.handleYearMonthChange }
+						/>
+					)
 				}
 			/>
 		);
