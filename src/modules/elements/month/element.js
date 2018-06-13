@@ -107,6 +107,23 @@ export default class Month extends Component {
 
 	handleYearMonthChange = ( month ) => this.setState({ month });
 
+	getCaptionElement = ({ date, localeUtils }) => {
+		const { month } = this.state;
+
+		if ( date.getMonth() !== month.getMonth()) {
+			return this.renderCaption( date, localeUtils );
+		}
+
+		return (
+			<YearMonthForm
+				today={ today }
+				date={ date }
+				localeUtils={ localeUtils }
+				onChange={ this.handleYearMonthChange }
+			/>
+		);
+	}
+
 	renderCaption = ( date, localeUtils ) => (
 		<div className={'tribe-editor__daypicker-caption'} role="heading">
 			<div>
@@ -136,20 +153,7 @@ export default class Month extends Component {
 						before: today,
 					}
 				}
-				captionElement={ ({ date, localeUtils }) => {
-					if ( date.getMonth() !== month.getMonth()) {
-						return this.renderCaption( date, localeUtils );
-					}
-
-					return (
-						<YearMonthForm
-							today={ today }
-							date={ date }
-							localeUtils={ localeUtils }
-							onChange={ this.handleYearMonthChange }
-						/>
-					);
-				} }
+				captionElement={ this.getCaptionElement }
 			/>
 		);
 	}
