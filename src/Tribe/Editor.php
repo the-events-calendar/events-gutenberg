@@ -200,6 +200,17 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
+	 * Check if post type is tribe events
+	 *
+	 * @since  0.2.2-alpha
+	 *
+	 * @return bool
+	 */
+	public function is_events_post_type() {
+		return Tribe__Admin__Helpers::instance()->is_post_type_screen( Tribe__Events__Main::POSTTYPE );
+	}
+
+	/**
 	 * @todo   Move this into the Block PHP files
 	 *
 	 * @since  0.1.0-alpha
@@ -240,15 +251,16 @@ class Tribe__Events_Gutenberg__Editor {
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'type'      => 'js',
-				'in_footer' => false,
-				'localize'  => array(
+				'type'         => 'js',
+				'in_footer'    => false,
+				'localize'     => array(
 					'name' => 'tribe_blocks_editor_google_maps_api',
 					'data' => array(
 						'zoom' => $gmaps_api_zoom,
 						'key' => $gmaps_api_key,
 					),
 				),
+				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
 
@@ -259,8 +271,8 @@ class Tribe__Events_Gutenberg__Editor {
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
-				'localize'  => array(
+				'in_footer'    => false,
+				'localize'     => array(
 					array(
 						'name' => 'tribe_blocks_editor_settings',
 						'data' => tribe( 'gutenberg.settings' )->get_options(),
@@ -282,6 +294,7 @@ class Tribe__Events_Gutenberg__Editor {
 						'data' => Tribe__View_Helpers::loadStates(),
 					),
 				),
+				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
 
@@ -313,8 +326,9 @@ class Tribe__Events_Gutenberg__Editor {
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'tribe-events-editor-blocks-gmaps-api', 'tribe-events-editor-elements' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
-				'localize'  => $localize_blocks,
+				'in_footer'    => false,
+				'localize'     => $localize_blocks,
+				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
 
@@ -325,7 +339,8 @@ class Tribe__Events_Gutenberg__Editor {
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
+				'in_footer'    => false,
+				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
 
@@ -336,7 +351,8 @@ class Tribe__Events_Gutenberg__Editor {
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
+				'in_footer'    => false,
+				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
 
@@ -347,7 +363,8 @@ class Tribe__Events_Gutenberg__Editor {
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
+				'in_footer'    => false,
+				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
 	}

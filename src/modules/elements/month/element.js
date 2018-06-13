@@ -16,8 +16,15 @@ import { Component } from '@wordpress/element';
 /**
  * Internal dependencies
  */
+import { YearMonthForm } from 'elements';
 import { equalDates } from 'utils/date';
 import './style.pcss';
+
+const today = new Date();
+const currentYear = today.getFullYear();
+const currentMonth = today.getMonth();
+const fromMonth = new Date( currentYear, currentMonth );
+const toMonth = new Date( currentYear + 10, 11 );
 
 export default class Month extends Component {
 	static propTypes = {
@@ -32,8 +39,9 @@ export default class Month extends Component {
 		withRange: false,
 		onSelectDay: noop,
 		initialRangeDays: 3,
-		from: new Date(),
+		from: today,
 		to: undefined,
+		month: fromMonth,
 	};
 
 	static getDerivedStateFromProps( nextProps ) {
@@ -63,7 +71,7 @@ export default class Month extends Component {
 
 			// if the range was unselected we fallback to the first available day
 			if ( range.from === null && range.to === null ) {
-				range.from = new Date();
+				range.from = today;
 				range.to = undefined;
 			}
 
@@ -76,7 +84,7 @@ export default class Month extends Component {
 			} );
 		} else {
 			this.setState( {
-				from: selected ? new Date() : day,
+				from: selected ? today : day,
 				to: undefined,
 			}, () => {
 				this.onSelectCallback();
@@ -97,23 +105,55 @@ export default class Month extends Component {
 		return from;
 	}
 
+	handleYearMonthChange = ( month ) => this.setState({ month });
+
+	getCaptionElement = ({ date, localeUtils }) => {
+		const { month } = this.state;
+
+		if ( date.getMonth() !== month.getMonth()) {
+			return this.renderCaption( date, localeUtils );
+		}
+
+		return (
+			<YearMonthForm
+				today={ today }
+				date={ date }
+				localeUtils={ localeUtils }
+				onChange={ this.handleYearMonthChange }
+			/>
+		);
+	}
+
+	renderCaption = ( date, localeUtils ) => (
+		<div className={'tribe-editor__daypicker-caption'} role="heading">
+			<div>
+				{ localeUtils.formatMonthTitle( date ) }
+			</div>
+		</div>
+	);
+
 	render() {
-		const { withRange, from, to } = this.state;
+		const { withRange, from, to, month } = this.state;
 		const modifiers = withRange ? { start: from, end: to } : {};
 		const containerClass = classNames( { 'tribe-editor__calendars--range': withRange } );
 
 		return (
 			<DayPicker
 				className={ containerClass }
+				month={ month }
+				fromMonth={ fromMonth }
+				toMonth={ toMonth }
 				numberOfMonths={ 2 }
 				modifiers={ modifiers }
 				selectedDays={ this.getSelectedDays() }
 				onDayClick={ this.selectDay }
+				onMonthChange={ this.handleYearMonthChange }
 				disabledDays={
 					{
-						before: new Date(),
+						before: today,
 					}
 				}
+				captionElement={ this.getCaptionElement }
 			/>
 		);
 	}
