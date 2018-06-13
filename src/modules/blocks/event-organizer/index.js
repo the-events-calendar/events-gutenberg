@@ -30,6 +30,11 @@ export default {
 			type: 'html',
 			default: '',
 		},
+		organizers: {
+			type: 'array',
+			source: 'meta',
+			meta: '_EventOrganizerID',
+		},
 	},
 
 	edit: Organizer,
