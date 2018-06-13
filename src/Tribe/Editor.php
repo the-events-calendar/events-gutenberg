@@ -207,21 +207,7 @@ class Tribe__Events_Gutenberg__Editor {
 	 * @return bool
 	 */
 	public function is_events_post_type() {
-		global $post, $typenow, $current_screen;
-
-		if ( $post && $post->post_type ) {
-			return $post->post_type === Tribe__Events__Main::POSTTYPE;
-		}
-
-		if ( $typenow ) {
-			return $typenow === Tribe__Events__Main::POSTTYPE;
-		}
-
-		if ( $current_screen && $current_screen->post_type ) {
-			return $current_screen->post_type === Tribe__Events__Main::POSTTYPE;
-		}
-
-		return false;
+		return Tribe__Admin__Helpers::instance()->is_post_type_screen( Tribe__Events__Main::POSTTYPE );
 	}
 
 	/**
