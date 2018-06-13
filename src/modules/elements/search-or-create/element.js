@@ -28,6 +28,7 @@ class SearchOrCreate extends Component {
 		id: '',
 		search: '',
 		posts: [],
+		exclude: [],
 		loading: false,
 	};
 
@@ -38,6 +39,7 @@ class SearchOrCreate extends Component {
 		results: PropTypes.number,
 		search: PropTypes.string,
 		posts: PropTypes.array,
+		exclude: PropTypes.array,
 		loading: PropTypes.bool,
 		onSetCreation: PropTypes.func,
 	};
@@ -181,21 +183,28 @@ export default compose( [
 			clearSearch,
 			search,
 		} = dispatch( props.storeName );
+
 		return {
 			clearSearch,
 			setTerm( term ) {
-				const { id, results = 5 } = props;
+				const { id, results = 5, exclude = [] } = props;
 				setTerm( id, term );
 				if ( term === '' ) {
 					clearSearch( id );
 				}
 
+				const params = {
+					orderby: 'relevance',
+					per_page: results,
+				};
+
+				if ( ! isEmpty( exclude ) ) {
+					params.exclude = exclude;
+				}
+
 				search( id, {
 					search: term,
-					params: {
-						orderby: 'relevance',
-						per_page: results,
-					},
+					params,
 				} );
 			},
 		};
