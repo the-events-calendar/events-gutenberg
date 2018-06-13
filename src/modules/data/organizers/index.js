@@ -1,9 +1,9 @@
 /**
  * External dependencies
  */
-import { get, pick, map, identity } from 'lodash';
+import { get, pick, map, identity, isEmpty } from 'lodash';
 
-import { select, dispatch } from '@wordpress/data';
+import { dispatch } from '@wordpress/data';
 
 const { apiRequest, data } = wp;
 const { registerStore, combineReducers } = data;
@@ -139,6 +139,11 @@ const details = {
 			const { blocks } = state;
 			const block = blocks[ id ] || {};
 			return get( block, key, defaultValue );
+		},
+		isBlock( state, organizer ) {
+			const organizers = map( state.blocks, ( block ) => block.organizer );
+			const search = organizers.filter( ( id ) => id === organizer );
+			return ! isEmpty( search );
 		},
 	},
 	resolvers: {
