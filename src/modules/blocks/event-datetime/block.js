@@ -40,7 +40,7 @@ import { toFormat, toMoment, totalSeconds, toDateTime, toDate } from 'utils/mome
 import { FORMATS, timezonesAsSelectData } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { store, STORE_NAME } from 'data/details';
-import withSaveData from 'utils/with-save-data';
+import withSaveData from 'editor/hoc/with-save-data';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 

@@ -24,7 +24,7 @@ import {
 /**
  * Internal dependencies
  */
-import withSaveData from 'utils/with-save-data';
+import withSaveData from 'editor/hoc/with-save-data';
 import { STORE_NAME } from 'data/details';
 import './style.pcss';
 

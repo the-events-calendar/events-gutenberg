@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { Component, compose } from '@wordpress/element';
 
 import { withDispatch, withSelect } from '@wordpress/data';
-import withSaveData from 'utils/with-save-data';
+import withSaveData from 'editor/hoc/with-save-data';
 
 import {
 	ToggleControl,
