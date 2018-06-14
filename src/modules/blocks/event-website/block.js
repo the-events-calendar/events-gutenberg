@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 /**
@@ -24,6 +25,8 @@ import './style.pcss';
  * Module Code
  */
 
+const placeholder = __( 'Add Button Text', 'events-gutenberg' );
+
 class EventWebsite extends Component {
 	static propTypes = {
 		isSelected: PropTypes.bool,
@@ -38,11 +41,29 @@ class EventWebsite extends Component {
 		super( ...arguments );
 	}
 
+	getTextWidth = ( text ) => {
+		const elem = document.createElement( 'canvas' );
+		const ctx = elem.getContext( '2d' );
+		ctx.font = '700 18px Helvetica';
+		elem.style.position = 'absolute';
+		elem.style.visibility = 'hidden';
+		elem.style.whiteSpace = 'nowrap';
+		elem.style.fontSize = '18px';
+		elem.style.fontFamily = 'Helvetica';
+		elem.style.fontWeight = '700';
+		document.body.appendChild( elem );
+		const textWidth = ctx.measureText( text ).width;
+		document.body.removeChild( elem );
+		return textWidth;
+	}
+
+	onLabelChange = ( e ) => this.props.setAttributes( { urlLabel: e.target.value } );
+
 	render() {
 		return (
 			<div
 				key="event-website"
-				className="tribe-editor__block tribe-editor-event-website"
+				className="tribe-editor__block tribe-editor__event-website"
 			>
 				{ this.renderLink() }
 			</div>
@@ -51,7 +72,6 @@ class EventWebsite extends Component {
 
 	renderLink() {
 		const { isSelected, urlLabel } = this.props;
-		const placeholder = __( 'Add Event Website', 'events-gutenberg' );
 
 		if ( ! isSelected && ! urlLabel ) {
 			return this.renderPlaceholder( placeholder );
@@ -88,14 +108,17 @@ class EventWebsite extends Component {
 
 	renderLabelInput() {
 		const { urlLabel, setAttributes } = this.props;
+		const text = urlLabel ? urlLabel : placeholder;
+		const textWidth = this.getTextWidth( text );
 
 		return (
-			<div key='tribe-events-website-label' className="tribe-editor__event-website">
-				<PlainText
-					id="tribe-events-website-link"
+			<div key='tribe-events-website-label' className="tribe-editor__event-website__label">
+				<input
+					className="tribe-editor__event-website__label-text"
 					value={ urlLabel }
-					onChange={ ( nextContent ) => setAttributes( { urlLabel: nextContent } ) }
-					placeholder={ __( 'Add Event Website', 'events-gutenberg' ) }
+					onChange={ this.onLabelChange }
+					placeholder={ placeholder }
+					style={ { width: `${textWidth}px` } }
 				/>
 			</div>
 		);
@@ -104,7 +127,7 @@ class EventWebsite extends Component {
 	renderPlaceholder( urlLabel ) {
 		return (
 			<button
-				className="tribe-editor__event-website tribe-editor__event-website--placeholder"
+				className="tribe-editor__event-website__label tribe-editor__event-website__label--placeholder"
 			>
 				{ urlLabel }
 			</button>

@@ -1,4 +1,8 @@
 .tribe-editor__event-website {
+
+}
+
+.tribe-editor__event-website__label {
 	align-items: center;
 	border: 1px solid #E1E3E6;
 	display: inline-flex;
@@ -11,13 +15,14 @@
 	font-size: 1.125rem;
 	background-color: #009FD4;
 
-	input,
-	textarea,
-	.editor-plain-text {
+	input {
 		border: 0;
+		padding: 0;
+		margin: 0;
 		color: #fff;
 		background-color: transparent;
 		flex-grow: 1;
+		font-size: 1.125rem;
 
 		&:focus {
 			border: 0;
@@ -38,10 +43,10 @@
 	}
 }
 
-.is-selected,
-.is-typing {
-	.tribe-editor__event-website {
-		margin-bottom: 10px;
+.tribe-editor__event-website__label-text {
+
+	&:empty:before {
+		content: attr(placeholder);
 	}
 }
 
