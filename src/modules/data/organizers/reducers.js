@@ -26,6 +26,7 @@ const DEFAULT_BLOCK = {
 	searches: {
 		search: '',
 		results: [],
+		loading: false,
 	},
 	post: {},
 	draft: {},
@@ -33,17 +34,15 @@ const DEFAULT_BLOCK = {
 
 export function blocks( state = {}, action ) {
 	switch ( action.type ) {
-		case 'ADD_BLOCK':
+		case 'SUBMIT': {
+			const current = state[ action.id ];
 			return {
 				...state,
 				[ action.id ]: {
-					...DEFAULT_BLOCK,
-					organizer: action.organizer,
+					...current,
+					submit: true,
 				},
 			};
-		case 'REMOVE_BLOCK': {
-			const { [ action.id ]: deletedValue, ...rest } = state;
-			return rest;
 		}
 		case 'SET_TERM': {
 			const current = state[ action.id ];
@@ -58,8 +57,9 @@ export function blocks( state = {}, action ) {
 				},
 			};
 		}
-		case 'SEARCH':
+		case 'SEARCH': {
 			return searchByTerm( state, action.id, action.payload );
+		}
 		case 'SET_RESULTS': {
 			const current = state[ action.id ];
 			return {
@@ -69,8 +69,8 @@ export function blocks( state = {}, action ) {
 					searches: {
 						...current.searches,
 						...action.payload,
+						loading: false,
 					},
-					loading: false,
 				},
 			};
 		}
@@ -89,6 +89,18 @@ export function blocks( state = {}, action ) {
 				},
 			};
 		}
+		case 'SET_ORGANIZER': {
+			const current = state[ action.id ];
+			return {
+				...state,
+				[ action.id ]: {
+					...DEFAULT_BLOCK,
+					...current,
+					loading: true,
+					organizer: action.organizer,
+				},
+			};
+		}
 		case 'SET_DRAFT_TITLE': {
 			const current = state[ action.id ];
 			return {
@@ -101,6 +113,7 @@ export function blocks( state = {}, action ) {
 					submit: false,
 					draft: {
 						title: action.title,
+						loading: false,
 					},
 				},
 			};
@@ -119,6 +132,8 @@ export function blocks( state = {}, action ) {
 				},
 			};
 		}
+		case 'REMOVE_DRAFT':
+			return removeDraft( state, action.id );
 		case 'CREATE_DRAFT':
 			return createDraft( state, action.id, action.payload );
 		case 'EDIT_POST':
@@ -185,10 +200,10 @@ function searchByTerm( prevState, id, payload ) {
 		...prevState,
 		[ id ]: {
 			...current,
-			loading: true,
 			searches: {
 				results: [],
 				search,
+				loading: true,
 			},
 		},
 	};
@@ -202,14 +217,15 @@ function createDraft( prevState, id, payload ) {
 		method: 'POST',
 		data: toOrganizer( payload ),
 	} ).then( ( body ) => {
-		dispatch( EVENT_DETAILS_STORE ).addOrganizer( {
-			...body,
-			block: 'individual',
-		} );
+		const { addOrganizer } = dispatch( EVENT_DETAILS_STORE );
+		addOrganizer( body.id );
 		store.dispatch( {
 			type: 'SET_POST',
 			id,
-			payload: body,
+			payload: {
+				...body,
+				volatile: true,
+			},
 		} );
 	} );
 
@@ -240,14 +256,13 @@ function editPost( prevState, id, payload ) {
 		method: 'PUT',
 		data: toOrganizer( payload ),
 	} ).then( ( body ) => {
-		dispatch( EVENT_DETAILS_STORE ).addOrganizer( {
-			...body,
-			block: 'individual',
-		} );
 		store.dispatch( {
 			type: 'SET_POST',
 			id,
-			payload: body,
+			payload: {
+				...body,
+				volatile: true,
+			},
 		} );
 	} );
 
@@ -263,3 +278,25 @@ function editPost( prevState, id, payload ) {
 		},
 	};
 }
+
+function removeDraft( state, id ) {
+	const block = state[ id ];
+	const { organizer } = block;
+
+	if ( ! organizer ) {
+		return state;
+	}
+
+	apiRequest( {
+		path: `/wp/v2/${ POST_TYPE }/${ organizer }`,
+		method: 'DELETE',
+	} ).then( () => dispatch( STORE_NAME ).clear( id ) );
+
+	return {
+		...state,
+		[ id ]: {
+			...block,
+			loading: true,
+		},
+	};
+};

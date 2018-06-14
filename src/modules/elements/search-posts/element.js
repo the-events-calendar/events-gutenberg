@@ -132,7 +132,7 @@ export default class SearchPosts extends Component {
 				role="menuitem"
 				className="tribe-editor__search-posts__item"
 				onClick={ () => {
-					onSelectItem( item );
+					onSelectItem( item.id );
 					this.onClose();
 				} }
 				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
@@ -220,18 +220,3 @@ export default class SearchPosts extends Component {
 		);
 	}
 }
-
-/*
-const applySelect = withSelect( ( select, props ) => {
-	const { metaKey } = props;
-	const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
-	const items = meta[ metaKey ] ? meta[ metaKey ] : [];
-	return {
-		items: items,
-	};
-} );
-
-export default compose(
-	applySelect
-)( SearchPosts );
-*/

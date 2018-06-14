@@ -107,6 +107,5 @@ export default ( attributes = null ) => createHigherOrderComponent( ( WrappedCom
 				return <WrappedComponent { ...this.props } />;
 			}
 	};
-},
-);
+}, 'withSaveData' );
 

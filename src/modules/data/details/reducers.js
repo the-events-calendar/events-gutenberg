@@ -2,7 +2,7 @@
  * External dependencies
  */
 import moment from 'moment/moment';
-import { find, isObject } from 'lodash';
+import { find, isObject, uniq } from 'lodash';
 
 /**
  * Internal dependencies
@@ -291,14 +291,14 @@ export function setOrganizers( prevState, organizer ) {
 export function addOrganizers( prevState, organizer ) {
 	return {
 		...prevState,
-		organizers: [ ...prevState.organizers, organizer ],
+		organizers: uniq( [ ...prevState.organizers, organizer ] ),
 	};
 }
 
 export function removeOrganizer( prevState, organizer ) {
 	return {
 		...prevState,
-		organizers: prevState.organizers.filter( ( item ) => item.id !== organizer.id ),
+		organizers: prevState.organizers.filter( ( item ) => item !== organizer ),
 	};
 }
 

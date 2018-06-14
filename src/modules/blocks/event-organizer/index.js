@@ -1,19 +1,17 @@
 /**
  * External dependencies
  */
-import { get } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { select } from '@wordpress/data';
 
 /**
  *
  * Internal dependencies
  */
-import EventOrganizer from './block';
+import Organizer from './block';
 
 export default {
 	id: 'event-organizer',
@@ -28,37 +26,18 @@ export default {
 	},
 
 	attributes: {
+		organizer: {
+			type: 'html',
+			default: '',
+		},
 		organizers: {
-			type: 'string',
+			type: 'array',
 			source: 'meta',
-			meta: '_EventOrganizerBlocks',
+			meta: '_EventOrganizerID',
 		},
 	},
 
-	edit: ( { attributes, setAttributes, isSelected, id } ) => {
-		const { organizers } = attributes;
-		const index = select( 'core/editor' ).getBlockIndex( id );
-		let organizer = 0;
-		try {
-			const blocks = JSON.parse( organizers );
-			const results = blocks.filter( ( b ) => b.index === index );
-			const block = results.length ? results[ 0 ] : {};
-			organizer = get( block, 'organizer', 0 );
-		} catch ( error ) {
-			organizer = 0;
-		}
-
-		return (
-			<EventOrganizer
-				id={ id }
-				selected={ isSelected }
-				setAttributes={ setAttributes }
-				current={ organizers }
-				organizer={ organizer }
-				{ ...attributes }
-			/>
-		);
-	},
+	edit: Organizer,
 
 	save() {
 		return null;

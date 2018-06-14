@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { Component, compose } from '@wordpress/element';
 
 import { withDispatch, withSelect } from '@wordpress/data';
-import withSaveData from 'utils/with-save-data';
+import withSaveData from 'editor/hoc/with-save-data';
 
 import {
 	ToggleControl,
@@ -44,12 +44,7 @@ import { STORE_NAME as DETAILS_STORE } from 'data/details';
  */
 
 class EventDetails extends Component {
-	static defaultProps = {
-		organizers: [],
-	};
-
 	static propTypes = {
-		organizers: PropTypes.array,
 		organizerTitle: PropTypes.string,
 		setAttributes: PropTypes.func,
 	};
@@ -88,14 +83,9 @@ class EventDetails extends Component {
 	renderOrganizer() {
 		const {
 			organizerTitle,
-			organizers,
 			setAttributes,
 			focus,
-			addOrganizer,
-			removeOrganizers,
 		} = this.props;
-
-		const organizersBlocks = [];
 
 		return (
 			<MetaGroup groupKey="organizer">
@@ -110,10 +100,6 @@ class EventDetails extends Component {
 				/>
 				<EventOrganizers
 					focus={ focus }
-					organizers={ organizers }
-					organizersBlocks={ organizersBlocks }
-					addOrganizer={ addOrganizer }
-					removeOrganizer={ removeOrganizers }
 				/>
 			</MetaGroup>
 		);

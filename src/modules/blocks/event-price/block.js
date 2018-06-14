@@ -31,7 +31,7 @@ import {
 import './style.pcss';
 import { parser, isFree } from 'utils/range';
 import { STORE_NAME as DETAILS_STORE } from 'data/details';
-import withSaveData from 'utils/with-save-data';
+import withSaveData from 'editor/hoc/with-save-data';
 
 /**
  * Module Code

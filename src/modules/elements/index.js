@@ -11,4 +11,5 @@ export { default as Dashboard } from './dashboard/element';
 export { default as CheckBox } from './checkbox/element';
 export { default as Month } from './month/element';
 export { default as SearchOrCreate } from './search-or-create/element';
+export { default as Loading } from './loading';
 export { default as YearMonthForm } from './year-month-form/element';
