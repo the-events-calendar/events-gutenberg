@@ -52,7 +52,7 @@ export default class EventCategory extends Component {
 		return (
 			<TermsList
 				slug="tribe_events_cat"
-				label={ __( 'Event Category:', 'events-gutenberg' ) }
+				label={ __( 'Event Category', 'events-gutenberg' ) }
 				renderEmpty={ __( 'Add Event Categories in document settings', 'events-gutenberg' ) }
 			/>
 		);
