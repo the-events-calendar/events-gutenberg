@@ -29,6 +29,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Feature - Featured Image Block for Events
 * Feature - Event Date Time can now move Years forward
 * Feature - Event links now are saved as attributes
+* Feathre - When searching a venue or organizer you can always create the searched value
 * Tweak - Favor the usage of HOC to sync / save data in details store
 * Tweak - Remove prefixes from store to make it more clear
 * Tweak - Removal of new volatile meta fields to store temp data
