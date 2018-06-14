@@ -44,14 +44,14 @@ class TaxonomiesElement extends Component {
 			return terms;
 		}
 
-		return terms.filter( term => term.parent === parentId );
+		return terms.filter( ( term ) => term.parent === parentId );
 	}
 
-	getTermListClassName = level => (
+	getTermListClassName = ( level ) => (
 		`tribe-editor__terms__list tribe-editor__terms__list--level-${ level }`
 	);
 
-	getTermListItemClassName = level => (
+	getTermListItemClassName = ( level ) => (
 		`tribe-editor__terms__list-item tribe-editor__terms__list-item--level-${ level }`
 	);
 
