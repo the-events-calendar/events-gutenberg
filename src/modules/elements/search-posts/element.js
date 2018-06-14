@@ -81,10 +81,9 @@ export default class SearchPosts extends Component {
 
 	searchPosts = ( event ) => {
 		const { storeName } = this.props;
-		const value = event.target.value.trim();
 
 		this.scrollPosition = 0;
-		dispatch( storeName ).search( value, {
+		dispatch( storeName ).search( event.target.value, {
 			exclude: this.props.exclude,
 		} );
 	}
