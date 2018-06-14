@@ -24,7 +24,6 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
-import { STORE_NAME } from 'data/organizers';
 
 /**
  * Module Code

@@ -25,7 +25,7 @@ import {
  * Module Code
  */
 export default class VenueDetails extends Component {
-	constructor( props ) {
+	constructor() {
 		super( ...arguments );
 
 		this.state = {
