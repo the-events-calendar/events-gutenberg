@@ -290,9 +290,7 @@ function removeDraft( state, id ) {
 	apiRequest( {
 		path: `/wp/v2/${ POST_TYPE }/${ organizer }`,
 		method: 'DELETE',
-	} ).then( () => {
-		dispatch( STORE_NAME ).clear( id );
-	} );
+	} ).then( () => dispatch( STORE_NAME ).clear( id ) );
 
 	return {
 		...state,

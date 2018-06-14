@@ -98,9 +98,7 @@ class EventOrganizers extends Component {
 						<Item
 							id={ id }
 							key={ id }
-							onRemoveOrganizer={ () => {
-								removeOrganizer( id );
-							} }
+							onRemoveOrganizer={ () => removeOrganizer( id ) }
 						/>
 					);
 				} ) }

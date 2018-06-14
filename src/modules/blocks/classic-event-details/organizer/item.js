@@ -16,7 +16,7 @@ import withRequest from 'editor/hoc/with-request';
 import { Loading } from 'elements';
 import { Actions, Name } from './index';
 
-const Item = ( { id, data = {}, isLoading, onRemoveOrganizer } ) => {
+const Item = ( { id, data = {}, isLoading, onRemoveOrganizer, ...rest } ) => {
 
 	if ( isLoading ) {
 		return <li><Loading className="tribe-editor__spinner--item" /></li>;
@@ -25,7 +25,7 @@ const Item = ( { id, data = {}, isLoading, onRemoveOrganizer } ) => {
 	return (
 		<li>
 			<Name { ...data } />
-			<Actions id={ id } onRemoveOrganizer={ onRemoveOrganizer } />
+			<Actions id={ id } onRemoveOrganizer={ onRemoveOrganizer } { ...rest } />
 		</li>
 	);
 };

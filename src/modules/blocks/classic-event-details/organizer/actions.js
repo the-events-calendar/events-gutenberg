@@ -13,31 +13,25 @@ import {
 
 import { __ } from '@wordpress/i18n';
 import { withSelect } from '@wordpress/data';
-import {
-	compose,
-} from '@wordpress/element';
+import { compose } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import { STORE_NAME } from 'data/organizers';
 
-const ActionsComponent = ( { isBlock, onRemoveOrganizer = noop } ) => {
+const ActionsComponent = ( { isBlock, onRemoveOrganizer = noop, focus } ) => {
 
 	if ( isBlock ) {
 		return null;
 	}
-
-	const icon = (
-		<Dashicon icon="no"/>
-	);
 
 	return (
 		<IconButton
 			className="tribe-editor__btn"
 			label={ __( 'Remove Organizer', 'events-gutenberg' ) }
 			onClick={ onRemoveOrganizer }
-			icon={ icon }
+			icon={ 	<Dashicon icon="no" /> }
 			aria-expanded={ focus }
 			style={ { position: 'absolute', right: 0, top: '-5px' } }
 		/>
