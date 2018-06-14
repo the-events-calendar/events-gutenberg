@@ -34,10 +34,6 @@ class EventLinks extends Component {
 		super( ...arguments );
 	}
 
-	componentDidMount() {
-		console.log(this.props);
-	}
-
 	render() {
 		return [ this.renderButtons(), this.renderControls() ];
 	}
