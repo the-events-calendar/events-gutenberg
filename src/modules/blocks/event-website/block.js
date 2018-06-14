@@ -9,17 +9,9 @@ import PropTypes from 'prop-types';
  */
 import { withDispatch, withSelect } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
-import {
-	PanelBody,
-	Dashicon,
-} from '@wordpress/components';
-
+import { Dashicon } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-
-import {
-	InspectorControls,
-	PlainText,
-} from '@wordpress/editor';
+import { PlainText, UrlInput } from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -85,11 +77,10 @@ class EventWebsite extends Component {
 		return (
 			<div key="tribe-events-website-url" className="tribe-editor__event-website__url">
 				<Dashicon icon="admin-links" />
-				<PlainText
-					id="tribe-events-website-link"
+				<UrlInput
+					autoFocus={ false }
 					value={ url }
-					onChange={ ( nextContent ) => this.setWebsiteUrl( { url: nextContent } ) }
-					placeholder={ buttonLabel }
+					onChange={ ( url ) => this.setWebsiteUrl( { url } ) }
 				/>
 			</div>
 		);
