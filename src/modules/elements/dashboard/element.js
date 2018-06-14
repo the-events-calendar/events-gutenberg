@@ -133,7 +133,11 @@ export default class Dashboard extends Component {
 	 */
 	onClickOutside = ( event ) => {
 		const { target } = event;
-		if ( Dashboard.isPartOfDashboard( target ) || Dashboard.isPartOfSidebar( target ) ) {
+		if (
+			Dashboard.isPartOfDashboard( target ) ||
+			Dashboard.isPartOfPopover( target ) ||
+			Dashboard.isPartOfSidebar( target )
+		) {
 			return;
 		}
 		this.close();
@@ -154,10 +158,19 @@ export default class Dashboard extends Component {
 		} );
 	}
 
+	/**
+	 * Listen for a click on the document to see if the element is part of the Popover component
+	 * if not we should close
+	 *
+	 * @param {DomNode} node - The element tested against
+	 * @returns {boolean} True if the element clicked is part of the popover component
+	 */
+	static isPartOfPopover( node ) {
+		return searchParent( node, testNode => testNode.classList.contains( 'components-popover' ) );
+	}
+
 	static isPartOfSidebar( node ) {
-		return searchParent( node, ( testNode ) => {
-			return testNode.classList.contains( 'edit-post-sidebar' );
-		} );
+		return searchParent( node, testNode => testNode.classList.contains( 'edit-post-sidebar' ) );
 	}
 
 	/**
