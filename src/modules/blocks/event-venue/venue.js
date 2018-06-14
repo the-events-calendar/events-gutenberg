@@ -4,6 +4,7 @@
 import React from 'react';
 import { isEmpty } from 'lodash';
 import { mapLink } from 'utils/geo-data';
+import { decode } from 'he';
 
 /**
  * WordPress dependencies
@@ -69,9 +70,8 @@ export default class VenueDetails extends Component {
 
 	renderVenueName() {
 		return (
-			<h3
-				className="tribe_editor__venue__name"
-				dangerouslySetInnerHTML={ this.getVenueName() }>
+			<h3 className="tribe_editor__venue__name">
+				{ decode( this.getVenueName() ) }
 			</h3>
 		);
 	}

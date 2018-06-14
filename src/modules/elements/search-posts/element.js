@@ -4,11 +4,12 @@
 import React from 'react';
 import { uniqueId, noop } from 'lodash';
 import classNames from 'classnames';
+import { decode } from 'he';
 
 /**
  * WordPress dependencies
  */
-import { withSelect, dispatch, select } from '@wordpress/data';
+import { dispatch } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
 
 import {
@@ -120,11 +121,13 @@ export default class SearchPosts extends Component {
 		return posts.map( this.renderItem, this );
 	}
 
-	renderItem = ( item ) => {
+	renderItem = ( item = {} ) => {
 		const { current } = this.state;
 		const { onSelectItem, onHover } = this.props;
 
 		const isCurrent = current && current.id === item.id;
+		const { title = {} } = item;
+		const { rendered = '' } = title;
 
 		return (
 			<button
@@ -139,8 +142,9 @@ export default class SearchPosts extends Component {
 				disabled={ item.isDisabled }
 				onMouseEnter={ onHover( item ) }
 				onMouseLeave={ onHover( null ) }
-				dangerouslySetInnerHTML={ { __html: item.title.rendered }}
-			/>
+			>
+				{ decode( rendered ) }
+			</button>
 		);
 	}
 
