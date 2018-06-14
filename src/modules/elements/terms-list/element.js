@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import './style.pcss';
 
 /**
  * Module Code
@@ -29,7 +30,7 @@ class TaxonomiesElement extends Component {
 		};
 	}
 
-	getTerms( parentId = null ) {
+	getTerms = ( parentId = null ) => {
 		if ( ! this.props.terms ) {
 			return [];
 		}
@@ -46,12 +47,15 @@ class TaxonomiesElement extends Component {
 		return terms.filter( term => term.parent === parentId );
 	}
 
-	getTermListClassName( level ) {
-		const { className } = this.props;
-		return `tribe-editor__terms__list tribe-terms__list-level-${ level } ${ className }`;
-	}
+	getTermListClassName = level => (
+		`tribe-editor__terms__list tribe-editor__terms__list--level-${ level }`
+	);
 
-	renderTermName( term ) {
+	getTermListItemClassName = level => (
+		`tribe-editor__terms__list-item tribe-editor__terms__list-item--level-${ level }`
+	);
+
+	renderTermName = ( term ) => {
 		if ( ! term.name ) {
 			return __( '(Untitled)', 'events-gutenberg' );
 		}
@@ -64,25 +68,28 @@ class TaxonomiesElement extends Component {
 
 		return (
 			<ul className={ this.getTermListClassName( 0 ) }>
-				{ terms.map( ( term, index ) => {
-					this.renderTermListItem( term, index + 1 === terms.length, 0 );
-				} ) }
+				{ terms.map( ( term, index ) => (
+					this.renderTermListItem( term, index + 1 === terms.length, 0 )
+				 ) ) }
 			</ul>
 		);
 	}
 
-	renderTermListItem( term, isLast, level ) {
+	renderTermListItem = ( term, isLast, level ) => {
 		const childTerms = this.getTerms( term.id );
 		const separator = ! isLast ? (
 			<span>
 				{ this.props.termSeparator }
-				{ ' ' }
 			</span>
 		) : null;
 
 		return (
-			<li key={ term.id }>
-				<a href={ term.link } target="_blank">
+			<li key={ term.id } className={ this.getTermListItemClassName( 0 ) }>
+				<a
+					href={ term.link }
+					target="_blank"
+					className="tribe-editor__terms__list-item-link"
+				>
 					{ this.renderTermName( term ) }
 				</a>
 				{ separator }
@@ -90,7 +97,7 @@ class TaxonomiesElement extends Component {
 		);
 	}
 
-	renderEmpty() {
+	renderEmpty = () => {
 		const { renderEmpty, slug } = this.props;
 		const key = `tribe-terms-${ slug }`;
 		if ( ! renderEmpty ) {
@@ -98,16 +105,16 @@ class TaxonomiesElement extends Component {
 		}
 
 		return [
-			<div key={ key } className="tribe-editor__terms tribe-editor--empty">
+			<div key={ key } className="tribe-editor__terms tribe-editor__terms--empty">
 				{ this.renderLabel() }
 				{ renderEmpty }
 			</div>,
 		];
 	}
 
-	renderLabel() {
+	renderLabel = () => {
 		const label = (
-			<strong className="tribe-editor__details__label" key="terms-label">
+			<strong className="tribe-editor__terms__label" key="terms-label">
 				{ this.props.label }
 				{ ' ' }
 			</strong>
@@ -117,13 +124,13 @@ class TaxonomiesElement extends Component {
 	}
 
 	render() {
-		const { attributes, focus, setAttributes, slug } = this.props;
+		const { attributes, className, focus, setAttributes, slug } = this.props;
 		const terms = this.getTerms();
 		const key = `tribe-terms-${ slug }`;
 
 		if ( this.props.terms.isLoading ) {
 			return [
-				<div key={ key } className="tribe-editor__terms">
+				<div key={ key } className={ `tribe-editor__terms ${ className }` }>
 					{ this.renderLabel() }
 					<Spinner key="terms-spinner" />
 				</div>,
@@ -133,9 +140,9 @@ class TaxonomiesElement extends Component {
 		}
 
 		return [
-			<div key={ key } className="tribe-editor__terms">
+			<div key={ key } className={ `tribe-editor__terms ${ className }` }>
 				{ this.renderLabel() }
-				<div key="terms" className={ this.props.className }>
+				<div key="terms" className="tribe-editor__terms__list-wrapper">
 					{ this.renderTermList() }
 				</div>
 			</div>,
