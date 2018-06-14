@@ -27,6 +27,13 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 #### 0.2.2-alpha - TBD
 
 * Feature - Featured Image Block for Events
+* Feature - Event Date Time can now move Years forward
+* Feature - Event links now are saved as attributes
+* Tweak - Favor the usage of HOC to sync / save data in details store
+* Tweak - Remove prefixes from store to make it more clear
+* Tweak - Removal of new volatile meta fields to store temp data
+* Fix - issues with sync of data between components with the same data
+* Fix - Event price and description are stored correctly
 
 #### 0.2.1-alpha - 2018-06-01
 
