@@ -133,7 +133,7 @@ export default class Dashboard extends Component {
 	 */
 	onClickOutside = ( event ) => {
 		const { target } = event;
-		if ( this.isPartOfDashboard( target ) ) {
+		if ( Dashboard.isPartOfDashboard( target ) || Dashboard.isPartOfSidebar( target ) ) {
 			return;
 		}
 		this.close();
@@ -146,11 +146,17 @@ export default class Dashboard extends Component {
 	 * @param {DomNode} node - The element tested against
 	 * @returns {boolean} True if the element clicked is part of the dashboard
 	 */
-	isPartOfDashboard( node ) {
+	static isPartOfDashboard( node ) {
 		return searchParent( node, ( testNode ) => {
 			const isContainer = testNode.classList.contains( 'tribe-editor__dashboard__container' );
 			const isDashboard = testNode.classList.contains( 'tribe-editor__dashboard' );
 			return isDashboard || isContainer;
+		} );
+	}
+
+	static isPartOfSidebar( node ) {
+		return searchParent( node, ( testNode ) => {
+			return testNode.classList.contains( 'edit-post-sidebar' );
 		} );
 	}
 
