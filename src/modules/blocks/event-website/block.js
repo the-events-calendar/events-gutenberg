@@ -47,12 +47,11 @@ class EventWebsite extends Component {
 	}
 
 	render() {
-		return [ this.renderButton(), this.renderControls() ];
-	}
-
-	renderButton() {
 		return (
-			<div key="event-website" className="tribe-editor__block tribe-editor-event-website">
+			<div
+				key="event-website"
+				className="tribe-editor__block tribe-editor-event-website"
+			>
 				{ this.renderLink() }
 			</div>
 		);
@@ -115,7 +114,7 @@ class EventWebsite extends Component {
 		return (
 			<button
 				className="tribe-editor__event-website tribe-editor__event-website--placeholder"
-				disabled>
+			>
 				{ urlLabel }
 			</button>
 		);
@@ -126,22 +125,6 @@ class EventWebsite extends Component {
 		const { setUrl } = this.props;
 		setUrl( url );
 	};
-
-	renderControls() {
-		const { isSelected } = this.props;
-
-		if ( ! isSelected ) {
-			return null;
-		}
-
-		return (
-			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Website Settings', 'events-gutenberg' ) }>
-
-				</PanelBody>
-			</InspectorControls>
-		);
-	}
 }
 
 export default compose( [
