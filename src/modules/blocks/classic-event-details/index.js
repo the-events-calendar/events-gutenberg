@@ -17,7 +17,7 @@ import EventDetails from './block';
  * Module Code
  */
 export default {
-	id: 'event-details',
+	id: 'classic-event-details',
 	title: __( 'Event Details Classic', 'events-gutenberg' ),
 	description: __(
 		'Display your event info together in one place -- just like in the Classic Editor..',
