@@ -54,8 +54,15 @@
 	z-index: 10;
 	top: 27px;
 
-	svg {
-		fill: #A2AAB2;
+	&--close {
+		svg {
+			width: 16px;
+		}
+	}
+
+	svg,
+	path {
+		fill: #8D949B;
 	}
 
 	button {
@@ -65,8 +72,9 @@
 		cursor: pointer;
 
 		&:hover {
-			svg {
-				fill: #000;
+			svg,
+			path {
+				fill: #009FD4;
 			}
 		}
 	}
