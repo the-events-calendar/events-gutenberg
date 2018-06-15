@@ -12,7 +12,7 @@ import { withDispatch, withSelect } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
 import { Dashicon } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { PlainText, UrlInput } from '@wordpress/editor';
+import { RichText, UrlInput } from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -113,8 +113,11 @@ class EventWebsite extends Component {
 
 		return (
 			<div key='tribe-events-website-label' className="tribe-editor__event-website__label">
-				<input
+				<RichText
+					id="tribe-events-website-link"
 					className="tribe-editor__event-website__label-text"
+					format="string"
+					tagName="h4"
 					value={ urlLabel }
 					onChange={ this.onLabelChange }
 					placeholder={ placeholder }

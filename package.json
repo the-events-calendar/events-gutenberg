@@ -1,6 +1,6 @@
 {
 	"name": "events-gutenberg",
-	"version": "0.2.0-alpha",
+	"version": "0.2.2-alpha",
 	"description": "A new WordPress editor experience",
 	"repository": "git+https://github.com/WordPress/gutenberg.git",
 	"author": "Modern Tribe",
@@ -32,6 +32,7 @@
 		"classnames": "^2.2.5",
 		"file-loader": "^1.1.6",
 		"google-maps-react": "^1.1.11",
+		"he": "^1.1.1",
 		"jest": "^22.4.3",
 		"jquery": "3.2.1",
 		"lodash": "4.17.4",

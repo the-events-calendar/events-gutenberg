@@ -91,6 +91,29 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
+	 * Gets the classic template, used for migration and setup new events with classic look
+	 *
+	 * @since  0.2.2-alpha
+	 *
+	 * @return array
+	 */
+	public function get_classic_template() {
+		$template = array();
+		$template[] = array( 'tribe/event-datetime' );
+		$template[] = array( 'tribe/featured-image' );
+		$template[] = array(
+			'core/paragraph',
+			array(
+				'placeholder' => __( 'Add Description...', 'events-gutenberg' ),
+			),
+		);
+		$template[] = array( 'tribe/event-links' );
+		$template[] = array( 'tribe/classic-event-details' );
+		$template[] = array( 'tribe/event-venue' );
+		return $template;
+	}
+
+	/**
 	 * Adds the required blocks into the Events Post Type
 	 *
 	 * @since  0.1.3-alpha
@@ -107,17 +130,7 @@ class Tribe__Events_Gutenberg__Editor {
 
 		// Basically setups up a diferent template if is a classic event
 		if ( $is_classic_editor ) {
-			$template[] = array( 'tribe/event-datetime' );
-			$template[] = array( 'tribe/featured-image' );
-			$template[] = array(
-				'core/paragraph',
-				array(
-					'placeholder' => __( 'Add Description...', 'events-gutenberg' ),
-				),
-			);
-			$template[] = array( 'tribe/event-links' );
-			$template[] = array( 'tribe/classic-event-details' );
-			$template[] = array( 'tribe/event-venue' );
+			$template = $this->get_classic_template();
 		} else {
 			$template[] = array( 'tribe/event-datetime' );
 			$template[] = array( 'tribe/featured-image' );
@@ -147,6 +160,40 @@ class Tribe__Events_Gutenberg__Editor {
  		$args['template'] = apply_filters( 'tribe_events_editor_default_template', $template, Tribe__Events__Main::POSTTYPE, $args );
 
  		return $args;
+	}
+
+	/**
+	 * Making sure we have correct post content for blocks after going into Gutenberg
+	 *
+	 * @since  0.2.2-alpha
+	 *
+	 * @param  int $post Which post we will migrate
+	 *
+	 * @return bool
+	 */
+	public function update_post_content_to_blocks( $post ) {
+		$post = get_post( $post );
+		$blocks = $this->get_classic_template();
+		$content = array();
+
+		foreach ( $blocks as $key => $block_param ) {
+			$slug = reset( $block_param );
+
+			if ( 'core/paragraph' === $slug ) {
+				$content[] = '<!-- wp:freeform -->';
+				$content[] = $post->post_content;
+				$content[] = '<!-- /wp:freeform -->';
+			} else {
+				$content[] = '<!-- wp:' . $slug . ' /-->';
+			}
+		}
+
+		$status = wp_update_post( array(
+			'ID' => $post->ID,
+			'post_content' => implode( "\n\r", $content ),
+		) );
+
+		return $status;
 	}
 
 	/**
@@ -186,7 +233,7 @@ class Tribe__Events_Gutenberg__Editor {
 			return false;
 		}
 
-		// Bail if not an event
+		// Bail if not an event (might need to be removed later)
 		if ( ! tribe_is_event( $post ) ) {
 			return false;
 		}
@@ -196,11 +243,25 @@ class Tribe__Events_Gutenberg__Editor {
 			return false;
 		}
 
-		return update_post_meta( $post, $this->key_flag_classic_editor, 1 );
+		$status = update_post_meta( $post, $this->key_flag_classic_editor, 1 );
+
+		// Only trigger when we actually have the correct post
+		if ( $status ) {
+			/**
+			 * Triggers
+			 *
+			 * @since  0.2.2-alpha
+			 *
+			 * @param  int $post Which post is getting updated
+			 */
+			do_action( 'tribe_blocks_editor_flag_post_classic_editor', $post );
+		}
+
+		return $status;
 	}
 
 	/**
-	 * Check if post type is tribe events
+	 * Check if current admin page is post type `tribe_events`
 	 *
 	 * @since  0.2.2-alpha
 	 *
@@ -208,6 +269,31 @@ class Tribe__Events_Gutenberg__Editor {
 	 */
 	public function is_events_post_type() {
 		return Tribe__Admin__Helpers::instance()->is_post_type_screen( Tribe__Events__Main::POSTTYPE );
+	}
+
+	/**
+	 * Check if post is from classic editor
+	 *
+	 * @since  0.2.2-alpha
+	 *
+	 * @param int|WP_Post $post
+	 *
+	 * @return bool
+	 */
+	public function post_is_from_classic_editor( $post ) {
+		if ( ! $post instanceof WP_Post ) {
+			$post = get_post( $post );
+		}
+
+		if ( empty( $post ) ) {
+			return false;
+		}
+
+		if ( ! $post instanceof WP_Post ) {
+			return false;
+		}
+
+		return tribe_is_truthy( get_post_meta( $post->ID, $this->key_flag_classic_editor, true ) );
 	}
 
 	/**
@@ -310,7 +396,7 @@ class Tribe__Events_Gutenberg__Editor {
 			),
 		);
 
-		$is_classic_editor = (bool) get_post_meta( tribe_get_request_var( 'post', 0 ), $this->key_flag_classic_editor, true );
+		$is_classic_editor = $this->post_is_from_classic_editor( tribe_get_request_var( 'post', 0 ) );
 
 		$localize_blocks[] = array(
 			'name' => 'tribe_blocks_editor',
