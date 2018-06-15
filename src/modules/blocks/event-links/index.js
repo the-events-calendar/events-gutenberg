@@ -33,9 +33,19 @@ export default {
 	attributes: {
 		googleCalendarLabel: {
 			type: 'html',
+			default: __( 'Google Calendar', 'events-gutenberg' ),
 		},
-		icalExportLabel: {
+		iCalLabel: {
 			type: 'html',
+			default: __( 'iCal Export', 'events-gutenberg' ),
+		},
+		hasiCal: {
+			type: 'html',
+			default: true,
+		},
+		hasGoogleCalendar: {
+			type: 'html',
+			default: true,
 		},
 	},
 
