@@ -4,6 +4,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { noop } from 'lodash';
+import { decode } from 'he';
 
 /**
  * WordPress dependencies
@@ -54,7 +55,7 @@ export default class OrganizerDetails extends Component {
 		const { title, website, email, phone } = fields;
 		return (
 			<Fragment>
-				<h3 dangerouslySetInnerHTML={ { __html: title } } />
+				<h3>{ decode( title ) }</h3>
 				{ phone && <p>{ phone }</p> }
 				{ website && <p>{ website }</p> }
 				{ email && <p>{ email }</p> }

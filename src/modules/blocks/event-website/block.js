@@ -18,6 +18,7 @@ import { __ } from '@wordpress/i18n';
 
 import {
 	InspectorControls,
+	RichText,
 	PlainText,
 } from '@wordpress/editor';
 
@@ -101,8 +102,10 @@ class EventWebsite extends Component {
 
 		return (
 			<div key='tribe-events-website-label' className="tribe-editor__event-website">
-				<PlainText
+				<RichText
 					id="tribe-events-website-link"
+					format="string"
+					tagName="h4"
 					value={ urlLabel }
 					onChange={ ( nextContent ) => setAttributes( { urlLabel: nextContent } ) }
 					placeholder={ __( 'Add Event Website', 'events-gutenberg' ) }

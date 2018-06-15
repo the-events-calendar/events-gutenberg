@@ -5,6 +5,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty, noop } from 'lodash';
+import { decode } from 'he';
 
 /**
  * WordPress dependencies
@@ -117,21 +118,10 @@ class SearchOrCreate extends Component {
 
 		return (
 			<nav className="tribe-editor__soc__results">
+				{ this.renderCreateItem() }
 				{ this.renderItems() }
 			</nav>
 		);
-	}
-
-	renderItems() {
-		const { posts, search } = this.props;
-
-		if ( posts.length === 0 ) {
-			return (
-				<li onClick={ this.setCreation }><strong>Create</strong>: { search } </li>
-			);
-		}
-
-		return ( posts.map( this.renderItem ) );
 	}
 
 	setCreation = () => {
@@ -139,18 +129,26 @@ class SearchOrCreate extends Component {
 		this.props.onSetCreation( search );
 	};
 
+	renderCreateItem() {
+		const { search } = this.props;
+		return <li onClick={ this.setCreation }><strong>Create</strong>: { search } </li>;
+	}
+
+	renderItems() {
+		const { posts } = this.props;
+		return posts.map( this.renderItem );
+	}
+
 	renderItem = ( item ) => {
-		const { title, id } = item;
+		const { title = {}, id } = item;
+		const { rendered = '' } = title;
 		return (
 			<li
 				key={ id }
 				onClick={ this.setSelection( item ) }
-				dangerouslySetInnerHTML={
-					{
-						__html: title.rendered,
-					}
-				}
-			/>
+			>
+				{ decode( rendered ) }
+			</li>
 		);
 	};
 
