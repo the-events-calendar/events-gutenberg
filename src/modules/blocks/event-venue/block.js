@@ -62,8 +62,8 @@ class EventVenue extends Component {
 		coordinates: PropTypes.object,
 		address: PropTypes.object,
 		draft: PropTypes.object,
-		showMap: PropTypes.oneOfType( [ PropTypes.bool, PropTypes.string ] ),
-		showMapLink: PropTypes.oneOfType( [ PropTypes.bool, PropTypes.string ] ),
+		showMap: PropTypes.bool,
+		showMapLink: PropTypes.bool,
 		createDraft: PropTypes.func,
 		editDraft: PropTypes.func,
 		removeDraft: PropTypes.func,
@@ -266,12 +266,12 @@ class EventVenue extends Component {
 					<ToggleControl
 						label={ __( 'Show Google Maps Link' ) }
 						checked={ ! ! showMapLink }
-						onChange={ ( value ) => setAttributes( { showMapLink: value } ) }
+						onChange={ ( value ) => setAttributes( { showMapLink: !! value } ) }
 					/>
 					<ToggleControl
 						label={ __( 'Show Google Maps Embed' ) }
 						checked={ ! ! showMap }
-						onChange={ ( value ) => setAttributes( { showMap: value } ) }
+						onChange={ ( value ) => setAttributes( { showMap: !! value } ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
