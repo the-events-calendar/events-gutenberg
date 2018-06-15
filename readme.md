@@ -24,9 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-#### 0.2.2-alpha - TBD
+#### 0.2.2-alpha - 2018-06-15
 
 * Feature - Featured Image Block for Events
+* Feature - Actual migration for Classic Editor Events into Blocks Editor
 
 #### 0.2.1-alpha - 2018-06-01
 
