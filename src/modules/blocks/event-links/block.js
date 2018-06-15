@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 
 import {
 	InspectorControls,
-	PlainText,
+	RichText,
 } from '@wordpress/editor';
 
 /**
@@ -57,8 +57,10 @@ export default class EventLinks extends Component {
 		return (
 			<div className="tribe-editor__btn--link tribe-events-gcal">
 				<LinkIcon />
-				<PlainText
+				<RichText
 					id="tribe-event-google-calendar"
+					format="string"
+					tagName="h5"
 					value={ googleCalendarLabel }
 					onChange={ ( nextContent ) => this.setState( { googleCalendarLabel: nextContent } ) }
 				/>
@@ -76,8 +78,9 @@ export default class EventLinks extends Component {
 		return (
 			<div className="tribe-editor__btn--link tribe-events-ical">
 				<LinkIcon />
-				<PlainText
-					type="text"
+				<RichText
+					format="string"
+					tagName="h5"
 					id="tribe-event-ical"
 					value={ iCalLabel }
 					onChange={ ( nextContent ) => this.setState( { iCalLabel: nextContent } ) }
