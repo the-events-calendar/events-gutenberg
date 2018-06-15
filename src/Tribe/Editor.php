@@ -82,6 +82,10 @@ class Tribe__Events_Gutenberg__Editor {
 			$args['supports'] = array();
 		}
 
+		if ( ! in_array( 'revisions', $args['supports'] ) ) {
+			$args['supports'][] = 'revisions';
+		}
+
 		// Add Custom Fields (meta) Support
 		if ( ! in_array( 'custom-fields', $args['supports'] ) ) {
 			$args['supports'][] = 'custom-fields';
