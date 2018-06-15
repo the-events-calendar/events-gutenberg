@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { isEmpty } from 'lodash';
 import { mapLink } from 'utils/geo-data';
 import { decode } from 'he';
@@ -105,7 +105,13 @@ export default class VenueDetails extends Component {
 				{ city && <span className="tribe-venue__delimiter">, </span> }
 				{ province && <span className="tribe-venue__region">{ province }</span> }
 				{ zip && <span className="tribe-venue__postal-code"> { zip }</span> }
-				{ country && <span className="tribe-venue__country-name"> { country }</span> }
+				{
+					country &&
+					<Fragment>
+						<br />
+						<span className="tribe-venue__country-name"> { country }</span>
+					</Fragment>
+				}
 				{ this.renderGoogleMapLink() }
 			</address>
 		);
@@ -119,13 +125,16 @@ export default class VenueDetails extends Component {
 		}
 
 		return (
-			<a
-				href={ mapLink( address ) }
-				title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
-				target="_blank"
-			>
-				{ __( '+ Google Map', 'events-gutenberg' ) }
-			</a>
+			<Fragment>
+				<br />
+				<a
+					href={ mapLink( address ) }
+					title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
+					target="_blank"
+				>
+					{ __( '+ Google Map', 'events-gutenberg' ) }
+				</a>
+			</Fragment>
 		);
 	}
 
