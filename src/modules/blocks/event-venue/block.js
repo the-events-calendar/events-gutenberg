@@ -41,6 +41,7 @@ import {
 import VenueDetails from './venue';
 import { STORE_NAME } from 'data/search/venues';
 import { STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
+import VenueIcon from 'icons/venue.svg';
 
 /**
  * Module Code
@@ -98,7 +99,6 @@ class EventVenue extends Component {
 		const { showMap } = this.props;
 
 		const containerClass = classNames(
-			'tribe-editor__block',
 			{
 				'tribe-editor__venue': this.hasVenue(),
 				'tribe-editor__venue--has-map': this.hasVenue() && showMap,
@@ -148,7 +148,7 @@ class EventVenue extends Component {
 		const { isSelected } = this.props;
 		return (
 			<SearchOrCreate
-				icon={ <Dashicon icon="location" size={ 22 }/> }
+				icon={ <VenueIcon /> }
 				storeName={ STORE_NAME }
 				selected={ isSelected }
 				onSelection={ this.setVenue }
@@ -219,8 +219,8 @@ class EventVenue extends Component {
 
 		return (
 			<div className="tribe-editor__venue__actions">
-				{ this.isDraft() && <button onClick={ this.edit }><Dashicon icon="edit"/></button> }
-				<button onClick={ this.removeVenue }><Dashicon icon="trash"/></button>
+				{ this.isDraft() && <button onClick={ this.edit }><Dashicon icon="edit" /></button> }
+				<button onClick={ this.removeVenue }><Dashicon icon="trash" /></button>
 			</div>
 		);
 	}
