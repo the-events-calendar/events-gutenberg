@@ -91,8 +91,11 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
-	 * [get_classic_template description]
-	 * @return [type] [description]
+	 * Gets the classic template, used for migration and setup new events with classic look
+	 *
+	 * @since  0.2.2-alpha
+	 *
+	 * @return array
 	 */
 	public function get_classic_template() {
 		$template = array();
