@@ -1,6 +1,6 @@
 .tribe-editor__soc__input {
   border: none;
-  padding: 16px 11px;
+  padding: 16px 11px 16px 0;
   font-size: 1.125rem;
   font-family: 'Helvetica', 'Arial', 'sans-serif';
   font-weight: bold;
@@ -19,19 +19,23 @@
 }
 
 .tribe-editor__soc__input__container {
-  border: 1px solid #E0E5E9;
-  border-radius: 4px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+	border: 1px solid #E0E5E9;
+	border-radius: 4px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
 
-  svg {
-	margin-left: 16px;
-	margin-right: 13px;
-	fill: #E2E4E7;
-  }
+	svg {
+		margin-left: 14px;
+		margin-right: 14px;
+		fill: #E2E4E7;
+		width: 22px;
+	}
 
+	path {
+		fill: #E2E4E7;
+	}
 }
 
 .tribe-editor__soc__input__container--active {
@@ -40,7 +44,8 @@
   border-bottom-right-radius: 0;
   border-right: none;
 
-  svg {
+  svg,
+  path {
 	fill: #009FD4;
   }
 
@@ -77,6 +82,7 @@
 	margin-bottom: 15px;
 	color: #67686C;
 	cursor: pointer;
+	font-family: 'Helvetica', 'Arial', 'sans-serif';
 
 	&:hover {
 	  color: #009FD4;
