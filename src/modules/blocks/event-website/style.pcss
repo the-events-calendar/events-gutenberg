@@ -9,7 +9,6 @@
 	border: 1px solid #E1E3E6;
 	display: inline-flex;
 	font-family: 'Helvetica', 'sans-serif';
-	font-weight: bold;
 	justify-content: center;
 	min-height: 54px;
 	padding: 0 20px;
@@ -33,6 +32,7 @@
 	background-color: transparent;
 	flex-grow: 1;
 	font-size: 1.125rem;
+	font-weight: normal;
 
 	&:focus {
 		border: 0;
@@ -46,6 +46,11 @@
 			color: #fff;
 			opacity: 1;
 		}
+	}
+
+	.tribe-editor__event-website__label & *[data-mce-selected="inline-boundary"],
+	.tribe-editor__event-website__label &:focus *[data-mce-selected="inline-boundary"] {
+		background: transparent;
 	}
 }
 

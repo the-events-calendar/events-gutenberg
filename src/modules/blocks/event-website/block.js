@@ -41,23 +41,9 @@ class EventWebsite extends Component {
 		super( ...arguments );
 	}
 
-	getTextWidth = ( text ) => {
-		const elem = document.createElement( 'canvas' );
-		const ctx = elem.getContext( '2d' );
-		ctx.font = '700 18px Helvetica';
-		elem.style.position = 'absolute';
-		elem.style.visibility = 'hidden';
-		elem.style.whiteSpace = 'nowrap';
-		elem.style.fontSize = '18px';
-		elem.style.fontFamily = 'Helvetica';
-		elem.style.fontWeight = '700';
-		document.body.appendChild( elem );
-		const textWidth = ctx.measureText( text ).width;
-		document.body.removeChild( elem );
-		return textWidth;
+	onLabelChange = ( urlLabel ) => {
+		this.props.setAttributes( { urlLabel } );
 	}
-
-	onLabelChange = ( e ) => this.props.setAttributes( { urlLabel: e.target.value } );
 
 	render() {
 		return (
@@ -107,9 +93,7 @@ class EventWebsite extends Component {
 	}
 
 	renderLabelInput() {
-		const { urlLabel, setAttributes } = this.props;
-		const text = urlLabel ? urlLabel : placeholder;
-		const textWidth = this.getTextWidth( text );
+		const { urlLabel } = this.props;
 
 		return (
 			<div key='tribe-events-website-label' className="tribe-editor__event-website__label">
@@ -121,7 +105,6 @@ class EventWebsite extends Component {
 					value={ urlLabel }
 					onChange={ this.onLabelChange }
 					placeholder={ placeholder }
-					style={ { width: `${textWidth}px` } }
 				/>
 			</div>
 		);
