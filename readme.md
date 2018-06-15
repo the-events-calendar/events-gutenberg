@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.2.3-alpha - TBD
+
+* Fix - Issue with wrong translation domain
+
 #### 0.2.2-alpha - 2018-06-15
 
 * Feature - Featured Image Block for Events

@@ -153,7 +153,7 @@ class EventVenue extends Component {
 				selected={ isSelected }
 				onSelection={ this.setVenue }
 				onSetCreation={ this.setDraftTitle }
-				placeholder={ __( 'Add or find a location', 'events-gutenber' ) }
+				placeholder={ __( 'Add or find a location', 'events-gutenberg' ) }
 			/>
 		);
 	}
