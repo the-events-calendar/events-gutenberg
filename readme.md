@@ -25,7 +25,9 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 ### Changelog
 
 #### 0.2.3-alpha - TBD
+
 * Fix - Prevent render empty content on organizer block
+* Fix - Issue with wrong translation domain
 
 #### 0.2.2-alpha - 2018-06-15
 
