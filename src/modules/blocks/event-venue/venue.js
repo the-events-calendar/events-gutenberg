@@ -4,6 +4,7 @@
 import React from 'react';
 import { isEmpty } from 'lodash';
 import { mapLink } from 'utils/geo-data';
+import { decode } from 'he';
 
 /**
  * WordPress dependencies
@@ -24,7 +25,7 @@ import {
  * Module Code
  */
 export default class VenueDetails extends Component {
-	constructor( props ) {
+	constructor() {
 		super( ...arguments );
 
 		this.state = {
@@ -69,27 +70,21 @@ export default class VenueDetails extends Component {
 
 	renderVenueName() {
 		return (
-			<h3
-				className="tribe_editor__venue__name"
-				dangerouslySetInnerHTML={ this.getVenueName() }>
+			<h3 className="tribe_editor__venue__name">
+				{ decode( this.getVenueName() ) }
 			</h3>
 		);
 	}
 
 	getVenueName( venue = this.props.venue ) {
 		// if we still don't have venue we don't have an address
-		let name = '';
-		if ( venue ) {
-			if ( ! venue.title ) {
-				name = __( '(Untitled Venue)', 'events-gutenberg' );
-			}
-			name = venue.title.rendered;
-		}
-		return { __html: name };
+		const { title = {} } = venue;
+		const { name = __( '(Untitled Venue)', 'events-gutenberg' ) } = title;
+		return name;
 	}
 
 	renderAddress() {
-		const address = this.props.address;
+		const { address = {} } = this.props;
 		if ( isEmpty( address ) ) {
 			return null;
 		}
