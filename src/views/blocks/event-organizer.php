@@ -1,4 +1,3 @@
-<?php $event_id = $this->get( 'post_id' ); ?>
-<div class="tribe-events-single-section tribe-events-event-meta secondary tribe-clearfix">
-    Gutenberg Organizer block
-</div>
+<?php
+$event_id = $this->get( 'post_id' );
+// todo: Implement template here.
