@@ -222,7 +222,7 @@ function search( prevState, term = '', args = {} ) {
 	const params = { ...query, ...args };
 
 	if ( 'exclude' in params && isEmpty( params.exclude ) ) {
-		delete params.search;
+		delete params.exclude;
 	}
 
 	const request = {

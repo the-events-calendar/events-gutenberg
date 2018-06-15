@@ -1,13 +1,18 @@
 /**
+ * External dependencies
+ */
+import React from 'react';
+
+/**
  * WordPress dependencies
  */
-import { Component } from '@wordpress/element';
+import { Component, compose } from '@wordpress/element';
 import { PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import {
 	InspectorControls,
-	PlainText,
+	RichText,
 } from '@wordpress/editor';
 
 /**
@@ -16,22 +21,16 @@ import {
 import LinkIcon from 'icons/link.svg';
 import './style.pcss';
 
+import withSaveData from 'editor/hoc/with-save-data';
+import withProperties from 'editor/hoc/with-properties';
+
 /**
  * Module Code
  */
-export default class EventLinks extends Component {
+class EventLinks extends Component {
+
 	constructor() {
 		super( ...arguments );
-
-		const { attributes } = this.props;
-		const { icalExportLabel, iCalLabel } = attributes;
-
-		this.state = {
-			hasiCal: true,
-			iCalLabel: iCalLabel || __( 'iCal Export', 'events-gutenberg' ),
-			hasGoogleCalendar: true,
-			googleCalendarLabel: icalExportLabel || __( 'Google Calendar', 'events-gutenberg' ),
-		};
 	}
 
 	render() {
@@ -48,7 +47,7 @@ export default class EventLinks extends Component {
 	}
 
 	renderGoogleCalendar() {
-		const { hasGoogleCalendar, googleCalendarLabel } = this.state;
+		const { hasGoogleCalendar, googleCalendarLabel, save } = this.props;
 
 		if ( ! hasGoogleCalendar ) {
 			return this.renderPlaceholder( __( 'Google Calendar', 'events-gutenberg' ) );
@@ -57,17 +56,19 @@ export default class EventLinks extends Component {
 		return (
 			<div className="tribe-editor__btn--link tribe-events-gcal">
 				<LinkIcon />
-				<PlainText
+				<RichText
 					id="tribe-event-google-calendar"
+					format="string"
+					tagName="h5"
 					value={ googleCalendarLabel }
-					onChange={ ( nextContent ) => this.setState( { googleCalendarLabel: nextContent } ) }
+					onChange={ save( 'googleCalendarLabel' ) }
 				/>
 			</div>
 		);
 	}
 
 	renderiCal() {
-		const { hasiCal, iCalLabel } = this.state;
+		const { hasiCal, iCalLabel, save } = this.props;
 
 		if ( ! hasiCal ) {
 			return this.renderPlaceholder( __( 'iCal Export', 'events-gutenberg' ) );
@@ -76,11 +77,12 @@ export default class EventLinks extends Component {
 		return (
 			<div className="tribe-editor__btn--link tribe-events-ical">
 				<LinkIcon />
-				<PlainText
-					type="text"
+				<RichText
+					format="string"
+					tagName="h5"
 					id="tribe-event-ical"
 					value={ iCalLabel }
-					onChange={ ( nextContent ) => this.setState( { iCalLabel: nextContent } ) }
+					onChange={ save( 'iCalLabel' ) }
 				/>
 			</div>
 		);
@@ -96,8 +98,7 @@ export default class EventLinks extends Component {
 	}
 
 	renderControls() {
-		const { hasGoogleCalendar, hasiCal } = this.state;
-		const { isSelected } = this.props;
+		const { hasGoogleCalendar, hasiCal, isSelected, save } = this.props;
 
 		if ( ! isSelected ) {
 			return null;
@@ -109,15 +110,30 @@ export default class EventLinks extends Component {
 					<ToggleControl
 						label={ __( 'Google Calendar', 'events-gutenberg' ) }
 						checked={ hasGoogleCalendar }
-						onChange={ ( value ) => this.setState( { hasGoogleCalendar: value } ) }
+						onChange={ save( 'hasGoogleCalendar' ) }
 					/>
 					<ToggleControl
 						label={ __( 'iCal', 'events-gutenberg' ) }
 						checked={ hasiCal }
-						onChange={ ( value ) => this.setState( { hasiCal: value } ) }
+						onChange={ save( 'hasiCal' ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
 		);
 	}
 }
+
+export default compose( [
+	withProperties( ( props ) => {
+		const { attributes, setAttributes } = props;
+		return {
+			...attributes,
+			save( key ) {
+				return ( value ) => {
+					setAttributes( { [ key ]: value } );
+				};
+			},
+		};
+	} ),
+	withSaveData(),
+] )( EventLinks );
