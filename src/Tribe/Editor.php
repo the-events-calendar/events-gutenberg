@@ -261,7 +261,7 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
-	 * Check if post type is tribe events
+	 * Check if current admin page is post type `tribe_events`
 	 *
 	 * @since  0.2.2-alpha
 	 *
@@ -269,6 +269,31 @@ class Tribe__Events_Gutenberg__Editor {
 	 */
 	public function is_events_post_type() {
 		return Tribe__Admin__Helpers::instance()->is_post_type_screen( Tribe__Events__Main::POSTTYPE );
+	}
+
+	/**
+	 * Check if post is from classic editor
+	 *
+	 * @since  0.2.2-alpha
+	 *
+	 * @param int|WP_Post $post
+	 *
+	 * @return bool
+	 */
+	public function post_is_from_classic_editor( $post ) {
+		if ( ! $post instanceof WP_Post ) {
+			$post = get_post( $post );
+		}
+
+		if ( empty( $post ) ) {
+			return false;
+		}
+
+		if ( ! $post instanceof WP_Post ) {
+			return false;
+		}
+
+		return tribe_is_truthy( get_post_meta( $post->ID, $this->key_flag_classic_editor, true ) );
 	}
 
 	/**
@@ -371,7 +396,7 @@ class Tribe__Events_Gutenberg__Editor {
 			),
 		);
 
-		$is_classic_editor = (bool) get_post_meta( tribe_get_request_var( 'post', 0 ), $this->key_flag_classic_editor, true );
+		$is_classic_editor = $this->post_is_from_classic_editor( tribe_get_request_var( 'post', 0 ) );
 
 		$localize_blocks[] = array(
 			'name' => 'tribe_blocks_editor',
