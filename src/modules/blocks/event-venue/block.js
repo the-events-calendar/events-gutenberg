@@ -141,6 +141,8 @@ class EventVenue extends Component {
 				venue={ details }
 				address={ address }
 				showMapLink={ showMapLink }
+				afterTitle={ this.renderEditAction() }
+				maybeEdit={ this.maybeEdit }
 			/>
 		);
 	}
@@ -211,6 +213,27 @@ class EventVenue extends Component {
 		);
 	}
 
+	maybeEdit = () => {
+		if ( this.hasVenue() && this.isDraft() ) {
+			return this.edit();
+		}
+	}
+
+	renderEditAction() {
+		const { isSelected } = this.props;
+		const { edit, create, loading, submit } = this.props;
+		const idle = edit || create || loading || submit;
+		if ( ! this.hasVenue() || ! isSelected || ! this.isDraft() || idle ) {
+			return null;
+		}
+
+		return (
+			<button onClick={ this.edit }>
+				<Dashicon icon="edit" />
+			</button>
+		);
+	}
+
 	editActions() {
 		const { isSelected } = this.props;
 		const { edit, create, loading, submit } = this.props;
@@ -220,7 +243,6 @@ class EventVenue extends Component {
 
 		return (
 			<div className="tribe-editor__venue__actions">
-				{ this.isDraft() && <button onClick={ this.edit }><Dashicon icon="edit" /></button> }
 				<button
 					className="tribe-editor__venue__actions--close"
 					onClick={ this.removeVenue }
