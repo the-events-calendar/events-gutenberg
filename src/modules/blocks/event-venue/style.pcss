@@ -81,11 +81,33 @@
 }
 
 .tribe_editor__venue__name {
-	font-size: 1.3125rem;
-	font-weight: bold;
-	margin-top: 0;
-	margin-bottom: 4px;
-	font-family: 'Helvetica', 'Arial', 'sans-serif';
+	display: flex;
+
+	button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+
+		svg,
+		path {
+			fill: #8D949B;
+		}
+
+		&:hover {
+			svg,
+			path {
+				fill: #009FD4;
+			}
+		}
+	}
+
+	h3 {
+		font-size: 1.3125rem;
+		font-weight: bold;
+		margin-top: 0;
+		margin-bottom: 4px;
+		font-family: 'Helvetica', 'Arial', 'sans-serif';
+	}
 }
 
 .tribe-editor__venue__address {
