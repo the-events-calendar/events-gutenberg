@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React, { Fragment } from 'react';
-import { isEmpty } from 'lodash';
+import { isEmpty, noop } from 'lodash';
 import { mapLink } from 'utils/geo-data';
 import { decode } from 'he';
 
@@ -25,6 +25,12 @@ import {
  * Module Code
  */
 export default class VenueDetails extends Component {
+	static defaultProps = {
+		beforeTitle: null,
+		afterTitle: null,
+		maybeEdit: noop,
+	};
+
 	constructor() {
 		super( ...arguments );
 
@@ -69,10 +75,15 @@ export default class VenueDetails extends Component {
 	}
 
 	renderVenueName() {
+		const { beforeTitle, afterTitle, maybeEdit } = this.props;
 		return (
-			<h3 className="tribe_editor__venue__name">
-				{ decode( this.getVenueName() ) }
-			</h3>
+			<div className="tribe_editor__venue__name">
+				{ beforeTitle }
+				<h3 onClick={ maybeEdit }>
+					{ decode( this.getVenueName() ) }
+				</h3>
+				{ afterTitle }
+			</div>
 		);
 	}
 
