@@ -1,35 +1,20 @@
 .tribe-editor__event-website {
+	background-color: #fafafa;
+	border: 1px solid #eee;
+	padding: 4% 20px;
+}
+
+.tribe-editor__event-website__label {
 	align-items: center;
 	border: 1px solid #E1E3E6;
 	display: inline-flex;
 	font-family: 'Helvetica', 'sans-serif';
-	font-weight: bold;
 	justify-content: center;
-	margin-right: 15px;
 	min-height: 54px;
 	padding: 0 20px;
-	font-size: 1.2rem;
+	font-size: 1.125rem;
 	background-color: #009FD4;
-
-	input,
-	textarea,
-	h4,
-	.editor-plain-text {
-		border: 0;
-		color: #fff;
-		background-color: transparent;
-		flex-grow: 1;
-
-		&:focus {
-			border: 0;
-			outline: 0;
-			box-shadow: none;
-		}
-
-		&::placeholder {
-			color: rgba(255, 255, 255, 0.7);
-		}
-	}
+	max-width: 100%;
 
 	&--placeholder {
 		border: 2px dashed #E1E3E6;
@@ -39,34 +24,51 @@
 	}
 }
 
-.is-selected,
-.is-typing {
-	.tribe-editor__event-website {
-		margin-bottom: 10px;
+.tribe-editor__event-website__label-text {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	color: #fff;
+	background-color: transparent;
+	flex-grow: 1;
+	font-size: 1.125rem;
+	font-weight: normal;
+
+	&:focus {
+		border: 0;
+		outline: 0;
+		box-shadow: none;
+	}
+
+	&::placeholder {
+
+		.tribe-editor__event-website__label & {
+			color: #fff;
+			opacity: 1;
+		}
+	}
+
+	.tribe-editor__event-website__label & *[data-mce-selected="inline-boundary"],
+	.tribe-editor__event-website__label &:focus *[data-mce-selected="inline-boundary"] {
+		background: transparent;
 	}
 }
 
 .tribe-editor__event-website__url {
-	display: block;
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
 
 	.dashicon {
-		display: inline-block;
-		margin-right: 10px;
-		position: relative;
-		top: -5px;
+		margin-right: 6px;
 	}
 
-	input,
-	textarea,
-	.editor-plain-text {
-		width: 240px;
-		display: inline-block;
-		border: 1px solid #ccd0d4;
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-		font-size: 13px;
-		padding: 6px 8px;
-		outline-offset: -1px;
-		box-shadow: 0 0 0 transparent;
-		transition: box-shadow .05s linear;
+	input {
+		background-color: transparent;
+
+		&:hover,
+		&:focus {
+			background-color: #fff;
+		}
 	}
 }

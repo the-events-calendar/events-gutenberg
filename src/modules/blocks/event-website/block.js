@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 /**
@@ -9,18 +10,9 @@ import PropTypes from 'prop-types';
  */
 import { withDispatch, withSelect } from '@wordpress/data';
 import { Component, compose } from '@wordpress/element';
-import {
-	PanelBody,
-	Dashicon,
-} from '@wordpress/components';
-
+import { Dashicon } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-
-import {
-	InspectorControls,
-	RichText,
-	PlainText,
-} from '@wordpress/editor';
+import { RichText, UrlInput } from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -32,6 +24,8 @@ import './style.pcss';
 /**
  * Module Code
  */
+
+const placeholder = __( 'Add Button Text', 'events-gutenberg' );
 
 class EventWebsite extends Component {
 	static propTypes = {
@@ -47,13 +41,16 @@ class EventWebsite extends Component {
 		super( ...arguments );
 	}
 
-	render() {
-		return [ this.renderButton(), this.renderControls() ];
+	onLabelChange = ( urlLabel ) => {
+		this.props.setAttributes( { urlLabel } );
 	}
 
-	renderButton() {
+	render() {
 		return (
-			<div key="event-website" className="tribe-editor__block tribe-editor-event-website">
+			<div
+				key="event-website"
+				className="tribe-editor__block tribe-editor__event-website"
+			>
 				{ this.renderLink() }
 			</div>
 		);
@@ -61,7 +58,6 @@ class EventWebsite extends Component {
 
 	renderLink() {
 		const { isSelected, urlLabel } = this.props;
-		const placeholder = __( 'Add Event Website', 'events-gutenberg' );
 
 		if ( ! isSelected && ! urlLabel ) {
 			return this.renderPlaceholder( placeholder );
@@ -87,28 +83,28 @@ class EventWebsite extends Component {
 		return (
 			<div key="tribe-events-website-url" className="tribe-editor__event-website__url">
 				<Dashicon icon="admin-links" />
-				<PlainText
-					id="tribe-events-website-link"
+				<UrlInput
+					autoFocus={ false }
 					value={ url }
-					onChange={ ( nextContent ) => this.setWebsiteUrl( { url: nextContent } ) }
-					placeholder={ buttonLabel }
+					onChange={ ( url ) => this.setWebsiteUrl( { url } ) }
 				/>
 			</div>
 		);
 	}
 
 	renderLabelInput() {
-		const { urlLabel, setAttributes } = this.props;
+		const { urlLabel } = this.props;
 
 		return (
-			<div key='tribe-events-website-label' className="tribe-editor__event-website">
+			<div key='tribe-events-website-label' className="tribe-editor__event-website__label">
 				<RichText
 					id="tribe-events-website-link"
+					className="tribe-editor__event-website__label-text"
 					format="string"
 					tagName="h4"
 					value={ urlLabel }
-					onChange={ ( nextContent ) => setAttributes( { urlLabel: nextContent } ) }
-					placeholder={ __( 'Add Event Website', 'events-gutenberg' ) }
+					onChange={ this.onLabelChange }
+					placeholder={ placeholder }
 				/>
 			</div>
 		);
@@ -117,8 +113,8 @@ class EventWebsite extends Component {
 	renderPlaceholder( urlLabel ) {
 		return (
 			<button
-				className="tribe-editor__event-website tribe-editor__event-website--placeholder"
-				disabled>
+				className="tribe-editor__event-website__label tribe-editor__event-website__label--placeholder"
+			>
 				{ urlLabel }
 			</button>
 		);
@@ -129,22 +125,6 @@ class EventWebsite extends Component {
 		const { setUrl } = this.props;
 		setUrl( url );
 	};
-
-	renderControls() {
-		const { isSelected } = this.props;
-
-		if ( ! isSelected ) {
-			return null;
-		}
-
-		return (
-			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Website Settings', 'events-gutenberg' ) }>
-
-				</PanelBody>
-			</InspectorControls>
-		);
-	}
 }
 
 export default compose( [
