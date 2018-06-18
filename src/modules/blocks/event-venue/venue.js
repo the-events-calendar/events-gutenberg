@@ -79,8 +79,8 @@ export default class VenueDetails extends Component {
 	getVenueName( venue = this.props.venue ) {
 		// if we still don't have venue we don't have an address
 		const { title = {} } = venue;
-		const { name = __( '(Untitled Venue)', 'events-gutenberg' ) } = title;
-		return name;
+		const { rendered = __( '(Untitled Venue)', 'events-gutenberg' ) } = title;
+		return rendered;
 	}
 
 	renderAddress() {
