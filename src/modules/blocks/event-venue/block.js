@@ -90,6 +90,10 @@ class EventVenue extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.removeVenue();
+	}
+
 	render() {
 		return [ this.renderBlock(), this.renderControls() ];
 	}
