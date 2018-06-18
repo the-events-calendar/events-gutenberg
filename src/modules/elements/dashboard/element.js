@@ -139,7 +139,7 @@ export default class Dashboard extends Component {
 			Dashboard.isPartOfDashboard( target ) ||
 			Dashboard.isPartOfPopover( target ) ||
 			Dashboard.isPartOfSidebar( target ) ||
-			this.validateChilds( target )
+			this.validateChildren( target )
 		) {
 			return;
 		}
@@ -182,9 +182,9 @@ export default class Dashboard extends Component {
 	 * @param {DOMNode} node - The clicked node
 	 * @returns {boolean} true if the node is any of the targets
 	 */
-	validateChilds( node ) {
+	validateChildren( node ) {
 		const { targets } = this.props;
-		return searchParent( node, testNode => {
+		return searchParent( node, ( testNode ) => {
 			const hasAny = targets.filter( ( className ) => testNode.classList.contains( className ) );
 			return ! isEmpty( hasAny );
 		} );
