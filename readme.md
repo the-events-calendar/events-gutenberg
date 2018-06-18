@@ -32,6 +32,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Fix - Remove `multiday` to be set automatically in some situations.
 * Fix - Keep the dashboard open if the calendar is advanced several months ahead. 
 * Fix - Render the selected month inside of the calendar instead of the current month.
+* Tweak - Align edit button in Organizer and Venue block next to the title.
+* Tweak - Fix Organizer and Venue block styles
+* Tweak - Update Delete icon for Organizer and Venue block
+* Tweak - Standardize the color of blue and dashboard background
 
 #### 0.2.2-alpha - 2018-06-15
 
