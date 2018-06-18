@@ -3,16 +3,6 @@
  */
 .gutenberg-editor-page.post-type-tribe_events {
 	.edit-post-visual-editor {
-		.editor-post-title {
-			@media screen and (max-width: 782px) {
-				margin: 0 auto;
-			}
-
-			@media screen and (min-width: 1300px) {
-				margin: 0 auto;
-				padding: 0 15px;
-			}
-		}
 
 		.editor-post-title__block {
 			@media screen and (min-width: 1300px) {
@@ -28,9 +18,11 @@
 		 */
 		.editor-block-list__block,
 		.editor-default-block-appender,
-		.editor-post-title {
-			@media screen and (max-width: 782px) {
-				max-width: calc( 100% - 60px );
+		.editor-post-title__block {
+			max-width: calc( 100% - 60px );
+
+			@media screen and (min-width: 1060px) {
+				max-width: 636px;
 			}
 
 			@media screen and (min-width: 1300px) {
