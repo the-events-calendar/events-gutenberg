@@ -29,6 +29,7 @@ import {
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
 import withSaveData from 'editor/hoc/with-save-data';
+import OrganizerIcon from 'icons/organizer.svg';
 
 class Organizer extends Component {
 
@@ -139,7 +140,7 @@ class Organizer extends Component {
 				id={ id }
 				storeName={ STORE_NAME }
 				selected={ isSelected }
-				icon={ <Dashicon icon="admin-users" size={ 22 } /> }
+				icon={ <OrganizerIcon /> }
 				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
 				onSelection={ this.selectItem }
 				onSetCreation={ this.setDraftTitle }
