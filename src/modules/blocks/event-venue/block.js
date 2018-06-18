@@ -287,13 +287,13 @@ class EventVenue extends Component {
 				<PanelBody title={ __( 'Venue Map Settings' ) }>
 					<ToggleControl
 						label={ __( 'Show Google Maps Link' ) }
-						checked={ ! ! showMapLink }
-						onChange={ ( value ) => setAttributes( { showMapLink: !! value } ) }
+						checked={ showMapLink }
+						onChange={ ( value ) => setAttributes( { showMapLink: value } ) }
 					/>
 					<ToggleControl
 						label={ __( 'Show Google Maps Embed' ) }
-						checked={ ! ! showMap }
-						onChange={ ( value ) => setAttributes( { showMap: !! value } ) }
+						checked={ showMap }
+						onChange={ ( value ) => setAttributes( { showMap: value } ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
