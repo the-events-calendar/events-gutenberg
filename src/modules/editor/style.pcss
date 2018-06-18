@@ -3,6 +3,25 @@
  */
 .gutenberg-editor-page.post-type-tribe_events {
 	.edit-post-visual-editor {
+		.editor-post-title {
+			@media screen and (max-width: 782px) {
+				margin: 0 auto;
+			}
+
+			@media screen and (min-width: 1300px) {
+				margin: 0 auto;
+				padding: 0 15px;
+			}
+		}
+
+		.editor-post-title__block {
+			@media screen and (min-width: 1300px) {
+				width: 100%;
+				padding: 0;
+				max-width: initial;
+			}
+		}
+
 		/**
 		 * On our elements we want 900px instead of the default
 		 * possibly keep an eye to how to do it on PHP
@@ -10,13 +29,26 @@
 		.editor-block-list__block,
 		.editor-default-block-appender,
 		.editor-post-title {
-			max-width: 900px;
+			@media screen and (max-width: 782px) {
+				max-width: calc( 100% - 60px );
+			}
+
+			@media screen and (min-width: 1300px) {
+				max-width: 700px;
+			}
+
+			@media screen and (min-width: 1400px) {
+				max-width: 800px;
+			}
+
+			@media screen and (min-width: 1500px) {
+				max-width: 900px;
+			}
 		}
 
 		/**
 		 * Resets padding and move it to margin
 		 */
-		.editor-post-title,
 		.editor-post-permalink {
 			padding-left: 0;
 			padding-right: 0;
