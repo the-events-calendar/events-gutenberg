@@ -68,6 +68,11 @@ class Organizer extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		const { remove } = this.props;
+		remove();
+	}
+
 	render() {
 		return [ this.renderBlock(), this.renderSettings() ];
 	}
@@ -261,8 +266,9 @@ export default compose( [
 			remove() {
 				const { post } = props;
 				const { volatile } = post;
+
+				removeOrganizer( post.id );
 				if ( volatile ) {
-					removeOrganizer( post.id );
 					removeDraft( props.id );
 				} else {
 					clear( props.id );
