@@ -220,8 +220,7 @@ class EventVenue extends Component {
 	}
 
 	renderEditAction() {
-		const { isSelected } = this.props;
-		const { edit, create, loading, submit } = this.props;
+		const { isSelected, edit, create, loading, submit } = this.props;
 		const idle = edit || create || loading || submit;
 		if ( ! this.hasVenue() || ! isSelected || ! this.isDraft() || idle ) {
 			return null;
