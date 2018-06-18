@@ -58,7 +58,7 @@ class EventPrice extends Component {
 	renderUI() {
 		return (
 			<section key="event-price-box" className="tribe-editor__block">
-				<div className="tribe-editor__event-cost">
+				<div className="tribe-editor__event-price">
 					{ this.renderLabel() }
 					{ this.renderDashboard() }
 				</div>
@@ -231,10 +231,13 @@ class EventPrice extends Component {
 			<InspectorControls key="inspector">
 				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 					<TextControl
+						className="tribe-editor__event-price__currency-symbol-setting"
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ currencySymbol }
-						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
+						placeholder={ __( '$', 'events-gutenberg' ) }
 						onChange={ setCurrencySymbol }
+						maxlength="1"
+						size="1"
 					/>
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
