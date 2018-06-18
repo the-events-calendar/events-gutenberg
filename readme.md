@@ -28,7 +28,8 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 * Fix - Prevent render empty content on organizer block
 * Fix - Issue with wrong translation domain
-* Fix - Add `autosave` endpoint for other types like Organizers or Venues.
+* Fix - Add `autosave` endpoint for other types like Organizers or Venues
+* Fix - Issues with the layout of blocks to avoid hide controls
 
 #### 0.2.2-alpha - 2018-06-15
 
