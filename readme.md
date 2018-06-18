@@ -29,6 +29,9 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Fix - Prevent render empty content on organizer block
 * Fix - Issue with wrong translation domain
 * Fix - Add `autosave` endpoint for other types like Organizers or Venues.
+* Fix - Remove `multiday` to be set automatically in some situations.
+* Fix - Keep the dashboard open if the calendar is advanced several months ahead. 
+* Fix - Render the selected month inside of the calendar instead of the current month.
 
 #### 0.2.2-alpha - 2018-06-15
 
