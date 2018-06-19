@@ -28,17 +28,14 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 * Fix - Prevent render empty content on organizer block
 * Fix - Issue with wrong translation domain
-<<<<<<< HEAD
 * Fix - Add `autosave` endpoint for other types like Organizers or Venues
 * Fix - Issue with deleting organizer block and reflecting on Classic Event Details
 * Fix - Issue with deleting location block and retaining old location data
-=======
 * Fix - Add `autosave` endpoint for other types like Organizers or Venues.
 * Tweak - Align edit button in Organizer and Venue block next to the title.
 * Tweak - Fix Organizer and Venue block styles
 * Tweak - Update Delete icon for Organizer and Venue block
 * Tweak - Standardize the color of blue and dashboard background
->>>>>>> master
 
 #### 0.2.2-alpha - 2018-06-15
 
