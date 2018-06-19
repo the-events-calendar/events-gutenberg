@@ -105,6 +105,7 @@ class EventWebsite extends Component {
 					value={ urlLabel }
 					onChange={ this.onLabelChange }
 					placeholder={ placeholder }
+					formattingControls={ [] }
 				/>
 			</div>
 		);
