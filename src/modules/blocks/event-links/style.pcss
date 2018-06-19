@@ -11,8 +11,12 @@
 	h5 {
 		color: #009FD4;
 		font-family: 'Helvetica', 'sans-serif';
-		font-weight: bold;
+		font-weight: normal;
 		font-size: 1rem;
+
+		& * [data-mce-selected="inline-boundary"] {
+			background: transparent;
+		}
 	}
 
 	input {
@@ -21,6 +25,7 @@
 
 	svg {
 		margin-right: 7px;
+		margin-bottom: 2px;
 	}
 }
 

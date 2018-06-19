@@ -147,8 +147,8 @@ class Tribe__Events_Gutenberg__Editor {
 			$template[] = array( 'tribe/event-price' );
 			$template[] = array( 'tribe/event-organizer' );
 			$template[] = array( 'tribe/event-venue' );
-			$template[] = array( 'tribe/event-links' );
 			$template[] = array( 'tribe/event-website' );
+			$template[] = array( 'tribe/event-links' );
 		}
 
 		/**
