@@ -29,10 +29,19 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Fix - Prevent render empty content on organizer block
 * Fix - Issue with wrong translation domain
 * Fix - Add `autosave` endpoint for other types like Organizers or Venues
+<<<<<<< HEAD
 * Fix - Issue with deleting organizer block and reflecting on Classic Event Details
 * Fix - Issue with deleting location block and retaining old location data
+=======
+* Fix - Event link block styles and functionality
+>>>>>>> master
 * Fix - Add `autosave` endpoint for other types like Organizers or Venues.
+* Fix - Remove `multiday` to be set automatically in some situations
+* Fix - Keep the dashboard open if the calendar is advanced several months ahead
+* Fix - Render the selected month inside of the calendar instead of the current month
 * Tweak - Align edit button in Organizer and Venue block next to the title.
+* Tweak - Set event links as last on default load for new event
+* Tweak - Align edit button in Organizer and Venue block next to the title
 * Tweak - Fix Organizer and Venue block styles
 * Tweak - Update Delete icon for Organizer and Venue block
 * Tweak - Standardize the color of blue and dashboard background

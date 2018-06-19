@@ -27,6 +27,10 @@ import withProperties from 'editor/hoc/with-properties';
 /**
  * Module Code
  */
+
+const googleCalendarPlaceholder = __( 'Google Calendar', 'events-gutenberg' );
+const iCalExportPlaceholder = __( 'iCal Export', 'events-gutenberg' );
+
 class EventLinks extends Component {
 
 	constructor() {
@@ -49,8 +53,12 @@ class EventLinks extends Component {
 	renderGoogleCalendar() {
 		const { hasGoogleCalendar, googleCalendarLabel, save } = this.props;
 
+		if ( this.buttonsAreDisabled() ) {
+			return this.renderPlaceholder( googleCalendarPlaceholder );
+		}
+
 		if ( ! hasGoogleCalendar ) {
-			return this.renderPlaceholder( __( 'Google Calendar', 'events-gutenberg' ) );
+			return null;
 		}
 
 		return (
@@ -61,6 +69,7 @@ class EventLinks extends Component {
 					format="string"
 					tagName="h5"
 					value={ googleCalendarLabel }
+					placeholder={ googleCalendarPlaceholder }
 					onChange={ save( 'googleCalendarLabel' ) }
 				/>
 			</div>
@@ -70,8 +79,12 @@ class EventLinks extends Component {
 	renderiCal() {
 		const { hasiCal, iCalLabel, save } = this.props;
 
+		if ( this.buttonsAreDisabled() ) {
+			return this.renderPlaceholder( iCalExportPlaceholder );
+		}
+
 		if ( ! hasiCal ) {
-			return this.renderPlaceholder( __( 'iCal Export', 'events-gutenberg' ) );
+			return null;
 		}
 
 		return (
@@ -82,10 +95,16 @@ class EventLinks extends Component {
 					tagName="h5"
 					id="tribe-event-ical"
 					value={ iCalLabel }
+					placeholder={ iCalExportPlaceholder }
 					onChange={ save( 'iCalLabel' ) }
 				/>
 			</div>
 		);
+	}
+
+	buttonsAreDisabled = () => {
+		const { hasGoogleCalendar, hasiCal } = this.props;
+		return ! hasGoogleCalendar && ! hasiCal;
 	}
 
 	renderPlaceholder( label ) {
