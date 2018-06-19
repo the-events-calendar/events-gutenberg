@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import { isEmpty } from 'lodash';
+import React, { Fragment } from 'react';
+import { isEmpty, noop } from 'lodash';
 import { mapLink } from 'utils/geo-data';
 import { decode } from 'he';
 
@@ -25,6 +25,12 @@ import {
  * Module Code
  */
 export default class VenueDetails extends Component {
+	static defaultProps = {
+		beforeTitle: null,
+		afterTitle: null,
+		maybeEdit: noop,
+	};
+
 	constructor() {
 		super( ...arguments );
 
@@ -69,10 +75,15 @@ export default class VenueDetails extends Component {
 	}
 
 	renderVenueName() {
+		const { beforeTitle, afterTitle, maybeEdit } = this.props;
 		return (
-			<h3 className="tribe_editor__venue__name">
-				{ decode( this.getVenueName() ) }
-			</h3>
+			<div className="tribe_editor__venue__name">
+				{ beforeTitle }
+				<h3 onClick={ maybeEdit }>
+					{ decode( this.getVenueName() ) }
+				</h3>
+				{ afterTitle }
+			</div>
 		);
 	}
 
@@ -105,7 +116,13 @@ export default class VenueDetails extends Component {
 				{ city && <span className="tribe-venue__delimiter">, </span> }
 				{ province && <span className="tribe-venue__region">{ province }</span> }
 				{ zip && <span className="tribe-venue__postal-code"> { zip }</span> }
-				{ country && <span className="tribe-venue__country-name"> { country }</span> }
+				{
+					country &&
+					<Fragment>
+						<br />
+						<span className="tribe-venue__country-name"> { country }</span>
+					</Fragment>
+				}
 				{ this.renderGoogleMapLink() }
 			</address>
 		);
@@ -119,13 +136,16 @@ export default class VenueDetails extends Component {
 		}
 
 		return (
-			<a
-				href={ mapLink( address ) }
-				title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
-				target="_blank"
-			>
-				{ __( '+ Google Map', 'events-gutenberg' ) }
-			</a>
+			<Fragment>
+				<br />
+				<a
+					href={ mapLink( address ) }
+					title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
+					target="_blank"
+				>
+					{ __( '+ Google Map', 'events-gutenberg' ) }
+				</a>
+			</Fragment>
 		);
 	}
 

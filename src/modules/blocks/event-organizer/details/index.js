@@ -12,6 +12,7 @@ import { decode } from 'he';
 import { Component } from '@wordpress/element';
 import { Dashicon } from '@wordpress/components';
 import { toFields } from 'elements/organizer-form/utils';
+import CloseIcon from 'icons/close.svg';
 import './style.pcss';
 
 /**
@@ -55,7 +56,9 @@ export default class OrganizerDetails extends Component {
 		const { title, website, email, phone } = fields;
 		return (
 			<Fragment>
-				<h3>{ decode( title ) }</h3>
+				<div className="tribe-editor__organizer__title">
+					<h3 onClick={ this.maybeEdit }>{ decode( title ) }</h3> { this.renderEdit() }
+				</div>
 				{ phone && <p>{ phone }</p> }
 				{ website && <p>{ website }</p> }
 				{ email && <p>{ email }</p> }
@@ -63,8 +66,30 @@ export default class OrganizerDetails extends Component {
 		);
 	}
 
+	maybeEdit = () => {
+		if ( ! this.isDraft() ) {
+			return;
+		}
+		const { edit } = this.props;
+		edit();
+	}
+
+	renderEdit = () => {
+		const { edit, selected } = this.props;
+
+		if ( ! selected || ! this.isDraft() ) {
+			return null;
+		}
+
+		return (
+			<button onClick={ edit }>
+				<Dashicon icon="edit" />
+			</button>
+		);
+	}
+
 	renderActions() {
-		const { edit, remove, selected } = this.props;
+		const { remove, selected } = this.props;
 
 		if ( ! selected ) {
 			return null;
@@ -72,8 +97,12 @@ export default class OrganizerDetails extends Component {
 
 		return (
 			<div className="tribe-editor__organizer__actions">
-				{ this.isDraft() && <button onClick={ edit }><Dashicon icon="edit" /></button> }
-				<button onClick={ remove }><Dashicon icon="trash" /></button>
+				<button
+					className="tribe-editor__organizer__actions--close"
+					onClick={ remove }
+				>
+					<CloseIcon />
+				</button>
 			</div>
 		)
 	}

@@ -16,6 +16,7 @@ test( 'isFalsy', () => {
 	expect( isFalsy( 'Sample string' ) ).toEqual( false );
 	expect( isFalsy( '1' ) ).toEqual( false );
 	expect( isFalsy( 'true' ) ).toEqual( false );
+	expect( isFalsy( '' ) ).toEqual( true );
 	expect( isFalsy( '0' ) ).toEqual( true );
 	expect( isFalsy( 'no' ) ).toEqual( true );
 	expect( isFalsy( 'false' ) ).toEqual( true );
