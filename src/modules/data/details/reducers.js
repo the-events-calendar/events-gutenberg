@@ -179,14 +179,16 @@ export function setOnlyDateForEnd( prevState, date ) {
 }
 
 export function setStartDate( prevState, date ) {
-	const { end } = prevState;
+	const { end, multiDay } = prevState;
 	const state = {
 		start: roundTime( toMoment( date ) ),
 		end: roundTime( toMoment( end ) ),
 	};
 
 	const start = roundTime( toMoment( date ) );
-	if ( state.end.isSameOrBefore( start ) ) {
+
+	const hasOffset = ! multiDay && Math.abs( state.end.diff( start, 'days' ) ) >= 1;
+	if ( state.end.isSameOrBefore( start ) || hasOffset ) {
 		state.end = start.add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
 
@@ -209,7 +211,7 @@ function isAllDay( start, end ) {
 }
 
 function setEndDate( prevState, date ) {
-	const { start } = prevState;
+	const { start, multiDay } = prevState;
 	const state = {
 		start: roundTime( toMoment( start ) ),
 		end: roundTime( toMoment( date ) ),
@@ -222,7 +224,8 @@ function setEndDate( prevState, date ) {
 		state.end = end;
 	}
 
-	if ( state.end.isSame( state.start ) ) {
+	const hasOffset = ! multiDay && Math.abs( state.end.diff( state.start, 'days' ) ) >= 1;
+	if ( state.end.isSame( state.start ) || hasOffset ) {
 		state.end = toMoment( state.start ).add( HALF_HOUR_IN_SECONDS, 'seconds' );
 	}
 
@@ -235,7 +238,6 @@ function setEndDate( prevState, date ) {
 function adjustEventPropertiesFromMoment( state ) {
 	return {
 		...state,
-		multiDay: ! isSameDay( state.end, state.start ),
 		allDay: isAllDay( state.start, state.end ),
 		start: toDateTime( state.start ),
 		end: toDateTime( state.end ),

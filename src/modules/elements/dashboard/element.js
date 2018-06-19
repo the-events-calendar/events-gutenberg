@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { noop } from 'lodash';
+import { noop, isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -38,7 +38,8 @@ export default class Dashboard extends Component {
 		overflow: false,
 		onOpen: noop,
 		onClose: noop,
-	}
+		targets: [],
+	};
 
 	static propTypes = {
 		open: PropTypes.bool,
@@ -47,7 +48,8 @@ export default class Dashboard extends Component {
 		direction: PropTypes.oneOf( Object.keys( directions ) ),
 		onOpen: PropTypes.func,
 		onClose: PropTypes.func,
-	}
+		targets: PropTypes.array,
+	};
 
 	constructor() {
 		super( ...arguments );
@@ -83,7 +85,7 @@ export default class Dashboard extends Component {
 		} else {
 			this.removeListeners();
 		}
-	}
+	};
 
 	/**
 	 * Attach event listeners when this component is opened.
@@ -123,7 +125,7 @@ export default class Dashboard extends Component {
 		if ( keyCode === ESCAPE_KEY ) {
 			this.close();
 		}
-	}
+	};
 
 	/**
 	 * Detect clicks on the document and test if they are part of the <Dashboard> component
@@ -136,7 +138,8 @@ export default class Dashboard extends Component {
 		if (
 			Dashboard.isPartOfDashboard( target ) ||
 			Dashboard.isPartOfPopover( target ) ||
-			Dashboard.isPartOfSidebar( target )
+			Dashboard.isPartOfSidebar( target ) ||
+			this.validateChildren( target )
 		) {
 			return;
 		}
@@ -171,6 +174,20 @@ export default class Dashboard extends Component {
 
 	static isPartOfSidebar( node ) {
 		return searchParent( node, testNode => testNode.classList.contains( 'edit-post-sidebar' ) );
+	}
+
+	/**
+	 * Validate if the clicked node is part of any of the targets provided by the component.
+	 *
+	 * @param {DOMNode} node - The clicked node
+	 * @returns {boolean} true if the node is any of the targets
+	 */
+	validateChildren( node ) {
+		const { targets } = this.props;
+		return searchParent( node, ( testNode ) => {
+			const hasAny = targets.filter( ( className ) => testNode.classList.contains( className ) );
+			return ! isEmpty( hasAny );
+		} );
 	}
 
 	/**
@@ -216,7 +233,7 @@ export default class Dashboard extends Component {
 			`tribe-editor__dashboard__container--${ direction }`,
 			{ 'tribe-editor__dashboard__container--overflow': overflow },
 			{ 'tribe-editor__dashboard__container--open': this.props.open },
-			...className
+			...className,
 		);
 	}
 

@@ -39,7 +39,7 @@ import classNames from 'classnames';
 import { toFormat, toMoment, totalSeconds, toDateTime, toDate } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
-import { store, STORE_NAME } from 'data/details';
+import { STORE_NAME } from 'data/details';
 import withSaveData from 'editor/hoc/with-save-data';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
@@ -259,6 +259,7 @@ class EventDateTime extends Component {
 			<Dashboard
 				open={ dashboardOpen }
 				onClose={ this.props.closeDashboard }
+				targets={ [ 'DayPicker-Week', 'DayPicker-Day' ] }
 				overflow>
 				<Fragment>
 					<section className="tribe-editor__calendars">
@@ -285,6 +286,7 @@ class EventDateTime extends Component {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
 			from: toMoment( start ).toDate(),
+			month: toMoment( start ).startOf( 'month' ).toDate(),
 		};
 
 		if ( ! this.isSameDay() ) {
