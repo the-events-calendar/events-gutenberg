@@ -92,6 +92,10 @@ class EventVenue extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.removeVenue();
+	}
+
 	render() {
 		return [ this.renderBlock(), this.renderControls() ];
 	}
@@ -234,8 +238,7 @@ class EventVenue extends Component {
 	}
 
 	editActions() {
-		const { isSelected } = this.props;
-		const { edit, create, loading, submit } = this.props;
+		const { isSelected, edit, create, loading, submit } = this.props;
 		if ( ! this.hasVenue() || ! isSelected || edit || create || loading || submit ) {
 			return null;
 		}
