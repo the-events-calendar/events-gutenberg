@@ -18,7 +18,7 @@ class Tribe__Events_Gutenberg__Meta {
 		register_meta( 'post', '_EventStartDate', $this->text() );
 		register_meta( 'post', '_EventEndDate', $this->text() );
 		register_meta( 'post', '_EventShowMap', $this->boolean() );
-		register_meta( 'post', '_EventShowMapLink', $this->text() );
+		register_meta( 'post', '_EventShowMapLink', $this->boolean() );
 		register_meta( 'post', '_EventURL', $this->text() );
 		register_meta( 'post', '_EventCost', $this->text() );
 		register_meta( 'post', '_EventCostDescription', $this->text() );

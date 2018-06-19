@@ -26,11 +26,16 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 #### 0.2.3-alpha - TBD
 
-* Tweak - Set event links as last on default load for new event
 * Fix - Prevent render empty content on organizer block
 * Fix - Issue with wrong translation domain
 * Fix - Add `autosave` endpoint for other types like Organizers or Venues
 * Fix - Event link block styles and functionality
+* Fix - Add `autosave` endpoint for other types like Organizers or Venues.
+* Tweak - Set event links as last on default load for new event
+* Tweak - Align edit button in Organizer and Venue block next to the title.
+* Tweak - Fix Organizer and Venue block styles
+* Tweak - Update Delete icon for Organizer and Venue block
+* Tweak - Standardize the color of blue and dashboard background
 
 #### 0.2.2-alpha - 2018-06-15
 
