@@ -1,7 +1,7 @@
 /**
  * Import external dependencies
  */
-import { omit, noop, pick, isEmpty } from 'lodash';
+import { omit, noop } from 'lodash';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import PropTypes from 'prop-types';
 import 'react-day-picker/lib/style.css';
@@ -12,6 +12,7 @@ import moment from 'moment/moment';
  * Wordpress dependencies
  */
 import { Component } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
@@ -24,7 +25,6 @@ const today = new Date();
 const currentYear = today.getFullYear();
 const currentMonth = today.getMonth();
 const fromMonth = new Date( currentYear, currentMonth );
-const toMonth = new Date( currentYear + 10, 11 );
 
 export default class Month extends Component {
 	static propTypes = {
@@ -40,11 +40,11 @@ export default class Month extends Component {
 	static defaultProps = {
 		withRange: false,
 		onSelectDay: noop,
-		initialRangeDays: 3,
+		initialRangeDays: applyFilters( 'tec.datetime.defaultRange', 3 ),
 		from: today,
 		to: undefined,
 		month: fromMonth,
-		toMonth,
+		toMonth: new Date( currentYear + 10, 11 ),
 	};
 
 	static getDerivedStateFromProps( nextProps ) {
@@ -151,11 +151,6 @@ export default class Month extends Component {
 				selectedDays={ this.getSelectedDays() }
 				onDayClick={ this.selectDay }
 				onMonthChange={ this.handleYearMonthChange }
-				disabledDays={
-					{
-						before: today,
-					}
-				}
 				captionElement={ this.getCaptionElement }
 			/>
 		);
