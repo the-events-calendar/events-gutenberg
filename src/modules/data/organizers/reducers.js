@@ -18,7 +18,7 @@ import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 import { toFields, toOrganizer } from 'elements/organizer-form/utils';
 
 const DEFAULT_BLOCK = {
-	organizer: 0,
+	organizer: undefined,
 	edit: false,
 	create: false,
 	loading: false,
