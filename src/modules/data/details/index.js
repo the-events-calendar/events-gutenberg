@@ -29,7 +29,7 @@ export const DEFAULT_STATE = {
 	timezone: 'UTC',
 	separatorDate: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
 	separatorTime: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
-	currencyPosition: isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) ) ? 'suffix' : 'prefix',
+	currencyPosition: getSetting( 'currencyPosition', 'prefix' ),
 	currencySymbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
 	dashboardOpen: false,
 	organizers: [],

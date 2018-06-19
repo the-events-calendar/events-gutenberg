@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { Component, compose } from '@wordpress/element';
 import { withDispatch, withSelect } from '@wordpress/data';
 import {
-	ToggleControl,
+	CheckboxControl,
 	TextControl,
 	PanelBody,
 } from '@wordpress/components';
@@ -68,7 +68,7 @@ class EventPrice extends Component {
 
 	renderLabel() {
 		const { currencyPosition } = this.props;
-
+console.log(currencyPosition);
 		const containerClass = classNames(
 			'tribe-editor__event-price',
 			`tribe-editor__event-price--${ currencyPosition }`,
@@ -236,17 +236,22 @@ class EventPrice extends Component {
 						value={ currencySymbol }
 						placeholder={ __( '$', 'events-gutenberg' ) }
 						onChange={ setCurrencySymbol }
-						maxlength="1"
+						maxLength="1"
 						size="1"
 					/>
-					<ToggleControl
-						label={ __( 'Show symbol before', 'events-gutenberg' ) }
-						checked={ 'prefix' === currencyPosition }
-						onChange={ setCurrencyPosition }
+					<CheckboxControl
+						label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
+						checked={ 'suffix' === currencyPosition }
+						onChange={ this.setCurrencyPosition }
 					/>
 				</PanelBody>
 			</InspectorControls>
 		);
+	}
+
+	setCurrencyPosition = ( value ) => {
+		const { setCurrencyPosition } = this.props;
+		setCurrencyPosition( ! value );
 	}
 }
 
