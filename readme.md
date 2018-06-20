@@ -44,6 +44,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Standardize the color of blue and dashboard background
 * Tweak - Enable selection of days on the past
 * Tweak - Remove format controls from `<RichText>` components
+* Tweak - Styles to match style guide
 
 #### 0.2.2-alpha - 2018-06-15
 
