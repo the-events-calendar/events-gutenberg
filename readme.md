@@ -43,6 +43,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Update Delete icon for Organizer and Venue block
 * Tweak - Standardize the color of blue and dashboard background
 * Tweak - Add custom icon for custom blocks
+* Tweak - Remove format controls from `<RichText>` components
 
 #### 0.2.2-alpha - 2018-06-15
 
