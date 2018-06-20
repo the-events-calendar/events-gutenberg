@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventLinks from './block';
+import { Icons } from 'elements';
 
 /**
  * Module Code
@@ -22,7 +23,7 @@ export default {
 		'Encourage visitors to add your event to their calendars with handy sharing buttons.',
 		'events-gutenberg'
 	),
-	icon: 'calendar',
+	icon: Icons.TEC,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
