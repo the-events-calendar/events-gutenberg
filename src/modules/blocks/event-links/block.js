@@ -71,6 +71,7 @@ class EventLinks extends Component {
 					value={ googleCalendarLabel }
 					placeholder={ googleCalendarPlaceholder }
 					onChange={ save( 'googleCalendarLabel' ) }
+					formattingControls={ [] }
 				/>
 			</div>
 		);
@@ -97,6 +98,7 @@ class EventLinks extends Component {
 					value={ iCalLabel }
 					placeholder={ iCalExportPlaceholder }
 					onChange={ save( 'iCalLabel' ) }
+					formattingControls={ [] }
 				/>
 			</div>
 		);
