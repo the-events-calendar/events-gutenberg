@@ -25,6 +25,7 @@ const today = new Date();
 const currentYear = today.getFullYear();
 const currentMonth = today.getMonth();
 const fromMonth = new Date( currentYear, currentMonth );
+const toInitialMonth = new Date( currentYear + 10, 11 );
 
 export default class Month extends Component {
 	static propTypes = {
@@ -44,7 +45,7 @@ export default class Month extends Component {
 		from: today,
 		to: undefined,
 		month: fromMonth,
-		toMonth: new Date( currentYear + 10, 11 ),
+		toMonth: toInitialMonth,
 	};
 
 	static getDerivedStateFromProps( nextProps ) {
