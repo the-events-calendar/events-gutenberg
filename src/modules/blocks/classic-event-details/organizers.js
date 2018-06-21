@@ -28,7 +28,7 @@ import {
 	OrganizerForm,
 	SearchPosts,
 } from 'elements';
-import { store, STORE_NAME } from 'data/search/organizers';
+import { store, STORE_NAME } from 'data/search/organizer';
 import withSaveData from 'editor/hoc/with-save-data';
 import { STORE_NAME as DETAILS_STORE } from 'data/details';
 import { Item } from './organizer';
