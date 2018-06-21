@@ -32,7 +32,6 @@ import withSaveData from 'editor/hoc/with-save-data';
 import OrganizerIcon from 'icons/organizer.svg';
 
 class Organizer extends Component {
-
 	static propTypes = {
 		post: PropTypes.object,
 		draft: PropTypes.object,
@@ -61,7 +60,7 @@ class Organizer extends Component {
 			isSelected,
 			edit,
 			create,
-			sendForm
+			sendForm,
 		} = this.props;
 		const unSelected = prevProps.isSelected && ! isSelected;
 		if ( unSelected && ( edit || create ) ) {

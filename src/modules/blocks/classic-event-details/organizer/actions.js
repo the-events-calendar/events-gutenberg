@@ -22,7 +22,6 @@ import { STORE_NAME } from 'data/organizers';
 import './style.pcss';
 
 const ActionsComponent = ( { isBlock, onRemoveOrganizer = noop, focus } ) => {
-
 	if ( isBlock ) {
 		return null;
 	}

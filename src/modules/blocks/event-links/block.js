@@ -32,7 +32,6 @@ const googleCalendarPlaceholder = __( 'Google Calendar', 'events-gutenberg' );
 const iCalExportPlaceholder = __( 'iCal Export', 'events-gutenberg' );
 
 class EventLinks extends Component {
-
 	constructor() {
 		super( ...arguments );
 	}

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { unescape, trim, } from 'lodash';
+import { unescape, trim } from 'lodash';
 
 import { __ } from '@wordpress/i18n';
 

@@ -175,7 +175,6 @@ function search( prevState, term = '', args = {} ) {
 
 	apiRequest( request )
 		.then( ( body, status, xhr ) => {
-
 			if ( term !== select( STORE_NAME ).search() ) {
 				return state;
 			}
