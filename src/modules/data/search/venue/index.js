@@ -14,13 +14,15 @@ import { select, registerStore } from '@wordpress/data';
 const { apiRequest } = wp;
 import { getResponseHeaders } from 'utils/request';
 import * as actions from './actions';
+import * as selectors from './selectors';
+import { POST_TYPE } from 'data/venue';
 
 const DEFAULT_STATE = {
 	results: [],
 	page: 1,
 	total: 0,
 	loading: false,
-	type: 'tribe_venue',
+	type: POST_TYPE,
 	search: '',
 };
 
