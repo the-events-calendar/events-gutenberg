@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { pick } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -12,6 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventWebsite from './block';
+import { Icons } from 'elements';
 
 /**
  * Module Code
@@ -23,7 +23,7 @@ export default {
 		'Is there another website for this event? Link to it with a button!',
 		'events-gutenberg'
 	),
-	icon: 'calendar',
+	icon: Icons.TEC,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
