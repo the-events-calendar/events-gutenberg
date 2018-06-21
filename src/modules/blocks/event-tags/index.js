@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventTags from './block';
+import { Icons } from 'elements';
 
 /**
  * Module Code
@@ -19,7 +20,7 @@ export default {
 	id: 'event-tags',
 	title: __( 'Event Tags', 'events-gutenberg' ),
 	description: __( 'Add keywords by displaying linked tags.', 'events-gutenberg' ),
-	icon: 'calendar',
+	icon: Icons.TEC,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

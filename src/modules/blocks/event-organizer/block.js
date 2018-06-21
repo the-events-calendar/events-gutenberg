@@ -68,11 +68,6 @@ class Organizer extends Component {
 		}
 	}
 
-	componentWillUnmount() {
-		const { remove } = this.props;
-		remove();
-	}
-
 	render() {
 		return [ this.renderBlock(), this.renderSettings() ];
 	}
