@@ -1,10 +1,19 @@
+/**
+ * External dependencies
+ */
 import { stringify } from 'querystringify';
 
-import { select } from '@wordpress/data';
+/**
+ * Wordpress dependencies
+ */
+import { select, registerStore } from '@wordpress/data';
 
-const { data, apiRequest } = wp;
-const { registerStore } = data;
+/**
+ * Internal dependencies
+ */
+const { apiRequest } = wp;
 import { getResponseHeaders } from 'utils/request';
+import * as actions from './actions';
 
 const DEFAULT_STATE = {
 	results: [],
@@ -69,33 +78,7 @@ export const store = registerStore( STORE_NAME, {
 			return state.results;
 		},
 	},
-	actions: {
-		setTerm( id, term ) {
-			return {
-				type: 'SET_TERM',
-				term,
-			};
-		},
-		clear( id ) {
-			return {
-				type: 'CLEAR',
-				results: [],
-				id,
-			};
-		},
-		clearSearch() {
-			return {
-				type: 'CLEAR_SEARCH',
-			};
-		},
-		search( id, payload ) {
-			return {
-				type: 'SEARCH',
-				id,
-				payload,
-			};
-		},
-	},
+	actions,
 } );
 
 function search( state, payload ) {
