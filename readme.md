@@ -37,7 +37,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Fix - Remove `multiday` to be set automatically in some situations
 * Fix - Keep the dashboard open if the calendar is advanced several months ahead
 * Fix - Render the selected month inside of the calendar instead of the current month
-* Fix - Standarize styles on Form fields and Colors on Dashboard
+* Fix - Normalize styles on Form fields and Colors on Dashboard
 * Tweak - Align edit button in Organizer and Venue block next to the title
 * Tweak - Set event links as last on default load for new event
 * Tweak - Fix Organizer and Venue block styles
@@ -46,6 +46,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Add custom icon for custom blocks
 * Tweak - Enable selection of days on the past
 * Tweak - Remove format controls from `<RichText>` components
+* Tweak - Organize Store based on actions and selectors
 
 #### 0.2.2-alpha - 2018-06-15
 
@@ -53,7 +54,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Feature - Actual migration for Classic Editor Events into Blocks Editor
 * Feature - Event Date Time can now move Years forward
 * Feature - Event links now are saved as attributes
-* Feathre - When searching a venue or organizer you can always create the searched value
+* Feature - When searching a venue or organizer you can always create the searched value
 * Tweak - Favor the usage of HOC to sync / save data in details store
 * Tweak - Remove prefixes from store to make it more clear
 * Tweak - Removal of new volatile meta fields to store temp data
