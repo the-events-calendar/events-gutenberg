@@ -59,27 +59,7 @@ export const store = registerStore( STORE_NAME, {
 			}
 		}
 	},
-	selectors: {
-		getSearch( state ) {
-			return state.search || '';
-		},
-		getPosts( state ) {
-			const { results, loading } = state;
-			return {
-				results,
-				loading,
-			};
-		},
-		getLoading( state ) {
-			return state.loading;
-		},
-		getSearchLoading( state ) {
-			return state.loading;
-		},
-		getResults( state ) {
-			return state.results;
-		},
-	},
+	selectors,
 	actions,
 } );
 
