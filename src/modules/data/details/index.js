@@ -7,8 +7,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Wordpress dependencies
  */
-const { data } = wp;
-const { registerStore } = data;
+import { registerStore } from '@wordpress/data';
 
 /**
  * Internal dependencies

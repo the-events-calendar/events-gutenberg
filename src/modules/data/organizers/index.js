@@ -1,8 +1,7 @@
 /**
  * Wordpress dependencies
  */
-const { data } = wp;
-const { registerStore, combineReducers } = data;
+import { registerStore, combineReducers } from '@wordpress/data';
 
 /**
  * Internal dependencies
