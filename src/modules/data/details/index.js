@@ -3,7 +3,6 @@
  */
 import moment from 'moment/moment';
 import { __ } from '@wordpress/i18n';
-import { isObject, get } from 'lodash';
 
 /**
  * Wordpress dependencies
@@ -18,6 +17,9 @@ import { roundTime, toDateTime } from 'utils/moment';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 
 import * as reducers from './reducers';
+import * as actions from './actions';
+import * as selectors from './selectors';
+
 import { getSetting } from 'editor/settings';
 import { isTruthy } from 'utils/string';
 
@@ -39,7 +41,7 @@ export const DEFAULT_STATE = {
 
 export const STORE_NAME = 'tec.details';
 
-const details = {
+export const store = registerStore( STORE_NAME, {
 	reducer( state = DEFAULT_STATE, action ) {
 		switch ( action.type ) {
 			case 'SET_INITIAL_STATE': {
@@ -149,133 +151,6 @@ const details = {
 			}
 		}
 	},
-	actions: {
-		addOrganizer( organizer ) {
-			return {
-				type: 'ADD_ORGANIZER',
-				organizer,
-			};
-		},
-		removeOrganizer( organizer ) {
-			return {
-				type: 'REMOVE_ORGANIZER',
-				organizer,
-			};
-		},
-		maybeRemoveOrganizer( organizer ) {
-			return {
-				type: 'MAYBE_REMOVE_ORGANIZER',
-				organizer,
-			};
-		},
-		replaceOrganizers( organizers ) {
-			return {
-				type: 'REPLACE_ORGANIZERS',
-				organizers,
-			};
-		},
-		setWebsiteUrl( url ) {
-			return {
-				type: 'SET_WEBSITE_URL',
-				url,
-			};
-		},
-		setInitialState( values ) {
-			return {
-				type: 'SET_INITIAL_STATE',
-				values,
-			};
-		},
-		toggleDashboard() {
-			return { type: 'TOGGLE_DASHBOARD' };
-		},
-		closeDashboard() {
-			return { type: 'CLOSE_DASHBOARD' };
-		},
-		setMultiDay( multiDay ) {
-			return {
-				type: 'SET_MULTI_DAY',
-				multiDay,
-			};
-		},
-		setAllDay( allDay ) {
-			return {
-				type: 'SET_ALL_DAY',
-				allDay,
-			};
-		},
-		setTimeZone( timezone ) {
-			return {
-				type: 'SET_TIME_ZONE',
-				timezone,
-			};
-		},
-		setStartDate( date ) {
-			return {
-				type: 'SET_START_DATE',
-				date,
-			};
-		},
-		setEndDate( date ) {
-			return {
-				type: 'SET_END_DATE',
-				date,
-			};
-		},
-		setStartTime( seconds ) {
-			return {
-				type: 'SET_START_TIME',
-				seconds,
-			};
-		},
-		setEndTime( seconds ) {
-			return {
-				type: 'SET_END_TIME',
-				seconds,
-			};
-		},
-		setSeparatorDate( separator ) {
-			return {
-				type: 'SET_DATE_TIME_SEPARATOR',
-				separator,
-			};
-		},
-		setSeparatorTime( separator ) {
-			return {
-				type: 'SET_TIME_RANGE_SEPARATOR',
-				separator,
-			};
-		},
-		setCurrencySymbol( symbol ) {
-			return {
-				type: 'SET_CURRENCY_SYMBOL',
-				symbol,
-			};
-		},
-		setCurrencyPosition( position ) {
-			return {
-				type: 'SET_CURRENCY_POSITION',
-				position,
-			};
-		},
-		setCost( cost ) {
-			return {
-				type: 'SET_COST',
-				cost,
-			};
-		},
-	},
-	selectors: {
-		getOrganizers( state ) {
-			const { organizers } = state;
-			return organizers
-				.filter( isObject )
-				.map( ( item ) => item.id );
-		},
-		get( state, key, defaultValue ) {
-			return get( state, key, defaultValue );
-		},
-	},
-};
-
-export const store = registerStore( STORE_NAME, details );
+	actions,
+	selectors,
+} );
