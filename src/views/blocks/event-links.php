@@ -4,15 +4,12 @@ if ( post_password_required() ) {
 	return;
 }
 
-$attributes = wp_parse_args(
-	$this->get( 'attributes', array() ),
-	array(
-		'googleCalendarLabel' => __( '+ Google Calendar', 'events-gutenberg' ),
-		'iCalLabel' => __( '+ iCal Export', 'events-gutenberg' ),
-		'hasiCal' => true,
-		'hasGoogleCalendar' => true,
-	)
-);
+$attributes = $this->attributes( array(
+	'googleCalendarLabel' => __( '+ Google Calendar', 'events-gutenberg' ),
+	'iCalLabel' => __( '+ iCal Export', 'events-gutenberg' ),
+	'hasiCal' => true,
+	'hasGoogleCalendar' => true,
+) );
 
 $should_render = ! $attributes['hasGoogleCalendar'] && ! $attributes['hasiCal'];
 
