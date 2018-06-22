@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventDateTime from './block';
-import { pick } from 'lodash';
+import { Icons } from 'elements';
 
 /**
  * Module Code
@@ -23,7 +23,7 @@ export default {
 		'Define the date, time, and duration for your event.',
 		'events-gutenberg'
 	),
-	icon: 'calendar',
+	icon: Icons.TEC,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
