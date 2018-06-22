@@ -24,7 +24,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-#### 0.2.3-alpha - TBD
+#### 0.2.3-alpha - 2018-06-22
 
 * Feature - Add filter `tec.datetime.defaultRange` to change the default number of days to use in a range
 * Fix - Prevent render empty content on organizer block
