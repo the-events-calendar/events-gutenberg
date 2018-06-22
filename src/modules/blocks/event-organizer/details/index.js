@@ -104,7 +104,7 @@ export default class OrganizerDetails extends Component {
 					<CloseIcon />
 				</button>
 			</div>
-		)
+		);
 	}
 
 	isDraft() {

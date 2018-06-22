@@ -1,17 +1,28 @@
+/**
+ * External dependencies
+ */
 import { stringify } from 'querystringify';
 
-import { select } from '@wordpress/data';
+/**
+ * Wordpress dependencies
+ */
+import { select, registerStore } from '@wordpress/data';
 
-const { data, apiRequest } = wp;
-const { registerStore } = data;
+/**
+ * Internal dependencies
+ */
+const { apiRequest } = wp;
 import { getResponseHeaders } from 'utils/request';
+import * as actions from './actions';
+import * as selectors from './selectors';
+import { POST_TYPE } from 'data/venue';
 
 const DEFAULT_STATE = {
 	results: [],
 	page: 1,
 	total: 0,
 	loading: false,
-	type: 'tribe_venue',
+	type: POST_TYPE,
 	search: '',
 };
 
@@ -48,54 +59,8 @@ export const store = registerStore( STORE_NAME, {
 			}
 		}
 	},
-	selectors: {
-		getSearch( state ) {
-			return state.search || '';
-		},
-		getPosts( state ) {
-			const { results, loading } = state;
-			return {
-				results,
-				loading,
-			};
-		},
-		getLoading( state ) {
-			return state.loading;
-		},
-		getSearchLoading( state ) {
-			return state.loading;
-		},
-		getResults( state ) {
-			return state.results;
-		},
-	},
-	actions: {
-		setTerm( id, term ) {
-			return {
-				type: 'SET_TERM',
-				term,
-			};
-		},
-		clear( id ) {
-			return {
-				type: 'CLEAR',
-				results: [],
-				id,
-			};
-		},
-		clearSearch() {
-			return {
-				type: 'CLEAR_SEARCH',
-			};
-		},
-		search( id, payload ) {
-			return {
-				type: 'SEARCH',
-				id,
-				payload,
-			};
-		},
-	},
+	selectors,
+	actions,
 } );
 
 function search( state, payload ) {

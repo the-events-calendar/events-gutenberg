@@ -39,7 +39,7 @@ import {
 } from 'elements';
 
 import VenueDetails from './venue';
-import { STORE_NAME } from 'data/search/venues';
+import { STORE_NAME } from 'data/search/venue';
 import { STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
