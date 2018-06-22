@@ -38,6 +38,8 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Fix - Keep the dashboard open if the calendar is advanced several months ahead
 * Fix - Render the selected month inside of the calendar instead of the current month
 * Fix - Normalize styles on Form fields and Colors on Dashboard
+* Fix - Standarize styles on Form fields and Colors on Dashboard
+* Fix - Render Event Links Block accordingly to their attributes
 * Tweak - Align edit button in Organizer and Venue block next to the title
 * Tweak - Set event links as last on default load for new event
 * Tweak - Fix Organizer and Venue block styles
@@ -47,6 +49,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Enable selection of days on the past
 * Tweak - Remove format controls from `<RichText>` components
 * Tweak - Organize Store based on actions and selectors
+* Tweak - Event Website block now renders on the FE
 
 #### 0.2.2-alpha - 2018-06-15
 
