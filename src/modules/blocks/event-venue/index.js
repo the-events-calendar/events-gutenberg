@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventVenue from './block';
+import { Icons } from 'elements';
 
 /**
  * Module Code
@@ -20,7 +21,7 @@ export default {
 	id: 'event-venue',
 	title: __( 'Event Location', 'events-gutenberg' ),
 	description: __( 'Where is this event happening? Select or create a location.', 'events-gutenberg' ),
-	icon: 'calendar',
+	icon: Icons.TEC,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
