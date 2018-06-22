@@ -77,7 +77,7 @@ export default class VenueDetails extends Component {
 	renderVenueName() {
 		const { beforeTitle, afterTitle, maybeEdit } = this.props;
 		return (
-			<div className="tribe_editor__venue__name">
+			<div className="tribe-editor__venue__name">
 				{ beforeTitle }
 				<h3 onClick={ maybeEdit }>
 					{ decode( this.getVenueName() ) }
