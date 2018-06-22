@@ -47,6 +47,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Add custom icon for custom blocks
 * Tweak - Enable selection of days on the past
 * Tweak - Remove format controls from `<RichText>` components
+* Tweak - Styles to match style guide
 * Tweak - Event Website block now renders on the FE
 
 #### 0.2.2-alpha - 2018-06-15
