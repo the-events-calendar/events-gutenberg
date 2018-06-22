@@ -2,6 +2,7 @@
  * Wordpress Imports
  */
 import { dispatch } from '@wordpress/data';
+
 const { apiRequest } = wp;
 
 /**
@@ -15,9 +16,7 @@ export async function getDetails( state, id ) {
 	}
 
 	apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ id }` } )
-		.then( ( body ) => {
-			dispatch( STORE_NAME ).setDetails( body.id, body );
-		} );
+		.then( ( body ) => dispatch( STORE_NAME ).setDetails( body.id, body ) );
 
 	return {
 		...state,
