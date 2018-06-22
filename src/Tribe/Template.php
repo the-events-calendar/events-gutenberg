@@ -18,5 +18,20 @@ class Tribe__Events_Gutenberg__Template extends Tribe__Template {
 		// Configures this templating class extract variables
 		$this->set_template_context_extract( true );
 	}
+
+	/**
+	 * Return the attributes of the template
+	 *
+	 * @since TBD
+	 *
+	 * @param array $default_attributes
+	 * @return array
+	 */
+	public function attributes( $default_attributes = array() ) {
+		return wp_parse_args(
+			$this->get( 'attributes', array() ),
+			$default_attributes
+		);
+	}
 }
 
