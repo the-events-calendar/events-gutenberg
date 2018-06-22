@@ -49,6 +49,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Enable selection of days on the past
 * Tweak - Remove format controls from `<RichText>` components
 * Tweak - Organize Store based on actions and selectors
+* Tweak - Styles to match style guide
 * Tweak - Event Website block now renders on the FE
 
 #### 0.2.2-alpha - 2018-06-15
