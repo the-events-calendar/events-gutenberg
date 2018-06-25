@@ -94,7 +94,7 @@ class EventPrice extends Component {
 		const { costDescription, cost, currencySymbol } = this.props;
 		const parsed = parser( cost );
 
-		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( parsed );
+		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( cost );
 
 		if ( ! hasPrice ) {
 			return null;
@@ -130,15 +130,17 @@ class EventPrice extends Component {
 		const { cost } = this.props;
 		const parsed = parser( cost );
 
-		if ( this.isEmpty( parsed ) ) {
+		if ( this.isEmpty( parsed ) && ! isFree( cost ) ) {
 			return null;
 		}
 
-		if ( isFree( parsed ) ) {
-			return null;
+		let value = parsed;
+
+		if ( isFree( cost ) ) {
+			value = __( 'Free', 'events-gutenberg' );
 		}
 
-		return <span className="tribe-editor__event-price__cost">{ parsed }</span>;
+		return <span className="tribe-editor__event-price__cost">{ value }</span>;
 	}
 
 	renderDescription() {
