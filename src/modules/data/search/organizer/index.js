@@ -1,13 +1,21 @@
-import { isNumber, get, isEmpty } from 'lodash';
+/**
+ * External dependencies
+ */
+import { isEmpty } from 'lodash';
 import { stringify } from 'querystringify';
 
-const { data, apiRequest } = wp;
-const { registerStore, dispatch } = data;
-import { select } from '@wordpress/data';
+/**
+ * Wordpress dependencies
+ */
+import { registerStore, dispatch, select } from '@wordpress/data';
+import { POST_TYPE } from 'data/organizers';
 import { getResponseHeaders } from 'utils/request';
-import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 
-const POST_TYPE = 'tribe_organizer';
+import * as actions from './actions';
+import * as selectors from './selectors';
+import * as resolvers from './resolvers';
+
+const { apiRequest } = wp;
 
 const DEFAULT_STATE = {
 	posts: [],
@@ -62,7 +70,7 @@ export const store = registerStore( STORE_NAME, {
 				return {
 					...state,
 					search: action.search,
-				}
+				};
 
 			case 'SEARCH': {
 				return search( state, action.search, action.payload );
@@ -74,83 +82,10 @@ export const store = registerStore( STORE_NAME, {
 		}
 		return state;
 	},
-
-	actions: {
-		setPage( page ) {
-			return {
-				type: 'SET_PAGE',
-				page,
-			};
-		},
-		setTotal( total ) {
-			return {
-				type: 'SET_TOTAL',
-				total,
-			};
-		},
-		addPosts( posts ) {
-			return {
-				type: 'ADD_POSTS',
-				posts,
-			};
-		},
-		setPosts( posts ) {
-			return {
-				type: 'SET_POSTS',
-				posts,
-			};
-		},
-		block( ) {
-			return {
-				type: 'SET_FETCHING',
-				fetching: true,
-			};
-		},
-		unblock() {
-			return {
-				type: 'SET_FETCHING',
-				fetching: false,
-			};
-		},
-		fetch( args ) {
-			return {
-				type: 'FETCH',
-				payload: args,
-			};
-		},
-		search( term, args ) {
-			return {
-				type: 'SEARCH',
-				search: term,
-				payload: args,
-			};
-		},
-	},
-
-	selectors: {
-		fetchDetails( state, organizers ) {
-			return state;
-		},
-		search( state ) {
-			return state.search;
-		},
-	},
-
-	resolvers: {
-		async fetchDetails( state = {}, organizers ) {
-			const filtered = organizers.filter( isNumber );
-			Promise.all( filtered.map( toPromise ) )
-				.then( ( result ) => {
-					dispatch( EVENT_DETAILS_STORE ).replaceOrganizers( result );
-				} );
-			return state;
-		}
-	},
+	actions,
+	selectors,
+	resolvers,
 } );
-
-function toPromise( id ) {
-	return apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ id }` } );
-}
 
 function fetch( state = {}, queryParams = {} ) {
 	const { page, total, fetching } = state;
@@ -240,7 +175,6 @@ function search( prevState, term = '', args = {} ) {
 
 	apiRequest( request )
 		.then( ( body, status, xhr ) => {
-
 			if ( term !== select( STORE_NAME ).search() ) {
 				return state;
 			}

@@ -39,8 +39,10 @@ import {
 } from 'elements';
 
 import VenueDetails from './venue';
-import { STORE_NAME } from 'data/search/venues';
+import { STORE_NAME } from 'data/search/venue';
 import { STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
+import VenueIcon from 'icons/venue.svg';
+import CloseIcon from 'icons/close.svg';
 
 /**
  * Module Code
@@ -60,8 +62,8 @@ class EventVenue extends Component {
 		coordinates: PropTypes.object,
 		address: PropTypes.object,
 		draft: PropTypes.object,
-		showMap: PropTypes.oneOfType( [ PropTypes.bool, PropTypes.string ] ),
-		showMapLink: PropTypes.oneOfType( [ PropTypes.bool, PropTypes.string ] ),
+		showMap: PropTypes.bool,
+		showMapLink: PropTypes.bool,
 		createDraft: PropTypes.func,
 		editDraft: PropTypes.func,
 		removeDraft: PropTypes.func,
@@ -90,6 +92,10 @@ class EventVenue extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.removeVenue();
+	}
+
 	render() {
 		return [ this.renderBlock(), this.renderControls() ];
 	}
@@ -98,7 +104,6 @@ class EventVenue extends Component {
 		const { showMap } = this.props;
 
 		const containerClass = classNames(
-			'tribe-editor__block',
 			{
 				'tribe-editor__venue': this.hasVenue(),
 				'tribe-editor__venue--has-map': this.hasVenue() && showMap,
@@ -140,6 +145,8 @@ class EventVenue extends Component {
 				venue={ details }
 				address={ address }
 				showMapLink={ showMapLink }
+				afterTitle={ this.renderEditAction() }
+				maybeEdit={ this.maybeEdit }
 			/>
 		);
 	}
@@ -148,7 +155,7 @@ class EventVenue extends Component {
 		const { isSelected } = this.props;
 		return (
 			<SearchOrCreate
-				icon={ <Dashicon icon="location" size={ 22 }/> }
+				icon={ <VenueIcon /> }
 				storeName={ STORE_NAME }
 				selected={ isSelected }
 				onSelection={ this.setVenue }
@@ -210,17 +217,40 @@ class EventVenue extends Component {
 		);
 	}
 
+	maybeEdit = () => {
+		if ( this.hasVenue() && this.isDraft() ) {
+			return this.edit();
+		}
+	}
+
+	renderEditAction() {
+		const { isSelected, edit, create, loading, submit } = this.props;
+		const idle = edit || create || loading || submit;
+		if ( ! this.hasVenue() || ! isSelected || ! this.isDraft() || idle ) {
+			return null;
+		}
+
+		return (
+			<button onClick={ this.edit }>
+				<Dashicon icon="edit" />
+			</button>
+		);
+	}
+
 	editActions() {
-		const { isSelected } = this.props;
-		const { edit, create, loading, submit } = this.props;
+		const { isSelected, edit, create, loading, submit } = this.props;
 		if ( ! this.hasVenue() || ! isSelected || edit || create || loading || submit ) {
 			return null;
 		}
 
 		return (
 			<div className="tribe-editor__venue__actions">
-				{ this.isDraft() && <button onClick={ this.edit }><Dashicon icon="edit"/></button> }
-				<button onClick={ this.removeVenue }><Dashicon icon="trash"/></button>
+				<button
+					className="tribe-editor__venue__actions--close"
+					onClick={ this.removeVenue }
+				>
+					<CloseIcon />
+				</button>
 			</div>
 		);
 	}
@@ -259,12 +289,12 @@ class EventVenue extends Component {
 				<PanelBody title={ __( 'Venue Map Settings' ) }>
 					<ToggleControl
 						label={ __( 'Show Google Maps Link' ) }
-						checked={ ! ! showMapLink }
+						checked={ showMapLink }
 						onChange={ ( value ) => setAttributes( { showMapLink: value } ) }
 					/>
 					<ToggleControl
 						label={ __( 'Show Google Maps Embed' ) }
-						checked={ ! ! showMap }
+						checked={ showMap }
 						onChange={ ( value ) => setAttributes( { showMap: value } ) }
 					/>
 				</PanelBody>

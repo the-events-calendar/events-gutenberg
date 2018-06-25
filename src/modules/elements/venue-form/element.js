@@ -180,6 +180,7 @@ export default class VenueForm extends Component {
 					format="string"
 					value={ title }
 					onChange={ ( value ) => { this.setState( { title: value } ) } }
+					formattingControls={ [] }
 				/>
 				<div className="tribe-editor__venue__fields">
 					<Input

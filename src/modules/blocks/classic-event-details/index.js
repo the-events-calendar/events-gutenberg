@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { get, pick } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -12,6 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventDetails from './block';
+import { Icons } from 'elements';
 
 /**
  * Module Code
@@ -23,7 +23,7 @@ export default {
 		'Display your event info together in one place -- just like in the Classic Editor..',
 		'events-gutenberg'
 	),
-	icon: 'calendar',
+	icon: Icons.TEC,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

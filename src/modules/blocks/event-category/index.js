@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventCategory from './block';
+import { Icons } from 'elements';
 
 /**
  * Module Code
@@ -19,7 +20,7 @@ export default {
 	id: 'event-category',
 	title: __( 'Event Category', 'events-gutenberg' ),
 	description: __( 'Show assigned event categories as links to their respective archives.', 'events-gutenberg' ),
-	icon: 'calendar',
+	icon: Icons.TEC,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

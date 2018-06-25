@@ -145,7 +145,7 @@ class OrganizerForm extends Component {
 
 		return [
 			<div
-				className="tribe_editor__organizer__form"
+				className="tribe-editor__organizer__form"
 				key="tribe-organizer-form"
 			>
 				<h3 key="tribe-organizer-form-title">

@@ -17,7 +17,6 @@ import { Loading } from 'elements';
 import { Actions, Name } from './index';
 
 const Item = ( { id, data = {}, isLoading, onRemoveOrganizer, ...rest } ) => {
-
 	if ( isLoading ) {
 		return <li><Loading className="tribe-editor__spinner--item" /></li>;
 	}

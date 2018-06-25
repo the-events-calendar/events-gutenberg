@@ -218,7 +218,7 @@ export default class TimePicker extends Component {
 		return [
 			<div
 				key="tribe-element-timepicker"
-				className="tribe_editor__timepicker"
+				className="tribe-editor__timepicker"
 			>
 				{ dropdown }
 			</div>,

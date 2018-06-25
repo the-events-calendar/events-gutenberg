@@ -29,9 +29,9 @@ import {
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
 import withSaveData from 'editor/hoc/with-save-data';
+import OrganizerIcon from 'icons/organizer.svg';
 
 class Organizer extends Component {
-
 	static propTypes = {
 		post: PropTypes.object,
 		draft: PropTypes.object,
@@ -60,7 +60,7 @@ class Organizer extends Component {
 			isSelected,
 			edit,
 			create,
-			sendForm
+			sendForm,
 		} = this.props;
 		const unSelected = prevProps.isSelected && ! isSelected;
 		if ( unSelected && ( edit || create ) ) {
@@ -139,7 +139,7 @@ class Organizer extends Component {
 				id={ id }
 				storeName={ STORE_NAME }
 				selected={ isSelected }
-				icon={ <Dashicon icon="admin-users" size={ 22 } /> }
+				icon={ <OrganizerIcon /> }
 				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
 				onSelection={ this.selectItem }
 				onSetCreation={ this.setDraftTitle }
@@ -261,8 +261,9 @@ export default compose( [
 			remove() {
 				const { post } = props;
 				const { volatile } = post;
+
+				removeOrganizer( post.id );
 				if ( volatile ) {
-					removeOrganizer( post.id );
 					removeDraft( props.id );
 				} else {
 					clear( props.id );
