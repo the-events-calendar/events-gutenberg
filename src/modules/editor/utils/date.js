@@ -12,12 +12,15 @@ export const FORMATS = {
 	TIME: 'HH:mm:ss',
 	DATE_TIME: 'YYYY-MM-DD HH:mm:ss',
 	WP: {
-		time: 'g:i a',
-		date: 'F j',
-		datetime: 'F j, Y g:i a',
 		...formats,
+		time: 'g:i a',
+		date: 'F j, Y',
+		datetime: 'F j, Y g:i a',
+		dateNoYear: 'F j',
 	},
 };
+
+export const TODAY = new Date();
 
 /**
  * Make sure all the Dates objects are on the same time
@@ -37,6 +40,10 @@ export function equalDates( ...params ) {
 		dates.length === params.length &&
 		rest.every( ( item ) => item.getTime() === first.getTime() )
 	);
+}
+
+export function equalYears( date1, date2 ) {
+	return date1.getFullYear() === date2.getFullYear();
 }
 
 export function timezonesAsSelectData() {

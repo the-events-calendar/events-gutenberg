@@ -180,13 +180,15 @@ export function totalSeconds( date ) {
  * @returns {string} A date time format
  */
 export function toDateTime( date ) {
-	const { datetime } = FORMATS.WP;
-
-	return date.format( toFormat( datetime ) );
+	return date.format( toFormat( FORMATS.WP.datetime ) );
 }
 
 export function toDate( date ) {
 	return date.format( toFormat( FORMATS.WP.date ) );
+}
+
+export function toDateNoYear( date ) {
+	return date.format( toFormat( FORMATS.WP.dateNoYear ) );
 }
 
 export function toTime( date ) {

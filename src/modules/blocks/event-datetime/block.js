@@ -36,8 +36,15 @@ import './style.pcss';
 
 import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
-import { toFormat, toMoment, totalSeconds, toDateTime, toDate } from 'utils/moment';
-import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
+import {
+	toFormat,
+	toMoment,
+	totalSeconds,
+	toDateTime,
+	toDate,
+	toDateNoYear
+} from 'utils/moment';
+import { equalYears, FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { STORE_NAME } from 'data/details';
 import withSaveData from 'editor/hoc/with-save-data';
@@ -118,9 +125,14 @@ class EventDateTime extends Component {
 
 	renderStartDate() {
 		const { start } = this.props;
+		let startDate = toDate( toMoment( start ) );
+
+		if ( equalYears( new Date( start ), TODAY ) ) {
+			startDate = toDateNoYear( toMoment( start ) );
+		}
 
 		return (
-			<span>{ toDate( toMoment( start ) ) }</span>
+			<span>{ startDate }</span>
 		);
 	}
 
@@ -286,7 +298,6 @@ class EventDateTime extends Component {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
 			from: toMoment( start ).toDate(),
-			month: toMoment( start ).startOf( 'month' ).toDate(),
 		};
 
 		if ( ! this.isSameDay() ) {
