@@ -37,7 +37,7 @@ import './style.pcss';
 import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
 import { toFormat, toMoment, totalSeconds, toDateTime, toDate } from 'utils/moment';
-import { FORMATS, timezonesAsSelectData } from 'utils/date';
+import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { STORE_NAME } from 'data/details';
 import withSaveData from 'editor/hoc/with-save-data';
@@ -214,10 +214,10 @@ class EventDateTime extends Component {
 		switch ( type ) {
 			case 'date-time':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorDate }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }> { separatorDate } </span> );
 			case 'time-range':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorTime }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }> { separatorTime } </span> );
 			case 'dash':
 				return <span className={ classNames( 'tribe-editor__separator', className ) }> &mdash; </span>;
 			case 'all-day':
