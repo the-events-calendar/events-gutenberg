@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.2.4-alpha - TBD
+
+* Fix - Styles for price block
+
 #### 0.2.3-alpha - 2018-06-22
 
 * Feature - Add filter `tec.datetime.defaultRange` to change the default number of days to use in a range
