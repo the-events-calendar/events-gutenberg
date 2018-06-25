@@ -169,6 +169,7 @@ class EventPrice extends Component {
 				ref={ this.dashboardRef }
 				open={ this.state.open }
 				onClose={ this.onCloseDashboard }
+				overflow
 			>
 				<Fragment>
 					<section className="tribe-editor__event-price__dashboard">
