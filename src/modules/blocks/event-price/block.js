@@ -68,10 +68,9 @@ class EventPrice extends Component {
 
 	renderLabel() {
 		const { currencyPosition } = this.props;
-console.log(currencyPosition);
 		const containerClass = classNames(
-			'tribe-editor__event-price',
-			`tribe-editor__event-price--${ currencyPosition }`,
+			'tribe-editor__event-price__price',
+			`tribe-editor__event-price__price--${ currencyPosition }`,
 		);
 
 		return (
