@@ -16,7 +16,6 @@ import {
 /**
  * Internal dependencies
  */
-import { getSetting } from 'editor/settings';
 import './style.pcss';
 
 import {
@@ -57,6 +56,4 @@ export default class EventTags extends Component {
 			/>
 		);
 	}
-
 }
-

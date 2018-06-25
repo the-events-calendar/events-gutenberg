@@ -29,6 +29,7 @@ export function isFalsy( value ) {
 		'false',
 		'no',
 		'0',
+		'',
 	];
 	return hasAnyOf( validValues, value );
 }

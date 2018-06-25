@@ -1,20 +1,15 @@
 /**
- * External imports
+ * Wordpress dependencies
  */
-import { get } from 'lodash';
+import { registerStore } from '@wordpress/data';
 
 /**
- * Wordpress Imports
- */
-import { dispatch } from '@wordpress/data';
-
-const { data, apiRequest } = wp;
-const { registerStore } = data;
-
-/**
- * Internal imports
+ * Internal dependencies
  */
 import * as reducers from './reducer';
+import * as actions from './actions';
+import * as selectors from './selectors';
+import * as resolvers from './resolvers';
 
 export const POST_TYPE = 'tribe_venue';
 export const STORE_NAME = 'tec.venue';
@@ -88,95 +83,6 @@ const reducer = ( state = DEFAULT_STATE, action ) => {
 			return state;
 		}
 	}
-};
-
-const actions = {
-	setDetails( id, details ) {
-		return {
-			type: 'SET_DETAILS',
-			id,
-			details,
-		};
-	},
-	setDraftTitle( title ) {
-		return {
-			type: 'SET_DRAFT_TITLE',
-			title,
-		};
-	},
-	setDraftDetails( details ) {
-		return {
-			type: 'SET_DRAFT_DETAILS',
-			draft: details,
-		};
-	},
-	editDraft( id, fields ) {
-		return {
-			type: 'EDIT_DRAFT',
-			id,
-			fields,
-		};
-	},
-	createDraft( fields ) {
-		return {
-			type: 'CREATE_DRAFT',
-			fields,
-		};
-	},
-	removeDraft( id ) {
-		return {
-			type: 'REMOVE_DRAFT',
-			id,
-		};
-	},
-	registerVenue( id ) {
-		return {
-			type: 'REGISTER_VENUE',
-			id,
-		};
-	},
-	submit() {
-		return {
-			type: 'SUBMIT',
-		};
-	},
-	clear() {
-		return {
-			type: 'CLEAR',
-		};
-	},
-	clearSearch() {
-		return {
-			type: 'CLEAR_SEARCH',
-		};
-	},
-};
-
-const selectors = {
-	getDetails( state, id ) {
-		return state.details;
-	},
-	get( state, key, defaultValue ) {
-		return get( state, key, defaultValue );
-	},
-};
-
-const resolvers = {
-	async getDetails( state, id ) {
-		if ( state.id === id ) {
-			return state;
-		}
-
-		apiRequest( { path: `/wp/v2/${ POST_TYPE }/${ id }` } )
-			.then( ( body ) => {
-				dispatch( STORE_NAME ).setDetails( body.id, body );
-			} );
-
-		return {
-			...state,
-			loading: true,
-		};
-	},
 };
 
 export const store = registerStore( STORE_NAME, {

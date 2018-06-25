@@ -96,7 +96,7 @@ class EventDetails extends Component {
 					onChange={ ( nextContent ) => setAttributes( { organizerTitle: nextContent } ) }
 					focus={ focus && 'organizerTitle' === focus.editable ? focus : undefined }
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
-					formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
+					formattingControls={ [] }
 				/>
 				<EventOrganizers
 					focus={ focus }
@@ -115,7 +115,7 @@ class EventDetails extends Component {
 				onChange={ ( nextContent ) => setAttributes( { detailsTitle: nextContent } ) }
 				focus={ focus && 'detailsTitle' === focus.editable ? focus : undefined }
 				placeholder={ __( 'Details', 'events-gutenberg' ) }
-				formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
+				formattingControls={ [] }
 			/>
 		);
 	}

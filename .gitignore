@@ -12,3 +12,4 @@ yarn.lock
 docker-compose.override.yml
 cypress.env.json
 .idea
+/node_modules/

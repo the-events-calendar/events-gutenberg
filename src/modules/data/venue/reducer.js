@@ -1,5 +1,5 @@
 /**
- * External imports
+ * External dependencies
  */
 import { isEmpty, get } from 'lodash';
 import { dispatch } from '@wordpress/data';

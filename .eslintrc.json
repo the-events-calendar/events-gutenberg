@@ -126,6 +126,7 @@
     "tribe_data_us_states": true,
     "siteTimezone": true,
     "expect": true,
-    "test": true
+    "test": true,
+    "tribe_blocks_editor": true
   }
 }

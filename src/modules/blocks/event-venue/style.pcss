@@ -54,8 +54,15 @@
 	z-index: 10;
 	top: 27px;
 
-	svg {
-		fill: #A2AAB2;
+	&--close {
+		svg {
+			width: 16px;
+		}
+	}
+
+	svg,
+	path {
+		fill: #8D949B;
 	}
 
 	button {
@@ -65,24 +72,55 @@
 		cursor: pointer;
 
 		&:hover {
-			svg {
-				fill: #000;
+			svg,
+			path {
+				fill: #009FD4;
 			}
 		}
 	}
 }
 
-.tribe_editor__venue__name {
-	font-size: 1.3125rem;
-	font-weight: bold;
-	margin-top: 0;
-	margin-bottom: 12px;
-	font-family: 'Helvetica', 'Arial', 'sans-serif';
+.tribe-editor__venue__name {
+	display: flex;
+
+	button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+
+		svg,
+		path {
+			fill: #8D949B;
+		}
+
+		&:hover {
+			svg,
+			path {
+				fill: #009FD4;
+			}
+		}
+	}
+
+	h3 {
+		font-size: 1.3125rem;
+		font-weight: bold;
+		margin-top: 0;
+		margin-bottom: 4px;
+		font-family: 'Helvetica', 'Arial', 'sans-serif';
+	}
 }
 
 .tribe-editor__venue__address {
 	font-style: normal;
 	margin-bottom: 20px;
+
+	a {
+		color: #009FD4;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
 }
 
 .tribe-editor__venue__phone {
@@ -102,4 +140,26 @@
 	font-size: 1rem;
 	line-height: 1.5;
 	letter-spacing: 0.13px;
+}
+
+.tribe-editor__organizer__title {
+	display: flex;
+
+	button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+
+		svg,
+		path {
+			fill: #8D949B;
+		}
+
+		&:hover {
+			svg,
+			path {
+				fill: #009FD4;
+			}
+		}
+	}
 }
