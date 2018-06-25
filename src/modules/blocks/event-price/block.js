@@ -95,17 +95,16 @@ class EventPrice extends Component {
 		const parsed = parser( cost );
 
 		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( parsed );
-		const hideCurrency = ! hasPrice && ! this.isEmpty( costDescription );
 
-		const currencyClassNames = classNames( [
-			'tribe-editor__event-price__currency',
-			{
-				'tribe-editor__event-price__currency--active': hasPrice,
-				'tribe-editor__event-price__currency--disabled': hideCurrency,
-			},
-		] );
+		if ( ! hasPrice ) {
+			return null;
+		}
 
-		return <span className={ currencyClassNames }>{ currencySymbol }</span>;
+		return (
+			<span className="tribe-editor__event-price__currency">
+				{ currencySymbol }
+			</span>
+		);
 	}
 
 	renderPlaceholder() {

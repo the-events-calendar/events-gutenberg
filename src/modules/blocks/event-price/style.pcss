@@ -3,40 +3,31 @@
 	align-items: center;
 	font-family: 'Helvetica', 'sans-serif';
 	font-weight: bold;
-
-	&--prefix {
-		.tribe-editor__event-price__currency {
-			margin-right: 8px;
-		}
-	}
-
-	&--suffix {
-		.tribe-editor__event-price__currency {
-			margin-left: 8px;
-			order: 2;
-		}
-	}
 }
 
 .tribe-editor__event-price__currency {
-	color: #E1E3E6;
+	flex: none;
+	color: #000;
 	font-size: 1.3125rem;
 
-	&--active {
-		color: #000;
+	.tribe-editor__event-price__price--prefix & {
+		margin-right: 8px;
 	}
 
-	&--disabled {
-		opacity: 0;
+	.tribe-editor__event-price__price--suffix & {
+		margin-left: 8px;
+		order: 2;
 	}
 }
 
 .tribe-editor__event-price__label {
+	flex: none;
 	color: #8D949B;
 	font-size: 1.125rem;
 }
 
 .tribe-editor__event-price__cost {
+	flex: none;
 	font-size: 1.3125rem;
 	font-weight: bold;
 }
@@ -47,6 +38,7 @@
 }
 
 .tribe-editor__event-price__description {
+	flex: auto;
 	font-size: 1rem;
 	font-weight: normal;
 	line-height: 1.2;
