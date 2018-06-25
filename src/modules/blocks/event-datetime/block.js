@@ -399,17 +399,22 @@ class EventDateTime extends Component {
 					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
 					value={ separatorDate }
 					onChange={ setSeparatorDate }
+					className="tribe-editor__date-time__date-time-separator-setting"
+					maxLength="2"
 				/>
 				<TextControl
 					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
 					value={ separatorTime }
 					onChange={ setSeparatorTime }
+					className="tribe-editor__date-time__time-range-separator-setting"
+					maxLength="2"
 				/>
 				<SelectControl
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
 					value={ timezone }
 					onChange={ setTimeZone }
 					options={ timezonesAsSelectData() }
+					className="tribe-editor__date-time__time-zone-setting"
 				/>
 			</PanelBody>
 		</InspectorControls> );
