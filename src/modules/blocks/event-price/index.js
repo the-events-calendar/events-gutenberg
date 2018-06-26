@@ -12,6 +12,11 @@ import { __ } from '@wordpress/i18n';
  */
 import EventPrice from './block';
 import { Icons } from 'elements';
+import { getStore } from 'data';
+
+const withStore = ( Component ) => ( props ) => (
+	<Component {...props } store={ getStore() } />
+);
 
 /**
  * Module Code
@@ -36,6 +41,7 @@ export default {
 		},
 		costDescription: {
 			type: 'html',
+			default: '',
 		},
 		currencySymbol: {
 			type: 'string',
@@ -50,9 +56,8 @@ export default {
 	},
 
 	useOnce: true,
-	edit: EventPrice,
+	edit: withStore( EventPrice ),
 	save( props ) {
 		return null;
 	},
 };
-
