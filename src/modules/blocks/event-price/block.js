@@ -32,7 +32,8 @@ import {
 import './style.pcss';
 import { parser, isFree } from 'utils/range';
 import withSaveData from 'editor/hoc/with-save-data';
-import { actions, selectors } from 'data/blocks/price';
+import * as actions from 'data/blocks/price/actions';
+import * as selectors from 'data/blocks/price/selectors';
 
 /**
  * Module Code
