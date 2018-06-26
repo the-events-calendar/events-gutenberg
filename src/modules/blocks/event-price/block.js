@@ -32,8 +32,7 @@ import {
 import './style.pcss';
 import { parser, isFree } from 'utils/range';
 import withSaveData from 'editor/hoc/with-save-data';
-import * as priceSelectors from 'data/blocks/price/selectors';
-import * as priceActions from 'data/blocks/price/actions';
+import { actions, selectors } from 'data/blocks/price';
 
 /**
  * Module Code
@@ -251,15 +250,15 @@ class EventPrice extends Component {
 
 const mapStateToProps = ( state ) => {
 	return {
-		cost: priceSelectors.getPrice( state ),
-		currencyPosition: priceSelectors.getPosition( state ),
-		currencySymbol: priceSelectors.getSymbol( state ),
-		costDescription: priceSelectors.getDescription( state ),
+		cost: selectors.getPrice( state ),
+		currencyPosition: selectors.getPosition( state ),
+		currencySymbol: selectors.getSymbol( state ),
+		costDescription: selectors.getDescription( state ),
 	};
 };
 
 const mapDispatchToProps = ( dispatch ) => {
-	return bindActionCreators( priceActions, dispatch );
+	return bindActionCreators( actions, dispatch );
 };
 
 export default compose(
