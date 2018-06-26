@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { trim, isEmpty } from 'lodash';
+import { trim, isEmpty, isFunction } from 'lodash';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -12,7 +12,6 @@ import { bindActionCreators, compose } from 'redux';
  */
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-import { withDispatch, withSelect } from '@wordpress/data';
 import {
 	ToggleControl,
 	TextControl,
@@ -35,22 +34,18 @@ import { parser, isFree } from 'utils/range';
 import withSaveData from 'editor/hoc/with-save-data';
 import * as priceSelectors from 'data/blocks/price/selectors';
 import * as priceActions from 'data/blocks/price/actions';
-import { DEFAULT_STATE } from 'data/blocks/price/reducers';
 
 /**
  * Module Code
  */
 
 class EventPrice extends Component {
-
 	constructor() {
 		super( ...arguments );
 
 		this.state = {
 			open: false,
 		};
-
-		this.dashboardRef = React.createRef();
 	}
 
 	render() {
@@ -171,7 +166,6 @@ class EventPrice extends Component {
 
 		return (
 			<Dashboard
-				ref={ this.dashboardRef }
 				open={ this.state.open }
 				onClose={ this.onCloseDashboard }
 			>
@@ -182,7 +176,7 @@ class EventPrice extends Component {
 							name="description"
 							type="text"
 							placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-							onChange={ this.setCost }
+							onChange={ this.callProperty( 'setCost' ) }
 							value={ cost }
 						/>
 						<input
@@ -190,7 +184,7 @@ class EventPrice extends Component {
 							name="description"
 							type="text"
 							placeholder={ __( 'Description', 'events-gutenberg' ) }
-							onChange={ this.savePriceDescription }
+							onChange={ this.callProperty( 'setDescription' ) }
 							value={ costDescription }
 						/>
 					</section>
@@ -202,17 +196,14 @@ class EventPrice extends Component {
 		);
 	}
 
-	setCost = ( e ) => {
-		const { target } = e;
-		const { setCost } = this.props;
-		setCost( target.value );
-	};
-
-	savePriceDescription = ( event ) => {
-		const { target } = event;
-		const { value } = target;
-		const { setAttributes } = this.props;
-		setAttributes( { costDescription: value } );
+	callProperty = ( name ) => {
+		return ( e ) => {
+			const { target } = e;
+			const callable = this.props[ name ];
+			if ( isFunction( callable ) ) {
+				callable( target.value );
+			}
+		}
 	};
 
 	onCloseDashboard = () => {
@@ -231,6 +222,7 @@ class EventPrice extends Component {
 			currencySymbol,
 			currencyPosition,
 			setPriceSymbol,
+			togglePosition,
 		} = this.props;
 
 		if ( ! isSelected ) {
@@ -249,7 +241,7 @@ class EventPrice extends Component {
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
 						checked={ 'prefix' === currencyPosition }
-						onChange={ this.setPosition }
+						onChange={ togglePosition }
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -267,9 +259,7 @@ const mapStateToProps = ( state ) => {
 };
 
 const mapDispatchToProps = ( dispatch ) => {
-	return {
-		...bindActionCreators( priceActions, dispatch ),
-	};
+	return bindActionCreators( priceActions, dispatch );
 };
 
 export default compose(
