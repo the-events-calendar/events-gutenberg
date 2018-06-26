@@ -49,6 +49,7 @@
 		"react-scroll-to": "^1.2.2",
 		"react-text-input": "^0.0.8",
 		"redux": "^4.0.0",
+		"redux-thunk": "^2.3.0",
 		"reselect": "^3.0.1",
 		"slug": "^0.9.1",
 		"url-loader": "^0.6.2",
