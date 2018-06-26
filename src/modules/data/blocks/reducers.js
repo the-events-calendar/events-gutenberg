@@ -9,7 +9,7 @@ import { combineReducers } from 'redux';
 import datetime from './datetime/reducers';
 import organizers from './organizers/reducers';
 import { reducer as price } from './price/reducers';
-import website from './website/reducers';
+import { reducer as website } from './website/reducers';
 
 export default combineReducers( {
 	datetime,
