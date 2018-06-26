@@ -249,18 +249,14 @@ class EventPrice extends Component {
 	}
 }
 
-const mapStateToProps = ( state ) => {
-	return {
-		cost: selectors.getPrice( state ),
-		currencyPosition: selectors.getPosition( state ),
-		currencySymbol: selectors.getSymbol( state ),
-		costDescription: selectors.getDescription( state ),
-	};
-};
+const mapStateToProps = ( state ) => ( {
+	cost: selectors.getPrice( state ),
+	currencyPosition: selectors.getPosition( state ),
+	currencySymbol: selectors.getSymbol( state ),
+	costDescription: selectors.getDescription( state ),
+} );
 
-const mapDispatchToProps = ( dispatch ) => {
-	return bindActionCreators( actions, dispatch );
-};
+const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
 
 export default compose(
 	connect(
