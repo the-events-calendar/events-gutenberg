@@ -1,15 +1,17 @@
 /**
  * External dependencies
  */
-import { trim, isEmpty, get as getFromObject } from 'lodash';
+import { trim, isEmpty } from 'lodash';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import { withDispatch, withSelect } from '@wordpress/data';
 import {
 	ToggleControl,
@@ -30,14 +32,17 @@ import {
 
 import './style.pcss';
 import { parser, isFree } from 'utils/range';
-import { STORE_NAME as DETAILS_STORE } from 'data/details';
 import withSaveData from 'editor/hoc/with-save-data';
+import * as priceSelectors from 'data/blocks/price/selectors';
+import * as priceActions from 'data/blocks/price/actions';
+import { DEFAULT_STATE } from 'data/blocks/price/reducers';
 
 /**
  * Module Code
  */
 
 class EventPrice extends Component {
+
 	constructor() {
 		super( ...arguments );
 
@@ -162,7 +167,7 @@ class EventPrice extends Component {
 	};
 
 	renderDashboard() {
-		const { cost, costDescription, setCost } = this.props;
+		const { cost, costDescription } = this.props;
 
 		return (
 			<Dashboard
@@ -177,7 +182,7 @@ class EventPrice extends Component {
 							name="description"
 							type="text"
 							placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-							onChange={ setCost }
+							onChange={ this.setCost }
 							value={ cost }
 						/>
 						<input
@@ -196,6 +201,12 @@ class EventPrice extends Component {
 			</Dashboard>
 		);
 	}
+
+	setCost = ( e ) => {
+		const { target } = e;
+		const { setCost } = this.props;
+		setCost( target.value );
+	};
 
 	savePriceDescription = ( event ) => {
 		const { target } = event;
@@ -217,10 +228,9 @@ class EventPrice extends Component {
 	renderControls() {
 		const {
 			isSelected,
-			setCurrencySymbol,
-			setCurrencyPosition,
 			currencySymbol,
 			currencyPosition,
+			setPriceSymbol,
 		} = this.props;
 
 		if ( ! isSelected ) {
@@ -234,12 +244,12 @@ class EventPrice extends Component {
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ setCurrencySymbol }
+						onChange={ setPriceSymbol }
 					/>
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
 						checked={ 'prefix' === currencyPosition }
-						onChange={ setCurrencyPosition }
+						onChange={ this.setPosition }
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -247,39 +257,25 @@ class EventPrice extends Component {
 	}
 }
 
-export default compose( [
-	withSelect( ( select, props ) => {
-		const { get } = select( DETAILS_STORE );
-		const { attributes } = props;
-		return {
-			currencyPosition: get( 'currencyPosition' ),
-			currencySymbol: get( 'currencySymbol' ),
-			cost: get( 'cost' ),
-			costDescription: getFromObject( attributes, 'costDescription', '' ),
-		};
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		const {
-			setCost,
-			setCurrencySymbol,
-			setCurrencyPosition,
-		} = dispatch( DETAILS_STORE );
+const mapStateToProps = ( state ) => {
+	return {
+		cost: priceSelectors.getPrice( state ),
+		currencyPosition: priceSelectors.getPosition( state ),
+		currencySymbol: priceSelectors.getSymbol( state ),
+		costDescription: priceSelectors.getDescription( state ),
+	};
+};
 
-		return {
-			setInitialState() {
-				const { attributes } = props;
-				const { cost } = attributes;
-				setCost( cost );
-			},
-			setCurrencySymbol,
-			setCurrencyPosition,
-			setCost( event ) {
-				const { target } = event;
-				const { value } = target;
-				setCost( value );
-			},
-		};
-	} ),
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		...bindActionCreators( priceActions, dispatch ),
+	};
+};
+
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	),
 	withSaveData(),
-] )( EventPrice );
-
+)( EventPrice );
