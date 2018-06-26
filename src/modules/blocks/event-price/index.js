@@ -12,11 +12,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EventPrice from './block';
 import { Icons } from 'elements';
-import { getStore } from 'data';
-
-const withStore = ( Component ) => ( props ) => (
-	<Component {...props } store={ getStore() } />
-);
+import withStore from 'editor/hoc/with-store';
 
 /**
  * Module Code
