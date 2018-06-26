@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
+import { DEFAULT_STATE } from './reducers';
 
 export const setCost = ( cost ) => ( {
 	type: types.SET_PRICE_COST,
@@ -10,37 +11,36 @@ export const setCost = ( cost ) => ( {
 	},
 } );
 
-export const setPriceSymbolPosition = ( position ) => ( {
+export const setPosition = ( position ) => ( {
 	type: types.SET_PRICE_POSITION,
 	payload: {
 		position,
 	},
 } );
 
-export const setPriceSymbol = ( symbol ) => ( {
+export const togglePosition = ( showBefore ) => {
+	return setPosition( showBefore ? 'prefix' : 'suffix' );
+};
+
+export const setSymbol = ( symbol ) => ( {
 	type: types.SET_PRICE_SYMBOL,
 	payload: {
 		symbol,
 	},
 } );
 
-export const setPriceDescription = ( description ) => ( {
+export const setDescription = ( description ) => ( {
 	type: types.SET_PRICE_DESCRIPTION,
 	payload: {
 		description,
 	},
 } );
 
-export const setInitialState = ( attributes ) => ( {
-	type: types.SET_PRICE_INITIAL_STATE,
-	meta: {
-		initial: true,
-		attributes,
-		methods: {
-			setCost,
-			setPriceSymbolPosition,
-			setPriceSymbol,
-			setPriceDescription,
-		},
-	},
-} );
+export const setInitialState = ( attributes = {} ) => {
+	return ( dispatch ) => {
+		dispatch( setCost( attributes.cost || DEFAULT_STATE.cost ) );
+		dispatch( setSymbol( attributes.currencySymbol || DEFAULT_STATE.symbol ) );
+		dispatch( setDescription( attributes.costDescription || DEFAULT_STATE.description ) );
+		dispatch( setPosition( attributes.currencyPosition || DEFAULT_STATE.position ) );
+	};
+};
