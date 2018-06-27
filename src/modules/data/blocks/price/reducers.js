@@ -21,7 +21,7 @@ export const DEFAULT_STATE = {
 	description: '',
 };
 
-export const reducer = ( state = DEFAULT_STATE, action ) => {
+export default ( state = DEFAULT_STATE, action ) => {
 	switch ( action.type ) {
 		case types.SET_PRICE_COST:
 			return {

@@ -8,7 +8,7 @@ export const DEFAULT_STATE = {
 	label: '',
 };
 
-export const reducer = ( state = DEFAULT_STATE, action ) => {
+export default ( state = DEFAULT_STATE, action ) => {
 	switch ( action.type ) {
 		case types.SET_WEBSITE_URL:
 			return {

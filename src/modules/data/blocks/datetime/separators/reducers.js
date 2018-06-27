@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 import { getSetting } from 'editor/settings';
 import * as types from './types';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
 	date: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
 	time: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
 };
