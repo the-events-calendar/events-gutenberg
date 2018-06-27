@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
 	noop,
@@ -11,13 +11,6 @@ import {
 	keys,
 } from 'lodash';
 
-/**
- * Wordpress dependencies
- */
-import {
-	Component,
-	createHigherOrderComponent,
-} from '@wordpress/element';
 
 /**
  * Higher order component that updates the attributes of a component if any of the properties of the
@@ -30,8 +23,8 @@ import {
  * @param {object} attributes Set of attributes to only update fallback to this.props.attributes
  * @returns {function} Return a new HOC
  */
-export default ( attributes = null ) => createHigherOrderComponent( ( WrappedComponent ) => {
-	return class WithSaveData extends Component {
+export default ( attributes = null ) => ( WrappedComponent ) => {
+	class WithSaveData extends Component {
 			static defaultProps = {
 				setAttributes: noop,
 				setInitialState: noop,
@@ -46,8 +39,8 @@ export default ( attributes = null ) => createHigherOrderComponent( ( WrappedCom
 
 			keys = [];
 
-			constructor() {
-				super( ...arguments );
+			constructor( props ) {
+				super( props );
 				this.keys = this.generateKeys();
 			}
 
@@ -69,8 +62,8 @@ export default ( attributes = null ) => createHigherOrderComponent( ( WrappedCom
 
 			// At this point attributes has been set so no need to be set the initial state into the store here.
 			componentDidMount() {
-				const { setInitialState } = this.props;
-				setInitialState();
+				const { setInitialState, attributes = {} } = this.props;
+				setInitialState( attributes, this.props );
 			}
 
 			componentDidUpdate( prevProps ) {
@@ -106,6 +99,10 @@ export default ( attributes = null ) => createHigherOrderComponent( ( WrappedCom
 			render() {
 				return <WrappedComponent { ...this.props } />;
 			}
-	};
-}, 'withSaveData' );
+	}
+
+	WithSaveData.displayName = `WithSaveData( ${ WrappedComponent.displayName || WrappedComponent.name || 'Component ' }`;
+
+	return WithSaveData;
+};
 
