@@ -127,12 +127,12 @@ const mapStateToProps = ( state ) => ( {
 	urlLabel: selectors.getLabel( state ),
 } );
 
-const mapStateToDispatch = ( dispatch ) => bindActionCreators( actions, dispatch );
+const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
 
 export default compose(
 	connect(
 		mapStateToProps,
-		mapStateToDispatch,
+		mapDispatchToProps,
 	),
 	withSaveData(),
 )( EventWebsite );
