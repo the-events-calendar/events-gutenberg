@@ -160,9 +160,14 @@ export default class GoogleMap extends Component {
 	}
 
 	loadMap() {
+		if ( ! google ) {
+			this.tryAgain();
+			return;
+		}
+
 		const { maps } = google;
 		// Try to fetch the library 0.5 seconds later
-		if ( ! google || ! maps ) {
+		if ( ! maps ) {
 			this.tryAgain();
 			return;
 		}
