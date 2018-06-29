@@ -37,6 +37,3 @@ export const dates = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	const end = replaceDate( toMoment( current.end ), roundTime( toMoment( to || from ) ) );
 	dispatch( actions.setEnd( toDateTime( end ) ) );
 };
-
-// export const setEnd =
-// Adjust other properties when end is set
