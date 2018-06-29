@@ -85,8 +85,8 @@ export const setInitialState = ( attributes = {} ) => ( dispatch ) => {
 	dispatch( setStart( start ) );
 	dispatch( setEnd( end ) );
 	dispatch( setAllDay( attributes.allDay || DEFAULT_STATE.allDay ) );
-	dispatch( setSeparatorDate( attributes.separatorDate || DEFAULT_STATE.date ) );
-	dispatch( setSeparatorTime( attributes.separatorTime || DEFAULT_STATE.time ) );
+	dispatch( setSeparatorDate( attributes.separatorDate || DEFAULT_STATE.dateTimeSeparator ) );
+	dispatch( setSeparatorTime( attributes.separatorTime || DEFAULT_STATE.timeRangeSeparator ) );
 	dispatch( setTimeZone( attributes.timezone || DEFAULT_STATE.timezone ) );
 	// sameDay
 	const current = {
