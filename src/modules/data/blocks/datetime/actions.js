@@ -78,22 +78,20 @@ export const setTimeZone = ( timezone ) => ( {
 	},
 } );
 
-export const setInitialState = ( attributes = {} ) => {
-	return ( dispatch ) => {
-		const start = attributes.start || DEFAULT_STATE.start;
-		const end = attributes.end || DEFAULT_STATE.end;
+export const setInitialState = ( attributes = {} ) => ( dispatch ) => {
+	const start = attributes.start || DEFAULT_STATE.start;
+	const end = attributes.end || DEFAULT_STATE.end;
 
-		dispatch( setStart( start ) );
-		dispatch( setEnd( end ) );
-		dispatch( setAllDay( attributes.allDay || DEFAULT_STATE.allDay ) );
-		dispatch( setSeparatorDate( attributes.separatorDate || DEFAULT_STATE.date ) );
-		dispatch( setSeparatorTime( attributes.separatorTime || DEFAULT_STATE.time ) );
-		dispatch( setTimeZone( attributes.timezone || DEFAULT_STATE.timezone ) );
-		// sameDay
-		const current = {
-			start: toMoment( start ),
-			end: toMoment( end ),
-		};
-		dispatch( setMultiDay( ! isSameDay( current.start, current.end ) ) );
+	dispatch( setStart( start ) );
+	dispatch( setEnd( end ) );
+	dispatch( setAllDay( attributes.allDay || DEFAULT_STATE.allDay ) );
+	dispatch( setSeparatorDate( attributes.separatorDate || DEFAULT_STATE.date ) );
+	dispatch( setSeparatorTime( attributes.separatorTime || DEFAULT_STATE.time ) );
+	dispatch( setTimeZone( attributes.timezone || DEFAULT_STATE.timezone ) );
+	// sameDay
+	const current = {
+		start: toMoment( start ),
+		end: toMoment( end ),
 	};
+	dispatch( setMultiDay( ! isSameDay( current.start, current.end ) ) );
 };
