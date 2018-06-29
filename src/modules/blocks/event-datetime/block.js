@@ -44,7 +44,7 @@ import {
 	toDate,
 	toDateNoYear
 } from 'utils/moment';
-import { equalYears, FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
+import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { STORE_NAME } from 'data/details';
 import withSaveData from 'editor/hoc/with-save-data';
@@ -127,7 +127,7 @@ class EventDateTime extends Component {
 		const { start } = this.props;
 		let startDate = toDate( toMoment( start ) );
 
-		if ( equalYears( new Date( start ), TODAY ) ) {
+		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
 			startDate = toDateNoYear( toMoment( start ) );
 		}
 
@@ -198,6 +198,11 @@ class EventDateTime extends Component {
 	isSameDay( start, end ) {
 		return toMoment( start || this.props.start )
 			.isSame( toMoment( end || this.props.end ), 'day' );
+	}
+
+	isSameYear( start, end ) {
+		return toMoment( start || this.props.start )
+			.isSame( toMoment( end || this.props.end ), 'year' );
 	}
 
 	/**
@@ -319,7 +324,7 @@ class EventDateTime extends Component {
 
 	renderStartTimePicker() {
 		const { start, allDay } = this.props;
-		const { time, date } = FORMATS.WP;
+		const { time } = FORMATS.WP;
 		const startMoment = toMoment( start );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
@@ -331,9 +336,15 @@ class EventDateTime extends Component {
 			pickerProps.allDay = true;
 		}
 
+		let startDate = toDate( toMoment( start ) );
+
+		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+			startDate = toDateNoYear( toMoment( start ) );
+		}
+
 		return (
 			<React.Fragment>
-				<span className="tribe-editor__time-picker__label">{ startMoment.format( toFormat( date ) ) }</span>
+				<span className="tribe-editor__time-picker__label">{ startDate }</span>
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -352,7 +363,7 @@ class EventDateTime extends Component {
 			return null;
 		}
 
-		const { time, date } = FORMATS.WP;
+		const { time } = FORMATS.WP;
 		const start = toMoment( this.props.start );
 		const end = toMoment( this.props.end );
 		const pickerProps = {
@@ -362,9 +373,15 @@ class EventDateTime extends Component {
 			timeFormat: time,
 		};
 
+		let endDate = toDate( toMoment( end ) );
+
+		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+			endDate = toDateNoYear( toMoment( end ) );
+		}
+
 		return (
 			<React.Fragment>
-				{ ! this.isSameDay() && <span className="tribe-editor__time-picker__label">{ end.format( toFormat( date ) ) }</span> }
+				{ ! this.isSameDay() && <span className="tribe-editor__time-picker__label">{ endDate }</span> }
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);

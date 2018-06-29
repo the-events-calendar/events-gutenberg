@@ -42,10 +42,6 @@ export function equalDates( ...params ) {
 	);
 }
 
-export function equalYears( date1, date2 ) {
-	return date1.getFullYear() === date2.getFullYear();
-}
-
 export function timezonesAsSelectData() {
 	return timezones().map( ( tzone ) => {
 		return {
