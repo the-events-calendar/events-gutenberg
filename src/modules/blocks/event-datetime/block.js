@@ -132,7 +132,7 @@ class EventDateTime extends Component {
 		}
 
 		return (
-			<span>{ startDate }</span>
+			<span className="tribe-editor__subtitle__headline-date">{ startDate }</span>
 		);
 	}
 
@@ -170,7 +170,7 @@ class EventDateTime extends Component {
 
 		const { end } = this.props;
 		return (
-			<span>{ toDate( toMoment( end ) ) }</span>
+			<span className="tribe-editor__subtitle__headline-date">{ toDate( toMoment( end ) ) }</span>
 		);
 	}
 
