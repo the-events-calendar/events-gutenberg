@@ -31,12 +31,18 @@
 		text-align: left;
 
 		&--current {
-			background-color: #edeff0;
+			color: #ffffff;
+			background-color: #009fd4;
+
+			&:not(:disabled):hover {
+				color: #ffffff;
+				background-color: #009fd4;
+			}
 		}
 
 		&:not(:disabled) {
 			&:hover {
-				background-color: #edeff0;
+				background-color: #e7f5fa;
 			}
 
 			&:focus,
