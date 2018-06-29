@@ -235,7 +235,7 @@ class EventPrice extends Component {
 						className="tribe-editor__event-price__currency-symbol-setting"
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ currencySymbol }
-						placeholder={ __( '$', 'events-gutenberg' ) }
+						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
 						onChange={ setCurrencySymbol }
 						maxLength="1"
 					/>
