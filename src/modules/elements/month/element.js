@@ -133,14 +133,12 @@ export default class Month extends Component {
 	);
 
 	render() {
-		const { withRange, from, to, month } = this.state;
+		const { withRange, from, to } = this.state;
 		const modifiers = withRange ? { start: from, end: to } : {};
 		const containerClass = classNames( { 'tribe-editor__calendars--range': withRange } );
-
 		return (
 			<DayPicker
 				className={ containerClass }
-				month={ month }
 				fromMonth={ fromMonth }
 				toMonth={ toMonth }
 				numberOfMonths={ 2 }
