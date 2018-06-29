@@ -14,6 +14,7 @@ import {
 	PanelBody,
 	SelectControl,
 	TextControl,
+	ToggleControl,
 } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
@@ -29,7 +30,6 @@ import {
 import {
 	TimePicker,
 	Dashboard,
-	CheckBox,
 	Month,
 } from 'elements';
 import './style.pcss';
@@ -283,13 +283,13 @@ class EventDateTime extends Component {
 						{ this.renderCalendars() }
 					</section>
 					<footer className="tribe-editor__subtitle__footer">
-						<section>
+						<section className="tribe-editor__subtitle__footer-date">
 							{ this.renderStartTimePicker() }
 							{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
 							{ this.renderEndTimePicker() }
 						</section>
-						<section>
-							{ this.renderMultidayCheckbox() }
+						<section className="tribe-editor__subtitle__footer-multiday">
+							{ this.renderMultidayToggle() }
 						</section>
 					</footer>
 				</Fragment>
@@ -395,10 +395,10 @@ class EventDateTime extends Component {
 		setEndTime( seconds );
 	};
 
-	renderMultidayCheckbox() {
+	renderMultidayToggle() {
 		const { multiDay, setMultiDay } = this.props;
 		return (
-			<CheckBox
+			<ToggleControl
 				label={ __( 'Multi-Day', 'events-gutenberg' ) }
 				checked={ multiDay }
 				onChange={ setMultiDay }
