@@ -237,7 +237,6 @@ class EventPrice extends Component {
 						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
 						onChange={ setCurrencySymbol }
-						maxLength="1"
 					/>
 					<CheckboxControl
 						label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
