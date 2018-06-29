@@ -7,5 +7,10 @@ export const getUI = ( state ) => state.ui;
 
 export const getDashboardOpen = createSelector(
 	[ getUI ],
-	( ui ) => ui.dashboardDateTimeOpen,
+	( ui ) => ui.dashboardDateTimeOpen
+);
+
+export const getVisibleMonth = createSelector(
+	[ getUI ],
+	( ui ) => ui.visibleMonth
 );

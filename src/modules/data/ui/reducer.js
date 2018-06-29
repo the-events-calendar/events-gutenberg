@@ -1,10 +1,16 @@
 /**
+ * External dependencies
+ */
+import moment from 'moment/moment';
+
+/**
  * Internal dependencies
  */
 import * as types from './types';
 
 export const DEFAULT_STATE = {
 	dashboardDateTimeOpen: false,
+	visibleMonth: moment().startOf( 'month' ).toDate(),
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -18,6 +24,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				dashboardDateTimeOpen: ! state.dashboardDateTimeOpen,
+			};
+		case types.SET_VISIBLE_MONTH:
+			return {
+				...state,
+				visibleMonth: action.payload.visibleMonth,
 			};
 		default:
 			return state;
