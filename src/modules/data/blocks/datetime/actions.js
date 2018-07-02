@@ -5,6 +5,8 @@ import { DEFAULT_STATE } from './reducers';
 import { isSameDay, toMoment } from 'editor/utils/moment';
 import * as types from './types';
 
+import { maybeBulkDispatch } from 'data/utils';
+
 export const setDate = ( from, to ) => ( {
 	type: types.SET_DATES,
 	meta: {
@@ -78,16 +80,19 @@ export const setTimeZone = ( timezone ) => ( {
 	},
 } );
 
-export const setInitialState = ( attributes = {} ) => ( dispatch ) => {
-	const start = attributes.start || DEFAULT_STATE.start;
-	const end = attributes.end || DEFAULT_STATE.end;
+export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
+	const start = get( 'start', DEFAULT_STATE.start );
+	const end = get( 'end', DEFAULT_STATE.end );
 
-	dispatch( setStart( start ) );
-	dispatch( setEnd( end ) );
-	dispatch( setAllDay( attributes.allDay || DEFAULT_STATE.allDay ) );
-	dispatch( setSeparatorDate( attributes.separatorDate || DEFAULT_STATE.dateTimeSeparator ) );
-	dispatch( setSeparatorTime( attributes.separatorTime || DEFAULT_STATE.timeRangeSeparator ) );
-	dispatch( setTimeZone( attributes.timezone || DEFAULT_STATE.timezone ) );
+	maybeBulkDispatch( attributes, dispatch )( [
+		[ setStart, 'start', DEFAULT_STATE.start ],
+		[ setEnd, 'end', DEFAULT_STATE.end ],
+		[ setAllDay, 'allDay', DEFAULT_STATE.allDay ],
+		[ setSeparatorDate, 'separatorDate', DEFAULT_STATE.dateTimeSeparator ],
+		[ setSeparatorTime, 'separatorTime', DEFAULT_STATE.timeRangeSeparator ],
+		[ setTimeZone, 'timezone', DEFAULT_STATE.timezone ],
+	] );
+
 	// sameDay
 	const current = {
 		start: toMoment( start ),
