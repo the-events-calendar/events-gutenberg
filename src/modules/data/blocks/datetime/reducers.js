@@ -19,8 +19,8 @@ import * as types from './types';
 export const DEFAULT_STATE = {
 	start: toDateTime( roundTime( moment() ) ),
 	end: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
-	dateTimeSeparator: getSetting( 'dateTimeSeparator', __( ' @ ', 'events-gutenberg' ) ),
-	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( ' - ', 'events-gutenberg' ) ),
+	dateTimeSeparator: getSetting( 'dateTimeSeparator', __( '@', 'events-gutenberg' ) ),
+	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),
 	allDay: false,
 	multiDay: false,
 	timezone: 'UTC',
