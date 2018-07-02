@@ -3,7 +3,6 @@
  */
 import * as types from './types';
 import { DEFAULT_STATE } from './reducers';
-import { maybeBulkDispatch } from 'data/utils';
 
 export const setCost = ( cost ) => ( {
 	type: types.SET_PRICE_COST,
