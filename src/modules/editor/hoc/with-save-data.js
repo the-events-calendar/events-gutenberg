@@ -13,6 +13,11 @@ import {
 import isShallowEqual from '@wordpress/is-shallow-equal';
 
 /**
+ * Wordpress dependencies
+ */
+import { select } from '@wordpress/data';
+
+/**
  * Higher order component that updates the attributes of a component if any of the properties of the
  * attributes changes.
  *
@@ -29,12 +34,16 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 				attributes: {},
 				setInitialState: noop,
 				setAttributes: noop,
+				name: '',
+				isolated: false,
 			};
 
 			static propTypes = {
 				setAttributes: PropTypes.func,
 				setInitialState: PropTypes.func,
 				attributes: PropTypes.object,
+				name: PropTypes.string,
+				isolated: PropTypes.bool,
 			};
 
 			keys = [];
@@ -61,7 +70,15 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 
 			// At this point attributes has been set so no need to be set the initial state into the store here.
 			componentDidMount() {
-				const { setInitialState, attributes = {} } = this.props;
+				const { setInitialState, attributes = {}, isolated } = this.props;
+				const count = this.countSameBlocks();
+
+				// Prevent to set the initial state for blocks that are copies from others
+				// overwrite this with isolated: true as property of the block
+				if ( count > 1 && ! isolated ) {
+					return;
+				}
+
 				setInitialState( {
 					attributes,
 					props: this.props,
@@ -69,6 +86,15 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 						return key in attributes ? attributes[ key ] : defaultValue;
 					},
 				} );
+			}
+
+			countSameBlocks( ) {
+				const { name = '' } = this.props;
+				const blocks = select( 'core/editor' ).getBlocks()
+					.map( ( block ) => block.name )
+					.filter( ( blockName ) => blockName === name );
+
+				return blocks.length;
 			}
 
 			componentDidUpdate() {
