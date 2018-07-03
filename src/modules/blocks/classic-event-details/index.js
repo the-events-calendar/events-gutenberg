@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EventDetails from './block';
 import { Icons } from 'elements';
+import withStore from 'editor/hoc/with-store';
 
 /**
  * Module Code
@@ -82,7 +83,7 @@ export default {
 
 	useOnce: true,
 
-	edit: EventDetails,
+	edit: withStore( EventDetails ),
 
 	save( props ) {
 		return null;

@@ -3,12 +3,39 @@
  */
 import { createSelector } from 'reselect';
 
-/**
- * Internal dependencies
- */
-import * as blockSelectors from 'data/blocks/selectors';
+export const datetimeSelector = ( state ) => state.blocks.datetime;
 
-export const getAll = createSelector(
-	[ blockSelectors.getBlocks ],
-	( blocks ) => blocks.datetime,
+export const getStart = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.start
+);
+
+export const getEnd = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.end
+);
+
+export const getAllDay = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.allDay
+);
+
+export const getMultiDay = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.multiDay
+);
+
+export const getDateSeparator = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.dateTimeSeparator
+);
+
+export const getTimeSeparator = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.timeRangeSeparator,
+);
+
+export const getTimeZone = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.timezone,
 );

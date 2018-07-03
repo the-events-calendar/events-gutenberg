@@ -1,9 +1,9 @@
 /**
  * External dependencies
  */
+import Proptypes from 'prop-types';
 import moment from 'moment';
-import { isString, find, noop, get } from 'lodash';
-import { stringify } from 'querystringify';
+import { isString, find, noop } from 'lodash';
 import classNames from 'classnames';
 import { ScrollTo, ScrollArea } from 'react-scroll-to';
 
@@ -12,13 +12,9 @@ import { ScrollTo, ScrollArea } from 'react-scroll-to';
  */
 import { Component } from '@wordpress/element';
 import {
-	Placeholder,
-	Spinner,
 	Dropdown,
 	Dashicon,
 } from '@wordpress/components';
-import { query } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -38,40 +34,26 @@ export default class TimePicker extends Component {
 		show2400: false,
 		timeFormat: 'H:i',
 		current: moment(),
-		seconds: totalSeconds( moment() ),
 		hasAllDay: true,
 		allDay: false,
 	};
 
-	constructor( props ) {
-		super( ...arguments );
+	static propTypes = {
+		current: Proptypes.instanceOf( moment ),
+	};
 
-		const current = roundTime( props.current || moment() );
-		this.state = {
-			allDay: props.allDay,
-			current,
-			seconds: totalSeconds( current ),
-		};
-		this.onSelectItem = this.props.onSelectItem.bind( this );
+	constructor() {
+		super( ...arguments );
 	}
 
-	static getDerivedStateFromProps( nextProps, prevState ) {
-		const { current } = nextProps;
-		if ( ! current || ! ( current instanceof moment ) ) {
-			return null;
-		}
-
-		return {
-			allDay: get( nextProps, 'allDay', prevState.allDay ),
-			current,
-			seconds: totalSeconds( current ),
-			minTime: get( nextProps, 'minTime', prevState.minTime ),
-		};
+	get seconds() {
+		const current = roundTime( this.props.current );
+		return totalSeconds( current );
 	}
 
 	get currentLabel() {
-		const { allDay, seconds } = this.state;
-		return allDay ? 'All Day' : this.formatLabel( seconds );
+		const { allDay } = this.props;
+		return allDay ? 'All Day' : this.formatLabel( this.seconds );
 	}
 
 	getItems( searchFor, props = this.props ) {
@@ -85,9 +67,8 @@ export default class TimePicker extends Component {
 			timeFormat,
 		} = props;
 
-		const { seconds } = this.state;
+		const currentValue = this.seconds;
 
-		const currentValue = seconds;
 		const start = minTime ? minTime : 0;
 		let end = maxTime ? maxTime : ( start + DAY_IN_SECONDS - 1 );
 
@@ -129,7 +110,7 @@ export default class TimePicker extends Component {
 	}
 
 	renderItem = ( item ) => {
-		const { allDay } = this.state;
+		const { allDay } = this.props;
 		const itemClasses = {
 			'tribe-editor__timepicker__item': true,
 			'tribe-editor__timepicker__item--current': item.isCurrent && ! allDay,
@@ -151,77 +132,77 @@ export default class TimePicker extends Component {
 	handleSelection = ( item ) => {
 		return () => {
 			const { value } = item;
-			const { current } = this.state;
-			const state = {
+			const data = {
 				allDay: value === 'all-day',
 				seconds: 0,
-				current: setTimeInSeconds( moment(), 0 ),
 			};
 
-			if ( ! state.allDay ) {
-				state.seconds = value;
-				state.current = setTimeInSeconds( moment(), value );
+			if ( ! data.allDay ) {
+				data.seconds = value;
 			}
 
-			const callback = () => {
-				this.onSelectItem( state );
-				this.onClose();
-			};
-
-			this.setState( state, callback );
+			this.props.onSelectItem( data );
+			this.onClose();
 		};
 	}
 
-	renderDropdown = ( { onToggle, isOpen, onClose } ) => {
-		this.onClose = onClose.bind( this );
-
-		return (
-			<ScrollTo>
-				{ () => {
-					return [
-						this.props.hasAllDay && this.renderItem( { text: 'All Day', value: 'all-day' } ),
-						<ScrollArea
-							id="tribe-element-timepicker-items"
-							key="tribe-element-timepicker-items"
-							role="menu"
-							className={ classNames( 'tribe-editor__timepicker__items' ) }
-						>
-							{ this.renderList() }
-						</ScrollArea>,
-					];
-				} }
-			</ScrollTo>
-		);
-	}
-
 	render() {
-		const dropdown = (
-			<Dropdown
-				className="tribe-element-timepicker-label"
-				position="bottom center"
-				contentClassName="tribe-editor__timepicker__dialog"
-				renderToggle={ ( { onToggle, isOpen } ) => (
-					<button
-						type="button"
-						className="button-link"
-						onClick={ onToggle }
-						aria-expanded={ isOpen }
-					>
-						{ this.currentLabel }
-						<Dashicon className="btn--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
-					</button>
-				) }
-				renderContent={ this.renderDropdown }
-			/>
-		);
-
-		return [
+		return (
 			<div
 				key="tribe-element-timepicker"
 				className="tribe-editor__timepicker"
 			>
-				{ dropdown }
-			</div>,
+				{ this.renderDropdown() }
+			</div>
+		);
+	}
+
+	renderDropdown() {
+		return (
+			<Dropdown
+				className="tribe-element-timepicker-label"
+				position="bottom center"
+				contentClassName="tribe-editor__timepicker__dialog"
+				renderToggle={ this.toggleDropdown }
+				renderContent={ this.renderDropdownContent }
+			/>
+		);
+	}
+
+	toggleDropdown = ( { onToggle, isOpen }  ) => {
+		return (
+			<button
+				type="button"
+				className="button-link"
+				onClick={ onToggle }
+				aria-expanded={ isOpen }
+			>
+				{ this.currentLabel }
+				<Dashicon className="btn--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
+			</button>
+		);
+	}
+
+	renderDropdownContent = ( { onToggle, isOpen, onClose } ) => {
+		this.onClose = onClose.bind( this );
+		return (
+			<ScrollTo>
+				{ this.scrollArea }
+			</ScrollTo>
+		);
+	}
+
+	scrollArea = () => {
+		return [
+			this.props.hasAllDay && this.renderItem( { text: 'All Day', value: 'all-day' } ),
+			<ScrollArea
+				id="tribe-element-timepicker-items"
+				key="tribe-element-timepicker-items"
+				role="menu"
+				className={ classNames( 'tribe-editor__timepicker__items' ) }
+			>
+				{ this.renderList() }
+			</ScrollArea>,
 		];
 	}
 }

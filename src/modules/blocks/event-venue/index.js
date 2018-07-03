@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { pick } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -12,6 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventVenue from './block';
+import withStore from 'editor/hoc/with-store';
 import { Icons } from 'elements';
 
 /**
@@ -52,17 +48,7 @@ export default {
 
 	useOnce: true,
 
-	edit: ( { attributes, ...rest } ) => {
-		const properties = {
-			...attributes,
-			...pick( rest, [ 'setAttributes', 'isSelected' ] ),
-			loading: !! attributes.venue,
-		};
-
-		return (
-			<EventVenue { ...properties } />
-		);
-	},
+	edit: withStore( EventVenue ),
 
 	save( props ) {
 		return null;
