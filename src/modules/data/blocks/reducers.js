@@ -12,6 +12,7 @@ import price from './price';
 import website from './website';
 import venue from './venue';
 import classic from './classic';
+import sharing from './sharing';
 
 export default combineReducers( {
 	datetime,
@@ -20,4 +21,5 @@ export default combineReducers( {
 	organizers,
 	price,
 	website,
+	sharing,
 } );

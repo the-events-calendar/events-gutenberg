@@ -83,8 +83,6 @@ export default {
 		},
 	},
 
-	useOnce: true,
-
 	edit: withStore( EventDetails ),
 
 	save( props ) {

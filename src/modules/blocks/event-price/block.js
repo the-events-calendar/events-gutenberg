@@ -34,6 +34,7 @@ import { parser, isFree } from 'utils/range';
 import withSaveData from 'editor/hoc/with-save-data';
 import * as actions from 'data/blocks/price/actions';
 import * as selectors from 'data/blocks/price/selectors';
+import { sendValue } from 'editor/utils/input';
 
 /**
  * Module Code
@@ -162,7 +163,7 @@ class EventPrice extends Component {
 	};
 
 	renderDashboard() {
-		const { cost, costDescription } = this.props;
+		const { cost, costDescription, setCost, setDescription } = this.props;
 
 		return (
 			<Dashboard
@@ -176,7 +177,7 @@ class EventPrice extends Component {
 							name="description"
 							type="text"
 							placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-							onChange={ this.callProperty( 'setCost' ) }
+							onChange={ sendValue( setCost ) }
 							value={ cost }
 						/>
 						<input
@@ -184,7 +185,7 @@ class EventPrice extends Component {
 							name="description"
 							type="text"
 							placeholder={ __( 'Description', 'events-gutenberg' ) }
-							onChange={ this.callProperty( 'setDescription' ) }
+							onChange={ sendValue( setDescription ) }
 							value={ costDescription }
 						/>
 					</section>
@@ -195,16 +196,6 @@ class EventPrice extends Component {
 			</Dashboard>
 		);
 	}
-
-	callProperty = ( name ) => {
-		return ( e ) => {
-			const { target } = e;
-			const callable = this.props[ name ];
-			if ( isFunction( callable ) ) {
-				callable( target.value );
-			}
-		}
-	};
 
 	onCloseDashboard = () => {
 		this.setState( ( state ) => {
