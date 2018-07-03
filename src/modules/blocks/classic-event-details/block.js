@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
+import AutosizeInput from 'react-input-autosize';
 
 /**
  * WordPress dependencies
@@ -22,7 +23,6 @@ import {
 } from '@wordpress/components';
 
 import {
-	RichText,
 	PlainText,
 	InspectorControls,
 } from '@wordpress/editor';
@@ -43,6 +43,7 @@ import { actions as priceActions, selectors as priceSelectors } from 'data/block
 import { actions as websiteActions, selectors as websiteSelectors } from 'data/blocks/website';
 import { actions as classicActions, selectors as classicSelectors } from 'data/blocks/classic';
 import { actions as UIActions } from 'data/ui';
+import { sendValue } from 'editor/utils/input';
 
 /**
  * Module Code
@@ -106,24 +107,17 @@ class EventDetails extends Component {
 		const {
 			organizerTitle,
 			setOrganizerTitle,
-			focus,
 		} = this.props;
 
 		return (
 			<MetaGroup groupKey="organizer">
-				<RichText
-					tagName="h3"
-					format="string"
+				<AutosizeInput
 					className="tribe-editor__events-section__headline"
 					value={ organizerTitle }
-					onChange={ setOrganizerTitle }
-					focus={ focus && 'organizerTitle' === focus.editable ? focus : undefined }
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
-					formattingControls={ [] }
+					onChange={ sendValue( setOrganizerTitle ) }
 				/>
-				<EventOrganizers
-					focus={ focus }
-				/>
+				<EventOrganizers />
 			</MetaGroup>
 		);
 	}
@@ -131,15 +125,11 @@ class EventDetails extends Component {
 	renderTitle() {
 		const { detailsTitle, setDetailsTitle } = this.props;
 		return (
-			<RichText
-				tagName="h3"
-				format="string"
+			<AutosizeInput
 				className="tribe-editor__events-section__headline"
 				value={ detailsTitle }
-				onChange={ setDetailsTitle }
-				focus={ focus && 'detailsTitle' === focus.editable ? focus : undefined }
 				placeholder={ __( 'Details', 'events-gutenberg' ) }
-				formattingControls={ [] }
+				onChange={ sendValue( setDetailsTitle ) }
 			/>
 		);
 	}

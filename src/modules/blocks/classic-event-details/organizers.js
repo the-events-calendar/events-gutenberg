@@ -129,7 +129,7 @@ class EventOrganizers extends Component {
 	}
 
 	renderActions() {
-		const { focus, organizers, addOrganizer } = this.props;
+		const { organizers, addOrganizer } = this.props;
 		const { loading } = this.state;
 
 		if ( loading ) {
@@ -152,7 +152,7 @@ class EventOrganizers extends Component {
 				/>
 				<CreateDropdown
 					key="organizer-create-dropdown"
-					focus={ this.hasOrganizers() ? focus : true }
+					focus={ true }
 					addOrganizer={ addOrganizer }
 				/>
 			</div>
