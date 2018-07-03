@@ -8,6 +8,6 @@ import React from 'react';
  */
 import { getStore } from 'data';
 
-export default ( Component ) => ( props ) => (
-	<Component { ...props } store={ getStore() } />
+export default ( Component, additionalProps = {} ) => ( props ) => (
+	<Component { ...props } { ...additionalProps } store={ getStore() } />
 );
