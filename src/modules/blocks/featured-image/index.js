@@ -32,7 +32,6 @@ export default {
 
 	},
 
-	useOnce: true,
 	edit: FeaturedImage,
 	save( props ) {
 		return null;

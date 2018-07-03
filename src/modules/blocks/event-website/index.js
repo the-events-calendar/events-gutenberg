@@ -44,8 +44,6 @@ export default {
 		},
 	},
 
-	useOnce: true,
-
 	edit: withStore( EventWebsite ),
 
 	save( props ) {
