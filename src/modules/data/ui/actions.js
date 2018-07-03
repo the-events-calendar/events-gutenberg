@@ -29,8 +29,8 @@ export const setVisibleMonth = ( visibleMonth ) => ( {
 	},
 } );
 
-export const setInitialState = ( attributes = {} ) => ( dispatch ) => {
-	const { start } = attributes;
+export const setInitialState = ( { get } ) => ( dispatch ) => {
+	const start = get( 'start' );
 	if ( ! start ) {
 		return;
 	}

@@ -221,7 +221,7 @@ class EventPrice extends Component {
 			isSelected,
 			currencySymbol,
 			currencyPosition,
-			setPriceSymbol,
+			setSymbol,
 			togglePosition,
 		} = this.props;
 
@@ -236,7 +236,7 @@ class EventPrice extends Component {
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ setPriceSymbol }
+						onChange={ setSymbol }
 					/>
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }

@@ -36,9 +36,9 @@ export const setDescription = ( description ) => ( {
 	},
 } );
 
-export const setInitialState = ( attributes = {} ) => ( dispatch ) => {
-	dispatch( setCost( attributes.cost || DEFAULT_STATE.cost ) );
-	dispatch( setSymbol( attributes.currencySymbol || DEFAULT_STATE.symbol ) );
-	dispatch( setDescription( attributes.costDescription || DEFAULT_STATE.description ) );
-	dispatch( setPosition( attributes.currencyPosition || DEFAULT_STATE.position ) );
+export const setInitialState = ( { get } ) => ( dispatch ) => {
+	dispatch( setCost( get( 'cost', DEFAULT_STATE.cost ) ) );
+	dispatch( setSymbol( get( 'currencySymbol', DEFAULT_STATE.symbol ) ) );
+	dispatch( setDescription( get( 'costDescription', DEFAULT_STATE.description ) ) );
+	dispatch( setPosition( get( 'currencyPosition', DEFAULT_STATE.position ) ) );
 };

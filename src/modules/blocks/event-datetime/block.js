@@ -474,10 +474,10 @@ const mapDispatchToProps = ( dispatch ) => {
 		...bindActionCreators( dateTimeActions, dispatch ),
 		...bindActionCreators( UIActions, dispatch ),
 		...bindActionCreators( priceActions, dispatch ),
-		setInitialState( attributes ) {
-			dispatch( priceActions.setInitialState( attributes ) );
-			dispatch( dateTimeActions.setInitialState( attributes ) );
-			dispatch( UIActions.setInitialState( attributes ) );
+		setInitialState( props ) {
+			dispatch( priceActions.setInitialState( props ) );
+			dispatch( dateTimeActions.setInitialState( props ) );
+			dispatch( UIActions.setInitialState( props ) );
 		},
 	};
 };

@@ -35,14 +35,16 @@ export default {
 	attributes: {
 		organizerTitle: {
 			type: 'html',
+			default: '',
+		},
+		detailsTitle: {
+			type: 'html',
+			default: '',
 		},
 		organizers: {
 			type: 'array',
 			source: 'meta',
 			meta: '_EventOrganizerID',
-		},
-		detailsTitle: {
-			type: 'html',
 		},
 		allDay: {
 			type: 'boolean',

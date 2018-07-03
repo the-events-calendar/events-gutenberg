@@ -10,7 +10,7 @@ import {
 	isObject,
 	keys,
 } from 'lodash';
-
+import isShallowEqual from '@wordpress/is-shallow-equal';
 
 /**
  * Higher order component that updates the attributes of a component if any of the properties of the
@@ -20,15 +20,15 @@ import {
  * the ones specified as attributes params otherwise will fallback to the property attributes of the
  * component to extract the keys of those to do the comparision.
  *
- * @param {object} attributes Set of attributes to only update fallback to this.props.attributes
+ * @param {object} selectedAtrributes Set of attributes to only update fallback to this.props.attributes
  * @returns {function} Return a new HOC
  */
-export default ( attributes = null ) => ( WrappedComponent ) => {
+export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 	class WithSaveData extends Component {
 			static defaultProps = {
-				setAttributes: noop,
-				setInitialState: noop,
 				attributes: {},
+				setInitialState: noop,
+				setAttributes: noop,
 			};
 
 			static propTypes = {
@@ -38,6 +38,7 @@ export default ( attributes = null ) => ( WrappedComponent ) => {
 			};
 
 			keys = [];
+			saving = null;
 
 			constructor( props ) {
 				super( props );
@@ -45,14 +46,12 @@ export default ( attributes = null ) => ( WrappedComponent ) => {
 			}
 
 			generateKeys() {
-				const attr = attributes || this.props.attributes;
-
-				if ( isArray( attr ) ) {
-					return attr;
+				if ( isArray( this.attrs ) ) {
+					return this.attrs;
 				}
 
-				if ( isObject( attr ) ) {
-					return keys( attr );
+				if ( isObject( this.attrs ) ) {
+					return keys( this.attrs );
 				}
 
 				console.warn( 'Make sure attributes is from a valid type: Array or Object' );
@@ -63,37 +62,40 @@ export default ( attributes = null ) => ( WrappedComponent ) => {
 			// At this point attributes has been set so no need to be set the initial state into the store here.
 			componentDidMount() {
 				const { setInitialState, attributes = {} } = this.props;
-				setInitialState( attributes, this.props );
+				setInitialState( {
+					attributes,
+					props: this.props,
+					get( key, defaultValue ) {
+						return key in attributes ? attributes[ key ] : defaultValue;
+					},
+				} );
 			}
 
-			componentDidUpdate( prevProps ) {
-				if ( isEmpty( this.keys ) ) {
+			componentDidUpdate() {
+				const diff = this.calculateDiff();
+				if ( isShallowEqual( this.saving, diff ) ) {
 					return;
 				}
 
-				const result = this.diff( prevProps );
-				if ( isEmpty( result ) ) {
+				this.saving = diff;
+				if ( isEmpty( diff ) ) {
 					return;
 				}
-
-				const { setAttributes } = this.props;
-				setAttributes( result );
+				this.props.setAttributes( diff );
 			}
 
-			// Diff with the properties that has changed only
-			diff( prevProps ) {
-				if ( ! isArray( this.keys ) ) {
-					console.warn( 'Make sure your keys are an array' );
-					return {};
-				}
-
-				const diff = {};
-				this.keys.forEach( ( key ) => {
-					if ( prevProps[ key ] !== this.props[ key ] ) {
+			calculateDiff() {
+				const attributes = this.attrs;
+				return this.keys.reduce( ( diff, key ) => {
+					if ( key in this.props && attributes[ key ] !== this.props[ key ] ) {
 						diff[ key ] = this.props[ key ];
 					}
-				} );
-				return diff;
+					return diff;
+				}, {} );
+			}
+
+			get attrs() {
+				return selectedAtrributes || this.props.attributes || {};
 			}
 
 			render() {

@@ -18,8 +18,8 @@ export const setLabel = ( label ) => ( {
 	},
 } );
 
-export const setInitialState = ( attributes = {} ) => ( dispatch ) => {
-	dispatch( setWebsite( attributes.url || DEFAULT_STATE.url ) );
-	dispatch( setLabel( attributes.urlLabel || DEFAULT_STATE.label ) );
+export const setInitialState = ( { get } ) => ( dispatch ) => {
+	dispatch( setWebsite( get( 'url' ) ) );
+	dispatch( setLabel( get( 'urlLabel', DEFAULT_STATE.label ) ) );
 };
 
