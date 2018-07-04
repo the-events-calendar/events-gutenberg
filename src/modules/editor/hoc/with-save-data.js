@@ -90,11 +90,9 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 
 			countSameBlocks( ) {
 				const { name = '' } = this.props;
-				const blocks = select( 'core/editor' ).getBlocks()
-					.map( ( block ) => block.name )
-					.filter( ( blockName ) => blockName === name );
-
-				return blocks.length;
+				return select( 'core/editor' ).getBlocks()
+					.filter( ( block ) => block.name === name )
+					.length;
 			}
 
 			componentDidUpdate() {
