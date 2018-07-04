@@ -283,11 +283,11 @@ class EventDateTime extends Component {
 	}
 
 	renderDashboard() {
-		const { dashboardOpen } = this.props;
+		const { dashboardOpen, closeDashboard } = this.props;
 		return (
 			<Dashboard
 				open={ dashboardOpen }
-				onClose={ this.props.closeDashboard }
+				onClose={ closeDashboard }
 				targets={ [ 'DayPicker-Week', 'DayPicker-Day' ] }
 				overflow
 			>
