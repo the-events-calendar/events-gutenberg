@@ -47,10 +47,10 @@ class Tribe__Events_Gutenberg__Compatibility__Tickets {
 		do_action( $hook );
 		$form = ob_get_clean();
 
-		if ( false !== strpos( $hook, 'before' ) ) {
-			return $form . $content;
-		} else {
+		if ( false === strpos( $hook, 'before' ) ) {
 			return $content . $form;
+		} else {
+			return $form . $content;
 		}
 	}
 }

@@ -65,6 +65,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 * @since  0.2.4-alpha
 	 *
+	 * @return bool
 	 */
 	private function load_compatibility_tickets() {
 		if ( ! class_exists( 'Tribe__Tickets__Main' ) ) {
