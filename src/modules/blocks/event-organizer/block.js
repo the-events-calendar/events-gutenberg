@@ -30,6 +30,7 @@ import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
 import withSaveData from 'editor/hoc/with-save-data';
 import OrganizerIcon from 'icons/organizer.svg';
+import { ORGANIZER } from 'editor/post-types';
 
 class Organizer extends Component {
 	static propTypes = {
@@ -132,12 +133,13 @@ class Organizer extends Component {
 	};
 
 	renderSearch() {
-		const { id, isSelected, organizers } = this.props;
+		const { id, isSelected, organizers, store } = this.props;
 
 		return (
 			<SearchOrCreate
-				id={ id }
-				storeName={ STORE_NAME }
+				name={ id }
+				store={ store }
+				postType={ ORGANIZER }
 				selected={ isSelected }
 				icon={ <OrganizerIcon /> }
 				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
