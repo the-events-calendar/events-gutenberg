@@ -61,8 +61,8 @@ class SearchOrCreate extends Component {
 	}
 
 	componentDidMount() {
-		const { registerBlock, name } = this.props;
-		registerBlock( name );
+		const { registerBlock, name, postType } = this.props;
+		registerBlock( name, postType );
 	}
 
 	render() {
@@ -108,8 +108,8 @@ class SearchOrCreate extends Component {
 
 	onChange = ( event ) => {
 		const { target = {} } = event;
-		const { name, search, postType, exclude, results } = this.props;
-		search( name, target.value, postType, exclude, results );
+		const { name, search, exclude, results } = this.props;
+		search( name, target.value, exclude, results );
 	};
 
 	renderResults() {
@@ -167,10 +167,10 @@ class SearchOrCreate extends Component {
 		);
 	};
 
-	setSelection = ( item ) => {
+	setSelection = ( { id } ) => {
 		return () => {
 			const { name, clearBlock, onSelection } = this.props;
-			onSelection( item );
+			onSelection( id );
 			clearBlock( name );
 		};
 	};
