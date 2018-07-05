@@ -6,6 +6,11 @@ import { DEFAULT_STATE } from './reducers/search';
 
 const blockSelector = ( state, props ) => state.search[ props.name ];
 
+export const getSearchType = createSelector(
+	[ blockSelector ],
+	( block ) => block ? block.type : DEFAULT_STATE.type
+);
+
 export const getSearchTerm = createSelector(
 	[ blockSelector ],
 	( block ) => block ? block.term : DEFAULT_STATE.term

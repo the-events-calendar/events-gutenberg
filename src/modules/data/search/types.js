@@ -1,6 +1,8 @@
 export const ADD_BLOCK = 'ADD_BLOCK';
 export const SET_TERM = 'SET_TERM';
 
+export const SET_POST_TYPE = 'SET_POST_TYPE';
+
 export const SEARCH = 'SEARCH';
 export const SET_SEARCH_LOADING = 'SET_SEARCH_LOADING';
 

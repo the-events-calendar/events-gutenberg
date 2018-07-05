@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import { types } from 'data/search';
+import { EVENT } from 'editor/post-types';
 
 export const DEFAULT_STATE = {
 	term: '',
@@ -9,6 +10,7 @@ export const DEFAULT_STATE = {
 	page: 1,
 	totalPages: 0,
 	loading: false,
+	type: EVENT,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -18,6 +20,12 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				term: action.payload.term,
 			};
+		case types.SET_POST_TYPE: {
+			return {
+				...state,
+				type: action.payload.type,
+			};
+		}
 		case types.SET_SEARCH_LOADING: {
 			return {
 				...state,
@@ -28,6 +36,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				...DEFAULT_STATE,
+				type: state.type,
 			};
 		case types.SET_RESULTS:
 			return {

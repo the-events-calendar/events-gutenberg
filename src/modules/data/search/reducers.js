@@ -14,6 +14,7 @@ export default ( state = {}, action ) => {
 		case types.SET_PAGE:
 		case types.SET_TOTAL_PAGES:
 		case types.SET_SEARCH_LOADING:
+		case types.SET_POST_TYPE:
 			return {
 				...state,
 				[ action.payload.id ]: search( state[ action.payload.id ], action ),
