@@ -1,8 +1,19 @@
 /**
+ * External dependencies
+ */
+import { stringify } from 'querystringify';
+import { isEmpty } from 'lodash';
+/**
  * Internal dependencies
  */
 import * as types from './types';
 import * as actions from './actions';
+import {
+	actions as requestActions,
+	types as requestTypes,
+	utils as requestUtils,
+} from 'data/request';
+import { selectors } from 'data/search/index';
 
 export const addBlock = ( id ) => ( {
 	type: types.ADD_BLOCK,
@@ -16,17 +27,6 @@ export const setTerm = ( id, term ) => ( {
 	payload: {
 		id,
 		term,
-	},
-} );
-
-export const search = ( id, term, type, exclude, results ) => ( {
-	type: types.SEARCH,
-	payload: {
-		id,
-		term,
-		type,
-		exclude,
-		results,
 	},
 } );
 
@@ -77,6 +77,50 @@ export const clearBlock = ( id ) => ( {
 	},
 } );
 
-export const registerBlock = ( name ) => ( dispatch ) => {
-	dispatch( actions.addBlock( name ) );
+export const search = ( id, term, exclude, resultsPerPage ) => ( dispatch, getState ) => {
+
+	dispatch( setTerm( id, term ) );
+
+	if ( term.trim() === '' ) {
+		dispatch( clearBlock( id ) );
+		return;
+	}
+
+	const query = requestUtils.toWPQuery( {
+		per_page: resultsPerPage,
+		search: term,
+	} );
+
+	const type = selectors.getSearchType( getState(), { name: id } );
+	const options = {
+		path: `${ type }?${ query }`,
+		actions: {
+			start: () => dispatch( enableLoading( id ) ),
+			success: ( { body, headers } ) => {
+				if ( term !== selectors.getSearchTerm( getState(), { name: id } ) ) {
+					return;
+				}
+				dispatch( disableLoading( id ) );
+				dispatch( setResults( id, body ) );
+				dispatch( setPage( id, 1 ) );
+				dispatch( setTotalPages( id, requestUtils.getTotalPages( headers ) ) );
+			},
+			error: () => dispatch( disableLoading( id ) ),
+		},
+	};
+
+	dispatch( requestActions.wpRequest( options ) );
+};
+
+export const setPostType = ( id, type ) => ( {
+	type: types.SET_POST_TYPE,
+	payload: {
+		id,
+		type,
+	},
+} );
+
+export const registerBlock = ( name, postType ) => ( dispatch ) => {
+	dispatch( addBlock( name ) );
+	dispatch( setPostType( name, postType ) );
 };
