@@ -7,7 +7,7 @@ import reducers from './reducers';
 import thunk from 'redux-thunk';
 
 import { dates, multiDay, allDay, endTime, startTime } from 'data/blocks/middlewares';
-import { search } from 'data/search/middlewares';
+import { wpRequest } from 'data/request/middlewares';
 
 const composeEnhancers = composeWithDevTools( {
 	name: 'The Events Calendar',
@@ -20,7 +20,7 @@ const middlewares = [
 	endTime,
 	multiDay,
 	allDay,
-	search,
+	wpRequest,
 ];
 
 let store = {};
