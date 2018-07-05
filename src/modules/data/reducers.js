@@ -8,9 +8,11 @@ import { combineReducers } from 'redux';
  */
 import blocks from './blocks';
 import ui from './ui';
+import search from './search';
 
 export default combineReducers( {
 	blocks,
 	ui,
+	search,
 } );
 
