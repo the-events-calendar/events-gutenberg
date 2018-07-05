@@ -14,6 +14,7 @@ const entryPointNames = [
 	'elements',
 	'editor',
 	'blocks',
+	'views',
 ];
 
 const alias = entryPointNames.reduce( ( memo, entryPointName ) => {
