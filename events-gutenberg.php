@@ -67,6 +67,10 @@ class Tribe__Events_Gutenberg__Plugin {
 
 		// Register the Service Provider
 		tribe_register_provider( 'Tribe__Events_Gutenberg__Provider' );
+
+		// Assets loader
+		tribe_singleton( 'gutenberg.assets', 'Tribe__Events_Gutenberg__Assets', array( 'register', 'hook' ) );
+		tribe( 'gutenberg.assets' );
 	}
 
 	/**
