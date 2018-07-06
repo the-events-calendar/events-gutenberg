@@ -47,8 +47,8 @@ export default ( args ) => ( WrappedComponent ) => {
 				editEntry( fieldsObject ) {
 					editEntry( name, fieldsObject );
 				},
-				sendForm( fieldsObject, callback, details ) {
-					sendForm( name, fieldsObject, callback, details );
+				sendForm( fieldsObject, callback ) {
+					sendForm( name, fieldsObject, callback );
 				},
 				setSubmit() {
 					setSubmit( name );

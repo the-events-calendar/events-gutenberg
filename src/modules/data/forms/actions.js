@@ -44,12 +44,12 @@ export const setSubmit = ( id ) => ( {
 	},
 } );
 
-export const sendForm = ( id, fields = {}, completed, details = {} ) => ( dispatch, getState ) => {
+export const sendForm = ( id, fields = {}, completed ) => ( dispatch, getState ) => {
 	const state = getState();
 	const props = { name: id };
 	const type = selectors.getFormType( state, props );
 	const create = selectors.getFormCreate( state, props );
-
+	const details = selectors.getFormFields( state, props );
 	const path = create
 		? `${ type }`
 		: `${ type }/${ details.id }`;

@@ -173,7 +173,7 @@ class EventVenue extends Component {
 	};
 
 	onSubmit = ( fields ) => {
-		const { sendForm, setDetails, setVenue, details } = this.props;
+		const { sendForm, setDetails, setVenue } = this.props;
 		sendForm(
 			toVenue( fields ),
 			( body ) => {
@@ -181,7 +181,6 @@ class EventVenue extends Component {
 				setDetails( id, body );
 				setVenue( id );
 			},
-			details
 		);
 	};
 

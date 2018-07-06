@@ -125,7 +125,6 @@ class Organizer extends Component {
 			addOrganizerInClassic,
 			addOrganizerInBlock,
 			id,
-			details,
 		} = this.props;
 		sendForm(
 			toOrganizer( fields ),
@@ -134,7 +133,6 @@ class Organizer extends Component {
 				addOrganizerInClassic( body.id );
 				addOrganizerInBlock( id, body.id );
 			},
-			details,
 		);
 	};
 
