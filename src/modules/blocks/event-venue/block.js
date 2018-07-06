@@ -40,12 +40,11 @@ import {
 } from 'elements';
 
 import { VENUE } from 'editor/post-types';
-
-import withSaveData from 'editor/hoc/with-save-data';
+import { withSaveData, withDetails } from 'editor/hoc';
 import VenueDetails from './venue';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
-import { actions } from 'data/blocks/venue';
+import { actions, selectors, utils } from 'data/blocks/venue';
 
 /**
  * Module Code
@@ -61,15 +60,13 @@ class EventVenue extends Component {
 		edit: PropTypes.bool,
 		create: PropTypes.bool,
 		details: PropTypes.object,
-		coordinates: PropTypes.object,
-		address: PropTypes.object,
 		draft: PropTypes.object,
 		showMap: PropTypes.bool,
 		showMapLink: PropTypes.bool,
 		createDraft: PropTypes.func,
 		editDraft: PropTypes.func,
 		removeDraft: PropTypes.func,
-		setDetails: PropTypes.func,
+		setVenue: PropTypes.func,
 		setDraftTitle: PropTypes.func,
 		setDraftDetails: PropTypes.func,
 		clear: PropTypes.func,
@@ -88,11 +85,11 @@ class EventVenue extends Component {
 		if ( unSelected && ( edit || create ) ) {
 			sendForm();
 		}
-
+		/*
 		const { venue, venueID, setAttributes } = this.props;
 		if ( venueID !== venue ) {
 			setAttributes( { venue: venueID } );
-		}
+		}*/
 	}
 
 	componentWillUnmount() {
@@ -141,12 +138,13 @@ class EventVenue extends Component {
 	}
 
 	renderDetails() {
-		const { showMapLink, details, address } = this.props;
+		const { showMapLink, details } = this.props;
+		const { getAddress } = utils;
 
 		return (
 			<VenueDetails
 				venue={ details }
-				address={ address }
+				address={ getAddress( details ) }
 				showMapLink={ showMapLink }
 				afterTitle={ this.renderEditAction() }
 				maybeEdit={ this.maybeEdit }
@@ -155,7 +153,7 @@ class EventVenue extends Component {
 	}
 
 	renderSearchOrCreate() {
-		const { isSelected, store, name } = this.props;
+		const { isSelected, store, name, setVenue } = this.props;
 		return (
 			<SearchOrCreate
 				name={ name }
@@ -163,7 +161,7 @@ class EventVenue extends Component {
 				store={ store }
 				selected={ isSelected }
 				postType={ VENUE }
-				onSelection={ this.setVenue }
+				onSelection={ setVenue }
 				onSetCreation={ this.setDraftTitle }
 				placeholder={ __( 'Add or find a location', 'events-gutenberg' ) }
 			/>
@@ -189,11 +187,6 @@ class EventVenue extends Component {
 		}
 	};
 
-	setVenue = ( venue ) => {
-		const { setDetails } = this.props;
-		setDetails( venue );
-	};
-
 	setDraftTitle = ( title ) => {
 		const { clear, setDraftTitle } = this.props;
 		clear();
@@ -206,17 +199,19 @@ class EventVenue extends Component {
 	}
 
 	renderMap() {
-		const { details, address, coordinates, edit, create, loading, submit, showMap } = this.props;
+		const { details, edit, create, loading, submit, showMap } = this.props;
 
 		if ( ! showMap || isEmpty( details ) || edit || create || loading || submit ) {
 			return null;
 		}
 
+		const { getCoordinates, getAddress } = utils;
+
 		return (
 			<GoogleMap
 				size={ { width: 450, height: 353 } }
-				coordinates={ coordinates }
-				address={ addressToMapString( address ) }
+				coordinates={ getCoordinates( details ) }
+				address={ addressToMapString( getAddress( details ) ) }
 				interactive={ true }
 			/>
 		);
@@ -269,12 +264,12 @@ class EventVenue extends Component {
 	removeVenue = () => {
 		const { details } = this.props;
 		const { id, volatile } = details;
-		const { clear, removeDraft } = this.props;
+		const { removeVenue, removeDraft } = this.props;
 
 		if ( id && volatile ) {
 			removeDraft();
 		} else {
-			clear();
+			removeVenue();
 		}
 	};
 
@@ -308,7 +303,11 @@ class EventVenue extends Component {
 	}
 }
 
-const mapStateToProps = ( state, props ) => ( {} );
+const mapStateToProps = ( state ) => ( {
+	venue: selectors.getVenue( state ),
+	showMapLink: selectors.getshowMapLink( state ),
+	showMap: selectors.getshowMap( state ),
+} );
 
 const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
 
@@ -318,64 +317,5 @@ export default compose(
 		mapDispatchToProps,
 	),
 	withSaveData(),
+	withDetails( 'venue' ),
 )( EventVenue );
-
-/*
-export default compose( [
-	withSelect( ( select, props ) => {
-		const { venue } = props;
-		const {
-			getDetails,
-			get,
-		} = select( VENUE_STORE_NAME );
-
-		return {
-			details: getDetails( venue ),
-			address: get( 'address' ),
-			coordinates: get( 'coordinates' ),
-			draft: get( 'draft' ),
-			edit: get( 'edit' ),
-			create: get( 'create' ),
-			loading: get( 'loading' ),
-			submit: get( 'submit' ),
-			venueID: get( 'id' ),
-		};
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		const {
-			clear,
-			setDraftDetails,
-			createDraft,
-			editDraft,
-			removeDraft,
-			setDetails,
-			setDraftTitle,
-			submit,
-		} = dispatch( VENUE_STORE_NAME );
-		return {
-			clear,
-			setDraftDetails() {
-				const { details } = props;
-				setDraftDetails( details );
-			},
-			createDraft( fields ) {
-				createDraft( toVenue( fields ) );
-			},
-			editDraft( fields ) {
-				const { draft } = props;
-				const { id } = draft;
-				editDraft( id, toVenue( fields ) );
-			},
-			removeDraft() {
-				const { details } = props;
-				const { id } = details;
-				removeDraft( id );
-			},
-			setDetails( venue ) {
-				setDetails( venue.id, venue );
-			},
-			setDraftTitle,
-			sendForm: submit,
-		};
-	} ),
-] )( EventVenue );*/
