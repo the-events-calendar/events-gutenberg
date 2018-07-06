@@ -6,43 +6,53 @@ import { PropTypes } from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty, noop } from 'lodash';
 import { decode } from 'he';
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { actions, selectors } from 'data/search';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component, compose } from '@wordpress/element';
-import { withDispatch, withSelect } from '@wordpress/data';
+import { Component } from '@wordpress/element';
 import { Spinner } from '@wordpress/components';
 import './style.pcss';
+import { EVENT } from 'editor/post-types';
 
 class SearchOrCreate extends Component {
 	static defaultProps = {
 		placeholder: __( 'Add or Find', 'events-gutenberg' ),
 		icon: null,
-		store: null,
+		store: {},
 		storeName: '',
 		selected: false,
-		onSelection: noop,
-		onSetCreation: noop,
 		results: 5,
-		id: '',
-		search: '',
 		posts: [],
 		exclude: [],
 		loading: false,
+		term: '',
+		onSelection: noop,
+		onSetCreation: noop,
+		registerBlock: noop,
+		search: noop,
+		clearBlock: noop,
 	};
 
 	static propTypes = {
-		storeName: PropTypes.string,
-		id: PropTypes.string,
+		selected: PropTypes.bool,
+		store: PropTypes.object,
+		name: PropTypes.string,
 		placeholder: PropTypes.string,
+		term: PropTypes.string,
 		results: PropTypes.number,
-		search: PropTypes.string,
 		posts: PropTypes.array,
 		exclude: PropTypes.array,
 		loading: PropTypes.bool,
 		onSetCreation: PropTypes.func,
+		registerBlock: PropTypes.func,
+		search: PropTypes.func,
+		clearBlock: PropTypes.func,
+		onSelection: PropTypes.func,
 	};
 
 	constructor() {
@@ -50,8 +60,13 @@ class SearchOrCreate extends Component {
 		this.inputRef = React.createRef();
 	}
 
+	componentDidMount() {
+		const { registerBlock, name, postType } = this.props;
+		registerBlock( name, postType );
+	}
+
 	render() {
-		const { selected } = this.props;
+		const { selected, icon } = this.props;
 		const containerClass = classNames( 'tribe-editor__soc__input__container', {
 			'tribe-editor__soc__input__container--active': selected,
 		} );
@@ -61,7 +76,7 @@ class SearchOrCreate extends Component {
 		return (
 			<section className="tribe-soc__container">
 				<div className={ containerClass } onClick={ this.maybeFocus }>
-					{ this.props.icon }
+					{ icon }
 					{ this.renderInput() }
 				</div>
 				{ this.renderResults() }
@@ -78,13 +93,13 @@ class SearchOrCreate extends Component {
 	};
 
 	renderInput() {
-		const { placeholder, search } = this.props;
+		const { placeholder, term } = this.props;
 
 		return (
 			<input
 				className="tribe-editor__soc__input"
 				ref={ this.inputRef }
-				value={ search }
+				value={ term }
 				placeholder={ placeholder }
 				onChange={ this.onChange }
 			/>
@@ -92,19 +107,19 @@ class SearchOrCreate extends Component {
 	}
 
 	onChange = ( event ) => {
-		const { target } = event;
-		const { setTerm } = this.props;
-		setTerm( target.value );
+		const { target = {} } = event;
+		const { name, search, exclude, results } = this.props;
+		search( name, target.value, exclude, results );
 	};
 
 	renderResults() {
-		const { selected, search, loading } = this.props;
+		const { selected, term, loading } = this.props;
 
 		if ( ! selected ) {
 			return null;
 		}
 
-		if ( isEmpty( search ) ) {
+		if ( isEmpty( term ) ) {
 			return null;
 		}
 
@@ -125,13 +140,13 @@ class SearchOrCreate extends Component {
 	}
 
 	setCreation = () => {
-		const { search } = this.props;
-		this.props.onSetCreation( search );
+		const { term } = this.props;
+		this.props.onSetCreation( term );
 	};
 
 	renderCreateItem() {
-		const { search } = this.props;
-		return <li onClick={ this.setCreation }><strong>Create</strong>: { search } </li>;
+		const { term } = this.props;
+		return <li onClick={ this.setCreation }><strong>Create</strong>: { term } </li>;
 	}
 
 	renderItems() {
@@ -152,59 +167,21 @@ class SearchOrCreate extends Component {
 		);
 	};
 
-	setSelection = ( item ) => {
+	setSelection = ( { id } ) => {
 		return () => {
-			const { id, clearSearch, onSelection } = this.props;
-			onSelection( item );
-			clearSearch( id );
+			const { name, clearBlock, onSelection } = this.props;
+			onSelection( id );
+			clearBlock( name );
 		};
 	};
 }
 
-export default compose( [
-	withSelect( ( select, props ) => {
-		const {
-			getSearch,
-			getSearchLoading,
-			getResults,
-		} = select( props.storeName );
-		const { id } = props;
-		return {
-			loading: getSearchLoading( id ),
-			posts: getResults( id ),
-			search: getSearch( id ),
-		};
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		const {
-			setTerm,
-			clearSearch,
-			search,
-		} = dispatch( props.storeName );
+const mapStateToProps = ( state, props ) => ( {
+	term: selectors.getSearchTerm( state, props ),
+	loading: selectors.getLoading( state, props ),
+	posts: selectors.getResults( state, props ),
+} );
 
-		return {
-			clearSearch,
-			setTerm( term ) {
-				const { id, results = 5, exclude = [] } = props;
-				setTerm( id, term );
-				if ( term === '' ) {
-					clearSearch( id );
-				}
+const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
 
-				const params = {
-					orderby: 'relevance',
-					per_page: results,
-				};
-
-				if ( ! isEmpty( exclude ) ) {
-					params.exclude = exclude;
-				}
-
-				search( id, {
-					search: term,
-					params,
-				} );
-			},
-		};
-	} ),
-] )( SearchOrCreate );
+export default connect( mapStateToProps, mapDispatchToProps )( SearchOrCreate );

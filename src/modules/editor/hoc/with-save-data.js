@@ -80,8 +80,7 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 				}
 
 				setInitialState( {
-					attributes,
-					props: this.props,
+					...this.props,
 					get( key, defaultValue ) {
 						return key in attributes ? attributes[ key ] : defaultValue;
 					},

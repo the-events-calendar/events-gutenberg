@@ -6,13 +6,14 @@ import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import { addressToMapString } from 'utils/geo-data';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { compose, bindActionCreators } from 'redux';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { withSelect, withDispatch } from '@wordpress/data';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import './style.pcss';
 
 import {
@@ -38,11 +39,13 @@ import {
 	GoogleMap,
 } from 'elements';
 
+import { VENUE } from 'editor/post-types';
+
+import withSaveData from 'editor/hoc/with-save-data';
 import VenueDetails from './venue';
-import { STORE_NAME } from 'data/search/venue';
-import { STORE_NAME as VENUE_STORE_NAME } from 'data/venue';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
+import { actions } from 'data/blocks/venue';
 
 /**
  * Module Code
@@ -52,7 +55,6 @@ class EventVenue extends Component {
 
 	static propTypes = {
 		venue: PropTypes.number,
-		venueID: PropTypes.number,
 		isSelected: PropTypes.bool,
 		loading: PropTypes.bool,
 		submit: PropTypes.bool,
@@ -72,7 +74,8 @@ class EventVenue extends Component {
 		setDraftDetails: PropTypes.func,
 		clear: PropTypes.func,
 		sendForm: PropTypes.func,
-		setAttributes: PropTypes.func,
+		toggleVenueMap: PropTypes.func,
+		toggleVenueMapLink: PropTypes.func,
 	};
 
 	constructor() {
@@ -152,12 +155,14 @@ class EventVenue extends Component {
 	}
 
 	renderSearchOrCreate() {
-		const { isSelected } = this.props;
+		const { isSelected, store, name } = this.props;
 		return (
 			<SearchOrCreate
+				name={ name }
 				icon={ <VenueIcon /> }
-				storeName={ STORE_NAME }
+				store={ store }
 				selected={ isSelected }
+				postType={ VENUE }
 				onSelection={ this.setVenue }
 				onSetCreation={ this.setDraftTitle }
 				placeholder={ __( 'Add or find a location', 'events-gutenberg' ) }
@@ -278,7 +283,7 @@ class EventVenue extends Component {
 	};
 
 	renderControls() {
-		const { setAttributes, showMapLink, showMap } = this.props;
+		const { showMapLink, showMap, toggleVenueMap, toggleVenueMapLink } = this.props;
 
 		if ( ! this.hasVenue() ) {
 			return null;
@@ -290,12 +295,12 @@ class EventVenue extends Component {
 					<ToggleControl
 						label={ __( 'Show Google Maps Link' ) }
 						checked={ showMapLink }
-						onChange={ ( value ) => setAttributes( { showMapLink: value } ) }
+						onChange={ toggleVenueMapLink }
 					/>
 					<ToggleControl
 						label={ __( 'Show Google Maps Embed' ) }
 						checked={ showMap }
-						onChange={ ( value ) => setAttributes( { showMap: value } ) }
+						onChange={ toggleVenueMap }
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -303,6 +308,19 @@ class EventVenue extends Component {
 	}
 }
 
+const mapStateToProps = ( state, props ) => ( {} );
+
+const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	),
+	withSaveData(),
+)( EventVenue );
+
+/*
 export default compose( [
 	withSelect( ( select, props ) => {
 		const { venue } = props;
@@ -360,4 +378,4 @@ export default compose( [
 			sendForm: submit,
 		};
 	} ),
-] )( EventVenue );
+] )( EventVenue );*/
