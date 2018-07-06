@@ -1,16 +1,9 @@
 /**
- * External dependencies
- */
-import { stringify } from 'querystringify';
-import { isEmpty } from 'lodash';
-/**
  * Internal dependencies
  */
 import * as types from './types';
-import * as actions from './actions';
 import {
 	actions as requestActions,
-	types as requestTypes,
 	utils as requestUtils,
 } from 'data/request';
 import { selectors } from 'data/search/index';
@@ -36,6 +29,14 @@ export const setResults = ( id, results ) => ( {
 		id,
 		results,
 	},
+} );
+
+export const addResults = ( id, results ) => ( {
+	type: types.ADD_RESULTS,
+	payload: {
+		id,
+		results,
+	}
 } );
 
 export const setTotalPages = ( id, totalPages ) => ( {
@@ -77,18 +78,34 @@ export const clearBlock = ( id ) => ( {
 	},
 } );
 
-export const search = ( id, term, exclude, resultsPerPage ) => ( dispatch, getState ) => {
+export const search = ( id, params ) => ( dispatch, getState ) => {
+
+	const {
+		term = '',
+		exclude = [],
+		perPage = 50,
+		populated = false,
+		page = 1,
+	} = params;
+
+	const total = selectors.getTotal( getState(), { name: id } );
+
+	if ( total !== 0 && page > total ) {
+		return;
+	}
 
 	dispatch( setTerm( id, term ) );
 
-	if ( term.trim() === '' ) {
+	if ( populated && term.trim() === '' ) {
 		dispatch( clearBlock( id ) );
 		return;
 	}
 
 	const query = requestUtils.toWPQuery( {
-		per_page: resultsPerPage,
+		per_page: perPage,
 		search: term,
+		page,
+		exclude,
 	} );
 
 	const type = selectors.getSearchType( getState(), { name: id } );
@@ -101,8 +118,12 @@ export const search = ( id, term, exclude, resultsPerPage ) => ( dispatch, getSt
 					return;
 				}
 				dispatch( disableLoading( id ) );
-				dispatch( setResults( id, body ) );
-				dispatch( setPage( id, 1 ) );
+				if ( page === 1 ) {
+					dispatch( setResults( id, body ) );
+				} else {
+					dispatch( addResults( id, body ) );
+				}
+				dispatch( setPage( id, page ) );
 				dispatch( setTotalPages( id, requestUtils.getTotalPages( headers ) ) );
 			},
 			error: () => dispatch( disableLoading( id ) ),
