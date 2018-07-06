@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { isUndefined } from 'lodash';
+import { isUndefined, isEqual } from 'lodash';
 
 /**
  * Internal dependencies
@@ -25,6 +25,10 @@ export default ( key ) => ( WrappedComponent ) => {
 
 		constructor( props ) {
 			super( props );
+			this.details = {
+				type: '',
+				id: null,
+			};
 		}
 
 		componentDidMount() {
@@ -39,9 +43,20 @@ export default ( key ) => ( WrappedComponent ) => {
 			if ( isUndefined( this.id ) ) {
 				return;
 			}
+
 			const { setPostType, postType, fetchDetails } = this.props;
+			const tmp = {
+				id: this.id,
+				type: postType,
+			};
+
+			if ( isEqual( this.details, tmp ) ) {
+				return;
+			}
+
 			setPostType( this.id, postType );
 			fetchDetails( this.id );
+			this.details = tmp;
 		}
 
 		get id() {
