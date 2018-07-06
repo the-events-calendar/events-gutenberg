@@ -10,7 +10,7 @@ $event_id = $this->get( 'post_id' );
 $attributes = $this->attributes();
 $cost       = tribe_get_formatted_cost();
 ?>
-<div class="tribe-block__event-price">
+<div class="tribe-block tribe-block__event-price">
     <?php
     // Event Cost
     if ( ! empty( $cost ) ) : ?>
