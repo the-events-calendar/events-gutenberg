@@ -27,6 +27,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 #### 0.2.4-alpha - TBD
 
 * Fix - Styles for map container and fix map error
+* Tweak - Implemented and added styles for the website block FE view
 
 #### 0.2.3-alpha - 2018-06-22
 
