@@ -23,7 +23,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
-		$args['attributes'] = $attributes;
+		$args['attributes'] = $this->attributes();
 
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.template' )->add_template_globals( $args );

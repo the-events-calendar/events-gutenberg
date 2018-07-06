@@ -23,6 +23,19 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 		return $this->namespace . '/' . $this->slug();
 	}
 
+	/*
+	 * Return the block attributes
+	 *
+	 * @since  TBD
+	 *
+	 * @param  array $attributes
+	 *
+	 * @return array
+	*/
+	public function attributes( $params = array() ) {
+		return apply_filters( 'tribe_block_attributes_defaults_' . $this->slug(), $params );
+	}
+
 	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
