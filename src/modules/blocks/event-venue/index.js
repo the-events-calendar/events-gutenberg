@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventVenue from './block';
-import withStore from 'editor/hoc/with-store';
+import { withStore } from 'editor/hoc';
 import { Icons } from 'elements';
 import { VENUE } from 'editor/post-types';
 

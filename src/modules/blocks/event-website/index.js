@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import withStore from 'editor/hoc/with-store';
+import { withStore } from 'editor/hoc';
 import EventWebsite from './block';
 import { Icons } from 'elements';
 
