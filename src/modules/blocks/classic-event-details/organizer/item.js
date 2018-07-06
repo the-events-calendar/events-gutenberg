@@ -2,38 +2,31 @@
  * External dependencies
  */
 import React from 'react';
+import { compose } from 'redux';
+import { isEmpty } from 'lodash';
 
 /**
  * Wordpress dependencies
  */
-import { compose } from '@wordpress/element';
 
 /**
  * Import internal dependencies
  */
-import { POST_TYPE } from 'data/organizers';
-import withRequest from 'editor/hoc/with-request';
+import { withDetails } from 'editor/hoc';
 import { Loading } from 'elements';
 import { Actions, Name } from './index';
 
-const Item = ( { id, data = {}, isLoading, onRemoveOrganizer, ...rest } ) => {
-	if ( isLoading ) {
-		return <li><Loading className="tribe-editor__spinner--item" /></li>;
+const Item = ( { id, details = {}, loading, onRemoveOrganizer, ...rest } ) => {
+	if ( loading || isEmpty( details ) ) {
+		return <li><Loading className="tribe-editor__spinner--item"/></li>;
 	}
 
 	return (
 		<li>
-			<Name { ...data } />
+			<Name { ...details } />
 			<Actions id={ id } onRemoveOrganizer={ onRemoveOrganizer } { ...rest } />
 		</li>
 	);
 };
 
-export default compose( [
-	withRequest( ( props ) => {
-		return {
-			path: `/wp/v2/${ POST_TYPE }/${ props.id }`,
-		};
-	} ),
-] )( Item );
-
+export default compose( withDetails( 'id' ) )( Item );

@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import withStore from 'editor/hoc/with-store';
+import { withStore } from 'editor/hoc';
 import EventDateTime from './block';
 import { Icons } from 'elements';
 
@@ -81,7 +81,7 @@ export default {
 		},
 	},
 
-	edit: withStore( EventDateTime ),
+	edit: withStore()( EventDateTime ),
 
 	save( props ) {
 		return null;

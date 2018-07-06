@@ -1,15 +1,22 @@
 /**
  * External dependencies
  */
-import { isObject, get as getValue } from 'lodash';
+import { createSelector } from 'reselect';
+import { DEFAULT_STATE } from './reducers/details';
 
-export function getOrganizers( state ) {
-	const { organizers } = state;
-	return organizers
-		.filter( isObject )
-		.map( ( item ) => item.id );
-}
+const blockSelector = ( state, props ) => state.details[ props.name ];
 
-export function get( state, key, defaultValue ) {
-	return getValue( state, key, defaultValue );
-}
+export const getPostType = createSelector(
+	[ blockSelector ],
+	( block ) => block ? block.type : DEFAULT_STATE.type
+);
+
+export const getLoading = createSelector(
+	[ blockSelector ],
+	( block ) => block ? block.loading : DEFAULT_STATE.loading,
+);
+
+export const getDetails = createSelector(
+	[ blockSelector ],
+	( block ) => block ? block.details : DEFAULT_STATE.details,
+);

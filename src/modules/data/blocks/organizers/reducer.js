@@ -6,15 +6,9 @@ import { combineReducers } from 'redux';
 /**
  * Internal dependencies
  */
-import blocks from './blocks';
-import ui from './ui';
-import search from './search';
-import details from './details';
+import { classic, blocks } from './reducers';
 
 export default combineReducers( {
 	blocks,
-	ui,
-	search,
-	details,
+	classic,
 } );
-

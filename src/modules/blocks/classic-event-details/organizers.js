@@ -1,24 +1,22 @@
 /**
  * External dependencies
  */
-import { isEmpty } from 'lodash';
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { withSelect, withDispatch } from '@wordpress/data';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 
 import {
 	Dropdown,
 	IconButton,
 	Dashicon,
-	Spinner,
-	Placeholder,
 } from '@wordpress/components';
 
 /**
@@ -28,10 +26,10 @@ import {
 	OrganizerForm,
 	SearchPosts,
 } from 'elements';
-import { store, STORE_NAME } from 'data/search/organizer';
-import withSaveData from 'editor/hoc/with-save-data';
-import { STORE_NAME as DETAILS_STORE } from 'data/details';
+import { actions, selectors } from 'data/blocks/organizers';
+import { actions as detailsActions } from 'data/details';
 import { Item } from './organizer';
+import { ORGANIZER } from 'editor/post-types';
 
 function CreateDropdown( { ...props } ) {
 	const { addOrganizer } = props;
@@ -84,21 +82,21 @@ class EventOrganizers extends Component {
 
 	constructor( props ) {
 		super( ...arguments );
-		this.state = {
-			loading: false,
-		};
 	}
 
 	renderOrganizerList() {
-		const { organizers, removeOrganizer } = this.props;
+		const { organizers, store } = this.props;
 		return (
 			<ul className={ classNames( 'tribe-editor__organizer__list' ) }>
-				{ organizers.map( ( id ) => {
+				{ organizers.map( ( { id, block } ) => {
 					return (
 						<Item
 							id={ id }
+							block={ block }
 							key={ id }
-							onRemoveOrganizer={ () => removeOrganizer( id ) }
+							store={ store }
+							postType={ ORGANIZER }
+							onRemoveOrganizer={ this.removeOrganizer( id ) }
 						/>
 					);
 				} ) }
@@ -106,21 +104,16 @@ class EventOrganizers extends Component {
 		);
 	}
 
+	removeOrganizer = ( id ) => () => {
+		const { removeOrganizerInClassic } = this.props;
+		removeOrganizerInClassic( id );
+	};
+
 	render() {
 		return [ this.renderList(), this.renderActions() ];
 	}
 
 	renderList() {
-		const { loading } = this.state;
-
-		if ( loading ) {
-			return (
-				<Placeholder style={ { minHeight: 50 } } key="placeholder">
-					<Spinner/>
-				</Placeholder>
-			);
-		}
-
 		return (
 			<div key="organizer-list">
 				{ this.renderOrganizerList() }
@@ -129,59 +122,49 @@ class EventOrganizers extends Component {
 	}
 
 	renderActions() {
-		const { organizers, addOrganizer } = this.props;
-		const { loading } = this.state;
-
-		if ( loading ) {
-			return null;
-		}
-
+		const { organizers, store } = this.props;
 		return (
 			<div key="organizer-actions">
 				<SearchPosts
 					key="organizer-search-dropdown"
-					postType="tribe_organizer"
+					name="search-organizers-classic"
+					postType={ ORGANIZER }
 					searchLabel={ __( 'Search for an organizer', 'events-gutenberg' ) }
 					iconLabel={ __( 'Add existing Organizer', 'events-gutenberg' ) }
 					store={ store }
-					storeName={ STORE_NAME }
-					focus={ true }
-					onSelectItem={ addOrganizer }
-					searchable={ true }
-					exclude={ organizers }
+					onSelectItem={ this.onCreate }
+					exclude={ organizers.map( ( { id } ) => id ) }
 				/>
 				<CreateDropdown
 					key="organizer-create-dropdown"
 					focus={ true }
-					addOrganizer={ addOrganizer }
+					addOrganizer={ this.onCreate }
 				/>
 			</div>
 		);
 	}
 
-	hasOrganizers = () => {
-		const { organizers } = this.props;
-		return ! isEmpty( organizers );
-	};
+	onCreate = ( id, details ) => {
+		const { addOrganizerInClassic, setDetails } = this.props;
+		setDetails( id, details );
+		addOrganizerInClassic( id );
+	}
 }
 
-export default compose( [
-	withSelect( ( select ) => {
-		const { get } = select( DETAILS_STORE );
-		return {
-			organizers: get( 'organizers' ),
-		};
-	} ),
-	withDispatch( ( dispatch ) => {
-		const {
-			addOrganizer,
-			removeOrganizer,
-		} = dispatch( DETAILS_STORE );
+const mapStateToProps = ( state ) => ( {
+	organizers: selectors.getMappedOrganizers( state ),
+} );
 
-		return {
-			addOrganizer,
-			removeOrganizer,
-		};
-	} ),
-	withSaveData(),
-] )( EventOrganizers );
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		...bindActionCreators( actions, dispatch ),
+		...bindActionCreators( detailsActions, dispatch ),
+	};
+};
+
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	),
+)( EventOrganizers );

@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EventPrice from './block';
 import { Icons } from 'elements';
-import withStore from 'editor/hoc/with-store';
+import { withStore } from 'editor/hoc';
 
 /**
  * Module Code
@@ -50,7 +50,7 @@ export default {
 			meta: '_EventCurrencyPosition',
 		},
 	},
-	edit: withStore( EventPrice ),
+	edit: withStore()( EventPrice ),
 	save( props ) {
 		return null;
 	},

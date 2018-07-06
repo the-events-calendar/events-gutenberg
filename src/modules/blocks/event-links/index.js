@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EventLinks from './block';
 import { Icons } from 'elements';
-import withStore from 'editor/hoc/with-store';
+import { withStore } from 'editor/hoc';
 
 /**
  * Module Code
@@ -51,7 +51,7 @@ export default {
 		},
 	},
 
-	edit: withStore( EventLinks ),
+	edit: withStore()( EventLinks ),
 	save( props ) {
 		return null;
 	},

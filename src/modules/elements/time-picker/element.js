@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { isString, find, noop } from 'lodash';
 import classNames from 'classnames';
@@ -39,7 +39,7 @@ export default class TimePicker extends Component {
 	};
 
 	static propTypes = {
-		current: Proptypes.instanceOf( moment ),
+		current: PropTypes.instanceOf( moment ),
 	};
 
 	constructor() {
