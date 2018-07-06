@@ -9,6 +9,7 @@ import { __ } from '@wordpress/i18n';
 import EventVenue from './block';
 import withStore from 'editor/hoc/with-store';
 import { Icons } from 'elements';
+import { VENUE } from 'editor/post-types';
 
 /**
  * Module Code
@@ -46,9 +47,7 @@ export default {
 		},
 	},
 
-	useOnce: true,
-
-	edit: withStore( EventVenue ),
+	edit: withStore( { postType: VENUE } )( EventVenue ),
 
 	save( props ) {
 		return null;
