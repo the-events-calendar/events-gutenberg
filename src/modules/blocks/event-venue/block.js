@@ -40,7 +40,7 @@ import {
 } from 'elements';
 
 import { VENUE } from 'editor/post-types';
-import { withSaveData, withDetails } from 'editor/hoc';
+import { withSaveData, withDetails, withForm } from 'editor/hoc';
 import VenueDetails from './venue';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
@@ -67,7 +67,6 @@ class EventVenue extends Component {
 		editDraft: PropTypes.func,
 		removeDraft: PropTypes.func,
 		setVenue: PropTypes.func,
-		setDraftTitle: PropTypes.func,
 		setDraftDetails: PropTypes.func,
 		clear: PropTypes.func,
 		sendForm: PropTypes.func,
@@ -80,16 +79,11 @@ class EventVenue extends Component {
 	}
 
 	componentDidUpdate( prevProps = {} ) {
-		const { isSelected, edit, create, sendForm } = this.props;
+		const { isSelected, edit, create, setSubmit } = this.props;
 		const unSelected = prevProps.isSelected && ! isSelected;
 		if ( unSelected && ( edit || create ) ) {
-			sendForm();
+			setSubmit();
 		}
-		/*
-		const { venue, venueID, setAttributes } = this.props;
-		if ( venueID !== venue ) {
-			setAttributes( { venue: venueID } );
-		}*/
 	}
 
 	componentWillUnmount() {
@@ -169,28 +163,35 @@ class EventVenue extends Component {
 	}
 
 	renderForm = () => {
-		const { draft } = this.props;
+		const { fields } = this.props;
 		return (
 			<VenueForm
-				{ ...toFields( draft ) }
+				{ ...toFields( fields ) }
 				onSubmit={ this.onSubmit }
 			/>
 		);
 	};
 
 	onSubmit = ( fields ) => {
-		const { edit, create, editDraft, createDraft } = this.props;
-		if ( edit ) {
-			editDraft( fields );
-		} else if ( create ) {
-			createDraft( fields );
-		}
+		const { sendForm, setDetails, setVenue, details } = this.props;
+		sendForm(
+			toVenue( fields ),
+			( body ) => {
+				const { id } = body;
+				setDetails( id, body );
+				setVenue( id );
+			},
+			details
+		);
 	};
 
 	setDraftTitle = ( title ) => {
-		const { clear, setDraftTitle } = this.props;
-		clear();
-		setDraftTitle( title );
+		const { createDraft } = this.props;
+		createDraft( {
+			title: {
+				rendered: title,
+			},
+		} );
 	};
 
 	hasVenue() {
@@ -257,8 +258,8 @@ class EventVenue extends Component {
 
 	isDraft() {
 		const { details } = this.props;
-		const { status, volatile } = details;
-		return 'draft' === status && volatile;
+		const { status } = details;
+		return 'draft' === status;
 	}
 
 	removeVenue = () => {
@@ -274,7 +275,8 @@ class EventVenue extends Component {
 	};
 
 	edit = () => {
-		this.props.setDraftDetails();
+		const { details, editEntry } = this.props;
+		editEntry( details );
 	};
 
 	renderControls() {
@@ -318,4 +320,5 @@ export default compose(
 	),
 	withSaveData(),
 	withDetails( 'venue' ),
+	withForm( ( props ) => props.name ),
 )( EventVenue );
