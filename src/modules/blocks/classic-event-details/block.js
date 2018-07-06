@@ -42,6 +42,10 @@ import { actions as dateTimeActions, selectors as dateTimeSelectors } from 'data
 import { actions as priceActions, selectors as priceSelectors } from 'data/blocks/price';
 import { actions as websiteActions, selectors as websiteSelectors } from 'data/blocks/website';
 import { actions as classicActions, selectors as classicSelectors } from 'data/blocks/classic';
+import {
+	actions as organizersActions,
+	selectors as organizerSelectors
+} from 'data/blocks/organizers';
 import { actions as UIActions } from 'data/ui';
 import { sendValue } from 'editor/utils/input';
 
@@ -107,6 +111,7 @@ class EventDetails extends Component {
 		const {
 			organizerTitle,
 			setOrganizerTitle,
+			store,
 		} = this.props;
 
 		return (
@@ -117,7 +122,7 @@ class EventDetails extends Component {
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 					onChange={ sendValue( setOrganizerTitle ) }
 				/>
-				<EventOrganizers />
+				<EventOrganizers store={ store } />
 			</MetaGroup>
 		);
 	}
@@ -300,6 +305,7 @@ const mapStateToProps = ( state ) => {
 		url: websiteSelectors.getUrl( state ),
 		detailsTitle: classicSelectors.detailsTitleSelector( state ),
 		organizerTitle: classicSelectors.organizerTitleSelector( state ),
+		organizers: organizerSelectors.getOrganizersInClassic( state ),
 	};
 };
 
@@ -316,6 +322,8 @@ const mapDispatchToProps = ( dispatch ) => {
 			dispatch( websiteActions.setInitialState( props ) );
 			dispatch( dateTimeActions.setInitialState( props ) );
 			dispatch( classicActions.setInitialState( props ) );
+			const { get } = props;
+			dispatch( organizersActions.setOrganizersInClassic( get( 'organizers', [] ) ) );
 		},
 	};
 };
