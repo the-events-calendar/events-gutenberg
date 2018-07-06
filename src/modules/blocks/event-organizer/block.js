@@ -24,15 +24,15 @@ import {
 } from 'elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
-import { withSaveData, withDetails } from 'editor/hoc';
+import { withSaveData, withDetails, withForm } from 'editor/hoc';
 import OrganizerIcon from 'icons/organizer.svg';
-import { actions, selectors as organizerSelectors, selectors } from 'data/blocks/organizers';
+import { actions, selectors } from 'data/blocks/organizers';
 import { actions as detailsActions } from 'data/details';
+import { toFields, toOrganizer } from 'elements/organizer-form/utils';
 
 class Organizer extends Component {
 	static propTypes = {
 		details: PropTypes.object,
-		draft: PropTypes.object,
 		create: PropTypes.bool,
 		edit: PropTypes.bool,
 		submit: PropTypes.bool,
@@ -45,8 +45,6 @@ class Organizer extends Component {
 		clear: PropTypes.func,
 		createDraft: PropTypes.func,
 		editPost: PropTypes.func,
-		setDraftTitle: PropTypes.func,
-		setDraftPost: PropTypes.func,
 	};
 
 	constructor( props ) {
@@ -58,11 +56,11 @@ class Organizer extends Component {
 			isSelected,
 			edit,
 			create,
-			sendForm,
+			setSubmit,
 		} = this.props;
 		const unSelected = prevProps.isSelected && ! isSelected;
 		if ( unSelected && ( edit || create ) ) {
-			sendForm();
+			setSubmit();
 		}
 	}
 
@@ -98,7 +96,7 @@ class Organizer extends Component {
 	}
 
 	renderForm() {
-		const { draft, submit } = this.props;
+		const { fields, submit } = this.props;
 
 		if ( submit ) {
 			return this.renderLoading();
@@ -106,8 +104,8 @@ class Organizer extends Component {
 
 		return (
 			<OrganizerForm
-				{ ...draft }
-				submit={ this.submit }
+				{ ...toFields( fields ) }
+				submit={ this.onSubmit }
 			/>
 		);
 	}
@@ -120,13 +118,24 @@ class Organizer extends Component {
 		);
 	}
 
-	submit = ( fields ) => {
-		const { id, create, edit, createDraft, editPost } = this.props;
-		if ( create ) {
-			createDraft( id, fields );
-		} else if ( edit ) {
-			editPost( id, fields );
-		}
+	onSubmit = ( fields ) => {
+		const {
+			sendForm,
+			setDetails,
+			addOrganizerInClassic,
+			addOrganizerInBlock,
+			id,
+			details,
+		} = this.props;
+		sendForm(
+			toOrganizer( fields ),
+			( body ) => {
+				setDetails( body.id, body );
+				addOrganizerInClassic( body.id );
+				addOrganizerInBlock( id, body.id );
+			},
+			details,
+		);
 	};
 
 	renderSearch() {
@@ -160,13 +169,13 @@ class Organizer extends Component {
 	}
 
 	remove = () => {
-		const { id, organizer, removeOrganizerInBlock } = this.props;;
+		const { id, organizer, removeOrganizerInBlock } = this.props;
 		removeOrganizerInBlock( id, organizer );
 	};
 
 	edit = () => {
-		const { id, details, setDraftPost } = this.props;
-		setDraftPost( id, details );
+		const { details, editEntry } = this.props;
+		editEntry( details );
 	};
 
 	selectItem = ( organizerID, details ) => {
@@ -174,7 +183,7 @@ class Organizer extends Component {
 			id,
 			addOrganizerInBlock,
 			addOrganizerInClassic,
-			setDetails
+			setDetails,
 		} = this.props;
 
 		setDetails( organizerID, details );
@@ -183,14 +192,12 @@ class Organizer extends Component {
 	};
 
 	setDraftTitle = ( title ) => {
-		const { id, setDraftTitle } = this.props;
-		this.clear();
-		setDraftTitle( id, title );
-	};
-
-	clear = () => {
-		const { id, clear } = this.props;
-		clear( id );
+		const { createDraft } = this.props;
+		createDraft( {
+			title: {
+				rendered: title,
+			},
+		} );
 	};
 }
 
@@ -198,8 +205,8 @@ const mapStateToProps = ( state, props ) => {
 	return {
 		organizer: selectors.getOrganizerInBlock( state, props ),
 		organizers: selectors.getOrganizersInClassic( state ),
-	}
-} ;
+	};
+};
 
 const mapDispatchToProps = ( dispatch ) => {
 	return {
@@ -220,4 +227,5 @@ export default compose(
 	),
 	withDetails( 'organizer' ),
 	withSaveData(),
+	withForm( ( props ) => props.id ),
 )( Organizer );
