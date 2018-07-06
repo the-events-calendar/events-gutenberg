@@ -50,7 +50,7 @@ export default {
 			meta: '_EventCurrencyPosition',
 		},
 	},
-	edit: withStore( EventPrice ),
+	edit: withStore()( EventPrice ),
 	save( props ) {
 		return null;
 	},

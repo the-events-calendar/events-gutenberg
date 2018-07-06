@@ -83,7 +83,7 @@ export default {
 		},
 	},
 
-	edit: withStore( EventDetails ),
+	edit: withStore()( EventDetails ),
 
 	save( props ) {
 		return null;

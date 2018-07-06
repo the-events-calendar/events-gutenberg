@@ -44,7 +44,7 @@ export default {
 		},
 	},
 
-	edit: withStore( EventWebsite ),
+	edit: withStore()( EventWebsite ),
 
 	save( props ) {
 		return null;

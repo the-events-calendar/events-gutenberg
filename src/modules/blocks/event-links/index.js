@@ -51,7 +51,7 @@ export default {
 		},
 	},
 
-	edit: withStore( EventLinks ),
+	edit: withStore()( EventLinks ),
 	save( props ) {
 		return null;
 	},
