@@ -17,7 +17,6 @@ import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import { Spinner } from '@wordpress/components';
 import './style.pcss';
-import { EVENT } from 'editor/post-types';
 
 class SearchOrCreate extends Component {
 	static defaultProps = {
@@ -109,7 +108,11 @@ class SearchOrCreate extends Component {
 	onChange = ( event ) => {
 		const { target = {} } = event;
 		const { name, search, exclude, results } = this.props;
-		search( name, target.value, exclude, results );
+		search( name, {
+			term: target.value,
+			exclude,
+			perPage: results,
+		} );
 	};
 
 	renderResults() {
@@ -167,10 +170,11 @@ class SearchOrCreate extends Component {
 		);
 	};
 
-	setSelection = ( { id } ) => {
+	setSelection = ( item ) => {
 		return () => {
 			const { name, clearBlock, onSelection } = this.props;
-			onSelection( id );
+			const { id } = item;
+			onSelection( id, item );
 			clearBlock( name );
 		};
 	};
