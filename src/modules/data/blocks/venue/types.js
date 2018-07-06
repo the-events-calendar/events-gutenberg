@@ -1,0 +1,7 @@
+export const SET_VENUE = 'SET_VENUE';
+
+export const TOGGLE_VENUE_MAP = 'TOGGLE_VENUE_MAP';
+export const SET_VENUE_MAP = 'SET_VENUE_MAP';
+
+export const TOGGLE_VENUE_MAP_LINK = 'TOGGLE_VENUE_MAP_LINK';
+export const SET_VENUE_MAP_LINK = 'SET_VENUE_MAP_LINK';
