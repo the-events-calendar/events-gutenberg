@@ -13,7 +13,8 @@ import { __ } from '@wordpress/i18n';
  */
 import Organizer from './block';
 import { Icons } from 'elements';
-import withStore from 'editor/hoc/with-store';
+import { withStore } from 'editor/hoc';
+import { ORGANIZER } from 'editor/post-types';
 
 export default {
 	id: 'event-organizer',
@@ -39,7 +40,7 @@ export default {
 		},
 	},
 
-	edit: withStore( Organizer, { isolated: true } ),
+	edit: withStore( { isolated: true, postType: ORGANIZER } )( Organizer ),
 
 	save() {
 		return null;
