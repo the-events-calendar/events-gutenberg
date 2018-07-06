@@ -81,7 +81,7 @@ export default {
 		},
 	},
 
-	edit: withStore( EventDateTime ),
+	edit: withStore()( EventDateTime ),
 
 	save( props ) {
 		return null;
