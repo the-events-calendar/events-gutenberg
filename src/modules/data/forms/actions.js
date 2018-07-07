@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { isEmpty, get } from 'lodash';
+
+/**
  * Internal dependencies
  */
 import { actions as requestActions } from 'data/request';
@@ -44,6 +49,20 @@ export const setSubmit = ( id ) => ( {
 	},
 } );
 
+export const addVolatile = ( id ) => ( {
+	type: types.ADD_VOLATILE_ID,
+	payload: {
+		id,
+	},
+} );
+
+export const removeVolatile = ( id ) => ( {
+	type: types.REMOVE_VOLATILE_ID,
+	payload: {
+		id,
+	},
+} );
+
 export const sendForm = ( id, fields = {}, completed ) => ( dispatch, getState ) => {
 	const state = getState();
 	const props = { name: id };
@@ -62,10 +81,39 @@ export const sendForm = ( id, fields = {}, completed ) => ( dispatch, getState )
 		},
 		actions: {
 			success: ( { body } ) => {
-				completed( body, create );
+				const postID = get( body, 'id', '' );
+
+				if ( create && postID ) {
+					dispatch( addVolatile( postID ) );
+				}
+
+				completed( body );
 				dispatch( clearForm( id ) );
 			},
 			error: () => dispatch( clearForm( id ) ),
+		},
+	};
+	dispatch( requestActions.wpRequest( options ) );
+};
+
+export const removeEntry = ( id, details = {} ) => ( dispatch, getState ) => {
+	const state = getState();
+	const props = { name: id };
+	const type = selectors.getFormType( state, props );
+	const status = get( details, 'status', '' );
+
+	if ( isEmpty( details ) || 'draft' !== status ) {
+		return;
+	}
+
+	const path = `${ type }/${ details.id }`;
+	const options = {
+		path,
+		params: {
+			method: 'DELETE',
+		},
+		actions: {
+			success: () => dispatch( removeVolatile( details.id ) ),
 		},
 	};
 	dispatch( requestActions.wpRequest( options ) );
