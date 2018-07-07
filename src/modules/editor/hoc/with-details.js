@@ -81,6 +81,7 @@ export default ( key ) => ( WrappedComponent ) => {
 		return {
 			loading: selectors.getLoading( state, { name } ),
 			details: selectors.getDetails( state, { name } ),
+			volatile: selectors.getVolatile( state, { name } ),
 		};
 	};
 
