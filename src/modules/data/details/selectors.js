@@ -1,7 +1,13 @@
 /**
  * External dependencies
  */
+import { isEmpty, difference } from 'lodash';
+
+/**
+ * External dependencies
+ */
 import { createSelector } from 'reselect';
+import { selectors as formsSelectors } from 'data/forms';
 import { DEFAULT_STATE } from './reducers/details';
 
 const blockSelector = ( state, props ) => state.details[ props.name ];
@@ -19,4 +25,15 @@ export const getLoading = createSelector(
 export const getDetails = createSelector(
 	[ blockSelector ],
 	( block ) => block ? block.details : DEFAULT_STATE.details,
+);
+
+export const getVolatile = createSelector(
+	[ getDetails, formsSelectors.getVolatile ],
+	( details, volatileGroup ) => {
+		if ( isEmpty( details ) ) {
+			return false;
+		}
+		// Check if details.id is present on volatileGroup
+		return difference( [ details.id ], volatileGroup ).length === 0;
+	}
 );
