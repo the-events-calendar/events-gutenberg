@@ -155,10 +155,11 @@ class Organizer extends Component {
 	}
 
 	renderDetails() {
-		const { details } = this.props;
+		const { details, volatile } = this.props;
 		return (
 			<OrganizerDetails
 				organizer={ details }
+				volatile={ volatile }
 				selected={ this.props.isSelected }
 				edit={ this.edit }
 				remove={ this.remove }
@@ -167,8 +168,22 @@ class Organizer extends Component {
 	}
 
 	remove = () => {
-		const { id, organizer, removeOrganizerInBlock } = this.props;
+		const {
+			id,
+			organizer,
+			removeOrganizerInBlock,
+			volatile,
+			removeEntry,
+			removeOrganizerInClassic,
+			details,
+		} = this.props;
+
 		removeOrganizerInBlock( id, organizer );
+
+		if ( volatile ) {
+			removeEntry( details );
+			removeOrganizerInClassic( organizer );
+		}
 	};
 
 	edit = () => {

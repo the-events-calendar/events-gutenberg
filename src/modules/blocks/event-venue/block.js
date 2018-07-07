@@ -218,15 +218,16 @@ class EventVenue extends Component {
 	}
 
 	maybeEdit = () => {
-		if ( this.hasVenue() && this.isDraft() ) {
+		const { volatile } = props;
+		if ( this.hasVenue() && volatile ) {
 			return this.edit();
 		}
 	}
 
 	renderEditAction() {
-		const { isSelected, edit, create, loading, submit } = this.props;
+		const { isSelected, edit, create, loading, submit, volatile } = this.props;
 		const idle = edit || create || loading || submit;
-		if ( ! this.hasVenue() || ! isSelected || ! this.isDraft() || idle ) {
+		if ( ! this.hasVenue() || ! isSelected || ! volatile || idle ) {
 			return null;
 		}
 
@@ -255,21 +256,11 @@ class EventVenue extends Component {
 		);
 	}
 
-	isDraft() {
-		const { details } = this.props;
-		const { status } = details;
-		return 'draft' === status;
-	}
-
 	removeVenue = () => {
-		const { details } = this.props;
-		const { id, volatile } = details;
-		const { removeVenue, removeDraft } = this.props;
-
-		if ( id && volatile ) {
-			removeDraft();
-		} else {
-			removeVenue();
+		const { volatile, removeEntry, removeVenue, details } = this.props;
+		removeVenue();
+		if ( volatile ) {
+			removeEntry( details );
 		}
 	};
 
