@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { noop } from 'lodash';
+import { noop, get } from 'lodash';
 
 /**
  * Internal dependencies
@@ -21,15 +21,17 @@ export default () => ( next ) => ( action ) => {
 	const {
 		path = '',
 		params = {},
-		actions = {
-			start: noop,
-			success: noop,
-			error: noop,
-			none: noop,
-		},
 	} = meta;
 
 	next( action );
+
+	const actions = {
+		start: noop,
+		success: noop,
+		error: noop,
+		none: noop,
+		...get( meta, 'actions', {} ),
+	};
 
 	if ( path === '' ) {
 		actions.none( path );

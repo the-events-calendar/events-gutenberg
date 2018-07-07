@@ -18,8 +18,8 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 
-const ActionsComponent = ( { block, onRemoveOrganizer = noop, focus } ) => {
-	if ( block ) {
+const ActionsComponent = ( { block, volatile, onRemoveOrganizer = noop, focus } ) => {
+	if ( block || volatile ) {
 		return null;
 	}
 

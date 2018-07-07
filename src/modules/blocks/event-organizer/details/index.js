@@ -36,9 +36,6 @@ export default class OrganizerDetails extends Component {
 
 	constructor( props ) {
 		super( ...arguments );
-		this.state = {
-			...props,
-		};
 	}
 
 	render() {
@@ -67,17 +64,17 @@ export default class OrganizerDetails extends Component {
 	}
 
 	maybeEdit = () => {
-		if ( ! this.isDraft() ) {
+		const { volatile, edit } = this.props;
+		if ( ! volatile ) {
 			return;
 		}
-		const { edit } = this.props;
 		edit();
-	}
+	};
 
 	renderEdit = () => {
-		const { edit, selected } = this.props;
+		const { edit, selected, volatile } = this.props;
 
-		if ( ! selected || ! this.isDraft() ) {
+		if ( ! selected || ! volatile ) {
 			return null;
 		}
 
@@ -105,10 +102,5 @@ export default class OrganizerDetails extends Component {
 				</button>
 			</div>
 		);
-	}
-
-	isDraft() {
-		const { organizer } = this.props;
-		return 'draft' === organizer.status;
 	}
 }
