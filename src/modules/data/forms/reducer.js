@@ -1,10 +1,15 @@
 /**
+ * External dependencies
+ */
+import { combineReducers } from 'redux';
+
+/**
  * Internal dependencies
  */
 import * as types from './types';
-import { form } from './reducers';
+import { form, volatile } from './reducers';
 
-export default ( state = {}, action ) => {
+const byId = ( state = {}, action ) => {
 	switch ( action.type ) {
 		case types.ADD_FORM:
 		case types.CLEAR_FORM:
@@ -20,3 +25,8 @@ export default ( state = {}, action ) => {
 			return state;
 	}
 };
+
+export default combineReducers( {
+	byId,
+	volatile,
+} );
