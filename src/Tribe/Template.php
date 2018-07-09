@@ -39,14 +39,14 @@ class Tribe__Events_Gutenberg__Template extends Tribe__Template {
 	 *
 	 * @since TBD
 	 *
-	 * @param array $default_attributes
-	 * @return array
+	 * @param  mixed $default
+	 * @return mixed
 	 */
-	public function attr( $index, $default_attributes = array() ) {
+	public function attr( $index, $default = null ) {
 
 		$attributes = $this->get( 'attributes', array() );
 
-		return Tribe__Utils__Array::get( $attributes, $index, $default_attributes );
+		return Tribe__Utils__Array::get( $attributes, $index, $default );
 	}
 }
 
