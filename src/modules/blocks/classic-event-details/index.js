@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EventDetails from './block';
 import { Icons } from 'elements';
+import { withStore } from 'editor/hoc';
 
 /**
  * Module Code
@@ -34,14 +35,16 @@ export default {
 	attributes: {
 		organizerTitle: {
 			type: 'html',
+			default: '',
+		},
+		detailsTitle: {
+			type: 'html',
+			default: '',
 		},
 		organizers: {
 			type: 'array',
 			source: 'meta',
 			meta: '_EventOrganizerID',
-		},
-		detailsTitle: {
-			type: 'html',
 		},
 		allDay: {
 			type: 'boolean',
@@ -80,9 +83,7 @@ export default {
 		},
 	},
 
-	useOnce: true,
-
-	edit: EventDetails,
+	edit: withStore()( EventDetails ),
 
 	save( props ) {
 		return null;

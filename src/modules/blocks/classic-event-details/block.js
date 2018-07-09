@@ -4,14 +4,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { compose, bindActionCreators } from 'redux';
+import AutosizeInput from 'react-input-autosize';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 
-import { withDispatch, withSelect } from '@wordpress/data';
 import withSaveData from 'editor/hoc/with-save-data';
 
 import {
@@ -21,7 +23,6 @@ import {
 } from '@wordpress/components';
 
 import {
-	RichText,
 	PlainText,
 	InspectorControls,
 } from '@wordpress/editor';
@@ -37,7 +38,16 @@ import {
 import { default as EventOrganizers } from './organizers';
 
 import { toMoment, toDate, toTime } from 'utils/moment';
-import { STORE_NAME as DETAILS_STORE } from 'data/details';
+import { actions as dateTimeActions, selectors as dateTimeSelectors } from 'data/blocks/datetime';
+import { actions as priceActions, selectors as priceSelectors } from 'data/blocks/price';
+import { actions as websiteActions, selectors as websiteSelectors } from 'data/blocks/website';
+import { actions as classicActions, selectors as classicSelectors } from 'data/blocks/classic';
+import {
+	actions as organizersActions,
+	selectors as organizerSelectors
+} from 'data/blocks/organizers';
+import { actions as UIActions } from 'data/ui';
+import { sendValue } from 'editor/utils/input';
 
 /**
  * Module Code
@@ -46,7 +56,24 @@ import { STORE_NAME as DETAILS_STORE } from 'data/details';
 class EventDetails extends Component {
 	static propTypes = {
 		organizerTitle: PropTypes.string,
-		setAttributes: PropTypes.func,
+		url: PropTypes.string,
+		start: PropTypes.string,
+		end: PropTypes.string,
+		separatorDate: PropTypes.string,
+		cost: PropTypes.string,
+		currencyPosition: PropTypes.string,
+		currencySymbol: PropTypes.string,
+		detailsTitle: PropTypes.string,
+		allDay: PropTypes.bool,
+		isSelected: PropTypes.bool,
+		setOrganizerTitle: PropTypes.func,
+		setDetailsTitle: PropTypes.func,
+		setWebsite: PropTypes.func,
+		setCost: PropTypes.func,
+		toggleDashboard: PropTypes.func,
+		setSymbol: PropTypes.func,
+		togglePosition: PropTypes.func,
+		setAllDay: PropTypes.func,
 	};
 
 	constructor() {
@@ -83,39 +110,31 @@ class EventDetails extends Component {
 	renderOrganizer() {
 		const {
 			organizerTitle,
-			setAttributes,
-			focus,
+			setOrganizerTitle,
+			store,
 		} = this.props;
 
 		return (
 			<MetaGroup groupKey="organizer">
-				<RichText
-					tagName="h3"
+				<AutosizeInput
 					className="tribe-editor__events-section__headline"
 					value={ organizerTitle }
-					onChange={ ( nextContent ) => setAttributes( { organizerTitle: nextContent } ) }
-					focus={ focus && 'organizerTitle' === focus.editable ? focus : undefined }
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
-					formattingControls={ [] }
+					onChange={ sendValue( setOrganizerTitle ) }
 				/>
-				<EventOrganizers
-					focus={ focus }
-				/>
+				<EventOrganizers store={ store } />
 			</MetaGroup>
 		);
 	}
 
 	renderTitle() {
-		const { detailsTitle, setAttributes } = this.props;
+		const { detailsTitle, setDetailsTitle } = this.props;
 		return (
-			<RichText
-				tagName="h3"
+			<AutosizeInput
 				className="tribe-editor__events-section__headline"
 				value={ detailsTitle }
-				onChange={ ( nextContent ) => setAttributes( { detailsTitle: nextContent } ) }
-				focus={ focus && 'detailsTitle' === focus.editable ? focus : undefined }
 				placeholder={ __( 'Details', 'events-gutenberg' ) }
-				formattingControls={ [] }
+				onChange={ sendValue( setDetailsTitle ) }
 			/>
 		);
 	}
@@ -151,7 +170,7 @@ class EventDetails extends Component {
 		const { end, toggleDashboard } = this.props;
 		return (
 			<div onClick={ toggleDashboard }>
-				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
+				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
 				{ toDate( toMoment( end ) ) }
 				{ this.renderEndTime() }
 			</div>
@@ -176,7 +195,7 @@ class EventDetails extends Component {
 	}
 
 	renderWebsite() {
-		const { url, setUrl } = this.props;
+		const { url, setWebsite } = this.props;
 		return (
 			<div>
 				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
@@ -184,7 +203,7 @@ class EventDetails extends Component {
 					id="tribe-event-url"
 					value={ url }
 					placeholder={ __( 'Enter url', 'events-gutenberg' ) }
-					onChange={ setUrl }
+					onChange={ setWebsite }
 				/>
 			</div>
 		);
@@ -192,12 +211,16 @@ class EventDetails extends Component {
 
 	renderCost() {
 		const { setCost, cost, currencyPosition, currencySymbol } = this.props;
+		const textClassName = classNames( [
+			'tribe-editor__event-cost__value',
+			`tribe-editor-cost-symbol-position-${ currencyPosition }`,
+		] );
 		return (
 			<div className="tribe-editor__event-cost">
 				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
 				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
-					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
+					className={ textClassName }
 					value={ cost }
 					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
 					onChange={ setCost }
@@ -231,9 +254,9 @@ class EventDetails extends Component {
 			allDay,
 			currencyPosition,
 			currencySymbol,
-			setCurrencySymbol,
+			togglePosition,
 			setAllDay,
-			setCurrencyPosition,
+			setSymbol,
 		} = this.props;
 
 		if ( ! isSelected ) {
@@ -253,13 +276,13 @@ class EventDetails extends Component {
 					<ToggleControl
 						label={ __( 'Show symbol before', 'events-gutenberg' ) }
 						checked={ 'prefix' === currencyPosition }
-						onChange={ setCurrencyPosition }
+						onChange={ togglePosition }
 					/>
 					<TextControl
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ setCurrencySymbol }
+						onChange={ setSymbol }
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -267,53 +290,48 @@ class EventDetails extends Component {
 	}
 }
 
-export default compose( [
-	withSelect( ( select, props ) => {
-		const { get } = select( DETAILS_STORE );
-		const { attributes } = props;
-		const { detailsTitle, organizerTitle } = attributes;
-		return {
-			detailsTitle,
-			organizerTitle,
-			start: get( 'start' ),
-			end: get( 'end' ),
-			multiDay: get( 'multiDay' ),
-			separatorDate: get( 'separatorDate' ),
-			separatorTime: get( 'separatorTime' ),
-			timezone: get( 'timezone' ),
-			allDay: get( 'allDay' ),
-			url: get( 'url' ),
-			currencyPosition: get( 'currencyPosition' ),
-			currencySymbol: get( 'currencySymbol' ),
-			cost: get( 'cost' ),
-		};
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		const {
-			setInitialState,
-			setWebsiteUrl,
-			setAllDay,
-			setCost,
-			setCurrencySymbol,
-			setCurrencyPosition,
-			toggleDashboard,
-			addOrganizer,
-			removeOrganizer,
-		} = dispatch( DETAILS_STORE );
+const mapStateToProps = ( state ) => {
+	return {
+		start: dateTimeSelectors.getStart( state ),
+		end: dateTimeSelectors.getEnd( state ),
+		multiDay: dateTimeSelectors.getMultiDay( state ),
+		allDay: dateTimeSelectors.getAllDay( state ),
+		separatorDate: dateTimeSelectors.getDateSeparator( state ),
+		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
+		timezone: dateTimeSelectors.getTimeZone( state ),
+		cost: priceSelectors.getPrice( state ),
+		currencyPosition: priceSelectors.getPosition( state ),
+		currencySymbol: priceSelectors.getSymbol( state ),
+		url: websiteSelectors.getUrl( state ),
+		detailsTitle: classicSelectors.detailsTitleSelector( state ),
+		organizerTitle: classicSelectors.organizerTitleSelector( state ),
+		organizers: organizerSelectors.getOrganizersInClassic( state ),
+	};
+};
 
-		return {
-			setInitialState() {
-				setInitialState( props.attributes );
-			},
-			setUrl: setWebsiteUrl,
-			setAllDay,
-			setCurrencySymbol,
-			setCurrencyPosition,
-			setCost,
-			toggleDashboard,
-			addOrganizer,
-			removeOrganizer,
-		};
-	} ),
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		...bindActionCreators( dateTimeActions, dispatch ),
+		...bindActionCreators( UIActions, dispatch ),
+		...bindActionCreators( priceActions, dispatch ),
+		...bindActionCreators( websiteActions, dispatch ),
+		...bindActionCreators( classicActions, dispatch ),
+		setInitialState( props ) {
+			dispatch( priceActions.setInitialState( props ) );
+			dispatch( UIActions.setInitialState( props ) );
+			dispatch( websiteActions.setInitialState( props ) );
+			dispatch( dateTimeActions.setInitialState( props ) );
+			dispatch( classicActions.setInitialState( props ) );
+			const { get } = props;
+			dispatch( organizersActions.setOrganizersInClassic( get( 'organizers', [] ) ) );
+		},
+	};
+};
+
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	),
 	withSaveData(),
-] )( EventDetails );
+)( EventDetails );

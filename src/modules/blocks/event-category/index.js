@@ -28,11 +28,8 @@ export default {
 		html: false,
 	},
 
-	attributes: {
+	attributes: {},
 
-	},
-
-	useOnce: true,
 	edit: EventCategory,
 	save( props ) {
 		return null;
