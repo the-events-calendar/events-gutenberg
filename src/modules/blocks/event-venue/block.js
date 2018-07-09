@@ -119,7 +119,7 @@ class EventVenue extends Component {
 		if ( loading || submit ) {
 			return (
 				<Placeholder key="loading">
-					<Spinner/>
+					<Spinner />
 				</Placeholder>
 			);
 		}
@@ -147,7 +147,7 @@ class EventVenue extends Component {
 	}
 
 	renderSearchOrCreate() {
-		const { isSelected, store, name, setVenue } = this.props;
+		const { isSelected, store, name } = this.props;
 		return (
 			<SearchOrCreate
 				name={ name }
@@ -155,7 +155,7 @@ class EventVenue extends Component {
 				store={ store }
 				selected={ isSelected }
 				postType={ VENUE }
-				onSelection={ setVenue }
+				onSelection={ this.setVenue }
 				onSetCreation={ this.setDraftTitle }
 				placeholder={ __( 'Add or find a location', 'events-gutenberg' ) }
 			/>
@@ -173,15 +173,22 @@ class EventVenue extends Component {
 	};
 
 	onSubmit = ( fields ) => {
-		const { sendForm, setDetails, setVenue } = this.props;
+		const { sendForm, setDetails } = this.props;
 		sendForm(
 			toVenue( fields ),
 			( body ) => {
 				const { id } = body;
 				setDetails( id, body );
-				setVenue( id );
+				this.setVenue( id );
 			},
 		);
+	};
+
+	setVenue = ( id ) => {
+		const { setVenue, setShowMap, setShowMapLink } = this.props;
+		setVenue( id );
+		setShowMap( true );
+		setShowMapLink( true );
 	};
 
 	setDraftTitle = ( title ) => {
