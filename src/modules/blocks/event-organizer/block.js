@@ -226,7 +226,10 @@ const mapDispatchToProps = ( dispatch ) => {
 		...bindActionCreators( actions, dispatch ),
 		...bindActionCreators( detailsActions, dispatch ),
 		setInitialState( { id, get } ) {
-			const organizer = get( 'organizer', undefined );
+			const organizer = get( 'organizer', '' );
+			if ( ! organizer ) {
+				return;
+			}
 			dispatch( actions.addOrganizerInBlock( id, organizer ) );
 			dispatch( actions.addOrganizerInClassic( organizer ) );
 		},
