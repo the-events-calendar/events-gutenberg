@@ -225,7 +225,7 @@ class EventVenue extends Component {
 	}
 
 	maybeEdit = () => {
-		const { volatile } = props;
+		const { volatile } = this.props;
 		if ( this.hasVenue() && volatile ) {
 			return this.edit();
 		}
