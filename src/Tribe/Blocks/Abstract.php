@@ -39,7 +39,25 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 		 * @param array  $params    The attributes
 		 * @param object $this      The current object
 		 */
-		return apply_filters( 'tribe_block_attributes_defaults', $params, $this );
+		$default_attributes = apply_filters( 'tribe_block_attributes_defaults', $this->default_attributes( $params ), $this );
+
+		return wp_parse_args(
+			$params,
+			$default_attributes
+		);
+	}
+
+	/*
+	 * Return the block default attributes
+	 *
+	 * @since  TBD
+	 *
+	 * @param  array $attributes
+	 *
+	 * @return array
+	*/
+	public function default_attributes( $attributes = array() ) {
+		return $attributes;
 	}
 
 	/**
