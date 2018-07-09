@@ -40,7 +40,7 @@ export default ( key ) => ( WrappedComponent ) => {
 		}
 
 		fetch() {
-			if ( isUndefined( this.id ) ) {
+			if ( isUndefined( this.id ) || ! this.id ) {
 				return;
 			}
 
