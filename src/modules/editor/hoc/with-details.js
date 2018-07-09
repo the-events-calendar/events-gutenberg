@@ -12,7 +12,7 @@ import { isUndefined, isEqual } from 'lodash';
  */
 import { actions, selectors } from 'data/details';
 
-export default ( key ) => ( WrappedComponent ) => {
+export default ( key = 'id' ) => ( WrappedComponent ) => {
 	class WithDetails extends Component {
 
 		static propTypes = {
@@ -40,7 +40,7 @@ export default ( key ) => ( WrappedComponent ) => {
 		}
 
 		fetch() {
-			if ( isUndefined( this.id ) ) {
+			if ( isUndefined( this.id ) || ! this.id ) {
 				return;
 			}
 
