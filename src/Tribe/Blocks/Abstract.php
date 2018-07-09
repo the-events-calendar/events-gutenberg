@@ -33,7 +33,13 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	 * @return array
 	*/
 	public function attributes( $params = array() ) {
-		return apply_filters( 'tribe_block_attributes_defaults_' . $this->slug(), $params );
+		/**
+		 * Filters the default attributes
+		 *
+		 * @param array  $params    The attributes
+		 * @param object $this      The current object
+		 */
+		return apply_filters( 'tribe_block_attributes_defaults', $params, $this );
 	}
 
 	/**
