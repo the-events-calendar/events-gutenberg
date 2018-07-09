@@ -1,3 +1,6 @@
+/**
+ * External dependencies
+ */
 import { createSelector } from 'reselect';
 
 export const venueBlockSelector = ( state ) => state.blocks.venue;
