@@ -22,7 +22,7 @@ export const toWpParams = ( args = {} ) => {
 	}
 
 	return params;
-}
+};
 
 export const toWPQuery = ( args = {} ) => stringify( toWpParams( args ) );
 
