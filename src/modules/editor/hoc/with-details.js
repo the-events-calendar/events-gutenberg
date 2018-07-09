@@ -12,7 +12,7 @@ import { isUndefined, isEqual } from 'lodash';
  */
 import { actions, selectors } from 'data/details';
 
-export default ( key ) => ( WrappedComponent ) => {
+export default ( key = 'id' ) => ( WrappedComponent ) => {
 	class WithDetails extends Component {
 
 		static propTypes = {
