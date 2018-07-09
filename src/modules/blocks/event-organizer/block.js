@@ -119,21 +119,21 @@ class Organizer extends Component {
 	}
 
 	onSubmit = ( fields ) => {
+		const { sendForm } = this.props;
+		sendForm( toOrganizer( fields ), this.formCompleted );
+	};
+
+	formCompleted = ( body = {} ) => {
 		const {
-			sendForm,
 			setDetails,
 			addOrganizerInClassic,
 			addOrganizerInBlock,
 			id,
 		} = this.props;
-		sendForm(
-			toOrganizer( fields ),
-			( body ) => {
-				setDetails( body.id, body );
-				addOrganizerInClassic( body.id );
-				addOrganizerInBlock( id, body.id );
-			},
-		);
+
+		setDetails( body.id, body );
+		addOrganizerInClassic( body.id );
+		addOrganizerInBlock( id, body.id );
 	};
 
 	renderSearch() {
