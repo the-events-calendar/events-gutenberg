@@ -12,13 +12,11 @@ import moment from 'moment/moment';
  * Wordpress dependencies
  */
 import { Component } from '@wordpress/element';
-import { applyFilters } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
  */
 import { YearMonthForm } from 'elements';
-import { equalDates } from 'utils/date';
 import './style.pcss';
 
 const today = new Date();
@@ -31,47 +29,36 @@ export default class Month extends Component {
 	static propTypes = {
 		withRange: PropTypes.bool,
 		onSelectDay: PropTypes.func,
-		initialRangeDays: PropTypes.number,
 		from: PropTypes.instanceOf( Date ),
 		to: PropTypes.instanceOf( Date ),
 		month: PropTypes.instanceOf( Date ),
-		toMonth: PropTypes.instanceOf( Date ),
+		setVisibleMonth: PropTypes.func,
 	};
 
 	static defaultProps = {
-		withRange: false,
 		onSelectDay: noop,
-		initialRangeDays: applyFilters( 'tec.datetime.defaultRange', 3 ),
 		from: today,
 		to: undefined,
 		month: fromMonth,
-		toMonth: toInitialMonth,
+		setVisibleMonth: noop,
 	};
 
-	static getDerivedStateFromProps( nextProps ) {
-		return {
-			...nextProps,
-		};
-	}
-
-	constructor( props ) {
+	constructor() {
 		super( ...arguments );
 
 		this.state = {
-			...props,
+			toMonth: toInitialMonth,
+			from: null,
+			to: null,
 		};
 	}
 
-	selectDay = ( day, { selected } ) => {
-		const { withRange } = this.state;
-		const { from, to } = this.state;
-
-		if ( equalDates( day, to, from ) ) {
-			return;
-		}
+	selectDay = ( day ) => {
+		const { withRange } = this.props;
+		let range = {};
 
 		if ( withRange ) {
-			const range = DateUtils.addDayToRange( day, this.state );
+			range = DateUtils.addDayToRange( day, this.state );
 
 			// if the range was unselected we fallback to the first available day
 			if ( range.from === null && range.to === null ) {
@@ -82,39 +69,40 @@ export default class Month extends Component {
 			if ( range.to && moment( range.to ).isSame( range.from ) ) {
 				range.to = undefined;
 			}
-
-			this.setState( range, () => {
-				this.onSelectCallback();
-			} );
 		} else {
-			this.setState( {
-				from: selected ? today : day,
-				to: undefined,
-			}, () => {
-				this.onSelectCallback();
-			} );
+			range.from = day;
+			range.to = undefined;
 		}
+
+		this.setState( this.maybeUpdate( range ), () => {
+			this.onSelectCallback();
+		} );
+	};
+
+	maybeUpdate = ( range ) => ( state ) => {
+		if ( state.from === range.from && state.to === range.to ) {
+			return null;
+		}
+		return range;
 	};
 
 	onSelectCallback = () => {
 		const { onSelectDay } = this.props;
 		onSelectDay( omit( this.state, [ 'withRange' ] ) );
-	}
+	};
 
 	getSelectedDays = () => {
-		const { from, withRange, to } = this.state;
+		const { withRange, from, to } = this.props;
 		if ( withRange ) {
-			return [ from, { from, to }];
+			return [ from, { from, to } ];
 		}
 		return from;
-	}
+	};
 
-	handleYearMonthChange = ( month ) => this.setState({ month });
+	getCaptionElement = ( { date, localeUtils } ) => {
+		const { month, setVisibleMonth } = this.props;
 
-	getCaptionElement = ({ date, localeUtils }) => {
-		const { month } = this.state;
-
-		if ( date.getMonth() !== month.getMonth()) {
+		if ( date.getMonth() !== month.getMonth() ) {
 			return this.renderCaption( date, localeUtils );
 		}
 
@@ -123,13 +111,13 @@ export default class Month extends Component {
 				today={ today }
 				date={ date }
 				localeUtils={ localeUtils }
-				onChange={ this.handleYearMonthChange }
+				onChange={ setVisibleMonth }
 			/>
 		);
-	}
+	};
 
 	renderCaption = ( date, localeUtils ) => (
-		<div className={'tribe-editor__daypicker-caption'} role="heading">
+		<div className={ 'tribe-editor__daypicker-caption' } role="heading">
 			<div>
 				{ localeUtils.formatMonthTitle( date ) }
 			</div>
@@ -137,7 +125,8 @@ export default class Month extends Component {
 	);
 
 	render() {
-		const { withRange, from, to, month, toMonth } = this.state;
+		const { from, to, withRange, month, setVisibleMonth } = this.props;
+		const { toMonth } = this.state;
 		const modifiers = withRange ? { start: from, end: to } : {};
 		const containerClass = classNames( { 'tribe-editor__calendars--range': withRange } );
 
@@ -151,7 +140,7 @@ export default class Month extends Component {
 				modifiers={ modifiers }
 				selectedDays={ this.getSelectedDays() }
 				onDayClick={ this.selectDay }
-				onMonthChange={ this.handleYearMonthChange }
+				onMonthChange={ setVisibleMonth }
 				captionElement={ this.getCaptionElement }
 			/>
 		);
