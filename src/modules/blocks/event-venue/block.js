@@ -264,10 +264,10 @@ class EventVenue extends Component {
 	}
 
 	removeVenue = () => {
-		const { volatile, removeEntry, removeVenue, details } = this.props;
+		const { volatile, maybeRemoveEntry, removeVenue, details } = this.props;
 		removeVenue();
 		if ( volatile ) {
-			removeEntry( details );
+			maybeRemoveEntry( details );
 		}
 	};
 

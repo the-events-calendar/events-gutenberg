@@ -173,7 +173,7 @@ class Organizer extends Component {
 			organizer,
 			removeOrganizerInBlock,
 			volatile,
-			removeEntry,
+			maybeRemoveEntry,
 			removeOrganizerInClassic,
 			details,
 		} = this.props;
@@ -181,7 +181,7 @@ class Organizer extends Component {
 		removeOrganizerInBlock( id, organizer );
 
 		if ( volatile ) {
-			removeEntry( details );
+			maybeRemoveEntry( details );
 			removeOrganizerInClassic( organizer );
 		}
 	};

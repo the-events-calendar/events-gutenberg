@@ -38,7 +38,7 @@ export default ( args ) => ( WrappedComponent ) => {
 				sendForm,
 				setSubmit,
 				editEntry,
-				removeEntry,
+				maybeRemoveEntry,
 			} = this.props;
 			const name = args( this.props );
 			return {
@@ -54,8 +54,8 @@ export default ( args ) => ( WrappedComponent ) => {
 				setSubmit() {
 					setSubmit( name );
 				},
-				removeEntry( details ) {
-					removeEntry( name, details );
+				maybeRemoveEntry( details ) {
+					maybeRemoveEntry( name, details );
 				},
 			};
 		}

@@ -33,6 +33,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Remove references to `withSelect` and `withDispatch` and replace with `connect`
 * Tweak - Prevent errors when a new organizer block is created
 * Tweak - `showMap` and `showMapLink` are enabled by default on Location block
+* Fix - Prevent to create multiples entries when using sync copies of blocks
 * Feature - HOC `withDetails` to fetch details of a post type.
 * Feature - HOC `withForm` to attach Form behaviors into a block.
 * Feature - HOC `withStore` to inject the store property into a component
