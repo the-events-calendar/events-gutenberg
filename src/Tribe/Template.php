@@ -44,9 +44,10 @@ class Tribe__Events_Gutenberg__Template extends Tribe__Template {
 	 */
 	public function attr( $index, $default = null ) {
 
-		$attributes = $this->get( 'attributes', array() );
+		$attribute = $this->get( array_merge( array( 'attributes' ), (array) $index ), array(), $default );
 
-		return Tribe__Utils__Array::get( $attributes, $index, $default );
+		return $attribute;
+
 	}
 }
 

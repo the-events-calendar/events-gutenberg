@@ -33,18 +33,25 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	 * @return array
 	*/
 	public function attributes( $params = array() ) {
-		/**
-		 * Filters the default attributes
-		 *
-		 * @param array  $params    The attributes
-		 * @param object $this      The current object
-		 */
-		$default_attributes = apply_filters( 'tribe_block_attributes_defaults', $this->default_attributes( $params ), $this );
 
-		return wp_parse_args(
+		// get the default attributes
+		$default_attributes = $this->default_attributes();
+
+		// parse the attributes with the default ones
+		$attributes = wp_parse_args(
 			$params,
 			$default_attributes
 		);
+
+		/**
+		 * Filters the default attributes for the block
+		 *
+		 * @param array  $attributes    The attributes
+		 * @param object $this      The current object
+		 */
+		$attributes = apply_filters( 'tribe_block_attributes_defaults_' . $this->slug(), $attributes, $this );
+
+		return $attributes;
 	}
 
 	/*
@@ -56,7 +63,18 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	 *
 	 * @return array
 	*/
-	public function default_attributes( $attributes = array() ) {
+	public function default_attributes() {
+
+		$attributes = array();
+
+		/**
+		 * Filters the default attributes
+		 *
+		 * @param array  $params    The attributes
+		 * @param object $this      The current object
+		 */
+		$attributes = apply_filters( 'tribe_block_attributes_defaults', $attributes, $this );
+
 		return $attributes;
 	}
 
