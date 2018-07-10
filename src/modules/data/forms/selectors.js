@@ -31,4 +31,9 @@ export const getFormFields = createSelector(
 	( block ) => block ? block.fields : DEFAULT_STATE.fields,
 );
 
+export const getFormSaving = createSelector(
+	[ formSelector ],
+	( block ) => block ? block.saving : DEFAULT_STATE.saving
+);
+
 export const getVolatile = ( state ) => state.forms.volatile;
