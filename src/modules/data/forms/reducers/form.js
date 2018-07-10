@@ -8,6 +8,7 @@ export const DEFAULT_STATE = {
 	edit: false,
 	create: false,
 	submit: false,
+	saving: false,
 	fields: {},
 	type: EVENT,
 };
@@ -32,6 +33,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 				edit: false,
 				create: true,
 				fields: action.payload.fields,
+			};
+		case types.SET_SAVING_FORM:
+			return {
+				...state,
+				saving: action.payload.saving,
 			};
 		case types.EDIT_FORM_ENTRY:
 			return {
