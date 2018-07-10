@@ -240,10 +240,7 @@ class EventPrice extends Component {
 		);
 	}
 
-	setCurrencyPosition = ( value ) => {
-		const { setCurrencyPosition } = this.props;
-		setCurrencyPosition( ! value );
-	}
+	setCurrencyPosition = ( value ) => this.props.togglePosition( ! value );
 }
 
 const mapStateToProps = ( state ) => ( {
