@@ -125,7 +125,7 @@ export default class Month extends Component {
 	);
 
 	render() {
-		const { from, to, withRange, setVisibleMonth } = this.props;
+		const { from, to, month, withRange, setVisibleMonth } = this.props;
 		const { toMonth } = this.state;
 		const modifiers = withRange ? { start: from, end: to } : {};
 		const containerClass = classNames( { 'tribe-editor__calendars--range': withRange } );
@@ -134,6 +134,7 @@ export default class Month extends Component {
 				className={ containerClass }
 				fromMonth={ fromMonth }
 				toMonth={ toMonth }
+				month={ month }
 				numberOfMonths={ 2 }
 				modifiers={ modifiers }
 				selectedDays={ this.getSelectedDays() }
