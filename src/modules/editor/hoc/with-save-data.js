@@ -12,10 +12,7 @@ import {
 } from 'lodash';
 import isShallowEqual from '@wordpress/is-shallow-equal';
 
-/**
- * Wordpress dependencies
- */
-import { select } from '@wordpress/data';
+const blockRegister = {};
 
 /**
  * Higher order component that updates the attributes of a component if any of the properties of the
@@ -44,6 +41,8 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 				attributes: PropTypes.object,
 				name: PropTypes.string,
 				isolated: PropTypes.bool,
+				increaseRegister: PropTypes.func,
+				decreaseRegister: PropTypes.func,
 			};
 
 			keys = [];
@@ -71,11 +70,12 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 			// At this point attributes has been set so no need to be set the initial state into the store here.
 			componentDidMount() {
 				const { setInitialState, attributes = {}, isolated } = this.props;
-				const count = this.countSameBlocks();
+
+				this.registerBlock();
 
 				// Prevent to set the initial state for blocks that are copies from others
 				// overwrite this with isolated: true as property of the block
-				if ( count > 1 && ! isolated ) {
+				if ( this.blockCount() > 1 && ! isolated ) {
 					return;
 				}
 
@@ -87,15 +87,28 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 				} );
 			}
 
-			countSameBlocks( ) {
-				const { name = '' } = this.props;
-				return select( 'core/editor' ).getBlocks()
-					.filter( ( block ) => block.name === name )
-					.length;
+			componentWillUnmount() {
+				this.unregisterBlock();
+			}
+
+			registerBlock() {
+				const { name } = this.props;
+				blockRegister[ name ] = name in blockRegister ? blockRegister[ name ] + 1 : 1;
+			}
+
+			unregisterBlock() {
+				const { name } = this.props;
+				blockRegister[ name ] -= 1;
+			}
+
+			blockCount() {
+				const { name } = this.props;
+				return blockRegister[ name ];
 			}
 
 			componentDidUpdate() {
 				const diff = this.calculateDiff();
+
 				if ( isShallowEqual( this.saving, diff ) ) {
 					return;
 				}
