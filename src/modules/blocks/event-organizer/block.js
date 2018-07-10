@@ -4,37 +4,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 /**
  * WordPress dependencies
  */
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import {
 	Spinner,
-	PanelBody,
-	Dashicon,
 } from '@wordpress/components';
-import { InspectorControls } from '@wordpress/editor';
-import { withSelect, withDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependendencies
  */
-import { STORE_NAME } from 'data/organizers';
-import { STORE_NAME as EVENT_DETAILS_STORE } from 'data/details';
 import {
 	SearchOrCreate,
 } from 'elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
-import withSaveData from 'editor/hoc/with-save-data';
+import { withSaveData, withDetails, withForm } from 'editor/hoc';
 import OrganizerIcon from 'icons/organizer.svg';
+import { actions, selectors } from 'data/blocks/organizers';
+import { actions as detailsActions } from 'data/details';
+import { toFields, toOrganizer } from 'elements/organizer-form/utils';
 
 class Organizer extends Component {
 	static propTypes = {
-		post: PropTypes.object,
-		draft: PropTypes.object,
+		details: PropTypes.object,
 		create: PropTypes.bool,
 		edit: PropTypes.bool,
 		submit: PropTypes.bool,
@@ -47,8 +45,6 @@ class Organizer extends Component {
 		clear: PropTypes.func,
 		createDraft: PropTypes.func,
 		editPost: PropTypes.func,
-		setDraftTitle: PropTypes.func,
-		setDraftPost: PropTypes.func,
 	};
 
 	constructor( props ) {
@@ -60,16 +56,16 @@ class Organizer extends Component {
 			isSelected,
 			edit,
 			create,
-			sendForm,
+			setSubmit,
 		} = this.props;
 		const unSelected = prevProps.isSelected && ! isSelected;
 		if ( unSelected && ( edit || create ) ) {
-			sendForm();
+			setSubmit();
 		}
 	}
 
 	render() {
-		return [ this.renderBlock(), this.renderSettings() ];
+		return this.renderBlock();
 	}
 
 	renderBlock() {
@@ -82,7 +78,7 @@ class Organizer extends Component {
 	}
 
 	renderContent() {
-		const { post, edit, create, loading } = this.props;
+		const { details, edit, create, loading } = this.props;
 
 		if ( loading ) {
 			return this.renderLoading();
@@ -92,7 +88,7 @@ class Organizer extends Component {
 			return this.renderForm();
 		}
 
-		if ( isEmpty( post ) ) {
+		if ( isEmpty( details ) ) {
 			return this.renderSearch();
 		}
 
@@ -100,7 +96,7 @@ class Organizer extends Component {
 	}
 
 	renderForm() {
-		const { draft, submit } = this.props;
+		const { fields, submit } = this.props;
 
 		if ( submit ) {
 			return this.renderLoading();
@@ -108,8 +104,8 @@ class Organizer extends Component {
 
 		return (
 			<OrganizerForm
-				{ ...draft }
-				submit={ this.submit }
+				{ ...toFields( fields ) }
+				submit={ this.onSubmit }
 			/>
 		);
 	}
@@ -122,22 +118,32 @@ class Organizer extends Component {
 		);
 	}
 
-	submit = ( fields ) => {
-		const { id, create, edit, createDraft, editPost } = this.props;
-		if ( create ) {
-			createDraft( id, fields );
-		} else if ( edit ) {
-			editPost( id, fields );
-		}
+	onSubmit = ( fields ) => {
+		const { sendForm } = this.props;
+		sendForm( toOrganizer( fields ), this.formCompleted );
+	};
+
+	formCompleted = ( body = {} ) => {
+		const {
+			setDetails,
+			addOrganizerInClassic,
+			addOrganizerInBlock,
+			id,
+		} = this.props;
+
+		setDetails( body.id, body );
+		addOrganizerInClassic( body.id );
+		addOrganizerInBlock( id, body.id );
 	};
 
 	renderSearch() {
-		const { id, isSelected, organizers } = this.props;
+		const { id, isSelected, organizers, store, postType } = this.props;
 
 		return (
 			<SearchOrCreate
-				id={ id }
-				storeName={ STORE_NAME }
+				name={ id }
+				store={ store }
+				postType={ postType }
 				selected={ isSelected }
 				icon={ <OrganizerIcon /> }
 				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
@@ -149,138 +155,93 @@ class Organizer extends Component {
 	}
 
 	renderDetails() {
-		const { post, remove } = this.props;
+		const { details, volatile } = this.props;
 		return (
 			<OrganizerDetails
-				organizer={ post }
+				organizer={ details }
+				volatile={ volatile }
 				selected={ this.props.isSelected }
 				edit={ this.edit }
-				remove={ remove }
+				remove={ this.remove }
 			/>
 		);
 	}
 
-	edit = () => {
-		const { id, post, setDraftPost } = this.props;
-		setDraftPost( id, post );
+	remove = () => {
+		const {
+			id,
+			organizer,
+			removeOrganizerInBlock,
+			volatile,
+			maybeRemoveEntry,
+			removeOrganizerInClassic,
+			details,
+		} = this.props;
+
+		removeOrganizerInBlock( id, organizer );
+
+		if ( volatile ) {
+			maybeRemoveEntry( details );
+			removeOrganizerInClassic( organizer );
+		}
 	};
 
-	selectItem = ( item ) => {
-		const { id, setPost } = this.props;
-		setPost( id, item );
+	edit = () => {
+		const { details, editEntry } = this.props;
+		editEntry( details );
+	};
+
+	selectItem = ( organizerID, details ) => {
+		const {
+			id,
+			addOrganizerInBlock,
+			addOrganizerInClassic,
+			setDetails,
+		} = this.props;
+
+		setDetails( organizerID, details );
+		addOrganizerInClassic( organizerID );
+		addOrganizerInBlock( id, organizerID );
 	};
 
 	setDraftTitle = ( title ) => {
-		const { id, setDraftTitle } = this.props;
-		this.clear();
-		setDraftTitle( id, title );
-	};
-
-	renderSettings() {
-		const { isSelected } = this.props;
-
-		if ( ! isSelected ) {
-			return null;
-		}
-
-		const { post } = this.props;
-		const buttonProps = {
-			onClick: this.clear,
-		};
-
-		if ( isEmpty( post ) ) {
-			buttonProps.disabled = true;
-		}
-
-		return (
-			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Organizer Settings', 'events-gutenberg' ) }>
-					<button { ...buttonProps }>
-						{ __( 'Remove Organizer', 'events-gutenberg' ) }
-					</button>
-				</PanelBody>
-			</InspectorControls>
-		);
-	}
-
-	clear = () => {
-		const { id, clear } = this.props;
-
-		clear( id );
+		const { createDraft } = this.props;
+		createDraft( {
+			title: {
+				rendered: title,
+			},
+		} );
 	};
 }
 
-export default compose( [
-	withSelect( ( select, props ) => {
-		const {
-			getByID,
-			getDetails,
-		} = select( STORE_NAME );
-		const organizer = getByID( props.id, 'organizer' );
+const mapStateToProps = ( state, props ) => {
+	return {
+		organizer: selectors.getOrganizerInBlock( state, props ),
+		organizers: selectors.getOrganizersInClassic( state ),
+	};
+};
 
-		const { get } = select( EVENT_DETAILS_STORE );
-		return {
-			post: getDetails( props.id, organizer ),
-			draft: getByID( props.id, 'draft' ),
-			create: getByID( props.id, 'create' ),
-			edit: getByID( props.id, 'edit' ),
-			submit: getByID( props.id, 'submit' ),
-			loading: getByID( props.id, 'loading' ),
-			organizer,
-			organizers: get( 'organizers' ),
-		};
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		const {
-			setPost,
-			clear,
-			createDraft,
-			editPost,
-			setDraftTitle,
-			setDraftPost,
-			submit,
-			setOrganizer,
-			removeDraft,
-		} = dispatch( STORE_NAME );
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		...bindActionCreators( actions, dispatch ),
+		...bindActionCreators( detailsActions, dispatch ),
+		setInitialState( { id, get } ) {
+			const organizer = get( 'organizer', '' );
+			if ( ! organizer ) {
+				return;
+			}
+			dispatch( actions.addOrganizerInBlock( id, organizer ) );
+			dispatch( actions.addOrganizerInClassic( organizer ) );
+		},
+	};
+};
 
-		const {
-			addOrganizer,
-			removeOrganizer,
-		} = dispatch( EVENT_DETAILS_STORE );
-
-		return {
-			setPost( id, item ) {
-				setPost( id, item );
-				addOrganizer( item.id );
-			},
-			clear,
-			createDraft,
-			editPost,
-			setDraftTitle,
-			setDraftPost,
-			remove() {
-				const { post } = props;
-				const { volatile } = post;
-
-				removeOrganizer( post.id );
-				if ( volatile ) {
-					removeDraft( props.id );
-				} else {
-					clear( props.id );
-				}
-			},
-			sendForm() {
-				submit( props.id );
-			},
-			setInitialState() {
-				const { id, attributes } = props;
-				const { organizer } = attributes;
-				if ( organizer ) {
-					setOrganizer( id, organizer );
-					addOrganizer( organizer );
-				}
-			},
-		};
-	} ),
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	),
+	withDetails( 'organizer' ),
 	withSaveData(),
-] )( Organizer );
+	withForm( ( props ) => props.id ),
+)( Organizer );

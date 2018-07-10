@@ -1,16 +1,17 @@
 /**
  * External dependencies
  */
-import { trim, isEmpty, get as getFromObject } from 'lodash';
+import { trim, isEmpty, isFunction } from 'lodash';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component, compose } from '@wordpress/element';
-import { withDispatch, withSelect } from '@wordpress/data';
+import { Component } from '@wordpress/element';
 import {
 	CheckboxControl,
 	TextControl,
@@ -30,8 +31,10 @@ import {
 
 import './style.pcss';
 import { parser, isFree } from 'utils/range';
-import { STORE_NAME as DETAILS_STORE } from 'data/details';
 import withSaveData from 'editor/hoc/with-save-data';
+import * as actions from 'data/blocks/price/actions';
+import * as selectors from 'data/blocks/price/selectors';
+import { sendValue } from 'editor/utils/input';
 
 /**
  * Module Code
@@ -44,8 +47,6 @@ class EventPrice extends Component {
 		this.state = {
 			open: false,
 		};
-
-		this.dashboardRef = React.createRef();
 	}
 
 	render() {
@@ -162,11 +163,10 @@ class EventPrice extends Component {
 	};
 
 	renderDashboard() {
-		const { cost, costDescription, setCost } = this.props;
+		const { cost, costDescription, setCost, setDescription } = this.props;
 
 		return (
 			<Dashboard
-				ref={ this.dashboardRef }
 				open={ this.state.open }
 				onClose={ this.onCloseDashboard }
 				overflow
@@ -178,7 +178,7 @@ class EventPrice extends Component {
 							name="description"
 							type="text"
 							placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-							onChange={ setCost }
+							onChange={ sendValue( setCost ) }
 							value={ cost }
 						/>
 						<input
@@ -186,7 +186,7 @@ class EventPrice extends Component {
 							name="description"
 							type="text"
 							placeholder={ __( 'Description', 'events-gutenberg' ) }
-							onChange={ this.savePriceDescription }
+							onChange={ sendValue( setDescription ) }
 							value={ costDescription }
 						/>
 					</section>
@@ -197,13 +197,6 @@ class EventPrice extends Component {
 			</Dashboard>
 		);
 	}
-
-	savePriceDescription = ( event ) => {
-		const { target } = event;
-		const { value } = target;
-		const { setAttributes } = this.props;
-		setAttributes( { costDescription: value } );
-	};
 
 	onCloseDashboard = () => {
 		this.setState( ( state ) => {
@@ -218,10 +211,9 @@ class EventPrice extends Component {
 	renderControls() {
 		const {
 			isSelected,
-			setCurrencySymbol,
-			setCurrencyPosition,
 			currencySymbol,
 			currencyPosition,
+			setSymbol,
 		} = this.props;
 
 		if ( ! isSelected ) {
@@ -236,7 +228,7 @@ class EventPrice extends Component {
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ setCurrencySymbol }
+						onChange={ setSymbol }
 					/>
 					<CheckboxControl
 						label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
@@ -254,39 +246,19 @@ class EventPrice extends Component {
 	}
 }
 
-export default compose( [
-	withSelect( ( select, props ) => {
-		const { get } = select( DETAILS_STORE );
-		const { attributes } = props;
-		return {
-			currencyPosition: get( 'currencyPosition' ),
-			currencySymbol: get( 'currencySymbol' ),
-			cost: get( 'cost' ),
-			costDescription: getFromObject( attributes, 'costDescription', '' ),
-		};
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		const {
-			setCost,
-			setCurrencySymbol,
-			setCurrencyPosition,
-		} = dispatch( DETAILS_STORE );
+const mapStateToProps = ( state ) => ( {
+	cost: selectors.getPrice( state ),
+	currencyPosition: selectors.getPosition( state ),
+	currencySymbol: selectors.getSymbol( state ),
+	costDescription: selectors.getDescription( state ),
+} );
 
-		return {
-			setInitialState() {
-				const { attributes } = props;
-				const { cost } = attributes;
-				setCost( cost );
-			},
-			setCurrencySymbol,
-			setCurrencyPosition,
-			setCost( event ) {
-				const { target } = event;
-				const { value } = target;
-				setCost( value );
-			},
-		};
-	} ),
+const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	),
 	withSaveData(),
-] )( EventPrice );
-
+)( EventPrice );

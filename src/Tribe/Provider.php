@@ -28,6 +28,8 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.template', 'Tribe__Events_Gutenberg__Template' );
 		$this->container->singleton( 'gutenberg.template.overwrite', 'Tribe__Events_Gutenberg__Template__Overwrite', array( 'hook' ) );
 
+		$this->container->singleton( 'gutenberg.compatibility.tickets', 'Tribe__Events_Gutenberg__Compatibility__Tickets', array( 'hook' ) );
+
 		$this->container->singleton( 'gutenberg.blocks.classic-event-details', 'Tribe__Events_Gutenberg__Blocks__Classic_Event_Details' );
 		$this->container->singleton( 'gutenberg.blocks.event-datetime', 'Tribe__Events_Gutenberg__Blocks__Event_Datetime' );
 		$this->container->singleton( 'gutenberg.blocks.event-venue', 'Tribe__Events_Gutenberg__Blocks__Event_Venue' );
@@ -48,9 +50,30 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		tribe( 'gutenberg.template.overwrite' );
 
 		/**
+		 * Lets load all compatibility related methods
+		 */
+		$this->load_compatibility_tickets();
+
+		/**
 		 * @todo  Remove this later on
 		 */
 		tribe( 'gutenberg.editor' )->assets();
+	}
+
+	/**
+	 * Initializes the correct classes for when Tickets is active.
+	 *
+	 * @since  0.2.4-alpha
+	 *
+	 * @return bool
+	 */
+	private function load_compatibility_tickets() {
+		if ( ! class_exists( 'Tribe__Tickets__Main' ) ) {
+			return false;
+		}
+
+		tribe( 'gutenberg.compatibility.tickets' );
+		return true;
 	}
 
 	/**
@@ -80,7 +103,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		add_action( 'init', tribe_callback( 'gutenberg.editor', 'register_blocks' ), 20 );
 
 		// Maybe add flag from classic editor
-		add_action( 'enqueue_block_editor_assets', tribe_callback( 'gutenberg.editor', 'flag_post_from_classic_editor' ), 0 );
+		add_action( 'init', tribe_callback( 'gutenberg.editor', 'flag_post_from_classic_editor' ), 0 );
 
 		// Update Post content to use blocks
 		add_action( 'tribe_blocks_editor_flag_post_classic_editor', tribe_callback( 'gutenberg.editor', 'update_post_content_to_blocks' ) );

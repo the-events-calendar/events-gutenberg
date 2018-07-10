@@ -27,6 +27,18 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 #### 0.2.4-alpha - TBD
 
 * Fix - Styles for price block
+* Fix - Styles for map container and fix map error
+* Fix - Issue on `datetime` block to select the date on Gutenberg 3.1
+* Tweak - Consolidate multiple stores into a single store
+* Tweak - Use native redux store implementation
+* Tweak - Remove references to `withSelect` and `withDispatch` and replace with `connect`
+* Tweak - Prevent errors when a new organizer block is created
+* Tweak - `showMap` and `showMapLink` are enabled by default on Location block
+* Fix - Prevent to create multiples entries when using sync copies of blocks
+* Feature - HOC `withDetails` to fetch details of a post type.
+* Feature - HOC `withForm` to attach Form behaviors into a block.
+* Feature - HOC `withStore` to inject the store property into a component
+* Feature - `useOnce` properties from block to allow live sync copies of blocks
 
 #### 0.2.3-alpha - 2018-06-22
 
