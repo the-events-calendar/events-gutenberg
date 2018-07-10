@@ -182,8 +182,14 @@ class EventDateTime extends Component {
 		}
 
 		const { end } = this.props;
+		let endDate = toDate( toMoment( end ) );
+
+		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+			endDate = toDateNoYear( toMoment( end ) );
+		}
+
 		return (
-			<span className="tribe-editor__subtitle__headline-date">{ toDate( toMoment( end ) ) }</span>
+			<span className="tribe-editor__subtitle__headline-date">{ endDate }</span>
 		);
 	}
 
@@ -244,13 +250,13 @@ class EventDateTime extends Component {
 			case 'date-time':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ ' '.concat( [ separatorDate, ' ' ] ) }
+						{ ' '.concat( separatorDate, ' ') }
 					</span>
 				);
 			case 'time-range':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ ' '.concat( [ separatorTime, ' ' ] ) }
+						{ ' '.concat( separatorTime, ' ') }
 					</span>
 				);
 			case 'dash':
