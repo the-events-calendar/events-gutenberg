@@ -237,6 +237,12 @@ class Tribe__Events_Gutenberg__Editor {
 			return false;
 		}
 
+		$on_classic_editor_page = tribe_get_request_var( 'classic-editor', false );
+		// Bail if in classic editor
+		if ( $on_classic_editor_page ) {
+			return false;
+		}
+
 		// Bail if not an event (might need to be removed later)
 		if ( ! tribe_is_event( $post ) ) {
 			return false;
