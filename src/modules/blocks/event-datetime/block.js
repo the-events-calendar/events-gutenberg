@@ -214,14 +214,12 @@ class EventDateTime extends Component {
 	 *
 	 * @returns {boolean} if the event is happening on the same day
 	 */
-	isSameDay( start, end ) {
-		return toMoment( start || this.props.start )
-			.isSame( toMoment( end || this.props.end ), 'day' );
+	isSameDay( start = this.props.start, end = this.props.end ) {
+		return toMoment( start ).isSame( toMoment( end ), 'day' );
 	}
 
-	isSameYear( start, end ) {
-		return toMoment( start || this.props.start )
-			.isSame( toMoment( end || this.props.end ), 'year' );
+	isSameYear( start = this.props.start, end = this.props.end ) {
+		return toMoment( start ).isSame( toMoment( end ), 'year' );
 	}
 
 	/**
