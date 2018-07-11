@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
 	noop,
@@ -10,14 +10,9 @@ import {
 	isObject,
 	keys,
 } from 'lodash';
+import isShallowEqual from '@wordpress/is-shallow-equal';
 
-/**
- * Wordpress dependencies
- */
-import {
-	Component,
-	createHigherOrderComponent,
-} from '@wordpress/element';
+const blockRegister = {};
 
 /**
  * Higher order component that updates the attributes of a component if any of the properties of the
@@ -27,39 +22,44 @@ import {
  * the ones specified as attributes params otherwise will fallback to the property attributes of the
  * component to extract the keys of those to do the comparision.
  *
- * @param {object} attributes Set of attributes to only update fallback to this.props.attributes
+ * @param {object} selectedAtrributes Set of attributes to only update fallback to this.props.attributes
  * @returns {function} Return a new HOC
  */
-export default ( attributes = null ) => createHigherOrderComponent( ( WrappedComponent ) => {
-	return class WithSaveData extends Component {
+export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
+	class WithSaveData extends Component {
 			static defaultProps = {
-				setAttributes: noop,
-				setInitialState: noop,
 				attributes: {},
+				setInitialState: noop,
+				setAttributes: noop,
+				name: '',
+				isolated: false,
 			};
 
 			static propTypes = {
 				setAttributes: PropTypes.func,
 				setInitialState: PropTypes.func,
 				attributes: PropTypes.object,
+				name: PropTypes.string,
+				isolated: PropTypes.bool,
+				increaseRegister: PropTypes.func,
+				decreaseRegister: PropTypes.func,
 			};
 
 			keys = [];
+			saving = null;
 
-			constructor() {
-				super( ...arguments );
+			constructor( props ) {
+				super( props );
 				this.keys = this.generateKeys();
 			}
 
 			generateKeys() {
-				const attr = attributes || this.props.attributes;
-
-				if ( isArray( attr ) ) {
-					return attr;
+				if ( isArray( this.attrs ) ) {
+					return this.attrs;
 				}
 
-				if ( isObject( attr ) ) {
-					return keys( attr );
+				if ( isObject( this.attrs ) ) {
+					return keys( this.attrs );
 				}
 
 				console.warn( 'Make sure attributes is from a valid type: Array or Object' );
@@ -69,43 +69,78 @@ export default ( attributes = null ) => createHigherOrderComponent( ( WrappedCom
 
 			// At this point attributes has been set so no need to be set the initial state into the store here.
 			componentDidMount() {
-				const { setInitialState } = this.props;
-				setInitialState();
-			}
+				const { setInitialState, attributes = {}, isolated } = this.props;
 
-			componentDidUpdate( prevProps ) {
-				if ( isEmpty( this.keys ) ) {
+				this.registerBlock();
+
+				// Prevent to set the initial state for blocks that are copies from others
+				// overwrite this with isolated: true as property of the block
+				if ( this.blockCount() > 1 && ! isolated ) {
 					return;
 				}
 
-				const result = this.diff( prevProps );
-				if ( isEmpty( result ) ) {
+				setInitialState( {
+					...this.props,
+					get( key, defaultValue ) {
+						return key in attributes ? attributes[ key ] : defaultValue;
+					},
+				} );
+			}
+
+			componentWillUnmount() {
+				this.unregisterBlock();
+			}
+
+			registerBlock() {
+				const { name } = this.props;
+				blockRegister[ name ] = name in blockRegister ? blockRegister[ name ] + 1 : 1;
+			}
+
+			unregisterBlock() {
+				const { name } = this.props;
+				blockRegister[ name ] -= 1;
+			}
+
+			blockCount() {
+				const { name } = this.props;
+				return blockRegister[ name ];
+			}
+
+			componentDidUpdate() {
+				const diff = this.calculateDiff();
+
+				if ( isShallowEqual( this.saving, diff ) ) {
 					return;
 				}
 
-				const { setAttributes } = this.props;
-				setAttributes( result );
+				this.saving = diff;
+				if ( isEmpty( diff ) ) {
+					return;
+				}
+				this.props.setAttributes( diff );
 			}
 
-			// Diff with the properties that has changed only
-			diff( prevProps ) {
-				if ( ! isArray( this.keys ) ) {
-					console.warn( 'Make sure your keys are an array' );
-					return {};
-				}
-
-				const diff = {};
-				this.keys.forEach( ( key ) => {
-					if ( prevProps[ key ] !== this.props[ key ] ) {
+			calculateDiff() {
+				const attributes = this.attrs;
+				return this.keys.reduce( ( diff, key ) => {
+					if ( key in this.props && attributes[ key ] !== this.props[ key ] ) {
 						diff[ key ] = this.props[ key ];
 					}
-				} );
-				return diff;
+					return diff;
+				}, {} );
+			}
+
+			get attrs() {
+				return selectedAtrributes || this.props.attributes || {};
 			}
 
 			render() {
 				return <WrappedComponent { ...this.props } />;
 			}
-	};
-}, 'withSaveData' );
+	}
+
+	WithSaveData.displayName = `WithSaveData( ${ WrappedComponent.displayName || WrappedComponent.name || 'Component ' }`;
+
+	return WithSaveData;
+};
 

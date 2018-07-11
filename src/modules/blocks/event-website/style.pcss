@@ -4,21 +4,23 @@
 
 .tribe-editor__event-website__label {
 	align-items: center;
-	border: 1px solid #E1E3E6;
 	display: inline-flex;
 	font-family: 'Helvetica', 'sans-serif';
 	justify-content: center;
-	min-height: 54px;
-	padding: 0 20px;
-	font-size: 1.125rem;
-	background-color: #009FD4;
 	max-width: 100%;
 
+	&--selected {
+		border: none;
+	}
+
 	&--placeholder {
-		border: 2px dashed #E1E3E6;
 		color: #8D949B;
 		cursor: text;
 		background-color: transparent;
+		padding: 0 20px;
+		font-size: 1.125rem;
+		min-height: 54px;
+		border: 2px dashed #E1E3E6;
 	}
 }
 
@@ -31,18 +33,35 @@
 	flex-grow: 1;
 	font-size: 1.125rem;
 	font-weight: normal;
+	table-layout: fixed;
+	width: 100%;
 
-	&:focus {
-		border: 0;
-		outline: 0;
-		box-shadow: none;
+	input {
+		padding: 0 20px;
+		font-size: 1.125rem;
+		min-height: 50px;
+		background-color: #009FD4;
+		border: 2px solid #009FD4;
+		color: #FFF;
+		font-family: 'Helvetica', 'sans-serif';
+		overflow: hidden;
+		max-width: calc(100% - 20px);
+
+		&:focus {
+			outline: 0;
+			box-shadow: none;
+		}
 	}
 
-	&::placeholder {
+	&--empty {
+		input {
+			border: 2px dashed #E1E3E6;
+			background-color: #FFF;
+			color: #8D949B;
 
-		.tribe-editor__event-website__label & {
-			color: #fff;
-			opacity: 1;
+			&::placeholder {
+				color: #8D949B;
+			}
 		}
 	}
 

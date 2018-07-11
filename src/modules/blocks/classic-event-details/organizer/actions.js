@@ -12,17 +12,14 @@ import {
 } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
-import { withSelect } from '@wordpress/data';
-import { compose } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import { STORE_NAME } from 'data/organizers';
 import './style.pcss';
 
-const ActionsComponent = ( { isBlock, onRemoveOrganizer = noop, focus } ) => {
-	if ( isBlock ) {
+const ActionsComponent = ( { block, volatile, onRemoveOrganizer = noop, focus } ) => {
+	if ( block || volatile ) {
 		return null;
 	}
 
@@ -37,11 +34,4 @@ const ActionsComponent = ( { isBlock, onRemoveOrganizer = noop, focus } ) => {
 	);
 };
 
-export default compose( [
-	withSelect( ( select, props ) => {
-		const { isBlock } = select( STORE_NAME );
-		return {
-			isBlock: isBlock( props.id ),
-		};
-	} ),
-] )( ActionsComponent );
+export default ActionsComponent;

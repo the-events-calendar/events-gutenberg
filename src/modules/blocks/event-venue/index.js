@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { pick } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -12,7 +7,9 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventVenue from './block';
+import { withStore } from 'editor/hoc';
 import { Icons } from 'elements';
+import { VENUE } from 'editor/post-types';
 
 /**
  * Module Code
@@ -50,19 +47,7 @@ export default {
 		},
 	},
 
-	useOnce: true,
-
-	edit: ( { attributes, ...rest } ) => {
-		const properties = {
-			...attributes,
-			...pick( rest, [ 'setAttributes', 'isSelected' ] ),
-			loading: !! attributes.venue,
-		};
-
-		return (
-			<EventVenue { ...properties } />
-		);
-	},
+	edit: withStore( { postType: VENUE } )( EventVenue ),
 
 	save( props ) {
 		return null;

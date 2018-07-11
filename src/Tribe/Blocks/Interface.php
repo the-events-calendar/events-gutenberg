@@ -21,6 +21,15 @@ interface Tribe__Events_Gutenberg__Blocks__Interface {
 	public function name();
 
 	/**
+	 * What are the default attributes for this block
+	 *
+	 * @since  TBD
+	 *
+	 * @return array
+	 */
+	public function default_attributes();
+
+	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
 	 * @since  0.1.0-alpha

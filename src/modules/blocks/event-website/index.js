@@ -10,6 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { withStore } from 'editor/hoc';
 import EventWebsite from './block';
 import { Icons } from 'elements';
 
@@ -34,6 +35,7 @@ export default {
 	attributes: {
 		urlLabel: {
 			type: 'html',
+			default: '',
 		},
 		url: {
 			type: 'string',
@@ -42,9 +44,7 @@ export default {
 		},
 	},
 
-	useOnce: true,
-
-	edit: EventWebsite,
+	edit: withStore()( EventWebsite ),
 
 	save( props ) {
 		return null;
