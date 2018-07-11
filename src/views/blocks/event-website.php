@@ -10,7 +10,7 @@ $attributes = $this->attributes( array(
 	'href' => tribe_get_event_website_url(),
 ) );
 
-if ( empty( $attributes['href'] ) || empty( $attributes['urlLabel'] ) ) {
+if ( ! $this->attr( 'href' ) || ! $this->attr( 'urlLabel' ) ) {
 	return;
 }
 
@@ -19,9 +19,9 @@ $target = apply_filters( 'tribe_get_event_website_link_target', '_self' );
 
 <a
     class="tribe-block__event-website"
-    href="<?php echo esc_url( $attributes['href'] ); ?>"
+    href="<?php echo esc_url( $this->attr( 'href' ) ); ?>"
     target="<?php echo esc_attr( $target ); ?>"
     <?php if ( '_blank' === $target  ) : ?> rel="noopener noreferrer" <?php endif; ?>
     >
-    <?php echo esc_html( $attributes['urlLabel'] ); ?>
+    <?php echo esc_html( $this->attr( 'urlLabel' ) ); ?>
 </a>
