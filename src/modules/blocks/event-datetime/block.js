@@ -3,12 +3,13 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose, bindActionCreators } from 'redux';
 
 /**
  * WordPress dependencies
  */
-import { Component, compose } from '@wordpress/element';
-import { withDispatch, withSelect } from '@wordpress/data';
+import { Component } from '@wordpress/element';
 
 import {
 	PanelBody,
@@ -34,12 +35,24 @@ import {
 } from 'elements';
 import './style.pcss';
 
+import {
+	actions as dateTimeActions,
+	selectors as dateTimeSelectors,
+} from 'data/blocks/datetime';
+import {
+	actions as UIActions,
+	selectors as UISelectors,
+} from 'data/ui';
+import {
+	selectors as priceSelectors,
+	actions as priceActions,
+} from 'data/blocks/price';
+
 import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
-import { toFormat, toMoment, totalSeconds, toDateTime, toDate } from 'utils/moment';
+import { toFormat, toMoment, totalSeconds, toDate } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
-import { STORE_NAME } from 'data/details';
 import withSaveData from 'editor/hoc/with-save-data';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
@@ -49,7 +62,6 @@ FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' )
  */
 
 class EventDateTime extends Component {
-
 	static propTypes = {
 		allDay: PropTypes.bool,
 		multiDay: PropTypes.bool,
@@ -66,14 +78,16 @@ class EventDateTime extends Component {
 		setCost: PropTypes.func,
 		setAllDay: PropTypes.func,
 		toggleDashboard: PropTypes.func,
-		setStartDate: PropTypes.func,
-		setEndDate: PropTypes.func,
+		setDate: PropTypes.func,
 		setStartTime: PropTypes.func,
 		setEndTime: PropTypes.func,
-		setMultiDay: PropTypes.func,
+		toggleMultiDay: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
+		closeDashboard: PropTypes.func,
+		setVisibleMonth: PropTypes.func,
+		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
 	constructor() {
@@ -194,8 +208,7 @@ class EventDateTime extends Component {
 	 * @returns {boolean} true if is an all day event
 	 */
 	isAllDay() {
-		const { allDay } = this.props;
-		return allDay;
+		return this.props.allDay;
 	}
 
 	renderTimezone() {
@@ -214,18 +227,34 @@ class EventDateTime extends Component {
 		switch ( type ) {
 			case 'date-time':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorDate }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }>
+						{ separatorDate }
+					</span>
+				);
 			case 'time-range':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>{ separatorTime }</span> );
+					<span className={ classNames( 'tribe-editor__separator', className ) }>
+						{ separatorTime }
+					</span>
+				);
 			case 'dash':
-				return <span className={ classNames( 'tribe-editor__separator', className ) }> &mdash; </span>;
+				return (
+					<span className={ classNames( 'tribe-editor__separator', className ) }> &mdash; </span>
+				);
 			case 'all-day':
-				return <span className={ classNames( 'tribe-editor__separator', className ) }> ALL DAY</span>;
+				return (
+					<span className={ classNames( 'tribe-editor__separator', className ) }> ALL DAY</span>
+				);
 			case 'space':
-				return <span className={ classNames( 'tribe-editor__separator', className ) }>&nbsp;</span>;
+				return (
+					<span className={ classNames( 'tribe-editor__separator', className ) }>&nbsp;</span>
+				);
 			case 'timezone':
-				return <span className={ classNames( 'tribe-editor__separator', className ) }> { timezone } </span>;
+				return (
+					<span className={ classNames( 'tribe-editor__separator', className ) }>
+						{ timezone }
+					</span>
+				);
 			default:
 				return null;
 		}
@@ -254,13 +283,14 @@ class EventDateTime extends Component {
 	}
 
 	renderDashboard() {
-		const { dashboardOpen } = this.props;
+		const { dashboardOpen, closeDashboard } = this.props;
 		return (
 			<Dashboard
 				open={ dashboardOpen }
-				onClose={ this.props.closeDashboard }
+				onClose={ closeDashboard }
 				targets={ [ 'DayPicker-Week', 'DayPicker-Day' ] }
-				overflow>
+				overflow
+			>
 				<Fragment>
 					<section className="tribe-editor__calendars">
 						{ this.renderCalendars() }
@@ -281,12 +311,13 @@ class EventDateTime extends Component {
 	}
 
 	renderCalendars() {
-		const { multiDay, start, end } = this.props;
+		const { multiDay, start, end, visibleMonth, setVisibleMonth } = this.props;
 		const monthProps = {
 			onSelectDay: this.setDays,
 			withRange: multiDay,
 			from: toMoment( start ).toDate(),
-			month: toMoment( start ).startOf( 'month' ).toDate(),
+			month: visibleMonth,
+			setVisibleMonth,
 		};
 
 		if ( ! this.isSameDay() ) {
@@ -300,10 +331,8 @@ class EventDateTime extends Component {
 
 	setDays = ( data ) => {
 		const { from, to } = data;
-		const { setStartDate, setEndDate } = this.props;
-
-		setStartDate( toDateTime( toMoment( from ) ) );
-		setEndDate( to ? toDateTime( toMoment( to ) ) : to );
+		const { setDate } = this.props;
+		setDate( from, to );
 	};
 
 	renderStartTimePicker() {
@@ -332,8 +361,11 @@ class EventDateTime extends Component {
 		const { seconds, allDay } = data;
 		const { setAllDay, setStartTime } = this.props;
 
-		setAllDay( allDay );
-		setStartTime( seconds );
+		if ( allDay ) {
+			setAllDay( allDay );
+		} else {
+			setStartTime( seconds );
+		}
 	};
 
 	renderEndTimePicker() {
@@ -362,18 +394,20 @@ class EventDateTime extends Component {
 	setEndTime = ( data ) => {
 		const { seconds, allDay } = data;
 		const { setAllDay, setEndTime } = this.props;
-
-		setAllDay( allDay );
-		setEndTime( seconds );
+		if ( allDay ) {
+			setAllDay( allDay );
+		} else {
+			setEndTime( seconds );
+		}
 	};
 
 	renderMultidayCheckbox() {
-		const { multiDay, setMultiDay } = this.props;
+		const { multiDay, toggleMultiDay } = this.props;
 		return (
 			<CheckBox
 				label={ __( 'Multi-Day', 'events-gutenberg' ) }
 				checked={ multiDay }
-				onChange={ setMultiDay }
+				onChange={ toggleMultiDay }
 			/>
 		);
 	}
@@ -420,55 +454,38 @@ class EventDateTime extends Component {
 	}
 }
 
-export default compose( [
-	withSelect( ( select ) => {
-		const { get } = select( STORE_NAME );
-		return {
-			start: get( 'start' ),
-			end: get( 'end' ),
-			multiDay: get( 'multiDay' ),
-			separatorDate: get( 'separatorDate' ),
-			separatorTime: get( 'separatorTime' ),
-			timezone: get( 'timezone' ),
-			allDay: get( 'allDay' ),
-			dashboardOpen: get( 'dashboardOpen' ),
-			cost: get( 'cost' ),
-		};
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		const {
-			setInitialState,
-			toggleDashboard,
-			closeDashboard,
-			setMultiDay,
-			setAllDay,
-			setTimezone,
-			setStartDate,
-			setEndDate,
-			setStartTime,
-			setEndTime,
-			setSeparatorDate,
-			setSeparatorTime,
-			setCost,
-		} = dispatch( STORE_NAME );
+const mapStateToProps = ( state ) => {
+	return {
+		dashboardOpen: UISelectors.getDashboardOpen( state ),
+		visibleMonth: UISelectors.getVisibleMonth( state ),
+		start: dateTimeSelectors.getStart( state ),
+		end: dateTimeSelectors.getEnd( state ),
+		multiDay: dateTimeSelectors.getMultiDay( state ),
+		allDay: dateTimeSelectors.getAllDay( state ),
+		separatorDate: dateTimeSelectors.getDateSeparator( state ),
+		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
+		timezone: dateTimeSelectors.getTimeZone( state ),
+		cost: priceSelectors.getPrice( state ),
+	};
+};
 
-		return {
-			setInitialState() {
-				setInitialState( props.attributes );
-			},
-			toggleDashboard,
-			closeDashboard,
-			setMultiDay,
-			setAllDay,
-			setTimezone,
-			setStartDate,
-			setEndDate,
-			setStartTime,
-			setEndTime,
-			setSeparatorDate,
-			setSeparatorTime,
-			setCost,
-		};
-	} ),
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		...bindActionCreators( dateTimeActions, dispatch ),
+		...bindActionCreators( UIActions, dispatch ),
+		...bindActionCreators( priceActions, dispatch ),
+		setInitialState( props ) {
+			dispatch( priceActions.setInitialState( props ) );
+			dispatch( dateTimeActions.setInitialState( props ) );
+			dispatch( UIActions.setInitialState( props ) );
+		},
+	};
+};
+
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	),
 	withSaveData(),
-] )( EventDateTime );
+)( EventDateTime );

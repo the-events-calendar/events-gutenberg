@@ -31,8 +31,6 @@ export default {
 	attributes: {
 
 	},
-
-	useOnce: true,
 	edit: EventTags,
 	save( props ) {
 		return null;
