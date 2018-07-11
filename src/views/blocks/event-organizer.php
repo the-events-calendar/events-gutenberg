@@ -5,12 +5,10 @@
  * @version TBD
  *
  */
-$event_id = $this->get( 'post_id' );
 
-$attributes   = $this->attributes();
-$organizer_id = $attributes['organizer'];
+$organizer = $this->attr( 'organizer' );
 
-if ( empty( $organizer_id ) ) {
+if ( ! $organizer ) {
 	return;
 }
 
