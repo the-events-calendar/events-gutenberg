@@ -119,21 +119,21 @@ class Organizer extends Component {
 	}
 
 	onSubmit = ( fields ) => {
+		const { sendForm } = this.props;
+		sendForm( toOrganizer( fields ), this.formCompleted );
+	};
+
+	formCompleted = ( body = {} ) => {
 		const {
-			sendForm,
 			setDetails,
 			addOrganizerInClassic,
 			addOrganizerInBlock,
 			id,
 		} = this.props;
-		sendForm(
-			toOrganizer( fields ),
-			( body ) => {
-				setDetails( body.id, body );
-				addOrganizerInClassic( body.id );
-				addOrganizerInBlock( id, body.id );
-			},
-		);
+
+		setDetails( body.id, body );
+		addOrganizerInClassic( body.id );
+		addOrganizerInBlock( id, body.id );
 	};
 
 	renderSearch() {
@@ -173,7 +173,7 @@ class Organizer extends Component {
 			organizer,
 			removeOrganizerInBlock,
 			volatile,
-			removeEntry,
+			maybeRemoveEntry,
 			removeOrganizerInClassic,
 			details,
 		} = this.props;
@@ -181,7 +181,7 @@ class Organizer extends Component {
 		removeOrganizerInBlock( id, organizer );
 
 		if ( volatile ) {
-			removeEntry( details );
+			maybeRemoveEntry( details );
 			removeOrganizerInClassic( organizer );
 		}
 	};
@@ -226,7 +226,10 @@ const mapDispatchToProps = ( dispatch ) => {
 		...bindActionCreators( actions, dispatch ),
 		...bindActionCreators( detailsActions, dispatch ),
 		setInitialState( { id, get } ) {
-			const organizer = get( 'organizer', undefined );
+			const organizer = get( 'organizer', '' );
+			if ( ! organizer ) {
+				return;
+			}
 			dispatch( actions.addOrganizerInBlock( id, organizer ) );
 			dispatch( actions.addOrganizerInClassic( organizer ) );
 		},

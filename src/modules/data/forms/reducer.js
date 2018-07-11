@@ -17,6 +17,7 @@ const byId = ( state = {}, action ) => {
 		case types.CREATE_FORM_DRAFT:
 		case types.EDIT_FORM_ENTRY:
 		case types.SUBMIT_FORM:
+		case types.SET_SAVING_FORM:
 			return {
 				...state,
 				[ action.payload.id ]: form( state[ action.payload.id ], action ),

@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose, bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 /**
@@ -38,7 +38,7 @@ export default ( args ) => ( WrappedComponent ) => {
 				sendForm,
 				setSubmit,
 				editEntry,
-				removeEntry,
+				maybeRemoveEntry,
 			} = this.props;
 			const name = args( this.props );
 			return {
@@ -54,8 +54,8 @@ export default ( args ) => ( WrappedComponent ) => {
 				setSubmit() {
 					setSubmit( name );
 				},
-				removeEntry( details ) {
-					removeEntry( name, details );
+				maybeRemoveEntry( details ) {
+					maybeRemoveEntry( name, details );
 				},
 			};
 		}
@@ -74,5 +74,5 @@ export default ( args ) => ( WrappedComponent ) => {
 
 	const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
 
-	return compose( connect( mapStateToProps, mapDispatchToProps ) )( WithForm );
+	return connect( mapStateToProps, mapDispatchToProps )( WithForm );
 };

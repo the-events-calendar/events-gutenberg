@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty, noop } from 'lodash';
 import { decode } from 'he';
-import { compose, bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actions, selectors } from 'data/search';
 

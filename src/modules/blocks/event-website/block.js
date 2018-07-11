@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import classNames from 'classnames';
+import AutosizeInput from 'react-input-autosize';
 
 /**
  * WordPress dependencies
@@ -22,6 +23,7 @@ import withSaveData from 'editor/hoc/with-save-data';
 import * as actions from 'data/blocks/website/actions';
 import * as selectors from 'data/blocks/website/selectors';
 import './style.pcss';
+import { sendValue } from 'editor/utils/input';
 
 /**
  * Module Code
@@ -87,21 +89,27 @@ class EventWebsite extends Component {
 	}
 
 	renderLabelInput() {
-		const { urlLabel, setLabel } = this.props;
+		const { urlLabel, setLabel, isSelected } = this.props;
+		const containerClassNames = classNames( 'tribe-editor__event-website__label', {
+			'tribe-editor__event-website__label--selected': isSelected,
+		} );
+
+		const isEmpty = urlLabel.trim() === '';
+		const inputClassNames = classNames( 'tribe-editor__event-website__label-text', {
+			'tribe-editor__event-website__label-text--empty': isEmpty && isSelected,
+		} );
+
 		return (
 			<div
 				key="tribe-events-website-label"
-				className="tribe-editor__event-website__label"
+				className={ containerClassNames }
 			>
-				<RichText
+				<AutosizeInput
 					id="tribe-events-website-link"
-					className="tribe-editor__event-website__label-text"
-					format="string"
-					tagName="h4"
+					className={ inputClassNames }
 					value={ urlLabel }
-					onChange={ setLabel }
 					placeholder={ placeholder }
-					formattingControls={ [] }
+					onChange={ sendValue( setLabel ) }
 				/>
 			</div>
 		);

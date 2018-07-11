@@ -6,7 +6,7 @@ import * as types from './types';
 export const DEFAULT_STATE = {
 	venue: undefined,
 	showMap: true,
-	showMapLink: false,
+	showMapLink: true,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {

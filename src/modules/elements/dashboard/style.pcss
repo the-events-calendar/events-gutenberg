@@ -8,25 +8,6 @@
 		pointer-events: auto;
 		width: 100%;
 	}
-
-	&--up {
-		.tribe-editor__dashboard {
-			bottom: -14px;
-		}
-	}
-
-	&--down {
-		.tribe-editor__dashboard {
-			top: 14px;
-		}
-	}
-
-	&--overflow {
-		.tribe-editor__dashboard {
-			margin-left: -29px;
-			margin-right: -29px;
-		}
-	}
 }
 
 .tribe-editor__dashboard {
@@ -50,5 +31,18 @@
 		font-size: 1em;
 		font-weight: normal;
 		margin-right: 8px;
+	}
+
+	.tribe-editor__dashboard__container--up & {
+		bottom: -14px;
+	}
+
+	.tribe-editor__dashboard__container--down & {
+		top: 14px;
+	}
+
+	.tribe-editor__dashboard__container--overflow & {
+		margin-left: -29px;
+		margin-right: -29px;
 	}
 }
