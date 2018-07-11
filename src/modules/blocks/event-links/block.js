@@ -79,6 +79,7 @@ class EventLinks extends Component {
 				<LinkIcon />
 				<AutosizeInput
 					name="google-calendar-label"
+					className="tribe-editor__btn-input"
 					value={ googleCalendarLabel }
 					placeholder={ googleCalendarPlaceholder }
 					onChange={ sendValue( setGoogleCalendarLabel ) }
