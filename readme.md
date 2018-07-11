@@ -26,6 +26,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 #### 0.2.4-alpha - TBD
 
+* Fix - Styles for date time block
 * Fix - Styles for price block
 * Fix - Styles for map container and fix map error
 * Fix - Issue on `datetime` block to select the date on Gutenberg 3.1
