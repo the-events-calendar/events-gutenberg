@@ -109,16 +109,12 @@ class EventPrice extends Component {
 	}
 
 	renderPlaceholder() {
-		const { open } = this.state;
 		const placeholder = __( 'Add Price', 'events-gutenberg' );
 
-		if ( open ) {
-			return null;
-		}
-
 		const { cost } = this.props;
+		const parsed = parser( cost );
 
-		if ( ! this.isEmpty( cost ) ) {
+		if ( ! this.isEmpty( parsed ) ) {
 			return null;
 		}
 
