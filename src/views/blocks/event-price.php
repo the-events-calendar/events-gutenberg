@@ -5,18 +5,15 @@
  * @version TBD
  *
  */
-$event_id = $this->get( 'post_id' );
-
-$attributes = $this->attributes();
-$cost       = tribe_get_formatted_cost();
+$cost             = $this->attr( 'cost' );
+$cost_description = $this->attr( 'costDescription' );
 ?>
 <div class="tribe-block tribe-block__event-price">
     <?php
-    // Event Cost
-    if ( ! empty( $cost ) ) : ?>
+    if ( $cost ) : ?>
         <span class="tribe-block__event-price__cost"> <?php echo esc_html( $cost ); ?> </span>
     <?php endif; ?>
-    <?php if ( ! empty( $attributes['costDescription'] ) ) : ?>
-        <span class="tribe-block__event-price__description"> <?php echo esc_html( $attributes['costDescription'] ); ?> </span>
+    <?php if ( $cost_description ) : ?>
+        <span class="tribe-block__event-price__description"><?php echo esc_html( $cost_description ); ?></span>
     <?php endif ?>
 </div>
