@@ -2,15 +2,17 @@
  * External dependencies
  */
 import React from 'react';
-import { uniqueId, noop } from 'lodash';
+import PropTypes from 'prop-types';
+import { uniqueId, noop, isEqual } from 'lodash';
 import classNames from 'classnames';
 import { decode } from 'he';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 /**
  * WordPress dependencies
  */
-import { dispatch } from '@wordpress/data';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 
 import {
 	Dropdown,
@@ -24,16 +26,27 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
+import { actions, selectors } from 'data/search';
 
 /**
  * Module Code
  */
 
-export default class SearchPosts extends Component {
+class SearchPosts extends Component {
 	static defaultProps = {
 		onHover: noop,
 		store: {},
 		storeName: '',
+		results: [],
+	};
+
+	static propTypes = {
+		registerBlock: PropTypes.func,
+		search: PropTypes.func,
+		exclude: PropTypes.array,
+		loading: PropTypes.bool,
+		name: PropTypes.string,
+		postType: PropTypes.string,
 	};
 
 	constructor() {
@@ -45,46 +58,45 @@ export default class SearchPosts extends Component {
 			loading: false,
 			search: '',
 		};
-		this.unsubscribe = noop;
 		this.scrollPosition = 0;
 		this.dropdownEl = React.createRef();
 	}
 
 	componentDidMount() {
-		const { store, storeName } = this.props;
-
-		dispatch( storeName ).fetch( {
-			exclude: this.props.exclude,
-		} );
-
-		this.saveState();
-		this.unsubscribe = store.subscribe( this.saveState );
+		const { registerBlock, name, postType } = this.props;
+		registerBlock( name, postType );
+		this.initialFetch();
 	}
 
-	componentDidUpdate() {
-		const { fetching } = this.state;
-		if ( ! fetching && this.scrollPosition && this.dropdownEl.current ) {
-				this.dropdownEl.current.scrollTop = this.scrollPosition;
-				this.scrollPosition = 0;
+	initialFetch() {
+		const { name, exclude, search } = this.props;
+		search( name, {
+			term: '',
+			exclude,
+			populate: true,
+		} );
+	}
+
+	componentDidUpdate( prevProps ) {
+		if ( ! isEqual( prevProps.exclude, this.props.exclude ) ) {
+			this.initialFetch();
+			return;
+		}
+
+		const { loading } = this.props;
+		if ( ! loading && this.scrollPosition && this.dropdownEl.current ) {
+			this.dropdownEl.current.scrollTop = this.scrollPosition;
+			this.scrollPosition = 0;
 		}
 	}
 
-	saveState = () => {
-		const { store } = this.props;
-		const { search, posts, fetching } = store.getState();
-		this.setState( { posts, search, fetching } );
-	}
-
-	componentWillUnmount() {
-		this.unsubscribe();
-	}
-
 	searchPosts = ( event ) => {
-		const { storeName } = this.props;
-
+		const { name, search, exclude } = this.props;
 		this.scrollPosition = 0;
-		dispatch( storeName ).search( event.target.value, {
-			exclude: this.props.exclude,
+		search( name, {
+			term: event.target.value,
+			exclude,
+			populate: true,
 		} );
 	}
 
@@ -92,36 +104,37 @@ export default class SearchPosts extends Component {
 		const { target } = event;
 		const { scrollHeight, scrollTop } = target;
 		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
-		const { fetching } = this.state;
-		if ( ! fetching ) {
+		const { loading } = this.state;
+		if ( ! loading ) {
 			this.scrollPosition = scrollTop;
 		}
 		if ( percentage > 0.75 ) {
-			const { store, storeName } = this.props;
-			const { page } = store.getState();
-			dispatch( storeName ).fetch( {
+			const { page, term, name, search, exclude } = this.props;
+			search( name, {
+				term,
+				exclude,
+				populate: true,
 				page: page + 1,
-				exclude: this.props.exclude,
 			} );
 		}
 	}
 
 	renderList = () => {
-		const { posts, fetching } = this.state;
+		const { results, loading } = this.props;
 
-		if ( fetching ) {
+		if ( loading ) {
 			return (
 				<Placeholder key="placeholder">
 					<Spinner />
 				</Placeholder>
 			);
 		}
-		return posts.map( this.renderItem, this );
+		return results.map( this.renderItem, this );
 	}
 
 	renderItem = ( item = {} ) => {
 		const { current } = this.state;
-		const { onSelectItem, onHover } = this.props;
+		const { onSelectItem } = this.props;
 
 		const isCurrent = current && current.id === item.id;
 		const { title = {} } = item;
@@ -133,13 +146,11 @@ export default class SearchPosts extends Component {
 				role="menuitem"
 				className="tribe-editor__search-posts__item"
 				onClick={ () => {
-					onSelectItem( item.id );
+					onSelectItem( item.id, item );
 					this.onClose();
 				} }
 				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
 				disabled={ item.isDisabled }
-				onMouseEnter={ onHover( item ) }
-				onMouseLeave={ onHover( null ) }
 			>
 				{ decode( rendered ) }
 			</button>
@@ -165,12 +176,8 @@ export default class SearchPosts extends Component {
 	}
 
 	renderSearchInput() {
-		const { searchable, searchLabel } = this.props;
+		const { term, searchLabel } = this.props;
 		const instanceId = uniqueId( 'search-' );
-
-		if ( ! searchable ) {
-			return null;
-		}
 
 		return ( <div>
 			<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
@@ -180,7 +187,7 @@ export default class SearchPosts extends Component {
 				id={ `editor-inserter__${ instanceId }` }
 				type="search"
 				placeholder={ searchLabel }
-				value={ this.state.search }
+				value={ term }
 				className="editor-inserter__search"
 				onChange={ this.searchPosts }
 			/>
@@ -189,28 +196,19 @@ export default class SearchPosts extends Component {
 
 	renderToggle = ( { onToggle, isOpen } ) => {
 		const { iconLabel } = this.props;
-		const icon = (
-			<Dashicon icon="search" />
-		);
 
 		return (
 			<IconButton
 				className="tribe-editor__btn"
 				label={ iconLabel }
 				onClick={ onToggle }
-				icon={ icon }
+				icon={ <Dashicon icon="search" /> }
 				aria-expanded={ isOpen }
 			/>
 		);
 	}
 
 	render() {
-		const { focus } = this.props;
-
-		if ( ! focus ) {
-			return null;
-		}
-
 		return (
 			<Dropdown
 				className="tribe-editor__dropdown"
@@ -222,3 +220,14 @@ export default class SearchPosts extends Component {
 		);
 	}
 }
+
+const mapStateToProps = ( state, props ) => ( {
+	term: selectors.getSearchTerm( state, props ),
+	loading: selectors.getLoading( state, props ),
+	results: selectors.getResults( state, props ),
+	page: selectors.getPage( state, props ),
+} );
+
+const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+
+export default connect( mapStateToProps, mapDispatchToProps )( SearchPosts );

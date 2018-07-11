@@ -2,14 +2,16 @@
  * External dependencies
  */
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+import classNames from 'classnames';
+import AutosizeInput from 'react-input-autosize';
 
 /**
  * WordPress dependencies
  */
-import { withDispatch, withSelect } from '@wordpress/data';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import { Dashicon } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { RichText, UrlInput } from '@wordpress/editor';
@@ -18,8 +20,10 @@ import { RichText, UrlInput } from '@wordpress/editor';
  * Internal dependencies
  */
 import withSaveData from 'editor/hoc/with-save-data';
-import { STORE_NAME } from 'data/details';
+import * as actions from 'data/blocks/website/actions';
+import * as selectors from 'data/blocks/website/selectors';
 import './style.pcss';
+import { sendValue } from 'editor/utils/input';
 
 /**
  * Module Code
@@ -30,8 +34,8 @@ const placeholder = __( 'Add Button Text', 'events-gutenberg' );
 class EventWebsite extends Component {
 	static propTypes = {
 		isSelected: PropTypes.bool,
-		setAttributes: PropTypes.func,
-		setUrl: PropTypes.func,
+		setWebsite: PropTypes.func,
+		setLabel: PropTypes.func,
 		attributes: PropTypes.object,
 		url: PropTypes.string,
 		urlLabel: PropTypes.string,
@@ -39,10 +43,6 @@ class EventWebsite extends Component {
 
 	constructor() {
 		super( ...arguments );
-	}
-
-	onLabelChange = ( urlLabel ) => {
-		this.props.setAttributes( { urlLabel } );
 	}
 
 	render() {
@@ -70,11 +70,7 @@ class EventWebsite extends Component {
 	}
 
 	renderUrlInput() {
-		const { isSelected, url } = this.props;
-
-		const buttonLabel = url
-			? __( 'Edit Website', 'events-gutenberg' )
-			: __( 'Insert Website', 'events-gutenberg' );
+		const { isSelected, url, setWebsite } = this.props;
 
 		if ( ! isSelected ) {
 			return null;
@@ -86,67 +82,65 @@ class EventWebsite extends Component {
 				<UrlInput
 					autoFocus={ false }
 					value={ url }
-					onChange={ ( url ) => this.setWebsiteUrl( { url } ) }
+					onChange={ setWebsite }
 				/>
 			</div>
 		);
 	}
 
 	renderLabelInput() {
-		const { urlLabel } = this.props;
+		const { urlLabel, setLabel, isSelected } = this.props;
+		const containerClassNames = classNames( 'tribe-editor__event-website__label', {
+			'tribe-editor__event-website__label--selected': isSelected,
+		} );
+
+		const isEmpty = urlLabel.trim() === '';
+		const inputClassNames = classNames( 'tribe-editor__event-website__label-text', {
+			'tribe-editor__event-website__label-text--empty': isEmpty && isSelected,
+		} );
 
 		return (
-			<div key='tribe-events-website-label' className="tribe-editor__event-website__label">
-				<RichText
+			<div
+				key="tribe-events-website-label"
+				className={ containerClassNames }
+			>
+				<AutosizeInput
 					id="tribe-events-website-link"
-					className="tribe-editor__event-website__label-text"
-					format="string"
-					tagName="h4"
+					className={ inputClassNames }
 					value={ urlLabel }
-					onChange={ this.onLabelChange }
 					placeholder={ placeholder }
-					formattingControls={ [] }
+					onChange={ sendValue( setLabel ) }
 				/>
 			</div>
 		);
 	}
 
 	renderPlaceholder( urlLabel ) {
+		const classes = [
+			'tribe-editor__event-website__label',
+			'tribe-editor__event-website__label--placeholder',
+		];
 		return (
 			<button
-				className="tribe-editor__event-website__label tribe-editor__event-website__label--placeholder"
+				className={ classNames( classes ) }
 			>
 				{ urlLabel }
 			</button>
 		);
 	}
-
-	setWebsiteUrl = ( data ) => {
-		const { url } = data;
-		const { setUrl } = this.props;
-		setUrl( url );
-	};
 }
 
-export default compose( [
-	withSelect( ( select, props ) => {
-		const { get } = select( STORE_NAME );
-		const { urlLabel } = props.attributes;
-		return {
-			url: get( 'url' ),
-			urlLabel,
-		};
-	} ),
-	withDispatch( ( dispatch, props ) => {
-		const { setWebsiteUrl } = dispatch( STORE_NAME );
-		return {
-			setUrl: setWebsiteUrl,
-			setInitialState() {
-				const { attributes } = props;
-				const { url } = attributes;
-				setWebsiteUrl( url );
-			},
-		};
-	} ),
+const mapStateToProps = ( state ) => ( {
+	url: selectors.getUrl( state ),
+	urlLabel: selectors.getLabel( state ),
+} );
+
+const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+
+export default compose(
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	),
 	withSaveData(),
-] )( EventWebsite );
+)( EventWebsite );
