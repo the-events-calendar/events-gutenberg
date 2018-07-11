@@ -13,7 +13,7 @@ import { bindActionCreators, compose } from 'redux';
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import {
-	ToggleControl,
+	CheckboxControl,
 	TextControl,
 	PanelBody,
 } from '@wordpress/components';
@@ -59,7 +59,7 @@ class EventPrice extends Component {
 	renderUI() {
 		return (
 			<section key="event-price-box" className="tribe-editor__block">
-				<div className="tribe-editor__event-cost">
+				<div className="tribe-editor__event-price">
 					{ this.renderLabel() }
 					{ this.renderDashboard() }
 				</div>
@@ -69,10 +69,9 @@ class EventPrice extends Component {
 
 	renderLabel() {
 		const { currencyPosition } = this.props;
-
 		const containerClass = classNames(
-			'tribe-editor__event-price',
-			`tribe-editor__event-price--${ currencyPosition }`,
+			'tribe-editor__event-price__price',
+			`tribe-editor__event-price__price--${ currencyPosition }`,
 		);
 
 		return (
@@ -96,18 +95,17 @@ class EventPrice extends Component {
 		const { costDescription, cost, currencySymbol } = this.props;
 		const parsed = parser( cost );
 
-		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( parsed );
-		const hideCurrency = ! hasPrice && ! this.isEmpty( costDescription );
+		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( cost );
 
-		const currencyClassNames = classNames( [
-			'tribe-editor__event-price__currency',
-			{
-				'tribe-editor__event-price__currency--active': hasPrice,
-				'tribe-editor__event-price__currency--disabled': hideCurrency,
-			},
-		] );
+		if ( ! hasPrice ) {
+			return null;
+		}
 
-		return <span className={ currencyClassNames }>{ currencySymbol }</span>;
+		return (
+			<span className="tribe-editor__event-price__currency">
+				{ currencySymbol }
+			</span>
+		);
 	}
 
 	renderPlaceholder() {
@@ -133,15 +131,17 @@ class EventPrice extends Component {
 		const { cost } = this.props;
 		const parsed = parser( cost );
 
-		if ( this.isEmpty( parsed ) ) {
+		if ( this.isEmpty( parsed ) && ! isFree( cost ) ) {
 			return null;
 		}
 
-		if ( isFree( parsed ) ) {
-			return null;
+		let value = parsed;
+
+		if ( isFree( cost ) ) {
+			value = __( 'Free', 'events-gutenberg' );
 		}
 
-		return <span className="tribe-editor__event-price__cost">{ parsed }</span>;
+		return <span className="tribe-editor__event-price__cost">{ value }</span>;
 	}
 
 	renderDescription() {
@@ -169,6 +169,7 @@ class EventPrice extends Component {
 			<Dashboard
 				open={ this.state.open }
 				onClose={ this.onCloseDashboard }
+				overflow
 			>
 				<Fragment>
 					<section className="tribe-editor__event-price__dashboard">
@@ -213,7 +214,6 @@ class EventPrice extends Component {
 			currencySymbol,
 			currencyPosition,
 			setSymbol,
-			togglePosition,
 		} = this.props;
 
 		if ( ! isSelected ) {
@@ -224,20 +224,23 @@ class EventPrice extends Component {
 			<InspectorControls key="inspector">
 				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 					<TextControl
+						className="tribe-editor__event-price__currency-symbol-setting"
 						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
 						value={ currencySymbol }
 						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
 						onChange={ setSymbol }
 					/>
-					<ToggleControl
-						label={ __( 'Show symbol before', 'events-gutenberg' ) }
-						checked={ 'prefix' === currencyPosition }
-						onChange={ togglePosition }
+					<CheckboxControl
+						label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
+						checked={ 'suffix' === currencyPosition }
+						onChange={ this.setCurrencyPosition }
 					/>
 				</PanelBody>
 			</InspectorControls>
 		);
 	}
+
+	setCurrencyPosition = ( value ) => this.props.togglePosition( ! value );
 }
 
 const mapStateToProps = ( state ) => ( {
