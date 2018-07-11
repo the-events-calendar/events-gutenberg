@@ -12,14 +12,14 @@ if ( ! $organizer ) {
 	return;
 }
 
-$phone   = tribe_get_organizer_phone( $organizer_id );
-$website = tribe_get_organizer_website_link( $organizer_id );
-$email   = tribe_get_organizer_email( $organizer_id );
+$phone   = tribe_get_organizer_phone( $organizer );
+$website = tribe_get_organizer_website_link( $organizer );
+$email   = tribe_get_organizer_email( $organizer );
 
 ?>
 <div class="tribe-block tribe-block__organizer__details tribe-clearfix">
 	<div class="tribe-block__organizer__title">
-		<h3><?php echo tribe_get_organizer( $organizer_id ); ?></h3>
+		<h3><?php echo tribe_get_organizer( $organizer ); ?></h3>
 	</div>
 	<?php if ( ! empty( $phone ) ) : ?>
 		<p class="tribe-block__organizer__phone"><?php echo esc_html( $phone ); ?></p>
