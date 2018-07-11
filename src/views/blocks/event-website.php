@@ -5,10 +5,6 @@
  * @version TBD
  *
  */
-$attributes = $this->attributes( array(
-	'urlLabel' => '',
-	'href' => tribe_get_event_website_url(),
-) );
 
 if ( ! $this->attr( 'href' ) || ! $this->attr( 'urlLabel' ) ) {
 	return;
