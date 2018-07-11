@@ -29,6 +29,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Fix - Styles for map container and fix map error
 * Fix - Issue on `datetime` block to select the date on Gutenberg 3.1
 * Fix - Prevent to create multiples entries when using sync copies of blocks
+* Fix - Problem when multiple sync copies were not initialized
 * Tweak - Consolidate multiple stores into a single store
 * Tweak - Use native redux store implementation
 * Tweak - Remove references to `withSelect` and `withDispatch` and replace with `connect`
