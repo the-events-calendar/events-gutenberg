@@ -105,6 +105,7 @@ class EventLinks extends Component {
 				<AutosizeInput
 					id="tribe-event-ical"
 					name="tribe-event-ical"
+					className="tribe-editor__btn-input"
 					value={ iCalLabel }
 					placeholder={ iCalExportPlaceholder }
 					onChange={ sendValue( setiCalLabel ) }
