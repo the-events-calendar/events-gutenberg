@@ -149,12 +149,11 @@ class EventPrice extends Component {
 	}
 
 	renderDashboard() {
-		const { open, cost, costDescription, setCost, setDescription, closeDashboardPrice } = this.props;
+		const { dashboardOpen, cost, costDescription, setCost, setDescription } = this.props;
 
 		return (
 			<Dashboard
-				open={ open }
-				onClose={ closeDashboardPrice }
+				open={ dashboardOpen }
 				onKeyDown={ this.onKeyDown }
 				onClick={ this.onClick }
 				overflow
@@ -258,7 +257,7 @@ class EventPrice extends Component {
 }
 
 const mapStateToProps = ( state ) => ( {
-	open: UISelectors.getDashboardPriceOpen( state ),
+	dashboardOpen: UISelectors.getDashboardPriceOpen( state ),
 	cost: priceSelectors.getPrice( state ),
 	currencyPosition: priceSelectors.getPosition( state ),
 	currencySymbol: priceSelectors.getSymbol( state ),

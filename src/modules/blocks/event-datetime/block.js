@@ -300,11 +300,10 @@ class EventDateTime extends Component {
 	}
 
 	renderDashboard() {
-		const { dashboardOpen, closeDashboardDateTime } = this.props;
+		const { dashboardOpen } = this.props;
 		return (
 			<Dashboard
 				open={ dashboardOpen }
-				onClose={ closeDashboardDateTime }
 				onKeyDown={ this.onKeyDown }
 				onClick={ this.onClick }
 				overflow

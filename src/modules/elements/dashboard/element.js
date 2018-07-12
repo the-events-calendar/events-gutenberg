@@ -38,21 +38,15 @@ export default class Dashboard extends Component {
 		overflow: false,
 		onKeyDown: noop,
 		onClick: noop,
-		onOpen: noop,
-		onClose: noop,
-		targets: [],
 	};
 
 	static propTypes = {
 		open: PropTypes.bool,
-		overflow: PropTypes.bool,
 		className: PropTypes.string,
 		direction: PropTypes.oneOf( Object.keys( directions ) ),
+		overflow: PropTypes.bool,
 		onKeyDown: PropTypes.func,
 		onClick: PropTypes.func,
-		onOpen: PropTypes.func,
-		onClose: PropTypes.func,
-		targets: PropTypes.array,
 	};
 
 	/**
