@@ -18,9 +18,6 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 
-/**
- * Module Code
- */
 class TaxonomiesElement extends Component {
 	constructor() {
 		super( ...arguments );
@@ -70,7 +67,7 @@ class TaxonomiesElement extends Component {
 			<ul className={ this.getTermListClassName( 0 ) }>
 				{ terms.map( ( term, index ) => (
 					this.renderTermListItem( term, index + 1 === terms.length, 0 )
-				 ) ) }
+				) ) }
 			</ul>
 		);
 	}
@@ -88,6 +85,7 @@ class TaxonomiesElement extends Component {
 				<a
 					href={ term.link }
 					target="_blank"
+					rel="noopener noreferrer"
 					className="tribe-editor__terms__list-item-link"
 				>
 					{ this.renderTermName( term ) }

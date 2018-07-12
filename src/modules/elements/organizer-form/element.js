@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import { isFunction, values } from 'lodash';
 
 /**
@@ -25,7 +26,7 @@ import { Input } from 'elements';
 class OrganizerForm extends Component {
 	static defaultProps = {
 		postType: 'tribe_organizer',
-	}
+	};
 
 	constructor() {
 		super( ...arguments );
@@ -38,7 +39,7 @@ class OrganizerForm extends Component {
 			website: '',
 			email: '',
 			organizer: null,
-			isValid: false,
+			isValid: this.isValid(),
 		};
 
 		this.fields = {};
@@ -96,12 +97,6 @@ class OrganizerForm extends Component {
 			this.props.onClose();
 		} ).fail( ( err ) => {
 			console.error( err );
-		} );
-	}
-
-	componentDidMount() {
-		this.setState( {
-			isValid: this.isValid(),
 		} );
 	}
 

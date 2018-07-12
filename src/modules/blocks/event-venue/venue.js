@@ -17,13 +17,6 @@ import {
 	Placeholder,
 } from '@wordpress/components';
 
-/**
- * Internal dependencies
- */
-
-/**
- * Module Code
- */
 export default class VenueDetails extends Component {
 	static defaultProps = {
 		beforeTitle: null,
@@ -142,6 +135,7 @@ export default class VenueDetails extends Component {
 					href={ mapLink( address ) }
 					title={ __( 'Click to view a Google Map', 'events-gutenberg' ) }
 					target="_blank"
+					rel="noopener noreferrer"
 				>
 					{ __( '+ Google Map', 'events-gutenberg' ) }
 				</a>

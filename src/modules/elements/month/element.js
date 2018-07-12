@@ -1,7 +1,7 @@
 /**
  * Import external dependencies
  */
-import { omit, noop, isEqual } from 'lodash';
+import { omit, noop } from 'lodash';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import PropTypes from 'prop-types';
 import 'react-day-picker/lib/style.css';
@@ -94,7 +94,7 @@ export default class Month extends Component {
 	getSelectedDays = () => {
 		const { withRange, from, to } = this.props;
 		if ( withRange ) {
-			return [ from, { from, to } ];
+			return [ from, { from, to }];
 		}
 		return from;
 	};
@@ -126,14 +126,13 @@ export default class Month extends Component {
 
 	render() {
 		const { from, to, month, withRange, setVisibleMonth } = this.props;
-		const { toMonth } = this.state;
 		const modifiers = withRange ? { start: from, end: to } : {};
 		const containerClass = classNames( { 'tribe-editor__calendars--range': withRange } );
 		return (
 			<DayPicker
 				className={ containerClass }
 				fromMonth={ fromMonth }
-				toMonth={ toMonth }
+				toMonth={ this.state.toMonth }
 				month={ month }
 				numberOfMonths={ 2 }
 				modifiers={ modifiers }

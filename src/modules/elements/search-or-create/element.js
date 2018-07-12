@@ -129,7 +129,7 @@ class SearchOrCreate extends Component {
 		if ( loading ) {
 			return (
 				<div className="tribe-editor__soc__results--loading">
-					<Spinner/>
+					<Spinner />
 				</div>
 			);
 		}

@@ -51,7 +51,6 @@ import { actions, selectors, utils } from 'data/blocks/venue';
  */
 
 class EventVenue extends Component {
-
 	static propTypes = {
 		venue: PropTypes.number,
 		isSelected: PropTypes.bool,

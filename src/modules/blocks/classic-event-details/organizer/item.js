@@ -18,7 +18,7 @@ import { Actions, Name } from './index';
 
 const Item = ( { id, details = {}, loading, onRemoveOrganizer, ...rest } ) => {
 	if ( loading || isEmpty( details ) ) {
-		return <li><Loading className="tribe-editor__spinner--item"/></li>;
+		return <li><Loading className="tribe-editor__spinner--item" /></li>;
 	}
 
 	return (

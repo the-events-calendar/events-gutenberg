@@ -8,10 +8,10 @@ import React from 'react';
  */
 import './style.pcss';
 
-const YearMonthForm = ({ today, date, localeUtils, onChange }) => {
+const YearMonthForm = ( { today, date, localeUtils, onChange } ) => {
 	const currentYear = today.getFullYear();
 	const currentMonth = today.getMonth();
-	const toMonth = new Date( currentYear + 10, 11 )
+	const toMonth = new Date( currentYear + 10, 11 );
 	const months = localeUtils.getMonths();
 	const years = [];
 
@@ -26,7 +26,12 @@ const YearMonthForm = ({ today, date, localeUtils, onChange }) => {
 
 	return (
 		<form className="tribe-editor__year-month-form">
-			<select className="tribe-editor__year-month-form__month" name="month" onChange={ handleChange } value={ date.getMonth() }>
+			<select
+				className="tribe-editor__year-month-form__month"
+				name="month"
+				onChange={ handleChange }
+				value={ date.getMonth() }
+			>
 				{ months.map( ( month, monthNum ) => {
 					if ( date.getFullYear() === currentYear && monthNum < currentMonth ) {
 						return (
@@ -43,25 +48,30 @@ const YearMonthForm = ({ today, date, localeUtils, onChange }) => {
 					);
 				} ) }
 			</select>
-			<select className="tribe-editor__year-month-form__year" name="year" onChange={ handleChange } value={ date.getFullYear() }>
+			<select
+				className="tribe-editor__year-month-form__year"
+				name="year"
+				onChange={ handleChange }
+				value={ date.getFullYear() }
+			>
 				{ years.map( year => {
 					if ( date.getMonth() < currentMonth && year === currentYear ) {
 						return (
 							<option key={ year } value={ year } disabled>
 								{ year }
 							</option>
-						)
+						);
 					}
 
 					return (
 						<option key={ year } value={ year }>
 							{ year }
 						</option>
-					)
+					);
 				} ) }
 			</select>
 		</form>
 	);
-}
+};
 
 export default YearMonthForm;
