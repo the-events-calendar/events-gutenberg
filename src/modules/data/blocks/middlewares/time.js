@@ -5,7 +5,6 @@ import { types, selectors, actions } from 'data/blocks/datetime';
 
 import {
 	isSameDay,
-	roundTime,
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
@@ -18,9 +17,10 @@ const {
 	setAllDay,
 	setMultiDay,
 	setEndTime,
+	setStartTime,
 } = actions;
 
-import { DAY_IN_SECONDS, HALF_HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from 'editor/utils/time';
+import { DAY_IN_SECONDS, HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from 'editor/utils/time';
 
 export const startTime = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	next( action );
@@ -47,12 +47,12 @@ export const startTime = ( { dispatch, getState } ) => ( next ) => ( action ) =>
 		const difference = DAY_IN_SECONDS - totalSeconds( toMoment( current.end ) );
 		if ( difference <= MINUTE_IN_SECONDS ) {
 			// Prevent to have 11:59 as end time when moving from all day to regular day
-			const total = totalSeconds( roundTime( toMoment( current.end ) ) );
+			const total = totalSeconds( toMoment( current.end ) );
 			// If the user select start at 11:30pm is going to be the same as end so we need to add half an hour
 			dispatch( setEndTime( total ) );
 		}
 	} else if ( start.isSameOrAfter( toMoment( current.end ) ) ) {
-		const total = totalSeconds( start.clone().add( HALF_HOUR_IN_SECONDS, 'seconds' ) );
+		const total = totalSeconds( start.clone().add( HOUR_IN_SECONDS, 'seconds' ) );
 		dispatch( setEndTime( total ) );
 	}
 };
@@ -78,13 +78,15 @@ export const endTime = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 		dispatch( setAllDay( false ) );
 	}
 
-	let end = setTimeInSeconds( toMoment( current.end ), seconds );
+	const end = setTimeInSeconds( toMoment( current.end ), seconds );
+	dispatch( setEnd( toDateTime( end ) ) );
+
 	const start = toMoment( current.start );
 	// Add HAlf an hour to the end if is the same or before the start.
 	if ( end.isSameOrBefore( start ) ) {
-		end = start.clone().add( HALF_HOUR_IN_SECONDS, 'seconds' );
+		const total = totalSeconds( start.clone().subtract( HOUR_IN_SECONDS, 'seconds' ) );
+		dispatch( setStartTime( total ) );
 	}
-	dispatch( setEnd( toDateTime( end ) ) );
 
 	if ( ! isSameDay( start, end ) ) {
 		dispatch( setMultiDay( true ) );

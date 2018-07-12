@@ -11,13 +11,19 @@
 	justify-content: center;
 	margin: 10px 15px 10px 0;
 	min-height: 38px;
+	max-width: 100%;
 	padding: 0 17px 0 14px;
+
+	.tribe-editor__btn-input {
+		max-width: calc(100% - 33px);
+	}
 
 	input {
 		color: #009FD4;
 		font-family: 'Helvetica', 'sans-serif';
 		font-weight: bold;
 		font-size: 1rem;
+		max-width: calc(100% - 12px);
 
 		& * [data-mce-selected="inline-boundary"] {
 			background: transparent;

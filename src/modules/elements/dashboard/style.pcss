@@ -8,25 +8,6 @@
 		pointer-events: auto;
 		width: 100%;
 	}
-
-	&--up {
-		.tribe-editor__dashboard {
-			bottom: -14px;
-		}
-	}
-
-	&--down {
-		.tribe-editor__dashboard {
-			top: 14px;
-		}
-	}
-
-	&--overflow {
-		.tribe-editor__dashboard {
-			left: -15px;
-			width: calc(100% + 30px);
-		}
-	}
 }
 
 .tribe-editor__dashboard {
@@ -37,6 +18,26 @@
 	position: absolute;
 	right: 0;
 	z-index: 100;
+
+	&:before {
+		content: '';
+		display: block;
+		height: 50px;
+		top: -34px;
+		left: 0;
+		right: 0;
+		position: absolute;
+		z-index: 2;
+	}
+
+	&:after {
+		height: 20px;
+		left: 0;
+		right: 0;
+		position: absolute;
+		content: '';
+		bottom: -20px;
+	}
 
 	.tribe-editor__time-picker__separator {
 		color: #545D66;
@@ -50,5 +51,18 @@
 		font-size: 1em;
 		font-weight: normal;
 		margin-right: 8px;
+	}
+
+	.tribe-editor__dashboard__container--up & {
+		bottom: -14px;
+	}
+
+	.tribe-editor__dashboard__container--down & {
+		top: 14px;
+	}
+
+	.tribe-editor__dashboard__container--overflow & {
+		margin-left: -29px;
+		margin-right: -29px;
 	}
 }

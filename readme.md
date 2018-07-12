@@ -26,6 +26,8 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 #### 0.2.4-alpha - TBD
 
+* Fix - Styles for date time block
+* Fix - Styles for price block
 * Fix - Styles for map container and fix map error
 * Fix - Issue on `datetime` block to select the date on Gutenberg 3.1
 * Fix - Prevent to create multiples entries when using sync copies of blocks
@@ -37,10 +39,12 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - `showMap` and `showMapLink` are enabled by default on Location block
 * Tweak - Favor `<AutosizeInput>` instead of `<RichText>`
 * Tweak - Implemented and added styles for the price block FE view
+* Tweak - Implemented and added styles for the links block FE view
 * Feature - HOC `withDetails` to fetch details of a post type.
 * Feature - HOC `withForm` to attach Form behaviors into a block.
 * Feature - HOC `withStore` to inject the store property into a component
 * Feature - `useOnce` properties from block to allow live sync copies of blocks
+* Feature - Time for an event can be set on any range of minutes not just half hours.
 
 #### 0.2.3-alpha - 2018-06-22
 
