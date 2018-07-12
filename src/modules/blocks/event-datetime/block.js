@@ -102,7 +102,7 @@ class EventDateTime extends Component {
 		document.addEventListener( 'click', this.onClick );
 	}
 
-	componentDidUnmount() {
+	componentWillUnmount() {
 		document.removeEventListener( 'keydown', this.onKeyDown );
 		document.removeEventListener( 'click', this.onClick );
 	}
