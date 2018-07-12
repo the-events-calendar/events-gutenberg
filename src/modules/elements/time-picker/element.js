@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { isString, find, noop } from 'lodash';
@@ -15,6 +16,7 @@ import {
 	Dropdown,
 	Dashicon,
 } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -22,7 +24,6 @@ import {
 import './style.pcss';
 import { DAY_IN_SECONDS, MINUTE_IN_SECONDS } from 'utils/time';
 import { toFormat, setTimeInSeconds } from 'utils/moment';
-import { roundTime, totalSeconds } from 'editor/utils/moment';
 
 export default class TimePicker extends Component {
 	static defaultProps = {
@@ -40,21 +41,58 @@ export default class TimePicker extends Component {
 
 	static propTypes = {
 		current: PropTypes.instanceOf( moment ),
+		allDay: PropTypes.bool,
+		onSelectItem: PropTypes.func,
+		timeFormat: PropTypes.string,
 	};
 
 	constructor() {
 		super( ...arguments );
 	}
 
-	get seconds() {
-		const current = roundTime( this.props.current );
-		return totalSeconds( current );
+	renderLabel( onToggle ) {
+		const { allDay, current } = this.props;
+
+		if ( allDay ) {
+			return (
+				<button
+					className="tribe-editor__timepicker__all-day-btn"
+					onClick={ onToggle }>
+					{ __( 'All Day', 'events-gutenberg' ) }
+				</button>
+			);
+		}
+
+		const label = current.format( 'HH:mm' );
+
+		return (
+			<input
+				name="google-calendar-label"
+				className="tribe-editor__btn-input"
+				type="time"
+				value={ label }
+				onChange={ this.setTime }
+			/>
+		);
 	}
 
-	get currentLabel() {
-		const { allDay } = this.props;
-		return allDay ? 'All Day' : this.formatLabel( this.seconds );
-	}
+	setTime = ( e ) => {
+		const newValue = e.target.value;
+		const parts = newValue.split( ':' );
+		const [ hour, minute ] = parts;
+
+		const { onSelectItem, current } = this.props;
+		const copy = current.clone();
+		copy.set( 'hour', parseInt( hour, 10 ) );
+		copy.set( 'minute', parseInt( minute, 10 ) );
+
+		const start = current.clone().startOf( 'day' );
+
+		onSelectItem( {
+			allDay: false,
+			seconds: copy.diff( start, 'seconds' ),
+		} );
+	};
 
 	getItems( searchFor, props = this.props ) {
 		const items = [];
@@ -67,7 +105,7 @@ export default class TimePicker extends Component {
 			timeFormat,
 		} = props;
 
-		const currentValue = this.seconds;
+		const { current } = this.props;
 
 		const start = minTime ? minTime : 0;
 		let end = maxTime ? maxTime : ( start + DAY_IN_SECONDS - 1 );
@@ -89,7 +127,7 @@ export default class TimePicker extends Component {
 				value: item,
 				text: this.formatLabel( item ),
 				isDisabled: false,
-				isCurrent: item === currentValue,
+				isCurrent: item === current,
 			} );
 		}
 
@@ -103,11 +141,11 @@ export default class TimePicker extends Component {
 	formatLabel = ( seconds ) => {
 		const { timeFormat } = this.props;
 		return setTimeInSeconds( moment(), seconds ).format( toFormat( timeFormat ) );
-	}
+	};
 
 	renderList = () => {
 		return this.getItems().map( this.renderItem );
-	}
+	};
 
 	renderItem = ( item ) => {
 		const { allDay } = this.props;
@@ -127,7 +165,7 @@ export default class TimePicker extends Component {
 				{ item.text }
 			</button>
 		);
-	}
+	};
 
 	handleSelection = ( item ) => {
 		return () => {
@@ -144,7 +182,7 @@ export default class TimePicker extends Component {
 			this.props.onSelectItem( data );
 			this.onClose();
 		};
-	}
+	};
 
 	render() {
 		return (
@@ -169,19 +207,20 @@ export default class TimePicker extends Component {
 		);
 	}
 
-	toggleDropdown = ( { onToggle, isOpen }  ) => {
+	toggleDropdown = ( { onToggle, isOpen } ) => {
 		return (
-			<button
-				type="button"
-				className="button-link"
-				onClick={ onToggle }
-				aria-expanded={ isOpen }
-			>
-				{ this.currentLabel }
-				<Dashicon className="btn--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
-			</button>
+			<div className="tribe-editor__timepicker-label-container">
+				{ this.renderLabel( onToggle ) }
+				<button
+					type="button"
+					aria-expanded={ isOpen }
+					onClick={ onToggle }
+				>
+					<Dashicon className="btn--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
+				</button>
+			</div>
 		);
-	}
+	};
 
 	renderDropdownContent = ( { onToggle, isOpen, onClose } ) => {
 		this.onClose = onClose.bind( this );
@@ -190,7 +229,7 @@ export default class TimePicker extends Component {
 				{ this.scrollArea }
 			</ScrollTo>
 		);
-	}
+	};
 
 	scrollArea = () => {
 		return [
@@ -204,5 +243,5 @@ export default class TimePicker extends Component {
 				{ this.renderList() }
 			</ScrollArea>,
 		];
-	}
+	};
 }
