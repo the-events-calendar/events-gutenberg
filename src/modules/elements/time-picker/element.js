@@ -23,15 +23,15 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 import { DAY_IN_SECONDS, MINUTE_IN_SECONDS } from 'utils/time';
-import { toFormat, setTimeInSeconds } from 'utils/moment';
+import { toFormat, setTimeInSeconds, totalSeconds, roundTime } from 'utils/moment';
 
 export default class TimePicker extends Component {
 	static defaultProps = {
 		onHover: noop,
 		onSelectItem: noop,
 		step: 30,
-		minTime: undefined,
-		maxTime: undefined,
+		min: undefined,
+		max: undefined,
 		show2400: false,
 		timeFormat: 'H:i',
 		current: moment(),
@@ -44,6 +44,7 @@ export default class TimePicker extends Component {
 		allDay: PropTypes.bool,
 		onSelectItem: PropTypes.func,
 		timeFormat: PropTypes.string,
+		min: PropTypes.instanceOf( moment ),
 	};
 
 	constructor() {
@@ -51,7 +52,7 @@ export default class TimePicker extends Component {
 	}
 
 	renderLabel( onToggle ) {
-		const { allDay, current } = this.props;
+		const { allDay, current, min, max } = this.props;
 
 		if ( allDay ) {
 			return (
@@ -64,6 +65,14 @@ export default class TimePicker extends Component {
 		}
 
 		const label = current.format( 'HH:mm' );
+		const additionalProps = {};
+		if ( min ) {
+			additionalProps.min = min.format( 'HH:mm' );
+		}
+
+		if ( max ) {
+			additionalProps.max = max.format( 'HH:mm' );
+		}
 
 		return (
 			<input
@@ -72,6 +81,7 @@ export default class TimePicker extends Component {
 				type="time"
 				value={ label }
 				onChange={ this.setTime }
+				{ ...additionalProps }
 			/>
 		);
 	}
@@ -81,12 +91,18 @@ export default class TimePicker extends Component {
 		const parts = newValue.split( ':' );
 		const [ hour, minute ] = parts;
 
-		const { onSelectItem, current } = this.props;
+		const { onSelectItem, current, min, max } = this.props;
 		const copy = current.clone();
 		copy.set( 'hour', parseInt( hour, 10 ) );
 		copy.set( 'minute', parseInt( minute, 10 ) );
 
 		const start = current.clone().startOf( 'day' );
+
+		const isBefore = min && copy.isBefore( min );
+		const isAfter = max && copy.isAfter( max );
+		if ( isBefore || isAfter ) {
+			return;
+		}
 
 		onSelectItem( {
 			allDay: false,
@@ -99,16 +115,23 @@ export default class TimePicker extends Component {
 
 		const {
 			step,
-			minTime,
-			maxTime,
+			min,
+			max,
 			show2400,
 			timeFormat,
 		} = props;
 
 		const { current } = this.props;
 
-		const start = minTime ? minTime : 0;
-		let end = maxTime ? maxTime : ( start + DAY_IN_SECONDS - 1 );
+		let start = 0;
+		if ( min ) {
+			const roundStart = roundTime( min );
+			if ( roundStart.isS( min ) ) {
+				roundStart.add( 30, 'minutes' );
+			}
+			start = totalSeconds( roundStart );
+		}
+		let end = max ? totalSeconds( max ) : ( start + DAY_IN_SECONDS - 1 );
 
 		// make sure the end time is greater than start time,
 		// otherwise there will be no list to show
