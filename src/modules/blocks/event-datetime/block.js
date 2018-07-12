@@ -97,6 +97,16 @@ class EventDateTime extends Component {
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
+	componentDidMount() {
+		document.addEventListener( 'keydown', this.onKeyDown );
+		document.addEventListener( 'click', this.onClick );
+	}
+
+	componentDidUnmount() {
+		document.removeEventListener( 'keydown', this.onKeyDown );
+		document.removeEventListener( 'click', this.onClick );
+	}
+
 	renderStart() {
 		return (
 			<React.Fragment>

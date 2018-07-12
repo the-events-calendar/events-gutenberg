@@ -50,34 +50,6 @@ export default class Dashboard extends Component {
 	};
 
 	/**
-	 * Once the component is mounted make sure to set the state based on the property, after
-	 * that make sure to setup the listeners accordingly.
-	 */
-	componentDidMount() {
-		this.addListeners();
-	}
-
-	componentWillUnmount() {
-		this.removeListeners();
-	}
-
-	/**
-	 * Attach event listeners when this component is opened.
-	 */
-	addListeners() {
-		document.addEventListener( 'keydown', this.props.onKeyDown );
-		document.addEventListener( 'click', this.props.onClick );
-	}
-
-	/**
-	 * Remove all listeners associated with this component.
-	 */
-	removeListeners() {
-		document.removeEventListener( 'keydown', this.props.onKeyDown );
-		document.removeEventListener( 'click', this.props.onClick );
-	}
-
-	/**
 	 * Construct a string with the appropriate class for the main container of the component
 	 *
 	 * @returns {string} The generated class name for the container

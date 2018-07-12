@@ -48,6 +48,16 @@ import { searchParent } from 'editor/utils/dom';
  */
 
 class EventPrice extends Component {
+	componentDidMount() {
+		document.addEventListener( 'keydown', this.onKeyDown );
+		document.addEventListener( 'click', this.onClick );
+	}
+
+	componentDidUnmount() {
+		document.removeEventListener( 'keydown', this.onKeyDown );
+		document.removeEventListener( 'click', this.onClick );
+	}
+
 	render() {
 		return [
 			this.renderUI(),
