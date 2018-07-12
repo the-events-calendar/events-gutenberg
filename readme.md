@@ -39,6 +39,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - `showMap` and `showMapLink` are enabled by default on Location block
 * Tweak - Favor `<AutosizeInput>` instead of `<RichText>`
 * Tweak - Implemented and added styles for the price block FE view
+* Tweak - Implemented and added styles for the website block FE view
 * Tweak - Implemented and added styles for the links block FE view
 * Feature - HOC `withDetails` to fetch details of a post type.
 * Feature - HOC `withForm` to attach Form behaviors into a block.
