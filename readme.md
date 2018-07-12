@@ -42,6 +42,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Feature - HOC `withForm` to attach Form behaviors into a block.
 * Feature - HOC `withStore` to inject the store property into a component
 * Feature - `useOnce` properties from block to allow live sync copies of blocks
+* Feature - Time for an event can be set on any range of minutes not just half hours.
 
 #### 0.2.3-alpha - 2018-06-22
 

@@ -30,10 +30,10 @@ export const dates = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 		end: selectors.getEnd( state ),
 	};
 
-	const start = replaceDate( toMoment( current.start ), roundTime( toMoment( from ) ) );
+	const start = replaceDate( toMoment( current.start ), toMoment( from ) );
 	dispatch( actions.setStart( toDateTime( start ) ) );
 
 	// Use the "to" value and fallback with "from" value
-	const end = replaceDate( toMoment( current.end ), roundTime( toMoment( to || from ) ) );
+	const end = replaceDate( toMoment( current.end ), toMoment( to || from ) );
 	dispatch( actions.setEnd( toDateTime( end ) ) );
 };
