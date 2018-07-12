@@ -80,6 +80,7 @@ export function roundTime( date ) {
 	}
 
 	return date
+		.clone()
 		.subtract( minutes, 'm' )
 		.seconds( 0 );
 }
