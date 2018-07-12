@@ -38,6 +38,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Prevent errors when a new organizer block is created
 * Tweak - `showMap` and `showMapLink` are enabled by default on Location block
 * Tweak - Favor `<AutosizeInput>` instead of `<RichText>`
+* Tweak - Implemented and added styles for the organizer block FE view
 * Tweak - Implemented and added styles for the price block FE view
 * Tweak - Implemented and added styles for the website block FE view
 * Tweak - Implemented and added styles for the links block FE view
