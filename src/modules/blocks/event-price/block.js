@@ -32,23 +32,22 @@ import {
 import './style.pcss';
 import { parser, isFree } from 'utils/range';
 import withSaveData from 'editor/hoc/with-save-data';
-import * as actions from 'data/blocks/price/actions';
-import * as selectors from 'data/blocks/price/selectors';
+import {
+	actions as priceActions,
+	selectors as priceSelectors,
+} from 'data/blocks/price';
+import {
+	actions as UIActions,
+	selectors as UISelectors,
+} from 'data/ui';
 import { sendValue } from 'editor/utils/input';
+import { searchParent } from 'editor/utils/dom';
 
 /**
  * Module Code
  */
 
 class EventPrice extends Component {
-	constructor() {
-		super( ...arguments );
-
-		this.state = {
-			open: false,
-		};
-	}
-
 	render() {
 		return [
 			this.renderUI(),
@@ -68,7 +67,7 @@ class EventPrice extends Component {
 	}
 
 	renderLabel() {
-		const { currencyPosition } = this.props;
+		const { currencyPosition, openDashboardPrice } = this.props;
 		const containerClass = classNames(
 			'tribe-editor__event-price__price',
 			`tribe-editor__event-price__price--${ currencyPosition }`,
@@ -77,7 +76,7 @@ class EventPrice extends Component {
 		return (
 			<div
 				className={ containerClass }
-				onClick={ this.toggleDashboard }
+				onClick={ openDashboardPrice }
 			>
 				{ this.renderCurrency() }
 				{ this.renderPlaceholder() }
@@ -142,7 +141,7 @@ class EventPrice extends Component {
 
 	renderDescription() {
 		const { costDescription } = this.props;
-
+		console.log(this.props);
 		if ( this.isEmpty( costDescription ) ) {
 			return null;
 		}
@@ -150,21 +149,16 @@ class EventPrice extends Component {
 		return <span className="tribe-editor__event-price__description">{ costDescription }</span>;
 	}
 
-	toggleDashboard = () => {
-		this.setState( ( state ) => {
-			return {
-				open: ! state.open,
-			};
-		} );
-	};
-
 	renderDashboard() {
-		const { cost, costDescription, setCost, setDescription } = this.props;
+		const { open, cost, costDescription, setCost, setDescription, closeDashboardPrice } = this.props;
 
 		return (
 			<Dashboard
-				open={ this.state.open }
-				onClose={ this.onCloseDashboard }
+				open={ open }
+				onClose={ closeDashboardPrice }
+				onKeyDown={ this.onKeyDown }
+				onClick={ this.onClick }
+				className="event-price"
 				overflow
 			>
 				<Fragment>
@@ -194,15 +188,42 @@ class EventPrice extends Component {
 		);
 	}
 
-	onCloseDashboard = () => {
-		this.setState( ( state ) => {
-			const { open } = state;
-			if ( ! open ) {
-				return null;
+	/* TODO: This needs to move to logic component wrapper */
+	onKeyDown = ( e ) => {
+		const ESCAPE_KEY = 27;
+		if ( e.keyCode === ESCAPE_KEY ) {
+			this.props.closeDashboardPrice();
+		}
+	}
+
+	/* TODO: This needs to move to logic component wrapper */
+	onClick = ( e ) => {
+		const { target } = e;
+		console.log( target );
+		if (
+			! this.isTargetInBlock( target ) &&
+			! this.isTargetInSidebar( target )
+		) {
+			this.props.closeDashboardPrice();
+		}
+	}
+
+	/* TODO: This needs to move to logic component wrapper */
+	isTargetInBlock = ( target ) => (
+		searchParent( target, ( testNode ) => {
+			if ( testNode.classList.contains( 'editor-block-list__block' ) ) {
+				return Boolean( testNode.querySelector( '.tribe-editor__event-price' ) );
 			}
-			return { open: false };
-		} );
-	};
+			return false;
+		} )
+	);
+
+	/* TODO: This needs to move to logic component wrapper */
+	isTargetInSidebar = ( target ) => (
+		searchParent( target, ( testNode ) => (
+			testNode.classList.contains( 'edit-post-sidebar' )
+		) )
+	);
 
 	renderControls() {
 		const {
@@ -240,13 +261,17 @@ class EventPrice extends Component {
 }
 
 const mapStateToProps = ( state ) => ( {
-	cost: selectors.getPrice( state ),
-	currencyPosition: selectors.getPosition( state ),
-	currencySymbol: selectors.getSymbol( state ),
-	costDescription: selectors.getDescription( state ),
+	open: UISelectors.getDashboardPriceOpen( state ),
+	cost: priceSelectors.getPrice( state ),
+	currencyPosition: priceSelectors.getPosition( state ),
+	currencySymbol: priceSelectors.getSymbol( state ),
+	costDescription: priceSelectors.getDescription( state ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+const mapDispatchToProps = ( dispatch ) => ( {
+	...bindActionCreators( priceActions, dispatch ),
+	...bindActionCreators( UIActions, dispatch ),
+} );
 
 export default compose(
 	connect(

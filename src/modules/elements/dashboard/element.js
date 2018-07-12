@@ -36,6 +36,8 @@ export default class Dashboard extends Component {
 		className: '',
 		direction: directions.down,
 		overflow: false,
+		onKeyDown: noop,
+		onClick: noop,
 		onOpen: noop,
 		onClose: noop,
 		targets: [],
@@ -46,6 +48,8 @@ export default class Dashboard extends Component {
 		overflow: PropTypes.bool,
 		className: PropTypes.string,
 		direction: PropTypes.oneOf( Object.keys( directions ) ),
+		onKeyDown: PropTypes.func,
+		onClick: PropTypes.func,
 		onOpen: PropTypes.func,
 		onClose: PropTypes.func,
 		targets: PropTypes.array,
@@ -56,7 +60,6 @@ export default class Dashboard extends Component {
 
 		this.listeners = {
 			added: false,
-			removed: false,
 		};
 	}
 
@@ -65,27 +68,12 @@ export default class Dashboard extends Component {
 	 * that make sure to setup the listeners accordingly.
 	 */
 	componentDidMount() {
-		this.setupListeners();
+		this.addListeners();
 	}
 
 	componentWillUnmount() {
 		this.removeListeners();
 	}
-
-	componentDidUpdate() {
-		this.setupListeners();
-	}
-
-	/**
-	 * Setup the listeners either: attach or remove them based on the status of the component.
-	 */
-	setupListeners = () => {
-		if ( this.props.open ) {
-			this.addListeners();
-		} else {
-			this.removeListeners();
-		}
-	};
 
 	/**
 	 * Attach event listeners when this component is opened.
@@ -95,9 +83,8 @@ export default class Dashboard extends Component {
 			return;
 		}
 		this.listeners.added = true;
-		document.addEventListener( 'keydown', this.onKeyDown );
-		document.addEventListener( 'click', this.onClickOutside );
-		this.props.onOpen();
+		document.addEventListener( 'keydown', this.props.onKeyDown );
+		document.addEventListener( 'click', this.props.onClick );
 	}
 
 	/**
@@ -108,9 +95,8 @@ export default class Dashboard extends Component {
 			return;
 		}
 		this.listeners.added = false;
-		document.removeEventListener( 'keydown', this.onKeyDown );
-		document.removeEventListener( 'click', this.onClickOutside );
-		this.props.onClose();
+		document.removeEventListener( 'keydown', this.props.onKeyDown );
+		document.removeEventListener( 'click', this.props.onClick );
 	}
 
 	/**
@@ -190,23 +176,19 @@ export default class Dashboard extends Component {
 		} );
 	}
 
-	isOpen() {
-		return this.props.open;
-	}
-
 	/**
 	 * Construct a string with the appropriate class for the main container of the component
 	 *
 	 * @returns {string} The generated class name for the container
 	 */
 	getContainerClass() {
-		const { className, direction, overflow } = this.props;
+		const { className, direction, overflow, open } = this.props;
 
 		return classNames(
 			'tribe-editor__dashboard__container',
 			`tribe-editor__dashboard__container--${ direction }`,
 			{ 'tribe-editor__dashboard__container--overflow': overflow },
-			{ 'tribe-editor__dashboard__container--open': this.props.open },
+			{ 'tribe-editor__dashboard__container--open': open },
 			...className,
 		);
 	}
