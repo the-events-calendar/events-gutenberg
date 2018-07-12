@@ -13,11 +13,14 @@ export const FORMATS = {
 	DATE_TIME: 'YYYY-MM-DD HH:mm:ss',
 	WP: {
 		time: 'g:i a',
-		date: 'F j',
+		date: 'F j, Y',
 		datetime: 'F j, Y g:i a',
+		dateNoYear: 'F j',
 		...formats,
 	},
 };
+
+export const TODAY = new Date();
 
 /**
  * Make sure all the Dates objects are on the same time

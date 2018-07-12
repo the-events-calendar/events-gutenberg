@@ -14,6 +14,25 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	}
 
 	/**
+	 * Set the default attributes of this block
+	 *
+	 * @since  TBD
+	 *
+	 * @return string
+	 */
+	public function default_attributes() {
+
+		$defaults = array(
+			'googleCalendarLabel' => esc_html__( 'Google Calendar', 'events-gutenberg' ),
+			'iCalLabel'           => esc_html__( 'iCal Export', 'events-gutenberg' ),
+			'hasiCal'             => true,
+			'hasGoogleCalendar'   => true,
+		);
+
+		return $defaults;
+	}
+
+	/**
 	 * Since we are dealing with a Dynamic type of Block we need a PHP method to render it
 	 *
 	 * @since  0.1.1-alpha

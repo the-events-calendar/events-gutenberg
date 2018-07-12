@@ -15,11 +15,10 @@ import {
 import {
 	isSameDay,
 	replaceDate,
-	roundTime,
 	toDateTime,
 	toMoment,
 } from 'editor/utils/moment';
-import { HALF_HOUR_IN_SECONDS } from 'editor/utils/time';
+import { HOUR_IN_SECONDS } from 'editor/utils/time';
 
 const resetMultiDay = ( current ) => {
 	let end = replaceDate( current.end, current.start );
@@ -28,16 +27,16 @@ const resetMultiDay = ( current ) => {
 	// Make sure when you come from multiday to a single day times are not at the same time.
 	if ( end.isSameOrBefore( start ) ) {
 		const future = start.clone();
-		future.add( HALF_HOUR_IN_SECONDS, 'seconds' );
+		future.add( HOUR_IN_SECONDS, 'seconds' );
 
 		// Rollback half an hour before adding half an hour as we are on the edge of the day
 		if ( ! isSameDay( current.start, future ) ) {
 			start = start.clone();
-			start.subtract( HALF_HOUR_IN_SECONDS, 'seconds' );
+			start.subtract( HOUR_IN_SECONDS, 'seconds' );
 		}
 
 		end = start.clone();
-		end.add( HALF_HOUR_IN_SECONDS, 'seconds' );
+		end.add( HOUR_IN_SECONDS, 'seconds' );
 	}
 
 	return {
@@ -62,8 +61,8 @@ export default ( { dispatch, getState } ) => ( next ) => ( action ) => {
 
 	const state = getState();
 	const current = {
-		start: roundTime( toMoment( selectors.getStart( state ) ) ),
-		end: roundTime( toMoment( selectors.getEnd( state ) ) ),
+		start: toMoment( selectors.getStart( state ) ),
+		end: toMoment( selectors.getEnd( state ) ),
 	};
 
 	const isMultiDay = selectors.getMultiDay( state );
