@@ -11,7 +11,6 @@ import classNames from 'classnames';
 import './style.pcss';
 
 import { Component } from '@wordpress/element';
-import { searchParent } from './../../editor/utils/dom';
 
 /**
  * Enumeration with the available directions.
