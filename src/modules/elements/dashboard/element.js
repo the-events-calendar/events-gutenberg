@@ -55,14 +55,6 @@ export default class Dashboard extends Component {
 		targets: PropTypes.array,
 	};
 
-	constructor() {
-		super( ...arguments );
-
-		this.listeners = {
-			added: false,
-		};
-	}
-
 	/**
 	 * Once the component is mounted make sure to set the state based on the property, after
 	 * that make sure to setup the listeners accordingly.
@@ -79,10 +71,6 @@ export default class Dashboard extends Component {
 	 * Attach event listeners when this component is opened.
 	 */
 	addListeners() {
-		if ( this.listeners.added ) {
-			return;
-		}
-		this.listeners.added = true;
 		document.addEventListener( 'keydown', this.props.onKeyDown );
 		document.addEventListener( 'click', this.props.onClick );
 	}
@@ -91,89 +79,8 @@ export default class Dashboard extends Component {
 	 * Remove all listeners associated with this component.
 	 */
 	removeListeners() {
-		if ( ! this.listeners.added ) {
-			return;
-		}
-		this.listeners.added = false;
 		document.removeEventListener( 'keydown', this.props.onKeyDown );
 		document.removeEventListener( 'click', this.props.onClick );
-	}
-
-	/**
-	 * Detect the events associated with the keydown to close the <Dashboard> component when
-	 * Escape key is pressed.
-	 *
-	 * @param {Event} event - The object event
-	 */
-	onKeyDown = ( event ) => {
-		const { keyCode } = event;
-		const ESCAPE_KEY = 27;
-		if ( keyCode === ESCAPE_KEY ) {
-			this.onClose();
-		}
-	};
-
-	/**
-	 * Detect clicks on the document and test if they are part of the <Dashboard> component
-	 * if not close the component.
-	 *
-	 * @param {Event} event - The object event
-	 */
-	onClickOutside = ( event ) => {
-		const { target } = event;
-		if (
-			Dashboard.isPartOfDashboard( target ) ||
-			Dashboard.isPartOfPopover( target ) ||
-			Dashboard.isPartOfSidebar( target ) ||
-			this.validateChildren( target )
-		) {
-			return;
-		}
-		this.props.onClose();
-	};
-
-	/**
-	 * Listen for a click on the document to see if the element is part of the Dashboard
-	 * if not we should close
-	 *
-	 * @param {DomNode} node - The element tested against
-	 * @returns {boolean} True if the element clicked is part of the dashboard
-	 */
-	static isPartOfDashboard( node ) {
-		return searchParent( node, ( testNode ) => {
-			const isContainer = testNode.classList.contains( 'tribe-editor__dashboard__container' );
-			const isDashboard = testNode.classList.contains( 'tribe-editor__dashboard' );
-			return isDashboard || isContainer;
-		} );
-	}
-
-	/**
-	 * Listen for a click on the document to see if the element is part of the Popover component
-	 * if not we should close
-	 *
-	 * @param {DomNode} node - The element tested against
-	 * @returns {boolean} True if the element clicked is part of the popover component
-	 */
-	static isPartOfPopover( node ) {
-		return searchParent( node, testNode => testNode.classList.contains( 'components-popover' ) );
-	}
-
-	static isPartOfSidebar( node ) {
-		return searchParent( node, testNode => testNode.classList.contains( 'edit-post-sidebar' ) );
-	}
-
-	/**
-	 * Validate if the clicked node is part of any of the targets provided by the component.
-	 *
-	 * @param {DOMNode} node - The clicked node
-	 * @returns {boolean} true if the node is any of the targets
-	 */
-	validateChildren( node ) {
-		const { targets } = this.props;
-		return searchParent( node, ( testNode ) => {
-			const hasAny = targets.filter( ( className ) => testNode.classList.contains( className ) );
-			return ! isEmpty( hasAny );
-		} );
 	}
 
 	/**

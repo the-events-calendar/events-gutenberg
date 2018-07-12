@@ -307,8 +307,6 @@ class EventDateTime extends Component {
 				onClose={ closeDashboardDateTime }
 				onKeyDown={ this.onKeyDown }
 				onClick={ this.onClick }
-				targets={ [ 'DayPicker-Week', 'DayPicker-Day' ] }
-				className="date-time"
 				overflow
 			>
 				<Fragment>

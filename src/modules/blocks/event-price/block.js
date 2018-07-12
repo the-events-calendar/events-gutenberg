@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { trim, isEmpty, isFunction } from 'lodash';
+import { trim, isEmpty } from 'lodash';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -91,7 +91,7 @@ class EventPrice extends Component {
 	}
 
 	renderCurrency() {
-		const { costDescription, cost, currencySymbol } = this.props;
+		const { cost, currencySymbol } = this.props;
 		const parsed = parser( cost );
 
 		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( cost );
@@ -141,7 +141,6 @@ class EventPrice extends Component {
 
 	renderDescription() {
 		const { costDescription } = this.props;
-		console.log(this.props);
 		if ( this.isEmpty( costDescription ) ) {
 			return null;
 		}
@@ -158,7 +157,6 @@ class EventPrice extends Component {
 				onClose={ closeDashboardPrice }
 				onKeyDown={ this.onKeyDown }
 				onClick={ this.onClick }
-				className="event-price"
 				overflow
 			>
 				<Fragment>
@@ -199,7 +197,6 @@ class EventPrice extends Component {
 	/* TODO: This needs to move to logic component wrapper */
 	onClick = ( e ) => {
 		const { target } = e;
-		console.log( target );
 		if (
 			! this.isTargetInBlock( target ) &&
 			! this.isTargetInSidebar( target )
