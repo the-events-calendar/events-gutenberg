@@ -9,7 +9,7 @@ import { stringify } from 'querystringify';
  * WordPress dependencies
  */
 import { Component, compose } from '@wordpress/element';
-import { Placeholder, Spinner, withAPIData } from '@wordpress/components';
+import { Spinner, withAPIData } from '@wordpress/components';
 import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
