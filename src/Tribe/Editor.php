@@ -500,9 +500,10 @@ class Tribe__Events_Gutenberg__Editor {
 				),
 			),
 			'formats'  => array(
-				'time'     => get_option( 'time_format', __( 'g:i a', 'default' ) ),
-				'date'     => get_option( 'date_format', __( 'F j, Y', 'default' ) ),
-				'datetime' => __( 'F j, Y g:i a', 'default' ),
+				'time'       => get_option( 'time_format', __( 'g:i a', 'default' ) ),
+				'date'       => get_option( 'date_format', __( 'F j, Y', 'default' ) ),
+				'dateNoYear' => __( 'F j', 'default' ),
+				'datetime'   => __( 'F j, Y g:i a', 'default' ),
 			),
 			'timezone' => array(
 				'offset' => get_option( 'gmt_offset', 0 ),

@@ -2,12 +2,11 @@
 	color: #B9BEC2;
 	font-size: 15px;
 	font-weight: 500;
-	margin-left: 5px;
 }
 
 .tribe-editor__subtitle__headline {
 	display: inline-block;
-	font-size: 1.2em;
+	font-size: 19px;
 	font-style: normal;
 	font-family: Helvetica, sans-serif, arial;
 	font-weight: bold;
@@ -22,27 +21,11 @@
 	}
 }
 
+.tribe-editor__subtitle__headline-date {
+	font-size: 21px;
+}
+
 .tribe-editor__subtitle {
-
-	.tribe-editor__timepicker {
-		button {
-			background-color: #FEFFFE;
-			border-radius: 2px;
-			border: 2px solid #EAEBEC;
-			color: #545D66;
-			font-family: Helvetica, sans-serif;
-			font-weight: normal;
-			line-height: 1.5;
-			padding: 12px 36px 12px 15px;
-			position: relative;
-			text-decoration: none;
-		}
-
-		.btn--icon {
-			position: absolute;
-			right: 14px;
-		}
-	}
 
 	.tribe-editor__event-cost {
 		display: inline-block;
@@ -66,6 +49,27 @@
 	justify-content: space-between;
 }
 
+.tribe-editor__subtitle__footer-multiday {
+
+	.components-toggle-control {
+		margin: 0;
+	}
+
+	.components-toggle-control .components-base-control__field {
+		align-items: center;
+		font-family: Helvetica, Arial, sans-serif;
+	}
+
+	.components-base-control__label {
+		margin-right: 8px;
+		margin-bottom: 0;
+	}
+
+	.components-form-toggle {
+		line-height: 18px;
+	}
+}
+
 .tribe-editor__calendars {
 	background-color: #FFF;
 	border: 1px solid #E1E3E6;
@@ -73,4 +77,30 @@
 	margin-bottom: 9px;
 	padding: 20px 18px;
 	width: 100%;
+}
+
+.tribe-editor__date-time__date-time-separator-setting,
+.tribe-editor__date-time__time-range-separator-setting {
+
+	.components-base-control__field {
+		display: flex;
+		align-items: center;
+	}
+
+	.components-base-control__label {
+		flex: auto;
+		margin-bottom: 0;
+	}
+
+	.components-text-control__input {
+		flex: none;
+	}
+}
+
+.tribe-editor__date-time__date-time-separator-setting,
+.tribe-editor__date-time__time-range-separator-setting {
+
+	.components-text-control__input {
+		width: 42px;
+	}
 }

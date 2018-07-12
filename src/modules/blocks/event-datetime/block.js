@@ -15,6 +15,7 @@ import {
 	PanelBody,
 	SelectControl,
 	TextControl,
+	ToggleControl,
 } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
@@ -30,7 +31,6 @@ import {
 import {
 	TimePicker,
 	Dashboard,
-	CheckBox,
 	Month,
 } from 'elements';
 import './style.pcss';
@@ -50,8 +50,14 @@ import {
 
 import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
-import { toFormat, toMoment, totalSeconds, toDate } from 'utils/moment';
-import { FORMATS, timezonesAsSelectData } from 'utils/date';
+import {
+	toFormat,
+	toMoment,
+	totalSeconds,
+	toDate,
+	toDateNoYear
+} from 'utils/moment';
+import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import withSaveData from 'editor/hoc/with-save-data';
 
@@ -132,9 +138,14 @@ class EventDateTime extends Component {
 
 	renderStartDate() {
 		const { start } = this.props;
+		let startDate = toDate( toMoment( start ) );
+
+		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+			startDate = toDateNoYear( toMoment( start ) );
+		}
 
 		return (
-			<span>{ toDate( toMoment( start ) ) }</span>
+			<span className="tribe-editor__subtitle__headline-date">{ startDate }</span>
 		);
 	}
 
@@ -171,8 +182,14 @@ class EventDateTime extends Component {
 		}
 
 		const { end } = this.props;
+		let endDate = toDate( toMoment( end ) );
+
+		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+			endDate = toDateNoYear( toMoment( end ) );
+		}
+
 		return (
-			<span>{ toDate( toMoment( end ) ) }</span>
+			<span className="tribe-editor__subtitle__headline-date">{ endDate }</span>
 		);
 	}
 
@@ -197,9 +214,12 @@ class EventDateTime extends Component {
 	 *
 	 * @returns {boolean} if the event is happening on the same day
 	 */
-	isSameDay( start, end ) {
-		return toMoment( start || this.props.start )
-			.isSame( toMoment( end || this.props.end ), 'day' );
+	isSameDay( start = this.props.start, end = this.props.end ) {
+		return toMoment( start ).isSame( toMoment( end ), 'day' );
+	}
+
+	isSameYear( start = this.props.start, end = this.props.end ) {
+		return toMoment( start ).isSame( toMoment( end ), 'year' );
 	}
 
 	/**
@@ -228,13 +248,13 @@ class EventDateTime extends Component {
 			case 'date-time':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ separatorDate }
+						{ ' '.concat( separatorDate, ' ') }
 					</span>
 				);
 			case 'time-range':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ separatorTime }
+						{ ' '.concat( separatorTime, ' ') }
 					</span>
 				);
 			case 'dash':
@@ -296,13 +316,13 @@ class EventDateTime extends Component {
 						{ this.renderCalendars() }
 					</section>
 					<footer className="tribe-editor__subtitle__footer">
-						<section>
+						<section className="tribe-editor__subtitle__footer-date">
 							{ this.renderStartTimePicker() }
 							{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
 							{ this.renderEndTimePicker() }
 						</section>
-						<section>
-							{ this.renderMultidayCheckbox() }
+						<section className="tribe-editor__subtitle__footer-multiday">
+							{ this.renderMultidayToggle() }
 						</section>
 					</footer>
 				</Fragment>
@@ -337,7 +357,7 @@ class EventDateTime extends Component {
 
 	renderStartTimePicker() {
 		const { start, allDay } = this.props;
-		const { time, date } = FORMATS.WP;
+		const { time } = FORMATS.WP;
 		const startMoment = toMoment( start );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
@@ -349,9 +369,15 @@ class EventDateTime extends Component {
 			pickerProps.allDay = true;
 		}
 
+		let startDate = toDate( toMoment( start ) );
+
+		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+			startDate = toDateNoYear( toMoment( start ) );
+		}
+
 		return (
 			<React.Fragment>
-				<span className="tribe-editor__time-picker__label">{ startMoment.format( toFormat( date ) ) }</span>
+				<span className="tribe-editor__time-picker__label">{ startDate }</span>
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -373,7 +399,7 @@ class EventDateTime extends Component {
 			return null;
 		}
 
-		const { time, date } = FORMATS.WP;
+		const { time } = FORMATS.WP;
 		const start = toMoment( this.props.start );
 		const end = toMoment( this.props.end );
 		const pickerProps = {
@@ -383,9 +409,15 @@ class EventDateTime extends Component {
 			timeFormat: time,
 		};
 
+		let endDate = toDate( toMoment( end ) );
+
+		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+			endDate = toDateNoYear( toMoment( end ) );
+		}
+
 		return (
 			<React.Fragment>
-				{ ! this.isSameDay() && <span className="tribe-editor__time-picker__label">{ end.format( toFormat( date ) ) }</span> }
+				{ ! this.isSameDay() && <span className="tribe-editor__time-picker__label">{ endDate }</span> }
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
@@ -401,10 +433,10 @@ class EventDateTime extends Component {
 		}
 	};
 
-	renderMultidayCheckbox() {
+	renderMultidayToggle() {
 		const { multiDay, toggleMultiDay } = this.props;
 		return (
-			<CheckBox
+			<ToggleControl
 				label={ __( 'Multi-Day', 'events-gutenberg' ) }
 				checked={ multiDay }
 				onChange={ toggleMultiDay }
@@ -433,17 +465,22 @@ class EventDateTime extends Component {
 					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
 					value={ separatorDate }
 					onChange={ setSeparatorDate }
+					className="tribe-editor__date-time__date-time-separator-setting"
+					maxLength="2"
 				/>
 				<TextControl
 					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
 					value={ separatorTime }
 					onChange={ setSeparatorTime }
+					className="tribe-editor__date-time__time-range-separator-setting"
+					maxLength="2"
 				/>
 				<SelectControl
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
 					value={ timezone }
 					onChange={ setTimeZone }
 					options={ timezonesAsSelectData() }
+					className="tribe-editor__date-time__time-zone-setting"
 				/>
 			</PanelBody>
 		</InspectorControls> );
