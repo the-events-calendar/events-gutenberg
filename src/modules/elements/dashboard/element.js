@@ -123,7 +123,7 @@ export default class Dashboard extends Component {
 		const { keyCode } = event;
 		const ESCAPE_KEY = 27;
 		if ( keyCode === ESCAPE_KEY ) {
-			this.close();
+			this.onClose();
 		}
 	};
 
@@ -143,7 +143,7 @@ export default class Dashboard extends Component {
 		) {
 			return;
 		}
-		this.close();
+		this.props.onClose();
 	};
 
 	/**
@@ -188,32 +188,6 @@ export default class Dashboard extends Component {
 			const hasAny = targets.filter( ( className ) => testNode.classList.contains( className ) );
 			return ! isEmpty( hasAny );
 		} );
-	}
-
-	/**
-	 * Outside method to open the <Dashboard /> component using a reference
-	 */
-	open() {
-		this.setState( { open: true }, this.setupListeners );
-	}
-
-	/**
-	 * Outside method to class the component using a reference.
-	 */
-	close() {
-		this.setState( { open: false }, this.removeListeners );
-	}
-
-	/**
-	 * External function to toggle the current state of the component, from open to false or
-	 * opposite and making sure calling `open` or `close` to remove / attach the listeners
-	 */
-	toggle() {
-		if ( this.isOpen() ) {
-			this.close();
-		} else {
-			this.open();
-		}
 	}
 
 	isOpen() {

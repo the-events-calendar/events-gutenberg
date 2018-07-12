@@ -83,7 +83,7 @@ class EventDateTime extends Component {
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
 		setAllDay: PropTypes.func,
-		toggleDashboard: PropTypes.func,
+		openDashboard: PropTypes.func,
 		setDate: PropTypes.func,
 		setStartTime: PropTypes.func,
 		setEndTime: PropTypes.func,
@@ -288,7 +288,7 @@ class EventDateTime extends Component {
 	renderLabel() {
 		return (
 			<div key="event-datetime" className="tribe-editor__subtitle">
-				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.toggleDashboard }>
+				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.openDashboard }>
 					{ this.renderStart() }
 					{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
 					{ this.renderEnd() }
