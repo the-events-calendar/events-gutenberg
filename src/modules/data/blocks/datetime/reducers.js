@@ -12,6 +12,7 @@ import moment from 'moment/moment';
  * Internal dependencies
  */
 import { HALF_HOUR_IN_SECONDS } from 'editor/utils/time';
+import { FORMATS } from 'editor/utils/date';
 import { roundTime, toDateTime } from 'editor/utils/moment';
 import { getSetting } from 'editor/settings';
 import * as types from './types';
@@ -23,7 +24,7 @@ export const DEFAULT_STATE = {
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),
 	allDay: false,
 	multiDay: false,
-	timezone: 'UTC',
+	timezone: FORMATS.TIMEZONE.string,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {

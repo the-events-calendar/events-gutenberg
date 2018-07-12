@@ -6,7 +6,7 @@ import { get } from 'lodash';
  */
 
 const WPDateSettings = get( window, 'tribe_date_settings', {} );
-const { formats } = WPDateSettings;
+const { formats = {}, timezone = {} } = WPDateSettings;
 
 export const FORMATS = {
 	TIME: 'HH:mm:ss',
@@ -17,6 +17,10 @@ export const FORMATS = {
 		datetime: 'F j, Y g:i a',
 		dateNoYear: 'F j',
 		...formats,
+	},
+	TIMEZONE: {
+		string: 'UTC',
+		...timezone,
 	},
 };
 
