@@ -407,14 +407,19 @@ class EventDateTime extends Component {
 	};
 
 	renderStartTimePicker() {
-		const { start, allDay } = this.props;
+		const { start, allDay, multiDay, end } = this.props;
 		const { time } = FORMATS.WP;
 		const startMoment = toMoment( start );
 		const pickerProps = {
 			onSelectItem: this.setStartTime,
 			current: startMoment,
 			timeFormat: time,
+			max: toMoment( end ).subtract( 1, 'minutes' ),
 		};
+
+		if ( ! multiDay ) {
+			pickerProps.min = startMoment.clone().startOf( 'day' );
+		}
 
 		if ( allDay ) {
 			pickerProps.allDay = true;
@@ -450,15 +455,20 @@ class EventDateTime extends Component {
 			return null;
 		}
 
+		const { multiDay } = this.props;
 		const { time } = FORMATS.WP;
 		const start = toMoment( this.props.start );
 		const end = toMoment( this.props.end );
 		const pickerProps = {
 			current: end,
 			onSelectItem: this.setEndTime,
-			minTime: totalSeconds( start.add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
+			min: start.clone().add( 1, 'minutes' ),
 			timeFormat: time,
 		};
+
+		if ( ! multiDay ) {
+			pickerProps.max = start.clone().endOf( 'day' );
+		}
 
 		let endDate = toDate( toMoment( end ) );
 

@@ -4,23 +4,18 @@
 import { types, selectors, actions } from 'data/blocks/datetime';
 
 import {
-	isSameDay,
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
-	totalSeconds,
 } from 'editor/utils/moment';
 
 const {
 	setStart,
 	setEnd,
 	setAllDay,
-	setMultiDay,
-	setEndTime,
-	setStartTime,
 } = actions;
 
-import { DAY_IN_SECONDS, HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from 'editor/utils/time';
+import { HOUR_IN_SECONDS } from 'editor/utils/time';
 
 export const startTime = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	next( action );
@@ -38,22 +33,19 @@ export const startTime = ( { dispatch, getState } ) => ( next ) => ( action ) =>
 		end: selectors.getEnd( state ),
 	};
 
-	const start = setTimeInSeconds( toMoment( current.start ), seconds );
-	dispatch( setStart( toDateTime( start ) ) );
-
 	// Reset all day if that's the case.
 	if ( isAllDay ) {
 		dispatch( setAllDay( false ) );
-		const difference = DAY_IN_SECONDS - totalSeconds( toMoment( current.end ) );
-		if ( difference <= MINUTE_IN_SECONDS ) {
-			// Prevent to have 11:59 as end time when moving from all day to regular day
-			const total = totalSeconds( toMoment( current.end ) );
-			// If the user select start at 11:30pm is going to be the same as end so we need to add half an hour
-			dispatch( setEndTime( total ) );
-		}
-	} else if ( start.isSameOrAfter( toMoment( current.end ) ) ) {
-		const total = totalSeconds( start.clone().add( HOUR_IN_SECONDS, 'seconds' ) );
-		dispatch( setEndTime( total ) );
+	}
+
+	const start = setTimeInSeconds( toMoment( current.start ), seconds );
+	const end = toMoment( current.end );
+
+	dispatch( setStart( toDateTime( start ) ) );
+
+	if ( start.isSameOrAfter( end ) ) {
+		const total = end.clone().add( HOUR_IN_SECONDS, 'seconds' );
+		dispatch( setEnd( toDateTime( total ) ) );
 	}
 };
 
@@ -79,16 +71,12 @@ export const endTime = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	}
 
 	const end = setTimeInSeconds( toMoment( current.end ), seconds );
+	const start = toMoment( current.start );
+
 	dispatch( setEnd( toDateTime( end ) ) );
 
-	const start = toMoment( current.start );
-	// Add HAlf an hour to the end if is the same or before the start.
 	if ( end.isSameOrBefore( start ) ) {
-		const total = totalSeconds( start.clone().subtract( HOUR_IN_SECONDS, 'seconds' ) );
-		dispatch( setStartTime( total ) );
-	}
-
-	if ( ! isSameDay( start, end ) ) {
-		dispatch( setMultiDay( true ) );
+		const total = start.clone().subtract( HOUR_IN_SECONDS, 'seconds' );
+		dispatch( setStart( toDateTime( total ) ) );
 	}
 };
