@@ -180,7 +180,7 @@ export default class GoogleMap extends Component {
 					interactive: false,
 					loading: false,
 					error: __(
-						'The map does not have valid coordinates neither a valid address',
+						'The map does not have valid coordinates nor a valid address',
 						'events-gutenberg',
 					),
 				} );
