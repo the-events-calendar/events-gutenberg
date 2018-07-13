@@ -1,6 +1,7 @@
 /**
  * External Dependencies
  */
+import React from 'react';
 import { noop, isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -9,8 +10,6 @@ import classNames from 'classnames';
  * Internal dependencies
  */
 import './style.pcss';
-
-import { Component } from '@wordpress/element';
 
 /**
  * Enumeration with the available directions.
@@ -29,27 +28,8 @@ export const directions = {
  *   <AnyComponent></AnyComponent>
  * </Dashboard
  */
-export default class Dashboard extends Component {
-	static defaultProps = {
-		open: false,
-		className: '',
-		direction: directions.down,
-	};
-
-	static propTypes = {
-		open: PropTypes.bool,
-		className: PropTypes.string,
-		direction: PropTypes.oneOf( Object.keys( directions ) ),
-	};
-
-	/**
-	 * Construct a string with the appropriate class for the main container of the component
-	 *
-	 * @returns {string} The generated class name for the container
-	 */
-	getContainerClass() {
-		const { className, direction, open } = this.props;
-
+const Dashboard = ({ className, direction, open, children }) => {
+	const getContainerClass = () => {
 		return classNames(
 			'tribe-editor__dashboard__container',
 			`tribe-editor__dashboard__container--${ direction }`,
@@ -58,13 +38,25 @@ export default class Dashboard extends Component {
 		);
 	}
 
-	render() {
-		return (
-			<div className={ this.getContainerClass() }>
-				<div className="tribe-editor__dashboard">
-					{ this.props.children }
-				</div>
+	return (
+		<div className={ getContainerClass() }>
+			<div className="tribe-editor__dashboard">
+				{ children }
 			</div>
-		);
-	}
+		</div>
+	);
 }
+
+Dashboard.defaultProps = {
+	open: false,
+	className: '',
+	direction: directions.down,
+};
+
+Dashboard.propTypes = {
+	open: PropTypes.bool,
+	className: PropTypes.string,
+	direction: PropTypes.oneOf( Object.keys( directions ) ),
+};
+
+export default Dashboard;
