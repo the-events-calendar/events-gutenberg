@@ -58,7 +58,8 @@ export default class TimePicker extends Component {
 			return (
 				<button
 					className="tribe-editor__timepicker__all-day-btn"
-					onClick={ onToggle }>
+					onClick={ onToggle }
+				>
 					{ __( 'All Day', 'events-gutenberg' ) }
 				</button>
 			);

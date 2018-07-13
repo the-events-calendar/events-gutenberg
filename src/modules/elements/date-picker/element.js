@@ -21,9 +21,6 @@ import { toMoment, toDate, toDatePicker, toDateTime } from 'utils/moment';
 
 import './style.pcss';
 
-/**
- * Module Code
- */
 export default class DatePicker extends Component {
 	static propTypes = {
 		changeDatetime: PropTypes.func,

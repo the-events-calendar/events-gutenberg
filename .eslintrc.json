@@ -127,6 +127,7 @@
     "siteTimezone": true,
     "expect": true,
     "test": true,
+    "describe": true,
     "tribe_blocks_editor": true
   }
 }

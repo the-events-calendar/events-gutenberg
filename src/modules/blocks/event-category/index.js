@@ -19,7 +19,10 @@ import { Icons } from 'elements';
 export default {
 	id: 'event-category',
 	title: __( 'Event Category', 'events-gutenberg' ),
-	description: __( 'Show assigned event categories as links to their respective archives.', 'events-gutenberg' ),
+	description: __(
+		'Show assigned event categories as links to their respective archives.',
+		'events-gutenberg'
+	),
 	icon: Icons.TEC,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],

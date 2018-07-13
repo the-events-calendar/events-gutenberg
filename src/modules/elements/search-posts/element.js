@@ -155,7 +155,7 @@ class SearchPosts extends Component {
 				{ decode( rendered ) }
 			</button>
 		);
-	}
+	};
 
 	renderDropdown = ( { onToggle, isOpen, onClose } ) => {
 		this.onClose = onClose.bind( this );
@@ -163,12 +163,14 @@ class SearchPosts extends Component {
 		return (
 			<div
 				className={ classNames( 'tribe-editor__search-posts' ) }
-				onScroll={ this.onScroll }>
+				onScroll={ this.onScroll }
+			>
 				{ this.renderSearchInput() }
 				<div
 					role="menu"
 					className={ classNames( 'tribe-editor__search-posts__results' ) }
-				     ref={ this.dropdownEl }>
+					ref={ this.dropdownEl }
+				>
 					{ this.renderList() }
 				</div>
 			</div>

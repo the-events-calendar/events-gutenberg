@@ -1,4 +1,5 @@
 import * as types from './../types';
+
 const DEFAULT_STATE = {
 	organizer: undefined,
 };
@@ -18,4 +19,4 @@ export default ( state = DEFAULT_STATE, action ) => {
 		default:
 			return state;
 	}
-}
+};
