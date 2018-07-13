@@ -34,7 +34,7 @@ const Dashboard = ({ className, direction, open, children }) => {
 			'tribe-editor__dashboard__container',
 			`tribe-editor__dashboard__container--${ direction }`,
 			{ 'tribe-editor__dashboard__container--open': open },
-			...className,
+			className,
 		);
 	}
 
