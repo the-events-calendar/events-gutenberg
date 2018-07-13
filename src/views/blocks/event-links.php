@@ -39,6 +39,7 @@ remove_filter( 'the_content', 'do_blocks', 9 );
                     <img src="<?php echo tribe( 'gutenberg' )->plugin_url . 'src/resources/icons/link.svg'; ?>" />
                     <?php echo esc_html( $this->attr( 'iCalLabel' ) ) ?>
                 </a>
+            </div>
 		<?php endif; ?>
     </div>
 <?php endif; ?>
