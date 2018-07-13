@@ -162,12 +162,7 @@ class EventPrice extends Component {
 		const { dashboardOpen, cost, costDescription, setCost, setDescription } = this.props;
 
 		return (
-			<Dashboard
-				open={ dashboardOpen }
-				onKeyDown={ this.onKeyDown }
-				onClick={ this.onClick }
-				overflow
-			>
+			<Dashboard open={ dashboardOpen }>
 				<Fragment>
 					<section className="tribe-editor__event-price__dashboard">
 						<input

@@ -312,12 +312,7 @@ class EventDateTime extends Component {
 	renderDashboard() {
 		const { dashboardOpen } = this.props;
 		return (
-			<Dashboard
-				open={ dashboardOpen }
-				onKeyDown={ this.onKeyDown }
-				onClick={ this.onClick }
-				overflow
-			>
+			<Dashboard open={ dashboardOpen }>
 				<Fragment>
 					<section className="tribe-editor__calendars">
 						{ this.renderCalendars() }

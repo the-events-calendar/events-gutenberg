@@ -34,18 +34,12 @@ export default class Dashboard extends Component {
 		open: false,
 		className: '',
 		direction: directions.down,
-		overflow: false,
-		onKeyDown: noop,
-		onClick: noop,
 	};
 
 	static propTypes = {
 		open: PropTypes.bool,
 		className: PropTypes.string,
 		direction: PropTypes.oneOf( Object.keys( directions ) ),
-		overflow: PropTypes.bool,
-		onKeyDown: PropTypes.func,
-		onClick: PropTypes.func,
 	};
 
 	/**
@@ -54,12 +48,11 @@ export default class Dashboard extends Component {
 	 * @returns {string} The generated class name for the container
 	 */
 	getContainerClass() {
-		const { className, direction, overflow, open } = this.props;
+		const { className, direction, open } = this.props;
 
 		return classNames(
 			'tribe-editor__dashboard__container',
 			`tribe-editor__dashboard__container--${ direction }`,
-			{ 'tribe-editor__dashboard__container--overflow': overflow },
 			{ 'tribe-editor__dashboard__container--open': open },
 			...className,
 		);
