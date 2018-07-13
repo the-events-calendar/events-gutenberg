@@ -14,7 +14,6 @@ import {
 } from 'data/blocks/datetime';
 
 export const dates = ( { dispatch, getState } ) => ( next ) => ( action ) => {
-
 	next( action );
 
 	if ( action.type !== types.SET_DATES ) {

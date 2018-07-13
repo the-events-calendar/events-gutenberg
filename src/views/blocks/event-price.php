@@ -1,13 +1,19 @@
 <?php
-$event_id = $this->get( 'post_id' );
-
-$cost = tribe_get_formatted_cost();
+/**
+ * Renders the event price block
+ *
+ * @version TBD
+ *
+ */
+$cost             = $this->attr( 'cost' );
+$cost_description = $this->attr( 'costDescription' );
 ?>
-<div class="tribe-events-single-section tribe-events-event-cost tribe-clearfix">
+<div class="tribe-block tribe-block__event-price">
     <?php
-    // Event Cost
-    if ( ! empty( $cost ) ) : ?>
-        <dt> <?php esc_html_e( 'Cost:', 'events-gutenberg' ) ?> </dt>
-        <dd class="tribe-events-event-cost"> <?php esc_html_e( $cost ); ?> </dd>
+    if ( $cost ) : ?>
+        <span class="tribe-block__event-price__cost"> <?php echo esc_html( $cost ); ?> </span>
+    <?php endif; ?>
+    <?php if ( $cost_description ) : ?>
+        <span class="tribe-block__event-price__description"><?php echo esc_html( $cost_description ); ?></span>
     <?php endif ?>
 </div>

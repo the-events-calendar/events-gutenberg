@@ -1,5 +1,15 @@
-<?php $event_id = $this->get( 'post_id' ); ?>
-<div class="tribe-events-single-section tribe-events-event-meta secondary tribe-clearfix">
+<?php
+/**
+ * Renders the event Venue block
+ *
+ * @version TBD
+ *
+ */
+$event_id = $this->get( 'post_id' );
+
+$map = tribe_get_embedded_map() ? 'tribe-block__venue--has-map' : '';
+?>
+<div class="tribe-block tribe-block__venue <?php echo esc_attr( $map ); ?>">
 	<?php do_action( 'tribe_events_single_event_meta_secondary_section_start' ); ?>
 
 	<?php $this->template( 'blocks/parts/venue' ); ?>

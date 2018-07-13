@@ -52,4 +52,4 @@ export default () => ( next ) => ( action ) => {
 	} ).fail( ( error ) => {
 		actions.error( error );
 	} );
-}
+};

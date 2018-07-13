@@ -14,7 +14,6 @@ import { actions, selectors } from 'data/details';
 
 export default ( key = 'id' ) => ( WrappedComponent ) => {
 	class WithDetails extends Component {
-
 		static propTypes = {
 			setPostType: PropTypes.func,
 			fetchDetails: PropTypes.func,
