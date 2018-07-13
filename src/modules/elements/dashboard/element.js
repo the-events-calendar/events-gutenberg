@@ -51,12 +51,14 @@ Dashboard.defaultProps = {
 	open: false,
 	className: '',
 	direction: directions.down,
+	children: null,
 };
 
 Dashboard.propTypes = {
 	open: PropTypes.bool,
 	className: PropTypes.string,
 	direction: PropTypes.oneOf( Object.keys( directions ) ),
+	children: PropTypes.element,
 };
 
 export default Dashboard;
