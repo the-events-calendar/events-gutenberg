@@ -24,7 +24,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-#### 0.2.4-alpha - TBD
+#### 0.2.4-alpha - 2018-07-12
 
 * Fix - Styles for date time block
 * Fix - Styles for price block
