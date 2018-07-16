@@ -4,10 +4,6 @@
 import { get, has } from 'lodash';
 
 /**
- * WordPress dependencies
- */
-
-/**
  * Internal dependencies
  */
 import { settings } from 'utils/globals';

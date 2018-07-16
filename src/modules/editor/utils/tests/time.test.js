@@ -1,3 +1,6 @@
+/**
+ * Internal dependencies
+ */
 import {
 	MINUTE_IN_SECONDS,
 	HALF_HOUR_IN_SECONDS,

@@ -1,3 +1,6 @@
+/**
+ * External dependencies
+ */
 import { get, identity, trim, find } from 'lodash';
 import { stringify } from 'querystringify';
 
