@@ -1,2 +1,2 @@
-global.jQuery = () => {
-}
+global.jQuery = () => {};
+global.window = {};
