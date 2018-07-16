@@ -6,7 +6,9 @@ import { get, has } from 'lodash';
 /**
  * Internal dependencies
  */
-import { settings } from 'utils/globals';
+import { settings as globalSettings } from 'utils/globals';
+
+let settings = {};
 
 /**
  * Module Code
@@ -14,13 +16,21 @@ import { settings } from 'utils/globals';
  * @return {object} An object with the global settings
  */
 export function getSettings() {
-	return settings;
+	return globalSettings || {};
 }
 
 export function getSetting( key, defaultValue = undefined ) {
-	return get( getSettings(), key, defaultValue );
+	return get( settings.getSettings(), key, defaultValue );
 }
 
 export function hasSetting( key ) {
-	return has( getSettings(), key );
+	return has( settings.getSettings(), key );
 }
+
+settings = {
+	getSettings,
+	getSetting,
+	hasSetting,
+};
+
+export default settings;
