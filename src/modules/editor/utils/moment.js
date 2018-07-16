@@ -13,13 +13,6 @@ import { replaceWithObject } from './string';
  * @returns {string} return a moment.js valid format
  */
 export function toFormat( format ) {
-	const strtr = ( str, pairs ) => {
-		const substrs = Object.keys( pairs ).map( escapeRegExp );
-		return str.split( RegExp( `(${ substrs.join( '|' ) })` ) )
-			.map( part => pairs[ part ] || part )
-			.join( '' );
-	};
-
 	const replacements = {
 		d: 'DD',
 		D: 'ddd',
