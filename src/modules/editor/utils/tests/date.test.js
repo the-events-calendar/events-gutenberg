@@ -45,6 +45,9 @@ describe( 'Tests for date.js', () => {
 				datetime: 'F j, Y g:i a',
 				dateNoYear: 'F j',
 			},
+			TIMEZONE: {
+				string: 'UTC',
+			},
 		};
 		expect( FORMATS ).toEqual( draft );
 	} );
