@@ -1,9 +1,10 @@
 /**
  * External dependencies
  */
-import { escapeRegExp, isString } from 'lodash';
+import { isString } from 'lodash';
 import moment from 'moment/moment';
 import { FORMATS } from './date';
+import { replaceWithObject } from './string';
 
 /**
  * Make sure the format provided matches the spec used by moment.js

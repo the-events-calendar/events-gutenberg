@@ -3,11 +3,7 @@
  */
 import { get, identity, trim, find } from 'lodash';
 import { stringify } from 'querystringify';
-
-const list = {
-	countries: get( window, 'tribe_data_countries', {} ),
-	us_states: get( window, 'tribe_data_us_states', {} ),
-};
+import { list } from './globals';
 
 /**
  * Convert data from an array with different keys and values into a unified shape of object.
