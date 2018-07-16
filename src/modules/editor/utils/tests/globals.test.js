@@ -6,6 +6,7 @@ import {
 	google,
 	mapsAPI,
 	settings,
+	list,
 } from '../globals';
 
 describe( 'Tests for globals.js', () => {
@@ -14,5 +15,9 @@ describe( 'Tests for globals.js', () => {
 		expect( google ).toEqual( null );
 		expect( settings ).toEqual( {} );
 		expect( mapsAPI ).toEqual( {} );
+		expect( list ).toEqual( {
+			countries: {},
+			us_states: {},
+		} );
 	} );
 } );
