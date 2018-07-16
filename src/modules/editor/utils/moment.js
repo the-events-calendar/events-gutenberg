@@ -60,15 +60,15 @@ export function toFormat( format ) {
 		U: 'X',
 	};
 
-	return strtr( format, replacements );
+	return replaceWithObject( format, replacements );
 }
 
 /**
  * Round the time of a moment object if the minutes on the date is lower than 30 will set to 0 if
  * is greater will se 30 so is either 30 or 0.
  *
- * @param {Moment} date Make sure the date is rounded between 0 or 30 minutes
- * @returns {Moment} A moment object
+ * @param {moment} date Make sure the date is rounded between 0 or 30 minutes
+ * @returns {moment} A moment object
  */
 export function roundTime( date ) {
 	if ( ! ( date instanceof moment ) ) {
@@ -92,7 +92,7 @@ export function roundTime( date ) {
  *
  * @param {(Date|moment|string)} date The date to be converted.
  * @param {string} format The format of the data to be used
- * @returns {Moment} A moment object
+ * @returns {moment} A moment object
  */
 export function toMoment( date, format = FORMATS.WP.datetime ) {
 	if ( date instanceof moment ) {
@@ -106,7 +106,7 @@ export function toMoment( date, format = FORMATS.WP.datetime ) {
 	return moment();
 }
 
-function toMomentFromDate( date ) {
+export function toMomentFromDate( date ) {
 	if ( ! ( date instanceof Date ) ) {
 		throw new Error( 'Make sure your date is an instance of Date' );
 	}
@@ -125,9 +125,9 @@ function toMomentFromDate( date ) {
 /**
  * Replace the date of a moment object with another date from another moment object
  *
- * @param {Moment} original The moment object where the date is going to be replaced
- * @param {Moment} replaced The moment object where the date to be used to replace is located
- * @returns {Moment} A moment object where the date is replaced
+ * @param {moment} original The moment object where the date is going to be replaced
+ * @param {moment} replaced The moment object where the date to be used to replace is located
+ * @returns {moment} A moment object where the date is replaced
  */
 export function replaceDate( original, replaced ) {
 	if ( ! ( original instanceof moment ) || ! ( replaced instanceof moment ) ) {
@@ -143,9 +143,9 @@ export function replaceDate( original, replaced ) {
 /**
  * Set time in seconds to a moment object
  *
- * @param {Moment} original The original moment where the date is going to be set
+ * @param {moment} original The original moment where the date is going to be set
  * @param {number} seconds Amount of seconds to be set to the moment object.
- * @returns {Moment} A moment object with the new date
+ * @returns {moment} A moment object with the new date
  */
 export function setTimeInSeconds( original, seconds = 0 ) {
 	if ( ! ( original instanceof moment ) ) {
@@ -164,7 +164,7 @@ export function setTimeInSeconds( original, seconds = 0 ) {
 /**
  * Total seconds of a current date from moment
  *
- * @param {Moment} date The date to compare on the current day
+ * @param {moment} date The date to compare on the current day
  * @returns {int} Total of seconds from start of the day to the current moment,
  */
 export function totalSeconds( date ) {
@@ -178,7 +178,7 @@ export function totalSeconds( date ) {
 /**
  * Convert a moment object into a WP date time format
  *
- * @param {Moment} date A moment date object
+ * @param {moment} date A moment date object
  * @returns {string} A date time format
  */
 export function toDateTime( date ) {
@@ -204,8 +204,8 @@ export function toDatePicker( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) 
 /**
  * Test if the current start and end date are happening on the same day.
  *
- * @param {Moment} start The start of the event
- * @param {(Moment|String)} end The end date of the event
+ * @param {moment} start The start of the event
+ * @param {(moment|String)} end The end date of the event
  * @returns {boolean} if the event is happening on the same day
  */
 export function isSameDay( start, end ) {
