@@ -109,7 +109,9 @@
 
 		"moduleNameMapper": {
 			"^utils(.*)$": "<rootDir>/src/modules/editor/utils$1",
-			"^editor(.*)$": "<rootDir>/src/modules/editor$1"
+			"^editor(.*)$": "<rootDir>/src/modules/editor$1",
+			"^data(.*)$": "<rootDir>/src/modules/data$1",
+			"^elements(.*)$": "<rootDir>/src/modules/elements$1"
 		},
 		"testEnvironment": "jest-environment-jsdom-global",
 		"testPathIgnorePatterns": [
