@@ -131,6 +131,7 @@
     "describe": true,
     "afterAll": true,
     "beforeAll": true,
+    "it": true,
     "tribe_blocks_editor": true
   }
 }
