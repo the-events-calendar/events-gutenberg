@@ -4,33 +4,18 @@
 import { get, has } from 'lodash';
 
 /**
- * Internal dependencies
- */
-import { settings as globalSettings } from 'utils/globals';
-
-let settings = {};
-
-/**
  * Module Code
  *
  * @return {object} An object with the global settings
  */
 export function getSettings() {
-	return globalSettings || {};
+	return window.tribe_blocks_editor_settings || {};
 }
 
-export function getSetting( key, defaultValue = undefined ) {
-	return get( settings.getSettings(), key, defaultValue );
+export function getSetting( key, defaultValue ) {
+	return get( getSettings(), key, defaultValue );
 }
 
 export function hasSetting( key ) {
-	return has( settings.getSettings(), key );
+	return has( getSettings(), key );
 }
-
-settings = {
-	getSettings,
-	getSetting,
-	hasSetting,
-};
-
-export default settings;
