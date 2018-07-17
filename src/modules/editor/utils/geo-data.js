@@ -1,10 +1,9 @@
+/**
+ * External dependencies
+ */
 import { get, identity, trim, find } from 'lodash';
 import { stringify } from 'querystringify';
-
-const list = {
-	countries: get( window, 'tribe_data_countries', {} ),
-	us_states: get( window, 'tribe_data_us_states', {} ),
-};
+import { list } from './globals';
 
 /**
  * Convert data from an array with different keys and values into a unified shape of object.
@@ -27,7 +26,7 @@ function toObject( data = {} ) {
  * @returns {{code: string, name: *}[]} An object with the list of countries
  */
 export function getCountries() {
-	return toObject( list.countries );
+	return toObject( list().countries );
 }
 
 export function getCountryCode( name ) {
@@ -50,13 +49,13 @@ export function getStateCode( countryCode, name ) {
 export function getStates( countryCode ) {
 	switch ( countryCode ) {
 		case 'US':
-			return toObject( list.us_states );
+			return toObject( list().us_states );
 		default:
 			return [];
 	}
 }
 
-export default list;
+export default list();
 
 export function addressToMapString( address = {} ) {
 	const {

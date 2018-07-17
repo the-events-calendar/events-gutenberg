@@ -4,24 +4,15 @@
 import { get, has } from 'lodash';
 
 /**
- * WordPress dependencies
- */
-
-/**
- * Internal dependencies
- */
-import { settings } from 'utils/globals';
-
-/**
  * Module Code
  *
  * @return {object} An object with the global settings
  */
 export function getSettings() {
-	return settings;
+	return window.tribe_blocks_editor_settings || {};
 }
 
-export function getSetting( key, defaultValue = undefined ) {
+export function getSetting( key, defaultValue ) {
 	return get( getSettings(), key, defaultValue );
 }
 

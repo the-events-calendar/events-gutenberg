@@ -62,8 +62,8 @@ const MAP_TYPES = {
 const IMAGE_FORMATS_VALUES = values( IMAGE_FORMATS );
 const MAP_TYPES_VALUES = values( MAP_TYPES );
 
-const API_KEY = get( mapsAPI, 'key', '' );
-const DEFAULT_ZOOM = parseInt( get( mapsAPI, 'zoom', 14 ), 10 );
+const API_KEY = get( mapsAPI(), 'key', '' );
+const DEFAULT_ZOOM = parseInt( get( mapsAPI(), 'zoom', 14 ), 10 );
 
 /**
  * A wrapper for Google's Static Maps
@@ -160,12 +160,12 @@ export default class GoogleMap extends Component {
 	}
 
 	loadMap() {
-		if ( ! google ) {
+		if ( ! google() ) {
 			this.tryAgain();
 			return;
 		}
 
-		const { maps } = google;
+		const { maps } = google();
 		// Try to fetch the library 0.5 seconds later
 		if ( ! maps ) {
 			this.tryAgain();
@@ -333,7 +333,7 @@ export default class GoogleMap extends Component {
 			return this.renderImage();
 		}
 
-		const { maps } = google;
+		const { maps } = google();
 
 		map.instance = new maps.Map(
 			interactiveMapContainer.current,
