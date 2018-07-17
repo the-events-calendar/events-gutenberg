@@ -130,6 +130,7 @@
     "test": true,
     "describe": true,
     "afterAll": true,
+    "beforeAll": true,
     "tribe_blocks_editor": true
   }
 }
