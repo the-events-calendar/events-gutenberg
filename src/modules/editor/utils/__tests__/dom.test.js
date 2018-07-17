@@ -4,7 +4,7 @@
 import {
 	isRootNode,
 	searchParent,
-} from './../dom';
+} from 'utils/dom';
 
 describe( 'Tests for dom.js', () => {
 	test( 'Test for searchParent', () => {

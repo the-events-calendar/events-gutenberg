@@ -5,7 +5,7 @@ import {
 	isTruthy,
 	isFalsy,
 	replaceWithObject,
-} from './../string';
+} from 'utils/string';
 
 describe( 'Tests for string.js', () => {
 	test( 'isTruthy', () => {

@@ -6,9 +6,9 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import * as m from './../moment';
+import * as m from 'utils/moment';
 
-import { HALF_HOUR_IN_SECONDS } from './../time';
+import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 

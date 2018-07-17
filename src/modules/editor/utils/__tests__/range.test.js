@@ -6,7 +6,7 @@ import {
 	extractParts,
 	parser,
 	isFree,
-} from './../range';
+} from 'utils/range';
 
 describe( 'Tests for range.js', () => {
 	test( 'parseChars', () => {

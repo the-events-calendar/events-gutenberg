@@ -7,7 +7,7 @@ import {
 	settings,
 	list,
 	get,
-} from '../globals';
+} from 'utils/globals';
 
 describe( 'Tests for globals.js', () => {
 
