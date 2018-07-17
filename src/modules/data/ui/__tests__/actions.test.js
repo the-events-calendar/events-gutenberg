@@ -9,13 +9,12 @@ import moment from 'moment';
 /**
  * Internal dependencies
  */
-import * as actions from './../actions';
-import * as types from './../types';
+import { actions, types } from 'data/ui';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
 
-describe( 'UI Actions', () => {
+describe( '[STORE] - UI actions', () => {
 	it( 'Should toggle the dashboard', () => {
 		const expectedAction = {
 			type: types.TOGGLE_DASHBOARD_DATE_TIME,
@@ -59,7 +58,9 @@ describe( 'UI Actions', () => {
 		store.dispatch( actions.setInitialState( { get: noop } ) );
 		expect( store.getActions() ).toEqual( [] );
 	} );
+} );
 
+describe( '[STORE] - UI thunk actions', () => {
 	it( 'Should set the initial state', () => {
 		const store = mockStore( {} );
 
@@ -69,12 +70,14 @@ describe( 'UI Actions', () => {
 			} ),
 		);
 
-		const expectedAction = [{
-			type: types.SET_VISIBLE_MONTH,
-			payload: {
-				visibleMonth: moment().startOf( 'month' ).toDate(),
+		const expectedAction = [
+			{
+				type: types.SET_VISIBLE_MONTH,
+				payload: {
+					visibleMonth: moment().startOf( 'month' ).toDate(),
+				},
 			},
-		}];
+		];
 		expect( store.getActions() ).toEqual( expectedAction );
 	} );
 } );
