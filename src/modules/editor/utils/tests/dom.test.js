@@ -6,14 +6,6 @@ import {
 	searchParent,
 } from './../dom';
 
-jest.mock( './../globals', () => ( {
-	global: {
-		top: {
-			document: 'global',
-		},
-	},
-} ) );
-
 describe( 'Tests for dom.js', () => {
 	test( 'Test for searchParent', () => {
 		expect( searchParent( null ) ).toBeFalsy();
@@ -49,7 +41,8 @@ describe( 'Tests for dom.js', () => {
 
 	test( 'Test for isRootNode', () => {
 		expect( isRootNode( null ) ).toBeFalsy();
-		expect( isRootNode( 'Dynamic text' ) ).toBeFalsy();
-		expect( isRootNode( 'global' ) ).toBeTruthy();
+		expect( isRootNode( 'text' ) ).toBeFalsy();
+		expect( isRootNode( window.document.body ) ).toBeFalsy();
+		expect( isRootNode( window.document ) ).toBeTruthy();
 	} );
 } );
