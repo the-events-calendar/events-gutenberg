@@ -114,7 +114,7 @@ describe( 'Tests for moment.js', () => {
 	test( 'toDateTime', () => {
 		const converted = m.toDateTime( moment() );
 		expect( typeof converted ).toBe( 'string' );
-		expect( converted ).toBe( moment().format( 'MMMM D, YYYY h:m a' ) );
+		expect( converted ).toBe( moment().format( 'MMMM D, YYYY h:mm a' ) );
 	} );
 
 	test( 'toDate', () => {
@@ -132,7 +132,7 @@ describe( 'Tests for moment.js', () => {
 	test( 'toTime', () => {
 		const converted = m.toTime( moment() );
 		expect( typeof converted ).toBe( 'string' );
-		expect( converted ).toBe( moment().format( 'h:m a' ) );
+		expect( converted ).toBe( moment().format( 'h:mm a' ) );
 	} );
 
 	test( 'toDatePicker', () => {
