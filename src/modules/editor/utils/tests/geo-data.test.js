@@ -2,25 +2,22 @@
  * Internal dependencies
  */
 import * as geo from '../geo-data';
-import { getStates } from 'editor/utils/geo-data';
 
-jest.mock( '../globals', () => ( {
-	list: {
-		countries: {
+describe( 'Tests for geo-data.js', () => {
+	beforeAll( () => {
+		window.tribe_data_countries = {
 			LB: 'Lebanon',
 			LC: 'Saint Lucia',
 			LI: 'Liechtenstein',
 			US: 'United States',
-		},
-		us_states: {
+		};
+		window.tribe_data_us_states = {
 			DC: 'District of Columbia',
 			DE: 'Delaware',
 			FL: 'Florida',
-		},
-	},
-} ) );
+		};
+	} );
 
-describe( 'Tests for geo-data.js', () => {
 	test( 'getCountries', () => {
 		expect( geo.getCountries() ).toEqual( [
 			{
@@ -95,5 +92,10 @@ describe( 'Tests for geo-data.js', () => {
 		};
 		expect( geo.mapLink( address ) )
 			.toBe( 'https://maps.google.com/maps?f=q&source=s_q&geocode=&q=Mexico%2C%2090123%2C%20MX' );
+	} );
+
+	afterAll( () => {
+		delete window.tribe_data_countries;
+		delete window.tribe_data_us_states;
 	} );
 } );
