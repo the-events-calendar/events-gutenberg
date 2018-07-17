@@ -26,7 +26,7 @@ function toObject( data = {} ) {
  * @returns {{code: string, name: *}[]} An object with the list of countries
  */
 export function getCountries() {
-	return toObject( list.countries );
+	return toObject( list().countries );
 }
 
 export function getCountryCode( name ) {
@@ -49,13 +49,13 @@ export function getStateCode( countryCode, name ) {
 export function getStates( countryCode ) {
 	switch ( countryCode ) {
 		case 'US':
-			return toObject( list.us_states );
+			return toObject( list().us_states );
 		default:
 			return [];
 	}
 }
 
-export default list;
+export default list();
 
 export function addressToMapString( address = {} ) {
 	const {
