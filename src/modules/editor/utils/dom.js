@@ -4,11 +4,6 @@
 import { noop } from 'lodash';
 
 /**
- * Internal dependencies
- */
-import { global } from './globals';
-
-/**
  * Utility to search the parent of a node looking from the current node Up to the highest
  * node on the DOM Tree
  *
@@ -37,5 +32,5 @@ export function searchParent( node = {}, callback = noop ) {
  * @returns {boolean} true if node is the root Node Document
  */
 export function isRootNode( node ) {
-	return node === global.top.document;
+	return node === window.top.document;
 }
