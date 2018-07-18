@@ -3,7 +3,6 @@
  */
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { noop } from 'lodash';
 import moment from 'moment';
 
 /**
@@ -34,7 +33,10 @@ describe( '[STORE] - UI actions', () => {
 
 	it( 'Should not set the initial state', () => {
 		const store = mockStore( {} );
-		store.dispatch( actions.setInitialState( { get: noop } ) );
+		const get = jest.fn();
+		store.dispatch( actions.setInitialState( { get } ) );
+
+		expect( get ).toHaveBeenCalledTimes( 1 );
 		expect( store.getActions() ).toEqual( [] );
 	} );
 } );
@@ -42,13 +44,12 @@ describe( '[STORE] - UI actions', () => {
 describe( '[STORE] - UI thunk actions', () => {
 	it( 'Should set the initial state', () => {
 		const store = mockStore( {} );
+		const get = jest.fn( () => moment() );
 
-		store.dispatch(
-			actions.setInitialState( {
-				get: () => moment(),
-			} ),
-		);
+		store.dispatch( actions.setInitialState( { get } ) );
 
+		expect( get ).toHaveBeenCalled();
+		expect( get ).toHaveBeenCalledTimes( 1 );
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 } );
