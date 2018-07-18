@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { sendValue } from '../input';
+import { sendValue } from 'utils/input';
 
 describe( 'Tests for input.js', () => {
 	const event = {

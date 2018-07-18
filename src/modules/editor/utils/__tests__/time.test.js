@@ -6,7 +6,7 @@ import {
 	HALF_HOUR_IN_SECONDS,
 	HOUR_IN_SECONDS,
 	DAY_IN_SECONDS,
-} from './../time';
+} from 'utils/time';
 
 describe( 'Tests for time.js', () => {
 	test( 'MINUTE_IN_SECONDS', () => {

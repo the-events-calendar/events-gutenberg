@@ -1,10 +1,9 @@
 /**
  * Internal dependencies
  */
-import { getSettings, getSetting, hasSetting } from '../settings';
+import { getSettings, getSetting, hasSetting } from 'editor/settings';
 
 describe( 'Tests for settings.js', () => {
-
 	beforeAll( () => {
 		window.tribe_blocks_editor_settings = {
 			api: 'lorem',

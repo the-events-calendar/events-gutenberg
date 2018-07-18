@@ -7,9 +7,9 @@ import {
 	equalDates,
 	timezones,
 	timezonesAsSelectData,
-} from './../date';
+} from 'utils/date';
 
-jest.mock( './../../../elements/timezone-picker/element', () => ( {
+jest.mock( 'elements/timezone-picker/element', () => ( {
 	getItems: () => [
 		{
 			options: [
@@ -31,7 +31,7 @@ jest.mock( './../../../elements/timezone-picker/element', () => ( {
 } ) );
 
 afterAll( () => {
-	jest.unmock( './../../../elements/timezone-picker/element' );
+	jest.unmock( 'elements/timezone-picker/element' );
 } );
 
 describe( 'Tests for date.js', () => {

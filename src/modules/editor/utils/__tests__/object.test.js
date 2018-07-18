@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { removeEmptyStrings, castBooleanStrings } from './../object';
+import { removeEmptyStrings, castBooleanStrings } from 'utils/object';
 
 describe( 'Tests for object.js', () => {
 	test( 'removeEmptyStrings', () => {
