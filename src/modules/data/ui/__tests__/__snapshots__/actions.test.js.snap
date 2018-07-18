@@ -32,3 +32,14 @@ Object {
   "type": "TOGGLE_DASHBOARD_DATE_TIME",
 }
 `;
+
+exports[`[STORE] - UI thunk actions Should set the initial state 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "visibleMonth": 2018-07-01T05:00:00.000Z,
+    },
+    "type": "SET_VISIBLE_MONTH",
+  },
+]
+`;
