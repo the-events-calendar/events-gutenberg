@@ -6,11 +6,12 @@ import moment from 'moment';
 /**
  * Internal dependencies
  */
-import reducer, { actions } from 'data/ui';
+import { actions } from 'data/ui';
+import reducer, { DEFAULT_STATE } from 'data/ui/reducer';
 
 describe( '[STORE] - UI reducer', () => {
 	it( 'Should return the default state', () => {
-		expect( reducer( undefined, {} ) ).toMatchSnapshot();
+		expect( reducer( undefined, {} ) ).toEqual( DEFAULT_STATE );
 	} );
 
 	it( 'Should Set the Dashboard date time by open it', () => {

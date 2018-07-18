@@ -12,13 +12,6 @@ Object {
 }
 `;
 
-exports[`[STORE] - UI reducer Should return the default state 1`] = `
-Object {
-  "dashboardDateTimeOpen": false,
-  "visibleMonth": 2018-07-01T05:00:00.000Z,
-}
-`;
-
 exports[`[STORE] - UI reducer Should set the Dashboard date time by closing it 1`] = `
 Object {
   "dashboardDateTimeOpen": false,
