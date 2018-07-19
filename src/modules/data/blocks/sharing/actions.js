@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { DEFAULT_STATE } from './reducer';
+import { DEFAULT_STATE } from './reducers';
 
 export const setGoogleCalendarLabel = ( label ) => ( {
 	type: types.SET_GOOGLE_CALENDAR_LABEL,
