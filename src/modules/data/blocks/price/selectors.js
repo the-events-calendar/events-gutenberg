@@ -3,15 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-/**
- * Internal dependencies
- */
-import { getBlocks } from 'data/blocks/selectors';
-
-export const getPriceBlock = createSelector(
-	[ getBlocks ],
-	( blocks ) => blocks.price,
-);
+export const getPriceBlock = ( state ) => state.blocks.price;
 
 export const getPrice = createSelector(
 	[ getPriceBlock ],
