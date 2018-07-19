@@ -4,7 +4,7 @@
 import { createSelector } from 'reselect';
 import { DEFAULT_STATE } from './reducers/search';
 
-const blockSelector = ( state, props ) => state.search[ props.name ];
+export const blockSelector = ( state, props ) => state.search[ props.name ];
 
 export const getSearchType = createSelector(
 	[ blockSelector ],
