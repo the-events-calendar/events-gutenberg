@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[STORE] - Classic actions Action to set the details title 1`] = `
+Object {
+  "payload": Object {
+    "title": "Events",
+  },
+  "type": "SET_CLASSIC_DETAILS_TITLE",
+}
+`;
+
+exports[`[STORE] - Classic actions Action to set the organizer title 1`] = `
+Object {
+  "payload": Object {
+    "title": "Modern Tribe",
+  },
+  "type": "SET_CLASSIC_ORGANIZERS_TITLE",
+}
+`;
+
+exports[`[STORE] - Classic thunk actions Action to set the initial state 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "title": "Events",
+    },
+    "type": "SET_CLASSIC_DETAILS_TITLE",
+  },
+  Object {
+    "payload": Object {
+      "title": "Modern Tribe",
+    },
+    "type": "SET_CLASSIC_ORGANIZERS_TITLE",
+  },
+]
+`;
