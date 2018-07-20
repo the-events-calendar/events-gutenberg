@@ -127,7 +127,7 @@ export default class TimePicker extends Component {
 		let start = 0;
 		if ( min ) {
 			const roundStart = roundTime( min );
-			if ( roundStart.isS( min ) ) {
+			if ( roundStart.isSameOrBefore( min ) ) {
 				roundStart.add( 30, 'minutes' );
 			}
 			start = totalSeconds( roundStart );
