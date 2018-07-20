@@ -27,6 +27,6 @@ export const getCoordinates = ( details = {} ) => {
 
 	return {
 		lat: isNaN( lat ) ? null : lat,
-		lng: isNaN( lng ) ? null : lat,
+		lng: isNaN( lng ) ? null : lng,
 	};
 };
