@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[STORE] - Datetime actions Action to set all day 1`] = `
+Object {
+  "payload": Object {
+    "allDay": true,
+  },
+  "type": "SET_ALL_DAY",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set all day 2`] = `
+Object {
+  "payload": Object {
+    "allDay": false,
+  },
+  "type": "SET_ALL_DAY",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the date 1`] = `
+Object {
+  "meta": Object {
+    "from": "2018-06-08T17:00:00.000Z",
+    "to": "2018-06-19T17:00:00.000Z",
+  },
+  "type": "SET_DATES",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the end time 1`] = `
+Object {
+  "meta": Object {
+    "seconds": 79200,
+  },
+  "type": "SET_END_TIME",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the multi day 1`] = `
+Object {
+  "payload": Object {
+    "multiDay": true,
+  },
+  "type": "SET_MULTI_DAY",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the multi day 2`] = `
+Object {
+  "payload": Object {
+    "multiDay": false,
+  },
+  "type": "SET_MULTI_DAY",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the separator date 1`] = `
+Object {
+  "payload": Object {
+    "separator": " -  ",
+  },
+  "type": "SET_SEPARATOR_DATE",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the separator time 1`] = `
+Object {
+  "payload": Object {
+    "separator": " @ ",
+  },
+  "type": "SET_SEPARATOR_TIME",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the start time 1`] = `
+Object {
+  "payload": Object {
+    "start": "June 5, 2018 5:00 pm",
+  },
+  "type": "SET_START_DATE_TIME",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the start time 2`] = `
+Object {
+  "payload": Object {
+    "end": "June 25, 2018 4:00 pm",
+  },
+  "type": "SET_END_DATE_TIME",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the start time 3`] = `
+Object {
+  "meta": Object {
+    "seconds": 72000,
+  },
+  "type": "SET_START_TIME",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the time zone 1`] = `
+Object {
+  "payload": Object {
+    "timezone": "UTC",
+  },
+  "type": "SET_TIME_ZONE",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to toggle the multi day 1`] = `
+Object {
+  "type": "TOGGLE_MULTI_DAY",
+}
+`;
+
+exports[`[STORE] - Datetime thunk actions Initial set of state 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
