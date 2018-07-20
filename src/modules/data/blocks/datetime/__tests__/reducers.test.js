@@ -4,6 +4,11 @@
 import { actions } from 'data/blocks/datetime';
 import reducer, { DEFAULT_STATE } from 'data/blocks/datetime/reducers';
 
+jest.mock( 'moment', () => () => {
+	const moment = require.requireActual( 'moment' );
+	return moment( 'July 19, 2018 7:30 pm', 'MMMM D, Y h:mm a' );
+} );
+
 describe( '[STORE] - Datetime reducer', () => {
 	it( 'Should set the default state', () => {
 		expect( reducer( undefined, {} ) ).toEqual( DEFAULT_STATE );
