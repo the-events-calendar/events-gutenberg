@@ -5,13 +5,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { noop } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { actions, selectors } from 'data/forms';
 
-export default ( args ) => ( WrappedComponent ) => {
+export default ( args = noop ) => ( WrappedComponent ) => {
 	class WithForm extends Component {
 		static propTypes = {
 			registerForm: PropTypes.func,
