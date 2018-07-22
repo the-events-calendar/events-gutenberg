@@ -36,10 +36,10 @@ export default ( getName = noop ) => ( WrappedComponent ) => {
 		}
 
 		render() {
-			return <WrappedComponent { ...this.props } { ...this.aditionalProps() } />;
+			return <WrappedComponent { ...this.props } { ...this.additionalProps() } />;
 		}
 
-		aditionalProps() {
+		additionalProps() {
 			const {
 				createDraft,
 				sendForm,
