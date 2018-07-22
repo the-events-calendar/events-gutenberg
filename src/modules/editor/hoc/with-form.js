@@ -30,7 +30,7 @@ export default ( getName = noop ) => ( WrappedComponent ) => {
 		}
 
 		componentDidMount() {
-			const name = args( this.props );
+			const name = getName( this.props );
 			const { registerForm, postType } = this.props;
 			registerForm( name, postType );
 		}
@@ -47,7 +47,7 @@ export default ( getName = noop ) => ( WrappedComponent ) => {
 				editEntry,
 				maybeRemoveEntry,
 			} = this.props;
-			const name = args( this.props );
+			const name = getName( this.props );
 			return {
 				createDraft( fieldsObject ) {
 					createDraft( name, fieldsObject );
@@ -69,7 +69,7 @@ export default ( getName = noop ) => ( WrappedComponent ) => {
 	}
 
 	const mapStateToProps = ( state, props ) => {
-		const name = args( props );
+		const name = getName( props );
 		const modifiedProps = { name };
 		return {
 			edit: selectors.getFormEdit( state, modifiedProps ),
