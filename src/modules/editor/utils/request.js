@@ -1,10 +1,19 @@
 /**
+ * External dependencies
+ */
+import { isEmpty, isFunction } from 'lodash';
+
+/**
  * Extract the headers from an XHR request object.
  *
  * @param {object} xhr Ajax object
  * @returns {object} key / value pairs: key is the name of the header
  */
-export function getResponseHeaders( xhr ) {
+export function getResponseHeaders( xhr = {} ) {
+	if ( isEmpty( xhr ) || ! isFunction( xhr.getAllResponseHeaders ) ) {
+		return {};
+	}
+
 	return xhr.getAllResponseHeaders().trim()
 		// Split the headers on Carry Return  or New Line
 		.split( '\u000d\u000a' )
