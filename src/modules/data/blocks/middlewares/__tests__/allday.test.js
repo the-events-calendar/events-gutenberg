@@ -60,6 +60,9 @@ describe( '[STORE] - All day middleware', () => {
 		expect( next ).toHaveBeenCalledWith( action );
 		expect( store.dispatch ).not.toHaveBeenCalled();
 		expect( store.getState ).not.toHaveBeenCalled();
+		expect( mockedActions.setStart ).not.toHaveBeenCalled();
+		expect( mockedActions.setEnd ).not.toHaveBeenCalled();
+		expect( mockedActions.setMultiDay ).not.toHaveBeenCalled();
 	} );
 
 	it( 'Should bail early if the event is not all day', () => {
@@ -69,6 +72,9 @@ describe( '[STORE] - All day middleware', () => {
 		expect( next ).toHaveBeenCalledWith( actions.setAllDay( true ) );
 		expect( store.getState ).toHaveBeenCalledTimes( 1 );
 		expect( store.dispatch ).not.toHaveBeenCalled();
+		expect( mockedActions.setStart ).not.toHaveBeenCalled();
+		expect( mockedActions.setEnd ).not.toHaveBeenCalled();
+		expect( mockedActions.setMultiDay ).not.toHaveBeenCalled();
 	} );
 
 	it( 'Should update the start end time of the event on all day event', () => {
