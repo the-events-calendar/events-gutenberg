@@ -4,6 +4,7 @@
 import { types, selectors, actions } from 'data/blocks/datetime';
 
 import {
+	isSameDay,
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
@@ -44,8 +45,13 @@ export const startTime = ( { dispatch, getState } ) => ( next ) => ( action ) =>
 	dispatch( setStart( toDateTime( start ) ) );
 
 	if ( start.isSameOrAfter( end ) ) {
-		const total = end.clone().add( HOUR_IN_SECONDS, 'seconds' );
+		const total = start.clone().add( HOUR_IN_SECONDS, 'seconds' );
 		dispatch( setEnd( toDateTime( total ) ) );
+
+		const multiDay = selectors.getMultiDay( state );
+		if ( ! isSameDay( start, total ) && ! multiDay ) {
+			dispatch( actions.toggleMultiDay() );
+		}
 	}
 };
 
@@ -76,7 +82,12 @@ export const endTime = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	dispatch( setEnd( toDateTime( end ) ) );
 
 	if ( end.isSameOrBefore( start ) ) {
-		const total = start.clone().subtract( HOUR_IN_SECONDS, 'seconds' );
+		const total = end.clone().subtract( HOUR_IN_SECONDS, 'seconds' );
 		dispatch( setStart( toDateTime( total ) ) );
+
+		const multiDay = selectors.getMultiDay( state );
+		if ( ! isSameDay( end, total ) && ! multiDay ) {
+			dispatch( actions.toggleMultiDay() );
+		}
 	}
 };
