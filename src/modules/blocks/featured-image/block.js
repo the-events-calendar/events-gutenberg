@@ -63,7 +63,7 @@ class FeaturedImage extends Component {
 				icon="format-image"
 				instructions={
 					__(
-						'Use the Featured Image section on your Sidebar to setup an image here',
+						'Add a Featured Image from the Document Settings sidebar',
 						'events-gutenberg'
 					)
 				}
