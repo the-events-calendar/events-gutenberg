@@ -51,7 +51,7 @@ describe( '[STORE] - All day middleware', () => {
 		mockedActions.setMultiDay.mockClear();
 	} );
 
-	it( 'Should move through a non unknown action', () => {
+	it( 'Should move through a unknown action', () => {
 		const { store, next, invoke } = create();
 		const action = { type: 'UNKNOWN' };
 		invoke( action );
