@@ -61,5 +61,27 @@ describe( '[STORE] - Search thunk actions', () => {
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
+
+	it( 'Should set the term and request action', () => {
+		const store = mockStore( {
+			search: {},
+		} );
+		store.dispatch( actions.search( 'post', { term: 'Modern' } ) );
+		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	it( 'Should set the term and clear the block', () => {
+		const initialState = {
+			search: {},
+		};
+		const store = mockStore( initialState );
+		const searchParams = {
+			term: '',
+			populated: true,
+		};
+
+		store.dispatch( actions.search( 'post', searchParams ) );
+		expect( store.getActions() ).toMatchSnapshot();
+	} );
 } );
 
