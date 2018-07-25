@@ -1,4 +1,9 @@
 <?php
+
+if ( ! tribe_embed_google_map() ) {
+	return;
+}
+
 $map = tribe_get_embedded_map();
 
 if ( empty( $map ) ) {
