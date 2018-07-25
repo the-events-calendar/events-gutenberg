@@ -10,7 +10,7 @@ import { createSelector } from 'reselect';
 import { selectors as formsSelectors } from 'data/forms';
 import { DEFAULT_STATE } from './reducers/details';
 
-const blockSelector = ( state, props ) => state.details[ props.name ];
+export const blockSelector = ( state, props ) => state.details[ props.name ];
 
 export const getPostType = createSelector(
 	[ blockSelector ],
