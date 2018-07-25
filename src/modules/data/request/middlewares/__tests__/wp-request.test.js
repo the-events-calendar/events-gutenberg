@@ -38,7 +38,7 @@ describe( '[STORE] - wp-request middleware', () => {
 		window.wp.apiRequest = undefined;
 	} );
 
-	it( 'Should move through a non unknown action', () => {
+	it( 'Should move through a unknown action', () => {
 		const { next, invoke } = create();
 		const action = { type: 'UNKNOWN' };
 		invoke( action );
