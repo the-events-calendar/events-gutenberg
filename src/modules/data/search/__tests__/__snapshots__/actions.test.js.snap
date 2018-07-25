@@ -119,3 +119,44 @@ Array [
   },
 ]
 `;
+
+exports[`[STORE] - Search thunk actions Should set the term and clear the block 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "id": "post",
+      "term": "",
+    },
+    "type": "SET_TERM",
+  },
+  Object {
+    "payload": Object {
+      "id": "post",
+    },
+    "type": "CLEAR_BLOCK",
+  },
+]
+`;
+
+exports[`[STORE] - Search thunk actions Should set the term and request action 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "id": "post",
+      "term": "Modern",
+    },
+    "type": "SET_TERM",
+  },
+  Object {
+    "meta": Object {
+      "actions": Object {
+        "error": [Function],
+        "start": [Function],
+        "success": [Function],
+      },
+      "path": "tribe_events?orderby=relevance&status=draft%2Cpublish&order=asc&page=1&per_page=50&search=Modern",
+    },
+    "type": "WP_REQUEST",
+  },
+]
+`;
