@@ -1,6 +1,9 @@
+/**
+ * Internal dependencies
+ */
 import * as types from './../types';
 
-const DEFAULT_STATE = {
+export const DEFAULT_STATE = {
 	organizer: undefined,
 };
 
