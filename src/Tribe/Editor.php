@@ -512,6 +512,31 @@ class Tribe__Events_Gutenberg__Editor {
 		);
 	}
 
+	/**
+	 * Add "Event Blocks" category to the editor
+	 *
+	 * @since  TBD
+	 *
+	 * @return array
+	 */
+	public function block_categories( $categories, $post ) {
+
+		if ( Tribe__Events__Main::POSTTYPE !== $post->post_type ) { // @TODO: make compatible with standalone ET options in the future
+			return $categories;
+		}
+
+		return array_merge(
+			$categories,
+			array(
+				array(
+					'slug'  => 'tribe-events',
+					'title' => __( 'Event Blocks', 'events-gutenberg' ),
+				),
+			)
+		);
+
+	}
+
 	/************************
 	 *                      *
 	 *  Deprecated Methods  *
