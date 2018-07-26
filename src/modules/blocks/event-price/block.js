@@ -272,6 +272,10 @@ const mapStateToProps = ( state ) => ( {
 const mapDispatchToProps = ( dispatch ) => ( {
 	...bindActionCreators( priceActions, dispatch ),
 	...bindActionCreators( UIActions, dispatch ),
+	setInitialState( props ) {
+		dispatch( priceActions.setInitialState( props ) );
+		dispatch( UIActions.setInitialState( props ) );
+	},
 } );
 
 export default compose(
