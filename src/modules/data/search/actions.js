@@ -36,7 +36,7 @@ export const addResults = ( id, results ) => ( {
 	payload: {
 		id,
 		results,
-	}
+	},
 } );
 
 export const setTotalPages = ( id, totalPages ) => ( {
@@ -79,7 +79,6 @@ export const clearBlock = ( id ) => ( {
 } );
 
 export const search = ( id, params ) => ( dispatch, getState ) => {
-
 	const {
 		term = '',
 		exclude = [],

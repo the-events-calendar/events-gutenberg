@@ -25,8 +25,8 @@ import './style.pcss';
  * - required
  * - validate
  *
- * Both properties are helpful to provide validation based on the type of the element also has the option to add a cusotm
- * validation callback with the property validateCallback.
+ * Both properties are helpful to provide validation based on the type of the element also has
+ * the option to add a cusotm validation callback with the property validateCallback.
  *
  * <Input />
  *
@@ -71,7 +71,7 @@ class Input extends Component {
 	 * Callback fired every time the input changes, if the property onChange is passed to the component is called as well
 	 * synchronously.
 	 *
-	 * @param event
+	 * @param {Event} event Event fired by the onChange listener
 	 */
 	onChange = ( event ) => {
 		const { onChange, onComplete, validate } = this.props;
@@ -90,8 +90,8 @@ class Input extends Component {
 	/**
 	 * Validates the component using validateCallback if provided or using the logic based on the type inferring
 	 *
-	 * @param value
-	 * @returns {boolean}
+	 * @param {string} value The value to be validated
+	 * @returns {boolean} `true` if the param is valid false otherwise
 	 */
 	validate( value ) {
 		const { validateCallback } = this.props;
@@ -102,8 +102,8 @@ class Input extends Component {
 	 * If the input is empty does not make any validation unless the value is required otherwise it uses the validation
 	 * based on the type="url" of the <input> component.
 	 *
-	 * @param value
-	 * @returns {boolean}
+	 * @param {string} value The value to be validated
+	 * @returns {boolean} `true` if the param is valid false otherwise
 	 */
 	maybeValidate = ( value ) => {
 		const { type, required } = this.props;
@@ -166,7 +166,7 @@ class Input extends Component {
 		}
 
 		return classes
-			.filter( ( className ) => className && className.length )
+			.filter( ( name ) => name && name.length )
 			.join( ' ' );
 	}
 

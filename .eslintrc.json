@@ -125,8 +125,15 @@
     "tribe_data_countries": true,
     "tribe_data_us_states": true,
     "siteTimezone": true,
+    "jest": true,
     "expect": true,
     "test": true,
+    "describe": true,
+    "afterAll": true,
+    "beforeAll": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "it": true,
     "tribe_blocks_editor": true
   }
 }

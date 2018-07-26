@@ -105,6 +105,9 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 		// Maybe add flag from classic editor
 		add_action( 'init', tribe_callback( 'gutenberg.editor', 'flag_post_from_classic_editor' ), 0 );
 
+		// Add Block Categories to Editor
+		add_action( 'block_categories', tribe_callback( 'gutenberg.editor', 'block_categories' ), 10, 2 );
+
 		// Update Post content to use blocks
 		add_action( 'tribe_blocks_editor_flag_post_classic_editor', tribe_callback( 'gutenberg.editor', 'update_post_content_to_blocks' ) );
 

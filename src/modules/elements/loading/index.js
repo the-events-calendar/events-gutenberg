@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import React from 'react';
 import classNames from 'classnames';
 
 /**
@@ -12,7 +13,7 @@ import './style.pcss';
 
 export default ( { className } ) => {
 	return (
-		<span className={ classNames( [ "tribe-editor__spinner-container", className ] ) }>
+		<span className={ classNames( [ 'tribe-editor__spinner-container', className ] ) }>
 			<Spinner />
 		</span>
 	);

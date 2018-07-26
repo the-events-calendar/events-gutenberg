@@ -51,7 +51,6 @@ import { actions, selectors, utils } from 'data/blocks/venue';
  */
 
 class EventVenue extends Component {
-
 	static propTypes = {
 		venue: PropTypes.number,
 		isSelected: PropTypes.bool,
@@ -157,7 +156,7 @@ class EventVenue extends Component {
 				postType={ VENUE }
 				onSelection={ this.setVenue }
 				onSetCreation={ this.setDraftTitle }
-				placeholder={ __( 'Add or find a location', 'events-gutenberg' ) }
+				placeholder={ __( 'Add or find a venue', 'events-gutenberg' ) }
 			/>
 		);
 	}

@@ -19,6 +19,8 @@
 		} ]
 	],
 	"plugins": [
+		"transform-class-properties",
+		"syntax-class-properties",
 		"transform-object-rest-spread",
 		[ "transform-react-jsx", {
 			"pragma": "wp.element.createElement"
@@ -27,14 +29,19 @@
 	"env": {
 		"default": {
 			"plugins": [
+				"transform-class-properties",
+				"syntax-class-properties",
 				"import-glob",
 				"lodash",
-				"transform-runtime",
-				"transform-class-properties"
+				"transform-runtime"
 			]
 		},
 		"test": {
-			"presets": [ "env" ]
+			"presets": [ "env" ],
+			"plugins": [
+				"transform-class-properties",
+				"syntax-class-properties"
+			]
 		},
 		"gettext": {
 			"plugins": [

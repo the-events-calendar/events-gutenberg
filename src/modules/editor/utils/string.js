@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { escapeRegExp, isUndefined } from 'lodash';
+
+/**
  * Internal dependencies
  */
 import { hasAnyOf } from './array';
@@ -33,3 +38,10 @@ export function isFalsy( value ) {
 	];
 	return hasAnyOf( validValues, value );
 }
+
+export const replaceWithObject = ( str = '', pairs = {} ) => {
+	const substrs = Object.keys( pairs ).map( escapeRegExp );
+	return str.split( RegExp( `(${ substrs.join( '|' ) })` ) )
+		.map( part => isUndefined( pairs[ part ] ) ? part : pairs[ part ] )
+		.join( '' );
+};

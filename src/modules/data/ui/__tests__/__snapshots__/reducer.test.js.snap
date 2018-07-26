@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[STORE] - UI reducer Should Set the Dashboard date time by open it 1`] = `
+Object {
+  "dashboardDateTimeOpen": true,
+}
+`;
+
+exports[`[STORE] - UI reducer Should Toggle Dashboard date time 1`] = `
+Object {
+  "dashboardDateTimeOpen": true,
+}
+`;
+
+exports[`[STORE] - UI reducer Should set the Dashboard date time by closing it 1`] = `
+Object {
+  "dashboardDateTimeOpen": false,
+}
+`;

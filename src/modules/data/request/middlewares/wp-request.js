@@ -43,13 +43,13 @@ export default () => ( next ) => ( action ) => {
 
 	actions.start( url, params );
 
-	apiRequest( {
+	return apiRequest( {
 		...params,
 		path: url,
-	} ).then( ( body, status, xhr ) => {
+	} ).then( ( body, status = '', xhr = {} ) => {
 		const headers = getResponseHeaders( xhr );
 		actions.success( { body, headers, status, xhr } );
-	} ).fail( ( error ) => {
+	} ).catch( ( error ) => {
 		actions.error( error );
 	} );
-}
+};

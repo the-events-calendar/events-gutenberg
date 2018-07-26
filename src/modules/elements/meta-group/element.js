@@ -25,11 +25,11 @@ class MetaGroup extends Component {
 	render() {
 		const { groupKey, className, children } = this.props;
 
-		const names = classNames([
+		const names = classNames( [
 			'tribe-editor__meta-group',
 			`tribe-editor__meta-group--${ groupKey }`,
 			className,
-		]);
+		] );
 		return (
 			<div
 				className={ names }

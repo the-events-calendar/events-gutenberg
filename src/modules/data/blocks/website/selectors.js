@@ -3,15 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-/**
- * Internal dependencies
- */
-import { getBlocks } from 'data/blocks/selectors';
-
-export const getWebsiteBlock = createSelector(
-	[ getBlocks ],
-	( blocks ) => blocks.website,
-);
+export const getWebsiteBlock = ( state ) => state.blocks.website;
 
 export const getUrl = createSelector(
 	[ getWebsiteBlock ],

@@ -16,10 +16,13 @@ import { VENUE } from 'editor/post-types';
  */
 export default {
 	id: 'event-venue',
-	title: __( 'Event Location', 'events-gutenberg' ),
-	description: __( 'Where is this event happening? Select or create a location.', 'events-gutenberg' ),
+	title: __( 'Event Venue', 'events-gutenberg' ),
+	description: __(
+		'Where is this event happening? Select or create a location.',
+		'events-gutenberg'
+	),
 	icon: Icons.TEC,
-	category: 'common',
+	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {

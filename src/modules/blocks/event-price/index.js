@@ -20,9 +20,12 @@ import { withStore } from 'editor/hoc';
 export default {
 	id: 'event-price',
 	title: __( 'Event Price', 'events-gutenberg' ),
-	description: __( 'Let visitors know the cost of this event or if it’s free to attend.', 'events-gutenberg' ),
+	description: __(
+		'Let visitors know the cost of this event or if it’s free to attend.',
+		'events-gutenberg'
+	),
 	icon: Icons.TEC,
-	category: 'common',
+	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {

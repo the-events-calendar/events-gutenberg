@@ -1,19 +1,15 @@
 /**
  * External dependencies
  */
-import classNames from 'classnames';
+import React from 'react';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import { withSelect } from '@wordpress/data';
-import { Placeholder, Spinner, withAPIData } from '@wordpress/components';
-
-import {
-	InspectorControls,
-} from '@wordpress/editor';
+import { Placeholder, Spinner } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -55,7 +51,7 @@ class FeaturedImage extends Component {
 		}
 
 		return (
-			<img src={ image.source_url } />
+			<img src={ image.source_url } alt="Featured Image" />
 		);
 	}
 
@@ -65,7 +61,12 @@ class FeaturedImage extends Component {
 				style={ { minHeight: 150 } }
 				key="placeholder"
 				icon="format-image"
-				instructions={ __( 'Use the Featured Image section on your Sidebar to setup an image here', 'events-gutenberg' ) }
+				instructions={
+					__(
+						'Add a Featured Image from the Document Settings sidebar',
+						'events-gutenberg'
+					)
+				}
 			>
 			</Placeholder>
 		);
@@ -78,7 +79,7 @@ class FeaturedImage extends Component {
 				key="placeholder"
 				instructions={ __( 'Loading the Image', 'events-gutenberg' ) }
 			>
-				<Spinner/>
+				<Spinner />
 			</Placeholder>
 		);
 	}

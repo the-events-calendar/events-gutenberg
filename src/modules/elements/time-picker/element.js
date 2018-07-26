@@ -58,7 +58,8 @@ export default class TimePicker extends Component {
 			return (
 				<button
 					className="tribe-editor__timepicker__all-day-btn"
-					onClick={ onToggle }>
+					onClick={ onToggle }
+				>
 					{ __( 'All Day', 'events-gutenberg' ) }
 				</button>
 			);
@@ -126,7 +127,7 @@ export default class TimePicker extends Component {
 		let start = 0;
 		if ( min ) {
 			const roundStart = roundTime( min );
-			if ( roundStart.isS( min ) ) {
+			if ( roundStart.isSameOrBefore( min ) ) {
 				roundStart.add( 30, 'minutes' );
 			}
 			start = totalSeconds( roundStart );

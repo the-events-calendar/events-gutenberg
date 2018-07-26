@@ -68,9 +68,6 @@ function CreateDropdown( { ...props } ) {
 	return content;
 }
 
-/**
- * Module Code
- */
 class EventOrganizers extends Component {
 	static defaultProps = {
 		organizers: [],
