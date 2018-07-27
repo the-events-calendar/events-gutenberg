@@ -4,4 +4,6 @@ node_js:
 env:
   - NODE_ENV=test
 script: npm run test:travis
-cache: yarn
+cache:
+  directories:
+    - "node_modules"
