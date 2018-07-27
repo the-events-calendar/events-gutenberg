@@ -8,6 +8,7 @@ node_modules
 .DS_Store
 *.log
 phpcs.xml
+yarn.lock
 docker-compose.override.yml
 cypress.env.json
 .idea
