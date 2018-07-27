@@ -1,10 +1,15 @@
+/**
+ * External dependencies
+ */
 import { combineReducers } from 'redux';
 
+/**
+ * Internal dependencies
+ */
 import * as types from './../types';
 import block from './block';
-const DEFAULT_STATE = {};
 
-const byId = ( state = DEFAULT_STATE, action ) => {
+export const byId = ( state = {}, action ) => {
 	switch ( action.type ) {
 		case types.ADD_ORGANIZER_BLOCK:
 		case types.REMOVE_ORGANIZER_BLOCK:
@@ -17,7 +22,7 @@ const byId = ( state = DEFAULT_STATE, action ) => {
 	}
 };
 
-const allIds = ( state = [], action ) => {
+export const allIds = ( state = [], action ) => {
 	switch ( action.type ) {
 		case types.ADD_ORGANIZER_BLOCK:
 			return [ ...state, action.payload.organizer ];
