@@ -111,7 +111,7 @@
 			"NODE_ENV": "test"
 		},
 		"setupFiles": [
-			"<rootDir>/jest.globals.js"
+			"<rootDir>/jest.setup.js"
 		],
 		"moduleNameMapper": {
 			"^utils(.*)$": "<rootDir>/src/modules/editor/utils$1",
