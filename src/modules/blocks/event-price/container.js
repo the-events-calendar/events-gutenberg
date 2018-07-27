@@ -91,12 +91,11 @@ const mapDispatchToProps = ( dispatch ) => ( {
 	setCurrencyPosition: ( value ) => dispatch( priceActions.togglePosition( ! value ) ),
 } );
 
-export default withStore()(
-	compose(
-		connect(
-			mapStateToProps,
-			mapDispatchToProps
-		),
-		withSaveData(),
-	)( EventPrice )
-);
+export default compose(
+	withStore(),
+	connect(
+		mapStateToProps,
+		mapDispatchToProps
+	),
+	withSaveData(),
+)( EventPrice );
