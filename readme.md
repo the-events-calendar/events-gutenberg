@@ -27,6 +27,8 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 #### 0.2.5-alpha - TBD
 * Tweak - Change event location to event venue
 * Tweak - Add tests for utils functions
+* Tweak - Add "Event Blocks" category to the editor
+* Tweak - Normalize styles for the Event Options metabox
 
 #### 0.2.4-alpha - 2018-07-12
 

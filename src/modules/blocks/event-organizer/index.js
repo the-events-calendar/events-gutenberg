@@ -21,7 +21,7 @@ export default {
 	title: __( 'Event Organizer', 'events-gutenberg' ),
 	description: __( 'List a host or coordinator for this event.', 'events-gutenberg' ),
 	icon: Icons.TEC,
-	category: 'common',
+	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {
