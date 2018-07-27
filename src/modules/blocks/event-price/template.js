@@ -2,10 +2,9 @@
  * External dependencies
  */
 import { trim, isEmpty } from 'lodash';
+import { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
 
 /**
  * WordPress dependencies
@@ -17,37 +16,23 @@ import {
 	TextControl,
 	PanelBody,
 } from '@wordpress/components';
-
-import {
-	InspectorControls,
-} from '@wordpress/editor';
+import { InspectorControls } from '@wordpress/editor';
 
 /**
  * Internal dependencies
  */
-import {
-	Dashboard,
-} from 'elements';
-
-import './style.pcss';
+import { Dashboard } from 'elements';
 import { parser, isFree } from 'utils/range';
-import withSaveData from 'editor/hoc/with-save-data';
-import {
-	actions as priceActions,
-	selectors as priceSelectors,
-} from 'data/blocks/price';
-import {
-	actions as UIActions,
-	selectors as UISelectors,
-} from 'data/ui';
 import { sendValue } from 'editor/utils/input';
 import { searchParent } from 'editor/utils/dom';
+import './style.pcss';
 
 /**
  * Module Code
  */
 
 class EventPrice extends Component {
+
 	componentDidMount() {
 		document.addEventListener( 'keydown', this.onKeyDown );
 		document.addEventListener( 'click', this.onClick );
@@ -56,24 +41,6 @@ class EventPrice extends Component {
 	componentWillUnmount() {
 		document.removeEventListener( 'keydown', this.onKeyDown );
 		document.removeEventListener( 'click', this.onClick );
-	}
-
-	render() {
-		return [
-			this.renderUI(),
-			this.renderControls(),
-		];
-	}
-
-	renderUI() {
-		return (
-			<section key="event-price-box" className="tribe-editor__block">
-				<div className="tribe-editor__event-price">
-					{ this.renderLabel() }
-					{ this.renderDashboard() }
-				</div>
-			</section>
-		);
 	}
 
 	renderLabel() {
@@ -94,10 +61,6 @@ class EventPrice extends Component {
 				{ this.renderDescription() }
 			</div>
 		);
-	}
-
-	isEmpty( value ) {
-		return isEmpty( trim( value ) );
 	}
 
 	renderCurrency() {
@@ -151,6 +114,7 @@ class EventPrice extends Component {
 
 	renderDescription() {
 		const { costDescription } = this.props;
+
 		if ( this.isEmpty( costDescription ) ) {
 			return null;
 		}
@@ -190,6 +154,51 @@ class EventPrice extends Component {
 		);
 	}
 
+	renderUI() {
+		return (
+			<section key="event-price-box" className="tribe-editor__block">
+				<div className="tribe-editor__event-price">
+					{ this.renderLabel() }
+					{ this.renderDashboard() }
+				</div>
+			</section>
+		);
+	}
+
+	renderControls() {
+		const {
+			isSelected,
+			currencySymbol,
+			currencyPosition,
+			setSymbol,
+		} = this.props;
+
+		if ( ! isSelected ) {
+			return null;
+		}
+
+		return (
+			<InspectorControls key="inspector">
+				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
+					<TextControl
+						className="tribe-editor__event-price__currency-symbol-setting"
+						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
+						value={ currencySymbol }
+						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
+						onChange={ setSymbol }
+					/>
+					<CheckboxControl
+						label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
+						checked={ 'suffix' === currencyPosition }
+						onChange={ this.setCurrencyPosition }
+					/>
+				</PanelBody>
+			</InspectorControls>
+		);
+	}
+
+	setCurrencyPosition = ( value ) => this.props.togglePosition( ! value );
+
 	/* TODO: This needs to move to logic component wrapper */
 	onKeyDown = ( e ) => {
 		const ESCAPE_KEY = 27;
@@ -226,62 +235,17 @@ class EventPrice extends Component {
 		) )
 	);
 
-	renderControls() {
-		const {
-			isSelected,
-			currencySymbol,
-			currencyPosition,
-			setSymbol,
-		} = this.props;
-
-		if ( ! isSelected ) {
-			return null;
-		}
-
-		return (
-			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
-					<TextControl
-						className="tribe-editor__event-price__currency-symbol-setting"
-						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
-						value={ currencySymbol }
-						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ setSymbol }
-					/>
-					<CheckboxControl
-						label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
-						checked={ 'suffix' === currencyPosition }
-						onChange={ this.setCurrencyPosition }
-					/>
-				</PanelBody>
-			</InspectorControls>
-		);
+	isEmpty( value ) {
+		return isEmpty( trim( value ) );
 	}
 
-	setCurrencyPosition = ( value ) => this.props.togglePosition( ! value );
+	render() {
+		return [
+			this.renderUI(),
+			this.renderControls(),
+		];
+	}
+
 }
 
-const mapStateToProps = ( state ) => ( {
-	dashboardOpen: UISelectors.getDashboardPriceOpen( state ),
-	cost: priceSelectors.getPrice( state ),
-	currencyPosition: priceSelectors.getPosition( state ),
-	currencySymbol: priceSelectors.getSymbol( state ),
-	costDescription: priceSelectors.getDescription( state ),
-} );
-
-const mapDispatchToProps = ( dispatch ) => ( {
-	...bindActionCreators( priceActions, dispatch ),
-	...bindActionCreators( UIActions, dispatch ),
-	setInitialState( props ) {
-		dispatch( priceActions.setInitialState( props ) );
-		dispatch( UIActions.setInitialState( props ) );
-	},
-} );
-
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps
-	),
-	withSaveData(),
-)( EventPrice );
+export default EventPrice;
