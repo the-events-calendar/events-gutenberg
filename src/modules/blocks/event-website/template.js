@@ -21,14 +21,17 @@ import './style.pcss';
 
 const placeholder = __( 'Add Button Text', 'events-gutenberg' );
 
-const EventWebsite = ({ isSelected, url, urlLabel, setWebsite, setLabel }) => {
+const EventWebsite = ({
+	isSelected,
+	isEmpty,
+	url,
+	urlLabel,
+	setWebsite,
+	setLabel
+}) => {
 
-	const renderUrlInput = () => {
-		if ( ! isSelected ) {
-			return null;
-		}
-
-		return (
+	const renderUrlInput = () => (
+		isSelected && (
 			<div key="tribe-events-website-url" className="tribe-editor__event-website__url">
 				<Dashicon icon="admin-links" />
 				<UrlInput
@@ -37,8 +40,8 @@ const EventWebsite = ({ isSelected, url, urlLabel, setWebsite, setLabel }) => {
 					onChange={ setWebsite }
 				/>
 			</div>
-		);
-	}
+		)
+	);
 
 	const renderLabelInput = () => {
 		const containerClassNames = classNames( {
@@ -46,7 +49,6 @@ const EventWebsite = ({ isSelected, url, urlLabel, setWebsite, setLabel }) => {
 			'tribe-editor__event-website__label--selected': isSelected,
 		} );
 
-		const isEmpty = urlLabel.trim() === '';
 		const inputClassNames = classNames( {
 			'tribe-editor__event-website__label-text': true,
 			'tribe-editor__event-website__label-text--empty': isEmpty && isSelected,
