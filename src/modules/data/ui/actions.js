@@ -26,14 +26,14 @@ export const openDashboardPrice = () => ( {
 	type: types.SET_DASHBOARD_PRICE,
 	payload: {
 		open: true,
-	}
+	},
 } );
 
 export const closeDashboardPrice = () => ( {
 	type: types.SET_DASHBOARD_PRICE,
 	payload: {
 		open: false,
-	}
+	},
 } );
 
 export const setVisibleMonth = ( visibleMonth ) => ( {
