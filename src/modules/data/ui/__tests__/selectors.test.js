@@ -18,6 +18,7 @@ describe( '[STORE] - UI Selectors', () => {
 	} );
 
 	it( 'Should select the status of dashboard', () => {
-		expect( selectors.getDashboardOpen( state ) ).toEqual( DEFAULT_STATE.dashboardDateTimeOpen );
+		expect( selectors.getDashboardDateTimeOpen( state ) )
+			.toEqual( DEFAULT_STATE.dashboardDateTimeOpen );
 	} );
 } );

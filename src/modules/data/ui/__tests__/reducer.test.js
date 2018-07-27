@@ -15,17 +15,17 @@ describe( '[STORE] - UI reducer', () => {
 	} );
 
 	it( 'Should Set the Dashboard date time by open it', () => {
-		const current = reducer( {}, actions.openDashboard() );
+		const current = reducer( {}, actions.openDashboardDateTime() );
 		expect( current ).toMatchSnapshot();
 	} );
 
 	it( 'Should set the Dashboard date time by closing it', () => {
-		const current = reducer( {}, actions.closeDashboard() );
+		const current = reducer( {}, actions.closeDashboardDateTime() );
 		expect( current ).toMatchSnapshot();
 	} );
 
 	it( 'Should Toggle Dashboard date time', () => {
-		const current = reducer( { dashboardDateTimeOpen: false }, actions.toggleDashboard() );
+		const current = reducer( { dashboardDateTimeOpen: false }, actions.toggleDashboardDateTime() );
 		expect( current ).toMatchSnapshot();
 	} );
 
