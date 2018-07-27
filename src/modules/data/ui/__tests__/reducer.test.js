@@ -14,18 +14,26 @@ describe( '[STORE] - UI reducer', () => {
 		expect( reducer( undefined, {} ) ).toEqual( DEFAULT_STATE );
 	} );
 
+	it( 'Should open the Dashboard price', () => {
+		expect( reducer( {}, actions.openDashboardPrice() ) ).toMatchSnapshot();
+	} );
+
 	it( 'Should Set the Dashboard date time by open it', () => {
-		const current = reducer( {}, actions.openDashboard() );
+		const current = reducer( {}, actions.openDashboardDateTime() );
 		expect( current ).toMatchSnapshot();
 	} );
 
 	it( 'Should set the Dashboard date time by closing it', () => {
-		const current = reducer( {}, actions.closeDashboard() );
+		const current = reducer( {}, actions.closeDashboardDateTime() );
 		expect( current ).toMatchSnapshot();
 	} );
 
+	it( 'Should close the dashaboard price', () => {
+		expect( reducer( {}, actions.closeDashboardPrice() ) ).toMatchSnapshot();
+	} );
+
 	it( 'Should Toggle Dashboard date time', () => {
-		const current = reducer( { dashboardDateTimeOpen: false }, actions.toggleDashboard() );
+		const current = reducer( { dashboardDateTimeOpen: false }, actions.toggleDashboardDateTime() );
 		expect( current ).toMatchSnapshot();
 	} );
 
