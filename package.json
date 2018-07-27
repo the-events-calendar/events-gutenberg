@@ -105,6 +105,7 @@
 	},
 	"jest": {
 		"verbose": true,
+		"testURL": "http://localhost/",
 		"globals": {
 			"NODE_ENV": "test"
 		},
