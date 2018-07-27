@@ -29,8 +29,7 @@ describe( '[STORE] - UI actions', () => {
 	} );
 
 	it( 'Should set the visible month', () => {
-		Date.now = jest.fn( () => '2018-07-01T05:00:00.000Z' );
-		expect( actions.setVisibleMonth( Date.now() ) ).toMatchSnapshot();
+		expect( actions.setVisibleMonth( '2018-07-01T05:00:00.000Z' ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should not set the initial state', () => {
