@@ -24,7 +24,6 @@ import { InspectorControls } from '@wordpress/editor';
 import { Dashboard } from 'elements';
 import { parser, isFree } from 'utils/range';
 import { sendValue } from 'editor/utils/input';
-import { searchParent } from 'editor/utils/dom';
 import './style.pcss';
 
 /**
@@ -34,17 +33,19 @@ import './style.pcss';
 class EventPrice extends Component {
 
 	componentDidMount() {
-		document.addEventListener( 'keydown', this.onKeyDown );
-		document.addEventListener( 'click', this.onClick );
+		const { onKeyDown, onClick } = this.props;
+		document.addEventListener( 'keydown', onKeyDown );
+		document.addEventListener( 'click', onClick );
 	}
 
 	componentWillUnmount() {
-		document.removeEventListener( 'keydown', this.onKeyDown );
-		document.removeEventListener( 'click', this.onClick );
+		const { onKeyDown, onClick } = this.props;
+		document.removeEventListener( 'keydown', onKeyDown );
+		document.removeEventListener( 'click', onClick );
 	}
 
 	renderLabel() {
-		const { currencyPosition, openDashboardPrice } = this.props;
+		const { currencyPosition, openDashboard } = this.props;
 		const containerClass = classNames(
 			'tribe-editor__event-price__price',
 			`tribe-editor__event-price__price--${ currencyPosition }`,
@@ -53,7 +54,7 @@ class EventPrice extends Component {
 		return (
 			<div
 				className={ containerClass }
-				onClick={ openDashboardPrice }
+				onClick={ openDashboard }
 			>
 				{ this.renderCurrency() }
 				{ this.renderPlaceholder() }
@@ -198,42 +199,6 @@ class EventPrice extends Component {
 	}
 
 	setCurrencyPosition = ( value ) => this.props.togglePosition( ! value );
-
-	/* TODO: This needs to move to logic component wrapper */
-	onKeyDown = ( e ) => {
-		const ESCAPE_KEY = 27;
-		if ( e.keyCode === ESCAPE_KEY ) {
-			this.props.closeDashboardPrice();
-		}
-	}
-
-	/* TODO: This needs to move to logic component wrapper */
-	onClick = ( e ) => {
-		const { target } = e;
-		if (
-			! this.isTargetInBlock( target ) &&
-			! this.isTargetInSidebar( target )
-		) {
-			this.props.closeDashboardPrice();
-		}
-	}
-
-	/* TODO: This needs to move to logic component wrapper */
-	isTargetInBlock = ( target ) => (
-		searchParent( target, ( testNode ) => {
-			if ( testNode.classList.contains( 'editor-block-list__block' ) ) {
-				return Boolean( testNode.querySelector( '.tribe-editor__event-price' ) );
-			}
-			return false;
-		} )
-	);
-
-	/* TODO: This needs to move to logic component wrapper */
-	isTargetInSidebar = ( target ) => (
-		searchParent( target, ( testNode ) => (
-			testNode.classList.contains( 'edit-post-sidebar' )
-		) )
-	);
 
 	isEmpty( value ) {
 		return isEmpty( trim( value ) );

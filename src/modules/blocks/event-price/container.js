@@ -7,6 +7,7 @@ import { bindActionCreators, compose } from 'redux';
 /**
  * Internal dependencies
  */
+import { searchParent } from 'editor/utils/dom';
 import withSaveData from 'editor/hoc/with-save-data';
 import { withStore } from 'editor/hoc';
 import {
@@ -19,6 +20,39 @@ import {
 } from 'data/ui';
 import EventPrice from './template';
 
+const ESCAPE_KEY = 27;
+
+const isTargetInBlock = ( target ) => (
+	searchParent( target, ( testNode ) => {
+		if ( testNode.classList.contains( 'editor-block-list__block' ) ) {
+			return Boolean( testNode.querySelector( '.tribe-editor__event-price' ) );
+		}
+		return false;
+	} )
+);
+
+const isTargetInSidebar = ( target ) => (
+	searchParent( target, ( testNode ) => (
+		testNode.classList.contains( 'edit-post-sidebar' )
+	) )
+);
+
+const onKeyDown = ( e, dispatch ) => {
+	if ( e.keyCode === ESCAPE_KEY ) {
+		dispatch( UIActions.closeDashboardPrice() );
+	}
+};
+
+const onClick = ( e, dispatch ) => {
+	const { target } = e;
+	if (
+		! isTargetInBlock( target ) &&
+		! isTargetInSidebar( target )
+	) {
+		dispatch( UIActions.closeDashboardPrice() );
+	}
+};
+
 const mapStateToProps = ( state ) => ( {
 	dashboardOpen: UISelectors.getDashboardPriceOpen( state ),
 	cost: priceSelectors.getPrice( state ),
@@ -29,11 +63,13 @@ const mapStateToProps = ( state ) => ( {
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	...bindActionCreators( priceActions, dispatch ),
-	...bindActionCreators( UIActions, dispatch ),
-	setInitialState( props ) {
+	setInitialState: ( props ) => {
 		dispatch( priceActions.setInitialState( props ) );
 		dispatch( UIActions.setInitialState( props ) );
 	},
+	onKeyDown: ( e ) => onKeyDown( e, dispatch ),
+	onClick: ( e ) => onClick( e, dispatch ),
+	openDashboard: () => dispatch( UIActions.openDashboardPrice() ),
 } );
 
 export default withStore()(
