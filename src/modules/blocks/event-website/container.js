@@ -20,12 +20,11 @@ const mapStateToProps = ( state ) => ( {
 
 const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
 
-export default withStore()(
-	compose(
-		connect(
-			mapStateToProps,
-			mapDispatchToProps,
-		),
-		withSaveData(),
-	)( EventWebsite )
-);
+export default compose(
+	withStore(),
+	connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	),
+	withSaveData(),
+)( EventWebsite );
