@@ -29,6 +29,94 @@ import './style.pcss';
  * Module Code
  */
 
+const renderCurrency = ({ showCurrencySymbol, currencySymbol }) => (
+	showCurrencySymbol && (
+		<span className="tribe-editor__event-price__currency">
+			{ currencySymbol }
+		</span>
+	)
+);
+
+const renderPlaceholder = ({ showCost }) => {
+	const placeholder = __( 'Add Price', 'events-gutenberg' );
+
+	return ! showCost && (
+		<span className="tribe-editor__event-price__label">{ placeholder }</span>
+	);
+};
+
+const renderCost = ({ showCost, isFree, cost }) => {
+	const parsed = parser( cost );
+
+	let value = parsed;
+
+	if ( isFree ) {
+		value = __( 'Free', 'events-gutenberg' );
+	}
+
+	return showCost && (
+		<span className="tribe-editor__event-price__cost">{ value }</span>
+	);
+};
+
+const renderDescription = ({ showCostDescription, costDescription }) => (
+	showCostDescription && (
+		<span className="tribe-editor__event-price__description">{ costDescription }</span>
+	)
+);
+
+const renderLabel = ( props ) => {
+	const { currencyPosition, openDashboard } = props;
+	const containerClass = classNames(
+		'tribe-editor__event-price__price',
+		`tribe-editor__event-price__price--${ currencyPosition }`,
+	);
+
+	return (
+		<div
+			className={ containerClass }
+			onClick={ openDashboard }
+		>
+			{ renderCurrency( props ) }
+			{ renderPlaceholder( props ) }
+			{ renderCost( props ) }
+			{ renderDescription( props ) }
+		</div>
+	);
+};
+
+const renderDashboard = ( props ) => {
+	const { dashboardOpen, cost, costDescription, setCost, setDescription } = props;
+
+	return (
+		<Dashboard open={ dashboardOpen }>
+			<Fragment>
+				<section className="tribe-editor__event-price__dashboard">
+					<input
+						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
+						name="description"
+						type="text"
+						placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
+						onChange={ sendValue( setCost ) }
+						value={ cost }
+					/>
+					<input
+						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
+						name="description"
+						type="text"
+						placeholder={ __( 'Description', 'events-gutenberg' ) }
+						onChange={ sendValue( setDescription ) }
+						value={ costDescription }
+					/>
+				</section>
+				<footer className="tribe-editor__event-price__dashboard__footer">
+					{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
+				</footer>
+			</Fragment>
+		</Dashboard>
+	);
+};
+
 class EventPrice extends Component {
 
 	componentDidMount() {
@@ -43,106 +131,12 @@ class EventPrice extends Component {
 		document.removeEventListener( 'click', onClick );
 	}
 
-	renderLabel() {
-		const { currencyPosition, openDashboard } = this.props;
-		const containerClass = classNames(
-			'tribe-editor__event-price__price',
-			`tribe-editor__event-price__price--${ currencyPosition }`,
-		);
-
-		return (
-			<div
-				className={ containerClass }
-				onClick={ openDashboard }
-			>
-				{ this.renderCurrency() }
-				{ this.renderPlaceholder() }
-				{ this.renderCost() }
-				{ this.renderDescription() }
-			</div>
-		);
-	}
-
-	renderCurrency() {
-		const { showCurrencySymbol, currencySymbol } = this.props;
-
-		return showCurrencySymbol && (
-			<span className="tribe-editor__event-price__currency">
-				{ currencySymbol }
-			</span>
-		);
-	}
-
-	renderPlaceholder() {
-		const { showCost } = this.props;
-		const placeholder = __( 'Add Price', 'events-gutenberg' );
-
-		return ! showCost && (
-			<span className="tribe-editor__event-price__label">{ placeholder }</span>
-		);
-	}
-
-	renderCost() {
-		const { showCost, isFree, cost } = this.props;
-		const parsed = parser( cost );
-
-		let value = parsed;
-
-		if ( isFree ) {
-			value = __( 'Free', 'events-gutenberg' );
-		}
-
-		return showCost && (
-			<span className="tribe-editor__event-price__cost">{ value }</span>
-		);
-	}
-
-	renderDescription() {
-		const { showCostDescription, costDescription } = this.props;
-
-		return showCostDescription && (
-			<span className="tribe-editor__event-price__description">{ costDescription }</span>
-		);
-	}
-
-	renderDashboard() {
-		const { dashboardOpen, cost, costDescription, setCost, setDescription } = this.props;
-
-		return (
-			<Dashboard open={ dashboardOpen }>
-				<Fragment>
-					<section className="tribe-editor__event-price__dashboard">
-						<input
-							className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
-							name="description"
-							type="text"
-							placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-							onChange={ sendValue( setCost ) }
-							value={ cost }
-						/>
-						<input
-							className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
-							name="description"
-							type="text"
-							placeholder={ __( 'Description', 'events-gutenberg' ) }
-							onChange={ sendValue( setDescription ) }
-							value={ costDescription }
-						/>
-					</section>
-					<footer className="tribe-editor__event-price__dashboard__footer">
-						{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
-					</footer>
-				</Fragment>
-			</Dashboard>
-		);
-	}
-
 	renderUI() {
 		return (
 			<section key="event-price-box" className="tribe-editor__block">
 				<div className="tribe-editor__event-price">
-					{ this.renderLabel() }
-					{ this.renderDashboard() }
+					{ renderLabel( this.props ) }
+					{ renderDashboard( this.props ) }
 				</div>
 			</section>
 		);
