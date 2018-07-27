@@ -11,4 +11,4 @@ global.wp = {
 	element: React,
 };
 
-moment.tz.setDefault( 'America/Los_Angeles' );
+moment.tz.setDefault( 'America/Mexico_City' );
