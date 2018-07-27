@@ -53,12 +53,10 @@ import classNames from 'classnames';
 import {
 	toFormat,
 	toMoment,
-	totalSeconds,
 	toDate,
 	toDateNoYear
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
-import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import withSaveData from 'editor/hoc/with-save-data';
 import { searchParent } from 'editor/utils/dom';
 
