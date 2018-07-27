@@ -15,15 +15,17 @@ const mockStore = configureStore( middlewares );
 
 describe( '[STORE] - UI actions', () => {
 	it( 'Should toggle the dashboard', () => {
-		expect( actions.toggleDashboard() ).toMatchSnapshot();
+		expect( actions.toggleDashboardDateTime() ).toMatchSnapshot();
 	} );
 
 	it( 'Should open the dashboard', () => {
-		expect( actions.openDashboard() ).toMatchSnapshot();
+		expect( actions.openDashboardDateTime() ).toMatchSnapshot();
+		expect( actions.openDashboardPrice() ).toMatchSnapshot();
 	} );
 
 	it( 'Should close the dashboard', () => {
-		expect( actions.closeDashboard() ).toMatchSnapshot();
+		expect( actions.closeDashboardDateTime() ).toMatchSnapshot();
+		expect( actions.closeDashboardPrice() ).toMatchSnapshot();
 	} );
 
 	it( 'Should set the visible month', () => {

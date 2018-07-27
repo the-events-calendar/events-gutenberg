@@ -102,7 +102,10 @@ describe( '[STORE] - wp-request middleware', () => {
 			$ajax.reject( 'Wrong path' );
 			return $ajax.promise();
 		};
-		await invoke( actions.wpRequest( { ...meta, path: 'tribe_organizer/1217//////' } ) );
+
+		try {
+			await invoke( actions.wpRequest( { ...meta, path: 'tribe_organizer/1217//////' } ) );
+		} catch ( error ) {}
 
 		expect.assertions( 7 );
 		expect( meta.actions.none ).not.toHaveBeenCalled();
