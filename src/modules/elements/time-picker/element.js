@@ -255,17 +255,15 @@ export default class TimePicker extends Component {
 		);
 	};
 
-	scrollArea = () => {
-		return [
-			this.props.hasAllDay && this.renderItem( { text: 'All Day', value: 'all-day' } ),
-			<ScrollArea
-				id="tribe-element-timepicker-items"
-				key="tribe-element-timepicker-items"
-				role="menu"
-				className={ classNames( 'tribe-editor__timepicker__items' ) }
-			>
-				{ this.renderList() }
-			</ScrollArea>,
-		];
-	};
+	scrollArea = () => (
+		<ScrollArea
+			id="tribe-element-timepicker-items"
+			key="tribe-element-timepicker-items"
+			role="menu"
+			className={ classNames( 'tribe-editor__timepicker__items' ) }
+		>
+			{ this.props.hasAllDay && this.renderItem( { text: 'All Day', value: 'all-day' } ) }
+			{ this.renderList() }
+		</ScrollArea>
+	);
 }

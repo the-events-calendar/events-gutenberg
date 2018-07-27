@@ -10,6 +10,7 @@ import * as types from './types';
 
 export const DEFAULT_STATE = {
 	dashboardDateTimeOpen: false,
+	dashboardPriceOpen: false,
 	visibleMonth: moment().startOf( 'month' ).toDate(),
 };
 
@@ -24,6 +25,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				dashboardDateTimeOpen: ! state.dashboardDateTimeOpen,
+			};
+		case types.SET_DASHBOARD_PRICE:
+			return {
+				...state,
+				dashboardPriceOpen: action.payload.open,
 			};
 		case types.SET_VISIBLE_MONTH:
 			return {

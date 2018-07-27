@@ -4,22 +4,36 @@
 import * as types from './types';
 import { toMoment } from 'editor/utils/moment';
 
-export const toggleDashboard = () => ( {
+export const toggleDashboardDateTime = () => ( {
 	type: types.TOGGLE_DASHBOARD_DATE_TIME,
 } );
 
-export const openDashboard = () => ( {
+export const openDashboardDateTime = () => ( {
 	type: types.SET_DASHBOARD_DATE_TIME,
 	payload: {
 		open: true,
 	},
 } );
 
-export const closeDashboard = () => ( {
+export const closeDashboardDateTime = () => ( {
 	type: types.SET_DASHBOARD_DATE_TIME,
 	payload: {
 		open: false,
 	},
+} );
+
+export const openDashboardPrice = () => ( {
+	type: types.SET_DASHBOARD_PRICE,
+	payload: {
+		open: true,
+	}
+} );
+
+export const closeDashboardPrice = () => ( {
+	type: types.SET_DASHBOARD_PRICE,
+	payload: {
+		open: false,
+	}
 } );
 
 export const setVisibleMonth = ( visibleMonth ) => ( {

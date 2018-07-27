@@ -70,7 +70,7 @@ class EventDetails extends Component {
 		setDetailsTitle: PropTypes.func,
 		setWebsite: PropTypes.func,
 		setCost: PropTypes.func,
-		toggleDashboard: PropTypes.func,
+		toggleDashboardDateTime: PropTypes.func,
 		setSymbol: PropTypes.func,
 		togglePosition: PropTypes.func,
 		setAllDay: PropTypes.func,
@@ -140,10 +140,10 @@ class EventDetails extends Component {
 	}
 
 	renderStart() {
-		const { start, toggleDashboard } = this.props;
+		const { start, toggleDashboardDateTime } = this.props;
 
 		return (
-			<div onClick={ toggleDashboard }>
+			<div onClick={ toggleDashboardDateTime }>
 				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
 				{ toDate( toMoment( start ) ) }
 				{ this.renderStartTime() }
@@ -167,9 +167,9 @@ class EventDetails extends Component {
 	}
 
 	renderEnd() {
-		const { end, toggleDashboard } = this.props;
+		const { end, toggleDashboardDateTime } = this.props;
 		return (
-			<div onClick={ toggleDashboard }>
+			<div onClick={ toggleDashboardDateTime }>
 				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
 				{ toDate( toMoment( end ) ) }
 				{ this.renderEndTime() }

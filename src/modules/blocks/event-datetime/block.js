@@ -60,6 +60,7 @@ import {
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import withSaveData from 'editor/hoc/with-save-data';
+import { searchParent } from 'editor/utils/dom';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 
@@ -83,7 +84,7 @@ class EventDateTime extends Component {
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
 		setAllDay: PropTypes.func,
-		toggleDashboard: PropTypes.func,
+		openDashboardDateTime: PropTypes.func,
 		setDate: PropTypes.func,
 		setStartTime: PropTypes.func,
 		setEndTime: PropTypes.func,
@@ -91,13 +92,19 @@ class EventDateTime extends Component {
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
-		closeDashboard: PropTypes.func,
+		closeDashboardDateTime: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
-	constructor() {
-		super( ...arguments );
+	componentDidMount() {
+		document.addEventListener( 'keydown', this.onKeyDown );
+		document.addEventListener( 'click', this.onClick );
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener( 'keydown', this.onKeyDown );
+		document.removeEventListener( 'click', this.onClick );
 	}
 
 	renderStart() {
@@ -287,8 +294,8 @@ class EventDateTime extends Component {
 	 */
 	renderLabel() {
 		return (
-			<div key="event-datetime" className="tribe-editor__subtitle">
-				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.toggleDashboard }>
+			<section key="event-datetime" className="tribe-editor__subtitle tribe-editor__date-time">
+				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.openDashboardDateTime }>
 					{ this.renderStart() }
 					{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
 					{ this.renderEnd() }
@@ -298,19 +305,14 @@ class EventDateTime extends Component {
 					{ this.renderPrice() }
 				</h2>
 				{ this.renderDashboard() }
-			</div>
+			</section>
 		);
 	}
 
 	renderDashboard() {
-		const { dashboardOpen, closeDashboard } = this.props;
+		const { dashboardOpen } = this.props;
 		return (
-			<Dashboard
-				open={ dashboardOpen }
-				onClose={ closeDashboard }
-				targets={ [ 'DayPicker-Week', 'DayPicker-Day' ] }
-				overflow
-			>
+			<Dashboard open={ dashboardOpen }>
 				<Fragment>
 					<section className="tribe-editor__calendars">
 						{ this.renderCalendars() }
@@ -329,6 +331,50 @@ class EventDateTime extends Component {
 			</Dashboard>
 		);
 	}
+
+	/* TODO: This needs to move to logic component wrapper */
+	onKeyDown = ( e ) => {
+		const ESCAPE_KEY = 27;
+		if ( e.keyCode === ESCAPE_KEY ) {
+			this.props.closeDashboardDateTime();
+		}
+	}
+
+	/* TODO: This needs to move to logic component wrapper */
+	onClick = ( e ) => {
+		const { target } = e;
+		if (
+			! this.isTargetInBlock( target ) &&
+			! this.isTargetInSidebar( target ) &&
+			! this.isTargetInDropdown( target )
+		) {
+			this.props.closeDashboardDateTime();
+		}
+	}
+
+	/* TODO: This needs to move to logic component wrapper */
+	isTargetInBlock = ( target ) => (
+		searchParent( target, ( testNode ) => {
+			if ( testNode.classList.contains( 'editor-block-list__block' ) ) {
+				return Boolean( testNode.querySelector( '.tribe-editor__date-time' ) );
+			}
+			return false;
+		} )
+	);
+
+	/* TODO: This needs to move to logic component wrapper */
+	isTargetInSidebar = ( target ) => (
+		searchParent( target, ( testNode ) => (
+			testNode.classList.contains( 'edit-post-sidebar' )
+		) )
+	);
+
+	/* TODO: This needs to move to logic component wrapper */
+	isTargetInDropdown = ( target ) => (
+		searchParent( target, ( testNode ) => (
+			testNode.classList.contains( 'tribe-editor__timepicker__dialog' )
+		) )
+	);
 
 	renderCalendars() {
 		const { multiDay, start, end, visibleMonth, setVisibleMonth } = this.props;
@@ -503,7 +549,7 @@ class EventDateTime extends Component {
 
 const mapStateToProps = ( state ) => {
 	return {
-		dashboardOpen: UISelectors.getDashboardOpen( state ),
+		dashboardOpen: UISelectors.getDashboardDateTimeOpen( state ),
 		visibleMonth: UISelectors.getVisibleMonth( state ),
 		start: dateTimeSelectors.getStart( state ),
 		end: dateTimeSelectors.getEnd( state ),
@@ -516,18 +562,16 @@ const mapStateToProps = ( state ) => {
 	};
 };
 
-const mapDispatchToProps = ( dispatch ) => {
-	return {
-		...bindActionCreators( dateTimeActions, dispatch ),
-		...bindActionCreators( UIActions, dispatch ),
-		...bindActionCreators( priceActions, dispatch ),
-		setInitialState( props ) {
-			dispatch( priceActions.setInitialState( props ) );
-			dispatch( dateTimeActions.setInitialState( props ) );
-			dispatch( UIActions.setInitialState( props ) );
-		},
-	};
-};
+const mapDispatchToProps = ( dispatch ) => ( {
+	...bindActionCreators( dateTimeActions, dispatch ),
+	...bindActionCreators( UIActions, dispatch ),
+	...bindActionCreators( priceActions, dispatch ),
+	setInitialState( props ) {
+		dispatch( priceActions.setInitialState( props ) );
+		dispatch( dateTimeActions.setInitialState( props ) );
+		dispatch( UIActions.setInitialState( props ) );
+	},
+} );
 
 export default compose(
 	connect(
