@@ -186,4 +186,23 @@ class EventPrice extends Component {
 
 }
 
+EventPrice.propTypes = {
+	dashboardOpen: PropTypes.bool,
+	cost: PropTypes.string,
+	currencyPosition: PropTypes.oneOf([ 'prefix', 'suffix' ]),
+	currencySymbol: PropTypes.string,
+	costDescription: PropTypes.string,
+	showCurrencySymbol: PropTypes.bool,
+	showCost: PropTypes.bool,
+	showCostDescription: PropTypes.bool,
+	isFree: PropTypes.bool,
+	setCost: PropTypes.func,
+	setSymbol: PropTypes.func,
+	setDescription: PropTypes.func,
+	setCurrencyPosition: PropTypes.func,
+	onKeyDown: PropTypes.func,
+	onClick: PropTypes.func,
+	openDashboard: PropTypes.func,
+};
+
 export default EventPrice;
