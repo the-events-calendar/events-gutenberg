@@ -21,87 +21,82 @@ import './style.pcss';
 
 const placeholder = __( 'Add Button Text', 'events-gutenberg' );
 
-const EventWebsite = ({
-	isSelected,
-	isEmpty,
-	url,
-	urlLabel,
-	setWebsite,
-	setLabel
-}) => {
+const renderUrlInput = ({ isSelected, url, setWebsite }) => (
+	isSelected && (
+		<div key="tribe-events-website-url" className="tribe-editor__event-website__url">
+			<Dashicon icon="admin-links" />
+			<UrlInput
+				autoFocus={ false }
+				value={ url }
+				onChange={ setWebsite }
+			/>
+		</div>
+	)
+);
 
-	const renderUrlInput = () => (
-		isSelected && (
-			<div key="tribe-events-website-url" className="tribe-editor__event-website__url">
-				<Dashicon icon="admin-links" />
-				<UrlInput
-					autoFocus={ false }
-					value={ url }
-					onChange={ setWebsite }
-				/>
-			</div>
-		)
+const renderLabelInput = ({ isSelected, isEmpty, urlLabel, setLabel }) => {
+	const containerClassNames = classNames( {
+		'tribe-editor__event-website__label': true,
+		'tribe-editor__event-website__label--selected': isSelected,
+	} );
+
+	const inputClassNames = classNames( {
+		'tribe-editor__event-website__label-text': true,
+		'tribe-editor__event-website__label-text--empty': isEmpty && isSelected,
+	} );
+
+	return (
+		<div
+			key="tribe-events-website-label"
+			className={ containerClassNames }
+		>
+			<AutosizeInput
+				id="tribe-events-website-link"
+				className={ inputClassNames }
+				value={ urlLabel }
+				placeholder={ placeholder }
+				onChange={ sendValue( setLabel ) }
+			/>
+		</div>
 	);
+}
 
-	const renderLabelInput = () => {
-		const containerClassNames = classNames( {
-			'tribe-editor__event-website__label': true,
-			'tribe-editor__event-website__label--selected': isSelected,
-		} );
+const renderPlaceholder = () => {
+	const classes = [
+		'tribe-editor__event-website__label',
+		'tribe-editor__event-website__label--placeholder',
+	];
 
-		const inputClassNames = classNames( {
-			'tribe-editor__event-website__label-text': true,
-			'tribe-editor__event-website__label-text--empty': isEmpty && isSelected,
-		} );
+	return (
+		<button className={ classNames( classes ) }>
+			{ placeholder }
+		</button>
+	);
+}
 
-		return (
-			<div
-				key="tribe-events-website-label"
-				className={ containerClassNames }
-			>
-				<AutosizeInput
-					id="tribe-events-website-link"
-					className={ inputClassNames }
-					value={ urlLabel }
-					placeholder={ placeholder }
-					onChange={ sendValue( setLabel ) }
-				/>
-			</div>
-		);
-	}
+const EventWebsite = ( props ) => {
 
-	const renderPlaceholder = ( placeholder ) => {
-		const classes = [
-			'tribe-editor__event-website__label',
-			'tribe-editor__event-website__label--placeholder',
-		];
-		return (
-			<button className={ classNames( classes ) }>
-				{ placeholder }
-			</button>
-		);
-	}
+	const { isSelected, urlLabel } = props;
+	let eventWebsite = renderPlaceholder();
 
-	const renderLink = () => {
-		if ( ! isSelected && ! urlLabel ) {
-			return renderPlaceholder( placeholder );
-		}
-
-		return [
-			renderLabelInput( placeholder ),
-			renderUrlInput(),
+	if ( isSelected || urlLabel ) {
+		eventWebsite = [
+			renderLabelInput( props ),
+			renderUrlInput( props ),
 		];
 	}
 
 	return (
 		<div className="tribe-editor__block tribe-editor__event-website">
-			{ renderLink() }
+			{ eventWebsite }
 		</div>
 	);
+
 }
 
 EventWebsite.propTypes = {
 	isSelected: PropTypes.bool,
+	isEmpty: PropTypes.bool,
 	url: PropTypes.string,
 	urlLabel: PropTypes.string,
 	setWebsite: PropTypes.func,
