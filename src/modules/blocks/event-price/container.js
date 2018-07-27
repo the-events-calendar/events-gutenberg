@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import { trim, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 
@@ -8,6 +9,7 @@ import { bindActionCreators, compose } from 'redux';
  * Internal dependencies
  */
 import { searchParent } from 'editor/utils/dom';
+import { parser, isFree } from 'utils/range';
 import withSaveData from 'editor/hoc/with-save-data';
 import { withStore } from 'editor/hoc';
 import {
@@ -21,6 +23,18 @@ import {
 import EventPrice from './template';
 
 const ESCAPE_KEY = 27;
+
+const showCurrencySymbol = ( cost ) => {
+	const parsed = parser( cost );
+	return ! isEmpty( trim( parsed ) ) && ! isFree( cost );
+};
+
+const showCost = ( cost ) => {
+	const parsed = parser( cost );
+	return ! isEmpty( trim( parsed ) ) || isFree( cost );
+};
+
+const showCostDescription = ( description ) => ! isEmpty( trim( description ) );
 
 const isTargetInBlock = ( target ) => (
 	searchParent( target, ( testNode ) => {
@@ -59,6 +73,10 @@ const mapStateToProps = ( state ) => ( {
 	currencyPosition: priceSelectors.getPosition( state ),
 	currencySymbol: priceSelectors.getSymbol( state ),
 	costDescription: priceSelectors.getDescription( state ),
+	showCurrencySymbol: showCurrencySymbol( state.blocks.price.cost ),
+	showCost: showCost( state.blocks.price.cost ),
+	showCostDescription: showCostDescription( state.blocks.price.description ),
+	isFree: isFree( state.blocks.price.cost ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {

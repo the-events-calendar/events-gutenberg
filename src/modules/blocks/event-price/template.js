@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { trim, isEmpty } from 'lodash';
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -65,16 +64,9 @@ class EventPrice extends Component {
 	}
 
 	renderCurrency() {
-		const { cost, currencySymbol } = this.props;
-		const parsed = parser( cost );
+		const { showCurrencySymbol, currencySymbol } = this.props;
 
-		const hasPrice = ! this.isEmpty( parsed ) && ! isFree( cost );
-
-		if ( ! hasPrice ) {
-			return null;
-		}
-
-		return (
+		return showCurrencySymbol && (
 			<span className="tribe-editor__event-price__currency">
 				{ currencySymbol }
 			</span>
@@ -82,45 +74,35 @@ class EventPrice extends Component {
 	}
 
 	renderPlaceholder() {
+		const { showCost } = this.props;
 		const placeholder = __( 'Add Price', 'events-gutenberg' );
 
-		const { cost } = this.props;
-		const parsed = parser( cost );
-
-		if ( ! this.isEmpty( parsed ) ) {
-			return null;
-		}
-
-		return (
+		return ! showCost && (
 			<span className="tribe-editor__event-price__label">{ placeholder }</span>
 		);
 	}
 
 	renderCost() {
-		const { cost } = this.props;
+		const { showCost, isFree, cost } = this.props;
 		const parsed = parser( cost );
-
-		if ( this.isEmpty( parsed ) && ! isFree( cost ) ) {
-			return null;
-		}
 
 		let value = parsed;
 
-		if ( isFree( cost ) ) {
+		if ( isFree ) {
 			value = __( 'Free', 'events-gutenberg' );
 		}
 
-		return <span className="tribe-editor__event-price__cost">{ value }</span>;
+		return showCost && (
+			<span className="tribe-editor__event-price__cost">{ value }</span>
+		);
 	}
 
 	renderDescription() {
-		const { costDescription } = this.props;
+		const { showCostDescription, costDescription } = this.props;
 
-		if ( this.isEmpty( costDescription ) ) {
-			return null;
-		}
-
-		return <span className="tribe-editor__event-price__description">{ costDescription }</span>;
+		return showCostDescription && (
+			<span className="tribe-editor__event-price__description">{ costDescription }</span>
+		);
 	}
 
 	renderDashboard() {
@@ -199,10 +181,6 @@ class EventPrice extends Component {
 	}
 
 	setCurrencyPosition = ( value ) => this.props.togglePosition( ! value );
-
-	isEmpty( value ) {
-		return isEmpty( trim( value ) );
-	}
 
 	render() {
 		return [
