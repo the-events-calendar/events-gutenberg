@@ -85,37 +85,75 @@ const renderLabel = ( props ) => {
 	);
 };
 
-const renderDashboard = ( props ) => {
-	const { dashboardOpen, cost, costDescription, setCost, setDescription } = props;
+const renderDashboard = ({
+	dashboardOpen,
+	cost,
+	costDescription,
+	setCost,
+	setDescription
+}) => (
+	<Dashboard open={ dashboardOpen }>
+		<Fragment>
+			<section className="tribe-editor__event-price__dashboard">
+				<input
+					className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
+					name="description"
+					type="text"
+					placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
+					onChange={ sendValue( setCost ) }
+					value={ cost }
+				/>
+				<input
+					className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
+					name="description"
+					type="text"
+					placeholder={ __( 'Description', 'events-gutenberg' ) }
+					onChange={ sendValue( setDescription ) }
+					value={ costDescription }
+				/>
+			</section>
+			<footer className="tribe-editor__event-price__dashboard__footer">
+				{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
+			</footer>
+		</Fragment>
+	</Dashboard>
+);
 
-	return (
-		<Dashboard open={ dashboardOpen }>
-			<Fragment>
-				<section className="tribe-editor__event-price__dashboard">
-					<input
-						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--price' ) }
-						name="description"
-						type="text"
-						placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-						onChange={ sendValue( setCost ) }
-						value={ cost }
-					/>
-					<input
-						className={ classNames( 'tribe-editor__event-price__input', 'tribe-editor__event-price__input--description' ) }
-						name="description"
-						type="text"
-						placeholder={ __( 'Description', 'events-gutenberg' ) }
-						onChange={ sendValue( setDescription ) }
-						value={ costDescription }
-					/>
-				</section>
-				<footer className="tribe-editor__event-price__dashboard__footer">
-					{ __( 'enter 0 as price for free events', 'events-gutenberg' ) }
-				</footer>
-			</Fragment>
-		</Dashboard>
-	);
-};
+const renderUI = ( props ) => (
+	<section key="event-price-box" className="tribe-editor__block">
+		<div className="tribe-editor__event-price">
+			{ renderLabel( props ) }
+			{ renderDashboard( props ) }
+		</div>
+	</section>
+);
+
+const renderControls = ({
+	isSelected,
+	currencySymbol,
+	currencyPosition,
+	setSymbol,
+	setCurrencyPosition,
+}) => (
+	isSelected && (
+		<InspectorControls key="inspector">
+			<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
+				<TextControl
+					className="tribe-editor__event-price__currency-symbol-setting"
+					label={ __( ' Currency Symbol', 'events-gutenberg' ) }
+					value={ currencySymbol }
+					placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
+					onChange={ setSymbol }
+				/>
+				<CheckboxControl
+					label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
+					checked={ 'suffix' === currencyPosition }
+					onChange={ setCurrencyPosition }
+				/>
+			</PanelBody>
+		</InspectorControls>
+	)
+);
 
 class EventPrice extends Component {
 
@@ -131,50 +169,10 @@ class EventPrice extends Component {
 		document.removeEventListener( 'click', onClick );
 	}
 
-	renderUI() {
-		return (
-			<section key="event-price-box" className="tribe-editor__block">
-				<div className="tribe-editor__event-price">
-					{ renderLabel( this.props ) }
-					{ renderDashboard( this.props ) }
-				</div>
-			</section>
-		);
-	}
-
-	renderControls() {
-		const {
-			isSelected,
-			currencySymbol,
-			currencyPosition,
-			setSymbol,
-			setCurrencyPosition,
-		} = this.props;
-
-		return isSelected && (
-			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
-					<TextControl
-						className="tribe-editor__event-price__currency-symbol-setting"
-						label={ __( ' Currency Symbol', 'events-gutenberg' ) }
-						value={ currencySymbol }
-						placeholder={ __( 'E.g.: $', 'events-gutenberg' ) }
-						onChange={ setSymbol }
-					/>
-					<CheckboxControl
-						label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
-						checked={ 'suffix' === currencyPosition }
-						onChange={ setCurrencyPosition }
-					/>
-				</PanelBody>
-			</InspectorControls>
-		);
-	}
-
 	render() {
 		return [
-			this.renderUI(),
-			this.renderControls(),
+			renderUI( this.props ),
+			renderControls( this.props ),
 		];
 	}
 
