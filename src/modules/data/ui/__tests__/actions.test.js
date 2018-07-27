@@ -13,6 +13,12 @@ import { actions } from 'data/ui';
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
 
+jest.mock( 'moment', () => {
+	const moment = require.requireActual( 'moment-timezone' );
+	moment.tz.setDefault( 'America/Mexico_City' );
+	return moment;
+} );
+
 describe( '[STORE] - UI actions', () => {
 	it( 'Should toggle the dashboard', () => {
 		expect( actions.toggleDashboardDateTime() ).toMatchSnapshot();
@@ -29,7 +35,8 @@ describe( '[STORE] - UI actions', () => {
 	} );
 
 	it( 'Should set the visible month', () => {
-		expect( actions.setVisibleMonth( '2018-07-01T05:00:00.000Z' ) ).toMatchSnapshot();
+		Date.now = jest.fn( () => '2018-07-01T05:00:00.000Z' );
+		expect( actions.setVisibleMonth( Date.now() ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should not set the initial state', () => {
