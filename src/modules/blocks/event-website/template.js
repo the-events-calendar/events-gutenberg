@@ -77,14 +77,12 @@ const renderPlaceholder = () => {
 const EventWebsite = ( props ) => {
 
 	const { isSelected, urlLabel } = props;
-	let eventWebsite = renderPlaceholder();
-
-	if ( isSelected || urlLabel ) {
-		eventWebsite = [
+	const eventWebsite = ( ! isSelected && ! urlLabel ) ?
+		renderPlaceholder() :
+		[
 			renderLabelInput( props ),
 			renderUrlInput( props ),
 		];
-	}
 
 	return (
 		<div className="tribe-editor__block tribe-editor__event-website">
