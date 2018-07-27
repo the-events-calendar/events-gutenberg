@@ -21,7 +21,7 @@ import { InspectorControls } from '@wordpress/editor';
  * Internal dependencies
  */
 import { Dashboard } from 'elements';
-import { parser, isFree } from 'utils/range';
+import { parser } from 'utils/range';
 import { sendValue } from 'editor/utils/input';
 import './style.pcss';
 
@@ -154,13 +154,10 @@ class EventPrice extends Component {
 			currencySymbol,
 			currencyPosition,
 			setSymbol,
+			setCurrencyPosition,
 		} = this.props;
 
-		if ( ! isSelected ) {
-			return null;
-		}
-
-		return (
+		return isSelected && (
 			<InspectorControls key="inspector">
 				<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
 					<TextControl
@@ -173,14 +170,12 @@ class EventPrice extends Component {
 					<CheckboxControl
 						label={ __( 'Currency symbol follows price', 'events-gutenberg' ) }
 						checked={ 'suffix' === currencyPosition }
-						onChange={ this.setCurrencyPosition }
+						onChange={ setCurrencyPosition }
 					/>
 				</PanelBody>
 			</InspectorControls>
 		);
 	}
-
-	setCurrencyPosition = ( value ) => this.props.togglePosition( ! value );
 
 	render() {
 		return [

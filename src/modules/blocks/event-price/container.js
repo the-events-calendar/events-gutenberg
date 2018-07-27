@@ -88,6 +88,7 @@ const mapDispatchToProps = ( dispatch ) => ( {
 	onKeyDown: ( e ) => onKeyDown( e, dispatch ),
 	onClick: ( e ) => onClick( e, dispatch ),
 	openDashboard: () => dispatch( UIActions.openDashboardPrice() ),
+	setCurrencyPosition: ( value ) => dispatch( priceActions.togglePosition( ! value ) ),
 } );
 
 export default withStore()(
