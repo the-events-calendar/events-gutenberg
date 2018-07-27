@@ -20,10 +20,12 @@ describe( '[STORE] - UI actions', () => {
 
 	it( 'Should open the dashboard', () => {
 		expect( actions.openDashboardDateTime() ).toMatchSnapshot();
+		expect( actions.openDashboardPrice() ).toMatchSnapshot();
 	} );
 
 	it( 'Should close the dashboard', () => {
 		expect( actions.closeDashboardDateTime() ).toMatchSnapshot();
+		expect( actions.closeDashboardPrice() ).toMatchSnapshot();
 	} );
 
 	it( 'Should set the visible month', () => {
