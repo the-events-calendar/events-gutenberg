@@ -13,12 +13,6 @@ import { actions } from 'data/ui';
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
 
-jest.mock( 'moment', () => {
-	const moment = require.requireActual( 'moment-timezone' );
-	moment.tz.setDefault( 'America/Mexico_City' );
-	return moment;
-} );
-
 describe( '[STORE] - UI actions', () => {
 	it( 'Should toggle the dashboard', () => {
 		expect( actions.toggleDashboardDateTime() ).toMatchSnapshot();
