@@ -4,7 +4,7 @@
 import * as types from './../types';
 
 export const DEFAULT_STATE = {
-	organizer: undefined,
+	organizer: null,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
