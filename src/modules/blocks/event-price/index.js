@@ -1,8 +1,4 @@
 /**
- * External dependencies
- */
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -10,9 +6,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventPrice from './block';
+import EventPrice from './container';
 import { Icons } from 'elements';
-import { withStore } from 'editor/hoc';
 
 /**
  * Module Code
@@ -53,7 +48,7 @@ export default {
 			meta: '_EventCurrencyPosition',
 		},
 	},
-	edit: withStore()( EventPrice ),
+	edit: EventPrice,
 	save( props ) {
 		return null;
 	},
