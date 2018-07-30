@@ -1,4 +1,4 @@
-import { getItems } from './../../elements/timezone-picker/element';
+import { getItems } from 'elements/timezone-picker/element';
 import { get } from 'lodash';
 
 /**
@@ -21,6 +21,11 @@ export const FORMATS = {
 	TIMEZONE: {
 		string: 'UTC',
 		...timezone,
+	},
+	DATABASE: {
+		date: 'Y-m-d',
+		datetime: 'Y-m-d H:i:s',
+		time: 'H:i:s',
 	},
 };
 
