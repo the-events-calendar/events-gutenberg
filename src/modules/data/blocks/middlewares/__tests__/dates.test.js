@@ -15,6 +15,7 @@ jest.mock( 'data/blocks/datetime', () => {
 		actions: {
 			setStart: jest.fn(),
 			setEnd: jest.fn(),
+			setMultiDay: jest.fn(),
 		},
 	};
 } );
@@ -47,6 +48,7 @@ describe( '[STORE] - date middleware', () => {
 	afterEach( () => {
 		mockedActions.setStart.mockClear();
 		mockedActions.setEnd.mockClear();
+		mockedActions.setMultiDay.mockClear();
 	} );
 
 	it( 'Should move through a unknown action', () => {
@@ -62,7 +64,7 @@ describe( '[STORE] - date middleware', () => {
 
 	it( 'Should set only the dates using only the "to" param', () => {
 		const { store, next, invoke } = create();
-		const action = actions.setDate( 'April 10, 2018' );
+		const action = actions.setDates( 'April 10, 2018' );
 		invoke( action );
 
 		expect( next ).toHaveBeenCalledTimes( 1 );
@@ -73,20 +75,40 @@ describe( '[STORE] - date middleware', () => {
 		expect( mockedActions.setStart ).toHaveBeenCalledWith( 'April 10, 2018 5:00 pm' );
 		expect( mockedActions.setEnd ).toHaveBeenCalledTimes( 1 );
 		expect( mockedActions.setEnd ).toHaveBeenCalledWith( 'April 10, 2018 5:30 pm' );
+		expect( mockedActions.setMultiDay ).not.toHaveBeenCalled();
 	} );
 
 	it( 'Should set only the dates using the "to" and "from" params', () => {
 		const { store, next, invoke } = create();
-		const action = actions.setDate( 'September 12, 2018 10:30', 'November 20, 2018 6:00pm' );
+		const action = actions.setDates( 'September 12, 2018 10:30', 'November 20, 2018 6:00pm' );
 		invoke( action );
 
 		expect( next ).toHaveBeenCalledTimes( 1 );
 		expect( next ).toHaveBeenCalledWith( action );
 		expect( store.getState ).toHaveBeenCalledTimes( 1 );
-		expect( store.dispatch ).toHaveBeenCalledTimes( 2 );
+		expect( store.dispatch ).toHaveBeenCalledTimes( 3 );
 		expect( mockedActions.setStart ).toHaveBeenCalledTimes( 1 );
 		expect( mockedActions.setStart ).toHaveBeenCalledWith( 'September 12, 2018 5:00 pm' );
 		expect( mockedActions.setEnd ).toHaveBeenCalledTimes( 1 );
 		expect( mockedActions.setEnd ).toHaveBeenCalledWith( 'November 20, 2018 5:30 pm' );
+		expect( mockedActions.setMultiDay ).toHaveBeenCalledTimes( 1 );
+		expect( mockedActions.setMultiDay ).toHaveBeenCalledWith( true );
+	} );
+
+	it( 'Should set the full date with time', () => {
+		const { store, next, invoke } = create();
+		const action = actions.setDateTime( 'September 12, 2018 12:00 pm', 'September 13, 2018' );
+		invoke( action );
+
+		expect( next ).toHaveBeenCalledTimes( 1 );
+		expect( next ).toHaveBeenCalledWith( action );
+		expect( store.getState ).toHaveBeenCalledTimes( 1 );
+		expect( store.dispatch ).toHaveBeenCalledTimes( 3 );
+		expect( mockedActions.setStart ).toHaveBeenCalledTimes( 1 );
+		expect( mockedActions.setStart ).toHaveBeenCalledWith( 'September 12, 2018 12:00 pm' );
+		expect( mockedActions.setEnd ).toHaveBeenCalledTimes( 1 );
+		expect( mockedActions.setEnd ).toHaveBeenCalledWith( 'September 13, 2018 12:00 am' );
+		expect( mockedActions.setMultiDay ).toHaveBeenCalledTimes( 1 );
+		expect( mockedActions.setMultiDay ).toHaveBeenCalledWith( true );
 	} );
 } );
