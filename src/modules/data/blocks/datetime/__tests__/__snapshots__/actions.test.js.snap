@@ -28,6 +28,17 @@ Object {
 }
 `;
 
+exports[`[STORE] - Datetime actions Action to set the dates with a time 1`] = `
+Object {
+  "meta": Object {
+    "from": "September 12, 2018 12:00 pm",
+    "to": "September 20, 2018 5:00 pm",
+    "withTime": true,
+  },
+  "type": "SET_DATES",
+}
+`;
+
 exports[`[STORE] - Datetime actions Action to set the end time 1`] = `
 Object {
   "meta": Object {

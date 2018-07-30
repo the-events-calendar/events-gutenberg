@@ -7,11 +7,20 @@ import * as types from './types';
 
 import { maybeBulkDispatch } from 'data/utils';
 
-export const setDate = ( from, to ) => ( {
+export const setDates = ( from, to ) => ( {
 	type: types.SET_DATES,
 	meta: {
 		from,
 		to,
+	},
+} );
+
+export const setDateTime = ( from, to ) => ( {
+	type: types.SET_DATES,
+	meta: {
+		from,
+		to,
+		withTime: true,
 	},
 } );
 

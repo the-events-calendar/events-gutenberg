@@ -29,7 +29,12 @@ describe( '[STORE] - Datetime actions', () => {
 	} );
 
 	test( 'Action to set the date', () => {
-		expect( actions.setDate( '2018-06-08T17:00:00.000Z', '2018-06-19T17:00:00.000Z' ) )
+		expect( actions.setDates( '2018-06-08T17:00:00.000Z', '2018-06-19T17:00:00.000Z' ) )
+			.toMatchSnapshot();
+	} );
+
+	test( 'Action to set the dates with a time', () => {
+		expect( actions.setDateTime( 'September 12, 2018 12:00 pm', 'September 20, 2018 5:00 pm' ) )
 			.toMatchSnapshot();
 	} );
 
