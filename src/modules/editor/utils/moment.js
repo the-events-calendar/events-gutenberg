@@ -88,10 +88,8 @@ export function roundTime( date ) {
  * @returns {moment} A moment object
  */
 export function toMoment( date, format = FORMATS.WP.datetime ) {
-	if ( date instanceof moment ) {
+	if ( date instanceof moment || date instanceof Date ) {
 		return moment( date );
-	} else if ( date instanceof Date ) {
-		return toMomentFromDate( date );
 	} else if ( isString( date ) ) {
 		return moment( date, toFormat( format ) );
 	}
