@@ -2,16 +2,16 @@
  * Internal dependencies
  */
 import {
-	roundTime,
 	toMoment,
 	toDateTime,
-	replaceDate,
+	replaceDate, isSameDay,
 } from 'utils/moment';
 import {
 	types,
 	actions,
 	selectors,
 } from 'data/blocks/datetime';
+import { HOUR_IN_SECONDS } from 'editor/utils/time';
 
 export const dates = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	next( action );
@@ -22,17 +22,30 @@ export const dates = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 
 	const state = getState();
 	const { meta = {} } = action;
-	const { from, to } = meta;
+	const { from, to, withTime = false } = meta;
 
 	const current = {
 		start: selectors.getStart( state ),
 		end: selectors.getEnd( state ),
 	};
 
-	const start = replaceDate( toMoment( current.start ), toMoment( from ) );
-	dispatch( actions.setStart( toDateTime( start ) ) );
-
+	let start = replaceDate( toMoment( current.start ), toMoment( from ) );
 	// Use the "to" value and fallback with "from" value
-	const end = replaceDate( toMoment( current.end ), toMoment( to || from ) );
+	let end = replaceDate( toMoment( current.end ), toMoment( to || from ) );
+
+	if ( withTime ) {
+		start = toMoment( from );
+		end = to ? toMoment( to ) : end;
+	}
+
+	if ( start.isSameOrAfter( end ) ) {
+		end = end.add( HOUR_IN_SECONDS, 'seconds' );
+	}
+
+	dispatch( actions.setStart( toDateTime( start ) ) );
 	dispatch( actions.setEnd( toDateTime( end ) ) );
+
+	if ( ! isSameDay( start, end ) ) {
+		dispatch( actions.setMultiDay( true ) );
+	}
 };
