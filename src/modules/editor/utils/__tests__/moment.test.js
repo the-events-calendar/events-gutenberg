@@ -54,11 +54,11 @@ describe( 'Tests for moment.js', () => {
 		expect( input.date() ).toEqual( 2 );
 		expect( input.month() ).toEqual( 0 );
 		expect( input.year() ).toEqual( 2015 );
-		expect( input.hour() ).toEqual( 0 );
-		expect( input.minutes() ).toEqual( 0 );
-		expect( input.seconds() ).toEqual( 0 );
+		expect( input.hour() ).toEqual( 8 );
+		expect( input.minutes() ).toEqual( 1 );
+		expect( input.seconds() ).toEqual( 59 );
 		expect( input.milliseconds() ).toEqual( 0 );
-		expect( input.format( FORMAT ) ).toEqual( '01-02-2015 00:00:00' );
+		expect( input.format( FORMAT ) ).toEqual( '01-02-2015 08:01:59' );
 	} );
 
 	test( 'replaceDate', () => {
