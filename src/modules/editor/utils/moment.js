@@ -80,6 +80,26 @@ export function roundTime( date ) {
 }
 
 /**
+ * Parse multiple formats in a date to ensure the generated dates are valid
+ *
+ * @param {string} date The date to be converted
+ * @param {array} formats The list of formats used to format
+ * @returns {moment} moment Object with the date or current date if is non valid
+ */
+export function parseFormats( date, formats = [ FORMATS.DATABASE.datetime, FORMATS.WP.datetime ] ) {
+	for ( let i = 0; i < formats.length; i++ ) {
+		const format = formats[ i ];
+		const result = toMoment( date, format );
+		if ( result.isValid() ) {
+			return result;
+		}
+	}
+
+	const noFormat = moment( date );
+	return noFormat.isValid() ? noFormat : moment();
+}
+
+/**
  * Convert a Date() object into a Moment.js object avoiding warnings of different formats
  * used by Date
  *
