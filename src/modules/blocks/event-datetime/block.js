@@ -32,6 +32,7 @@ import {
 	TimePicker,
 	Dashboard,
 	Month,
+	DateInput,
 } from 'elements';
 import './style.pcss';
 
@@ -53,12 +54,10 @@ import classNames from 'classnames';
 import {
 	toFormat,
 	toMoment,
-	totalSeconds,
 	toDate,
-	toDateNoYear
+	toDateNoYear,
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
-import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import withSaveData from 'editor/hoc/with-save-data';
 import { searchParent } from 'editor/utils/dom';
 
@@ -255,13 +254,13 @@ class EventDateTime extends Component {
 			case 'date-time':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ ' '.concat( separatorDate, ' ') }
+						{ ' '.concat( separatorDate, ' ' ) }
 					</span>
 				);
 			case 'time-range':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ ' '.concat( separatorTime, ' ') }
+						{ ' '.concat( separatorTime, ' ' ) }
 					</span>
 				);
 			case 'dash':
@@ -292,18 +291,28 @@ class EventDateTime extends Component {
 	 *
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
-	renderLabel() {
+	renderDate() {
+		const { isSelected } = this.props;
 		return (
-			<section key="event-datetime" className="tribe-editor__subtitle tribe-editor__date-time">
-				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.openDashboardDateTime }>
-					{ this.renderStart() }
-					{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
-					{ this.renderEnd() }
-					{ this.isAllDay() ? this.renderSeparator( 'all-day' ) : null }
-					{ this.renderSeparator( 'space' ) }
-					{ this.renderTimezone() }
-					{ this.renderPrice() }
-				</h2>
+			<section
+				key="event-datetime"
+				className="tribe-editor__subtitle tribe-editor__date-time"
+			>
+				<DateInput
+					selected={ isSelected }
+					onClickHandler={ this.props.openDashboardDateTime }
+					setDateTime={ this.props.setDateTime }
+				>
+					<h2 className="tribe-editor__subtitle__headline">
+						{ this.renderStart() }
+						{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
+						{ this.renderEnd() }
+						{ this.isAllDay() ? this.renderSeparator( 'all-day' ) : null }
+						{ this.renderSeparator( 'space' ) }
+						{ this.renderTimezone() }
+						{ this.renderPrice() }
+					</h2>
+				</DateInput>
 				{ this.renderDashboard() }
 			</section>
 		);
@@ -338,7 +347,7 @@ class EventDateTime extends Component {
 		if ( e.keyCode === ESCAPE_KEY ) {
 			this.props.closeDashboardDateTime();
 		}
-	}
+	};
 
 	/* TODO: This needs to move to logic component wrapper */
 	onClick = ( e ) => {
@@ -350,7 +359,7 @@ class EventDateTime extends Component {
 		) {
 			this.props.closeDashboardDateTime();
 		}
-	}
+	};
 
 	/* TODO: This needs to move to logic component wrapper */
 	isTargetInBlock = ( target ) => (
@@ -397,8 +406,8 @@ class EventDateTime extends Component {
 
 	setDays = ( data ) => {
 		const { from, to } = data;
-		const { setDate } = this.props;
-		setDate( from, to );
+		const { setDates } = this.props;
+		setDates( from, to );
 	};
 
 	renderStartTimePicker() {
@@ -543,7 +552,7 @@ class EventDateTime extends Component {
 	}
 
 	render() {
-		return [ this.renderLabel(), this.renderControls() ];
+		return [ this.renderDate(), this.renderControls() ];
 	}
 }
 
