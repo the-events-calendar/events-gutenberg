@@ -13,6 +13,7 @@ import { FORMATS } from 'editor/utils/date';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 
+
 describe( 'Tests for moment.js', () => {
 	let console;
 	beforeAll( () => {
@@ -167,9 +168,12 @@ describe( 'Tests for moment.js', () => {
 	test( 'toMomentFromDate', () => {
 		expect( () => m.toMomentFromDate( '' ) ).toThrowError();
 		expect( () => m.toMomentFromDate( moment() ) ).toThrowError();
-		const now = new Date();
+		Date.now = jest.fn( () => '2018-05-04T05:23:19.000Z' );
+		const format = 'YYYY-MM-DD HH:mm:ss';
+		const now = new Date( 'December 17, 2015 03:24:00' );
 		expect( m.toMomentFromDate( now ) ).toBeInstanceOf( moment );
-		expect( m.toMomentFromDate( now ).isSame( moment().startOf( 'day' ) ) ).toBeTruthy();
+		const expected = m.toMomentFromDate( now ).format( format );
+		expect( expected ).toBe( '2015-12-17 00:00:00' );
 	} );
 
 	test( 'toFormat', () => {
