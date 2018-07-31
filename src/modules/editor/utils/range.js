@@ -65,7 +65,7 @@ export function extractParts( chars ) {
 			return null === result ? '' : result[ 1 ];
 		} )
 		.filter( ( item ) => ! isEmpty( item ) )
-		.map( ( item ) => parseFloat( item ).toFixed(2) )
+		.map( ( item ) => parseFloat( item ).toFixed( 2 ) )
 		.filter( ( item ) => ! isNaN( item ) )
 		.slice( 0, 2 );
 }
