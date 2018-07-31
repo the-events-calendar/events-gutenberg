@@ -64,23 +64,23 @@ $end_date_time = tribe_get_event_date_time( $end, $date_format, $time_format );
 		<?php endif; ?>
 
 		<?php if ( ! $all_day || ! $same_day ) : ?>
-			<span class"tribe-events-schedule__time-separator">'<?php echo $separator_time; ?></span>
+			<span class"tribe-events-schedule__time-separator"><?php echo $separator_time; ?></span>
 		<?php endif; ?>
 
 		<?php if ( ! $same_day ) : ?>
-			<span class="tribe-events-schedule__end-date">'<?php echo $end_date_time['date']; ?></span>
+			<span class="tribe-events-schedule__end-date"><?php echo $end_date_time['date']; ?></span>
 
 			<?php if ( ! $all_day ) : ?>
-				<span class="tribe-events-schedule__date-separator">'<?php echo $separator_date; ?></span>
-				<span class="tribe-events-schedule__start-time">'<?php echo $end_date_time['time']; ?></span>
+				<span class="tribe-events-schedule__date-separator"><?php echo $separator_date; ?></span>
+				<span class="tribe-events-schedule__start-time"><?php echo $end_date_time['time']; ?></span>
 			<?php endif; ?>
 
 		<?php elseif ( ! $all_day ) : ?>
-			<span class="tribe-events-schedule__start-time">'<?php echo $end_date_time['time']; ?></span>
+			<span class="tribe-events-schedule__start-time"><?php echo $end_date_time['time']; ?></span>
 		<?php endif; ?>
 
 		<?php if ( ! $all_day ) : ?>
-			<span class="tribe-events-schedule__timezone">'<?php echo $timezone; ?></span>
+			<span class="tribe-events-schedule__timezone"><?php echo $timezone; ?></span>
 		<?php endif; ?>
 	</h2>
 	<?php if ( tribe_get_cost() && tribe( 'gutenberg.editor' )->post_is_from_classic_editor( $event_id ) ) : ?>
