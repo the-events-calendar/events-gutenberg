@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { DEFAULT_STATE } from './reducers';
-import { isSameDay, toMoment } from 'editor/utils/moment';
+import { isSameDay, parseFormats, toDateTime, toMoment } from 'editor/utils/moment';
 import * as types from './types';
 
 import { maybeBulkDispatch } from 'data/utils';
@@ -92,6 +92,14 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		[ setSeparatorTime, 'separatorTime', DEFAULT_STATE.timeRangeSeparator ],
 		[ setTimeZone, 'timezone', DEFAULT_STATE.timezone ],
 	] );
+
+	if ( attributes.start ) {
+		dispatch( setStart( toDateTime( parseFormats( attributes.start ) ) ) );
+	}
+
+	if ( attributes.end ) {
+		dispatch( setEnd( toDateTime( parseFormats( attributes.end ) ) ) );
+	}
 
 	// sameDay
 	const current = {

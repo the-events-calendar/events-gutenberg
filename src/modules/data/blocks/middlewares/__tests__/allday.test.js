@@ -25,8 +25,8 @@ describe( '[STORE] - All day middleware', () => {
 		state = {
 			blocks: {
 				datetime: {
-					start: 'June 10, 2018 10:00 am',
-					end: 'June 10, 2018 2:30 pm',
+					start: '2018-06-10 10:00:00',
+					end: '2018-06-10 14:30:00',
 					allDay: false,
 					multiDay: false,
 				},
@@ -86,9 +86,9 @@ describe( '[STORE] - All day middleware', () => {
 		expect( store.getState ).toHaveBeenCalledTimes( 1 );
 		expect( store.dispatch ).toHaveBeenCalledTimes( 3 );
 		expect( mockedActions.setStart ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setStart ).toHaveBeenCalledWith( 'June 10, 2018 12:00 am' );
+		expect( mockedActions.setStart ).toHaveBeenCalledWith( '2018-06-10 00:00:00' );
 		expect( mockedActions.setEnd ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setEnd ).toHaveBeenCalledWith( 'June 10, 2018 11:59 pm' );
+		expect( mockedActions.setEnd ).toHaveBeenCalledWith( '2018-06-10 23:59:59' );
 		expect( mockedActions.setMultiDay ).toHaveBeenCalledTimes( 1 );
 		expect( mockedActions.setMultiDay ).toHaveBeenCalledWith( false );
 	} );

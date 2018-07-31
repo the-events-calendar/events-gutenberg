@@ -25,8 +25,8 @@ describe( '[STORE] - date middleware', () => {
 		state = {
 			blocks: {
 				datetime: {
-					start: 'April 5, 2018 5:00 pm',
-					end: 'April 5, 2018 5:30 pm',
+					start: '2018-04-5 17:00',
+					end: '2018-04-5 17:30',
 					allDay: false,
 					multiDay: false,
 				},
@@ -73,14 +73,14 @@ describe( '[STORE] - date middleware', () => {
 		expect( store.getState ).toHaveBeenCalledTimes( 1 );
 		expect( store.dispatch ).toHaveBeenCalledTimes( 2 );
 		expect( mockedActions.setStart ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setStart ).toHaveBeenCalledWith( 'April 5, 2018 5:00 pm' );
+		expect( mockedActions.setStart ).toHaveBeenCalledWith( '2018-04-05 17:00:00' );
 		expect( mockedActions.setEnd ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setEnd ).toHaveBeenCalledWith( 'April 5, 2018 5:30 pm' );
+		expect( mockedActions.setEnd ).toHaveBeenCalledWith( '2018-04-05 17:30:00' );
 	} );
 
 	it( 'Should prevent collision when multiday is disabled and dates are at the same time', () => {
 		// Adjust the end time to use the same time as start
-		state.blocks.datetime.end = 'April 10, 2018 5:00pm';
+		state.blocks.datetime.end = '2018-04-10 17:00:00';
 		const { store, next, invoke } = create();
 		const action = actions.toggleMultiDay();
 
@@ -91,14 +91,14 @@ describe( '[STORE] - date middleware', () => {
 		expect( store.getState ).toHaveBeenCalledTimes( 1 );
 		expect( store.dispatch ).toHaveBeenCalledTimes( 2 );
 		expect( mockedActions.setStart ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setStart ).toHaveBeenCalledWith( 'April 5, 2018 5:00 pm' );
+		expect( mockedActions.setStart ).toHaveBeenCalledWith( '2018-04-05 17:00:00' );
 		expect( mockedActions.setEnd ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setEnd ).toHaveBeenCalledWith( 'April 5, 2018 6:00 pm' );
+		expect( mockedActions.setEnd ).toHaveBeenCalledWith( '2018-04-05 18:00:00' );
 	} );
 
 	it( 'Should adjust the end time when multiday is disabled and before start', () => {
 		// Adjust the end time to use a time before the start
-		state.blocks.datetime.end = 'April 10, 2018 8:00 am';
+		state.blocks.datetime.end = '2018-04-10 8:00:00';
 		const { store, next, invoke } = create();
 		const action = actions.toggleMultiDay();
 
@@ -109,9 +109,9 @@ describe( '[STORE] - date middleware', () => {
 		expect( store.getState ).toHaveBeenCalledTimes( 1 );
 		expect( store.dispatch ).toHaveBeenCalledTimes( 2 );
 		expect( mockedActions.setStart ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setStart ).toHaveBeenCalledWith( 'April 5, 2018 5:00 pm' );
+		expect( mockedActions.setStart ).toHaveBeenCalledWith( '2018-04-05 17:00:00' );
 		expect( mockedActions.setEnd ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setEnd ).toHaveBeenCalledWith( 'April 5, 2018 6:00 pm' );
+		expect( mockedActions.setEnd ).toHaveBeenCalledWith( '2018-04-05 18:00:00' );
 	} );
 
 	it( 'Should adjust the end time when multiday is enabled and is on the same day', () => {
@@ -130,13 +130,13 @@ describe( '[STORE] - date middleware', () => {
 		expect( mockedActions.setAllDay ).toHaveBeenCalledTimes( 1 );
 		expect( mockedActions.setAllDay ).toHaveBeenCalledWith( false );
 		expect( mockedActions.setEnd ).toHaveBeenCalledTimes( 1 );
-		expect( mockedActions.setEnd ).toHaveBeenCalledWith( 'April 8, 2018 5:30 pm' );
+		expect( mockedActions.setEnd ).toHaveBeenCalledWith( '2018-04-08 17:30:00' );
 	} );
 
 	it( 'Should just disable the all day action when dates are not the same on multi day', () => {
 		// Set the state on the store to be a multiday
 		state.blocks.datetime.multiDay = true;
-		state.blocks.datetime.end = 'April 10, 2018 8:00 am';
+		state.blocks.datetime.end = '2018-04-10 8:00:00';
 		const { store, next, invoke } = create();
 		const action = actions.toggleMultiDay();
 
