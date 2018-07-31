@@ -64,20 +64,21 @@ describe( '[STORE] - Datetime thunk actions', () => {
 	test( 'Initial set of state', () => {
 		const store = mockStore( {} );
 
+		const attributes = {
+			start: 'June 5, 2018 5:00 pm',
+			end: 'June 5, 2018 5:30 pm',
+			dateTimeSeparator: ' @ ',
+			timeRangeSeparator: ' - ',
+			allDay: false,
+			multiDay: false,
+			timezone: 'UTC',
+		};
+
 		const get = jest.fn( ( key ) => {
-			const values = {
-				start: 'June 5, 2018 5:00 pm',
-				end: 'June 5, 2018 5:30 pm',
-				dateTimeSeparator: ' @ ',
-				timeRangeSeparator: ' - ',
-				allDay: false,
-				multiDay: false,
-				timezone: 'UTC',
-			};
-			return values[ key ];
+			return attributes[ key ];
 		} );
 
-		store.dispatch( actions.setInitialState( { get } ) );
+		store.dispatch( actions.setInitialState( { get, attributes } ) );
 
 		expect( get ).toHaveBeenCalled();
 		expect( get ).toHaveBeenCalledTimes( 2 );
