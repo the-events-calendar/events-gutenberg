@@ -157,10 +157,10 @@ class EventDateTime extends Component {
 	}
 
 	renderStartTime() {
-		const { start } = this.props;
+		const { start, allDay } = this.props;
 		const { time } = FORMATS.WP;
 
-		if ( this.isAllDay() ) {
+		if ( allDay ) {
 			return null;
 		}
 
@@ -184,7 +184,9 @@ class EventDateTime extends Component {
 	}
 
 	renderEndDate() {
-		if ( this.isSameDay() ) {
+		const { multiDay } = this.props;
+
+		if ( ! multiDay ) {
 			return null;
 		}
 
@@ -201,41 +203,23 @@ class EventDateTime extends Component {
 	}
 
 	renderEndTime() {
-		const { end } = this.props;
+		const { end, multiDay, allDay } = this.props;
 		const { time } = FORMATS.WP;
 
-		if ( this.isAllDay() ) {
+		if ( allDay ) {
 			return null;
 		}
 
 		return (
 			<React.Fragment>
-				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
+				{ multiDay && this.renderSeparator( 'date-time' ) }
 				{ toMoment( end ).format( toFormat( time ) ) }
 			</React.Fragment>
 		);
 	}
 
-	/**
-	 * Test if the current start and end date are happening on the same day.
-	 *
-	 * @returns {boolean} if the event is happening on the same day
-	 */
-	isSameDay( start = this.props.start, end = this.props.end ) {
-		return toMoment( start ).isSame( toMoment( end ), 'day' );
-	}
-
 	isSameYear( start = this.props.start, end = this.props.end ) {
 		return toMoment( start ).isSame( toMoment( end ), 'year' );
-	}
-
-	/**
-	 * Test if the current event is happening all day.
-	 *
-	 * @returns {boolean} true if is an all day event
-	 */
-	isAllDay() {
-		return this.props.allDay;
 	}
 
 	renderTimezone() {
@@ -293,13 +277,15 @@ class EventDateTime extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderLabel() {
+		const { multiDay, allDay } = this.props;
+
 		return (
 			<section key="event-datetime" className="tribe-editor__subtitle tribe-editor__date-time">
 				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.openDashboardDateTime }>
 					{ this.renderStart() }
-					{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
+					{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
 					{ this.renderEnd() }
-					{ this.isAllDay() ? this.renderSeparator( 'all-day' ) : null }
+					{ allDay && this.renderSeparator( 'all-day' ) }
 					{ this.renderSeparator( 'space' ) }
 					{ this.renderTimezone() }
 					{ this.renderPrice() }
@@ -310,7 +296,7 @@ class EventDateTime extends Component {
 	}
 
 	renderDashboard() {
-		const { dashboardOpen } = this.props;
+		const { dashboardOpen, multiDay, allDay } = this.props;
 		return (
 			<Dashboard open={ dashboardOpen }>
 				<Fragment>
@@ -320,7 +306,10 @@ class EventDateTime extends Component {
 					<footer className="tribe-editor__subtitle__footer">
 						<section className="tribe-editor__subtitle__footer-date">
 							{ this.renderStartTimePicker() }
-							{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
+							{
+								( multiDay || ! allDay ) &&
+								this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' )
+							}
 							{ this.renderEndTimePicker() }
 						</section>
 						<section className="tribe-editor__subtitle__footer-multiday">
@@ -386,7 +375,7 @@ class EventDateTime extends Component {
 			setVisibleMonth,
 		};
 
-		if ( ! this.isSameDay() ) {
+		if ( multiDay ) {
 			monthProps.to = toMoment( end ).toDate();
 		}
 
@@ -446,10 +435,6 @@ class EventDateTime extends Component {
 	};
 
 	renderEndTimePicker() {
-		if ( this.isAllDay() ) {
-			return null;
-		}
-
 		const { multiDay } = this.props;
 		const { time } = FORMATS.WP;
 		const start = toMoment( this.props.start );
@@ -473,7 +458,7 @@ class EventDateTime extends Component {
 
 		return (
 			<React.Fragment>
-				{ ! this.isSameDay() && <span className="tribe-editor__time-picker__label">{ endDate }</span> }
+				{ multiDay && <span className="tribe-editor__time-picker__label">{ endDate }</span> }
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
