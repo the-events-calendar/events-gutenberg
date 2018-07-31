@@ -44,10 +44,11 @@ import { actions as websiteActions, selectors as websiteSelectors } from 'data/b
 import { actions as classicActions, selectors as classicSelectors } from 'data/blocks/classic';
 import {
 	actions as organizersActions,
-	selectors as organizerSelectors
+	selectors as organizerSelectors,
 } from 'data/blocks/organizers';
 import { actions as UIActions } from 'data/ui';
 import { sendValue } from 'editor/utils/input';
+import { FORMATS } from 'editor/utils';
 
 /**
  * Module Code
@@ -122,7 +123,7 @@ class EventDetails extends Component {
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 					onChange={ sendValue( setOrganizerTitle ) }
 				/>
-				<EventOrganizers store={ store } />
+				<EventOrganizers store={ store }/>
 			</MetaGroup>
 		);
 	}
@@ -143,9 +144,14 @@ class EventDetails extends Component {
 		const { start, toggleDashboardDateTime } = this.props;
 
 		return (
-			<div onClick={ toggleDashboardDateTime }>
-				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
-				{ toDate( toMoment( start ) ) }
+			<div
+				role="button"
+				tabIndex={ 0 }
+				onKeyDown={ toggleDashboardDateTime }
+				onClick={ toggleDashboardDateTime }
+			>
+				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br />
+				{ toDate( toMoment( start ), FORMATS.WP.date ) }
 				{ this.renderStartTime() }
 			</div>
 		);
@@ -161,7 +167,7 @@ class EventDetails extends Component {
 		return (
 			<React.Fragment>
 				<span>{ separatorDate }</span>
-				<span>{ toTime( toMoment( start ) ) }</span>
+				<span>{ toTime( toMoment( start ), FORMATS.WP.time ) }</span>
 			</React.Fragment>
 		);
 	}
@@ -170,8 +176,8 @@ class EventDetails extends Component {
 		const { end, toggleDashboardDateTime } = this.props;
 		return (
 			<div onClick={ toggleDashboardDateTime }>
-				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
-				{ toDate( toMoment( end ) ) }
+				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br/>
+				{ toDate( toMoment( end ), FORMATS.WP.date ) }
 				{ this.renderEndTime() }
 			</div>
 		);
@@ -189,7 +195,7 @@ class EventDetails extends Component {
 		return (
 			<React.Fragment>
 				<span>{ separatorDate }</span>
-				{ toTime( toMoment( end ) ) }
+				{ toTime( toMoment( end ), FORMATS.WP.time ) }
 			</React.Fragment>
 		);
 	}
