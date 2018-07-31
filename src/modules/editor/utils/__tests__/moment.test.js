@@ -9,10 +9,23 @@ import moment from 'moment/moment';
 import * as m from 'utils/moment';
 
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
+import { FORMATS } from 'editor/utils/date';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 
 describe( 'Tests for moment.js', () => {
+	let console;
+	beforeAll( () => {
+		console = window.console;
+		window.console = {
+			warn: jest.fn(),
+		};
+	} );
+
+	afterAll( () => {
+		window.console = console;
+	} );
+
 	test( 'roundTime', () => {
 		const test1 = m.roundTime(
 			moment( '05-09-2018 12:26:02', FORMAT ),
@@ -114,13 +127,16 @@ describe( 'Tests for moment.js', () => {
 	test( 'toDateTime', () => {
 		const converted = m.toDateTime( moment() );
 		expect( typeof converted ).toBe( 'string' );
-		expect( converted ).toBe( moment().format( 'MMMM D, YYYY h:mm a' ) );
+		const format = m.toFormat( FORMATS.DATABASE.datetime );
+		expect( converted ).toBe( moment().format( format ) );
 	} );
 
 	test( 'toDate', () => {
 		const converted = m.toDate( moment() );
 		expect( typeof converted ).toBe( 'string' );
-		expect( converted ).toBe( moment().format( 'MMMM D, YYYY' ) );
+		expect( typeof converted ).toBe( 'string' );
+		const format = m.toFormat( FORMATS.WP.date );
+		expect( converted ).toBe( moment().format( format ) );
 	} );
 
 	test( 'toDateNoYear', () => {
@@ -158,6 +174,8 @@ describe( 'Tests for moment.js', () => {
 
 	test( 'toFormat', () => {
 		expect( m.toFormat( '' ) ).toEqual( '' );
+		expect( m.toFormat( 'Y-m-d H:i:s' ) ).toEqual( 'YYYY-MM-DD HH:mm:ss' );
+		expect( m.toFormat( 'F j, Y g:i a' ) ).toEqual( 'MMMM D, YYYY h:mm a' );
 		expect( m.toFormat( 'tLBIOPTZcr' ) ).toEqual( '' );
 		expect( m.toFormat( 'd' ) ).toEqual( 'DD' );
 		expect( m.toFormat( 'D' ) ).toEqual( 'ddd' );
@@ -186,5 +204,27 @@ describe( 'Tests for moment.js', () => {
 		expect( m.toFormat( 'u' ) ).toEqual( 'SSS' );
 		expect( m.toFormat( 'e' ) ).toEqual( 'zz' );
 		expect( m.toFormat( 'U' ) ).toEqual( 'X' );
+	} );
+
+	describe( 'parseFormats', () => {
+		test( 'Use DB format', () => {
+			const format = 'YYYY-MM-DD HH:mm:ss';
+			const expected = m.parseFormats( '2019-11-19 22:32:00' );
+			expect( expected.format( format ) ).toBe( '2019-11-19 22:32:00' );
+		} );
+
+		test( 'Use WP datetime format', () => {
+			const format = 'MMMM D, YYYY h:mm a';
+			const expected = m.parseFormats( 'November 19, 2019 10:32 pm' );
+			expect( expected.format( format ) ).toBe( 'November 19, 2019 10:32 pm' );
+		} );
+
+		test( 'Invalid date', () => {
+			Date.now = jest.fn( () => '2018-07-01T05:07:31.000Z' );
+			const format = 'YYYY-MM-DD HH:mm:ss';
+			const expected = m.parseFormats( 'No date!' );
+			expect( expected.format( format ) ).toBe( '2018-07-01 00:07:31' );
+			expect( window.console.warn ).toHaveBeenCalled();
+		} );
 	} );
 } );
