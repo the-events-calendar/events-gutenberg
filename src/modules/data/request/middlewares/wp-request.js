@@ -49,7 +49,7 @@ export default () => ( next ) => ( action ) => {
 	} ).then( ( body, status = '', xhr = {} ) => {
 		const headers = getResponseHeaders( xhr );
 		actions.success( { body, headers, status, xhr } );
-	} ).catch( ( error ) => {
+	} ).fail( ( error ) => {
 		actions.error( error );
 	} );
 };

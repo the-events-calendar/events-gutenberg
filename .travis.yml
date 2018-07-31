@@ -1,6 +1,9 @@
 language: node_js
 node_js:
   - "7"
+env:
+  - NODE_ENV=test
+script: npm run test:travis
 cache:
   directories:
     - "node_modules"

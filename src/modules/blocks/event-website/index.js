@@ -10,8 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { withStore } from 'editor/hoc';
-import EventWebsite from './block';
+import EventWebsite from './container';
 import { Icons } from 'elements';
 
 /**
@@ -44,10 +43,9 @@ export default {
 		},
 	},
 
-	edit: withStore()( EventWebsite ),
+	edit: EventWebsite,
 
 	save( props ) {
 		return null;
 	},
 };
-
