@@ -80,6 +80,26 @@ export function roundTime( date ) {
 }
 
 /**
+ * Parse multiple formats in a date to ensure the generated dates are valid
+ *
+ * @param {string} date The date to be converted
+ * @param {array} formats The list of formats used to format
+ * @returns {moment} moment Object with the date or current date if is non valid
+ */
+export function parseFormats( date, formats = [ FORMATS.DATABASE.datetime, FORMATS.WP.datetime ] ) {
+	for ( let i = 0; i < formats.length; i++ ) {
+		const format = formats[ i ];
+		const result = toMoment( date, format );
+		if ( result.isValid() ) {
+			return result;
+		}
+	}
+
+	const noFormat = moment( date );
+	return noFormat.isValid() ? noFormat : moment();
+}
+
+/**
  * Convert a Date() object into a Moment.js object avoiding warnings of different formats
  * used by Date
  *
@@ -87,7 +107,7 @@ export function roundTime( date ) {
  * @param {string} format The format of the data to be used
  * @returns {moment} A moment object
  */
-export function toMoment( date, format = FORMATS.WP.datetime ) {
+export function toMoment( date, format = FORMATS.DATABASE.datetime ) {
 	if ( date instanceof moment || date instanceof Date ) {
 		return moment( date );
 	} else if ( isString( date ) ) {
@@ -170,22 +190,23 @@ export function totalSeconds( date ) {
  * Convert a moment object into a WP date time format
  *
  * @param {moment} date A moment date object
+ * @param {string} format Format used to output the date
  * @returns {string} A date time format
  */
-export function toDateTime( date ) {
-	return date.format( toFormat( FORMATS.WP.datetime ) );
+export function toDateTime( date, format = FORMATS.DATABASE.datetime ) {
+	return date.format( toFormat( format ) );
 }
 
-export function toDate( date ) {
-	return date.format( toFormat( FORMATS.WP.date ) );
+export function toDate( date, format = FORMATS.WP.date ) {
+	return date.format( toFormat( format ) );
 }
 
-export function toDateNoYear( date ) {
-	return date.format( toFormat( FORMATS.WP.dateNoYear ) );
+export function toDateNoYear( date, format = FORMATS.WP.dateNoYear ) {
+	return date.format( toFormat( format ) );
 }
 
-export function toTime( date ) {
-	return date.format( toFormat( FORMATS.WP.time ) );
+export function toTime( date, format = FORMATS.WP.time ) {
+	return date.format( toFormat( format ) );
 }
 
 export function toDatePicker( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) {

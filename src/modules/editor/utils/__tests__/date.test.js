@@ -45,6 +45,11 @@ describe( 'Tests for date.js', () => {
 				datetime: 'F j, Y g:i a',
 				dateNoYear: 'F j',
 			},
+			DATABASE: {
+				date: 'Y-m-d',
+				datetime: 'Y-m-d H:i:s',
+				time: 'H:i:s',
+			},
 			TIMEZONE: {
 				string: 'UTC',
 			},
