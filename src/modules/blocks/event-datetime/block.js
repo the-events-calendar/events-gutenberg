@@ -55,7 +55,8 @@ import {
 	toMoment,
 	totalSeconds,
 	toDate,
-	toDateNoYear
+	toDateNoYear,
+	toTime,
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
@@ -158,18 +159,15 @@ class EventDateTime extends Component {
 
 	renderStartTime() {
 		const { start } = this.props;
-		const { time } = FORMATS.WP;
 
 		if ( this.isAllDay() ) {
 			return null;
 		}
 
-		const startMoment = toMoment( start );
-
 		return (
 			<React.Fragment>
 				{ this.renderSeparator( 'date-time' ) }
-				{ startMoment.format( toFormat( time ) ) }
+				{ toTime( toMoment( start ), FORMATS.WP.time ) }
 			</React.Fragment>
 		);
 	}
@@ -211,7 +209,7 @@ class EventDateTime extends Component {
 		return (
 			<React.Fragment>
 				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
-				{ toMoment( end ).format( toFormat( time ) ) }
+				{ toTime( toMoment( end ), FORMATS.WP.time ) }
 			</React.Fragment>
 		);
 	}
