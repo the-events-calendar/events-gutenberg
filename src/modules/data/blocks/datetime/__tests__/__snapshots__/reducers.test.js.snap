@@ -36,18 +36,6 @@ Object {
 }
 `;
 
-exports[`[STORE] - Datetime reducer Should set the end time 1`] = `
-Object {
-  "allDay": false,
-  "dateTimeSeparator": "@",
-  "end": "July 19, 2018 8:00 pm",
-  "multiDay": false,
-  "start": "July 19, 2018 7:30 pm",
-  "timeRangeSeparator": "-",
-  "timezone": "UTC",
-}
-`;
-
 exports[`[STORE] - Datetime reducer Should set the multi day 1`] = `
 Object {
   "allDay": false,
@@ -108,36 +96,12 @@ Object {
 }
 `;
 
-exports[`[STORE] - Datetime reducer Should set the start time 1`] = `
-Object {
-  "allDay": false,
-  "dateTimeSeparator": "@",
-  "end": "July 19, 2018 8:00 pm",
-  "multiDay": false,
-  "start": "July 19, 2018 7:30 pm",
-  "timeRangeSeparator": "-",
-  "timezone": "UTC",
-}
-`;
-
 exports[`[STORE] - Datetime reducer Should set the timezone 1`] = `
 Object {
   "allDay": false,
   "dateTimeSeparator": "@",
   "end": "July 19, 2018 8:00 pm",
   "multiDay": false,
-  "start": "July 19, 2018 7:30 pm",
-  "timeRangeSeparator": "-",
-  "timezone": "UTC",
-}
-`;
-
-exports[`[STORE] - Datetime reducer Should toggle the multi day 1`] = `
-Object {
-  "allDay": false,
-  "dateTimeSeparator": "@",
-  "end": "July 19, 2018 8:00 pm",
-  "multiDay": true,
   "start": "July 19, 2018 7:30 pm",
   "timeRangeSeparator": "-",
   "timezone": "UTC",
