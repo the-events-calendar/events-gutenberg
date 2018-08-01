@@ -51,6 +51,7 @@ import {
 import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
 import {
+	roundTime,
 	toFormat,
 	toMoment,
 	totalSeconds,
@@ -61,6 +62,7 @@ import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import withSaveData from 'editor/hoc/with-save-data';
 import { searchParent } from 'editor/utils/dom';
+import { DAY_IN_SECONDS } from '../../editor/utils/time';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 
@@ -390,15 +392,93 @@ class EventDateTime extends Component {
 		setDate( from, to );
 	};
 
+	startTimePickerOnChange = ( e ) => {
+		const { start, end, setStartTime } = this.props;
+		const [ hour, minute ] = e.target.value.split( ':' );
+
+		const startMoment = toMoment( start );
+		const max = toMoment( end ).clone().subtract( 1, 'minutes' );
+
+		const copy = startMoment.clone();
+		copy.set( 'hour', parseInt( hour, 10 ) );
+		copy.set( 'minute', parseInt( minute, 10 ) );
+		copy.set( 'second', 0 );
+
+		if ( copy.isAfter( max ) ) {
+			return;
+		}
+
+		setStartTime( copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' ) );
+	}
+
+	startTimePickerOnClick = ( value, onClose ) => {
+		const { setAllDay, setStartTime } = this.props;
+
+		const data = {
+			allDay: value === 'all-day',
+			seconds: 0,
+		};
+
+		if ( ! data.allDay ) {
+			data.seconds = value;
+		}
+
+		setAllDay( data.allDay );
+		setStartTime( data.seconds );
+		onClose();
+	}
+
+	endTimePickerOnChange = ( e ) => {
+		const { start, end, setEndTime } = this.props;
+		const [ hour, minute ] = e.target.value.split( ':' );
+
+		const endMoment = toMoment( end );
+		const min = toMoment( start ).clone().add( 1, 'minutes' );
+
+		const copy = endMoment.clone();
+		copy.set( 'hour', parseInt( hour, 10 ) );
+		copy.set( 'minute', parseInt( minute, 10 ) );
+		copy.set( 'second', 0 );
+
+		if ( copy.isBefore( min ) ) {
+			return;
+		}
+
+		setEndTime( copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' ) );
+	}
+
+	endTimePickerOnClick = ( value, onClose ) => {
+		const { setAllDay, setEndTime } = this.props;
+
+		const data = {
+			allDay: value === 'all-day',
+			seconds: 0,
+		};
+
+		if ( ! data.allDay ) {
+			data.seconds = value;
+		}
+
+		setAllDay( data.allDay );
+		setEndTime( data.seconds );
+		onClose();
+	}
+
 	renderStartTimePicker() {
 		const { start, allDay, multiDay, end } = this.props;
 		const { time } = FORMATS.WP;
 		const startMoment = toMoment( start );
+		const endMoment = toMoment( end );
+
 		const pickerProps = {
-			onSelectItem: this.setStartTime,
 			current: startMoment,
+			max: endMoment.clone().subtract( 1, 'minutes' ),
+			start: startMoment.clone().startOf( 'day' ),
+			end: roundTime( endMoment ),
+			onChange: this.startTimePickerOnChange,
+			onClick: this.startTimePickerOnClick,
+			onSelectItem: this.setStartTime,
 			timeFormat: time,
-			max: toMoment( end ).subtract( 1, 'minutes' ),
 		};
 
 		if ( ! multiDay ) {
@@ -435,19 +515,32 @@ class EventDateTime extends Component {
 	};
 
 	renderEndTimePicker() {
-		const { multiDay } = this.props;
+		const { start, end, multiDay, allDay } = this.props;
 		const { time } = FORMATS.WP;
-		const start = toMoment( this.props.start );
-		const end = toMoment( this.props.end );
+		const startMoment = toMoment( start );
+		const endMoment = toMoment( end );
+
 		const pickerProps = {
-			current: end,
+			current: endMoment,
+			min: startMoment.clone().add( 1, 'minutes' ),
+			start: roundTime( startMoment ).add( 30, 'minutes' ),
+			end: endMoment.clone().endOf( 'day' ),
+			onChange: this.endTimePickerOnChange,
+			onClick: this.endTimePickerOnClick,
 			onSelectItem: this.setEndTime,
-			min: start.clone().add( 1, 'minutes' ),
 			timeFormat: time,
 		};
 
+		// if ( endMoment.diff( endMoment.clone().add( 1, 'days' ).startOf( 'day' ), 'seconds' ) < HALF_HOUR_IN_SECONDS ) {
+		// 	pickerProps.start = endMoment.clone().endOf( 'day' );
+		// }
+
+		if ( ! multiDay && allDay ) {
+			return null;
+		}
+
 		if ( ! multiDay ) {
-			pickerProps.max = start.clone().endOf( 'day' );
+			pickerProps.max = startMoment.clone().endOf( 'day' );
 		}
 
 		let endDate = toDate( toMoment( end ) );
