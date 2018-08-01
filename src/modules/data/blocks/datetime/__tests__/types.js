@@ -7,8 +7,6 @@ describe( '[STORE] - Datetime types', () => {
 	it( 'Should return the types values', () => {
 		expect( types.SET_END_DATE_TIME ).toBe( 'SET_END_DATE_TIME' );
 		expect( types.SET_START_DATE_TIME ).toBe( 'SET_START_DATE_TIME' );
-		expect( types.SET_START_TIME ).toBe( 'SET_START_TIME' );
-		expect( types.SET_END_TIME ).toBe( 'SET_END_TIME' );
 		expect( types.SET_ALL_DAY ).toBe( 'SET_ALL_DAY' );
 		expect( types.SET_TIME_ZONE ).toBe( 'SET_TIME_ZONE' );
 		expect( types.SET_MULTI_DAY ).toBe( 'SET_MULTI_DAY' );

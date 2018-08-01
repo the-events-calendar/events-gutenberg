@@ -29,20 +29,6 @@ export const setEnd = ( end ) => ( {
 	},
 } );
 
-export const setStartTime = ( seconds ) => ( {
-	type: types.SET_START_TIME,
-	meta: {
-		seconds,
-	},
-} );
-
-export const setEndTime = ( seconds ) => ( {
-	type: types.SET_END_TIME,
-	meta: {
-		seconds,
-	},
-} );
-
 export const setSeparatorDate = ( separator ) => ( {
 	type: types.SET_SEPARATOR_DATE,
 	payload: {

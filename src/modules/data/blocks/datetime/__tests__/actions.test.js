@@ -20,14 +20,6 @@ describe( '[STORE] - Datetime actions', () => {
 		expect( actions.setEnd( 'June 25, 2018 4:00 pm' ) ).toMatchSnapshot();
 	} );
 
-	test( 'Action to set the start time', () => {
-		expect( actions.setStartTime( 72000 ) ).toMatchSnapshot();
-	} );
-
-	test( 'Action to set the end time', () => {
-		expect( actions.setEndTime( 79200 ) ).toMatchSnapshot();
-	} );
-
 	test( 'Action to set the date', () => {
 		expect( actions.setDate( '2018-06-08T17:00:00.000Z', '2018-06-19T17:00:00.000Z' ) )
 			.toMatchSnapshot();
