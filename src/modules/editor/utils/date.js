@@ -1,5 +1,5 @@
 import { getItems } from 'elements/timezone-picker/element';
-import { get } from 'lodash';
+import { get, identity } from 'lodash';
 
 /**
  * Internal dependencies
@@ -7,6 +7,7 @@ import { get } from 'lodash';
 
 const WPDateSettings = get( window, 'tribe_date_settings', {} );
 const { formats = {}, timezone = {} } = WPDateSettings;
+import { toMoment } from 'editor/utils/moment';
 
 export const FORMATS = {
 	TIME: 'HH:mm:ss',
@@ -64,4 +65,22 @@ export function timezones() {
 	return getItems()
 		.map( ( group ) => group.options || [] )
 		.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
+}
+
+export function toNaturalLanguage( date = null, format = { date: 'D MMMM YYYY', time: 'h:mm a' } ) {
+	const parsed = date && toMoment( date );
+	if ( parsed && parsed.isValid() ) {
+		return `${ parsed.format( format.date ) } at ${ parsed.format( format.time ) }`;
+	}
+	return '';
+}
+
+export function rangeToNaturalLanguage( start = '', end = '' ) {
+	const from = toNaturalLanguage( start );
+	const to = toNaturalLanguage( end );
+	const parts = [
+		from ? `From ${ from }` : '',
+		to ? `to ${ to }` : '',
+	];
+	return parts.filter( identity ).join( ' ' );
 }
