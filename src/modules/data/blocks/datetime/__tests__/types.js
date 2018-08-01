@@ -10,8 +10,6 @@ describe( '[STORE] - Datetime types', () => {
 		expect( types.SET_ALL_DAY ).toBe( 'SET_ALL_DAY' );
 		expect( types.SET_TIME_ZONE ).toBe( 'SET_TIME_ZONE' );
 		expect( types.SET_MULTI_DAY ).toBe( 'SET_MULTI_DAY' );
-		expect( types.SET_DATES ).toBe( 'SET_DATES' );
-		expect( types.TOGGLE_MULTI_DAY ).toBe( 'TOGGLE_MULTI_DAY' );
 		expect( types.SET_SEPARATOR_TIME ).toBe( 'SET_SEPARATOR_TIME' );
 		expect( types.SET_SEPARATOR_DATE ).toBe( 'SET_SEPARATOR_DATE' );
 	} );

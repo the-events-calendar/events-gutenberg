@@ -7,14 +7,6 @@ import * as types from './types';
 
 import { maybeBulkDispatch } from 'data/utils';
 
-export const setDate = ( from, to ) => ( {
-	type: types.SET_DATES,
-	meta: {
-		from,
-		to,
-	},
-} );
-
 export const setStart = ( start ) => ( {
 	type: types.SET_START_DATE_TIME,
 	payload: {
@@ -42,8 +34,6 @@ export const setSeparatorTime = ( separator ) => ( {
 		separator,
 	},
 } );
-
-export const toggleMultiDay = () => ( { type: types.TOGGLE_MULTI_DAY } );
 
 export const setAllDay = ( allDay ) => ( {
 	type: types.SET_ALL_DAY,

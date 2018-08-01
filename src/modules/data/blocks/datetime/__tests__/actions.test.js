@@ -20,11 +20,6 @@ describe( '[STORE] - Datetime actions', () => {
 		expect( actions.setEnd( 'June 25, 2018 4:00 pm' ) ).toMatchSnapshot();
 	} );
 
-	test( 'Action to set the date', () => {
-		expect( actions.setDate( '2018-06-08T17:00:00.000Z', '2018-06-19T17:00:00.000Z' ) )
-			.toMatchSnapshot();
-	} );
-
 	test( 'Action to set the separator date', () => {
 		expect( actions.setSeparatorDate( ' -  ' ) ).toMatchSnapshot();
 	} );
@@ -40,10 +35,6 @@ describe( '[STORE] - Datetime actions', () => {
 	test( 'Action to set all day', () => {
 		expect( actions.setAllDay( true ) ).toMatchSnapshot();
 		expect( actions.setAllDay( false ) ).toMatchSnapshot();
-	} );
-
-	test( 'Action to toggle the multi day', () => {
-		expect( actions.toggleMultiDay() ).toMatchSnapshot();
 	} );
 
 	test( 'Action to set the multi day', () => {

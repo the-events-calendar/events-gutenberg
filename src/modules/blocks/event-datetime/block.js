@@ -60,6 +60,7 @@ import {
 	toDateNoYear,
 	toDateTime,
 	isSameDay,
+	replaceDate,
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
@@ -90,10 +91,9 @@ class EventDateTime extends Component {
 		setCost: PropTypes.func,
 		setAllDay: PropTypes.func,
 		openDashboardDateTime: PropTypes.func,
-		setDate: PropTypes.func,
 		setStart: PropTypes.func,
 		setEnd: PropTypes.func,
-		toggleMultiDay: PropTypes.func,
+		setMultiDay: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
@@ -391,8 +391,19 @@ class EventDateTime extends Component {
 
 	setDays = ( data ) => {
 		const { from, to } = data;
-		const { setDate } = this.props;
-		setDate( from, to );
+		const { start, end, setStart, setEnd } = this.props;
+		const startMoment = toMoment( start );
+		const endMoment = toMoment( end );
+
+		let newStartMoment = replaceDate( startMoment, toMoment( from ) );
+		let newEndMoment = replaceDate( endMoment, toMoment( to || from ) );
+
+		if ( newEndMoment.isSameOrBefore( newStartMoment ) ) {
+			( { startMoment: newStartMoment, endMoment: newEndMoment } = this.resetTimes( newStartMoment ) );
+		}
+
+		setStart( toDateTime( newStartMoment ) );
+		setEnd( toDateTime( newEndMoment ) );
 	};
 
 	startTimePickerOnChange = ( e ) => {
@@ -546,29 +557,42 @@ class EventDateTime extends Component {
 		);
 	}
 
+	resetTimes = ( startMoment ) => {
+		const testMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
+
+		// Rollback half an hour before adding half an hour as we are on the edge of the day
+		if ( ! isSameDay( startMoment, testMoment ) ) {
+			startMoment.subtract( HOUR_IN_SECONDS, 'seconds' );
+		}
+
+		const endMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
+
+		return {
+			startMoment,
+			endMoment,
+		};
+	}
+
 	multiDayToggleOnChange = ( checked ) => {
-		const { start, end, setStart, setEnd, toggleMultiDay } = this.props;
+		const { start, end, setStart, setEnd, setMultiDay } = this.props;
 
 		if ( checked ) {
 			const RANGE_DAYS = applyFilters( 'tec.datetime.defaultRange', 3 );
 			const endMoment = toMoment( end ).clone().add( RANGE_DAYS, 'days' );
 			setEnd( toDateTime( endMoment ) );
 		} else {
-			const startMoment = toMoment( start );
-			const testMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
+			let startMoment = toMoment( start );
+			let endMoment = replaceDate( toMoment( end ), startMoment );
 
-			// Rollback half an hour before adding half an hour as we are on the edge of the day
-			if ( ! isSameDay( startMoment, testMoment ) ) {
-				startMoment.subtract( HOUR_IN_SECONDS, 'seconds' );
+			if ( endMoment.isSameOrBefore( startMoment ) ) {
+				( { startMoment, endMoment } = this.resetTimes( startMoment ) );
 			}
-
-			const endMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
 
 			setStart( toDateTime( startMoment ) );
 			setEnd( toDateTime( endMoment ) );
 		}
 
-		toggleMultiDay();
+		setMultiDay( checked );
 	}
 
 	renderMultiDayToggle() {

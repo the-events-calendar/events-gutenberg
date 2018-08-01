@@ -44,8 +44,4 @@ describe( '[STORE] - Datetime reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setMultiDay( true ) ) ).toMatchSnapshot();
 		expect( reducer( DEFAULT_STATE, actions.setMultiDay( false ) ) ).toMatchSnapshot();
 	} );
-
-	it( 'Should toggle the multi day', () => {
-		expect( reducer( DEFAULT_STATE, actions.toggleMultiDay() ) ).toMatchSnapshot();
-	} );
 } );
