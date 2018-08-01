@@ -423,8 +423,8 @@ class EventDateTime extends Component {
 			data.seconds = value;
 		}
 
-		setAllDay( data.allDay );
 		setStartTime( data.seconds );
+		setAllDay( data.allDay );
 		onClose();
 	}
 
@@ -459,8 +459,8 @@ class EventDateTime extends Component {
 			data.seconds = value;
 		}
 
-		setAllDay( data.allDay );
 		setEndTime( data.seconds );
+		setAllDay( data.allDay );
 		onClose();
 	}
 
