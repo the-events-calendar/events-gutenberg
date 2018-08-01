@@ -51,9 +51,15 @@ class DateInput extends Component {
 		}
 
 		const { start, end } = parsed;
-		const from = start ? toDateTime( toMoment( start.date() ) ) : null;
-		const to = end ? toDate( toMoment( end.date() ) ) : null;
-		this.props.setDateTime( from, to );
+
+		const dates = {
+			from: start ? toDateTime( toMoment( start.date() ) ) : null,
+			to: end ? toDateTime( toMoment( end.date() ) ) : null,
+		};
+		console.log( start && start.date() );
+		console.log( end && end.date() );
+		console.log( dates );
+		this.props.setDateTime( dates.from, dates.to );
 	};
 
 	onBlur = ( event ) => {
@@ -61,7 +67,7 @@ class DateInput extends Component {
 	};
 
 	renderInput() {
-		const { placeholder } = this.props;
+		const { placeholder, onClickHandler } = this.props;
 		return (
 			<input
 				type="text"
@@ -70,26 +76,27 @@ class DateInput extends Component {
 				ref={ this.inputRef }
 				placeholder={ placeholder }
 				onBlur={ this.onBlur }
+				onFocus={ onClickHandler }
 			/>
 		);
 	}
 
-	render() {
-		const {
-			children,
-			selected,
-			onClickHandler,
-		} = this.props;
+	renderChildren() {
+		const { children, onClickHandler } = this.props;
 		return (
 			<div
 				role="button"
 				tabIndex={ 0 }
+				className="tribe-editor__btn--label"
 				onClick={ onClickHandler }
-				onKeyDown={ onClickHandler }
 			>
-				{ selected ? this.renderInput() : children }
+				{ children }
 			</div>
 		);
+	}
+
+	render() {
+		return this.props.selected ? this.renderInput() : this.renderChildren();
 	}
 }
 
