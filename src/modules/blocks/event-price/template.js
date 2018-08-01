@@ -37,8 +37,13 @@ const renderCurrency = ({ showCurrencySymbol, currencySymbol }) => (
 	)
 );
 
-const renderPlaceholder = ({ showCost }) => {
-	const placeholder = __( 'Add Price', 'events-gutenberg' );
+const renderPlaceholder = ({ showCost, currencySymbol, currencyPosition }) => {
+	let placeholder = __( 'Add Price', 'events-gutenberg' );
+
+	placeholder = ( 'prefix' === currencyPosition ) ?
+		currencySymbol + ' ' + placeholder :
+		placeholder + ' ' + currencySymbol;
+
 
 	return ! showCost && (
 		<span className="tribe-editor__event-price__label">{ placeholder }</span>
