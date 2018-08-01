@@ -67,8 +67,6 @@ export default ( { dispatch, getState } ) => ( next ) => ( action ) => {
 
 	const isMultiDay = selectors.getMultiDay( state );
 	if ( isMultiDay ) {
-		// Reset all day if that's the case.
-		dispatch( setAllDay( false ) );
 		if ( isSameDay( current.start, current.end ) ) {
 			const end = current.end.clone().add( RANGE_DAYS, 'days' );
 			dispatch( setEnd( toDateTime( end ) ) );

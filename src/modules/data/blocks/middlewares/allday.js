@@ -42,6 +42,4 @@ export default ( { dispatch, getState } ) => ( next ) => ( action ) => {
 
 	const end = toMoment( current.start ).endOf( 'day' );
 	dispatch( setEnd( toDateTime( end ) ) );
-
-	dispatch( setMultiDay( false ) );
 };
