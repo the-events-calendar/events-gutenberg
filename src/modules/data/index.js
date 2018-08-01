@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
 
-import { dates, multiDay, allDay, endTime, startTime } from 'data/blocks/middlewares';
+import { dates, multiDay, endTime, startTime } from 'data/blocks/middlewares';
 import { wpRequest } from 'data/request/middlewares';
 
 const composeEnhancers = composeWithDevTools( {
@@ -19,7 +19,6 @@ const middlewares = [
 	startTime,
 	endTime,
 	multiDay,
-	allDay,
 	wpRequest,
 ];
 
