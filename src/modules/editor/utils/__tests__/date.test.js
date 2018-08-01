@@ -6,7 +6,7 @@ import {
 	TODAY,
 	equalDates,
 	timezones,
-	timezonesAsSelectData,
+	timezonesAsSelectData, toNaturalLanguage, rangeToNaturalLanguage,
 } from 'utils/date';
 
 jest.mock( 'elements/timezone-picker/element', () => ( {
@@ -101,5 +101,38 @@ describe( 'Tests for date.js', () => {
 			},
 		];
 		expect( timezonesAsSelectData() ).toEqual( expected );
+	} );
+
+	describe( 'toNaturalLanguage', () => {
+		it( 'Should return empty string when non parsed', () => {
+			expect( toNaturalLanguage( null ) ).toBe( '' );
+			expect( toNaturalLanguage( undefined ) ).toBe( '' );
+			expect( toNaturalLanguage( '' ) ).toBe( '' );
+		} );
+
+		it( 'Should return the parsed date', () => {
+			expect( toNaturalLanguage( '2018-05-04 17:00:00' ) ).toBe( '4 May 2018 at 5:00 pm' );
+			expect( toNaturalLanguage( '2019-12-24 12:00:00' ) ).toBe( '24 December 2019 at 12:00 pm' );
+		} );
+	} );
+
+	describe( 'rangeToNaturalLanguage', () => {
+		it( 'Should return empty string when range is invalid', () => {
+			expect( rangeToNaturalLanguage( null, null ) ).toBe( '' );
+			expect( rangeToNaturalLanguage( undefined, undefined ) ).toBe( '' );
+			expect( rangeToNaturalLanguage( '', '' ) ).toBe( '' );
+		} );
+
+		it( 'Should return only the start date', () => {
+			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00' ) )
+				.toBe( 'From 24 December 2019 at 12:00 pm' );
+			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '' ) )
+				.toBe( 'From 24 December 2019 at 12:00 pm' );
+		} );
+
+		it( 'Should return the range', () => {
+			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '2019-12-24 17:00:00' ) )
+				.toBe( 'From 24 December 2019 at 12:00 pm to 24 December 2019 at 5:00 pm' );
+		} );
 	} );
 } );
