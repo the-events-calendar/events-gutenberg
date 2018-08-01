@@ -4,14 +4,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { isString, find, noop } from 'lodash';
+import { noop } from 'lodash';
 import classNames from 'classnames';
 import { ScrollTo, ScrollArea } from 'react-scroll-to';
 
 /**
  * WordPress dependencies
  */
-import { Component } from '@wordpress/element';
 import {
 	Dropdown,
 	Dashicon,
@@ -22,39 +21,22 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import './style.pcss';
-import { DAY_IN_SECONDS, HALF_HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from 'utils/time';
-import { toFormat, setTimeInSeconds, totalSeconds, roundTime } from 'utils/moment';
+import { HALF_HOUR_IN_SECONDS } from 'utils/time';
+import { toFormat, setTimeInSeconds, totalSeconds } from 'utils/moment';
 
-export default class TimePicker extends Component {
-	static defaultProps = {
-		current: moment(),
-		min: undefined,
-		max: undefined,
-		start: undefined,
-		end: undefined,
-		step: HALF_HOUR_IN_SECONDS,
-		timeFormat: 'H:i',
-		allDay: false,
-		onChange: noop,
-		onClick: noop,
-	};
-
-	static propTypes = {
-		current: PropTypes.instanceOf( moment ),
-		min: PropTypes.instanceOf( moment ),
-		max: PropTypes.instanceOf( moment ),
-		start: PropTypes.instanceOf( moment ).isRequired,
-		end: PropTypes.instanceOf( moment ).isRequired,
-		step: PropTypes.number,
-		timeFormat: PropTypes.string,
-		allDay: PropTypes.bool,
-		onChange: PropTypes.func.isRequired,
-		onClick: PropTypes.func.isRequired,
-	};
-
-	renderLabel = ( onToggle ) => {
-		const { allDay, current, min, max, onChange } = this.props;
-
+const TimePicker = ({
+	current,
+	min,
+	max,
+	start,
+	end,
+	step,
+	timeFormat,
+	allDay,
+	onChange,
+	onClick,
+}) => {
+	const renderLabel = ( onToggle ) => {
 		if ( allDay ) {
 			return (
 				<button
@@ -86,11 +68,11 @@ export default class TimePicker extends Component {
 				{ ...additionalProps }
 			/>
 		);
-	}
+	};
 
-	toggleDropdown = ({ onToggle, isOpen }) => (
+	const toggleDropdown = ({ onToggle, isOpen }) => (
 		<div className="tribe-editor__timepicker-label-container">
-			{ this.renderLabel( onToggle ) }
+			{ renderLabel( onToggle ) }
 			<button
 				type="button"
 				aria-expanded={ isOpen }
@@ -101,8 +83,7 @@ export default class TimePicker extends Component {
 		</div>
 	);
 
-	getItems = () => {
-		const { current, start, end, step } = this.props;
+	const getItems = () => {
 		const items = [];
 
 		const startSeconds = totalSeconds( start );
@@ -111,7 +92,7 @@ export default class TimePicker extends Component {
 		for ( let time = startSeconds; time < endSeconds; time += step ) {
 			items.push( {
 				value: time,
-				text: this.formatLabel( time ),
+				text: formatLabel( time ),
 				isCurrent: time === totalSeconds( current ),
 			} );
 		}
@@ -119,13 +100,11 @@ export default class TimePicker extends Component {
 		return items;
 	}
 
-	formatLabel = ( seconds ) => {
-		const { timeFormat } = this.props;
+	const formatLabel = ( seconds ) => {
 		return setTimeInSeconds( moment(), seconds ).format( toFormat( timeFormat ) );
 	};
 
-	renderItem = ( item, onClose ) => {
-		const { allDay, onClick } = this.props;
+	const renderItem = ( item, onClose ) => {
 		const itemClasses = {
 			'tribe-editor__timepicker__item': true,
 			'tribe-editor__timepicker__item--current': item.isCurrent && ! allDay,
@@ -144,7 +123,7 @@ export default class TimePicker extends Component {
 		);
 	};
 
-	renderDropdownContent = ({ onClose }) => (
+	const renderDropdownContent = ({ onClose }) => (
 		<ScrollTo>
 			{ () => (
 				<ScrollArea
@@ -153,27 +132,53 @@ export default class TimePicker extends Component {
 					role="menu"
 					className={ classNames( 'tribe-editor__timepicker__items' ) }
 				>
-					{ this.renderItem( { text: 'All Day', value: 'all-day' }, onClose ) }
-					{ this.getItems().map( ( item ) => this.renderItem( item, onClose ) ) }
+					{ renderItem( { text: 'All Day', value: 'all-day' }, onClose ) }
+					{ getItems().map( ( item ) => renderItem( item, onClose ) ) }
 				</ScrollArea>
 			) }
 		</ScrollTo>
 	);
 
-	render() {
-		return (
-			<div
-				key="tribe-element-timepicker"
-				className="tribe-editor__timepicker"
-			>
-				<Dropdown
-					className="tribe-element-timepicker-label"
-					position="bottom center"
-					contentClassName="tribe-editor__timepicker__dialog"
-					renderToggle={ this.toggleDropdown }
-					renderContent={ this.renderDropdownContent }
-				/>
-			</div>
-		);
-	}
+	return (
+		<div
+			key="tribe-element-timepicker"
+			className="tribe-editor__timepicker"
+		>
+			<Dropdown
+				className="tribe-element-timepicker-label"
+				position="bottom center"
+				contentClassName="tribe-editor__timepicker__dialog"
+				renderToggle={ toggleDropdown }
+				renderContent={ renderDropdownContent }
+			/>
+		</div>
+	);
 }
+
+TimePicker.defaultProps = {
+	current: moment(),
+	min: undefined,
+	max: undefined,
+	start: undefined,
+	end: undefined,
+	step: HALF_HOUR_IN_SECONDS,
+	timeFormat: 'H:i',
+	allDay: false,
+	onChange: noop,
+	onClick: noop,
+};
+
+TimePicker.propTypes = {
+	current: PropTypes.instanceOf( moment ),
+	min: PropTypes.instanceOf( moment ),
+	max: PropTypes.instanceOf( moment ),
+	start: PropTypes.instanceOf( moment ).isRequired,
+	end: PropTypes.instanceOf( moment ).isRequired,
+	step: PropTypes.number,
+	timeFormat: PropTypes.string,
+	allDay: PropTypes.bool,
+	onChange: PropTypes.func.isRequired,
+	onClick: PropTypes.func.isRequired,
+};
+
+export default TimePicker;
