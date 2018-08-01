@@ -52,11 +52,12 @@ import { getSetting } from 'editor/settings';
 import classNames from 'classnames';
 import {
 	roundTime,
+	setTimeInSeconds,
 	toFormat,
 	toMoment,
-	totalSeconds,
 	toDate,
-	toDateNoYear
+	toDateNoYear,
+	toDateTime,
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
@@ -88,8 +89,8 @@ class EventDateTime extends Component {
 		setAllDay: PropTypes.func,
 		openDashboardDateTime: PropTypes.func,
 		setDate: PropTypes.func,
-		setStartTime: PropTypes.func,
-		setEndTime: PropTypes.func,
+		setStart: PropTypes.func,
+		setEnd: PropTypes.func,
 		toggleMultiDay: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
@@ -393,7 +394,7 @@ class EventDateTime extends Component {
 	};
 
 	startTimePickerOnChange = ( e ) => {
-		const { start, end, setStartTime } = this.props;
+		const { start, end, setStart } = this.props;
 		const [ hour, minute ] = e.target.value.split( ':' );
 
 		const startMoment = toMoment( start );
@@ -408,28 +409,29 @@ class EventDateTime extends Component {
 			return;
 		}
 
-		setStartTime( copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' ) );
+		const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
+		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
+		setStart( startDateTime );
 	}
 
 	startTimePickerOnClick = ( value, onClose ) => {
-		const { setAllDay, setStartTime } = this.props;
+		const { start, end, setStart, setEnd, setAllDay } = this.props;
+		const isAllDay = value === 'all-day';
+		const seconds = isAllDay ? 0 : value;
+		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
 
-		const data = {
-			allDay: value === 'all-day',
-			seconds: 0,
-		};
-
-		if ( ! data.allDay ) {
-			data.seconds = value;
+		if ( isAllDay ) {
+			const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), DAY_IN_SECONDS - 1 ) );
+			setEnd( endDateTime );
 		}
 
-		setStartTime( data.seconds );
-		setAllDay( data.allDay );
+		setStart( startDateTime );
+		setAllDay( isAllDay );
 		onClose();
 	}
 
 	endTimePickerOnChange = ( e ) => {
-		const { start, end, setEndTime } = this.props;
+		const { start, end, setEnd } = this.props;
 		const [ hour, minute ] = e.target.value.split( ':' );
 
 		const endMoment = toMoment( end );
@@ -444,23 +446,24 @@ class EventDateTime extends Component {
 			return;
 		}
 
-		setEndTime( copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' ) );
+		const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
+		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), seconds ) );
+		setEnd( endDateTime );
 	}
 
 	endTimePickerOnClick = ( value, onClose ) => {
-		const { setAllDay, setEndTime } = this.props;
+		const { start, end, setStart, setEnd, setAllDay } = this.props;
+		const isAllDay = value === 'all-day';
+		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
+		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), seconds ) );
 
-		const data = {
-			allDay: value === 'all-day',
-			seconds: 0,
-		};
-
-		if ( ! data.allDay ) {
-			data.seconds = value;
+		if ( isAllDay ) {
+			const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
+			setStart( startDateTime );
 		}
 
-		setEndTime( data.seconds );
-		setAllDay( data.allDay );
+		setEnd( endDateTime );
+		setAllDay( isAllDay );
 		onClose();
 	}
 
@@ -517,12 +520,11 @@ class EventDateTime extends Component {
 			end: roundTime( endMoment.clone().endOf( 'day' ) ),
 			onChange: this.endTimePickerOnChange,
 			onClick: this.endTimePickerOnClick,
-			onSelectItem: this.setEndTime,
 			timeFormat: FORMATS.WP.time,
 		};
 
-		// if there is less than half an hour left in the day
-		if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( endMoment, 'seconds' ) < HALF_HOUR_IN_SECONDS ) {
+		// if the start time has less than half an hour left in the day
+		if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= HALF_HOUR_IN_SECONDS ) {
 			pickerProps.start = endMoment.clone().endOf( 'day' );
 		}
 
