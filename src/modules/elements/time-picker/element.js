@@ -89,7 +89,7 @@ const TimePicker = ({
 		const startSeconds = totalSeconds( start );
 		const endSeconds = totalSeconds( end );
 
-		for ( let time = startSeconds; time < endSeconds; time += step ) {
+		for ( let time = startSeconds; time <= endSeconds; time += step ) {
 			items.push( {
 				value: time,
 				text: formatLabel( time ),

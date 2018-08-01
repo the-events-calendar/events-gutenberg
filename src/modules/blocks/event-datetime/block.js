@@ -466,7 +466,6 @@ class EventDateTime extends Component {
 
 	renderStartTimePicker() {
 		const { start, allDay, multiDay, end } = this.props;
-		const { time } = FORMATS.WP;
 		const startMoment = toMoment( start );
 		const endMoment = toMoment( end );
 
@@ -474,11 +473,10 @@ class EventDateTime extends Component {
 			current: startMoment,
 			max: endMoment.clone().subtract( 1, 'minutes' ),
 			start: startMoment.clone().startOf( 'day' ),
-			end: roundTime( endMoment ),
+			end: roundTime( endMoment.clone().subtract( 1, 'minutes' ) ),
 			onChange: this.startTimePickerOnChange,
 			onClick: this.startTimePickerOnClick,
-			onSelectItem: this.setStartTime,
-			timeFormat: time,
+			timeFormat: FORMATS.WP.time,
 		};
 
 		if ( ! multiDay ) {
@@ -490,7 +488,6 @@ class EventDateTime extends Component {
 		}
 
 		let startDate = toDate( toMoment( start ) );
-
 		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
 			startDate = toDateNoYear( toMoment( start ) );
 		}
@@ -503,20 +500,13 @@ class EventDateTime extends Component {
 		);
 	}
 
-	setStartTime = ( data ) => {
-		const { seconds, allDay } = data;
-		const { setAllDay, setStartTime } = this.props;
-
-		if ( allDay ) {
-			setAllDay( allDay );
-		} else {
-			setStartTime( seconds );
-		}
-	};
-
 	renderEndTimePicker() {
 		const { start, end, multiDay, allDay } = this.props;
-		const { time } = FORMATS.WP;
+
+		if ( ! multiDay && allDay ) {
+			return null;
+		}
+
 		const startMoment = toMoment( start );
 		const endMoment = toMoment( end );
 
@@ -524,27 +514,23 @@ class EventDateTime extends Component {
 			current: endMoment,
 			min: startMoment.clone().add( 1, 'minutes' ),
 			start: roundTime( startMoment ).add( 30, 'minutes' ),
-			end: endMoment.clone().endOf( 'day' ),
+			end: roundTime( endMoment.clone().endOf( 'day' ) ),
 			onChange: this.endTimePickerOnChange,
 			onClick: this.endTimePickerOnClick,
 			onSelectItem: this.setEndTime,
-			timeFormat: time,
+			timeFormat: FORMATS.WP.time,
 		};
 
-		// if ( endMoment.diff( endMoment.clone().add( 1, 'days' ).startOf( 'day' ), 'seconds' ) < HALF_HOUR_IN_SECONDS ) {
-		// 	pickerProps.start = endMoment.clone().endOf( 'day' );
-		// }
-
-		if ( ! multiDay && allDay ) {
-			return null;
+		// if there is less than half an hour left in the day
+		if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( endMoment, 'seconds' ) < HALF_HOUR_IN_SECONDS ) {
+			pickerProps.start = endMoment.clone().endOf( 'day' );
 		}
 
-		if ( ! multiDay ) {
-			pickerProps.max = startMoment.clone().endOf( 'day' );
+		if ( allDay ) {
+			pickerProps.allDay = true;
 		}
 
 		let endDate = toDate( toMoment( end ) );
-
 		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
 			endDate = toDateNoYear( toMoment( end ) );
 		}
@@ -556,16 +542,6 @@ class EventDateTime extends Component {
 			</React.Fragment>
 		);
 	}
-
-	setEndTime = ( data ) => {
-		const { seconds, allDay } = data;
-		const { setAllDay, setEndTime } = this.props;
-		if ( allDay ) {
-			setAllDay( allDay );
-		} else {
-			setEndTime( seconds );
-		}
-	};
 
 	renderMultidayToggle() {
 		const { multiDay, toggleMultiDay } = this.props;
