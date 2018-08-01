@@ -58,6 +58,7 @@ import {
 	toDate,
 	toDateNoYear,
 	toDateTime,
+	isSameDay,
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
@@ -474,20 +475,17 @@ class EventDateTime extends Component {
 
 		const pickerProps = {
 			current: startMoment,
-			max: endMoment.clone().subtract( 1, 'minutes' ),
 			start: startMoment.clone().startOf( 'day' ),
-			end: roundTime( endMoment.clone().subtract( 1, 'minutes' ) ),
+			end: startMoment.clone().endOf( 'day' ),
 			onChange: this.startTimePickerOnChange,
 			onClick: this.startTimePickerOnClick,
 			timeFormat: FORMATS.WP.time,
+			allDay,
 		};
 
 		if ( ! multiDay ) {
-			pickerProps.min = startMoment.clone().startOf( 'day' );
-		}
-
-		if ( allDay ) {
-			pickerProps.allDay = true;
+			pickerProps.end = roundTime( endMoment.clone().subtract( 1, 'minutes' ) );
+			pickerProps.max = endMoment.clone().subtract( 1, 'minutes' );
 		}
 
 		let startDate = toDate( toMoment( start ) );
@@ -515,21 +513,23 @@ class EventDateTime extends Component {
 
 		const pickerProps = {
 			current: endMoment,
-			min: startMoment.clone().add( 1, 'minutes' ),
-			start: roundTime( startMoment ).add( 30, 'minutes' ),
+			start: endMoment.clone().startOf( 'day' ),
 			end: roundTime( endMoment.clone().endOf( 'day' ) ),
 			onChange: this.endTimePickerOnChange,
 			onClick: this.endTimePickerOnClick,
 			timeFormat: FORMATS.WP.time,
+			allDay,
 		};
 
-		// if the start time has less than half an hour left in the day
-		if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= HALF_HOUR_IN_SECONDS ) {
-			pickerProps.start = endMoment.clone().endOf( 'day' );
-		}
 
-		if ( allDay ) {
-			pickerProps.allDay = true;
+		if ( ! multiDay ) {
+			// if the start time has less than half an hour left in the day
+			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= HALF_HOUR_IN_SECONDS ) {
+				pickerProps.start = endMoment.clone().endOf( 'day' );
+			} else {
+				pickerProps.start = roundTime( startMoment ).add( 30, 'minutes' );
+			}
+			pickerProps.min = startMoment.clone().add( 1, 'minutes' );
 		}
 
 		let endDate = toDate( toMoment( end ) );
