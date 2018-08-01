@@ -44,10 +44,11 @@ import { actions as websiteActions, selectors as websiteSelectors } from 'data/b
 import { actions as classicActions, selectors as classicSelectors } from 'data/blocks/classic';
 import {
 	actions as organizersActions,
-	selectors as organizerSelectors
+	selectors as organizerSelectors,
 } from 'data/blocks/organizers';
 import { actions as UIActions } from 'data/ui';
 import { sendValue } from 'editor/utils/input';
+import { FORMATS } from 'editor/utils';
 
 /**
  * Module Code
@@ -122,7 +123,7 @@ class EventDetails extends Component {
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 					onChange={ sendValue( setOrganizerTitle ) }
 				/>
-				<EventOrganizers store={ store } />
+				<EventOrganizers store={ store }/>
 			</MetaGroup>
 		);
 	}
@@ -131,7 +132,7 @@ class EventDetails extends Component {
 		const { detailsTitle, setDetailsTitle } = this.props;
 		return (
 			<AutosizeInput
-				className="tribe-editor__events-section__headline"
+				className="tribe-editor__events-section__headline trigger-dashboard-datetime"
 				value={ detailsTitle }
 				placeholder={ __( 'Details', 'events-gutenberg' ) }
 				onChange={ sendValue( setDetailsTitle ) }
@@ -143,10 +144,15 @@ class EventDetails extends Component {
 		const { start, toggleDashboardDateTime } = this.props;
 
 		return (
-			<div onClick={ toggleDashboardDateTime }>
-				<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong><br/>
-				{ toDate( toMoment( start ) ) }
-				{ this.renderStartTime() }
+			<div>
+				<button
+					className="tribe-editor__btn--label trigger-dashboard-datetime"
+					onClick={ toggleDashboardDateTime }
+				>
+					<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong>
+					{ toDate( toMoment( start ), FORMATS.WP.date ) }
+					{ this.renderStartTime() }
+				</button>
 			</div>
 		);
 	}
@@ -161,7 +167,7 @@ class EventDetails extends Component {
 		return (
 			<React.Fragment>
 				<span>{ separatorDate }</span>
-				<span>{ toTime( toMoment( start ) ) }</span>
+				<span>{ toTime( toMoment( start ), FORMATS.WP.time ) }</span>
 			</React.Fragment>
 		);
 	}
@@ -169,10 +175,15 @@ class EventDetails extends Component {
 	renderEnd() {
 		const { end, toggleDashboardDateTime } = this.props;
 		return (
-			<div onClick={ toggleDashboardDateTime }>
-				<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong><br />
-				{ toDate( toMoment( end ) ) }
-				{ this.renderEndTime() }
+			<div>
+				<button
+					className="tribe-editor__btn--label trigger-dashboard-datetime"
+					onClick={ toggleDashboardDateTime }
+				>
+					<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong>
+					{ toDate( toMoment( end ), FORMATS.WP.date ) }
+					{ this.renderEndTime() }
+				</button>
 			</div>
 		);
 	}
@@ -189,7 +200,7 @@ class EventDetails extends Component {
 		return (
 			<React.Fragment>
 				<span>{ separatorDate }</span>
-				{ toTime( toMoment( end ) ) }
+				{ toTime( toMoment( end ), FORMATS.WP.time ) }
 			</React.Fragment>
 		);
 	}
