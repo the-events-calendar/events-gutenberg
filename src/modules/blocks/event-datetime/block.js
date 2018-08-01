@@ -10,6 +10,7 @@ import { compose, bindActionCreators } from 'redux';
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks';
 
 import {
 	PanelBody,
@@ -64,7 +65,7 @@ import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import withSaveData from 'editor/hoc/with-save-data';
 import { searchParent } from 'editor/utils/dom';
-import { DAY_IN_SECONDS } from '../../editor/utils/time';
+import { DAY_IN_SECONDS, HOUR_IN_SECONDS } from '../../editor/utils/time';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 
@@ -317,7 +318,7 @@ class EventDateTime extends Component {
 							{ this.renderEndTimePicker() }
 						</section>
 						<section className="tribe-editor__subtitle__footer-multiday">
-							{ this.renderMultidayToggle() }
+							{ this.renderMultiDayToggle() }
 						</section>
 					</footer>
 				</Fragment>
@@ -545,13 +546,38 @@ class EventDateTime extends Component {
 		);
 	}
 
-	renderMultidayToggle() {
-		const { multiDay, toggleMultiDay } = this.props;
+	multiDayToggleOnChange = ( checked ) => {
+		const { start, end, setStart, setEnd, toggleMultiDay } = this.props;
+
+		if ( checked ) {
+			const RANGE_DAYS = applyFilters( 'tec.datetime.defaultRange', 3 );
+			const endMoment = toMoment( end ).clone().add( RANGE_DAYS, 'days' );
+			setEnd( toDateTime( endMoment ) );
+		} else {
+			const startMoment = toMoment( start );
+			const testMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
+
+			// Rollback half an hour before adding half an hour as we are on the edge of the day
+			if ( ! isSameDay( startMoment, testMoment ) ) {
+				startMoment.subtract( HOUR_IN_SECONDS, 'seconds' );
+			}
+
+			const endMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
+
+			setStart( toDateTime( startMoment ) );
+			setEnd( toDateTime( endMoment ) );
+		}
+
+		toggleMultiDay();
+	}
+
+	renderMultiDayToggle() {
+		const { multiDay } = this.props;
 		return (
 			<ToggleControl
 				label={ __( 'Multi-Day', 'events-gutenberg' ) }
 				checked={ multiDay }
-				onChange={ toggleMultiDay }
+				onChange={ this.multiDayToggleOnChange }
 			/>
 		);
 	}
