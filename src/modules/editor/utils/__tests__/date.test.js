@@ -6,8 +6,14 @@ import {
 	TODAY,
 	equalDates,
 	timezones,
-	timezonesAsSelectData, toNaturalLanguage, rangeToNaturalLanguage,
+	timezonesAsSelectData,
+	toNaturalLanguage,
+	rangeToNaturalLanguage,
 } from 'utils/date';
+
+import {
+	toMoment,
+} from 'utils/moment';
 
 jest.mock( 'elements/timezone-picker/element', () => ( {
 	getItems: () => [
@@ -105,14 +111,22 @@ describe( 'Tests for date.js', () => {
 
 	describe( 'toNaturalLanguage', () => {
 		it( 'Should return empty string when non parsed', () => {
-			expect( toNaturalLanguage( null ) ).toBe( '' );
-			expect( toNaturalLanguage( undefined ) ).toBe( '' );
-			expect( toNaturalLanguage( '' ) ).toBe( '' );
+			expect( toNaturalLanguage( null ) ).toEqual( { moment: null, text: '' } );
+			expect( toNaturalLanguage( undefined ) ).toEqual( { moment: null, text: '' } );
+			expect( toNaturalLanguage( '' ) ).toEqual( { moment: '', text: '' } );
 		} );
 
 		it( 'Should return the parsed date', () => {
-			expect( toNaturalLanguage( '2018-05-04 17:00:00' ) ).toBe( '4 May 2018 at 5:00 pm' );
-			expect( toNaturalLanguage( '2019-12-24 12:00:00' ) ).toBe( '24 December 2019 at 12:00 pm' );
+			expect( toNaturalLanguage( '2018-05-04 17:00:00' ) )
+				.toEqual( {
+					moment: toMoment( '2018-05-04 17:00:00' ),
+					text: 'May 4 2018 at 5:00 pm',
+				} );
+			expect( toNaturalLanguage( '2019-12-24 12:00:00' ) )
+				.toEqual( {
+					moment: toMoment( '2019-12-24 12:00:00' ),
+					text: 'Dec 24 2019 at 12:00 pm',
+				} );
 		} );
 	} );
 
@@ -125,14 +139,14 @@ describe( 'Tests for date.js', () => {
 
 		it( 'Should return only the start date', () => {
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00' ) )
-				.toBe( 'From 24 December 2019 at 12:00 pm' );
+				.toBe( 'Dec 24 2019 at 12:00 pm' );
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '' ) )
-				.toBe( 'From 24 December 2019 at 12:00 pm' );
+				.toBe( 'Dec 24 2019 at 12:00 pm' );
 		} );
 
 		it( 'Should return the range', () => {
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '2019-12-24 17:00:00' ) )
-				.toBe( 'From 24 December 2019 at 12:00 pm to 24 December 2019 at 5:00 pm' );
+				.toBe( 'Dec 24 2019 at 12:00 pm - Dec 24 2019 at 5:00 pm' );
 		} );
 	} );
 } );

@@ -67,20 +67,25 @@ export function timezones() {
 		.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
 }
 
-export function toNaturalLanguage( date = null, format = { date: 'D MMMM YYYY', time: 'h:mm a' } ) {
-	const parsed = date && toMoment( date );
-	if ( parsed && parsed.isValid() ) {
-		return `${ parsed.format( format.date ) } at ${ parsed.format( format.time ) }`;
+export function toNaturalLanguage( date = null, format = { date: 'MMM D YYYY', time: 'h:mm a' } ) {
+	const parsed = {
+		text: '',
+		moment: date && toMoment( date ),
+	};
+
+	const { moment } = parsed;
+	if ( moment && moment.isValid() ) {
+		parsed.text = `${ moment.format( format.date ) } at ${ moment.format( format.time ) }`;
 	}
-	return '';
+	return parsed;
 }
 
 export function rangeToNaturalLanguage( start = '', end = '' ) {
 	const from = toNaturalLanguage( start );
 	const to = toNaturalLanguage( end );
 	const parts = [
-		from ? `From ${ from }` : '',
-		to ? `to ${ to }` : '',
+		from.text,
+		to.text,
 	];
-	return parts.filter( identity ).join( ' ' );
+	return parts.filter( identity ).join( ' - ' );
 }
