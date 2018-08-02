@@ -32,6 +32,7 @@ import {
 	TimePicker,
 	Dashboard,
 	Month,
+	Upsell,
 } from 'elements';
 import './style.pcss';
 
@@ -309,6 +310,8 @@ class EventDateTime extends Component {
 
 	renderDashboard() {
 		const { dashboardOpen } = this.props;
+		const hideUpsell = getConstants().hide_upsell === 'true';
+
 		return (
 			<Dashboard open={ dashboardOpen }>
 				<Fragment>
@@ -326,7 +329,7 @@ class EventDateTime extends Component {
 								{ this.renderMultidayToggle() }
 							</div>
 						</div>
-						{ this.renderUpsell() }
+						<Upsell hideUpsell={ hideUpsell } />
 					</footer>
 				</Fragment>
 			</Dashboard>
@@ -492,34 +495,6 @@ class EventDateTime extends Component {
 				checked={ multiDay }
 				onChange={ toggleMultiDay }
 			/>
-		);
-	}
-
-	renderUpsell = () => {
-		const hideUpsell = getConstants().hide_upsell === 'true';
-
-		return (
-			! hideUpsell
-			&& (
-				<div className="tribe-editor__subtitle__footer-upsell">
-					<p className="tribe-editor__subtitle__footer-upsell-text">
-						{ __(
-							`Turbo charge your events calendar with nifty features like
-							recurring events, tickets, imports, event submission, filters,
-							and more! `,
-							'events-gutenberg'
-						) }
-						<a
-							href="https://theeventscalendar.com/products/804/?utm_campaign=in-app&utm_medium=plugin-tec&utm_source=post-editor"
-							className="tribe-editor__subtitle__footer-upsell-link"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							{ __( 'Check out our add-ons.', 'events-gutenberg' ) }
-						</a>
-					</p>
-				</div>
-			)
 		);
 	}
 
