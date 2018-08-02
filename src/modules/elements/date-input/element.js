@@ -4,13 +4,13 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import chrono from 'chrono-node';
-import { noop, isUndefined, isFunction } from 'lodash';
+import { noop, isUndefined, isFunction, debounce } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import './style.pcss';
-import { toDate, toDateTime, toMoment } from 'editor/utils/moment';
+import { toDateTime, toMoment } from 'editor/utils/moment';
 
 const nullableType = ( props, name ) => {
 	if ( isUndefined( props[ name ] ) ) {
@@ -26,26 +26,35 @@ class DateInput extends Component {
 	static propTypes = {
 		selected: PropTypes.bool,
 		children: PropTypes.node,
-		placeholder: PropTypes.string,
+		value: PropTypes.string,
 		onClickHandler: PropTypes.func,
+		setNaturalLanguageLabel: PropTypes.func,
 		setDateTime: nullableType,
 	};
 
 	static defaultProps = {
 		selected: false,
 		children: null,
-		placeholder: 'Enter your date',
+		value: '',
 		onClickHandler: noop,
 		setDateTime: noop,
+		setNaturalLanguageLabel: noop,
 	};
 
 	constructor( props ) {
 		super( props );
 		this.inputRef = createRef();
+		this.sendDateTime = debounce( this._sendDateTime, 250 );
 	}
 
-	sendDateTime = ( text, reference ) => {
-		const [ parsed ] = chrono.parse( text, reference );
+	handleChange = ( event ) => {
+		this.sendDateTime();
+		this.props.setNaturalLanguageLabel( event.target.value );
+	};
+
+	_sendDateTime() {
+		const { value } = this.props;
+		const [ parsed ] = chrono.parse( value );
 		if ( ! parsed ) {
 			return;
 		}
@@ -56,26 +65,21 @@ class DateInput extends Component {
 			from: start ? toDateTime( toMoment( start.date() ) ) : null,
 			to: end ? toDateTime( toMoment( end.date() ) ) : null,
 		};
-		console.log( start && start.date() );
-		console.log( end && end.date() );
-		console.log( dates );
-		this.props.setDateTime( dates.from, dates.to );
-	};
 
-	onBlur = ( event ) => {
-		this.sendDateTime( event.target.value );
-	};
+		this.props.setDateTime( dates.from, dates.to );
+	}
 
 	renderInput() {
-		const { placeholder, onClickHandler } = this.props;
+		const { value, onClickHandler } = this.props;
 		return (
 			<input
 				type="text"
 				name="date-input"
 				className="tribe-editor__date-input"
+				value={ value }
 				ref={ this.inputRef }
-				placeholder={ placeholder }
 				onBlur={ this.onBlur }
+				onChange={ this.handleChange }
 				onFocus={ onClickHandler }
 			/>
 		);
