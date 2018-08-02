@@ -1,18 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DateInput element Should render the component 1`] = `
-<div
-  onClick={[MockFunction]}
-  onKeyDown={[MockFunction]}
-  role="button"
-  tabIndex={0}
->
-  <input
-    className="tribe-editor__date-input"
-    name="date-input"
-    onBlur={[Function]}
-    placeholder="Enter your date"
-    type="text"
-  />
-</div>
+<input
+  className="tribe-editor__date-input"
+  name="date-input"
+  onChange={[Function]}
+  onFocus={[MockFunction]}
+  type="text"
+  value=""
+/>
 `;

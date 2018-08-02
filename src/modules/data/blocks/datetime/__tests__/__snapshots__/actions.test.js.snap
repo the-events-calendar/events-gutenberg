@@ -126,6 +126,15 @@ Object {
 }
 `;
 
+exports[`[STORE] - Datetime actions Set Natural Language Label 1`] = `
+Object {
+  "payload": Object {
+    "label": "2 weeks from now",
+  },
+  "type": "SET_NATURAL_LANGUAGE_LABEL",
+}
+`;
+
 exports[`[STORE] - Datetime thunk actions Initial set of state 1`] = `
 Array [
   Object {
@@ -163,6 +172,12 @@ Array [
       "end": "2018-06-05 17:30:00",
     },
     "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "label": "Jun 5 2018 at 5:00 pm - Jun 5 2018 at 5:30 pm",
+    },
+    "type": "SET_NATURAL_LANGUAGE_LABEL",
   },
   Object {
     "payload": Object {
