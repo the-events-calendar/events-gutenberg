@@ -78,8 +78,9 @@ class EventDateTime extends Component {
 		separatorDate: PropTypes.string,
 		separatorTime: PropTypes.string,
 		timezone: PropTypes.string,
+		currencyPosition: PropTypes.oneOf([ 'prefix', 'suffix' ]),
 		currencySymbol: PropTypes.string,
-		currencyPosition: PropTypes.string,
+		naturalLanguageLabel: PropTypes.string,
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
 		setAllDay: PropTypes.func,
@@ -93,6 +94,7 @@ class EventDateTime extends Component {
 		setSeparatorDate: PropTypes.func,
 		closeDashboardDateTime: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
+		setNatualLanguageLabel: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -298,7 +300,9 @@ class EventDateTime extends Component {
 				<DateInput
 					selected={ isSelected }
 					onClickHandler={ this.props.openDashboardDateTime }
+					setNaturalLanguageLabel={ this.props.setNaturalLanguageLabel }
 					setDateTime={ this.props.setDateTime }
+					value={ this.props.naturalLanguageLabel }
 				>
 					<h2 className="tribe-editor__subtitle__headline">
 						{ this.renderStart() }
@@ -553,14 +557,13 @@ const mapStateToProps = ( state ) => {
 		visibleMonth: UISelectors.getVisibleMonth( state ),
 		start: dateTimeSelectors.getStart( state ),
 		end: dateTimeSelectors.getEnd( state ),
+		naturalLanguageLabel: dateTimeSelectors.getNaturalLanguageLabel( state ),
 		multiDay: dateTimeSelectors.getMultiDay( state ),
 		allDay: dateTimeSelectors.getAllDay( state ),
 		separatorDate: dateTimeSelectors.getDateSeparator( state ),
 		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
 		timezone: dateTimeSelectors.getTimeZone( state ),
 		cost: priceSelectors.getPrice( state ),
-		currencyPosition: PropTypes.oneOf([ 'prefix', 'suffix' ]),
-		currencySymbol: PropTypes.string,
 	};
 };
 
