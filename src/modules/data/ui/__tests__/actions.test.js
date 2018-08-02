@@ -46,7 +46,7 @@ describe( '[STORE] - UI actions', () => {
 describe( '[STORE] - UI thunk actions', () => {
 	it( 'Should set the initial state', () => {
 		const store = mockStore( {} );
-		const get = jest.fn( () => moment() );
+		const get = jest.fn( () => moment( '2018-07-01T00:00:00.000Z' ) );
 
 		store.dispatch( actions.setInitialState( { get } ) );
 
