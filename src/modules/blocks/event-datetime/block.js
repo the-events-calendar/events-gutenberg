@@ -48,7 +48,7 @@ import {
 	actions as priceActions,
 } from 'data/blocks/price';
 
-import { getSetting } from 'editor/settings';
+import { getSetting, getConstants } from 'editor/settings';
 import classNames from 'classnames';
 import {
 	toFormat,
@@ -316,14 +316,17 @@ class EventDateTime extends Component {
 						{ this.renderCalendars() }
 					</section>
 					<footer className="tribe-editor__subtitle__footer">
-						<section className="tribe-editor__subtitle__footer-date">
-							{ this.renderStartTimePicker() }
-							{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
-							{ this.renderEndTimePicker() }
-						</section>
-						<section className="tribe-editor__subtitle__footer-multiday">
-							{ this.renderMultidayToggle() }
-						</section>
+						<div className="tribe-editor__subtitle__footer-date">
+							<div className="tribe-editor__subtitle__time-pickers">
+								{ this.renderStartTimePicker() }
+								{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
+								{ this.renderEndTimePicker() }
+							</div>
+							<div className="tribe-editor__subtitle__footer-multiday">
+								{ this.renderMultiDayToggle() }
+							</div>
+						</div>
+						{ this.renderUpsell() }
 					</footer>
 				</Fragment>
 			</Dashboard>
@@ -489,6 +492,34 @@ class EventDateTime extends Component {
 				checked={ multiDay }
 				onChange={ toggleMultiDay }
 			/>
+		);
+	}
+
+	renderUpsell = () => {
+		const hideUpsell = getConstants().hide_upsell === 'true';
+
+		return (
+			! hideUpsell
+			&& (
+				<div className="tribe-editor__subtitle__footer-upsell">
+					<p className="tribe-editor__subtitle__footer-upsell-text">
+						{ __(
+							`Turbo charge your events calendar with nifty features like
+							recurring events, tickets, imports, event submission, filters,
+							and more! `,
+							'events-gutenberg'
+						) }
+						<a
+							href="https://theeventscalendar.com/products/804/?utm_campaign=in-app&utm_medium=plugin-tec&utm_source=post-editor"
+							className="tribe-editor__subtitle__footer-upsell-link"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{ __( 'Check out our add-ons.', 'events-gutenberg' ) }
+						</a>
+					</p>
+				</div>
+			)
 		);
 	}
 

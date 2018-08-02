@@ -19,3 +19,7 @@ export function getSetting( key, defaultValue ) {
 export function hasSetting( key ) {
 	return has( getSettings(), key );
 }
+
+export function getConstants() {
+	return window.tribe_blocks_editor_constants || {};
+}

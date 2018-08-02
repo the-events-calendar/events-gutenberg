@@ -407,7 +407,7 @@ class Tribe__Events_Gutenberg__Editor {
 			array(
 				'name' => 'tribe_blocks_editor_constants',
 				'data' => array(
-					'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ),
+					'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ) ? 'true' : 'false',
 				),
 			),
 		);
