@@ -39,3 +39,8 @@ export const getTimeZone = createSelector(
 	[ datetimeSelector ],
 	( values ) => values.timezone,
 );
+
+export const getNaturalLanguageLabel = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.naturalLanguage,
+);
