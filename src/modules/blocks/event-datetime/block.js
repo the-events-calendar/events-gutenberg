@@ -54,7 +54,6 @@ import classNames from 'classnames';
 import {
 	roundTime,
 	setTimeInSeconds,
-	toFormat,
 	toMoment,
 	toDate,
 	toDateNoYear,
