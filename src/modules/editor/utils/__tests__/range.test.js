@@ -19,17 +19,17 @@ describe( 'Tests for range.js', () => {
 
 	test( 'extractParts', () => {
 		expect( extractParts( '' ) ).toEqual( [] );
-		expect( extractParts( '12' ) ).toEqual( [ 12 ] );
-		expect( extractParts( '12 - 23' ) ).toEqual( [ 12, 23 ] );
-		expect( extractParts( '12.23 - ' ) ).toEqual( [ 12.23 ] );
-		expect( extractParts( '12.23 - 5,10' ) ).toEqual( [ 12.23, 5.10 ] );
-		expect( extractParts( '12.23 - - - - - 5,10' ) ).toEqual( [ 12.23, 5.10 ] );
-		expect( extractParts( '- - - - - 12.23 - 5,10' ) ).toEqual( [ 12.23, 5.10 ] );
-		expect( extractParts( '......,,,,12.23 - 5,10' ) ).toEqual( [ 12.23, 5.10 ] );
-		expect( extractParts( '.12.23 - 5,10.....,,,,' ) ).toEqual( [ 12.23, 5.10 ] );
-		expect( extractParts( '12.2.....3 ,-. 5,10' ) ).toEqual( [ 12.2, 5.10 ] );
-		expect( extractParts( '1-2-3-!"·$%&4-5-6$,.-' ) ).toEqual( [ 1, 2 ] );
-		expect( extractParts( '12.23 ,-. ----5,,,,,,10' ) ).toEqual( [ 12.23, 5 ] );
+		expect( extractParts( '12' ) ).toEqual( [ '12' ] );
+		expect( extractParts( '12 - 23' ) ).toEqual( [ '12', '23' ] );
+		expect( extractParts( '12.23 - ' ) ).toEqual( [ '12.23' ] );
+		expect( extractParts( '12.23 - 5,10' ) ).toEqual( [ '12.23', '5.10' ] );
+		expect( extractParts( '12.23 - - - - - 5,10' ) ).toEqual( [ '12.23', '5.10' ] );
+		expect( extractParts( '- - - - - 12.23 - 5,10' ) ).toEqual( [ '12.23', '5.10' ] );
+		expect( extractParts( '......,,,,12.23 - 5,10' ) ).toEqual( [ '12.23', '5.10' ] );
+		expect( extractParts( '.12.23 - 5,10.....,,,,' ) ).toEqual( [ '12.23', '5.10' ] );
+		expect( extractParts( '12.2.....3 ,-. 5,10' ) ).toEqual( [ '12.20', '5.10' ] );
+		expect( extractParts( '1-2-3-!"·$%&4-5-6$,.-' ) ).toEqual( [ '1', '2' ] );
+		expect( extractParts( '12.23 ,-. ----5,,,,,,10' ) ).toEqual( [ '12.23', '5' ] );
 	} );
 
 	test( 'parser', () => {
@@ -49,7 +49,7 @@ describe( 'Tests for range.js', () => {
 		expect( parser( '0 -' ) ).toEqual( '' );
 		expect( parser( '0 - 0' ) ).toEqual( '' );
 		expect( parser( '0.0 - 0' ) ).toEqual( '' );
-		expect( parser( '0.0 - 0.5' ) ).toEqual( '0 - 0.50' );
+		expect( parser( '0.0 - 0.5' ) ).toEqual( '0.00 - 0.50' );
 	} );
 
 	test( 'isFree', () => {

@@ -23,12 +23,13 @@ export function parser( input ) {
 	}
 
 	const [ a, b ] = extractParts( chars );
+	const [ num_a, num_b ] = [ parseFloat( a ), parseFloat( b ) ];
 
-	if ( ! b || b === a ) {
-		return a === 0 ? '' : trim( a );
+	if ( ! num_b || num_b === num_a ) {
+		return num_a === 0 ? '' : trim( a );
 	}
 
-	return a >= b ? `${ trim( b ) } - ${ trim( a ) }` : `${ trim( a ) } - ${ trim( b ) }`;
+	return num_a >= num_b ? `${ trim( b ) } - ${ trim( a ) }` : `${ trim( a ) } - ${ trim( b ) }`;
 }
 
 /**
@@ -65,7 +66,10 @@ export function extractParts( chars ) {
 			return null === result ? '' : result[ 1 ];
 		} )
 		.filter( ( item ) => ! isEmpty( item ) )
-		.map( ( item ) => parseFloat( item ).toFixed( 2 ) )
+		.map( ( item ) => {
+			// If the user input the price with decimals (even .00) we want to keep them
+			return ( 0 < item.indexOf( '.' ) ) ? parseFloat( item ).toFixed( 2 ) : parseFloat( item ).toFixed( 0 );
+		} )
 		.filter( ( item ) => ! isNaN( item ) )
 		.slice( 0, 2 );
 }
