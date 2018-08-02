@@ -30,6 +30,9 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Add "Event Blocks" category to the editor
 * Tweak - Normalize styles for the Event Options metabox
 * Tweak - Display the currency symbol and position in the event price block preview
+* Fix - Remove specificity and side effects from time picker element
+* Fix - Make time picker element stateless, removing logic and allowing presentation via props
+* Fix - Remove middlewares for date time block actions, move logic to event handlers in block
 
 #### 0.2.4-alpha - 2018-07-12
 
