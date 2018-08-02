@@ -323,7 +323,7 @@ class EventDateTime extends Component {
 								{ this.renderEndTimePicker() }
 							</div>
 							<div className="tribe-editor__subtitle__footer-multiday">
-								{ this.renderMultiDayToggle() }
+								{ this.renderMultidayToggle() }
 							</div>
 						</div>
 						{ this.renderUpsell() }
