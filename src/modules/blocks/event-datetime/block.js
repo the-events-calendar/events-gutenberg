@@ -207,7 +207,6 @@ class EventDateTime extends Component {
 
 	renderEndTime() {
 		const { end, multiDay, allDay } = this.props;
-		const { time } = FORMATS.WP;
 
 		if ( allDay ) {
 			return null;
