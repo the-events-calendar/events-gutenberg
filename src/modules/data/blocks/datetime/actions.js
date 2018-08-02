@@ -6,6 +6,7 @@ import { isSameDay, parseFormats, toDateTime, toMoment } from 'editor/utils/mome
 import * as types from './types';
 
 import { maybeBulkDispatch } from 'data/utils';
+import { rangeToNaturalLanguage } from 'editor/utils';
 
 export const setDates = ( from, to ) => ( {
 	type: types.SET_DATES,
@@ -21,6 +22,13 @@ export const setDateTime = ( from, to ) => ( {
 		from,
 		to,
 		withTime: true,
+	},
+} );
+
+export const setNaturalLanguageLabel = ( label ) => ( {
+	type: types.SET_NATURAL_LANGUAGE_LABEL,
+	payload: {
+		label,
 	},
 } );
 
@@ -102,13 +110,18 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		[ setTimeZone, 'timezone', DEFAULT_STATE.timezone ],
 	] );
 
+	const values = {};
 	if ( attributes.start ) {
-		dispatch( setStart( toDateTime( parseFormats( attributes.start ) ) ) );
+		values.start = toDateTime( parseFormats( attributes.start ) );
+		dispatch( setStart( values.start ) );
 	}
 
 	if ( attributes.end ) {
-		dispatch( setEnd( toDateTime( parseFormats( attributes.end ) ) ) );
+		values.end = toDateTime( parseFormats( attributes.end ) );
+		dispatch( setEnd( values.end ) );
 	}
+
+	dispatch( setNaturalLanguageLabel( rangeToNaturalLanguage( values.start, values.end ) ) );
 
 	// sameDay
 	const current = {
