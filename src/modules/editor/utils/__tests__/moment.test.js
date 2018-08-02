@@ -13,7 +13,6 @@ import { FORMATS } from 'editor/utils/date';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 
-
 describe( 'Tests for moment.js', () => {
 	let console;
 	beforeAll( () => {
@@ -62,7 +61,7 @@ describe( 'Tests for moment.js', () => {
 	} );
 
 	test( 'toMoment', () => {
-		const input = m.toMoment( new Date( 'January 2, 2015 08:01:59' ) );
+		const input = m.toMoment( new Date( 'January 2, 2015 08:01:59 UTC' ).toISOString() );
 
 		expect( input ).toBeInstanceOf( moment );
 		expect( input.date() ).toEqual( 2 );

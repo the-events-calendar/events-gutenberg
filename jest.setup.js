@@ -11,4 +11,4 @@ global.wp = {
 	element: React,
 };
 
-moment.tz.setDefault( 'America/Mexico_City' );
+moment.tz.setDefault( 'UTC' );
