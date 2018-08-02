@@ -49,11 +49,6 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				multiDay: action.payload.multiDay,
 			};
-		case types.TOGGLE_MULTI_DAY:
-			return {
-				...state,
-				multiDay: ! state.multiDay,
-			};
 		case types.SET_SEPARATOR_DATE:
 			return {
 				...state,
