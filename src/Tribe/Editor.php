@@ -404,6 +404,12 @@ class Tribe__Events_Gutenberg__Editor {
 				'name' => 'tribe_blocks_editor_timezone_html',
 				'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
 			),
+			array(
+				'name' => 'tribe_blocks_editor_constants',
+				'data' => array(
+					'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ),
+				),
+			),
 		);
 
 		$is_classic_editor = $this->post_is_from_classic_editor( tribe_get_request_var( 'post', 0 ) );
