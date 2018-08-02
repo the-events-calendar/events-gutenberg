@@ -329,7 +329,7 @@ class EventDateTime extends Component {
 								{ this.renderMultidayToggle() }
 							</div>
 						</div>
-						<Upsell hideUpsell={ hideUpsell } />
+						{ ! hideUpsell && <Upsell hideUpsell={ hideUpsell } /> }
 					</footer>
 				</Fragment>
 			</Dashboard>
