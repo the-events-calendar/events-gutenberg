@@ -287,7 +287,6 @@ class EventDateTime extends Component {
 					{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
 					{ this.renderEnd() }
 					{ allDay && this.renderSeparator( 'all-day' ) }
-					{ this.renderSeparator( 'space' ) }
 					{ this.renderTimezone() }
 					{ this.renderPrice() }
 				</h2>
