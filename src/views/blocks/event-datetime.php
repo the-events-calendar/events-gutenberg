@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Checks if the two dates provided are on the same day.
+ *
+ * @param string $date_1 A date/time string. See `strtotime` for valid formats.
+ * @param string $date_2 A date/time string. See `strtotime` for valid formats.
+ *
+ * @return bool True if same day.
+ */
 if ( ! function_exists( 'tribe_is_same_day' ) ) {
 	function tribe_is_same_day( $date_1, $date_2 ) {
 		$date_1_formatted = date( 'Y-m-d', wp_strtotime( $date_1 ) );
@@ -8,6 +16,14 @@ if ( ! function_exists( 'tribe_is_same_day' ) ) {
 	}
 }
 
+/**
+ * Checks if the two dates provided are in the same year.
+ *
+ * @param string $date_1 A date/time string. See `strtotime` for valid formats.
+ * @param string $date_2 A date/time string. See `strtotime` for valid formats.
+ *
+ * @return bool True if same year.
+ */
 if ( ! function_exists( 'tribe_is_same_year' ) ) {
 	function tribe_is_same_year( $date_1, $date_2 ) {
 		$date_1_year = date( 'Y', wp_strtotime( $date_1 ) );
@@ -16,14 +32,23 @@ if ( ! function_exists( 'tribe_is_same_year' ) ) {
 	}
 }
 
+/**
+ * Returns an array with date and time of date provided
+ *
+ * @param string $date        A date/time string. See `strtotime` for valid formats.
+ * @param string $date_format A date format. See `strtotime` for valid formats.
+ * @param string $time_format A time format. See `strtotime` for valid formats.
+ *
+ * @return array Array with date and time.
+ */
 if ( ! function_exists( 'tribe_get_event_date_time' ) ) {
 	function tribe_get_event_date_time( $date, $date_format, $time_format ) {
 		$timestamp = wp_strtotime( $date );
 
-		return [
+		return array(
 			'date' => date( $date_format, $timestamp ),
 			'time' => date( $time_format, $timestamp ),
-		];
+		);
 	}
 }
 
