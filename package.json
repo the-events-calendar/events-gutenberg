@@ -126,7 +126,7 @@
 			"/i18n/",
 			"/src/views",
 			"/src/Tribe",
-			"/src/resources"
+			"resources"
 		]
 	}
 }

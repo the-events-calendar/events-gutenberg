@@ -7,7 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // Main CSS loader for everything but blocks..
 const cssExtractTextPlugin = new ExtractTextPlugin( {
-	filename: "src/resources/css/[name].css"
+	filename: "resources/css/[name].css"
 } );
 
 const entryPointNames = [
@@ -76,7 +76,7 @@ const config = {
 	}, {} ),
 	externals,
 	output: {
-		filename: "src/resources/js/[name].js",
+		filename: "resources/js/[name].js",
 		path: __dirname,
 		library: [ "tribe", "events", "[name]" ],
 		libraryTarget: "this"
@@ -90,7 +90,7 @@ const config = {
 			...alias,
 			data: path.resolve( __dirname, 'src/modules/data' ),
 			utils: path.resolve( __dirname, 'src/modules/editor/utils' ),
-			icons: path.resolve( __dirname, 'src/resources/icons' ),
+			icons: path.resolve( __dirname, 'resources/icons' ),
 		},
 	},
 	module: {
