@@ -9,10 +9,7 @@ class Tribe__Events_Gutenberg__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 */
 	public function register() {
-		$this->container->singleton( 'gutenberg', $GLOBALS['__tribe_events_gutenberg_plugin'] );
-
-		// Set the Plugin class and Unset the global variable
-		unset( $GLOBALS['__tribe_events_gutenberg_plugin'] );
+		$this->container->singleton( 'gutenberg', 'Tribe__Events_Gutenberg__Plugin' );
 
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.editor', 'Tribe__Events_Gutenberg__Editor' );
