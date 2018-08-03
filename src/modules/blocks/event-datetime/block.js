@@ -5,6 +5,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
+import { trim, isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -60,6 +61,7 @@ import {
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
+import { parser, isFree } from 'utils/range';
 import withSaveData from 'editor/hoc/with-save-data';
 import { hasClass, searchParent } from 'editor/utils/dom';
 
@@ -68,6 +70,11 @@ FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' )
 /**
  * Module Code
  */
+
+const showCurrencySymbol = ( cost ) => {
+	const parsed = parser( cost );
+	return ! isEmpty( trim( parsed ) ) && ! isFree( cost );
+};
 
 class EventDateTime extends Component {
 	static propTypes = {
@@ -551,8 +558,8 @@ const mapStateToProps = ( state ) => {
 		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
 		timezone: dateTimeSelectors.getTimeZone( state ),
 		cost: priceSelectors.getPrice( state ),
-		currencyPosition: PropTypes.oneOf([ 'prefix', 'suffix' ]),
-		currencySymbol: PropTypes.string,
+		currencySymbol: priceSelectors.getSymbol( state ),
+		showCurrencySymbol: showCurrencySymbol( state.blocks.price.cost ),
 	};
 };
 
