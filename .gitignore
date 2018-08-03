@@ -13,3 +13,5 @@ docker-compose.override.yml
 cypress.env.json
 .idea
 /node_modules/
+npm-debug.log
+yarn-error.log
