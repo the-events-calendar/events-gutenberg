@@ -224,7 +224,7 @@ describe( 'Tests for moment.js', () => {
 		} );
 
 		test( 'Invalid date', () => {
-			Date.now = jest.fn( () => '2018-07-01T05:07:31.000Z' );
+			Date.now = jest.fn( () => new Date( 'July 1, 2018 00:07:31 UTC' ).toISOString() );
 			const format = 'YYYY-MM-DD HH:mm:ss';
 			const expected = m.parseFormats( 'No date!' );
 			expect( expected.format( format ) ).toBe( '2018-07-01 00:07:31' );
