@@ -43,7 +43,6 @@ class DateInput extends Component {
 
 	constructor( props ) {
 		super( props );
-		this.inputRef = createRef();
 		this.sendDateTime = debounce( this._sendDateTime, 250 );
 	}
 
@@ -77,8 +76,6 @@ class DateInput extends Component {
 				name="date-input"
 				className="tribe-editor__date-input"
 				value={ value }
-				ref={ this.inputRef }
-				onBlur={ this.onBlur }
 				onChange={ this.handleChange }
 				onFocus={ onClickHandler }
 			/>
