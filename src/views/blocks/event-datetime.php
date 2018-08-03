@@ -59,14 +59,13 @@ $end            = get_post_meta( $event_id, '_EventEndDate', true );
 $timezone       = get_post_meta( $event_id, '_EventTimezone', true );
 $separator_date = get_post_meta( $event_id, '_EventDateTimeSeparator', true );
 $separator_time = get_post_meta( $event_id, '_EventTimeRangeSeparator', true );
-$all_day        = (boolean) get_post_meta( $event_id, '_EventAllDay', true );
+$all_day        = tribe_is_truthy( get_post_meta( $event_id, '_EventAllDay', true ) );
 $same_day       = tribe_is_same_day( $start, $end );
 $show_year      = ! tribe_is_same_year( $start, $end ) || ! tribe_is_same_year( $start, date( 'Y-m-d H:i:s' ) );
 
-$date_format_with_year = 'F j, Y';
-$date_format_no_year   = 'F j';
-$time_format           = 'g:i a';
-$date_format           = $show_year ? $date_format_with_year : $date_format_no_year;
+$date_settings_formats = tribe( 'gutenberg.editor' )->get_date_settings()[ 'formats' ];
+$time_format           = $date_settings_formats[ 'time' ];
+$date_format           = $show_year ? $date_settings_formats[ 'date' ] : $date_settings_formats[ 'dateNoYear' ];
 
 $start_date_time = tribe_get_event_date_time( $start, $date_format, $time_format );
 $end_date_time   = tribe_get_event_date_time( $end, $date_format, $time_format );
