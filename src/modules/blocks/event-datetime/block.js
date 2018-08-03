@@ -33,6 +33,7 @@ import {
 	TimePicker,
 	Dashboard,
 	Month,
+	Upsell,
 } from 'elements';
 import './style.pcss';
 
@@ -49,7 +50,7 @@ import {
 	actions as priceActions,
 } from 'data/blocks/price';
 
-import { getSetting } from 'editor/settings';
+import { getSetting, getConstants } from 'editor/settings';
 import classNames from 'classnames';
 import {
 	roundTime,
@@ -297,6 +298,8 @@ class EventDateTime extends Component {
 
 	renderDashboard() {
 		const { dashboardOpen, multiDay, allDay } = this.props;
+		const hideUpsell = getConstants().hide_upsell === 'true';
+
 		return (
 			<Dashboard open={ dashboardOpen }>
 				<Fragment>
@@ -304,17 +307,20 @@ class EventDateTime extends Component {
 						{ this.renderCalendars() }
 					</section>
 					<footer className="tribe-editor__subtitle__footer">
-						<section className="tribe-editor__subtitle__footer-date">
-							{ this.renderStartTimePicker() }
-							{
-								( multiDay || ! allDay ) &&
-								this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' )
-							}
-							{ this.renderEndTimePicker() }
-						</section>
-						<section className="tribe-editor__subtitle__footer-multiday">
-							{ this.renderMultiDayToggle() }
-						</section>
+						<div className="tribe-editor__subtitle__footer-date">
+							<div className="tribe-editor__subtitle__time-pickers">
+								{ this.renderStartTimePicker() }
+								{
+									( multiDay || ! allDay ) &&
+									this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' )
+								}
+								{ this.renderEndTimePicker() }
+							</div>
+							<div className="tribe-editor__subtitle__footer-multiday">
+								{ this.renderMultiDayToggle() }
+							</div>
+						</div>
+						{ ! hideUpsell && <Upsell /> }
 					</footer>
 				</Fragment>
 			</Dashboard>
@@ -654,6 +660,8 @@ const mapStateToProps = ( state ) => {
 		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
 		timezone: dateTimeSelectors.getTimeZone( state ),
 		cost: priceSelectors.getPrice( state ),
+		currencySymbol: priceSelectors.getSymbol( state ),
+		currencyPosition: priceSelectors.getPosition( state ),
 	};
 };
 
