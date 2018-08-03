@@ -570,6 +570,8 @@ const mapStateToProps = ( state ) => {
 		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
 		timezone: dateTimeSelectors.getTimeZone( state ),
 		cost: priceSelectors.getPrice( state ),
+		currencySymbol: priceSelectors.getSymbol( state ),
+		currencyPosition: priceSelectors.getPosition( state ),
 	};
 };
 
