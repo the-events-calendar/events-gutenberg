@@ -100,4 +100,4 @@ class Tribe__Events_Gutenberg__Plugin {
 
 }
 
-new Tribe__Events_Gutenberg__Plugin();
+$GLOBALS['__tribe_events_gutenberg_plugin'] = new Tribe__Events_Gutenberg__Plugin();
