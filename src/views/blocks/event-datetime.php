@@ -54,12 +54,12 @@ if ( ! function_exists( 'tribe_get_event_date_time' ) ) {
 
 $event_id = get_the_ID();
 
-$start = get_post_meta( $event_id, '_EventStartDate' )[0];
-$end = get_post_meta( $event_id, '_EventEndDate' )[0];
-$timezone = get_post_meta( $event_id, '_EventTimezone' )[0];
-$separator_date = get_post_meta( $event_id, '_EventDateTimeSeparator' )[0];
-$separator_time = get_post_meta( $event_id, '_EventTimeRangeSeparator' )[0];
-$all_day = (boolean) get_post_meta( $event_id, '_EventAllDay' )[0];
+$start = get_post_meta( $event_id, '_EventStartDate', true );
+$end = get_post_meta( $event_id, '_EventEndDate', true );
+$timezone = get_post_meta( $event_id, '_EventTimezone', true );
+$separator_date = get_post_meta( $event_id, '_EventDateTimeSeparator', true );
+$separator_time = get_post_meta( $event_id, '_EventTimeRangeSeparator', true );
+$all_day = (boolean) get_post_meta( $event_id, '_EventAllDay', true );
 $same_day = tribe_is_same_day( $start, $end );
 $show_year = ! tribe_is_same_year( $start, $end ) || ! tribe_is_same_year( $start, date( 'Y-m-d H:i:s' ) );
 
