@@ -32,6 +32,7 @@ import {
 	TimePicker,
 	Dashboard,
 	Month,
+	Upsell,
 } from 'elements';
 import './style.pcss';
 
@@ -48,17 +49,18 @@ import {
 	actions as priceActions,
 } from 'data/blocks/price';
 
-import { getSetting } from 'editor/settings';
+import { getSetting, getConstants } from 'editor/settings';
 import classNames from 'classnames';
 import {
 	toFormat,
 	toMoment,
 	toDate,
-	toDateNoYear
+	toDateNoYear,
+	toTime,
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
 import withSaveData from 'editor/hoc/with-save-data';
-import { searchParent } from 'editor/utils/dom';
+import { hasClass, searchParent } from 'editor/utils/dom';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 
@@ -156,18 +158,15 @@ class EventDateTime extends Component {
 
 	renderStartTime() {
 		const { start } = this.props;
-		const { time } = FORMATS.WP;
 
 		if ( this.isAllDay() ) {
 			return null;
 		}
 
-		const startMoment = toMoment( start );
-
 		return (
 			<React.Fragment>
 				{ this.renderSeparator( 'date-time' ) }
-				{ startMoment.format( toFormat( time ) ) }
+				{ toTime( toMoment( start ), FORMATS.WP.time ) }
 			</React.Fragment>
 		);
 	}
@@ -209,7 +208,7 @@ class EventDateTime extends Component {
 		return (
 			<React.Fragment>
 				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
-				{ toMoment( end ).format( toFormat( time ) ) }
+				{ toTime( toMoment( end ), FORMATS.WP.time ) }
 			</React.Fragment>
 		);
 	}
@@ -309,6 +308,8 @@ class EventDateTime extends Component {
 
 	renderDashboard() {
 		const { dashboardOpen } = this.props;
+		const hideUpsell = getConstants().hide_upsell === 'true';
+
 		return (
 			<Dashboard open={ dashboardOpen }>
 				<Fragment>
@@ -316,14 +317,17 @@ class EventDateTime extends Component {
 						{ this.renderCalendars() }
 					</section>
 					<footer className="tribe-editor__subtitle__footer">
-						<section className="tribe-editor__subtitle__footer-date">
-							{ this.renderStartTimePicker() }
-							{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
-							{ this.renderEndTimePicker() }
-						</section>
-						<section className="tribe-editor__subtitle__footer-multiday">
-							{ this.renderMultidayToggle() }
-						</section>
+						<div className="tribe-editor__subtitle__footer-date">
+							<div className="tribe-editor__subtitle__time-pickers">
+								{ this.renderStartTimePicker() }
+								{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
+								{ this.renderEndTimePicker() }
+							</div>
+							<div className="tribe-editor__subtitle__footer-multiday">
+								{ this.renderMultidayToggle() }
+							</div>
+						</div>
+						{ ! hideUpsell && <Upsell /> }
 					</footer>
 				</Fragment>
 			</Dashboard>
@@ -343,12 +347,11 @@ class EventDateTime extends Component {
 		const { target } = e;
 		if (
 			! this.isTargetInBlock( target ) &&
-			! this.isTargetInSidebar( target ) &&
-			! this.isTargetInDropdown( target )
+			! this.isValidChildren( target )
 		) {
 			this.props.closeDashboardDateTime();
 		}
-	}
+	};
 
 	/* TODO: This needs to move to logic component wrapper */
 	isTargetInBlock = ( target ) => (
@@ -360,19 +363,14 @@ class EventDateTime extends Component {
 		} )
 	);
 
-	/* TODO: This needs to move to logic component wrapper */
-	isTargetInSidebar = ( target ) => (
-		searchParent( target, ( testNode ) => (
-			testNode.classList.contains( 'edit-post-sidebar' )
-		) )
-	);
-
-	/* TODO: This needs to move to logic component wrapper */
-	isTargetInDropdown = ( target ) => (
-		searchParent( target, ( testNode ) => (
-			testNode.classList.contains( 'tribe-editor__timepicker__dialog' )
-		) )
-	);
+	isValidChildren = ( target ) => {
+		const targets = [
+			'tribe-editor__timepicker__dialog',
+			'edit-post-sidebar',
+			'trigger-dashboard-datetime',
+		];
+		return searchParent( target, ( testNode ) => hasClass( testNode, targets ) );
+	};
 
 	renderCalendars() {
 		const { multiDay, start, end, visibleMonth, setVisibleMonth } = this.props;
@@ -557,6 +555,8 @@ const mapStateToProps = ( state ) => {
 		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
 		timezone: dateTimeSelectors.getTimeZone( state ),
 		cost: priceSelectors.getPrice( state ),
+		currencySymbol: priceSelectors.getSymbol( state ),
+		currencyPosition: priceSelectors.getPosition( state ),
 	};
 };
 

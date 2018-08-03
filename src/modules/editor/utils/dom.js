@@ -4,6 +4,22 @@
 import { noop } from 'lodash';
 
 /**
+ * Test if a node element has a class present on it
+ *
+ * @param {HTMLElement|Element} node The node where to look for the class names
+ * @param {array} classNames List of class names as an array of strings
+ * @returns {boolean} `true` if has any of the classes or false if does not have any
+ */
+export function hasClass( node, classNames = [] ) {
+	for ( let i = 0; i < classNames.length; i++ ) {
+		if ( node.classList.contains( classNames[ i ] ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
  * Utility to search the parent of a node looking from the current node Up to the highest
  * node on the DOM Tree
  *

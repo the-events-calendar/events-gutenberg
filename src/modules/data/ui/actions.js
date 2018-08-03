@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { toMoment } from 'editor/utils/moment';
+import { toMoment, parseFormats } from 'editor/utils/moment';
 
 export const toggleDashboardDateTime = () => ( {
 	type: types.TOGGLE_DASHBOARD_DATE_TIME,
@@ -48,6 +48,7 @@ export const setInitialState = ( { get } ) => ( dispatch ) => {
 	if ( ! start ) {
 		return;
 	}
-	const month = toMoment( start ).startOf( 'month' ).toDate();
+
+	const month = toMoment( parseFormats( start ) ).startOf( 'month' ).toDate();
 	dispatch( setVisibleMonth( month ) );
 };

@@ -2,11 +2,36 @@
  * Internal dependencies
  */
 import {
+	hasClass,
 	isRootNode,
 	searchParent,
 } from 'utils/dom';
 
 describe( 'Tests for dom.js', () => {
+	beforeAll( () => {
+		window.document.body.classList.add( 'one', 'two' );
+	} );
+
+	afterAll( () => {
+		window.document.body.classList.remove( 'one', 'two' );
+	} );
+
+	describe( 'hasClass dom utility', () => {
+		it( 'Should return false when the dom element does not have any class', () => {
+			expect( hasClass( window.document.body, [] ) ).toBe( false );
+			expect( hasClass( window.document.body, [ 'five', 'seven' ] ) ).toBe( false );
+			expect( hasClass( window.document.body, [ 'eight' ] ) ).toBe( false );
+		} );
+
+		it( 'Should return true whe the dom element has any of the classes', () => {
+			expect( hasClass( window.document.body, [ 'one', 'two' ] ) ).toBe( true );
+			expect( hasClass( window.document.body, [ 'two', 'one' ] ) ).toBe( true );
+			expect( hasClass( window.document.body, [ 'four', 'two' ] ) ).toBe( true );
+			expect( hasClass( window.document.body, [ 'one', 'five' ] ) ).toBe( true );
+			expect( hasClass( window.document.body, [ 'nostyle', 'six', 'seven', 'one' ] ) ).toBe( true );
+		} );
+	} );
+
 	test( 'Test for searchParent', () => {
 		expect( searchParent( null ) ).toBeFalsy();
 		const treeWithNode = {
