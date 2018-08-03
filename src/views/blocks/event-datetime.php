@@ -10,8 +10,8 @@
  */
 if ( ! function_exists( 'tribe_is_same_day' ) ) {
 	function tribe_is_same_day( $date_1, $date_2 ) {
-		$date_1_formatted = date( 'Y-m-d', wp_strtotime( $date_1 ) );
-		$date_2_formatted = date( 'Y-m-d', wp_strtotime( $date_2 ) );
+		$date_1_formatted = date( 'Y-m-d', Tribe__Date_Utils::wp_strtotime( $date_1 ) );
+		$date_2_formatted = date( 'Y-m-d', Tribe__Date_Utils::wp_strtotime( $date_2 ) );
 		return $date_1_formatted == $date_2_formatted;
 	}
 }
@@ -26,8 +26,8 @@ if ( ! function_exists( 'tribe_is_same_day' ) ) {
  */
 if ( ! function_exists( 'tribe_is_same_year' ) ) {
 	function tribe_is_same_year( $date_1, $date_2 ) {
-		$date_1_year = date( 'Y', wp_strtotime( $date_1 ) );
-		$date_2_year = date( 'Y', wp_strtotime( $date_2 ) );
+		$date_1_year = date( 'Y', Tribe__Date_Utils::wp_strtotime( $date_1 ) );
+		$date_2_year = date( 'Y', Tribe__Date_Utils::wp_strtotime( $date_2 ) );
 		return $date_1_year == $date_2_year;
 	}
 }
@@ -43,7 +43,7 @@ if ( ! function_exists( 'tribe_is_same_year' ) ) {
  */
 if ( ! function_exists( 'tribe_get_event_date_time' ) ) {
 	function tribe_get_event_date_time( $date, $date_format, $time_format ) {
-		$timestamp = wp_strtotime( $date );
+		$timestamp = Tribe__Date_Utils::wp_strtotime( $date );
 
 		return array(
 			'date' => date( $date_format, $timestamp ),
