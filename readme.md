@@ -30,6 +30,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Add "Event Blocks" category to the editor
 * Tweak - Normalize styles for the Event Options metabox
 * Tweak - Display the currency symbol and position in the event price block preview
+* Fix - Avoid crash when using `wp` cli tool, (thanks to Matt Fields @0x6d617474 for report this problem)
 
 #### 0.2.4-alpha - 2018-07-12
 
