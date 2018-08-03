@@ -100,5 +100,4 @@ class Tribe__Events_Gutenberg__Plugin {
 
 }
 
-// Will be unset once we have the proper Singleton setup
-$__tribe_events_gutenberg_plugin = new Tribe__Events_Gutenberg__Plugin();
+$GLOBALS['__tribe_events_gutenberg_plugin'] = new Tribe__Events_Gutenberg__Plugin();
