@@ -32,6 +32,7 @@ import {
 	TimePicker,
 	Dashboard,
 	Month,
+	Upsell,
 } from 'elements';
 import './style.pcss';
 
@@ -48,7 +49,7 @@ import {
 	actions as priceActions,
 } from 'data/blocks/price';
 
-import { getSetting } from 'editor/settings';
+import { getSetting, getConstants } from 'editor/settings';
 import classNames from 'classnames';
 import {
 	toFormat,
@@ -309,6 +310,8 @@ class EventDateTime extends Component {
 
 	renderDashboard() {
 		const { dashboardOpen } = this.props;
+		const hideUpsell = getConstants().hide_upsell === 'true';
+
 		return (
 			<Dashboard open={ dashboardOpen }>
 				<Fragment>
@@ -316,14 +319,17 @@ class EventDateTime extends Component {
 						{ this.renderCalendars() }
 					</section>
 					<footer className="tribe-editor__subtitle__footer">
-						<section className="tribe-editor__subtitle__footer-date">
-							{ this.renderStartTimePicker() }
-							{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
-							{ this.renderEndTimePicker() }
-						</section>
-						<section className="tribe-editor__subtitle__footer-multiday">
-							{ this.renderMultidayToggle() }
-						</section>
+						<div className="tribe-editor__subtitle__footer-date">
+							<div className="tribe-editor__subtitle__time-pickers">
+								{ this.renderStartTimePicker() }
+								{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
+								{ this.renderEndTimePicker() }
+							</div>
+							<div className="tribe-editor__subtitle__footer-multiday">
+								{ this.renderMultidayToggle() }
+							</div>
+						</div>
+						{ ! hideUpsell && <Upsell /> }
 					</footer>
 				</Fragment>
 			</Dashboard>
