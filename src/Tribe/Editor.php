@@ -137,7 +137,6 @@ class Tribe__Events_Gutenberg__Editor {
 			$template = $this->get_classic_template();
 		} else {
 			$template[] = array( 'tribe/event-datetime' );
-			$template[] = array( 'tribe/featured-image' );
 			$template[] = array(
 				'core/paragraph',
 				array(
