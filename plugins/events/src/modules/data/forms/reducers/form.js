@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { EVENT } from 'editor/post-types';
+import { EVENT } from '@@plugins/events/editor/post-types';
 import * as types from './../types';
 
 export const DEFAULT_STATE = {

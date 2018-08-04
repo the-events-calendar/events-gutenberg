@@ -22,7 +22,7 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
-import { google, mapsAPI } from 'utils/globals';
+import { google, mapsAPI } from '@@plugins/events/editor/utils/globals';
 
 /**
  * Module Code

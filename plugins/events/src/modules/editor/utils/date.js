@@ -1,4 +1,4 @@
-import { getItems } from 'elements/timezone-picker/element';
+import { getItems } from '@@plugins/events/elements/timezone-picker/element';
 import { get } from 'lodash';
 
 /**

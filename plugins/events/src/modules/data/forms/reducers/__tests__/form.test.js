@@ -1,9 +1,9 @@
 /**
  * Internal dependencies
  */
-import { form } from 'data/forms/reducers';
-import { actions } from 'data/forms';
-import { DEFAULT_STATE } from 'data/forms/reducers/form';
+import { form } from '@@plugins/events/data/forms/reducers';
+import { actions } from '@@plugins/events/data/forms';
+import { DEFAULT_STATE } from '@@plugins/events/data/forms/reducers/form';
 
 describe( '[STORE] - form reducer', () => {
 	it( 'Should return the default state', () => {

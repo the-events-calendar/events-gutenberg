@@ -6,8 +6,8 @@ import moment from 'moment';
 /**
  * Internal dependencies
  */
-import { actions } from 'data/ui';
-import reducer, { DEFAULT_STATE } from 'data/ui/reducer';
+import { actions } from '@@plugins/events/data/ui';
+import reducer, { DEFAULT_STATE } from '@@plugins/events/data/ui/reducer';
 
 describe( '[STORE] - UI reducer', () => {
 	it( 'Should return the default state', () => {

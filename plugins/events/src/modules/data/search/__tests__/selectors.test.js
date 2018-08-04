@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from 'data/search';
-import { DEFAULT_STATE } from 'data/search/reducers/search';
+import { selectors } from '@@plugins/events/data/search';
+import { DEFAULT_STATE } from '@@plugins/events/data/search/reducers/search';
 
 const state = {
 	search: {

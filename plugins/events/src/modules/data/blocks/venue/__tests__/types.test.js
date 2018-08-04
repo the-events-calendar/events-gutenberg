@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from 'data/blocks/venue';
+import { types } from '@@plugins/events/data/blocks/venue';
 
 describe( '[STORE] - Venue types', () => {
 	it( 'Should return the venue types', () => {

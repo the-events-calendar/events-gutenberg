@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { EVENT } from 'editor/post-types';
-import { types } from 'data/details';
+import { EVENT } from '@@plugins/events/editor/post-types';
+import { types } from '@@plugins/events/data/details';
 
 export const DEFAULT_STATE = {
 	loading: false,

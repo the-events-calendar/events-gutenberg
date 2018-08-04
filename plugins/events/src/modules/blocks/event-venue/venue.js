@@ -3,7 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import { isEmpty, noop } from 'lodash';
-import { mapLink } from 'utils/geo-data';
+import { mapLink } from '@@plugins/events/editor/utils/geo-data';
 import { decode } from 'he';
 
 /**

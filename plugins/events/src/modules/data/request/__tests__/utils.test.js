@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { utils } from 'data/request';
+import { utils } from '@@plugins/events/data/request';
 
 const wpParamsExpected = {
 	orderby: 'title',

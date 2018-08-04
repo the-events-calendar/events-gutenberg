@@ -5,13 +5,13 @@ import {
 	types,
 	actions,
 	selectors, selectors as dateTimeSelectors,
-} from 'data/blocks/datetime';
+} from '@@plugins/events/data/blocks/datetime';
 
 import {
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
-} from 'editor/utils/moment';
+} from '@@plugins/events/editor/utils/moment';
 
 const {
 	setStart,

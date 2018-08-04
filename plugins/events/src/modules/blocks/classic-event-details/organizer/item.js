@@ -12,7 +12,7 @@ import { isEmpty } from 'lodash';
 /**
  * Import internal dependencies
  */
-import { withDetails } from 'editor/hoc';
+import { withDetails } from '@@plugins/events/editor/hoc';
 import { Loading } from 'elements';
 import { Actions, Name } from './index';
 

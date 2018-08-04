@@ -11,10 +11,10 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import { HALF_HOUR_IN_SECONDS } from 'editor/utils/time';
-import { FORMATS } from 'editor/utils/date';
-import { roundTime, toDateTime } from 'editor/utils/moment';
-import { getSetting } from 'editor/settings';
+import { HALF_HOUR_IN_SECONDS } from '@@plugins/events/editor/utils/time';
+import { FORMATS } from '@@plugins/events/editor/utils/date';
+import { roundTime, toDateTime } from '@@plugins/events/editor/utils/moment';
+import { getSetting } from '@@plugins/events/editor/settings';
 import * as types from './types';
 
 export const DEFAULT_STATE = {

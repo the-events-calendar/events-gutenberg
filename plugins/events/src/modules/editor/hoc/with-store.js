@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 /**
  * Internal dependencies
  */
-import { getStore } from 'data';
+import { getStore } from '@@plugins/events/data';
 
 export default ( additionalProps = {} ) => ( WrappedComponent ) => {
 	class WithStore extends Component {

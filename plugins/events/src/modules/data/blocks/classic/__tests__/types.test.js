@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from 'data/blocks/classic';
+import { types } from '@@plugins/events/data/blocks/classic';
 
 describe( '[STORE] - Classic types', () => {
 	it( 'Should return the types values', () => {

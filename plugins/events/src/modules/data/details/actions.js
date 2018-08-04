@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash';
  */
 import * as types from './types';
 import * as selectors from './selectors';
-import { actions as requestActions } from 'data/request';
+import { actions as requestActions } from '@@plugins/events/data/request';
 
 export const enableLoading = ( id ) => ( {
 	type: types.SET_DETAILS_LOADING,

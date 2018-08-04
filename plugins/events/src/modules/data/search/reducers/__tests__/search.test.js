@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { actions } from 'data/search';
-import reducer, { DEFAULT_STATE } from 'data/search/reducers/search';
+import { actions } from '@@plugins/events/data/search';
+import reducer, { DEFAULT_STATE } from '@@plugins/events/data/search/reducers/search';
 
 describe( '[STORE] - search reducer', () => {
 	it( 'Should return default state', () => {

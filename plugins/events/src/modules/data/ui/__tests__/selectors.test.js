@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from 'data/ui';
-import { DEFAULT_STATE } from 'data/ui/reducer';
+import { selectors } from '@@plugins/events/data/ui';
+import { DEFAULT_STATE } from '@@plugins/events/data/ui/reducer';
 
 const state = {
 	ui: DEFAULT_STATE,

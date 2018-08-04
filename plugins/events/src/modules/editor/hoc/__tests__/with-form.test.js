@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { withForm } from 'editor/hoc';
+import { withForm } from '@@plugins/events/editor/hoc';
 
 const initialState = {
 	forms: {

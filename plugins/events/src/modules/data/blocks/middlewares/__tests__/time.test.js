@@ -1,16 +1,16 @@
 /**
  * Internal dependencies
  */
-import { HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from 'editor/utils/time';
-import { startTime, endTime } from 'data/blocks/middlewares';
-import { actions as mockedActions } from 'data/blocks/datetime';
-import * as actions from 'data/blocks/datetime/actions';
+import { HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from '@@plugins/events/editor/utils/time';
+import { startTime, endTime } from '@@plugins/events/data/blocks/middlewares';
+import { actions as mockedActions } from '@@plugins/events/data/blocks/datetime';
+import * as actions from '@@plugins/events/data/blocks/datetime/actions';
 
 let create;
 let state = {};
 
-jest.mock( 'data/blocks/datetime', () => {
-	const original = require.requireActual( 'data/blocks/datetime' );
+jest.mock( '@@plugins/events/data/blocks/datetime', () => {
+	const original = require.requireActual( '@@plugins/events/data/blocks/datetime' );
 	return {
 		...original,
 		actions: {

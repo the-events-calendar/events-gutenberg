@@ -17,7 +17,7 @@ import {
 /**
  * Internal dependencies
  */
-import { toMoment, toDate, toDatePicker, toDateTime } from 'utils/moment';
+import { toMoment, toDate, toDatePicker, toDateTime } from '@@plugins/events/editor/utils/moment';
 
 import './style.pcss';
 

@@ -8,7 +8,7 @@ import moment from 'moment';
 /**
  * Internal dependencies
  */
-import { actions } from 'data/ui';
+import { actions } from '@@plugins/events/data/ui';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );

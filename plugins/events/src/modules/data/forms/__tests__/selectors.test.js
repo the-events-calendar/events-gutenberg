@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { selectors } from 'data/forms';
-import { DEFAULT_STATE } from 'data/forms/reducers/form';
+import { selectors } from '@@plugins/events/data/forms';
+import { DEFAULT_STATE } from '@@plugins/events/data/forms/reducers/form';
 
 const state = {
 	forms: {

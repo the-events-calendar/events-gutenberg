@@ -39,17 +39,17 @@ import './style.pcss';
 import {
 	actions as dateTimeActions,
 	selectors as dateTimeSelectors,
-} from 'data/blocks/datetime';
+} from '@@plugins/events/data/blocks/datetime';
 import {
 	actions as UIActions,
 	selectors as UISelectors,
-} from 'data/ui';
+} from '@@plugins/events/data/ui';
 import {
 	selectors as priceSelectors,
 	actions as priceActions,
-} from 'data/blocks/price';
+} from '@@plugins/events/data/blocks/price';
 
-import { getSetting, getConstants } from 'editor/settings';
+import { getSetting, getConstants } from '@@plugins/events/editor/settings';
 import classNames from 'classnames';
 import {
 	toFormat,
@@ -57,10 +57,10 @@ import {
 	toDate,
 	toDateNoYear,
 	toTime,
-} from 'utils/moment';
-import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
-import withSaveData from 'editor/hoc/with-save-data';
-import { hasClass, searchParent } from 'editor/utils/dom';
+} from '@@plugins/events/editor/utils/moment';
+import { FORMATS, timezonesAsSelectData, TODAY } from '@@plugins/events/editor/utils/date';
+import withSaveData from '@@plugins/events/editor/hoc/with-save-data';
+import { hasClass, searchParent } from '@@plugins/events/editor/utils/dom';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 

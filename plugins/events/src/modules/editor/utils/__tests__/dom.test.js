@@ -5,7 +5,7 @@ import {
 	hasClass,
 	isRootNode,
 	searchParent,
-} from 'utils/dom';
+} from '@@plugins/events/editor/utils/dom';
 
 describe( 'Tests for dom.js', () => {
 	beforeAll( () => {

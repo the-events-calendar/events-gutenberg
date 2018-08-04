@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-export * from 'editor/utils';
-export * from 'editor/settings';
+export * from '@@plugins/events/editor/utils';
+export * from '@@plugins/events/editor/settings';
 
 import './style.pcss';

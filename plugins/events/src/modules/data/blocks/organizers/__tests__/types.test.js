@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from 'data/blocks/organizers';
+import { types } from '@@plugins/events/data/blocks/organizers';
 
 describe( '[STORE] - Organizers types', () => {
 	it( 'Should return the organizers types', () => {

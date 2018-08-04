@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { withDetails } from 'editor/hoc';
+import { withDetails } from '@@plugins/events/editor/hoc';
 
 const initialState = {
 	details: {},

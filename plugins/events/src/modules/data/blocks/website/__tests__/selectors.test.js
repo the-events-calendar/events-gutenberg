@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from 'data/blocks/website';
-import { DEFAULT_STATE } from 'data/blocks/website/reducers';
+import { selectors } from '@@plugins/events/data/blocks/website';
+import { DEFAULT_STATE } from '@@plugins/events/data/blocks/website/reducers';
 
 const state = {
 	blocks: {

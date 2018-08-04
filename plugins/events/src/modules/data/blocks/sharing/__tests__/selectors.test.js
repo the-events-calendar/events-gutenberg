@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { DEFAULT_STATE } from 'data/blocks/sharing/reducers';
-import { selectors } from 'data/blocks/sharing';
+import { DEFAULT_STATE } from '@@plugins/events/data/blocks/sharing/reducers';
+import { selectors } from '@@plugins/events/data/blocks/sharing';
 
 const state = {
 	blocks: {

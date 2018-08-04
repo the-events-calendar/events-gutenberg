@@ -6,10 +6,10 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import * as m from 'utils/moment';
+import * as m from '@@plugins/events/editor/utils/moment';
 
-import { HALF_HOUR_IN_SECONDS } from 'utils/time';
-import { FORMATS } from 'editor/utils/date';
+import { HALF_HOUR_IN_SECONDS } from '@@plugins/events/editor/utils/time';
+import { FORMATS } from '@@plugins/events/editor/utils/date';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 

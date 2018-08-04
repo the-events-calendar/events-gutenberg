@@ -15,7 +15,7 @@ import { RichText } from '@wordpress/editor';
  * Internal dependencies
  */
 import { Input } from 'elements';
-import list, { getCountries, getStates, getCountryCode, getStateCode } from 'utils/geo-data';
+import list, { getCountries, getStates, getCountryCode, getStateCode } from '@@plugins/events/editor/utils/geo-data';
 import './style.pcss';
 
 export function toFields( venue ) {

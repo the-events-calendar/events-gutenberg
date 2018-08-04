@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { types } from 'data/search';
-import { EVENT } from 'editor/post-types';
+import { types } from '@@plugins/events/data/search';
+import { EVENT } from '@@plugins/events/editor/post-types';
 
 export const DEFAULT_STATE = {
 	term: '',

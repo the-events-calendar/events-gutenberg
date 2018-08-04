@@ -6,8 +6,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
 
-import { dates, multiDay, allDay, endTime, startTime } from 'data/blocks/middlewares';
-import { wpRequest } from 'data/request/middlewares';
+import { dates, multiDay, allDay, endTime, startTime } from '@@plugins/events/data/blocks/middlewares';
+import { wpRequest } from '@@plugins/events/data/request/middlewares';
 
 const composeEnhancers = composeWithDevTools( {
 	name: 'The Events Calendar',

@@ -26,7 +26,7 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
-import { actions, selectors } from 'data/search';
+import { actions, selectors } from '@@plugins/events/data/search';
 
 /**
  * Module Code

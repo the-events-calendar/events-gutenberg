@@ -1,15 +1,15 @@
 /**
  * Internal dependencies
  */
-import { dates } from 'data/blocks/middlewares';
-import { actions as mockedActions } from 'data/blocks/datetime';
-import * as actions from 'data/blocks/datetime/actions';
+import { dates } from '@@plugins/events/data/blocks/middlewares';
+import { actions as mockedActions } from '@@plugins/events/data/blocks/datetime';
+import * as actions from '@@plugins/events/data/blocks/datetime/actions';
 
 let create;
 let state = {};
 
-jest.mock( 'data/blocks/datetime', () => {
-	const original = require.requireActual( 'data/blocks/datetime' );
+jest.mock( '@@plugins/events/data/blocks/datetime', () => {
+	const original = require.requireActual( '@@plugins/events/data/blocks/datetime' );
 	return {
 		...original,
 		actions: {

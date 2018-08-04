@@ -1,11 +1,11 @@
 /**
  * Internal dependencies
  */
-import reducer, { actions } from 'data/search';
-import search, { DEFAULT_STATE } from 'data/search/reducers/search';
+import reducer, { actions } from '@@plugins/events/data/search';
+import search, { DEFAULT_STATE } from '@@plugins/events/data/search/reducers/search';
 
-jest.mock( 'data/search/reducers/search', () => {
-	const original = require.requireActual( 'data/search/reducers/search' );
+jest.mock( '@@plugins/events/data/search/reducers/search', () => {
+	const original = require.requireActual( '@@plugins/events/data/search/reducers/search' );
 	return {
 		__esModule: true,
 		...original,

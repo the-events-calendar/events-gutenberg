@@ -1,12 +1,12 @@
 /**
  * Internal dependencies
  */
-import reducer, { actions } from 'data/details';
-import { details } from 'data/details/reducers';
-import { DEFAULT_STATE } from 'data/details/reducers/details';
+import reducer, { actions } from '@@plugins/events/data/details';
+import { details } from '@@plugins/events/data/details/reducers';
+import { DEFAULT_STATE } from '@@plugins/events/data/details/reducers/details';
 
-jest.mock( 'data/details/reducers', () => {
-	const original = require.requireActual( 'data/details/reducers/details' );
+jest.mock( '@@plugins/events/data/details/reducers', () => {
+	const original = require.requireActual( '@@plugins/events/data/details/reducers/details' );
 	return {
 		details: jest.fn( ( state = original.DEFAULT_STATE ) => state ),
 	};

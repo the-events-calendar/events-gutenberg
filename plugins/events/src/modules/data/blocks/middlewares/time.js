@@ -1,14 +1,14 @@
 /**
  * Internal dependencies
  */
-import { types, selectors, actions } from 'data/blocks/datetime';
+import { types, selectors, actions } from '@@plugins/events/data/blocks/datetime';
 
 import {
 	isSameDay,
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
-} from 'editor/utils/moment';
+} from '@@plugins/events/editor/utils/moment';
 
 const {
 	setStart,
@@ -16,7 +16,7 @@ const {
 	setAllDay,
 } = actions;
 
-import { HOUR_IN_SECONDS } from 'editor/utils/time';
+import { HOUR_IN_SECONDS } from '@@plugins/events/editor/utils/time';
 
 export const startTime = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	next( action );

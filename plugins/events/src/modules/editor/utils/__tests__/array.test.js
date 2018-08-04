@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { hasAnyOf } from 'utils/array';
+import { hasAnyOf } from '@@plugins/events/editor/utils/array';
 
 describe( 'Tests for array.js', () => {
 	test( 'hasAnyOf', () => {

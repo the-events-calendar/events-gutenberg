@@ -7,9 +7,9 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { withStore } from 'editor/hoc';
+import { withStore } from '@@plugins/events/editor/hoc';
 
-jest.mock( 'data', () => ( {
+jest.mock( '@@plugins/events/data', () => ( {
 	getStore() {
 		return {};
 	},

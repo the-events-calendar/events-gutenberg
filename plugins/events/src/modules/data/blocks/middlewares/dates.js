@@ -6,12 +6,12 @@ import {
 	toMoment,
 	toDateTime,
 	replaceDate,
-} from 'utils/moment';
+} from '@@plugins/events/editor/utils/moment';
 import {
 	types,
 	actions,
 	selectors,
-} from 'data/blocks/datetime';
+} from '@@plugins/events/data/blocks/datetime';
 
 export const dates = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	next( action );

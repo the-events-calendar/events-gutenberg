@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import { addressToMapString } from 'utils/geo-data';
+import { addressToMapString } from '@@plugins/events/editor/utils/geo-data';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -39,12 +39,12 @@ import {
 	GoogleMap,
 } from 'elements';
 
-import { VENUE } from 'editor/post-types';
-import { withSaveData, withDetails, withForm } from 'editor/hoc';
+import { VENUE } from '@@plugins/events/editor/post-types';
+import { withSaveData, withDetails, withForm } from '@@plugins/events/editor/hoc';
 import VenueDetails from './venue';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
-import { actions, selectors, utils } from 'data/blocks/venue';
+import { actions, selectors, utils } from '@@plugins/events/data/blocks/venue';
 
 /**
  * Module Code

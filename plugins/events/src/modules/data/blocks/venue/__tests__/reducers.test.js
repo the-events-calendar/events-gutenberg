@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import reducer, { DEFAULT_STATE } from 'data/blocks/venue/reducers';
-import { actions } from 'data/blocks/venue';
+import reducer, { DEFAULT_STATE } from '@@plugins/events/data/blocks/venue/reducers';
+import { actions } from '@@plugins/events/data/blocks/venue';
 
 describe( '[STORE] - Venue reducer', () => {
 	it( 'Should set the initial state', () => {

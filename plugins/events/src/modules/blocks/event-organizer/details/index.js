@@ -11,7 +11,7 @@ import { decode } from 'he';
  */
 import { Component } from '@wordpress/element';
 import { Dashicon } from '@wordpress/components';
-import { toFields } from 'elements/organizer-form/utils';
+import { toFields } from '@@plugins/events/elements/organizer-form/utils';
 import CloseIcon from 'icons/close.svg';
 import './style.pcss';
 

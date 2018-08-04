@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from 'data/blocks/price';
+import { types } from '@@plugins/events/data/blocks/price';
 
 describe( '[STORE] - Price types', () => {
 	it( 'Should return the types values', () => {

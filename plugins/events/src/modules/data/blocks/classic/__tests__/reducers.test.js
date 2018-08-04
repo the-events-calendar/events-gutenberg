@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { actions } from 'data/blocks/classic';
-import reducer, { DEFAULT_STATE } from 'data/blocks/classic/reducers';
+import { actions } from '@@plugins/events/data/blocks/classic';
+import reducer, { DEFAULT_STATE } from '@@plugins/events/data/blocks/classic/reducers';
 
 describe( '[STORE] - Classic reducer', () => {
 	test( 'Default state', () => {

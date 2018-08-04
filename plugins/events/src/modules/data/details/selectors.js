@@ -7,7 +7,7 @@ import { isEmpty, difference } from 'lodash';
  * External dependencies
  */
 import { createSelector } from 'reselect';
-import { selectors as formsSelectors } from 'data/forms';
+import { selectors as formsSelectors } from '@@plugins/events/data/forms';
 import { DEFAULT_STATE } from './reducers/details';
 
 export const blockSelector = ( state, props ) => state.details[ props.name ];

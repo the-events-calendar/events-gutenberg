@@ -8,18 +8,18 @@ import { bindActionCreators, compose } from 'redux';
 /**
  * Internal dependencies
  */
-import { searchParent } from 'editor/utils/dom';
-import { parser, isFree } from 'utils/range';
-import withSaveData from 'editor/hoc/with-save-data';
-import { withStore } from 'editor/hoc';
+import { searchParent } from '@@plugins/events/editor/utils/dom';
+import { parser, isFree } from '@@plugins/events/editor/utils/range';
+import withSaveData from '@@plugins/events/editor/hoc/with-save-data';
+import { withStore } from '@@plugins/events/editor/hoc';
 import {
 	actions as priceActions,
 	selectors as priceSelectors,
-} from 'data/blocks/price';
+} from '@@plugins/events/data/blocks/price';
 import {
 	actions as UIActions,
 	selectors as UISelectors,
-} from 'data/ui';
+} from '@@plugins/events/data/ui';
 import EventPrice from './template';
 
 const ESCAPE_KEY = 27;

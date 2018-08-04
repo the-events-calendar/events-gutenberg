@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import * as geo from 'utils/geo-data';
+import * as geo from '@@plugins/events/editor/utils/geo-data';
 
 describe( 'Tests for geo-data.js', () => {
 	beforeAll( () => {

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { selectors } from 'data/blocks/organizers';
+import { selectors } from '@@plugins/events/data/blocks/organizers';
 
 const state = {
 	blocks: {

@@ -6,7 +6,7 @@ import {
 	extractParts,
 	parser,
 	isFree,
-} from 'utils/range';
+} from '@@plugins/events/editor/utils/range';
 
 describe( 'Tests for range.js', () => {
 	test( 'parseChars', () => {

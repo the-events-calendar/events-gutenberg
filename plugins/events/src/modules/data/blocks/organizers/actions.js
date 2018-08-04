@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from 'data/blocks/organizers';
+import { types } from '@@plugins/events/data/blocks/organizers';
 
 export const setOrganizersInClassic = ( organizers ) => ( {
 	type: types.SET_CLASSIC_ORGANIZERS,

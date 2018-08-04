@@ -7,7 +7,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { withSaveData } from 'editor/hoc';
+import { withSaveData } from '@@plugins/events/editor/hoc';
 
 const Block = ( props ) => <div { ...props }>With Save Data!</div>;
 let Wrapper;

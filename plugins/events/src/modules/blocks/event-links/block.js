@@ -22,9 +22,9 @@ import { InspectorControls } from '@wordpress/editor';
 import LinkIcon from 'icons/link.svg';
 import './style.pcss';
 
-import withSaveData from 'editor/hoc/with-save-data';
-import { actions, selectors } from 'data/blocks/sharing';
-import { sendValue } from 'editor/utils/input';
+import withSaveData from '@@plugins/events/editor/hoc/with-save-data';
+import { actions, selectors } from '@@plugins/events/data/blocks/sharing';
+import { sendValue } from '@@plugins/events/editor/utils/input';
 
 /**
  * Module Code
