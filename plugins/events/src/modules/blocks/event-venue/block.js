@@ -40,7 +40,7 @@ import {
 } from 'elements';
 
 import { VENUE } from '@@plugins/events/editor/post-types';
-import { withSaveData, withDetails, withForm } from '@@plugins/events/editor/hoc';
+import { withSaveData, withDetails, withForm } from '@@plugins/common/hoc';
 import VenueDetails from './venue';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';

@@ -7,7 +7,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { withStore } from '@@plugins/events/editor/hoc';
+import { withStore } from '@@plugins/common/hoc';
 
 jest.mock( '@@plugins/events/data', () => ( {
 	getStore() {

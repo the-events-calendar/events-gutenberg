@@ -24,7 +24,7 @@ import {
 } from 'elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
-import { withSaveData, withDetails, withForm } from '@@plugins/events/editor/hoc';
+import { withSaveData, withDetails, withForm } from '@@plugins/common/hoc';
 import OrganizerIcon from 'icons/organizer.svg';
 import { actions, selectors } from '@@plugins/events/data/blocks/organizers';
 import { actions as detailsActions } from '@@plugins/events/data/details';

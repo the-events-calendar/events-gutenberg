@@ -11,7 +11,7 @@ import { bindActionCreators, compose } from 'redux';
 import { searchParent } from '@@plugins/events/editor/utils/dom';
 import { parser, isFree } from '@@plugins/events/editor/utils/range';
 import withSaveData from '@@plugins/events/editor/hoc/with-save-data';
-import { withStore } from '@@plugins/events/editor/hoc';
+import { withStore } from '@@plugins/common/hoc';
 import {
 	actions as priceActions,
 	selectors as priceSelectors,
