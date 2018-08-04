@@ -1,0 +1,27 @@
+{
+    "verbose": true,
+    "testURL": "http://localhost/",
+    "globals": {
+        "NODE_ENV": "test"
+    },
+    "setupFiles": [
+        "<rootDir>/jest.setup.js"
+    ],
+    "projects": [
+        {
+            "displayName": "events",
+            "testMatch": ["<rootDir>/plugins/events/*"]
+        }
+    ],
+    "moduleNameMapper": {
+    },
+    "testEnvironment": "jest-environment-jsdom-global",
+    "testPathIgnorePatterns": [
+        "/node_modules/",
+        "/lang/",
+        "/i18n/",
+        "/src/views",
+        "/src/Tribe",
+        "/src/resources"
+    ]
+}
