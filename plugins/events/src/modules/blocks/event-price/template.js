@@ -21,8 +21,8 @@ import { InspectorControls } from '@wordpress/editor';
  * Internal dependencies
  */
 import { Dashboard } from 'elements';
-import { parser } from '@@plugins/events/editor/utils/range';
-import { sendValue } from '@@plugins/events/editor/utils/input';
+import { parser } from '@@tribe/events/editor/utils/range';
+import { sendValue } from '@@tribe/events/editor/utils/input';
 import './style.pcss';
 
 /**

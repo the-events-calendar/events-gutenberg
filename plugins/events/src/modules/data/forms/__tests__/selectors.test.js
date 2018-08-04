@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { selectors } from '@@plugins/events/data/forms';
-import { DEFAULT_STATE } from '@@plugins/events/data/forms/reducers/form';
+import { selectors } from '@@tribe/events/data/forms';
+import { DEFAULT_STATE } from '@@tribe/events/data/forms/reducers/form';
 
 const state = {
 	forms: {

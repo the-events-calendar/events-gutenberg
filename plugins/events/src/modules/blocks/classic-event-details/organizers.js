@@ -26,10 +26,10 @@ import {
 	OrganizerForm,
 	SearchPosts,
 } from 'elements';
-import { actions, selectors } from '@@plugins/events/data/blocks/organizers';
-import { actions as detailsActions } from '@@plugins/events/data/details';
+import { actions, selectors } from '@@tribe/events/data/blocks/organizers';
+import { actions as detailsActions } from '@@tribe/events/data/details';
 import { Item } from './organizer';
-import { ORGANIZER } from '@@plugins/events/editor/post-types';
+import { ORGANIZER } from '@@tribe/events/editor/post-types';
 
 function CreateDropdown( { ...props } ) {
 	const { addOrganizer } = props;

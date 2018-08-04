@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import classic from '@@plugins/events/data/blocks/organizers/reducers/classic';
-import { actions } from '@@plugins/events/data/blocks/organizers';
+import classic from '@@tribe/events/data/blocks/organizers/reducers/classic';
+import { actions } from '@@tribe/events/data/blocks/organizers';
 
 describe( '[STORE] - Classic reducer', () => {
 	it( 'Should return the default state', () => {

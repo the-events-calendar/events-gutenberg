@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { actions, middlewares } from '@@plugins/events/data/request';
+import { actions, middlewares } from '@@tribe/events/data/request';
 
 let create;
 const nextMock = jest.fn();

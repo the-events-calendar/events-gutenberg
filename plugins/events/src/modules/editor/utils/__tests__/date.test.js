@@ -7,9 +7,9 @@ import {
 	equalDates,
 	timezones,
 	timezonesAsSelectData,
-} from '@@plugins/events/editor/utils/date';
+} from '@@tribe/events/editor/utils/date';
 
-jest.mock( '@@plugins/events/elements/timezone-picker/element', () => ( {
+jest.mock( '@@tribe/events/elements/timezone-picker/element', () => ( {
 	getItems: () => [
 		{
 			options: [
@@ -31,7 +31,7 @@ jest.mock( '@@plugins/events/elements/timezone-picker/element', () => ( {
 } ) );
 
 afterAll( () => {
-	jest.unmock( '@@plugins/events/elements/timezone-picker/element' );
+	jest.unmock( '@@tribe/events/elements/timezone-picker/element' );
 } );
 
 describe( 'Tests for date.js', () => {

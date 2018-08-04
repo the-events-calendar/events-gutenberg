@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import block, { DEFAULT_STATE } from '@@plugins/events/data/blocks/organizers/reducers/block';
-import { actions } from '@@plugins/events/data/blocks/organizers';
+import block, { DEFAULT_STATE } from '@@tribe/events/data/blocks/organizers/reducers/block';
+import { actions } from '@@tribe/events/data/blocks/organizers';
 
 describe( '[STORE] - Block reducer', () => {
 	it( 'Should return the default state', () => {

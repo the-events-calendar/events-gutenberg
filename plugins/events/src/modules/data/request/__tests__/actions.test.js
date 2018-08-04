@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { actions } from '@@plugins/events/data/request';
+import { actions } from '@@tribe/events/data/request';
 
 describe( '[STORE] - Request actions', () => {
 	test( 'WP Request action', () => {

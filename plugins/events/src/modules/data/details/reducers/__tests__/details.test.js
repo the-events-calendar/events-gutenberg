@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { actions } from '@@plugins/events/data/details';
-import reducer, { DEFAULT_STATE } from '@@plugins/events/data/details/reducers/details';
+import { actions } from '@@tribe/events/data/details';
+import reducer, { DEFAULT_STATE } from '@@tribe/events/data/details/reducers/details';
 
 describe( '[STORE] - details reducer', () => {
 	it( 'Should return default state', () => {

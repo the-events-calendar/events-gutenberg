@@ -10,15 +10,15 @@ import {
 	types,
 	actions,
 	selectors,
-} from '@@plugins/events/data/blocks/datetime';
+} from '@@tribe/events/data/blocks/datetime';
 
 import {
 	isSameDay,
 	replaceDate,
 	toDateTime,
 	toMoment,
-} from '@@plugins/events/editor/utils/moment';
-import { HOUR_IN_SECONDS } from '@@plugins/events/editor/utils/time';
+} from '@@tribe/events/editor/utils/moment';
+import { HOUR_IN_SECONDS } from '@@tribe/events/editor/utils/time';
 
 const resetMultiDay = ( current ) => {
 	let end = replaceDate( current.end, current.start );

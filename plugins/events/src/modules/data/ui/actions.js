@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { toMoment, parseFormats } from '@@plugins/events/editor/utils/moment';
+import { toMoment, parseFormats } from '@@tribe/events/editor/utils/moment';
 
 export const toggleDashboardDateTime = () => ( {
 	type: types.TOGGLE_DASHBOARD_DATE_TIME,

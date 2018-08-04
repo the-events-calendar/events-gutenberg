@@ -6,8 +6,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { getSetting } from '@@plugins/events/editor/settings';
-import { isTruthy } from '@@plugins/events/editor/utils/string';
+import { getSetting } from '@@tribe/events/editor/settings';
+import { isTruthy } from '@@tribe/events/editor/utils/string';
 import * as types from './types';
 
 const position = isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) )

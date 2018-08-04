@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { EVENT } from '@@plugins/events/editor/post-types';
-import { types } from '@@plugins/events/data/details';
+import { EVENT } from '@@tribe/events/editor/post-types';
+import { types } from '@@tribe/events/data/details';
 
 export const DEFAULT_STATE = {
 	loading: false,

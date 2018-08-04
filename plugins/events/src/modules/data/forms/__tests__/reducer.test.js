@@ -1,11 +1,11 @@
 /**
  * Internal dependencies
  */
-import reducer, { actions } from '@@plugins/events/data/forms';
-import form, { DEFAULT_STATE } from '@@plugins/events/data/forms/reducers/form';
+import reducer, { actions } from '@@tribe/events/data/forms';
+import form, { DEFAULT_STATE } from '@@tribe/events/data/forms/reducers/form';
 
-jest.mock( '@@plugins/events/data/forms/reducers/form', () => {
-	const original = require.requireActual( '@@plugins/events/data/search/reducers/search' );
+jest.mock( '@@tribe/events/data/forms/reducers/form', () => {
+	const original = require.requireActual( '@@tribe/events/data/search/reducers/search' );
 	return {
 		__esModule: true,
 		...original,
@@ -13,7 +13,7 @@ jest.mock( '@@plugins/events/data/forms/reducers/form', () => {
 	};
 } );
 
-jest.mock( '@@plugins/events/data/forms/reducers/volatile', () => {
+jest.mock( '@@tribe/events/data/forms/reducers/volatile', () => {
 	return {
 		__esModule: true,
 		default: jest.fn( ( state = [] ) => state ),

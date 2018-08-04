@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from '@@plugins/events/data/blocks/classic';
-import { DEFAULT_STATE } from '@@plugins/events/data/blocks/classic/reducers';
+import { selectors } from '@@tribe/events/data/blocks/classic';
+import { DEFAULT_STATE } from '@@tribe/events/data/blocks/classic/reducers';
 
 const state = {
 	blocks: {

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@plugins/events/data/ui';
+import { types } from '@@tribe/events/data/ui';
 
 describe( '[STORE] - UI types', () => {
 	it( 'Should match the types values', () => {

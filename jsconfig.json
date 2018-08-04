@@ -6,8 +6,8 @@
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./",
         "paths": {
-            "@@plugins/events/*": ["plugins/events/src/modules/*"],
-            "@@plugins/common/*": ["plugins/common/*"]
+            "@@tribe/events/*": ["plugins/events/src/modules/*"],
+            "@@tribe/common/*": ["plugins/common/*"]
 
         }
     },

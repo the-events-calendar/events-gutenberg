@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { getSettings, getSetting, hasSetting } from '@@plugins/events/editor/settings';
+import { getSettings, getSetting, hasSetting } from '@@tribe/events/editor/settings';
 
 describe( 'Tests for settings.js', () => {
 	beforeAll( () => {

@@ -5,8 +5,8 @@ import * as types from './types';
 import {
 	actions as requestActions,
 	utils as requestUtils,
-} from '@@plugins/events/data/request';
-import { selectors } from '@@plugins/events/data/search/index';
+} from '@@tribe/events/data/request';
+import { selectors } from '@@tribe/events/data/search/index';
 
 export const addBlock = ( id ) => ( {
 	type: types.ADD_BLOCK,

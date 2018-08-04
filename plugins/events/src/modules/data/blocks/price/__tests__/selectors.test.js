@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from '@@plugins/events/data/blocks/price';
-import { DEFAULT_STATE } from '@@plugins/events/data/blocks/price/reducers';
+import { selectors } from '@@tribe/events/data/blocks/price';
+import { DEFAULT_STATE } from '@@tribe/events/data/blocks/price/reducers';
 
 const state = {
 	blocks: {

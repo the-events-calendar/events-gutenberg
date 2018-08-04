@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { EVENT, ORGANIZER, VENUE } from '@@plugins/events/editor/post-types';
+import { EVENT, ORGANIZER, VENUE } from '@@tribe/events/editor/post-types';
 
 describe( 'Tests for post-types.js', () => {
 	test( 'It should match the TEC post types', () => {

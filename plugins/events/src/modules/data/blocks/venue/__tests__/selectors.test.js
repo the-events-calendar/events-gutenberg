@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { DEFAULT_STATE } from '@@plugins/events/data/blocks/venue/reducers';
-import { selectors } from '@@plugins/events/data/blocks/venue';
+import { DEFAULT_STATE } from '@@tribe/events/data/blocks/venue/reducers';
+import { selectors } from '@@tribe/events/data/blocks/venue';
 
 const state = {
 	blocks: {

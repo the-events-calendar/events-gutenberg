@@ -24,11 +24,11 @@ import {
 } from 'elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
-import { withSaveData, withDetails, withForm } from '@@plugins/common/hoc';
+import { withSaveData, withDetails, withForm } from '@@tribe/common/hoc';
 import OrganizerIcon from 'icons/organizer.svg';
-import { actions, selectors } from '@@plugins/events/data/blocks/organizers';
-import { actions as detailsActions } from '@@plugins/events/data/details';
-import { toFields, toOrganizer } from '@@plugins/events/elements/organizer-form/utils';
+import { actions, selectors } from '@@tribe/events/data/blocks/organizers';
+import { actions as detailsActions } from '@@tribe/events/data/details';
+import { toFields, toOrganizer } from '@@tribe/events/elements/organizer-form/utils';
 
 class Organizer extends Component {
 	static propTypes = {

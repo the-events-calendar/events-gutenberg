@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@plugins/events/data/search';
+import { types } from '@@tribe/events/data/search';
 
 describe( '[STORE] - Search types', () => {
 	it( 'Should return the types values', () => {

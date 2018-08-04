@@ -1,16 +1,16 @@
 /**
  * Internal dependencies
  */
-import { HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from '@@plugins/events/editor/utils/time';
-import { startTime, endTime } from '@@plugins/events/data/blocks/middlewares';
-import { actions as mockedActions } from '@@plugins/events/data/blocks/datetime';
-import * as actions from '@@plugins/events/data/blocks/datetime/actions';
+import { HOUR_IN_SECONDS, MINUTE_IN_SECONDS } from '@@tribe/events/editor/utils/time';
+import { startTime, endTime } from '@@tribe/events/data/blocks/middlewares';
+import { actions as mockedActions } from '@@tribe/events/data/blocks/datetime';
+import * as actions from '@@tribe/events/data/blocks/datetime/actions';
 
 let create;
 let state = {};
 
-jest.mock( '@@plugins/events/data/blocks/datetime', () => {
-	const original = require.requireActual( '@@plugins/events/data/blocks/datetime' );
+jest.mock( '@@tribe/events/data/blocks/datetime', () => {
+	const original = require.requireActual( '@@tribe/events/data/blocks/datetime' );
 	return {
 		...original,
 		actions: {

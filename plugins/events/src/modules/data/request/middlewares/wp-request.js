@@ -6,8 +6,8 @@ import { noop, get } from 'lodash';
 /**
  * Internal dependencies
  */
-import { types } from '@@plugins/events/data/request';
-import { getResponseHeaders } from '@@plugins/events/editor/utils/request';
+import { types } from '@@tribe/events/data/request';
+import { getResponseHeaders } from '@@tribe/events/editor/utils/request';
 
 export const BASE = '/wp/v2';
 

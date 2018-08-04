@@ -10,7 +10,7 @@ import { noop } from 'lodash';
 /**
  * Internal dependencies
  */
-import { actions, selectors } from '@@plugins/events/data/forms';
+import { actions, selectors } from '@@tribe/events/data/forms';
 
 /**
  * HOC that register a new object associated with set of fields for a form

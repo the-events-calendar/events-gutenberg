@@ -16,7 +16,7 @@ import {
 /**
  * Internal dependencies
  */
-import { getSetting } from '@@plugins/events/editor/settings';
+import { getSetting } from '@@tribe/events/editor/settings';
 import './style.pcss';
 
 import {

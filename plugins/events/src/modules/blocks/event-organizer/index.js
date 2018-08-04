@@ -13,8 +13,8 @@ import { __ } from '@wordpress/i18n';
  */
 import Organizer from './block';
 import { Icons } from 'elements';
-import { withStore } from '@@plugins/common/hoc';
-import { ORGANIZER } from '@@plugins/events/editor/post-types';
+import { withStore } from '@@tribe/common/hoc';
+import { ORGANIZER } from '@@tribe/events/editor/post-types';
 
 export default {
 	id: 'event-organizer',

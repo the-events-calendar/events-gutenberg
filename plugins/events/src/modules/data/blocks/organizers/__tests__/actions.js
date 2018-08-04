@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { actions } from '@@plugins/events/data/blocks/organizers';
+import { actions } from '@@tribe/events/data/blocks/organizers';
 
 describe( '[STORE] - Organizer actions', () => {
 	test( 'Add organizer in classic', () => {

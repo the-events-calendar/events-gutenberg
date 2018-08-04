@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EventLinks from './block';
 import { Icons } from 'elements';
-import { withStore } from '@@plugins/common/hoc';
+import { withStore } from '@@tribe/common/hoc';
 
 /**
  * Module Code

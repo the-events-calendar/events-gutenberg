@@ -39,17 +39,17 @@ import './style.pcss';
 import {
 	actions as dateTimeActions,
 	selectors as dateTimeSelectors,
-} from '@@plugins/events/data/blocks/datetime';
+} from '@@tribe/events/data/blocks/datetime';
 import {
 	actions as UIActions,
 	selectors as UISelectors,
-} from '@@plugins/events/data/ui';
+} from '@@tribe/events/data/ui';
 import {
 	selectors as priceSelectors,
 	actions as priceActions,
-} from '@@plugins/events/data/blocks/price';
+} from '@@tribe/events/data/blocks/price';
 
-import { getSetting, getConstants } from '@@plugins/events/editor/settings';
+import { getSetting, getConstants } from '@@tribe/events/editor/settings';
 import classNames from 'classnames';
 import {
 	toFormat,
@@ -57,10 +57,10 @@ import {
 	toDate,
 	toDateNoYear,
 	toTime,
-} from '@@plugins/events/editor/utils/moment';
-import { FORMATS, timezonesAsSelectData, TODAY } from '@@plugins/events/editor/utils/date';
-import withSaveData from '@@plugins/events/editor/hoc/with-save-data';
-import { hasClass, searchParent } from '@@plugins/events/editor/utils/dom';
+} from '@@tribe/events/editor/utils/moment';
+import { FORMATS, timezonesAsSelectData, TODAY } from '@@tribe/events/editor/utils/date';
+import withSaveData from '@@tribe/events/editor/hoc/with-save-data';
+import { hasClass, searchParent } from '@@tribe/events/editor/utils/dom';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 

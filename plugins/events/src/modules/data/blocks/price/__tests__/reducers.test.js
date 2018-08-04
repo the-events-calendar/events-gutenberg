@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { actions } from '@@plugins/events/data/blocks/price';
-import reducer, { DEFAULT_STATE } from '@@plugins/events/data/blocks/price/reducers';
+import { actions } from '@@tribe/events/data/blocks/price';
+import reducer, { DEFAULT_STATE } from '@@tribe/events/data/blocks/price/reducers';
 
 describe( '[STORE] - Price reducer', () => {
 	it( 'Should return the default state', () => {

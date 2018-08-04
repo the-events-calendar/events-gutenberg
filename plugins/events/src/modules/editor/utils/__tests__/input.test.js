@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { sendValue } from '@@plugins/events/editor/utils/input';
+import { sendValue } from '@@tribe/events/editor/utils/input';
 
 describe( 'Tests for input.js', () => {
 	const event = {

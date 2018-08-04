@@ -2,10 +2,10 @@
  * Internal dependencies
  */
 import { DEFAULT_STATE } from './reducers';
-import { isSameDay, parseFormats, toDateTime, toMoment } from '@@plugins/events/editor/utils/moment';
+import { isSameDay, parseFormats, toDateTime, toMoment } from '@@tribe/events/editor/utils/moment';
 import * as types from './types';
 
-import { maybeBulkDispatch } from '@@plugins/events/data/utils';
+import { maybeBulkDispatch } from '@@tribe/events/data/utils';
 
 export const setDate = ( from, to ) => ( {
 	type: types.SET_DATES,

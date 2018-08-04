@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { withStore } from '@@plugins/common/hoc';
+import { withStore } from '@@tribe/common/hoc';
 import EventDateTime from './block';
 import { Icons } from 'elements';
 

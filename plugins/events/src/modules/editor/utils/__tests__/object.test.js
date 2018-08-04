@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { removeEmptyStrings, castBooleanStrings } from '@@plugins/events/editor/utils/object';
+import { removeEmptyStrings, castBooleanStrings } from '@@tribe/events/editor/utils/object';
 
 describe( 'Tests for object.js', () => {
 	test( 'removeEmptyStrings', () => {

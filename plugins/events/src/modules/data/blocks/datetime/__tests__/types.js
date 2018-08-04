@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@plugins/events/data/blocks/datetime';
+import { types } from '@@tribe/events/data/blocks/datetime';
 
 describe( '[STORE] - Datetime types', () => {
 	it( 'Should return the types values', () => {

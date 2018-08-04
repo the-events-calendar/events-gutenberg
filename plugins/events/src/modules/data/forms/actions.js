@@ -6,7 +6,7 @@ import { isEmpty, get } from 'lodash';
 /**
  * Internal dependencies
  */
-import { actions as requestActions } from '@@plugins/events/data/request';
+import { actions as requestActions } from '@@tribe/events/data/request';
 
 import * as types from './types';
 import * as selectors from './selectors';

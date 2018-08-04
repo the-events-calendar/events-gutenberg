@@ -14,7 +14,7 @@ import AutosizeInput from 'react-input-autosize';
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 
-import withSaveData from '@@plugins/events/editor/hoc/with-save-data';
+import withSaveData from '@@tribe/events/editor/hoc/with-save-data';
 
 import {
 	ToggleControl,
@@ -37,18 +37,18 @@ import {
 
 import { default as EventOrganizers } from './organizers';
 
-import { toMoment, toDate, toTime } from '@@plugins/events/editor/utils/moment';
-import { actions as dateTimeActions, selectors as dateTimeSelectors } from '@@plugins/events/data/blocks/datetime';
-import { actions as priceActions, selectors as priceSelectors } from '@@plugins/events/data/blocks/price';
-import { actions as websiteActions, selectors as websiteSelectors } from '@@plugins/events/data/blocks/website';
-import { actions as classicActions, selectors as classicSelectors } from '@@plugins/events/data/blocks/classic';
+import { toMoment, toDate, toTime } from '@@tribe/events/editor/utils/moment';
+import { actions as dateTimeActions, selectors as dateTimeSelectors } from '@@tribe/events/data/blocks/datetime';
+import { actions as priceActions, selectors as priceSelectors } from '@@tribe/events/data/blocks/price';
+import { actions as websiteActions, selectors as websiteSelectors } from '@@tribe/events/data/blocks/website';
+import { actions as classicActions, selectors as classicSelectors } from '@@tribe/events/data/blocks/classic';
 import {
 	actions as organizersActions,
 	selectors as organizerSelectors,
-} from '@@plugins/events/data/blocks/organizers';
-import { actions as UIActions } from '@@plugins/events/data/ui';
-import { sendValue } from '@@plugins/events/editor/utils/input';
-import { FORMATS } from '@@plugins/events/editor/utils';
+} from '@@tribe/events/data/blocks/organizers';
+import { actions as UIActions } from '@@tribe/events/data/ui';
+import { sendValue } from '@@tribe/events/editor/utils/input';
+import { FORMATS } from '@@tribe/events/editor/utils';
 
 /**
  * Module Code

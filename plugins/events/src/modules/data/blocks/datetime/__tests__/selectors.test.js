@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from '@@plugins/events/data/blocks/datetime';
-import { DEFAULT_STATE } from '@@plugins/events/data/blocks/datetime/reducers';
+import { selectors } from '@@tribe/events/data/blocks/datetime';
+import { DEFAULT_STATE } from '@@tribe/events/data/blocks/datetime/reducers';
 
 const state = {
 	blocks: {

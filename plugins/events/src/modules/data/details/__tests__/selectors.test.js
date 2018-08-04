@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from '@@plugins/events/data/details';
-import { DEFAULT_STATE } from '@@plugins/events/data/details/reducers/details';
+import { selectors } from '@@tribe/events/data/details';
+import { DEFAULT_STATE } from '@@tribe/events/data/details/reducers/details';
 
 const state = {
 	details: {

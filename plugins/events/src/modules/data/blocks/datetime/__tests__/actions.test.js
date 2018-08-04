@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { actions } from '@@plugins/events/data/blocks/datetime';
+import { actions } from '@@tribe/events/data/blocks/datetime';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );

@@ -10,7 +10,7 @@ import { isUndefined, isEqual } from 'lodash';
 /**
  * Internal dependencies
  */
-import { actions, selectors } from '@@plugins/events/data/details';
+import { actions, selectors } from '@@tribe/events/data/details';
 
 export default ( key = 'id' ) => ( WrappedComponent ) => {
 	class WithDetails extends Component {

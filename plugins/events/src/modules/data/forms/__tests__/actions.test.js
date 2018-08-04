@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { actions } from '@@plugins/events/data/forms';
+import { actions } from '@@tribe/events/data/forms';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );

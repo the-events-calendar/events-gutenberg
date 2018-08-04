@@ -22,8 +22,8 @@
 		["module-resolver", {
 			"root": ".",
 			"alias": {
-				"@@plugins/events": "./plugins/events/src/modules",
-				"@@plugins/common": "./plugins/common"
+				"@@tribe/events": "./plugins/events/src/modules",
+				"@@tribe/common": "./plugins/common"
 			}
 		}],
 		"transform-class-properties",
