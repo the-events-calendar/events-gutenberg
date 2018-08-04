@@ -9,6 +9,10 @@
     ],
     "projects": [
         {
+            "displayName": "common",
+            "testMatch": ["<rootDir>/plugins/common/*"]
+        },
+        {
             "displayName": "events",
             "testMatch": ["<rootDir>/plugins/events/*"]
         }

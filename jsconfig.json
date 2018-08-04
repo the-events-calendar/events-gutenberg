@@ -6,7 +6,9 @@
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./",
         "paths": {
-            "@@plugins/events/*": ["plugins/events/src/modules/*"]
+            "@@plugins/events/*": ["plugins/events/src/modules/*"],
+            "@@plugins/common/*": ["plugins/common/*"]
+
         }
     },
     "include": [
