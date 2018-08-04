@@ -19,6 +19,12 @@
 		} ]
 	],
 	"plugins": [
+		["module-resolver", {
+			"root": ".",
+			"alias": {
+				"@@plugins/events": "./plugins/events/src/modules"
+			}
+		}],
 		"transform-class-properties",
 		"syntax-class-properties",
 		"transform-object-rest-spread",

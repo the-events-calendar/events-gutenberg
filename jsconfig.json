@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./",
+        "paths": {
+            "@@plugins/events/*": ["plugins/events/src/modules/*"]
+        }
+    },
+    "include": [
+        "plugins"
+    ],
+    "exclude": [
+        "**/node_modules/*",
+    ]
+}

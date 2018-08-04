@@ -1,10 +1,13 @@
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "extends": [
-    "products/react"
+    "products/react",
+    "plugin:import/errors",
+    "plugin:import/warnings"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -14,7 +17,13 @@
     },
     "sourceType": "module"
   },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
   "rules": {
+    "import/no-unresolved": [1],
     "indent": [
       "error",
       "tab",
