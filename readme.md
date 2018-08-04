@@ -24,7 +24,8 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-#### 0.2.5-alpha - TBD
+#### 0.2.5-alpha - 2018-08-04
+
 * Feature - Frontend view for date time block
 * Tweak - Change event location to event venue
 * Tweak - Add tests for utils functions
