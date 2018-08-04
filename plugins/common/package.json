@@ -1,0 +1,16 @@
+{
+  "name": "common-gutenberg",
+  "version": "0.0.1",
+  "description": "Common gutenberg modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gutenberg",
+    "common"
+  ],
+  "repository": "git+https://github.com/WordPress/gutenberg.git",
+  "author": "Modern Tribe",
+  "license": "GPL-2.0-or-later"
+}
