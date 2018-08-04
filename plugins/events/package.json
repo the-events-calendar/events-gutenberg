@@ -1,0 +1,21 @@
+{
+    "name": "events",
+    "version": "0.2.4-alpha",
+    "description": "A new WordPress editor experience",
+    "repository": "git+https://github.com/WordPress/gutenberg.git",
+    "author": "Modern Tribe",
+    "license": "GPL-2.0-or-later",
+    "private": true,
+    "keywords": [
+        "WordPress",
+        "editor",
+        "The Events Calendar"
+    ],
+    "engines": {
+        "node": ">=8.0.0",
+        "npm": ">=5.0.0"
+    },
+    "scripts": {
+        "gettext-strings": "cross-env BABEL_ENV=gettext webpack"
+    }
+}
