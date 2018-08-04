@@ -117,7 +117,9 @@
 			"^utils(.*)$": "<rootDir>/src/modules/editor/utils$1",
 			"^editor(.*)$": "<rootDir>/src/modules/editor$1",
 			"^data(.*)$": "<rootDir>/src/modules/data$1",
-			"^elements(.*)$": "<rootDir>/src/modules/elements$1"
+			"^elements(.*)$": "<rootDir>/src/modules/elements$1",
+			"\\.(css|pcss)$": "<rootDir>/__mocks__/style.js",
+			"\\.(svg)$": "<rootDir>/__mocks__/icons.js"
 		},
 		"testEnvironment": "jest-environment-jsdom-global",
 		"testPathIgnorePatterns": [
