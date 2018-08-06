@@ -22,8 +22,8 @@
 		"test": "jest --config jest.config.json",
 		"test:travis": "npm run test -- --maxWorkers=4",
 		"lint": "eslint --quiet --parser=babel-eslint 'src/modules/**/*.js'",
-    "lint:fix": "eslint --fix --quiet --parser=babel-eslint 'src/modules/**/*.js'",
-    "bootstrap": "lerna bootstrap"
+		"lint:fix": "eslint --fix --quiet --parser=babel-eslint 'src/modules/**/*.js'",
+		"bootstrap": "lerna bootstrap"
 	},
 	"dependencies": {
 		"@wordpress/a11y": "1.0.3",
