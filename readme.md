@@ -28,7 +28,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 * Fix - Remove specificity and side effects from time picker element
 * Fix - Make time picker element stateless, removing logic and allowing presentation via props
-* Fix - Remove middlewares for date time block actions, move logic to event handlers in block
+* Fix - Remove middlewares for date time block actions, move logic to thunks
 
 #### 0.2.5-alpha - 2018-08-04
 
