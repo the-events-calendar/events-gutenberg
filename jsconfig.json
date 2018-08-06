@@ -7,7 +7,7 @@
         "baseUrl": "./",
         "paths": {
             "@@tribe/events/*": ["plugins/events/src/modules/*"],
-            "@@tribe/common/*": ["plugins/common/*"]
+            "@@tribe/common/*": ["plugins/common/src/modules/*"]
 
         }
     },
