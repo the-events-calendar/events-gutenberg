@@ -24,6 +24,12 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.2.6-alpha - TBD
+
+* Tweak - Rename the "Event Tags" block and label to "Tags"
+
+* Feature - Frontend view for date time block
+
 #### 0.2.5-alpha - 2018-08-04
 
 * Feature - Frontend view for date time block
