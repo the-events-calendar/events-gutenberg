@@ -19,7 +19,7 @@
 		"build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
 		"gettext-strings": "cross-env BABEL_ENV=gettext webpack",
 		"dev": "cross-env BABEL_ENV=default webpack --watch",
-		"test": "jest",
+		"test": "jest --config jest.config.json",
 		"test:travis": "npm run test -- --maxWorkers=4",
 		"lint": "eslint --quiet --parser=babel-eslint 'src/modules/**/*.js'",
 		"lint:fix": "eslint --fix --quiet --parser=babel-eslint 'src/modules/**/*.js'"
@@ -106,30 +106,5 @@
 		"snapshot-diff": "^0.4.0",
 		"style-loader": "0.18.2",
 		"webpack": "3.10.0"
-	},
-	"jest": {
-		"verbose": true,
-		"testURL": "http://localhost/",
-		"globals": {
-			"NODE_ENV": "test"
-		},
-		"setupFiles": [
-			"<rootDir>/jest.setup.js"
-		],
-		"moduleNameMapper": {
-			"^utils(.*)$": "<rootDir>/src/modules/editor/utils$1",
-			"^editor(.*)$": "<rootDir>/src/modules/editor$1",
-			"^data(.*)$": "<rootDir>/src/modules/data$1",
-			"^elements(.*)$": "<rootDir>/src/modules/elements$1"
-		},
-		"testEnvironment": "jest-environment-jsdom-global",
-		"testPathIgnorePatterns": [
-			"/node_modules/",
-			"/lang/",
-			"/i18n/",
-			"/src/views",
-			"/src/Tribe",
-			"/src/resources"
-		]
 	}
 }
