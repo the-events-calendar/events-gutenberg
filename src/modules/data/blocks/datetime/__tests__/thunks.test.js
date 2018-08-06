@@ -77,7 +77,7 @@ describe( '[STORE] - Datetime thunks', () => {
 			seconds: 64800,
 		};
 
-		store.dispatch( thunks.setStartTime( attributes ) );
+		store.dispatch( thunks.setEndTime( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
