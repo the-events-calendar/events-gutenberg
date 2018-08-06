@@ -89,7 +89,7 @@ describe( '[STORE] - Datetime thunks', () => {
 			isAllDay: true,
 		};
 
-		store.dispatch( thunks.setAllDayThunk( attributes ) );
+		store.dispatch( thunks.setAllDay( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
@@ -101,7 +101,7 @@ describe( '[STORE] - Datetime thunks', () => {
 			isAllDay: false,
 		};
 
-		store.dispatch( thunks.setAllDayThunk( attributes ) );
+		store.dispatch( thunks.setAllDay( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
@@ -136,10 +136,10 @@ describe( '[STORE] - Datetime thunks', () => {
 		const attributes = {
 			start: '2018-06-05 17:00:00',
 			end: '2018-06-05 17:30:00',
-			checked: true,
+			isMultiDay: true,
 		};
 
-		store.dispatch( thunks.setMultiDayThunk( attributes ) );
+		store.dispatch( thunks.setMultiDay( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
@@ -148,10 +148,10 @@ describe( '[STORE] - Datetime thunks', () => {
 		const attributes = {
 			start: '2018-06-05 17:00:00',
 			end: '2018-06-08 17:30:00',
-			checked: false,
+			isMultiDay: false,
 		};
 
-		store.dispatch( thunks.setMultiDayThunk( attributes ) );
+		store.dispatch( thunks.setMultiDay( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
@@ -160,10 +160,10 @@ describe( '[STORE] - Datetime thunks', () => {
 		const attributes = {
 			start: '2018-06-05 17:00:00',
 			end: '2018-06-08 15:30:00',
-			checked: false,
+			isMultiDay: false,
 		};
 
-		store.dispatch( thunks.setMultiDayThunk( attributes ) );
+		store.dispatch( thunks.setMultiDay( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
@@ -172,10 +172,10 @@ describe( '[STORE] - Datetime thunks', () => {
 		const attributes = {
 			start: '2018-06-05 23:30:00',
 			end: '2018-06-08 15:30:00',
-			checked: false,
+			isMultiDay: false,
 		};
 
-		store.dispatch( thunks.setMultiDayThunk( attributes ) );
+		store.dispatch( thunks.setMultiDay( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
