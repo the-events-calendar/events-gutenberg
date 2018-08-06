@@ -20,6 +20,7 @@
 	],
 	"plugins": [
 		["module-resolver", {
+			"cwd": "babelrc",
 			"root": ".",
 			"alias": {
 				"@@tribe/events": "./plugins/events/src/modules",
