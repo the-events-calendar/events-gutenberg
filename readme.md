@@ -24,7 +24,12 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-#### 0.2.5-alpha - TBD
+#### 0.2.6-alpha - TBD
+
+* Tweak - Rename the "Event Tags" block and label to "Tags"
+
+#### 0.2.5-alpha - 2018-08-04
+
 * Feature - Frontend view for date time block
 * Tweak - Change event location to event venue
 * Tweak - Add tests for utils functions
@@ -33,6 +38,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Display the currency symbol and position in the event price block preview
 * Fix - Remove featured image from default blocks in new event
 * Fix - Avoid crash when using `wp` cli tool, (thanks to Matt Fields @0x6d617474 for report this problem)
+* Fix - Remove warning when `currencyPosition` is empty string
 
 #### 0.2.4-alpha - 2018-07-12
 
