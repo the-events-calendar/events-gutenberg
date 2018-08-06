@@ -28,11 +28,6 @@ const iCalExportPlaceholder = __( 'iCal Export', 'events-gutenberg' );
 
 const EventLinks = ( props ) => {
 
-	const buttonsAreDisabled = () => {
-		const { hasGoogleCalendar, hasiCal } = props;
-		return ! hasGoogleCalendar && ! hasiCal;
-	};
-
 	const renderPlaceholder= ( label ) => (
 			<button className="tribe-editor__btn--link tribe-editor__btn--placeholder" disabled>
 				<LinkIcon />
@@ -41,17 +36,13 @@ const EventLinks = ( props ) => {
 		);
 
 	const renderGoogleCalendar = () => {
-		const { hasGoogleCalendar, googleCalendarLabel, setGoogleCalendarLabel } = props;
+		const { hasiCal, hasGoogleCalendar, googleCalendarLabel, setGoogleCalendarLabel } = props;
 
-		if ( buttonsAreDisabled() ) {
+		if ( ! hasGoogleCalendar && ! hasiCal ) {
 			return renderPlaceholder( googleCalendarPlaceholder );
 		}
 
-		if ( ! hasGoogleCalendar ) {
-			return null;
-		}
-
-		return (
+		return hasGoogleCalendar && (
 			<div className="tribe-editor__btn--link tribe-events-gcal">
 				<LinkIcon />
 				<AutosizeInput
@@ -66,17 +57,13 @@ const EventLinks = ( props ) => {
 	};
 
 	const renderiCal = () => {
-		const { hasiCal, iCalLabel, setiCalLabel } = props;
+		const { hasiCal, hasGoogleCalendar, iCalLabel, setiCalLabel } = props;
 
-		if ( buttonsAreDisabled() ) {
+		if ( ! hasGoogleCalendar && ! hasiCal ) {
 			return renderPlaceholder( iCalExportPlaceholder );
 		}
 
-		if ( ! hasiCal ) {
-			return null;
-		}
-
-		return (
+		return hasiCal && (
 			<div className="tribe-editor__btn--link tribe-events-ical">
 				<LinkIcon />
 				<AutosizeInput
