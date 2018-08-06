@@ -14,10 +14,10 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { config } from 'editor/utils/globals';
-const admin = get( config(), 'admin_url', '' );
 import './style.pcss';
 
 const EditLink = ( { id, label, target } ) => {
+	const admin = get( config(), 'admin_url', '' );
 	if ( ! admin || ! id ) {
 		return null;
 	}
