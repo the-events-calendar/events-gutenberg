@@ -10,7 +10,6 @@ import { compose, bindActionCreators } from 'redux';
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
-import { applyFilters } from '@wordpress/hooks';
 
 import {
 	PanelBody,
@@ -39,6 +38,7 @@ import './style.pcss';
 
 import {
 	actions as dateTimeActions,
+	thunks as dateTimeThunks,
 	selectors as dateTimeSelectors,
 } from 'data/blocks/datetime';
 import {
@@ -57,13 +57,10 @@ import {
 	toMoment,
 	toDate,
 	toDateNoYear,
-	toDateTime,
-	isSameDay,
-	replaceDate,
 	toTime,
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
-import { HALF_HOUR_IN_SECONDS, HOUR_IN_SECONDS, DAY_IN_SECONDS } from 'utils/time';
+import { HALF_HOUR_IN_SECONDS, DAY_IN_SECONDS } from 'utils/time';
 import withSaveData from 'editor/hoc/with-save-data';
 import { hasClass, searchParent } from 'utils/dom';
 
@@ -88,7 +85,6 @@ class EventDateTime extends Component {
 		currencyPosition: PropTypes.string,
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
-		setAllDay: PropTypes.func,
 		openDashboardDateTime: PropTypes.func,
 		setStart: PropTypes.func,
 		setEnd: PropTypes.func,
@@ -126,12 +122,7 @@ class EventDateTime extends Component {
 		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
 		// Bail when not classic
-		if ( ! tribe_blocks_editor ) {
-			return null;
-		}
-
-		// Bail when not classic
-		if ( ! tribe_blocks_editor.is_classic ) {
+		if ( ! tribe_blocks_editor || ! tribe_blocks_editor.is_classic ) {
 			return null;
 		}
 
@@ -386,19 +377,8 @@ class EventDateTime extends Component {
 
 	setDays = ( data ) => {
 		const { from, to } = data;
-		const { start, end, setStart, setEnd } = this.props;
-		const startMoment = toMoment( start );
-		const endMoment = toMoment( end );
-
-		let newStartMoment = replaceDate( startMoment, toMoment( from ) );
-		let newEndMoment = replaceDate( endMoment, toMoment( to || from ) );
-
-		if ( newEndMoment.isSameOrBefore( newStartMoment ) ) {
-			( { startMoment: newStartMoment, endMoment: newEndMoment } = this.resetTimes( newStartMoment ) );
-		}
-
-		setStart( toDateTime( newStartMoment ) );
-		setEnd( toDateTime( newEndMoment ) );
+		const { start, end, setDates } = this.props;
+		setDates( { start, end, to, from } );
 	};
 
 	startTimePickerOnChange = ( e ) => {
@@ -418,7 +398,7 @@ class EventDateTime extends Component {
 		}
 
 		const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
-		setStartTime( start, end, seconds, false );
+		setStartTime( { start, end, seconds, isAllDay: false } );
 	}
 
 	startTimePickerOnClick = ( value, onClose ) => {
@@ -426,7 +406,7 @@ class EventDateTime extends Component {
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? 0 : value;
 
-		setStartTime( start, end, seconds, isAllDay );
+		setStartTime( { start, end, seconds, isAllDay } );
 		onClose();
 	}
 
@@ -447,7 +427,7 @@ class EventDateTime extends Component {
 		}
 
 		const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
-		setEndTime( start, end, seconds, false );
+		setEndTime( {start, end, seconds, isAllDay: false } );
 	}
 
 	endTimePickerOnClick = ( value, onClose ) => {
@@ -455,7 +435,7 @@ class EventDateTime extends Component {
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
 
-		setEndTime( start, end, seconds, isAllDay );
+		setEndTime( {start, end, seconds, isAllDay } );
 		onClose();
 	}
 
@@ -536,42 +516,9 @@ class EventDateTime extends Component {
 		);
 	}
 
-	resetTimes = ( startMoment ) => {
-		const testMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
-
-		// Rollback half an hour before adding half an hour as we are on the edge of the day
-		if ( ! isSameDay( startMoment, testMoment ) ) {
-			startMoment.subtract( HOUR_IN_SECONDS, 'seconds' );
-		}
-
-		const endMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
-
-		return {
-			startMoment,
-			endMoment,
-		};
-	}
-
 	multiDayToggleOnChange = ( checked ) => {
-		const { start, end, setStart, setEnd, setMultiDay } = this.props;
-
-		if ( checked ) {
-			const RANGE_DAYS = applyFilters( 'tec.datetime.defaultRange', 3 );
-			const endMoment = toMoment( end ).clone().add( RANGE_DAYS, 'days' );
-			setEnd( toDateTime( endMoment ) );
-		} else {
-			let startMoment = toMoment( start );
-			let endMoment = replaceDate( toMoment( end ), startMoment );
-
-			if ( endMoment.isSameOrBefore( startMoment ) ) {
-				( { startMoment, endMoment } = this.resetTimes( startMoment ) );
-			}
-
-			setStart( toDateTime( startMoment ) );
-			setEnd( toDateTime( endMoment ) );
-		}
-
-		setMultiDay( checked );
+		const { start, end, setMultiDayThunk } = this.props;
+		setMultiDayThunk( { start, end, checked } );
 	}
 
 	renderMultiDayToggle() {
@@ -651,11 +598,12 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	...bindActionCreators( dateTimeActions, dispatch ),
+	...bindActionCreators( dateTimeThunks, dispatch ),
 	...bindActionCreators( UIActions, dispatch ),
 	...bindActionCreators( priceActions, dispatch ),
 	setInitialState( props ) {
 		dispatch( priceActions.setInitialState( props ) );
-		dispatch( dateTimeActions.setInitialState( props ) );
+		dispatch( dateTimeThunks.setInitialState( props ) );
 		dispatch( UIActions.setInitialState( props ) );
 	},
 } );
