@@ -27,6 +27,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 #### 0.2.6-alpha - TBD
 
 * Tweak - Rename the "Event Tags" block and label to "Tags"
+* Feature - Add Edit Link button for Venue and Organizer block
 
 #### 0.2.5-alpha - 2018-08-04
 
