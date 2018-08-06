@@ -10,9 +10,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventLinks from './block';
+import EventLinks from './container';
 import { Icons } from 'elements';
-import { withStore } from 'editor/hoc';
 
 /**
  * Module Code
@@ -51,7 +50,7 @@ export default {
 		},
 	},
 
-	edit: withStore()( EventLinks ),
+	edit: EventLinks,
 	save( props ) {
 		return null;
 	},
