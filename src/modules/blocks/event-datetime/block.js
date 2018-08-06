@@ -64,10 +64,9 @@ import {
 	toTime,
 } from 'utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from 'utils/date';
-import { HALF_HOUR_IN_SECONDS } from 'utils/time';
+import { HALF_HOUR_IN_SECONDS, HOUR_IN_SECONDS, DAY_IN_SECONDS } from 'utils/time';
 import withSaveData from 'editor/hoc/with-save-data';
-import { hasClass, searchParent } from 'editor/utils/dom';
-import { DAY_IN_SECONDS, HOUR_IN_SECONDS } from '../../editor/utils/time';
+import { hasClass, searchParent } from 'utils/dom';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 
