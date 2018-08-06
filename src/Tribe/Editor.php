@@ -374,6 +374,13 @@ class Tribe__Events_Gutenberg__Editor {
 				'localize'     => array(
 					array(
 						'name' => 'tribe_js_config',
+						/**
+						 * Array used to setup the FE with custom variables from the BE
+						 *
+						 * @since TBD
+						 *
+						 * @param array An array with the variables to be localized
+						 */
 						'data' => apply_filters( 'tribe_events_gutenberg_js_config', $js_config ),
 					),
 					array(
