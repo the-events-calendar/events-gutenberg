@@ -60,12 +60,10 @@ describe( '[STORE] - Datetime thunks', () => {
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	test( 'Set start time when All Day is not set', () => {
+	test( 'Set start time', () => {
 		const attributes = {
 			start: '2018-06-05 17:00:00',
-			end: '2018-06-05 17:30:00',
 			seconds: 7200,
-			isAllDay: false,
 		};
 
 		store.dispatch( thunks.setStartTime( attributes ) );
@@ -73,25 +71,10 @@ describe( '[STORE] - Datetime thunks', () => {
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	test( 'Set start time when All Day is set', () => {
+	test( 'Set end time', () => {
 		const attributes = {
-			start: '2018-06-05 17:00:00',
-			end: '2018-06-05 17:30:00',
-			seconds: 0,
-			isAllDay: true,
-		};
-
-		store.dispatch( thunks.setStartTime( attributes ) );
-
-		expect( store.getActions() ).toMatchSnapshot();
-	} );
-
-	test( 'Set end time when All Day is not set', () => {
-		const attributes = {
-			start: '2018-06-05 17:00:00',
 			end: '2018-06-05 17:30:00',
 			seconds: 64800,
-			isAllDay: false,
 		};
 
 		store.dispatch( thunks.setStartTime( attributes ) );
@@ -99,15 +82,26 @@ describe( '[STORE] - Datetime thunks', () => {
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	test( 'Set end time when All Day is set', () => {
+	test( 'Set all day on', () => {
 		const attributes = {
 			start: '2018-06-05 17:00:00',
 			end: '2018-06-05 17:30:00',
-			seconds: DAY_IN_SECONDS - 1,
 			isAllDay: true,
 		};
 
-		store.dispatch( thunks.setStartTime( attributes ) );
+		store.dispatch( thunks.setAllDayThunk( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	test( 'Set all day off', () => {
+		const attributes = {
+			start: '2018-06-05 00:00:00',
+			end: '2018-06-05 23:59:59',
+			isAllDay: false,
+		};
+
+		store.dispatch( thunks.setAllDayThunk( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
