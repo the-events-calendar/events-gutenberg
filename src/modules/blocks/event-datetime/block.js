@@ -426,7 +426,7 @@ class EventDateTime extends Component {
 		}
 
 		const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
-		setEndTime( {start, end, seconds, isAllDay: false } );
+		setEndTime( { start, end, seconds, isAllDay: false } );
 	}
 
 	endTimePickerOnClick = ( value, onClose ) => {
@@ -434,7 +434,7 @@ class EventDateTime extends Component {
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
 
-		setEndTime( {start, end, seconds, isAllDay } );
+		setEndTime( { start, end, seconds, isAllDay } );
 		onClose();
 	}
 

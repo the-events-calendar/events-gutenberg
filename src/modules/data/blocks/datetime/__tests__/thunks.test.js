@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
  * Internal dependencies
  */
 import { thunks } from 'data/blocks/datetime';
+import { DAY_IN_SECONDS } from 'utils/time';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
@@ -33,6 +34,7 @@ describe( '[STORE] - Datetime thunks', () => {
 		};
 
 		store = mockStore( initialState );
+		console.log(store.dispatch);
 	} );
 
 	test( 'Initial set of state', () => {
@@ -85,8 +87,30 @@ describe( '[STORE] - Datetime thunks', () => {
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	test( 'Set end time', () => {
+	test( 'Set end time when All Day is not set', () => {
+		const attributes = {
+			start: '2018-06-05 17:00:00',
+			end: '2018-06-05 17:30:00',
+			seconds: 64800,
+			isAllDay: false,
+		};
 
+		store.dispatch( thunks.setStartTime( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	test( 'Set end time when All Day is set', () => {
+		const attributes = {
+			start: '2018-06-05 17:00:00',
+			end: '2018-06-05 17:30:00',
+			seconds: DAY_IN_SECONDS - 1,
+			isAllDay: true,
+		};
+
+		store.dispatch( thunks.setStartTime( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
 	test( 'Set dates from date picker', () => {
