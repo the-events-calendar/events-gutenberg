@@ -138,7 +138,51 @@ describe( '[STORE] - Datetime thunks', () => {
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	test( 'Set multi day', () => {
+	test( 'Set multi day to true', () => {
+		const attributes = {
+			start: '2018-06-05 17:00:00',
+			end: '2018-06-05 17:30:00',
+			checked: true,
+		};
 
+		store.dispatch( thunks.setMultiDayThunk( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	test( 'Set multi day to false when end time is later than start time', () => {
+		const attributes = {
+			start: '2018-06-05 17:00:00',
+			end: '2018-06-08 17:30:00',
+			checked: false,
+		};
+
+		store.dispatch( thunks.setMultiDayThunk( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	test( 'Set multi day to false when end time is earlier than start time', () => {
+		const attributes = {
+			start: '2018-06-05 17:00:00',
+			end: '2018-06-08 15:30:00',
+			checked: false,
+		};
+
+		store.dispatch( thunks.setMultiDayThunk( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	test( 'Set multi day to false when end time is earlier than start time', () => {
+		const attributes = {
+			start: '2018-06-05 23:30:00',
+			end: '2018-06-08 15:30:00',
+			checked: false,
+		};
+
+		store.dispatch( thunks.setMultiDayThunk( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
 	} );
 } );

@@ -66,7 +66,7 @@ export const setDates = ( { start, end, from, to } ) => ( dispatch ) => {
 	dispatch( setEnd( toDateTime( newEndMoment ) ) );
 };
 
-export const setMultiDayThunk = ( {start, end, checked } ) => ( dispatch ) => {
+export const setMultiDayThunk = ( { start, end, checked } ) => ( dispatch ) => {
 	if ( checked ) {
 		const RANGE_DAYS = applyFilters( 'tec.datetime.defaultRange', 3 );
 		const endMoment = toMoment( end ).clone().add( RANGE_DAYS, 'days' );

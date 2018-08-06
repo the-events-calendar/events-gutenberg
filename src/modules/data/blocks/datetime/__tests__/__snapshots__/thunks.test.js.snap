@@ -121,6 +121,92 @@ Array [
 ]
 `;
 
+exports[`[STORE] - Datetime thunks Set multi day to false when end time is earlier than start time 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 18:00:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set multi day to false when end time is earlier than start time 2`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 22:30:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 23:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set multi day to false when end time is later than start time 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set multi day to true 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "end": "2018-06-08 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": true,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
 exports[`[STORE] - Datetime thunks Set start time when All Day is not set 1`] = `
 Array [
   Object {
