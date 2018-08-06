@@ -8,12 +8,12 @@ module.exports = {
 	devtool: (
 		process.env.NODE_ENV === 'production'
 			? 'source-map'
-			: 'cheap-module-eval-source-map'
+			: 'eval-source-map'
 	),
 	externals,
 	output: {
 		filename: './src/resources/js/[name].js',
-		libraryTarget: 'this',
+		libraryTarget: 'var',
 	},
 	module: {
 		rules: [

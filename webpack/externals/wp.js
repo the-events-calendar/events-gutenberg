@@ -13,7 +13,8 @@ const wp = [
 const externals = wp.reduce(
 	( result, dependency ) => {
 		result[ `@wordpress/${ dependency }` ] = {
-			this: [ 'wp', dependency ],
+			var: `wp.${ dependency }`,
+			root: [ 'wp', dependency ],
 		};
 		return result;
 	},

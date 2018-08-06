@@ -39,7 +39,6 @@ class Tribe__Events_Gutenberg__Assets {
 				'conditionals' => array( $this, 'should_enqueue_frontend' ),
 			)
 		);
-
 	}
 
 	/**
