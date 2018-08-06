@@ -34,7 +34,6 @@ describe( '[STORE] - Datetime thunks', () => {
 		};
 
 		store = mockStore( initialState );
-		console.log(store.dispatch);
 	} );
 
 	test( 'Initial set of state', () => {
@@ -113,8 +112,30 @@ describe( '[STORE] - Datetime thunks', () => {
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	test( 'Set dates from date picker', () => {
+	test( 'Set dates from date picker with multi day off', () => {
+		const attributes = {
+			start: '2018-06-05 17:00:00',
+			end: '2018-06-05 17:30:00',
+			from: new Date( 'Wed Sep 19 2018 12:00:00' ),
+			to: undefined,
+		};
 
+		store.dispatch( thunks.setDates( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	test( 'Set dates from date picker with multi day on', () => {
+		const attributes = {
+			start: '2018-06-05 17:00:00',
+			end: '2018-06-05 17:30:00',
+			from: new Date( 'Wed Sep 19 2018 12:00:00' ),
+			to: new Date( 'Fri Sep 21 2018 12:00:00' ),
+		};
+
+		store.dispatch( thunks.setDates( attributes ) );
+
+		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
 	test( 'Set multi day', () => {

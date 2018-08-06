@@ -47,6 +47,40 @@ Array [
 ]
 `;
 
+exports[`[STORE] - Datetime thunks Set dates from date picker with multi day off 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-09-19 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-09-19 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set dates from date picker with multi day on 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-09-19 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-09-21 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+]
+`;
+
 exports[`[STORE] - Datetime thunks Set end time when All Day is not set 1`] = `
 Array [
   Object {

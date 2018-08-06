@@ -51,7 +51,7 @@ export const setEndTime = ( { start, end, seconds, isAllDay } ) => ( dispatch ) 
 	dispatch( setAllDay( isAllDay ) );
 };
 
-export const setDates = ( { start, end, to, from } ) => ( dispatch ) => {
+export const setDates = ( { start, end, from, to } ) => ( dispatch ) => {
 	const startMoment = toMoment( start );
 	const endMoment = toMoment( end );
 
