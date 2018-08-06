@@ -26,98 +26,100 @@ import './style.pcss';
 const googleCalendarPlaceholder = __( 'Google Calendar', 'events-gutenberg' );
 const iCalExportPlaceholder = __( 'iCal Export', 'events-gutenberg' );
 
-const EventLinks = ( props ) => {
+const renderPlaceholder= ( label ) => (
+	<button className="tribe-editor__btn--link tribe-editor__btn--placeholder" disabled>
+		<LinkIcon />
+		{ label }
+	</button>
+);
 
-	const renderPlaceholder= ( label ) => (
-			<button className="tribe-editor__btn--link tribe-editor__btn--placeholder" disabled>
-				<LinkIcon />
-				{ label }
-			</button>
-		);
+const renderGoogleCalendar = ({
+	hasiCal,
+	hasGoogleCalendar,
+	googleCalendarLabel,
+	setGoogleCalendarLabel
+}) => {
+	if ( ! hasGoogleCalendar && ! hasiCal ) {
+		return renderPlaceholder( googleCalendarPlaceholder );
+	}
 
-	const renderGoogleCalendar = () => {
-		const { hasiCal, hasGoogleCalendar, googleCalendarLabel, setGoogleCalendarLabel } = props;
-
-		if ( ! hasGoogleCalendar && ! hasiCal ) {
-			return renderPlaceholder( googleCalendarPlaceholder );
-		}
-
-		return hasGoogleCalendar && (
-			<div className="tribe-editor__btn--link tribe-events-gcal">
-				<LinkIcon />
-				<AutosizeInput
-					name="google-calendar-label"
-					className="tribe-editor__btn-input"
-					value={ googleCalendarLabel }
-					placeholder={ googleCalendarPlaceholder }
-					onChange={ sendValue( setGoogleCalendarLabel ) }
-				/>
-			</div>
-		);
-	};
-
-	const renderiCal = () => {
-		const { hasiCal, hasGoogleCalendar, iCalLabel, setiCalLabel } = props;
-
-		if ( ! hasGoogleCalendar && ! hasiCal ) {
-			return renderPlaceholder( iCalExportPlaceholder );
-		}
-
-		return hasiCal && (
-			<div className="tribe-editor__btn--link tribe-events-ical">
-				<LinkIcon />
-				<AutosizeInput
-					id="tribe-event-ical"
-					name="tribe-event-ical"
-					className="tribe-editor__btn-input"
-					value={ iCalLabel }
-					placeholder={ iCalExportPlaceholder }
-					onChange={ sendValue( setiCalLabel ) }
-				/>
-			</div>
-		);
-	};
-
-	const renderButtons = () => (
-		<div key="event-links" className="tribe-editor__block tribe-editor__events-link">
-			{ renderGoogleCalendar() }
-			{ renderiCal() }
+	return hasGoogleCalendar && (
+		<div className="tribe-editor__btn--link tribe-events-gcal">
+			<LinkIcon />
+			<AutosizeInput
+				name="google-calendar-label"
+				className="tribe-editor__btn-input"
+				value={ googleCalendarLabel }
+				placeholder={ googleCalendarPlaceholder }
+				onChange={ sendValue( setGoogleCalendarLabel ) }
+			/>
 		</div>
 	);
-
-	const renderControls = () => {
-		const {
-			hasGoogleCalendar,
-			hasiCal,
-			isSelected,
-			toggleIcalLabel,
-			toggleGoogleCalendar,
-		} = props;
-
-		return isSelected && (
-			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Share Settings', 'events-gutenberg' ) }>
-					<ToggleControl
-						label={ __( 'Google Calendar', 'events-gutenberg' ) }
-						checked={ hasGoogleCalendar }
-						onChange={ toggleGoogleCalendar }
-					/>
-					<ToggleControl
-						label={ __( 'iCal', 'events-gutenberg' ) }
-						checked={ hasiCal }
-						onChange={ toggleIcalLabel }
-					/>
-				</PanelBody>
-			</InspectorControls>
-		);
-	};
-
-	return [
-		renderButtons(),
-		renderControls(),
-	];
-
 };
+
+const renderiCal = ({
+	hasiCal,
+	hasGoogleCalendar,
+	iCalLabel,
+	setiCalLabel
+}) => {
+	if ( ! hasGoogleCalendar && ! hasiCal ) {
+		return renderPlaceholder( iCalExportPlaceholder );
+	}
+
+	return hasiCal && (
+		<div className="tribe-editor__btn--link tribe-events-ical">
+			<LinkIcon />
+			<AutosizeInput
+				id="tribe-event-ical"
+				name="tribe-event-ical"
+				className="tribe-editor__btn-input"
+				value={ iCalLabel }
+				placeholder={ iCalExportPlaceholder }
+				onChange={ sendValue( setiCalLabel ) }
+			/>
+		</div>
+	);
+};
+
+const renderButtons = ( props ) => (
+	<div key="event-links" className="tribe-editor__block tribe-editor__events-link">
+		{ renderGoogleCalendar( props ) }
+		{ renderiCal( props ) }
+	</div>
+);
+
+const renderControls = ({
+	hasGoogleCalendar,
+	hasiCal,
+	isSelected,
+	toggleIcalLabel,
+	toggleGoogleCalendar,
+}) => (
+	isSelected && (
+		<InspectorControls key="inspector">
+			<PanelBody title={ __( 'Share Settings', 'events-gutenberg' ) }>
+				<ToggleControl
+					label={ __( 'Google Calendar', 'events-gutenberg' ) }
+					checked={ hasGoogleCalendar }
+					onChange={ toggleGoogleCalendar }
+				/>
+				<ToggleControl
+					label={ __( 'iCal', 'events-gutenberg' ) }
+					checked={ hasiCal }
+					onChange={ toggleIcalLabel }
+				/>
+			</PanelBody>
+		</InspectorControls>
+	)
+);
+
+const EventLinks = ( props ) => (
+	[
+		renderButtons( props ),
+		renderControls( props ),
+	]
+);
 
 EventLinks.propTypes = {
 	hasGoogleCalendar: PropTypes.bool,
