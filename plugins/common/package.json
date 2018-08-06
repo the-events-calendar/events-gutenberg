@@ -4,12 +4,14 @@
   "description": "Common gutenberg modules",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
+    "prepare": "npm run build -- -p"
   },
   "keywords": [
     "gutenberg",
     "common"
   ],
+  "private": true,
   "repository": "git+https://github.com/WordPress/gutenberg.git",
   "author": "Modern Tribe",
   "license": "GPL-2.0-or-later"
