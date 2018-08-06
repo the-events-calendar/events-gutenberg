@@ -54,7 +54,6 @@ import { getSetting, getConstants } from 'editor/settings';
 import classNames from 'classnames';
 import {
 	roundTime,
-	setTimeInSeconds,
 	toMoment,
 	toDate,
 	toDateNoYear,
@@ -97,6 +96,8 @@ class EventDateTime extends Component {
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
+		setStartTime: PropTypes.func,
+		setEndTime: PropTypes.func,
 		closeDashboardDateTime: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
@@ -401,7 +402,7 @@ class EventDateTime extends Component {
 	};
 
 	startTimePickerOnChange = ( e ) => {
-		const { start, end, setStart } = this.props;
+		const { start, end, setStartTime } = this.props;
 		const [ hour, minute ] = e.target.value.split( ':' );
 
 		const startMoment = toMoment( start );
@@ -417,28 +418,20 @@ class EventDateTime extends Component {
 		}
 
 		const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
-		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
-		setStart( startDateTime );
+		setStartTime( start, end, seconds, false );
 	}
 
 	startTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setStart, setEnd, setAllDay } = this.props;
+		const { start, end, setStartTime } = this.props;
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? 0 : value;
-		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
 
-		if ( isAllDay ) {
-			const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), DAY_IN_SECONDS - 1 ) );
-			setEnd( endDateTime );
-		}
-
-		setStart( startDateTime );
-		setAllDay( isAllDay );
+		setStartTime( start, end, seconds, isAllDay );
 		onClose();
 	}
 
 	endTimePickerOnChange = ( e ) => {
-		const { start, end, setEnd } = this.props;
+		const { start, end, setEndTime } = this.props;
 		const [ hour, minute ] = e.target.value.split( ':' );
 
 		const endMoment = toMoment( end );
@@ -454,23 +447,15 @@ class EventDateTime extends Component {
 		}
 
 		const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
-		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), seconds ) );
-		setEnd( endDateTime );
+		setEndTime( start, end, seconds, false );
 	}
 
 	endTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setStart, setEnd, setAllDay } = this.props;
+		const { start, end, setEndTime } = this.props;
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
-		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), seconds ) );
 
-		if ( isAllDay ) {
-			const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
-			setStart( startDateTime );
-		}
-
-		setEnd( endDateTime );
-		setAllDay( isAllDay );
+		setEndTime( start, end, seconds, isAllDay );
 		onClose();
 	}
 

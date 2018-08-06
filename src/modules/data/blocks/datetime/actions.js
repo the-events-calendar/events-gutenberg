@@ -2,7 +2,13 @@
  * Internal dependencies
  */
 import { DEFAULT_STATE } from './reducers';
-import { isSameDay, parseFormats, toDateTime, toMoment } from 'editor/utils/moment';
+import {
+	isSameDay,
+	parseFormats,
+	setTimeInSeconds,
+	toDateTime,
+	toMoment,
+} from 'utils/moment';
 import * as types from './types';
 
 import { maybeBulkDispatch } from 'data/utils';
@@ -55,6 +61,30 @@ export const setTimeZone = ( timezone ) => ( {
 		timezone,
 	},
 } );
+
+export const setStartTime = ( start, end, seconds, isAllDay ) => ( dispatch ) => {
+	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
+
+	if ( isAllDay ) {
+		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), DAY_IN_SECONDS - 1 ) );
+		dispatch( setEnd( endDateTime ) );
+	}
+
+	dispatch( setStart( startDateTime ) );
+	dispatch( setAllDay( isAllDay ) );
+};
+
+export const setEndTime = ( start, end, seconds, isAllDay ) => ( dispatch ) => {
+	const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), seconds ) );
+
+	if ( isAllDay ) {
+		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
+		dispatch( setStart( startDateTime ) );
+	}
+
+	dispatch( setEnd( endDateTime ) );
+	dispatch( setAllDay( isAllDay ) );
+}
 
 export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 	const start = get( 'start', DEFAULT_STATE.start );
