@@ -33,7 +33,7 @@ import {
 	Dashboard,
 	Month,
 	Upsell,
-} from 'elements';
+} from '@@tribe/events/elements';
 import './style.pcss';
 
 import {
@@ -59,7 +59,7 @@ import {
 	toTime,
 } from '@@tribe/events/editor/utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from '@@tribe/events/editor/utils/date';
-import withSaveData from '@@tribe/events/editor/hoc/with-save-data';
+import withSaveData from '@@tribe/common/hoc/with-save-data';
 import { hasClass, searchParent } from '@@tribe/events/editor/utils/dom';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );

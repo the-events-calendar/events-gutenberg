@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventDetails from './block';
-import { Icons } from 'elements';
+import { Icons } from '@@tribe/events/elements';
 import { withStore } from '@@tribe/common/hoc';
 
 /**

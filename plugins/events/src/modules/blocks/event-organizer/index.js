@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import Organizer from './block';
-import { Icons } from 'elements';
+import { Icons } from '@@tribe/events/elements';
 import { withStore } from '@@tribe/common/hoc';
 import { ORGANIZER } from '@@tribe/events/editor/post-types';
 

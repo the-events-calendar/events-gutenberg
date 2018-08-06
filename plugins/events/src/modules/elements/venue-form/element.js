@@ -14,7 +14,7 @@ import { RichText } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import { Input } from 'elements';
+import { Input } from '@@tribe/events/elements';
 import list, { getCountries, getStates, getCountryCode, getStateCode } from '@@tribe/events/editor/utils/geo-data';
 import './style.pcss';
 

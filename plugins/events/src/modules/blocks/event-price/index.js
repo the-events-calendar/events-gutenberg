@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventPrice from './container';
-import { Icons } from 'elements';
+import { Icons } from '@@tribe/events/elements';
 
 /**
  * Module Code

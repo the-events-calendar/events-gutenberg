@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { withStore } from '@@tribe/common/hoc';
 import EventDateTime from './block';
-import { Icons } from 'elements';
+import { Icons } from '@@tribe/events/elements';
 
 /**
  * Module Code

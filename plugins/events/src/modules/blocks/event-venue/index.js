@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EventVenue from './block';
 import { withStore } from '@@tribe/common/hoc';
-import { Icons } from 'elements';
+import { Icons } from '@@tribe/events/elements';
 import { VENUE } from '@@tribe/events/editor/post-types';
 
 /**

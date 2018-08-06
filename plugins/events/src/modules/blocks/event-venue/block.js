@@ -37,7 +37,7 @@ import {
 	toFields,
 	toVenue,
 	GoogleMap,
-} from 'elements';
+} from '@@tribe/events/elements';
 
 import { VENUE } from '@@tribe/events/editor/post-types';
 import { withSaveData, withDetails, withForm } from '@@tribe/common/hoc';

@@ -25,7 +25,7 @@ import {
 import {
 	OrganizerForm,
 	SearchPosts,
-} from 'elements';
+} from '@@tribe/events/elements';
 import { actions, selectors } from '@@tribe/events/data/blocks/organizers';
 import { actions as detailsActions } from '@@tribe/events/data/details';
 import { Item } from './organizer';

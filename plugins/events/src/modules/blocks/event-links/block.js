@@ -22,7 +22,7 @@ import { InspectorControls } from '@wordpress/editor';
 import LinkIcon from 'icons/link.svg';
 import './style.pcss';
 
-import withSaveData from '@@tribe/events/editor/hoc/with-save-data';
+import withSaveData from '@@tribe/common/hoc/with-save-data';
 import { actions, selectors } from '@@tribe/events/data/blocks/sharing';
 import { sendValue } from '@@tribe/events/editor/utils/input';
 

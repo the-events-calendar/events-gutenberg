@@ -21,7 +21,7 @@ import { __ } from '@wordpress/i18n';
  */
 import {
 	SearchOrCreate,
-} from 'elements';
+} from '@@tribe/events/elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
 import { withSaveData, withDetails, withForm } from '@@tribe/common/hoc';

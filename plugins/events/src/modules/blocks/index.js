@@ -1,16 +1,16 @@
 import { registerBlockType } from '@wordpress/blocks';
 
-import classicEventDetails from 'blocks/classic-event-details';
+import classicEventDetails from '@@tribe/events/blocks/classic-event-details';
 
-import eventDateTime from 'blocks/event-datetime';
-import eventVenue from 'blocks/event-venue';
-import eventOrganizer from 'blocks/event-organizer';
-import eventLinks from 'blocks/event-links';
-import eventPrice from 'blocks/event-price';
-import eventCategory from 'blocks/event-category';
-import eventTags from 'blocks/event-tags';
-import eventWebsite from 'blocks/event-website';
-import FeaturedImage from 'blocks/featured-image';
+import eventDateTime from '@@tribe/events/blocks/event-datetime';
+import eventVenue from '@@tribe/events/blocks/event-venue';
+import eventOrganizer from '@@tribe/events/blocks/event-organizer';
+import eventLinks from '@@tribe/events/blocks/event-links';
+import eventPrice from '@@tribe/events/blocks/event-price';
+import eventCategory from '@@tribe/events/blocks/event-category';
+import eventTags from '@@tribe/events/blocks/event-tags';
+import eventWebsite from '@@tribe/events/blocks/event-website';
+import FeaturedImage from '@@tribe/events/blocks/featured-image';
 import { initStore } from '@@tribe/events/data';
 
 import './style.pcss';

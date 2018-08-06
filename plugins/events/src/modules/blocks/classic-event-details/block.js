@@ -14,7 +14,7 @@ import AutosizeInput from 'react-input-autosize';
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 
-import withSaveData from '@@tribe/events/editor/hoc/with-save-data';
+import withSaveData from '@@tribe/common/hoc/with-save-data';
 
 import {
 	ToggleControl,
@@ -33,7 +33,7 @@ import {
 import {
 	TermsList,
 	MetaGroup,
-} from 'elements';
+} from '@@tribe/events/elements';
 
 import { default as EventOrganizers } from './organizers';
 

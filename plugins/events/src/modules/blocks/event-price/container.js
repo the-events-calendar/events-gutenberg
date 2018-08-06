@@ -10,7 +10,7 @@ import { bindActionCreators, compose } from 'redux';
  */
 import { searchParent } from '@@tribe/events/editor/utils/dom';
 import { parser, isFree } from '@@tribe/events/editor/utils/range';
-import withSaveData from '@@tribe/events/editor/hoc/with-save-data';
+import withSaveData from '@@tribe/common/hoc/with-save-data';
 import { withStore } from '@@tribe/common/hoc';
 import {
 	actions as priceActions,

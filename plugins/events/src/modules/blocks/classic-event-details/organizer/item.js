@@ -13,7 +13,7 @@ import { isEmpty } from 'lodash';
  * Import internal dependencies
  */
 import { withDetails } from '@@tribe/common/hoc';
-import { Loading } from 'elements';
+import { Loading } from '@@tribe/events/elements';
 import { Actions, Name } from './index';
 
 const Item = ( { id, details = {}, loading, onRemoveOrganizer, ...rest } ) => {
