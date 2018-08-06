@@ -2,7 +2,7 @@ const js = require( '../module/rules/javascript' );
 const styles = require( '../module/rules/styles' );
 const images = require( '../module/rules/images' );
 const svg = require( '../module/rules/svg' );
-const wpExternals = require( '../externals/wp' );
+const externals = require( '../externals' );
 
 module.exports = {
 	devtool: (
@@ -10,7 +10,7 @@ module.exports = {
 			? 'source-map'
 			: 'cheap-module-eval-source-map'
 	),
-	externals: wpExternals,
+	externals,
 	output: {
 		filename: './src/resources/js/[name].js',
 		libraryTarget: 'this',

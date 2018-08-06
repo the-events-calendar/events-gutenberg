@@ -7,9 +7,7 @@ const getDirectories = source => (
 );
 const getDirectoryNames = source => (
 	getDirectories( source ).map( file => {
-		const src = source.replace( './', '' );
-		const regex = new RegExp( `${ src }\\/?` );
-		return file.replace( regex, '' );
+		return file.replace( /^.*\//, '' );
 	} )
 );
 

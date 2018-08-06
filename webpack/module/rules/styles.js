@@ -5,7 +5,6 @@ const plugin = new MiniCssExtractPlugin( {
 } );
 
 const loaders = [
-	process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : null,
 	{ loader: 'css-loader', options: { importLoaders: 1 } },
 	{
 		loader: 'postcss-loader',
@@ -22,6 +21,10 @@ const loaders = [
 		},
 	},
 ];
+
+if ( process.env.NODE_ENV === 'production' ) {
+	loaders.unshift( MiniCssExtractPlugin.loader );
+}
 
 module.exports = {
 	plugin,

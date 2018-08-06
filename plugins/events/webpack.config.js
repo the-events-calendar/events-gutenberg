@@ -5,10 +5,10 @@ const { resolve } = require( 'path' );
 const merge = require( 'webpack-merge' );
 const common = require( '../../webpack/common/webpack.config' );
 const { getDirectoryNames } = require( '../../webpack/utils/directories' );
-const { generateExternals } = require( '../../webpack/externals/tribe' );
+const { generateExternals } = require( '../../webpack/externals/tribe/generate' );
 const { generateEntries } = require( '../../webpack/entry/tribe' );
 
-const directoryNames = getDirectoryNames( './src/modules' );
+const directoryNames = getDirectoryNames( resolve( __dirname, './src/modules' ) );
 const PLUGIN_SCOPE = 'events';
 
 const config = merge( common, {
