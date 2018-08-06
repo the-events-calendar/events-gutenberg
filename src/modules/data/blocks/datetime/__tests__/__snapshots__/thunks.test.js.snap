@@ -46,3 +46,43 @@ Array [
   },
 ]
 `;
+
+exports[`[STORE] - Datetime thunks Set start time when All Day is not set 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 02:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "allDay": false,
+    },
+    "type": "SET_ALL_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set start time when All Day is set 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 23:59:59",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 00:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "allDay": true,
+    },
+    "type": "SET_ALL_DAY",
+  },
+]
+`;
