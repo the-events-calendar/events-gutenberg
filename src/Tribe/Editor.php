@@ -132,12 +132,11 @@ class Tribe__Events_Gutenberg__Editor {
 		$post = tribe_get_request_var( 'post' );
 		$is_classic_editor = ! empty( $post ) && is_numeric( $post ) && ! gutenberg_post_has_blocks( $post );
 
-		// Basically setups up a diferent template if is a classic event
+		// Basically setups up a different template if is a classic event
 		if ( $is_classic_editor ) {
 			$template = $this->get_classic_template();
 		} else {
 			$template[] = array( 'tribe/event-datetime' );
-			$template[] = array( 'tribe/featured-image' );
 			$template[] = array(
 				'core/paragraph',
 				array(
@@ -161,7 +160,7 @@ class Tribe__Events_Gutenberg__Editor {
 		 * @param  array   $args       Array of configurations for the post type
 		 *
 		 */
- 		$args['template'] = apply_filters( 'tribe_events_editor_default_template', $template, Tribe__Events__Main::POSTTYPE, $args );
+		$args['template'] = apply_filters( 'tribe_events_editor_default_template', $template, Tribe__Events__Main::POSTTYPE, $args );
 
  		return $args;
 	}
