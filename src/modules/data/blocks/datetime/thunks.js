@@ -27,29 +27,26 @@ import {
 } from 'utils/moment';
 import { HOUR_IN_SECONDS, DAY_IN_SECONDS } from 'utils/time';
 
-export const setStartTime = ( { start, end, seconds, isAllDay } ) => ( dispatch ) => {
+export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
 	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
+	dispatch( setStart( startDateTime ) );
+};
 
+export const setEndTime = ( { end, seconds } ) => ( dispatch ) => {
+	const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), seconds ) );
+	dispatch( setEnd( endDateTime ) );
+};
+
+export const setAllDayThunk = ( { start, end, isAllDay } ) => ( dispatch ) => {
 	if ( isAllDay ) {
+		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
 		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), DAY_IN_SECONDS - 1 ) );
+		dispatch( setStart( startDateTime ) );
 		dispatch( setEnd( endDateTime ) );
 	}
 
-	dispatch( setStart( startDateTime ) );
 	dispatch( setAllDay( isAllDay ) );
-};
-
-export const setEndTime = ( { start, end, seconds, isAllDay } ) => ( dispatch ) => {
-	const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), seconds ) );
-
-	if ( isAllDay ) {
-		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
-		dispatch( setStart( startDateTime ) );
-	}
-
-	dispatch( setEnd( endDateTime ) );
-	dispatch( setAllDay( isAllDay ) );
-};
+}
 
 export const setDates = ( { start, end, from, to } ) => ( dispatch ) => {
 	const startMoment = toMoment( start );

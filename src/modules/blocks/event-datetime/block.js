@@ -88,6 +88,7 @@ class EventDateTime extends Component {
 		openDashboardDateTime: PropTypes.func,
 		setStartTime: PropTypes.func,
 		setEndTime: PropTypes.func,
+		setAllDayThunk: PropTypes.func,
 		setMultiDayThunk: PropTypes.func,
 		setDates: PropTypes.func,
 		setTimeZone: PropTypes.func,
@@ -397,15 +398,19 @@ class EventDateTime extends Component {
 		}
 
 		const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
-		setStartTime( { start, end, seconds, isAllDay: false } );
+		setStartTime( { start, seconds } );
 	}
 
 	startTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setStartTime } = this.props;
+		const { start, end, setStartTime, setAllDayThunk } = this.props;
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? 0 : value;
 
-		setStartTime( { start, end, seconds, isAllDay } );
+		if ( ! isAllDay ) {
+			setStartTime( { start, seconds } );
+		}
+
+		setAllDayThunk( { start, end, isAllDay } );
 		onClose();
 	}
 
@@ -426,15 +431,19 @@ class EventDateTime extends Component {
 		}
 
 		const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
-		setEndTime( { start, end, seconds, isAllDay: false } );
+		setEndTime( { end, seconds } );
 	}
 
 	endTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setEndTime } = this.props;
+		const { start, end, setEndTime, setAllDayThunk } = this.props;
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
 
-		setEndTime( { start, end, seconds, isAllDay } );
+		if ( ! isAllDay ) {
+			setEndTime( { end, seconds } );
+		}
+
+		setAllDayThunk( { start, end, isAllDay } );
 		onClose();
 	}
 
