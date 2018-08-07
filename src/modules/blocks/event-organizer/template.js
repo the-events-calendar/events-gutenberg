@@ -31,6 +31,7 @@ import OrganizerIcon from 'icons/organizer.svg';
 import { toFields, toOrganizer } from 'elements/organizer-form/utils';
 
 class Organizer extends Component {
+
 	static propTypes = {
 		details: PropTypes.object,
 		create: PropTypes.bool,
@@ -60,32 +61,117 @@ class Organizer extends Component {
 		}
 	}
 
-	render() {
-		return [ this.renderBlock(), this.renderSettings() ];
-	}
+	formCompleted = ( body = {} ) => {
+		const {
+			setDetails,
+			addOrganizerInClassic,
+			addOrganizerInBlock,
+			id,
+		} = this.props;
 
-	renderSettings() {
-		const { isSelected, organizer } = this.props;
+		setDetails( body.id, body );
+		addOrganizerInClassic( body.id );
+		addOrganizerInBlock( id, body.id );
+	};
+
+	onSubmit = ( fields ) => (
+		this.props.sendForm( toOrganizer( fields ), this.formCompleted )
+	);
+
+	renderLoading = () => (
+		<div className="tribe-editor__spinner-container">
+			<Spinner />
+		</div>
+	);
+
+	renderForm() {
+		const { fields, submit } = this.props;
+
+		if ( submit ) {
+			return this.renderLoading();
+		}
+
 		return (
-			isSelected &&
-			organizer &&
-			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Venue Map Settings' ) }>
-					<EditLink
-						id={ organizer }
-						label={ __( 'Edit Organizer', 'events-gutenberg' ) }
-					/>
-				</PanelBody>
-			</InspectorControls>
+			<OrganizerForm
+				{ ...toFields( fields ) }
+				submit={ this.onSubmit }
+			/>
 		);
 	}
 
-	renderBlock() {
-		const { id } = this.props;
+	selectItem = ( organizerID, details ) => {
+		const {
+			id,
+			addOrganizerInBlock,
+			addOrganizerInClassic,
+			setDetails,
+		} = this.props;
+
+		setDetails( organizerID, details );
+		addOrganizerInClassic( organizerID );
+		addOrganizerInBlock( id, organizerID );
+	};
+
+	setDraftTitle = ( title ) => (
+		this.props.createDraft( {
+			title: {
+				rendered: title,
+			},
+		} )
+	);
+
+	renderSearch() {
+		const { id, isSelected, organizers, store, postType } = this.props;
+
 		return (
-			<section key={ id }>
-				{ this.renderContent() }
-			</section>
+			<SearchOrCreate
+				name={ id }
+				store={ store }
+				postType={ postType }
+				selected={ isSelected }
+				icon={ <OrganizerIcon /> }
+				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
+				onSelection={ this.selectItem }
+				onSetCreation={ this.setDraftTitle }
+				exclude={ organizers }
+			/>
+		);
+	}
+
+	edit = () => {
+		const { details, editEntry } = this.props;
+		editEntry( details );
+	};
+
+	remove = () => {
+		const {
+			id,
+			organizer,
+			removeOrganizerInBlock,
+			volatile,
+			maybeRemoveEntry,
+			removeOrganizerInClassic,
+			details,
+		} = this.props;
+
+		removeOrganizerInBlock( id, organizer );
+
+		if ( volatile ) {
+			maybeRemoveEntry( details );
+			removeOrganizerInClassic( organizer );
+		}
+	};
+
+	renderDetails() {
+		const { details, volatile, isSelected } = this.props;
+		return (
+			<OrganizerDetails
+				organizer={ details }
+				volatile={ volatile }
+				selected={ isSelected }
+				edit={ this.edit }
+				remove={ this.remove }
+			/>
 		);
 	}
 
@@ -107,123 +193,38 @@ class Organizer extends Component {
 		return this.renderDetails();
 	}
 
-	renderForm() {
-		const { fields, submit } = this.props;
-
-		if ( submit ) {
-			return this.renderLoading();
-		}
-
+	renderBlock() {
 		return (
-			<OrganizerForm
-				{ ...toFields( fields ) }
-				submit={ this.onSubmit }
-			/>
+			<section key={ this.props.id }>
+				{ this.renderContent() }
+			</section>
 		);
 	}
 
-	renderLoading() {
+	renderSettings() {
+		const { isSelected, organizer } = this.props;
+
 		return (
-			<div className="tribe-editor__spinner-container">
-				<Spinner />
-			</div>
+			isSelected &&
+			organizer &&
+			<InspectorControls key="inspector">
+				<PanelBody title={ __( 'Venue Map Settings' ) }>
+					<EditLink
+						id={ organizer }
+						label={ __( 'Edit Organizer', 'events-gutenberg' ) }
+					/>
+				</PanelBody>
+			</InspectorControls>
 		);
 	}
 
-	onSubmit = ( fields ) => {
-		const { sendForm } = this.props;
-		sendForm( toOrganizer( fields ), this.formCompleted );
-	};
-
-	formCompleted = ( body = {} ) => {
-		const {
-			setDetails,
-			addOrganizerInClassic,
-			addOrganizerInBlock,
-			id,
-		} = this.props;
-
-		setDetails( body.id, body );
-		addOrganizerInClassic( body.id );
-		addOrganizerInBlock( id, body.id );
-	};
-
-	renderSearch() {
-		const { id, isSelected, organizers, store, postType } = this.props;
-
-		return (
-			<SearchOrCreate
-				name={ id }
-				store={ store }
-				postType={ postType }
-				selected={ isSelected }
-				icon={ <OrganizerIcon /> }
-				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
-				onSelection={ this.selectItem }
-				onSetCreation={ this.setDraftTitle }
-				exclude={ organizers }
-			/>
-		);
+	render() {
+		return [
+			this.renderBlock(),
+			this.renderSettings(),
+		];
 	}
 
-	renderDetails() {
-		const { details, volatile } = this.props;
-		return (
-			<OrganizerDetails
-				organizer={ details }
-				volatile={ volatile }
-				selected={ this.props.isSelected }
-				edit={ this.edit }
-				remove={ this.remove }
-			/>
-		);
-	}
-
-	remove = () => {
-		const {
-			id,
-			organizer,
-			removeOrganizerInBlock,
-			volatile,
-			maybeRemoveEntry,
-			removeOrganizerInClassic,
-			details,
-		} = this.props;
-
-		removeOrganizerInBlock( id, organizer );
-
-		if ( volatile ) {
-			maybeRemoveEntry( details );
-			removeOrganizerInClassic( organizer );
-		}
-	};
-
-	edit = () => {
-		const { details, editEntry } = this.props;
-		editEntry( details );
-	};
-
-	selectItem = ( organizerID, details ) => {
-		const {
-			id,
-			addOrganizerInBlock,
-			addOrganizerInClassic,
-			setDetails,
-		} = this.props;
-
-		setDetails( organizerID, details );
-		addOrganizerInClassic( organizerID );
-		addOrganizerInBlock( id, organizerID );
-	};
-
-	setDraftTitle = ( title ) => {
-		const { createDraft } = this.props;
-		createDraft( {
-			title: {
-				rendered: title,
-			},
-		} );
-	};
 }
 
 export default Organizer;
