@@ -37,6 +37,7 @@ import {
 	toFields,
 	toVenue,
 	GoogleMap,
+	EditLink,
 } from 'elements';
 
 import { VENUE } from 'editor/post-types';
@@ -276,7 +277,7 @@ class EventVenue extends Component {
 	};
 
 	renderControls() {
-		const { showMapLink, showMap, toggleVenueMap, toggleVenueMapLink } = this.props;
+		const { venue, showMapLink, showMap, toggleVenueMap, toggleVenueMapLink } = this.props;
 
 		if ( ! this.hasVenue() ) {
 			return null;
@@ -295,6 +296,10 @@ class EventVenue extends Component {
 						checked={ showMap }
 						onChange={ toggleVenueMap }
 					/>
+				<EditLink
+					id={ venue }
+					label={ __( 'Edit Venue', 'events-gutenberg' ) }
+				/>
 				</PanelBody>
 			</InspectorControls>
 		);
