@@ -48,7 +48,7 @@ export default {
 			source: 'meta',
 			meta: '_EventAllDay',
 		},
-		timezone: {
+		timeZone: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventTimezone',
@@ -62,6 +62,14 @@ export default {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventTimeRangeSeparator',
+		},
+		showTimeZone: {
+			type: 'boolean',
+			default: true,
+		},
+		timeZoneLabel: {
+			type: 'string',
+			default: '',
 		},
 		// Only Available for classic users
 		cost: {
