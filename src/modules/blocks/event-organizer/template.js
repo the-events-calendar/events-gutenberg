@@ -46,7 +46,8 @@ class Organizer extends Component {
 		clear: PropTypes.func,
 		createDraft: PropTypes.func,
 		editPost: PropTypes.func,
-		formOnSubmit: PropTypes.func,
+		onFormSubmit: PropTypes.func,
+		onSelectItem: PropTypes.func
 	};
 
 	componentDidUpdate( prevProps ) {
@@ -69,7 +70,7 @@ class Organizer extends Component {
 	);
 
 	renderForm() {
-		const { fields, submit, formOnSubmit } = this.props;
+		const { fields, submit, onFormSubmit } = this.props;
 
 		if ( submit ) {
 			return this.renderLoading();
@@ -78,23 +79,10 @@ class Organizer extends Component {
 		return (
 			<OrganizerForm
 				{ ...toFields( fields ) }
-				submit={ formOnSubmit }
+				submit={ onFormSubmit }
 			/>
 		);
 	}
-
-	selectItem = ( organizerID, details ) => {
-		const {
-			id,
-			addOrganizerInBlock,
-			addOrganizerInClassic,
-			setDetails,
-		} = this.props;
-
-		setDetails( organizerID, details );
-		addOrganizerInClassic( organizerID );
-		addOrganizerInBlock( id, organizerID );
-	};
 
 	setDraftTitle = ( title ) => (
 		this.props.createDraft( {
@@ -105,7 +93,7 @@ class Organizer extends Component {
 	);
 
 	renderSearch() {
-		const { id, isSelected, organizers, store, postType } = this.props;
+		const { id, isSelected, organizers, store, postType, onSelectItem } = this.props;
 
 		return (
 			<SearchOrCreate
@@ -115,7 +103,7 @@ class Organizer extends Component {
 				selected={ isSelected }
 				icon={ <OrganizerIcon /> }
 				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
-				onSelection={ this.selectItem }
+				onSelection={ onSelectItem }
 				onSetCreation={ this.setDraftTitle }
 				exclude={ organizers }
 			/>

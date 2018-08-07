@@ -30,9 +30,21 @@ const onFormCompleted = ( dispatchProps, ownProps ) => ( body = {} ) => {
 	addOrganizerInBlock( ownProps.id, body.id );
 };
 
-const formOnSubmit = ( dispatchProps, ownProps, fields ) => (
+const onFormSubmit = ( dispatchProps, ownProps ) => ( fields ) => (
 	ownProps.sendForm( toOrganizer( fields ), onFormCompleted( dispatchProps, ownProps ) )
 );
+
+const onSelectItem = ( dispatchProps, ownProps ) => ( organizerID, details ) => {
+	const {
+		setDetails,
+		addOrganizerInClassic,
+		addOrganizerInBlock
+	} = dispatchProps;
+
+	setDetails( organizerID, details );
+	addOrganizerInClassic( organizerID );
+	addOrganizerInBlock( ownProps.id, organizerID );
+};
 
 const mapStateToProps = ( state, props ) => ( {
 	organizer: selectors.getOrganizerInBlock( state, props ),
@@ -60,7 +72,8 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 		...ownProps,
 		...stateProps,
 		...dispatchProps,
-		formOnSubmit: ( fields ) => formOnSubmit( dispatchProps, ownProps, fields ),
+		onFormSubmit: onFormSubmit( dispatchProps, ownProps ),
+		onSelectItem: onSelectItem( dispatchProps, ownProps ),
 	};
 };
 
