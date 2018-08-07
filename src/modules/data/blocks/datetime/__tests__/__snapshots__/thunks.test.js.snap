@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[STORE] - Datetime thunks Initial set of state 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "June 5, 2018 5:00 pm",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "June 5, 2018 5:30 pm",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "allDay": false,
+    },
+    "type": "SET_ALL_DAY",
+  },
+  Object {
+    "payload": Object {
+      "timezone": "UTC",
+    },
+    "type": "SET_TIME_ZONE",
+  },
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "label": "Jun 5 2018 at 5:00 pm - Jun 5 2018 at 5:30 pm",
+    },
+    "type": "SET_NATURAL_LANGUAGE_LABEL",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": true,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set all day off 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "allDay": false,
+    },
+    "type": "SET_ALL_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set all day on 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 00:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 23:59:59",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "allDay": true,
+    },
+    "type": "SET_ALL_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set dates from date picker with multi day off 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-09-19 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-09-19 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set dates from date picker with multi day on 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-09-19 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-09-21 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set end time 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-08-06 18:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set multi day to false when end time is earlier than start time 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 18:00:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set multi day to false when end time is earlier than start time 2`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 22:30:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 23:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set multi day to false when end time is later than start time 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-05 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set multi day to true 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "end": "2018-06-08 17:30:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": true,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks Set start time 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-05 02:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+]
+`;
