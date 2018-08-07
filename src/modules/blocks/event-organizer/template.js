@@ -47,7 +47,8 @@ class Organizer extends Component {
 		createDraft: PropTypes.func,
 		editPost: PropTypes.func,
 		onFormSubmit: PropTypes.func,
-		onSelectItem: PropTypes.func
+		onSelectItem: PropTypes.func,
+		onSetCreation: PropTypes.func,
 	};
 
 	componentDidUpdate( prevProps ) {
@@ -84,16 +85,16 @@ class Organizer extends Component {
 		);
 	}
 
-	setDraftTitle = ( title ) => (
-		this.props.createDraft( {
-			title: {
-				rendered: title,
-			},
-		} )
-	);
-
 	renderSearch() {
-		const { id, isSelected, organizers, store, postType, onSelectItem } = this.props;
+		const {
+			id,
+			isSelected,
+			organizers,
+			store,
+			postType,
+			onSelectItem,
+			onSetCreation,
+		} = this.props;
 
 		return (
 			<SearchOrCreate
@@ -104,7 +105,7 @@ class Organizer extends Component {
 				icon={ <OrganizerIcon /> }
 				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
 				onSelection={ onSelectItem }
-				onSetCreation={ this.setDraftTitle }
+				onSetCreation={ onSetCreation }
 				exclude={ organizers }
 			/>
 		);

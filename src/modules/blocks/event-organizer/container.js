@@ -46,6 +46,14 @@ const onSelectItem = ( dispatchProps, ownProps ) => ( organizerID, details ) => 
 	addOrganizerInBlock( ownProps.id, organizerID );
 };
 
+const onSetCreation = ( ownProps ) => ( title ) => (
+	ownProps.createDraft( {
+		title: {
+			rendered: title,
+		},
+	} )
+);
+
 const mapStateToProps = ( state, props ) => ( {
 	organizer: selectors.getOrganizerInBlock( state, props ),
 	organizers: selectors.getOrganizersInClassic( state ),
@@ -74,6 +82,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 		...dispatchProps,
 		onFormSubmit: onFormSubmit( dispatchProps, ownProps ),
 		onSelectItem: onSelectItem( dispatchProps, ownProps ),
+		onSetCreation: onSetCreation( ownProps ),
 	};
 };
 
