@@ -12,13 +12,42 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ---
 
-### Using developement Version from GitHub
+### Using development version from GitHub
 
 1. Clone the Repository
-2. Install [Yarn](https://yarnpkg.com) _(better)_ or [NPM](https://www.npmjs.com/)
-3. Run `yarn install` on the repository
-4. Run `yarn run build` to generate Assets for the Plugin
+2. Install [NPM](https://www.npmjs.com/)
+3. Run `npm install` on the repository
+4. Run `npm run bootstrap` to bootstrap the plugins
 
+#### Production
+
+To build for production
+
+```sh
+npm run build
+# To only build for certain plugins
+npm run build -- --scope=@moderntribe/common,@moderntribe/events
+```
+
+#### Development
+
+To watch files for development
+
+```sh
+npm run dev
+# To only run watchers for certain plugins
+npm run dev -- --scope=@moderntribe/common,@moderntribe/events
+```
+
+#### Analyze bundles
+
+This will open a browser window showing current bundle sizes for a plugin.
+
+```sh
+npm run analyze
+# To only analyze certain plugins
+npm run analyze -- --scope=@moderntribe/common
+```
 
 ---
 
