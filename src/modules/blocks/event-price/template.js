@@ -186,7 +186,7 @@ class EventPrice extends Component {
 EventPrice.propTypes = {
 	dashboardOpen: PropTypes.bool,
 	cost: PropTypes.string,
-	currencyPosition: PropTypes.oneOf([ 'prefix', 'suffix' ]),
+	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
 	currencySymbol: PropTypes.string,
 	costDescription: PropTypes.string,
 	showCurrencySymbol: PropTypes.bool,
