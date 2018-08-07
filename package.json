@@ -20,7 +20,7 @@
 		"test:travis": "npm run test -- --maxWorkers=4",
 		"lint": "eslint --quiet --parser=babel-eslint 'plugins/**/src/modules/**/*.js'",
 		"lint:fix": "npm run lint -- --fix",
-    "bootstrap": "lerna bootstrap && lerna run bootstrap",
+    "bootstrap": "lerna bootstrap && npx lerna run bootstrap",
     "build": "lerna run build",
     "dev": "lerna run --parallel dev"
 	},
