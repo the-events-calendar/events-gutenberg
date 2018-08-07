@@ -22,7 +22,8 @@
 		"lint:fix": "npm run lint -- --fix",
 		"bootstrap": "lerna bootstrap",
 		"build": "lerna run build",
-		"dev": "lerna run --parallel dev"
+		"dev": "lerna run --parallel dev",
+		"analyze": "lerna run --parallel analyze"
 	},
 	"dependencies": {
 		"@moderntribe/common": "file:plugins/common",
