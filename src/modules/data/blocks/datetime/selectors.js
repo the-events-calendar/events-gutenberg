@@ -37,5 +37,16 @@ export const getTimeSeparator = createSelector(
 
 export const getTimeZone = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.timezone,
+	( values ) => values.timeZone,
 );
+
+export const getTimeZoneVisibility = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.showTimeZone,
+);
+
+export const getTimeZoneLabel = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.timeZoneLabel,
+);
+
