@@ -3,6 +3,7 @@ node_js:
   - "8"
 env:
   - NODE_ENV=test
+before_script: npm run bootstrap
 script: npm run test:travis
 cache:
   directories:
