@@ -15,6 +15,7 @@ export { default as Loading } from './loading';
 export { default as YearMonthForm } from './year-month-form/element';
 export { default as DateInput } from './date-input/element';
 export { default as Upsell } from './upsell/element';
+export { default as EditLink } from './edit-link/element';
 
 import * as Icons from './icons/element';
 export { Icons };

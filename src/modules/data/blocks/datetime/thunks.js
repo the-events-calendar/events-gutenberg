@@ -9,8 +9,8 @@ import { applyFilters } from '@wordpress/hooks';
 import {
 	setStart,
 	setEnd,
-	setAllDay,
-	setMultiDay,
+	setAllDay as setAllDayAction,
+	setMultiDay as setMultiDayAction,
 	setSeparatorDate,
 	setSeparatorTime,
 	setTimeZone,
@@ -39,7 +39,7 @@ export const setEndTime = ( { end, seconds } ) => ( dispatch ) => {
 	dispatch( setEnd( endDateTime ) );
 };
 
-export const setAllDayThunk = ( { start, end, isAllDay } ) => ( dispatch ) => {
+export const setAllDay = ( { start, end, isAllDay } ) => ( dispatch ) => {
 	if ( isAllDay ) {
 		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
 		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), DAY_IN_SECONDS - 1 ) );
@@ -47,7 +47,7 @@ export const setAllDayThunk = ( { start, end, isAllDay } ) => ( dispatch ) => {
 		dispatch( setEnd( endDateTime ) );
 	}
 
-	dispatch( setAllDay( isAllDay ) );
+	dispatch( setAllDayAction( isAllDay ) );
 }
 
 export const setDates = ( { start, end, from, to } ) => ( dispatch ) => {
@@ -65,8 +65,8 @@ export const setDates = ( { start, end, from, to } ) => ( dispatch ) => {
 	dispatch( setEnd( toDateTime( newEndMoment ) ) );
 };
 
-export const setMultiDayThunk = ( { start, end, checked } ) => ( dispatch ) => {
-	if ( checked ) {
+export const setMultiDay = ( { start, end, isMultiDay } ) => ( dispatch ) => {
+	if ( isMultiDay ) {
 		const RANGE_DAYS = applyFilters( 'tec.datetime.defaultRange', 3 );
 		const endMoment = toMoment( end ).clone().add( RANGE_DAYS, 'days' );
 		dispatch( setEnd( toDateTime( endMoment ) ) );
@@ -82,7 +82,7 @@ export const setMultiDayThunk = ( { start, end, checked } ) => ( dispatch ) => {
 		dispatch( setEnd( toDateTime( endMoment ) ) );
 	}
 
-	dispatch( setMultiDay( checked ) );
+	dispatch( setMultiDayAction( isMultiDay ) );
 };
 
 const resetTimes = ( startMoment ) => {
@@ -108,7 +108,7 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 	maybeBulkDispatch( attributes, dispatch )( [
 		[ setStart, 'start', DEFAULT_STATE.start ],
 		[ setEnd, 'end', DEFAULT_STATE.end ],
-		[ setAllDay, 'allDay', DEFAULT_STATE.allDay ],
+		[ setAllDayAction, 'allDay', DEFAULT_STATE.allDay ],
 		[ setSeparatorDate, 'separatorDate', DEFAULT_STATE.dateTimeSeparator ],
 		[ setSeparatorTime, 'separatorTime', DEFAULT_STATE.timeRangeSeparator ],
 		[ setTimeZone, 'timezone', DEFAULT_STATE.timezone ],
@@ -132,5 +132,5 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		start: toMoment( start ),
 		end: toMoment( end ),
 	};
-	dispatch( setMultiDay( ! isSameDay( current.start, current.end ) ) );
+	dispatch( setMultiDayAction( ! isSameDay( current.start, current.end ) ) );
 };
