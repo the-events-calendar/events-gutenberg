@@ -25,8 +25,8 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 		constructor( props ) {
 			super( props );
 			this.details = {
-				type: '',
 				id: null,
+				type: '',
 			};
 		}
 
@@ -63,15 +63,7 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 		}
 
 		render() {
-			return <WrappedComponent { ...this.props } { ...this.aditionalProps() } />;
-		}
-
-		aditionalProps() {
-			const { loading, details } = this.props;
-			return {
-				loading,
-				details,
-			};
+			return <WrappedComponent { ...this.props } />;
 		}
 	}
 
