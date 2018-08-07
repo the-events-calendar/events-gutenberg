@@ -13,7 +13,9 @@ import { isUndefined, isNaN } from 'lodash';
  */
 export const maybeDispatch = ( attributes, dispatch ) => ( action, key, defaultValue ) => {
 	if ( key in attributes ) {
-		const useDefault = isUndefined( attributes[ key ] ) || isNaN( attributes[ key ] );
+		const useDefault = isUndefined( attributes[ key ] ) ||
+			isNaN( attributes[ key ] ) ||
+			'' === attributes[ key ];
 		const value = useDefault ? defaultValue : attributes[ key ];
 		dispatch( action( value ) );
 	}

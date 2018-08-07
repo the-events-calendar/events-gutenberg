@@ -56,7 +56,7 @@ describe( 'Data utils maybeDispatch', () => {
 
 		maybeDispatch( attributes, dispatch )( action, 'content', 'Custom string' );
 		expect( action ).toHaveBeenCalled();
-		expect( action ).toHaveBeenCalledWith( '' );
+		expect( action ).toHaveBeenCalledWith( 'Custom string' );
 
 		maybeDispatch( attributes, dispatch )( action, 'amount', 10 );
 		expect( action ).toHaveBeenCalled();
@@ -72,7 +72,7 @@ describe( 'Data utils maybeDispatch', () => {
 	test( 'Action fired with default value when value is `empty`', () => {
 		maybeDispatch( { title: '' }, dispatch )( action, 'title', 'default' );
 		expect( action ).toHaveBeenCalled();
-		expect( action ).toHaveBeenCalledWith( '' );
+		expect( action ).toHaveBeenCalledWith( 'default' );
 		expect( action ).toHaveBeenCalledTimes( 1 );
 	} );
 
