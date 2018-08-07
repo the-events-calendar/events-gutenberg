@@ -1,0 +1,7 @@
+{
+  "packages": [
+    "plugins/*"
+  ],
+  "version": "independent",
+  "npmClientArgs": ["--production", "--no-optional"]
+}
