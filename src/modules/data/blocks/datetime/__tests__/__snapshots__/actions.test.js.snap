@@ -103,9 +103,36 @@ Object {
 exports[`[STORE] - Datetime actions Action to set the time zone 1`] = `
 Object {
   "payload": Object {
-    "timezone": "UTC",
+    "timeZone": "UTC",
   },
   "type": "SET_TIME_ZONE",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the time zone label 1`] = `
+Object {
+  "payload": Object {
+    "label": "Modern Tribe",
+  },
+  "type": "SET_TIMEZONE_LABEL",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the visibility of the time zone 1`] = `
+Object {
+  "payload": Object {
+    "show": true,
+  },
+  "type": "SET_TIMEZONE_VISIBILITY",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the visibility of the time zone 2`] = `
+Object {
+  "payload": Object {
+    "show": false,
+  },
+  "type": "SET_TIMEZONE_VISIBILITY",
 }
 `;
 
@@ -137,7 +164,7 @@ Array [
   },
   Object {
     "payload": Object {
-      "timezone": "UTC",
+      "timeZone": "UTC",
     },
     "type": "SET_TIME_ZONE",
   },

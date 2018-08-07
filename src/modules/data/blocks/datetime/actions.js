@@ -73,10 +73,24 @@ export const setMultiDay = ( multiDay ) => ( {
 	},
 } );
 
-export const setTimeZone = ( timezone ) => ( {
+export const setTimeZone = ( timeZone ) => ( {
 	type: types.SET_TIME_ZONE,
 	payload: {
-		timezone,
+		timeZone,
+	},
+} );
+
+export const setTimeZoneLabel = ( label ) => ( {
+	type: types.SET_TIMEZONE_LABEL,
+	payload: {
+		label,
+	},
+} );
+
+export const setTimeZoneVisibility = ( show ) => ( {
+	type: types.SET_TIMEZONE_VISIBILITY,
+	payload: {
+		show,
 	},
 } );
 
@@ -90,7 +104,9 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		[ setAllDay, 'allDay', DEFAULT_STATE.allDay ],
 		[ setSeparatorDate, 'separatorDate', DEFAULT_STATE.dateTimeSeparator ],
 		[ setSeparatorTime, 'separatorTime', DEFAULT_STATE.timeRangeSeparator ],
-		[ setTimeZone, 'timezone', DEFAULT_STATE.timezone ],
+		[ setTimeZone, 'timeZone', DEFAULT_STATE.timeZone ],
+		[ setTimeZoneLabel, 'timeZoneLabel', DEFAULT_STATE.timeZoneLabel ],
+		[ setTimeZoneVisibility, 'showTimeZone', DEFAULT_STATE.showTimeZone ],
 	] );
 
 	if ( attributes.start ) {

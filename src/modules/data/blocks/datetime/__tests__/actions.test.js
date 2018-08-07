@@ -45,6 +45,15 @@ describe( '[STORE] - Datetime actions', () => {
 		expect( actions.setTimeZone( 'UTC' ) ).toMatchSnapshot();
 	} );
 
+	test( 'Action to set the time zone label', () => {
+		expect( actions.setTimeZoneLabel( 'Modern Tribe' ) ).toMatchSnapshot();
+	} );
+
+	test( 'Action to set the visibility of the time zone', () => {
+		expect( actions.setTimeZoneVisibility( true ) ).toMatchSnapshot();
+		expect( actions.setTimeZoneVisibility( false ) ).toMatchSnapshot();
+	} );
+
 	test( 'Action to set all day', () => {
 		expect( actions.setAllDay( true ) ).toMatchSnapshot();
 		expect( actions.setAllDay( false ) ).toMatchSnapshot();
@@ -71,7 +80,7 @@ describe( '[STORE] - Datetime thunk actions', () => {
 			timeRangeSeparator: ' - ',
 			allDay: false,
 			multiDay: false,
-			timezone: 'UTC',
+			timeZone: 'UTC',
 		};
 
 		const get = jest.fn( ( key ) => {
