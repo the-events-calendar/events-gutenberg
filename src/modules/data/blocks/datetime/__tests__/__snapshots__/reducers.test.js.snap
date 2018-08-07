@@ -6,9 +6,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -18,9 +20,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -30,9 +34,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "June 25, 2018 4:00 pm",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -42,9 +48,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -54,9 +62,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": true,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -66,9 +76,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -78,9 +90,11 @@ Object {
   "dateTimeSeparator": " > ",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -90,9 +104,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": " | ",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -102,9 +118,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "June 5, 2018 5:00 pm",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -114,9 +132,11 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -126,9 +146,53 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
+}
+`;
+
+exports[`[STORE] - Datetime reducer Should set the timezone label 1`] = `
+Object {
+  "allDay": false,
+  "dateTimeSeparator": "@",
+  "end": "2018-07-19 20:00:00",
+  "multiDay": false,
+  "showTimeZone": true,
+  "start": "2018-07-19 19:30:00",
+  "timeRangeSeparator": "-",
+  "timeZone": "UTC",
+  "timeZoneLabel": "Modern Tribe",
+}
+`;
+
+exports[`[STORE] - Datetime reducer Should set the visibility of the timezone 1`] = `
+Object {
+  "allDay": false,
+  "dateTimeSeparator": "@",
+  "end": "2018-07-19 20:00:00",
+  "multiDay": false,
+  "showTimeZone": true,
+  "start": "2018-07-19 19:30:00",
+  "timeRangeSeparator": "-",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
+}
+`;
+
+exports[`[STORE] - Datetime reducer Should set the visibility of the timezone 2`] = `
+Object {
+  "allDay": false,
+  "dateTimeSeparator": "@",
+  "end": "2018-07-19 20:00:00",
+  "multiDay": false,
+  "showTimeZone": false,
+  "start": "2018-07-19 19:30:00",
+  "timeRangeSeparator": "-",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
 
@@ -138,8 +202,10 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": true,
+  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
-  "timezone": "UTC",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
 }
 `;
