@@ -2,12 +2,11 @@
  * External dependencies
  */
 const { resolve } = require( 'path' );
-const { readdirSync } = require( 'fs' );
-const { pickBy, zipObject, mapValues, mapKeys, includes } = require( 'lodash' );
-const { pipe } = require( 'lodash/fp' );
+const { reduce, zipObject } = require( 'lodash' );
 const merge = require( 'webpack-merge' );
 const common = require( '../../webpack/common/webpack.config' );
 const { getDirectoryNames, getDirectories } = require( '../../webpack/utils/directories' );
+const { getJSFileNames, getJSFiles } = require( '../../webpack/utils/files' );
 const { generateEntries } = require( '../../webpack/entry/tribe' );
 
 const directoryNames = getDirectoryNames( resolve( __dirname, './src/modules' ) );
@@ -43,23 +42,19 @@ const styleDirectories = getDirectories( stylePath );
 const styleDirectoryNames = getDirectoryNames( stylePath );
 const styleEntries = zipObject( styleDirectoryNames, styleDirectories );
 
-const hasFile = ( file ) => pipe(
-	entryPath => readdirSync( entryPath ),
-	filenames => includes( filenames, file )
-);
-
 const removeExtension = ( str ) => str.slice( 0, str.lastIndexOf( '.' ) );
 
-const getEntries = ( file ) => pipe(
-	fileEntries => pickBy( fileEntries, hasFile( file ) ),
-	validEntries => mapValues( validEntries, path => `${ path }/${ file }` ),
-	entries => mapKeys( entries, ( _, entry ) => `${ entry }/${ removeExtension( file ) }` )
-);
-
-const entries = {
-	...getEntries( 'backend.js' )( styleEntries ),
-	...getEntries( 'frontend.js' )( styleEntries ),
-};
+const entries = reduce( styleEntries, ( result, dirPath, dirName ) => {
+	const jsFiles = getJSFiles( dirPath );
+	const jsFileNames = getJSFileNames( dirPath );
+	const entryNames = jsFileNames.map(
+		filename => `${ dirName }/${ removeExtension( filename ) }`
+	);
+	return {
+		...result,
+		...zipObject( entryNames, jsFiles ),
+	};
+}, { } );
 
 const styleConfig = merge( common, {
 	entry: entries,
