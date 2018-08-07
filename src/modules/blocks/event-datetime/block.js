@@ -82,7 +82,7 @@ class EventDateTime extends Component {
 		separatorDate: PropTypes.string,
 		separatorTime: PropTypes.string,
 		timezone: PropTypes.string,
-		currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix' ] ),
+		currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
 		currencySymbol: PropTypes.string,
 		naturalLanguageLabel: PropTypes.string,
 		setInitialState: PropTypes.func,
