@@ -10,7 +10,7 @@ import { isUndefined, isEqual } from 'lodash';
 /**
  * Internal dependencies
  */
-import { actions, selectors } from 'data/details';
+import { actions, thunks, selectors } from 'data/details';
 
 export default ( key = 'id' ) => ( WrappedComponent ) => {
 	class WithDetails extends Component {
@@ -76,7 +76,10 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 		};
 	};
 
-	const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+	const mapDispatchToProps = ( dispatch ) => ( {
+		...bindActionCreators( actions, dispatch ),
+		...bindActionCreators( thunks, dispatch ),
+	} );
 
-	return compose( connect( mapStateToProps, mapDispatchToProps ) )( WithDetails );
+	return connect( mapStateToProps, mapDispatchToProps )( WithDetails );
 };
