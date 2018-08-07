@@ -1,16 +1,14 @@
 /**
  * External dependencies
  */
-const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const { resolve } = require( 'path' );
 const { readdirSync } = require( 'fs' );
-const { pickBy, zipObject, mapValues, mapKeys, reduce, includes } = require( 'lodash' );
+const { pickBy, zipObject, mapValues, mapKeys, includes } = require( 'lodash' );
 const { pipe } = require( 'lodash/fp' );
 const merge = require( 'webpack-merge' );
 const common = require( '../../webpack/common/webpack.config' );
 const { getDirectoryNames, getDirectories } = require( '../../webpack/utils/directories' );
 const { generateEntries } = require( '../../webpack/entry/tribe' );
-const styles = require( '../../webpack/module/rules/styles' );
 
 const directoryNames = getDirectoryNames( resolve( __dirname, './src/modules' ) );
 const PLUGIN_SCOPE = 'events';
