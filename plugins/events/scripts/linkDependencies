@@ -1,0 +1,6 @@
+#! /bin/bash
+
+ln -sf $PWD/src/modules/blocks $PWD
+ln -sf $PWD/src/modules/data $PWD
+ln -sf $PWD/src/modules/editor $PWD
+ln -sf $PWD/src/modules/elements $PWD

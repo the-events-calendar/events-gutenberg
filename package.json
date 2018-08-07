@@ -20,7 +20,7 @@
 		"test:travis": "npm run test -- --maxWorkers=4",
 		"lint": "eslint --quiet --parser=babel-eslint 'plugins/**/src/modules/**/*.js'",
 		"lint:fix": "npm run lint -- --fix",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap && lerna run bootstrap",
     "build": "lerna run build",
     "dev": "lerna run --parallel dev"
 	},
@@ -110,5 +110,6 @@
 		"webpack": "^4.16.5",
 		"webpack-cli": "^3.1.0",
 		"webpack-merge": "^4.1.4"
-	}
+  },
+  "workspaces": ["plugins/*"]
 }
