@@ -14,6 +14,7 @@ export { default as SearchOrCreate } from './search-or-create/element';
 export { default as Loading } from './loading';
 export { default as YearMonthForm } from './year-month-form/element';
 export { default as Upsell } from './upsell/element';
+export { default as TimeZone } from './timezone/element';
 
 import * as Icons from './icons/element';
 export { Icons };
