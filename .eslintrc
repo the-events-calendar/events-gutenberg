@@ -17,11 +17,6 @@
     },
     "sourceType": "module"
   },
-  "settings": {
-    "import/resolver": {
-      "node": {}
-    }
-  },
   "rules": {
     "import/no-unresolved": [1],
     "indent": [

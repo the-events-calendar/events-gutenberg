@@ -70,7 +70,6 @@
 		"babel-loader": "^7.1.5",
 		"babel-plugin-import-glob": "2.0.0",
 		"babel-plugin-lodash": "3.2.11",
-		"babel-plugin-module-resolver": "^3.1.1",
 		"babel-plugin-syntax-class-properties": "^6.13.0",
 		"babel-plugin-transform-class-properties": "^6.24.1",
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
