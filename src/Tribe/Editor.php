@@ -359,6 +359,10 @@ class Tribe__Events_Gutenberg__Editor {
 			)
 		);
 
+		$js_config = array(
+			'admin_url' => admin_url(),
+		);
+
 		tribe_asset(
 			$plugin,
 			'tribe-events-editor-elements',
@@ -368,6 +372,17 @@ class Tribe__Events_Gutenberg__Editor {
 			array(
 				'in_footer'    => false,
 				'localize'     => array(
+					array(
+						'name' => 'tribe_js_config',
+						/**
+						 * Array used to setup the FE with custom variables from the BE
+						 *
+						 * @since TBD
+						 *
+						 * @param array An array with the variables to be localized
+						 */
+						'data' => apply_filters( 'tribe_events_gutenberg_js_config', $js_config ),
+					),
 					array(
 						'name' => 'tribe_blocks_editor_settings',
 						'data' => tribe( 'gutenberg.settings' )->get_options(),
