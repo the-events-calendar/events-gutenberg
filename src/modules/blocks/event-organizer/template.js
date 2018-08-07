@@ -28,7 +28,7 @@ import {
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
 import OrganizerIcon from 'icons/organizer.svg';
-import { toFields, toOrganizer } from 'elements/organizer-form/utils';
+import { toFields } from 'elements/organizer-form/utils';
 
 class Organizer extends Component {
 
@@ -46,6 +46,7 @@ class Organizer extends Component {
 		clear: PropTypes.func,
 		createDraft: PropTypes.func,
 		editPost: PropTypes.func,
+		formOnSubmit: PropTypes.func,
 	};
 
 	componentDidUpdate( prevProps ) {
@@ -61,23 +62,6 @@ class Organizer extends Component {
 		}
 	}
 
-	formCompleted = ( body = {} ) => {
-		const {
-			setDetails,
-			addOrganizerInClassic,
-			addOrganizerInBlock,
-			id,
-		} = this.props;
-
-		setDetails( body.id, body );
-		addOrganizerInClassic( body.id );
-		addOrganizerInBlock( id, body.id );
-	};
-
-	onSubmit = ( fields ) => (
-		this.props.sendForm( toOrganizer( fields ), this.formCompleted )
-	);
-
 	renderLoading = () => (
 		<div className="tribe-editor__spinner-container">
 			<Spinner />
@@ -85,7 +69,7 @@ class Organizer extends Component {
 	);
 
 	renderForm() {
-		const { fields, submit } = this.props;
+		const { fields, submit, formOnSubmit } = this.props;
 
 		if ( submit ) {
 			return this.renderLoading();
@@ -94,7 +78,7 @@ class Organizer extends Component {
 		return (
 			<OrganizerForm
 				{ ...toFields( fields ) }
-				submit={ this.onSubmit }
+				submit={ formOnSubmit }
 			/>
 		);
 	}
