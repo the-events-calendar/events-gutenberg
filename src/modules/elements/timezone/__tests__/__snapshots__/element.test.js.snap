@@ -38,44 +38,6 @@ exports[`EditLink element Should add the class name into the component 1`] = `
 </div>
 `;
 
-exports[`EditLink element Should add the class name into the componetn 1`] = `
-<div
-  className="my-custom-class-name"
-  style={
-    Object {
-      "display": "inline-block",
-    }
-  }
->
-  <input
-    onChange={[Function]}
-    placeholder=""
-    style={
-      Object {
-        "boxSizing": "content-box",
-        "width": "1px",
-      }
-    }
-    value=""
-  />
-  <div
-    style={
-      Object {
-        "height": 0,
-        "left": 0,
-        "overflow": "scroll",
-        "position": "absolute",
-        "top": 0,
-        "visibility": "hidden",
-        "whiteSpace": "pre",
-      }
-    }
-  >
-    
-  </div>
-</div>
-`;
-
 exports[`EditLink element Should render the component 1`] = `
 <div
   className="tribe-editor__timezone-input"
