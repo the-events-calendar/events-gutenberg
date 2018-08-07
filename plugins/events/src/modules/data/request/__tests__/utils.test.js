@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { utils } from '@@tribe/events/data/request';
+import { utils } from '@moderntribe/events/data/request';
 
 const wpParamsExpected = {
 	orderby: 'title',

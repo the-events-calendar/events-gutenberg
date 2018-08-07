@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/blocks/sharing';
+import { types } from '@moderntribe/events/data/blocks/sharing';
 
 describe( '[STORE] - Sharing types', () => {
 	it( 'Should return the value for the types', () => {

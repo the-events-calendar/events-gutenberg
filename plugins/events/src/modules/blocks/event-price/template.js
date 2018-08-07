@@ -20,9 +20,9 @@ import { InspectorControls } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import { Dashboard } from '@@tribe/events/elements';
-import { parser } from '@@tribe/events/editor/utils/range';
-import { sendValue } from '@@tribe/events/editor/utils/input';
+import { Dashboard } from '@moderntribe/events/elements';
+import { parser } from '@moderntribe/events/editor/utils/range';
+import { sendValue } from '@moderntribe/events/editor/utils/input';
 import './style.pcss';
 
 /**

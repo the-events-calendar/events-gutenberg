@@ -16,7 +16,7 @@ import { Component } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { YearMonthForm } from '@@tribe/events/elements';
+import { YearMonthForm } from '@moderntribe/events/elements';
 import './style.pcss';
 
 const today = new Date();

@@ -22,9 +22,9 @@ import { InspectorControls } from '@wordpress/editor';
 import LinkIcon from 'icons/link.svg';
 import './style.pcss';
 
-import withSaveData from '@@tribe/common/hoc/with-save-data';
-import { actions, selectors } from '@@tribe/events/data/blocks/sharing';
-import { sendValue } from '@@tribe/events/editor/utils/input';
+import withSaveData from '@moderntribe/common/hoc/with-save-data';
+import { actions, selectors } from '@moderntribe/events/data/blocks/sharing';
+import { sendValue } from '@moderntribe/events/editor/utils/input';
 
 /**
  * Module Code

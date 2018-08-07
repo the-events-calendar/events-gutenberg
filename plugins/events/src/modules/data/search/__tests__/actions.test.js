@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { actions } from '@@tribe/events/data/search';
+import { actions } from '@moderntribe/events/data/search';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );

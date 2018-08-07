@@ -7,7 +7,7 @@ import {
 	settings,
 	list,
 	get,
-} from '@@tribe/events/editor/utils/globals';
+} from '@moderntribe/events/editor/utils/globals';
 
 describe( 'Tests for globals.js', () => {
 

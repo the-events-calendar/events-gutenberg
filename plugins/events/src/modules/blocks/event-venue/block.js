@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import { addressToMapString } from '@@tribe/events/editor/utils/geo-data';
+import { addressToMapString } from '@moderntribe/events/editor/utils/geo-data';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
@@ -37,14 +37,14 @@ import {
 	toFields,
 	toVenue,
 	GoogleMap,
-} from '@@tribe/events/elements';
+} from '@moderntribe/events/elements';
 
-import { VENUE } from '@@tribe/events/editor/post-types';
-import { withSaveData, withDetails, withForm } from '@@tribe/common/hoc';
+import { VENUE } from '@moderntribe/events/editor/post-types';
+import { withSaveData, withDetails, withForm } from '@moderntribe/common/hoc';
 import VenueDetails from './venue';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
-import { actions, selectors, utils } from '@@tribe/events/data/blocks/venue';
+import { actions, selectors, utils } from '@moderntribe/events/data/blocks/venue';
 
 /**
  * Module Code

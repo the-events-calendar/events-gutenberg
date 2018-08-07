@@ -7,7 +7,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { withSaveData } from '@@tribe/common/hoc';
+import { withSaveData } from '@moderntribe/common/hoc';
 
 const Block = ( props ) => <div { ...props }>With Save Data!</div>;
 let Wrapper;

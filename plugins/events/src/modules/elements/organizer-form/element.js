@@ -17,7 +17,7 @@ import { Component } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { Input } from '@@tribe/events/elements';
+import { Input } from '@moderntribe/events/elements';
 
 /**
  * Module Code

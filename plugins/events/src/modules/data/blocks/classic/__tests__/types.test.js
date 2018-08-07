@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/blocks/classic';
+import { types } from '@moderntribe/events/data/blocks/classic';
 
 describe( '[STORE] - Classic types', () => {
 	it( 'Should return the types values', () => {

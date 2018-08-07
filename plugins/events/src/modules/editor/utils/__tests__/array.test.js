@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { hasAnyOf } from '@@tribe/events/editor/utils/array';
+import { hasAnyOf } from '@moderntribe/events/editor/utils/array';
 
 describe( 'Tests for array.js', () => {
 	test( 'hasAnyOf', () => {

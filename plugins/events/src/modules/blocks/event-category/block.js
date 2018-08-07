@@ -16,12 +16,12 @@ import {
 /**
  * Internal dependencies
  */
-import { getSetting } from '@@tribe/events/editor/settings';
+import { getSetting } from '@moderntribe/events/editor/settings';
 import './style.pcss';
 
 import {
 	TermsList,
-} from '@@tribe/events/elements';
+} from '@moderntribe/events/elements';
 
 /**
  * Module Code

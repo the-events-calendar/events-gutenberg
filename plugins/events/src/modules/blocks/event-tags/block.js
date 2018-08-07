@@ -20,7 +20,7 @@ import './style.pcss';
 
 import {
 	TermsList,
-} from '@@tribe/events/elements';
+} from '@moderntribe/events/elements';
 
 /**
  * Module Code

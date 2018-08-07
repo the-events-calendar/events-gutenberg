@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import reducer, { DEFAULT_STATE } from '@@tribe/events/data/blocks/venue/reducers';
-import { actions } from '@@tribe/events/data/blocks/venue';
+import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/venue/reducers';
+import { actions } from '@moderntribe/events/data/blocks/venue';
 
 describe( '[STORE] - Venue reducer', () => {
 	it( 'Should set the initial state', () => {

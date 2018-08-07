@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/details';
+import { types } from '@moderntribe/events/data/details';
 
 describe( '[STORE] - Details types', () => {
 	it( 'Should return the types values', () => {

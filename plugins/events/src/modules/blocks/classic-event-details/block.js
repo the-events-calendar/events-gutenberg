@@ -14,7 +14,7 @@ import AutosizeInput from 'react-input-autosize';
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 
-import withSaveData from '@@tribe/common/hoc/with-save-data';
+import withSaveData from '@moderntribe/common/hoc/with-save-data';
 
 import {
 	ToggleControl,
@@ -33,22 +33,22 @@ import {
 import {
 	TermsList,
 	MetaGroup,
-} from '@@tribe/events/elements';
+} from '@moderntribe/events/elements';
 
 import { default as EventOrganizers } from './organizers';
 
-import { toMoment, toDate, toTime } from '@@tribe/events/editor/utils/moment';
-import { actions as dateTimeActions, selectors as dateTimeSelectors } from '@@tribe/events/data/blocks/datetime';
-import { actions as priceActions, selectors as priceSelectors } from '@@tribe/events/data/blocks/price';
-import { actions as websiteActions, selectors as websiteSelectors } from '@@tribe/events/data/blocks/website';
-import { actions as classicActions, selectors as classicSelectors } from '@@tribe/events/data/blocks/classic';
+import { toMoment, toDate, toTime } from '@moderntribe/events/editor/utils/moment';
+import { actions as dateTimeActions, selectors as dateTimeSelectors } from '@moderntribe/events/data/blocks/datetime';
+import { actions as priceActions, selectors as priceSelectors } from '@moderntribe/events/data/blocks/price';
+import { actions as websiteActions, selectors as websiteSelectors } from '@moderntribe/events/data/blocks/website';
+import { actions as classicActions, selectors as classicSelectors } from '@moderntribe/events/data/blocks/classic';
 import {
 	actions as organizersActions,
 	selectors as organizerSelectors,
-} from '@@tribe/events/data/blocks/organizers';
-import { actions as UIActions } from '@@tribe/events/data/ui';
-import { sendValue } from '@@tribe/events/editor/utils/input';
-import { FORMATS } from '@@tribe/events/editor/utils';
+} from '@moderntribe/events/data/blocks/organizers';
+import { actions as UIActions } from '@moderntribe/events/data/ui';
+import { sendValue } from '@moderntribe/events/editor/utils/input';
+import { FORMATS } from '@moderntribe/events/editor/utils';
 
 /**
  * Module Code

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/forms';
+import { types } from '@moderntribe/events/data/forms';
 
 describe( '[STORE] - Form types', () => {
 	it( 'Should return the types values', () => {

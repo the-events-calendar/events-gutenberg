@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { actions } from '@@tribe/events/data/blocks/datetime';
-import reducer, { DEFAULT_STATE } from '@@tribe/events/data/blocks/datetime/reducers';
+import { actions } from '@moderntribe/events/data/blocks/datetime';
+import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/datetime/reducers';
 
 jest.mock( 'moment', () => () => {
 	const moment = require.requireActual( 'moment' );

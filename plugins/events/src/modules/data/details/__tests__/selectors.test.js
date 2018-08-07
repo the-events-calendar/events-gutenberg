@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from '@@tribe/events/data/details';
-import { DEFAULT_STATE } from '@@tribe/events/data/details/reducers/details';
+import { selectors } from '@moderntribe/events/data/details';
+import { DEFAULT_STATE } from '@moderntribe/events/data/details/reducers/details';
 
 const state = {
 	details: {

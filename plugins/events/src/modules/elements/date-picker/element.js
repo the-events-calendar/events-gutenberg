@@ -17,7 +17,7 @@ import {
 /**
  * Internal dependencies
  */
-import { toMoment, toDate, toDatePicker, toDateTime } from '@@tribe/events/editor/utils/moment';
+import { toMoment, toDate, toDatePicker, toDateTime } from '@moderntribe/events/editor/utils/moment';
 
 import './style.pcss';
 

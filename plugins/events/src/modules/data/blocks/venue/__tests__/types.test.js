@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/blocks/venue';
+import { types } from '@moderntribe/events/data/blocks/venue';
 
 describe( '[STORE] - Venue types', () => {
 	it( 'Should return the venue types', () => {

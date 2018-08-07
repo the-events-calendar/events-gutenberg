@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { DEFAULT_STATE } from '@@tribe/events/data/blocks/sharing/reducers';
-import { selectors } from '@@tribe/events/data/blocks/sharing';
+import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/sharing/reducers';
+import { selectors } from '@moderntribe/events/data/blocks/sharing';
 
 const state = {
 	blocks: {

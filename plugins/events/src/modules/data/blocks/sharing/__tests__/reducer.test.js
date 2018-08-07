@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { actions } from '@@tribe/events/data/blocks/sharing';
-import reducer, { DEFAULT_STATE } from '@@tribe/events/data/blocks/sharing/reducers';
+import { actions } from '@moderntribe/events/data/blocks/sharing';
+import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/sharing/reducers';
 
 describe( '[STORE] - Sharing reducer', () => {
 	it( 'Should return the default state', () => {

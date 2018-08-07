@@ -25,11 +25,11 @@ import {
 import {
 	OrganizerForm,
 	SearchPosts,
-} from '@@tribe/events/elements';
-import { actions, selectors } from '@@tribe/events/data/blocks/organizers';
-import { actions as detailsActions } from '@@tribe/events/data/details';
+} from '@moderntribe/events/elements';
+import { actions, selectors } from '@moderntribe/events/data/blocks/organizers';
+import { actions as detailsActions } from '@moderntribe/events/data/details';
 import { Item } from './organizer';
-import { ORGANIZER } from '@@tribe/events/editor/post-types';
+import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 
 function CreateDropdown( { ...props } ) {
 	const { addOrganizer } = props;

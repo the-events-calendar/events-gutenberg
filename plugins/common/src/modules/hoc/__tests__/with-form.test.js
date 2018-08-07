@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { withForm } from '@@tribe/common/hoc';
+import { withForm } from '@moderntribe/common/hoc';
 
 const initialState = {
 	forms: {

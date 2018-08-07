@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/ui';
+import { types } from '@moderntribe/events/data/ui';
 
 describe( '[STORE] - UI types', () => {
 	it( 'Should match the types values', () => {

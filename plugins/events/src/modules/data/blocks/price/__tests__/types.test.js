@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/blocks/price';
+import { types } from '@moderntribe/events/data/blocks/price';
 
 describe( '[STORE] - Price types', () => {
 	it( 'Should return the types values', () => {

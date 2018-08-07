@@ -10,9 +10,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { withStore } from '@@tribe/common/hoc';
+import { withStore } from '@moderntribe/common/hoc';
 import EventDateTime from './block';
-import { Icons } from '@@tribe/events/elements';
+import { Icons } from '@moderntribe/events/elements';
 
 /**
  * Module Code

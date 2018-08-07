@@ -8,7 +8,7 @@ import { isEmpty, noop } from 'lodash';
 import { decode } from 'he';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions, selectors } from '@@tribe/events/data/search';
+import { actions, selectors } from '@moderntribe/events/data/search';
 
 /**
  * WordPress dependencies

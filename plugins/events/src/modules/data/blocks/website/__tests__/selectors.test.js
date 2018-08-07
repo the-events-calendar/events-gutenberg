@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { selectors } from '@@tribe/events/data/blocks/website';
-import { DEFAULT_STATE } from '@@tribe/events/data/blocks/website/reducers';
+import { selectors } from '@moderntribe/events/data/blocks/website';
+import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/website/reducers';
 
 const state = {
 	blocks: {

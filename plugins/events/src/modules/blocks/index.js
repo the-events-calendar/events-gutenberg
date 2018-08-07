@@ -1,17 +1,17 @@
 import { registerBlockType } from '@wordpress/blocks';
 
-import classicEventDetails from '@@tribe/events/blocks/classic-event-details';
+import classicEventDetails from '@moderntribe/events/blocks/classic-event-details';
 
-import eventDateTime from '@@tribe/events/blocks/event-datetime';
-import eventVenue from '@@tribe/events/blocks/event-venue';
-import eventOrganizer from '@@tribe/events/blocks/event-organizer';
-import eventLinks from '@@tribe/events/blocks/event-links';
-import eventPrice from '@@tribe/events/blocks/event-price';
-import eventCategory from '@@tribe/events/blocks/event-category';
-import eventTags from '@@tribe/events/blocks/event-tags';
-import eventWebsite from '@@tribe/events/blocks/event-website';
-import FeaturedImage from '@@tribe/events/blocks/featured-image';
-import { initStore } from '@@tribe/events/data';
+import eventDateTime from '@moderntribe/events/blocks/event-datetime';
+import eventVenue from '@moderntribe/events/blocks/event-venue';
+import eventOrganizer from '@moderntribe/events/blocks/event-organizer';
+import eventLinks from '@moderntribe/events/blocks/event-links';
+import eventPrice from '@moderntribe/events/blocks/event-price';
+import eventCategory from '@moderntribe/events/blocks/event-category';
+import eventTags from '@moderntribe/events/blocks/event-tags';
+import eventWebsite from '@moderntribe/events/blocks/event-website';
+import FeaturedImage from '@moderntribe/events/blocks/featured-image';
+import { initStore } from '@moderntribe/events/data';
 
 import './style.pcss';
 

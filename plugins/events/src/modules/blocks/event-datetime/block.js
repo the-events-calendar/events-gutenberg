@@ -33,23 +33,23 @@ import {
 	Dashboard,
 	Month,
 	Upsell,
-} from '@@tribe/events/elements';
+} from '@moderntribe/events/elements';
 import './style.pcss';
 
 import {
 	actions as dateTimeActions,
 	selectors as dateTimeSelectors,
-} from '@@tribe/events/data/blocks/datetime';
+} from '@moderntribe/events/data/blocks/datetime';
 import {
 	actions as UIActions,
 	selectors as UISelectors,
-} from '@@tribe/events/data/ui';
+} from '@moderntribe/events/data/ui';
 import {
 	selectors as priceSelectors,
 	actions as priceActions,
-} from '@@tribe/events/data/blocks/price';
+} from '@moderntribe/events/data/blocks/price';
 
-import { getSetting, getConstants } from '@@tribe/events/editor/settings';
+import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
 import classNames from 'classnames';
 import {
 	toFormat,
@@ -57,10 +57,10 @@ import {
 	toDate,
 	toDateNoYear,
 	toTime,
-} from '@@tribe/events/editor/utils/moment';
-import { FORMATS, timezonesAsSelectData, TODAY } from '@@tribe/events/editor/utils/date';
-import withSaveData from '@@tribe/common/hoc/with-save-data';
-import { hasClass, searchParent } from '@@tribe/events/editor/utils/dom';
+} from '@moderntribe/events/editor/utils/moment';
+import { FORMATS, timezonesAsSelectData, TODAY } from '@moderntribe/events/editor/utils/date';
+import withSaveData from '@moderntribe/common/hoc/with-save-data';
+import { hasClass, searchParent } from '@moderntribe/events/editor/utils/dom';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 

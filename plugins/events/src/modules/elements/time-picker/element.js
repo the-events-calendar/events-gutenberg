@@ -22,8 +22,8 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import './style.pcss';
-import { DAY_IN_SECONDS, MINUTE_IN_SECONDS } from '@@tribe/events/editor/utils/time';
-import { toFormat, setTimeInSeconds, totalSeconds, roundTime } from '@@tribe/events/editor/utils/moment';
+import { DAY_IN_SECONDS, MINUTE_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { toFormat, setTimeInSeconds, totalSeconds, roundTime } from '@moderntribe/events/editor/utils/moment';
 
 export default class TimePicker extends Component {
 	static defaultProps = {

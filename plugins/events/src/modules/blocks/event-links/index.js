@@ -11,8 +11,8 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventLinks from './block';
-import { Icons } from '@@tribe/events/elements';
-import { withStore } from '@@tribe/common/hoc';
+import { Icons } from '@moderntribe/events/elements';
+import { withStore } from '@moderntribe/common/hoc';
 
 /**
  * Module Code

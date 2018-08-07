@@ -5,13 +5,13 @@ import {
 	types,
 	actions,
 	selectors, selectors as dateTimeSelectors,
-} from '@@tribe/events/data/blocks/datetime';
+} from '@moderntribe/events/data/blocks/datetime';
 
 import {
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
-} from '@@tribe/events/editor/utils/moment';
+} from '@moderntribe/events/editor/utils/moment';
 
 const {
 	setStart,

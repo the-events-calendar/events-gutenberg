@@ -5,7 +5,7 @@ import {
 	isTruthy,
 	isFalsy,
 	replaceWithObject,
-} from '@@tribe/events/editor/utils/string';
+} from '@moderntribe/events/editor/utils/string';
 
 describe( 'Tests for string.js', () => {
 	test( 'isTruthy', () => {

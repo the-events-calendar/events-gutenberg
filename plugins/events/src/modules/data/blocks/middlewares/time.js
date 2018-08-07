@@ -1,14 +1,14 @@
 /**
  * Internal dependencies
  */
-import { types, selectors, actions } from '@@tribe/events/data/blocks/datetime';
+import { types, selectors, actions } from '@moderntribe/events/data/blocks/datetime';
 
 import {
 	isSameDay,
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
-} from '@@tribe/events/editor/utils/moment';
+} from '@moderntribe/events/editor/utils/moment';
 
 const {
 	setStart,
@@ -16,7 +16,7 @@ const {
 	setAllDay,
 } = actions;
 
-import { HOUR_IN_SECONDS } from '@@tribe/events/editor/utils/time';
+import { HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 
 export const startTime = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	next( action );

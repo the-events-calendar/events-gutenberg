@@ -1,11 +1,11 @@
 /**
  * Internal dependencies
  */
-import reducer, { actions } from '@@tribe/events/data/search';
-import search, { DEFAULT_STATE } from '@@tribe/events/data/search/reducers/search';
+import reducer, { actions } from '@moderntribe/events/data/search';
+import search, { DEFAULT_STATE } from '@moderntribe/events/data/search/reducers/search';
 
-jest.mock( '@@tribe/events/data/search/reducers/search', () => {
-	const original = require.requireActual( '@@tribe/events/data/search/reducers/search' );
+jest.mock( '@moderntribe/events/data/search/reducers/search', () => {
+	const original = require.requireActual( '@moderntribe/events/data/search/reducers/search' );
 	return {
 		__esModule: true,
 		...original,

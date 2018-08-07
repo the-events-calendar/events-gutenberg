@@ -26,7 +26,7 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
-import { actions, selectors } from '@@tribe/events/data/search';
+import { actions, selectors } from '@moderntribe/events/data/search';
 
 /**
  * Module Code

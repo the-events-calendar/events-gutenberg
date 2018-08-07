@@ -14,8 +14,8 @@ import { RichText } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import { Input } from '@@tribe/events/elements';
-import list, { getCountries, getStates, getCountryCode, getStateCode } from '@@tribe/events/editor/utils/geo-data';
+import { Input } from '@moderntribe/events/elements';
+import list, { getCountries, getStates, getCountryCode, getStateCode } from '@moderntribe/events/editor/utils/geo-data';
 import './style.pcss';
 
 export function toFields( venue ) {

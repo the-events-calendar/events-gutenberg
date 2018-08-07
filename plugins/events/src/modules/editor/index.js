@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-export * from '@@tribe/events/editor/utils';
-export * from '@@tribe/events/editor/settings';
+export * from '@moderntribe/events/editor/utils';
+export * from '@moderntribe/events/editor/settings';
 
 import './style.pcss';

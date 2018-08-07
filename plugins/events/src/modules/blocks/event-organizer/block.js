@@ -21,14 +21,14 @@ import { __ } from '@wordpress/i18n';
  */
 import {
 	SearchOrCreate,
-} from '@@tribe/events/elements';
+} from '@moderntribe/events/elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
-import { withSaveData, withDetails, withForm } from '@@tribe/common/hoc';
+import { withSaveData, withDetails, withForm } from '@moderntribe/common/hoc';
 import OrganizerIcon from 'icons/organizer.svg';
-import { actions, selectors } from '@@tribe/events/data/blocks/organizers';
-import { actions as detailsActions } from '@@tribe/events/data/details';
-import { toFields, toOrganizer } from '@@tribe/events/elements/organizer-form/utils';
+import { actions, selectors } from '@moderntribe/events/data/blocks/organizers';
+import { actions as detailsActions } from '@moderntribe/events/data/details';
+import { toFields, toOrganizer } from '@moderntribe/events/elements/organizer-form/utils';
 
 class Organizer extends Component {
 	static propTypes = {

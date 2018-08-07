@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { getAddress, getCoordinates } from '@@tribe/events/data/blocks/venue/utils';
+import { getAddress, getCoordinates } from '@moderntribe/events/data/blocks/venue/utils';
 
 describe( 'Venue Utils', () => {
 	it( 'Should return the address details', () => {

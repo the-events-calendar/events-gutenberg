@@ -1,4 +1,4 @@
-import { getItems } from '@@tribe/events/elements/timezone-picker/element';
+import { getItems } from '@moderntribe/events/elements/timezone-picker/element';
 import { get } from 'lodash';
 
 /**

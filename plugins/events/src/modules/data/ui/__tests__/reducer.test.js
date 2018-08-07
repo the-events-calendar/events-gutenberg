@@ -6,8 +6,8 @@ import moment from 'moment';
 /**
  * Internal dependencies
  */
-import { actions } from '@@tribe/events/data/ui';
-import reducer, { DEFAULT_STATE } from '@@tribe/events/data/ui/reducer';
+import { actions } from '@moderntribe/events/data/ui';
+import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/ui/reducer';
 
 describe( '[STORE] - UI reducer', () => {
 	it( 'Should return the default state', () => {

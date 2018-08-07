@@ -12,9 +12,9 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import Organizer from './block';
-import { Icons } from '@@tribe/events/elements';
-import { withStore } from '@@tribe/common/hoc';
-import { ORGANIZER } from '@@tribe/events/editor/post-types';
+import { Icons } from '@moderntribe/events/elements';
+import { withStore } from '@moderntribe/common/hoc';
+import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 
 export default {
 	id: 'event-organizer',

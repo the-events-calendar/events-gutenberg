@@ -7,9 +7,9 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { withStore } from '@@tribe/common/hoc';
+import { withStore } from '@moderntribe/common/hoc';
 
-jest.mock( '@@tribe/events/data', () => ( {
+jest.mock( '@moderntribe/events/data', () => ( {
 	getStore() {
 		return {};
 	},

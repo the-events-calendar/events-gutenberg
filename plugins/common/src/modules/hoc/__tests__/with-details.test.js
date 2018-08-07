@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { withDetails } from '@@tribe/common/hoc';
+import { withDetails } from '@moderntribe/common/hoc';
 
 const initialState = {
 	details: {},

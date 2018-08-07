@@ -11,10 +11,10 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import { HALF_HOUR_IN_SECONDS } from '@@tribe/events/editor/utils/time';
-import { FORMATS } from '@@tribe/events/editor/utils/date';
-import { roundTime, toDateTime } from '@@tribe/events/editor/utils/moment';
-import { getSetting } from '@@tribe/events/editor/settings';
+import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { FORMATS } from '@moderntribe/events/editor/utils/date';
+import { roundTime, toDateTime } from '@moderntribe/events/editor/utils/moment';
+import { getSetting } from '@moderntribe/events/editor/settings';
 import * as types from './types';
 
 export const DEFAULT_STATE = {

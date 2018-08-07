@@ -7,9 +7,9 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventVenue from './block';
-import { withStore } from '@@tribe/common/hoc';
-import { Icons } from '@@tribe/events/elements';
-import { VENUE } from '@@tribe/events/editor/post-types';
+import { withStore } from '@moderntribe/common/hoc';
+import { Icons } from '@moderntribe/events/elements';
+import { VENUE } from '@moderntribe/events/editor/post-types';
 
 /**
  * Module Code

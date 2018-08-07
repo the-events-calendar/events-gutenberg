@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/blocks/website';
+import { types } from '@moderntribe/events/data/blocks/website';
 
 describe( '[STORE] - Website types', () => {
 	it( 'Should match the types values', () => {

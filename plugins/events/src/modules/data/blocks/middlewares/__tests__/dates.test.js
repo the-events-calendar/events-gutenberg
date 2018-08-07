@@ -1,15 +1,15 @@
 /**
  * Internal dependencies
  */
-import { dates } from '@@tribe/events/data/blocks/middlewares';
-import { actions as mockedActions } from '@@tribe/events/data/blocks/datetime';
-import * as actions from '@@tribe/events/data/blocks/datetime/actions';
+import { dates } from '@moderntribe/events/data/blocks/middlewares';
+import { actions as mockedActions } from '@moderntribe/events/data/blocks/datetime';
+import * as actions from '@moderntribe/events/data/blocks/datetime/actions';
 
 let create;
 let state = {};
 
-jest.mock( '@@tribe/events/data/blocks/datetime', () => {
-	const original = require.requireActual( '@@tribe/events/data/blocks/datetime' );
+jest.mock( '@moderntribe/events/data/blocks/datetime', () => {
+	const original = require.requireActual( '@moderntribe/events/data/blocks/datetime' );
 	return {
 		...original,
 		actions: {

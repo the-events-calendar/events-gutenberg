@@ -6,10 +6,10 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import * as m from '@@tribe/events/editor/utils/moment';
+import * as m from '@moderntribe/events/editor/utils/moment';
 
-import { HALF_HOUR_IN_SECONDS } from '@@tribe/events/editor/utils/time';
-import { FORMATS } from '@@tribe/events/editor/utils/date';
+import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 

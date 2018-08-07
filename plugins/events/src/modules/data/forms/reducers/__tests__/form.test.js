@@ -1,9 +1,9 @@
 /**
  * Internal dependencies
  */
-import { form } from '@@tribe/events/data/forms/reducers';
-import { actions } from '@@tribe/events/data/forms';
-import { DEFAULT_STATE } from '@@tribe/events/data/forms/reducers/form';
+import { form } from '@moderntribe/events/data/forms/reducers';
+import { actions } from '@moderntribe/events/data/forms';
+import { DEFAULT_STATE } from '@moderntribe/events/data/forms/reducers/form';
 
 describe( '[STORE] - form reducer', () => {
 	it( 'Should return the default state', () => {

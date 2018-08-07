@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { maybeDispatch } from '@@tribe/events/data/utils';
+import { maybeDispatch } from '@moderntribe/events/data/utils';
 
 const dispatch = jest.fn();
 const action = jest.fn();

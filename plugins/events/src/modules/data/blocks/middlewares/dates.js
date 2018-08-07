@@ -6,12 +6,12 @@ import {
 	toMoment,
 	toDateTime,
 	replaceDate,
-} from '@@tribe/events/editor/utils/moment';
+} from '@moderntribe/events/editor/utils/moment';
 import {
 	types,
 	actions,
 	selectors,
-} from '@@tribe/events/data/blocks/datetime';
+} from '@moderntribe/events/data/blocks/datetime';
 
 export const dates = ( { dispatch, getState } ) => ( next ) => ( action ) => {
 	next( action );

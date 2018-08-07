@@ -1,12 +1,12 @@
 /**
  * Internal dependencies
  */
-import { allIds, byId } from '@@tribe/events/data/blocks/organizers/reducers/blocks';
-import block from '@@tribe/events/data/blocks/organizers/reducers/block';
-import { actions } from '@@tribe/events/data/blocks/organizers';
+import { allIds, byId } from '@moderntribe/events/data/blocks/organizers/reducers/blocks';
+import block from '@moderntribe/events/data/blocks/organizers/reducers/block';
+import { actions } from '@moderntribe/events/data/blocks/organizers';
 
-jest.mock( '@@tribe/events/data/blocks/organizers/reducers/block', () => {
-	const original = require.requireActual( '@@tribe/events/data/search/reducers/search' );
+jest.mock( '@moderntribe/events/data/blocks/organizers/reducers/block', () => {
+	const original = require.requireActual( '@moderntribe/events/data/search/reducers/search' );
 	return {
 		__esModule: true,
 		...original,

@@ -12,8 +12,8 @@ import { isEmpty } from 'lodash';
 /**
  * Import internal dependencies
  */
-import { withDetails } from '@@tribe/common/hoc';
-import { Loading } from '@@tribe/events/elements';
+import { withDetails } from '@moderntribe/common/hoc';
+import { Loading } from '@moderntribe/events/elements';
 import { Actions, Name } from './index';
 
 const Item = ( { id, details = {}, loading, onRemoveOrganizer, ...rest } ) => {

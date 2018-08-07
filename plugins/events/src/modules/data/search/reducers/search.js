@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { types } from '@@tribe/events/data/search';
-import { EVENT } from '@@tribe/events/editor/post-types';
+import { types } from '@moderntribe/events/data/search';
+import { EVENT } from '@moderntribe/events/editor/post-types';
 
 export const DEFAULT_STATE = {
 	term: '',
