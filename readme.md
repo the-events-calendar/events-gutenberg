@@ -49,6 +49,45 @@ npm run analyze
 npm run analyze -- --scope=@moderntribe/common
 ```
 
+### Adding new plugins
+
+From the root, we'll need to symlink the new plugin so that it can be looked up via npm. Just doing the command below will do the trick.
+
+```sh
+npm install --save plugins/*
+```
+
+#### Symlinking folders
+
+Since the folder structure we use is not node-friendly, we have to symlink directories from within the plugin's `src/modules` directory into the root of the plugin. This allows plugins to be properly imported when importing a module i.e. `@moderntribe/events/blocks` would have to be `@moderntribe/events/src/modules/blocks` if we did not do this.
+
+Add a new `scripts` folder within the plugin with a `linkDependencies` bash script.
+
+```sh
+mkdir scripts
+touch scripts/linkDependencies
+chmod +x scripts/linkDependencies
+```
+
+Add into the script something like:
+
+```sh
+#! /bin/bash
+
+ln -sf $PWD/src/modules/[bundleName] $PWD # Add one for each bundle
+```
+
+Now add in a `bootstrap` script into the plugin's `package.json`
+```json
+{
+    "scripts": {
+        "bootstrap": "./scripts/linkDependencies"
+    }
+}
+```
+
+Finally, run `npm run bootstrap` from the root to link the plugin up.
+
 ---
 
 ### Changelog
