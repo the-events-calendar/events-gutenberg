@@ -24,15 +24,26 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-#### 0.2.5-alpha - TBD
+#### 0.2.6-alpha - TBD
+
+* Tweak - Rename the "Event Tags" block and label to "Tags"
+* Feature - Add Edit Link button for Venue and Organizer block
+* Feature - Add filter to customize the variables send to the FE `tribe_events_gutenberg_js_config`
+* Fix - Remove specificity and side effects from time picker element
+* Fix - Make time picker element stateless, removing logic and allowing presentation via props
+* Fix - Remove middlewares for date time block actions, move logic to event handlers in block
+
+#### 0.2.5-alpha - 2018-08-04
+
+* Feature - Frontend view for date time block
 * Tweak - Change event location to event venue
 * Tweak - Add tests for utils functions
 * Tweak - Add "Event Blocks" category to the editor
 * Tweak - Normalize styles for the Event Options metabox
 * Tweak - Display the currency symbol and position in the event price block preview
-* Fix - Remove specificity and side effects from time picker element
-* Fix - Make time picker element stateless, removing logic and allowing presentation via props
-* Fix - Remove middlewares for date time block actions, move logic to event handlers in block
+* Fix - Remove featured image from default blocks in new event
+* Fix - Avoid crash when using `wp` cli tool, (thanks to Matt Fields @0x6d617474 for report this problem)
+* Fix - Remove warning when `currencyPosition` is empty string
 
 #### 0.2.4-alpha - 2018-07-12
 
