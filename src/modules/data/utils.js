@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { isUndefined, isNaN } from 'lodash';
+
+/**
  * Dispatch an action only if the attribute is present inside of the attributes
  *
  * @param {object} attributes Set of attributes associated with the block
@@ -8,7 +13,9 @@
  */
 export const maybeDispatch = ( attributes, dispatch ) => ( action, key, defaultValue ) => {
 	if ( key in attributes ) {
-		dispatch( action( attributes[ key ] || defaultValue ) );
+		const useDefault = isUndefined( attributes[ key ] ) || isNaN( attributes[ key ] );
+		const value = useDefault ? defaultValue : attributes[ key ];
+		dispatch( action( value ) );
 	}
 };
 
