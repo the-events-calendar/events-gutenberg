@@ -16,11 +16,6 @@ describe( '[STORE] - Datetime actions', () => {
 		expect( actions.setEnd( 'June 25, 2018 4:00 pm' ) ).toMatchSnapshot();
 	} );
 
-	test( 'Action to set the dates with a time', () => {
-		expect( actions.setDateTime( 'September 12, 2018 12:00 pm', 'September 20, 2018 5:00 pm' ) )
-			.toMatchSnapshot();
-	} );
-
 	test( 'Action to set the separator date', () => {
 		expect( actions.setSeparatorDate( ' -  ' ) ).toMatchSnapshot();
 	} );

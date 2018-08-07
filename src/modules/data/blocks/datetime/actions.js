@@ -3,9 +3,6 @@
  */
 import * as types from './types';
 
-export const setDateTime = ( from, to ) => ( {
-} );
-
 export const setNaturalLanguageLabel = ( label ) => ( {
 	type: types.SET_NATURAL_LANGUAGE_LABEL,
 	payload: {
