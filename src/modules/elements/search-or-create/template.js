@@ -20,7 +20,6 @@ import './style.pcss';
 
 class SearchOrCreate extends Component {
 	static defaultProps = {
-		store: {},
 		isSelected: false,
 		term: '',
 		placeholder: __( 'Add or Find', 'events-gutenberg' ),
@@ -28,7 +27,6 @@ class SearchOrCreate extends Component {
 		icon: null,
 		posts: [],
 		loading: false,
-		registerBlock: noop,
 		clearBlock: noop,
 		setFocus: noop,
 		onInputChange: noop,
@@ -37,7 +35,6 @@ class SearchOrCreate extends Component {
 	};
 
 	static propTypes = {
-		store: PropTypes.object,
 		isSelected: PropTypes.bool,
 		term: PropTypes.string,
 		placeholder: PropTypes.string,
@@ -45,7 +42,6 @@ class SearchOrCreate extends Component {
 		icon: PropTypes.object,
 		posts: PropTypes.array,
 		loading: PropTypes.bool,
-		registerBlock: PropTypes.func,
 		clearBlock: PropTypes.func,
 		setFocus: PropTypes.func,
 		onInputChange: PropTypes.func,
