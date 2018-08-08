@@ -132,7 +132,7 @@ const TimePicker = ({
 					role="menu"
 					className={ classNames( 'tribe-editor__timepicker__items' ) }
 				>
-					{ renderItem( { text: 'All Day', value: 'all-day' }, onClose ) }
+					{ renderItem( { text: __( 'All Day', 'events-gutenberg' ), value: 'all-day' }, onClose ) }
 					{ getItems().map( ( item ) => renderItem( item, onClose ) ) }
 				</ScrollArea>
 			) }
