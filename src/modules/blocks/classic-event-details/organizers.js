@@ -31,7 +31,7 @@ import { actions as detailsActions } from 'data/details';
 import { Item } from './organizer';
 import { ORGANIZER } from 'editor/post-types';
 
-function CreateDropdown( { ...props } ) {
+function CreateDropdown( props ) {
 	const { addOrganizer } = props;
 
 	const icon = (

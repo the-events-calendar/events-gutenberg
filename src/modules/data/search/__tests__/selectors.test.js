@@ -19,8 +19,8 @@ describe( '[STORE] - Search selectors', () => {
 		expect( selectors.blockSelector( state, props ) ).toEqual( DEFAULT_STATE );
 	} );
 
-	it( 'Should return the type of the block', () => {
-		expect( selectors.getSearchType( state, props ) ).toEqual( DEFAULT_STATE.type );
+	it( 'Should return the post type of the block', () => {
+		expect( selectors.getSearchPostType( state, props ) ).toEqual( DEFAULT_STATE.type );
 	} );
 
 	it( 'Should return the search term', () => {

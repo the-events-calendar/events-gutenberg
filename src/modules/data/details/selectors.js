@@ -14,7 +14,7 @@ export const blockSelector = ( state, props ) => state.details[ props.name ];
 
 export const getPostType = createSelector(
 	[ blockSelector ],
-	( block ) => block ? block.type : DEFAULT_STATE.type
+	( block ) => block ? block.postType : DEFAULT_STATE.postType
 );
 
 export const getLoading = createSelector(

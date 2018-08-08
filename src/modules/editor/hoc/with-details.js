@@ -46,7 +46,7 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 			const { setPostType, postType, fetchDetails } = this.props;
 			const tmp = {
 				id: this.id,
-				type: postType,
+				postType,
 			};
 
 			if ( isEqual( this.details, tmp ) ) {

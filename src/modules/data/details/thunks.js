@@ -20,9 +20,9 @@ export const fetchDetails = ( id ) => ( dispatch, getState ) => {
 		return;
 	}
 
-	const type = selectors.getPostType( state, props );
+	const postType = selectors.getPostType( state, props );
 	const options = {
-		path: `${ type }/${ id }`,
+		path: `${ postType }/${ id }`,
 		actions: {
 			start: () => dispatch( actions.enableLoading( id ) ),
 			success: ( { body } ) => {

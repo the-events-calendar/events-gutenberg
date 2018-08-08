@@ -17,6 +17,7 @@ import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import { Spinner } from '@wordpress/components';
 import './style.pcss';
+import { setTerm } from '../../data/search/actions';
 
 class SearchOrCreate extends Component {
 	static defaultProps = {
@@ -106,10 +107,11 @@ class SearchOrCreate extends Component {
 	}
 
 	onChange = ( event ) => {
-		const { target = {} } = event;
-		const { name, search, exclude, results } = this.props;
+		const { value } = event.target;
+		const { name, setTerm, search, exclude, results } = this.props;
+		setTerm( name, value );
 		search( name, {
-			term: target.value,
+			term: value,
 			exclude,
 			perPage: results,
 		} );
@@ -135,10 +137,10 @@ class SearchOrCreate extends Component {
 		}
 
 		return (
-			<nav className="tribe-editor__soc__results">
+			<ul className="tribe-editor__soc__results">
 				{ this.renderCreateItem() }
 				{ this.renderItems() }
-			</nav>
+			</ul>
 		);
 	}
 

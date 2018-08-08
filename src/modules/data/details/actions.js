@@ -27,10 +27,10 @@ export const setDetails = ( id, details ) => ( {
 	},
 } );
 
-export const setPostType = ( id, type ) => ( {
+export const setPostType = ( id, postType ) => ( {
 	type: types.SET_DETAILS_POST_TYPE,
 	payload: {
 		id,
-		type,
+		postType,
 	},
 } );

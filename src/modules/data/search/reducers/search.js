@@ -10,7 +10,7 @@ export const DEFAULT_STATE = {
 	page: 1,
 	totalPages: 0,
 	loading: false,
-	type: EVENT,
+	postType: EVENT,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -23,7 +23,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_POST_TYPE: {
 			return {
 				...state,
-				type: action.payload.type,
+				postType: action.payload.postType,
 			};
 		}
 		case types.SET_SEARCH_LOADING: {
@@ -36,7 +36,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				...DEFAULT_STATE,
-				type: state.type,
+				postType: state.postType,
 			};
 		case types.SET_RESULTS:
 			return {

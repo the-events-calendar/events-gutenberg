@@ -93,8 +93,6 @@ export const search = ( id, params ) => ( dispatch, getState ) => {
 		return;
 	}
 
-	dispatch( setTerm( id, term ) );
-
 	if ( populated && term.trim() === '' ) {
 		dispatch( clearBlock( id ) );
 		return;
@@ -107,9 +105,9 @@ export const search = ( id, params ) => ( dispatch, getState ) => {
 		exclude,
 	} );
 
-	const type = selectors.getSearchType( getState(), { name: id } );
+	const postType = selectors.getSearchPostType( getState(), { name: id } );
 	const options = {
-		path: `${ type }?${ query }`,
+		path: `${ postType }?${ query }`,
 		actions: {
 			start: () => dispatch( enableLoading( id ) ),
 			success: ( { body, headers } ) => {
@@ -132,11 +130,11 @@ export const search = ( id, params ) => ( dispatch, getState ) => {
 	dispatch( requestActions.wpRequest( options ) );
 };
 
-export const setPostType = ( id, type ) => ( {
+export const setPostType = ( id, postType ) => ( {
 	type: types.SET_POST_TYPE,
 	payload: {
 		id,
-		type,
+		postType,
 	},
 } );
 

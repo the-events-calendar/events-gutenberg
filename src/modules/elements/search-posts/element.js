@@ -27,6 +27,7 @@ import {
  */
 import './style.pcss';
 import { actions, selectors } from 'data/search';
+import { setTerm } from '../../data/search/actions';
 
 /**
  * Module Code
@@ -90,11 +91,13 @@ class SearchPosts extends Component {
 		}
 	}
 
-	searchPosts = ( event ) => {
-		const { name, search, exclude } = this.props;
+	onChange = ( event ) => {
+		const { value } = event.target;
+		const { name, setTerm, search, exclude } = this.props;
 		this.scrollPosition = 0;
+		setTerm( name, value );
 		search( name, {
-			term: event.target.value,
+			term: value,
 			exclude,
 			populate: true,
 		} );
@@ -191,7 +194,7 @@ class SearchPosts extends Component {
 				placeholder={ searchLabel }
 				value={ term }
 				className="editor-inserter__search"
-				onChange={ this.searchPosts }
+				onChange={ this.onChange }
 			/>
 		</div> );
 	}
