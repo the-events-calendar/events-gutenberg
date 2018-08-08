@@ -6,6 +6,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { get } from 'lodash';
 
 /**
  * Internal dependencies
@@ -13,6 +14,8 @@ import { __ } from '@wordpress/i18n';
 import { withStore } from 'editor/hoc';
 import EventDateTime from './block';
 import { Icons } from 'elements';
+import { config } from 'editor/utils/globals';
+const timeZone = get( config(), 'timeZone', {} );
 
 /**
  * Module Code
@@ -65,11 +68,11 @@ export default {
 		},
 		showTimeZone: {
 			type: 'boolean',
-			default: false,
+			default: get( timeZone, 'show_time_zone', false ),
 		},
 		timeZoneLabel: {
 			type: 'string',
-			default: '',
+			default: get( timeZone, 'label', '' ),
 		},
 		// Only Available for classic users
 		cost: {
