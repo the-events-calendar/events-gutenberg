@@ -136,7 +136,10 @@ class EventDateTime extends Component {
 		}
 
 		return (
-			<div className="tribe-editor__event-cost">
+			<div
+				key="tribe-editor-event-cost"
+				className="tribe-editor__event-cost"
+			>
 				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
@@ -271,7 +274,9 @@ class EventDateTime extends Component {
 				);
 			case 'timeZone':
 				return showTimeZone && (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>
+					<span
+						key="time-zone-separator"
+						className={ classNames( 'tribe-editor__separator', className ) }>
 						<TimeZone
 							value={ timeZoneLabel }
 							placeholder={ timeZoneLabel }
@@ -290,7 +295,15 @@ class EventDateTime extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderDate() {
-		const { multiDay, allDay, isSelected } = this.props;
+		const {
+			multiDay,
+			allDay,
+			isSelected,
+			openDashboardDateTime,
+			setDateTime,
+			setNaturalLanguageLabel,
+			naturalLanguageLabel,
+		} = this.props;
 		return (
 			<section
 				key="event-datetime"
@@ -298,23 +311,32 @@ class EventDateTime extends Component {
 			>
 				<DateInput
 					selected={ isSelected }
-					onClickHandler={ this.props.openDashboardDateTime }
-					setNaturalLanguageLabel={ this.props.setNaturalLanguageLabel }
-					setDateTime={ this.props.setDateTime }
-					value={ this.props.naturalLanguageLabel }
+					onClickHandler={ openDashboardDateTime }
+					onChange={ setNaturalLanguageLabel }
+					setDateTime={ setDateTime }
+					value={ naturalLanguageLabel }
+					after={ this.renderExtras() }
 				>
 					<h2 className="tribe-editor__subtitle__headline">
-						{ this.renderStart() }
-						{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
-						{ this.renderEnd() }
-						{ allDay && this.renderSeparator( 'all-day' ) }
-						{ this.renderTimezone() }
-						{ this.renderPrice() }
+						<button
+							className="tribe-editor__btn--label"
+							onClick={ openDashboardDateTime }
+						>
+							{ this.renderStart() }
+							{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
+							{ this.renderEnd() }
+							{ allDay && this.renderSeparator( 'all-day' ) }
+						</button>
+						{ this.renderExtras() }
 					</h2>
 				</DateInput>
 				{ this.renderDashboard() }
 			</section>
 		);
+	}
+
+	renderExtras() {
+		return [ this.renderTimezone(), this.renderPrice() ];
 	}
 
 	renderDashboard() {
