@@ -5,7 +5,7 @@
  *
  * @since 0.1.0-alpha
  */
-class Tribe__Events_Gutenberg__Editor {
+class Tribe__Gutenberg__Events__Editor {
 
 	/**
 	 * Meta key for flaging if a post is from classic editor
@@ -370,7 +370,7 @@ class Tribe__Events_Gutenberg__Editor {
 				'localize'     => array(
 					array(
 						'name' => 'tribe_blocks_editor_settings',
-						'data' => tribe( 'gutenberg.settings' )->get_options(),
+						'data' => tribe( 'gutenberg.events.settings' )->get_options(),
 					),
 					array(
 						'name' => 'tribe_blocks_editor_timezone_html',
@@ -397,7 +397,7 @@ class Tribe__Events_Gutenberg__Editor {
 		$localize_blocks = array(
 			array(
 				'name' => 'tribe_blocks_editor_settings',
-				'data' => tribe( 'gutenberg.settings' )->get_options(),
+				'data' => tribe( 'gutenberg.events.settings' )->get_options(),
 			),
 			array(
 				'name' => 'tribe_blocks_editor_timezone_html',

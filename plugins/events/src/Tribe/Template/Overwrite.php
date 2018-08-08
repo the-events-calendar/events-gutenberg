@@ -4,7 +4,7 @@
  *
  * @since 0.1.1-alpha
  */
-class Tribe__Events_Gutenberg__Template__Overwrite {
+class Tribe__Gutenberg__Events__Template__Overwrite {
 
 	/**
 	 * Hook into the Events Template single page to allow Blocks to be properly reordered
@@ -82,9 +82,9 @@ class Tribe__Events_Gutenberg__Template__Overwrite {
 		);
 
 		// Set globals to allow better usage of render method for each block
-		tribe( 'gutenberg.template' )->add_template_globals( $args );
+		tribe( 'gutenberg.events.template' )->add_template_globals( $args );
 
-		return tribe( 'gutenberg.template' )->template( 'single-event' );
+		return tribe( 'gutenberg.events.template' )->template( 'single-event' );
 	}
 
 }

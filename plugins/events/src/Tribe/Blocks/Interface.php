@@ -1,6 +1,6 @@
 <?php
 
-interface Tribe__Events_Gutenberg__Blocks__Interface {
+interface Tribe__Gutenberg__Events__Blocks__Interface {
 
 	/**
 	 * Which is the name/slug of this block

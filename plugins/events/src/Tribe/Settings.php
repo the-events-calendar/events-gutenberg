@@ -4,7 +4,7 @@
  *
  * @since 0.1.1-alpha
  */
-class Tribe__Events_Gutenberg__Settings {
+class Tribe__Gutenberg__Events__Settings {
 	/**
 	 * Hook into the required places to make it work
 	 *

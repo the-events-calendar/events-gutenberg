@@ -5,7 +5,7 @@
  *
  * @since 0.1.1-alpha
  */
-class Tribe__Events_Gutenberg__Template extends Tribe__Template {
+class Tribe__Gutenberg__Events__Template extends Tribe__Template {
 	/**
 	 * Building of the Class template configuration
 	 *

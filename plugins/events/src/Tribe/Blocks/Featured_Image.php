@@ -1,6 +1,6 @@
 <?php
-class Tribe__Events_Gutenberg__Blocks__Featured_Image
-extends Tribe__Events_Gutenberg__Blocks__Abstract {
+class Tribe__Gutenberg__Events__Blocks__Featured_Image
+extends Tribe__Gutenberg__Events__Blocks__Abstract {
 
 	/**
 	 * Which is the name/slug of this block
@@ -26,8 +26,8 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		$args['attributes'] = $this->attributes( $attributes );
 
 		// Add the rendering attributes into global context
-		tribe( 'gutenberg.template' )->add_template_globals( $args );
+		tribe( 'gutenberg.events.template' )->add_template_globals( $args );
 
-		return tribe( 'gutenberg.template' )->template( array( 'blocks', $this->slug() ), $args, false );
+		return tribe( 'gutenberg.events.template' )->template( array( 'blocks', $this->slug() ), $args, false );
 	}
 }

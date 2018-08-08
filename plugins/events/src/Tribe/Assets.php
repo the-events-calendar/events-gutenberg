@@ -4,7 +4,7 @@
  *
  * @since TBD
  */
-class Tribe__Events_Gutenberg__Assets {
+class Tribe__Gutenberg__Events__Assets {
 	/**
 	 *
 	 * @since  TBD

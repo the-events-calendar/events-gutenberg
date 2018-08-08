@@ -4,7 +4,7 @@
  *
  * @since 0.1.0-alpha
  */
-class Tribe__Events_Gutenberg__Meta {
+class Tribe__Gutenberg__Events__Meta {
 	/**
 	 * Register the required Meta fields for good Gutenberg saving
 	 *
