@@ -119,9 +119,9 @@ exports[`[STORE] - Datetime thunks Set end time 1`] = `
 Array [
   Object {
     "payload": Object {
-      "start": "2018-08-06 18:00:00",
+      "end": "2018-06-05 18:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "SET_END_DATE_TIME",
   },
 ]
 `;

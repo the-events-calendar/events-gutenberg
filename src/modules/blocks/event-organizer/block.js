@@ -13,14 +13,19 @@ import { connect } from 'react-redux';
 import { Component } from '@wordpress/element';
 import {
 	Spinner,
+	PanelBody,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import {
+	InspectorControls,
+} from '@wordpress/editor';
 
 /**
  * Internal dependendencies
  */
 import {
 	SearchOrCreate,
+	EditLink,
 } from 'elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
@@ -65,7 +70,23 @@ class Organizer extends Component {
 	}
 
 	render() {
-		return this.renderBlock();
+		return [ this.renderBlock(), this.renderSettings() ];
+	}
+
+	renderSettings() {
+		const { isSelected, organizer } = this.props;
+		return (
+			isSelected &&
+			organizer &&
+			<InspectorControls key="inspector">
+				<PanelBody title={ __( 'Venue Map Settings' ) }>
+					<EditLink
+						id={ organizer }
+						label={ __( 'Edit Organizer', 'events-gutenberg' ) }
+					/>
+				</PanelBody>
+			</InspectorControls>
+		);
 	}
 
 	renderBlock() {
