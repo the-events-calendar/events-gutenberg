@@ -17,114 +17,117 @@ import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import { Spinner } from '@wordpress/components';
 import './style.pcss';
-import { setTerm } from '../../data/search/actions';
 
 class SearchOrCreate extends Component {
 	static defaultProps = {
-		placeholder: __( 'Add or Find', 'events-gutenberg' ),
-		icon: null,
 		store: {},
-		storeName: '',
-		selected: false,
-		results: 5,
+		isSelected: false,
+		term: '',
+		placeholder: __( 'Add or Find', 'events-gutenberg' ),
+		name: '',
+		resultsPerPage: 5,
+		icon: null,
 		posts: [],
 		exclude: [],
 		loading: false,
-		term: '',
-		onSelection: noop,
-		onSetCreation: noop,
+		onItemSelect: noop,
+		onCreateNew: noop,
 		registerBlock: noop,
 		search: noop,
 		clearBlock: noop,
 	};
 
 	static propTypes = {
-		selected: PropTypes.bool,
 		store: PropTypes.object,
-		name: PropTypes.string,
-		placeholder: PropTypes.string,
+		isSelected: PropTypes.bool,
 		term: PropTypes.string,
-		results: PropTypes.number,
+		placeholder: PropTypes.string,
+		name: PropTypes.string,
+		resultsPerPage: PropTypes.number,
+		icon: PropTypes.object,
 		posts: PropTypes.array,
 		exclude: PropTypes.array,
 		loading: PropTypes.bool,
-		onSetCreation: PropTypes.func,
+		onItemSelect: PropTypes.func,
+		onCreateNew: PropTypes.func,
 		registerBlock: PropTypes.func,
 		search: PropTypes.func,
 		clearBlock: PropTypes.func,
-		onSelection: PropTypes.func,
 	};
 
-	constructor() {
-		super( ...arguments );
+	constructor( props ) {
+		super( props );
 		this.inputRef = React.createRef();
 	}
 
 	componentDidMount() {
-		const { registerBlock, name, postType } = this.props;
-		registerBlock( name, postType );
+		const { addBlock, setPostType, name, postType } = this.props;
+		addBlock( name );
+		setPostType( name, postType );
+		this.setFocus();
 	}
 
-	render() {
-		const { selected, icon } = this.props;
-		const containerClass = classNames( 'tribe-editor__soc__input__container', {
-			'tribe-editor__soc__input__container--active': selected,
-		} );
-
-		this.maybeFocus();
-
-		return (
-			<section className="tribe-soc__container">
-				<div className={ containerClass } onClick={ this.maybeFocus }>
-					{ icon }
-					{ this.renderInput() }
-				</div>
-				{ this.renderResults() }
-			</section>
-		);
+	componentDidUpdate() {
+		this.setFocus();
 	}
 
-	maybeFocus = () => {
-		const { selected } = this.props;
+	componentWillUnmount() {
+		const { clearBlock, name } = this.props;
+		clearBlock( name );
+	}
 
-		if ( selected && this.inputRef.current ) {
+	setFocus = () => {
+		if (
+			this.props.isSelected
+			&& this.inputRef.current
+			&& document.activeElement !== this.inputRef.current
+		) {
+			console.log('here focusing again');
 			this.inputRef.current.focus();
 		}
 	};
 
-	renderInput() {
-		const { placeholder, term } = this.props;
-
-		return (
-			<input
-				className="tribe-editor__soc__input"
-				ref={ this.inputRef }
-				value={ term }
-				placeholder={ placeholder }
-				onChange={ this.onChange }
-			/>
-		);
-	}
-
-	onChange = ( event ) => {
+	onInputChange = ( event ) => {
 		const { value } = event.target;
-		const { name, setTerm, search, exclude, results } = this.props;
+		const { name, setTerm, search, exclude, resultsPerPage } = this.props;
 		setTerm( name, value );
 		search( name, {
 			term: value,
 			exclude,
-			perPage: results,
+			perPage: resultsPerPage,
 		} );
 	};
 
+	createNew = () => {
+		const { term, onCreateNew } = this.props;
+		onCreateNew( term );
+	};
+
+	onItemClick = ( item ) => () => {
+		const { name, clearBlock, onItemSelect } = this.props;
+		const { id } = item;
+		onItemSelect( id, item );
+		clearBlock( name );
+	};
+
+	renderItem = ( item ) => {
+		const { title = {}, id } = item;
+		const { rendered = '' } = title;
+
+		return (
+			<li
+				key={ id }
+				onClick={ this.onItemClick( item ) }
+			>
+				{ decode( rendered ) }
+			</li>
+		);
+	};
+
 	renderResults() {
-		const { selected, term, loading } = this.props;
+		const { isSelected, term, loading, posts } = this.props;
 
-		if ( ! selected ) {
-			return null;
-		}
-
-		if ( isEmpty( term ) ) {
+		if ( ! isSelected || isEmpty( term ) ) {
 			return null;
 		}
 
@@ -138,48 +141,34 @@ class SearchOrCreate extends Component {
 
 		return (
 			<ul className="tribe-editor__soc__results">
-				{ this.renderCreateItem() }
-				{ this.renderItems() }
+				<li onClick={ this.createNew }><strong>Create</strong>: { this.props.term }</li>
+				{ posts.map( this.renderItem ) }
 			</ul>
 		);
 	}
 
-	setCreation = () => {
-		const { term } = this.props;
-		this.props.onSetCreation( term );
-	};
+	render() {
+		const { isSelected, icon, term, placeholder } = this.props;
+		const containerClass = classNames( 'tribe-editor__soc__input__container', {
+			'tribe-editor__soc__input__container--active': isSelected,
+		} );
 
-	renderCreateItem() {
-		const { term } = this.props;
-		return <li onClick={ this.setCreation }><strong>Create</strong>: { term } </li>;
-	}
-
-	renderItems() {
-		const { posts } = this.props;
-		return posts.map( this.renderItem );
-	}
-
-	renderItem = ( item ) => {
-		const { title = {}, id } = item;
-		const { rendered = '' } = title;
 		return (
-			<li
-				key={ id }
-				onClick={ this.setSelection( item ) }
-			>
-				{ decode( rendered ) }
-			</li>
+			<section className="tribe-soc__container">
+				<div className={ containerClass }>
+					{ icon }
+					<input
+						className="tribe-editor__soc__input"
+						ref={ this.inputRef }
+						value={ term }
+						placeholder={ placeholder }
+						onChange={ this.onInputChange }
+					/>
+				</div>
+				{ this.renderResults() }
+			</section>
 		);
-	};
-
-	setSelection = ( item ) => {
-		return () => {
-			const { name, clearBlock, onSelection } = this.props;
-			const { id } = item;
-			onSelection( id, item );
-			clearBlock( name );
-		};
-	};
+	}
 }
 
 const mapStateToProps = ( state, props ) => ( {

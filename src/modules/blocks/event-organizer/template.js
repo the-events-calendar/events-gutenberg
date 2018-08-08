@@ -30,7 +30,7 @@ import OrganizerForm from './details/form';
 import OrganizerIcon from 'icons/organizer.svg';
 import { toFields } from 'elements/organizer-form/utils';
 
-class Organizer extends Component {
+class EventOrganizer extends Component {
 
 	static propTypes = {
 		details: PropTypes.object,
@@ -101,11 +101,11 @@ class Organizer extends Component {
 				name={ id }
 				store={ store }
 				postType={ postType }
-				selected={ isSelected }
+				isSelected={ isSelected }
 				icon={ <OrganizerIcon /> }
 				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
-				onSelection={ onSelectItem }
-				onSetCreation={ onSetCreation }
+				onItemSelect={ onSelectItem }
+				onCreateNew={ onSetCreation }
 				exclude={ organizers }
 			/>
 		);
@@ -200,4 +200,4 @@ class Organizer extends Component {
 
 }
 
-export default Organizer;
+export default EventOrganizer;

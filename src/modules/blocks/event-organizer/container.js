@@ -11,7 +11,7 @@ import { withStore, withSaveData, withDetails, withForm } from 'editor/hoc';
 import { actions, selectors } from 'data/blocks/organizers';
 import { actions as detailsActions } from 'data/details';
 import { ORGANIZER } from 'editor/post-types';
-import Organizer from './template';
+import EventOrganizer from './template';
 import { toOrganizer } from 'elements/organizer-form/utils';
 
 /**
@@ -90,4 +90,4 @@ export default compose(
 	withDetails( 'organizer' ),
 	connect( null, mapDispatchToProps, mergeProps ),
 	withSaveData(),
-)( Organizer );
+)( EventOrganizer );

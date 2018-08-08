@@ -153,10 +153,10 @@ class EventVenue extends Component {
 				name={ name }
 				icon={ <VenueIcon /> }
 				store={ store }
-				selected={ isSelected }
+				isSelected={ isSelected }
 				postType={ VENUE }
-				onSelection={ this.setVenue }
-				onSetCreation={ this.setDraftTitle }
+				onItemSelect={ this.setVenue }
+				onCreateNew={ this.setDraftTitle }
 				placeholder={ __( 'Add or find a venue', 'events-gutenberg' ) }
 			/>
 		);

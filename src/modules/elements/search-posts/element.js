@@ -64,8 +64,9 @@ class SearchPosts extends Component {
 	}
 
 	componentDidMount() {
-		const { registerBlock, name, postType } = this.props;
-		registerBlock( name, postType );
+		const { addBlock, setPostType, name, postType } = this.props;
+		addBlock( name );
+		setPostType( name, postType );
 		this.initialFetch();
 	}
 

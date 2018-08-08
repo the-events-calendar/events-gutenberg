@@ -23,6 +23,14 @@ export const setTerm = ( id, term ) => ( {
 	},
 } );
 
+export const setPostType = ( id, postType ) => ( {
+	type: types.SET_POST_TYPE,
+	payload: {
+		id,
+		postType,
+	},
+} );
+
 export const setResults = ( id, results ) => ( {
 	type: types.SET_RESULTS,
 	payload: {
@@ -128,17 +136,4 @@ export const search = ( id, params ) => ( dispatch, getState ) => {
 	};
 
 	dispatch( requestActions.wpRequest( options ) );
-};
-
-export const setPostType = ( id, postType ) => ( {
-	type: types.SET_POST_TYPE,
-	payload: {
-		id,
-		postType,
-	},
-} );
-
-export const registerBlock = ( name, postType ) => ( dispatch ) => {
-	dispatch( addBlock( name ) );
-	dispatch( setPostType( name, postType ) );
 };
