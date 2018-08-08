@@ -28,12 +28,12 @@ class SearchOrCreate extends Component {
 		icon: null,
 		posts: [],
 		loading: false,
-		onItemSelect: noop,
-		onCreateNew: noop,
 		registerBlock: noop,
 		clearBlock: noop,
 		setFocus: noop,
 		onInputChange: noop,
+		onCreateClick: noop,
+		onItemClick: noop,
 	};
 
 	static propTypes = {
@@ -45,12 +45,12 @@ class SearchOrCreate extends Component {
 		icon: PropTypes.object,
 		posts: PropTypes.array,
 		loading: PropTypes.bool,
-		onItemSelect: PropTypes.func,
-		onCreateNew: PropTypes.func,
 		registerBlock: PropTypes.func,
 		clearBlock: PropTypes.func,
 		setFocus: PropTypes.func,
 		onInputChange: PropTypes.func,
+		onCreateClick: PropTypes.func,
+		onItemClick: PropTypes.func,
 	};
 
 	constructor( props ) {
@@ -74,18 +74,6 @@ class SearchOrCreate extends Component {
 		clearBlock( name );
 	}
 
-	createNew = () => {
-		const { term, onCreateNew } = this.props;
-		onCreateNew( term );
-	};
-
-	onItemClick = ( item ) => () => {
-		const { name, clearBlock, onItemSelect } = this.props;
-		const { id } = item;
-		onItemSelect( id, item );
-		clearBlock( name );
-	};
-
 	renderItem = ( item ) => {
 		const { title = {}, id } = item;
 		const { rendered = '' } = title;
@@ -93,15 +81,15 @@ class SearchOrCreate extends Component {
 		return (
 			<li
 				key={ id }
-				onClick={ this.onItemClick( item ) }
+				onClick={ this.props.onItemClick( item ) }
 			>
 				{ decode( rendered ) }
 			</li>
 		);
 	};
 
-	renderResults() {
-		const { isSelected, term, loading, posts } = this.props;
+	renderResults = () => {
+		const { isSelected, term, loading, posts, onCreateClick } = this.props;
 
 		if ( ! isSelected || isEmpty( term ) ) {
 			return null;
@@ -117,7 +105,7 @@ class SearchOrCreate extends Component {
 
 		return (
 			<ul className="tribe-editor__soc__results">
-				<li onClick={ this.createNew }><strong>Create</strong>: { this.props.term }</li>
+				<li onClick={ onCreateClick }><strong>Create</strong>: { this.props.term }</li>
 				{ posts.map( this.renderItem ) }
 			</ul>
 		);

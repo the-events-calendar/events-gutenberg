@@ -48,7 +48,7 @@ class EventOrganizer extends Component {
 		editPost: PropTypes.func,
 		onFormSubmit: PropTypes.func,
 		onSelectItem: PropTypes.func,
-		onSetCreation: PropTypes.func,
+		onCreateNew: PropTypes.func,
 	};
 
 	componentDidUpdate( prevProps ) {
@@ -92,8 +92,8 @@ class EventOrganizer extends Component {
 			organizers,
 			store,
 			postType,
-			onSelectItem,
-			onSetCreation,
+			onItemSelect,
+			onCreateNew,
 		} = this.props;
 
 		return (
@@ -104,8 +104,8 @@ class EventOrganizer extends Component {
 				isSelected={ isSelected }
 				icon={ <OrganizerIcon /> }
 				placeholder={ __( 'Add or find an organizer', 'events-gutenberg' ) }
-				onItemSelect={ onSelectItem }
-				onCreateNew={ onSetCreation }
+				onItemSelect={ onItemSelect }
+				onCreateNew={ onCreateNew }
 				exclude={ organizers }
 			/>
 		);

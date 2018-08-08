@@ -10,6 +10,10 @@ import { actions, selectors } from 'data/search';
  */
 import SearchOrCreate from './template';
 
+/**
+ * Module Code
+ */
+
 const setFocus = ( isSelected ) => ( inputRef ) => {
 	if (
 		isSelected
@@ -32,6 +36,15 @@ const onInputChange = ( dispatchProps, ownProps ) => ( event ) => {
 	} );
 };
 
+const onCreateClick = ( term, onCreateNew ) => () => onCreateNew( term );
+
+const onItemClick = ( dispatchProps, ownProps ) => ( item ) => () => {
+	const { clearBlock } = dispatchProps;
+	const { name, onItemSelect } = ownProps;
+	onItemSelect( item.id, item );
+	clearBlock( name );
+};
+
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
 	loading: selectors.getLoading( state, props ),
@@ -46,6 +59,8 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...dispatchProps,
 	setFocus: setFocus( ownProps.isSelected ),
 	onInputChange: onInputChange( dispatchProps, ownProps ),
+	onCreateClick: onCreateClick( stateProps.term, ownProps.onCreateNew ),
+	onItemClick: onItemClick( dispatchProps, ownProps ),
 } );
 
 export default connect(

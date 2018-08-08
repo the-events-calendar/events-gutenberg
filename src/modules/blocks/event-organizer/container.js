@@ -34,7 +34,7 @@ const onFormSubmit = ( dispatchProps, ownProps ) => ( fields ) => (
 	ownProps.sendForm( toOrganizer( fields ), onFormCompleted( dispatchProps, ownProps ) )
 );
 
-const onSelectItem = ( dispatchProps, ownProps ) => ( organizerID, details ) => {
+const onItemSelect = ( dispatchProps, ownProps ) => ( organizerID, details ) => {
 	const {
 		setDetails,
 		addOrganizerInClassic,
@@ -46,7 +46,7 @@ const onSelectItem = ( dispatchProps, ownProps ) => ( organizerID, details ) => 
 	addOrganizerInBlock( ownProps.id, organizerID );
 };
 
-const onSetCreation = ( ownProps ) => ( title ) => (
+const onCreateNew = ( ownProps ) => ( title ) => (
 	ownProps.createDraft( {
 		title: {
 			rendered: title,
@@ -78,8 +78,8 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 		...stateProps,
 		...dispatchProps,
 		onFormSubmit: onFormSubmit( dispatchProps, ownProps ),
-		onSelectItem: onSelectItem( dispatchProps, ownProps ),
-		onSetCreation: onSetCreation( ownProps ),
+		onItemSelect: onItemSelect( dispatchProps, ownProps ),
+		onCreateNew: onCreateNew( ownProps ),
 	};
 };
 
