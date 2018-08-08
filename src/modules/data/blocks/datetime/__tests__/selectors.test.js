@@ -50,4 +50,8 @@ describe( '[STORE] - Datetime selectors', () => {
 	it( 'Should return time range separator', () => {
 		expect( selectors.getTimeSeparator( state ) ).toBe( DEFAULT_STATE.timeRangeSeparator );
 	} );
+
+	it( 'Should return the natural language label', () => {
+		expect( selectors.getNaturalLanguageLabel( state ) ).toBe( DEFAULT_STATE.naturalLanguage );
+	} );
 } );

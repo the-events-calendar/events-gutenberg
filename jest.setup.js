@@ -7,12 +7,12 @@ import $ from 'jquery';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+Enzyme.configure( { adapter: new Adapter() } );
+
 global.jQuery = $;
 global.$ = $;
 global.wp = {
 	element: React,
 };
 
-moment.tz.setDefault( 'America/Mexico_City' );
-
-Enzyme.configure( { adapter: new Adapter() } );
+moment.tz.setDefault( 'UTC' );

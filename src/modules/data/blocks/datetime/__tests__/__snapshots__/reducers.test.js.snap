@@ -6,6 +6,7 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -20,6 +21,7 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -34,20 +36,7 @@ Object {
   "dateTimeSeparator": "@",
   "end": "June 25, 2018 4:00 pm",
   "multiDay": false,
-  "showTimeZone": true,
-  "start": "2018-07-19 19:30:00",
-  "timeRangeSeparator": "-",
-  "timeZone": "UTC",
-  "timeZoneLabel": "UTC",
-}
-`;
-
-exports[`[STORE] - Datetime reducer Should set the end time 1`] = `
-Object {
-  "allDay": false,
-  "dateTimeSeparator": "@",
-  "end": "2018-07-19 20:00:00",
-  "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -62,6 +51,7 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": true,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -76,6 +66,22 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
+  "showTimeZone": true,
+  "start": "2018-07-19 19:30:00",
+  "timeRangeSeparator": "-",
+  "timeZone": "UTC",
+  "timeZoneLabel": "UTC",
+}
+`;
+
+exports[`[STORE] - Datetime reducer Should set the natural language label 1`] = `
+Object {
+  "allDay": false,
+  "dateTimeSeparator": "@",
+  "end": "2018-07-19 20:00:00",
+  "multiDay": false,
+  "naturalLanguage": "2 weeks from now",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -90,6 +96,7 @@ Object {
   "dateTimeSeparator": " > ",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -104,6 +111,7 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": " | ",
@@ -118,22 +126,9 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "June 5, 2018 5:00 pm",
-  "timeRangeSeparator": "-",
-  "timeZone": "UTC",
-  "timeZoneLabel": "UTC",
-}
-`;
-
-exports[`[STORE] - Datetime reducer Should set the start time 1`] = `
-Object {
-  "allDay": false,
-  "dateTimeSeparator": "@",
-  "end": "2018-07-19 20:00:00",
-  "multiDay": false,
-  "showTimeZone": true,
-  "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
   "timeZone": "UTC",
   "timeZoneLabel": "UTC",
@@ -146,6 +141,7 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -160,6 +156,7 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -174,6 +171,7 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
@@ -188,21 +186,8 @@ Object {
   "dateTimeSeparator": "@",
   "end": "2018-07-19 20:00:00",
   "multiDay": false,
+  "naturalLanguage": "",
   "showTimeZone": false,
-  "start": "2018-07-19 19:30:00",
-  "timeRangeSeparator": "-",
-  "timeZone": "UTC",
-  "timeZoneLabel": "UTC",
-}
-`;
-
-exports[`[STORE] - Datetime reducer Should toggle the multi day 1`] = `
-Object {
-  "allDay": false,
-  "dateTimeSeparator": "@",
-  "end": "2018-07-19 20:00:00",
-  "multiDay": true,
-  "showTimeZone": true,
   "start": "2018-07-19 19:30:00",
   "timeRangeSeparator": "-",
   "timeZone": "UTC",

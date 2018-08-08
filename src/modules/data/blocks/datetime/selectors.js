@@ -50,3 +50,7 @@ export const getTimeZoneLabel = createSelector(
 	( values ) => values.timeZoneLabel,
 );
 
+export const getNaturalLanguageLabel = createSelector(
+	[ datetimeSelector ],
+	( values ) => values.naturalLanguage,
+);
