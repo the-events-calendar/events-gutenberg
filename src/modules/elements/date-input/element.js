@@ -76,10 +76,10 @@ const _parse = ( value, setDateTime ) => {
 	const { start, end } = parsed;
 
 	const dates = {
-		from: start ? toDateTime( toMoment( start.date() ) ) : null,
-		to: end ? toDateTime( toMoment( end.date() ) ) : null,
+		start: start ? toDateTime( toMoment( start.date() ) ) : null,
+		end: end ? toDateTime( toMoment( end.date() ) ) : null,
 	};
-	setDateTime( dates.from, dates.to );
+	setDateTime( dates );
 };
 
 const DateInput = ( props ) => {

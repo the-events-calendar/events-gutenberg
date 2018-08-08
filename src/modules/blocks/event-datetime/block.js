@@ -90,15 +90,16 @@ class EventDateTime extends Component {
 		openDashboardDateTime: PropTypes.func,
 		setStartTime: PropTypes.func,
 		setEndTime: PropTypes.func,
-		setAllDayThunk: PropTypes.func,
-		setMultiDayThunk: PropTypes.func,
+		setAllDay: PropTypes.func,
+		setMultiDay: PropTypes.func,
 		setDates: PropTypes.func,
+		setDateTime: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
 		closeDashboardDateTime: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
-		setNatualLanguageLabel: PropTypes.func,
+		setNaturalLanguageLabel: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -415,7 +416,7 @@ class EventDateTime extends Component {
 	};
 
 	startTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setStartTime, setAllDayThunk } = this.props;
+		const { start, end, setStartTime, setAllDay } = this.props;
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? 0 : value;
 
@@ -423,7 +424,7 @@ class EventDateTime extends Component {
 			setStartTime( { start, seconds } );
 		}
 
-		setAllDayThunk( { start, end, isAllDay } );
+		setAllDay( { start, end, isAllDay } );
 		onClose();
 	};
 
@@ -448,7 +449,7 @@ class EventDateTime extends Component {
 	};
 
 	endTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setEndTime, setAllDayThunk } = this.props;
+		const { start, end, setEndTime, setAllDay } = this.props;
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
 
@@ -456,7 +457,7 @@ class EventDateTime extends Component {
 			setEndTime( { end, seconds } );
 		}
 
-		setAllDayThunk( { start, end, isAllDay } );
+		setAllDay( { start, end, isAllDay } );
 		onClose();
 	};
 
@@ -538,8 +539,8 @@ class EventDateTime extends Component {
 	}
 
 	multiDayToggleOnChange = ( checked ) => {
-		const { start, end, setMultiDayThunk } = this.props;
-		setMultiDayThunk( { start, end, checked } );
+		const { start, end, setMultiDay } = this.props;
+		setMultiDay( { start, end, checked } );
 	};
 
 	renderMultiDayToggle() {
