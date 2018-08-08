@@ -18,25 +18,6 @@ Object {
 }
 `;
 
-exports[`[STORE] - Datetime actions Action to set the date 1`] = `
-Object {
-  "meta": Object {
-    "from": "2018-06-08T17:00:00.000Z",
-    "to": "2018-06-19T17:00:00.000Z",
-  },
-  "type": "SET_DATES",
-}
-`;
-
-exports[`[STORE] - Datetime actions Action to set the end time 1`] = `
-Object {
-  "meta": Object {
-    "seconds": 79200,
-  },
-  "type": "SET_END_TIME",
-}
-`;
-
 exports[`[STORE] - Datetime actions Action to set the multi day 1`] = `
 Object {
   "payload": Object {
@@ -91,15 +72,6 @@ Object {
 }
 `;
 
-exports[`[STORE] - Datetime actions Action to set the start time 3`] = `
-Object {
-  "meta": Object {
-    "seconds": 72000,
-  },
-  "type": "SET_START_TIME",
-}
-`;
-
 exports[`[STORE] - Datetime actions Action to set the time zone 1`] = `
 Object {
   "payload": Object {
@@ -109,55 +81,11 @@ Object {
 }
 `;
 
-exports[`[STORE] - Datetime actions Action to toggle the multi day 1`] = `
+exports[`[STORE] - Datetime actions Set Natural Language Label 1`] = `
 Object {
-  "type": "TOGGLE_MULTI_DAY",
+  "payload": Object {
+    "label": "2 weeks from now",
+  },
+  "type": "SET_NATURAL_LANGUAGE_LABEL",
 }
-`;
-
-exports[`[STORE] - Datetime thunk actions Initial set of state 1`] = `
-Array [
-  Object {
-    "payload": Object {
-      "start": "June 5, 2018 5:00 pm",
-    },
-    "type": "SET_START_DATE_TIME",
-  },
-  Object {
-    "payload": Object {
-      "end": "June 5, 2018 5:30 pm",
-    },
-    "type": "SET_END_DATE_TIME",
-  },
-  Object {
-    "payload": Object {
-      "allDay": false,
-    },
-    "type": "SET_ALL_DAY",
-  },
-  Object {
-    "payload": Object {
-      "timezone": "UTC",
-    },
-    "type": "SET_TIME_ZONE",
-  },
-  Object {
-    "payload": Object {
-      "start": "2018-06-05 17:00:00",
-    },
-    "type": "SET_START_DATE_TIME",
-  },
-  Object {
-    "payload": Object {
-      "end": "2018-06-05 17:30:00",
-    },
-    "type": "SET_END_DATE_TIME",
-  },
-  Object {
-    "payload": Object {
-      "multiDay": true,
-    },
-    "type": "SET_MULTI_DAY",
-  },
-]
 `;

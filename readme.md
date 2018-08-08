@@ -27,8 +27,13 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 #### 0.2.6-alpha - TBD
 
 * Tweak - Rename the "Event Tags" block and label to "Tags"
+* Tweak - Change Event Website placeholder text to "Add Event Website"
 * Feature - Add Edit Link button for Venue and Organizer block
 * Feature - Add filter to customize the variables send to the FE `tribe_events_gutenberg_js_config`
+* Feature - Add Human Readable input for date
+* Fix - Remove specificity and side effects from time picker element
+* Fix - Make time picker element stateless, removing logic and allowing presentation via props
+* Fix - Remove middlewares for date time block actions, move logic to thunks
 
 #### 0.2.5-alpha - 2018-08-04
 

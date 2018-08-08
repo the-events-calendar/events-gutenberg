@@ -19,7 +19,7 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 
-const placeholder = __( 'Add Button Text', 'events-gutenberg' );
+const placeholder = __( 'Add Event Website', 'events-gutenberg' );
 
 const renderUrlInput = ({ isSelected, url, setWebsite }) => (
 	isSelected && (
