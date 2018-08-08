@@ -16,7 +16,7 @@ extends Tribe__Gutenberg__Events__Blocks__Abstract {
 	/**
 	 * Set the default attributes of this block
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @return string
 	 */

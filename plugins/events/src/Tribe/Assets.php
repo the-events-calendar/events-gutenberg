@@ -2,12 +2,12 @@
 /**
  * Events Gutenberg Assets
  *
- * @since TBD
+ * @since 0.2.4-alpha
  */
 class Tribe__Gutenberg__Events__Assets {
 	/**
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @return void
 	 */
@@ -18,7 +18,7 @@ class Tribe__Gutenberg__Events__Assets {
 	/**
 	 * Registers and Enqueues the assets
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @param string $key Which key we are checking against
 	 *
@@ -26,7 +26,7 @@ class Tribe__Gutenberg__Events__Assets {
 	 */
 	public function register() {
 
-		$plugin = tribe( 'gutenberg' );
+		$plugin = tribe( 'gutenberg.events.plugin' );
 
 		tribe_asset(
 			$plugin,
@@ -44,7 +44,7 @@ class Tribe__Gutenberg__Events__Assets {
 	/**
 	 * Checks if we should enqueue frontend assets
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @return bool
 	 */
@@ -59,7 +59,7 @@ class Tribe__Gutenberg__Events__Assets {
 		/**
 		 * Allow filtering of where the base Frontend Assets will be loaded
 		 *
-		 * @since  TBD
+		 * @since  0.2.4-alpha
 		 *
 		 * @param bool $should_enqueue
 		 */

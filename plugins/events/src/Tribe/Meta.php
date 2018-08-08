@@ -90,7 +90,7 @@ class Tribe__Gutenberg__Events__Meta {
 	/**
 	 * Default definition for an attribute of type text
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 *
 	 * @return array
 	 */
@@ -107,7 +107,7 @@ class Tribe__Gutenberg__Events__Meta {
 	/***
 	 * Default definition for an attribute of type boolean
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 *
 	 * @return array
 	 */
@@ -124,7 +124,7 @@ class Tribe__Gutenberg__Events__Meta {
 	/**
 	 * Register a numeric type of array
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 *
 	 * @return array
 	 */
@@ -182,7 +182,7 @@ class Tribe__Gutenberg__Events__Meta {
 	 * Make sure sanitization on boolean does not triggered warnings when multiple values are passed
 	 * to the function
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 * @param $value
 	 *
 	 * @return bool
@@ -195,7 +195,7 @@ class Tribe__Gutenberg__Events__Meta {
 	 * Sanitize strings allowing the usage of white spaces before or after the separators, as
 	 * - sanitize_text_field removes any whitespace
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 * @param $value
 	 *
 	 * @return mixed

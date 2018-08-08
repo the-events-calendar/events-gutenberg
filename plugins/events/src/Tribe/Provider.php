@@ -10,6 +10,7 @@ class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
 	 */
 	public function register() {
 		// Setup to check if gutenberg is active
+		$this->container->singleton( 'gutenberg.events.plugin', 'Tribe__Gutenberg__Events__Plugin' );
 		$this->container->singleton( 'gutenberg.events.editor', 'Tribe__Gutenberg__Events__Editor' );
 
 		// Should we continue loading?

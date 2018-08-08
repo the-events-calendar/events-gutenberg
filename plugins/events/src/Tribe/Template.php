@@ -22,7 +22,7 @@ class Tribe__Gutenberg__Events__Template extends Tribe__Template {
 	/**
 	 * Return the attributes of the template
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 *
 	 * @param array $default_attributes
 	 * @return array
@@ -37,7 +37,7 @@ class Tribe__Gutenberg__Events__Template extends Tribe__Template {
 	/**
 	 * Return a specific attribute
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 *
 	 * @param  mixed $default
 	 * @return mixed

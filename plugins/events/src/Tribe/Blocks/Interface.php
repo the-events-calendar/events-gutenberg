@@ -23,7 +23,7 @@ interface Tribe__Gutenberg__Events__Blocks__Interface {
 	/**
 	 * What are the default attributes for this block
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @return array
 	 */
@@ -71,7 +71,7 @@ interface Tribe__Gutenberg__Events__Blocks__Interface {
 	/**
 	 * Attach any specific hook to the current block.
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 *
 	 * @return mixed
 	 */

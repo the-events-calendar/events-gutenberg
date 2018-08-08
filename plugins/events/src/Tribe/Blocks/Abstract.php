@@ -26,7 +26,7 @@ implements Tribe__Gutenberg__Events__Blocks__Interface {
 	/*
 	 * Return the block attributes
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @param  array $attributes
 	 *
@@ -57,7 +57,7 @@ implements Tribe__Gutenberg__Events__Blocks__Interface {
 	/*
 	 * Return the block default attributes
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @param  array $attributes
 	 *
@@ -169,7 +169,7 @@ implements Tribe__Gutenberg__Events__Blocks__Interface {
 	/**
 	 * Attach any particular hook for the specif block.
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 */
 	public function hook() {
 	}
