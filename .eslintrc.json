@@ -134,6 +134,7 @@
     "beforeEach": true,
     "afterEach": true,
     "it": true,
-    "tribe_blocks_editor": true
+    "tribe_blocks_editor": true,
+    "mount": true
   }
 }

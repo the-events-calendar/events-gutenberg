@@ -3,7 +3,6 @@
  */
 import renderer from 'react-test-renderer';
 import React from 'react';
-import { mount } from 'enzyme';
 
 // Prevent to load a mocked version of lodash
 jest.unmock( 'lodash' );
