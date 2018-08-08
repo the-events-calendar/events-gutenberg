@@ -72,6 +72,7 @@ describe( '[STORE] - Datetime thunks', () => {
 	} );
 
 	test( 'Set end time', () => {
+		Date.now = jest.fn( () => '2018-08-06T05:23:19.000Z' );
 		const attributes = {
 			end: '2018-06-05 17:30:00',
 			seconds: 64800,
@@ -130,6 +131,34 @@ describe( '[STORE] - Datetime thunks', () => {
 		store.dispatch( thunks.setDates( attributes ) );
 
 		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	describe( 'setDateTime', () => {
+		test( 'Set only the start date', () => {
+			const attributes = {
+				start: '2018-06-10 17:00:00',
+			};
+			store.dispatch( thunks.setDateTime( attributes ) );
+			expect( store.getActions() ).toMatchSnapshot();
+		} );
+
+		test( 'Set the start and end date on the same day', () => {
+			const attributes = {
+				start: '2018-06-10 12:00:00',
+				end: '2018-06-10 12:00:00',
+			};
+			store.dispatch( thunks.setDateTime( attributes ) );
+			expect( store.getActions() ).toMatchSnapshot();
+		} );
+
+		test( 'Set the start and end date on different days', () => {
+			const attributes = {
+				start: '2018-05-01 12:00:00',
+				end: '2018-05-04 20:00:00',
+			};
+			store.dispatch( thunks.setDateTime( attributes ) );
+			expect( store.getActions() ).toMatchSnapshot();
+		} );
 	} );
 
 	test( 'Set multi day to true', () => {

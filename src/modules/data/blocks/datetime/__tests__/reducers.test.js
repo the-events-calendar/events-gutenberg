@@ -44,4 +44,9 @@ describe( '[STORE] - Datetime reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setMultiDay( true ) ) ).toMatchSnapshot();
 		expect( reducer( DEFAULT_STATE, actions.setMultiDay( false ) ) ).toMatchSnapshot();
 	} );
+
+	it( 'Should set the natural language label', () => {
+		expect( reducer( DEFAULT_STATE, actions.setNaturalLanguageLabel( '2 weeks from now' ) ) )
+			.toMatchSnapshot();
+	} );
 } );

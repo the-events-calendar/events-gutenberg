@@ -40,6 +40,12 @@ Array [
   },
   Object {
     "payload": Object {
+      "label": "Jun 5 2018 at 5:00 pm - Jun 5 2018 at 5:30 pm",
+    },
+    "type": "SET_NATURAL_LANGUAGE_LABEL",
+  },
+  Object {
+    "payload": Object {
       "multiDay": true,
     },
     "type": "SET_MULTI_DAY",
@@ -219,6 +225,75 @@ Array [
       "start": "2018-06-05 02:00:00",
     },
     "type": "SET_START_DATE_TIME",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks setDateTime Set only the start date 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-10 17:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-10 18:00:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks setDateTime Set the start and end date on different days 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-05-01 12:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-05-04 20:00:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": true,
+    },
+    "type": "SET_MULTI_DAY",
+  },
+]
+`;
+
+exports[`[STORE] - Datetime thunks setDateTime Set the start and end date on the same day 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "start": "2018-06-10 12:00:00",
+    },
+    "type": "SET_START_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "end": "2018-06-10 13:00:00",
+    },
+    "type": "SET_END_DATE_TIME",
+  },
+  Object {
+    "payload": Object {
+      "multiDay": false,
+    },
+    "type": "SET_MULTI_DAY",
   },
 ]
 `;

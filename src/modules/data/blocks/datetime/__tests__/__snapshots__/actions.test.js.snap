@@ -80,3 +80,12 @@ Object {
   "type": "SET_TIME_ZONE",
 }
 `;
+
+exports[`[STORE] - Datetime actions Set Natural Language Label 1`] = `
+Object {
+  "payload": Object {
+    "label": "2 weeks from now",
+  },
+  "type": "SET_NATURAL_LANGUAGE_LABEL",
+}
+`;

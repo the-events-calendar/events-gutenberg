@@ -3,6 +3,13 @@
  */
 import * as types from './types';
 
+export const setNaturalLanguageLabel = ( label ) => ( {
+	type: types.SET_NATURAL_LANGUAGE_LABEL,
+	payload: {
+		label,
+	},
+} );
+
 export const setStart = ( start ) => ( {
 	type: types.SET_START_DATE_TIME,
 	payload: {

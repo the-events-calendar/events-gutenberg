@@ -8,6 +8,10 @@ describe( '[STORE] - Datetime actions', () => {
 		expect( actions.setStart( 'June 5, 2018 5:00 pm' ) ).toMatchSnapshot();
 	} );
 
+	test( 'Set Natural Language Label', () => {
+		expect( actions.setNaturalLanguageLabel( '2 weeks from now' ) ).toMatchSnapshot();
+	} );
+
 	test( 'Action to set the start time', () => {
 		expect( actions.setEnd( 'June 25, 2018 4:00 pm' ) ).toMatchSnapshot();
 	} );

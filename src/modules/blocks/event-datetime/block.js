@@ -32,6 +32,7 @@ import {
 	TimePicker,
 	Dashboard,
 	Month,
+	DateInput,
 	Upsell,
 } from 'elements';
 import './style.pcss';
@@ -81,21 +82,24 @@ class EventDateTime extends Component {
 		separatorDate: PropTypes.string,
 		separatorTime: PropTypes.string,
 		timezone: PropTypes.string,
+		currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
 		currencySymbol: PropTypes.string,
-		currencyPosition: PropTypes.string,
+		naturalLanguageLabel: PropTypes.string,
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
 		openDashboardDateTime: PropTypes.func,
 		setStartTime: PropTypes.func,
 		setEndTime: PropTypes.func,
-		setAllDayThunk: PropTypes.func,
-		setMultiDayThunk: PropTypes.func,
+		setAllDay: PropTypes.func,
+		setMultiDay: PropTypes.func,
 		setDates: PropTypes.func,
+		setDateTime: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
 		closeDashboardDateTime: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
+		setNaturalLanguageLabel: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -232,13 +236,13 @@ class EventDateTime extends Component {
 			case 'date-time':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ ' '.concat( separatorDate, ' ') }
+						{ ' '.concat( separatorDate, ' ' ) }
 					</span>
 				);
 			case 'time-range':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ ' '.concat( separatorTime, ' ') }
+						{ ' '.concat( separatorTime, ' ' ) }
 					</span>
 				);
 			case 'dash':
@@ -269,19 +273,29 @@ class EventDateTime extends Component {
 	 *
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
-	renderLabel() {
-		const { multiDay, allDay } = this.props;
-
+	renderDate() {
+		const { multiDay, allDay, isSelected } = this.props;
 		return (
-			<section key="event-datetime" className="tribe-editor__subtitle tribe-editor__date-time">
-				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.openDashboardDateTime }>
-					{ this.renderStart() }
-					{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
-					{ this.renderEnd() }
-					{ allDay && this.renderSeparator( 'all-day' ) }
-					{ this.renderTimezone() }
-					{ this.renderPrice() }
-				</h2>
+			<section
+				key="event-datetime"
+				className="tribe-editor__subtitle tribe-editor__date-time"
+			>
+				<DateInput
+					selected={ isSelected }
+					onClickHandler={ this.props.openDashboardDateTime }
+					setNaturalLanguageLabel={ this.props.setNaturalLanguageLabel }
+					setDateTime={ this.props.setDateTime }
+					value={ this.props.naturalLanguageLabel }
+				>
+					<h2 className="tribe-editor__subtitle__headline">
+						{ this.renderStart() }
+						{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
+						{ this.renderEnd() }
+						{ allDay && this.renderSeparator( 'all-day' ) }
+						{ this.renderTimezone() }
+						{ this.renderPrice() }
+					</h2>
+				</DateInput>
 				{ this.renderDashboard() }
 			</section>
 		);
@@ -311,7 +325,7 @@ class EventDateTime extends Component {
 								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
-						{ ! hideUpsell && <Upsell /> }
+						{ ! hideUpsell && <Upsell/> }
 					</footer>
 				</Fragment>
 			</Dashboard>
@@ -324,7 +338,7 @@ class EventDateTime extends Component {
 		if ( e.keyCode === ESCAPE_KEY ) {
 			this.props.closeDashboardDateTime();
 		}
-	}
+	};
 
 	/* TODO: This needs to move to logic component wrapper */
 	onClick = ( e ) => {
@@ -399,10 +413,10 @@ class EventDateTime extends Component {
 
 		const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
 		setStartTime( { start, seconds } );
-	}
+	};
 
 	startTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setStartTime, setAllDayThunk } = this.props;
+		const { start, end, setStartTime, setAllDay } = this.props;
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? 0 : value;
 
@@ -410,9 +424,9 @@ class EventDateTime extends Component {
 			setStartTime( { start, seconds } );
 		}
 
-		setAllDayThunk( { start, end, isAllDay } );
+		setAllDay( { start, end, isAllDay } );
 		onClose();
-	}
+	};
 
 	endTimePickerOnChange = ( e ) => {
 		const { start, end, setEndTime } = this.props;
@@ -432,10 +446,10 @@ class EventDateTime extends Component {
 
 		const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
 		setEndTime( { end, seconds } );
-	}
+	};
 
 	endTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setEndTime, setAllDayThunk } = this.props;
+		const { start, end, setEndTime, setAllDay } = this.props;
 		const isAllDay = value === 'all-day';
 		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
 
@@ -443,9 +457,9 @@ class EventDateTime extends Component {
 			setEndTime( { end, seconds } );
 		}
 
-		setAllDayThunk( { start, end, isAllDay } );
+		setAllDay( { start, end, isAllDay } );
 		onClose();
-	}
+	};
 
 	renderStartTimePicker() {
 		const { start, allDay, multiDay, end } = this.props;
@@ -525,9 +539,9 @@ class EventDateTime extends Component {
 	}
 
 	multiDayToggleOnChange = ( checked ) => {
-		const { start, end, setMultiDayThunk } = this.props;
-		setMultiDayThunk( { start, end, checked } );
-	}
+		const { start, end, setMultiDay } = this.props;
+		setMultiDay( { start, end, checked } );
+	};
 
 	renderMultiDayToggle() {
 		const { multiDay } = this.props;
@@ -583,7 +597,7 @@ class EventDateTime extends Component {
 	}
 
 	render() {
-		return [ this.renderLabel(), this.renderControls() ];
+		return [ this.renderDate(), this.renderControls() ];
 	}
 }
 
@@ -593,6 +607,7 @@ const mapStateToProps = ( state ) => {
 		visibleMonth: UISelectors.getVisibleMonth( state ),
 		start: dateTimeSelectors.getStart( state ),
 		end: dateTimeSelectors.getEnd( state ),
+		naturalLanguageLabel: dateTimeSelectors.getNaturalLanguageLabel( state ),
 		multiDay: dateTimeSelectors.getMultiDay( state ),
 		allDay: dateTimeSelectors.getAllDay( state ),
 		separatorDate: dateTimeSelectors.getDateSeparator( state ),

@@ -14,6 +14,7 @@ import {
 	setSeparatorDate,
 	setSeparatorTime,
 	setTimeZone,
+	setNaturalLanguageLabel,
 } from './actions';
 import { DEFAULT_STATE } from './reducers';
 import { maybeBulkDispatch } from 'data/utils';
@@ -24,8 +25,10 @@ import {
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
+	adjustStart, toDate,
 } from 'utils/moment';
-import { HOUR_IN_SECONDS, DAY_IN_SECONDS } from 'utils/time';
+import { DAY_IN_SECONDS } from 'utils/time';
+import { rangeToNaturalLanguage } from 'editor/utils';
 
 export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
 	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
@@ -52,16 +55,26 @@ export const setDates = ( { start, end, from, to } ) => ( dispatch ) => {
 	const startMoment = toMoment( start );
 	const endMoment = toMoment( end );
 
-	let newStartMoment = replaceDate( startMoment, toMoment( from ) );
-	let newEndMoment = replaceDate( endMoment, toMoment( to || from ) );
+	const result = adjustStart(
+		replaceDate( startMoment, toMoment( from ) ),
+		replaceDate( endMoment, toMoment( to || from ) ),
+	)
 
-	if ( newEndMoment.isSameOrBefore( newStartMoment ) ) {
-		( { startMoment: newStartMoment, endMoment: newEndMoment } = resetTimes( newStartMoment ) );
-	}
-
-	dispatch( setStart( toDateTime( newStartMoment ) ) );
-	dispatch( setEnd( toDateTime( newEndMoment ) ) );
+	dispatch( setStart( toDateTime( result.start ) ) );
+	dispatch( setEnd( toDateTime( result.end ) ) );
 };
+
+export const setDateTime = ( { start, end } ) => ( dispatch ) => {
+	const result = adjustStart(
+		toMoment( start ),
+		toMoment( end || start ),
+	)
+
+	const isMultiDay = ! isSameDay( result.start, result.end );
+	dispatch( setStart( toDateTime( result.start ) ) );
+	dispatch( setEnd( toDateTime( result.end ) ) );
+	dispatch( setMultiDayAction( isMultiDay ) );
+}
 
 export const setMultiDay = ( { start, end, isMultiDay } ) => ( dispatch ) => {
 	if ( isMultiDay ) {
@@ -69,34 +82,17 @@ export const setMultiDay = ( { start, end, isMultiDay } ) => ( dispatch ) => {
 		const endMoment = toMoment( end ).clone().add( RANGE_DAYS, 'days' );
 		dispatch( setEnd( toDateTime( endMoment ) ) );
 	} else {
-		let startMoment = toMoment( start );
-		let endMoment = replaceDate( toMoment( end ), startMoment );
+		const startMoment = toMoment( start );
+		const result = adjustStart(
+			startMoment,
+			replaceDate( toMoment( end ), startMoment ),
+		);
 
-		if ( endMoment.isSameOrBefore( startMoment ) ) {
-			( { startMoment, endMoment } = resetTimes( startMoment ) );
-		}
-
-		dispatch( setStart( toDateTime( startMoment ) ) );
-		dispatch( setEnd( toDateTime( endMoment ) ) );
+		dispatch( setStart( toDateTime( result.start ) ) );
+		dispatch( setEnd( toDateTime( result.end ) ) );
 	}
 
 	dispatch( setMultiDayAction( isMultiDay ) );
-};
-
-const resetTimes = ( startMoment ) => {
-	const testMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
-
-	// Rollback half an hour before adding half an hour as we are on the edge of the day
-	if ( ! isSameDay( startMoment, testMoment ) ) {
-		startMoment.subtract( HOUR_IN_SECONDS, 'seconds' );
-	}
-
-	const endMoment = startMoment.clone().add( HOUR_IN_SECONDS, 'seconds' );
-
-	return {
-		startMoment,
-		endMoment,
-	};
 };
 
 export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
@@ -112,13 +108,18 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		[ setTimeZone, 'timezone', DEFAULT_STATE.timezone ],
 	] );
 
+	const values = {};
 	if ( attributes.start ) {
-		dispatch( setStart( toDateTime( parseFormats( attributes.start ) ) ) );
+		values.start = toDateTime( parseFormats( attributes.start ) );
+		dispatch( setStart( values.start ) );
 	}
 
 	if ( attributes.end ) {
-		dispatch( setEnd( toDateTime( parseFormats( attributes.end ) ) ) );
+		values.end = toDateTime( parseFormats( attributes.end ) );
+		dispatch( setEnd( values.end ) );
 	}
+
+	dispatch( setNaturalLanguageLabel( rangeToNaturalLanguage( values.start, values.end ) ) );
 
 	// sameDay
 	const current = {
