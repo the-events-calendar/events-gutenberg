@@ -2,7 +2,6 @@
  * External dependencies
  */
 import React from 'react';
-import { compose } from 'redux';
 import { isEmpty } from 'lodash';
 
 /**
@@ -29,4 +28,4 @@ const Item = ( { id, details = {}, loading, onRemoveOrganizer, ...rest } ) => {
 	);
 };
 
-export default compose( withDetails( 'id' ) )( Item );
+export default withDetails( 'id' )( Item );

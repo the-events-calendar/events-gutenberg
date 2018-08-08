@@ -48,7 +48,7 @@ function CreateDropdown( { ...props } ) {
 		/>
 	);
 
-	const dropdownContent = ( { onToggle, isOpen, onClose } ) => (
+	const dropdownContent = ( { onClose } ) => (
 		<OrganizerForm
 			addOrganizer={ addOrganizer }
 			onClose={ onClose }
@@ -159,9 +159,7 @@ const mapDispatchToProps = ( dispatch ) => {
 	};
 };
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps,
-	),
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
 )( EventOrganizers );

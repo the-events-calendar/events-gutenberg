@@ -86,11 +86,8 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 export default compose(
 	withStore( { isolated: true, postType: ORGANIZER } ),
 	withForm( ( props ) => props.id ),
-	connect(
-		mapStateToProps,
-		mapDispatchToProps,
-		mergeProps,
-	),
+	connect( mapStateToProps ),
 	withDetails( 'organizer' ),
+	connect( null, mapDispatchToProps, mergeProps ),
 	withSaveData(),
 )( Organizer );
