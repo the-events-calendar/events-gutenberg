@@ -8,8 +8,10 @@ import moment from 'moment/moment';
  */
 import * as m from 'utils/moment';
 
-import { HALF_HOUR_IN_SECONDS } from 'utils/time';
+import { HALF_HOUR_IN_SECONDS, HOUR_IN_SECONDS } from 'utils/time';
 import { FORMATS } from 'editor/utils/date';
+import { resetTimes } from 'utils/moment';
+import { adjustStart } from 'utils/moment';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 
@@ -18,6 +20,7 @@ describe( 'Tests for moment.js', () => {
 	beforeAll( () => {
 		console = window.console;
 		window.console = {
+			...console,
 			warn: jest.fn(),
 		};
 	} );
@@ -228,6 +231,49 @@ describe( 'Tests for moment.js', () => {
 			const expected = m.parseFormats( 'No date!' );
 			expect( expected.format( format ) ).toBe( '2018-07-01 00:07:31' );
 			expect( window.console.warn ).toHaveBeenCalled();
+		} );
+	} );
+
+	describe( 'resetTimes', () => {
+		const format = 'YYYY-MM-DD HH:mm:ss';
+		it( 'Should add an hour in seconds', () => {
+			const startMoment = moment( new Date( 'July 19, 2018 19:30:00 UTC' ).toISOString() );
+			const { start, end } = resetTimes( startMoment );
+			expect( start.format( format ) ).toBe( '2018-07-19 19:30:00' );
+			expect( end.format( format ) ).toBe( '2018-07-19 20:30:00' );
+		} );
+
+		it( 'Should add hour in seconds on start of the day', () => {
+			const startMoment = moment( new Date( 'July 19, 2018 00:00:00 UTC' ).toISOString() );
+			const { start, end } = resetTimes( startMoment );
+			expect( start.format( format ) ).toBe( '2018-07-19 00:00:00' );
+			expect( end.format( format ) ).toBe( '2018-07-19 01:00:00' );
+		} );
+
+		it( 'Should prevent overflow to the next day', () => {
+			const startMoment = moment( new Date( 'July 19, 2018 23:59:59 UTC' ).toISOString() );
+			const { start, end } = resetTimes( startMoment );
+			expect( start.format( format ) ).toBe( '2018-07-19 22:59:59' );
+			expect( end.format( format ) ).toBe( '2018-07-19 23:59:59' );
+		} );
+	} );
+
+	describe( 'adjustStart', () => {
+		const format = 'YYYY-MM-DD HH:mm:ss';
+		it( 'Should keep the same order when start is before', () => {
+			const start = moment( new Date( 'July 10, 2018 14:30:00 UTC' ).toISOString() );
+			const end = moment( new Date( 'July 10, 2018 20:35:00 UTC' ).toISOString() );
+			const output = adjustStart( start, end );
+			expect( output.start.format( format ) ).toBe( '2018-07-10 14:30:00' );
+			expect( output.end.format( format ) ).toBe( '2018-07-10 20:35:00' );
+		} );
+
+		it( 'Should adjust the start and end time', () => {
+			const start = moment( new Date( 'July 10, 2018 20:35:00 UTC' ).toISOString() );
+			const end = moment( new Date( 'July 10, 2018 10:30:00 UTC' ).toISOString() );
+			const output = adjustStart( start, end );
+			expect( output.start.format( format ) ).toBe( '2018-07-10 20:35:00' );
+			expect( output.end.format( format ) ).toBe( '2018-07-10 21:35:00' );
 		} );
 	} );
 } );
