@@ -20,6 +20,18 @@ const setFocus = ( isSelected ) => ( inputRef ) => {
 	}
 };
 
+const onInputChange = ( dispatchProps, ownProps ) => ( event ) => {
+	const { setTerm, search } = dispatchProps;
+	const { name, exclude } = ownProps;
+	const { value } = event.target;
+	setTerm( name, value );
+	search( name, {
+		term: value,
+		exclude,
+		perPage: 5,
+	} );
+};
+
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
 	loading: selectors.getLoading( state, props ),
@@ -33,6 +45,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...stateProps,
 	...dispatchProps,
 	setFocus: setFocus( ownProps.isSelected ),
+	onInputChange: onInputChange( dispatchProps, ownProps ),
 } );
 
 export default connect(

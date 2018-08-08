@@ -25,17 +25,15 @@ class SearchOrCreate extends Component {
 		term: '',
 		placeholder: __( 'Add or Find', 'events-gutenberg' ),
 		name: '',
-		resultsPerPage: 5,
 		icon: null,
 		posts: [],
-		exclude: [],
 		loading: false,
 		onItemSelect: noop,
 		onCreateNew: noop,
 		registerBlock: noop,
-		search: noop,
 		clearBlock: noop,
 		setFocus: noop,
+		onInputChange: noop,
 	};
 
 	static propTypes = {
@@ -44,17 +42,15 @@ class SearchOrCreate extends Component {
 		term: PropTypes.string,
 		placeholder: PropTypes.string,
 		name: PropTypes.string,
-		resultsPerPage: PropTypes.number,
 		icon: PropTypes.object,
 		posts: PropTypes.array,
-		exclude: PropTypes.array,
 		loading: PropTypes.bool,
 		onItemSelect: PropTypes.func,
 		onCreateNew: PropTypes.func,
 		registerBlock: PropTypes.func,
-		search: PropTypes.func,
 		clearBlock: PropTypes.func,
 		setFocus: PropTypes.func,
+		onInputChange: PropTypes.func,
 	};
 
 	constructor( props ) {
@@ -77,17 +73,6 @@ class SearchOrCreate extends Component {
 		const { clearBlock, name } = this.props;
 		clearBlock( name );
 	}
-
-	onInputChange = ( event ) => {
-		const { value } = event.target;
-		const { name, setTerm, search, exclude, resultsPerPage } = this.props;
-		setTerm( name, value );
-		search( name, {
-			term: value,
-			exclude,
-			perPage: resultsPerPage,
-		} );
-	};
 
 	createNew = () => {
 		const { term, onCreateNew } = this.props;
@@ -139,7 +124,7 @@ class SearchOrCreate extends Component {
 	}
 
 	render() {
-		const { isSelected, icon, term, placeholder } = this.props;
+		const { isSelected, icon, term, placeholder, onInputChange } = this.props;
 		const containerClass = classNames( 'tribe-editor__soc__input__container', {
 			'tribe-editor__soc__input__container--active': isSelected,
 		} );
@@ -153,7 +138,7 @@ class SearchOrCreate extends Component {
 						ref={ this.inputRef }
 						value={ term }
 						placeholder={ placeholder }
-						onChange={ this.onInputChange }
+						onChange={ onInputChange }
 					/>
 				</div>
 				{ this.renderResults() }
