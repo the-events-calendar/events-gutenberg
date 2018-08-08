@@ -6,20 +6,7 @@ const plugin = new MiniCssExtractPlugin( {
 
 const loaders = [
 	{ loader: 'css-loader', options: { importLoaders: 1 } },
-	{
-		loader: 'postcss-loader',
-		options: {
-			ident: 'postcss',
-			plugins: ( loader ) => [
-				require( 'postcss-import' )( { root: loader.resourcePath } ),
-				require( 'postcss-cssnext' ),
-				require( 'postcss-nested' ),
-				require( 'postcss-mixins' ),
-				require( 'postcss-hexrgba' ),
-				require( 'css-mqpacker' ),
-			],
-		},
-	},
+	{ loader: 'postcss-loader'	},
 ];
 
 if ( process.env.NODE_ENV === 'production' ) {
@@ -28,6 +15,7 @@ if ( process.env.NODE_ENV === 'production' ) {
 
 module.exports = {
 	plugin,
+	loaders,
 	rule: {
 		test: /\.(p?css)$/,
 		use: loaders,
