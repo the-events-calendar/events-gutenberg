@@ -65,7 +65,7 @@ export default {
 		},
 		showTimeZone: {
 			type: 'boolean',
-			default: true,
+			default: false,
 		},
 		timeZoneLabel: {
 			type: 'string',

@@ -27,7 +27,7 @@ export const DEFAULT_STATE = {
 	multiDay: false,
 	timeZone: FORMATS.TIMEZONE.string,
 	timeZoneLabel: FORMATS.TIMEZONE.string,
-	showTimeZone: true,
+	showTimeZone: false,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
