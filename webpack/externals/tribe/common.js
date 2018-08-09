@@ -18,4 +18,4 @@ const generateExternals = ( entries ) => (
 	)
 );
 
-module.exports = generateExternals( directories );
+module.exports = {};
