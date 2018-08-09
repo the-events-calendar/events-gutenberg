@@ -54,8 +54,8 @@ const onCreateNew = ( ownProps ) => ( title ) => (
 	} )
 );
 
-const mapStateToProps = ( state, props ) => ( {
-	organizer: selectors.getOrganizerInBlock( state, props ),
+const mapStateToProps = ( state, ownProps ) => ( {
+	organizer: selectors.getOrganizerInBlock( state, ownProps ),
 	organizers: selectors.getOrganizersInClassic( state ),
 } );
 
