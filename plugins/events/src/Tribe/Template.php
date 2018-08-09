@@ -5,7 +5,7 @@
  *
  * @since 0.1.1-alpha
  */
-class Tribe__Events_Gutenberg__Template extends Tribe__Template {
+class Tribe__Gutenberg__Events__Template extends Tribe__Template {
 	/**
 	 * Building of the Class template configuration
 	 *
@@ -22,7 +22,7 @@ class Tribe__Events_Gutenberg__Template extends Tribe__Template {
 	/**
 	 * Return the attributes of the template
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 *
 	 * @param array $default_attributes
 	 * @return array
@@ -37,7 +37,7 @@ class Tribe__Events_Gutenberg__Template extends Tribe__Template {
 	/**
 	 * Return a specific attribute
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 *
 	 * @param  mixed $default
 	 * @return mixed

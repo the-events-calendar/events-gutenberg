@@ -1,7 +1,7 @@
 <?php
 
-abstract class Tribe__Events_Gutenberg__Blocks__Abstract
-implements Tribe__Events_Gutenberg__Blocks__Interface {
+abstract class Tribe__Gutenberg__Events__Blocks__Abstract
+implements Tribe__Gutenberg__Events__Blocks__Interface {
 
 	/**
 	 * Namespace for Blocks from tribe
@@ -26,7 +26,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	/*
 	 * Return the block attributes
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @param  array $attributes
 	 *
@@ -57,7 +57,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	/*
 	 * Return the block default attributes
 	 *
-	 * @since  TBD
+	 * @since  0.2.4-alpha
 	 *
 	 * @param  array $attributes
 	 *
@@ -169,7 +169,7 @@ implements Tribe__Events_Gutenberg__Blocks__Interface {
 	/**
 	 * Attach any particular hook for the specif block.
 	 *
-	 * @since TBD
+	 * @since 0.2.4-alpha
 	 */
 	public function hook() {
 	}
