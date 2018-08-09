@@ -12,59 +12,49 @@ import { noop, isUndefined, isFunction, debounce } from 'lodash';
 import './style.pcss';
 import { toDateTime, toMoment } from 'editor/utils/moment';
 
-const nullableType = ( props, name ) => {
-	if ( isUndefined( props[ name ] ) ) {
-		return;
-	}
-
-	if ( ! isFunction( props[ name ] ) ) {
-		return new Error( `Invalid prop ${ name } should be undefined or a function` );
-	}
-};
-
 const Input = ( props ) => (
-	<input
-		type="text"
-		name="date-input"
-		className="tribe-editor__date-input"
-		value={ props.value }
-		onChange={ props.onChange }
-		onFocus={ props.onClickHandler }
-	/>
+	<div className="tribe-editor__date-input__container">
+		{ props.before }
+		<input
+			type="text"
+			name="date-input"
+			className="tribe-editor__date-input"
+			value={ props.value }
+			onChange={ props.onChange }
+			onFocus={ props.onClickHandler }
+		/>
+		{ props.after }
+	</div>
 );
 
 Input.propTypes = {
 	value: PropTypes.string,
 	onClickHandler: PropTypes.func,
 	onChange: PropTypes.func,
+	before: PropTypes.node,
+	after: PropTypes.node,
 };
 
 Input.defaultProps = {
 	value: '',
 	onClickHandler: noop,
 	onChange: noop,
+	before: null,
+	after: null,
 };
 
-const Label = ( props ) => (
-	<div
-		role="button"
-		tabIndex={ 0 }
-		className="tribe-editor__btn--label"
-		onClick={ props.onClickHandler }
-		onKeyDown={ props.onClickHandler }
-	>
-		{ props.children }
+const Label = ( { children } ) => (
+	<div className="tribe-editor__btn--label">
+		{ children }
 	</div>
 );
 
 Label.propTypes = {
 	children: PropTypes.node,
-	onClickHandler: PropTypes.func,
 };
 
 Label.defaultProps = {
 	children: null,
-	onClickHandler: noop,
 };
 
 const _parse = ( value, setDateTime ) => {
@@ -86,7 +76,7 @@ const DateInput = ( props ) => {
 	const parse = debounce( _parse, 500 );
 
 	function handleChange( event ) {
-		props.setNaturalLanguageLabel( event.target.value );
+		props.onChange( event.target.value );
 		parse( event.target.value, props.setDateTime );
 	}
 
@@ -97,14 +87,22 @@ const DateInput = ( props ) => {
 
 DateInput.propTypes = {
 	selected: PropTypes.bool,
-	setNaturalLanguageLabel: PropTypes.func,
-	setDateTime: nullableType,
+	setDateTime: PropTypes.func,
+	onClickHandler: PropTypes.func,
+	onChange: PropTypes.func,
+	before: PropTypes.node,
+	after: PropTypes.node,
+	value: PropTypes.string,
 };
 
 DateInput.defaultProps = {
 	selected: false,
 	setDateTime: noop,
-	setNaturalLanguageLabel: noop,
+	onClickHandler: noop,
+	onChange: noop,
+	before: null,
+	after: null,
+	value: '',
 };
 
 export default DateInput;

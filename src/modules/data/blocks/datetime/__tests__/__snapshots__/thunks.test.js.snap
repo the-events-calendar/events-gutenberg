@@ -22,7 +22,7 @@ Array [
   },
   Object {
     "payload": Object {
-      "timezone": "UTC",
+      "timeZone": "UTC",
     },
     "type": "SET_TIME_ZONE",
   },

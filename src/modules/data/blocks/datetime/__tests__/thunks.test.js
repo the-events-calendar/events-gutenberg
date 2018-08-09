@@ -46,7 +46,7 @@ describe( '[STORE] - Datetime thunks', () => {
 			timeRangeSeparator: ' - ',
 			allDay: false,
 			multiDay: false,
-			timezone: 'UTC',
+			timeZone: 'UTC',
 		};
 
 		const get = jest.fn( ( key ) => {

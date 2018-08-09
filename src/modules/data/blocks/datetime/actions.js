@@ -52,9 +52,23 @@ export const setMultiDay = ( multiDay ) => ( {
 	},
 } );
 
-export const setTimeZone = ( timezone ) => ( {
+export const setTimeZone = ( timeZone ) => ( {
 	type: types.SET_TIME_ZONE,
 	payload: {
-		timezone,
+		timeZone,
+	},
+} );
+
+export const setTimeZoneLabel = ( label ) => ( {
+	type: types.SET_TIMEZONE_LABEL,
+	payload: {
+		label,
+	},
+} );
+
+export const setTimeZoneVisibility = ( show ) => ( {
+	type: types.SET_TIMEZONE_VISIBILITY,
+	payload: {
+		show,
 	},
 } );
