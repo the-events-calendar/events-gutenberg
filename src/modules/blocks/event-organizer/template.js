@@ -111,11 +111,13 @@ class EventOrganizer extends Component {
 		);
 	}
 
+	/* TODO: move into container component */
 	edit = () => {
 		const { details, editEntry } = this.props;
 		editEntry( details );
 	};
 
+	/* TODO: move into container component */
 	remove = () => {
 		const {
 			clientId,
