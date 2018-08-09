@@ -8,19 +8,6 @@ import thunk from 'redux-thunk';
  * Internal dependencies
  */
 import { thunks } from 'data/blocks/datetime';
-import { DAY_IN_SECONDS } from 'utils/time';
-import {
-	setAllDay as setAllDayAction,
-	setEnd,
-	setSeparatorDate,
-	setSeparatorTime,
-	setStart,
-	setTimeZone,
-	setTimeZoneLabel,
-	setTimeZoneVisibility,
-} from 'data/blocks/datetime/actions';
-import { DEFAULT_STATE } from 'data/blocks/datetime/reducers';
-
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
 
