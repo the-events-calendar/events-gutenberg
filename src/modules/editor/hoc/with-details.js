@@ -70,8 +70,8 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 	const mapStateToProps = ( state, props ) => {
 		const name = props[ key ];
 		return {
-			loading: selectors.getLoading( state, { name } ),
 			details: selectors.getDetails( state, { name } ),
+			loading: selectors.getIsLoading( state, { name } ),
 			volatile: selectors.getVolatile( state, { name } ),
 		};
 	};

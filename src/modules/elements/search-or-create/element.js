@@ -47,7 +47,7 @@ const onItemClick = ( dispatchProps, ownProps ) => ( item ) => () => {
 
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
-	loading: selectors.getLoading( state, props ),
+	loading: selectors.getIsLoading( state, props ),
 	posts: selectors.getResults( state, props ),
 } );
 

@@ -34,7 +34,7 @@ describe( '[STORE] - Details selectors', () => {
 	} );
 
 	it( 'Should get the loading', () => {
-		expect( selectors.getLoading( state, props ) ).toEqual( false );
+		expect( selectors.getIsLoading( state, props ) ).toEqual( false );
 	} );
 
 	it( 'Should return the details', () => {

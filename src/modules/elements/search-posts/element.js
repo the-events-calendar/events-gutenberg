@@ -228,7 +228,7 @@ class SearchPosts extends Component {
 
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
-	loading: selectors.getLoading( state, props ),
+	loading: selectors.getIsLoading( state, props ),
 	results: selectors.getResults( state, props ),
 	page: selectors.getPage( state, props ),
 } );
