@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[STORE] - Details actions Disable loading action 1`] = `
+exports[`[STORE] - Details actions Disable isLoading action 1`] = `
 Object {
   "payload": Object {
     "id": "events",
     "loading": false,
   },
-  "type": "SET_LOADING",
+  "type": "SET_IS_LOADING",
 }
 `;
 
-exports[`[STORE] - Details actions Enable loading action 1`] = `
+exports[`[STORE] - Details actions Enable isLoading action 1`] = `
 Object {
   "payload": Object {
     "id": "events",
     "loading": true,
   },
-  "type": "SET_LOADING",
+  "type": "SET_IS_LOADING",
 }
 `;
 

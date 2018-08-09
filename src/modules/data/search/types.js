@@ -4,7 +4,7 @@ export const SET_TERM = 'SET_TERM';
 export const SET_POST_TYPE = 'SET_POST_TYPE';
 
 export const SEARCH = 'SEARCH';
-export const SET_LOADING = 'SET_LOADING';
+export const SET_IS_LOADING = 'SET_IS_LOADING';
 
 export const SET_RESULTS = 'SET_RESULTS';
 export const ADD_RESULTS = 'ADD_RESULTS';

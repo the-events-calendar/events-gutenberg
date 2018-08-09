@@ -36,7 +36,7 @@ Object {
     "id": 1,
     "loading": false,
   },
-  "type": "SET_LOADING",
+  "type": "SET_IS_LOADING",
 }
 `;
 
@@ -46,7 +46,7 @@ Object {
     "id": 1,
     "loading": true,
   },
-  "type": "SET_LOADING",
+  "type": "SET_IS_LOADING",
 }
 `;
 

@@ -68,7 +68,7 @@ export default ( state = {}, action ) => {
 					totalPages: action.payload.totalPages,
 				},
 			};
-		case types.SET_LOADING:
+		case types.SET_IS_LOADING:
 			return {
 				...state,
 				[ action.payload.id ]: {

@@ -4,12 +4,12 @@
 import { actions } from 'data/details';
 
 describe( '[STORE] - Details actions', () => {
-	test( 'Enable loading action', () => {
-		expect( actions.enableLoading( 'events' ) ).toMatchSnapshot();
+	test( 'Enable isLoading action', () => {
+		expect( actions.enableIsLoading( 'events' ) ).toMatchSnapshot();
 	} );
 
-	test( 'Disable loading action', () => {
-		expect( actions.disableLoading( 'events' ) ).toMatchSnapshot();
+	test( 'Disable isLoading action', () => {
+		expect( actions.disableIsLoading( 'events' ) ).toMatchSnapshot();
 	} );
 
 	test( 'Set details actions', () => {

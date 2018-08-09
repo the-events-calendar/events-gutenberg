@@ -3,16 +3,16 @@
  */
 import * as types from './types';
 
-export const enableLoading = ( id ) => ( {
-	type: types.SET_LOADING,
+export const enableIsLoading = ( id ) => ( {
+	type: types.SET_IS_LOADING,
 	payload: {
 		id,
 		loading: true,
 	},
 } );
 
-export const disableLoading = ( id ) => ( {
-	type: types.SET_LOADING,
+export const disableIsLoading = ( id ) => ( {
+	type: types.SET_IS_LOADING,
 	payload: {
 		id,
 		loading: false,

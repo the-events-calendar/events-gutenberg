@@ -72,7 +72,7 @@ describe( '[STORE] - search reducer', () => {
 		const mockState = {
 			events: DEFAULT_STATE,
 		};
-		expect( reducer( mockState, actions.enableLoading( 'events' ) ) )
+		expect( reducer( mockState, actions.enableIsLoading( 'events' ) ) )
 			.toMatchSnapshot();
 	} );
 
@@ -81,7 +81,7 @@ describe( '[STORE] - search reducer', () => {
 			events: DEFAULT_STATE,
 			loading: true,
 		};
-		expect( reducer( mockState, actions.disableLoading( 'events' ) ) )
+		expect( reducer( mockState, actions.disableIsLoading( 'events' ) ) )
 			.toMatchSnapshot();
 	} );
 

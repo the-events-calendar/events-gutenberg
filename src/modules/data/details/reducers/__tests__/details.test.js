@@ -15,7 +15,7 @@ describe( '[STORE] - details reducer', () => {
 	} );
 
 	it( 'Should enable the loading', () => {
-		expect( reducer( DEFAULT_STATE, actions.enableLoading( 20 ) ) )
+		expect( reducer( DEFAULT_STATE, actions.enableIsLoading( 20 ) ) )
 			.toMatchSnapshot();
 	} );
 

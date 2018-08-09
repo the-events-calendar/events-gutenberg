@@ -25,10 +25,6 @@ export default ( getName = noop ) => ( WrappedComponent ) => {
 			postType: PropTypes.string,
 		};
 
-		constructor( props ) {
-			super( props );
-		}
-
 		componentDidMount() {
 			const name = getName( this.props );
 			const { registerForm, postType } = this.props;

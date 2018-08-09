@@ -38,11 +38,11 @@ describe( '[STORE] - Search actions', () => {
 	} );
 
 	it( 'Should enable loading', () => {
-		expect( actions.enableLoading( 1 ) ).toMatchSnapshot();
+		expect( actions.enableIsLoading( 1 ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should disable loading', () => {
-		expect( actions.disableLoading( 1 ) ).toMatchSnapshot();
+		expect( actions.disableIsLoading( 1 ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should clear the block', () => {

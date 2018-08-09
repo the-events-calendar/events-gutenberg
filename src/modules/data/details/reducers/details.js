@@ -22,7 +22,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				postType: action.payload.postType,
 			};
-		case types.SET_LOADING:
+		case types.SET_IS_LOADING:
 			return {
 				...state,
 				loading: action.payload.loading,
