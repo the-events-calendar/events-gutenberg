@@ -9,7 +9,7 @@ export const DEFAULT_STATE = {
 	results: [],
 	page: 1,
 	totalPages: 0,
-	loading: false,
+	isLoading: false,
 	postType: EVENT,
 };
 
@@ -73,7 +73,7 @@ export default ( state = {}, action ) => {
 				...state,
 				[ action.payload.id ]: {
 					...state[ action.payload.id ],
-					loading: action.payload.loading,
+					isLoading: action.payload.isLoading,
 				},
 			};
 		case types.SET_POST_TYPE:

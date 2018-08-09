@@ -15,8 +15,8 @@ import { withDetails } from 'editor/hoc';
 import { Loading } from 'elements';
 import { Actions, Name } from './index';
 
-const Item = ( { id, details = {}, loading, onRemoveOrganizer, ...rest } ) => {
-	if ( loading || isEmpty( details ) ) {
+const Item = ( { id, details = {}, isLoading, onRemoveOrganizer, ...rest } ) => {
+	if ( isLoading || isEmpty( details ) ) {
 		return <li><Loading className="tribe-editor__spinner--item" /></li>;
 	}
 

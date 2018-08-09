@@ -27,8 +27,8 @@ describe( '[STORE] - Search selectors', () => {
 		expect( selectors.getSearchTerm( state, props ) ).toEqual( DEFAULT_STATE.term );
 	} );
 
-	it( 'Should return the loading state', () => {
-		expect( selectors.getIsLoading( state, props ) ).toEqual( DEFAULT_STATE.loading );
+	it( 'Should return the isLoading state', () => {
+		expect( selectors.getIsLoading( state, props ) ).toEqual( DEFAULT_STATE.isLoading );
 	} );
 
 	it( 'Should return the search results', () => {

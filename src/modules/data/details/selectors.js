@@ -19,7 +19,7 @@ export const getPostType = createSelector(
 
 export const getIsLoading = createSelector(
 	[ blockSelector ],
-	( block ) => block ? block.loading : DEFAULT_STATE.loading,
+	( block ) => block ? block.isLoading : DEFAULT_STATE.isLoading,
 );
 
 export const getDetails = createSelector(

@@ -37,7 +37,7 @@ class EventOrganizer extends Component {
 		create: PropTypes.bool,
 		edit: PropTypes.bool,
 		submit: PropTypes.bool,
-		loading: PropTypes.bool,
+		isLoading: PropTypes.bool,
 		isSelected: PropTypes.bool,
 		organizer: PropTypes.number,
 		id: PropTypes.string,
@@ -149,9 +149,9 @@ class EventOrganizer extends Component {
 	}
 
 	renderContent() {
-		const { details, edit, create, loading } = this.props;
+		const { details, edit, create, isLoading } = this.props;
 
-		if ( loading ) {
+		if ( isLoading ) {
 			return this.renderLoading();
 		}
 

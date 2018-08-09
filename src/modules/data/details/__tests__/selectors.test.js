@@ -33,7 +33,7 @@ describe( '[STORE] - Details selectors', () => {
 		expect( selectors.getPostType( state, props ) ).toEqual( 'tribe_events' );
 	} );
 
-	it( 'Should get the loading', () => {
+	it( 'Should get the isLoading state', () => {
 		expect( selectors.getIsLoading( state, props ) ).toEqual( false );
 	} );
 

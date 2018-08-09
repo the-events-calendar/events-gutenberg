@@ -26,7 +26,7 @@ class SearchOrCreate extends Component {
 		name: '',
 		icon: null,
 		posts: [],
-		loading: false,
+		isLoading: false,
 		clearBlock: noop,
 		setFocus: noop,
 		onInputChange: noop,
@@ -41,7 +41,7 @@ class SearchOrCreate extends Component {
 		name: PropTypes.string,
 		icon: PropTypes.object,
 		posts: PropTypes.array,
-		loading: PropTypes.bool,
+		isLoading: PropTypes.bool,
 		clearBlock: PropTypes.func,
 		setFocus: PropTypes.func,
 		onInputChange: PropTypes.func,
@@ -85,13 +85,13 @@ class SearchOrCreate extends Component {
 	};
 
 	renderResults = () => {
-		const { isSelected, term, loading, posts, onCreateClick } = this.props;
+		const { isSelected, term, isLoading, posts, onCreateClick } = this.props;
 
 		if ( ! isSelected || isEmpty( term ) ) {
 			return null;
 		}
 
-		if ( loading ) {
+		if ( isLoading ) {
 			return (
 				<div className="tribe-editor__soc__results--loading">
 					<Spinner />

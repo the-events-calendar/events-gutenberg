@@ -44,7 +44,7 @@ class SearchPosts extends Component {
 		registerBlock: PropTypes.func,
 		search: PropTypes.func,
 		exclude: PropTypes.array,
-		loading: PropTypes.bool,
+		isLoading: PropTypes.bool,
 		name: PropTypes.string,
 		postType: PropTypes.string,
 	};
@@ -55,7 +55,7 @@ class SearchPosts extends Component {
 			filterValue: '',
 			selectedItem: null,
 			posts: [],
-			loading: false,
+			isLoading: false,
 			search: '',
 		};
 		this.scrollPosition = 0;
@@ -84,8 +84,8 @@ class SearchPosts extends Component {
 			return;
 		}
 
-		const { loading } = this.props;
-		if ( ! loading && this.scrollPosition && this.dropdownEl.current ) {
+		const { isLoading } = this.props;
+		if ( ! isLoading && this.scrollPosition && this.dropdownEl.current ) {
 			this.dropdownEl.current.scrollTop = this.scrollPosition;
 			this.scrollPosition = 0;
 		}
@@ -107,8 +107,8 @@ class SearchPosts extends Component {
 		const { target } = event;
 		const { scrollHeight, scrollTop } = target;
 		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
-		const { loading } = this.state;
-		if ( ! loading ) {
+		const { isLoading } = this.state;
+		if ( ! isLoading ) {
 			this.scrollPosition = scrollTop;
 		}
 		if ( percentage > 0.75 ) {
@@ -123,9 +123,9 @@ class SearchPosts extends Component {
 	}
 
 	renderList = () => {
-		const { results, loading } = this.props;
+		const { results, isLoading } = this.props;
 
-		if ( loading ) {
+		if ( isLoading ) {
 			return (
 				<Placeholder key="placeholder">
 					<Spinner />
@@ -228,7 +228,7 @@ class SearchPosts extends Component {
 
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
-	loading: selectors.getIsLoading( state, props ),
+	isLoading: selectors.getIsLoading( state, props ),
 	results: selectors.getResults( state, props ),
 	page: selectors.getPage( state, props ),
 } );

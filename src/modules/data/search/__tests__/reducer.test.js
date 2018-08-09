@@ -19,7 +19,7 @@ describe( '[STORE] - search reducer', () => {
 				...DEFAULT_STATE,
 				results: [ 1, 2, 3 ],
 				type: 'tribe_events',
-				loading: true,
+				isLoading: true,
 			},
 		};
 		expect( reducer( mockState, actions.clearBlock( 'events' ) ) ).toMatchSnapshot();
@@ -79,7 +79,7 @@ describe( '[STORE] - search reducer', () => {
 	it( 'Should disable loading', () => {
 		const mockState = {
 			events: DEFAULT_STATE,
-			loading: true,
+			isLoading: true,
 		};
 		expect( reducer( mockState, actions.disableIsLoading( 'events' ) ) )
 			.toMatchSnapshot();

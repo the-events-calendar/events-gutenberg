@@ -17,7 +17,7 @@ describe( '[STORE] - Details thunks', () => {
 		const store = mockStore( {
 			details: {
 				20: {
-					loading: true,
+					isLoading: true,
 					details: {},
 				},
 			}
@@ -30,7 +30,7 @@ describe( '[STORE] - Details thunks', () => {
 		const store = mockStore( {
 			details: {
 				20: {
-					loading: false,
+					isLoading: false,
 					details: {},
 				},
 			}

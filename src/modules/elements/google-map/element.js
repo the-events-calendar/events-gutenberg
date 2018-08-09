@@ -142,7 +142,7 @@ export default class GoogleMap extends Component {
 		this.state = {
 			...props,
 			error: '',
-			loading: true,
+			isLoading: true,
 		};
 
 		this.interactiveMapContainer = React.createRef();
@@ -178,7 +178,7 @@ export default class GoogleMap extends Component {
 			if ( isEmpty( address ) ) {
 				this.setState( {
 					interactive: false,
-					loading: false,
+					isLoading: false,
 					error: __(
 						'The map does not have valid coordinates nor a valid address',
 						'events-gutenberg',
@@ -195,13 +195,13 @@ export default class GoogleMap extends Component {
 			);
 			this.setState( {
 				interactive: false,
-				loading: false,
+				isLoading: false,
 			} );
 			return;
 		}
 
 		this.setState( {
-			loading: false,
+			isLoading: false,
 			interactive: true,
 		}, this.attachInteractiveMap );
 	}
@@ -248,7 +248,7 @@ export default class GoogleMap extends Component {
 
 		if ( this.tries >= this.MAX_TRIES ) {
 			this.setState( {
-				loading: false,
+				isLoading: false,
 				error: __( 'Make sure Google Maps Library is included on this page.', 'events-gutenberg' ),
 			} );
 			return;
@@ -262,9 +262,9 @@ export default class GoogleMap extends Component {
 	}
 
 	render() {
-		const { loading } = this.state;
+		const { isLoading } = this.state;
 		const containerClass = classNames( 'tribe-editor__map', {
-			'tribe-editor__map--loading': loading,
+			'tribe-editor__map--loading': isLoading,
 		} );
 
 		return (
@@ -275,9 +275,9 @@ export default class GoogleMap extends Component {
 	}
 
 	renderMap() {
-		const { loading, error, interactive, apiKey } = this.state;
+		const { isLoading, error, interactive, apiKey } = this.state;
 
-		if ( loading ) {
+		if ( isLoading ) {
 			return <Spinner />;
 		}
 

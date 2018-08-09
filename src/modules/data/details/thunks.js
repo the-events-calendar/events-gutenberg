@@ -13,10 +13,10 @@ import { actions as requestActions } from 'data/request';
 export const fetchDetails = ( id ) => ( dispatch, getState ) => {
 	const state = getState();
 	const props = { name: id };
-	const loading = selectors.getIsLoading( state, props );
+	const isLoading = selectors.getIsLoading( state, props );
 	const details = selectors.getDetails( state, props );
 
-	if ( ! isEmpty( details ) || loading ) {
+	if ( ! isEmpty( details ) || isLoading ) {
 		return;
 	}
 

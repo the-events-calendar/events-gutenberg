@@ -18,7 +18,7 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 			setPostType: PropTypes.func,
 			fetchDetails: PropTypes.func,
 			postType: PropTypes.string,
-			loading: PropTypes.bool,
+			isLoading: PropTypes.bool,
 			details: PropTypes.object,
 		};
 
@@ -71,7 +71,7 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 		const name = props[ key ];
 		return {
 			details: selectors.getDetails( state, { name } ),
-			loading: selectors.getIsLoading( state, { name } ),
+			isLoading: selectors.getIsLoading( state, { name } ),
 			volatile: selectors.getVolatile( state, { name } ),
 		};
 	};

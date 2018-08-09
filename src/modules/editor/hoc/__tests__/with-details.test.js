@@ -51,7 +51,7 @@ describe( 'HOC - With Details', () => {
 	it( 'Should attach the details properties', () => {
 		const expected = {
 			details: {},
-			loading: false,
+			isLoading: false,
 		};
 		expect( instance.findByType( Block ).props ).toMatchObject( expected );
 	} );

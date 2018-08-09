@@ -62,7 +62,7 @@ export const enableIsLoading = ( id ) => ( {
 	type: types.SET_IS_LOADING,
 	payload: {
 		id,
-		loading: true,
+		isLoading: true,
 	},
 } );
 
@@ -70,7 +70,7 @@ export const disableIsLoading = ( id ) => ( {
 	type: types.SET_IS_LOADING,
 	payload: {
 		id,
-		loading: false,
+		isLoading: false,
 	},
 } );
 
