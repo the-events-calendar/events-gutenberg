@@ -68,7 +68,7 @@ export default ( state = {}, action ) => {
 					totalPages: action.payload.totalPages,
 				},
 			};
-		case types.SET_IS_LOADING:
+		case types.SET_SEARCH_IS_LOADING:
 			return {
 				...state,
 				[ action.payload.id ]: {
@@ -76,7 +76,7 @@ export default ( state = {}, action ) => {
 					isLoading: action.payload.isLoading,
 				},
 			};
-		case types.SET_POST_TYPE:
+		case types.SET_SEARCH_POST_TYPE:
 			return {
 				...state,
 				[ action.payload.id ]: {

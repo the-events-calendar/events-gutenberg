@@ -39,12 +39,12 @@ export const search = ( id, params ) => ( dispatch, getState ) => {
 	const options = {
 		path: `${ postType }?${ query }`,
 		actions: {
-			start: () => dispatch( actions.enableIsLoading( id ) ),
+			start: () => dispatch( actions.enableSearchIsLoading( id ) ),
 			success: ( { body, headers } ) => {
 				if ( term !== selectors.getSearchTerm( getState(), { name: id } ) ) {
 					return;
 				}
-				dispatch( actions.disableIsLoading( id ) );
+				dispatch( actions.disableSearchIsLoading( id ) );
 				if ( page === 1 ) {
 					dispatch( actions.setResults( id, body ) );
 				} else {
@@ -53,7 +53,7 @@ export const search = ( id, params ) => ( dispatch, getState ) => {
 				dispatch( actions.setPage( id, page ) );
 				dispatch( actions.setTotalPages( id, requestUtils.getTotalPages( headers ) ) );
 			},
-			error: () => dispatch( actions.disableIsLoading( id ) ),
+			error: () => dispatch( actions.disableSearchIsLoading( id ) ),
 		},
 	};
 

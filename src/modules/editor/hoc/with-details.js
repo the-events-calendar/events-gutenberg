@@ -15,7 +15,7 @@ import { actions, thunks, selectors } from 'data/details';
 export default ( key = 'clientId' ) => ( WrappedComponent ) => {
 	class WithDetails extends Component {
 		static propTypes = {
-			setPostType: PropTypes.func,
+			setDetailsPostType: PropTypes.func,
 			fetchDetails: PropTypes.func,
 			postType: PropTypes.string,
 			isLoading: PropTypes.bool,
@@ -43,7 +43,7 @@ export default ( key = 'clientId' ) => ( WrappedComponent ) => {
 				return;
 			}
 
-			const { setPostType, postType, fetchDetails } = this.props;
+			const { setDetailsPostType, postType, fetchDetails } = this.props;
 			const tmp = {
 				id: this.id,
 				postType,
@@ -53,7 +53,7 @@ export default ( key = 'clientId' ) => ( WrappedComponent ) => {
 				return;
 			}
 
-			setPostType( this.id, postType );
+			setDetailsPostType( this.id, postType );
 			fetchDetails( this.id );
 			this.details = tmp;
 		}

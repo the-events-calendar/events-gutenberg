@@ -24,12 +24,12 @@ export const fetchDetails = ( id ) => ( dispatch, getState ) => {
 	const options = {
 		path: `${ postType }/${ id }`,
 		actions: {
-			start: () => dispatch( actions.enableIsLoading( id ) ),
+			start: () => dispatch( actions.enableDetailsIsLoading( id ) ),
 			success: ( { body } ) => {
 				dispatch( actions.setDetails( id, body ) );
-				dispatch( actions.disableIsLoading( id ) );
+				dispatch( actions.disableDetailsIsLoading( id ) );
 			},
-			error: () => dispatch( actions.disableIsLoading( id ) ),
+			error: () => dispatch( actions.disableDetailsIsLoading( id ) ),
 		},
 	};
 

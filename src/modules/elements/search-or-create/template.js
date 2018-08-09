@@ -55,9 +55,9 @@ class SearchOrCreate extends Component {
 	}
 
 	componentDidMount() {
-		const { addBlock, setPostType, name, postType, setFocus } = this.props;
+		const { addBlock, setSearchPostType, name, postType, setFocus } = this.props;
 		addBlock( name );
-		setPostType( name, postType );
+		setSearchPostType( name, postType );
 		setFocus( this.inputRef );
 	}
 

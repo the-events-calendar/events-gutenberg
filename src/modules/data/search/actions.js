@@ -18,8 +18,8 @@ export const setTerm = ( id, term ) => ( {
 	},
 } );
 
-export const setPostType = ( id, postType ) => ( {
-	type: types.SET_POST_TYPE,
+export const setSearchPostType = ( id, postType ) => ( {
+	type: types.SET_SEARCH_POST_TYPE,
 	payload: {
 		id,
 		postType,
@@ -58,16 +58,16 @@ export const setPage = ( id, page ) => ( {
 	},
 } );
 
-export const enableIsLoading = ( id ) => ( {
-	type: types.SET_IS_LOADING,
+export const enableSearchIsLoading = ( id ) => ( {
+	type: types.SET_SEARCH_IS_LOADING,
 	payload: {
 		id,
 		isLoading: true,
 	},
 } );
 
-export const disableIsLoading = ( id ) => ( {
-	type: types.SET_IS_LOADING,
+export const disableSearchIsLoading = ( id ) => ( {
+	type: types.SET_SEARCH_IS_LOADING,
 	payload: {
 		id,
 		isLoading: false,

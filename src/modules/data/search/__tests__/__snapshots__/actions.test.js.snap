@@ -36,7 +36,7 @@ Object {
     "id": 1,
     "isLoading": false,
   },
-  "type": "SET_IS_LOADING",
+  "type": "SET_SEARCH_IS_LOADING",
 }
 `;
 
@@ -46,7 +46,7 @@ Object {
     "id": 1,
     "isLoading": true,
   },
-  "type": "SET_IS_LOADING",
+  "type": "SET_SEARCH_IS_LOADING",
 }
 `;
 
@@ -66,7 +66,7 @@ Object {
     "id": 1,
     "postType": "post",
   },
-  "type": "SET_POST_TYPE",
+  "type": "SET_SEARCH_POST_TYPE",
 }
 `;
 

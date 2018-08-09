@@ -7,7 +7,7 @@ Array [
       "id": "event",
       "postType": undefined,
     },
-    "type": "SET_POST_TYPE",
+    "type": "SET_DETAILS_POST_TYPE",
   },
   Object {
     "meta": Object {

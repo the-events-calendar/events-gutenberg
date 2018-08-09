@@ -72,7 +72,7 @@ describe( '[STORE] - search reducer', () => {
 		const mockState = {
 			events: DEFAULT_STATE,
 		};
-		expect( reducer( mockState, actions.enableIsLoading( 'events' ) ) )
+		expect( reducer( mockState, actions.enableSearchIsLoading( 'events' ) ) )
 			.toMatchSnapshot();
 	} );
 
@@ -81,7 +81,7 @@ describe( '[STORE] - search reducer', () => {
 			events: DEFAULT_STATE,
 			isLoading: true,
 		};
-		expect( reducer( mockState, actions.disableIsLoading( 'events' ) ) )
+		expect( reducer( mockState, actions.disableSearchIsLoading( 'events' ) ) )
 			.toMatchSnapshot();
 	} );
 
@@ -89,7 +89,7 @@ describe( '[STORE] - search reducer', () => {
 		const mockState = {
 			events: DEFAULT_STATE,
 		};
-		expect( reducer( mockState, actions.setPostType( 'events', 'tribe_organizer' ) ) )
+		expect( reducer( mockState, actions.setSearchPostType( 'events', 'tribe_organizer' ) ) )
 			.toMatchSnapshot();
 	} );
 } );

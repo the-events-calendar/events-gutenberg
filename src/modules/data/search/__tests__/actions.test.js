@@ -38,11 +38,11 @@ describe( '[STORE] - Search actions', () => {
 	} );
 
 	it( 'Should enable loading', () => {
-		expect( actions.enableIsLoading( 1 ) ).toMatchSnapshot();
+		expect( actions.enableSearchIsLoading( 1 ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should disable loading', () => {
-		expect( actions.disableIsLoading( 1 ) ).toMatchSnapshot();
+		expect( actions.disableSearchIsLoading( 1 ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should clear the block', () => {
@@ -50,7 +50,7 @@ describe( '[STORE] - Search actions', () => {
 	} );
 
 	it( 'Should set the post type', () => {
-		expect( actions.setPostType( 1, 'post' ) ).toMatchSnapshot();
+		expect( actions.setSearchPostType( 1, 'post' ) ).toMatchSnapshot();
 	} );
 } );
 

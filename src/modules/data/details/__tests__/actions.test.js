@@ -5,11 +5,11 @@ import { actions } from 'data/details';
 
 describe( '[STORE] - Details actions', () => {
 	test( 'Enable isLoading action', () => {
-		expect( actions.enableIsLoading( 'events' ) ).toMatchSnapshot();
+		expect( actions.enableDetailsIsLoading( 'events' ) ).toMatchSnapshot();
 	} );
 
 	test( 'Disable isLoading action', () => {
-		expect( actions.disableIsLoading( 'events' ) ).toMatchSnapshot();
+		expect( actions.disableDetailsIsLoading( 'events' ) ).toMatchSnapshot();
 	} );
 
 	test( 'Set details actions', () => {
@@ -17,6 +17,6 @@ describe( '[STORE] - Details actions', () => {
 	} );
 
 	test( 'Set post type action', () => {
-		expect( actions.setPostType( 'events', 'tribe_events' ) ).toMatchSnapshot();
+		expect( actions.setDetailsPostType( 'events', 'tribe_events' ) ).toMatchSnapshot();
 	} );
 } );
