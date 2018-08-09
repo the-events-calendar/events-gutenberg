@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import reducer, { DEFAULT_STATE } from 'data/blocks/venue/reducers';
+import reducer, { DEFAULT_STATE } from 'data/blocks/venue/reducer';
 import { actions } from 'data/blocks/venue';
 
 describe( '[STORE] - Venue reducer', () => {

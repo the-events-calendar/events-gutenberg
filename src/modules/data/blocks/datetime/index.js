@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import reducer from './reducers';
+import reducer from './reducer';
 import * as types from './types';
 import * as actions from './actions';
 import * as thunks from './thunks';
