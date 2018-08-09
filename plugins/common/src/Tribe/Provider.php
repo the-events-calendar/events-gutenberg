@@ -1,6 +1,6 @@
 <?php
 
-class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
+class Tribe__Gutenberg__Common__Provider extends tad_DI52_ServiceProvider {
 
 	/**
 	 * Binds and sets up implementations.
@@ -24,6 +24,9 @@ class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.common.assets', 'Tribe__Gutenberg__Common__Assets', array( 'register' ) );
 
 		$this->hook();
+
+		// Initialize the correct Singletons
+		tribe( 'gutenberg.common.assets' );
 	}
 
 	/**
