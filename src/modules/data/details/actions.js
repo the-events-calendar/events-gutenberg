@@ -4,7 +4,7 @@
 import * as types from './types';
 
 export const enableLoading = ( id ) => ( {
-	type: types.SET_DETAILS_LOADING,
+	type: types.SET_LOADING,
 	payload: {
 		id,
 		loading: true,
@@ -12,7 +12,7 @@ export const enableLoading = ( id ) => ( {
 } );
 
 export const disableLoading = ( id ) => ( {
-	type: types.SET_DETAILS_LOADING,
+	type: types.SET_LOADING,
 	payload: {
 		id,
 		loading: false,
@@ -28,7 +28,7 @@ export const setDetails = ( id, details ) => ( {
 } );
 
 export const setPostType = ( id, postType ) => ( {
-	type: types.SET_DETAILS_POST_TYPE,
+	type: types.SET_POST_TYPE,
 	payload: {
 		id,
 		postType,

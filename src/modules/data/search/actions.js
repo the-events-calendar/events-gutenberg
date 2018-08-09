@@ -64,7 +64,7 @@ export const setPage = ( id, page ) => ( {
 } );
 
 export const enableLoading = ( id ) => ( {
-	type: types.SET_SEARCH_LOADING,
+	type: types.SET_LOADING,
 	payload: {
 		id,
 		loading: true,
@@ -72,7 +72,7 @@ export const enableLoading = ( id ) => ( {
 } );
 
 export const disableLoading = ( id ) => ( {
-	type: types.SET_SEARCH_LOADING,
+	type: types.SET_LOADING,
 	payload: {
 		id,
 		loading: false,

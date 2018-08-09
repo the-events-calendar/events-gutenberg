@@ -17,12 +17,12 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				details: action.payload.details,
 			};
-		case types.SET_DETAILS_POST_TYPE:
+		case types.SET_POST_TYPE:
 			return {
 				...state,
 				postType: action.payload.postType,
 			};
-		case types.SET_DETAILS_LOADING:
+		case types.SET_LOADING:
 			return {
 				...state,
 				loading: action.payload.loading,

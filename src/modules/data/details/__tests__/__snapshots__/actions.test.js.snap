@@ -6,7 +6,7 @@ Object {
     "id": "events",
     "loading": false,
   },
-  "type": "SET_DETAILS_LOADING",
+  "type": "SET_LOADING",
 }
 `;
 
@@ -16,7 +16,7 @@ Object {
     "id": "events",
     "loading": true,
   },
-  "type": "SET_DETAILS_LOADING",
+  "type": "SET_LOADING",
 }
 `;
 
@@ -39,6 +39,6 @@ Object {
     "id": "events",
     "postType": "tribe_events",
   },
-  "type": "SET_DETAILS_POST_TYPE",
+  "type": "SET_POST_TYPE",
 }
 `;
