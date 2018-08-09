@@ -77,10 +77,6 @@ class EventOrganizers extends Component {
 		organizers: PropTypes.array,
 	};
 
-	constructor( props ) {
-		super( ...arguments );
-	}
-
 	renderOrganizerList() {
 		const { organizers, store } = this.props;
 		return (

@@ -12,7 +12,7 @@ import { isUndefined, isEqual } from 'lodash';
  */
 import { actions, thunks, selectors } from 'data/details';
 
-export default ( key = 'id' ) => ( WrappedComponent ) => {
+export default ( key = 'clientId' ) => ( WrappedComponent ) => {
 	class WithDetails extends Component {
 		static propTypes = {
 			setPostType: PropTypes.func,

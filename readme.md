@@ -37,6 +37,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Fix - Make time picker element stateless, removing logic and allowing presentation via props
 * Fix - Remove middlewares for date time block actions, move logic to thunks
 * Fix - Separate logic and presentation from SearchOrCreate component
+* Fix - Change all references of block id to clientId
 
 #### 0.2.5-alpha - 2018-08-04
 

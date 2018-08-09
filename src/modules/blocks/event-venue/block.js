@@ -297,7 +297,7 @@ class EventVenue extends Component {
 						onChange={ toggleVenueMap }
 					/>
 				<EditLink
-					id={ venue }
+					postId={ venue }
 					label={ __( 'Edit Venue', 'events-gutenberg' ) }
 				/>
 				</PanelBody>

@@ -40,7 +40,7 @@ class EventOrganizer extends Component {
 		isLoading: PropTypes.bool,
 		isSelected: PropTypes.bool,
 		organizer: PropTypes.number,
-		id: PropTypes.string,
+		clientId: PropTypes.string,
 		current: PropTypes.string,
 		setPost: PropTypes.func,
 		clear: PropTypes.func,
@@ -87,7 +87,7 @@ class EventOrganizer extends Component {
 
 	renderSearch() {
 		const {
-			id,
+			clientId,
 			isSelected,
 			organizers,
 			store,
@@ -98,7 +98,7 @@ class EventOrganizer extends Component {
 
 		return (
 			<SearchOrCreate
-				name={ id }
+				name={ clientId }
 				store={ store }
 				postType={ postType }
 				isSelected={ isSelected }
@@ -118,7 +118,7 @@ class EventOrganizer extends Component {
 
 	remove = () => {
 		const {
-			id,
+			clientId,
 			organizer,
 			removeOrganizerInBlock,
 			volatile,
@@ -127,7 +127,7 @@ class EventOrganizer extends Component {
 			details,
 		} = this.props;
 
-		removeOrganizerInBlock( id, organizer );
+		removeOrganizerInBlock( clientId, organizer );
 
 		if ( volatile ) {
 			maybeRemoveEntry( details );
@@ -168,7 +168,7 @@ class EventOrganizer extends Component {
 
 	renderBlock() {
 		return (
-			<section key={ this.props.id }>
+			<section key={ this.props.clientId }>
 				{ this.renderContent() }
 			</section>
 		);
@@ -183,7 +183,7 @@ class EventOrganizer extends Component {
 			<InspectorControls key="inspector">
 				<PanelBody title={ __( 'Venue Map Settings' ) }>
 					<EditLink
-						id={ organizer }
+						postId={ organizer }
 						label={ __( 'Edit Organizer', 'events-gutenberg' ) }
 					/>
 				</PanelBody>

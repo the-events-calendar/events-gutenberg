@@ -5,17 +5,13 @@ import React from 'react';
 import { isEmpty } from 'lodash';
 
 /**
- * Wordpress dependencies
- */
-
-/**
  * Import internal dependencies
  */
 import { withDetails } from 'editor/hoc';
 import { Loading } from 'elements';
 import { Actions, Name } from './index';
 
-const Item = ( { id, details = {}, isLoading, onRemoveOrganizer, ...rest } ) => {
+const Item = ( { details = {}, isLoading, onRemoveOrganizer, ...rest } ) => {
 	if ( isLoading || isEmpty( details ) ) {
 		return <li><Loading className="tribe-editor__spinner--item" /></li>;
 	}
@@ -23,7 +19,7 @@ const Item = ( { id, details = {}, isLoading, onRemoveOrganizer, ...rest } ) => 
 	return (
 		<li>
 			<Name { ...details } />
-			<Actions id={ id } onRemoveOrganizer={ onRemoveOrganizer } { ...rest } />
+			<Actions onRemoveOrganizer={ onRemoveOrganizer } { ...rest } />
 		</li>
 	);
 };

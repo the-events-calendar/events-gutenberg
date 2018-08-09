@@ -27,7 +27,7 @@ const onFormCompleted = ( dispatchProps, ownProps ) => ( body = {} ) => {
 
 	setDetails( body.id, body );
 	addOrganizerInClassic( body.id );
-	addOrganizerInBlock( ownProps.id, body.id );
+	addOrganizerInBlock( ownProps.clientId, body.id );
 };
 
 const onFormSubmit = ( dispatchProps, ownProps ) => ( fields ) => (
@@ -43,7 +43,7 @@ const onItemSelect = ( dispatchProps, ownProps ) => ( organizerID, details ) => 
 
 	setDetails( organizerID, details );
 	addOrganizerInClassic( organizerID );
-	addOrganizerInBlock( ownProps.id, organizerID );
+	addOrganizerInBlock( ownProps.clientId, organizerID );
 };
 
 const onCreateNew = ( ownProps ) => ( title ) => (
@@ -62,12 +62,12 @@ const mapStateToProps = ( state, props ) => ( {
 const mapDispatchToProps = ( dispatch ) => ( {
 	...bindActionCreators( actions, dispatch ),
 	...bindActionCreators( detailsActions, dispatch ),
-	setInitialState( { id, get } ) {
+	setInitialState( { clientId, get } ) {
 		const organizer = get( 'organizer', '' );
 		if ( ! organizer ) {
 			return;
 		}
-		dispatch( actions.addOrganizerInBlock( id, organizer ) );
+		dispatch( actions.addOrganizerInBlock( clientId, organizer ) );
 		dispatch( actions.addOrganizerInClassic( organizer ) );
 	},
 } );
@@ -85,7 +85,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 
 export default compose(
 	withStore( { isolated: true, postType: ORGANIZER } ),
-	withForm( ( props ) => props.id ),
+	withForm( ( props ) => props.clientId ),
 	connect( mapStateToProps ),
 	withDetails( 'organizer' ),
 	connect( null, mapDispatchToProps, mergeProps ),
