@@ -25,7 +25,9 @@ export const DEFAULT_STATE = {
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),
 	allDay: false,
 	multiDay: false,
-	timezone: FORMATS.TIMEZONE.string,
+	timeZone: FORMATS.TIMEZONE.string,
+	timeZoneLabel: FORMATS.TIMEZONE.string,
+	showTimeZone: false,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -68,8 +70,19 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_TIME_ZONE:
 			return {
 				...state,
-				timezone: action.payload.timezone,
+				timeZone: action.payload.timeZone,
 			};
+		case types.SET_TIMEZONE_LABEL:
+			return {
+				...state,
+				timeZoneLabel: action.payload.label,
+			}
+		case types.SET_TIMEZONE_VISIBILITY: {
+			return {
+				...state,
+				showTimeZone: action.payload.show,
+			}
+		}
 		default:
 			return state;
 	}

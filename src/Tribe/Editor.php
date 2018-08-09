@@ -361,6 +361,10 @@ class Tribe__Events_Gutenberg__Editor {
 
 		$js_config = array(
 			'admin_url' => admin_url(),
+			'timeZone' => array(
+				'show_time_zone' => false,
+				'label' => '',
+			),
 		);
 
 		tribe_asset(

@@ -14,6 +14,8 @@ import {
 	setSeparatorDate,
 	setSeparatorTime,
 	setTimeZone,
+	setTimeZoneLabel,
+	setTimeZoneVisibility,
 	setNaturalLanguageLabel,
 } from './actions';
 import { DEFAULT_STATE } from './reducers';
@@ -25,7 +27,8 @@ import {
 	setTimeInSeconds,
 	toDateTime,
 	toMoment,
-	adjustStart, toDate,
+	adjustStart,
+	toDate,
 } from 'utils/moment';
 import { DAY_IN_SECONDS } from 'utils/time';
 import { rangeToNaturalLanguage } from 'editor/utils';
@@ -105,7 +108,9 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		[ setAllDayAction, 'allDay', DEFAULT_STATE.allDay ],
 		[ setSeparatorDate, 'separatorDate', DEFAULT_STATE.dateTimeSeparator ],
 		[ setSeparatorTime, 'separatorTime', DEFAULT_STATE.timeRangeSeparator ],
-		[ setTimeZone, 'timezone', DEFAULT_STATE.timezone ],
+		[ setTimeZone, 'timeZone', DEFAULT_STATE.timeZone ],
+		[ setTimeZoneLabel, 'timeZoneLabel', DEFAULT_STATE.timeZoneLabel ],
+		[ setTimeZoneVisibility, 'showTimeZone', DEFAULT_STATE.showTimeZone ],
 	] );
 
 	const values = {};

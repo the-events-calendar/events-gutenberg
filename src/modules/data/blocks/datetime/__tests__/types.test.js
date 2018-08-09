@@ -12,6 +12,8 @@ describe( '[STORE] - Datetime types', () => {
 		expect( types.SET_MULTI_DAY ).toBe( 'SET_MULTI_DAY' );
 		expect( types.SET_SEPARATOR_TIME ).toBe( 'SET_SEPARATOR_TIME' );
 		expect( types.SET_SEPARATOR_DATE ).toBe( 'SET_SEPARATOR_DATE' );
+		expect( types.SET_TIMEZONE_LABEL ).toBe( 'SET_TIMEZONE_LABEL' );
+		expect( types.SET_TIMEZONE_VISIBILITY ).toBe( 'SET_TIMEZONE_VISIBILITY' );
 		expect( types.SET_NATURAL_LANGUAGE_LABEL ).toBe( 'SET_NATURAL_LANGUAGE_LABEL' );
 	} );
 } );

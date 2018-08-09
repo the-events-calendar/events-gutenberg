@@ -81,6 +81,8 @@
 		"cross-env": "^5.2.0",
 		"css-loader": "0.28.9",
 		"css-mqpacker": "^4.0.1",
+		"enzyme": "^3.3.0",
+		"enzyme-adapter-react-16": "^1.1.1",
 		"eslint": "^4.19.1",
 		"eslint-config-products": "github:moderntribe/eslint-config-products#v0.1.1",
 		"eslint-plugin-react": "^7.10.0",

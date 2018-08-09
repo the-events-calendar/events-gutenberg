@@ -28,10 +28,18 @@ describe( '[STORE] - Datetime selectors', () => {
 	} );
 
 	it( 'Should return the timezone', () => {
-		expect( selectors.getTimeZone( state ) ).toBe( DEFAULT_STATE.timezone );
+		expect( selectors.getTimeZone( state ) ).toBe( DEFAULT_STATE.timeZone );
 	} );
 
-	it( 'Should return the multiday', () => {
+	it( 'Should return the time zone label', () => {
+		expect( selectors.getTimeZoneLabel( state ) ).toBe( DEFAULT_STATE.timeZoneLabel );
+	} );
+
+	it( 'Should return the time zone visibility', () => {
+		expect( selectors.getTimeZoneVisibility( state ) ).toBe( DEFAULT_STATE.showTimeZone );
+	} );
+
+	it( 'Should return the multi day', () => {
 		expect( selectors.getMultiDay( state ) ).toBe( DEFAULT_STATE.multiDay );
 	} );
 
@@ -39,7 +47,7 @@ describe( '[STORE] - Datetime selectors', () => {
 		expect( selectors.getDateSeparator( state ) ).toBe( DEFAULT_STATE.dateTimeSeparator );
 	} );
 
-	it( 'Should return timee range separator', () => {
+	it( 'Should return time range separator', () => {
 		expect( selectors.getTimeSeparator( state ) ).toBe( DEFAULT_STATE.timeRangeSeparator );
 	} );
 

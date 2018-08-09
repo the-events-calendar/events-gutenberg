@@ -34,6 +34,7 @@ import {
 	Month,
 	DateInput,
 	Upsell,
+	TimeZone,
 } from 'elements';
 import './style.pcss';
 
@@ -81,7 +82,11 @@ class EventDateTime extends Component {
 		end: PropTypes.string,
 		separatorDate: PropTypes.string,
 		separatorTime: PropTypes.string,
-		timezone: PropTypes.string,
+		timeZone: PropTypes.string,
+		showTimeZone: PropTypes.bool,
+		timeZoneLabel: PropTypes.string,
+		setTimeZoneLabel: PropTypes.func,
+		setTimeZoneVisibility: PropTypes.func,
 		currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
 		currencySymbol: PropTypes.string,
 		naturalLanguageLabel: PropTypes.string,
@@ -131,7 +136,10 @@ class EventDateTime extends Component {
 		}
 
 		return (
-			<div className="tribe-editor__event-cost">
+			<div
+				key="tribe-editor-event-cost"
+				className="tribe-editor__event-cost"
+			>
 				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
@@ -220,7 +228,7 @@ class EventDateTime extends Component {
 	}
 
 	renderTimezone() {
-		return this.renderSeparator( 'timezone' );
+		return this.renderSeparator( 'timeZone' );
 	}
 
 	/**
@@ -231,7 +239,14 @@ class EventDateTime extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type, className ) {
-		const { timezone, separatorDate, separatorTime } = this.props;
+		const {
+			timeZone,
+			separatorDate,
+			separatorTime,
+			setTimeZoneLabel,
+			timeZoneLabel,
+			showTimeZone,
+		} = this.props;
 		switch ( type ) {
 			case 'date-time':
 				return (
@@ -257,10 +272,16 @@ class EventDateTime extends Component {
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>&nbsp;</span>
 				);
-			case 'timezone':
-				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ timezone }
+			case 'timeZone':
+				return showTimeZone && (
+					<span
+						key="time-zone-separator"
+						className={ classNames( 'tribe-editor__separator', className ) }>
+						<TimeZone
+							value={ timeZoneLabel }
+							placeholder={ timeZoneLabel }
+							onChange={ setTimeZoneLabel }
+						/>
 					</span>
 				);
 			default:
@@ -274,7 +295,15 @@ class EventDateTime extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderDate() {
-		const { multiDay, allDay, isSelected } = this.props;
+		const {
+			multiDay,
+			allDay,
+			isSelected,
+			openDashboardDateTime,
+			setDateTime,
+			setNaturalLanguageLabel,
+			naturalLanguageLabel,
+		} = this.props;
 		return (
 			<section
 				key="event-datetime"
@@ -282,23 +311,32 @@ class EventDateTime extends Component {
 			>
 				<DateInput
 					selected={ isSelected }
-					onClickHandler={ this.props.openDashboardDateTime }
-					setNaturalLanguageLabel={ this.props.setNaturalLanguageLabel }
-					setDateTime={ this.props.setDateTime }
-					value={ this.props.naturalLanguageLabel }
+					onClickHandler={ openDashboardDateTime }
+					onChange={ setNaturalLanguageLabel }
+					setDateTime={ setDateTime }
+					value={ naturalLanguageLabel }
+					after={ this.renderExtras() }
 				>
 					<h2 className="tribe-editor__subtitle__headline">
-						{ this.renderStart() }
-						{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
-						{ this.renderEnd() }
-						{ allDay && this.renderSeparator( 'all-day' ) }
-						{ this.renderTimezone() }
-						{ this.renderPrice() }
+						<button
+							className="tribe-editor__btn--label"
+							onClick={ openDashboardDateTime }
+						>
+							{ this.renderStart() }
+							{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
+							{ this.renderEnd() }
+							{ allDay && this.renderSeparator( 'all-day' ) }
+						</button>
+						{ this.renderExtras() }
 					</h2>
 				</DateInput>
 				{ this.renderDashboard() }
 			</section>
 		);
+	}
+
+	renderExtras() {
+		return [ this.renderTimezone(), this.renderPrice() ];
 	}
 
 	renderDashboard() {
@@ -563,10 +601,11 @@ class EventDateTime extends Component {
 		const {
 			separatorTime,
 			separatorDate,
-			timezone,
+			timeZone,
 			setTimeZone,
 			setSeparatorTime,
 			setSeparatorDate,
+			showTimeZone,
 		} = this.props;
 
 		return ( <InspectorControls key="inspector">
@@ -587,13 +626,23 @@ class EventDateTime extends Component {
 				/>
 				<SelectControl
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
-					value={ timezone }
+					value={ timeZone }
 					onChange={ setTimeZone }
 					options={ timezonesAsSelectData() }
 					className="tribe-editor__date-time__time-zone-setting"
 				/>
+				<ToggleControl
+					label={ __( 'Show Time Zone', 'events-gutenberg' ) }
+					checked={ showTimeZone }
+					onChange={ this.toggleTimeZoneVisibility }
+				/>
 			</PanelBody>
 		</InspectorControls> );
+	}
+
+	toggleTimeZoneVisibility = () => {
+		const { showTimeZone, setTimeZoneVisibility } = this.props;
+		setTimeZoneVisibility( ! showTimeZone );
 	}
 
 	render() {
@@ -612,7 +661,9 @@ const mapStateToProps = ( state ) => {
 		allDay: dateTimeSelectors.getAllDay( state ),
 		separatorDate: dateTimeSelectors.getDateSeparator( state ),
 		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
-		timezone: dateTimeSelectors.getTimeZone( state ),
+		showTimeZone: dateTimeSelectors.getTimeZoneVisibility( state ),
+		timeZone: dateTimeSelectors.getTimeZone( state ),
+		timeZoneLabel: dateTimeSelectors.getTimeZoneLabel( state ),
 		cost: priceSelectors.getPrice( state ),
 		currencySymbol: priceSelectors.getSymbol( state ),
 		currencyPosition: priceSelectors.getPosition( state ),
