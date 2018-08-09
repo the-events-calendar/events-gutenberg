@@ -64,7 +64,7 @@ exports[`[STORE] - Search actions Should set the post type 1`] = `
 Object {
   "payload": Object {
     "id": 1,
-    "type": "post",
+    "postType": "post",
   },
   "type": "SET_POST_TYPE",
 }
@@ -102,33 +102,8 @@ Object {
 }
 `;
 
-exports[`[STORE] - Search thunk actions Should register a block 1`] = `
+exports[`[STORE] - Search thunk actions Should clear the block 1`] = `
 Array [
-  Object {
-    "payload": Object {
-      "id": "test",
-    },
-    "type": "ADD_BLOCK",
-  },
-  Object {
-    "payload": Object {
-      "id": "test",
-      "type": "post",
-    },
-    "type": "SET_POST_TYPE",
-  },
-]
-`;
-
-exports[`[STORE] - Search thunk actions Should set the term and clear the block 1`] = `
-Array [
-  Object {
-    "payload": Object {
-      "id": "post",
-      "term": "",
-    },
-    "type": "SET_TERM",
-  },
   Object {
     "payload": Object {
       "id": "post",
@@ -138,15 +113,8 @@ Array [
 ]
 `;
 
-exports[`[STORE] - Search thunk actions Should set the term and request action 1`] = `
+exports[`[STORE] - Search thunk actions Should request action 1`] = `
 Array [
-  Object {
-    "payload": Object {
-      "id": "post",
-      "term": "Modern",
-    },
-    "type": "SET_TERM",
-  },
   Object {
     "meta": Object {
       "actions": Object {

@@ -5,7 +5,7 @@ import reducer, { actions } from 'data/forms';
 import form, { DEFAULT_STATE } from 'data/forms/reducers/form';
 
 jest.mock( 'data/forms/reducers/form', () => {
-	const original = require.requireActual( 'data/search/reducers/search' );
+	const original = require.requireActual( 'data/search/reducer' );
 	return {
 		__esModule: true,
 		...original,

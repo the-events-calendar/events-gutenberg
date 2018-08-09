@@ -109,9 +109,10 @@ class SearchOrCreate extends Component {
 
 	render() {
 		const { isSelected, icon, term, placeholder, onInputChange } = this.props;
-		const containerClass = classNames( 'tribe-editor__soc__input__container', {
-			'tribe-editor__soc__input__container--active': isSelected,
-		} );
+		const containerClass = classNames(
+			'tribe-editor__soc__input__container',
+			{ 'tribe-editor__soc__input__container--active': isSelected },
+		);
 
 		return (
 			<section className="tribe-soc__container">

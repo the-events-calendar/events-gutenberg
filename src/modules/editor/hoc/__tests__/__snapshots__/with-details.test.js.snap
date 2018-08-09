@@ -5,7 +5,7 @@ Array [
   Object {
     "payload": Object {
       "id": "event",
-      "type": undefined,
+      "postType": undefined,
     },
     "type": "SET_DETAILS_POST_TYPE",
   },

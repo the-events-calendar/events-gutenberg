@@ -37,7 +37,7 @@ exports[`[STORE] - Details actions Set post type action 1`] = `
 Object {
   "payload": Object {
     "id": "events",
-    "type": "tribe_events",
+    "postType": "tribe_events",
   },
   "type": "SET_DETAILS_POST_TYPE",
 }

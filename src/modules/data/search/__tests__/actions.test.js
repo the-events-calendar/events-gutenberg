@@ -55,14 +55,7 @@ describe( '[STORE] - Search actions', () => {
 } );
 
 describe( '[STORE] - Search thunk actions', () => {
-	it( 'Should register a block', () => {
-		const store = mockStore( {} );
-		store.dispatch( actions.registerBlock( 'test', 'post' ) );
-
-		expect( store.getActions() ).toMatchSnapshot();
-	} );
-
-	it( 'Should set the term and request action', () => {
+	it( 'Should request action', () => {
 		const store = mockStore( {
 			search: {},
 		} );
@@ -70,7 +63,7 @@ describe( '[STORE] - Search thunk actions', () => {
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	it( 'Should set the term and clear the block', () => {
+	it( 'Should clear the block', () => {
 		const initialState = {
 			search: {},
 		};

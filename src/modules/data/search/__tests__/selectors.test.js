@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { selectors } from 'data/search';
-import { DEFAULT_STATE } from 'data/search/reducers/search';
+import { DEFAULT_STATE } from 'data/search/reducer';
 
 const state = {
 	search: {

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { createSelector } from 'reselect';
-import { DEFAULT_STATE } from './reducers/search';
+import { DEFAULT_STATE } from './reducer';
 
 export const blockSelector = ( state, props ) => state.search[ props.name ];
 
