@@ -1,4 +1,3 @@
-
 /**
  * External dependencies
  */
@@ -10,6 +9,17 @@ import thunk from 'redux-thunk';
  */
 import { thunks } from 'data/blocks/datetime';
 import { DAY_IN_SECONDS } from 'utils/time';
+import {
+	setAllDay as setAllDayAction,
+	setEnd,
+	setSeparatorDate,
+	setSeparatorTime,
+	setStart,
+	setTimeZone,
+	setTimeZoneLabel,
+	setTimeZoneVisibility,
+} from 'data/blocks/datetime/actions';
+import { DEFAULT_STATE } from 'data/blocks/datetime/reducers';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
@@ -29,8 +39,8 @@ describe( '[STORE] - Datetime thunks', () => {
 					allDay: false,
 					multiDay: false,
 					timezone: 'UTC',
-				}
-			}
+				},
+			},
 		};
 
 		store = mockStore( initialState );
@@ -49,15 +59,35 @@ describe( '[STORE] - Datetime thunks', () => {
 			timeZone: 'UTC',
 		};
 
-		const get = jest.fn( ( key ) => {
-			return attributes[ key ];
-		} );
+		store.dispatch( thunks.setInitialState( { attributes } ) );
 
-		store.dispatch( thunks.setInitialState( { get, attributes } ) );
-
-		expect( get ).toHaveBeenCalled();
-		expect( get ).toHaveBeenCalledTimes( 2 );
 		expect( store.getActions() ).toMatchSnapshot();
+	} );
+
+	test( 'Should set the human readable', () => {
+		store = mockStore( {} );
+		const attributes = {
+			start: '',
+			end: '',
+		};
+
+		store.dispatch( thunks.setInitialState( { attributes } ) );
+
+		const types = store.getActions().map( ( action ) => action.type );
+		const values = store.getActions().map( ( action ) => action.payload )
+			.reduce( ( obj, item ) => {
+				return { ...obj, ...item };
+			}, {} );
+		const expectedActions = [
+			'SET_START_DATE_TIME',
+			'SET_END_DATE_TIME',
+			'SET_NATURAL_LANGUAGE_LABEL',
+			'SET_MULTI_DAY',
+		];
+		expect( types ).toEqual( expectedActions );
+		expect( values.start ).not.toBe( '' );
+		expect( values.end ).not.toBe( '' );
+		expect( values.label ).not.toBe( '' );
 	} );
 
 	test( 'Set start time', () => {

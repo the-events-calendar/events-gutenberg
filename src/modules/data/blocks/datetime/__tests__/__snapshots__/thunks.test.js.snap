@@ -46,7 +46,7 @@ Array [
   },
   Object {
     "payload": Object {
-      "multiDay": true,
+      "multiDay": false,
     },
     "type": "SET_MULTI_DAY",
   },
