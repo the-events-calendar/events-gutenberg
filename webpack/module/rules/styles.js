@@ -1,17 +1,14 @@
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
-const plugin = new MiniCssExtractPlugin( {
+const plugin = () => new MiniCssExtractPlugin( {
 	filename: 'src/resources/css/[name].css',
 } );
 
 const loaders = [
+	MiniCssExtractPlugin.loader,
 	{ loader: 'css-loader', options: { importLoaders: 1 } },
-	{ loader: 'postcss-loader'	},
+	{ loader: 'postcss-loader' },
 ];
-
-if ( process.env.NODE_ENV === 'production' ) {
-	loaders.unshift( MiniCssExtractPlugin.loader );
-}
 
 module.exports = {
 	plugin,
