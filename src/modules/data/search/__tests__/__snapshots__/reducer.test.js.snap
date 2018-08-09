@@ -3,7 +3,7 @@
 exports[`[STORE] - search reducer Should add the results 1`] = `
 Object {
   "events": Object {
-    "loading": false,
+    "isLoading": false,
     "page": 1,
     "postType": "tribe_events",
     "results": Array [
@@ -20,7 +20,7 @@ Object {
 exports[`[STORE] - search reducer Should clear the block to the initial state keeping only the post type 1`] = `
 Object {
   "events": Object {
-    "loading": false,
+    "isLoading": false,
     "page": 1,
     "postType": "tribe_events",
     "results": Array [],
@@ -33,21 +33,21 @@ Object {
 exports[`[STORE] - search reducer Should disable loading 1`] = `
 Object {
   "events": Object {
-    "loading": false,
+    "isLoading": false,
     "page": 1,
     "postType": "tribe_events",
     "results": Array [],
     "term": "",
     "totalPages": 0,
   },
-  "loading": true,
+  "isLoading": true,
 }
 `;
 
 exports[`[STORE] - search reducer Should enable loading 1`] = `
 Object {
   "events": Object {
-    "loading": true,
+    "isLoading": true,
     "page": 1,
     "postType": "tribe_events",
     "results": Array [],
@@ -60,7 +60,7 @@ Object {
 exports[`[STORE] - search reducer Should set the page 1`] = `
 Object {
   "events": Object {
-    "loading": false,
+    "isLoading": false,
     "page": undefined,
     "postType": "tribe_events",
     "results": Array [],
@@ -73,7 +73,7 @@ Object {
 exports[`[STORE] - search reducer Should set the post type 1`] = `
 Object {
   "events": Object {
-    "loading": false,
+    "isLoading": false,
     "page": 1,
     "postType": undefined,
     "results": Array [],
@@ -86,7 +86,7 @@ Object {
 exports[`[STORE] - search reducer Should set the results 1`] = `
 Object {
   "events": Object {
-    "loading": false,
+    "isLoading": false,
     "page": 1,
     "postType": "tribe_events",
     "results": Array [
@@ -103,7 +103,7 @@ Object {
 exports[`[STORE] - search reducer Should set the search term 1`] = `
 Object {
   "events": Object {
-    "loading": false,
+    "isLoading": false,
     "page": 1,
     "postType": "tribe_events",
     "results": Array [],
@@ -116,7 +116,7 @@ Object {
 exports[`[STORE] - search reducer Should set the total pages 1`] = `
 Object {
   "events": Object {
-    "loading": false,
+    "isLoading": false,
     "page": 1,
     "postType": "tribe_events",
     "results": Array [],

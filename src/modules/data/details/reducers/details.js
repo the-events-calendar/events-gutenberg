@@ -5,7 +5,7 @@ import { EVENT } from 'editor/post-types';
 import { types } from 'data/details';
 
 export const DEFAULT_STATE = {
-	loading: false,
+	isLoading: false,
 	details: {},
 	postType: EVENT,
 };
@@ -25,7 +25,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_IS_LOADING:
 			return {
 				...state,
-				loading: action.payload.loading,
+				isLoading: action.payload.isLoading,
 			};
 		default:
 			return state;

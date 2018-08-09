@@ -3,7 +3,7 @@
 exports[`[STORE] - details reducer Should enable the loading 1`] = `
 Object {
   "details": Object {},
-  "loading": true,
+  "isLoading": true,
   "postType": "tribe_events",
 }
 `;
@@ -13,7 +13,7 @@ Object {
   "details": Object {
     "title": "Modern Tribe",
   },
-  "loading": false,
+  "isLoading": false,
   "postType": "tribe_events",
 }
 `;
@@ -21,7 +21,7 @@ Object {
 exports[`[STORE] - details reducer Should set the post type 1`] = `
 Object {
   "details": Object {},
-  "loading": false,
+  "isLoading": false,
   "postType": "tribe_organizers",
 }
 `;
