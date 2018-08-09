@@ -3,7 +3,7 @@
  */
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions, selectors } from 'data/search';
+import { actions, thunks, selectors } from 'data/search';
 
 /**
  * Internal dependencies
@@ -51,7 +51,10 @@ const mapStateToProps = ( state, props ) => ( {
 	posts: selectors.getResults( state, props ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+const mapDispatchToProps = ( dispatch ) => ( {
+	...bindActionCreators( actions, dispatch ),
+	...bindActionCreators( thunks, dispatch ),
+} );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...ownProps,

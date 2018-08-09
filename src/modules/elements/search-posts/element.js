@@ -26,8 +26,7 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
-import { actions, selectors } from 'data/search';
-import { setTerm } from '../../data/search/actions';
+import { actions, thunks, selectors } from 'data/search';
 
 /**
  * Module Code
@@ -234,6 +233,9 @@ const mapStateToProps = ( state, props ) => ( {
 	page: selectors.getPage( state, props ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+const mapDispatchToProps = ( dispatch ) => ( {
+	...bindActionCreators( actions, dispatch ),
+	...bindActionCreators( thunks, dispatch ),
+} );
 
 export default connect( mapStateToProps, mapDispatchToProps )( SearchPosts );

@@ -3,8 +3,9 @@
  */
 import reducer from './reducer';
 import * as actions from './actions';
+import * as thunks from './thunks';
 import * as types from './types';
-import * as selectors from './selector';
+import * as selectors from './selectors';
 
 export default reducer;
-export { actions, types, selectors };
+export { actions, thunks, types, selectors };

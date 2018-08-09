@@ -2,11 +2,6 @@
  * Internal dependencies
  */
 import * as types from './types';
-import {
-	actions as requestActions,
-	utils as requestUtils,
-} from 'data/request';
-import { selectors } from 'data/search/index';
 
 export const addBlock = ( id ) => ( {
 	type: types.ADD_BLOCK,
@@ -85,55 +80,3 @@ export const clearBlock = ( id ) => ( {
 		id,
 	},
 } );
-
-export const search = ( id, params ) => ( dispatch, getState ) => {
-	const {
-		term = '',
-		exclude = [],
-		perPage = 50,
-		populated = false,
-		page = 1,
-	} = params;
-
-	const total = selectors.getTotal( getState(), { name: id } );
-
-	if ( total !== 0 && page > total ) {
-		return;
-	}
-
-	if ( populated && term.trim() === '' ) {
-		dispatch( clearBlock( id ) );
-		return;
-	}
-
-	const query = requestUtils.toWPQuery( {
-		per_page: perPage,
-		search: term,
-		page,
-		exclude,
-	} );
-
-	const postType = selectors.getSearchPostType( getState(), { name: id } );
-	const options = {
-		path: `${ postType }?${ query }`,
-		actions: {
-			start: () => dispatch( enableLoading( id ) ),
-			success: ( { body, headers } ) => {
-				if ( term !== selectors.getSearchTerm( getState(), { name: id } ) ) {
-					return;
-				}
-				dispatch( disableLoading( id ) );
-				if ( page === 1 ) {
-					dispatch( setResults( id, body ) );
-				} else {
-					dispatch( addResults( id, body ) );
-				}
-				dispatch( setPage( id, page ) );
-				dispatch( setTotalPages( id, requestUtils.getTotalPages( headers ) ) );
-			},
-			error: () => dispatch( disableLoading( id ) ),
-		},
-	};
-
-	dispatch( requestActions.wpRequest( options ) );
-};

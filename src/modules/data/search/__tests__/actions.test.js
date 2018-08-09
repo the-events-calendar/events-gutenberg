@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { actions } from 'data/search';
+import { actions, thunks } from 'data/search';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
@@ -59,7 +59,7 @@ describe( '[STORE] - Search thunk actions', () => {
 		const store = mockStore( {
 			search: {},
 		} );
-		store.dispatch( actions.search( 'post', { term: 'Modern' } ) );
+		store.dispatch( thunks.search( 'post', { term: 'Modern' } ) );
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
@@ -73,7 +73,7 @@ describe( '[STORE] - Search thunk actions', () => {
 			populated: true,
 		};
 
-		store.dispatch( actions.search( 'post', searchParams ) );
+		store.dispatch( thunks.search( 'post', searchParams ) );
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 } );
