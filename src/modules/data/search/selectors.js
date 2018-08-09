@@ -16,7 +16,7 @@ export const getSearchTerm = createSelector(
 	( block ) => block ? block.term : DEFAULT_STATE.term
 );
 
-export const getLoading = createSelector(
+export const getIsLoading = createSelector(
 	[ blockSelector ],
 	( block ) => block ? block.loading : DEFAULT_STATE.loading,
 );
