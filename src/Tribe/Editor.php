@@ -281,6 +281,18 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
+	 * Check if current admin page is new post page
+	 *
+	 * @since  0.2.6-alpha
+	 *
+	 * @return bool
+	 */
+	public function is_new_post() {
+		$context = new Tribe__Context();
+		return $context->is_new_post();
+	}
+
+	/**
 	 * Check if post is from classic editor
 	 *
 	 * @since  0.2.2-alpha
@@ -412,6 +424,7 @@ class Tribe__Events_Gutenberg__Editor {
 			)
 		);
 
+		$is_new_post = $this->is_new_post();
 
 		$localize_blocks = array(
 			array(
@@ -425,7 +438,11 @@ class Tribe__Events_Gutenberg__Editor {
 			array(
 				'name' => 'tribe_blocks_editor_price_settings',
 				'data' => array(
-					'default_currency_symbol' => tribe_get_option( 'defaultCurrencySymbol', '$' ),
+					'default_currency_symbol'   => tribe_get_option( 'defaultCurrencySymbol', '$' ),
+					'default_currency_position' => (
+						tribe_get_option( 'reverseCurrencyPosition', false ) ? 'suffix' : 'prefix'
+					),
+					'is_new_event'              => $is_new_post,
 				),
 			),
 			array(
