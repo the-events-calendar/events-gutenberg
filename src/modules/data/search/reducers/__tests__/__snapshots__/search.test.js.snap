@@ -4,6 +4,7 @@ exports[`[STORE] - search reducer Should add the results 1`] = `
 Object {
   "loading": false,
   "page": 1,
+  "postType": "tribe_events",
   "results": Array [
     1,
     2,
@@ -14,7 +15,6 @@ Object {
   ],
   "term": "",
   "totalPages": 0,
-  "type": "tribe_events",
 }
 `;
 
@@ -26,7 +26,30 @@ Object {
   "results": Array [],
   "term": "",
   "totalPages": 0,
-  "type": "tribe_events",
+}
+`;
+
+exports[`[STORE] - search reducer Should enable loading 1`] = `
+Object {
+  "isLoading": true,
+  "loading": false,
+  "page": 1,
+  "postType": "tribe_events",
+  "results": Array [],
+  "term": "",
+  "totalPages": 0,
+}
+`;
+
+exports[`[STORE] - search reducer Should enable loading 2`] = `
+Object {
+  "isLoading": false,
+  "loading": false,
+  "page": 1,
+  "postType": "tribe_events",
+  "results": Array [],
+  "term": "",
+  "totalPages": 0,
 }
 `;
 
@@ -34,10 +57,10 @@ exports[`[STORE] - search reducer Should return default state on add block 1`] =
 Object {
   "loading": false,
   "page": 1,
+  "postType": "tribe_events",
   "results": Array [],
   "term": "",
   "totalPages": 0,
-  "type": "tribe_events",
 }
 `;
 
@@ -45,10 +68,21 @@ exports[`[STORE] - search reducer Should set the page 1`] = `
 Object {
   "loading": false,
   "page": 2,
+  "postType": "tribe_events",
   "results": Array [],
   "term": "",
   "totalPages": 0,
-  "type": "tribe_events",
+}
+`;
+
+exports[`[STORE] - search reducer Should set the post type 1`] = `
+Object {
+  "loading": false,
+  "page": 1,
+  "postType": "tribe_organizer",
+  "results": Array [],
+  "term": "",
+  "totalPages": 0,
 }
 `;
 
@@ -56,6 +90,7 @@ exports[`[STORE] - search reducer Should set the results 1`] = `
 Object {
   "loading": false,
   "page": 1,
+  "postType": "tribe_events",
   "results": Array [
     1,
     2,
@@ -63,7 +98,6 @@ Object {
   ],
   "term": "",
   "totalPages": 0,
-  "type": "tribe_events",
 }
 `;
 
@@ -71,10 +105,10 @@ exports[`[STORE] - search reducer Should set the search term 1`] = `
 Object {
   "loading": false,
   "page": 1,
+  "postType": "tribe_events",
   "results": Array [],
   "term": "Modern Tribe",
   "totalPages": 0,
-  "type": "tribe_events",
 }
 `;
 
@@ -82,9 +116,9 @@ exports[`[STORE] - search reducer Should set the total pages 1`] = `
 Object {
   "loading": false,
   "page": 1,
+  "postType": "tribe_events",
   "results": Array [],
   "term": "",
   "totalPages": 10,
-  "type": "tribe_events",
 }
 `;

@@ -17,7 +17,7 @@ describe( '[STORE] - search reducer', () => {
 		const state = {
 			...DEFAULT_STATE,
 			results: [ 1, 2, 3 ],
-			type: 'tribe_events',
+			postType: 'tribe_events',
 			loading: true,
 		};
 		expect( reducer( state, actions.clearBlock( 'events' ) ) ).toMatchSnapshot();
@@ -50,10 +50,14 @@ describe( '[STORE] - search reducer', () => {
 	} );
 
 	it( 'Should enable loading', () => {
-		expect( reducer( DEFAULT_STATE, actions.enableSearchIsLoading( 'events' ) ) );
+		expect( reducer( DEFAULT_STATE, actions.enableSearchIsLoading( 'events' ) ) )
+			.toMatchSnapshot();
+		expect( reducer( DEFAULT_STATE, actions.disableSearchIsLoading( 'events' ) ) )
+			.toMatchSnapshot();
 	} );
 
 	it( 'Should set the post type', () => {
-		expect( reducer( DEFAULT_STATE, actions.setSearchPostType( 'events', 'tribe_organizer' ) ) );
+		expect( reducer( DEFAULT_STATE, actions.setSearchPostType( 'events', 'tribe_organizer' ) ) )
+			.toMatchSnapshot();
 	} );
 } );
