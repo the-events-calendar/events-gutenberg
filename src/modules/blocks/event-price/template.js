@@ -29,7 +29,7 @@ import './style.pcss';
  * Module Code
  */
 
-const renderCurrency = ({ showCurrencySymbol, currencySymbol }) => (
+const renderCurrency = ( { showCurrencySymbol, currencySymbol } ) => (
 	showCurrencySymbol && (
 		<span className="tribe-editor__event-price__currency">
 			{ currencySymbol }
@@ -37,20 +37,19 @@ const renderCurrency = ({ showCurrencySymbol, currencySymbol }) => (
 	)
 );
 
-const renderPlaceholder = ({ showCost, currencySymbol, currencyPosition }) => {
+const renderPlaceholder = ( { showCost, currencySymbol, currencyPosition } ) => {
 	let placeholder = __( 'Add Price', 'events-gutenberg' );
 
-	placeholder = ( 'prefix' === currencyPosition ) ?
-		currencySymbol + ' ' + placeholder :
-		placeholder + ' ' + currencySymbol;
-
+	placeholder = ( 'prefix' === currencyPosition )
+		? currencySymbol + ' ' + placeholder
+		: placeholder + ' ' + currencySymbol;
 
 	return ! showCost && (
 		<span className="tribe-editor__event-price__label">{ placeholder }</span>
 	);
 };
 
-const renderCost = ({ showCost, isFree, cost }) => {
+const renderCost = ( { showCost, isFree, cost } ) => {
 	const parsed = parser( cost );
 
 	let value = parsed;
@@ -64,7 +63,7 @@ const renderCost = ({ showCost, isFree, cost }) => {
 	);
 };
 
-const renderDescription = ({ showCostDescription, costDescription }) => (
+const renderDescription = ( { showCostDescription, costDescription } ) => (
 	showCostDescription && (
 		<span className="tribe-editor__event-price__description">{ costDescription }</span>
 	)
@@ -90,13 +89,13 @@ const renderLabel = ( props ) => {
 	);
 };
 
-const renderDashboard = ({
+const renderDashboard = ( {
 	dashboardOpen,
 	cost,
 	costDescription,
 	setCost,
-	setDescription
-}) => (
+	setDescription,
+} ) => (
 	<Dashboard open={ dashboardOpen }>
 		<Fragment>
 			<section className="tribe-editor__event-price__dashboard">
@@ -133,13 +132,13 @@ const renderUI = ( props ) => (
 	</section>
 );
 
-const renderControls = ({
+const renderControls = ( {
 	isSelected,
 	currencySymbol,
 	currencyPosition,
 	setSymbol,
 	setCurrencyPosition,
-}) => (
+} ) => (
 	isSelected && (
 		<InspectorControls key="inspector">
 			<PanelBody title={ __( 'Price Settings', 'events-gutenberg' ) }>
@@ -161,7 +160,6 @@ const renderControls = ({
 );
 
 class EventPrice extends Component {
-
 	componentDidMount() {
 		const { onKeyDown, onClick } = this.props;
 		document.addEventListener( 'keydown', onKeyDown );
@@ -180,7 +178,6 @@ class EventPrice extends Component {
 			renderControls( this.props ),
 		];
 	}
-
 }
 
 EventPrice.propTypes = {

@@ -24,7 +24,7 @@ import './style.pcss';
 import { HALF_HOUR_IN_SECONDS } from 'utils/time';
 import { toFormat, setTimeInSeconds, totalSeconds } from 'utils/moment';
 
-const TimePicker = ({
+const TimePicker = ( {
 	current,
 	min,
 	max,
@@ -35,7 +35,7 @@ const TimePicker = ({
 	allDay,
 	onChange,
 	onClick,
-}) => {
+} ) => {
 	const renderLabel = ( onToggle ) => {
 		if ( allDay ) {
 			return (
@@ -70,7 +70,7 @@ const TimePicker = ({
 		);
 	};
 
-	const toggleDropdown = ({ onToggle, isOpen }) => (
+	const toggleDropdown = ( { onToggle, isOpen } ) => (
 		<div className="tribe-editor__timepicker-label-container">
 			{ renderLabel( onToggle ) }
 			<button
@@ -98,7 +98,7 @@ const TimePicker = ({
 		}
 
 		return items;
-	}
+	};
 
 	const formatLabel = ( seconds ) => {
 		return setTimeInSeconds( moment(), seconds ).format( toFormat( timeFormat ) );
@@ -123,7 +123,7 @@ const TimePicker = ({
 		);
 	};
 
-	const renderDropdownContent = ({ onClose }) => (
+	const renderDropdownContent = ( { onClose } ) => (
 		<ScrollTo>
 			{ () => (
 				<ScrollArea
@@ -153,7 +153,7 @@ const TimePicker = ({
 			/>
 		</div>
 	);
-}
+};
 
 TimePicker.defaultProps = {
 	current: moment(),

@@ -38,7 +38,7 @@ describe( '[STORE] - Thunk actions', () => {
 					loading: true,
 					details: {},
 				},
-			}
+			},
 		} );
 		store.dispatch( actions.fetchDetails( 20 ) );
 		expect( store.getActions() ).toEqual( [] );
@@ -51,7 +51,7 @@ describe( '[STORE] - Thunk actions', () => {
 					loading: false,
 					details: {},
 				},
-			}
+			},
 		} );
 		store.dispatch( actions.fetchDetails( 20 ) );
 		expect( store.getActions() ).toMatchSnapshot();

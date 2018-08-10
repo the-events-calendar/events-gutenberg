@@ -36,7 +36,6 @@ describe( '[STORE] - Organizer byId reducer', () => {
 		expect( byId( undefined, {} ) ).toEqual( {} );
 	} );
 
-
 	it( 'Should pass the actions to the child reducer when block not present', () => {
 		const groupAction = [
 			actions.addOrganizerInBlock( 10, 99 ),

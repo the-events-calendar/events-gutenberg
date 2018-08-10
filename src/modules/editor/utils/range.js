@@ -68,7 +68,7 @@ export function extractParts( chars ) {
 		.filter( ( item ) => ! isEmpty( item ) )
 		.map( ( item ) => {
 			// If the user input the price with decimals (even .00) we want to keep them
-			const decimals = 0 < item.indexOf( '.' ) ? 2 : 0 ;
+			const decimals = 0 < item.indexOf( '.' ) ? 2 : 0;
 			return parseFloat( item ).toFixed( decimals );
 		} )
 		.filter( ( item ) => ! isNaN( item ) )

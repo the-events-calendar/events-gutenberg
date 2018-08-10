@@ -136,7 +136,7 @@ class EventDetails extends Component {
 					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 					onChange={ sendValue( setOrganizerTitle ) }
 				/>
-				<EventOrganizers store={ store }/>
+				<EventOrganizers store={ store } />
 			</MetaGroup>
 		);
 	}
@@ -222,7 +222,7 @@ class EventDetails extends Component {
 		const { url, setWebsite } = this.props;
 		return (
 			<div>
-				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
+				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
 				<PlainText
 					id="tribe-event-url"
 					value={ url }
@@ -241,7 +241,7 @@ class EventDetails extends Component {
 		] );
 		return (
 			<div className="tribe-editor__event-cost">
-				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
+				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
 				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ textClassName }

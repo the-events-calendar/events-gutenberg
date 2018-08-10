@@ -11,7 +11,6 @@ import {
 } from 'utils/globals';
 
 describe( 'Tests for globals.js', () => {
-
 	beforeAll( () => {
 		window.tribe_blocks_editor_google_maps_api = {};
 		window.tribe_blocks_editor_settings = {};
@@ -45,5 +44,5 @@ describe( 'Tests for globals.js', () => {
 		delete window.tribe_data_countries;
 		delete window.tribe_data_us_states;
 		delete window.tribe_js_config;
-	});
+	} );
 } );

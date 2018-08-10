@@ -276,7 +276,8 @@ class EventDateTime extends Component {
 				return showTimeZone && (
 					<span
 						key="time-zone-separator"
-						className={ classNames( 'tribe-editor__separator', className ) }>
+						className={ classNames( 'tribe-editor__separator', className ) }
+					>
 						<TimeZone
 							value={ timeZoneLabel }
 							placeholder={ timeZoneLabel }
@@ -363,7 +364,7 @@ class EventDateTime extends Component {
 								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
-						{ ! hideUpsell && <Upsell/> }
+						{ ! hideUpsell && <Upsell /> }
 					</footer>
 				</Fragment>
 			</Dashboard>
@@ -551,7 +552,6 @@ class EventDateTime extends Component {
 			timeFormat: FORMATS.WP.time,
 			allDay,
 		};
-
 
 		if ( ! multiDay ) {
 			// if the start time has less than half an hour left in the day
