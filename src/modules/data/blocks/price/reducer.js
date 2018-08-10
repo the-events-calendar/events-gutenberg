@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { getSetting } from 'editor/settings';
 import { isTruthy } from 'utils/string';
+import { getPriceSettings } from 'editor/settings';
 import * as types from './types';
 
 const position = isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) )
@@ -15,8 +16,8 @@ const position = isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) )
 	: 'prefix';
 
 export const DEFAULT_STATE = {
-	position,
-	symbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
+	position: getPriceSettings().default_currency_position || position,
+	symbol: getPriceSettings().default_currency_symbol || __( '$', 'events-gutenberg' ),
 	cost: '',
 	description: '',
 };
