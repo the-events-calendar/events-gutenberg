@@ -1,12 +1,23 @@
 /**
+ * Wordpress dependenciess
+ */
+import { __ } from '@wordpress/i18n';
+
+/**
  * Internal dependencies
  */
+import { getSetting } from 'editor/settings';
+import { isTruthy } from 'utils/string';
 import { getPriceSettings } from 'editor/settings';
 import * as types from './types';
 
+const position = isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) )
+	? 'suffix'
+	: 'prefix';
+
 export const DEFAULT_STATE = {
-	position: getPriceSettings().default_currency_position,
-	symbol: getPriceSettings().default_currency_symbol,
+	position: getPriceSettings().default_currency_position || position,
+	symbol: getPriceSettings().default_currency_symbol || __( '$', 'events-gutenberg' ),
 	cost: '',
 	description: '',
 };
