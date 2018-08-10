@@ -16,9 +16,9 @@ import { __ } from '@wordpress/i18n';
 import { config } from 'editor/utils/globals';
 import './style.pcss';
 
-const EditLink = ( { id, label, target } ) => {
+const EditLink = ( { postId, label, target } ) => {
 	const admin = get( config(), 'admin_url', '' );
-	if ( ! admin || ! id ) {
+	if ( ! admin || ! postId ) {
 		return null;
 	}
 
@@ -29,7 +29,7 @@ const EditLink = ( { id, label, target } ) => {
 	return (
 		<a
 			className="tribe-editor__edit-link"
-			href={ `${ admin }post.php?post=${ id }&action=edit` }
+			href={ `${ admin }post.php?post=${ postId }&action=edit` }
 			target={ target }
 			{ ...extraProps }
 		>
@@ -39,13 +39,13 @@ const EditLink = ( { id, label, target } ) => {
 };
 
 EditLink.propTypes = {
-	id: PropTypes.number,
+	postId: PropTypes.number,
 	label: PropTypes.string,
 	target: PropTypes.string,
 };
 
 EditLink.defaultProps = {
-	id: 0,
+	postId: 0,
 	label: __( 'Edit', 'events-gutenberg' ),
 	target: '_blank',
 };

@@ -7,7 +7,7 @@ import { details } from './reducers';
 export default ( state = {}, action ) => {
 	switch ( action.type ) {
 		case types.SET_DETAILS:
-		case types.SET_DETAILS_LOADING:
+		case types.SET_DETAILS_IS_LOADING:
 		case types.SET_DETAILS_POST_TYPE:
 			return {
 				...state,

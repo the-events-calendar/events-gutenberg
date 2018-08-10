@@ -22,17 +22,17 @@ describe( 'EditLink element', () => {
 	} );
 
 	it( 'Should render the component', () => {
-		const component = renderer.create( <EditLink id={ 100 } /> );
+		const component = renderer.create( <EditLink postId={ 100 } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'Should set the target attribute', () => {
-		const component = renderer.create( <EditLink id={ 101 } target="_self" /> );
+		const component = renderer.create( <EditLink postId={ 101 } target="_self" /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'Should set the label for the edit link', () => {
-		const component = renderer.create( <EditLink id={ 102 } label="Modern Tribe" /> );
+		const component = renderer.create( <EditLink postId={ 102 } label="Modern Tribe" /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 

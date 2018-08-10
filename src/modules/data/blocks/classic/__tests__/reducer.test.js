@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { actions } from 'data/blocks/classic';
-import reducer, { DEFAULT_STATE } from 'data/blocks/classic/reducers';
+import reducer, { DEFAULT_STATE } from 'data/blocks/classic/reducer';
 
 describe( '[STORE] - Classic reducer', () => {
 	test( 'Default state', () => {

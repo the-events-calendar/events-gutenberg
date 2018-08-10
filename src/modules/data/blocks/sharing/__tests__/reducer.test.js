@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { actions } from 'data/blocks/sharing';
-import reducer, { DEFAULT_STATE } from 'data/blocks/sharing/reducers';
+import reducer, { DEFAULT_STATE } from 'data/blocks/sharing/reducer';
 
 describe( '[STORE] - Sharing reducer', () => {
 	it( 'Should return the default state', () => {

@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { actions } from 'data/blocks/website';
-import reducer, { DEFAULT_STATE } from 'data/blocks/website/reducers';
+import reducer, { DEFAULT_STATE } from 'data/blocks/website/reducer';
 
 describe( '[STORE] - Website reducer', () => {
 	it( 'Should return the default state', () => {

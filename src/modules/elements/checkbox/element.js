@@ -27,7 +27,6 @@ export default class CheckBox extends Component {
 	static propTypes = {
 		checked: PropTypes.bool,
 		onChange: PropTypes.func,
-		id: PropTypes.string,
 	};
 
 	/**
@@ -36,7 +35,6 @@ export default class CheckBox extends Component {
 	static defaultProps = {
 		checked: false,
 		onChange: noop,
-		id: uniqueId( 'tribe-checkbox' ),
 	};
 
 	constructor( props ) {

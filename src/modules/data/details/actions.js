@@ -1,25 +1,21 @@
-import { isEmpty } from 'lodash';
-
 /**
  * Internal dependencies
  */
 import * as types from './types';
-import * as selectors from './selectors';
-import { actions as requestActions } from 'data/request';
 
-export const enableLoading = ( id ) => ( {
-	type: types.SET_DETAILS_LOADING,
+export const enableDetailsIsLoading = ( id ) => ( {
+	type: types.SET_DETAILS_IS_LOADING,
 	payload: {
 		id,
-		loading: true,
+		isLoading: true,
 	},
 } );
 
-export const disableLoading = ( id ) => ( {
-	type: types.SET_DETAILS_LOADING,
+export const disableDetailsIsLoading = ( id ) => ( {
+	type: types.SET_DETAILS_IS_LOADING,
 	payload: {
 		id,
-		loading: false,
+		isLoading: false,
 	},
 } );
 
@@ -31,35 +27,10 @@ export const setDetails = ( id, details ) => ( {
 	},
 } );
 
-export const fetchDetails = ( id ) => ( dispatch, getState ) => {
-	const state = getState();
-	const props = { name: id };
-	const loading = selectors.getLoading( state, props );
-	const details = selectors.getDetails( state, props );
-
-	if ( ! isEmpty( details ) || loading ) {
-		return;
-	}
-
-	const type = selectors.getPostType( state, props );
-	const options = {
-		path: `${ type }/${ id }`,
-		actions: {
-			start: () => dispatch( enableLoading( id ) ),
-			success: ( { body } ) => {
-				dispatch( setDetails( id, body ) );
-				dispatch( disableLoading( id ) );
-			},
-			error: () => dispatch( disableLoading( id ) ),
-		},
-	};
-	dispatch( requestActions.wpRequest( options ) );
-};
-
-export const setPostType = ( id, type ) => ( {
+export const setDetailsPostType = ( id, postType ) => ( {
 	type: types.SET_DETAILS_POST_TYPE,
 	payload: {
 		id,
-		type,
+		postType,
 	},
 } );

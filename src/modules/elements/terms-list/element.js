@@ -73,8 +73,7 @@ class TaxonomiesElement extends Component {
 		);
 	}
 
-	renderTermListItem = ( term, isLast, level ) => {
-		const childTerms = this.getTerms( term.id );
+	renderTermListItem = ( term, isLast ) => {
 		const separator = ! isLast ? (
 			<span>
 				{ this.props.termSeparator }
@@ -123,7 +122,7 @@ class TaxonomiesElement extends Component {
 	}
 
 	render() {
-		const { attributes, className, focus, setAttributes, slug } = this.props;
+		const { className, slug } = this.props;
 		const terms = this.getTerms();
 		const key = `tribe-terms-${ slug }`;
 
@@ -154,11 +153,9 @@ TaxonomiesElement.defaultProps = {
 	className: '',
 };
 
-const applySelect = withSelect( ( select, props ) => {
-	return {
-		terms: select( 'core/editor' ).getEditedPostAttribute( props.slug ),
-	};
-} );
+const applySelect = withSelect( ( select, props ) => ( {
+	terms: select( 'core/editor' ).getEditedPostAttribute( props.slug ),
+} ) );
 
 const applyWithAPIData = withAPIData( ( props ) => {
 	const { slug, terms } = props;

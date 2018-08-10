@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditLink element Should add the class name into the component 1`] = `
+exports[`TimeZone element Should add the class name into the component 1`] = `
 <div
   className="my-custom-class-name"
   style={
@@ -38,7 +38,7 @@ exports[`EditLink element Should add the class name into the component 1`] = `
 </div>
 `;
 
-exports[`EditLink element Should render the component 1`] = `
+exports[`TimeZone element Should render the component 1`] = `
 <div
   className="tribe-editor__timezone-input"
   style={
@@ -76,7 +76,7 @@ exports[`EditLink element Should render the component 1`] = `
 </div>
 `;
 
-exports[`EditLink element Should render the placeholder on the input 1`] = `
+exports[`TimeZone element Should render the placeholder on the input 1`] = `
 <div
   className="tribe-editor__timezone-input"
   style={
@@ -129,7 +129,7 @@ exports[`EditLink element Should render the placeholder on the input 1`] = `
 </div>
 `;
 
-exports[`EditLink element Should render the value on the input 1`] = `
+exports[`TimeZone element Should render the value on the input 1`] = `
 <div
   className="tribe-editor__timezone-input"
   style={

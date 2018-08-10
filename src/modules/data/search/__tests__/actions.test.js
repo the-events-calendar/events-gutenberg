@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 /**
  * Internal dependencies
  */
-import { actions } from 'data/search';
+import { actions, thunks } from 'data/search';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
@@ -38,11 +38,11 @@ describe( '[STORE] - Search actions', () => {
 	} );
 
 	it( 'Should enable loading', () => {
-		expect( actions.enableLoading( 1 ) ).toMatchSnapshot();
+		expect( actions.enableSearchIsLoading( 1 ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should disable loading', () => {
-		expect( actions.disableLoading( 1 ) ).toMatchSnapshot();
+		expect( actions.disableSearchIsLoading( 1 ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should clear the block', () => {
@@ -50,27 +50,24 @@ describe( '[STORE] - Search actions', () => {
 	} );
 
 	it( 'Should set the post type', () => {
-		expect( actions.setPostType( 1, 'post' ) ).toMatchSnapshot();
+		expect( actions.setSearchPostType( 1, 'post' ) ).toMatchSnapshot();
 	} );
 } );
 
 describe( '[STORE] - Search thunk actions', () => {
-	it( 'Should register a block', () => {
-		const store = mockStore( {} );
-		store.dispatch( actions.registerBlock( 'test', 'post' ) );
-
-		expect( store.getActions() ).toMatchSnapshot();
-	} );
-
-	it( 'Should set the term and request action', () => {
+	it( 'Should request action', () => {
 		const store = mockStore( {
-			search: {},
+			search: {
+				post: {
+					postType: 'tribe_events',
+				},
+			},
 		} );
-		store.dispatch( actions.search( 'post', { term: 'Modern' } ) );
+		store.dispatch( thunks.search( 'post', { term: 'Modern' } ) );
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	it( 'Should set the term and clear the block', () => {
+	it( 'Should clear the block', () => {
 		const initialState = {
 			search: {},
 		};
@@ -80,7 +77,7 @@ describe( '[STORE] - Search thunk actions', () => {
 			populated: true,
 		};
 
-		store.dispatch( actions.search( 'post', searchParams ) );
+		store.dispatch( thunks.search( 'post', searchParams ) );
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 } );

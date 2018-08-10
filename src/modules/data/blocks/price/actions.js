@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { DEFAULT_STATE } from './reducers';
+import { DEFAULT_STATE } from './reducer';
 import { isTruthy } from 'editor/utils/string';
 import { getPriceSettings } from 'editor/settings';
 

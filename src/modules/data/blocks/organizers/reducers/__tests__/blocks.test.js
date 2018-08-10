@@ -6,7 +6,7 @@ import block from 'data/blocks/organizers/reducers/block';
 import { actions } from 'data/blocks/organizers';
 
 jest.mock( 'data/blocks/organizers/reducers/block', () => {
-	const original = require.requireActual( 'data/search/reducers/search' );
+	const original = require.requireActual( 'data/search/reducer' );
 	return {
 		__esModule: true,
 		...original,

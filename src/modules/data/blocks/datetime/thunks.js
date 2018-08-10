@@ -18,7 +18,7 @@ import {
 	setTimeZoneVisibility,
 	setNaturalLanguageLabel,
 } from './actions';
-import { DEFAULT_STATE } from './reducers';
+import { DEFAULT_STATE } from './reducer';
 import { maybeBulkDispatch } from 'data/utils';
 import {
 	isSameDay,
@@ -28,7 +28,6 @@ import {
 	toDateTime,
 	toMoment,
 	adjustStart,
-	toDate,
 } from 'utils/moment';
 import { DAY_IN_SECONDS } from 'utils/time';
 import { rangeToNaturalLanguage } from 'editor/utils';
@@ -98,10 +97,7 @@ export const setMultiDay = ( { start, end, isMultiDay } ) => ( dispatch ) => {
 	dispatch( setMultiDayAction( isMultiDay ) );
 };
 
-export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
-	const start = get( 'start', DEFAULT_STATE.start );
-	const end = get( 'end', DEFAULT_STATE.end );
-
+export const setInitialState = ( { attributes } ) => ( dispatch ) => {
 	maybeBulkDispatch( attributes, dispatch )( [
 		[ setStart, 'start', DEFAULT_STATE.start ],
 		[ setEnd, 'end', DEFAULT_STATE.end ],
@@ -113,7 +109,11 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		[ setTimeZoneVisibility, 'showTimeZone', DEFAULT_STATE.showTimeZone ],
 	] );
 
-	const values = {};
+	const values = {
+		start: DEFAULT_STATE.start,
+		end: DEFAULT_STATE.end,
+	};
+
 	if ( attributes.start ) {
 		values.start = toDateTime( parseFormats( attributes.start ) );
 		dispatch( setStart( values.start ) );
@@ -126,10 +126,5 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 
 	dispatch( setNaturalLanguageLabel( rangeToNaturalLanguage( values.start, values.end ) ) );
 
-	// sameDay
-	const current = {
-		start: toMoment( start ),
-		end: toMoment( end ),
-	};
-	dispatch( setMultiDayAction( ! isSameDay( current.start, current.end ) ) );
+	dispatch( setMultiDayAction( ! isSameDay( values.start, values.end ) ) );
 };

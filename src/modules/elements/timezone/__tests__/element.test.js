@@ -9,7 +9,7 @@ import renderer from 'react-test-renderer';
  */
 import { TimeZone } from 'elements';
 
-describe( 'EditLink element', () => {
+describe( 'TimeZone element', () => {
 	it( 'Should render the component', () => {
 		const component = renderer.create( <TimeZone /> );
 		expect( component.toJSON() ).toMatchSnapshot();
