@@ -2,13 +2,14 @@
  * External dependencies
  */
 import React from 'react';
+import { compose } from 'redux';
 import { unescape } from 'lodash';
 import { stringify } from 'querystringify';
 
 /**
  * WordPress dependencies
  */
-import { Component, compose } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 import { Spinner, withAPIData } from '@wordpress/components';
 import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
@@ -72,8 +73,7 @@ class TaxonomiesElement extends Component {
 		);
 	}
 
-	renderTermListItem = ( term, isLast, level ) => {
-		const childTerms = this.getTerms( term.id );
+	renderTermListItem = ( term, isLast ) => {
 		const separator = ! isLast ? (
 			<span>
 				{ this.props.termSeparator }
@@ -122,7 +122,7 @@ class TaxonomiesElement extends Component {
 	}
 
 	render() {
-		const { attributes, className, focus, setAttributes, slug } = this.props;
+		const { className, slug } = this.props;
 		const terms = this.getTerms();
 		const key = `tribe-terms-${ slug }`;
 
@@ -153,11 +153,9 @@ TaxonomiesElement.defaultProps = {
 	className: '',
 };
 
-const applySelect = withSelect( ( select, props ) => {
-	return {
-		terms: select( 'core/editor' ).getEditedPostAttribute( props.slug ),
-	};
-} );
+const applySelect = withSelect( ( select, props ) => ( {
+	terms: select( 'core/editor' ).getEditedPostAttribute( props.slug ),
+} ) );
 
 const applyWithAPIData = withAPIData( ( props ) => {
 	const { slug, terms } = props;

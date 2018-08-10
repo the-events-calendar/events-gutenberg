@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { noop, uniqueid } from 'lodash';
+import { noop, uniqueId } from 'lodash';
 import PropTypes from 'prop-types';
 
 /**
@@ -27,7 +27,6 @@ export default class CheckBox extends Component {
 	static propTypes = {
 		checked: PropTypes.bool,
 		onChange: PropTypes.func,
-		id: PropTypes.string,
 	};
 
 	/**
@@ -36,7 +35,6 @@ export default class CheckBox extends Component {
 	static defaultProps = {
 		checked: false,
 		onChange: noop,
-		id: uniqueid( 'tribe-checkbox' ),
 	};
 
 	constructor( props ) {

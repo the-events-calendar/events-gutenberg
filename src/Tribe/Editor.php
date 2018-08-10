@@ -359,6 +359,14 @@ class Tribe__Events_Gutenberg__Editor {
 			)
 		);
 
+		$js_config = array(
+			'admin_url' => admin_url(),
+			'timeZone' => array(
+				'show_time_zone' => false,
+				'label' => '',
+			),
+		);
+
 		tribe_asset(
 			$plugin,
 			'tribe-events-editor-elements',
@@ -368,6 +376,17 @@ class Tribe__Events_Gutenberg__Editor {
 			array(
 				'in_footer'    => false,
 				'localize'     => array(
+					array(
+						'name' => 'tribe_js_config',
+						/**
+						 * Array used to setup the FE with custom variables from the BE
+						 *
+						 * @since TBD
+						 *
+						 * @param array An array with the variables to be localized
+						 */
+						'data' => apply_filters( 'tribe_events_gutenberg_js_config', $js_config ),
+					),
 					array(
 						'name' => 'tribe_blocks_editor_settings',
 						'data' => tribe( 'gutenberg.settings' )->get_options(),
@@ -393,7 +412,6 @@ class Tribe__Events_Gutenberg__Editor {
 			)
 		);
 
-
 		$localize_blocks = array(
 			array(
 				'name' => 'tribe_blocks_editor_settings',
@@ -402,6 +420,16 @@ class Tribe__Events_Gutenberg__Editor {
 			array(
 				'name' => 'tribe_blocks_editor_timezone_html',
 				'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
+			),
+			array(
+				'name' => 'tribe_blocks_editor_price_settings',
+				'data' => array(
+					'default_currency_symbol'   => tribe_get_option( 'defaultCurrencySymbol', '$' ),
+					'default_currency_position' => (
+						tribe_get_option( 'reverseCurrencyPosition', false ) ? 'suffix' : 'prefix'
+					),
+					'is_new_event'              => tribe( 'context' )->is_new_post(),
+				),
 			),
 			array(
 				'name' => 'tribe_blocks_editor_constants',

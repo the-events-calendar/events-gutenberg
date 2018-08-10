@@ -2,6 +2,8 @@
 	color: #B9BEC2;
 	font-size: 15px;
 	font-weight: 500;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .tribe-editor__subtitle__headline {
@@ -40,6 +42,10 @@
 			width: 110px;
 			display: inline-block;
 		}
+	}
+
+	.tribe-editor__btn--label {
+		text-align: left;
 	}
 }
 
@@ -108,4 +114,17 @@
 	.components-text-control__input {
 		width: 42px;
 	}
+}
+
+.tribe-editor__date-time {
+	.tribe-editor__dashboard {
+		&:before {
+			display: none;
+		}
+	}
+}
+
+.tribe-editor__date-input__container {
+	display: flex;
+	align-items: center;
 }

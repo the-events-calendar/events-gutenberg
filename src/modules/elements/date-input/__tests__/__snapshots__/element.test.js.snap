@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateInput element Should render the after child on the input 1`] = `
+<div
+  className="tribe-editor__date-input__container"
+>
+  <input
+    className="tribe-editor__date-input"
+    name="date-input"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value=""
+  />
+  <span>
+    After the input
+  </span>
+</div>
+`;
+
+exports[`DateInput element Should render the before and after child 1`] = `
+<div
+  className="tribe-editor__date-input__container"
+>
+  <span>
+    Before the input
+  </span>
+  <input
+    className="tribe-editor__date-input"
+    name="date-input"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value=""
+  />
+  <span>
+    After the input
+  </span>
+</div>
+`;
+
+exports[`DateInput element Should render the before child on the input 1`] = `
+<div
+  className="tribe-editor__date-input__container"
+>
+  <span>
+    Before the input
+  </span>
+  <input
+    className="tribe-editor__date-input"
+    name="date-input"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value=""
+  />
+</div>
+`;
+
+exports[`DateInput element Should render the children when is not selected 1`] = `
+<div
+  className="tribe-editor__btn--label"
+>
+  <div>
+    This is the children
+  </div>
+</div>
+`;
+
+exports[`DateInput element Should render the input when is selected 1`] = `
+<div
+  className="tribe-editor__date-input__container"
+>
+  <input
+    className="tribe-editor__date-input"
+    name="date-input"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value=""
+  />
+</div>
+`;
+
+exports[`DateInput element Should trigger the change on the input field 1`] = `
+<div
+  className="tribe-editor__date-input__container"
+>
+  <input
+    className="tribe-editor__date-input"
+    name="date-input"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value="Modern Tribe"
+  />
+</div>
+`;
+
+exports[`DateInput element Should trigger the setDateTime callback 1`] = `
+<div
+  className="tribe-editor__date-input__container"
+>
+  <input
+    className="tribe-editor__date-input"
+    name="date-input"
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+    value="17 August 2018 - 19 August 2018"
+  />
+</div>
+`;

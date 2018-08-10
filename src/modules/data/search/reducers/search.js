@@ -15,28 +15,17 @@ export const DEFAULT_STATE = {
 
 export default ( state = DEFAULT_STATE, action ) => {
 	switch ( action.type ) {
+		case types.ADD_BLOCK:
+			return DEFAULT_STATE;
+		case types.CLEAR_BLOCK:
+			return {
+				...DEFAULT_STATE,
+				postType: state.type,
+			};
 		case types.SET_TERM:
 			return {
 				...state,
 				term: action.payload.term,
-			};
-		case types.SET_POST_TYPE: {
-			return {
-				...state,
-				type: action.payload.type,
-			};
-		}
-		case types.SET_SEARCH_LOADING: {
-			return {
-				...state,
-				loading: action.payload.loading,
-			};
-		}
-		case types.CLEAR_BLOCK:
-			return {
-				...state,
-				...DEFAULT_STATE,
-				type: state.type,
 			};
 		case types.SET_RESULTS:
 			return {
@@ -58,6 +47,18 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				totalPages: action.payload.totalPages,
 			};
+		case types.SET_SEARCH_IS_LOADING: {
+			return {
+				...state,
+				isLoading: action.payload.loading,
+			};
+		}
+		case types.SET_SEARCH_POST_TYPE: {
+			return {
+				...state,
+				postType: action.payload.type,
+			};
+		}
 		default:
 			return state;
 	}

@@ -7,6 +7,7 @@ import {
 	settings,
 	list,
 	get,
+	config,
 } from 'utils/globals';
 
 describe( 'Tests for globals.js', () => {
@@ -16,6 +17,7 @@ describe( 'Tests for globals.js', () => {
 		window.tribe_blocks_editor_settings = {};
 		window.tribe_data_countries = {};
 		window.tribe_data_us_states = {};
+		window.tribe_js_config = {};
 	} );
 
 	test( 'Should match the default value for the globals values', () => {
@@ -29,6 +31,12 @@ describe( 'Tests for globals.js', () => {
 			countries: {},
 			us_states: {},
 		} );
+		expect( config() ).toEqual( {} );
+	} );
+
+	test( 'get default value', () => {
+		expect( get( 'UNKNOWN', 10 ) ).toBe( 10 );
+		expect( get( 'tribe_js_config', [] ) ).toEqual( {} );
 	} );
 
 	afterAll( () => {
@@ -36,5 +44,6 @@ describe( 'Tests for globals.js', () => {
 		delete window.tribe_blocks_editor_settings;
 		delete window.tribe_data_countries;
 		delete window.tribe_data_us_states;
+		delete window.tribe_js_config;
 	});
 } );

@@ -3,10 +3,9 @@
  */
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import reducers from './reducers';
+import reducer from './reducer';
 import thunk from 'redux-thunk';
 
-import { dates, multiDay, allDay, endTime, startTime } from 'data/blocks/middlewares';
 import { wpRequest } from 'data/request/middlewares';
 
 const composeEnhancers = composeWithDevTools( {
@@ -15,18 +14,13 @@ const composeEnhancers = composeWithDevTools( {
 
 const middlewares = [
 	thunk,
-	dates,
-	startTime,
-	endTime,
-	multiDay,
-	allDay,
 	wpRequest,
 ];
 
 let store = {};
 
 export const initStore = () => {
-	store = createStore( reducers, composeEnhancers(
+	store = createStore( reducer, composeEnhancers(
 		applyMiddleware( ...middlewares ),
 	) );
 };
