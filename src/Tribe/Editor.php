@@ -363,7 +363,7 @@ class Tribe__Events_Gutenberg__Editor {
 			'admin_url' => admin_url(),
 			'timeZone' => array(
 				'show_time_zone' => false,
-				'label' => '',
+				'label' => get_option( 'timezone_string', 'UTC' ),
 			),
 		);
 
