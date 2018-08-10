@@ -13,6 +13,10 @@ import * as actions from 'data/blocks/website/actions';
 import * as selectors from 'data/blocks/website/selectors';
 import EventWebsite from './template';
 
+/**
+ * Module Code
+ */
+
 const isEmpty = ( label ) => label.trim() === '';
 
 const mapStateToProps = ( state ) => ( {

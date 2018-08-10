@@ -40,9 +40,9 @@ const renderCurrency = ({ showCurrencySymbol, currencySymbol }) => (
 const renderPlaceholder = ({ showCost, currencySymbol, currencyPosition }) => {
 	let placeholder = __( 'Add Price', 'events-gutenberg' );
 
-	placeholder = ( 'prefix' === currencyPosition ) ?
-		currencySymbol + ' ' + placeholder :
-		placeholder + ' ' + currencySymbol;
+	placeholder = ( 'prefix' === currencyPosition )
+		? currencySymbol + ' ' + placeholder
+		: placeholder + ' ' + currencySymbol;
 
 
 	return ! showCost && (
