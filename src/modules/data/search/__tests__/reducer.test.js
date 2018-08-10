@@ -2,9 +2,22 @@
  * Internal dependencies
  */
 import reducer, { actions } from 'data/search';
-import { DEFAULT_STATE } from 'data/search/reducer'
+import search, { DEFAULT_STATE } from 'data/search/reducers/search';
 
-describe( '[STORE] - search reducer', () => {
+jest.mock( 'data/search/reducers/search', () => {
+	const original = require.requireActual( 'data/search/reducers/search' );
+	return {
+		__esModule: true,
+		...original,
+		default: jest.fn( ( state = original.DEFAULT_STATE ) => state ),
+	};
+} );
+
+describe( '[STORE] - search reducers', () => {
+	beforeEach( () => {
+		search.mockClear();
+	} );
+
 	it( 'Should return default state', () => {
 		expect( reducer( undefined, {} ) ).toEqual( {} );
 	} );
@@ -13,83 +26,48 @@ describe( '[STORE] - search reducer', () => {
 		expect( reducer( {}, actions.addBlock( 'events' ) ) ).toEqual( { events: DEFAULT_STATE } );
 	} );
 
-	it( 'Should clear the block to the initial state keeping only the post type', () => {
-		const mockState = {
-			events: {
-				...DEFAULT_STATE,
-				results: [ 1, 2, 3 ],
-				type: 'tribe_events',
-				isLoading: true,
-			},
-		};
-		expect( reducer( mockState, actions.clearBlock( 'events' ) ) ).toMatchSnapshot();
+	it( 'Should pass the actions to the child reducer when block not present', () => {
+		const groupAction = [
+			actions.addBlock( 'post' ),
+			actions.clearBlock( 'post' ),
+			actions.setTerm( 'post', {} ),
+			actions.setResults( 'post', [] ),
+			actions.addResults( 'post', [] ),
+			actions.setPage( 'post', 2 ),
+			actions.setTotalPages( 'post', 3 ),
+			actions.enableLoading( 'post' ),
+			actions.setPostType( 'post', 'posts' ),
+		];
+
+		groupAction.forEach( ( action ) => {
+			reducer( {}, action );
+			expect( search ).toHaveBeenCalledWith( undefined, action );
+			expect( search ).toHaveBeenCalledTimes( 1 );
+			search.mockClear();
+		} );
 	} );
 
-	it( 'Should set the search term', () => {
-		const mockState = {
-			events: DEFAULT_STATE,
-		};
-		expect( reducer( mockState, actions.setTerm( 'events', 'Modern Tribe' ) ) )
-			.toMatchSnapshot();
-	} );
+	it( 'It should pass the block to the child reducer', () => {
+		const groupAction = [
+			actions.addBlock( 'events' ),
+			actions.clearBlock( 'events' ),
+			actions.setTerm( 'events', {} ),
+			actions.setResults( 'events', [] ),
+			actions.addResults( 'events', [] ),
+			actions.setPage( 'events', 2 ),
+			actions.setTotalPages( 'events', 3 ),
+			actions.enableLoading( 'events' ),
+			actions.setPostType( 'events', 'tribe_events' ),
+		];
 
-	it( 'Should set the results', () => {
-		const mockState = {
-			events: DEFAULT_STATE,
+		const state = {
+			events: {},
 		};
-		expect( reducer( mockState, actions.setResults( 'events', [ 1, 2, 3 ] ) ) )
-			.toMatchSnapshot();
-	} );
-
-	it( 'Should add the results', () => {
-		const mockState = {
-			events: {
-				...DEFAULT_STATE,
-				results: [ 1, 2, 3 ],
-			},
-		};
-		expect( reducer( mockState, actions.addResults( 'events', [ 4, 5, 6 ] ) ) )
-			.toMatchSnapshot();
-	} );
-
-	it( 'Should set the page', () => {
-		const mockState = {
-			events: DEFAULT_STATE,
-		};
-		expect( reducer( mockState, actions.setPage( 'events', 2 ) ) )
-			.toMatchSnapshot();
-	} );
-
-	it( 'Should set the total pages', () => {
-		const mockState = {
-			events: DEFAULT_STATE,
-		};
-		expect( reducer( mockState, actions.setTotalPages( 'events', 10 ) ) )
-			.toMatchSnapshot();
-	} );
-
-	it( 'Should enable loading', () => {
-		const mockState = {
-			events: DEFAULT_STATE,
-		};
-		expect( reducer( mockState, actions.enableSearchIsLoading( 'events' ) ) )
-			.toMatchSnapshot();
-	} );
-
-	it( 'Should disable loading', () => {
-		const mockState = {
-			events: DEFAULT_STATE,
-			isLoading: true,
-		};
-		expect( reducer( mockState, actions.disableSearchIsLoading( 'events' ) ) )
-			.toMatchSnapshot();
-	} );
-
-	it( 'Should set the post type', () => {
-		const mockState = {
-			events: DEFAULT_STATE,
-		};
-		expect( reducer( mockState, actions.setSearchPostType( 'events', 'tribe_organizer' ) ) )
-			.toMatchSnapshot();
+		groupAction.forEach( ( action ) => {
+			reducer( state, action );
+			expect( search ).toHaveBeenCalledWith( {}, action );
+			expect( search ).toHaveBeenCalledTimes( 1 );
+			search.mockClear();
+		} );
 	} );
 } );
