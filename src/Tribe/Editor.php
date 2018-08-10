@@ -423,6 +423,12 @@ class Tribe__Events_Gutenberg__Editor {
 				'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
 			),
 			array(
+				'name' => 'tribe_blocks_editor_price_settings',
+				'data' => array(
+					'default_currency_symbol' => tribe_get_option( 'defaultCurrencySymbol', '$' ),
+				),
+			),
+			array(
 				'name' => 'tribe_blocks_editor_constants',
 				'data' => array(
 					'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ) ? 'true' : 'false',
