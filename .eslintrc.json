@@ -69,10 +69,11 @@
       "error",
       {
         "words": true,
-        "nonwords": true,
+        "nonwords": false,
         "overrides": {
           "--": false,
-          "++": false
+          "++": false,
+          "!": true
         }
       }
     ],

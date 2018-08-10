@@ -44,7 +44,7 @@ describe( 'Venue Utils', () => {
 
 		const expected = {
 			lat: 37.802953,
-			lng: - 122.448342,
+			lng: -122.448342,
 		};
 		expect( getCoordinates( details ) ).toEqual( expected );
 	} );
