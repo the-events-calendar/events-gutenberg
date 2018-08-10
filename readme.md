@@ -29,6 +29,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 * Tweak - Rename the "Event Tags" block and label to "Tags"
 * Tweak - Change Event Website placeholder text to "Add Event Website"
 * Tweak - Move redundant search reducer to parent reducer
+* Tweak - Remove references to the deprecated `compose` function from `@wordpress/element`
 * Feature - Add Edit Link button for Venue and Organizer block
 * Feature - Add filter to customize the variables send to the FE `tribe_events_gutenberg_js_config`
 * Feature - Add Human Readable input for date
