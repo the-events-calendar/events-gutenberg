@@ -50,10 +50,10 @@ describe( '[STORE] - search reducer', () => {
 	} );
 
 	it( 'Should enable loading', () => {
-		expect( reducer( DEFAULT_STATE, actions.enableLoading( 'events' ) ) );
+		expect( reducer( DEFAULT_STATE, actions.enableSearchIsLoading( 'events' ) ) );
 	} );
 
 	it( 'Should set the post type', () => {
-		expect( reducer( DEFAULT_STATE, actions.setPostType( 'events', 'tribe_organizer' ) ) );
+		expect( reducer( DEFAULT_STATE, actions.setSearchPostType( 'events', 'tribe_organizer' ) ) );
 	} );
 } );

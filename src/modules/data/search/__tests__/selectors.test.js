@@ -20,7 +20,7 @@ describe( '[STORE] - Search selectors', () => {
 	} );
 
 	it( 'Should return the post type of the block', () => {
-		expect( selectors.getSearchPostType( state, props ) ).toEqual( DEFAULT_STATE.type );
+		expect( selectors.getSearchPostType( state, props ) ).toEqual( DEFAULT_STATE.postType );
 	} );
 
 	it( 'Should return the search term', () => {

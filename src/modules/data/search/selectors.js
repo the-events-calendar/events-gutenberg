@@ -8,7 +8,7 @@ export const blockSelector = ( state, props ) => state.search[ props.name ];
 
 export const getSearchPostType = createSelector(
 	[ blockSelector ],
-	( block ) => block ? block.type : DEFAULT_STATE.postType
+	( block ) => block ? block.postType : DEFAULT_STATE.postType
 );
 
 export const getSearchTerm = createSelector(
