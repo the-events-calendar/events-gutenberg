@@ -77,6 +77,13 @@
         }
       }
     ],
+    "arrow-body-style": [
+      "error",
+      "as-needed",
+      {
+        "requireReturnForObjectLiteral": false
+      }
+    ],
     "camelcase": [
       "error",
       {
