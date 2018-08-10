@@ -281,18 +281,6 @@ class Tribe__Events_Gutenberg__Editor {
 	}
 
 	/**
-	 * Check if current admin page is new post page
-	 *
-	 * @since  0.2.6-alpha
-	 *
-	 * @return bool
-	 */
-	public function is_new_post() {
-		$context = new Tribe__Context();
-		return $context->is_new_post();
-	}
-
-	/**
 	 * Check if post is from classic editor
 	 *
 	 * @since  0.2.2-alpha
@@ -424,8 +412,6 @@ class Tribe__Events_Gutenberg__Editor {
 			)
 		);
 
-		$is_new_post = $this->is_new_post();
-
 		$localize_blocks = array(
 			array(
 				'name' => 'tribe_blocks_editor_settings',
@@ -442,7 +428,7 @@ class Tribe__Events_Gutenberg__Editor {
 					'default_currency_position' => (
 						tribe_get_option( 'reverseCurrencyPosition', false ) ? 'suffix' : 'prefix'
 					),
-					'is_new_event'              => $is_new_post,
+					'is_new_event'              => tribe( 'context' )->is_new_post(),
 				),
 			),
 			array(
