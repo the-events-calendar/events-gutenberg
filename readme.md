@@ -24,7 +24,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
-#### 0.2.6-alpha - TBD
+#### 0.2.6-alpha - 2018-08-10
 
 * Tweak - Rename the "Event Tags" block and label to "Tags"
 * Tweak - Change Event Website placeholder text to "Add Event Website"
