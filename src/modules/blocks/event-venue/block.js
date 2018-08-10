@@ -296,10 +296,10 @@ class EventVenue extends Component {
 						checked={ showMap }
 						onChange={ toggleVenueMap }
 					/>
-				<EditLink
-					id={ venue }
-					label={ __( 'Edit Venue', 'events-gutenberg' ) }
-				/>
+					<EditLink
+						id={ venue }
+						label={ __( 'Edit Venue', 'events-gutenberg' ) }
+					/>
 				</PanelBody>
 			</InspectorControls>
 		);

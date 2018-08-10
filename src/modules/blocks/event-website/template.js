@@ -21,7 +21,7 @@ import './style.pcss';
 
 const placeholder = __( 'Add Event Website', 'events-gutenberg' );
 
-const renderUrlInput = ({ isSelected, url, setWebsite }) => (
+const renderUrlInput = ( { isSelected, url, setWebsite } ) => (
 	isSelected && (
 		<div key="tribe-events-website-url" className="tribe-editor__event-website__url">
 			<Dashicon icon="admin-links" />
@@ -34,7 +34,7 @@ const renderUrlInput = ({ isSelected, url, setWebsite }) => (
 	)
 );
 
-const renderLabelInput = ({ isSelected, isEmpty, urlLabel, setLabel }) => {
+const renderLabelInput = ( { isSelected, isEmpty, urlLabel, setLabel } ) => {
 	const containerClassNames = classNames( {
 		'tribe-editor__event-website__label': true,
 		'tribe-editor__event-website__label--selected': isSelected,
@@ -59,7 +59,7 @@ const renderLabelInput = ({ isSelected, isEmpty, urlLabel, setLabel }) => {
 			/>
 		</div>
 	);
-}
+};
 
 const renderPlaceholder = () => {
 	const classes = [
@@ -72,14 +72,13 @@ const renderPlaceholder = () => {
 			{ placeholder }
 		</button>
 	);
-}
+};
 
 const EventWebsite = ( props ) => {
-
 	const { isSelected, urlLabel } = props;
-	const eventWebsite = ( ! isSelected && ! urlLabel ) ?
-		renderPlaceholder() :
-		[
+	const eventWebsite = ( ! isSelected && ! urlLabel )
+		? renderPlaceholder()
+		: [
 			renderLabelInput( props ),
 			renderUrlInput( props ),
 		];
@@ -89,8 +88,7 @@ const EventWebsite = ( props ) => {
 			{ eventWebsite }
 		</div>
 	);
-
-}
+};
 
 EventWebsite.propTypes = {
 	isSelected: PropTypes.bool,
@@ -99,6 +97,6 @@ EventWebsite.propTypes = {
 	urlLabel: PropTypes.string,
 	setWebsite: PropTypes.func,
 	setLabel: PropTypes.func,
-}
+};
 
 export default EventWebsite;

@@ -29,8 +29,8 @@ describe( '[STORE] - Datetime thunks', () => {
 					allDay: false,
 					multiDay: false,
 					timezone: 'UTC',
-				}
-			}
+				},
+			},
 		};
 
 		store = mockStore( initialState );

@@ -46,7 +46,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				naturalLanguage: action.payload.label,
-			}
+			};
 		case types.SET_ALL_DAY:
 			return {
 				...state,
@@ -76,12 +76,12 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				timeZoneLabel: action.payload.label,
-			}
+			};
 		case types.SET_TIMEZONE_VISIBILITY: {
 			return {
 				...state,
 				showTimeZone: action.payload.show,
-			}
+			};
 		}
 		default:
 			return state;

@@ -88,7 +88,7 @@ export function roundTime( date ) {
  * @returns {moment} moment Object with the date or current date if is non valid
  */
 export function parseFormats( date, formats = [ FORMATS.DATABASE.datetime, FORMATS.WP.datetime ] ) {
-	for ( let i = 0; i < formats.length; i ++ ) {
+	for ( let i = 0; i < formats.length; i++ ) {
 		const format = formats[ i ];
 		const result = toMoment( date, format );
 		if ( result.isValid() ) {
@@ -247,7 +247,7 @@ export function resetTimes( start ) {
 		start,
 		end,
 	};
-};
+}
 
 /**
  * Make sure the start time is always before the end time

@@ -69,11 +69,19 @@
       "error",
       {
         "words": true,
-        "nonwords": true,
+        "nonwords": false,
         "overrides": {
           "--": false,
-          "++": false
+          "++": false,
+          "!": true
         }
+      }
+    ],
+    "arrow-body-style": [
+      "error",
+      "as-needed",
+      {
+        "requireReturnForObjectLiteral": false
       }
     ],
     "camelcase": [

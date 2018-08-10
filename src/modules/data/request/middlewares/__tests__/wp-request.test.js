@@ -65,7 +65,7 @@ describe( '[STORE] - wp-request middleware', () => {
 		expect( meta.actions.error ).not.toHaveBeenCalled();
 	} );
 
-	it( 'Should execute the correct actions on success', async () => {
+	it( 'Should execute the correct actions on success', async() => {
 		const { invoke } = create();
 
 		const body = {
@@ -94,7 +94,7 @@ describe( '[STORE] - wp-request middleware', () => {
 		expect( xhr.getAllResponseHeaders ).toHaveBeenCalledTimes( 1 );
 	} );
 
-	it( 'Should execute the correct actions on failure', async () => {
+	it( 'Should execute the correct actions on failure', async() => {
 		const { invoke } = create();
 
 		window.wp.apiRequest = () => {
