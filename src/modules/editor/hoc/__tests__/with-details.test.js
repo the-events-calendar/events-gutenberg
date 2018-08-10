@@ -30,7 +30,7 @@ let instance;
 describe( 'HOC - With Details', () => {
 	beforeEach( () => {
 		Wrapper = withDetails()( Block );
-		component = renderer.create( <Wrapper store={ store } id="event" /> );
+		component = renderer.create( <Wrapper store={ store } clientId="event" /> );
 		instance = component.root;
 	} );
 
@@ -51,7 +51,7 @@ describe( 'HOC - With Details', () => {
 	it( 'Should attach the details properties', () => {
 		const expected = {
 			details: {},
-			loading: false,
+			isLoading: false,
 		};
 		expect( instance.findByType( Block ).props ).toMatchObject( expected );
 	} );

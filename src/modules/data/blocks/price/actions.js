@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { DEFAULT_STATE } from './reducers';
+import { DEFAULT_STATE } from './reducer';
 
 export const setCost = ( cost ) => ( {
 	type: types.SET_PRICE_COST,

@@ -4,8 +4,8 @@ exports[`[STORE] - Details reducer Should set the details 1`] = `
 Object {
   "20": Object {
     "details": Object {},
-    "loading": false,
-    "type": "tribe_events",
+    "isLoading": false,
+    "postType": "tribe_events",
   },
 }
 `;

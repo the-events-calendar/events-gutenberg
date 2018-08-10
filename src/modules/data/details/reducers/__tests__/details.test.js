@@ -15,12 +15,12 @@ describe( '[STORE] - details reducer', () => {
 	} );
 
 	it( 'Should enable the loading', () => {
-		expect( reducer( DEFAULT_STATE, actions.enableLoading( 20 ) ) )
+		expect( reducer( DEFAULT_STATE, actions.enableDetailsIsLoading( 20 ) ) )
 			.toMatchSnapshot();
 	} );
 
 	it( 'Should set the post type', () => {
-		expect( reducer( DEFAULT_STATE, actions.setPostType( 20, 'tribe_organizers' ) ) )
+		expect( reducer( DEFAULT_STATE, actions.setDetailsPostType( 20, 'tribe_organizers' ) ) )
 			.toMatchSnapshot();
 	} );
 } );

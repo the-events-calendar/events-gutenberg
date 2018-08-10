@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { actions } from 'data/blocks/datetime';
-import reducer, { DEFAULT_STATE } from 'data/blocks/datetime/reducers';
+import reducer, { DEFAULT_STATE } from 'data/blocks/datetime/reducer';
 
 jest.mock( 'moment', () => () => {
 	const moment = require.requireActual( 'moment' );

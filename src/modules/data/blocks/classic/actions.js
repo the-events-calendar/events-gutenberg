@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { DEFAULT_STATE } from './reducers';
+import { DEFAULT_STATE } from './reducer';
 
 export const setDetailsTitle = ( title ) => ( {
 	type: types.SET_CLASSIC_DETAILS_TITLE,

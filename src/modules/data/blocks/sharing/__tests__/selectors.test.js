@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { DEFAULT_STATE } from 'data/blocks/sharing/reducers';
+import { DEFAULT_STATE } from 'data/blocks/sharing/reducer';
 import { selectors } from 'data/blocks/sharing';
 
 const state = {

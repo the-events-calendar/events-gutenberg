@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { DEFAULT_STATE } from 'data/blocks/venue/reducers';
+import { DEFAULT_STATE } from 'data/blocks/venue/reducer';
 import { selectors } from 'data/blocks/venue';
 
 const state = {

@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { Component } from 'react';
+import React from 'react';
 
 /**
  * Internal dependencies
@@ -9,18 +9,16 @@ import React, { Component } from 'react';
 import { getStore } from 'data';
 
 export default ( additionalProps = {} ) => ( WrappedComponent ) => {
-	class WithStore extends Component {
-		constructor( props ) {
-			super( props );
-		}
 
-		render() {
-			const extraProps = {
-				...additionalProps,
-				store: getStore(),
-			};
-			return <WrappedComponent { ...this.props } { ...extraProps } />;
-		}
-	}
+	const WithStore = ( props ) => {
+		const extraProps = {
+			...additionalProps,
+			store: getStore(),
+		};
+
+		return <WrappedComponent { ...props } { ...extraProps } />;
+	};
+
 	return WithStore;
+
 };

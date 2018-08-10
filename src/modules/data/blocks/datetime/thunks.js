@@ -18,7 +18,7 @@ import {
 	setTimeZoneVisibility,
 	setNaturalLanguageLabel,
 } from './actions';
-import { DEFAULT_STATE } from './reducers';
+import { DEFAULT_STATE } from './reducer';
 import { maybeBulkDispatch } from 'data/utils';
 import {
 	isSameDay,
@@ -28,7 +28,6 @@ import {
 	toDateTime,
 	toMoment,
 	adjustStart,
-	toDate,
 } from 'utils/moment';
 import { DAY_IN_SECONDS } from 'utils/time';
 import { rangeToNaturalLanguage } from 'editor/utils';

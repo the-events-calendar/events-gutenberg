@@ -3,7 +3,7 @@
  */
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import reducers from './reducers';
+import reducer from './reducer';
 import thunk from 'redux-thunk';
 
 import { wpRequest } from 'data/request/middlewares';
@@ -20,7 +20,7 @@ const middlewares = [
 let store = {};
 
 export const initStore = () => {
-	store = createStore( reducers, composeEnhancers(
+	store = createStore( reducer, composeEnhancers(
 		applyMiddleware( ...middlewares ),
 	) );
 };

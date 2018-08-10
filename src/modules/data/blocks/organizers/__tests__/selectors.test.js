@@ -28,18 +28,18 @@ describe( '[STORE] - Organizers selectors', () => {
 	} );
 
 	it( 'Should return the organizer block', () => {
-		expect( selectors.getOrganizerBlock( state, { id: 'firstBlock' } ) )
+		expect( selectors.getOrganizerBlock( state, { clientId: 'firstBlock' } ) )
 			.toEqual( state.blocks.organizers.blocks.byId.firstBlock );
-		expect( selectors.getOrganizerBlock( state, { id: 'secondBlock' } ) )
+		expect( selectors.getOrganizerBlock( state, { clientId: 'secondBlock' } ) )
 			.toEqual( state.blocks.organizers.blocks.byId.secondBlock );
-		expect( selectors.getOrganizerBlock( state, { id: 'thirdBlock' } ) )
+		expect( selectors.getOrganizerBlock( state, { clientId: 'thirdBlock' } ) )
 			.toEqual( undefined );
 	} );
 
 	it( 'Should return the organizer in a block', () => {
-		expect( selectors.getOrganizerInBlock( state, { id: 'firstBlock' } ) ).toEqual( 100 );
-		expect( selectors.getOrganizerInBlock( state, { id: 'secondBlock' } ) ).toEqual( 101 );
-		expect( selectors.getOrganizerInBlock( state, { id: 'thirdBlock' } ) ).toEqual( undefined );
+		expect( selectors.getOrganizerInBlock( state, { clientId: 'firstBlock' } ) ).toEqual( 100 );
+		expect( selectors.getOrganizerInBlock( state, { clientId: 'secondBlock' } ) ).toEqual( 101 );
+		expect( selectors.getOrganizerInBlock( state, { clientId: 'thirdBlock' } ) ).toEqual( undefined );
 	} );
 
 	it( 'Should return the organizers in a block', () => {

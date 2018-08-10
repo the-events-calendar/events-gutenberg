@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { selectors } from 'data/blocks/classic';
-import { DEFAULT_STATE } from 'data/blocks/classic/reducers';
+import { DEFAULT_STATE } from 'data/blocks/classic/reducer';
 
 const state = {
 	blocks: {

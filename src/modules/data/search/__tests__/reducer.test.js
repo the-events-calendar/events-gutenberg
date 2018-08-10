@@ -35,8 +35,8 @@ describe( '[STORE] - search reducers', () => {
 			actions.addResults( 'post', [] ),
 			actions.setPage( 'post', 2 ),
 			actions.setTotalPages( 'post', 3 ),
-			actions.enableLoading( 'post' ),
-			actions.setPostType( 'post', 'posts' ),
+			actions.enableSearchIsLoading( 'post' ),
+			actions.setSearchPostType( 'post', 'posts' ),
 		];
 
 		groupAction.forEach( ( action ) => {
@@ -56,8 +56,8 @@ describe( '[STORE] - search reducers', () => {
 			actions.addResults( 'events', [] ),
 			actions.setPage( 'events', 2 ),
 			actions.setTotalPages( 'events', 3 ),
-			actions.enableLoading( 'events' ),
-			actions.setPostType( 'events', 'tribe_events' ),
+			actions.enableSearchIsLoading( 'events' ),
+			actions.setSearchPostType( 'events', 'tribe_events' ),
 		];
 
 		const state = {
