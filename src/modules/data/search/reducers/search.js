@@ -10,7 +10,7 @@ export const DEFAULT_STATE = {
 	page: 1,
 	totalPages: 0,
 	loading: false,
-	type: EVENT,
+	postType: EVENT,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -20,7 +20,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.CLEAR_BLOCK:
 			return {
 				...DEFAULT_STATE,
-				postType: state.type,
+				postType: state.postType,
 			};
 		case types.SET_TERM:
 			return {
@@ -50,13 +50,13 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_SEARCH_IS_LOADING: {
 			return {
 				...state,
-				isLoading: action.payload.loading,
+				isLoading: action.payload.isLoading,
 			};
 		}
 		case types.SET_SEARCH_POST_TYPE: {
 			return {
 				...state,
-				postType: action.payload.type,
+				postType: action.payload.postType,
 			};
 		}
 		default:
