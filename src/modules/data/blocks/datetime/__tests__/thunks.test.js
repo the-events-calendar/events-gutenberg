@@ -3,6 +3,7 @@
  */
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { noop } from 'lodash';
 
 /**
  * Internal dependencies
@@ -46,8 +47,11 @@ describe( '[STORE] - Datetime thunks', () => {
 			timeZone: 'UTC',
 		};
 
-		store.dispatch( thunks.setInitialState( { attributes } ) );
+		const get = jest.fn( ( name ) => attributes[ name ] );
+		store.dispatch( thunks.setInitialState( { get, attributes } ) );
 
+		expect( get ).toHaveBeenCalled();
+		expect( get ).toHaveBeenCalledTimes( 2 );
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
@@ -58,7 +62,8 @@ describe( '[STORE] - Datetime thunks', () => {
 			end: '',
 		};
 
-		store.dispatch( thunks.setInitialState( { attributes } ) );
+		const get = jest.fn( ( name ) => attributes[ name ] );
+		store.dispatch( thunks.setInitialState( { get, attributes } ) );
 
 		const types = store.getActions().map( ( action ) => action.type );
 		const values = store.getActions().map( ( action ) => action.payload )
@@ -71,6 +76,8 @@ describe( '[STORE] - Datetime thunks', () => {
 			'SET_NATURAL_LANGUAGE_LABEL',
 			'SET_MULTI_DAY',
 		];
+		expect( get ).toHaveBeenCalled();
+		expect( get ).toHaveBeenCalledTimes( 2 );
 		expect( types ).toEqual( expectedActions );
 		expect( values.start ).not.toBe( '' );
 		expect( values.end ).not.toBe( '' );

@@ -24,6 +24,10 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ### Changelog
 
+#### 0.2.7-alpha - TBD
+
+* Tweak - Use event timezone as default value
+
 #### 0.2.6-alpha - 2018-08-10
 
 * Tweak - Rename the "Event Tags" block and label to "Tags"

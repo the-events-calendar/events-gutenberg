@@ -16,6 +16,7 @@ import EventDateTime from './block';
 import { Icons } from 'elements';
 import { config } from 'editor/utils/globals';
 const timeZone = get( config(), 'timeZone', {} );
+import { FORMATS } from 'editor/utils/date';
 
 /**
  * Module Code
@@ -72,7 +73,7 @@ export default {
 		},
 		timeZoneLabel: {
 			type: 'string',
-			default: get( timeZone, 'label', '' ),
+			default: get( timeZone, 'label', FORMATS.TIMEZONE.string ),
 		},
 		// Only Available for classic users
 		cost: {
