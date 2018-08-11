@@ -11,6 +11,8 @@ exports[`HOC - With Details Should render a component 1`] = `
   description="The Next Generation of Digital Agency"
   isolated={false}
   name="tribe/event"
+  onBlockCreated={[Function]}
+  onBlockRemoved={[Function]}
   setAttributes={[MockFunction]}
   setInitialState={
     [MockFunction] {
@@ -25,6 +27,8 @@ exports[`HOC - With Details Should render a component 1`] = `
             "get": [Function],
             "isolated": false,
             "name": "tribe/event",
+            "onBlockCreated": [Function],
+            "onBlockRemoved": [Function],
             "setAttributes": [MockFunction],
             "setInitialState": [MockFunction] {
               "calls": [Circular],

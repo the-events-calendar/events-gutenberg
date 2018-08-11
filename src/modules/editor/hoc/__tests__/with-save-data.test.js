@@ -10,9 +10,6 @@ import React from 'react';
 import { withSaveData } from 'editor/hoc';
 
 const Block = ( props ) => <div { ...props }>With Save Data!</div>;
-let Wrapper;
-let component;
-let instance;
 const props = {
 	name: 'tribe/event',
 	setInitialState: jest.fn(),
@@ -26,6 +23,10 @@ const props = {
 };
 
 describe( 'HOC - With Details', () => {
+	let Wrapper;
+	let component;
+	let instance;
+
 	beforeEach( () => {
 		Wrapper = withSaveData()( Block );
 		component = renderer.create( <Wrapper { ...props } /> );
@@ -103,5 +104,50 @@ describe( 'HOC - With Details on multiple instances', () => {
 
 		expect( props.setInitialState ).toHaveBeenCalled();
 		expect( props.setInitialState ).toHaveBeenCalledTimes( 3 );
+	} );
+} );
+
+describe( 'HOC - test life cycle callbacks', () => {
+	let Wrapper;
+	let component;
+	let instance;
+	let properties = {};
+
+	beforeAll( () => {
+		props.onBlockCreated = jest.fn();
+		props.onBlockRemoved = jest.fn();
+	});
+
+	beforeEach( () => {
+		Wrapper = withSaveData()( Block );
+		component = renderer.create( <Wrapper { ...props } /> );
+		instance = component.root;
+		properties = instance.props;
+	} );
+
+	afterEach( () => {
+		props.setInitialState.mockClear();
+		props.setAttributes.mockClear();
+		props.onBlockCreated.mockClear();
+		props.onBlockRemoved.mockClear();
+	} );
+
+	afterAll( () => {
+		delete props.onBlockCreated;
+		delete props.onBlockRemoved;
+	} );
+
+	it( 'Should call the onBlockCreated callback on mount', () => {
+		expect( props.onBlockCreated ).toHaveBeenCalled();
+		expect( props.onBlockCreated ).toHaveBeenCalledWith( properties );
+		expect( props.onBlockRemoved ).not.toHaveBeenCalled();
+	} );
+
+	it( 'Should call the onBlockRemoved callback on unmount of the block', () => {
+		component.unmount();
+		expect( props.onBlockCreated ).toHaveBeenCalled();
+		expect( props.onBlockCreated ).toHaveBeenCalledWith( properties );
+		expect( props.onBlockRemoved ).toHaveBeenCalled();
+		expect( props.onBlockRemoved ).toHaveBeenCalledWith( properties );
 	} );
 } );
