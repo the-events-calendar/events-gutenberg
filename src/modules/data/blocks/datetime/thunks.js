@@ -97,7 +97,10 @@ export const setMultiDay = ( { start, end, isMultiDay } ) => ( dispatch ) => {
 	dispatch( setMultiDayAction( isMultiDay ) );
 };
 
-export const setInitialState = ( { attributes } ) => ( dispatch ) => {
+export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
+	const timeZone = get( 'timeZone', DEFAULT_STATE.timeZone );
+	const defaultTimeZone = get( 'timeZoneLabel', timeZone );
+
 	maybeBulkDispatch( attributes, dispatch )( [
 		[ setStart, 'start', DEFAULT_STATE.start ],
 		[ setEnd, 'end', DEFAULT_STATE.end ],
@@ -105,7 +108,7 @@ export const setInitialState = ( { attributes } ) => ( dispatch ) => {
 		[ setSeparatorDate, 'separatorDate', DEFAULT_STATE.dateTimeSeparator ],
 		[ setSeparatorTime, 'separatorTime', DEFAULT_STATE.timeRangeSeparator ],
 		[ setTimeZone, 'timeZone', DEFAULT_STATE.timeZone ],
-		[ setTimeZoneLabel, 'timeZoneLabel', DEFAULT_STATE.timeZoneLabel ],
+		[ setTimeZoneLabel, 'timeZoneLabel', defaultTimeZone ],
 		[ setTimeZoneVisibility, 'showTimeZone', DEFAULT_STATE.showTimeZone ],
 	] );
 
