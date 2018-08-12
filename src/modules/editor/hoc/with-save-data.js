@@ -22,10 +22,10 @@ const blockRegister = {};
  * the ones specified as attributes params otherwise will fallback to the property attributes of the
  * component to extract the keys of those to do the comparision.
  *
- * @param {object} selectedAtrributes Set of attributes to only update fallback to this.props.attributes
+ * @param {object} selectedAttributes Set of attributes to only update fallback to this.props.attributes
  * @returns {function} Return a new HOC
  */
-export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
+export default ( selectedAttributes = null ) => ( WrappedComponent ) => {
 	class WithSaveData extends Component {
 			static defaultProps = {
 				attributes: {},
@@ -33,6 +33,8 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 				setAttributes: noop,
 				name: '',
 				isolated: false,
+				onBlockCreated: noop,
+				onBlockRemoved: noop,
 			};
 
 			static propTypes = {
@@ -43,6 +45,8 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 				isolated: PropTypes.bool,
 				increaseRegister: PropTypes.func,
 				decreaseRegister: PropTypes.func,
+				onBlockCreated: PropTypes.func,
+				onBlockRemoved: PropTypes.func,
 			};
 
 			keys = [];
@@ -69,12 +73,13 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 
 			// At this point attributes has been set so no need to be set the initial state into the store here.
 			componentDidMount() {
-				const { setInitialState, attributes = {}, isolated } = this.props;
+				const { setInitialState, attributes = {}, isolated, onBlockCreated } = this.props;
 
+				onBlockCreated( this.props );
 				this.registerBlock();
 
 				// Prevent to set the initial state for blocks that are copies from others
-				// overwrite this with isolated: true as property of the block
+				// overwrite this with the isolated property of the block to `true`
 				if ( this.blockCount() > 1 && ! isolated ) {
 					return;
 				}
@@ -88,7 +93,9 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 			}
 
 			componentWillUnmount() {
+				const { onBlockRemoved } = this.props;
 				this.unregisterBlock();
+				onBlockRemoved( this.props );
 			}
 
 			registerBlock() {
@@ -131,7 +138,7 @@ export default ( selectedAtrributes = null ) => ( WrappedComponent ) => {
 			}
 
 			get attrs() {
-				return selectedAtrributes || this.props.attributes || {};
+				return selectedAttributes || this.props.attributes || {};
 			}
 
 			render() {

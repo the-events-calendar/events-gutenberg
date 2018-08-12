@@ -70,6 +70,13 @@ const mapDispatchToProps = ( dispatch ) => ( {
 		dispatch( actions.addOrganizerInBlock( clientId, organizer ) );
 		dispatch( actions.addOrganizerInClassic( organizer ) );
 	},
+	onBlockRemoved( props ) {
+		const { clientId, organizer } = props;
+		if ( ! organizer ) {
+			return;
+		}
+		dispatch( actions.removeOrganizerInBlock( clientId, organizer ) );
+	},
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
