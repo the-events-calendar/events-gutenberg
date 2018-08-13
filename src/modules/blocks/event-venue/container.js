@@ -33,6 +33,23 @@ const onFormSubmit = ( dispatch, ownProps ) => ( fields ) => (
 
 const onItemSelect = ( dispatch ) => setVenue( dispatch );
 
+const onCreateNew = ( ownProps ) => ( title ) => ownProps.createDraft( {
+	title: {
+		rendered: title,
+	},
+} );
+
+// TODO: need to remove the use of "maybe" functions as they hold logic they
+// ultimately should not.
+const removeVenue = ( dispatch, ownProps ) => () => {
+	const { volatile, maybeRemoveEntry, details } = ownProps;
+
+	dispatch( actions.removeVenue() );
+	if ( volatile ) {
+		maybeRemoveEntry( details );
+	}
+}
+
 const mapStateToProps = ( state ) => ( {
 	venue: selectors.getVenue( state ),
 	showMapLink: selectors.getshowMapLink( state ),
@@ -43,6 +60,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	...bindActionCreators( actions, dispatch ),
 	onFormSubmit: onFormSubmit( dispatch, ownProps ),
 	onItemSelect: onItemSelect( dispatch ),
+	onCreateNew: onCreateNew( ownProps ),
+	removeVenue: removeVenue( dispatch, ownProps ),
 } );
 
 export default compose(

@@ -63,6 +63,8 @@ class EventVenue extends Component {
 		toggleVenueMapLink: PropTypes.func,
 		onFormSubmit: PropTypes.func,
 		onItemSelect: PropTypes.func,
+		onCreateNew: PropTypes.func,
+		removeVenue: PropTypes.func,
 	};
 
 	componentDidUpdate( prevProps ) {
@@ -74,7 +76,11 @@ class EventVenue extends Component {
 	}
 
 	componentWillUnmount() {
-		this.removeVenue();
+		// TODO: this does not work as intended. If one deletes a block, then adds
+		// another block, the venue id persists because of the setInitialState()
+		// function. This will perform as intended once setInitialState() is
+		// removed.
+		this.props.removeVenue();
 	}
 
 	renderForm = () => {
@@ -119,7 +125,7 @@ class EventVenue extends Component {
 	renderSearchOrCreate() {
 		// TODO: The store should not be passed through like this as a prop.
 		// Instead, we should hook up the element with a HOC.
-		const { isSelected, store, name, onItemSelect } = this.props;
+		const { isSelected, store, name, onItemSelect, onCreateNew } = this.props;
 		return (
 			<SearchOrCreate
 				name={ name }
@@ -128,7 +134,7 @@ class EventVenue extends Component {
 				isSelected={ isSelected }
 				postType={ VENUE }
 				onItemSelect={ onItemSelect }
-				onCreateNew={ this.setDraftTitle }
+				onCreateNew={ onCreateNew }
 				placeholder={ __( 'Add or find a venue', 'events-gutenberg' ) }
 			/>
 		);
@@ -172,7 +178,15 @@ class EventVenue extends Component {
 	}
 
 	editActions() {
-		const { isSelected, edit, create, isLoading, submit } = this.props;
+		const {
+			isSelected,
+			edit,
+			create,
+			isLoading,
+			submit,
+			removeVenue
+		} = this.props;
+
 		if ( ! this.hasVenue() || ! isSelected || edit || create || isLoading || submit ) {
 			return null;
 		}
@@ -181,7 +195,7 @@ class EventVenue extends Component {
 			<div className="tribe-editor__venue__actions">
 				<button
 					className="tribe-editor__venue__actions--close"
-					onClick={ this.removeVenue }
+					onClick={ removeVenue }
 				>
 					<CloseIcon />
 				</button>
@@ -237,34 +251,22 @@ class EventVenue extends Component {
 		return [ this.renderBlock(), this.renderControls() ];
 	}
 
-	setDraftTitle = ( title ) => {
-		const { createDraft } = this.props;
-		createDraft( {
-			title: {
-				rendered: title,
-			},
-		} );
-	};
-
+	// TODO: this hasVenue is coupled to the existence of details, not the venue ID.
+	// Given how withDetails is currently tightly coupled with the state, this cannot
+	// be moved to the container. withDetails should be decoupled from state.
 	hasVenue() {
 		const { details } = this.props;
 		return ! isEmpty( details );
 	}
 
+	// TODO: this function cannot be moved to container as it depends on hasVenue().
+	// Once withDetails is decoupled from state, this should move to container.
 	maybeEdit = () => {
 		const { volatile } = this.props;
 		if ( this.hasVenue() && volatile ) {
 			return this.edit();
 		}
 	}
-
-	removeVenue = () => {
-		const { volatile, maybeRemoveEntry, removeVenue, details } = this.props;
-		removeVenue();
-		if ( volatile ) {
-			maybeRemoveEntry( details );
-		}
-	};
 
 	edit = () => {
 		const { details, editEntry } = this.props;
