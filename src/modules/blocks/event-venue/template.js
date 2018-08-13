@@ -27,7 +27,6 @@ import {
 	SearchOrCreate,
 	VenueForm,
 	toFields,
-	toVenue,
 	GoogleMap,
 	EditLink,
 } from 'elements';
@@ -57,15 +56,16 @@ class EventVenue extends Component {
 		createDraft: PropTypes.func,
 		editDraft: PropTypes.func,
 		removeDraft: PropTypes.func,
-		setVenue: PropTypes.func,
 		setDraftDetails: PropTypes.func,
 		clear: PropTypes.func,
 		sendForm: PropTypes.func,
 		toggleVenueMap: PropTypes.func,
 		toggleVenueMapLink: PropTypes.func,
+		onFormSubmit: PropTypes.func,
+		onItemSelect: PropTypes.func,
 	};
 
-	componentDidUpdate( prevProps = {} ) {
+	componentDidUpdate( prevProps ) {
 		const { isSelected, edit, create, setSubmit } = this.props;
 		const unSelected = prevProps.isSelected && ! isSelected;
 		if ( unSelected && ( edit || create ) ) {
@@ -77,26 +77,60 @@ class EventVenue extends Component {
 		this.removeVenue();
 	}
 
-	render() {
-		return [ this.renderBlock(), this.renderControls() ];
+	renderForm = () => {
+		const { fields, onFormSubmit } = this.props;
+		return (
+			<VenueForm
+				{ ...toFields( fields ) }
+				onSubmit={ onFormSubmit }
+			/>
+		);
 	}
 
-	renderBlock() {
-		const { showMap } = this.props;
-
-		const containerClass = classNames(
-			{
-				'tribe-editor__venue': this.hasVenue(),
-				'tribe-editor__venue--has-map': this.hasVenue() && showMap,
-			},
-		);
+	renderEditAction() {
+		const { isSelected, edit, create, isLoading, submit, volatile } = this.props;
+		const idle = edit || create || isLoading || submit;
+		if ( ! this.hasVenue() || ! isSelected || ! volatile || idle ) {
+			return null;
+		}
 
 		return (
-			<div key="event-venue-box" className={ containerClass }>
-				{ this.getContainer() }
-				{ this.renderMap() }
-				{ this.editActions() }
-			</div>
+			<button onClick={ this.edit }>
+				<Dashicon icon="edit" />
+			</button>
+		);
+	}
+
+	renderDetails = () => {
+		const { showMapLink, details } = this.props;
+		const { getAddress } = utils;
+
+		return (
+			<VenueDetails
+				venue={ details }
+				address={ getAddress( details ) }
+				showMapLink={ showMapLink }
+				afterTitle={ this.renderEditAction() }
+				maybeEdit={ this.maybeEdit }
+			/>
+		);
+	}
+
+	renderSearchOrCreate() {
+		// TODO: The store should not be passed through like this as a prop.
+		// Instead, we should hook up the element with a HOC.
+		const { isSelected, store, name, onItemSelect } = this.props;
+		return (
+			<SearchOrCreate
+				name={ name }
+				icon={ <VenueIcon /> }
+				store={ store }
+				isSelected={ isSelected }
+				postType={ VENUE }
+				onItemSelect={ onItemSelect }
+				onCreateNew={ this.setDraftTitle }
+				placeholder={ __( 'Add or find a venue', 'events-gutenberg' ) }
+			/>
 		);
 	}
 
@@ -118,80 +152,6 @@ class EventVenue extends Component {
 		return this.hasVenue() ? this.renderDetails() : this.renderSearchOrCreate();
 	}
 
-	renderDetails() {
-		const { showMapLink, details } = this.props;
-		const { getAddress } = utils;
-
-		return (
-			<VenueDetails
-				venue={ details }
-				address={ getAddress( details ) }
-				showMapLink={ showMapLink }
-				afterTitle={ this.renderEditAction() }
-				maybeEdit={ this.maybeEdit }
-			/>
-		);
-	}
-
-	renderSearchOrCreate() {
-		const { isSelected, store, name } = this.props;
-		return (
-			<SearchOrCreate
-				name={ name }
-				icon={ <VenueIcon /> }
-				store={ store }
-				isSelected={ isSelected }
-				postType={ VENUE }
-				onItemSelect={ this.setVenue }
-				onCreateNew={ this.setDraftTitle }
-				placeholder={ __( 'Add or find a venue', 'events-gutenberg' ) }
-			/>
-		);
-	}
-
-	renderForm = () => {
-		const { fields } = this.props;
-		return (
-			<VenueForm
-				{ ...toFields( fields ) }
-				onSubmit={ this.onSubmit }
-			/>
-		);
-	};
-
-	onSubmit = ( fields ) => {
-		const { sendForm } = this.props;
-		sendForm( toVenue( fields ), this.formCompleted );
-	};
-
-	formCompleted = ( body = {} ) => {
-		const { setDetails } = this.props;
-		const { id } = body;
-		setDetails( id, body );
-		this.setVenue( id );
-	};
-
-	setVenue = ( id ) => {
-		const { setVenue, setShowMap, setShowMapLink } = this.props;
-		setVenue( id );
-		setShowMap( true );
-		setShowMapLink( true );
-	};
-
-	setDraftTitle = ( title ) => {
-		const { createDraft } = this.props;
-		createDraft( {
-			title: {
-				rendered: title,
-			},
-		} );
-	};
-
-	hasVenue() {
-		const { details } = this.props;
-		return ! isEmpty( details );
-	}
-
 	renderMap() {
 		const { details, edit, create, isLoading, submit, showMap } = this.props;
 
@@ -208,27 +168,6 @@ class EventVenue extends Component {
 				address={ addressToMapString( getAddress( details ) ) }
 				interactive={ true }
 			/>
-		);
-	}
-
-	maybeEdit = () => {
-		const { volatile } = this.props;
-		if ( this.hasVenue() && volatile ) {
-			return this.edit();
-		}
-	}
-
-	renderEditAction() {
-		const { isSelected, edit, create, isLoading, submit, volatile } = this.props;
-		const idle = edit || create || isLoading || submit;
-		if ( ! this.hasVenue() || ! isSelected || ! volatile || idle ) {
-			return null;
-		}
-
-		return (
-			<button onClick={ this.edit }>
-				<Dashicon icon="edit" />
-			</button>
 		);
 	}
 
@@ -250,18 +189,20 @@ class EventVenue extends Component {
 		);
 	}
 
-	removeVenue = () => {
-		const { volatile, maybeRemoveEntry, removeVenue, details } = this.props;
-		removeVenue();
-		if ( volatile ) {
-			maybeRemoveEntry( details );
-		}
-	};
+	renderBlock() {
+		const containerClass = classNames( {
+			'tribe-editor__venue': this.hasVenue(),
+			'tribe-editor__venue--has-map': this.hasVenue() && this.props.showMap,
+		} );
 
-	edit = () => {
-		const { details, editEntry } = this.props;
-		editEntry( details );
-	};
+		return (
+			<div key="event-venue-box" className={ containerClass }>
+				{ this.getContainer() }
+				{ this.renderMap() }
+				{ this.editActions() }
+			</div>
+		);
+	}
 
 	renderControls() {
 		const { venue, showMapLink, showMap, toggleVenueMap, toggleVenueMapLink } = this.props;
@@ -291,6 +232,44 @@ class EventVenue extends Component {
 			</InspectorControls>
 		);
 	}
+
+	render() {
+		return [ this.renderBlock(), this.renderControls() ];
+	}
+
+	setDraftTitle = ( title ) => {
+		const { createDraft } = this.props;
+		createDraft( {
+			title: {
+				rendered: title,
+			},
+		} );
+	};
+
+	hasVenue() {
+		const { details } = this.props;
+		return ! isEmpty( details );
+	}
+
+	maybeEdit = () => {
+		const { volatile } = this.props;
+		if ( this.hasVenue() && volatile ) {
+			return this.edit();
+		}
+	}
+
+	removeVenue = () => {
+		const { volatile, maybeRemoveEntry, removeVenue, details } = this.props;
+		removeVenue();
+		if ( volatile ) {
+			maybeRemoveEntry( details );
+		}
+	};
+
+	edit = () => {
+		const { details, editEntry } = this.props;
+		editEntry( details );
+	};
 }
 
 export default EventVenue;
