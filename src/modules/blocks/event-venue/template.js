@@ -1,21 +1,16 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import { addressToMapString } from 'utils/geo-data';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { compose, bindActionCreators } from 'redux';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
-import './style.pcss';
-
 import {
 	Spinner,
 	Placeholder,
@@ -23,10 +18,7 @@ import {
 	PanelBody,
 	Dashicon,
 } from '@wordpress/components';
-
-import {
-	InspectorControls,
-} from '@wordpress/editor';
+import { InspectorControls } from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -39,13 +31,12 @@ import {
 	GoogleMap,
 	EditLink,
 } from 'elements';
-
 import { VENUE } from 'editor/post-types';
-import { withSaveData, withDetails, withForm } from 'editor/hoc';
 import VenueDetails from './venue';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
-import { actions, selectors, utils } from 'data/blocks/venue';
+import { utils } from 'data/blocks/venue';
+import './style.pcss';
 
 /**
  * Module Code
@@ -73,10 +64,6 @@ class EventVenue extends Component {
 		toggleVenueMap: PropTypes.func,
 		toggleVenueMapLink: PropTypes.func,
 	};
-
-	constructor() {
-		super( ...arguments );
-	}
 
 	componentDidUpdate( prevProps = {} ) {
 		const { isSelected, edit, create, setSubmit } = this.props;
@@ -306,20 +293,4 @@ class EventVenue extends Component {
 	}
 }
 
-const mapStateToProps = ( state ) => ( {
-	venue: selectors.getVenue( state ),
-	showMapLink: selectors.getshowMapLink( state ),
-	showMap: selectors.getshowMap( state ),
-} );
-
-const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
-
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps,
-	),
-	withSaveData(),
-	withDetails( 'venue' ),
-	withForm( ( props ) => props.name ),
-)( EventVenue );
+export default EventVenue;
