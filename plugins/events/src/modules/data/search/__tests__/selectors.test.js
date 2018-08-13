@@ -19,16 +19,16 @@ describe( '[STORE] - Search selectors', () => {
 		expect( selectors.blockSelector( state, props ) ).toEqual( DEFAULT_STATE );
 	} );
 
-	it( 'Should return the type of the block', () => {
-		expect( selectors.getSearchType( state, props ) ).toEqual( DEFAULT_STATE.type );
+	it( 'Should return the post type of the block', () => {
+		expect( selectors.getSearchPostType( state, props ) ).toEqual( DEFAULT_STATE.postType );
 	} );
 
 	it( 'Should return the search term', () => {
 		expect( selectors.getSearchTerm( state, props ) ).toEqual( DEFAULT_STATE.term );
 	} );
 
-	it( 'Should return the loading state', () => {
-		expect( selectors.getLoading( state, props ) ).toEqual( DEFAULT_STATE.loading );
+	it( 'Should return the isLoading state', () => {
+		expect( selectors.getIsLoading( state, props ) ).toEqual( DEFAULT_STATE.isLoading );
 	} );
 
 	it( 'Should return the search results', () => {

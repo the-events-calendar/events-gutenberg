@@ -2,11 +2,6 @@
  * Internal dependencies
  */
 import * as types from './types';
-import {
-	actions as requestActions,
-	utils as requestUtils,
-} from '@moderntribe/events/data/request';
-import { selectors } from '@moderntribe/events/data/search/index';
 
 export const addBlock = ( id ) => ( {
 	type: types.ADD_BLOCK,
@@ -20,6 +15,14 @@ export const setTerm = ( id, term ) => ( {
 	payload: {
 		id,
 		term,
+	},
+} );
+
+export const setSearchPostType = ( id, postType ) => ( {
+	type: types.SET_SEARCH_POST_TYPE,
+	payload: {
+		id,
+		postType,
 	},
 } );
 
@@ -55,19 +58,19 @@ export const setPage = ( id, page ) => ( {
 	},
 } );
 
-export const enableLoading = ( id ) => ( {
-	type: types.SET_SEARCH_LOADING,
+export const enableSearchIsLoading = ( id ) => ( {
+	type: types.SET_SEARCH_IS_LOADING,
 	payload: {
 		id,
-		loading: true,
+		isLoading: true,
 	},
 } );
 
-export const disableLoading = ( id ) => ( {
-	type: types.SET_SEARCH_LOADING,
+export const disableSearchIsLoading = ( id ) => ( {
+	type: types.SET_SEARCH_IS_LOADING,
 	payload: {
 		id,
-		loading: false,
+		isLoading: false,
 	},
 } );
 
@@ -77,70 +80,3 @@ export const clearBlock = ( id ) => ( {
 		id,
 	},
 } );
-
-export const search = ( id, params ) => ( dispatch, getState ) => {
-	const {
-		term = '',
-		exclude = [],
-		perPage = 50,
-		populated = false,
-		page = 1,
-	} = params;
-
-	const total = selectors.getTotal( getState(), { name: id } );
-
-	if ( total !== 0 && page > total ) {
-		return;
-	}
-
-	dispatch( setTerm( id, term ) );
-
-	if ( populated && term.trim() === '' ) {
-		dispatch( clearBlock( id ) );
-		return;
-	}
-
-	const query = requestUtils.toWPQuery( {
-		per_page: perPage,
-		search: term,
-		page,
-		exclude,
-	} );
-
-	const type = selectors.getSearchType( getState(), { name: id } );
-	const options = {
-		path: `${ type }?${ query }`,
-		actions: {
-			start: () => dispatch( enableLoading( id ) ),
-			success: ( { body, headers } ) => {
-				if ( term !== selectors.getSearchTerm( getState(), { name: id } ) ) {
-					return;
-				}
-				dispatch( disableLoading( id ) );
-				if ( page === 1 ) {
-					dispatch( setResults( id, body ) );
-				} else {
-					dispatch( addResults( id, body ) );
-				}
-				dispatch( setPage( id, page ) );
-				dispatch( setTotalPages( id, requestUtils.getTotalPages( headers ) ) );
-			},
-			error: () => dispatch( disableLoading( id ) ),
-		},
-	};
-
-	dispatch( requestActions.wpRequest( options ) );
-};
-
-export const setPostType = ( id, type ) => ( {
-	type: types.SET_POST_TYPE,
-	payload: {
-		id,
-		type,
-	},
-} );
-
-export const registerBlock = ( name, postType ) => ( dispatch ) => {
-	dispatch( addBlock( name ) );
-	dispatch( setPostType( name, postType ) );
-};

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/venue/reducers';
+import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/venue/reducer';
 import { actions } from '@moderntribe/events/data/blocks/venue';
 
 describe( '[STORE] - Venue reducer', () => {

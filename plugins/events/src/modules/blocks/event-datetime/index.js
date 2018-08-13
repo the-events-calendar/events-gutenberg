@@ -6,6 +6,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { get } from 'lodash';
 
 /**
  * Internal dependencies
@@ -13,6 +14,9 @@ import { __ } from '@wordpress/i18n';
 import { withStore } from '@moderntribe/common/hoc';
 import EventDateTime from './block';
 import { Icons } from '@moderntribe/events/elements';
+import { config } from '@moderntribe/events/editor/utils/globals';
+const timeZone = get( config(), 'timeZone', {} );
+import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
 /**
  * Module Code
@@ -48,7 +52,7 @@ export default {
 			source: 'meta',
 			meta: '_EventAllDay',
 		},
-		timezone: {
+		timeZone: {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventTimezone',
@@ -62,6 +66,14 @@ export default {
 			type: 'string',
 			source: 'meta',
 			meta: '_EventTimeRangeSeparator',
+		},
+		showTimeZone: {
+			type: 'boolean',
+			default: get( timeZone, 'show_time_zone', false ),
+		},
+		timeZoneLabel: {
+			type: 'string',
+			default: get( timeZone, 'label', FORMATS.TIMEZONE.string ),
 		},
 		// Only Available for classic users
 		cost: {

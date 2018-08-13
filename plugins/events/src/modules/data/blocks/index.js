@@ -1,6 +1,6 @@
 /**
  * Internal dependencies
  */
-import reducer from './reducers';
+import reducer from './reducer';
 
 export default reducer;

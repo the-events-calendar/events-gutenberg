@@ -1,8 +1,4 @@
 /**
- * External dependencies
- */
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -13,8 +9,6 @@ import { __ } from '@wordpress/i18n';
  */
 import Organizer from './block';
 import { Icons } from '@moderntribe/events/elements';
-import { withStore } from '@moderntribe/common/hoc';
-import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 
 export default {
 	id: 'event-organizer',
@@ -40,7 +34,7 @@ export default {
 		},
 	},
 
-	edit: withStore( { isolated: true, postType: ORGANIZER } )( Organizer ),
+	edit: Organizer,
 
 	save() {
 		return null;

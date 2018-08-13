@@ -24,6 +24,9 @@ $time_format = tribe_get_time_format();
 $date_format = tribe_get_date_format( $use_yearless_format );
 
 $timezone = get_post_meta( $event_id, '_EventTimezone', true );
+$show_time_zone = $this->attr( 'showTimeZone' );
+$time_zone_label = $this->attr( 'timeZoneLabel' );
+
 
 $formatted_start_date = tribe_get_start_date( $event_id, false, $date_format );
 $formatted_start_time = tribe_get_start_time( $event_id, $time_format );
@@ -89,6 +92,8 @@ $is_same_day      = $formatted_start_date == $formatted_end_date;
 			</span>
 		<?php endif; ?>
 
-		<span class="tribe-events-schedule__timezone"><?php echo $timezone; ?></span>
+        <?php if ( $show_time_zone ) : ?>
+            <span class="tribe-events-schedule__timezone"><?php echo esc_html( $time_zone_label ); ?></span>
+        <?php endif; ?>
 	</h2>
 </div>

@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { actions } from '@moderntribe/events/data/blocks/website';
-import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/website/reducers';
+import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/website/reducer';
 
 describe( '[STORE] - Website reducer', () => {
 	it( 'Should return the default state', () => {

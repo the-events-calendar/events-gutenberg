@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import reducer, { actions } from '@moderntribe/events/data/details';
-import { details } from '@moderntribe/events/data/details/reducers';
+import { details } from '@moderntribe/events/data/details/reducer';
 import { DEFAULT_STATE } from '@moderntribe/events/data/details/reducers/details';
 
 jest.mock( '@moderntribe/events/data/details/reducers', () => {
@@ -27,8 +27,8 @@ describe( '[STORE] - Details reducer', () => {
 
 	it( 'Should pass the actions to the child reducer when block not present', () => {
 		const groupAction = [
-			actions.enableLoading( 20 ),
-			actions.setPostType( 20, 'tribe_events' ),
+			actions.enableDetailsIsLoading( 20 ),
+			actions.setDetailsPostType( 20, 'tribe_events' ),
 			actions.setDetails( 20, { title: 'Modern Tribe' } ),
 		];
 
@@ -42,8 +42,8 @@ describe( '[STORE] - Details reducer', () => {
 
 	it( 'It should pass the block to the child reducer', () => {
 		const groupAction = [
-			actions.enableLoading( 20 ),
-			actions.setPostType( 20, 'tribe_events' ),
+			actions.enableDetailsIsLoading( 20 ),
+			actions.setDetailsPostType( 20, 'tribe_events' ),
 			actions.setDetails( 20, { title: 'Modern Tribe' } ),
 		];
 

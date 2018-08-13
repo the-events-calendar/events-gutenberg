@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { EVENT } from '@moderntribe/events/editor/post-types';
-import * as types from './../types';
+import * as types from 'data/forms/types';
 
 export const DEFAULT_STATE = {
 	edit: false,

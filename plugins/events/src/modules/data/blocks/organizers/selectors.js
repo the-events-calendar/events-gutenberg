@@ -7,7 +7,7 @@ import { difference } from 'lodash';
 export const getOrganizersInClassic = ( state ) => state.blocks.organizers.classic;
 
 export const getOrganizerBlock = ( state, props ) =>
-	state.blocks.organizers.blocks.byId[ props.id ];
+	state.blocks.organizers.blocks.byId[ props.clientId ];
 
 export const getOrganizerInBlock = createSelector(
 	[ getOrganizerBlock ],

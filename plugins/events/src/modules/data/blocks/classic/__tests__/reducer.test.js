@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { actions } from '@moderntribe/events/data/blocks/classic';
-import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/classic/reducers';
+import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/classic/reducer';
 
 describe( '[STORE] - Classic reducer', () => {
 	test( 'Default state', () => {

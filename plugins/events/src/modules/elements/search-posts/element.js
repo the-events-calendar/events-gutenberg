@@ -26,7 +26,7 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
-import { actions, selectors } from '@moderntribe/events/data/search';
+import { actions, thunks, selectors } from '@moderntribe/events/data/search';
 
 /**
  * Module Code
@@ -44,7 +44,7 @@ class SearchPosts extends Component {
 		registerBlock: PropTypes.func,
 		search: PropTypes.func,
 		exclude: PropTypes.array,
-		loading: PropTypes.bool,
+		isLoading: PropTypes.bool,
 		name: PropTypes.string,
 		postType: PropTypes.string,
 	};
@@ -55,7 +55,7 @@ class SearchPosts extends Component {
 			filterValue: '',
 			selectedItem: null,
 			posts: [],
-			loading: false,
+			isLoading: false,
 			search: '',
 		};
 		this.scrollPosition = 0;
@@ -63,8 +63,9 @@ class SearchPosts extends Component {
 	}
 
 	componentDidMount() {
-		const { registerBlock, name, postType } = this.props;
-		registerBlock( name, postType );
+		const { addBlock, setSearchPostType, name, postType } = this.props;
+		addBlock( name );
+		setSearchPostType( name, postType );
 		this.initialFetch();
 	}
 
@@ -83,18 +84,20 @@ class SearchPosts extends Component {
 			return;
 		}
 
-		const { loading } = this.props;
-		if ( ! loading && this.scrollPosition && this.dropdownEl.current ) {
+		const { isLoading } = this.props;
+		if ( ! isLoading && this.scrollPosition && this.dropdownEl.current ) {
 			this.dropdownEl.current.scrollTop = this.scrollPosition;
 			this.scrollPosition = 0;
 		}
 	}
 
-	searchPosts = ( event ) => {
-		const { name, search, exclude } = this.props;
+	onChange = ( event ) => {
+		const { value } = event.target;
+		const { name, setTerm, search, exclude } = this.props;
 		this.scrollPosition = 0;
+		setTerm( name, value );
 		search( name, {
-			term: event.target.value,
+			term: value,
 			exclude,
 			populate: true,
 		} );
@@ -104,8 +107,8 @@ class SearchPosts extends Component {
 		const { target } = event;
 		const { scrollHeight, scrollTop } = target;
 		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
-		const { loading } = this.state;
-		if ( ! loading ) {
+		const { isLoading } = this.state;
+		if ( ! isLoading ) {
 			this.scrollPosition = scrollTop;
 		}
 		if ( percentage > 0.75 ) {
@@ -120,9 +123,9 @@ class SearchPosts extends Component {
 	}
 
 	renderList = () => {
-		const { results, loading } = this.props;
+		const { results, isLoading } = this.props;
 
-		if ( loading ) {
+		if ( isLoading ) {
 			return (
 				<Placeholder key="placeholder">
 					<Spinner />
@@ -191,7 +194,7 @@ class SearchPosts extends Component {
 				placeholder={ searchLabel }
 				value={ term }
 				className="editor-inserter__search"
-				onChange={ this.searchPosts }
+				onChange={ this.onChange }
 			/>
 		</div> );
 	}
@@ -225,11 +228,14 @@ class SearchPosts extends Component {
 
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
-	loading: selectors.getLoading( state, props ),
+	isLoading: selectors.getIsLoading( state, props ),
 	results: selectors.getResults( state, props ),
 	page: selectors.getPage( state, props ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+const mapDispatchToProps = ( dispatch ) => ( {
+	...bindActionCreators( actions, dispatch ),
+	...bindActionCreators( thunks, dispatch ),
+} );
 
 export default connect( mapStateToProps, mapDispatchToProps )( SearchPosts );

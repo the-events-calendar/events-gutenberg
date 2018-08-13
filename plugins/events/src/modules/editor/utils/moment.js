@@ -5,6 +5,7 @@ import { isString } from 'lodash';
 import moment from 'moment/moment';
 import { FORMATS } from './date';
 import { replaceWithObject } from './string';
+import { HOUR_IN_SECONDS } from 'editor/utils/time';
 
 /**
  * Make sure the format provided matches the spec used by moment.js
@@ -87,7 +88,7 @@ export function roundTime( date ) {
  * @returns {moment} moment Object with the date or current date if is non valid
  */
 export function parseFormats( date, formats = [ FORMATS.DATABASE.datetime, FORMATS.WP.datetime ] ) {
-	for ( let i = 0; i < formats.length; i++ ) {
+	for ( let i = 0; i < formats.length; i ++ ) {
 		const format = formats[ i ];
 		const result = toMoment( date, format );
 		if ( result.isValid() ) {
@@ -108,10 +109,8 @@ export function parseFormats( date, formats = [ FORMATS.DATABASE.datetime, FORMA
  * @returns {moment} A moment object
  */
 export function toMoment( date, format = FORMATS.DATABASE.datetime ) {
-	if ( date instanceof moment ) {
+	if ( date instanceof moment || date instanceof Date ) {
 		return moment( date );
-	} else if ( date instanceof Date ) {
-		return toMomentFromDate( date );
 	} else if ( isString( date ) ) {
 		return moment( date, toFormat( format ) );
 	}
@@ -224,4 +223,46 @@ export function toDatePicker( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) 
  */
 export function isSameDay( start, end ) {
 	return moment( start ).isSame( end, 'day' );
+}
+
+/**
+ * Reset the time of an event by creating an object with start and end ensuring the end event is
+ * after the start date and both are on the same day if the start is one hour before the end of the
+ * day it will remove an hour of the start to ensure both start / end happen on the same day
+ *
+ * @param {moment} start The start date
+ * @returns {{start: {moment}, end: {moment}}} Object with two keys: start, end
+ */
+export function resetTimes( start ) {
+	const testMoment = start.clone().add( HOUR_IN_SECONDS, 'seconds' );
+
+	// Rollback an hour before adding half an hour as we are on the edge of the day
+	if ( ! isSameDay( start, testMoment ) ) {
+		start.subtract( HOUR_IN_SECONDS, 'seconds' );
+	}
+
+	const end = start.clone().add( HOUR_IN_SECONDS, 'seconds' );
+
+	return {
+		start,
+		end,
+	};
+};
+
+/**
+ * Make sure the start time is always before the end time
+ *
+ * @param {moment} start The start date
+ * @param {moment} end The end date
+ * @returns {{start: {moment}, end: {moment}}} Object with two keys: start, end
+ */
+export function adjustStart( start, end ) {
+	if ( end.isSameOrBefore( start ) ) {
+		return resetTimes( start );
+	}
+
+	return {
+		start,
+		end,
+	};
 }

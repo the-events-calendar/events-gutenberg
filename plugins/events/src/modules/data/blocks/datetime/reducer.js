@@ -20,11 +20,14 @@ import * as types from './types';
 export const DEFAULT_STATE = {
 	start: toDateTime( roundTime( moment() ) ),
 	end: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
+	naturalLanguage: '',
 	dateTimeSeparator: getSetting( 'dateTimeSeparator', __( '@', 'events-gutenberg' ) ),
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),
 	allDay: false,
 	multiDay: false,
-	timezone: FORMATS.TIMEZONE.string,
+	timeZone: FORMATS.TIMEZONE.string,
+	timeZoneLabel: FORMATS.TIMEZONE.string,
+	showTimeZone: false,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -39,6 +42,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				end: action.payload.end,
 			};
+		case types.SET_NATURAL_LANGUAGE_LABEL:
+			return {
+				...state,
+				naturalLanguage: action.payload.label,
+			}
 		case types.SET_ALL_DAY:
 			return {
 				...state,
@@ -48,11 +56,6 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				multiDay: action.payload.multiDay,
-			};
-		case types.TOGGLE_MULTI_DAY:
-			return {
-				...state,
-				multiDay: ! state.multiDay,
 			};
 		case types.SET_SEPARATOR_DATE:
 			return {
@@ -67,8 +70,19 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_TIME_ZONE:
 			return {
 				...state,
-				timezone: action.payload.timezone,
+				timeZone: action.payload.timeZone,
 			};
+		case types.SET_TIMEZONE_LABEL:
+			return {
+				...state,
+				timeZoneLabel: action.payload.label,
+			}
+		case types.SET_TIMEZONE_VISIBILITY: {
+			return {
+				...state,
+				showTimeZone: action.payload.show,
+			}
+		}
 		default:
 			return state;
 	}

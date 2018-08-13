@@ -32,12 +32,16 @@ import {
 	TimePicker,
 	Dashboard,
 	Month,
+	DateInput,
 	Upsell,
+	TimeZone,
 } from '@moderntribe/events/elements';
+
 import './style.pcss';
 
 import {
 	actions as dateTimeActions,
+	thunks as dateTimeThunks,
 	selectors as dateTimeSelectors,
 } from '@moderntribe/events/data/blocks/datetime';
 import {
@@ -52,7 +56,7 @@ import {
 import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
 import classNames from 'classnames';
 import {
-	toFormat,
+	roundTime,
 	toMoment,
 	toDate,
 	toDateNoYear,
@@ -61,6 +65,7 @@ import {
 import { FORMATS, timezonesAsSelectData, TODAY } from '@moderntribe/events/editor/utils/date';
 import withSaveData from '@moderntribe/common/hoc/with-save-data';
 import { hasClass, searchParent } from '@moderntribe/events/editor/utils/dom';
+import { HALF_HOUR_IN_SECONDS, DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/moment';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 
@@ -78,22 +83,29 @@ class EventDateTime extends Component {
 		end: PropTypes.string,
 		separatorDate: PropTypes.string,
 		separatorTime: PropTypes.string,
-		timezone: PropTypes.string,
+		timeZone: PropTypes.string,
+		showTimeZone: PropTypes.bool,
+		timeZoneLabel: PropTypes.string,
+		setTimeZoneLabel: PropTypes.func,
+		setTimeZoneVisibility: PropTypes.func,
+		currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
 		currencySymbol: PropTypes.string,
-		currencyPosition: PropTypes.string,
+		naturalLanguageLabel: PropTypes.string,
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
-		setAllDay: PropTypes.func,
 		openDashboardDateTime: PropTypes.func,
-		setDate: PropTypes.func,
 		setStartTime: PropTypes.func,
 		setEndTime: PropTypes.func,
-		toggleMultiDay: PropTypes.func,
+		setAllDay: PropTypes.func,
+		setMultiDay: PropTypes.func,
+		setDates: PropTypes.func,
+		setDateTime: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
 		closeDashboardDateTime: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
+		setNaturalLanguageLabel: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -120,17 +132,15 @@ class EventDateTime extends Component {
 		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
 		// Bail when not classic
-		if ( ! tribe_blocks_editor ) {
-			return null;
-		}
-
-		// Bail when not classic
-		if ( ! tribe_blocks_editor.is_classic ) {
+		if ( ! tribe_blocks_editor || ! tribe_blocks_editor.is_classic ) {
 			return null;
 		}
 
 		return (
-			<div className="tribe-editor__event-cost">
+			<div
+				key="tribe-editor-event-cost"
+				className="tribe-editor__event-cost"
+			>
 				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
@@ -157,9 +167,9 @@ class EventDateTime extends Component {
 	}
 
 	renderStartTime() {
-		const { start } = this.props;
+		const { start, allDay } = this.props;
 
-		if ( this.isAllDay() ) {
+		if ( allDay ) {
 			return null;
 		}
 
@@ -181,7 +191,9 @@ class EventDateTime extends Component {
 	}
 
 	renderEndDate() {
-		if ( this.isSameDay() ) {
+		const { multiDay } = this.props;
+
+		if ( ! multiDay ) {
 			return null;
 		}
 
@@ -198,45 +210,26 @@ class EventDateTime extends Component {
 	}
 
 	renderEndTime() {
-		const { end } = this.props;
-		const { time } = FORMATS.WP;
+		const { end, multiDay, allDay } = this.props;
 
-		if ( this.isAllDay() ) {
+		if ( allDay ) {
 			return null;
 		}
 
 		return (
 			<React.Fragment>
-				{ this.isSameDay() ? null : this.renderSeparator( 'date-time' ) }
+				{ multiDay && this.renderSeparator( 'date-time' ) }
 				{ toTime( toMoment( end ), FORMATS.WP.time ) }
 			</React.Fragment>
 		);
-	}
-
-	/**
-	 * Test if the current start and end date are happening on the same day.
-	 *
-	 * @returns {boolean} if the event is happening on the same day
-	 */
-	isSameDay( start = this.props.start, end = this.props.end ) {
-		return toMoment( start ).isSame( toMoment( end ), 'day' );
 	}
 
 	isSameYear( start = this.props.start, end = this.props.end ) {
 		return toMoment( start ).isSame( toMoment( end ), 'year' );
 	}
 
-	/**
-	 * Test if the current event is happening all day.
-	 *
-	 * @returns {boolean} true if is an all day event
-	 */
-	isAllDay() {
-		return this.props.allDay;
-	}
-
 	renderTimezone() {
-		return this.renderSeparator( 'timezone' );
+		return this.renderSeparator( 'timeZone' );
 	}
 
 	/**
@@ -247,18 +240,25 @@ class EventDateTime extends Component {
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
 	renderSeparator( type, className ) {
-		const { timezone, separatorDate, separatorTime } = this.props;
+		const {
+			timeZone,
+			separatorDate,
+			separatorTime,
+			setTimeZoneLabel,
+			timeZoneLabel,
+			showTimeZone,
+		} = this.props;
 		switch ( type ) {
 			case 'date-time':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ ' '.concat( separatorDate, ' ') }
+						{ ' '.concat( separatorDate, ' ' ) }
 					</span>
 				);
 			case 'time-range':
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ ' '.concat( separatorTime, ' ') }
+						{ ' '.concat( separatorTime, ' ' ) }
 					</span>
 				);
 			case 'dash':
@@ -273,10 +273,16 @@ class EventDateTime extends Component {
 				return (
 					<span className={ classNames( 'tribe-editor__separator', className ) }>&nbsp;</span>
 				);
-			case 'timezone':
-				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>
-						{ timezone }
+			case 'timeZone':
+				return showTimeZone && (
+					<span
+						key="time-zone-separator"
+						className={ classNames( 'tribe-editor__separator', className ) }>
+						<TimeZone
+							value={ timeZoneLabel }
+							placeholder={ timeZoneLabel }
+							onChange={ setTimeZoneLabel }
+						/>
 					</span>
 				);
 			default:
@@ -289,25 +295,53 @@ class EventDateTime extends Component {
 	 *
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
-	renderLabel() {
+	renderDate() {
+		const {
+			multiDay,
+			allDay,
+			isSelected,
+			openDashboardDateTime,
+			setDateTime,
+			setNaturalLanguageLabel,
+			naturalLanguageLabel,
+		} = this.props;
 		return (
-			<section key="event-datetime" className="tribe-editor__subtitle tribe-editor__date-time">
-				<h2 className="tribe-editor__subtitle__headline" onClick={ this.props.openDashboardDateTime }>
-					{ this.renderStart() }
-					{ this.isSameDay() && this.isAllDay() ? null : this.renderSeparator( 'time-range' ) }
-					{ this.renderEnd() }
-					{ this.isAllDay() ? this.renderSeparator( 'all-day' ) : null }
-					{ this.renderSeparator( 'space' ) }
-					{ this.renderTimezone() }
-					{ this.renderPrice() }
-				</h2>
+			<section
+				key="event-datetime"
+				className="tribe-editor__subtitle tribe-editor__date-time"
+			>
+				<DateInput
+					selected={ isSelected }
+					onClickHandler={ openDashboardDateTime }
+					onChange={ setNaturalLanguageLabel }
+					setDateTime={ setDateTime }
+					value={ naturalLanguageLabel }
+					after={ this.renderExtras() }
+				>
+					<h2 className="tribe-editor__subtitle__headline">
+						<button
+							className="tribe-editor__btn--label"
+							onClick={ openDashboardDateTime }
+						>
+							{ this.renderStart() }
+							{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
+							{ this.renderEnd() }
+							{ allDay && this.renderSeparator( 'all-day' ) }
+						</button>
+						{ this.renderExtras() }
+					</h2>
+				</DateInput>
 				{ this.renderDashboard() }
 			</section>
 		);
 	}
 
+	renderExtras() {
+		return [ this.renderTimezone(), this.renderPrice() ];
+	}
+
 	renderDashboard() {
-		const { dashboardOpen } = this.props;
+		const { dashboardOpen, multiDay, allDay } = this.props;
 		const hideUpsell = getConstants().hide_upsell === 'true';
 
 		return (
@@ -320,14 +354,17 @@ class EventDateTime extends Component {
 						<div className="tribe-editor__subtitle__footer-date">
 							<div className="tribe-editor__subtitle__time-pickers">
 								{ this.renderStartTimePicker() }
-								{ this.isAllDay() ? null : this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' ) }
+								{
+									( multiDay || ! allDay ) &&
+									this.renderSeparator( 'time-range', 'tribe-editor__time-picker__separator' )
+								}
 								{ this.renderEndTimePicker() }
 							</div>
 							<div className="tribe-editor__subtitle__footer-multiday">
-								{ this.renderMultidayToggle() }
+								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
-						{ ! hideUpsell && <Upsell /> }
+						{ ! hideUpsell && <Upsell/> }
 					</footer>
 				</Fragment>
 			</Dashboard>
@@ -340,7 +377,7 @@ class EventDateTime extends Component {
 		if ( e.keyCode === ESCAPE_KEY ) {
 			this.props.closeDashboardDateTime();
 		}
-	}
+	};
 
 	/* TODO: This needs to move to logic component wrapper */
 	onClick = ( e ) => {
@@ -382,7 +419,7 @@ class EventDateTime extends Component {
 			setVisibleMonth,
 		};
 
-		if ( ! this.isSameDay() ) {
+		if ( multiDay ) {
 			monthProps.to = toMoment( end ).toDate();
 		}
 
@@ -393,31 +430,97 @@ class EventDateTime extends Component {
 
 	setDays = ( data ) => {
 		const { from, to } = data;
-		const { setDate } = this.props;
-		setDate( from, to );
+		const { start, end, setDates } = this.props;
+		setDates( { start, end, to, from } );
+	};
+
+	startTimePickerOnChange = ( e ) => {
+		const { start, end, setStartTime } = this.props;
+		const [ hour, minute ] = e.target.value.split( ':' );
+
+		const startMoment = toMoment( start );
+		const max = toMoment( end ).clone().subtract( 1, 'minutes' );
+
+		const copy = startMoment.clone();
+		copy.set( 'hour', parseInt( hour, 10 ) );
+		copy.set( 'minute', parseInt( minute, 10 ) );
+		copy.set( 'second', 0 );
+
+		if ( copy.isAfter( max ) ) {
+			return;
+		}
+
+		const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
+		setStartTime( { start, seconds } );
+	};
+
+	startTimePickerOnClick = ( value, onClose ) => {
+		const { start, end, setStartTime, setAllDay } = this.props;
+		const isAllDay = value === 'all-day';
+		const seconds = isAllDay ? 0 : value;
+
+		if ( ! isAllDay ) {
+			setStartTime( { start, seconds } );
+		}
+
+		setAllDay( { start, end, isAllDay } );
+		onClose();
+	};
+
+	endTimePickerOnChange = ( e ) => {
+		const { start, end, setEndTime } = this.props;
+		const [ hour, minute ] = e.target.value.split( ':' );
+
+		const endMoment = toMoment( end );
+		const min = toMoment( start ).clone().add( 1, 'minutes' );
+
+		const copy = endMoment.clone();
+		copy.set( 'hour', parseInt( hour, 10 ) );
+		copy.set( 'minute', parseInt( minute, 10 ) );
+		copy.set( 'second', 0 );
+
+		if ( copy.isBefore( min ) ) {
+			return;
+		}
+
+		const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
+		setEndTime( { end, seconds } );
+	};
+
+	endTimePickerOnClick = ( value, onClose ) => {
+		const { start, end, setEndTime, setAllDay } = this.props;
+		const isAllDay = value === 'all-day';
+		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
+
+		if ( ! isAllDay ) {
+			setEndTime( { end, seconds } );
+		}
+
+		setAllDay( { start, end, isAllDay } );
+		onClose();
 	};
 
 	renderStartTimePicker() {
 		const { start, allDay, multiDay, end } = this.props;
-		const { time } = FORMATS.WP;
 		const startMoment = toMoment( start );
+		const endMoment = toMoment( end );
+
 		const pickerProps = {
-			onSelectItem: this.setStartTime,
 			current: startMoment,
-			timeFormat: time,
-			max: toMoment( end ).subtract( 1, 'minutes' ),
+			start: startMoment.clone().startOf( 'day' ),
+			end: startMoment.clone().endOf( 'day' ),
+			onChange: this.startTimePickerOnChange,
+			onClick: this.startTimePickerOnClick,
+			timeFormat: FORMATS.WP.time,
+			allDay,
 		};
 
 		if ( ! multiDay ) {
-			pickerProps.min = startMoment.clone().startOf( 'day' );
-		}
-
-		if ( allDay ) {
-			pickerProps.allDay = true;
+			pickerProps.end = roundTime( endMoment.clone().subtract( 1, 'minutes' ) );
+			pickerProps.max = endMoment.clone().subtract( 1, 'minutes' );
 		}
 
 		let startDate = toDate( toMoment( start ) );
-
 		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
 			startDate = toDateNoYear( toMoment( start ) );
 		}
@@ -430,68 +533,62 @@ class EventDateTime extends Component {
 		);
 	}
 
-	setStartTime = ( data ) => {
-		const { seconds, allDay } = data;
-		const { setAllDay, setStartTime } = this.props;
-
-		if ( allDay ) {
-			setAllDay( allDay );
-		} else {
-			setStartTime( seconds );
-		}
-	};
-
 	renderEndTimePicker() {
-		if ( this.isAllDay() ) {
+		const { start, end, multiDay, allDay } = this.props;
+
+		if ( ! multiDay && allDay ) {
 			return null;
 		}
 
-		const { multiDay } = this.props;
-		const { time } = FORMATS.WP;
-		const start = toMoment( this.props.start );
-		const end = toMoment( this.props.end );
+		const startMoment = toMoment( start );
+		const endMoment = toMoment( end );
+
 		const pickerProps = {
-			current: end,
-			onSelectItem: this.setEndTime,
-			min: start.clone().add( 1, 'minutes' ),
-			timeFormat: time,
+			current: endMoment,
+			start: endMoment.clone().startOf( 'day' ),
+			end: roundTime( endMoment.clone().endOf( 'day' ) ),
+			onChange: this.endTimePickerOnChange,
+			onClick: this.endTimePickerOnClick,
+			timeFormat: FORMATS.WP.time,
+			allDay,
 		};
 
+
 		if ( ! multiDay ) {
-			pickerProps.max = start.clone().endOf( 'day' );
+			// if the start time has less than half an hour left in the day
+			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= HALF_HOUR_IN_SECONDS ) {
+				pickerProps.start = endMoment.clone().endOf( 'day' );
+			} else {
+				pickerProps.start = roundTime( startMoment ).add( 30, 'minutes' );
+			}
+			pickerProps.min = startMoment.clone().add( 1, 'minutes' );
 		}
 
 		let endDate = toDate( toMoment( end ) );
-
 		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
 			endDate = toDateNoYear( toMoment( end ) );
 		}
 
 		return (
 			<React.Fragment>
-				{ ! this.isSameDay() && <span className="tribe-editor__time-picker__label">{ endDate }</span> }
+				{ multiDay && <span className="tribe-editor__time-picker__label">{ endDate }</span> }
 				<TimePicker { ...pickerProps } />
 			</React.Fragment>
 		);
 	}
 
-	setEndTime = ( data ) => {
-		const { seconds, allDay } = data;
-		const { setAllDay, setEndTime } = this.props;
-		if ( allDay ) {
-			setAllDay( allDay );
-		} else {
-			setEndTime( seconds );
-		}
+	multiDayToggleOnChange = ( checked ) => {
+		const { start, end, setMultiDay } = this.props;
+		setMultiDay( { start, end, checked } );
 	};
 
-	renderMultidayToggle() {
-		const { multiDay, toggleMultiDay } = this.props;
+	renderMultiDayToggle() {
+		const { multiDay } = this.props;
 		return (
 			<ToggleControl
 				label={ __( 'Multi-Day', 'events-gutenberg' ) }
 				checked={ multiDay }
-				onChange={ toggleMultiDay }
+				onChange={ this.multiDayToggleOnChange }
 			/>
 		);
 	}
@@ -505,10 +602,11 @@ class EventDateTime extends Component {
 		const {
 			separatorTime,
 			separatorDate,
-			timezone,
+			timeZone,
 			setTimeZone,
 			setSeparatorTime,
 			setSeparatorDate,
+			showTimeZone,
 		} = this.props;
 
 		return ( <InspectorControls key="inspector">
@@ -529,17 +627,27 @@ class EventDateTime extends Component {
 				/>
 				<SelectControl
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
-					value={ timezone }
+					value={ timeZone }
 					onChange={ setTimeZone }
 					options={ timezonesAsSelectData() }
 					className="tribe-editor__date-time__time-zone-setting"
+				/>
+				<ToggleControl
+					label={ __( 'Show Time Zone', 'events-gutenberg' ) }
+					checked={ showTimeZone }
+					onChange={ this.toggleTimeZoneVisibility }
 				/>
 			</PanelBody>
 		</InspectorControls> );
 	}
 
+	toggleTimeZoneVisibility = () => {
+		const { showTimeZone, setTimeZoneVisibility } = this.props;
+		setTimeZoneVisibility( ! showTimeZone );
+	}
+
 	render() {
-		return [ this.renderLabel(), this.renderControls() ];
+		return [ this.renderDate(), this.renderControls() ];
 	}
 }
 
@@ -549,11 +657,14 @@ const mapStateToProps = ( state ) => {
 		visibleMonth: UISelectors.getVisibleMonth( state ),
 		start: dateTimeSelectors.getStart( state ),
 		end: dateTimeSelectors.getEnd( state ),
+		naturalLanguageLabel: dateTimeSelectors.getNaturalLanguageLabel( state ),
 		multiDay: dateTimeSelectors.getMultiDay( state ),
 		allDay: dateTimeSelectors.getAllDay( state ),
 		separatorDate: dateTimeSelectors.getDateSeparator( state ),
 		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
-		timezone: dateTimeSelectors.getTimeZone( state ),
+		showTimeZone: dateTimeSelectors.getTimeZoneVisibility( state ),
+		timeZone: dateTimeSelectors.getTimeZone( state ),
+		timeZoneLabel: dateTimeSelectors.getTimeZoneLabel( state ),
 		cost: priceSelectors.getPrice( state ),
 		currencySymbol: priceSelectors.getSymbol( state ),
 		currencyPosition: priceSelectors.getPosition( state ),
@@ -562,11 +673,12 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	...bindActionCreators( dateTimeActions, dispatch ),
+	...bindActionCreators( dateTimeThunks, dispatch ),
 	...bindActionCreators( UIActions, dispatch ),
 	...bindActionCreators( priceActions, dispatch ),
 	setInitialState( props ) {
 		dispatch( priceActions.setInitialState( props ) );
-		dispatch( dateTimeActions.setInitialState( props ) );
+		dispatch( dateTimeThunks.setInitialState( props ) );
 		dispatch( UIActions.setInitialState( props ) );
 	},
 } );

@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { getSetting } from '@moderntribe/events/editor/settings';
+import { getSetting, getPriceSettings } from '@moderntribe/events/editor/settings';
 import { isTruthy } from '@moderntribe/events/editor/utils/string';
 import * as types from './types';
 
@@ -15,8 +15,8 @@ const position = isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) )
 	: 'prefix';
 
 export const DEFAULT_STATE = {
-	position,
-	symbol: getSetting( 'defaultCurrencySymbol', __( '$', 'events-gutenberg' ) ),
+	position: getPriceSettings().default_currency_position || position,
+	symbol: getPriceSettings().default_currency_symbol || __( '$', 'events-gutenberg' ),
 	cost: '',
 	description: '',
 };

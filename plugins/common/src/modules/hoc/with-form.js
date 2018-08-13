@@ -25,10 +25,6 @@ export default ( getName = noop ) => ( WrappedComponent ) => {
 			postType: PropTypes.string,
 		};
 
-		constructor( props ) {
-			super( props );
-		}
-
 		componentDidMount() {
 			const name = getName( this.props );
 			const { registerForm, postType } = this.props;
@@ -49,21 +45,11 @@ export default ( getName = noop ) => ( WrappedComponent ) => {
 			} = this.props;
 			const name = getName( this.props );
 			return {
-				createDraft( fieldsObject ) {
-					createDraft( name, fieldsObject );
-				},
-				editEntry( fieldsObject ) {
-					editEntry( name, fieldsObject );
-				},
-				sendForm( fieldsObject, callback ) {
-					sendForm( name, fieldsObject, callback );
-				},
-				setSubmit() {
-					setSubmit( name );
-				},
-				maybeRemoveEntry( details ) {
-					maybeRemoveEntry( name, details );
-				},
+				createDraft: ( fieldsObject ) => createDraft( name, fieldsObject ),
+				editEntry: ( fieldsObject ) => editEntry( name, fieldsObject ),
+				sendForm: ( fieldsObject, callback ) => sendForm( name, fieldsObject, callback ),
+				setSubmit: () => setSubmit( name ),
+				maybeRemoveEntry: ( details ) => maybeRemoveEntry( name, details ),
 			};
 		}
 	}

@@ -8,17 +8,17 @@ import moment from 'moment/moment';
  */
 import * as m from '@moderntribe/events/editor/utils/moment';
 
-import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { HALF_HOUR_IN_SECONDS, HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
-
 
 describe( 'Tests for moment.js', () => {
 	let console;
 	beforeAll( () => {
 		console = window.console;
 		window.console = {
+			...console,
 			warn: jest.fn(),
 		};
 	} );
@@ -62,17 +62,17 @@ describe( 'Tests for moment.js', () => {
 	} );
 
 	test( 'toMoment', () => {
-		const input = m.toMoment( new Date( 'January 2, 2015 08:01:59' ) );
+		const input = m.toMoment( new Date( 'January 2, 2015 08:01:59 UTC' ).toISOString() );
 
 		expect( input ).toBeInstanceOf( moment );
 		expect( input.date() ).toEqual( 2 );
 		expect( input.month() ).toEqual( 0 );
 		expect( input.year() ).toEqual( 2015 );
-		expect( input.hour() ).toEqual( 0 );
-		expect( input.minutes() ).toEqual( 0 );
-		expect( input.seconds() ).toEqual( 0 );
+		expect( input.hour() ).toEqual( 8 );
+		expect( input.minutes() ).toEqual( 1 );
+		expect( input.seconds() ).toEqual( 59 );
 		expect( input.milliseconds() ).toEqual( 0 );
-		expect( input.format( FORMAT ) ).toEqual( '01-02-2015 00:00:00' );
+		expect( input.format( FORMAT ) ).toEqual( '01-02-2015 08:01:59' );
 	} );
 
 	test( 'replaceDate', () => {
@@ -224,11 +224,54 @@ describe( 'Tests for moment.js', () => {
 		} );
 
 		test( 'Invalid date', () => {
-			Date.now = jest.fn( () => '2018-07-01T05:07:31.000Z' );
+			Date.now = jest.fn( () => new Date( 'July 1, 2018 00:07:31 UTC' ).toISOString() );
 			const format = 'YYYY-MM-DD HH:mm:ss';
 			const expected = m.parseFormats( 'No date!' );
 			expect( expected.format( format ) ).toBe( '2018-07-01 00:07:31' );
 			expect( window.console.warn ).toHaveBeenCalled();
+		} );
+	} );
+
+	describe( 'resetTimes', () => {
+		const format = 'YYYY-MM-DD HH:mm:ss';
+		it( 'Should add an hour in seconds', () => {
+			const startMoment = moment( new Date( 'July 19, 2018 19:30:00 UTC' ).toISOString() );
+			const { start, end } = m.resetTimes( startMoment );
+			expect( start.format( format ) ).toBe( '2018-07-19 19:30:00' );
+			expect( end.format( format ) ).toBe( '2018-07-19 20:30:00' );
+		} );
+
+		it( 'Should add hour in seconds on start of the day', () => {
+			const startMoment = moment( new Date( 'July 19, 2018 00:00:00 UTC' ).toISOString() );
+			const { start, end } = m.resetTimes( startMoment );
+			expect( start.format( format ) ).toBe( '2018-07-19 00:00:00' );
+			expect( end.format( format ) ).toBe( '2018-07-19 01:00:00' );
+		} );
+
+		it( 'Should prevent overflow to the next day', () => {
+			const startMoment = moment( new Date( 'July 19, 2018 23:59:59 UTC' ).toISOString() );
+			const { start, end } = m.resetTimes( startMoment );
+			expect( start.format( format ) ).toBe( '2018-07-19 22:59:59' );
+			expect( end.format( format ) ).toBe( '2018-07-19 23:59:59' );
+		} );
+	} );
+
+	describe( 'adjustStart', () => {
+		const format = 'YYYY-MM-DD HH:mm:ss';
+		it( 'Should keep the same order when start is before', () => {
+			const start = moment( new Date( 'July 10, 2018 14:30:00 UTC' ).toISOString() );
+			const end = moment( new Date( 'July 10, 2018 20:35:00 UTC' ).toISOString() );
+			const output = m.adjustStart( start, end );
+			expect( output.start.format( format ) ).toBe( '2018-07-10 14:30:00' );
+			expect( output.end.format( format ) ).toBe( '2018-07-10 20:35:00' );
+		} );
+
+		it( 'Should adjust the start and end time', () => {
+			const start = moment( new Date( 'July 10, 2018 20:35:00 UTC' ).toISOString() );
+			const end = moment( new Date( 'July 10, 2018 10:30:00 UTC' ).toISOString() );
+			const output = m.adjustStart( start, end );
+			expect( output.start.format( format ) ).toBe( '2018-07-10 20:35:00' );
+			expect( output.end.format( format ) ).toBe( '2018-07-10 21:35:00' );
 		} );
 	} );
 } );

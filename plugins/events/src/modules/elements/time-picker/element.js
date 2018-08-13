@@ -4,14 +4,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { isString, find, noop } from 'lodash';
+import { noop } from 'lodash';
 import classNames from 'classnames';
 import { ScrollTo, ScrollArea } from 'react-scroll-to';
 
 /**
  * WordPress dependencies
  */
-import { Component } from '@wordpress/element';
 import {
 	Dropdown,
 	Dashicon,
@@ -22,38 +21,31 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import './style.pcss';
-import { DAY_IN_SECONDS, MINUTE_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
-import { toFormat, setTimeInSeconds, totalSeconds, roundTime } from '@moderntribe/events/editor/utils/moment';
+import {
+	DAY_IN_SECONDS,
+	MINUTE_IN_SECONDS,
+	HALF_HOUR_IN_SECONDS,
+} from '@moderntribe/events/editor/utils/time';
+import {
+	toFormat,
+	setTimeInSeconds,
+	totalSeconds,
+	roundTime,
+} from '@moderntribe/events/editor/utils/moment';
 
-export default class TimePicker extends Component {
-	static defaultProps = {
-		onHover: noop,
-		onSelectItem: noop,
-		step: 30,
-		min: undefined,
-		max: undefined,
-		show2400: false,
-		timeFormat: 'H:i',
-		current: moment(),
-		hasAllDay: true,
-		allDay: false,
-	};
-
-	static propTypes = {
-		current: PropTypes.instanceOf( moment ),
-		allDay: PropTypes.bool,
-		onSelectItem: PropTypes.func,
-		timeFormat: PropTypes.string,
-		min: PropTypes.instanceOf( moment ),
-	};
-
-	constructor() {
-		super( ...arguments );
-	}
-
-	renderLabel( onToggle ) {
-		const { allDay, current, min, max } = this.props;
-
+const TimePicker = ( {
+	current,
+	min,
+	max,
+	start,
+	end,
+	step,
+	timeFormat,
+	allDay,
+	onChange,
+	onClick,
+} ) => {
+	const renderLabel = ( onToggle ) => {
 		if ( allDay ) {
 			return (
 				<button
@@ -81,98 +73,47 @@ export default class TimePicker extends Component {
 				className="tribe-editor__btn-input"
 				type="time"
 				value={ label }
-				onChange={ this.setTime }
+				onChange={ onChange }
 				{ ...additionalProps }
 			/>
 		);
-	}
-
-	setTime = ( e ) => {
-		const newValue = e.target.value;
-		const parts = newValue.split( ':' );
-		const [ hour, minute ] = parts;
-
-		const { onSelectItem, current, min, max } = this.props;
-		const copy = current.clone();
-		copy.set( 'hour', parseInt( hour, 10 ) );
-		copy.set( 'minute', parseInt( minute, 10 ) );
-
-		const start = current.clone().startOf( 'day' );
-
-		const isBefore = min && copy.isBefore( min );
-		const isAfter = max && copy.isAfter( max );
-		if ( isBefore || isAfter ) {
-			return;
-		}
-
-		onSelectItem( {
-			allDay: false,
-			seconds: copy.diff( start, 'seconds' ),
-		} );
 	};
 
-	getItems( searchFor, props = this.props ) {
+	const toggleDropdown = ({ onToggle, isOpen }) => (
+		<div className="tribe-editor__timepicker-label-container">
+			{ renderLabel( onToggle ) }
+			<button
+				type="button"
+				aria-expanded={ isOpen }
+				onClick={ onToggle }
+			>
+				<Dashicon className="btn--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
+			</button>
+		</div>
+	);
+
+	const getItems = () => {
 		const items = [];
 
-		const {
-			step,
-			min,
-			max,
-			show2400,
-			timeFormat,
-		} = props;
+		const startSeconds = totalSeconds( start );
+		const endSeconds = totalSeconds( end );
 
-		const { current } = this.props;
-
-		let start = 0;
-		if ( min ) {
-			const roundStart = roundTime( min );
-			if ( roundStart.isSameOrBefore( min ) ) {
-				roundStart.add( 30, 'minutes' );
-			}
-			start = totalSeconds( roundStart );
-		}
-		let end = max ? totalSeconds( max ) : ( start + DAY_IN_SECONDS - 1 );
-
-		// make sure the end time is greater than start time,
-		// otherwise there will be no list to show
-		if ( end < start ) {
-			end += DAY_IN_SECONDS;
-		}
-
-		// show a 24:00 option when using military time
-		if ( end === DAY_IN_SECONDS - 1 && isString( timeFormat ) && show2400 ) {
-			end = DAY_IN_SECONDS;
-		}
-
-		for ( let item = start, index = 0; item <= end; index++, item += step * MINUTE_IN_SECONDS ) {
+		for ( let time = startSeconds; time <= endSeconds; time += step ) {
 			items.push( {
-				index: index,
-				value: item,
-				text: this.formatLabel( item ),
-				isDisabled: false,
-				isCurrent: item === current,
+				value: time,
+				text: formatLabel( time ),
+				isCurrent: time === totalSeconds( current ),
 			} );
-		}
-
-		if ( searchFor ) {
-			return find( items, searchFor );
 		}
 
 		return items;
 	}
 
-	formatLabel = ( seconds ) => {
-		const { timeFormat } = this.props;
+	const formatLabel = ( seconds ) => {
 		return setTimeInSeconds( moment(), seconds ).format( toFormat( timeFormat ) );
 	};
 
-	renderList = () => {
-		return this.getItems().map( this.renderItem );
-	};
-
-	renderItem = ( item ) => {
-		const { allDay } = this.props;
+	const renderItem = ( item, onClose ) => {
 		const itemClasses = {
 			'tribe-editor__timepicker__item': true,
 			'tribe-editor__timepicker__item--current': item.isCurrent && ! allDay,
@@ -184,86 +125,69 @@ export default class TimePicker extends Component {
 				role="menuitem"
 				className={ classNames( itemClasses ) }
 				value={ item.value }
-				onClick={ this.handleSelection( item ) }
+				onClick={ () => onClick( item.value, onClose ) }
 			>
 				{ item.text }
 			</button>
 		);
 	};
 
-	handleSelection = ( item ) => {
-		return () => {
-			const { value } = item;
-			const data = {
-				allDay: value === 'all-day',
-				seconds: 0,
-			};
+	const renderDropdownContent = ({ onClose }) => (
+		<ScrollTo>
+			{ () => (
+				<ScrollArea
+					id="tribe-element-timepicker-items"
+					key="tribe-element-timepicker-items"
+					role="menu"
+					className={ classNames( 'tribe-editor__timepicker__items' ) }
+				>
+					{ renderItem( { text: __( 'All Day', 'events-gutenberg' ), value: 'all-day' }, onClose ) }
+					{ getItems().map( ( item ) => renderItem( item, onClose ) ) }
+				</ScrollArea>
+			) }
+		</ScrollTo>
+	);
 
-			if ( ! data.allDay ) {
-				data.seconds = value;
-			}
-
-			this.props.onSelectItem( data );
-			this.onClose();
-		};
-	};
-
-	render() {
-		return (
-			<div
-				key="tribe-element-timepicker"
-				className="tribe-editor__timepicker"
-			>
-				{ this.renderDropdown() }
-			</div>
-		);
-	}
-
-	renderDropdown() {
-		return (
+	return (
+		<div
+			key="tribe-element-timepicker"
+			className="tribe-editor__timepicker"
+		>
 			<Dropdown
 				className="tribe-element-timepicker-label"
 				position="bottom center"
 				contentClassName="tribe-editor__timepicker__dialog"
-				renderToggle={ this.toggleDropdown }
-				renderContent={ this.renderDropdownContent }
+				renderToggle={ toggleDropdown }
+				renderContent={ renderDropdownContent }
 			/>
-		);
-	}
-
-	toggleDropdown = ( { onToggle, isOpen } ) => {
-		return (
-			<div className="tribe-editor__timepicker-label-container">
-				{ this.renderLabel( onToggle ) }
-				<button
-					type="button"
-					aria-expanded={ isOpen }
-					onClick={ onToggle }
-				>
-					<Dashicon className="btn--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
-				</button>
-			</div>
-		);
-	};
-
-	renderDropdownContent = ( { onToggle, isOpen, onClose } ) => {
-		this.onClose = onClose.bind( this );
-		return (
-			<ScrollTo>
-				{ this.scrollArea }
-			</ScrollTo>
-		);
-	};
-
-	scrollArea = () => (
-		<ScrollArea
-			id="tribe-element-timepicker-items"
-			key="tribe-element-timepicker-items"
-			role="menu"
-			className={ classNames( 'tribe-editor__timepicker__items' ) }
-		>
-			{ this.props.hasAllDay && this.renderItem( { text: 'All Day', value: 'all-day' } ) }
-			{ this.renderList() }
-		</ScrollArea>
+		</div>
 	);
 }
+
+TimePicker.defaultProps = {
+	current: moment(),
+	min: undefined,
+	max: undefined,
+	start: undefined,
+	end: undefined,
+	step: HALF_HOUR_IN_SECONDS,
+	timeFormat: 'H:i',
+	allDay: false,
+	onChange: noop,
+	onClick: noop,
+};
+
+TimePicker.propTypes = {
+	current: PropTypes.instanceOf( moment ),
+	min: PropTypes.instanceOf( moment ),
+	max: PropTypes.instanceOf( moment ),
+	start: PropTypes.instanceOf( moment ).isRequired,
+	end: PropTypes.instanceOf( moment ).isRequired,
+	step: PropTypes.number,
+	timeFormat: PropTypes.string,
+	allDay: PropTypes.bool,
+	onChange: PropTypes.func.isRequired,
+	onClick: PropTypes.func.isRequired,
+};
+
+export default TimePicker;

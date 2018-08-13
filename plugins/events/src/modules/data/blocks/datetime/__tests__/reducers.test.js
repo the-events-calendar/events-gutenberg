@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { actions } from '@moderntribe/events/data/blocks/datetime';
-import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/datetime/reducers';
+import reducer, { DEFAULT_STATE } from '@moderntribe/events/data/blocks/datetime/reducer';
 
 jest.mock( 'moment', () => () => {
 	const moment = require.requireActual( 'moment' );
@@ -23,14 +23,6 @@ describe( '[STORE] - Datetime reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setEnd( 'June 25, 2018 4:00 pm' ) ) ).toMatchSnapshot();
 	} );
 
-	it( 'Should set the start time', () => {
-		expect( reducer( DEFAULT_STATE, actions.setStartTime( 72000 ) ) ).toMatchSnapshot();
-	} );
-
-	it( 'Should set the end time', () => {
-		expect( reducer( DEFAULT_STATE, actions.setEndTime( 79200 ) ) ).toMatchSnapshot();
-	} );
-
 	it( 'Should set the separator time', () => {
 		expect( reducer( DEFAULT_STATE, actions.setSeparatorTime( ' | ' ) ) ).toMatchSnapshot();
 	} );
@@ -43,6 +35,16 @@ describe( '[STORE] - Datetime reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setTimeZone( 'UTC' ) ) ).toMatchSnapshot();
 	} );
 
+	it( 'Should set the timezone label', () => {
+		expect( reducer( DEFAULT_STATE, actions.setTimeZoneLabel( 'Modern Tribe' ) ) )
+			.toMatchSnapshot();
+	} );
+
+	it( 'Should set the visibility of the timezone', () => {
+		expect( reducer( DEFAULT_STATE, actions.setTimeZoneVisibility( true ) ) ).toMatchSnapshot();
+		expect( reducer( DEFAULT_STATE, actions.setTimeZoneVisibility( false ) ) ).toMatchSnapshot();
+	} );
+
 	it( 'Should set the all day', () => {
 		expect( reducer( DEFAULT_STATE, actions.setAllDay( true ) ) ).toMatchSnapshot();
 		expect( reducer( DEFAULT_STATE, actions.setAllDay( false ) ) ).toMatchSnapshot();
@@ -53,7 +55,8 @@ describe( '[STORE] - Datetime reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setMultiDay( false ) ) ).toMatchSnapshot();
 	} );
 
-	it( 'Should toggle the multi day', () => {
-		expect( reducer( DEFAULT_STATE, actions.toggleMultiDay() ) ).toMatchSnapshot();
+	it( 'Should set the natural language label', () => {
+		expect( reducer( DEFAULT_STATE, actions.setNaturalLanguageLabel( '2 weeks from now' ) ) )
+			.toMatchSnapshot();
 	} );
 } );

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { form } from '@moderntribe/events/data/forms/reducers';
+import { form } from '@moderntribe/events/data/forms/reducer';
 import { actions } from '@moderntribe/events/data/forms';
 import { DEFAULT_STATE } from '@moderntribe/events/data/forms/reducers/form';
 

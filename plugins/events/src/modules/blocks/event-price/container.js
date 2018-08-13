@@ -22,6 +22,10 @@ import {
 } from '@moderntribe/events/data/ui';
 import EventPrice from './template';
 
+/**
+ * Module Code
+ */
+
 const ESCAPE_KEY = 27;
 
 const showCurrencySymbol = ( cost ) => {
@@ -60,8 +64,8 @@ const onKeyDown = ( e, dispatch ) => {
 const onClick = ( e, dispatch ) => {
 	const { target } = e;
 	if (
-		! isTargetInBlock( target ) &&
-		! isTargetInSidebar( target )
+		! isTargetInBlock( target )
+		&& ! isTargetInSidebar( target )
 	) {
 		dispatch( UIActions.closeDashboardPrice() );
 	}

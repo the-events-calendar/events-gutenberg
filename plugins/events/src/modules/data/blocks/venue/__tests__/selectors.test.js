@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/venue/reducers';
+import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/venue/reducer';
 import { selectors } from '@moderntribe/events/data/blocks/venue';
 
 const state = {

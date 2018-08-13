@@ -31,7 +31,7 @@ import { actions as detailsActions } from '@moderntribe/events/data/details';
 import { Item } from './organizer';
 import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 
-function CreateDropdown( { ...props } ) {
+function CreateDropdown( props ) {
 	const { addOrganizer } = props;
 
 	const icon = (
@@ -48,7 +48,7 @@ function CreateDropdown( { ...props } ) {
 		/>
 	);
 
-	const dropdownContent = ( { onToggle, isOpen, onClose } ) => (
+	const dropdownContent = ( { onClose } ) => (
 		<OrganizerForm
 			addOrganizer={ addOrganizer }
 			onClose={ onClose }
@@ -76,10 +76,6 @@ class EventOrganizers extends Component {
 	static propTypes = {
 		organizers: PropTypes.array,
 	};
-
-	constructor( props ) {
-		super( ...arguments );
-	}
 
 	renderOrganizerList() {
 		const { organizers, store } = this.props;
@@ -159,9 +155,7 @@ const mapDispatchToProps = ( dispatch ) => {
 	};
 };
 
-export default compose(
-	connect(
-		mapStateToProps,
-		mapDispatchToProps,
-	),
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
 )( EventOrganizers );
