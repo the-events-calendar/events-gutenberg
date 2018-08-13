@@ -65,6 +65,7 @@ class EventVenue extends Component {
 		onItemSelect: PropTypes.func,
 		onCreateNew: PropTypes.func,
 		removeVenue: PropTypes.func,
+		editVenue: PropTypes.func,
 	};
 
 	componentDidUpdate( prevProps ) {
@@ -94,14 +95,23 @@ class EventVenue extends Component {
 	}
 
 	renderEditAction() {
-		const { isSelected, edit, create, isLoading, submit, volatile } = this.props;
+		const {
+			isSelected,
+			edit,
+			create,
+			isLoading,
+			submit,
+			volatile,
+			editVenue
+		} = this.props;
+
 		const idle = edit || create || isLoading || submit;
 		if ( ! this.hasVenue() || ! isSelected || ! volatile || idle ) {
 			return null;
 		}
 
 		return (
-			<button onClick={ this.edit }>
+			<button onClick={ editVenue }>
 				<Dashicon icon="edit" />
 			</button>
 		);
@@ -140,7 +150,7 @@ class EventVenue extends Component {
 		);
 	}
 
-	getContainer() {
+	renderContainer() {
 		const { isLoading, edit, create, submit } = this.props;
 
 		if ( isLoading || submit ) {
@@ -177,7 +187,7 @@ class EventVenue extends Component {
 		);
 	}
 
-	editActions() {
+	renderRemoveAction() {
 		const {
 			isSelected,
 			edit,
@@ -211,9 +221,9 @@ class EventVenue extends Component {
 
 		return (
 			<div key="event-venue-box" className={ containerClass }>
-				{ this.getContainer() }
+				{ this.renderContainer() }
 				{ this.renderMap() }
-				{ this.editActions() }
+				{ this.renderRemoveAction() }
 			</div>
 		);
 	}
@@ -262,16 +272,11 @@ class EventVenue extends Component {
 	// TODO: this function cannot be moved to container as it depends on hasVenue().
 	// Once withDetails is decoupled from state, this should move to container.
 	maybeEdit = () => {
-		const { volatile } = this.props;
+		const { volatile, editVenue } = this.props;
 		if ( this.hasVenue() && volatile ) {
-			return this.edit();
+			return editVenue;
 		}
 	}
-
-	edit = () => {
-		const { details, editEntry } = this.props;
-		editEntry( details );
-	};
 }
 
 export default EventVenue;

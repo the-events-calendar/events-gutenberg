@@ -48,7 +48,12 @@ const removeVenue = ( dispatch, ownProps ) => () => {
 	if ( volatile ) {
 		maybeRemoveEntry( details );
 	}
-}
+};
+
+const editVenue = ( ownProps ) => () => {
+	const { details, editEntry } = ownProps;
+	editEntry( details );
+};
 
 const mapStateToProps = ( state ) => ( {
 	venue: selectors.getVenue( state ),
@@ -62,6 +67,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	onItemSelect: onItemSelect( dispatch ),
 	onCreateNew: onCreateNew( ownProps ),
 	removeVenue: removeVenue( dispatch, ownProps ),
+	editVenue: editVenue( ownProps ),
 } );
 
 export default compose(
