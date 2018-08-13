@@ -7,7 +7,7 @@ import { combineReducers } from 'redux';
  * Internal dependencies
  */
 import * as types from './types';
-import { form, volatile } from './reducer';
+import { form, volatile } from './reducers';
 
 const byId = ( state = {}, action ) => {
 	switch ( action.type ) {
