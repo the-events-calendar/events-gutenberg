@@ -7,7 +7,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { EditLink } from 'elements';
+import { EditLink } from '@moderntribe/events/elements';
 
 describe( 'EditLink element', () => {
 	beforeAll( () => {

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { actions } from 'data/details';
+import { actions } from '@moderntribe/events/data/details';
 
 describe( '[STORE] - Details actions', () => {
 	test( 'Enable isLoading action', () => {

@@ -7,7 +7,7 @@ import renderer from 'react-test-renderer';
 /**
  * Internal dependencies
  */
-import { TimeZone } from 'elements';
+import { TimeZone } from '@moderntribe/events/elements';
 
 describe( 'TimeZone element', () => {
 	it( 'Should render the component', () => {

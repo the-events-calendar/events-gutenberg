@@ -5,8 +5,8 @@ import reducer, { actions } from '@moderntribe/events/data/search';
 import search, { DEFAULT_STATE } from '@moderntribe/events/data/search/reducers/search';
 
 
-jest.mock( 'data/search/reducers/search', () => {
-	const original = require.requireActual( 'data/search/reducers/search' );
+jest.mock( '@moderntribe/events/data/search/reducers/search', () => {
+	const original = require.requireActual( '@moderntribe/events/data/search/reducers/search' );
 	return {
 		__esModule: true,
 		...original,

@@ -8,9 +8,8 @@ import { compose, bindActionCreators } from 'redux';
  * Internal dependencies
  */
 import EventLinks from './template';
-import withSaveData from 'editor/hoc/with-save-data';
-import { actions, selectors } from 'data/blocks/sharing';
-import { withStore } from 'editor/hoc';
+import { actions, selectors } from '@moderntribe/events/data/blocks/sharing';
+import { withStore, withSaveData } from '@moderntribe/common/hoc';
 
 /**
  * Module Code

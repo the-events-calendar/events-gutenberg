@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { volatile } from '@moderntribe/events/data/forms/reducer';
+import { volatile } from '@moderntribe/events/data/forms/reducers';
 import { actions } from '@moderntribe/events/data/forms';
 
 describe( '[STORE] - Volatile reducer', () => {

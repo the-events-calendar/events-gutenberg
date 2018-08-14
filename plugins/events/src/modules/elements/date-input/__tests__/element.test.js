@@ -11,7 +11,7 @@ const lodash = require.requireActual( 'lodash' );
 /**
  * Internal dependencies
  */
-import { DateInput } from 'elements';
+import { DateInput } from '@moderntribe/events/elements';
 
 describe( 'DateInput element', () => {
 	it( 'Should render the children when is not selected', () => {

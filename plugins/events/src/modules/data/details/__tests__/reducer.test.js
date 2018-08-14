@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import reducer, { actions } from '@moderntribe/events/data/details';
-import { details } from '@moderntribe/events/data/details/reducer';
+import { details } from '@moderntribe/events/data/details/reducers';
 import { DEFAULT_STATE } from '@moderntribe/events/data/details/reducers/details';
 
 jest.mock( '@moderntribe/events/data/details/reducers', () => {

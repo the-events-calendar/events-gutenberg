@@ -24,11 +24,11 @@ import {
 import {
 	SearchOrCreate,
 	EditLink,
-} from 'elements';
+} from '@moderntribe/events/elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
 import OrganizerIcon from 'icons/organizer.svg';
-import { toFields } from 'elements/organizer-form/utils';
+import { toFields } from '@moderntribe/events/elements/organizer-form/utils';
 
 class EventOrganizer extends Component {
 
