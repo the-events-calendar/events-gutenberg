@@ -159,18 +159,17 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 			die( -1 );
 		}
 
-		ob_start();
 
 		$args = array(
 			'ticket_id' => intval( absint( $_POST['ticket_id'] ) ),
+			'ticket'    => tribe( 'tickets.rsvp' )->get_ticket( get_the_id(), intval( $_POST['ticket_id'] ) )
 		);
 
-		tribe( 'gutenberg.template' )->template( 'blocks/rsvp/content/form', $args );
+		$html = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/content/form', $args, false );
 
-		$response['html']    = ob_get_clean();
+		$response['html']    = $html;
 		$response['success'] = true;
 
-		apply_filters( 'tribe_events_rsvp_form', $response );
 
 		wp_send_json( $response );
 
