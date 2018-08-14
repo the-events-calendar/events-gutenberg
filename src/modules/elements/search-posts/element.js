@@ -61,7 +61,6 @@ class SearchPosts extends Component {
 		search( name, {
 			term: '',
 			exclude,
-			populate: true,
 		} );
 	}
 
@@ -79,7 +78,6 @@ class SearchPosts extends Component {
 		search( name, {
 			term: value,
 			exclude,
-			populate: true,
 		} );
 	}
 
@@ -93,7 +91,7 @@ class SearchPosts extends Component {
 			search( name, {
 				term,
 				exclude,
-				populate: true,
+				populated: true,
 				page: page + 1,
 			} );
 		}
