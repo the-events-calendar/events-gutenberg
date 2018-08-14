@@ -116,6 +116,7 @@ class EventOrganizers extends Component {
 
 	renderActions() {
 		const { organizers, store } = this.props;
+		// TODO: The store should be passed in as a HOC, not directly this way.
 		return (
 			<div key="organizer-actions">
 				<SearchPosts

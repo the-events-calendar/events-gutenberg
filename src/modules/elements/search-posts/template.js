@@ -36,31 +36,21 @@ class SearchPosts extends Component {
 	};
 
 	static propTypes = {
-		registerBlock: PropTypes.func,
-		search: PropTypes.func,
-		exclude: PropTypes.array,
-		isLoading: PropTypes.bool,
 		name: PropTypes.string,
 		postType: PropTypes.string,
+		exclude: PropTypes.array,
+		searchLabel: PropTypes.string,
+		iconLabel: PropTypes.string,
+		term: PropTypes.string,
+		isLoading: PropTypes.bool,
+		results: PropTypes.array,
+		page: PropTypes.number,
+		onMount: PropTypes.func,
+		search: PropTypes.func,
 	};
 
 	componentDidMount() {
-		const { addBlock, setSearchPostType, name, postType } = this.props;
-		addBlock( name );
-		setSearchPostType( name, postType );
-		this.initialFetch();
-	}
-
-	componentDidUpdate() {
-
-	}
-
-	initialFetch() {
-		const { name, exclude, search } = this.props;
-		search( name, {
-			term: '',
-			exclude,
-		} );
+		this.props.onMount();
 	}
 
 	onChange = ( event ) => {
