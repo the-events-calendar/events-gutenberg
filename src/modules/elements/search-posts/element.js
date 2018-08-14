@@ -51,13 +51,6 @@ class SearchPosts extends Component {
 
 	constructor() {
 		super( ...arguments );
-		this.state = {
-			filterValue: '',
-			selectedItem: null,
-			posts: [],
-			isLoading: false,
-			search: '',
-		};
 		this.scrollPosition = 0;
 		this.dropdownEl = React.createRef();
 	}
@@ -107,7 +100,7 @@ class SearchPosts extends Component {
 		const { target } = event;
 		const { scrollHeight, scrollTop } = target;
 		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
-		const { isLoading } = this.state;
+		const { isLoading } = this.props;
 		if ( ! isLoading ) {
 			this.scrollPosition = scrollTop;
 		}
@@ -122,6 +115,29 @@ class SearchPosts extends Component {
 		}
 	}
 
+	renderToggle = ( { onToggle } ) => (
+		<IconButton
+			className="tribe-editor__btn"
+			label={ this.props.iconLabel }
+			onClick={ onToggle }
+			icon={ <Dashicon icon="search" /> }
+		/>
+	);
+
+	renderItem = ( item ) => (
+		<button
+			key={ `post-${ item.id }` }
+			role="menuitem"
+			className="tribe-editor__search-posts__item"
+			onClick={ () => {
+				this.props.onSelectItem( item.id, item );
+				this.onClose();
+			} }
+		>
+			{ decode( item.title.rendered ) }
+		</button>
+	);
+
 	renderList = () => {
 		const { results, isLoading } = this.props;
 
@@ -132,52 +148,8 @@ class SearchPosts extends Component {
 				</Placeholder>
 			);
 		}
+
 		return results.map( this.renderItem, this );
-	}
-
-	renderItem = ( item = {} ) => {
-		const { current } = this.state;
-		const { onSelectItem } = this.props;
-
-		const isCurrent = current && current.id === item.id;
-		const { title = {} } = item;
-		const { rendered = '' } = title;
-
-		return (
-			<button
-				key={ `post-${ item.id }` }
-				role="menuitem"
-				className="tribe-editor__search-posts__item"
-				onClick={ () => {
-					onSelectItem( item.id, item );
-					this.onClose();
-				} }
-				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
-				disabled={ item.isDisabled }
-			>
-				{ decode( rendered ) }
-			</button>
-		);
-	};
-
-	renderDropdown = ( { onToggle, isOpen, onClose } ) => {
-		this.onClose = onClose.bind( this );
-
-		return (
-			<div
-				className={ classNames( 'tribe-editor__search-posts' ) }
-				onScroll={ this.onScroll }
-			>
-				{ this.renderSearchInput() }
-				<div
-					role="menu"
-					className={ classNames( 'tribe-editor__search-posts__results' ) }
-					ref={ this.dropdownEl }
-				>
-					{ this.renderList() }
-				</div>
-			</div>
-		);
 	}
 
 	renderSearchInput() {
@@ -199,17 +171,23 @@ class SearchPosts extends Component {
 		</div> );
 	}
 
-	renderToggle = ( { onToggle, isOpen } ) => {
-		const { iconLabel } = this.props;
+	renderDropdown = ( { isOpen, onClose } ) => {
+		this.onClose = onClose.bind( this );
 
 		return (
-			<IconButton
-				className="tribe-editor__btn"
-				label={ iconLabel }
-				onClick={ onToggle }
-				icon={ <Dashicon icon="search" /> }
+			<div
+				className={ classNames( 'tribe-editor__search-posts' ) }
+				onScroll={ this.onScroll }
 				aria-expanded={ isOpen }
-			/>
+			>
+				{ this.renderSearchInput() }
+				<div
+					className={ classNames( 'tribe-editor__search-posts__results' ) }
+					ref={ this.dropdownEl }
+				>
+					{ this.renderList() }
+				</div>
+			</div>
 		);
 	}
 
