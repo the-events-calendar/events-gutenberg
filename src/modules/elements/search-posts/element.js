@@ -23,7 +23,18 @@ const onMount = ( dispatch, ownProps ) => () => {
 		term: '',
 		exclude,
 	} ) );
-}
+};
+
+const onInputChange = ( dispatch, ownProps ) => ( event ) => {
+	const { name, exclude } = ownProps;
+	const { value } = event.target;
+
+	dispatch( actions.setTerm( name, value ) );
+	dispatch( thunks.search( name, {
+		term: value,
+		exclude,
+	} ) );
+};
 
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
@@ -36,6 +47,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	...bindActionCreators( actions, dispatch ),
 	...bindActionCreators( thunks, dispatch ),
 	onMount: onMount( dispatch, ownProps ),
+	onInputChange: onInputChange( dispatch, ownProps ),
 } );
 
 export default connect( mapStateToProps, mapDispatchToProps )( SearchPosts );

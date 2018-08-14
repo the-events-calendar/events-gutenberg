@@ -46,22 +46,12 @@ class SearchPosts extends Component {
 		results: PropTypes.array,
 		page: PropTypes.number,
 		onMount: PropTypes.func,
+		onInputChange: PropTypes.func,
 		search: PropTypes.func,
 	};
 
 	componentDidMount() {
 		this.props.onMount();
-	}
-
-	onChange = ( event ) => {
-		const { value } = event.target;
-		const { name, setTerm, search, exclude } = this.props;
-
-		setTerm( name, value );
-		search( name, {
-			term: value,
-			exclude,
-		} );
 	}
 
 	onScroll = ( event ) => {
@@ -139,7 +129,7 @@ class SearchPosts extends Component {
 	}
 
 	renderSearchInput() {
-		const { term, searchLabel } = this.props;
+		const { term, searchLabel, onInputChange } = this.props;
 		const instanceId = uniqueId( 'search-' );
 
 		return ( <div>
@@ -152,7 +142,7 @@ class SearchPosts extends Component {
 				placeholder={ searchLabel }
 				value={ term }
 				className="editor-inserter__search"
-				onChange={ this.onChange }
+				onChange={ onInputChange }
 			/>
 		</div> );
 	}
