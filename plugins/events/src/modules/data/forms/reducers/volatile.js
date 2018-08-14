@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import * as types from 'data/forms/types';
+import * as types from '@moderntribe/events/data/forms/types';
 
 export default ( state = [], action ) => {
 	switch ( action.type ) {

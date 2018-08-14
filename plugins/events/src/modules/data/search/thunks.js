@@ -6,7 +6,7 @@ import * as selectors from './selectors';
 import {
 	actions as requestActions,
 	utils as requestUtils,
-} from 'data/request';
+} from '@moderntribe/events/data/request';
 
 export const search = ( id, params ) => ( dispatch, getState ) => {
 	const {

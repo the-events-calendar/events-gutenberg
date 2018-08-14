@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { details } from './reducer';
+import { details } from './reducers';
 
 export default ( state = {}, action ) => {
 	switch ( action.type ) {

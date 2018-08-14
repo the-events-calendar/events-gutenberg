@@ -19,7 +19,7 @@ import {
 	setNaturalLanguageLabel,
 } from './actions';
 import { DEFAULT_STATE } from './reducer';
-import { maybeBulkDispatch } from 'data/utils';
+import { maybeBulkDispatch } from '@moderntribe/events/data/utils';
 import {
 	isSameDay,
 	parseFormats,
@@ -28,9 +28,9 @@ import {
 	toDateTime,
 	toMoment,
 	adjustStart,
-} from 'utils/moment';
-import { DAY_IN_SECONDS } from 'utils/time';
-import { rangeToNaturalLanguage } from 'editor/utils';
+} from '@moderntribe/events/editor/utils/moment';
+import { DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { rangeToNaturalLanguage } from '@moderntribe/events/editor/utils/date';
 
 export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
 	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );

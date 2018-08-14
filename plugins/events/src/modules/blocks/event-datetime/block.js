@@ -65,7 +65,7 @@ import {
 import { FORMATS, timezonesAsSelectData, TODAY } from '@moderntribe/events/editor/utils/date';
 import withSaveData from '@moderntribe/common/hoc/with-save-data';
 import { hasClass, searchParent } from '@moderntribe/events/editor/utils/dom';
-import { HALF_HOUR_IN_SECONDS, DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/moment';
+import { HALF_HOUR_IN_SECONDS, DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 

@@ -8,7 +8,7 @@ import { isEmpty } from 'lodash';
  */
 import * as actions from './actions';
 import * as selectors from './selectors';
-import { actions as requestActions } from 'data/request';
+import { actions as requestActions } from '@moderntribe/events/data/request';
 
 export const fetchDetails = ( id ) => ( dispatch, getState ) => {
 	const state = getState();

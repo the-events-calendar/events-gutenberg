@@ -3,7 +3,7 @@
  */
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import reducer from './reducer';
+import reducer from './reducers';
 import thunk from 'redux-thunk';
 
 import { wpRequest } from '@moderntribe/events/data/request/middlewares';

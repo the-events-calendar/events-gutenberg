@@ -3,8 +3,8 @@
  */
 import * as types from './types';
 import { DEFAULT_STATE } from './reducer';
-import { isTruthy } from 'editor/utils/string';
-import { getPriceSettings } from 'editor/settings';
+import { isTruthy } from '@moderntribe/events/editor/utils/string';
+import { getPriceSettings } from '@moderntribe/events/editor/settings';
 
 export const setCost = ( cost ) => ( {
 	type: types.SET_PRICE_COST,

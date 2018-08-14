@@ -10,7 +10,7 @@ import { noop, isUndefined, isFunction, debounce } from 'lodash';
  * Internal dependencies
  */
 import './style.pcss';
-import { toDateTime, toMoment } from 'editor/utils/moment';
+import { toDateTime, toMoment } from '@moderntribe/events/editor/utils/moment';
 
 const Input = ( props ) => (
 	<div className="tribe-editor__date-input__container">

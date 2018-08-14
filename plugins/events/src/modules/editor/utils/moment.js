@@ -5,7 +5,7 @@ import { isString } from 'lodash';
 import moment from 'moment/moment';
 import { FORMATS } from './date';
 import { replaceWithObject } from './string';
-import { HOUR_IN_SECONDS } from 'editor/utils/time';
+import { HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 
 /**
  * Make sure the format provided matches the spec used by moment.js

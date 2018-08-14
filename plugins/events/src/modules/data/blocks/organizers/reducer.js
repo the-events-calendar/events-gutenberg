@@ -6,7 +6,7 @@ import { combineReducers } from 'redux';
 /**
  * Internal dependencies
  */
-import { classic, blocks } from './reducer';
+import { classic, blocks } from './reducers';
 
 export default combineReducers( {
 	blocks,

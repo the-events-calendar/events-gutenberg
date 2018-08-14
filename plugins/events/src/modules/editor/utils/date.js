@@ -7,7 +7,7 @@ import { get, identity } from 'lodash';
 
 const WPDateSettings = get( window, 'tribe_date_settings', {} );
 const { formats = {}, timezone = {} } = WPDateSettings;
-import { toMoment } from 'editor/utils/moment';
+import { toMoment } from '@moderntribe/events/editor/utils/moment';
 
 export const FORMATS = {
 	TIME: 'HH:mm:ss',
