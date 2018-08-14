@@ -8,7 +8,6 @@
 
 	// Bind actions to the "not-going" click
 	$( '.tribe-block__rsvp-ticket' ).on( 'click', '.not-going', function( e ) {
-		e.preventDefault();
 		var ticket    = $( this ).closest( '.tribe-block__rsvp-ticket' );
 
 		ticket.find( '.rsvp-form' ).html( '' );
@@ -17,7 +16,6 @@
 
 	// Bind actions to the "going" click
 	$( '.tribe-block__rsvp-ticket' ).on( 'click', '.going', function( e ) {
-		e.preventDefault();
 		var ticket    = $( this ).closest( '.tribe-block__rsvp-ticket' );
 		var ticket_id = ticket.data( 'rsvp-id' );
 
