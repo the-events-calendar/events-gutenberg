@@ -153,12 +153,12 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 */
 	public function rsvp_form() {
 
-		$response = array( 'success' => false, 'html' => '', 'view' => 'rsvp-form' );
+		$response  = array( 'success' => false, 'html' => '', 'view' => 'rsvp-form' );
+		$ticket_id = tribe_get_request_var( 'ticket_id' );
 
-		if ( ! isset( $_POST['ticket_id'] ) ) {
+		if ( null === $ticket_id ) {
 			wp_send_json_error( $response );
 		}
-
 
 		$args = array(
 			'ticket_id' => intval( absint( $_POST['ticket_id'] ) ),
