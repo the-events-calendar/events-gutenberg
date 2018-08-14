@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { uniqueId, noop, isEqual } from 'lodash';
+import { uniqueId, noop } from 'lodash';
 import classNames from 'classnames';
 import { decode } from 'he';
 
