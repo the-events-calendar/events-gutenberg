@@ -107,17 +107,19 @@ class SearchPosts extends Component {
 	);
 
 	renderItem = ( item ) => (
-		<button
-			key={ `post-${ item.id }` }
-			role="menuitem"
-			className="tribe-editor__search-posts__item"
-			onClick={ () => {
-				this.props.onSelectItem( item.id, item );
-				this.onClose();
-			} }
-		>
-			{ decode( item.title.rendered ) }
-		</button>
+		<li className="tribe-editor__search-posts__results-list-item">
+			<button
+				key={ `post-${ item.id }` }
+				role="menuitem"
+				className="tribe-editor__search-posts__results-list-item-action"
+				onClick={ () => {
+					this.props.onSelectItem( item.id, item );
+					this.onClose();
+				} }
+			>
+				{ decode( item.title.rendered ) }
+			</button>
+		</li>
 	);
 
 	renderList = () => {
@@ -131,7 +133,11 @@ class SearchPosts extends Component {
 			);
 		}
 
-		return results.map( this.renderItem, this );
+		return (
+			<ul className="tribe-editor__search-posts__results-list">
+				{ results.map( this.renderItem, this ) }
+			</ul>
+		);
 	}
 
 	renderSearchInput() {
