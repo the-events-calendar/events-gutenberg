@@ -49,12 +49,6 @@ class SearchPosts extends Component {
 		postType: PropTypes.string,
 	};
 
-	constructor() {
-		super( ...arguments );
-		this.scrollPosition = 0;
-		this.dropdownEl = React.createRef();
-	}
-
 	componentDidMount() {
 		const { addBlock, setSearchPostType, name, postType } = this.props;
 		addBlock( name );
@@ -74,20 +68,13 @@ class SearchPosts extends Component {
 	componentDidUpdate( prevProps ) {
 		if ( ! isEqual( prevProps.exclude, this.props.exclude ) ) {
 			this.initialFetch();
-			return;
-		}
-
-		const { isLoading } = this.props;
-		if ( ! isLoading && this.scrollPosition && this.dropdownEl.current ) {
-			this.dropdownEl.current.scrollTop = this.scrollPosition;
-			this.scrollPosition = 0;
 		}
 	}
 
 	onChange = ( event ) => {
 		const { value } = event.target;
 		const { name, setTerm, search, exclude } = this.props;
-		this.scrollPosition = 0;
+
 		setTerm( name, value );
 		search( name, {
 			term: value,
@@ -100,10 +87,7 @@ class SearchPosts extends Component {
 		const { target } = event;
 		const { scrollHeight, scrollTop } = target;
 		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
-		const { isLoading } = this.props;
-		if ( ! isLoading ) {
-			this.scrollPosition = scrollTop;
-		}
+
 		if ( percentage > 0.75 ) {
 			const { page, term, name, search, exclude } = this.props;
 			search( name, {
@@ -183,7 +167,6 @@ class SearchPosts extends Component {
 				{ this.renderSearchInput() }
 				<div
 					className={ classNames( 'tribe-editor__search-posts__results' ) }
-					ref={ this.dropdownEl }
 				>
 					{ this.renderList() }
 				</div>
