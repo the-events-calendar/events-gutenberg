@@ -143,7 +143,6 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		);
 	}
 
-
 	/**
 	 * Function that returns the RSVP form from an AJAX call
 	 *
@@ -169,7 +168,6 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		$response['html']    = $html;
 		$response['success'] = true;
-
 
 		wp_send_json( $response );
 
