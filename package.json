@@ -29,6 +29,7 @@
 	"dependencies": {
 		"@moderntribe/common": "file:plugins/common",
 		"@moderntribe/events": "file:plugins/events",
+		"@nfen/redux-reducer-injector": "0.0.3",
 		"@wordpress/a11y": "1.0.3",
 		"@wordpress/data": "^1.1.0",
 		"@wordpress/i18n": "^1.2.2",
