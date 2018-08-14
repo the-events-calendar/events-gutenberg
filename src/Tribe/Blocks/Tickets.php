@@ -18,6 +18,14 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		return 'tickets';
 	}
 
+	/**
+	 * Returns the Correct tickets for the Tickets block
+	 *
+	 * @since  TBD
+	 *
+	 * @param  int   $post_id  Which Event or Post we are looking ticket in
+	 * @return array
+	 */
 	private function get_tickets( $post_id ) {
 		$unfiltered_tickets = Tribe__Tickets__Tickets::get_all_event_tickets( $post_id );
 		$tickets = array();
@@ -29,6 +37,8 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 			}
 			$tickets[] = $ticket;
 		}
+
+		return $tickets;
 	}
 
 	/**
@@ -42,8 +52,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 */
 	public function render( $attributes = array() ) {
 		$args['attributes'] = $this->attributes( $attributes );
-		$args['post_id'] = get_the_ID();
-		$args['tickets'] = $this->get_tickets( $args['post_id'] );
+		$args['tickets'] = $this->get_tickets( tribe( 'gutenberg.template' )->get( 'post_id' ) );
 
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.template' )->add_template_globals( $args );
