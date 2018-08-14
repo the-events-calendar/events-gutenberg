@@ -36,12 +36,25 @@ import {
 } from '@moderntribe/events/elements';
 
 import { default as EventOrganizers } from './organizers';
-
 import { toMoment, toDate, toTime } from '@moderntribe/events/editor/utils/moment';
-import { actions as dateTimeActions, selectors as dateTimeSelectors } from '@moderntribe/events/data/blocks/datetime';
-import { actions as priceActions, selectors as priceSelectors } from '@moderntribe/events/data/blocks/price';
-import { actions as websiteActions, selectors as websiteSelectors } from '@moderntribe/events/data/blocks/website';
-import { actions as classicActions, selectors as classicSelectors } from '@moderntribe/events/data/blocks/classic';
+import {
+	actions as dateTimeActions,
+	thunks as dateTimeThunks,
+	selectors as dateTimeSelectors,
+} from '@moderntribe/events/data/blocks/datetime';
+import {
+	actions as priceActions,
+	selectors as priceSelectors,
+} from '@moderntribe/events/data/blocks/price';
+import {
+	actions as websiteActions,
+	selectors as websiteSelectors,
+} from '@moderntribe/events/data/blocks/website';
+import {
+	actions as classicActions,
+	selectors as classicSelectors,
+} from '@moderntribe/events/data/blocks/classic';
+
 import {
 	actions as organizersActions,
 	selectors as organizerSelectors,
@@ -323,6 +336,7 @@ const mapStateToProps = ( state ) => {
 const mapDispatchToProps = ( dispatch ) => {
 	return {
 		...bindActionCreators( dateTimeActions, dispatch ),
+		...bindActionCreators( dateTimeThunks, dispatch ),
 		...bindActionCreators( UIActions, dispatch ),
 		...bindActionCreators( priceActions, dispatch ),
 		...bindActionCreators( websiteActions, dispatch ),
@@ -331,7 +345,7 @@ const mapDispatchToProps = ( dispatch ) => {
 			dispatch( priceActions.setInitialState( props ) );
 			dispatch( UIActions.setInitialState( props ) );
 			dispatch( websiteActions.setInitialState( props ) );
-			dispatch( dateTimeActions.setInitialState( props ) );
+			dispatch( dateTimeThunks.setInitialState( props ) );
 			dispatch( classicActions.setInitialState( props ) );
 			const { get } = props;
 			dispatch( organizersActions.setOrganizersInClassic( get( 'organizers', [] ) ) );

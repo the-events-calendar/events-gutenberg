@@ -19,7 +19,6 @@ initStore();
 
 const blocks = [
 	classicEventDetails,
-
 	eventDateTime,
 	eventVenue,
 	eventOrganizer,

@@ -3,10 +3,9 @@
  */
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import reducers from './reducers';
+import reducer from './reducers';
 import thunk from 'redux-thunk';
 
-import { dates, multiDay, allDay, endTime, startTime } from '@moderntribe/events/data/blocks/middlewares';
 import { wpRequest } from '@moderntribe/events/data/request/middlewares';
 
 const composeEnhancers = composeWithDevTools( {
@@ -15,18 +14,13 @@ const composeEnhancers = composeWithDevTools( {
 
 const middlewares = [
 	thunk,
-	dates,
-	startTime,
-	endTime,
-	multiDay,
-	allDay,
 	wpRequest,
 ];
 
 let store = {};
 
 export const initStore = () => {
-	store = createStore( reducers, composeEnhancers(
+	store = createStore( reducer, composeEnhancers(
 		applyMiddleware( ...middlewares ),
 	) );
 };

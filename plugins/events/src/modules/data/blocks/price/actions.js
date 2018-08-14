@@ -2,7 +2,9 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { DEFAULT_STATE } from './reducers';
+import { DEFAULT_STATE } from './reducer';
+import { isTruthy } from '@moderntribe/events/editor/utils/string';
+import { getPriceSettings } from '@moderntribe/events/editor/settings';
 
 export const setCost = ( cost ) => ( {
 	type: types.SET_PRICE_COST,
@@ -37,8 +39,16 @@ export const setDescription = ( description ) => ( {
 } );
 
 export const setInitialState = ( { get } ) => ( dispatch ) => {
+	const isNewEvent = isTruthy( getPriceSettings().is_new_event );
+	const currencySymbol = isNewEvent
+		? getPriceSettings().default_currency_symbol
+		: get( 'currencySymbol', DEFAULT_STATE.symbol );
+	const currencyPosition = isNewEvent
+		? getPriceSettings().default_currency_position
+		: get( 'currencyPosition', DEFAULT_STATE.position );
+
+	dispatch( setPosition( currencyPosition ) );
+	dispatch( setSymbol( currencySymbol ) );
 	dispatch( setCost( get( 'cost', DEFAULT_STATE.cost ) ) );
-	dispatch( setSymbol( get( 'currencySymbol', DEFAULT_STATE.symbol ) ) );
 	dispatch( setDescription( get( 'costDescription', DEFAULT_STATE.description ) ) );
-	dispatch( setPosition( get( 'currencyPosition', DEFAULT_STATE.position ) ) );
 };

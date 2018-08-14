@@ -37,6 +37,7 @@ import {
 	toFields,
 	toVenue,
 	GoogleMap,
+	EditLink,
 } from '@moderntribe/events/elements';
 
 import { VENUE } from '@moderntribe/events/editor/post-types';
@@ -54,7 +55,7 @@ class EventVenue extends Component {
 	static propTypes = {
 		venue: PropTypes.number,
 		isSelected: PropTypes.bool,
-		loading: PropTypes.bool,
+		isLoading: PropTypes.bool,
 		submit: PropTypes.bool,
 		edit: PropTypes.bool,
 		create: PropTypes.bool,
@@ -113,9 +114,9 @@ class EventVenue extends Component {
 	}
 
 	getContainer() {
-		const { loading, edit, create, submit } = this.props;
+		const { isLoading, edit, create, submit } = this.props;
 
-		if ( loading || submit ) {
+		if ( isLoading || submit ) {
 			return (
 				<Placeholder key="loading">
 					<Spinner />
@@ -152,10 +153,10 @@ class EventVenue extends Component {
 				name={ name }
 				icon={ <VenueIcon /> }
 				store={ store }
-				selected={ isSelected }
+				isSelected={ isSelected }
 				postType={ VENUE }
-				onSelection={ this.setVenue }
-				onSetCreation={ this.setDraftTitle }
+				onItemSelect={ this.setVenue }
+				onCreateNew={ this.setDraftTitle }
 				placeholder={ __( 'Add or find a venue', 'events-gutenberg' ) }
 			/>
 		);
@@ -205,9 +206,9 @@ class EventVenue extends Component {
 	}
 
 	renderMap() {
-		const { details, edit, create, loading, submit, showMap } = this.props;
+		const { details, edit, create, isLoading, submit, showMap } = this.props;
 
-		if ( ! showMap || isEmpty( details ) || edit || create || loading || submit ) {
+		if ( ! showMap || isEmpty( details ) || edit || create || isLoading || submit ) {
 			return null;
 		}
 
@@ -231,8 +232,8 @@ class EventVenue extends Component {
 	}
 
 	renderEditAction() {
-		const { isSelected, edit, create, loading, submit, volatile } = this.props;
-		const idle = edit || create || loading || submit;
+		const { isSelected, edit, create, isLoading, submit, volatile } = this.props;
+		const idle = edit || create || isLoading || submit;
 		if ( ! this.hasVenue() || ! isSelected || ! volatile || idle ) {
 			return null;
 		}
@@ -245,8 +246,8 @@ class EventVenue extends Component {
 	}
 
 	editActions() {
-		const { isSelected, edit, create, loading, submit } = this.props;
-		if ( ! this.hasVenue() || ! isSelected || edit || create || loading || submit ) {
+		const { isSelected, edit, create, isLoading, submit } = this.props;
+		if ( ! this.hasVenue() || ! isSelected || edit || create || isLoading || submit ) {
 			return null;
 		}
 
@@ -276,7 +277,7 @@ class EventVenue extends Component {
 	};
 
 	renderControls() {
-		const { showMapLink, showMap, toggleVenueMap, toggleVenueMapLink } = this.props;
+		const { venue, showMapLink, showMap, toggleVenueMap, toggleVenueMapLink } = this.props;
 
 		if ( ! this.hasVenue() ) {
 			return null;
@@ -294,6 +295,10 @@ class EventVenue extends Component {
 						label={ __( 'Show Google Maps Embed' ) }
 						checked={ showMap }
 						onChange={ toggleVenueMap }
+					/>
+					<EditLink
+						postId={ venue }
+						label={ __( 'Edit Venue', 'events-gutenberg' ) }
 					/>
 				</PanelBody>
 			</InspectorControls>

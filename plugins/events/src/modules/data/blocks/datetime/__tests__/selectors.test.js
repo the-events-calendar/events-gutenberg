@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { selectors } from '@moderntribe/events/data/blocks/datetime';
-import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/datetime/reducers';
+import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/datetime/reducer';
 
 const state = {
 	blocks: {
@@ -16,30 +16,42 @@ describe( '[STORE] - Datetime selectors', () => {
 	} );
 
 	it( 'Should return the all day', () => {
-		expect( selectors.getAllDay( state ) ).toEqual( DEFAULT_STATE.allDay );
+		expect( selectors.getAllDay( state ) ).toBe( DEFAULT_STATE.allDay );
 	} );
 
 	it( 'Should return the start date', () => {
-		expect( selectors.getStart( state ) ).toEqual( DEFAULT_STATE.start );
+		expect( selectors.getStart( state ) ).toBe( DEFAULT_STATE.start );
 	} );
 
 	it( 'Should return the end date', () => {
-		expect( selectors.getEnd( state ) ).toEqual( DEFAULT_STATE.end );
+		expect( selectors.getEnd( state ) ).toBe( DEFAULT_STATE.end );
 	} );
 
 	it( 'Should return the timezone', () => {
-		expect( selectors.getTimeZone( state ) ).toEqual( DEFAULT_STATE.timezone );
+		expect( selectors.getTimeZone( state ) ).toBe( DEFAULT_STATE.timeZone );
 	} );
 
-	it( 'Should return the multiday', () => {
-		expect( selectors.getMultiDay( state ) ).toEqual( DEFAULT_STATE.multiDay );
+	it( 'Should return the time zone label', () => {
+		expect( selectors.getTimeZoneLabel( state ) ).toBe( DEFAULT_STATE.timeZoneLabel );
+	} );
+
+	it( 'Should return the time zone visibility', () => {
+		expect( selectors.getTimeZoneVisibility( state ) ).toBe( DEFAULT_STATE.showTimeZone );
+	} );
+
+	it( 'Should return the multi day', () => {
+		expect( selectors.getMultiDay( state ) ).toBe( DEFAULT_STATE.multiDay );
 	} );
 
 	it( 'Should return the date separator', () => {
-		expect( selectors.getDateSeparator( state ) ).toEqual( DEFAULT_STATE.dateTimeSeparator );
+		expect( selectors.getDateSeparator( state ) ).toBe( DEFAULT_STATE.dateTimeSeparator );
 	} );
 
-	it( 'Should return timee range separator', () => {
-		expect( selectors.getTimeSeparator( state ) ).toEqual( DEFAULT_STATE.timeRangeSeparator );
+	it( 'Should return time range separator', () => {
+		expect( selectors.getTimeSeparator( state ) ).toBe( DEFAULT_STATE.timeRangeSeparator );
+	} );
+
+	it( 'Should return the natural language label', () => {
+		expect( selectors.getNaturalLanguageLabel( state ) ).toBe( DEFAULT_STATE.naturalLanguage );
 	} );
 } );

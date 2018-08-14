@@ -40,9 +40,9 @@ const renderCurrency = ({ showCurrencySymbol, currencySymbol }) => (
 const renderPlaceholder = ({ showCost, currencySymbol, currencyPosition }) => {
 	let placeholder = __( 'Add Price', 'events-gutenberg' );
 
-	placeholder = ( 'prefix' === currencyPosition ) ?
-		currencySymbol + ' ' + placeholder :
-		placeholder + ' ' + currencySymbol;
+	placeholder = ( 'prefix' === currencyPosition )
+		? currencySymbol + ' ' + placeholder
+		: placeholder + ' ' + currencySymbol;
 
 
 	return ! showCost && (
@@ -186,7 +186,7 @@ class EventPrice extends Component {
 EventPrice.propTypes = {
 	dashboardOpen: PropTypes.bool,
 	cost: PropTypes.string,
-	currencyPosition: PropTypes.oneOf([ 'prefix', 'suffix' ]),
+	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
 	currencySymbol: PropTypes.string,
 	costDescription: PropTypes.string,
 	showCurrencySymbol: PropTypes.bool,

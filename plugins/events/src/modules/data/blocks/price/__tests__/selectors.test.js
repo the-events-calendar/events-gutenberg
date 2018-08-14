@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { selectors } from '@moderntribe/events/data/blocks/price';
-import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/price/reducers';
+import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/price/reducer';
 
 const state = {
 	blocks: {

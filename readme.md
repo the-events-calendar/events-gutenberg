@@ -92,7 +92,29 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.2.5-alpha - TBD
+#### 0.2.7-alpha - TBD
+
+* Tweak - Use event timezone as default value
+* Fix - Allow removal of organizers from classic block if the organizer block is removed
+
+#### 0.2.6-alpha - 2018-08-10
+
+* Tweak - Rename the "Event Tags" block and label to "Tags"
+* Tweak - Change Event Website placeholder text to "Add Event Website"
+* Tweak - Remove references to the deprecated `compose` function from `@wordpress/element`
+* Feature - Add Edit Link button for Venue and Organizer block
+* Feature - Add filter to customize the variables send to the FE `tribe_events_gutenberg_js_config`
+* Feature - Add Human Readable input for date
+* Feature - Time Zone is editable and can be used as label
+* Fix - Separate logic and presentation from event links block
+* Fix - Remove specificity and side effects from time picker element
+* Fix - Make time picker element stateless, removing logic and allowing presentation via props
+* Fix - Remove middlewares for date time block actions, move logic to thunks
+* Fix - Separate logic and presentation from SearchOrCreate component
+* Fix - Change all references of block id to clientId
+
+#### 0.2.5-alpha - 2018-08-04
+
 * Feature - Frontend view for date time block
 * Tweak - Change event location to event venue
 * Tweak - Add tests for utils functions
@@ -101,6 +123,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Tweak - Display the currency symbol and position in the event price block preview
 * Fix - Remove featured image from default blocks in new event
 * Fix - Avoid crash when using `wp` cli tool, (thanks to Matt Fields @0x6d617474 for report this problem)
+* Fix - Remove warning when `currencyPosition` is empty string
 
 #### 0.2.4-alpha - 2018-07-12
 

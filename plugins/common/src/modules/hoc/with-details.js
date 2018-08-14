@@ -3,30 +3,30 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose, bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { isUndefined, isEqual } from 'lodash';
 
 /**
  * Internal dependencies
  */
-import { actions, selectors } from '@moderntribe/events/data/details';
+import { actions, thunks, selectors } from '@moderntribe/events/data/details';
 
-export default ( key = 'id' ) => ( WrappedComponent ) => {
+export default ( key = 'clientId' ) => ( WrappedComponent ) => {
 	class WithDetails extends Component {
 		static propTypes = {
-			setPostType: PropTypes.func,
+			setDetailsPostType: PropTypes.func,
 			fetchDetails: PropTypes.func,
 			postType: PropTypes.string,
-			loading: PropTypes.bool,
+			isLoading: PropTypes.bool,
 			details: PropTypes.object,
 		};
 
 		constructor( props ) {
 			super( props );
 			this.details = {
-				type: '',
 				id: null,
+				type: '',
 			};
 		}
 
@@ -43,17 +43,17 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 				return;
 			}
 
-			const { setPostType, postType, fetchDetails } = this.props;
+			const { setDetailsPostType, postType, fetchDetails } = this.props;
 			const tmp = {
 				id: this.id,
-				type: postType,
+				postType,
 			};
 
 			if ( isEqual( this.details, tmp ) ) {
 				return;
 			}
 
-			setPostType( this.id, postType );
+			setDetailsPostType( this.id, postType );
 			fetchDetails( this.id );
 			this.details = tmp;
 		}
@@ -63,28 +63,23 @@ export default ( key = 'id' ) => ( WrappedComponent ) => {
 		}
 
 		render() {
-			return <WrappedComponent { ...this.props } { ...this.aditionalProps() } />;
-		}
-
-		aditionalProps() {
-			const { loading, details } = this.props;
-			return {
-				loading,
-				details,
-			};
+			return <WrappedComponent { ...this.props } />;
 		}
 	}
 
 	const mapStateToProps = ( state, props ) => {
 		const name = props[ key ];
 		return {
-			loading: selectors.getLoading( state, { name } ),
 			details: selectors.getDetails( state, { name } ),
+			isLoading: selectors.getIsLoading( state, { name } ),
 			volatile: selectors.getVolatile( state, { name } ),
 		};
 	};
 
-	const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
+	const mapDispatchToProps = ( dispatch ) => ( {
+		...bindActionCreators( actions, dispatch ),
+		...bindActionCreators( thunks, dispatch ),
+	} );
 
-	return compose( connect( mapStateToProps, mapDispatchToProps ) )( WithDetails );
+	return connect( mapStateToProps, mapDispatchToProps )( WithDetails );
 };

@@ -8,18 +8,22 @@ import { get, has } from 'lodash';
  *
  * @return {object} An object with the global settings
  */
-export function getSettings() {
-	return window.tribe_blocks_editor_settings || {};
-}
+export const getSettings = () => (
+	window.tribe_blocks_editor_settings || {}
+);
 
-export function getSetting( key, defaultValue ) {
-	return get( getSettings(), key, defaultValue );
-}
+export const getSetting = ( key, defaultValue ) => (
+	get( getSettings(), key, defaultValue )
+);
 
-export function hasSetting( key ) {
-	return has( getSettings(), key );
-}
+export const hasSetting = ( key ) => (
+	has( getSettings(), key )
+);
 
-export function getConstants() {
-	return window.tribe_blocks_editor_constants || {};
-}
+export const getConstants = () => (
+	window.tribe_blocks_editor_constants || {}
+);
+
+export const getPriceSettings = () => (
+	window.tribe_blocks_editor_price_settings || {}
+);

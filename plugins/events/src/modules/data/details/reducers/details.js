@@ -5,9 +5,9 @@ import { EVENT } from '@moderntribe/events/editor/post-types';
 import { types } from '@moderntribe/events/data/details';
 
 export const DEFAULT_STATE = {
-	loading: false,
+	isLoading: false,
 	details: {},
-	type: EVENT,
+	postType: EVENT,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -20,12 +20,12 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_DETAILS_POST_TYPE:
 			return {
 				...state,
-				type: action.payload.type,
+				postType: action.payload.postType,
 			};
-		case types.SET_DETAILS_LOADING:
+		case types.SET_DETAILS_IS_LOADING:
 			return {
 				...state,
-				loading: action.payload.loading,
+				isLoading: action.payload.isLoading,
 			};
 		default:
 			return state;

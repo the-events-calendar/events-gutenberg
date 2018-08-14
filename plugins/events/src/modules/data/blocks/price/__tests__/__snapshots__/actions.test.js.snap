@@ -58,9 +58,9 @@ exports[`[STORE] - Price thunk actions Should set the initial state 1`] = `
 Array [
   Object {
     "payload": Object {
-      "cost": 10,
+      "position": "suffix",
     },
-    "type": "SET_PRICE_COST",
+    "type": "SET_PRICE_POSITION",
   },
   Object {
     "payload": Object {
@@ -70,15 +70,15 @@ Array [
   },
   Object {
     "payload": Object {
-      "description": "Not so expensive",
+      "cost": 10,
     },
-    "type": "SET_PRICE_DESCRIPTION",
+    "type": "SET_PRICE_COST",
   },
   Object {
     "payload": Object {
-      "position": "suffix",
+      "description": "Not so expensive",
     },
-    "type": "SET_PRICE_POSITION",
+    "type": "SET_PRICE_DESCRIPTION",
   },
 ]
 `;

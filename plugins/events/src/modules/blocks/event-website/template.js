@@ -19,7 +19,11 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 
-const placeholder = __( 'Add Button Text', 'events-gutenberg' );
+/**
+ * Module Code
+ */
+
+const placeholder = __( 'Add Event Website', 'events-gutenberg' );
 
 const renderUrlInput = ({ isSelected, url, setWebsite }) => (
 	isSelected && (
@@ -77,12 +81,9 @@ const renderPlaceholder = () => {
 const EventWebsite = ( props ) => {
 
 	const { isSelected, urlLabel } = props;
-	const eventWebsite = ( ! isSelected && ! urlLabel ) ?
-		renderPlaceholder() :
-		[
-			renderLabelInput( props ),
-			renderUrlInput( props ),
-		];
+	const eventWebsite = ( ! isSelected && ! urlLabel )
+		? renderPlaceholder()
+		: [ renderLabelInput( props ), renderUrlInput( props ) ];
 
 	return (
 		<div className="tribe-editor__block tribe-editor__event-website">

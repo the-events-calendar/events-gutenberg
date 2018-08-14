@@ -18,7 +18,7 @@ import { Icons } from '@moderntribe/events/elements';
  */
 export default {
 	id: 'event-tags',
-	title: __( 'Event Tags', 'events-gutenberg' ),
+	title: __( 'Tags', 'events-gutenberg' ),
 	description: __( 'Add keywords by displaying linked tags.', 'events-gutenberg' ),
 	icon: Icons.TEC,
 	category: 'common',
