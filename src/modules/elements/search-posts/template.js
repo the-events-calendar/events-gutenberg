@@ -47,27 +47,12 @@ class SearchPosts extends Component {
 		page: PropTypes.number,
 		onMount: PropTypes.func,
 		onInputChange: PropTypes.func,
+		onDropdownScroll: PropTypes.func,
 		search: PropTypes.func,
 	};
 
 	componentDidMount() {
 		this.props.onMount();
-	}
-
-	onScroll = ( event ) => {
-		const { target } = event;
-		const { scrollHeight, scrollTop } = target;
-		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
-
-		if ( percentage > 0.75 ) {
-			const { page, term, name, search, exclude } = this.props;
-			search( name, {
-				term,
-				exclude,
-				populated: true,
-				page: page + 1,
-			} );
-		}
 	}
 
 	onItemClick = ( item ) => {
@@ -153,12 +138,12 @@ class SearchPosts extends Component {
 		return (
 			<div
 				className={ classNames( 'tribe-editor__search-posts' ) }
-				onScroll={ this.onScroll }
 				aria-expanded={ isOpen }
 			>
 				{ this.renderSearchInput() }
 				<div
 					className={ classNames( 'tribe-editor__search-posts__results' ) }
+					onScroll={ this.props.onDropdownScroll }
 				>
 					{ this.renderList() }
 				</div>

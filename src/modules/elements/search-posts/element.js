@@ -36,6 +36,23 @@ const onInputChange = ( dispatch, ownProps ) => ( event ) => {
 	} ) );
 };
 
+const onDropdownScroll = ( stateProps, dispatchProps, ownProps ) => ( event ) => {
+	const { target } = event;
+	const { scrollHeight, scrollTop } = target;
+	const scrollPercentage = ( scrollTop / ( scrollHeight - target.offsetHeight ) ) * 100;
+
+	if ( scrollPercentage > 75 ) {
+		const { term, page } = stateProps;
+		const { name, exclude } = ownProps;
+		dispatchProps.dispatch( thunks.search( name, {
+			term,
+			exclude,
+			populated: true,
+			page: page + 1,
+		} ) );
+	}
+};
+
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
 	isLoading: selectors.getIsLoading( state, props ),
@@ -48,6 +65,18 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	...bindActionCreators( thunks, dispatch ),
 	onMount: onMount( dispatch, ownProps ),
 	onInputChange: onInputChange( dispatch, ownProps ),
+	dispatch,
 } );
 
-export default connect( mapStateToProps, mapDispatchToProps )( SearchPosts );
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
+	...ownProps,
+	...stateProps,
+	...dispatchProps,
+	onDropdownScroll: onDropdownScroll( stateProps, dispatchProps, ownProps ),
+} );
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+	mergeProps
+)( SearchPosts );
