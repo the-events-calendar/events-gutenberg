@@ -156,7 +156,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		$response = array( 'success' => false, 'html' => '', 'view' => 'rsvp-form' );
 
 		if ( ! isset( $_POST['ticket_id'] ) ) {
-			die( -1 );
+			wp_send_json_error( $response );
 		}
 
 
