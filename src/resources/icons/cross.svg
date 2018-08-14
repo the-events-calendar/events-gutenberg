@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="18.36 19.78 12 13.41 5.64 19.78 4.22 18.36 10.59 12 4.22 5.64 5.64 4.22 12 10.59 18.36 4.23 19.77 5.64 13.41 12 19.77 18.36"></polygon>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Gridicon-/-cross" transform="translate(-4.000000, -4.000000)">
+            <g id="gridicons-cross">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Shape" fill="#aeb4bb" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

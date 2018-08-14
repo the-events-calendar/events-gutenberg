@@ -7,7 +7,8 @@
  */
 ?>
 <span>
-	<a href="#" class="not-going">
-		<?php esc_html_e( 'Not going', 'events-gutenberg' ); ?>
-	</a>
+	<button class="not-going">
+		<img src="<?php echo tribe( 'gutenberg' )->plugin_url . 'src/resources/icons/cross.svg'; ?>" />
+		<span><?php esc_html_e( 'Not going', 'events-gutenberg' ); ?></span>
+	</button>
 </span>

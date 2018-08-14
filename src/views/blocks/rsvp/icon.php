@@ -7,6 +7,6 @@
  */
 ?>
 <div class="rsvp-icon">
-	<h1>🎟️</h1>
+	<img src="<?php echo tribe( 'gutenberg' )->plugin_url . 'src/resources/icons/rsvp.svg'; ?>" />
 	<?php esc_html_e( 'RSVP', 'events-gutenberg' ) ?>
 </div>
