@@ -56,14 +56,6 @@ class SearchPosts extends Component {
 		this.props.onMount();
 	}
 
-	onDropdownToggle = ( isOpen ) => {
-		const { name, term, setTerm } = this.props;
-
-		if ( ! isOpen && term !== '' ) {
-			setTerm( name, '' );
-		}
-	}
-
 	renderToggle = ( { onToggle } ) => {
 		return (
 			<IconButton
@@ -153,7 +145,7 @@ class SearchPosts extends Component {
 				className="tribe-editor__dropdown"
 				position="bottom center"
 				contentClassName="tribe-editor__dropdown-dialog"
-				onToggle={ this.onDropdownToggle }
+				onToggle={ this.props.onDropdownToggle }
 				renderToggle={ this.renderToggle }
 				renderContent={ this.renderDropdown }
 			/>

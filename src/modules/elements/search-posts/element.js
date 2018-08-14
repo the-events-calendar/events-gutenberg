@@ -45,7 +45,7 @@ const onItemClick = ( dispatch, ownProps ) => ( onClose ) => ( item ) => {
 	}
 
 	onClose();
-}
+};
 
 const onDropdownScroll = ( stateProps, dispatchProps, ownProps ) => ( event ) => {
 	const { target } = event;
@@ -61,6 +61,12 @@ const onDropdownScroll = ( stateProps, dispatchProps, ownProps ) => ( event ) =>
 			populated: true,
 			page: page + 1,
 		} ) );
+	}
+};
+
+const onDropdownToggle = ( stateProps, dispatchProps, ownProps ) => ( isOpen ) => {
+	if ( ! isOpen && stateProps.term !== '' ) {
+		dispatchProps.dispatch( actions.setTerm( ownProps.name, '' ) );
 	}
 };
 
@@ -85,6 +91,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...stateProps,
 	...dispatchProps,
 	onDropdownScroll: onDropdownScroll( stateProps, dispatchProps, ownProps ),
+	onDropdownToggle: onDropdownToggle( stateProps, dispatchProps, ownProps ),
 } );
 
 export default connect(
