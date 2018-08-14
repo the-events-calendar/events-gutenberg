@@ -95,7 +95,7 @@ class SearchPosts extends Component {
 		return (
 			<ul className="tribe-editor__search-posts__results-list">
 				{ results.map( ( item ) => (
-					this.renderItem( item, onItemClick( onClose ) ), this )
+					this.renderItem( item, onItemClick( onClose ) ) )
 				) }
 			</ul>
 		);
@@ -120,24 +120,20 @@ class SearchPosts extends Component {
 		</div> );
 	}
 
-	renderDropdown = ( { isOpen, onClose } ) => {
-		this.onClose = onClose.bind( this );
-
-		return (
+	renderDropdown = ( { isOpen, onClose } ) => (
+		<div
+			className={ classNames( 'tribe-editor__search-posts' ) }
+			aria-expanded={ isOpen }
+		>
+			{ this.renderSearchInput() }
 			<div
-				className={ classNames( 'tribe-editor__search-posts' ) }
-				aria-expanded={ isOpen }
+				className={ classNames( 'tribe-editor__search-posts__results' ) }
+				onScroll={ this.props.onDropdownScroll }
 			>
-				{ this.renderSearchInput() }
-				<div
-					className={ classNames( 'tribe-editor__search-posts__results' ) }
-					onScroll={ this.props.onDropdownScroll }
-				>
-					{ this.renderList( onClose ) }
-				</div>
+				{ this.renderList( onClose ) }
 			</div>
-		);
-	}
+		</div>
+	);
 
 	render() {
 		return (
