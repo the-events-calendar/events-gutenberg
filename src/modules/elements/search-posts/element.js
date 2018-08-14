@@ -97,6 +97,13 @@ class SearchPosts extends Component {
 		}
 	}
 
+	onItemClick = ( item ) => {
+		const { name, setTerm, onSelectItem } = this.props;
+		setTerm( name, '' );
+		onSelectItem( item.id, item );
+		this.onClose();
+	};
+
 	renderToggle = ( { onToggle } ) => (
 		<IconButton
 			className="tribe-editor__btn"
@@ -112,10 +119,7 @@ class SearchPosts extends Component {
 				key={ `post-${ item.id }` }
 				role="menuitem"
 				className="tribe-editor__search-posts__results-list-item-action"
-				onClick={ () => {
-					this.props.onSelectItem( item.id, item );
-					this.onClose();
-				} }
+				onClick={ () => this.onItemClick( item ) }
 			>
 				{ decode( item.title.rendered ) }
 			</button>
