@@ -1,230 +1,74 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { uniqueId, noop, isEqual } from 'lodash';
-import classNames from 'classnames';
-import { decode } from 'he';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 /**
- * WordPress dependencies
- */
-import { Component } from '@wordpress/element';
-
-import {
-	Dropdown,
-	IconButton,
-	Dashicon,
-	Spinner,
-	Placeholder,
-} from '@wordpress/components';
-
-/**
  * Internal dependencies
  */
-import './style.pcss';
+import SearchPosts from './template';
 import { actions, thunks, selectors } from 'data/search';
 
 /**
  * Module Code
  */
 
-class SearchPosts extends Component {
-	static defaultProps = {
-		onHover: noop,
-		store: {},
-		storeName: '',
-		results: [],
-	};
+const onMount = ( dispatch, ownProps ) => () => {
+	const { name, postType, exclude } = ownProps;
 
-	static propTypes = {
-		registerBlock: PropTypes.func,
-		search: PropTypes.func,
-		exclude: PropTypes.array,
-		isLoading: PropTypes.bool,
-		name: PropTypes.string,
-		postType: PropTypes.string,
-	};
+	dispatch( actions.addBlock( name ) );
+	dispatch( actions.setSearchPostType( name, postType ) );
+	dispatch( thunks.search( name, {
+		term: '',
+		exclude,
+	} ) );
+};
 
-	constructor() {
-		super( ...arguments );
-		this.state = {
-			filterValue: '',
-			selectedItem: null,
-			posts: [],
-			isLoading: false,
-			search: '',
-		};
-		this.scrollPosition = 0;
-		this.dropdownEl = React.createRef();
+const onInputChange = ( dispatch, ownProps ) => ( event ) => {
+	const { name, exclude } = ownProps;
+	const { value } = event.target;
+
+	dispatch( actions.setTerm( name, value ) );
+	dispatch( thunks.search( name, {
+		term: value,
+		exclude,
+	} ) );
+};
+
+const onItemClick = ( dispatch, ownProps ) => ( onClose ) => ( item ) => {
+	const { name, onItemSelect } = ownProps;
+	dispatch( actions.setTerm( name, '' ) );
+
+	if ( onItemSelect ) {
+		onItemSelect( item.id, item );
 	}
 
-	componentDidMount() {
-		const { addBlock, setSearchPostType, name, postType } = this.props;
-		addBlock( name );
-		setSearchPostType( name, postType );
-		this.initialFetch();
-	}
+	onClose();
+};
 
-	initialFetch() {
-		const { name, exclude, search } = this.props;
-		search( name, {
-			term: '',
+const onDropdownScroll = ( stateProps, dispatchProps, ownProps ) => ( event ) => {
+	const { target } = event;
+	const { scrollHeight, scrollTop } = target;
+	const scrollPercentage = ( scrollTop / ( scrollHeight - target.offsetHeight ) ) * 100;
+
+	if ( scrollPercentage > 75 ) {
+		const { term, page } = stateProps;
+		const { name, exclude } = ownProps;
+		dispatchProps.dispatch( thunks.search( name, {
+			term,
 			exclude,
-			populate: true,
-		} );
+			populated: true,
+			page: page + 1,
+		} ) );
 	}
+};
 
-	componentDidUpdate( prevProps ) {
-		if ( ! isEqual( prevProps.exclude, this.props.exclude ) ) {
-			this.initialFetch();
-			return;
-		}
-
-		const { isLoading } = this.props;
-		if ( ! isLoading && this.scrollPosition && this.dropdownEl.current ) {
-			this.dropdownEl.current.scrollTop = this.scrollPosition;
-			this.scrollPosition = 0;
-		}
+const onDropdownToggle = ( stateProps, dispatchProps, ownProps ) => ( isOpen ) => {
+	if ( ! isOpen && stateProps.term !== '' ) {
+		dispatchProps.dispatch( actions.setTerm( ownProps.name, '' ) );
 	}
-
-	onChange = ( event ) => {
-		const { value } = event.target;
-		const { name, setTerm, search, exclude } = this.props;
-		this.scrollPosition = 0;
-		setTerm( name, value );
-		search( name, {
-			term: value,
-			exclude,
-			populate: true,
-		} );
-	}
-
-	onScroll = ( event ) => {
-		const { target } = event;
-		const { scrollHeight, scrollTop } = target;
-		const percentage = scrollTop > 0 ? scrollTop / scrollHeight : 0;
-		const { isLoading } = this.state;
-		if ( ! isLoading ) {
-			this.scrollPosition = scrollTop;
-		}
-		if ( percentage > 0.75 ) {
-			const { page, term, name, search, exclude } = this.props;
-			search( name, {
-				term,
-				exclude,
-				populate: true,
-				page: page + 1,
-			} );
-		}
-	}
-
-	renderList = () => {
-		const { results, isLoading } = this.props;
-
-		if ( isLoading ) {
-			return (
-				<Placeholder key="placeholder">
-					<Spinner />
-				</Placeholder>
-			);
-		}
-		return results.map( this.renderItem, this );
-	}
-
-	renderItem = ( item = {} ) => {
-		const { current } = this.state;
-		const { onSelectItem } = this.props;
-
-		const isCurrent = current && current.id === item.id;
-		const { title = {} } = item;
-		const { rendered = '' } = title;
-
-		return (
-			<button
-				key={ `post-${ item.id }` }
-				role="menuitem"
-				className="tribe-editor__search-posts__item"
-				onClick={ () => {
-					onSelectItem( item.id, item );
-					this.onClose();
-				} }
-				tabIndex={ isCurrent || item.isDisabled ? null : '-1' }
-				disabled={ item.isDisabled }
-			>
-				{ decode( rendered ) }
-			</button>
-		);
-	};
-
-	renderDropdown = ( { onToggle, isOpen, onClose } ) => {
-		this.onClose = onClose.bind( this );
-
-		return (
-			<div
-				className={ classNames( 'tribe-editor__search-posts' ) }
-				onScroll={ this.onScroll }
-			>
-				{ this.renderSearchInput() }
-				<div
-					role="menu"
-					className={ classNames( 'tribe-editor__search-posts__results' ) }
-					ref={ this.dropdownEl }
-				>
-					{ this.renderList() }
-				</div>
-			</div>
-		);
-	}
-
-	renderSearchInput() {
-		const { term, searchLabel } = this.props;
-		const instanceId = uniqueId( 'search-' );
-
-		return ( <div>
-			<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
-				{ searchLabel }
-			</label>
-			<input
-				id={ `editor-inserter__${ instanceId }` }
-				type="search"
-				placeholder={ searchLabel }
-				value={ term }
-				className="editor-inserter__search"
-				onChange={ this.onChange }
-			/>
-		</div> );
-	}
-
-	renderToggle = ( { onToggle, isOpen } ) => {
-		const { iconLabel } = this.props;
-
-		return (
-			<IconButton
-				className="tribe-editor__btn"
-				label={ iconLabel }
-				onClick={ onToggle }
-				icon={ <Dashicon icon="search" /> }
-				aria-expanded={ isOpen }
-			/>
-		);
-	}
-
-	render() {
-		return (
-			<Dropdown
-				className="tribe-editor__dropdown"
-				position="bottom center"
-				contentClassName="tribe-editor__dropdown-dialog"
-				renderToggle={ this.renderToggle }
-				renderContent={ this.renderDropdown }
-			/>
-		);
-	}
-}
+};
 
 const mapStateToProps = ( state, props ) => ( {
 	term: selectors.getSearchTerm( state, props ),
@@ -233,9 +77,23 @@ const mapStateToProps = ( state, props ) => ( {
 	page: selectors.getPage( state, props ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => ( {
-	...bindActionCreators( actions, dispatch ),
-	...bindActionCreators( thunks, dispatch ),
+const mapDispatchToProps = ( dispatch, ownProps ) => ( {
+	onMount: onMount( dispatch, ownProps ),
+	onInputChange: onInputChange( dispatch, ownProps ),
+	onItemClick: onItemClick( dispatch, ownProps ),
+	dispatch,
 } );
 
-export default connect( mapStateToProps, mapDispatchToProps )( SearchPosts );
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
+	...ownProps,
+	...stateProps,
+	...dispatchProps,
+	onDropdownScroll: onDropdownScroll( stateProps, dispatchProps, ownProps ),
+	onDropdownToggle: onDropdownToggle( stateProps, dispatchProps, ownProps ),
+} );
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+	mergeProps
+)( SearchPosts );

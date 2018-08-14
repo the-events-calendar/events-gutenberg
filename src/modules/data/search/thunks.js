@@ -8,6 +8,9 @@ import {
 	utils as requestUtils,
 } from 'data/request';
 
+// TODO: There is a lot of logic in this thunk that should be moved into
+// each specific call instead. Given the function name and location,
+// "search" should only search given params and handle success/error.
 export const search = ( id, params ) => ( dispatch, getState ) => {
 	const {
 		term = '',
@@ -23,6 +26,8 @@ export const search = ( id, params ) => ( dispatch, getState ) => {
 		return;
 	}
 
+	// This logic should probably not be in here. Instead, this should be called
+	// before the search call and determine whether search is called or not.
 	if ( populated && term.trim() === '' ) {
 		dispatch( actions.clearBlock( id ) );
 		return;
