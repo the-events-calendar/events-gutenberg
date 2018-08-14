@@ -47,6 +47,7 @@ class SearchPosts extends Component {
 		page: PropTypes.number,
 		onMount: PropTypes.func,
 		onInputChange: PropTypes.func,
+		onItemClick: PropTypes.func,
 		onDropdownScroll: PropTypes.func,
 		search: PropTypes.func,
 	};
@@ -54,13 +55,6 @@ class SearchPosts extends Component {
 	componentDidMount() {
 		this.props.onMount();
 	}
-
-	onItemClick = ( item ) => {
-		const { name, setTerm, onSelectItem } = this.props;
-		setTerm( name, '' );
-		onSelectItem( item.id, item );
-		this.onClose();
-	};
 
 	onDropdownToggle = ( isOpen ) => {
 		const { name, term, setTerm } = this.props;
@@ -81,22 +75,22 @@ class SearchPosts extends Component {
 		);
 	}
 
-	renderItem = ( item ) => (
+	renderItem = ( item, onClick ) => (
 		<li
 			key={ `post-${ item.id }` }
 			className="tribe-editor__search-posts__results-list-item"
 		>
 			<button
 				className="tribe-editor__search-posts__results-list-item-button"
-				onClick={ () => this.onItemClick( item ) }
+				onClick={ () => onClick( item ) }
 			>
 				{ decode( item.title.rendered ) }
 			</button>
 		</li>
 	);
 
-	renderList = () => {
-		const { results, isLoading } = this.props;
+	renderList = ( onClose ) => {
+		const { results, isLoading, onItemClick } = this.props;
 
 		if ( isLoading ) {
 			return (
@@ -108,7 +102,9 @@ class SearchPosts extends Component {
 
 		return (
 			<ul className="tribe-editor__search-posts__results-list">
-				{ results.map( this.renderItem, this ) }
+				{ results.map( ( item ) => (
+					this.renderItem( item, onItemClick( onClose ) ), this )
+				) }
 			</ul>
 		);
 	}
@@ -145,7 +141,7 @@ class SearchPosts extends Component {
 					className={ classNames( 'tribe-editor__search-posts__results' ) }
 					onScroll={ this.props.onDropdownScroll }
 				>
-					{ this.renderList() }
+					{ this.renderList( onClose ) }
 				</div>
 			</div>
 		);

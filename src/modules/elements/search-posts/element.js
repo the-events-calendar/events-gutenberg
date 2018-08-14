@@ -36,6 +36,17 @@ const onInputChange = ( dispatch, ownProps ) => ( event ) => {
 	} ) );
 };
 
+const onItemClick = ( dispatch, ownProps ) => ( onClose ) => ( item ) => {
+	const { name, onItemSelect } = ownProps;
+	dispatch( actions.setTerm( name, '' ) );
+
+	if ( onItemSelect ) {
+		onItemSelect( item.id, item );
+	}
+
+	onClose();
+}
+
 const onDropdownScroll = ( stateProps, dispatchProps, ownProps ) => ( event ) => {
 	const { target } = event;
 	const { scrollHeight, scrollTop } = target;
@@ -65,6 +76,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	...bindActionCreators( thunks, dispatch ),
 	onMount: onMount( dispatch, ownProps ),
 	onInputChange: onInputChange( dispatch, ownProps ),
+	onItemClick: onItemClick( dispatch, ownProps ),
 	dispatch,
 } );
 
