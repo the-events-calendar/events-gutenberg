@@ -105,19 +105,21 @@ class SearchPosts extends Component {
 		const { term, searchLabel, onInputChange } = this.props;
 		const instanceId = uniqueId( 'search-' );
 
-		return ( <div>
-			<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
-				{ searchLabel }
-			</label>
-			<input
-				id={ `editor-inserter__${ instanceId }` }
-				type="search"
-				placeholder={ searchLabel }
-				value={ term }
-				className="editor-inserter__search"
-				onChange={ onInputChange }
-			/>
-		</div> );
+		return (
+			<div>
+				<label htmlFor={ `editor-inserter__${ instanceId }` } className="screen-reader-text">
+					{ searchLabel }
+				</label>
+				<input
+					id={ `editor-inserter__${ instanceId }` }
+					type="search"
+					placeholder={ searchLabel }
+					value={ term }
+					className="editor-inserter__search"
+					onChange={ onInputChange }
+				/>
+			</div>
+		);
 	}
 
 	renderDropdown = ( { isOpen, onClose } ) => (
