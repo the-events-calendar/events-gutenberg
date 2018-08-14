@@ -78,8 +78,6 @@ const mapStateToProps = ( state, props ) => ( {
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	...bindActionCreators( actions, dispatch ),
-	...bindActionCreators( thunks, dispatch ),
 	onMount: onMount( dispatch, ownProps ),
 	onInputChange: onInputChange( dispatch, ownProps ),
 	onItemClick: onItemClick( dispatch, ownProps ),

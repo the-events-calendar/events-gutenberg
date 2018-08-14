@@ -28,28 +28,21 @@ import './style.pcss';
  */
 
 class SearchPosts extends Component {
-	static defaultProps = {
-		onHover: noop,
-		store: {},
-		storeName: '',
-		results: [],
-	};
-
 	static propTypes = {
-		name: PropTypes.string,
-		postType: PropTypes.string,
-		exclude: PropTypes.array,
+		name: PropTypes.string.isRequired,
+		postType: PropTypes.string.isRequired,
+		exclude: PropTypes.array.isRequired,
 		searchLabel: PropTypes.string,
 		iconLabel: PropTypes.string,
-		term: PropTypes.string,
-		isLoading: PropTypes.bool,
-		results: PropTypes.array,
-		page: PropTypes.number,
-		onMount: PropTypes.func,
-		onInputChange: PropTypes.func,
-		onItemClick: PropTypes.func,
-		onDropdownScroll: PropTypes.func,
-		search: PropTypes.func,
+		term: PropTypes.string.isRequired,
+		isLoading: PropTypes.bool.isRequired,
+		results: PropTypes.array.isRequired,
+		page: PropTypes.number.isRequired,
+		onMount: PropTypes.func.isRequired,
+		onInputChange: PropTypes.func.isRequired,
+		onItemClick: PropTypes.func.isRequired,
+		onDropdownScroll: PropTypes.func.isRequired,
+		onDropdownToggle: PropTypes.func.isRequired,
 	};
 
 	componentDidMount() {
