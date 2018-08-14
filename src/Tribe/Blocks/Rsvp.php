@@ -77,9 +77,11 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		// Get the event id
 		$event_id = get_the_id();
 
+		$tickets = array();
+
 		// Bail if there's no event id
 		if ( ! $event_id ) {
-			return array();
+			return $tickets;
 		}
 
 		// Get the tickets IDs for this event
@@ -87,10 +89,8 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		// Bail if we don't have tickets
 		if ( ! $ticket_ids ) {
-			return array();
+			return $tickets;
 		}
-
-		$tickets = array();
 
 		foreach ( $ticket_ids as $post ) {
 
@@ -156,13 +156,13 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		$response = array( 'success' => false, 'html' => '', 'view' => 'rsvp-form' );
 
 		if ( ! isset( $_POST['ticket_id'] ) ) {
-			die( - 1 );
+			die( -1 );
 		}
 
 		ob_start();
 
 		$args = array(
-			'ticket_id' => intval( $_POST['ticket_id'] )
+			'ticket_id' => intval( absint( $_POST['ticket_id'] ) ),
 		);
 
 		tribe( 'gutenberg.template' )->template( 'blocks/rsvp/content/form', $args );
@@ -172,9 +172,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		apply_filters( 'tribe_events_rsvp_form', $response );
 
-		header( 'Content-type: application/json' );
-		echo json_encode( $response );
-		die();
+		wp_send_json( $response );
 
 	}
 }

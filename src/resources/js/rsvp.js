@@ -1,10 +1,10 @@
-var tribe_tickets_rsvp = {
-	num_attendees: 0,
-	event        : {}
-};
-
 (function( $, my ) {
 	'use strict';
+
+	var tribe_tickets_rsvp = {
+		num_attendees: 0,
+		event        : {}
+	};
 
 	// Bind actions to the "not-going" click
 	$( '.tribe-block__rsvp-ticket' ).on( 'click', '.not-going', function( e ) {
