@@ -1,12 +1,13 @@
 <?php
 /**
- * This template renders the tickets
+ * This template renders one Ticket Container it will
+ * be repeated for as many ticket are to be displayed
  *
  * @version TBD
  *
  */
 $post_id = $this->get( 'post_id' );
-$ticket = $this->get( 'ticket' );
+$ticket  = $this->get( 'ticket' );
 $classes = array( 'tribe-block__tickets__item' );
 ?>
 <div
