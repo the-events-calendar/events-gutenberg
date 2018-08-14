@@ -1,8 +1,8 @@
 <?php
 $ticket = $this->get( 'ticket' );
 ?>
-<div
+<button
 	class="tribe-block__tickets__item__quantity__add"
 >
-	Quantity Add
-</div>
+	<?php esc_html_e( '+', 'events-gutenberg' ); ?>
+</button>
