@@ -12,13 +12,81 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ---
 
-### Using developement Version from GitHub
+### Using development version from GitHub
 
 1. Clone the Repository
-2. Install [Yarn](https://yarnpkg.com) _(better)_ or [NPM](https://www.npmjs.com/)
-3. Run `yarn install` on the repository
-4. Run `yarn run build` to generate Assets for the Plugin
+2. Install [NPM](https://www.npmjs.com/)
+3. Run `npm install` on the repository
+4. Run `npm run bootstrap` to bootstrap the plugins
 
+#### Production
+
+To build for production
+
+```sh
+npm run build
+# To only build for certain plugins
+npm run build -- --scope=@moderntribe/common,@moderntribe/events
+```
+
+#### Development
+
+To watch files for development
+
+```sh
+npm run dev
+# To only run watchers for certain plugins
+npm run dev -- --scope=@moderntribe/common,@moderntribe/events
+```
+
+#### Analyze bundles
+
+This will open a browser window showing current bundle sizes for a plugin.
+
+```sh
+npm run analyze
+# To only analyze certain plugins
+npm run analyze -- --scope=@moderntribe/common
+```
+
+### Adding new plugins
+
+From the root, we'll need to symlink the new plugin so that it can be looked up via npm. Just doing the command below will do the trick.
+
+```sh
+npm install --save plugins/*
+```
+
+#### Symlinking folders
+
+Since the folder structure we use is not node-friendly, we have to symlink directories from within the plugin's `src/modules` directory into the root of the plugin. This allows plugins to be properly imported when importing a module i.e. `@moderntribe/events/blocks` would have to be `@moderntribe/events/src/modules/blocks` if we did not do this.
+
+Add a new `scripts` folder within the plugin with a `linkDependencies` bash script.
+
+```sh
+mkdir scripts
+touch scripts/linkDependencies
+chmod +x scripts/linkDependencies
+```
+
+Add into the script something like:
+
+```sh
+#! /bin/bash
+
+ln -sf $PWD/src/modules/[bundleName] $PWD # Add one for each bundle
+```
+
+Now add in a `bootstrap` script into the plugin's `package.json`
+```json
+{
+    "scripts": {
+        "bootstrap": "./scripts/linkDependencies"
+    }
+}
+```
+
+Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ---
 
