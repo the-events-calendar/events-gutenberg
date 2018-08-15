@@ -1,6 +1,6 @@
 /**
  * Internal dependencies
  */
-import { withPrefix } from '@moderntribe/common/data/utils';
+import { PREFIX } from '@moderntribe/common/data/utils';
 
-export const WP_REQUEST = withPrefix( 'WP_REQUEST' );
+export const WP_REQUEST = `${ PREFIX }/WP_REQUEST`;
