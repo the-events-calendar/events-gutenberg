@@ -16,9 +16,9 @@
 		"npm": ">=5.0.0"
 	},
 	"scripts": {
-		"test": "TZ=UTC jest --config jest.config.json",
+		"test": "TZ=UTC jest --config ./jest.config.json",
 		"gettext-strings": "cross-env BABEL_ENV=gettext webpack",
-		"test:travis": "npm run test -- --maxWorkers=4 --no-cache",
+		"test:travis": "npm run test -- --maxWorkers=4",
 		"lint": "eslint --quiet --parser=babel-eslint 'plugins/**/src/modules/**/*.js'",
 		"lint:fix": "npm run lint -- --fix",
 		"bootstrap": "lerna bootstrap && npx lerna run bootstrap",
