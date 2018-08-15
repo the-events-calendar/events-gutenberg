@@ -5,9 +5,11 @@ import { selectors } from '@moderntribe/events/data/blocks/datetime';
 import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/datetime/reducer';
 
 const state = {
-	blocks: {
-		datetime: DEFAULT_STATE,
-	},
+	events: {
+		blocks: {
+			datetime: DEFAULT_STATE,
+		},
+	}
 };
 
 describe( '[STORE] - Datetime selectors', () => {
