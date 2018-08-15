@@ -13,10 +13,8 @@ import reducer from '@moderntribe/common/data';
 import { wpRequest } from './middlewares';
 
 export default () => {
-	let store = window.__tribe_common_store__ || null;
-
-	if ( store ) {
-		return store;
+	if ( window.__tribe_common_store__ ) {
+		return window.__tribe_common_store__;
 	}
 
 	const middlewares = [
@@ -26,7 +24,7 @@ export default () => {
 
 	const composeEnhancers = composeWithDevTools( { name: 'tribe/common' } );
 
-	store = createStore( reducer( {} ), composeEnhancers( applyMiddleware( ...middlewares ) ) );
+	const store = createStore( reducer( {} ), composeEnhancers( applyMiddleware( ...middlewares ) ) );
 	augmentStore( reducer, store );
 	window.__tribe_common_store__ = store;
 
