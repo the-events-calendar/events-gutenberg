@@ -1,6 +1,6 @@
 /**
  * Internal dependencies
  */
-import { PREFIX } from '@moderntribe/common/data/utils';
+import { PREFIX_COMMON_STORE } from '@moderntribe/common/data/utils';
 
-export const WP_REQUEST = `${ PREFIX }/WP_REQUEST`;
+export const WP_REQUEST = `${ PREFIX_COMMON_STORE }/WP_REQUEST`;

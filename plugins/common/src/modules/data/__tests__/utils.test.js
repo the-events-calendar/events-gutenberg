@@ -1,10 +1,10 @@
 /**
  * Internal dependencies
  */
-import { PREFIX } from '@moderntribe/common/data/utils';
+import { PREFIX_COMMON_STORE } from '@moderntribe/common/data/utils';
 
 describe( 'prefix', () => {
 	it( 'Should return the prefix', () => {
-		expect( PREFIX ).toBe('@@MT/COMMON');
+		expect( PREFIX_COMMON_STORE ).toBe('@@MT/COMMON');
 	} );
 } );
