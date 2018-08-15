@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import idx from 'idx';
 import { createSelector } from 'reselect';
 
 export const datetimeSelector = ( state ) => state.blocks.datetime;
