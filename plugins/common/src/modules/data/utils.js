@@ -1,1 +1,1 @@
-export const PREFIX = '@@MT/COMMON';
+export const PREFIX_COMMON_STORE = '@@MT/COMMON';
