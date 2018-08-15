@@ -16,7 +16,8 @@
       ],
       "testURL": "http://localhost/",
       "moduleNameMapper": {
-        "\\.(css|pcss)$": "identity-obj-proxy"
+        "\\.(css|pcss)$": "identity-obj-proxy",
+        "\\.(svg)$": "<rootDir>/__mocks__/icons.js"
       }
     },
     {
@@ -31,7 +32,7 @@
       "testURL": "http://localhost/",
       "moduleNameMapper": {
         "\\.(css|pcss)$": "identity-obj-proxy",
-        "\\.(svg)$": "<rootDir>/plugins/events/__mocks__/icons.js"
+        "\\.(svg)$": "<rootDir>/__mocks__/icons.js"
       }
     }
   ],
