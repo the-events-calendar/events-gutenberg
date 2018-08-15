@@ -27,7 +27,7 @@
       ],
       "testURL": "http://localhost/",
       "moduleNameMapper": {
-        "\\.(css|pcss)$": "<rootDir>/plugins/events/__mocks__/style.js",
+        "^.+\\.(p?css)$": "<rootDir>/plugins/events/__mocks__/style.js",
         "\\.(svg)$": "<rootDir>/plugins/events/__mocks__/icons.js"
       }
     }
