@@ -14,7 +14,11 @@
       "testMatch": [
         "<rootDir>/plugins/common/**/__tests__/**/*.js?(x)"
       ],
-      "testURL": "http://localhost/"
+      "testURL": "http://localhost/",
+      "moduleNameMapper": {
+        "\\.(css|pcss)$": "identity-obj-proxy",
+        "\\.(svg)$": "<rootDir>/__mocks__/icons.js"
+      }
     },
     {
       "displayName": "events",
@@ -27,8 +31,8 @@
       ],
       "testURL": "http://localhost/",
       "moduleNameMapper": {
-        "^.+\\.(p?css)$": "<rootDir>/plugins/events/__mocks__/style.js",
-        "\\.(svg)$": "<rootDir>/plugins/events/__mocks__/icons.js"
+        "\\.(css|pcss)$": "identity-obj-proxy",
+        "\\.(svg)$": "<rootDir>/__mocks__/icons.js"
       }
     }
   ],
