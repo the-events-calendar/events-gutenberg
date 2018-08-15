@@ -152,7 +152,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 */
 	public function rsvp_form() {
 
-		$response  = array( 'success' => false, 'html' => '', 'view' => 'rsvp-form' );
+		$response  = array( 'html' => '', 'view' => 'rsvp-form' );
 		$ticket_id = tribe_get_request_var( 'ticket_id' );
 
 		if ( null === $ticket_id ) {
@@ -160,13 +160,17 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		}
 
 		$args = array(
-			'ticket_id' => intval( absint( $_POST['ticket_id'] ) ),
-			'ticket'    => tribe( 'tickets.rsvp' )->get_ticket( get_the_id(), intval( $_POST['ticket_id'] ) )
+			'ticket_id' => $ticket_id,
+			'ticket'    => tribe( 'tickets.rsvp' )->get_ticket( get_the_id(), $ticket_id )
 		);
 
 		$html = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/content/form', $args, false );
 
 		$response['html']    = $html;
+
+		wp_send_json( $response );
+
+	}
 		$response['success'] = true;
 
 		wp_send_json( $response );
