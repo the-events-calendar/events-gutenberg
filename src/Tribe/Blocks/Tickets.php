@@ -51,8 +51,15 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
+		$post_id = tribe( 'gutenberg.template' )->get( 'post_id' );
 		$args['attributes'] = $this->attributes( $attributes );
-		$args['tickets'] = $this->get_tickets( tribe( 'gutenberg.template' )->get( 'post_id' ) );
+		$args['tickets'] = $this->get_tickets( $post_id );
+
+		// Fetch the default provider
+		$provider = Tribe__Tickets__Tickets::get_event_ticket_provider( $post_id );
+		$provider = call_user_func( array( $provider, 'get_instance' ) );
+
+		$args['provider'] = $provider
 
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.template' )->add_template_globals( $args );
