@@ -59,7 +59,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		$provider = Tribe__Tickets__Tickets::get_event_ticket_provider( $post_id );
 		$provider = call_user_func( array( $provider, 'get_instance' ) );
 
-		$args['provider'] = $provider
+		$args['provider'] = $provider;
 
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.template' )->add_template_globals( $args );
