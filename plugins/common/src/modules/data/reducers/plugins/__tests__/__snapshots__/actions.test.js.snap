@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Plugin actions Activate Plugin 1`] = `
+Object {
+  "payload": Object {
+    "name": "events",
+  },
+  "type": "@@MT/COMMON/ACTIVATE_PLUGIN",
+}
+`;
+
+exports[`Plugin actions Add Plugin 1`] = `
+Object {
+  "payload": Object {
+    "name": "events",
+  },
+  "type": "@@MT/COMMON/ADD_PLUGIN",
+}
+`;
+
+exports[`Plugin actions Deactivate Plugin 1`] = `
+Object {
+  "payload": Object {
+    "name": "events",
+  },
+  "type": "@@MT/COMMON/DEACTIVATE_PLUGIN",
+}
+`;
+
+exports[`Plugin actions Remove Plugin 1`] = `
+Object {
+  "payload": Object {
+    "name": "events",
+  },
+  "type": "@@MT/COMMON/REMOVE_PLUGIN",
+}
+`;
