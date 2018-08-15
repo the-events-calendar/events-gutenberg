@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { actions, middlewares } from '@moderntribe/events/data/request';
+import wpRequest, { actions } from '@moderntribe/common/store/middlewares/request';
 
 let create;
 const nextMock = jest.fn();
@@ -23,7 +23,7 @@ const xhr = {
 describe( '[STORE] - wp-request middleware', () => {
 	beforeAll( () => {
 		create = () => {
-			const invoke = ( action ) => middlewares.wpRequest()( nextMock )( action );
+			const invoke = ( action ) => wpRequest()( nextMock )( action );
 			return { next: nextMock, invoke };
 		};
 	} );
@@ -61,7 +61,7 @@ describe( '[STORE] - wp-request middleware', () => {
 		expect( meta.actions.none ).toHaveBeenLastCalledWith( meta.path );
 		expect( meta.actions.start ).not.toHaveBeenCalled();
 		expect( meta.actions.success ).not.toHaveBeenCalled();
-		// expect( xhr.getAllResponseHeaders ).not.toHaveBeenCalled();
+		expect( xhr.getAllResponseHeaders ).not.toHaveBeenCalled();
 		expect( meta.actions.error ).not.toHaveBeenCalled();
 	} );
 

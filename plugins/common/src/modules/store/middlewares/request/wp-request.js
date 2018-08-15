@@ -6,7 +6,7 @@ import { noop, get } from 'lodash';
 /**
  * Internal dependencies
  */
-import { types } from '@moderntribe/events/data/request';
+import { types } from '@moderntribe/common/store/middlewares/request';
 import { getResponseHeaders } from '@moderntribe/events/editor/utils/request';
 
 export const BASE = '/wp/v2';

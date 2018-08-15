@@ -6,6 +6,6 @@ Object {
     "actions": Object {},
     "path": "tribe_organizer/1225",
   },
-  "type": "WP_REQUEST",
+  "type": "@@MT/COMMON/WP_REQUEST",
 }
 `;
