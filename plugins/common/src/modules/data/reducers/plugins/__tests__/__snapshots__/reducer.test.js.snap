@@ -8,7 +8,7 @@ Object {
 
 exports[`Plugins reducer Should add a new plugin as inactive 1`] = `
 Object {
-  "events": false,
+  "events": true,
 }
 `;
 
