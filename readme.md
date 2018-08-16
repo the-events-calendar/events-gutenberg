@@ -97,6 +97,9 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 * Tweak - Use event timezone as default value
 * Tweak - Separate logic and presentation in event venue block
+* Tweak - Move `request` mechanism into `common`
+* Feature - Add store registration in `common`
+* Feature - Move `events` reducer into the `common` store
 * Fix - Allow removal of organizers from classic block if the organizer block is removed
 
 #### 0.2.6-alpha - 2018-08-10
