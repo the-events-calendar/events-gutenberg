@@ -22,7 +22,7 @@ const isEmpty = ( label ) => label.trim() === '';
 const mapStateToProps = ( state ) => ( {
 	url: selectors.getUrl( state ),
 	urlLabel: selectors.getLabel( state ),
-	isEmpty: isEmpty( state.blocks.website.label ),
+	isEmpty: isEmpty( selectors.getLabel( state ) ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => bindActionCreators( actions, dispatch );
