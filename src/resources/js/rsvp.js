@@ -7,8 +7,8 @@
 	};
 
 	// Bind actions to the "not-going" click
-	$( '.tribe-block__rsvp-ticket' ).on( 'click', '.not-going', function( e ) {
-		var ticket    = $( this ).closest( '.tribe-block__rsvp-ticket' );
+	$( '.tribe-block__rsvp__ticket' ).on( 'click', '.not-going', function( e ) {
+		var ticket    = $( this ).closest( '.tribe-block__rsvp__ticket' );
 
 		ticket.find( '.rsvp-form' ).html( '' );
 
@@ -16,7 +16,7 @@
 
 	// Bind actions to the "going" click
 	$( '.tribe-block__rsvp-ticket' ).on( 'click', '.going', function( e ) {
-		var ticket    = $( this ).closest( '.tribe-block__rsvp-ticket' );
+		var ticket    = $( this ).closest( '.tribe-block__rsvp__ticket' );
 		var ticket_id = ticket.data( 'rsvp-id' );
 
 		var params = {
@@ -28,7 +28,7 @@
 			TribeRsvp.ajaxurl,
 			params,
 			function( response ) {
-				ticket.find( '.rsvp-form' ).html( response.html );
+				ticket.find( '.tribe-block__rsvp__form' ).html( response.html );
 			}
 		);
 	} );
