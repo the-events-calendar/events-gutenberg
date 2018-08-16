@@ -1,10 +1,14 @@
 /**
  * Internal dependencies
  */
-import { maybeDispatch } from '@moderntribe/events/data/utils';
+import { maybeDispatch, PREFIX_EVENTS_STORE } from '@moderntribe/events/data/utils';
 
 const dispatch = jest.fn();
 const action = jest.fn();
+
+describe( 'Store prefix', () => {
+	expect( PREFIX_EVENTS_STORE ).toBe( '@@MT/EVENTS' );
+} );
 
 describe( 'Data utils maybeDispatch', () => {
 	afterEach( () => {
