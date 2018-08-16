@@ -6,7 +6,7 @@ Object {
     "id": "events",
     "isLoading": false,
   },
-  "type": "SET_DETAILS_IS_LOADING",
+  "type": "@@MT/EVENTS/SET_DETAILS_IS_LOADING",
 }
 `;
 
@@ -16,7 +16,7 @@ Object {
     "id": "events",
     "isLoading": true,
   },
-  "type": "SET_DETAILS_IS_LOADING",
+  "type": "@@MT/EVENTS/SET_DETAILS_IS_LOADING",
 }
 `;
 
@@ -29,7 +29,7 @@ Object {
     },
     "id": "events",
   },
-  "type": "SET_DETAILS",
+  "type": "@@MT/EVENTS/SET_DETAILS",
 }
 `;
 
@@ -39,6 +39,6 @@ Object {
     "id": "events",
     "postType": "tribe_events",
   },
-  "type": "SET_DETAILS_POST_TYPE",
+  "type": "@@MT/EVENTS/SET_DETAILS_POST_TYPE",
 }
 `;
