@@ -3,7 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-export const sharingSelector = ( state ) => state.blocks.sharing;
+export const sharingSelector = ( state ) => state.events.blocks.sharing;
 
 export const googleCalendarLabelSelector = createSelector(
 	[ sharingSelector ],

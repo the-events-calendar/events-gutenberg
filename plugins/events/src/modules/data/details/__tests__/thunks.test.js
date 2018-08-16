@@ -15,12 +15,14 @@ const mockStore = configureStore( middlewares );
 describe( '[STORE] - Details thunks', () => {
 	it( 'Should avoid fetching new details when loading', () => {
 		const store = mockStore( {
-			details: {
-				20: {
-					isLoading: true,
-					details: {},
+			events: {
+				details: {
+					20: {
+						isLoading: true,
+						details: {},
+					},
 				},
-			}
+			},
 		} );
 		store.dispatch( thunks.fetchDetails( 20 ) );
 		expect( store.getActions() ).toEqual( [] );
@@ -28,12 +30,14 @@ describe( '[STORE] - Details thunks', () => {
 
 	it( 'Should fetching details for non loading block', () => {
 		const store = mockStore( {
-			details: {
-				20: {
-					isLoading: false,
-					details: {},
+			events: {
+				details: {
+					20: {
+						isLoading: false,
+						details: {},
+					},
 				},
-			}
+			},
 		} );
 		store.dispatch( thunks.fetchDetails( 20 ) );
 		expect( store.getActions() ).toMatchSnapshot();

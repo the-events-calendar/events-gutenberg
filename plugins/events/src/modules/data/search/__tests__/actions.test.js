@@ -57,11 +57,13 @@ describe( '[STORE] - Search actions', () => {
 describe( '[STORE] - Search thunk actions', () => {
 	it( 'Should request action', () => {
 		const store = mockStore( {
-			search: {
-				post: {
-					postType: 'tribe_events',
+			events: {
+				search: {
+					post: {
+						postType: 'tribe_events',
+					},
 				},
-			},
+			}
 		} );
 		store.dispatch( thunks.search( 'post', { term: 'Modern' } ) );
 		expect( store.getActions() ).toMatchSnapshot();
@@ -69,7 +71,9 @@ describe( '[STORE] - Search thunk actions', () => {
 
 	it( 'Should clear the block', () => {
 		const initialState = {
-			search: {},
+			events: {
+				search: {},
+			}
 		};
 		const store = mockStore( initialState );
 		const searchParams = {

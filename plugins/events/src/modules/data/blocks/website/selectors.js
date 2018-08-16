@@ -3,7 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-export const getWebsiteBlock = ( state ) => state.blocks.website;
+export const getWebsiteBlock = ( state ) => state.events.blocks.website;
 
 export const getUrl = createSelector(
 	[ getWebsiteBlock ],
