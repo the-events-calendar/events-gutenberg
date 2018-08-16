@@ -1,7 +1,12 @@
-export const SET_PRICE_COST = 'SET_PRICE_COST';
+/**
+ * Internal dependencies
+ */
+import { PREFIX_EVENTS_STORE } from '@moderntribe/events/data/utils';
 
-export const SET_PRICE_SYMBOL = 'SET_PRICE_SYMBOL';
+export const SET_PRICE_COST = `${ PREFIX_EVENTS_STORE }/SET_PRICE_COST`;
 
-export const SET_PRICE_POSITION = 'SET_PRICE_POSITION';
+export const SET_PRICE_SYMBOL = `${ PREFIX_EVENTS_STORE }/SET_PRICE_SYMBOL`;
 
-export const SET_PRICE_DESCRIPTION = 'SET_PRICE_DESCRIPTION';
+export const SET_PRICE_POSITION = `${ PREFIX_EVENTS_STORE }/SET_PRICE_POSITION`;
+
+export const SET_PRICE_DESCRIPTION = `${ PREFIX_EVENTS_STORE }/SET_PRICE_DESCRIPTION`;
