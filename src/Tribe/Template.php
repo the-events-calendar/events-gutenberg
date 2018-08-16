@@ -19,7 +19,7 @@ class Tribe__Events_Gutenberg__Template extends Tribe__Template {
 		$this->set_template_context_extract( true );
 
 		// Uses the public folders
-		$this->set_template_use_stack( true );
+		$this->set_template_folder_lookup( true );
 	}
 
 	/**
