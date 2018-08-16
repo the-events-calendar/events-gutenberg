@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import idx from 'idx';
 import { createSelector } from 'reselect';
 
 export const getUI = ( state ) => state.events.ui;
