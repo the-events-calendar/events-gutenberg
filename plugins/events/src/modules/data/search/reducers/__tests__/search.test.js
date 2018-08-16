@@ -18,7 +18,7 @@ describe( '[STORE] - search reducer', () => {
 			...DEFAULT_STATE,
 			results: [ 1, 2, 3 ],
 			postType: 'tribe_events',
-			loading: true,
+			isLoading: true,
 		};
 		expect( reducer( state, actions.clearBlock( 'events' ) ) ).toMatchSnapshot();
 	} );
