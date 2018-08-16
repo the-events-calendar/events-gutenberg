@@ -124,7 +124,7 @@ Array [
       },
       "path": "tribe_events?orderby=relevance&status=draft%2Cpublish&order=asc&page=1&per_page=50&search=Modern",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;

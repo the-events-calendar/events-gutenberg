@@ -99,7 +99,7 @@ Array [
       },
       "path": "tribe_venue/21",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;
@@ -123,7 +123,7 @@ Array [
       },
       "path": "tribe_venue/21",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;
@@ -145,7 +145,7 @@ Array [
       },
       "path": "tribe_organizer",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;
