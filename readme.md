@@ -18,6 +18,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 2. Install [NPM](https://www.npmjs.com/)
 3. Run `npm install` on the repository
 4. Run `npm run bootstrap` to bootstrap the plugins
+5. Run `npm run build` to build out the assets
 
 #### Production
 
