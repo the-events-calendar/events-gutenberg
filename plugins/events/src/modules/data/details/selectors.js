@@ -10,9 +10,7 @@ import { createSelector } from 'reselect';
 import { selectors as formsSelectors } from '@moderntribe/events/data/forms';
 import { DEFAULT_STATE } from './reducers/details';
 
-export const blockSelector = ( state, props ) => {
-	return state.events.details[ props.name ];
-}
+export const blockSelector = ( state, props ) => state.events.details[ props.name ];
 
 export const getPostType = createSelector(
 	[ blockSelector ],
