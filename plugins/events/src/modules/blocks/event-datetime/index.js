@@ -11,16 +11,17 @@ import { get } from 'lodash';
 /**
  * Internal dependencies
  */
-import { withStore } from '@moderntribe/common/hoc';
-import EventDateTime from './block';
+import EventDateTime from './container';
 import { Icons } from '@moderntribe/events/elements';
 import { config } from '@moderntribe/events/editor/utils/globals';
-const timeZone = get( config(), 'timeZone', {} );
 import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
 /**
  * Module Code
  */
+
+const timeZone = get( config(), 'timeZone', {} );
+
 export default {
 	id: 'event-datetime',
 	title: __( 'Event Date Time', 'events-gutenberg' ),
@@ -93,7 +94,7 @@ export default {
 		},
 	},
 
-	edit: withStore()( EventDateTime ),
+	edit: EventDateTime,
 
 	save( props ) {
 		return null;
