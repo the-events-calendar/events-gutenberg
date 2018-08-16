@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import chrono from 'chrono-node';
-import { noop, isUndefined, isFunction, debounce } from 'lodash';
+import { noop, debounce } from 'lodash';
 
 /**
  * Internal dependencies
@@ -12,18 +12,18 @@ import { noop, isUndefined, isFunction, debounce } from 'lodash';
 import './style.pcss';
 import { toDateTime, toMoment } from '@moderntribe/events/editor/utils/moment';
 
-const Input = ( props ) => (
+const Input = ( { value, onClickHandler, onChange, before, after } ) => (
 	<div className="tribe-editor__date-input__container">
-		{ props.before }
+		{ before }
 		<input
 			type="text"
 			name="date-input"
 			className="tribe-editor__date-input"
-			value={ props.value }
-			onChange={ props.onChange }
-			onFocus={ props.onClickHandler }
+			value={ value }
+			onChange={ onChange }
+			onFocus={ onClickHandler }
 		/>
-		{ props.after }
+		{ after }
 	</div>
 );
 
@@ -75,10 +75,11 @@ const _parse = ( value, setDateTime ) => {
 const DateInput = ( props ) => {
 	const parse = debounce( _parse, 500 );
 
-	function handleChange( event ) {
-		props.onChange( event.target.value );
-		parse( event.target.value, props.setDateTime );
-	}
+	const handleChange = ( event ) => {
+		const { value } = event.target;
+		props.onChange( value );
+		parse( value, props.setDateTime );
+	};
 
 	return props.selected
 		? <Input { ...props } onChange={ handleChange } />

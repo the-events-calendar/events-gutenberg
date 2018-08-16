@@ -215,7 +215,6 @@ class EventDateTime extends Component {
 	 */
 	renderSeparator( type, className ) {
 		const {
-			timeZone,
 			separatorDate,
 			separatorTime,
 			setTimeZoneLabel,
@@ -262,52 +261,6 @@ class EventDateTime extends Component {
 			default:
 				return null;
 		}
-	}
-
-	/**
-	 * Main label used to display the event
-	 *
-	 * @returns {ReactDOM} A React Dom Element null if none.
-	 */
-	renderDate() {
-		const {
-			multiDay,
-			allDay,
-			isSelected,
-			openDashboardDateTime,
-			setDateTime,
-			setNaturalLanguageLabel,
-			naturalLanguageLabel,
-		} = this.props;
-		return (
-			<section
-				key="event-datetime"
-				className="tribe-editor__subtitle tribe-editor__date-time"
-			>
-				<DateInput
-					selected={ isSelected }
-					onClickHandler={ openDashboardDateTime }
-					onChange={ setNaturalLanguageLabel }
-					setDateTime={ setDateTime }
-					value={ naturalLanguageLabel }
-					after={ this.renderExtras() }
-				>
-					<h2 className="tribe-editor__subtitle__headline">
-						<button
-							className="tribe-editor__btn--label"
-							onClick={ openDashboardDateTime }
-						>
-							{ this.renderStart() }
-							{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
-							{ this.renderEnd() }
-							{ allDay && this.renderSeparator( 'all-day' ) }
-						</button>
-						{ this.renderExtras() }
-					</h2>
-				</DateInput>
-				{ this.renderDashboard() }
-			</section>
-		);
 	}
 
 	renderExtras() {
@@ -567,6 +520,57 @@ class EventDateTime extends Component {
 		);
 	}
 
+	toggleTimeZoneVisibility = () => {
+		const { showTimeZone, setTimeZoneVisibility } = this.props;
+		setTimeZoneVisibility( ! showTimeZone );
+	}
+
+	/**
+	 * Main label used to display the event
+	 *
+	 * @returns {ReactDOM} A React Dom Element null if none.
+	 */
+	renderDate() {
+		const {
+			multiDay,
+			allDay,
+			isSelected,
+			openDashboardDateTime,
+			setDateTime,
+			setNaturalLanguageLabel,
+			naturalLanguageLabel,
+		} = this.props;
+		return (
+			<section
+				key="event-datetime"
+				className="tribe-editor__subtitle tribe-editor__date-time"
+			>
+				<DateInput
+					selected={ isSelected }
+					onClickHandler={ openDashboardDateTime }
+					onChange={ setNaturalLanguageLabel }
+					setDateTime={ setDateTime }
+					value={ naturalLanguageLabel }
+					after={ this.renderExtras() }
+				>
+					<h2 className="tribe-editor__subtitle__headline">
+						<button
+							className="tribe-editor__btn--label"
+							onClick={ openDashboardDateTime }
+						>
+							{ this.renderStart() }
+							{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
+							{ this.renderEnd() }
+							{ allDay && this.renderSeparator( 'all-day' ) }
+						</button>
+						{ this.renderExtras() }
+					</h2>
+				</DateInput>
+				{ this.renderDashboard() }
+			</section>
+		);
+	}
+
 	/**
 	 * Controls being rendered on the sidebar.
 	 *
@@ -613,11 +617,6 @@ class EventDateTime extends Component {
 				/>
 			</PanelBody>
 		</InspectorControls> );
-	}
-
-	toggleTimeZoneVisibility = () => {
-		const { showTimeZone, setTimeZoneVisibility } = this.props;
-		setTimeZoneVisibility( ! showTimeZone );
 	}
 
 	render() {
