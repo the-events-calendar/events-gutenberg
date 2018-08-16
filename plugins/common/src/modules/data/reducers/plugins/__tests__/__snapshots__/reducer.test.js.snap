@@ -1,20 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Plugins reducer Should activate the plugin 1`] = `
+exports[`Plugins reducer Should add a new plugin as active 1`] = `
 Object {
   "events": true,
-}
-`;
-
-exports[`Plugins reducer Should add a new plugin as inactive 1`] = `
-Object {
-  "events": true,
-}
-`;
-
-exports[`Plugins reducer Should deactivate a plugin 1`] = `
-Object {
-  "events": false,
 }
 `;
 
