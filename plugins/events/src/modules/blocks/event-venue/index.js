@@ -6,10 +6,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventVenue from './block';
-import { withStore } from '@moderntribe/common/hoc';
+import EventVenue from './container';
 import { Icons } from '@moderntribe/events/elements';
-import { VENUE } from '@moderntribe/events/editor/post-types';
 
 /**
  * Module Code
@@ -50,7 +48,7 @@ export default {
 		},
 	},
 
-	edit: withStore( { postType: VENUE } )( EventVenue ),
+	edit: EventVenue,
 
 	save( props ) {
 		return null;

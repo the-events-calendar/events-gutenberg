@@ -116,6 +116,7 @@ class EventOrganizers extends Component {
 
 	renderActions() {
 		const { organizers, store } = this.props;
+		// TODO: The store should be passed in as a HOC, not directly this way.
 		return (
 			<div key="organizer-actions">
 				<SearchPosts
@@ -125,19 +126,19 @@ class EventOrganizers extends Component {
 					searchLabel={ __( 'Search for an organizer', 'events-gutenberg' ) }
 					iconLabel={ __( 'Add existing Organizer', 'events-gutenberg' ) }
 					store={ store }
-					onSelectItem={ this.onCreate }
+					onItemSelect={ this.addOrganizer }
 					exclude={ organizers.map( ( { id } ) => id ) }
 				/>
 				<CreateDropdown
 					key="organizer-create-dropdown"
 					focus={ true }
-					addOrganizer={ this.onCreate }
+					addOrganizer={ this.addOrganizer }
 				/>
 			</div>
 		);
 	}
 
-	onCreate = ( id, details ) => {
+	addOrganizer = ( id, details ) => {
 		const { addOrganizerInClassic, setDetails } = this.props;
 		setDetails( id, details );
 		addOrganizerInClassic( id );
