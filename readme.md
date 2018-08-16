@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.2.7-alpha - TBD
 
 * Tweak - Use event timezone as default value
+* Tweak - Separate logic and presentation in event venue block
 * Fix - Allow removal of organizers from classic block if the organizer block is removed
 
 #### 0.2.6-alpha - 2018-08-10

@@ -14,7 +14,12 @@
 		}
 	}
 
-	.tribe-editor__search-posts__item {
+	.tribe-editor__search-posts__results-list,
+	.tribe-editor__search-posts__results-list-item {
+		margin: 0;
+	}
+
+	.tribe-editor__search-posts__results-list-item-button {
 		display: block;
 		width: 100%;
 		color: #555d66;
@@ -26,20 +31,14 @@
 		background: transparent;
 		text-align: left;
 
-		&:disabled {
-
+		&:hover {
+			background-color: #f8f9f9;
 		}
 
-		&:not(:disabled) {
-			&:hover {
-				background-color: #f8f9f9;
-			}
-
-			&:focus,
-			&:active,
-			&.is-active {
-				position: relative;
-			}
+		&:focus,
+		&:active,
+		&.is-active {
+			position: relative;
 		}
 	}
 }
