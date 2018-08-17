@@ -1,0 +1,56 @@
+/**
+ * RSVP block view styles
+ *
+ * @since  TBD
+ */
+
+ /* Hide this for now */
+#rsvp-now { display: none; }
+
+.tribe-block__rsvp {}
+
+.tribe-block__rsvp__ticket {
+	display: flex;
+	flex-wrap: wrap;
+	background: #f8f8f8;
+	border: 2px solid #dfdfdf;
+	border-bottom-width: 0;
+
+	&:last-child {
+		border-bottom-width: 2px;
+	}
+}
+
+.tribe-block__rsvp__status {
+	flex: 1 1 200px;
+	padding: 10px;
+}
+
+.tribe-block__rsvp__icon {
+	background: #fff;
+	flex: 1 1 100px;
+	padding: 10px;
+	text-align: center;
+}
+
+.tribe-block__rsvp__content {
+	border-left: 2px dashed #dfdfdf;
+	flex: 10 5 400px;
+	padding: 10px;
+}
+
+.tribe-block__rsvp__form {
+
+	form {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.left {
+		flex: 0 2 70px;
+	}
+
+	.right {
+		flex: 1 1;
+	}
+}
