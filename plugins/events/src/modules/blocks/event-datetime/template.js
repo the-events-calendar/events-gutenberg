@@ -89,6 +89,11 @@ class EventDateTime extends Component {
 		onKeyDown: PropTypes.func,
 		onClick: PropTypes.func,
 		onSelectDay: PropTypes.func,
+		onStartTimePickerChange: PropTypes.func,
+		onStartTimePickerClick: PropTypes.func,
+		onEndTimePickerChange: PropTypes.func,
+		onEndTimePickerClick: PropTypes.func,
+		onMultiDayToggleChange: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -422,18 +427,14 @@ class EventDateTime extends Component {
 		);
 	}
 
-	multiDayToggleOnChange = ( checked ) => {
-		const { start, end, setMultiDay } = this.props;
-		setMultiDay( { start, end, checked } );
-	};
-
 	renderMultiDayToggle() {
-		const { multiDay } = this.props;
+		const { multiDay, onMultiDayToggleChange } = this.props;
+
 		return (
 			<ToggleControl
 				label={ __( 'Multi-Day', 'events-gutenberg' ) }
 				checked={ multiDay }
-				onChange={ this.multiDayToggleOnChange }
+				onChange={ onMultiDayToggleChange }
 			/>
 		);
 	}

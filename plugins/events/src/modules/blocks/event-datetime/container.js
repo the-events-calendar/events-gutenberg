@@ -148,6 +148,11 @@ const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose )
 	onClose();
 };
 
+const onMultiDayToggleChange = ( stateProps, dispatchProps ) => ( checked ) => {
+	const { start, end } = stateProps;
+	dispatchProps.setMultiDay( { start, end, checked } );
+};
+
 const mapStateToProps = ( state ) => {
 	return {
 		dashboardOpen: UISelectors.getDashboardDateTimeOpen( state ),
@@ -192,6 +197,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	onStartTimePickerClick: onStartTimePickerClick( stateProps, dispatchProps ),
 	onEndTimePickerChange: onEndTimePickerChange( stateProps, dispatchProps ),
 	onEndTimePickerClick: onEndTimePickerClick( stateProps, dispatchProps ),
+	onMultiDayToggleChange: onMultiDayToggleChange( stateProps, dispatchProps ),
 } );
 
 export default compose(
