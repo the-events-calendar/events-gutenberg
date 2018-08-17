@@ -5,7 +5,7 @@ Object {
   "payload": Object {
     "url": "https://tri.be/",
   },
-  "type": "SET_WEBSITE_URL",
+  "type": "@@MT/EVENTS/SET_WEBSITE_URL",
 }
 `;
 
@@ -14,7 +14,7 @@ Object {
   "payload": Object {
     "label": "Modern Tribe",
   },
-  "type": "SET_WEBSITE_LABEL",
+  "type": "@@MT/EVENTS/SET_WEBSITE_LABEL",
 }
 `;
 
@@ -24,13 +24,13 @@ Array [
     "payload": Object {
       "url": "https://tri.be/",
     },
-    "type": "SET_WEBSITE_URL",
+    "type": "@@MT/EVENTS/SET_WEBSITE_URL",
   },
   Object {
     "payload": Object {
       "label": "Modern Tribe",
     },
-    "type": "SET_WEBSITE_LABEL",
+    "type": "@@MT/EVENTS/SET_WEBSITE_LABEL",
   },
 ]
 `;

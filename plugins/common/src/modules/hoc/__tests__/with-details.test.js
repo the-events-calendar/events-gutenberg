@@ -12,11 +12,13 @@ import thunk from 'redux-thunk';
 import { withDetails } from '@moderntribe/common/hoc';
 
 const initialState = {
-	details: {},
-	forms: {
-		byID: {},
-		volatile: [],
-	},
+	events: {
+		details: {},
+		forms: {
+			byID: {},
+			volatile: [],
+		},
+	}
 };
 // here it is possible to pass in any middleware if needed into //configureStore
 const mockStore = configureStore( [ thunk ] );

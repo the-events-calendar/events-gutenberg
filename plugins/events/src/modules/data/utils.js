@@ -3,6 +3,8 @@
  */
 import { isUndefined, isNaN } from 'lodash';
 
+export const PREFIX_EVENTS_STORE = '@@MT/EVENTS';
+
 /**
  * Dispatch an action only if the attribute is present inside of the attributes
  *

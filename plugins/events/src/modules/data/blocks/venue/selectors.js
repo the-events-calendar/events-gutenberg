@@ -3,7 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-export const venueBlockSelector = ( state ) => state.blocks.venue;
+export const venueBlockSelector = ( state ) => state.events.blocks.venue;
 export const getVenue = createSelector(
 	[ venueBlockSelector ],
 	( block ) => block.venue,

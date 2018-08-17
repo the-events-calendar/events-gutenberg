@@ -5,7 +5,9 @@ import { selectors } from '@moderntribe/events/data/ui';
 import { DEFAULT_STATE } from '@moderntribe/events/data/ui/reducer';
 
 const state = {
-	ui: DEFAULT_STATE,
+	events: {
+		ui: DEFAULT_STATE,
+	}
 };
 
 describe( '[STORE] - UI Selectors', () => {

@@ -3,12 +3,14 @@
  */
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { noop } from 'lodash';
+
 
 /**
  * Internal dependencies
  */
+import { PREFIX_EVENTS_STORE } from '@moderntribe/events/data/utils';
 import { thunks } from '@moderntribe/events/data/blocks/datetime';
+
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
 
@@ -71,10 +73,10 @@ describe( '[STORE] - Datetime thunks', () => {
 				return { ...obj, ...item };
 			}, {} );
 		const expectedActions = [
-			'SET_START_DATE_TIME',
-			'SET_END_DATE_TIME',
-			'SET_NATURAL_LANGUAGE_LABEL',
-			'SET_MULTI_DAY',
+			`${ PREFIX_EVENTS_STORE }/SET_START_DATE_TIME`,
+			`${ PREFIX_EVENTS_STORE }/SET_END_DATE_TIME`,
+			`${ PREFIX_EVENTS_STORE }/SET_NATURAL_LANGUAGE_LABEL`,
+			`${ PREFIX_EVENTS_STORE }/SET_MULTI_DAY`,
 		];
 		expect( get ).toHaveBeenCalled();
 		expect( get ).toHaveBeenCalledTimes( 2 );

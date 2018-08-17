@@ -3,7 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-export const getPriceBlock = ( state ) => state.blocks.price;
+export const getPriceBlock = ( state ) => state.events.blocks.price;
 
 export const getPrice = createSelector(
 	[ getPriceBlock ],

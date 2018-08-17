@@ -3,7 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-export const classicSelector = ( state ) => state.blocks.classic;
+export const classicSelector = ( state ) => state.events.blocks.classic;
 
 export const detailsTitleSelector = createSelector(
 	[ classicSelector ],

@@ -50,22 +50,24 @@ describe( '[STORE] - form thunk actions', () => {
 	let store = {};
 	beforeAll( () => {
 		store = mockStore( {
-			forms: {
-				byId: {
-					20: {
-						create: true,
-						type: 'tribe_organizer',
-						fields: {},
-					},
-					21: {
-						create: false,
-						type: 'tribe_venue',
-						fields: {
-							id: 21,
+			events: {
+				forms: {
+					byId: {
+						20: {
+							create: true,
+							type: 'tribe_organizer',
+							fields: {},
+						},
+						21: {
+							create: false,
+							type: 'tribe_venue',
+							fields: {
+								id: 21,
+							},
 						},
 					},
+					volatile: [],
 				},
-				volatile: [],
 			},
 		} );
 	} );

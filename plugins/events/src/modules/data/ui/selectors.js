@@ -3,7 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-export const getUI = ( state ) => state.ui;
+export const getUI = ( state ) => state.events.ui;
 
 export const getDashboardDateTimeOpen = createSelector(
 	[ getUI ],

@@ -5,19 +5,21 @@ import { selectors } from '@moderntribe/events/data/details';
 import { DEFAULT_STATE } from '@moderntribe/events/data/details/reducers/details';
 
 const state = {
-	details: {
-		20: {
-			...DEFAULT_STATE,
-			details: {
-				id: 20,
-				title: 'Modern Tribe',
+	events: {
+		details: {
+			20: {
+				...DEFAULT_STATE,
+				details: {
+					id: 20,
+					title: 'Modern Tribe',
+				},
 			},
 		},
-	},
-	forms: {
-		byID: {},
-		volatile: [ 20 ],
-	},
+		forms: {
+			byID: {},
+			volatile: [ 20 ],
+		},
+	}
 };
 
 describe( '[STORE] - Details selectors', () => {
@@ -26,7 +28,7 @@ describe( '[STORE] - Details selectors', () => {
 	it( 'Should return the details blocks', () => {
 		expect( selectors.blockSelector( state, { name: 10 } ) ).toEqual( undefined );
 		expect( selectors.blockSelector( state, props ) )
-			.toEqual( state.details[ '20' ] );
+			.toEqual( state.events.details[ '20' ] );
 	} );
 
 	it( 'Should return the post type', () => {

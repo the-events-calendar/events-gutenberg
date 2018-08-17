@@ -6,7 +6,7 @@ import * as selectors from './selectors';
 import {
 	actions as requestActions,
 	utils as requestUtils,
-} from '@moderntribe/events/data/request';
+} from '@moderntribe/common/store/middlewares/request';
 
 // TODO: There is a lot of logic in this thunk that should be moved into
 // each specific call instead. Given the function name and location,

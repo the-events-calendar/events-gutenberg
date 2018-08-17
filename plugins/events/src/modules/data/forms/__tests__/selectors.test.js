@@ -5,38 +5,40 @@ import { selectors } from '@moderntribe/events/data/forms';
 import { DEFAULT_STATE } from '@moderntribe/events/data/forms/reducers/form';
 
 const state = {
-	forms: {
-		byId: {
-			99: {
-				...DEFAULT_STATE,
-				type: 'tribe_organizers',
-				create: true,
-				fields: {
-					name: 'Modern Tribe',
-					description: 'The Next Generation of Digital Agency',
+	events: {
+		forms: {
+			byId: {
+				99: {
+					...DEFAULT_STATE,
+					type: 'tribe_organizers',
+					create: true,
+					fields: {
+						name: 'Modern Tribe',
+						description: 'The Next Generation of Digital Agency',
+					},
+				},
+				100: {
+					...DEFAULT_STATE,
+					edit: true,
+				},
+				101: {
+					...DEFAULT_STATE,
+					submit: true,
+				},
+				102: {
+					...DEFAULT_STATE,
+					saving: true,
 				},
 			},
-			100: {
-				...DEFAULT_STATE,
-				edit: true,
-			},
-			101: {
-				...DEFAULT_STATE,
-				submit: true,
-			},
-			102: {
-				...DEFAULT_STATE,
-				saving: true,
-			},
+			volatile: [ 100, 102 ],
 		},
-		volatile: [ 100, 102 ],
-	},
+	}
 };
 
 describe( '[STORE] - Forms selectors', () => {
 	it( 'Should return the forms blocks', () => {
-		expect( selectors.formSelector( state, { name: 99 } ) ).toEqual( state.forms.byId[ '99' ] );
-		expect( selectors.formSelector( state, { name: 100 } ) ).toEqual( state.forms.byId[ '100' ] );
+		expect( selectors.formSelector( state, { name: 99 } ) ).toEqual( state.events.forms.byId[ '99' ] );
+		expect( selectors.formSelector( state, { name: 100 } ) ).toEqual( state.events.forms.byId[ '100' ] );
 		expect( selectors.formSelector( state, { name: 200 } ) ).toBe( undefined );
 	} );
 
@@ -75,7 +77,7 @@ describe( '[STORE] - Forms selectors', () => {
 
 	it( 'Should return the form fields', () => {
 		expect( selectors.getFormFields( state, { name: 99 } ) )
-			.toEqual( state.forms.byId[ '99' ].fields );
+			.toEqual( state.events.forms.byId[ '99' ].fields );
 		expect( selectors.getFormFields( state, { name: 100 } ) ).toEqual( {} );
 		expect( selectors.getFormFields( state, { name: 101 } ) ).toEqual( {} );
 		expect( selectors.getFormFields( state, { name: 102 } ) ).toEqual( {} );

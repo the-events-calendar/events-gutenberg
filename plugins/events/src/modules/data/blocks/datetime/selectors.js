@@ -3,7 +3,7 @@
  */
 import { createSelector } from 'reselect';
 
-export const datetimeSelector = ( state ) => state.blocks.datetime;
+export const datetimeSelector = ( state ) => state.events.blocks.datetime;
 
 export const getStart = createSelector(
 	[ datetimeSelector ],

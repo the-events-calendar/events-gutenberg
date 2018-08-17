@@ -5,9 +5,11 @@ import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/venue/reducer';
 import { selectors } from '@moderntribe/events/data/blocks/venue';
 
 const state = {
-	blocks: {
-		venue: DEFAULT_STATE,
-	},
+	events: {
+		blocks: {
+			venue: DEFAULT_STATE,
+		},
+	}
 };
 
 describe( '[STORE] - Venue selectors', () => {

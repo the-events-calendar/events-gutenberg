@@ -5,7 +5,7 @@ Object {
   "payload": Object {
     "hasGoogleCalendar": true,
   },
-  "type": "SET_HAS_GOOGLE_CALENDAR",
+  "type": "@@MT/EVENTS/SET_HAS_GOOGLE_CALENDAR",
 }
 `;
 
@@ -14,7 +14,7 @@ Object {
   "payload": Object {
     "hasGoogleCalendar": false,
   },
-  "type": "SET_HAS_GOOGLE_CALENDAR",
+  "type": "@@MT/EVENTS/SET_HAS_GOOGLE_CALENDAR",
 }
 `;
 
@@ -23,7 +23,7 @@ Object {
   "payload": Object {
     "hasiCal": true,
   },
-  "type": "SET_HAS_ICAL",
+  "type": "@@MT/EVENTS/SET_HAS_ICAL",
 }
 `;
 
@@ -32,7 +32,7 @@ Object {
   "payload": Object {
     "hasiCal": false,
   },
-  "type": "SET_HAS_ICAL",
+  "type": "@@MT/EVENTS/SET_HAS_ICAL",
 }
 `;
 
@@ -41,7 +41,7 @@ Object {
   "payload": Object {
     "label": "Modern Tribe Google Calendar",
   },
-  "type": "SET_GOOGLE_CALENDAR_LABEL",
+  "type": "@@MT/EVENTS/SET_GOOGLE_CALENDAR_LABEL",
 }
 `;
 
@@ -50,19 +50,19 @@ Object {
   "payload": Object {
     "label": "Modern Tribe iCal",
   },
-  "type": "SET_ICAL_LABEL",
+  "type": "@@MT/EVENTS/SET_ICAL_LABEL",
 }
 `;
 
 exports[`[STORE] - Sharing actions Should toggle if has the google label 1`] = `
 Object {
-  "type": "TOGGLE_GOOGLE_CALENDAR",
+  "type": "@@MT/EVENTS/TOGGLE_GOOGLE_CALENDAR",
 }
 `;
 
 exports[`[STORE] - Sharing actions Should toggle if has the iCal label 1`] = `
 Object {
-  "type": "TOGGLE_ICAL",
+  "type": "@@MT/EVENTS/TOGGLE_ICAL",
 }
 `;
 
@@ -72,25 +72,25 @@ Array [
     "payload": Object {
       "label": "Modern Tribe Google Calendar",
     },
-    "type": "SET_GOOGLE_CALENDAR_LABEL",
+    "type": "@@MT/EVENTS/SET_GOOGLE_CALENDAR_LABEL",
   },
   Object {
     "payload": Object {
       "label": "Modern Tribe iCal",
     },
-    "type": "SET_ICAL_LABEL",
+    "type": "@@MT/EVENTS/SET_ICAL_LABEL",
   },
   Object {
     "payload": Object {
       "hasiCal": true,
     },
-    "type": "SET_HAS_ICAL",
+    "type": "@@MT/EVENTS/SET_HAS_ICAL",
   },
   Object {
     "payload": Object {
       "hasGoogleCalendar": true,
     },
-    "type": "SET_HAS_GOOGLE_CALENDAR",
+    "type": "@@MT/EVENTS/SET_HAS_GOOGLE_CALENDAR",
   },
 ]
 `;

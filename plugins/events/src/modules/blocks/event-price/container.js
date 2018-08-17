@@ -77,10 +77,10 @@ const mapStateToProps = ( state ) => ( {
 	currencyPosition: priceSelectors.getPosition( state ),
 	currencySymbol: priceSelectors.getSymbol( state ),
 	costDescription: priceSelectors.getDescription( state ),
-	showCurrencySymbol: showCurrencySymbol( state.blocks.price.cost ),
-	showCost: showCost( state.blocks.price.cost ),
-	showCostDescription: showCostDescription( state.blocks.price.description ),
-	isFree: isFree( state.blocks.price.cost ),
+	showCurrencySymbol: showCurrencySymbol( priceSelectors.getPrice( state ) ),
+	showCost: showCost( priceSelectors.getPrice( state ) ),
+	showCostDescription: showCostDescription( priceSelectors.getDescription( state ) ),
+	isFree: isFree( priceSelectors.getPrice( state ) ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
