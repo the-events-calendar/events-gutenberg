@@ -162,7 +162,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 			'ticket'    => tribe( 'tickets.rsvp' )->get_ticket( get_the_id(), $ticket_id )
 		);
 
-		$html = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/content/form', $args, false );
+		$html = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/form/form', $args, false );
 
 		$response['html']    = $html;
 
