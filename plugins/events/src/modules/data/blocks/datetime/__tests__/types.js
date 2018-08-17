@@ -18,5 +18,7 @@ describe( '[STORE] - Datetime types', () => {
 			.toBe( `${ PREFIX_EVENTS_STORE }/SET_TIMEZONE_VISIBILITY` );
 		expect( types.SET_NATURAL_LANGUAGE_LABEL )
 			.toBe( `${ PREFIX_EVENTS_STORE }/SET_NATURAL_LANGUAGE_LABEL` );
+		expect( types.SET_DATE_INPUT_VISIBILITY )
+			.toBe( `${ PREFIX_EVENTS_STORE }/SET_DATE_INPUT_VISIBILITY` );
 	} );
 } );

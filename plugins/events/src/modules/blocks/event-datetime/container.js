@@ -41,6 +41,7 @@ const mapStateToProps = ( state ) => {
 		showTimeZone: dateTimeSelectors.getTimeZoneVisibility( state ),
 		timeZone: dateTimeSelectors.getTimeZone( state ),
 		timeZoneLabel: dateTimeSelectors.getTimeZoneLabel( state ),
+		showDateInput: dateTimeSelectors.getDateInputVisibility( state ),
 		cost: priceSelectors.getPrice( state ),
 		currencySymbol: priceSelectors.getSymbol( state ),
 		currencyPosition: priceSelectors.getPosition( state ),

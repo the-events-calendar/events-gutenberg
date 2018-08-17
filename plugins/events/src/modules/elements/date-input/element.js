@@ -40,20 +40,6 @@ Input.defaultProps = {
 	after: null,
 };
 
-const Label = ( { children } ) => (
-	<div className="tribe-editor__btn--label">
-		{ children }
-	</div>
-);
-
-Label.propTypes = {
-	children: PropTypes.node,
-};
-
-Label.defaultProps = {
-	children: null,
-};
-
 const _parse = ( value, setDateTime ) => {
 	const [ parsed ] = chrono.parse( value );
 	if ( ! parsed ) {
@@ -70,7 +56,7 @@ const _parse = ( value, setDateTime ) => {
 };
 
 const DateInput = ( props ) => {
-	const { onChange, setDateTime, isSelected } = props;
+	const { onChange, setDateTime } = props;
 	const parse = debounce( _parse, 500 );
 
 	const handleChange = ( event ) => {
@@ -79,13 +65,10 @@ const DateInput = ( props ) => {
 		parse( value, setDateTime );
 	};
 
-	return isSelected
-		? <Input { ...props } onChange={ handleChange } />
-		: <Label { ...props } />;
+	return <Input { ...props } onChange={ handleChange } />;
 };
 
 DateInput.propTypes = {
-	isSelected: PropTypes.bool,
 	setDateTime: PropTypes.func,
 	onChange: PropTypes.func,
 	before: PropTypes.node,
@@ -94,7 +77,6 @@ DateInput.propTypes = {
 };
 
 DateInput.defaultProps = {
-	isSelected: false,
 	setDateTime: noop,
 	onChange: noop,
 	before: null,

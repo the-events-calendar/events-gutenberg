@@ -59,4 +59,9 @@ describe( '[STORE] - Datetime reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setNaturalLanguageLabel( '2 weeks from now' ) ) )
 			.toMatchSnapshot();
 	} );
+
+	it( 'Should set the date input visibility', () => {
+		expect( reducer( DEFAULT_STATE, actions.setDateInputVisibility( true ) ) ).toMatchSnapshot();
+		expect( reducer( DEFAULT_STATE, actions.setDateInputVisibility( false ) ) ).toMatchSnapshot();
+	} );
 } );

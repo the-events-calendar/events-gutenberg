@@ -46,4 +46,9 @@ describe( '[STORE] - Datetime actions', () => {
 		expect( actions.setMultiDay( true ) ).toMatchSnapshot();
 		expect( actions.setMultiDay( false ) ).toMatchSnapshot();
 	} );
+
+	test( 'Action to set the date input visibility', () => {
+		expect( actions.setDateInputVisibility( true ) ).toMatchSnapshot();
+		expect( actions.setDateInputVisibility( false ) ).toMatchSnapshot();
+	} );
 } );

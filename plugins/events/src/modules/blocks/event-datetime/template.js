@@ -60,6 +60,7 @@ class EventDateTime extends Component {
 		timeZone: PropTypes.string,
 		showTimeZone: PropTypes.bool,
 		timeZoneLabel: PropTypes.string,
+		showDateInput: PropTypes.bool,
 		setTimeZoneLabel: PropTypes.func,
 		setTimeZoneVisibility: PropTypes.func,
 		currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
@@ -80,6 +81,7 @@ class EventDateTime extends Component {
 		closeDashboardDateTime: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
 		setNaturalLanguageLabel: PropTypes.func,
+		setDateInputVisibility: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -300,20 +302,24 @@ class EventDateTime extends Component {
 
 	/* TODO: This needs to move to logic component wrapper */
 	onKeyDown = ( e ) => {
+		const { setDateInputVisibility, closeDashboardDateTime } = this.props;
 		const ESCAPE_KEY = 27;
 		if ( e.keyCode === ESCAPE_KEY ) {
-			this.props.closeDashboardDateTime();
+			setDateInputVisibility( false );
+			closeDashboardDateTime();
 		}
 	};
 
 	/* TODO: This needs to move to logic component wrapper */
 	onClick = ( e ) => {
+		const { setDateInputVisibility, closeDashboardDateTime } = this.props;
 		const { target } = e;
 		if (
 			! this.isTargetInBlock( target ) &&
 			! this.isValidChildren( target )
 		) {
-			this.props.closeDashboardDateTime();
+			setDateInputVisibility( false );
+			closeDashboardDateTime();
 		}
 	};
 
@@ -332,6 +338,7 @@ class EventDateTime extends Component {
 			'tribe-editor__timepicker__dialog',
 			'edit-post-sidebar',
 			'trigger-dashboard-datetime',
+			'tribe-editor__btn--label',
 		];
 		return searchParent( target, ( testNode ) => hasClass( testNode, targets ) );
 	};
@@ -534,7 +541,8 @@ class EventDateTime extends Component {
 		const {
 			multiDay,
 			allDay,
-			isSelected,
+			showDateInput,
+			setDateInputVisibility,
 			openDashboardDateTime,
 			setDateTime,
 			setNaturalLanguageLabel,
@@ -545,26 +553,34 @@ class EventDateTime extends Component {
 				key="event-datetime"
 				className="tribe-editor__subtitle tribe-editor__date-time"
 			>
-				<DateInput
-					isSelected={ isSelected }
-					onChange={ setNaturalLanguageLabel }
-					setDateTime={ setDateTime }
-					value={ naturalLanguageLabel }
-					after={ this.renderExtras() }
-				>
-					<h2 className="tribe-editor__subtitle__headline">
-						<button
-							className="tribe-editor__btn--label"
-							onClick={ openDashboardDateTime }
-						>
-							{ this.renderStart() }
-							{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
-							{ this.renderEnd() }
-							{ allDay && this.renderSeparator( 'all-day' ) }
-						</button>
-						{ this.renderExtras() }
-					</h2>
-				</DateInput>
+				{
+					showDateInput
+					? (
+						<DateInput
+							onChange={ setNaturalLanguageLabel }
+							setDateTime={ setDateTime }
+							value={ naturalLanguageLabel }
+							after={ this.renderExtras() }
+						/>
+					)
+					: (
+						<h2 className="tribe-editor__subtitle__headline">
+							<button
+								className="tribe-editor__btn--label"
+								onClick={ () => {
+									setDateInputVisibility( true );
+									openDashboardDateTime();
+								} }
+							>
+								{ this.renderStart() }
+								{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
+								{ this.renderEnd() }
+								{ allDay && this.renderSeparator( 'all-day' ) }
+							</button>
+							{ this.renderExtras() }
+						</h2>
+					)
+				}
 				{ this.renderDashboard() }
 			</section>
 		);

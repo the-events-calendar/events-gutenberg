@@ -72,3 +72,10 @@ export const setTimeZoneVisibility = ( show ) => ( {
 		show,
 	},
 } );
+
+export const setDateInputVisibility = ( show ) => ( {
+	type: types.SET_DATE_INPUT_VISIBILITY,
+	payload: {
+		show,
+	},
+} );
