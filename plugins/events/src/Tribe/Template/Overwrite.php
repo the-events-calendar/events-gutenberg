@@ -76,7 +76,7 @@ class Tribe__Gutenberg__Events__Template__Overwrite {
 
 		// Prevent printing for posts that doens't have Blocks
 		if ( ! gutenberg_post_has_blocks( $post_id ) ) {
-			return $file;
+			return $silence;
 		}
 
 		$args = array(
