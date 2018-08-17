@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import chrono from 'chrono-node';
-import { noop, debounce } from 'lodash';
+import { debounce } from 'lodash';
 
 /**
  * Internal dependencies
@@ -12,7 +12,7 @@ import { noop, debounce } from 'lodash';
 import './style.pcss';
 import { toDateTime, toMoment } from '@moderntribe/events/editor/utils/moment';
 
-const _parse = ( value, setDateTime ) => {
+const parseValue = ( value, setDateTime ) => {
 	const [ parsed ] = chrono.parse( value );
 	if ( ! parsed ) {
 		return null;
@@ -27,12 +27,12 @@ const _parse = ( value, setDateTime ) => {
 	setDateTime( dates );
 };
 
-const parse = debounce( _parse, 500 );
+const debouncedParseValue = debounce( parseValue, 500 );
 
 const handleChange = ( onChange, setDateTime ) => ( event ) => {
 	const { value } = event.target;
 	onChange( value );
-	parse( value, setDateTime );
+	debouncedParseValue( value, setDateTime );
 };
 
 const DateInput = ( props ) => {

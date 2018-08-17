@@ -37,7 +37,6 @@ import {
 	toTime,
 } from '@moderntribe/events/editor/utils/moment';
 import { FORMATS, timezonesAsSelectData, TODAY } from '@moderntribe/events/editor/utils/date';
-import { hasClass, searchParent } from '@moderntribe/events/editor/utils/dom';
 import { HALF_HOUR_IN_SECONDS, DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 import './style.pcss';
 
@@ -82,17 +81,21 @@ class EventDateTime extends Component {
 		setVisibleMonth: PropTypes.func,
 		setNaturalLanguageLabel: PropTypes.func,
 		setDateInputVisibility: PropTypes.func,
+		onKeyDown: PropTypes.func,
+		onClick: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
 	componentDidMount() {
-		document.addEventListener( 'keydown', this.onKeyDown );
-		document.addEventListener( 'click', this.onClick );
+		const { onKeyDown, onClick } = this.props;
+		document.addEventListener( 'keydown', onKeyDown );
+		document.addEventListener( 'click', onClick );
 	}
 
 	componentWillUnmount() {
-		document.removeEventListener( 'keydown', this.onKeyDown );
-		document.removeEventListener( 'click', this.onClick );
+		const { onKeyDown, onClick } = this.props;
+		document.removeEventListener( 'keydown', onKeyDown );
+		document.removeEventListener( 'click', onClick );
 	}
 
 	renderStart() {
@@ -299,49 +302,6 @@ class EventDateTime extends Component {
 			</Dashboard>
 		);
 	}
-
-	/* TODO: This needs to move to logic component wrapper */
-	onKeyDown = ( e ) => {
-		const { setDateInputVisibility, closeDashboardDateTime } = this.props;
-		const ESCAPE_KEY = 27;
-		if ( e.keyCode === ESCAPE_KEY ) {
-			setDateInputVisibility( false );
-			closeDashboardDateTime();
-		}
-	};
-
-	/* TODO: This needs to move to logic component wrapper */
-	onClick = ( e ) => {
-		const { setDateInputVisibility, closeDashboardDateTime } = this.props;
-		const { target } = e;
-		if (
-			! this.isTargetInBlock( target ) &&
-			! this.isValidChildren( target )
-		) {
-			setDateInputVisibility( false );
-			closeDashboardDateTime();
-		}
-	};
-
-	/* TODO: This needs to move to logic component wrapper */
-	isTargetInBlock = ( target ) => (
-		searchParent( target, ( testNode ) => {
-			if ( testNode.classList.contains( 'editor-block-list__block' ) ) {
-				return Boolean( testNode.querySelector( '.tribe-editor__date-time' ) );
-			}
-			return false;
-		} )
-	);
-
-	isValidChildren = ( target ) => {
-		const targets = [
-			'tribe-editor__timepicker__dialog',
-			'edit-post-sidebar',
-			'trigger-dashboard-datetime',
-			'tribe-editor__btn--label',
-		];
-		return searchParent( target, ( testNode ) => hasClass( testNode, targets ) );
-	};
 
 	renderCalendars() {
 		const { multiDay, start, end, visibleMonth, setVisibleMonth } = this.props;
