@@ -88,6 +88,7 @@ class EventDateTime extends Component {
 		setDateInputVisibility: PropTypes.func,
 		onKeyDown: PropTypes.func,
 		onClick: PropTypes.func,
+		onSelectDay: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -304,9 +305,16 @@ class EventDateTime extends Component {
 	}
 
 	renderCalendars() {
-		const { multiDay, start, end, visibleMonth, setVisibleMonth } = this.props;
+		const {
+			multiDay,
+			start,
+			end,
+			visibleMonth,
+			setVisibleMonth,
+			onSelectDay,
+		} = this.props;
 		const monthProps = {
-			onSelectDay: this.setDays,
+			onSelectDay: onSelectDay,
 			withRange: multiDay,
 			from: toMoment( start ).toDate(),
 			month: visibleMonth,
@@ -321,12 +329,6 @@ class EventDateTime extends Component {
 			<Month { ...monthProps } />
 		);
 	}
-
-	setDays = ( data ) => {
-		const { start, end, setDates } = this.props;
-		const { from, to } = data;
-		setDates( { start, end, to, from } );
-	};
 
 	startTimePickerOnChange = ( e ) => {
 		const { start, end, setStartTime } = this.props;

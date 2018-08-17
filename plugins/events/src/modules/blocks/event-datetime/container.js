@@ -71,6 +71,12 @@ const onClick = ( dispatchProps ) => ( e ) => {
 	}
 };
 
+const onSelectDay = ( stateProps, dispatchProps ) => ( { from, to } ) => {
+	const { start, end } = stateProps;
+	const { setDates } = dispatchProps;
+	setDates( { start, end, from, to } );
+};
+
 const mapStateToProps = ( state ) => {
 	return {
 		dashboardOpen: UISelectors.getDashboardDateTimeOpen( state ),
@@ -110,6 +116,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...dispatchProps,
 	onKeyDown: onKeyDown( dispatchProps ),
 	onClick: onClick( dispatchProps ),
+	onSelectDay: onSelectDay( stateProps, dispatchProps ),
 } );
 
 export default compose(
