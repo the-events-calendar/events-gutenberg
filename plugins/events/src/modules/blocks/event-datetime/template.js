@@ -313,6 +313,7 @@ class EventDateTime extends Component {
 			setVisibleMonth,
 			onSelectDay,
 		} = this.props;
+
 		const monthProps = {
 			onSelectDay: onSelectDay,
 			withRange: multiDay,
@@ -330,74 +331,15 @@ class EventDateTime extends Component {
 		);
 	}
 
-	startTimePickerOnChange = ( e ) => {
-		const { start, end, setStartTime } = this.props;
-		const [ hour, minute ] = e.target.value.split( ':' );
-
-		const startMoment = toMoment( start );
-		const max = toMoment( end ).clone().subtract( 1, 'minutes' );
-
-		const copy = startMoment.clone();
-		copy.set( 'hour', parseInt( hour, 10 ) );
-		copy.set( 'minute', parseInt( minute, 10 ) );
-		copy.set( 'second', 0 );
-
-		if ( copy.isAfter( max ) ) {
-			return;
-		}
-
-		const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
-		setStartTime( { start, seconds } );
-	};
-
-	startTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setStartTime, setAllDay } = this.props;
-		const isAllDay = value === 'all-day';
-		const seconds = isAllDay ? 0 : value;
-
-		if ( ! isAllDay ) {
-			setStartTime( { start, seconds } );
-		}
-
-		setAllDay( { start, end, isAllDay } );
-		onClose();
-	};
-
-	endTimePickerOnChange = ( e ) => {
-		const { start, end, setEndTime } = this.props;
-		const [ hour, minute ] = e.target.value.split( ':' );
-
-		const endMoment = toMoment( end );
-		const min = toMoment( start ).clone().add( 1, 'minutes' );
-
-		const copy = endMoment.clone();
-		copy.set( 'hour', parseInt( hour, 10 ) );
-		copy.set( 'minute', parseInt( minute, 10 ) );
-		copy.set( 'second', 0 );
-
-		if ( copy.isBefore( min ) ) {
-			return;
-		}
-
-		const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
-		setEndTime( { end, seconds } );
-	};
-
-	endTimePickerOnClick = ( value, onClose ) => {
-		const { start, end, setEndTime, setAllDay } = this.props;
-		const isAllDay = value === 'all-day';
-		const seconds = isAllDay ? DAY_IN_SECONDS - 1 : value;
-
-		if ( ! isAllDay ) {
-			setEndTime( { end, seconds } );
-		}
-
-		setAllDay( { start, end, isAllDay } );
-		onClose();
-	};
-
 	renderStartTimePicker() {
-		const { start, end, allDay, multiDay } = this.props;
+		const {
+			start,
+			end,
+			allDay,
+			multiDay,
+			onStartTimePickerChange,
+			onStartTimePickerClick
+		} = this.props;
 		const startMoment = toMoment( start );
 		const endMoment = toMoment( end );
 
@@ -405,8 +347,8 @@ class EventDateTime extends Component {
 			current: startMoment,
 			start: startMoment.clone().startOf( 'day' ),
 			end: startMoment.clone().endOf( 'day' ),
-			onChange: this.startTimePickerOnChange,
-			onClick: this.startTimePickerOnClick,
+			onChange: onStartTimePickerChange,
+			onClick: onStartTimePickerClick,
 			timeFormat: FORMATS.WP.time,
 			allDay,
 		};
@@ -430,7 +372,14 @@ class EventDateTime extends Component {
 	}
 
 	renderEndTimePicker() {
-		const { start, end, multiDay, allDay } = this.props;
+		const {
+			start,
+			end,
+			multiDay,
+			allDay,
+			onEndTimePickerChange,
+			onEndTimePickerClick,
+		} = this.props;
 
 		if ( ! multiDay && allDay ) {
 			return null;
@@ -443,8 +392,8 @@ class EventDateTime extends Component {
 			current: endMoment,
 			start: endMoment.clone().startOf( 'day' ),
 			end: roundTime( endMoment.clone().endOf( 'day' ) ),
-			onChange: this.endTimePickerOnChange,
-			onClick: this.endTimePickerOnClick,
+			onChange: onEndTimePickerChange,
+			onClick: onEndTimePickerClick,
 			timeFormat: FORMATS.WP.time,
 			allDay,
 		};

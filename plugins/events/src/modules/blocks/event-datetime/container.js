@@ -20,6 +20,7 @@ import {
 	selectors as priceSelectors,
 	actions as priceActions,
 } from '@moderntribe/events/data/blocks/price';
+import { toMoment } from '@moderntribe/events/editor/utils/moment';
 import { hasClass, searchParent } from '@moderntribe/events/editor/utils/dom';
 import { withStore, withSaveData } from '@moderntribe/common/hoc';
 import EventDateTime from './template';
@@ -77,6 +78,76 @@ const onSelectDay = ( stateProps, dispatchProps ) => ( { from, to } ) => {
 	setDates( { start, end, from, to } );
 };
 
+const onStartTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
+	const { start, end } = stateProps;
+	const { setStartTime } = dispatchProps;
+	const [ hour, minute ] = e.target.value.split( ':' );
+
+	const startMoment = toMoment( start );
+	const max = toMoment( end ).clone().subtract( 1, 'minutes' );
+
+	const copy = startMoment.clone();
+	copy.set( 'hour', parseInt( hour, 10 ) );
+	copy.set( 'minute', parseInt( minute, 10 ) );
+	copy.set( 'second', 0 );
+
+	if ( copy.isAfter( max ) ) {
+		return;
+	}
+
+	const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
+	setStartTime( { start, seconds } );
+};
+
+const onStartTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) => {
+	const { start, end } = stateProps;
+	const { setStartTime, setAllDay } = dispatchProps;
+
+	const isAllDay = value === 'all-day';
+
+	if ( ! isAllDay ) {
+		setStartTime( { start, value } );
+	}
+
+	setAllDay( { start, end, isAllDay } );
+	onClose();
+};
+
+const onEndTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
+	const { start, end } = stateProps;
+	const { setEndTime } = dispatchProps;
+	const [ hour, minute ] = e.target.value.split( ':' );
+
+	const endMoment = toMoment( end );
+	const min = toMoment( start ).clone().add( 1, 'minutes' );
+
+	const copy = endMoment.clone();
+	copy.set( 'hour', parseInt( hour, 10 ) );
+	copy.set( 'minute', parseInt( minute, 10 ) );
+	copy.set( 'second', 0 );
+
+	if ( copy.isBefore( min ) ) {
+		return;
+	}
+
+	const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
+	setEndTime( { end, seconds } );
+};
+
+const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) => {
+	const { start, end } = stateProps;
+	const { setEndTime, setAllDay } = dispatchProps;
+
+	const isAllDay = value === 'all-day';
+
+	if ( ! isAllDay ) {
+		setEndTime( { end, value } );
+	}
+
+	setAllDay( { start, end, isAllDay } );
+	onClose();
+};
+
 const mapStateToProps = ( state ) => {
 	return {
 		dashboardOpen: UISelectors.getDashboardDateTimeOpen( state ),
@@ -117,6 +188,10 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	onKeyDown: onKeyDown( dispatchProps ),
 	onClick: onClick( dispatchProps ),
 	onSelectDay: onSelectDay( stateProps, dispatchProps ),
+	onStartTimePickerChange: onStartTimePickerChange( stateProps, dispatchProps ),
+	onStartTimePickerClick: onStartTimePickerClick( stateProps, dispatchProps ),
+	onEndTimePickerChange: onEndTimePickerChange( stateProps, dispatchProps ),
+	onEndTimePickerClick: onEndTimePickerClick( stateProps, dispatchProps ),
 } );
 
 export default compose(
