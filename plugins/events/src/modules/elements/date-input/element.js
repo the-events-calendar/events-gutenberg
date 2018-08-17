@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import chrono from 'chrono-node';
-import { debounce } from 'lodash';
+import { noop, debounce } from 'lodash';
 
 /**
  * Internal dependencies
@@ -27,9 +27,7 @@ const parseValue = ( value, setDateTime ) => {
 	setDateTime( dates );
 };
 
-const debouncedParseValue = debounce( parseValue, 500 );
-
-const handleChange = ( onChange, setDateTime ) => ( event ) => {
+const handleChange = ( debouncedParseValue ) => ( onChange, setDateTime ) => ( event ) => {
 	const { value } = event.target;
 	onChange( value );
 	debouncedParseValue( value, setDateTime );
@@ -37,6 +35,7 @@ const handleChange = ( onChange, setDateTime ) => ( event ) => {
 
 const DateInput = ( props ) => {
 	const { value, onChange, setDateTime, before, after } = props;
+	const debouncedParseValue = debounce( parseValue, 500 );
 
 	return (
 		<div className="tribe-editor__date-input__container">
@@ -46,7 +45,7 @@ const DateInput = ( props ) => {
 				name="date-input"
 				className="tribe-editor__date-input"
 				value={ value }
-				onChange={ handleChange( onChange, setDateTime ) }
+				onChange={ handleChange( debouncedParseValue )( onChange, setDateTime ) }
 			/>
 			{ after }
 		</div>
@@ -54,14 +53,16 @@ const DateInput = ( props ) => {
 };
 
 DateInput.propTypes = {
-	setDateTime: PropTypes.func.isRequired,
-	onChange: PropTypes.func.isRequired,
+	setDateTime: PropTypes.func,
+	onChange: PropTypes.func,
 	before: PropTypes.node,
 	after: PropTypes.node,
 	value: PropTypes.string,
 };
 
 DateInput.defaultProps = {
+	setDateTime: noop,
+	onChange: noop,
 	before: null,
 	after: null,
 	value: '',

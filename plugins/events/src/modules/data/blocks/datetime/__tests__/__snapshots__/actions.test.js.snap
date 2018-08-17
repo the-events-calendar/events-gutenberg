@@ -18,6 +18,24 @@ Object {
 }
 `;
 
+exports[`[STORE] - Datetime actions Action to set the date input visibility 1`] = `
+Object {
+  "payload": Object {
+    "show": true,
+  },
+  "type": "@@MT/EVENTS/SET_DATE_INPUT_VISIBILITY",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the date input visibility 2`] = `
+Object {
+  "payload": Object {
+    "show": false,
+  },
+  "type": "@@MT/EVENTS/SET_DATE_INPUT_VISIBILITY",
+}
+`;
+
 exports[`[STORE] - Datetime actions Action to set the multi day 1`] = `
 Object {
   "payload": Object {
