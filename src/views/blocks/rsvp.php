@@ -20,8 +20,6 @@ $tickets  = $this->get( 'tickets' );
 
 			<?php $this->template( 'blocks/rsvp/content', array( 'ticket' => $ticket ) ); ?>
 
-			<?php $this->template( 'blocks/rsvp/status', array( 'ticket' => $ticket ) ); ?>
-
 		</div>
 
 	<?php endforeach; ?>

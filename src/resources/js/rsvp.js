@@ -28,7 +28,8 @@
 			TribeRsvp.ajaxurl,
 			params,
 			function( response ) {
-				ticket.find( '.tribe-block__rsvp__form' ).html( response.html );
+				var form = ticket.find( '.tribe-block__rsvp__form' );
+				form.html( response.data.html );
 			}
 		);
 	} );

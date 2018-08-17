@@ -8,7 +8,7 @@
 ?>
 <span>
 	<button class="going">
-		<img src="<?php echo tribe( 'gutenberg' )->plugin_url . 'src/resources/icons/checkmark.svg'; ?>" />
+		<?php echo file_get_contents( tribe( 'gutenberg' )->plugin_url . 'src/resources/icons/checkmark.svg' ); ?>
 		<span><?php esc_html_e( 'Going', 'events-gutenberg' ); ?></span>
 	</button>
 </span>

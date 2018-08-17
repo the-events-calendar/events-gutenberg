@@ -8,19 +8,11 @@
 ?>
 <div class="tribe-block__rsvp__content">
 
-	<?php $this->template( 'blocks/rsvp/content/title', array( 'ticket' => $ticket ) ); ?>
-
-	<?php $this->template( 'blocks/rsvp/content/description', array( 'ticket' => $ticket ) ); ?>
-
-	<div class="tribe-block__rsvp__content__messages">
-		<?php if ( ! $ticket->is_in_stock() ) : ?>
-			<span class="tribe-block__rsvp__messages--no-stock">
-				<?php esc_html_e( 'Out of stock!', 'event-tickets' ); ?>
-			</span>
-		<?php endif; ?>
+	<div class="tribe-block__rsvp__details__status">
+		<?php $this->template( 'blocks/rsvp/details', array( 'ticket' => $ticket ) ); ?>
+		<?php $this->template( 'blocks/rsvp/status', array( 'ticket' => $ticket ) ); ?>
 	</div>
 
-	<!-- This div is where the AJAX returns the form -->
-	<div class="tribe-block__rsvp__form"></div>
+	<?php $this->template( 'blocks/rsvp/form', array( 'ticket' => $ticket ) ); ?>
 
 </div>

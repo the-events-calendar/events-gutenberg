@@ -8,7 +8,7 @@
 ?>
 <span>
 	<button class="not-going">
-		<img src="<?php echo tribe( 'gutenberg' )->plugin_url . 'src/resources/icons/cross.svg'; ?>" />
+		<?php echo file_get_contents( tribe( 'gutenberg' )->plugin_url . 'src/resources/icons/cross.svg' ); ?>
 		<span><?php esc_html_e( 'Not going', 'events-gutenberg' ); ?></span>
 	</button>
 </span>
