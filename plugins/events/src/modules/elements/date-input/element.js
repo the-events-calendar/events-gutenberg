@@ -12,34 +12,6 @@ import { noop, debounce } from 'lodash';
 import './style.pcss';
 import { toDateTime, toMoment } from '@moderntribe/events/editor/utils/moment';
 
-const Input = ( { value, onChange, before, after } ) => (
-	<div className="tribe-editor__date-input__container">
-		{ before }
-		<input
-			type="text"
-			name="date-input"
-			className="tribe-editor__date-input"
-			value={ value }
-			onChange={ onChange }
-		/>
-		{ after }
-	</div>
-);
-
-Input.propTypes = {
-	value: PropTypes.string,
-	onChange: PropTypes.func,
-	before: PropTypes.node,
-	after: PropTypes.node,
-};
-
-Input.defaultProps = {
-	value: '',
-	onChange: noop,
-	before: null,
-	after: null,
-};
-
 const _parse = ( value, setDateTime ) => {
 	const [ parsed ] = chrono.parse( value );
 	if ( ! parsed ) {
@@ -55,30 +27,41 @@ const _parse = ( value, setDateTime ) => {
 	setDateTime( dates );
 };
 
+const parse = debounce( _parse, 500 );
+
+const handleChange = ( onChange, setDateTime ) => ( event ) => {
+	const { value } = event.target;
+	onChange( value );
+	parse( value, setDateTime );
+};
+
 const DateInput = ( props ) => {
-	const { onChange, setDateTime } = props;
-	const parse = debounce( _parse, 500 );
+	const { value, onChange, setDateTime, before, after } = props;
 
-	const handleChange = ( event ) => {
-		const { value } = event.target;
-		onChange( value );
-		parse( value, setDateTime );
-	};
-
-	return <Input { ...props } onChange={ handleChange } />;
+	return (
+		<div className="tribe-editor__date-input__container">
+			{ before }
+			<input
+				type="text"
+				name="date-input"
+				className="tribe-editor__date-input"
+				value={ value }
+				onChange={ handleChange( onChange, setDateTime ) }
+			/>
+			{ after }
+		</div>
+	);
 };
 
 DateInput.propTypes = {
-	setDateTime: PropTypes.func,
-	onChange: PropTypes.func,
+	setDateTime: PropTypes.func.isRequired,
+	onChange: PropTypes.func.isRequired,
 	before: PropTypes.node,
 	after: PropTypes.node,
 	value: PropTypes.string,
 };
 
 DateInput.defaultProps = {
-	setDateTime: noop,
-	onChange: noop,
 	before: null,
 	after: null,
 	value: '',
