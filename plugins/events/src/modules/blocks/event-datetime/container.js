@@ -153,6 +153,10 @@ const onMultiDayToggleChange = ( stateProps, dispatchProps ) => ( checked ) => {
 	dispatchProps.setMultiDay( { start, end, checked } );
 };
 
+const onTimeZoneVisibilityChange = ( dispatch ) => ( checked ) => (
+	dispatch( dateTimeActions.setTimeZoneVisibility( checked ) )
+);
+
 const mapStateToProps = ( state ) => {
 	return {
 		dashboardOpen: UISelectors.getDashboardDateTimeOpen( state ),
@@ -184,6 +188,7 @@ const mapDispatchToProps = ( dispatch ) => ( {
 		dispatch( dateTimeThunks.setInitialState( props ) );
 		dispatch( UIActions.setInitialState( props ) );
 	},
+	onTimeZoneVisibilityChange: onTimeZoneVisibilityChange( dispatch ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {

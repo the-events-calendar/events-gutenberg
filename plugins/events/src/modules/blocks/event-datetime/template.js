@@ -42,7 +42,7 @@ import {
 	TODAY,
 	timezonesAsSelectData
 } from '@moderntribe/events/editor/utils/date';
-import { HALF_HOUR_IN_SECONDS, DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 import './style.pcss';
 
 /**
@@ -66,23 +66,16 @@ class EventDateTime extends Component {
 		timeZoneLabel: PropTypes.string,
 		showDateInput: PropTypes.bool,
 		setTimeZoneLabel: PropTypes.func,
-		setTimeZoneVisibility: PropTypes.func,
 		currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
 		currencySymbol: PropTypes.string,
 		naturalLanguageLabel: PropTypes.string,
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
 		openDashboardDateTime: PropTypes.func,
-		setStartTime: PropTypes.func,
-		setEndTime: PropTypes.func,
-		setAllDay: PropTypes.func,
-		setMultiDay: PropTypes.func,
-		setDates: PropTypes.func,
 		setDateTime: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
-		closeDashboardDateTime: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
 		setNaturalLanguageLabel: PropTypes.func,
 		setDateInputVisibility: PropTypes.func,
@@ -94,6 +87,7 @@ class EventDateTime extends Component {
 		onEndTimePickerChange: PropTypes.func,
 		onEndTimePickerClick: PropTypes.func,
 		onMultiDayToggleChange: PropTypes.func,
+		onTimeZoneVisibilityChange: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -439,11 +433,6 @@ class EventDateTime extends Component {
 		);
 	}
 
-	toggleTimeZoneVisibility = () => {
-		const { showTimeZone, setTimeZoneVisibility } = this.props;
-		setTimeZoneVisibility( ! showTimeZone );
-	}
-
 	/**
 	 * Main label used to display the event
 	 *
@@ -512,6 +501,7 @@ class EventDateTime extends Component {
 			setSeparatorTime,
 			setSeparatorDate,
 			showTimeZone,
+			onTimeZoneVisibilityChange,
 		} = this.props;
 
 		return ( <InspectorControls key="inspector">
@@ -540,7 +530,7 @@ class EventDateTime extends Component {
 				<ToggleControl
 					label={ __( 'Show Time Zone', 'events-gutenberg' ) }
 					checked={ showTimeZone }
-					onChange={ this.toggleTimeZoneVisibility }
+					onChange={ onTimeZoneVisibilityChange }
 				/>
 			</PanelBody>
 		</InspectorControls> );
