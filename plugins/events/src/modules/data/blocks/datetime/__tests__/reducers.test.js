@@ -15,12 +15,12 @@ describe( '[STORE] - Datetime reducer', () => {
 	} );
 
 	it( 'Should set the start', () => {
-		expect( reducer( DEFAULT_STATE, actions.setStart( 'June 5, 2018 5:00 pm' ) ) )
+		expect( reducer( DEFAULT_STATE, actions.setStartDateTime( 'June 5, 2018 5:00 pm' ) ) )
 			.toMatchSnapshot();
 	} );
 
 	it( 'Should set the end', () => {
-		expect( reducer( DEFAULT_STATE, actions.setEnd( 'June 25, 2018 4:00 pm' ) ) ).toMatchSnapshot();
+		expect( reducer( DEFAULT_STATE, actions.setEndDateTime( 'June 25, 2018 4:00 pm' ) ) ).toMatchSnapshot();
 	} );
 
 	it( 'Should set the separator time', () => {

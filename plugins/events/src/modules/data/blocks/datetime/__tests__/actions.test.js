@@ -5,7 +5,7 @@ import { actions } from '@moderntribe/events/data/blocks/datetime';
 
 describe( '[STORE] - Datetime actions', () => {
 	test( 'Action to set the start time', () => {
-		expect( actions.setStart( 'June 5, 2018 5:00 pm' ) ).toMatchSnapshot();
+		expect( actions.setStartDateTime( 'June 5, 2018 5:00 pm' ) ).toMatchSnapshot();
 	} );
 
 	test( 'Set Natural Language Label', () => {
@@ -13,7 +13,7 @@ describe( '[STORE] - Datetime actions', () => {
 	} );
 
 	test( 'Action to set the start time', () => {
-		expect( actions.setEnd( 'June 25, 2018 4:00 pm' ) ).toMatchSnapshot();
+		expect( actions.setEndDateTime( 'June 25, 2018 4:00 pm' ) ).toMatchSnapshot();
 	} );
 
 	test( 'Action to set the separator date', () => {

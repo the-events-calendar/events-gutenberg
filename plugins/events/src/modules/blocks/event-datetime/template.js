@@ -546,8 +546,7 @@ class EventDateTime extends Component {
 				className="tribe-editor__subtitle tribe-editor__date-time"
 			>
 				<DateInput
-					selected={ isSelected }
-					onClickHandler={ openDashboardDateTime }
+					isSelected={ isSelected }
 					onChange={ setNaturalLanguageLabel }
 					setDateTime={ setDateTime }
 					value={ naturalLanguageLabel }

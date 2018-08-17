@@ -12,7 +12,7 @@ import { noop, debounce } from 'lodash';
 import './style.pcss';
 import { toDateTime, toMoment } from '@moderntribe/events/editor/utils/moment';
 
-const Input = ( { value, onClickHandler, onChange, before, after } ) => (
+const Input = ( { value, onChange, before, after } ) => (
 	<div className="tribe-editor__date-input__container">
 		{ before }
 		<input
@@ -21,7 +21,6 @@ const Input = ( { value, onClickHandler, onChange, before, after } ) => (
 			className="tribe-editor__date-input"
 			value={ value }
 			onChange={ onChange }
-			onFocus={ onClickHandler }
 		/>
 		{ after }
 	</div>
@@ -29,7 +28,6 @@ const Input = ( { value, onClickHandler, onChange, before, after } ) => (
 
 Input.propTypes = {
 	value: PropTypes.string,
-	onClickHandler: PropTypes.func,
 	onChange: PropTypes.func,
 	before: PropTypes.node,
 	after: PropTypes.node,
@@ -37,7 +35,6 @@ Input.propTypes = {
 
 Input.defaultProps = {
 	value: '',
-	onClickHandler: noop,
 	onChange: noop,
 	before: null,
 	after: null,
@@ -73,23 +70,23 @@ const _parse = ( value, setDateTime ) => {
 };
 
 const DateInput = ( props ) => {
+	const { onChange, setDateTime, isSelected } = props;
 	const parse = debounce( _parse, 500 );
 
 	const handleChange = ( event ) => {
 		const { value } = event.target;
-		props.onChange( value );
-		parse( value, props.setDateTime );
+		onChange( value );
+		parse( value, setDateTime );
 	};
 
-	return props.selected
+	return isSelected
 		? <Input { ...props } onChange={ handleChange } />
 		: <Label { ...props } />;
 };
 
 DateInput.propTypes = {
-	selected: PropTypes.bool,
+	isSelected: PropTypes.bool,
 	setDateTime: PropTypes.func,
-	onClickHandler: PropTypes.func,
 	onChange: PropTypes.func,
 	before: PropTypes.node,
 	after: PropTypes.node,
@@ -97,9 +94,8 @@ DateInput.propTypes = {
 };
 
 DateInput.defaultProps = {
-	selected: false,
+	isSelected: false,
 	setDateTime: noop,
-	onClickHandler: noop,
 	onChange: noop,
 	before: null,
 	after: null,
