@@ -6,7 +6,7 @@
  *
  */
 ?>
-<div class="rsvp-status">
+<div class="tribe-block__rsvp__status">
 	<?php if ( $ticket->is_in_stock() ) : ?>
 
 		<?php $this->template( 'blocks/rsvp/status/going', array( 'ticket' => $ticket ) ); ?>

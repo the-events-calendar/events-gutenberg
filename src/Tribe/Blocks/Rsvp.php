@@ -53,8 +53,9 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
+		$post_id            = tribe( 'gutenberg.template' )->get( 'post_id' );
 		$args['attributes'] = $this->attributes( $attributes );
-		$args['tickets']    = $this->get_tickets();
+		$args['tickets']    = $this->get_tickets( $post_id );
 
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.template' )->add_template_globals( $args );
@@ -72,20 +73,17 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 *
 	 * @return array
 	*/
-	protected function get_tickets() {
-
-		// Get the event id
-		$event_id = get_the_id();
+	protected function get_tickets( $post_id ) {
 
 		$tickets = array();
 
 		// Bail if there's no event id
-		if ( ! $event_id ) {
+		if ( ! $post_id ) {
 			return $tickets;
 		}
 
 		// Get the tickets IDs for this event
-		$ticket_ids = tribe( 'tickets.rsvp' )->get_tickets_ids( $event_id );
+		$ticket_ids = tribe( 'tickets.rsvp' )->get_tickets_ids( $post_id );
 
 		// Bail if we don't have tickets
 		if ( ! $ticket_ids ) {
@@ -95,7 +93,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		foreach ( $ticket_ids as $post ) {
 
 			// Get the ticket
-			$ticket = tribe( 'tickets.rsvp' )->get_ticket( $event_id, $post );
+			$ticket = tribe( 'tickets.rsvp' )->get_ticket( $post_id, $post );
 
 			// Continue if is not RSVP, we only want RSVP tickets
 			if ( 'Tribe__Tickets__RSVP' !== $ticket->provider_class ) {
@@ -168,12 +166,8 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		$response['html']    = $html;
 
-		wp_send_json( $response );
+		wp_send_json_success( $response );
 
 	}
-		$response['success'] = true;
 
-		wp_send_json( $response );
-
-	}
 }
