@@ -157,26 +157,29 @@ const onTimeZoneVisibilityChange = ( dispatch ) => ( checked ) => (
 	dispatch( dateTimeActions.setTimeZoneVisibility( checked ) )
 );
 
-const mapStateToProps = ( state ) => {
-	return {
-		dashboardOpen: UISelectors.getDashboardDateTimeOpen( state ),
-		visibleMonth: UISelectors.getVisibleMonth( state ),
-		start: dateTimeSelectors.getStart( state ),
-		end: dateTimeSelectors.getEnd( state ),
-		naturalLanguageLabel: dateTimeSelectors.getNaturalLanguageLabel( state ),
-		multiDay: dateTimeSelectors.getMultiDay( state ),
-		allDay: dateTimeSelectors.getAllDay( state ),
-		separatorDate: dateTimeSelectors.getDateSeparator( state ),
-		separatorTime: dateTimeSelectors.getTimeSeparator( state ),
-		showTimeZone: dateTimeSelectors.getTimeZoneVisibility( state ),
-		timeZone: dateTimeSelectors.getTimeZone( state ),
-		timeZoneLabel: dateTimeSelectors.getTimeZoneLabel( state ),
-		showDateInput: dateTimeSelectors.getDateInputVisibility( state ),
-		cost: priceSelectors.getPrice( state ),
-		currencySymbol: priceSelectors.getSymbol( state ),
-		currencyPosition: priceSelectors.getPosition( state ),
-	};
+const onDateTimeLabelClick = ( dispatch ) => () => {
+	dispatch( dateTimeActions.setDateInputVisibility( true ) );
+	dispatch( dateTimeActions.openDashboardDateTime() );
 };
+
+const mapStateToProps = ( state ) => ( {
+	isDashboardOpen: UISelectors.getDashboardDateTimeOpen( state ),
+	visibleMonth: UISelectors.getVisibleMonth( state ),
+	start: dateTimeSelectors.getStart( state ),
+	end: dateTimeSelectors.getEnd( state ),
+	naturalLanguageLabel: dateTimeSelectors.getNaturalLanguageLabel( state ),
+	multiDay: dateTimeSelectors.getMultiDay( state ),
+	allDay: dateTimeSelectors.getAllDay( state ),
+	separatorDate: dateTimeSelectors.getDateSeparator( state ),
+	separatorTime: dateTimeSelectors.getTimeSeparator( state ),
+	showTimeZone: dateTimeSelectors.getTimeZoneVisibility( state ),
+	timeZone: dateTimeSelectors.getTimeZone( state ),
+	timeZoneLabel: dateTimeSelectors.getTimeZoneLabel( state ),
+	showDateInput: dateTimeSelectors.getDateInputVisibility( state ),
+	cost: priceSelectors.getPrice( state ),
+	currencySymbol: priceSelectors.getSymbol( state ),
+	currencyPosition: priceSelectors.getPosition( state ),
+} );
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	...bindActionCreators( dateTimeActions, dispatch ),
@@ -189,6 +192,7 @@ const mapDispatchToProps = ( dispatch ) => ( {
 		dispatch( UIActions.setInitialState( props ) );
 	},
 	onTimeZoneVisibilityChange: onTimeZoneVisibilityChange( dispatch ),
+	onDateTimeLabelClick: onDateTimeLabelClick( dispatch ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {

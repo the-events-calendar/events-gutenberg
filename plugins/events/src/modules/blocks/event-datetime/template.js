@@ -55,7 +55,7 @@ class EventDateTime extends Component {
 	static propTypes = {
 		allDay: PropTypes.bool,
 		multiDay: PropTypes.bool,
-		dashboardOpen: PropTypes.bool,
+		isDashboardOpen: PropTypes.bool,
 		cost: PropTypes.string,
 		start: PropTypes.string,
 		end: PropTypes.string,
@@ -71,14 +71,12 @@ class EventDateTime extends Component {
 		naturalLanguageLabel: PropTypes.string,
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
-		openDashboardDateTime: PropTypes.func,
 		setDateTime: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
 		setNaturalLanguageLabel: PropTypes.func,
-		setDateInputVisibility: PropTypes.func,
 		onKeyDown: PropTypes.func,
 		onClick: PropTypes.func,
 		onSelectDay: PropTypes.func,
@@ -88,6 +86,7 @@ class EventDateTime extends Component {
 		onEndTimePickerClick: PropTypes.func,
 		onMultiDayToggleChange: PropTypes.func,
 		onTimeZoneVisibilityChange: PropTypes.func,
+		onDateTimeLabelClick: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
@@ -103,16 +102,7 @@ class EventDateTime extends Component {
 		document.removeEventListener( 'click', onClick );
 	}
 
-	renderStart() {
-		return (
-			<React.Fragment>
-				{ this.renderStartDate() }
-				{ this.renderStartTime() }
-			</React.Fragment>
-		);
-	}
-
-	renderPrice() {
+	renderPrice = () => {
 		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
 		// Bail when not classic
@@ -137,7 +127,7 @@ class EventDateTime extends Component {
 		);
 	}
 
-	renderStartDate() {
+	renderStartDate = () => {
 		const { start, end } = this.props;
 		let startDate = toDate( toMoment( start ) );
 
@@ -150,7 +140,7 @@ class EventDateTime extends Component {
 		);
 	}
 
-	renderStartTime() {
+	renderStartTime = () => {
 		const { start, allDay } = this.props;
 
 		if ( allDay ) {
@@ -158,23 +148,14 @@ class EventDateTime extends Component {
 		}
 
 		return (
-			<React.Fragment>
+			<Fragment>
 				{ this.renderSeparator( 'date-time' ) }
 				{ toTime( toMoment( start ), FORMATS.WP.time ) }
-			</React.Fragment>
+			</Fragment>
 		);
 	}
 
-	renderEnd() {
-		return (
-			<React.Fragment>
-				{ this.renderEndDate() }
-				{ this.renderEndTime() }
-			</React.Fragment>
-		);
-	}
-
-	renderEndDate() {
+	renderEndDate = () => {
 		const { start, end, multiDay } = this.props;
 
 		if ( ! multiDay ) {
@@ -192,7 +173,7 @@ class EventDateTime extends Component {
 		);
 	}
 
-	renderEndTime() {
+	renderEndTime = () => {
 		const { end, multiDay, allDay } = this.props;
 
 		if ( allDay ) {
@@ -200,15 +181,27 @@ class EventDateTime extends Component {
 		}
 
 		return (
-			<React.Fragment>
+			<Fragment>
 				{ multiDay && this.renderSeparator( 'date-time' ) }
 				{ toTime( toMoment( end ), FORMATS.WP.time ) }
-			</React.Fragment>
+			</Fragment>
 		);
 	}
 
-	renderTimezone() {
-		return this.renderSeparator( 'timeZone' );
+	renderTimezone = () => {
+		const { setTimeZoneLabel, timeZoneLabel, showTimeZone } = this.props;
+
+		return showTimeZone && (
+			<span
+				key="time-zone"
+				className={ classNames( 'tribe-editor__time-zone', className ) }>
+				<TimeZone
+					value={ timeZoneLabel }
+					placeholder={ timeZoneLabel }
+					onChange={ setTimeZoneLabel }
+				/>
+			</span>
+		);
 	}
 
 	/**
@@ -218,14 +211,9 @@ class EventDateTime extends Component {
 	 *
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
-	renderSeparator( type, className ) {
-		const {
-			separatorDate,
-			separatorTime,
-			setTimeZoneLabel,
-			timeZoneLabel,
-			showTimeZone,
-		} = this.props;
+	renderSeparator = ( type, className ) => {
+		const { separatorDate, separatorTime } = this.props;
+
 		switch ( type ) {
 			case 'date-time':
 				return (
@@ -239,45 +227,30 @@ class EventDateTime extends Component {
 						{ ' '.concat( separatorTime, ' ' ) }
 					</span>
 				);
-			case 'dash':
-				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }> &mdash; </span>
-				);
 			case 'all-day':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }> ALL DAY</span>
-				);
-			case 'space':
-				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>&nbsp;</span>
-				);
-			case 'timeZone':
-				return showTimeZone && (
-					<span
-						key="time-zone-separator"
-						className={ classNames( 'tribe-editor__separator', className ) }>
-						<TimeZone
-							value={ timeZoneLabel }
-							placeholder={ timeZoneLabel }
-							onChange={ setTimeZoneLabel }
-						/>
-					</span>
+					<span className={ classNames( 'tribe-editor__separator', className ) }>ALL DAY</span>
 				);
 			default:
 				return null;
 		}
 	}
 
-	renderExtras() {
-		return [ this.renderTimezone(), this.renderPrice() ];
+	renderExtras = () => {
+		return (
+			<Fragment>
+				{ this.renderTimezone() }
+				{ this.renderPrice() }
+			</Fragment>
+		);
 	}
 
-	renderDashboard() {
-		const { dashboardOpen, multiDay, allDay } = this.props;
+	renderDashboard = () => {
+		const { isDashboardOpen, multiDay, allDay } = this.props;
 		const hideUpsell = getConstants().hide_upsell === 'true';
 
 		return (
-			<Dashboard open={ dashboardOpen }>
+			<Dashboard isOpen={ isDashboardOpen }>
 				<Fragment>
 					<section className="tribe-editor__calendars">
 						{ this.renderCalendars() }
@@ -296,14 +269,14 @@ class EventDateTime extends Component {
 								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
-						{ ! hideUpsell && <Upsell/> }
+						{ ! hideUpsell && <Upsell /> }
 					</footer>
 				</Fragment>
 			</Dashboard>
 		);
 	}
 
-	renderCalendars() {
+	renderCalendars = () => {
 		const {
 			multiDay,
 			start,
@@ -330,7 +303,7 @@ class EventDateTime extends Component {
 		);
 	}
 
-	renderStartTimePicker() {
+	renderStartTimePicker = () => {
 		const {
 			start,
 			end,
@@ -342,7 +315,7 @@ class EventDateTime extends Component {
 		const startMoment = toMoment( start );
 		const endMoment = toMoment( end );
 
-		const pickerProps = {
+		const timePickerProps = {
 			current: startMoment,
 			start: startMoment.clone().startOf( 'day' ),
 			end: startMoment.clone().endOf( 'day' ),
@@ -353,8 +326,8 @@ class EventDateTime extends Component {
 		};
 
 		if ( ! multiDay ) {
-			pickerProps.end = roundTime( endMoment.clone().subtract( 1, 'minutes' ) );
-			pickerProps.max = endMoment.clone().subtract( 1, 'minutes' );
+			timePickerProps.end = roundTime( endMoment.clone().subtract( 1, 'minutes' ) );
+			timePickerProps.max = endMoment.clone().subtract( 1, 'minutes' );
 		}
 
 		let startDate = toDate( toMoment( start ) );
@@ -363,14 +336,14 @@ class EventDateTime extends Component {
 		}
 
 		return (
-			<React.Fragment>
+			<Fragment>
 				<span className="tribe-editor__time-picker__label">{ startDate }</span>
-				<TimePicker { ...pickerProps } />
-			</React.Fragment>
+				<TimePicker { ...timePickerProps } />
+			</Fragment>
 		);
 	}
 
-	renderEndTimePicker() {
+	renderEndTimePicker = () => {
 		const {
 			start,
 			end,
@@ -387,7 +360,7 @@ class EventDateTime extends Component {
 		const startMoment = toMoment( start );
 		const endMoment = toMoment( end );
 
-		const pickerProps = {
+		const timePickerProps = {
 			current: endMoment,
 			start: endMoment.clone().startOf( 'day' ),
 			end: roundTime( endMoment.clone().endOf( 'day' ) ),
@@ -401,11 +374,11 @@ class EventDateTime extends Component {
 		if ( ! multiDay ) {
 			// if the start time has less than half an hour left in the day
 			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= HALF_HOUR_IN_SECONDS ) {
-				pickerProps.start = endMoment.clone().endOf( 'day' );
+				timePickerProps.start = endMoment.clone().endOf( 'day' );
 			} else {
-				pickerProps.start = roundTime( startMoment ).add( 30, 'minutes' );
+				timePickerProps.start = roundTime( startMoment ).add( 30, 'minutes' );
 			}
-			pickerProps.min = startMoment.clone().add( 1, 'minutes' );
+			timePickerProps.min = startMoment.clone().add( 1, 'minutes' );
 		}
 
 		let endDate = toDate( toMoment( end ) );
@@ -414,14 +387,14 @@ class EventDateTime extends Component {
 		}
 
 		return (
-			<React.Fragment>
+			<Fragment>
 				{ multiDay && <span className="tribe-editor__time-picker__label">{ endDate }</span> }
-				<TimePicker { ...pickerProps } />
-			</React.Fragment>
+				<TimePicker { ...timePickerProps } />
+			</Fragment>
 		);
 	}
 
-	renderMultiDayToggle() {
+	renderMultiDayToggle = () => {
 		const { multiDay, onMultiDayToggleChange } = this.props;
 
 		return (
@@ -438,17 +411,17 @@ class EventDateTime extends Component {
 	 *
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
-	renderDate() {
+	renderBlock = () => {
 		const {
 			multiDay,
 			allDay,
 			showDateInput,
-			setDateInputVisibility,
-			openDashboardDateTime,
+			onDateTimeLabelClick,
 			setDateTime,
 			setNaturalLanguageLabel,
 			naturalLanguageLabel,
 		} = this.props;
+
 		return (
 			<section
 				key="event-datetime"
@@ -468,14 +441,13 @@ class EventDateTime extends Component {
 						<h2 className="tribe-editor__subtitle__headline">
 							<button
 								className="tribe-editor__btn--label"
-								onClick={ () => {
-									setDateInputVisibility( true );
-									openDashboardDateTime();
-								} }
+								onClick={ onDateTimeLabelClick }
 							>
-								{ this.renderStart() }
+								{ this.renderStartDate() }
+								{ this.renderStartTime() }
 								{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
-								{ this.renderEnd() }
+								{ this.renderEndDate() }
+								{ this.renderEndTime() }
 								{ allDay && this.renderSeparator( 'all-day' ) }
 							</button>
 							{ this.renderExtras() }
@@ -492,7 +464,7 @@ class EventDateTime extends Component {
 	 *
 	 * @returns {ReactDOM} A React Dom Element null if none.
 	 */
-	renderControls() {
+	renderControls = () => {
 		const {
 			separatorTime,
 			separatorDate,
@@ -537,7 +509,7 @@ class EventDateTime extends Component {
 	}
 
 	render() {
-		return [ this.renderDate(), this.renderControls() ];
+		return [ this.renderBlock(), this.renderControls() ];
 	}
 }
 
