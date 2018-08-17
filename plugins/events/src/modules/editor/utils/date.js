@@ -32,10 +32,6 @@ export const FORMATS = {
 
 export const TODAY = new Date();
 
-export const isSameYear = ( startDate, endDate ) => (
-	toMoment( startDate ).isSame( toMoment( endDate ), 'year' )
-);
-
 export const timezonesAsSelectData = () => {
 	return timezones().map( ( tzone ) => ( {
 		value: tzone.key,

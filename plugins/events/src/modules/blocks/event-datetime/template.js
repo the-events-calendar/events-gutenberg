@@ -35,11 +35,11 @@ import {
 	toDate,
 	toDateNoYear,
 	toTime,
+	isSameYear,
 } from '@moderntribe/events/editor/utils/moment';
 import {
 	FORMATS,
 	TODAY,
-	isSameYear,
 	timezonesAsSelectData
 } from '@moderntribe/events/editor/utils/date';
 import { HALF_HOUR_IN_SECONDS, DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
@@ -323,8 +323,8 @@ class EventDateTime extends Component {
 	}
 
 	setDays = ( data ) => {
-		const { from, to } = data;
 		const { start, end, setDates } = this.props;
+		const { from, to } = data;
 		setDates( { start, end, to, from } );
 	};
 
