@@ -32,42 +32,24 @@ export const FORMATS = {
 
 export const TODAY = new Date();
 
-/**
- * Make sure all the Dates objects are on the same time
- *
- * @param {Date} params 0 to N set of Dates params
- * @returns {boolean} true if all the dates have the same timestamp
- */
-export function equalDates( ...params ) {
-	if ( params.length === 0 ) {
-		return false;
-	}
+export const isSameYear = ( startDate, endDate ) => (
+	toMoment( startDate ).isSame( toMoment( endDate ), 'year' )
+);
 
-	const dates = params.filter( ( item ) => item instanceof Date );
-	const [ first, ...rest ] = dates;
+export const timezonesAsSelectData = () => {
+	return timezones().map( ( tzone ) => ( {
+		value: tzone.key,
+		label: tzone.text,
+	} ) );
+};
 
-	return (
-		dates.length === params.length &&
-		rest.every( ( item ) => item.getTime() === first.getTime() )
-	);
-}
-
-export function timezonesAsSelectData() {
-	return timezones().map( ( tzone ) => {
-		return {
-			value: tzone.key,
-			label: tzone.text,
-		};
-	} );
-}
-
-export function timezones() {
+export const timezones = () => {
 	return getItems()
 		.map( ( group ) => group.options || [] )
 		.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
-}
+};
 
-export function toNaturalLanguage( date = null, format = { date: 'MMM D YYYY', time: 'h:mm a' } ) {
+export const toNaturalLanguage = ( date = null, format = { date: 'MMM D YYYY', time: 'h:mm a' } ) => {
 	const parsed = {
 		text: '',
 		moment: date && toMoment( date ),
@@ -78,9 +60,9 @@ export function toNaturalLanguage( date = null, format = { date: 'MMM D YYYY', t
 		parsed.text = `${ moment.format( format.date ) } at ${ moment.format( format.time ) }`;
 	}
 	return parsed;
-}
+};
 
-export function rangeToNaturalLanguage( start = '', end = '' ) {
+export const rangeToNaturalLanguage = ( start = '', end = '' ) => {
 	const from = toNaturalLanguage( start );
 	const to = toNaturalLanguage( end );
 	const parts = [

@@ -36,7 +36,12 @@ import {
 	toDateNoYear,
 	toTime,
 } from '@moderntribe/events/editor/utils/moment';
-import { FORMATS, timezonesAsSelectData, TODAY } from '@moderntribe/events/editor/utils/date';
+import {
+	FORMATS,
+	TODAY,
+	isSameYear,
+	timezonesAsSelectData
+} from '@moderntribe/events/editor/utils/date';
 import { HALF_HOUR_IN_SECONDS, DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 import './style.pcss';
 
@@ -133,10 +138,10 @@ class EventDateTime extends Component {
 	}
 
 	renderStartDate() {
-		const { start } = this.props;
+		const { start, end } = this.props;
 		let startDate = toDate( toMoment( start ) );
 
-		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+		if ( isSameYear( start, end ) && isSameYear( start, TODAY ) ) {
 			startDate = toDateNoYear( toMoment( start ) );
 		}
 
@@ -170,16 +175,15 @@ class EventDateTime extends Component {
 	}
 
 	renderEndDate() {
-		const { multiDay } = this.props;
+		const { start, end, multiDay } = this.props;
 
 		if ( ! multiDay ) {
 			return null;
 		}
 
-		const { end } = this.props;
 		let endDate = toDate( toMoment( end ) );
 
-		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+		if ( isSameYear( start, end ) && isSameYear( start, TODAY ) ) {
 			endDate = toDateNoYear( toMoment( end ) );
 		}
 
@@ -201,10 +205,6 @@ class EventDateTime extends Component {
 				{ toTime( toMoment( end ), FORMATS.WP.time ) }
 			</React.Fragment>
 		);
-	}
-
-	isSameYear( start = this.props.start, end = this.props.end ) {
-		return toMoment( start ).isSame( toMoment( end ), 'year' );
 	}
 
 	renderTimezone() {
@@ -395,7 +395,7 @@ class EventDateTime extends Component {
 	};
 
 	renderStartTimePicker() {
-		const { start, allDay, multiDay, end } = this.props;
+		const { start, end, allDay, multiDay } = this.props;
 		const startMoment = toMoment( start );
 		const endMoment = toMoment( end );
 
@@ -415,7 +415,7 @@ class EventDateTime extends Component {
 		}
 
 		let startDate = toDate( toMoment( start ) );
-		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+		if ( isSameYear( start, end ) && isSameYear( start, TODAY ) ) {
 			startDate = toDateNoYear( toMoment( start ) );
 		}
 
@@ -459,7 +459,7 @@ class EventDateTime extends Component {
 		}
 
 		let endDate = toDate( toMoment( end ) );
-		if ( this.isSameYear() && this.isSameYear( TODAY ) ) {
+		if ( isSameYear( start, end ) && isSameYear( start, TODAY ) ) {
 			endDate = toDateNoYear( toMoment( end ) );
 		}
 
