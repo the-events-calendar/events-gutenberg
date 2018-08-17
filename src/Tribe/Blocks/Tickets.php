@@ -35,6 +35,10 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 			if ( 'Tribe__Tickets__RSVP' === $ticket->provider_class ) {
 				continue;
 			}
+
+			if ( ! $ticket->date_in_range() ) {
+				continue;
+			}
 			$tickets[] = $ticket;
 		}
 
