@@ -11,7 +11,7 @@ $must_login = ! is_user_logged_in() && tribe( 'tickets.rsvp' )->login_required()
 	<a href="<?php echo esc_url( tribe( 'tickets' )->get_login_url() ); ?>">
 		<?php esc_html_e( 'Login to RSVP', 'events-gutenberg' ); ?>
 	</a>
-<?php else: ?>
+<?php else : ?>
 	<button
 		type="submit"
 		name="tickets_process"
