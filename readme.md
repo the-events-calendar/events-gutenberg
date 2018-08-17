@@ -28,6 +28,7 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 * Tweak - Use event timezone as default value
 * Tweak - Separate logic and presentation in event venue block
+* Fix - Display timezone label when selection is a UTC offset
 * Fix - Allow removal of organizers from classic block if the organizer block is removed
 
 #### 0.2.6-alpha - 2018-08-10
