@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { withStore, withSaveData, withDetails, withForm } from 'editor/hoc';
 import { actions, selectors } from 'data/blocks/organizers';
 import { actions as detailsActions } from 'data/details';
+import { actions as formActions } from 'data/forms';
 import { ORGANIZER } from 'editor/post-types';
 import EventOrganizer from './template';
 import { toOrganizer } from 'elements/organizer-form/utils';
@@ -71,11 +72,21 @@ const mapDispatchToProps = ( dispatch ) => ( {
 		dispatch( actions.addOrganizerInClassic( organizer ) );
 	},
 	onBlockRemoved( props ) {
-		const { clientId, organizer } = props;
+		const { clientId, organizer, volatile } = props;
 		if ( ! organizer ) {
 			return;
 		}
+
 		dispatch( actions.removeOrganizerInBlock( clientId, organizer ) );
+
+		if ( volatile ) {
+			dispatch( actions.removeOrganizerInClassic( organizer ) );
+			/**
+			 * @todo: this one creates a connection with the Form event, however the form has no idea of
+			 * @todo: the ID to be removed so this one might be a good saga watcher
+			 */
+			dispatch( formActions.removeVolatile( organizer ) );
+		}
 	},
 } );
 
