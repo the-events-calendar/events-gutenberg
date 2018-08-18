@@ -9,7 +9,7 @@ $must_login = ! is_user_logged_in() && tribe( 'tickets.rsvp' )->login_required()
 $remaining  = $ticket->remaining();
 ?>
 <div class="number-input">
-	<button class="minus"></button>
+	<?php $this->template( 'blocks/rsvp/form/quantity-minus' ); ?>
 		<input
 			type="number"
 			name="quantity_<?php echo absint( $ticket->ID ); ?>"
@@ -23,5 +23,5 @@ $remaining  = $ticket->remaining();
 			<?php endif; ?>
 			<?php disabled( $must_login ); ?>
 		/>
-	<button class="plus"></button>
+	<?php $this->template( 'blocks/rsvp/form/quantity-plus' ); ?>
 </div>
