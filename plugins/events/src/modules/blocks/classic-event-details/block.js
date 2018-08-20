@@ -14,7 +14,7 @@ import AutosizeInput from 'react-input-autosize';
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 
-import withSaveData from '@moderntribe/common/hoc/with-save-data';
+import { withStore, withSaveData } from '@moderntribe/common/hoc';
 
 import {
 	ToggleControl,
@@ -67,7 +67,7 @@ import { FORMATS } from '@moderntribe/events/editor/utils';
  * Module Code
  */
 
-class EventDetails extends Component {
+class ClassicEventDetails extends Component {
 	static propTypes = {
 		organizerTitle: PropTypes.string,
 		url: PropTypes.string,
@@ -354,9 +354,10 @@ const mapDispatchToProps = ( dispatch ) => {
 };
 
 export default compose(
+	withStore(),
 	connect(
 		mapStateToProps,
 		mapDispatchToProps,
 	),
 	withSaveData(),
-)( EventDetails );
+)( ClassicEventDetails );
