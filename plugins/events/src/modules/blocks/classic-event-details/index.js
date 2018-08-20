@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import ClassicEventDetails from './block';
+import ClassicEventDetails from './container';
 import { Icons } from '@moderntribe/events/elements';
 
 /**
