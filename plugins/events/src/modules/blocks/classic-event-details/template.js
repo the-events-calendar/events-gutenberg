@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import AutosizeInput from 'react-input-autosize';
@@ -10,24 +10,13 @@ import AutosizeInput from 'react-input-autosize';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
-import {
-	ToggleControl,
-	TextControl,
-	PanelBody,
-} from '@wordpress/components';
-import {
-	PlainText,
-	InspectorControls,
-} from '@wordpress/editor';
+import { ToggleControl, TextControl, PanelBody } from '@wordpress/components';
+import { PlainText, InspectorControls } from '@wordpress/editor';
 
 /**
  * Internal dependencies
  */
-import {
-	TermsList,
-	MetaGroup,
-} from '@moderntribe/events/elements';
+import { TermsList, MetaGroup } from '@moderntribe/events/elements';
 import { default as EventOrganizers } from './organizers';
 import { toMoment, toDate, toTime } from '@moderntribe/events/editor/utils/moment';
 import { sendValue } from '@moderntribe/events/editor/utils/input';
@@ -37,82 +26,11 @@ import { FORMATS } from '@moderntribe/events/editor/utils';
  * Module Code
  */
 
-class ClassicEventDetails extends Component {
-	static propTypes = {
-		organizerTitle: PropTypes.string,
-		url: PropTypes.string,
-		start: PropTypes.string,
-		end: PropTypes.string,
-		separatorDate: PropTypes.string,
-		cost: PropTypes.string,
-		currencyPosition: PropTypes.string,
-		currencySymbol: PropTypes.string,
-		detailsTitle: PropTypes.string,
-		allDay: PropTypes.bool,
-		isSelected: PropTypes.bool,
-		setOrganizerTitle: PropTypes.func,
-		setDetailsTitle: PropTypes.func,
-		setWebsite: PropTypes.func,
-		setCost: PropTypes.func,
-		toggleDashboardDateTime: PropTypes.func,
-		setSymbol: PropTypes.func,
-		togglePosition: PropTypes.func,
-		setAllDay: PropTypes.func,
-	};
+const ClassicEventDetails = ( props ) => {
 
-	constructor() {
-		super( ...arguments );
-	}
+	const renderTitle = () => {
+		const { detailsTitle, setDetailsTitle } = props;
 
-	render() {
-		return [ this.renderBlock(), this.renderControls() ];
-	}
-
-	renderBlock() {
-		return (
-			<div key="event-details-box" className="tribe-editor__block tribe-editor__event-details">
-				{ this.renderDetails() }
-				{ this.renderOrganizer() }
-			</div>
-		);
-	}
-
-	renderDetails() {
-		return (
-			<MetaGroup groupKey="event-details">
-				{ this.renderTitle() }
-				{ this.renderStart() }
-				{ this.renderEnd() }
-				{ this.renderWebsite() }
-				{ this.renderCost() }
-				{ this.renderCategory() }
-				{ this.renderTags() }
-			</MetaGroup>
-		);
-	}
-
-	renderOrganizer() {
-		const {
-			organizerTitle,
-			setOrganizerTitle,
-			store,
-		} = this.props;
-
-		return (
-			<MetaGroup groupKey="organizer">
-				<AutosizeInput
-					className="tribe-editor__events-section__headline"
-					value={ organizerTitle }
-					placeholder={ __( 'Organizer', 'events-gutenberg' ) }
-					onChange={ sendValue( setOrganizerTitle ) }
-				/>
-				<EventOrganizers store={ store }/>
-			</MetaGroup>
-		);
-	}
-
-	renderTitle() {
-		const { detailsTitle, setDetailsTitle } = this.props;
 		return (
 			<AutosizeInput
 				className="tribe-editor__events-section__headline trigger-dashboard-datetime"
@@ -121,10 +39,10 @@ class ClassicEventDetails extends Component {
 				onChange={ sendValue( setDetailsTitle ) }
 			/>
 		);
-	}
+	};
 
-	renderStart() {
-		const { start, toggleDashboardDateTime } = this.props;
+	const renderStart = () => {
+		const { start, allDay, toggleDashboardDateTime, separatorDate } = props;
 
 		return (
 			<div>
@@ -134,29 +52,20 @@ class ClassicEventDetails extends Component {
 				>
 					<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong>
 					{ toDate( toMoment( start ), FORMATS.WP.date ) }
-					{ this.renderStartTime() }
+					{ ! allDay && (
+						<Fragment>
+							<span>{ separatorDate }</span>
+							<span>{ toTime( toMoment( start ), FORMATS.WP.time ) }</span>
+						</Fragment>
+					) }
 				</button>
 			</div>
 		);
-	}
+	};
 
-	renderStartTime() {
-		const { allDay, start, separatorDate } = this.props;
+	const renderEnd = () => {
+		const { end, allDay, toggleDashboardDateTime, separatorDate } = props;
 
-		if ( allDay ) {
-			return null;
-		}
-
-		return (
-			<React.Fragment>
-				<span>{ separatorDate }</span>
-				<span>{ toTime( toMoment( start ), FORMATS.WP.time ) }</span>
-			</React.Fragment>
-		);
-	}
-
-	renderEnd() {
-		const { end, toggleDashboardDateTime } = this.props;
 		return (
 			<div>
 				<button
@@ -165,34 +74,23 @@ class ClassicEventDetails extends Component {
 				>
 					<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong>
 					{ toDate( toMoment( end ), FORMATS.WP.date ) }
-					{ this.renderEndTime() }
+					{ ! allDay && (
+						<Fragment>
+							<span>{ separatorDate }</span>
+							<span>{ toTime( toMoment( end ), FORMATS.WP.time ) }</span>
+						</Fragment>
+					) }
 				</button>
 			</div>
 		);
-	}
+	};
 
-	renderEndTime() {
-		const { allDay } = this.props;
+	const renderWebsite = () => {
+		const { url, setWebsite } = props;
 
-		if ( allDay ) {
-			return null;
-		}
-
-		const { end, separatorDate } = this.props;
-
-		return (
-			<React.Fragment>
-				<span>{ separatorDate }</span>
-				{ toTime( toMoment( end ), FORMATS.WP.time ) }
-			</React.Fragment>
-		);
-	}
-
-	renderWebsite() {
-		const { url, setWebsite } = this.props;
 		return (
 			<div>
-				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br/>
+				<strong>{ __( 'Website: ', 'events-gutenberg' ) }</strong><br />
 				<PlainText
 					id="tribe-event-url"
 					value={ url }
@@ -201,17 +99,18 @@ class ClassicEventDetails extends Component {
 				/>
 			</div>
 		);
-	}
+	};
 
-	renderCost() {
-		const { setCost, cost, currencyPosition, currencySymbol } = this.props;
+	const renderCost = () => {
+		const { setCost, cost, currencyPosition, currencySymbol } = props;
 		const textClassName = classNames( [
 			'tribe-editor__event-cost__value',
 			`tribe-editor-cost-symbol-position-${ currencyPosition }`,
 		] );
+
 		return (
 			<div className="tribe-editor__event-cost">
-				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br/>
+				<strong>{ __( 'Price: ', 'events-gutenberg' ) }</strong><br />
 				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
 				<PlainText
 					className={ textClassName }
@@ -222,42 +121,67 @@ class ClassicEventDetails extends Component {
 				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
 			</div>
 		);
-	}
+	};
 
-	renderCategory() {
-		return (
-			<TermsList
-				slug="tribe_events_cat"
-				label={ __( 'Event Category:', 'events-gutenberg' ) }
-			/>
-		);
-	}
+	const renderCategory = () => (
+		<TermsList
+			slug="tribe_events_cat"
+			label={ __( 'Event Category:', 'events-gutenberg' ) }
+		/>
+	);
 
-	renderTags() {
-		return (
-			<TermsList
-				slug="tags"
-				label={ __( 'Event Tags:', 'events-gutenberg' ) }
-			/>
-		);
-	}
+	const renderTags = () => (
+		<TermsList
+			slug="tags"
+			label={ __( 'Event Tags:', 'events-gutenberg' ) }
+		/>
+	);
 
-	renderControls() {
-		const {
-			isSelected,
-			allDay,
-			currencyPosition,
-			currencySymbol,
-			togglePosition,
-			setAllDay,
-			setSymbol,
-		} = this.props;
+	const {
+		organizerTitle,
+		setOrganizerTitle,
+		store,
+		isSelected,
+		allDay,
+		setAllDay,
+		currencyPosition,
+		togglePosition,
+		currencySymbol,
+		setSymbol,
+	} = props;
 
-		if ( ! isSelected ) {
-			return null;
-		}
-
-		return (
+	/**
+	 * TODO: The store shouldn't be passed down as a prop, as in EventOrganizers
+	 * This needs to be fixed in another PR
+	 */
+	return [
+		(
+			<div
+				key="event-details-box"
+				className="tribe-editor__block tribe-editor__event-details"
+			>
+				<MetaGroup groupKey="event-details">
+					{ renderTitle() }
+					{ renderStart() }
+					{ renderEnd() }
+					{ renderWebsite() }
+					{ renderCost() }
+					{ renderCategory() }
+					{ renderTags() }
+				</MetaGroup>
+				<MetaGroup groupKey="organizer">
+					<AutosizeInput
+						className="tribe-editor__events-section__headline"
+						value={ organizerTitle }
+						placeholder={ __( 'Organizer', 'events-gutenberg' ) }
+						onChange={ sendValue( setOrganizerTitle ) }
+					/>
+					<EventOrganizers store={ store } />
+				</MetaGroup>
+			</div>
+		),
+		(
+			isSelected &&
 			<InspectorControls key="inspector">
 				<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
 					<ToggleControl
@@ -280,8 +204,30 @@ class ClassicEventDetails extends Component {
 					/>
 				</PanelBody>
 			</InspectorControls>
-		);
-	}
-}
+		),
+	];
+};
+
+ClassicEventDetails.propTypes = {
+	organizerTitle: PropTypes.string,
+	url: PropTypes.string,
+	start: PropTypes.string,
+	end: PropTypes.string,
+	separatorDate: PropTypes.string,
+	cost: PropTypes.string,
+	currencyPosition: PropTypes.string,
+	currencySymbol: PropTypes.string,
+	detailsTitle: PropTypes.string,
+	allDay: PropTypes.bool,
+	isSelected: PropTypes.bool,
+	setOrganizerTitle: PropTypes.func,
+	setDetailsTitle: PropTypes.func,
+	setWebsite: PropTypes.func,
+	setCost: PropTypes.func,
+	toggleDashboardDateTime: PropTypes.func,
+	setSymbol: PropTypes.func,
+	togglePosition: PropTypes.func,
+	setAllDay: PropTypes.func,
+};
 
 export default ClassicEventDetails;
