@@ -17,10 +17,10 @@ import { PlainText, InspectorControls } from '@wordpress/editor';
  * Internal dependencies
  */
 import { TermsList, MetaGroup } from '@moderntribe/events/elements';
-import { default as EventOrganizers } from './organizers';
 import { toMoment, toDate, toTime } from '@moderntribe/events/editor/utils/moment';
 import { sendValue } from '@moderntribe/events/editor/utils/input';
 import { FORMATS } from '@moderntribe/events/editor/utils';
+import EventOrganizers from './organizers';
 
 /**
  * Module Code
@@ -54,7 +54,7 @@ const ClassicEventDetails = ( props ) => {
 					{ toDate( toMoment( start ), FORMATS.WP.date ) }
 					{ ! allDay && (
 						<Fragment>
-							<span>{ separatorDate }</span>
+							<span>{ ' '.concat( separatorDate, ' ' ) }</span>
 							<span>{ toTime( toMoment( start ), FORMATS.WP.time ) }</span>
 						</Fragment>
 					) }
@@ -76,7 +76,7 @@ const ClassicEventDetails = ( props ) => {
 					{ toDate( toMoment( end ), FORMATS.WP.date ) }
 					{ ! allDay && (
 						<Fragment>
-							<span>{ separatorDate }</span>
+							<span>{ ' '.concat( separatorDate, ' ' ) }</span>
 							<span>{ toTime( toMoment( end ), FORMATS.WP.time ) }</span>
 						</Fragment>
 					) }
@@ -123,20 +123,6 @@ const ClassicEventDetails = ( props ) => {
 		);
 	};
 
-	const renderCategory = () => (
-		<TermsList
-			slug="tribe_events_cat"
-			label={ __( 'Event Category:', 'events-gutenberg' ) }
-		/>
-	);
-
-	const renderTags = () => (
-		<TermsList
-			slug="tags"
-			label={ __( 'Event Tags:', 'events-gutenberg' ) }
-		/>
-	);
-
 	const {
 		organizerTitle,
 		setOrganizerTitle,
@@ -166,8 +152,14 @@ const ClassicEventDetails = ( props ) => {
 					{ renderEnd() }
 					{ renderWebsite() }
 					{ renderCost() }
-					{ renderCategory() }
-					{ renderTags() }
+					<TermsList
+						slug="tribe_events_cat"
+						label={ __( 'Event Category:', 'events-gutenberg' ) }
+					/>
+					<TermsList
+						slug="tags"
+						label={ __( 'Event Tags:', 'events-gutenberg' ) }
+					/>
 				</MetaGroup>
 				<MetaGroup groupKey="organizer">
 					<AutosizeInput
