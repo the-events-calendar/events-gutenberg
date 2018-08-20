@@ -11,12 +11,4 @@ describe( 'Plugin actions', () => {
 	test( 'Remove Plugin', () => {
 		expect( actions.removePlugin( 'events' ) ).toMatchSnapshot();
 	} );
-
-	test( 'Activate Plugin', () => {
-		expect( actions.activatePlugin( 'events' ) ).toMatchSnapshot();
-	} );
-
-	test( 'Deactivate Plugin', () => {
-		expect( actions.deactivatePlugin( 'events' ) ).toMatchSnapshot();
-	} );
 } );

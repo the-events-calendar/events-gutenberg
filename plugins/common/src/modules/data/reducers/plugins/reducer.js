@@ -1,28 +1,19 @@
 /**
  * External dependencies
  */
-import { omit } from 'lodash';
+import { uniq } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import { types } from '@moderntribe/common/data/reducers/plugins';
 
-export default ( state = {}, action ) => {
+export default ( state = [], action ) => {
 	switch ( action.type ) {
 		case types.ADD_PLUGIN:
-		case types.DEACTIVATE_PLUGIN:
-			return {
-				...state,
-				[ action.payload.name ]: false,
-			};
+			return uniq( [ ...state, action.payload.name ] );
 		case types.REMOVE_PLUGIN:
-			return omit( state, action.payload.name );
-		case types.ACTIVATE_PLUGIN:
-			return {
-				...state,
-				[ action.payload.name ]: true,
-			};
+			return [ ...state ].filter( ( pluginName ) => pluginName !== action.payload.name );
 		default:
 			return state;
 	}

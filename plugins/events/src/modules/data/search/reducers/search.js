@@ -9,7 +9,7 @@ export const DEFAULT_STATE = {
 	results: [],
 	page: 1,
 	totalPages: 0,
-	loading: false,
+	isLoading: false,
 	postType: EVENT,
 };
 

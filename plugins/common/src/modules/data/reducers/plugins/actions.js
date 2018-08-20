@@ -16,17 +16,3 @@ export const removePlugin = ( name ) => ( {
 		name,
 	},
 } );
-
-export const activatePlugin = ( name ) => ( {
-	type: types.ACTIVATE_PLUGIN,
-	payload: {
-		name,
-	},
-} );
-
-export const deactivatePlugin = ( name ) => ( {
-	type: types.DEACTIVATE_PLUGIN,
-	payload: {
-		name,
-	},
-} );
