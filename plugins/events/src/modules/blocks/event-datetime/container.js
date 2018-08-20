@@ -86,16 +86,16 @@ const onStartTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	const startMoment = toMoment( start );
 	const max = toMoment( end ).clone().subtract( 1, 'minutes' );
 
-	const copy = startMoment.clone();
-	copy.set( 'hour', parseInt( hour, 10 ) );
-	copy.set( 'minute', parseInt( minute, 10 ) );
-	copy.set( 'second', 0 );
+	const startMomentCopy = startMoment.clone();
+	startMomentCopy.set( 'hour', parseInt( hour, 10 ) );
+	startMomentCopy.set( 'minute', parseInt( minute, 10 ) );
+	startMomentCopy.set( 'second', 0 );
 
-	if ( copy.isAfter( max ) ) {
+	if ( startMomentCopy.isAfter( max ) ) {
 		return;
 	}
 
-	const seconds = copy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
+	const seconds = startMomentCopy.diff( startMoment.clone().startOf( 'day' ), 'seconds' );
 	setStartTime( { start, seconds } );
 };
 
@@ -121,16 +121,16 @@ const onEndTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	const endMoment = toMoment( end );
 	const min = toMoment( start ).clone().add( 1, 'minutes' );
 
-	const copy = endMoment.clone();
+	const endMomentCopy = endMoment.clone();
 	copy.set( 'hour', parseInt( hour, 10 ) );
-	copy.set( 'minute', parseInt( minute, 10 ) );
-	copy.set( 'second', 0 );
+	endMomentCopy.set( 'minute', parseInt( minute, 10 ) );
+	endMomentCopy.set( 'second', 0 );
 
 	if ( copy.isBefore( min ) ) {
 		return;
 	}
 
-	const seconds = copy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
+	const seconds = endMomentCopy.diff( endMoment.clone().startOf( 'day' ), 'seconds' );
 	setEndTime( { end, seconds } );
 };
 
