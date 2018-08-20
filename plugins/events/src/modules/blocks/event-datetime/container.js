@@ -122,11 +122,11 @@ const onEndTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	const min = toMoment( start ).clone().add( 1, 'minutes' );
 
 	const endMomentCopy = endMoment.clone();
-	copy.set( 'hour', parseInt( hour, 10 ) );
+	endMomentCopy.set( 'hour', parseInt( hour, 10 ) );
 	endMomentCopy.set( 'minute', parseInt( minute, 10 ) );
 	endMomentCopy.set( 'second', 0 );
 
-	if ( copy.isBefore( min ) ) {
+	if ( endMomentCopy.isBefore( min ) ) {
 		return;
 	}
 
