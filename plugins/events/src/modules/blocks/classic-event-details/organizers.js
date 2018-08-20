@@ -1,10 +1,10 @@
 /**
  * External dependencies
  */
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, bindActionCreators } from 'redux';
+import classNames from 'classnames';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 /**
@@ -12,20 +12,12 @@ import { connect } from 'react-redux';
  */
 import { __ } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-
-import {
-	Dropdown,
-	IconButton,
-	Dashicon,
-} from '@wordpress/components';
+import { Dropdown, IconButton, Dashicon } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import {
-	OrganizerForm,
-	SearchPosts,
-} from '@moderntribe/events/elements';
+import { OrganizerForm, SearchPosts } from '@moderntribe/events/elements';
 import { actions, selectors } from '@moderntribe/events/data/blocks/organizers';
 import { actions as detailsActions } from '@moderntribe/events/data/details';
 import { Item } from './organizer';
@@ -149,12 +141,10 @@ const mapStateToProps = ( state ) => ( {
 	organizers: selectors.getMappedOrganizers( state ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => {
-	return {
-		...bindActionCreators( actions, dispatch ),
-		...bindActionCreators( detailsActions, dispatch ),
-	};
-};
+const mapDispatchToProps = ( dispatch ) => ( {
+	...bindActionCreators( actions, dispatch ),
+	...bindActionCreators( detailsActions, dispatch ),
+} );
 
 export default connect(
 	mapStateToProps,
