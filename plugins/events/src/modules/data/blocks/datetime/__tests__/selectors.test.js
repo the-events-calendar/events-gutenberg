@@ -56,4 +56,9 @@ describe( '[STORE] - Datetime selectors', () => {
 	it( 'Should return the natural language label', () => {
 		expect( selectors.getNaturalLanguageLabel( state ) ).toBe( DEFAULT_STATE.naturalLanguage );
 	} );
+
+	it( 'Should return the natural language label', () => {
+		expect( selectors.getDateInputVisibility( state ) ).toBe( DEFAULT_STATE.showDateInput );
+	} );
+
 } );

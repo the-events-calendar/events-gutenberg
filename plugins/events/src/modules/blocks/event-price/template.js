@@ -91,13 +91,13 @@ const renderLabel = ( props ) => {
 };
 
 const renderDashboard = ({
-	dashboardOpen,
+	isDashboardOpen,
 	cost,
 	costDescription,
 	setCost,
 	setDescription
 }) => (
-	<Dashboard open={ dashboardOpen }>
+	<Dashboard isOpen={ isDashboardOpen }>
 		<Fragment>
 			<section className="tribe-editor__event-price__dashboard">
 				<input
@@ -184,7 +184,7 @@ class EventPrice extends Component {
 }
 
 EventPrice.propTypes = {
-	dashboardOpen: PropTypes.bool,
+	isDashboardOpen: PropTypes.bool,
 	cost: PropTypes.string,
 	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix', '' ] ),
 	currencySymbol: PropTypes.string,
