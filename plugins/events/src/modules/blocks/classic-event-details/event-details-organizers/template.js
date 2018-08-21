@@ -15,7 +15,7 @@ import { Dropdown, IconButton, Dashicon } from '@wordpress/components';
  * Internal dependencies
  */
 import { OrganizerForm, SearchPosts } from '@moderntribe/events/elements';
-import { Item } from './organizer';
+import EventDetailsOrganizer from './event-details-organizer/event-details-organizer';
 import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 
 const CreateDropdown = ( props ) => {
@@ -67,13 +67,13 @@ const EventDetailsOrganizers = ( props ) => {
 			<div key="organizer-list">
 				<ul className={ classNames( 'tribe-editor__organizer__list' ) }>
 					{ organizers.map( ( { id, block } ) => (
-						<Item
+						<EventDetailsOrganizer
 							id={ id }
 							block={ block }
 							key={ id }
 							store={ store }
 							postType={ ORGANIZER }
-							onRemoveOrganizer={ removeOrganizer( id ) }
+							onRemoveClick={ removeOrganizer( id ) }
 						/>
 					) ) }
 				</ul>
