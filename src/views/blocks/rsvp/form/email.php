@@ -11,7 +11,7 @@
  * @since TBD
  *
  */
-$email = apply_filters( 'tribe_tickets_rsvp_form_email', '' );
+$email = apply_filters( 'tribe_tickets_rsvp_form_email', '', $ticket );
 ?>
 <input
 	type="email"

@@ -19,11 +19,13 @@ $ticket_id = $this->get( 'ticket_id' );
 	</div>
 
 	<div class="right">
-		<?php $this->template( 'blocks/rsvp/form/name' ); ?>
+		<?php $this->template( 'blocks/rsvp/form/error' ); ?>
 
-		<?php $this->template( 'blocks/rsvp/form/email' ); ?>
+		<?php $this->template( 'blocks/rsvp/form/name', array( 'ticket' => $ticket ) ); ?>
 
-		<?php $this->template( 'blocks/rsvp/form/submit' ); ?>
+		<?php $this->template( 'blocks/rsvp/form/email', array( 'ticket' => $ticket ) ); ?>
+
+		<?php $this->template( 'blocks/rsvp/form/submit', array( 'ticket' => $ticket ) ); ?>
 	</div>
 
 </form>

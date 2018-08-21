@@ -12,7 +12,7 @@
  *
  * @param string
  */
-$name = apply_filters( 'tribe_tickets_rsvp_form_full_name', '' );
+$name = apply_filters( 'tribe_tickets_rsvp_form_full_name', '', $ticket );
 ?>
 <input
 	type="text"
