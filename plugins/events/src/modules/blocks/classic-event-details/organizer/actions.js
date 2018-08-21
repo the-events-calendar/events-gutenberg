@@ -28,7 +28,7 @@ const ActionsComponent = ( { block, volatile, onRemoveOrganizer = noop, focus } 
 			className="tribe-editor__btn tribe-editor__btn--action"
 			label={ __( 'Remove Organizer', 'events-gutenberg' ) }
 			onClick={ onRemoveOrganizer }
-			icon={ 	<Dashicon icon="no" /> }
+			icon={ <Dashicon icon="no" /> }
 			aria-expanded={ focus }
 		/>
 	);
