@@ -13,7 +13,7 @@ import { HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
  * @param {string} format The format to be converted to a moment format
  * @returns {string} return a moment.js valid format
  */
-export function toFormat( format ) {
+export const toFormat = ( format ) => {
 	const replacements = {
 		d: 'DD',
 		D: 'ddd',
@@ -64,7 +64,7 @@ export function toFormat( format ) {
  * @param {moment} date Make sure the date is rounded between 0 or 30 minutes
  * @returns {moment} A moment object
  */
-export function roundTime( date ) {
+export const roundTime = ( date ) => {
 	if ( ! ( date instanceof moment ) ) {
 		return date;
 	}
@@ -87,7 +87,7 @@ export function roundTime( date ) {
  * @param {array} formats The list of formats used to format
  * @returns {moment} moment Object with the date or current date if is non valid
  */
-export function parseFormats( date, formats = [ FORMATS.DATABASE.datetime, FORMATS.WP.datetime ] ) {
+export const parseFormats = ( date, formats = [ FORMATS.DATABASE.datetime, FORMATS.WP.datetime ] ) => {
 	for ( let i = 0; i < formats.length; i ++ ) {
 		const format = formats[ i ];
 		const result = toMoment( date, format );
@@ -108,7 +108,7 @@ export function parseFormats( date, formats = [ FORMATS.DATABASE.datetime, FORMA
  * @param {string} format The format of the data to be used
  * @returns {moment} A moment object
  */
-export function toMoment( date, format = FORMATS.DATABASE.datetime ) {
+export const toMoment = ( date, format = FORMATS.DATABASE.datetime ) => {
 	if ( date instanceof moment || date instanceof Date ) {
 		return moment( date );
 	} else if ( isString( date ) ) {
@@ -118,7 +118,7 @@ export function toMoment( date, format = FORMATS.DATABASE.datetime ) {
 	return moment();
 }
 
-export function toMomentFromDate( date ) {
+export const toMomentFromDate = ( date ) => {
 	if ( ! ( date instanceof Date ) ) {
 		throw new Error( 'Make sure your date is an instance of Date' );
 	}
@@ -141,7 +141,7 @@ export function toMomentFromDate( date ) {
  * @param {moment} replaced The moment object where the date to be used to replace is located
  * @returns {moment} A moment object where the date is replaced
  */
-export function replaceDate( original, replaced ) {
+export const replaceDate = ( original, replaced ) => {
 	if ( ! ( original instanceof moment ) || ! ( replaced instanceof moment ) ) {
 		throw new Error( 'Make sure your values are instances of moment' );
 	}
@@ -159,7 +159,7 @@ export function replaceDate( original, replaced ) {
  * @param {number} seconds Amount of seconds to be set to the moment object.
  * @returns {moment} A moment object with the new date
  */
-export function setTimeInSeconds( original, seconds = 0 ) {
+export const setTimeInSeconds = ( original, seconds = 0 ) => {
 	if ( ! ( original instanceof moment ) ) {
 		throw new Error( 'Make sure your values are instances of moment' );
 	}
@@ -179,7 +179,7 @@ export function setTimeInSeconds( original, seconds = 0 ) {
  * @param {moment} date The date to compare on the current day
  * @returns {int} Total of seconds from start of the day to the current moment,
  */
-export function totalSeconds( date ) {
+export const totalSeconds = ( date ) => {
 	if ( ! date || ! ( date instanceof moment ) ) {
 		return 0;
 	}
@@ -194,36 +194,47 @@ export function totalSeconds( date ) {
  * @param {string} format Format used to output the date
  * @returns {string} A date time format
  */
-export function toDateTime( date, format = FORMATS.DATABASE.datetime ) {
+export const toDateTime = ( date, format = FORMATS.DATABASE.datetime ) => {
 	return date.format( toFormat( format ) );
 }
 
-export function toDate( date, format = FORMATS.WP.date ) {
+export const toDate = ( date, format = FORMATS.WP.date ) => {
 	return date.format( toFormat( format ) );
 }
 
-export function toDateNoYear( date, format = FORMATS.WP.dateNoYear ) {
+export const toDateNoYear = ( date, format = FORMATS.WP.dateNoYear ) => {
 	return date.format( toFormat( format ) );
 }
 
-export function toTime( date, format = FORMATS.WP.time ) {
+export const toTime = ( date, format = FORMATS.WP.time ) => {
 	return date.format( toFormat( format ) );
 }
 
-export function toDatePicker( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) {
+export const toDatePicker = ( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) => {
 	return date.format( format );
 }
 
 /**
- * Test if the current start and end date are happening on the same day.
+ * Test if the start and end dates are the same day.
  *
- * @param {moment} start The start of the event
- * @param {(moment|String)} end The end date of the event
- * @returns {boolean} if the event is happening on the same day
+ * @param {moment} start The start date
+ * @param {(moment|String)} end The end date
+ * @returns {boolean} if the start and end dates are the same day
  */
-export function isSameDay( start, end ) {
+export const isSameDay = ( start, end ) => {
 	return moment( start ).isSame( end, 'day' );
 }
+
+/**
+ * Test if the start and end dates have the same year.
+ *
+ * @param {moment} start The start date
+ * @param {(moment|String)} end The end date
+ * @returns {boolean} if the start and end dates have the same year
+ */
+export const isSameYear = ( start, end ) => (
+	toMoment( start ).isSame( toMoment( end ), 'year' )
+);
 
 /**
  * Reset the time of an event by creating an object with start and end ensuring the end event is
@@ -233,7 +244,7 @@ export function isSameDay( start, end ) {
  * @param {moment} start The start date
  * @returns {{start: {moment}, end: {moment}}} Object with two keys: start, end
  */
-export function resetTimes( start ) {
+export const resetTimes = ( start ) => {
 	const testMoment = start.clone().add( HOUR_IN_SECONDS, 'seconds' );
 
 	// Rollback an hour before adding half an hour as we are on the edge of the day
@@ -256,7 +267,7 @@ export function resetTimes( start ) {
  * @param {moment} end The end date
  * @returns {{start: {moment}, end: {moment}}} Object with two keys: start, end
  */
-export function adjustStart( start, end ) {
+export const adjustStart = ( start, end ) => {
 	if ( end.isSameOrBefore( start ) ) {
 		return resetTimes( start );
 	}

@@ -7,50 +7,55 @@ export const datetimeSelector = ( state ) => state.events.blocks.datetime;
 
 export const getStart = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.start
+	( datetime ) => datetime.start
 );
 
 export const getEnd = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.end
+	( datetime ) => datetime.end
 );
 
 export const getAllDay = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.allDay
+	( datetime ) => datetime.allDay
 );
 
 export const getMultiDay = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.multiDay
+	( datetime ) => datetime.multiDay
 );
 
 export const getDateSeparator = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.dateTimeSeparator
+	( datetime ) => datetime.dateTimeSeparator
 );
 
 export const getTimeSeparator = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.timeRangeSeparator,
+	( datetime ) => datetime.timeRangeSeparator,
 );
 
 export const getTimeZone = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.timeZone,
+	( datetime ) => datetime.timeZone,
 );
 
 export const getTimeZoneVisibility = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.showTimeZone,
+	( datetime ) => datetime.showTimeZone,
 );
 
 export const getTimeZoneLabel = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.timeZoneLabel,
+	( datetime ) => datetime.timeZoneLabel,
 );
 
 export const getNaturalLanguageLabel = createSelector(
 	[ datetimeSelector ],
-	( values ) => values.naturalLanguage,
+	( datetime ) => datetime.naturalLanguage,
 );
+
+export const getDateInputVisibility = createSelector(
+	[ datetimeSelector ],
+	( datetime ) => datetime.showDateInput,
+)

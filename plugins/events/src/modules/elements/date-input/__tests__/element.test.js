@@ -14,44 +14,21 @@ const lodash = require.requireActual( 'lodash' );
 import { DateInput } from '@moderntribe/events/elements';
 
 describe( 'DateInput element', () => {
-	it( 'Should render the children when is not selected', () => {
-		const component = renderer.create(
-			<DateInput selected={ false }>
-				<div>This is the children</div>
-			</DateInput>,
-		);
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
-
-	it( 'Should render the input when is selected', () => {
-		const component = renderer.create(
-			<DateInput selected={ true }>
-				<div>This is the children</div>
-			</DateInput>
-		);
+	it( 'Should render the input', () => {
+		const component = renderer.create( <DateInput /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'Should render the before child on the input', () => {
 		const component = renderer.create(
-			<DateInput
-				selected={ true }
-				before={ <span>Before the input</span> }
-			>
-				<div>This is the children</div>
-			</DateInput>
+			<DateInput before={ <span>Before the input</span> } />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'Should render the after child on the input', () => {
 		const component = renderer.create(
-			<DateInput
-				selected={ true }
-				after={ <span>After the input</span> }
-			>
-				<div>This is the children</div>
-			</DateInput>
+			<DateInput after={ <span>After the input</span> } />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
@@ -59,12 +36,9 @@ describe( 'DateInput element', () => {
 	it( 'Should render the before and after child', () => {
 		const component = renderer.create(
 			<DateInput
-				selected={ true }
 				before={ <span>Before the input</span> }
 				after={ <span>After the input</span> }
-			>
-				<div>This is the children</div>
-			</DateInput>
+			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
@@ -74,11 +48,8 @@ describe( 'DateInput element', () => {
 		const component = (
 			<DateInput
 				onChange={ onChange }
-				selected={ true }
 				value="Modern Tribe"
-			>
-				<div>This is the children</div>
-			</DateInput>
+			/>
 		);
 		const mounted = mount( component );
 		const render = renderer.create( component );
@@ -95,11 +66,8 @@ describe( 'DateInput element', () => {
 		const component = (
 			<DateInput
 				setDateTime={ setDateTime }
-				selected={ true }
 				value="17 August 2018 - 19 August 2018"
-			>
-				<div>This is the children</div>
-			</DateInput>
+			/>
 		);
 		const mounted = mount( component );
 		const render = renderer.create( component );

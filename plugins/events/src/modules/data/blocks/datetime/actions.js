@@ -10,14 +10,14 @@ export const setNaturalLanguageLabel = ( label ) => ( {
 	},
 } );
 
-export const setStart = ( start ) => ( {
+export const setStartDateTime = ( start ) => ( {
 	type: types.SET_START_DATE_TIME,
 	payload: {
 		start,
 	},
 } );
 
-export const setEnd = ( end ) => ( {
+export const setEndDateTime = ( end ) => ( {
 	type: types.SET_END_DATE_TIME,
 	payload: {
 		end,
@@ -68,6 +68,13 @@ export const setTimeZoneLabel = ( label ) => ( {
 
 export const setTimeZoneVisibility = ( show ) => ( {
 	type: types.SET_TIMEZONE_VISIBILITY,
+	payload: {
+		show,
+	},
+} );
+
+export const setDateInputVisibility = ( show ) => ( {
+	type: types.SET_DATE_INPUT_VISIBILITY,
 	payload: {
 		show,
 	},

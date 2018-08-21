@@ -72,7 +72,7 @@ const onClick = ( e, dispatch ) => {
 };
 
 const mapStateToProps = ( state ) => ( {
-	dashboardOpen: UISelectors.getDashboardPriceOpen( state ),
+	isDashboardOpen: UISelectors.getDashboardPriceOpen( state ),
 	cost: priceSelectors.getPrice( state ),
 	currencyPosition: priceSelectors.getPosition( state ),
 	currencySymbol: priceSelectors.getSymbol( state ),
