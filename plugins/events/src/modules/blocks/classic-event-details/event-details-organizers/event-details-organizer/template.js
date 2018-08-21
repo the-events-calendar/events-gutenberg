@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { unescape, trim, isEmpty } from 'lodash';
 
@@ -33,25 +33,31 @@ const EventDetailsOrganizer = ( props ) => {
 		volatile,
 		onRemoveClick,
 	} ) => (
-		! ( block || volatile ) &&
-		<IconButton
-			className="tribe-editor__btn tribe-editor__btn--action"
-			label={ __( 'Remove Organizer', 'events-gutenberg' ) }
-			onClick={ onRemoveClick( organizerId ) }
-			icon={ <Dashicon icon="no" /> }
-		/>
+		! ( block || volatile )
+		&& (
+			<IconButton
+				className="tribe-editor__btn tribe-editor__btn--action"
+				label={ __( 'Remove Organizer', 'events-gutenberg' ) }
+				onClick={ onRemoveClick( organizerId ) }
+				icon={ <Dashicon icon="no" /> }
+			/>
+		)
 	);
-	console.log(props.focus);
-	const { isLoading, details } = props;
 
-	if ( isLoading || isEmpty( details ) ) {
-		return <li><Loading className="tribe-editor__spinner--item" /></li>;
-	}
+	const { isLoading, details } = props;
 
 	return (
 		<li>
-			{ getOrganizerName( props.details ) }
-			{ getOrganizerRemoveButton( props ) }
+			{
+				( isLoading || isEmpty( details ) )
+				? <Loading className="tribe-editor__spinner--item" />
+				: (
+					<Fragment>
+						{ getOrganizerName( props.details ) }
+						{ getOrganizerRemoveButton( props ) }
+					</Fragment>
+				)
+			}
 		</li>
 	);
 };

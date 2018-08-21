@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 /**
@@ -33,8 +33,6 @@ const mapStateToProps = ( state ) => ( {
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
-	...bindActionCreators( organizersActions, dispatch ),
-	...bindActionCreators( detailsActions, dispatch ),
 	addOrganizer: addOrganizer( dispatch ),
 	removeOrganizer: removeOrganizer( dispatch ),
 } );

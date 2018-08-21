@@ -18,8 +18,8 @@ import { OrganizerForm, SearchPosts } from '@moderntribe/events/elements';
 import EventDetailsOrganizer from './event-details-organizer/container';
 import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 
-const CreateDropdown = ( props ) => {
-	const dropdownToggle = ( { onToggle } ) => (
+const EventDetailsOrganizers = ( props ) => {
+	const renderDropdownToggle = ( { onToggle } ) => (
 		<IconButton
 			className="tribe-editor__btn"
 			label={ __( 'Create Organizer' ) }
@@ -28,7 +28,7 @@ const CreateDropdown = ( props ) => {
 		/>
 	);
 
-	const dropdownContent = ( { onClose, isOpen } ) => (
+	const renderDropdownContent = ( { onClose, isOpen } ) => (
 		<OrganizerForm
 			addOrganizer={ props.addOrganizer }
 			onClose={ onClose }
@@ -36,18 +36,6 @@ const CreateDropdown = ( props ) => {
 		/>
 	);
 
-	return (
-		<Dropdown
-			className="tribe-editor__organizer__dropdown"
-			position="bottom center"
-			contentClassName="tribe-editor-dropdown__dialog"
-			renderToggle={ dropdownToggle }
-			renderContent={ dropdownContent }
-		/>
-	);
-};
-
-const EventDetailsOrganizers = ( props ) => {
 	const { addOrganizer, removeOrganizer, organizers } = props;
 
 	return (
@@ -75,9 +63,13 @@ const EventDetailsOrganizers = ( props ) => {
 					onItemSelect={ addOrganizer }
 					exclude={ organizers.map( ( { id } ) => id ) }
 				/>
-				<CreateDropdown
+				<Dropdown
 					key="organizer-create-dropdown"
-					addOrganizer={ addOrganizer }
+					className="tribe-editor__organizer__dropdown"
+					position="bottom center"
+					contentClassName="tribe-editor-dropdown__dialog"
+					renderToggle={ renderDropdownToggle }
+					renderContent={ renderDropdownContent }
 				/>
 			</div>
 		</Fragment>
@@ -85,11 +77,9 @@ const EventDetailsOrganizers = ( props ) => {
 };
 
 EventDetailsOrganizers.propTypes = {
-	organizers: PropTypes.array,
-}
-
-EventDetailsOrganizers.defaultProps = {
-	organizers: [],
+	organizers: PropTypes.array.isRequired,
+	addOrganizer: PropTypes.func.isRequired,
+	removeOrganizer: PropTypes.func.isRequired,
 };
 
 export default EventDetailsOrganizers;
