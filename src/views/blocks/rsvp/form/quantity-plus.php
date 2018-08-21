@@ -6,4 +6,4 @@
  *
  */
 ?>
-<button class="plus"></button>
+<button class="tribe-plus"></button>
