@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { unescape, trim, isEmpty } from 'lodash';
 
 /**
@@ -30,7 +31,6 @@ const EventDetailsOrganizer = ( props ) => {
 		block,
 		volatile,
 		onRemoveClick,
-		focus
 	} ) => (
 		! ( block || volatile ) &&
 		<IconButton
@@ -38,10 +38,9 @@ const EventDetailsOrganizer = ( props ) => {
 			label={ __( 'Remove Organizer', 'events-gutenberg' ) }
 			onClick={ onRemoveClick }
 			icon={ <Dashicon icon="no" /> }
-			aria-expanded={ focus }
 		/>
 	);
-
+	console.log(props.focus);
 	const { isLoading, details } = props;
 
 	if ( isLoading || isEmpty( details ) ) {
@@ -54,6 +53,14 @@ const EventDetailsOrganizer = ( props ) => {
 			{ getOrganizerRemoveButton( props ) }
 		</li>
 	);
+};
+
+EventDetailsOrganizer.propTypes = {
+	details: PropTypes.object,
+	isLoading: PropTypes.bool,
+	block: PropTypes.bool,
+	volatie: PropTypes.bool,
+	onRemoveClick: PropTypes.func,
 };
 
 export default EventDetailsOrganizer;
