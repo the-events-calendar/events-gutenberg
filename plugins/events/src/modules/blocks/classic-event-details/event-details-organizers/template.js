@@ -19,20 +19,20 @@ import EventDetailsOrganizer from './event-details-organizer/container';
 import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 
 const CreateDropdown = ( props ) => {
-	const dropdownToggle = ( { onToggle, isOpen } ) => (
+	const dropdownToggle = ( { onToggle } ) => (
 		<IconButton
 			className="tribe-editor__btn"
 			label={ __( 'Create Organizer' ) }
 			onClick={ onToggle }
 			icon={ <Dashicon icon="plus" /> }
-			aria-expanded={ isOpen }
 		/>
 	);
 
-	const dropdownContent = ( { onClose } ) => (
+	const dropdownContent = ( { onClose, isOpen } ) => (
 		<OrganizerForm
 			addOrganizer={ props.addOrganizer }
 			onClose={ onClose }
+			aria-expanded={ isOpen }
 		/>
 	);
 
@@ -59,8 +59,7 @@ const EventDetailsOrganizers = ( props ) => {
 		removeOrganizerInClassic( id );
 	};
 
-	// TODO: The store should be passed in as a HOC, not directly this way.
-	const { organizers, store } = props;
+	const { organizers } = props;
 
 	return (
 		<Fragment>
@@ -84,13 +83,11 @@ const EventDetailsOrganizers = ( props ) => {
 					postType={ ORGANIZER }
 					searchLabel={ __( 'Search for an organizer', 'events-gutenberg' ) }
 					iconLabel={ __( 'Add existing Organizer', 'events-gutenberg' ) }
-					store={ store }
 					onItemSelect={ addOrganizer }
 					exclude={ organizers.map( ( { id } ) => id ) }
 				/>
 				<CreateDropdown
 					key="organizer-create-dropdown"
-					focus={ true }
 					addOrganizer={ addOrganizer }
 				/>
 			</div>

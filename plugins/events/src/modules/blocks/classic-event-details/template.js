@@ -126,7 +126,6 @@ const ClassicEventDetails = ( props ) => {
 	const {
 		organizerTitle,
 		setOrganizerTitle,
-		store,
 		isSelected,
 		allDay,
 		setAllDay,
@@ -136,10 +135,6 @@ const ClassicEventDetails = ( props ) => {
 		setSymbol,
 	} = props;
 
-	/**
-	 * TODO: The store shouldn't be passed down as a prop, as in EventDetailsOrganizers
-	 * This needs to be fixed in another PR
-	 */
 	return [
 		(
 			<div
@@ -168,7 +163,7 @@ const ClassicEventDetails = ( props ) => {
 						placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 						onChange={ sendValue( setOrganizerTitle ) }
 					/>
-					<EventDetailsOrganizers store={ store } />
+					<EventDetailsOrganizers />
 				</MetaGroup>
 			</div>
 		),
