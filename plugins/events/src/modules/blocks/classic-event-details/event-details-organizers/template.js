@@ -4,8 +4,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
 /**
  * WordPress dependencies
@@ -17,8 +15,6 @@ import { Dropdown, IconButton, Dashicon } from '@wordpress/components';
  * Internal dependencies
  */
 import { OrganizerForm, SearchPosts } from '@moderntribe/events/elements';
-import { actions, selectors } from '@moderntribe/events/data/blocks/organizers';
-import { actions as detailsActions } from '@moderntribe/events/data/details';
 import { Item } from './organizer';
 import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 
@@ -111,16 +107,4 @@ EventDetailsOrganizers.defaultProps = {
 	organizers: [],
 };
 
-const mapStateToProps = ( state ) => ( {
-	organizers: selectors.getMappedOrganizers( state ),
-} );
-
-const mapDispatchToProps = ( dispatch ) => ( {
-	...bindActionCreators( actions, dispatch ),
-	...bindActionCreators( detailsActions, dispatch ),
-} );
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)( EventDetailsOrganizers );
+export default EventDetailsOrganizers;

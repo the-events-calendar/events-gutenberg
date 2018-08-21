@@ -20,7 +20,7 @@ import { TermsList, MetaGroup } from '@moderntribe/events/elements';
 import { toMoment, toDate, toTime } from '@moderntribe/events/editor/utils/moment';
 import { sendValue } from '@moderntribe/events/editor/utils/input';
 import { FORMATS } from '@moderntribe/events/editor/utils';
-import EventOrganizers from './organizers';
+import EventDetailsOrganizers from './event-details-organizers/container';
 
 /**
  * Module Code
@@ -137,7 +137,7 @@ const ClassicEventDetails = ( props ) => {
 	} = props;
 
 	/**
-	 * TODO: The store shouldn't be passed down as a prop, as in EventOrganizers
+	 * TODO: The store shouldn't be passed down as a prop, as in EventDetailsOrganizers
 	 * This needs to be fixed in another PR
 	 */
 	return [
@@ -168,7 +168,7 @@ const ClassicEventDetails = ( props ) => {
 						placeholder={ __( 'Organizer', 'events-gutenberg' ) }
 						onChange={ sendValue( setOrganizerTitle ) }
 					/>
-					<EventOrganizers store={ store } />
+					<EventDetailsOrganizers store={ store } />
 				</MetaGroup>
 			</div>
 		),
