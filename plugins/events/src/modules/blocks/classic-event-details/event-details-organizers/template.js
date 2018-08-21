@@ -48,18 +48,7 @@ const CreateDropdown = ( props ) => {
 };
 
 const EventDetailsOrganizers = ( props ) => {
-	const addOrganizer = ( id, details ) => {
-		const { addOrganizerInClassic, setDetails } = props;
-		setDetails( id, details );
-		addOrganizerInClassic( id );
-	};
-
-	const removeOrganizer = ( id ) => () => {
-		const { removeOrganizerInClassic } = props;
-		removeOrganizerInClassic( id );
-	};
-
-	const { organizers } = props;
+	const { addOrganizer, removeOrganizer, organizers } = props;
 
 	return (
 		<Fragment>
@@ -71,7 +60,7 @@ const EventDetailsOrganizers = ( props ) => {
 							block={ block }
 							key={ id }
 							postType={ ORGANIZER }
-							onRemoveClick={ removeOrganizer( id ) }
+							onRemoveClick={ removeOrganizer }
 						/>
 					) ) }
 				</ul>

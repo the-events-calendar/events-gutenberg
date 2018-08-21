@@ -1,30 +1,45 @@
 /**
  * External dependencies
  */
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
  */
-import { actions, selectors } from '@moderntribe/events/data/blocks/organizers';
+import {
+	actions as organizersActions,
+	selectors as organizersSelectors,
+} from '@moderntribe/events/data/blocks/organizers';
 import { actions as detailsActions } from '@moderntribe/events/data/details';
+import { withStore } from '@moderntribe/common/hoc';
 import EventDetailsOrganizers from './template';
 
 /**
  * Module Code
  */
 
+const addOrganizer = ( dispatch ) => ( id, details ) => {
+	dispatch( detailsActions.setDetails( id, details ) );
+	dispatch( organizersActions.addOrganizerInClassic( id ) );
+};
+
+const removeOrganizer = ( dispatch ) => ( id ) => () => (
+	dispatch( organizersActions.removeOrganizerInClassic( id ) )
+);
+
 const mapStateToProps = ( state ) => ( {
-	organizers: selectors.getMappedOrganizers( state ),
+	organizers: organizersSelectors.getMappedOrganizers( state ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
-	...bindActionCreators( actions, dispatch ),
+	...bindActionCreators( organizersActions, dispatch ),
 	...bindActionCreators( detailsActions, dispatch ),
+	addOrganizer: addOrganizer( dispatch ),
+	removeOrganizer: removeOrganizer( dispatch ),
 } );
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps ),
 )( EventDetailsOrganizers );

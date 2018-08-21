@@ -28,6 +28,7 @@ const EventDetailsOrganizer = ( props ) => {
 	};
 
 	const getOrganizerRemoveButton = ( {
+		organizerId,
 		block,
 		volatile,
 		onRemoveClick,
@@ -36,7 +37,7 @@ const EventDetailsOrganizer = ( props ) => {
 		<IconButton
 			className="tribe-editor__btn tribe-editor__btn--action"
 			label={ __( 'Remove Organizer', 'events-gutenberg' ) }
-			onClick={ onRemoveClick }
+			onClick={ onRemoveClick( organizerId ) }
 			icon={ <Dashicon icon="no" /> }
 		/>
 	);
@@ -58,6 +59,7 @@ const EventDetailsOrganizer = ( props ) => {
 EventDetailsOrganizer.propTypes = {
 	details: PropTypes.object,
 	isLoading: PropTypes.bool,
+	organizerId: PropTypes.number,
 	block: PropTypes.bool,
 	volatie: PropTypes.bool,
 	onRemoveClick: PropTypes.func,
