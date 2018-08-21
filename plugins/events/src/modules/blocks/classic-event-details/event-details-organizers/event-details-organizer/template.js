@@ -13,11 +13,14 @@ import { Dashicon, IconButton } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { withDetails } from '@moderntribe/common/hoc';
 import { Loading } from '@moderntribe/events/elements';
 import './style.pcss';
 
-const Item = ( props ) => {
+/**
+ * Module Code
+ */
+
+const EventDetailsOrganizer = ( props ) => {
 	const getOrganizerName = ( { title } ) => {
 		const { rendered = __( '(Untitled)', 'events-gutenberg' ) } = title;
 		return trim( unescape( rendered ) );
@@ -53,4 +56,4 @@ const Item = ( props ) => {
 	);
 };
 
-export default withDetails( 'id' )( Item );
+export default EventDetailsOrganizer;
