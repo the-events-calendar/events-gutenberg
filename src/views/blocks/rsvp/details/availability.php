@@ -6,14 +6,12 @@
  *
  */
 ?>
-<div class="availability">
+<div class="tribe-block__rsvp__availability">
 	<?php if ( ! $ticket->is_in_stock() ) : ?>
-		<span class="no-stock"><?php esc_html_e( 'Out of stock!', 'event-tickets' ); ?></span>
+		<span class="tribe-block__rsvp__no-stock"><?php esc_html_e( 'Out of stock!', 'event-tickets' ); ?></span>
 	<?php else : ?>
-		<?php printf(
-			'<span class="quantity">%s</span> %s',
-			$ticket->remaining(),
-			esc_html__( 'Remaining', 'events-gutenberg' )
-		); ?>
+		<span class="tribe-block__rsvp__quantity"><?php echo $ticket->remaining(); ?> </span>
+		<?php esc_html_e( 'remaining', 'events-gutenberg' ) ?>
+
 	<?php endif; ?>
 </div>

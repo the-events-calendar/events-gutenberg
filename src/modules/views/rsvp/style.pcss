@@ -46,37 +46,61 @@
 .tribe-block__rsvp__details__status {
 	display: flex;
 	flex-direction: row;
+	flex: 1 100%;
+	flex-wrap: wrap;
 }
 
 .tribe-block__rsvp__details {
 	flex: 10 5 400px;
 	padding: 30px 20px;
+}
 
-	header {
-		font-size: 18px;
-		font-weight: 600;
-		margin-bottom: 10px;
+.tribe-block__rsvp__title {
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+.tribe-block__rsvp__description {
+	color: #545e66;
+	font-size: 13px;
+}
+
+.tribe-block__rsvp__availability {
+	color: #545e66;
+	font-size: 14px;
+	span {
+		font-size: 16px;
 	}
+}
 
-	.description {
-		color: #545e66;
-		font-size: 13px;
-	}
+.tribe-block__rsvp__loading {
+	background: rgba( 255, 255, 255, .7 );
+	display: none;
+	height: 100%;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	z-index: 99;
 
-	.availability {
-		color: #545e66;
-		font-size: 14px;
+	svg {
+		max-width: 70px;
+		position: absolute;
+		top: 35%;
+		circle {
+			fill: #888;
+		}
 	}
 }
 
 .tribe-block__rsvp__status {
 	color: #aeb4bb;
+	display: flex;
 	flex: 1 1 170px;
+	flex-wrap: wrap;
+	justify-content: center;
 	padding: 30px 15px;
 	text-align: center;
-	justify-content: center;
-	display: flex;
-	flex-wrap: wrap;
 
 	> span {
 		flex: 2 2 50%;
@@ -168,7 +192,7 @@
 
 		}
 
-		.number-input {
+		.tribe-block__rsvp__number-input {
 			display: inline-flex;
 
 			&,
@@ -200,7 +224,7 @@
 					transform: translate(-50%, -50%);
 				}
 
-				&.minus {
+				&.tribe-minus {
 					padding-right: 0;
 
 					&:before,
@@ -210,7 +234,7 @@
 					}
 				}
 
-				&.plus {
+				&.tribe-plus {
 					padding-left: 0;
 					&:after {
 						transform: translate(-50%, -50%) rotate(90deg);
