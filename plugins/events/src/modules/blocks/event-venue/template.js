@@ -31,7 +31,7 @@ import {
 	EditLink,
 } from '@moderntribe/events/elements';
 import { VENUE } from '@moderntribe/events/editor/post-types';
-import VenueDetails from './venue';
+import VenueDetails from './venue-details';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
 import { utils } from '@moderntribe/events/data/blocks/venue';

@@ -1,13 +1,15 @@
 /**
  * External dependencies
  */
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
  */
-import SearchPosts from './template';
 import { actions, thunks, selectors } from '@moderntribe/events/data/search';
+import { withStore } from '@moderntribe/common/hoc';
+import SearchPosts from './template';
 
 /**
  * Module Code
@@ -91,8 +93,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	onDropdownToggle: onDropdownToggle( stateProps, dispatchProps, ownProps ),
 } );
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-	mergeProps
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
 )( SearchPosts );

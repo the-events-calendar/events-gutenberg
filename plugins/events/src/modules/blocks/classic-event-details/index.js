@@ -10,9 +10,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventDetails from './block';
+import ClassicEventDetails from './container';
 import { Icons } from '@moderntribe/events/elements';
-import { withStore } from '@moderntribe/common/hoc';
 
 /**
  * Module Code
@@ -83,7 +82,7 @@ export default {
 		},
 	},
 
-	edit: withStore()( EventDetails ),
+	edit: ClassicEventDetails,
 
 	save( props ) {
 		return null;
