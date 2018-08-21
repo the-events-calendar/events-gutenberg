@@ -8,7 +8,7 @@
 $must_login = ! is_user_logged_in() && tribe( 'tickets.rsvp' )->login_required();
 $remaining  = $ticket->remaining();
 ?>
-<div class="number-input">
+<div class="tribe-block__rsvp__number-input">
 	<?php $this->template( 'blocks/rsvp/form/quantity-minus' ); ?>
 		<input
 			type="number"
