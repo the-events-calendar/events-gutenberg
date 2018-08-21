@@ -33,6 +33,7 @@
 		"@moderntribe/common": "file:plugins/common",
 		"@moderntribe/events": "file:plugins/events",
 		"@moderntribe/tickets": "file:plugins/tickets",
+		"@moderntribe/events-pro": "file:plugins/events-pro",
 		"@nfen/redux-reducer-injector": "0.0.3",
 		"@wordpress/a11y": "1.0.3",
 		"@wordpress/data": "^1.1.0",
