@@ -47,6 +47,9 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.template' )->add_template_globals( $args );
 
+		// We need to remove all filters before trying to render iCal Link on Gutenberg otherwise we hit an infinite Loop
+		remove_all_filters( 'the_content' );
+
 		return tribe( 'gutenberg.template' )->template( array( 'blocks', $this->slug() ), $args, false );
 	}
 }
