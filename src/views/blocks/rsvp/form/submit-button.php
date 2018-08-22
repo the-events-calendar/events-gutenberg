@@ -10,7 +10,7 @@
 	type="submit"
 	name="tickets_process"
 	value="1"
-	class="tribe-button rsvp-submit"
+	class="tribe-block__rsvp__submit-button"
 >
 	<?php esc_html_e( 'Submit RSVP', 'events-gutenberg' ); ?>
 </button>

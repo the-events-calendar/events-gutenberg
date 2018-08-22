@@ -6,4 +6,4 @@
  *
  */
 ?>
-<button class="tribe-minus"></button>
+<button class="tribe-block__rsvp__number-input-button tribe-block__rsvp__number-input-button--minus"></button>
