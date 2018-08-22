@@ -1,4 +1,11 @@
 <?php
+/**
+ * This template renders a Single Ticket Quantity
+ *
+ * @version TBD
+ *
+ */
+
 $ticket = $this->get( 'ticket' );
 $available = $ticket->available();
 $is_available = 0 !== $available;

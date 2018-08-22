@@ -1,4 +1,11 @@
 <?php
+/**
+ * This template renders a Single Ticket Quantity Minus Button
+ *
+ * @version TBD
+ *
+ */
+
 $ticket = $this->get( 'ticket' );
 ?>
 <button

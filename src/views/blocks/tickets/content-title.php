@@ -1,4 +1,11 @@
 <?php
+/**
+ * This template renders a Single Ticket Title
+ *
+ * @version TBD
+ *
+ */
+
 $ticket = $this->get( 'ticket' );
 ?>
 <div

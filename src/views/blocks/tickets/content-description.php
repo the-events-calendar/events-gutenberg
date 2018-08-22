@@ -1,4 +1,11 @@
 <?php
+/**
+ * This template renders a Single Ticket description
+ *
+ * @version TBD
+ *
+ */
+
 $ticket = $this->get( 'ticket' );
 
 if ( ! $ticket->show_description() ) {

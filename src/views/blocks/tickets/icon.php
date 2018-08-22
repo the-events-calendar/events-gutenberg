@@ -1,4 +1,11 @@
 <?php
+/**
+ * This template renders a Single Ticket icon
+ *
+ * @version TBD
+ *
+ */
+
 $ticket = $this->get( 'ticket' );
 ?>
 <div

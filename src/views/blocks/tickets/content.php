@@ -1,4 +1,12 @@
 <?php
+/**
+ * This template renders a Single Ticket content
+ * composed by Title and Description currently
+ *
+ * @version TBD
+ *
+ */
+
 $ticket = $this->get( 'ticket' );
 
 $context = array(
