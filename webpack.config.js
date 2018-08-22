@@ -36,6 +36,7 @@ const extractConfig = {
 					require( "postcss-cssnext" ),
 					require( "postcss-nested" ),
 					require( "postcss-mixins" ),
+					require( "postcss-svg" ),
 					require( "postcss-hexrgba" ),
 					require( "css-mqpacker" )
 				]
