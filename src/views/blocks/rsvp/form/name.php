@@ -8,11 +8,14 @@
 /**
  * Set the default Full Name for the RSVP form
  *
- * @since TBD
- *
  * @param string
+ * @param Tribe__Events_Gutenberg__Template $this
+ *
+ * @since TBD
  */
-$name = apply_filters( 'tribe_tickets_rsvp_form_full_name', '', $ticket );
+$name = apply_filters( 'tribe_tickets_rsvp_form_full_name', '', $this );
+
+var_dump( $this );
 ?>
 <input
 	type="text"
@@ -20,4 +23,5 @@ $name = apply_filters( 'tribe_tickets_rsvp_form_full_name', '', $ticket );
 	class="tribe-tickets-full-name"
 	placeholder="<?php esc_attr_e( 'Full Name', 'events-gutenberg' ); ?>"
 	value="<?php echo esc_attr( $name ); ?>"
+	required
 />
