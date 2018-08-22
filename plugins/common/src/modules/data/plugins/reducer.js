@@ -6,7 +6,7 @@ import { uniq } from 'lodash';
 /**
  * Internal dependencies
  */
-import { types } from '@moderntribe/common/data/reducers/plugins';
+import { types } from '@moderntribe/common/data/plugins';
 
 export default ( state = [], action ) => {
 	switch ( action.type ) {
