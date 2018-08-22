@@ -10,7 +10,7 @@ $event_id = $this->get( 'post_id' );
 $tickets  = $this->get( 'tickets' );
 
 ?>
-<div class="tribe-block__rsvp">
+<div class="tribe-block tribe-block__rsvp">
 
 	<?php foreach ( $tickets as $ticket ) : ?>
 
