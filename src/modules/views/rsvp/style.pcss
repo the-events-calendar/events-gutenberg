@@ -131,8 +131,12 @@
 			}
 		}
 
-		&.going {
-			&.active {
+		&[disabled="disabled"] {
+			cursor: default;
+		}
+
+		&.tribe-going {
+			&.tribe-active {
 				color: #555;
 				font-weight: 600;
 				svg path {
@@ -141,8 +145,8 @@
 			}
 		}
 
-		&.not-going {
-			&.active {
+		&.tribe-not-going {
+			&.tribe-active {
 				color: #555;
 				font-weight: 600;
 				svg path {
@@ -150,7 +154,6 @@
 				}
 			}
 		}
-
 	}
 }
 
