@@ -159,7 +159,7 @@ const onTimeZoneVisibilityChange = ( dispatch ) => ( checked ) => (
 
 const onDateTimeLabelClick = ( dispatch ) => () => {
 	dispatch( dateTimeActions.setDateInputVisibility( true ) );
-	dispatch( dateTimeActions.openDashboardDateTime() );
+	dispatch( UIActions.openDashboardDateTime() );
 };
 
 const mapStateToProps = ( state ) => ( {

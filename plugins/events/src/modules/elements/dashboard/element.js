@@ -36,7 +36,7 @@ const Dashboard = ({ className, direction, isOpen, children }) => {
 	);
 
 	return (
-		<div className={ getContainerClass() }>
+		<div className={ containerClasses }>
 			<div className="tribe-editor__dashboard">
 				{ children }
 			</div>
