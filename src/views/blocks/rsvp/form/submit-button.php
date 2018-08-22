@@ -12,5 +12,5 @@
 	value="1"
 	class="tribe-button rsvp-submit"
 >
-<?php esc_html_e( 'Submit RSVP', 'events-gutenberg' ); ?>
+	<?php esc_html_e( 'Submit RSVP', 'events-gutenberg' ); ?>
 </button>
