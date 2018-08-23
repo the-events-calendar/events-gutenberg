@@ -14,11 +14,11 @@ $ticket_id = $this->get( 'ticket_id' );
 	<input type="hidden" name="product_id[]" value="<?php echo esc_attr( absint( $ticket_id ) ); ?>">
 	<!-- Maybe add nonce over here? Try to leave templates as clean as possible -->
 
-	<div class="left">
+	<div class="tribe-left">
 		<?php $this->template( 'blocks/rsvp/form/quantity', array( 'ticket' => $ticket ) ); ?>
 	</div>
 
-	<div class="right">
+	<div class="tribe-right">
 		<?php $this->template( 'blocks/rsvp/form/error' ); ?>
 
 		<?php $this->template( 'blocks/rsvp/form/name', array( 'ticket' => $ticket ) ); ?>
