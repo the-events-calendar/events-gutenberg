@@ -40,9 +40,10 @@ import {
 import {
 	FORMATS,
 	TODAY,
-	timezonesAsSelectData
+	timezonesAsSelectData,
 } from '@moderntribe/events/editor/utils/date';
 import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import DateTimeHooks from './hooks';
 import './style.pcss';
 
 /**
@@ -194,7 +195,8 @@ class EventDateTime extends Component {
 		return showTimeZone && (
 			<span
 				key="time-zone"
-				className={ classNames( 'tribe-editor__time-zone', className ) }>
+				className={ classNames( 'tribe-editor__time-zone', className ) }
+			>
 				<TimeZone
 					value={ timeZoneLabel }
 					placeholder={ timeZoneLabel }
@@ -269,8 +271,9 @@ class EventDateTime extends Component {
 								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
-						{ ! hideUpsell && <Upsell /> }
 					</footer>
+					<DateTimeHooks />
+					{ ! hideUpsell && <Upsell /> }
 				</Fragment>
 			</Dashboard>
 		);
@@ -310,7 +313,7 @@ class EventDateTime extends Component {
 			allDay,
 			multiDay,
 			onStartTimePickerChange,
-			onStartTimePickerClick
+			onStartTimePickerClick,
 		} = this.props;
 		const startMoment = toMoment( start );
 		const endMoment = toMoment( end );
@@ -370,7 +373,6 @@ class EventDateTime extends Component {
 			allDay,
 		};
 
-
 		if ( ! multiDay ) {
 			// if the start time has less than half an hour left in the day
 			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= HALF_HOUR_IN_SECONDS ) {
@@ -429,30 +431,30 @@ class EventDateTime extends Component {
 			>
 				{
 					showDateInput
-					? (
-						<DateInput
-							onChange={ setNaturalLanguageLabel }
-							setDateTime={ setDateTime }
-							value={ naturalLanguageLabel }
-							after={ this.renderExtras() }
-						/>
-					)
-					: (
-						<h2 className="tribe-editor__subtitle__headline">
-							<button
-								className="tribe-editor__btn--label"
-								onClick={ onDateTimeLabelClick }
-							>
-								{ this.renderStartDate() }
-								{ this.renderStartTime() }
-								{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
-								{ this.renderEndDate() }
-								{ this.renderEndTime() }
-								{ allDay && this.renderSeparator( 'all-day' ) }
-							</button>
-							{ this.renderExtras() }
-						</h2>
-					)
+						? (
+							<DateInput
+								onChange={ setNaturalLanguageLabel }
+								setDateTime={ setDateTime }
+								value={ naturalLanguageLabel }
+								after={ this.renderExtras() }
+							/>
+						)
+						: (
+							<h2 className="tribe-editor__subtitle__headline">
+								<button
+									className="tribe-editor__btn--label"
+									onClick={ onDateTimeLabelClick }
+								>
+									{ this.renderStartDate() }
+									{ this.renderStartTime() }
+									{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
+									{ this.renderEndDate() }
+									{ this.renderEndTime() }
+									{ allDay && this.renderSeparator( 'all-day' ) }
+								</button>
+								{ this.renderExtras() }
+							</h2>
+						)
 				}
 				{ this.renderDashboard() }
 			</section>
