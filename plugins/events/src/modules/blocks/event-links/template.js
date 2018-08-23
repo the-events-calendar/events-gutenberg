@@ -15,7 +15,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import LinkIcon from 'icons/link.svg';
+import LinkIcon from '@moderntribe/events/src/resources/icons/link.svg';
 import { sendValue } from '@moderntribe/events/editor/utils/input';
 import './style.pcss';
 

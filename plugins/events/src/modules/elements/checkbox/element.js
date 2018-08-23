@@ -13,8 +13,8 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import IconOn from 'icons/checkbox-on.svg';
-import IconOff from 'icons/checkbox-off.svg';
+import IconOn from '@moderntribe/events/src/resources/icons/checkbox-on.svg';
+import IconOff from '@moderntribe/events/src/resources/icons/checkbox-off.svg';
 import './style.pcss';
 
 /**
