@@ -363,7 +363,7 @@ class Tribe__Events_Gutenberg__Editor {
 			'admin_url' => admin_url(),
 			'timeZone' => array(
 				'show_time_zone' => false,
-				'label' => get_option( 'timezone_string', 'UTC' ),
+				'label' => $this->get_timezone_label(),
 			),
 		);
 
@@ -540,9 +540,22 @@ class Tribe__Events_Gutenberg__Editor {
 			),
 			'timezone' => array(
 				'offset' => get_option( 'gmt_offset', 0 ),
-				'string' => get_option( 'timezone_string', 'UTC' ),
+				'string' => $this->get_timezone_label(),
 			),
 		);
+	}
+
+	/**
+	 * Returns the site timezone as a string
+	 *
+	 * @since TBD
+	 *
+	 * @return string
+	 */
+	public function get_timezone_label() {
+		return class_exists( 'Tribe__Timezones' )
+			? Tribe__Timezones::wp_timezone_string()
+			: get_option( 'timezone_string', 'UTC' );
 	}
 
 	/**
