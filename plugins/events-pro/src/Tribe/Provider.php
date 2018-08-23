@@ -10,23 +10,22 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 	 */
 	public function register() {
 		// Setup to check if gutenberg is active
-		$this->container->singleton( 'gutenberg.events_pro.plugin', 'Tribe__Gutenberg__Events_Pro__Plugin' );
-		$this->container->singleton( 'gutenberg.events_pro.editor', 'Tribe__Gutenberg__Events_Pro__Editor' );
+		$this->container->singleton( 'gutenberg.events-pro.plugin', 'Tribe__Gutenberg__Events_Pro__Plugin' );
 
 		// Should we continue loading?
 		if (
-			! tribe( 'gutenberg.events_pro.editor' )->is_gutenberg_active()
-			|| ! tribe( 'gutenberg.events_pro.editor' )->is_blocks_editor_active()
+			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
+			|| ! tribe( 'gutenberg.events.editor' )->is_blocks_editor_active()
 		) {
 			return;
 		}
 
-		$this->container->singleton( 'gutenberg.events_pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' ) );
+		$this->container->singleton( 'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' ) );
 
 		$this->hook();
 
 		// Initialize the correct Singletons
-		tribe( 'gutenberg.events_pro.assets' );
+		tribe( 'gutenberg.events-pro.assets' );
 	}
 
 	/**
