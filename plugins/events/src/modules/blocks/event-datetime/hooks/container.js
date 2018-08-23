@@ -9,7 +9,7 @@ import { compose } from 'redux';
  */
 import { selectors } from '@moderntribe/common/data/plugins';
 import { withStore } from '@moderntribe/common/hoc';
-import ChildDateTimeBlocks from './blocks';
+import PluginDateTimeBlockHooks from './blocks';
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	plugins: selectors.getPlugins( state ),
@@ -18,4 +18,4 @@ const mapStateToProps = ( state, ownProps ) => ( {
 export default compose(
 	withStore(),
 	connect( mapStateToProps ),
-)( ChildDateTimeBlocks );
+)( PluginDateTimeBlockHooks );

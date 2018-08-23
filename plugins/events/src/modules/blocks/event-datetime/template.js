@@ -43,6 +43,7 @@ import {
 	timezonesAsSelectData
 } from '@moderntribe/events/editor/utils/date';
 import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import PluginDateTimeBlockHooks from './hooks';
 import './style.pcss';
 
 /**
@@ -270,6 +271,7 @@ class EventDateTime extends Component {
 								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
+						<PluginDateTimeBlockHooks />
 						{ ! hideUpsell && <Upsell /> }
 					</footer>
 				</Fragment>

@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { InnerBlocks } from '@wordpress/editor';
 
-export default class ChildBlockHooks extends PureComponent {
+export default class PluginBlockHooks extends PureComponent {
 	static propTypes = {
 		allowedBlocks: PropTypes.arrayOf( PropTypes.string ),
 		plugins: PropTypes.arrayOf( PropTypes.string ).isRequired,

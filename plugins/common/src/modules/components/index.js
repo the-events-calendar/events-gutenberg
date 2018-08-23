@@ -1,1 +1,1 @@
-export { default as ChildBlockHooks } from './child-block-hooks';
+export { default as PluginBlockHooks } from './plugin-block-hooks';

@@ -7,13 +7,13 @@ import renderer from 'react-test-renderer';
 /**
  * Internal Dependencies
  */
-import ChildBlockHooks from '../child-block-hooks';
+import PluginBlockHooks from '@moderntribe/common/components/plugin-block-hooks';
 
 jest.mock( '@wordpress/editor', () => ( {
 	InnerBlocks: 'InnerBlocks',
 } ) );
 
-describe( 'ChildBlockHooks', () => {
+describe( 'PluginBlockHooks', () => {
 	let props;
 	beforeEach( () => {
 		props = {
@@ -32,21 +32,21 @@ describe( 'ChildBlockHooks', () => {
 
 	test( 'should match snapshot', () => {
 		const component = renderer.create(
-			<ChildBlockHooks { ...props } />
+			<PluginBlockHooks { ...props } />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 	test( 'should only render events templates', () => {
 		props.plugins.pop();
 		const component = renderer.create(
-			<ChildBlockHooks { ...props } />
+			<PluginBlockHooks { ...props } />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 	test( 'should only render events-pro templates', () => {
 		props.plugins.unshift();
 		const component = renderer.create(
-			<ChildBlockHooks { ...props } />
+			<PluginBlockHooks { ...props } />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );

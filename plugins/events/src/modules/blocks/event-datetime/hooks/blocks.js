@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * Internal Dependencies
  */
 import { constants } from '@moderntribe/common/data/plugins';
-import { ChildBlockHooks } from '@moderntribe/common/components';
+import { PluginBlockHooks } from '@moderntribe/common/components';
 
 const PLUGIN_TEMPLATES = {
 	[ constants.EVENTS_PRO_PLUGIN ]: [
@@ -19,11 +19,11 @@ const PLUGIN_TEMPLATES = {
 	],
 };
 
-const ChildDateTimeBlocks = ( {
+const PluginDateTimeBlockHooks = ( {
 	plugins,
 } ) => {
 	return (
-		<ChildBlockHooks
+		<PluginBlockHooks
 			plugins={ plugins }
 			pluginTemplates={ PLUGIN_TEMPLATES }
 			templateLock="all"
@@ -31,8 +31,8 @@ const ChildDateTimeBlocks = ( {
 	);
 };
 
-ChildDateTimeBlocks.propTypes = {
+PluginDateTimeBlockHooks.propTypes = {
 	plugins: PropTypes.arrayOf( PropTypes.string ).isRequired,
 };
 
-export default ChildDateTimeBlocks;
+export default PluginDateTimeBlockHooks;
