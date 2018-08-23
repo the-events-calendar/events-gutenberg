@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 67.59 68.12">
+<svg
+	class="tribe-svg-icon tribe-svg-icon-ticket"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 67.59 68.12"
+>
 	<defs>
 		<style>
 			.blue{
