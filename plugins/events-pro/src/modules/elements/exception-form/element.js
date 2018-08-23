@@ -12,7 +12,7 @@ export default class ExceptionForm extends PureComponent {
 	}
 	render() {
 		return (
-			<div></div>
+			<div>Exception Form</div>
 		);
 	}
 }

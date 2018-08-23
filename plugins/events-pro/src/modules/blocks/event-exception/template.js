@@ -4,7 +4,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default class RecurringForm extends PureComponent {
+/**
+ * Internal dependencies
+ */
+import ExceptionForm from '@moderntribe/events-pro/elements/exception-form/element';
+
+export default class EventException extends PureComponent {
 	static propTypes = {}
 
 	constructor( props ) {
@@ -12,7 +17,7 @@ export default class RecurringForm extends PureComponent {
 	}
 	render() {
 		return (
-			<div>Recurring Form</div>
+			<ExceptionForm />
 		);
 	}
 }

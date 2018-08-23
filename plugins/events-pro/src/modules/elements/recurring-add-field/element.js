@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const RecurringAddField = ( props ) => {
 	return (
-		<button type="button"></button>
+		<button type="button">Add Rule</button>
 	);
 };
 
