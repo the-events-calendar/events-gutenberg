@@ -13,9 +13,9 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		// Add AJAX calls
 		add_action( 'wp_ajax_rsvp-form', array( $this, 'rsvp_form' ) );
 		add_action( 'wp_ajax_nopriv_rsvp-form', array( $this, 'rsvp_form' ) );
+		add_action( 'wp_ajax_rsvp-process', array( $this, 'rsvp_process' ) );
+		add_action( 'wp_ajax_nopriv_rsvp-process', array( $this, 'rsvp_process' ) );
 
-		// @TODO: Need to get the instance of `Tribe__Tickets__Tickets` to remove the `front_end_tickets_form_in_content` filter from `the_content`
-		// remove_filter( 'the_content', array( Tribe__Tickets__Tickets::get_instance(), 'front_end_tickets_form_in_content', 15 ) );
 	}
 
 	/**
@@ -152,6 +152,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		$response  = array( 'html' => '', 'view' => 'rsvp-form' );
 		$ticket_id = absint( tribe_get_request_var( 'ticket_id', 0 ) );
+		$going     = tribe_get_request_var( 'going', 'yes' );
 
 		if ( 0 === $ticket_id ) {
 			wp_send_json_error( $response );
@@ -159,7 +160,8 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		$args = array(
 			'ticket_id' => $ticket_id,
-			'ticket'    => tribe( 'tickets.rsvp' )->get_ticket( get_the_id(), $ticket_id )
+			'ticket'    => tribe( 'tickets.rsvp' )->get_ticket( get_the_id(), $ticket_id ),
+			'going'     => $going,
 		);
 
 		$html = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/form/form', $args, false );
@@ -170,4 +172,112 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 	}
 
+	/**
+	 * Function that process the RSVP
+	 *
+	 * @since  TBD
+	 *
+	 * @return void
+	 */
+	public function rsvp_process() {
+
+		$response  = array( 'html' => '', 'view' => 'rsvp-process' );
+		$ticket_id = absint( tribe_get_request_var( 'ticket_id', 0 ) );
+
+		if ( 0 === $ticket_id ) {
+			wp_send_json_error( $response );
+		}
+
+		$has_tickets = false;
+		$post_id     = get_the_id();
+		$ticket      = tribe( 'tickets.rsvp' )->get_ticket( $post_id, $ticket_id );
+
+		/**
+		 * RSVP specific action fired just before a RSVP-driven attendee tickets for an order are generated
+		 *
+		 * @param $data $_POST Parameters comes from RSVP Form
+		 */
+		do_action( 'tribe_tickets_rsvp_before_order_processing', $_POST );
+
+		$attendee_details = tribe( 'tickets.rsvp' )->parse_attendee_details();
+
+		if ( false === $attendee_details ) {
+			wp_send_json_error( $response );
+		}
+
+		// Iterate over each product
+		foreach ( (array) $_POST['product_id'] as $product_id ) {
+			if ( ! $ticket_qty = tribe( 'tickets.rsvp' )->parse_ticket_quantity( $product_id ) ) {
+				// if there were no RSVP tickets for the product added to the cart, continue
+				continue;
+			}
+
+			$has_tickets |= tribe( 'tickets.rsvp' )->generate_tickets_for( $product_id, $ticket_qty, $attendee_details );
+		}
+
+		$order_id              = $attendee_details['order_id'];
+		$attendee_order_status = $attendee_details['order_status'];
+
+		/**
+		 * Fires when an RSVP attendee tickets have been generated.
+		 *
+		 * @param int    $order_id              ID of the RSVP order
+		 * @param int    $post_id               ID of the post the order was placed for
+		 * @param string $attendee_order_status 'yes' if the user indicated they will attend
+		 */
+		do_action( 'event_tickets_rsvp_tickets_generated', $order_id, $post_id, $attendee_order_status );
+
+		$send_mail_stati = array( 'yes' );
+
+		/**
+		 * Filters whether a confirmation email should be sent or not for RSVP tickets.
+		 *
+		 * This applies to attendance and non attendance emails.
+		 *
+		 * @param bool $send_mail Defaults to `true`.
+		 */
+		$send_mail = apply_filters( 'tribe_tickets_rsvp_send_mail', true );
+
+		if ( $send_mail ) {
+			/**
+			 * Filters the attendee order stati that should trigger an attendance confirmation.
+			 *
+			 * Any attendee order status not listed here will trigger a non attendance email.
+			 *
+			 * @param array  $send_mail_stati       An array of default stati triggering an attendance email.
+			 * @param int    $order_id              ID of the RSVP order
+			 * @param int    $post_id               ID of the post the order was placed for
+			 * @param string $attendee_order_status 'yes' if the user indicated they will attend
+			 */
+			$send_mail_stati = apply_filters(
+				'tribe_tickets_rsvp_send_mail_stati', $send_mail_stati, $order_id, $post_id, $attendee_order_status
+			);
+
+			// No point sending tickets if their current intention is not to attend
+			if ( $has_tickets && in_array( $attendee_order_status, $send_mail_stati ) ) {
+				tribe( 'tickets.rsvp' )->send_tickets_email( $order_id, $post_id );
+			} elseif ( $has_tickets ) {
+				tribe( 'tickets.rsvp' )->send_non_attendance_confirmation( $order_id, $post_id );
+			}
+		}
+
+		$args = array(
+			'ticket_id' => $ticket_id,
+			'ticket'    => $ticket,
+		);
+
+		$remaining = $ticket->remaining();
+
+		if ( ! $remaining ) {
+			$response['status_html'] = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/status', $args, false );
+		}
+
+
+		$response['remaining']      = $ticket->remaining();
+		$response['remaining_html'] = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/details/availability', $args, false );
+		$response['html']           = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/messages/success', $args, false );
+
+		wp_send_json_success( $response );
+
+	}
 }
