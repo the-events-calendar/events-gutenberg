@@ -1,4 +1,11 @@
 <?php
+/**
+ * This template renders a Single Ticket Quantity number Input
+ *
+ * @version TBD
+ *
+ */
+
 $must_login = ! is_user_logged_in() && $ticket->get_provider()->login_required();
 $ticket = $this->get( 'ticket' );
 $max_quantity = tribe( 'tickets.handler' )->get_ticket_max_purchase( $ticket->ID );
