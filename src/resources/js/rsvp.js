@@ -15,7 +15,8 @@
 	} );
 
 	// Bind actions to the "going" click
-	$( '.tribe-block__rsvp-ticket' ).on( 'click', '.going', function( e ) {
+	$( '.tribe-block__rsvp__ticket' ).on( 'click', '.going', function( e ) {
+
 		var ticket    = $( this ).closest( '.tribe-block__rsvp__ticket' );
 		var ticket_id = ticket.data( 'rsvp-id' );
 
@@ -28,7 +29,8 @@
 			TribeRsvp.ajaxurl,
 			params,
 			function( response ) {
-				ticket.find( '.tribe-block__rsvp__form' ).html( response.html );
+				var form = ticket.find( '.tribe-block__rsvp__form' );
+				form.html( response.data.html );
 			}
 		);
 	} );

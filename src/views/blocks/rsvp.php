@@ -10,7 +10,7 @@ $event_id = $this->get( 'post_id' );
 $tickets  = $this->get( 'tickets' );
 
 ?>
-<div class="tribe-block__rsvp">
+<div class="tribe-block tribe-block__rsvp">
 
 	<?php foreach ( $tickets as $ticket ) : ?>
 
@@ -19,8 +19,6 @@ $tickets  = $this->get( 'tickets' );
 			<?php $this->template( 'blocks/rsvp/icon' ); ?>
 
 			<?php $this->template( 'blocks/rsvp/content', array( 'ticket' => $ticket ) ); ?>
-
-			<?php $this->template( 'blocks/rsvp/status', array( 'ticket' => $ticket ) ); ?>
 
 		</div>
 
