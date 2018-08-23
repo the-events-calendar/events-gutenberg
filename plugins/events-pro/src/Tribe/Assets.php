@@ -41,5 +41,20 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 				'localize'  => array(),
 			)
 		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-pro-gutenberg-elements',
+			'elements.js',
+			/**
+			 * @todo revise this dependencies
+			 */
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+			)
+		);
 	}
 }
