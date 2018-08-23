@@ -194,7 +194,8 @@ class EventDateTime extends Component {
 		return showTimeZone && (
 			<span
 				key="time-zone"
-				className={ classNames( 'tribe-editor__time-zone', className ) }>
+				className="tribe-editor__time-zone"
+			>
 				<TimeZone
 					value={ timeZoneLabel }
 					placeholder={ timeZoneLabel }
