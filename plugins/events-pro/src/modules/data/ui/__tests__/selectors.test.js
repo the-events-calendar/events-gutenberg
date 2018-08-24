@@ -7,7 +7,7 @@ import { DEFAULT_STATE } from '@moderntribe/events-pro/data/ui/reducer';
 const state = {
 	'events-pro': {
 		ui: DEFAULT_STATE,
-	}
+	},
 };
 
 describe( '[STORE] - UI Selectors', () => {
