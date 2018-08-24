@@ -1,6 +1,14 @@
-export default ( state = {}, action ) => {
-	switch ( action.type ) {
-		default:
-			return state;
-	}
-};
+/**
+ * External dependencies
+ */
+import { combineReducers } from 'redux';
+
+/**
+ * Internal dependencies
+ */
+import ui from './ui';
+
+export default combineReducers( {
+	ui,
+} );
+
