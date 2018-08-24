@@ -24,7 +24,6 @@ export default class PluginBlockHooks extends PureComponent {
 		] ),
 		/**
 		 * Plugins to be used
-		 * TODO: Just connect this prop to tribe/common store
 		*/
 		plugins: PropTypes.arrayOf( PropTypes.string ).isRequired,
 		/**

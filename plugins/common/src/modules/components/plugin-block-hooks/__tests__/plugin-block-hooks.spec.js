@@ -7,7 +7,7 @@ import renderer from 'react-test-renderer';
 /**
  * Internal Dependencies
  */
-import PluginBlockHooks from '@moderntribe/common/components/plugin-block-hooks';
+import PluginBlockHooks from '../component';
 
 jest.mock( '@wordpress/editor', () => ( {
 	InnerBlocks: 'InnerBlocks',
