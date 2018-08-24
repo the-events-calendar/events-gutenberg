@@ -12,6 +12,15 @@ import PluginBlockHooks from '@moderntribe/common/components/plugin-block-hooks'
 jest.mock( '@wordpress/editor', () => ( {
 	InnerBlocks: 'InnerBlocks',
 } ) );
+jest.mock( '@wordpress/data', () => ( {
+	select: jest.fn( () => ( {
+		getBlockTypes: jest.fn( () => ( [
+			{ name: 'tribe/event-datetime' },
+			{ name: 'tribe/event-pro-recurring' },
+			{ name: 'tribe/event-pro-exclusion' },
+		] ) ),
+	} ) ),
+} ) );
 
 describe( 'PluginBlockHooks', () => {
 	let props;
@@ -45,6 +54,13 @@ describe( 'PluginBlockHooks', () => {
 	} );
 	test( 'should only render events-pro templates', () => {
 		props.plugins.unshift();
+		const component = renderer.create(
+			<PluginBlockHooks { ...props } />
+		);
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+	test( 'should not hook in unregistered blocks', () => {
+		props.pluginTemplates.events.push( [ 'i-dont-exist', {}] );
 		const component = renderer.create(
 			<PluginBlockHooks { ...props } />
 		);
