@@ -3,10 +3,18 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
+import AddField from '@moderntribe/events-pro/elements/add-field/element';
 
 const RecurringAddField = ( props ) => {
 	return (
-		<button type="button">Add Rule</button>
+		<AddField { ...props }>
+			{ __( 'Add Rule', 'events-gutenberg' ) }
+		</AddField>
 	);
 };
 
