@@ -5,6 +5,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { InnerBlocks } from '@wordpress/editor';
 
+/**
+ * Allows for dynamic plugin templates based on current plugins available
+ * utilizing InnerBlocks api
+ *
+ * @export
+ * @class PluginBlockHooks
+ * @extends {PureComponent}
+ */
 export default class PluginBlockHooks extends PureComponent {
 	static propTypes = {
 		allowedBlocks: PropTypes.arrayOf( PropTypes.string ),
