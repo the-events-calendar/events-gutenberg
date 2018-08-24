@@ -56,5 +56,17 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 				'localize'  => array(),
 			)
 		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-pro-gutenberg-element',
+			'elements.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+			)
+		);
 	}
 }
