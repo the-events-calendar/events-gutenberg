@@ -55,6 +55,18 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			)
 		);
 		
+		tribe_asset(
+			$plugin,
+			'tribe-pro-gutenberg-element',
+			'elements.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+			)
+		);
+
 		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'set_editor_defaults' ), 10 );
 	}
 
@@ -122,7 +134,6 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		$js_config['editor_defaults'] = $defaults;
 
 		return $js_config;
-
 	}
 
 }
