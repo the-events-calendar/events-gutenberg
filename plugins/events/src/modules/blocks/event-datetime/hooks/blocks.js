@@ -13,26 +13,18 @@ import { PluginBlockHooks } from '@moderntribe/common/components';
 const PLUGIN_TEMPLATES = {
 	[ constants.EVENTS_PRO_PLUGIN ]: [
 		[ 'tribe/event-pro-recurring', {}],
-		[ 'tribe/event-pro-exception', {}],
-		[ 'tribe/event-pro-recurring-add', {}],
-		[ 'tribe/event-pro-exception-add', {}],
 	],
 };
 
-const PluginDateTimeBlockHooks = ( {
-	plugins,
-} ) => {
+const PluginDateTimeBlockHooks = () => {
 	return (
 		<PluginBlockHooks
-			plugins={ plugins }
 			pluginTemplates={ PLUGIN_TEMPLATES }
 			templateLock="all"
 		/>
 	);
 };
 
-PluginDateTimeBlockHooks.propTypes = {
-	plugins: PropTypes.arrayOf( PropTypes.string ).isRequired,
-};
+PluginDateTimeBlockHooks.propTypes = {};
 
 export default PluginDateTimeBlockHooks;
