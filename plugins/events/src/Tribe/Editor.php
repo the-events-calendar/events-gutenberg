@@ -44,7 +44,7 @@ extends Tribe__Gutenberg__Common__Editor {
 		$template = array();
 
 		$post = tribe_get_request_var( 'post' );
-		$is_classic_editor = ! empty( $post ) && is_numeric( $post ) && ! gutenberg_post_has_blocks( $post );
+		$is_classic_editor = ! empty( $post ) && is_numeric( $post ) && ! has_blocks( $post );
 
 		// Basically setups up a different template if is a classic event
 		if ( $is_classic_editor ) {
