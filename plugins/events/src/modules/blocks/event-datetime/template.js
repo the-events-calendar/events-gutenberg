@@ -79,7 +79,7 @@ class EventDateTime extends Component {
 		setVisibleMonth: PropTypes.func,
 		setNaturalLanguageLabel: PropTypes.func,
 		onKeyDown: PropTypes.func,
-		onClick: PropTypes.func,
+		onClickOutside: PropTypes.func,
 		onSelectDay: PropTypes.func,
 		onStartTimePickerChange: PropTypes.func,
 		onStartTimePickerClick: PropTypes.func,
@@ -90,18 +90,6 @@ class EventDateTime extends Component {
 		onDateTimeLabelClick: PropTypes.func,
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
-
-	componentDidMount() {
-		const { onKeyDown, onClick } = this.props;
-		document.addEventListener( 'keydown', onKeyDown );
-		document.addEventListener( 'click', onClick );
-	}
-
-	componentWillUnmount() {
-		const { onKeyDown, onClick } = this.props;
-		document.removeEventListener( 'keydown', onKeyDown );
-		document.removeEventListener( 'click', onClick );
-	}
 
 	renderPrice = () => {
 		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
@@ -511,7 +499,9 @@ class EventDateTime extends Component {
 	}
 
 	render() {
-		return [ this.renderBlock(), this.renderControls() ];
+		return (
+			[ this.renderBlock(), this.renderControls() ]
+		);
 	}
 }
 
