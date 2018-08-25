@@ -12,7 +12,7 @@ import { decode } from 'he';
 import { Component } from '@wordpress/element';
 import { Dashicon } from '@wordpress/components';
 import { toFields } from '@moderntribe/events/elements/organizer-form/utils';
-import CloseIcon from 'icons/close.svg';
+import CloseIcon from '@moderntribe/events/src/resources/icons/close.svg';
 import './style.pcss';
 
 /**
