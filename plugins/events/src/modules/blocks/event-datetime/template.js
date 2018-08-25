@@ -500,11 +500,7 @@ class EventDateTime extends Component {
 
 	render() {
 		return (
-			<div>
-				{
-					[ this.renderBlock(), this.renderControls() ]
-				}
-			</div>
+			[ this.renderBlock(), this.renderControls() ]
 		);
 	}
 }
