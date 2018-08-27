@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { map, filter, includes } from 'lodash';
 import { InnerBlocks } from '@wordpress/editor';
 import { select } from '@wordpress/data';
+import './style.pcss';
 
 /**
  * Allows for dynamic plugin templates based on current plugins available
@@ -88,12 +89,14 @@ export default class PluginBlockHooks extends PureComponent {
 
 	render() {
 		return (
-			<InnerBlocks
-				allowedBlocks={ this.props.allowedBlocks }
-				layouts={ this.props.layouts }
-				template={ this.template }
-				templateLock={ this.props.templateLock }
-			/>
+			<div className="tribe-common__plugin-block-hook">
+				<InnerBlocks
+					allowedBlocks={ this.props.allowedBlocks }
+					layouts={ this.props.layouts }
+					template={ this.template }
+					templateLock={ this.props.templateLock }
+				/>
+			</div>
 		);
 	}
 }
