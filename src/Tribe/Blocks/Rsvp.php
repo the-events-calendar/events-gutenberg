@@ -205,8 +205,10 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 			wp_send_json_error( $response );
 		}
 
+		$products = (array) tribe_get_request_var( 'product_id' );
+
 		// Iterate over each product
-		foreach ( (array) $_POST['product_id'] as $product_id ) {
+		foreach ( $products as $product_id ) {
 			if ( ! $ticket_qty = tribe( 'tickets.rsvp' )->parse_ticket_quantity( $product_id ) ) {
 				// if there were no RSVP tickets for the product added to the cart, continue
 				continue;
