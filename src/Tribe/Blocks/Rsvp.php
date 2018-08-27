@@ -197,7 +197,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		 *
 		 * @param $data $_POST Parameters comes from RSVP Form
 		 */
-		do_action( 'tribe_tickets_rsvp_before_order_processing', $_POST );
+		do_action( 'tribe_tickets_rsvp_before_order_processing' );
 
 		$attendee_details = tribe( 'tickets.rsvp' )->parse_attendee_details();
 
