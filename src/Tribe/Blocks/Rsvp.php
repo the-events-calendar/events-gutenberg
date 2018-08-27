@@ -252,7 +252,11 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 			 * @param string $attendee_order_status 'yes' if the user indicated they will attend
 			 */
 			$send_mail_stati = apply_filters(
-				'tribe_tickets_rsvp_send_mail_stati', $send_mail_stati, $order_id, $post_id, $attendee_order_status
+				'tribe_tickets_rsvp_send_mail_stati',
+				$send_mail_stati,
+				$order_id,
+				$post_id,
+				$attendee_order_status
 			);
 
 			// No point sending tickets if their current intention is not to attend
