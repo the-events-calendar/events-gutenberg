@@ -3,11 +3,15 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import './style.pcss';
 
-const AddField = ( { children, onClick } ) => {
+const AddField = ( { children, noBorder, onClick } ) => {
 	return (
-		<section className="tribe-events-pro__add-field">
+		<aside className={ classnames( 'tribe-events-pro__add-field', {
+			'tribe-events-pro__add-field--no-border': noBorder,
+		} ) }
+		>
 			<button
 				className="tribe-events-pro__add-field__button"
 				onClick={ onClick }
@@ -16,13 +20,14 @@ const AddField = ( { children, onClick } ) => {
 				<span className="tribe-events-pro__add-field__button__plus">+</span>
 				<span>{ children }</span>
 			</button>
-		</section>
+		</aside>
 	);
 };
 
 AddField.propTypes = {
 	children: PropTypes.node.isRequired,
 	onClick: PropTypes.func.isRequired,
+	noBorder: PropTypes.bool,
 };
 
 export default AddField;
