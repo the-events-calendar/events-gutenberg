@@ -1,0 +1,15 @@
+/**
+ * Internal dependencies
+ */
+import { PREFIX_EVENTS_STORE } from '@moderntribe/events/data/utils';
+
+export const ADD_FORM = `${ PREFIX_EVENTS_STORE }/ADD_FORM`;
+export const SET_FORM_FIELDS = `${ PREFIX_EVENTS_STORE }/SET_FORM_FIELDS`;
+export const CREATE_FORM_DRAFT = `${ PREFIX_EVENTS_STORE }/CREATE_FORM_DRAFT`;
+export const EDIT_FORM_ENTRY = `${ PREFIX_EVENTS_STORE }/EDIT_FORM_ENTRY`;
+export const SUBMIT_FORM = `${ PREFIX_EVENTS_STORE }/SUBMIT_FORM`;
+export const CLEAR_FORM = `${ PREFIX_EVENTS_STORE }/CLEAR_FORM`;
+export const SET_SAVING_FORM = `${ PREFIX_EVENTS_STORE }/SET_SAVING_FORM`;
+
+export const ADD_VOLATILE_ID = `${ PREFIX_EVENTS_STORE }/ADD_VOLATILE_ID`;
+export const REMOVE_VOLATILE_ID = `${ PREFIX_EVENTS_STORE }/REMOVE_VOLATILE_ID`;
