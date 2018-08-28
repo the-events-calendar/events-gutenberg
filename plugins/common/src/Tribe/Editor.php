@@ -159,7 +159,7 @@ class Tribe__Gutenberg__Common__Editor {
 		}
 
 		// Bail if it already has Blocks
-		if ( gutenberg_post_has_blocks( $post ) ) {
+		if ( has_blocks( $post ) ) {
 			return false;
 		}
 
