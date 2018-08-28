@@ -11,6 +11,7 @@ import { withStore, withSaveData, withDetails, withForm } from '@moderntribe/com
 import { actions, selectors } from '@moderntribe/events/data/blocks/organizers';
 import { actions as detailsActions } from '@moderntribe/events/data/details';
 import { ORGANIZER } from '@moderntribe/events/editor/post-types';
+import { actions as formActions } from '@moderntribe/events/data/forms';
 import EventOrganizer from './template';
 import { toOrganizer } from '@moderntribe/events/elements/organizer-form/utils';
 
@@ -71,11 +72,21 @@ const mapDispatchToProps = ( dispatch ) => ( {
 		dispatch( actions.addOrganizerInClassic( organizer ) );
 	},
 	onBlockRemoved( props ) {
-		const { clientId, organizer } = props;
+		const { clientId, organizer, volatile } = props;
 		if ( ! organizer ) {
 			return;
 		}
+
 		dispatch( actions.removeOrganizerInBlock( clientId, organizer ) );
+
+		if ( volatile ) {
+			dispatch( actions.removeOrganizerInClassic( organizer ) );
+			/**
+			 * @todo: this one creates a connection with the Form event, however the form has no idea of
+			 * @todo: the ID to be removed so this one might be a good saga watcher
+			 */
+			dispatch( formActions.removeVolatile( organizer ) );
+		}
 	},
 } );
 

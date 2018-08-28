@@ -44,7 +44,7 @@ extends Tribe__Gutenberg__Common__Editor {
 		$template = array();
 
 		$post = tribe_get_request_var( 'post' );
-		$is_classic_editor = ! empty( $post ) && is_numeric( $post ) && ! gutenberg_post_has_blocks( $post );
+		$is_classic_editor = ! empty( $post ) && is_numeric( $post ) && ! has_blocks( $post );
 
 		// Basically setups up a different template if is a classic event
 		if ( $is_classic_editor ) {
@@ -165,7 +165,7 @@ extends Tribe__Gutenberg__Common__Editor {
 			'admin_url' => admin_url(),
 			'timeZone' => array(
 				'show_time_zone' => false,
-				'label' => get_option( 'timezone_string', 'UTC' ),
+				'label' => $this->get_timezone_label(),
 			),
 		);
 
@@ -342,9 +342,22 @@ extends Tribe__Gutenberg__Common__Editor {
 			),
 			'timezone' => array(
 				'offset' => get_option( 'gmt_offset', 0 ),
-				'string' => get_option( 'timezone_string', 'UTC' ),
+				'string' => $this->get_timezone_label(),
 			),
 		);
+	}
+
+	/**
+	 * Returns the site timezone as a string
+	 *
+	 * @since TBD
+	 *
+	 * @return string
+	 */
+	public function get_timezone_label() {
+		return class_exists( 'Tribe__Timezones' )
+			? Tribe__Timezones::wp_timezone_string()
+			: get_option( 'timezone_string', 'UTC' );
 	}
 
 	/**
