@@ -4,22 +4,24 @@
 import { selectors } from '@moderntribe/events/data/blocks/organizers';
 
 const state = {
-	blocks: {
-		organizers: {
-			blocks: {
-				byId: {
-					firstBlock: {
-						organizer: 100,
+	events: {
+		blocks: {
+			organizers: {
+				blocks: {
+					byId: {
+						firstBlock: {
+							organizer: 100,
+						},
+						secondBlock: {
+							organizer: 101,
+						},
 					},
-					secondBlock: {
-						organizer: 101,
-					},
+					allIds: [ 100, 101 ],
 				},
-				allIds: [ 100, 101 ],
+				classic: [ 98, 99, 100 ],
 			},
-			classic: [ 98, 99, 100 ],
 		},
-	},
+	}
 };
 
 describe( '[STORE] - Organizers selectors', () => {
@@ -29,9 +31,9 @@ describe( '[STORE] - Organizers selectors', () => {
 
 	it( 'Should return the organizer block', () => {
 		expect( selectors.getOrganizerBlock( state, { clientId: 'firstBlock' } ) )
-			.toEqual( state.blocks.organizers.blocks.byId.firstBlock );
+			.toEqual( state.events.blocks.organizers.blocks.byId.firstBlock );
 		expect( selectors.getOrganizerBlock( state, { clientId: 'secondBlock' } ) )
-			.toEqual( state.blocks.organizers.blocks.byId.secondBlock );
+			.toEqual( state.events.blocks.organizers.blocks.byId.secondBlock );
 		expect( selectors.getOrganizerBlock( state, { clientId: 'thirdBlock' } ) )
 			.toEqual( undefined );
 	} );

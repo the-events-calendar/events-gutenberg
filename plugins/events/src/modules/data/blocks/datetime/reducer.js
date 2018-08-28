@@ -28,6 +28,7 @@ export const DEFAULT_STATE = {
 	timeZone: FORMATS.TIMEZONE.string,
 	timeZoneLabel: FORMATS.TIMEZONE.string,
 	showTimeZone: false,
+	showDateInput: false,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -46,7 +47,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				naturalLanguage: action.payload.label,
-			}
+			};
 		case types.SET_ALL_DAY:
 			return {
 				...state,
@@ -76,13 +77,17 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				timeZoneLabel: action.payload.label,
-			}
-		case types.SET_TIMEZONE_VISIBILITY: {
+			};
+		case types.SET_TIMEZONE_VISIBILITY:
 			return {
 				...state,
 				showTimeZone: action.payload.show,
-			}
-		}
+			};
+		case types.SET_DATE_INPUT_VISIBILITY:
+			return {
+				...state,
+				showDateInput: action.payload.show,
+			};
 		default:
 			return state;
 	}

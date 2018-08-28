@@ -5,9 +5,11 @@ import { selectors } from '@moderntribe/events/data/blocks/price';
 import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/price/reducer';
 
 const state = {
-	blocks: {
-		price: DEFAULT_STATE,
-	},
+	events: {
+		blocks: {
+			price: DEFAULT_STATE,
+		},
+	}
 };
 
 describe( '[STORE] - Price selectors', () => {

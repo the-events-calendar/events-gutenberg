@@ -5,7 +5,7 @@ Object {
   "payload": Object {
     "allDay": true,
   },
-  "type": "SET_ALL_DAY",
+  "type": "@@MT/EVENTS/SET_ALL_DAY",
 }
 `;
 
@@ -14,7 +14,25 @@ Object {
   "payload": Object {
     "allDay": false,
   },
-  "type": "SET_ALL_DAY",
+  "type": "@@MT/EVENTS/SET_ALL_DAY",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the date input visibility 1`] = `
+Object {
+  "payload": Object {
+    "show": true,
+  },
+  "type": "@@MT/EVENTS/SET_DATE_INPUT_VISIBILITY",
+}
+`;
+
+exports[`[STORE] - Datetime actions Action to set the date input visibility 2`] = `
+Object {
+  "payload": Object {
+    "show": false,
+  },
+  "type": "@@MT/EVENTS/SET_DATE_INPUT_VISIBILITY",
 }
 `;
 
@@ -23,7 +41,7 @@ Object {
   "payload": Object {
     "multiDay": true,
   },
-  "type": "SET_MULTI_DAY",
+  "type": "@@MT/EVENTS/SET_MULTI_DAY",
 }
 `;
 
@@ -32,7 +50,7 @@ Object {
   "payload": Object {
     "multiDay": false,
   },
-  "type": "SET_MULTI_DAY",
+  "type": "@@MT/EVENTS/SET_MULTI_DAY",
 }
 `;
 
@@ -41,7 +59,7 @@ Object {
   "payload": Object {
     "separator": " -  ",
   },
-  "type": "SET_SEPARATOR_DATE",
+  "type": "@@MT/EVENTS/SET_SEPARATOR_DATE",
 }
 `;
 
@@ -50,7 +68,7 @@ Object {
   "payload": Object {
     "separator": " @ ",
   },
-  "type": "SET_SEPARATOR_TIME",
+  "type": "@@MT/EVENTS/SET_SEPARATOR_TIME",
 }
 `;
 
@@ -59,7 +77,7 @@ Object {
   "payload": Object {
     "start": "June 5, 2018 5:00 pm",
   },
-  "type": "SET_START_DATE_TIME",
+  "type": "@@MT/EVENTS/SET_START_DATE_TIME",
 }
 `;
 
@@ -68,7 +86,7 @@ Object {
   "payload": Object {
     "end": "June 25, 2018 4:00 pm",
   },
-  "type": "SET_END_DATE_TIME",
+  "type": "@@MT/EVENTS/SET_END_DATE_TIME",
 }
 `;
 
@@ -77,7 +95,7 @@ Object {
   "payload": Object {
     "timeZone": "UTC",
   },
-  "type": "SET_TIME_ZONE",
+  "type": "@@MT/EVENTS/SET_TIME_ZONE",
 }
 `;
 
@@ -86,7 +104,7 @@ Object {
   "payload": Object {
     "label": "Modern Tribe",
   },
-  "type": "SET_TIMEZONE_LABEL",
+  "type": "@@MT/EVENTS/SET_TIMEZONE_LABEL",
 }
 `;
 
@@ -95,7 +113,7 @@ Object {
   "payload": Object {
     "show": true,
   },
-  "type": "SET_TIMEZONE_VISIBILITY",
+  "type": "@@MT/EVENTS/SET_TIMEZONE_VISIBILITY",
 }
 `;
 
@@ -104,7 +122,7 @@ Object {
   "payload": Object {
     "show": false,
   },
-  "type": "SET_TIMEZONE_VISIBILITY",
+  "type": "@@MT/EVENTS/SET_TIMEZONE_VISIBILITY",
 }
 `;
 
@@ -113,6 +131,6 @@ Object {
   "payload": Object {
     "label": "2 weeks from now",
   },
-  "type": "SET_NATURAL_LANGUAGE_LABEL",
+  "type": "@@MT/EVENTS/SET_NATURAL_LANGUAGE_LABEL",
 }
 `;

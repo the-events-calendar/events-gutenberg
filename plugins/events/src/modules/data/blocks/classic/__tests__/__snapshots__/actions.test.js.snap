@@ -5,7 +5,7 @@ Object {
   "payload": Object {
     "title": "Events",
   },
-  "type": "SET_CLASSIC_DETAILS_TITLE",
+  "type": "@@MT/EVENTS/SET_CLASSIC_DETAILS_TITLE",
 }
 `;
 
@@ -14,7 +14,7 @@ Object {
   "payload": Object {
     "title": "Modern Tribe",
   },
-  "type": "SET_CLASSIC_ORGANIZERS_TITLE",
+  "type": "@@MT/EVENTS/SET_CLASSIC_ORGANIZERS_TITLE",
 }
 `;
 
@@ -24,13 +24,13 @@ Array [
     "payload": Object {
       "title": "Events",
     },
-    "type": "SET_CLASSIC_DETAILS_TITLE",
+    "type": "@@MT/EVENTS/SET_CLASSIC_DETAILS_TITLE",
   },
   Object {
     "payload": Object {
       "title": "Modern Tribe",
     },
-    "type": "SET_CLASSIC_ORGANIZERS_TITLE",
+    "type": "@@MT/EVENTS/SET_CLASSIC_ORGANIZERS_TITLE",
   },
 ]
 `;

@@ -6,49 +6,49 @@ Array [
     "payload": Object {
       "start": "June 5, 2018 5:00 pm",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "June 5, 2018 5:30 pm",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "allDay": false,
     },
-    "type": "SET_ALL_DAY",
+    "type": "@@MT/EVENTS/SET_ALL_DAY",
   },
   Object {
     "payload": Object {
       "timeZone": "UTC",
     },
-    "type": "SET_TIME_ZONE",
+    "type": "@@MT/EVENTS/SET_TIME_ZONE",
   },
   Object {
     "payload": Object {
       "start": "2018-06-05 17:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-06-05 17:30:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "label": "Jun 5 2018 at 5:00 pm - Jun 5 2018 at 5:30 pm",
     },
-    "type": "SET_NATURAL_LANGUAGE_LABEL",
+    "type": "@@MT/EVENTS/SET_NATURAL_LANGUAGE_LABEL",
   },
   Object {
     "payload": Object {
       "multiDay": false,
     },
-    "type": "SET_MULTI_DAY",
+    "type": "@@MT/EVENTS/SET_MULTI_DAY",
   },
 ]
 `;
@@ -59,7 +59,7 @@ Array [
     "payload": Object {
       "allDay": false,
     },
-    "type": "SET_ALL_DAY",
+    "type": "@@MT/EVENTS/SET_ALL_DAY",
   },
 ]
 `;
@@ -70,19 +70,19 @@ Array [
     "payload": Object {
       "start": "2018-06-05 00:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-06-05 23:59:59",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "allDay": true,
     },
-    "type": "SET_ALL_DAY",
+    "type": "@@MT/EVENTS/SET_ALL_DAY",
   },
 ]
 `;
@@ -93,13 +93,13 @@ Array [
     "payload": Object {
       "start": "2018-09-19 17:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-09-19 17:30:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
 ]
 `;
@@ -110,13 +110,13 @@ Array [
     "payload": Object {
       "start": "2018-09-19 17:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-09-21 17:30:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
 ]
 `;
@@ -127,7 +127,7 @@ Array [
     "payload": Object {
       "end": "2018-06-05 18:00:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
 ]
 `;
@@ -138,19 +138,19 @@ Array [
     "payload": Object {
       "start": "2018-06-05 17:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-06-05 18:00:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "multiDay": false,
     },
-    "type": "SET_MULTI_DAY",
+    "type": "@@MT/EVENTS/SET_MULTI_DAY",
   },
 ]
 `;
@@ -161,19 +161,19 @@ Array [
     "payload": Object {
       "start": "2018-06-05 22:30:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-06-05 23:30:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "multiDay": false,
     },
-    "type": "SET_MULTI_DAY",
+    "type": "@@MT/EVENTS/SET_MULTI_DAY",
   },
 ]
 `;
@@ -184,19 +184,19 @@ Array [
     "payload": Object {
       "start": "2018-06-05 17:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-06-05 17:30:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "multiDay": false,
     },
-    "type": "SET_MULTI_DAY",
+    "type": "@@MT/EVENTS/SET_MULTI_DAY",
   },
 ]
 `;
@@ -207,13 +207,13 @@ Array [
     "payload": Object {
       "end": "2018-06-08 17:30:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "multiDay": true,
     },
-    "type": "SET_MULTI_DAY",
+    "type": "@@MT/EVENTS/SET_MULTI_DAY",
   },
 ]
 `;
@@ -224,7 +224,7 @@ Array [
     "payload": Object {
       "start": "2018-06-05 02:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
 ]
 `;
@@ -235,19 +235,19 @@ Array [
     "payload": Object {
       "start": "2018-06-10 17:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-06-10 18:00:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "multiDay": false,
     },
-    "type": "SET_MULTI_DAY",
+    "type": "@@MT/EVENTS/SET_MULTI_DAY",
   },
 ]
 `;
@@ -258,19 +258,19 @@ Array [
     "payload": Object {
       "start": "2018-05-01 12:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-05-04 20:00:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "multiDay": true,
     },
-    "type": "SET_MULTI_DAY",
+    "type": "@@MT/EVENTS/SET_MULTI_DAY",
   },
 ]
 `;
@@ -281,19 +281,19 @@ Array [
     "payload": Object {
       "start": "2018-06-10 12:00:00",
     },
-    "type": "SET_START_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_START_DATE_TIME",
   },
   Object {
     "payload": Object {
       "end": "2018-06-10 13:00:00",
     },
-    "type": "SET_END_DATE_TIME",
+    "type": "@@MT/EVENTS/SET_END_DATE_TIME",
   },
   Object {
     "payload": Object {
       "multiDay": false,
     },
-    "type": "SET_MULTI_DAY",
+    "type": "@@MT/EVENTS/SET_MULTI_DAY",
   },
 ]
 `;

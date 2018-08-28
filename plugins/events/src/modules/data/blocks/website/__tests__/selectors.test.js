@@ -5,9 +5,11 @@ import { selectors } from '@moderntribe/events/data/blocks/website';
 import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/website/reducer';
 
 const state = {
-	blocks: {
-		website: DEFAULT_STATE,
-	},
+	events: {
+		blocks: {
+			website: DEFAULT_STATE,
+		},
+	}
 };
 
 describe( '[STORE] - Website selectors', () => {

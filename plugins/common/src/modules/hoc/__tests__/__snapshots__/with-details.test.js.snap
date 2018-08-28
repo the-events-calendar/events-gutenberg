@@ -7,7 +7,7 @@ Array [
       "id": "event",
       "postType": undefined,
     },
-    "type": "SET_DETAILS_POST_TYPE",
+    "type": "@@MT/EVENTS/SET_DETAILS_POST_TYPE",
   },
   Object {
     "meta": Object {
@@ -18,7 +18,7 @@ Array [
       },
       "path": "tribe_events/event",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;

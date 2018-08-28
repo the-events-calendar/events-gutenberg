@@ -5,7 +5,7 @@ Object {
   "payload": Object {
     "id": 20,
   },
-  "type": "ADD_VOLATILE_ID",
+  "type": "@@MT/EVENTS/ADD_VOLATILE_ID",
 }
 `;
 
@@ -14,7 +14,7 @@ Object {
   "payload": Object {
     "id": 20,
   },
-  "type": "CLEAR_FORM",
+  "type": "@@MT/EVENTS/CLEAR_FORM",
 }
 `;
 
@@ -26,7 +26,7 @@ Object {
     },
     "id": 20,
   },
-  "type": "CREATE_FORM_DRAFT",
+  "type": "@@MT/EVENTS/CREATE_FORM_DRAFT",
 }
 `;
 
@@ -38,7 +38,7 @@ Object {
     },
     "id": 20,
   },
-  "type": "EDIT_FORM_ENTRY",
+  "type": "@@MT/EVENTS/EDIT_FORM_ENTRY",
 }
 `;
 
@@ -48,7 +48,7 @@ Object {
     "id": 20,
     "type": "tribe_organizers",
   },
-  "type": "ADD_FORM",
+  "type": "@@MT/EVENTS/ADD_FORM",
 }
 `;
 
@@ -57,7 +57,7 @@ Object {
   "payload": Object {
     "id": 20,
   },
-  "type": "REMOVE_VOLATILE_ID",
+  "type": "@@MT/EVENTS/REMOVE_VOLATILE_ID",
 }
 `;
 
@@ -67,7 +67,7 @@ Object {
     "id": 20,
     "saving": true,
   },
-  "type": "SET_SAVING_FORM",
+  "type": "@@MT/EVENTS/SET_SAVING_FORM",
 }
 `;
 
@@ -77,7 +77,7 @@ Object {
     "id": 20,
     "saving": false,
   },
-  "type": "SET_SAVING_FORM",
+  "type": "@@MT/EVENTS/SET_SAVING_FORM",
 }
 `;
 
@@ -86,7 +86,7 @@ Object {
   "payload": Object {
     "id": 20,
   },
-  "type": "SUBMIT_FORM",
+  "type": "@@MT/EVENTS/SUBMIT_FORM",
 }
 `;
 
@@ -99,7 +99,7 @@ Array [
       },
       "path": "tribe_venue/21",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;
@@ -123,7 +123,7 @@ Array [
       },
       "path": "tribe_venue/21",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;
@@ -145,7 +145,7 @@ Array [
       },
       "path": "tribe_organizer",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;

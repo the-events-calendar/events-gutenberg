@@ -7,8 +7,8 @@ import { applyFilters } from '@wordpress/hooks';
  * Internal dependencies
  */
 import {
-	setStart,
-	setEnd,
+	setStartDateTime,
+	setEndDateTime,
 	setAllDay as setAllDayAction,
 	setMultiDay as setMultiDayAction,
 	setSeparatorDate,
@@ -34,20 +34,20 @@ import { rangeToNaturalLanguage } from '@moderntribe/events/editor/utils/date';
 
 export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
 	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
-	dispatch( setStart( startDateTime ) );
+	dispatch( setStartDateTime( startDateTime ) );
 };
 
 export const setEndTime = ( { end, seconds } ) => ( dispatch ) => {
 	const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), seconds ) );
-	dispatch( setEnd( endDateTime ) );
+	dispatch( setEndDateTime( endDateTime ) );
 };
 
 export const setAllDay = ( { start, end, isAllDay } ) => ( dispatch ) => {
 	if ( isAllDay ) {
 		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
 		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), DAY_IN_SECONDS - 1 ) );
-		dispatch( setStart( startDateTime ) );
-		dispatch( setEnd( endDateTime ) );
+		dispatch( setStartDateTime( startDateTime ) );
+		dispatch( setEndDateTime( endDateTime ) );
 	}
 
 	dispatch( setAllDayAction( isAllDay ) );
@@ -62,8 +62,8 @@ export const setDates = ( { start, end, from, to } ) => ( dispatch ) => {
 		replaceDate( endMoment, toMoment( to || from ) ),
 	)
 
-	dispatch( setStart( toDateTime( result.start ) ) );
-	dispatch( setEnd( toDateTime( result.end ) ) );
+	dispatch( setStartDateTime( toDateTime( result.start ) ) );
+	dispatch( setEndDateTime( toDateTime( result.end ) ) );
 };
 
 export const setDateTime = ( { start, end } ) => ( dispatch ) => {
@@ -73,8 +73,8 @@ export const setDateTime = ( { start, end } ) => ( dispatch ) => {
 	)
 
 	const isMultiDay = ! isSameDay( result.start, result.end );
-	dispatch( setStart( toDateTime( result.start ) ) );
-	dispatch( setEnd( toDateTime( result.end ) ) );
+	dispatch( setStartDateTime( toDateTime( result.start ) ) );
+	dispatch( setEndDateTime( toDateTime( result.end ) ) );
 	dispatch( setMultiDayAction( isMultiDay ) );
 }
 
@@ -82,7 +82,7 @@ export const setMultiDay = ( { start, end, isMultiDay } ) => ( dispatch ) => {
 	if ( isMultiDay ) {
 		const RANGE_DAYS = applyFilters( 'tec.datetime.defaultRange', 3 );
 		const endMoment = toMoment( end ).clone().add( RANGE_DAYS, 'days' );
-		dispatch( setEnd( toDateTime( endMoment ) ) );
+		dispatch( setEndDateTime( toDateTime( endMoment ) ) );
 	} else {
 		const startMoment = toMoment( start );
 		const result = adjustStart(
@@ -90,8 +90,8 @@ export const setMultiDay = ( { start, end, isMultiDay } ) => ( dispatch ) => {
 			replaceDate( toMoment( end ), startMoment ),
 		);
 
-		dispatch( setStart( toDateTime( result.start ) ) );
-		dispatch( setEnd( toDateTime( result.end ) ) );
+		dispatch( setStartDateTime( toDateTime( result.start ) ) );
+		dispatch( setEndDateTime( toDateTime( result.end ) ) );
 	}
 
 	dispatch( setMultiDayAction( isMultiDay ) );
@@ -102,8 +102,8 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 	const defaultTimeZone = get( 'timeZoneLabel', timeZone );
 
 	maybeBulkDispatch( attributes, dispatch )( [
-		[ setStart, 'start', DEFAULT_STATE.start ],
-		[ setEnd, 'end', DEFAULT_STATE.end ],
+		[ setStartDateTime, 'start', DEFAULT_STATE.start ],
+		[ setEndDateTime, 'end', DEFAULT_STATE.end ],
 		[ setAllDayAction, 'allDay', DEFAULT_STATE.allDay ],
 		[ setSeparatorDate, 'separatorDate', DEFAULT_STATE.dateTimeSeparator ],
 		[ setSeparatorTime, 'separatorTime', DEFAULT_STATE.timeRangeSeparator ],
@@ -119,12 +119,12 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 
 	if ( attributes.start ) {
 		values.start = toDateTime( parseFormats( attributes.start ) );
-		dispatch( setStart( values.start ) );
+		dispatch( setStartDateTime( values.start ) );
 	}
 
 	if ( attributes.end ) {
 		values.end = toDateTime( parseFormats( attributes.end ) );
-		dispatch( setEnd( values.end ) );
+		dispatch( setEndDateTime( values.end ) );
 	}
 
 	dispatch( setNaturalLanguageLabel( rangeToNaturalLanguage( values.start, values.end ) ) );

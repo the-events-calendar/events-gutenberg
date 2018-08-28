@@ -5,7 +5,7 @@ Object {
   "payload": Object {
     "cost": 10,
   },
-  "type": "SET_PRICE_COST",
+  "type": "@@MT/EVENTS/SET_PRICE_COST",
 }
 `;
 
@@ -14,7 +14,7 @@ Object {
   "payload": Object {
     "position": "suffix",
   },
-  "type": "SET_PRICE_POSITION",
+  "type": "@@MT/EVENTS/SET_PRICE_POSITION",
 }
 `;
 
@@ -23,7 +23,7 @@ Object {
   "payload": Object {
     "description": "My description",
   },
-  "type": "SET_PRICE_DESCRIPTION",
+  "type": "@@MT/EVENTS/SET_PRICE_DESCRIPTION",
 }
 `;
 
@@ -32,7 +32,7 @@ Object {
   "payload": Object {
     "symbol": "€",
   },
-  "type": "SET_PRICE_SYMBOL",
+  "type": "@@MT/EVENTS/SET_PRICE_SYMBOL",
 }
 `;
 
@@ -41,7 +41,7 @@ Object {
   "payload": Object {
     "position": "prefix",
   },
-  "type": "SET_PRICE_POSITION",
+  "type": "@@MT/EVENTS/SET_PRICE_POSITION",
 }
 `;
 
@@ -50,7 +50,7 @@ Object {
   "payload": Object {
     "position": "suffix",
   },
-  "type": "SET_PRICE_POSITION",
+  "type": "@@MT/EVENTS/SET_PRICE_POSITION",
 }
 `;
 
@@ -60,25 +60,25 @@ Array [
     "payload": Object {
       "position": "suffix",
     },
-    "type": "SET_PRICE_POSITION",
+    "type": "@@MT/EVENTS/SET_PRICE_POSITION",
   },
   Object {
     "payload": Object {
       "symbol": "€",
     },
-    "type": "SET_PRICE_SYMBOL",
+    "type": "@@MT/EVENTS/SET_PRICE_SYMBOL",
   },
   Object {
     "payload": Object {
       "cost": 10,
     },
-    "type": "SET_PRICE_COST",
+    "type": "@@MT/EVENTS/SET_PRICE_COST",
   },
   Object {
     "payload": Object {
       "description": "Not so expensive",
     },
-    "type": "SET_PRICE_DESCRIPTION",
+    "type": "@@MT/EVENTS/SET_PRICE_DESCRIPTION",
   },
 ]
 `;

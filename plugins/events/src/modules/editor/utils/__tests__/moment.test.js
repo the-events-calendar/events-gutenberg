@@ -165,6 +165,21 @@ describe( 'Tests for moment.js', () => {
 		expect( m.isSameDay( new Date(), new Date() ) ).toBeTruthy();
 	} );
 
+	test( 'isSameYear', () => {
+		expect( m.isSameYear(
+			moment( 'May 23, 2018 12:30 am', 'MMM D, YYYY k:m a' ),
+			moment( 'September 15, 2018 5:30 am', 'MMM D, YYYY k:m a' )
+		) ).toBeTruthy();
+		expect( m.isSameYear(
+			moment( 'May 23, 2022 12:30 am', 'MMM D, YYYY k:m a' ),
+			moment( 'September 15, 2022 5:30 am', 'MMM D, YYYY k:m a' )
+		) ).toBeTruthy();
+		expect( m.isSameYear(
+			moment( 'May 23, 2018 12:30 am', 'MMM D, YYYY k:m a' ),
+			moment( 'September 15, 2022 5:30 am', 'MMM D, YYYY k:m a' )
+		) ).toBeFalsy();
+	} );
+
 	test( 'toMomentFromDate', () => {
 		expect( () => m.toMomentFromDate( '' ) ).toThrowError();
 		expect( () => m.toMomentFromDate( moment() ) ).toThrowError();

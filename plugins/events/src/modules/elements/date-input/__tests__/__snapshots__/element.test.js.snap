@@ -8,7 +8,6 @@ exports[`DateInput element Should render the after child on the input 1`] = `
     className="tribe-editor__date-input"
     name="date-input"
     onChange={[Function]}
-    onFocus={[Function]}
     type="text"
     value=""
   />
@@ -29,7 +28,6 @@ exports[`DateInput element Should render the before and after child 1`] = `
     className="tribe-editor__date-input"
     name="date-input"
     onChange={[Function]}
-    onFocus={[Function]}
     type="text"
     value=""
   />
@@ -50,24 +48,13 @@ exports[`DateInput element Should render the before child on the input 1`] = `
     className="tribe-editor__date-input"
     name="date-input"
     onChange={[Function]}
-    onFocus={[Function]}
     type="text"
     value=""
   />
 </div>
 `;
 
-exports[`DateInput element Should render the children when is not selected 1`] = `
-<div
-  className="tribe-editor__btn--label"
->
-  <div>
-    This is the children
-  </div>
-</div>
-`;
-
-exports[`DateInput element Should render the input when is selected 1`] = `
+exports[`DateInput element Should render the input 1`] = `
 <div
   className="tribe-editor__date-input__container"
 >
@@ -75,7 +62,6 @@ exports[`DateInput element Should render the input when is selected 1`] = `
     className="tribe-editor__date-input"
     name="date-input"
     onChange={[Function]}
-    onFocus={[Function]}
     type="text"
     value=""
   />
@@ -90,7 +76,6 @@ exports[`DateInput element Should trigger the change on the input field 1`] = `
     className="tribe-editor__date-input"
     name="date-input"
     onChange={[Function]}
-    onFocus={[Function]}
     type="text"
     value="Modern Tribe"
   />
@@ -105,7 +90,6 @@ exports[`DateInput element Should trigger the setDateTime callback 1`] = `
     className="tribe-editor__date-input"
     name="date-input"
     onChange={[Function]}
-    onFocus={[Function]}
     type="text"
     value="17 August 2018 - 19 August 2018"
   />

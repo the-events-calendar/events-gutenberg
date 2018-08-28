@@ -5,8 +5,10 @@ import { selectors } from '@moderntribe/events/data/blocks/classic';
 import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/classic/reducer';
 
 const state = {
-	blocks: {
-		classic: DEFAULT_STATE,
+	events: {
+		blocks: {
+			classic: DEFAULT_STATE,
+		},
 	},
 };
 

@@ -7,7 +7,7 @@ Array [
       "id": "posts",
       "type": "post",
     },
-    "type": "ADD_FORM",
+    "type": "@@MT/EVENTS/ADD_FORM",
   },
 ]
 `;

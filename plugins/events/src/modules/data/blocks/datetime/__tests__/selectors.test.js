@@ -5,9 +5,11 @@ import { selectors } from '@moderntribe/events/data/blocks/datetime';
 import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/datetime/reducer';
 
 const state = {
-	blocks: {
-		datetime: DEFAULT_STATE,
-	},
+	events: {
+		blocks: {
+			datetime: DEFAULT_STATE,
+		},
+	}
 };
 
 describe( '[STORE] - Datetime selectors', () => {
@@ -54,4 +56,9 @@ describe( '[STORE] - Datetime selectors', () => {
 	it( 'Should return the natural language label', () => {
 		expect( selectors.getNaturalLanguageLabel( state ) ).toBe( DEFAULT_STATE.naturalLanguage );
 	} );
+
+	it( 'Should return the natural language label', () => {
+		expect( selectors.getDateInputVisibility( state ) ).toBe( DEFAULT_STATE.showDateInput );
+	} );
+
 } );

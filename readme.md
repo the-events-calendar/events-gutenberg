@@ -97,9 +97,13 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 * Tweak - Use event timezone as default value
 * Tweak - Separate logic and presentation in event venue block
-* Fix - Display timezone label when selection is a UTC offset
+* Tweak - Move `request` mechanism into `common`
 * Tweak - Make sure organizers are removed from classic editor when the organizer block is removed
+* Fix - Display timezone label when selection is a UTC offset
 * Fix - Allow removal of organizers from classic block if the organizer block is removed
+* Fix - Separate logic and presentation from date time block
+* Feature - Add store registration in `common`
+* Feature - Move `events` reducer into the `common` store
 
 #### 0.2.6-alpha - 2018-08-10
 

@@ -49,29 +49,13 @@ class SearchPosts extends Component {
 		this.props.onMount();
 	}
 
-	renderToggle = ( { onToggle } ) => {
-		return (
-			<IconButton
-				className="tribe-editor__btn"
-				label={ this.props.iconLabel }
-				onClick={ onToggle }
-				icon={ <Dashicon icon="search" /> }
-			/>
-		);
-	}
-
-	renderItem = ( item, onClick ) => (
-		<li
-			key={ `post-${ item.id }` }
-			className="tribe-editor__search-posts__results-list-item"
-		>
-			<button
-				className="tribe-editor__search-posts__results-list-item-button"
-				onClick={ () => onClick( item ) }
-			>
-				{ decode( item.title.rendered ) }
-			</button>
-		</li>
+	renderToggle = ( { onToggle } ) => (
+		<IconButton
+			className="tribe-editor__btn"
+			label={ this.props.iconLabel }
+			onClick={ onToggle }
+			icon={ <Dashicon icon="search" /> }
+		/>
 	);
 
 	renderList = ( onClose ) => {
@@ -88,8 +72,18 @@ class SearchPosts extends Component {
 		return (
 			<ul className="tribe-editor__search-posts__results-list">
 				{ results.map( ( item ) => (
-					this.renderItem( item, onItemClick( onClose ) ) )
-				) }
+					<li
+						key={ `post-${ item.id }` }
+						className="tribe-editor__search-posts__results-list-item"
+					>
+						<button
+							className="tribe-editor__search-posts__results-list-item-button"
+							onClick={ () => onItemClick( onClose )( item ) }
+						>
+							{ decode( item.title.rendered ) }
+						</button>
+					</li>
+				) ) }
 			</ul>
 		);
 	}

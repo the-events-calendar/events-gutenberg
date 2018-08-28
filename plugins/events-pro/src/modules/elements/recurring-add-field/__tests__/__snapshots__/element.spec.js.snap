@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecurringAddField should match snapshot 1`] = `
+<section
+  className="tribe-events-pro__add-field"
+>
+  <button
+    className="tribe-events-pro__add-field__button"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    <span
+      className="tribe-events-pro__add-field__button__plus"
+    >
+      +
+    </span>
+    <span>
+      Add Rule
+    </span>
+  </button>
+</section>
+`;

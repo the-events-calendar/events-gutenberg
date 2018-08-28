@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[STORE] - UI reducer Should toggle repeat panel 1`] = `
+Object {
+  "isRepeatBlockVisible": true,
+}
+`;

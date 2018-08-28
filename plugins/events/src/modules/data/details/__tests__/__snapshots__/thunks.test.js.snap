@@ -11,7 +11,7 @@ Array [
       },
       "path": "undefined/20",
     },
-    "type": "WP_REQUEST",
+    "type": "@@MT/COMMON/WP_REQUEST",
   },
 ]
 `;

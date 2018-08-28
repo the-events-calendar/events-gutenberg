@@ -6,7 +6,7 @@ Object {
     "id": "firstBlock",
     "organizer": 99,
   },
-  "type": "ADD_ORGANIZER_BLOCK",
+  "type": "@@MT/EVENTS/ADD_ORGANIZER_BLOCK",
 }
 `;
 
@@ -15,7 +15,7 @@ Object {
   "payload": Object {
     "organizer": 77,
   },
-  "type": "ADD_CLASSIC_ORGANIZERS",
+  "type": "@@MT/EVENTS/ADD_CLASSIC_ORGANIZERS",
 }
 `;
 
@@ -25,7 +25,7 @@ Object {
     "id": "firstBlock",
     "organizer": 100,
   },
-  "type": "REMOVE_ORGANIZER_BLOCK",
+  "type": "@@MT/EVENTS/REMOVE_ORGANIZER_BLOCK",
 }
 `;
 
@@ -34,7 +34,7 @@ Object {
   "payload": Object {
     "id": 2,
   },
-  "type": "REMOVE_CLASSIC_ORGANIZERS",
+  "type": "@@MT/EVENTS/REMOVE_CLASSIC_ORGANIZERS",
 }
 `;
 
@@ -47,6 +47,6 @@ Object {
       3,
     ],
   },
-  "type": "SET_CLASSIC_ORGANIZERS",
+  "type": "@@MT/EVENTS/SET_CLASSIC_ORGANIZERS",
 }
 `;

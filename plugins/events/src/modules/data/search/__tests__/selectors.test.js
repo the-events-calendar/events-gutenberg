@@ -5,8 +5,10 @@ import { selectors } from '@moderntribe/events/data/search';
 import { DEFAULT_STATE } from '@moderntribe/events/data/search/reducers/search';
 
 const state = {
-	search: {
-		test: DEFAULT_STATE,
+	events: {
+		search: {
+			test: DEFAULT_STATE,
+		},
 	},
 };
 

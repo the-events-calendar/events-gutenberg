@@ -12,8 +12,10 @@ import thunk from 'redux-thunk';
 import { withForm } from '@moderntribe/common/hoc';
 
 const initialState = {
-	forms: {
-		byId: {},
+	events: {
+		forms: {
+			byId: {},
+		},
 	},
 };
 // here it is possible to pass in any middleware if needed into //configureStore
@@ -30,7 +32,7 @@ describe( 'HOC - With Form', () => {
 	beforeEach( () => {
 		setFormID = jest.fn( () => 'posts' );
 		Wrapper = withForm( setFormID )( Block );
-		component = renderer.create( <Wrapper store={ store } postType="post" /> );
+		component = renderer.create( <Wrapper store={ store } postType="post"/> );
 		instance = component.root;
 	} );
 

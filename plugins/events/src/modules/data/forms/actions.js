@@ -6,7 +6,7 @@ import { isEmpty, get } from 'lodash';
 /**
  * Internal dependencies
  */
-import { actions as requestActions } from '@moderntribe/events/data/request';
+import { actions as requestActions } from '@moderntribe/common/store/middlewares/request';
 
 import * as types from './types';
 import * as selectors from './selectors';

@@ -5,9 +5,11 @@ import { DEFAULT_STATE } from '@moderntribe/events/data/blocks/sharing/reducer';
 import { selectors } from '@moderntribe/events/data/blocks/sharing';
 
 const state = {
-	blocks: {
-		sharing: DEFAULT_STATE,
-	},
+	events: {
+		blocks: {
+			sharing: DEFAULT_STATE,
+		},
+	}
 };
 
 describe( '[STORE] - Sharing selectors', () => {
