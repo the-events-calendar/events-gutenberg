@@ -183,7 +183,7 @@ class EventOrganizer extends Component {
 			isSelected &&
 			organizer &&
 			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Venue Map Settings' ) }>
+				<PanelBody title={ __( 'Organizer Settings' ) }>
 					<EditLink
 						postId={ organizer }
 						label={ __( 'Edit Organizer', 'events-gutenberg' ) }

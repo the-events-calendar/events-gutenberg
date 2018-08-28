@@ -30,7 +30,10 @@ class Tribe__Gutenberg__Events__Template__Overwrite {
 	public function get_path( $slug ) {
 		$slug = (array) $slug;
 
-		return tribe( 'gutenberg' )->plugin_path . 'src/views/' . implode( '/', array_map( 'sanitize_file_name', $slug ) ) . '.php';
+		$file = implode( '/', array_map( 'sanitize_file_name', $slug ) ) . '.php';
+		// todo: replace with real plugin template, once is moved out of the extension
+		$directory = 'plugins/events/src/views/';
+		return tribe( 'gutenberg' )->plugin_path . $directory . $file;
 	}
 
 	/**
@@ -47,7 +50,7 @@ class Tribe__Gutenberg__Events__Template__Overwrite {
 		$post_id = get_the_ID();
 
 		// Prevent overwrite for posts that doens't have Blocks
-		if ( ! gutenberg_post_has_blocks( $post_id ) ) {
+		if ( ! has_blocks( $post_id ) ) {
 			return $file;
 		}
 
@@ -72,8 +75,8 @@ class Tribe__Gutenberg__Events__Template__Overwrite {
 		$post_id = get_the_ID();
 
 		// Prevent printing for posts that doens't have Blocks
-		if ( ! gutenberg_post_has_blocks( $post_id ) ) {
-			return $file;
+		if ( ! has_blocks( $post_id ) ) {
+			return $silence;
 		}
 
 		$args = array(

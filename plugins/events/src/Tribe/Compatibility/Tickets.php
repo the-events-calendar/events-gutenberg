@@ -28,6 +28,10 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 	 * @return string
 	 */
 	public function include_frontend_form( $content = '' ) {
+		if ( is_admin() ) {
+			return $content ;
+		}
+
 		// Fetch the post
 		$post = get_post( get_the_ID() );
 
@@ -37,7 +41,7 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 		}
 
 		// Bail on non gutenberg
-		if ( ! gutenberg_post_has_blocks( $post->ID ) ) {
+		if ( ! has_blocks( $post->ID ) ) {
 			return $content;
 		}
 

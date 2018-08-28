@@ -237,7 +237,7 @@ class EventVenue extends Component {
 
 		return (
 			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Venue Map Settings' ) }>
+				<PanelBody title={ __( 'Venue Settings' ) }>
 					<ToggleControl
 						label={ __( 'Show Google Maps Link' ) }
 						checked={ showMapLink }

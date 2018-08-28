@@ -43,6 +43,8 @@ class Tribe__Gutenberg__Plugin {
 		$this->plugin_path = trailingslashit( dirname( $this->plugin_file ) );
 		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );
 		$this->plugin_url  = plugins_url( $this->plugin_dir );
+		// todo: remove after migration of the extension
+		$this->extension_url = trailingslashit( $this->plugin_url . 'plugins/events' );
 	}
 
 	/**

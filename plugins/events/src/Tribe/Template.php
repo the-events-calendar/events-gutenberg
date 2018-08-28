@@ -13,7 +13,8 @@ class Tribe__Gutenberg__Events__Template extends Tribe__Template {
 	 */
 	public function __construct() {
 		$this->set_template_origin( tribe( 'gutenberg' ) );
-		$this->set_template_folder( 'src/views' );
+		// todo: update to the plugins directory only
+		$this->set_template_folder( 'plugins/events/src/views' );
 
 		// Configures this templating class extract variables
 		$this->set_template_context_extract( true );
