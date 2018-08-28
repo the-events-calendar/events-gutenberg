@@ -2,8 +2,6 @@
 	'use strict';
 
 	// base elements
-	var body       = $( 'html, body' );
-	var document   = $( document );
 	var tribe_rsvp = $( '.tribe-block__rsvp' );
 
 	// Bail if we don't have what we need
@@ -24,17 +22,17 @@
 	function tribe_rsvp_toggle_actions( button ) {
 
 		// Check if is the going or not going button
-		var going   = button.hasClass( 'tribe-block__rsvp__status-button--going' );
-		var sibling = going ? '.tribe-block__rsvp__status-button--not-going' : '.tribe-block__rsvp__status-button--going';
-		var sibling = button.closest( '.tribe-block__rsvp__status' ).find( sibling );
+		var going     = button.hasClass( 'tribe-block__rsvp__status-button--going' );
+		var sibling   = going ? '.tribe-block__rsvp__status-button--not-going' : '.tribe-block__rsvp__status-button--going';
+		var siblingEl = button.closest( '.tribe-block__rsvp__status' ).find( sibling );
 
 		// Add active classs to the current button
 		button.addClass( 'tribe-active' );
 		button.attr( 'disabled', 'disabled' );
 
 		// Remove the active class of the other button and disable it
-		sibling.removeClass( 'tribe-active' );
-		sibling.removeAttr( 'disabled' );
+		siblingEl.removeClass( 'tribe-active' );
+		siblingEl.removeAttr( 'disabled' );
 
 	}
 
@@ -50,33 +48,33 @@
 		'.tribe-block__rsvp__status-button--going, .tribe-block__rsvp__status-button--not-going',
 		function( e ) {
 
-		var button    = $( this );
-		var ticket    = $( this ).closest( '.tribe-block__rsvp__ticket' );
-		var ticket_id = ticket.data( 'rsvp-id' );
-		var going     = button.hasClass( 'tribe-block__rsvp__status-button--going' );
+			var button    = $( this );
+			var ticket    = $( this ).closest( '.tribe-block__rsvp__ticket' );
+			var ticket_id = ticket.data( 'rsvp-id' );
+			var going     = button.hasClass( 'tribe-block__rsvp__status-button--going' );
 
-		// Toggle button styles and disable
-		tribe_rsvp_toggle_actions( $( this ) );
+			// Toggle button styles and disable
+			tribe_rsvp_toggle_actions( $( this ) );
 
-		// Set the AJAX params
-		var params = {
-			action    : 'rsvp-form',
-			ticket_id : ticket_id,
-			going     : going ? 'yes' : 'no',
-		};
+			// Set the AJAX params
+			var params = {
+				action    : 'rsvp-form',
+				ticket_id : ticket_id,
+				going     : going ? 'yes' : 'no',
+			};
 
-		// Show the loader for this RSVP
-		tribe_rsvp_loader_start( ticket );
+			// Show the loader for this RSVP
+			tribe_rsvp_loader_start( ticket );
 
-		$.post(
-			TribeRsvp.ajaxurl,
-			params,
-			function( response ) {
-				var form = ticket.find( '.tribe-block__rsvp__form' );
-				form.html( response.data.html );
-				tribe_rsvp_loader_end( ticket );
-			}
-		);
+			$.post(
+				TribeRsvp.ajaxurl,
+				params,
+				function( response ) {
+					var form = ticket.find( '.tribe-block__rsvp__form' );
+					form.html( response.data.html );
+					tribe_rsvp_loader_end( ticket );
+				}
+			);
 	} );
 
 	/**
@@ -100,7 +98,7 @@
 			// Trigger the on Change for the input as it's not handled via stepUp() || stepDown()
 			input.trigger( 'change' );
 
-	} );
+		} );
 
 	/**
 	 * Show the loader
@@ -169,7 +167,7 @@
 
 				ticket.find( '.tribe-block__rsvp__form' ).html( response.data.html );
 
-				if ( 1 > remaining ) {
+				if ( 0 === remaining ) {
 					// If there are no more RSVPs remaining we update the status section
 					ticket.find( '.tribe-block__rsvp__status' ).replaceWith( response.data.status_html );
 				}
