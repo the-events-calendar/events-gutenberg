@@ -16,7 +16,6 @@ export default () => ( next ) => ( action ) => {
 	const namespaces = rest.namespaces || {};
 	const core = namespaces.core || 'wp/v2';
 	const BASE = `${ url }${ core }`;
-	console.log( BASE );
 
 	if ( action.type !== types.WP_REQUEST ) {
 		return next( action );
