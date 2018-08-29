@@ -10,7 +10,7 @@ import 'whatwg-fetch';
 import { config } from '@moderntribe/common/utils/globals';
 import { types } from '@moderntribe/common/store/middlewares/request';
 
-export default () => ( next ) => ( action ) => {
+export default () => ( next ) => async ( action ) => {
 	if ( action.type !== types.WP_REQUEST ) {
 		return next( action );
 	}
@@ -53,23 +53,23 @@ export default () => ( next ) => ( action ) => {
 		'X-WP-Nonce': nonce,
 	};
 
-	return fetch( endpoint, {
-		...params,
-		credentials: 'include',
-		headers,
-	} ).then( ( response ) => {
+	try {
+
+		const response = await fetch( endpoint, {
+			...params,
+			credentials: 'include',
+			headers,
+		} );
+
 		const { status } = response;
 		if ( status !== 200 ) {
 			throw response;
 		}
-		return Promise.all( [ response, response.json() ] );
-	} )
-		.then( ( results ) => {
-			const [ response, body ] = results;
-			actions.success( { body, headers: response.headers } );
-			return results;
-		} ).catch( ( error ) => {
-			actions.error( error );
-			return error;
-		} );
+		const body = await response.json();
+		actions.success( { body, headers: response.headers } );
+		return [ response, body ];
+	} catch( error ) {
+		actions.error( error );
+		return error;
+	}
 };
