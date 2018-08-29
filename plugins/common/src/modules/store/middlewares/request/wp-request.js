@@ -68,7 +68,7 @@ export default () => ( next ) => async ( action ) => {
 		const body = await response.json();
 		actions.success( { body, headers: response.headers } );
 		return [ response, body ];
-	} catch( error ) {
+	} catch ( error ) {
 		actions.error( error );
 		return error;
 	}
