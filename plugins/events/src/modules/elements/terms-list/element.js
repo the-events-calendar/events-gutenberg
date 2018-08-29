@@ -19,131 +19,116 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 
-class TaxonomiesElement extends Component {
-	constructor() {
-		super( ...arguments );
+const getTerms = ( terms, parentId = null ) => {
+	if ( ! terms || ! terms.length ) {
+		return [];
 	}
 
-	getTerms = ( parentId = null ) => {
-		const { terms } = this.props;
-		
-		if ( ! terms || ! terms.length ) {
-			return [];
-		}
-
-		if ( parentId === null ) {
-			return terms;
-		}
-
-		return terms.filter( ( term ) => term.parent === parentId );
+	if ( parentId === null ) {
+		return terms;
 	}
 
-	getTermListClassName = ( level ) => (
-		`tribe-editor__terms__list tribe-editor__terms__list--level-${ level }`
-	);
-
-	getTermListItemClassName = ( level ) => (
-		`tribe-editor__terms__list-item tribe-editor__terms__list-item--level-${ level }`
-	);
-
-	renderTermName = ( term ) => {
-		if ( ! term.name ) {
-			return __( '(Untitled)', 'events-gutenberg' );
-		}
-
-		return unescape( term.name ).trim();
-	}
-
-	renderTermList() {
-		const terms = this.getTerms( null );
-
-		return (
-			<ul className={ this.getTermListClassName( 0 ) }>
-				{ terms.map( ( term, index ) => (
-					this.renderTermListItem( term, index + 1 === terms.length, 0 )
-				) ) }
-			</ul>
-		);
-	}
-
-	renderTermListItem = ( term, isLast ) => {
-		const separator = ! isLast ? (
-			<span>
-				{ this.props.termSeparator }
-			</span>
-		) : null;
-
-		return (
-			<li key={ term.id } className={ this.getTermListItemClassName( 0 ) }>
-				<a
-					href={ term.link }
-					target="_blank"
-					rel="noopener noreferrer"
-					className="tribe-editor__terms__list-item-link"
-				>
-					{ this.renderTermName( term ) }
-				</a>
-				{ separator }
-			</li>
-		);
-	}
-
-	renderEmpty = () => {
-		const { renderEmpty, slug } = this.props;
-		const key = `tribe-terms-${ slug }`;
-		if ( ! renderEmpty ) {
-			return null;
-		}
-
-		return [
-			<div key={ key } className="tribe-editor__terms tribe-editor__terms--empty">
-				{ this.renderLabel() }
-				{ renderEmpty }
-			</div>,
-		];
-	}
-
-	renderLabel = () => {
-		const label = (
-			<strong className="tribe-editor__terms__label" key="terms-label">
-				{ this.props.label }
-				{ ' ' }
-			</strong>
-		);
-
-		return label;
-	}
-
-	render() {
-		const { className, slug } = this.props;
-		const terms = this.getTerms();
-		const key = `tribe-terms-${ slug }`;
-
-		if ( this.props.isRequesting ) {
-			return [
-				<div key={ key } className={ `tribe-editor__terms ${ className }` }>
-					{ this.renderLabel() }
-					<Spinner key="terms-spinner" />
-				</div>,
-			];
-		} else if ( ! terms.length ) {
-			return this.renderEmpty();
-		}
-
-		return [
-			<div key={ key } className={ `tribe-editor__terms ${ className }` }>
-				{ this.renderLabel() }
-				<div key="terms" className="tribe-editor__terms__list-wrapper">
-					{ this.renderTermList() }
-				</div>
-			</div>,
-		];
-	}
+	return terms.filter( ( term ) => term.parent === parentId );
 }
+
+const getTermListClassName = ( level = 0 ) => (
+	`tribe-editor__terms__list tribe-editor__terms__list--level-${ level }`
+);
+
+const getTermListItemClassName = ( level = 0 ) => (
+	`tribe-editor__terms__list-item tribe-editor__terms__list-item--level-${ level }`
+);
+
+const termName = ( term = {} ) => {
+	return term.name
+		? unescape( term.name ).trim()
+		: __( '(Untitled)', 'events-gutenberg' );
+}
+
+const Label = ( { text } ) => (
+	<strong className="tribe-editor__terms__label" key="terms-label">
+		{ text }
+		{ ' ' }
+	</strong>
+);
+
+const Empty = ( { renderEmpty = null, id, label } ) => (
+	renderEmpty && (
+		<div key={ id } className="tribe-editor__terms--empty">
+			<Label text={ label } />
+			{ renderEmpty }
+		</div>
+	)
+);
+
+const List = ( { terms = [], termSeparator, isLoading, id, className } ) => {
+	if ( isLoading ) {
+		return <Loading id={ id } className={ className } />;
+	}
+
+	return (
+		<ul className={ getTermListClassName() }>
+			{ terms.map( ( term, index ) => (
+				<Item
+					key={ index }
+					term={ term }
+					separator={ termSeparator }
+					isLast={ index + 1 === terms.length }
+				/>
+			) ) }
+		</ul>
+	);
+};
+
+const Separator = ( { delimiter, isLast } ) => ! isLast && <span>{ delimiter }</span>;
+
+const Item = ( { separator, term, isLast } ) => {
+	return (
+		<li key={ term.id } className={ getTermListItemClassName( 0 ) }>
+			<a
+				href={ term.link }
+				target="_blank"
+				rel="noopener noreferrer"
+				className="tribe-editor__terms__list-item-link"
+			>
+				{ termName( term ) }
+			</a>
+			<Separator delimiter={ separator } />
+			{ separator }
+		</li>
+	);
+}
+
+const Loading = ( { id, className } ) => (
+	<div key={ id } className={ `tribe-editor__terms__spinner ${ className }` }>
+		<Label />
+		<Spinner key="terms-spinner" />
+	</div>
+);
+
+const TaxonomiesElement = ( { className, slug, label, renderEmpty, isRequesting, ...rest } ) => {
+	const terms = getTerms( rest.terms );
+	const key = `tribe-terms-${ slug }`;
+
+	if ( ! terms.length && ! isRequesting ) {
+		return <Empty id={ key } renderEmpty={ renderEmpty } label={ label } />;
+	}
+
+	return (
+		<div key={ key } className={ `tribe-editor__terms ${ className }` }>
+			<Label text={ label } />
+			<div key="terms" className="tribe-editor__terms__list-wrapper">
+				<List terms={ terms } className={ className } id={ key } isLoading={ isRequesting } />
+			</div>
+		</div>
+	);
+};
 
 TaxonomiesElement.defaultProps = {
 	termSeparator: __( ', ', 'events-gutenberg' ),
 	className: '',
+	terms: [],
+	isRequesting: false,
 };
 
 const applySelect = withSelect( ( select, props ) => {
