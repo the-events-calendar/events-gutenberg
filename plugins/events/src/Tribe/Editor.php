@@ -167,6 +167,13 @@ extends Tribe__Gutenberg__Common__Editor {
 				'show_time_zone' => false,
 				'label' => $this->get_timezone_label(),
 			),
+			'rest' => array(
+				'url' => get_rest_url(),
+				'nonce' => wp_create_nonce( 'wp_rest' ),
+				'namespaces' => array(
+					'core' => 'wp/v2',
+				),
+			),
 		);
 
 		tribe_asset(

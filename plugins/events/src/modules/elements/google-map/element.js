@@ -22,7 +22,7 @@ import {
  * Internal dependencies
  */
 import './style.pcss';
-import { google, mapsAPI } from '@moderntribe/events/editor/utils/globals';
+import { google, mapsAPI } from '@moderntribe/common/utils/globals';
 
 /**
  * Module Code

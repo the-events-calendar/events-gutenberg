@@ -49,11 +49,6 @@ class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
 		 * Lets load all compatibility related methods
 		 */
 		$this->load_compatibility_tickets();
-
-		/**
-		 * @todo  Remove this later on
-		 */
-		tribe( 'gutenberg.events.editor' )->assets();
 	}
 
 	/**
@@ -97,6 +92,8 @@ class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
 
 		// Setup the registration of Blocks
 		add_action( 'init', tribe_callback( 'gutenberg.events.editor', 'register_blocks' ), 20 );
+		// Load assets of the blocks
+		add_action( 'admin_init', tribe_callback( 'gutenberg.events.editor', 'assets' ) );
 
 		// Maybe add flag from classic editor
 		add_action( 'init', tribe_callback( 'gutenberg.events.editor', 'flag_post_from_classic_editor' ), 0 );
