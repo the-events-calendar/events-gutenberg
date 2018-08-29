@@ -3,7 +3,7 @@
  */
 import { get, identity, trim, find } from 'lodash';
 import { stringify } from 'querystringify';
-import { list } from './globals';
+import { list } from '@moderntribe/common/utils/globals';
 
 /**
  * Convert data from an array with different keys and values into a unified shape of object.

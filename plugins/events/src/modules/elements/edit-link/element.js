@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { config } from '@moderntribe/events/editor/utils/globals';
+import { config } from '@moderntribe/common/utils/globals';
 import './style.pcss';
 
 const EditLink = ( { postId, label, target } ) => {
