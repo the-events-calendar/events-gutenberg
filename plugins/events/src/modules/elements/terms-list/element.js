@@ -22,18 +22,11 @@ import './style.pcss';
 class TaxonomiesElement extends Component {
 	constructor() {
 		super( ...arguments );
-
-		this.state = {
-			terms: null,
-		};
 	}
 
 	getTerms = ( parentId = null ) => {
-		if ( ! this.props.terms ) {
-			return [];
-		}
-
-		const terms = this.props.terms.data;
+		const { terms } = this.props;
+		
 		if ( ! terms || ! terms.length ) {
 			return [];
 		}
@@ -126,7 +119,7 @@ class TaxonomiesElement extends Component {
 		const terms = this.getTerms();
 		const key = `tribe-terms-${ slug }`;
 
-		if ( this.props.terms.isLoading ) {
+		if ( this.props.isRequesting ) {
 			return [
 				<div key={ key } className={ `tribe-editor__terms ${ className }` }>
 					{ this.renderLabel() }
@@ -153,34 +146,30 @@ TaxonomiesElement.defaultProps = {
 	className: '',
 };
 
-const applySelect = withSelect( ( select, props ) => ( {
-	terms: select( 'core/editor' ).getEditedPostAttribute( props.slug ),
-} ) );
+const applySelect = withSelect( ( select, props ) => {
+	const { getEntityRecords } = select( 'core' );
+	const { isResolving } = select( 'core/data' );
+	const { slug } = props;
+	// post_tags are stored as 'tags' in the editor attributes
+	const attributeName = slug === 'post_tag' ? 'tags' : slug;
+	const ids = select( 'core/editor' ).getEditedPostAttribute( attributeName );
 
-const applyWithAPIData = withAPIData( ( props ) => {
-	const { slug, terms } = props;
-	const args = {
-		per_page: 100,
-		orderby: 'count',
-		order: 'desc',
-	};
-
-	if ( ! terms || ! terms.length ) {
-		return {
-			terms: [],
-		};
+	if ( ! ids || ids.length === 0 ) {
+		return { terms: [], isRequesting: false };
 	}
 
-	args.include = terms;
-
-	const query = stringify( args );
+	const query = {
+		orderby: 'count',
+		order: 'desc',
+		include: ids,
+	}
 
 	return {
-		terms: `/wp/v2/${ slug }?${ query }`,
+		terms: getEntityRecords( 'taxonomy', slug, query ),
+		isRequesting: isResolving( 'core', 'getEntityRecords', [ 'taxonomy', slug, query ] ),
 	};
 } );
 
 export default compose(
 	applySelect,
-	applyWithAPIData,
 )( TaxonomiesElement );
