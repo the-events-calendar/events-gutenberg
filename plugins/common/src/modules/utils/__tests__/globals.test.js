@@ -8,7 +8,7 @@ import {
 	list,
 	get,
 	config,
-} from '@moderntribe/events/editor/utils/globals';
+} from '@moderntribe/common/utils/globals';
 
 describe( 'Tests for globals.js', () => {
 
