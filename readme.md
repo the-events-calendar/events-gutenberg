@@ -101,6 +101,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Tweak - Separate logic and presentation in event venue block
 * Tweak - Move `request` mechanism into `common`
 * Tweak - Make sure organizers are removed from classic editor when the organizer block is removed
+* Tweak - Favor `fetch` instead of `window.wp.apiRequest` to make API calls
 * Fix - Display timezone label when selection is a UTC offset
 * Fix - Allow removal of organizers from classic block if the organizer block is removed
 * Fix - Separate logic and presentation from date time block
