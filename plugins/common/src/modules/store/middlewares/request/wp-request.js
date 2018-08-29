@@ -11,12 +11,6 @@ import { config } from '@moderntribe/common/utils/globals';
 import { types } from '@moderntribe/common/store/middlewares/request';
 
 export default () => ( next ) => ( action ) => {
-	const rest = get( config(), 'rest', {} )
-	const { url = '', nonce = '' } = rest;
-	const namespaces = rest.namespaces || {};
-	const core = namespaces.core || 'wp/v2';
-	const BASE = `${ url }${ core }`;
-
 	if ( action.type !== types.WP_REQUEST ) {
 		return next( action );
 	}
@@ -29,6 +23,12 @@ export default () => ( next ) => ( action ) => {
 	} = meta;
 
 	next( action );
+
+	const rest = get( config(), 'rest', {} )
+	const { url = '', nonce = '' } = rest;
+	const namespaces = rest.namespaces || {};
+	const core = namespaces.core || 'wp/v2';
+	const BASE = `${ url }${ core }`;
 
 	const actions = {
 		start: noop,
