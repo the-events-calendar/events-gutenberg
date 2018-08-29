@@ -61,7 +61,7 @@ const Empty = ( { renderEmpty = null, id, label } ) => (
 	)
 );
 
-const List = ( { terms = [], termSeparator, isLoading, id, className } ) => {
+const List = ( { terms = [], termSeparator = ' ', isLoading = false, id = '', className = '' } ) => {
 	if ( isLoading ) {
 		return <Loading id={ id } className={ className } />;
 	}
@@ -99,24 +99,24 @@ const Item = ( { separator, term, isLast } ) => {
 	);
 }
 
-const Loading = ( { id, className } ) => (
+const Loading = ( { id = '', className = '' } ) => (
 	<div key={ id } className={ `tribe-editor__terms__spinner ${ className }` }>
 		<Label />
 		<Spinner key="terms-spinner" />
 	</div>
 );
 
-const TaxonomiesElement = ( { className, slug, label, renderEmpty, isRequesting, ...rest } ) => {
+export const TaxonomiesElement = ( { className, slug, label, renderEmpty, isRequesting, ...rest } ) => {
 	const terms = getTerms( rest.terms );
 	const key = `tribe-terms-${ slug }`;
 
 	if ( ! terms.length && ! isRequesting ) {
-		return <Empty id={ key } renderEmpty={ renderEmpty } label={ label } />;
+		return <Empty id={ key } renderEmpty={ renderEmpty } label={ label }/>;
 	}
 
 	return (
 		<div key={ key } className={ `tribe-editor__terms ${ className }` }>
-			<Label text={ label } />
+			<Label text={ label }/>
 			<div key="terms" className="tribe-editor__terms__list-wrapper">
 				<List terms={ terms } className={ className } id={ key } isLoading={ isRequesting } />
 			</div>
