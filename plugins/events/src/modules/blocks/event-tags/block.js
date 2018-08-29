@@ -50,7 +50,7 @@ export default class EventTags extends Component {
 	renderList() {
 		return (
 			<TermsList
-				slug="tags"
+				slug="post_tag"
 				label={ __( 'Tags', 'events-gutenberg' ) }
 				renderEmpty={ __( 'Add tags in document settings', 'events-gutenberg' ) }
 			/>
