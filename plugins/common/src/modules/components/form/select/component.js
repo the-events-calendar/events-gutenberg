@@ -50,61 +50,55 @@ export default class Select extends PureComponent {
 		return selected && selected.label;
 	}
 
-	renderOptions = ( onClose ) => {
-		return (
-			this.props.options.map( ( option ) => (
-				<button
-					className={ classnames(
-						'tribe-common-form-select__options__option',
-						this.props.optionClassName
-					) }
-					key={ option.value }
-					onClick={ partial( this._onOptionClick, onClose, option.value ) }
-					role="menuitem"
-					type="button"
-					value={ option.value }
-				>
-					{ option.label }
-				</button>
-			) )
-		);
-	}
-
-	renderToggle = ( { onToggle, isOpen } ) => {
-		return (
-			<div className="tribe-common-form-select__toggle">
-				<button
-					type="button"
-					aria-expanded={ isOpen }
-					onClick={ onToggle }
-				>
-					<span>{ this.label }</span>
-					<Dashicon
-						className="btn--icon"
-						icon={ isOpen ? 'arrow-up' : 'arrow-down' }
-					/>
-				</button>
-			</div>
-		);
-	}
-
-	renderContent = ( { onClose } ) => {
-		return (
-			<ScrollTo>
-				{ () => (
-					<PreventBlockClose>
-						<ScrollArea
-							role="menu"
-							className={ classnames( 'tribe-common-form-select__options' ) }
-						>
-							{ this.renderOptions( onClose ) }
-						</ScrollArea>
-					</PreventBlockClose>
+	renderOptions = ( onClose ) => (
+		this.props.options.map( ( option ) => (
+			<button
+				className={ classnames(
+					'tribe-common-form-select__options__option',
+					this.props.optionClassName
 				) }
-			</ScrollTo>
+				key={ option.value }
+				onClick={ partial( this._onOptionClick, onClose, option.value ) }
+				role="menuitem"
+				type="button"
+				value={ option.value }
+			>
+				{ option.label }
+			</button>
+		) )
+	)
 
-		);
-	}
+	renderToggle = ( { onToggle, isOpen } ) => (
+		<div className="tribe-common-form-select__toggle">
+			<button
+				type="button"
+				aria-expanded={ isOpen }
+				onClick={ onToggle }
+			>
+				<span>{ this.label }</span>
+				<Dashicon
+					className="btn--icon"
+					icon={ isOpen ? 'arrow-up' : 'arrow-down' }
+				/>
+			</button>
+		</div>
+	)
+
+	renderContent = ( { onClose } ) => (
+		<ScrollTo>
+			{ () => (
+				<PreventBlockClose>
+					<ScrollArea
+						role="menu"
+						className={ classnames( 'tribe-common-form-select__options' ) }
+					>
+						{ this.renderOptions( onClose ) }
+					</ScrollArea>
+				</PreventBlockClose>
+			) }
+		</ScrollTo>
+
+	);
 
 	render() {
 		return (
