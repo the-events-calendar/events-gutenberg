@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ExceptionAddField should match snapshot 1`] = `
-<section
+<aside
   className="tribe-events-pro__add-field"
 >
   <button
@@ -18,5 +18,5 @@ exports[`ExceptionAddField should match snapshot 1`] = `
       Add Exception
     </span>
   </button>
-</section>
+</aside>
 `;

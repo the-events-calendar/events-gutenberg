@@ -259,9 +259,9 @@ class EventDateTime extends Component {
 								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
-						<PluginDateTimeBlockHooks />
-						{ ! hideUpsell && <Upsell /> }
 					</footer>
+					<PluginDateTimeBlockHooks />
+					{ ! hideUpsell && <Upsell /> }
 				</Fragment>
 			</Dashboard>
 		);

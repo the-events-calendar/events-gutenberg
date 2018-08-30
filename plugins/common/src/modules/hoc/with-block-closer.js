@@ -7,6 +7,11 @@ import PropTypes from 'prop-types';
 import { noop } from 'lodash';
 
 const ESCAPE_KEY = 27;
+export const EVENT_NAMESPACE = 'tribe:click:proxy';
+export const dispatch = ( e ) => {
+	e.target.dispatchEvent( new CustomEvent( EVENT_NAMESPACE, { bubbles: true } ) );
+};
+export const intercept = e => e.stopPropagation();
 
 export default ( WrappedComponent ) => {
 	/**
@@ -32,7 +37,18 @@ export default ( WrappedComponent ) => {
 		}
 
 		nodeRef = React.createRef();
-		_eventNamespace = 'tribe:click:proxy';
+		_eventNamespace = EVENT_NAMESPACE;
+
+		/**
+		 * dispatches custom events
+		 *
+		 * @memberof WithBlockCloser
+		 * @param {Event} e event
+		 */
+		_dispatchClickProxyEvent = dispatch;
+
+		// Prevent CustomEvents from propagating to document proxy listeners
+		_interceptClickProxyEvent = intercept;
 
 		/**
 		 * keydown handler
@@ -47,19 +63,6 @@ export default ( WrappedComponent ) => {
 		}
 
 		handleClick = () => this.props.onClose()
-
-		/**
-		 * dispatches custom events
-		 *
-		 * @memberof WithBlockCloser
-		 * @param {Event} e event
-		 */
-		_dispatchClickProxyEvent = ( e ) => {
-			e.target.dispatchEvent( new CustomEvent( this._eventNamespace, { bubbles: true } ) );
-		}
-
-		// Prevent CustomEvents from propagating to document proxy listeners
-		_interceptClickProxyEvent = ( e ) => e.stopPropagation()
 
 		componentDidMount() {
 			this.props.isOpen && this._addEventListeners();
