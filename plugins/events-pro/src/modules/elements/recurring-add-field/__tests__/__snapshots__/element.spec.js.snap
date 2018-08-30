@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RecurringAddField should match snapshot 1`] = `
-<section
+<aside
   className="tribe-events-pro__add-field"
 >
   <button
@@ -18,5 +18,5 @@ exports[`RecurringAddField should match snapshot 1`] = `
       Add Rule
     </span>
   </button>
-</section>
+</aside>
 `;
