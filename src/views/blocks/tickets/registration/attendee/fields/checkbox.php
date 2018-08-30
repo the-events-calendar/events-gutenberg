@@ -27,9 +27,9 @@ if ( ! $options ) {
 <div
 	class="tribe-field tribe-block__tickets__item__attendee__field__checkbox <?php echo $required ? 'tribe-tickets-meta-required' : ''; ?>"
 >
-	<label class="tribe-tickets-meta-label">
-		<?php echo wp_kses_post( $field['label'] ); ?>
-	</label>
+	<header class="tribe-tickets-meta-label">
+		<h3><?php echo wp_kses_post( $field['label'] ); ?></h3>
+	</header>
 	<div class="tribe-options">
 		<?php
 		foreach ( $options as $option ) {

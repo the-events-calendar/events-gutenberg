@@ -29,8 +29,9 @@ $slug          = $field['slug'];
 	class="tribe-field tribe-block__tickets__item__attendee__field__radio <?php echo $required ? 'tribe-tickets-meta-required' : ''; ?>"
 >
 	<header class="tribe-tickets-meta-label">
-		<?php echo wp_kses_post( $field['label'] ); ?>
+		<h3><?php echo wp_kses_post( $field['label'] ); ?></h3>
 	</header>
+
 	<div class="tribe-options">
 		<?php
 		foreach ( $options as $option ) {
