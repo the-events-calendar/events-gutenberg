@@ -55,9 +55,9 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
-		$post_id = tribe( 'gutenberg.template' )->get( 'post_id' );
+		$post_id            = tribe( 'gutenberg.template' )->get( 'post_id' );
 		$args['attributes'] = $this->attributes( $attributes );
-		$args['tickets'] = $this->get_tickets( $post_id );
+		$args['tickets']    = $this->get_tickets( $post_id );
 
 		// Fetch the default provider
 		$provider = Tribe__Tickets__Tickets::get_event_ticket_provider( $post_id );
@@ -68,6 +68,38 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.template' )->add_template_globals( $args );
 
+		// enqueue assets
+		tribe_asset_enqueue( 'tribe-gutenberg-tickets' );
+
 		return tribe( 'gutenberg.template' )->template( array( 'blocks', $this->slug() ), $args, false );
+	}
+
+	/**
+	 * Register block assets
+	 *
+	 * @since  TBD
+	 *
+	 *
+	 * @return void
+	 */
+	public function assets() {
+		$gutenberg = tribe( 'gutenberg' );
+
+		tribe_asset(
+			$gutenberg,
+			'tribe-gutenberg-tickets',
+			'tickets.js',
+			array( 'jquery', 'jquery-ui-datepicker' ),
+			null,
+			array(
+				'type'         => 'js',
+				'localize'     => array(
+					'name' => 'TribeTickets',
+					'data' => array(
+						'ajaxurl' => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) )
+					),
+				),
+			)
+		);
 	}
 }

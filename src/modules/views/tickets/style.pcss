@@ -85,27 +85,52 @@
 	}
 }
 
-.tribe-block__tickets__item__quantity__number {
-	display: inline-block;
+.tribe-block__tickets__buy {
 
-	input[type="number"],
-	input[type="text"] {
-		background-color: transparent;
-		border: 0;
-		font-size: 2.5em;
+}
+
+.tribe-block__tickets__item__quantity__number {
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	display: inline-flex;
+	cursor: pointer;
+	outline:none;
+	justify-content: center;
+	height: 3rem;
+	margin: 0;
+	position: relative;
+	width: 3.2rem;
+	-webkit-appearance: none;
+
+	&:hover {
+		background: none;
+	}
+
+	input[type="number"] {
+		max-width: 3rem;
+		background: transparent;
+		color: #444;
+		padding: .5rem 0;
+		border: none;
+		font-size: 1.8rem;
+		height: 3rem;
+		font-weight: bold;
 		text-align: center;
-		padding: 0;
-		width: 90px;
 		-moz-appearance: textfield;
+
+		-webkit-appearance: textfield;
+		-moz-appearance: textfield;
+		appearance: textfield;
 
 		&::-webkit-inner-spin-button,
 		&::-webkit-outer-spin-button {
 			-webkit-appearance: none;
-			margin: 0; /* Removes leftover margin */
+			-moz-appearance: none;
+			appearance: none;
 		}
 	}
 }
 
-.tribe-block__tickets__buy {
 
 }
