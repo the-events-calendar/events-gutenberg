@@ -5,9 +5,9 @@
  * @version TBD
  *
  */
-$post_id = $this->get( 'post_id' );
-$tickets = $this->get( 'tickets', array() );
-$provider = $this->get( 'provider' );
+$post_id      = $this->get( 'post_id' );
+$tickets      = $this->get( 'tickets', array() );
+$provider     = $this->get( 'provider' );
 $cart_classes = array( 'tribe-block', 'tribe-block__tickets' );
 
 // We don't display anything if there is not provider
