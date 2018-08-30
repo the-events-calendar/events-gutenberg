@@ -6,10 +6,10 @@ var tribe.tickets.block = {
 (function( $, my ) {
 	'use strict';
 
-	var tribe_ticket = $( '.tribe-block__tickets' );
+	var $tribe_ticket = $( '.tribe-block__tickets' );
 
 	// Bail if we don't have what we need
-	if ( 0 === tribe_ticket.length ) {
+	if ( 0 === $tribe_ticket.length ) {
 		return;
 	}
 
