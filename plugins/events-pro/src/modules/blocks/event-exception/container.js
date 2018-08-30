@@ -8,7 +8,8 @@ import { compose } from 'redux';
  * Internal dependencies
  */
 import { withStore } from '@moderntribe/common/hoc';
-import { selectors, actions } from '@moderntribe/events-pro/data/ui';
+import * as ui from '@moderntribe/events-pro/data/ui';
+import * as exception from '@moderntribe/events-pro/data/blocks/exception';
 import EventRecurringBlock from './template';
 
 /**
@@ -16,13 +17,16 @@ import EventRecurringBlock from './template';
  */
 
 const mapStateToProps = state => ( {
-	isExceptionPanelVisible: selectors.isExceptionPanelVisible( state ),
-	isExceptionPanelExpanded: selectors.isExceptionPanelExpanded( state ),
+	isExceptionPanelVisible: ui.selectors.isExceptionPanelVisible( state ),
+	isExceptionPanelExpanded: ui.selectors.isExceptionPanelExpanded( state ),
+	exceptions: exception.selectors.getExceptions( state ),
 } );
 
 const mapDispatchToProps = dispatch => ( {
-	toggleExceptionPanelVisibility: () => dispatch( actions.toggleExceptionPanelVisibility() ),
-	toggleExceptionPanelExpand: () => dispatch( actions.toggleExceptionPanelExpand() ),
+	toggleExceptionPanelVisibility: () => dispatch( ui.actions.toggleExceptionPanelVisibility() ),
+	toggleExceptionPanelExpand: () => dispatch( ui.actions.toggleExceptionPanelExpand() ),
+	addField: ( payload ) => dispatch( exception.actions.addField( payload ) ),
+	removeField: ( id ) => dispatch( exception.actions.removeField( id ) ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
@@ -32,7 +36,9 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	initialExceptionPanelClick: compose(
 		dispatchProps.toggleExceptionPanelVisibility,
 		dispatchProps.toggleExceptionPanelExpand,
+		() => dispatchProps.addField( { id: 1 } )
 	),
+	addField: () => dispatchProps.addField( { id: 2 } ),
 } );
 
 export default compose(
