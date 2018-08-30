@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p --progress",
     "dev": "cross-env NODE_ENV=development webpack -d --watch",
-    "bootstrap": "scripts/linkDependencies",
+    "bootstrap": "bash scripts/linkDependencies",
     "preanalyze": "cross-env NODE_ENV=production webpack -p --profile --json > stats.json",
     "analyze": "webpack-bundle-analyzer -m static stats.json"
   },
