@@ -36,4 +36,4 @@ var tribe.tickets.block = {
 
 	} );
 
-})( jQuery, tribe_tickets );
+})( jQuery, tribe.tickets.block );
