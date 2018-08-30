@@ -93,7 +93,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.2.7-alpha - TBD
+#### 0.2.7-alpha - 2018-08-30
 
 * Feature - Add store registration in `common`
 * Feature - Move `events` reducer into the `common` store
