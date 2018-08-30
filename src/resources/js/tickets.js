@@ -1,4 +1,4 @@
-var tribe_tickets = {
+var tribe.tickets.block = {
 	num_attendees: 0,
 	event        : {}
 };
