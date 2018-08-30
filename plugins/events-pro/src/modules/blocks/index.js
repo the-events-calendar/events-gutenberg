@@ -6,11 +6,15 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal Dependencies
  */
+import recurringEntry from '@moderntribe/events-pro/blocks/recurring-entry';
 import eventsRecurring from '@moderntribe/events-pro/blocks/event-recurring';
+import eventsException from '@moderntribe/events-pro/blocks/event-exception';
 import { initStore } from '@moderntribe/events-pro/data';
 
 const blocks = [
+	recurringEntry,
 	eventsRecurring,
+	eventsException,
 ];
 
 blocks.forEach( block => {

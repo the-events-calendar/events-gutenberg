@@ -18,10 +18,10 @@ import { Icons } from '@moderntribe/events/elements';
  */
 
 export default {
-	id: 'event-pro-recurring',
-	title: __( 'Rules', 'events-gutenberg' ),
+	id: 'event-pro-recurring-entry',
+	title: __( 'Recurring', 'events-gutenberg' ),
 	description: __(
-		'Add recurrence to your event.',
+		'Entry for recurrence',
 		'events-gutenberg'
 	),
 	icon: Icons.TEC,

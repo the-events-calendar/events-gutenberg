@@ -16,11 +16,11 @@ import EventRecurringBlock from './template';
  */
 
 const mapStateToProps = state => ( {
-	isRulePanelVisible: selectors.isRulePanelVisible( state ),
-	isRulePanelExpanded: selectors.isRulePanelExpanded( state ),
+	isRepeatBlockVisible: selectors.isRepeatBlockVisible( state ),
 } );
 
 const mapDispatchToProps = dispatch => ( {
+	toggleRepeatBlocksVisibility: () => dispatch( actions.toggleRepeatBlocksVisibility() ),
 	toggleRulePanelVisibility: () => dispatch( actions.toggleRulePanelVisibility() ),
 	toggleRulePanelExpand: () => dispatch( actions.toggleRulePanelExpand() ),
 } );
@@ -29,9 +29,10 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...stateProps,
 	...dispatchProps,
 	...ownProps,
-	initialRulePanelClick: compose(
+	initialRepeatBlockClick: compose(
 		dispatchProps.toggleRulePanelVisibility,
 		dispatchProps.toggleRulePanelExpand,
+		dispatchProps.toggleRepeatBlocksVisibility,
 	),
 } );
 
