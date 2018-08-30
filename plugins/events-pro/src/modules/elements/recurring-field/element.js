@@ -1,15 +1,35 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-const RecurringField = ( props ) => {
-	return (
-		<fieldset></fieldset>
-	);
-};
+/**
+ * Internal dependencies
+ */
+import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
+import { Fieldset } from '@moderntribe/events-pro/src/modules/elements';
+import Singular from '@moderntribe/events-pro/src/modules/elements/recurring-field/singular';
 
-RecurringField.propTypes = {};
+export default class RecurringField extends PureComponent {
+	static propTypes = {}
 
-export default RecurringField;
+	renderFieldType = () => {
+		switch ( this.props.field ) {
+			case constants.DAILY:
+			case constants.WEEKLY:
+			case constants.MONTHLY:
+			case constants.YEARLY:
+			default:
+				return <Singular />;
+		}
+	}
+
+	render() {
+		return (
+			<Fieldset>
+				{ this.renderFieldType() }
+			</Fieldset>
+		);
+	}
+}
