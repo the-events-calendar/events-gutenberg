@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
 import { Select } from '@moderntribe/common/components/form';
 import { DatePicker, TimePicker } from '@moderntribe/events/elements';
 import { Row, Fieldset, Label } from '@moderntribe/events-pro/elements';
-import { RECURRENCE_TYPE_RULES_OPTIONS } from '@moderntribe/events-pro/data/blocks/options';
+import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 export default class ExceptionForm extends PureComponent {
 	static propTypes = {}
@@ -26,7 +26,7 @@ export default class ExceptionForm extends PureComponent {
 						</Label>
 						<div>
 							<Select
-								options={ RECURRENCE_TYPE_RULES_OPTIONS }
+								options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 								value="single"
 							/>
 						</div>
