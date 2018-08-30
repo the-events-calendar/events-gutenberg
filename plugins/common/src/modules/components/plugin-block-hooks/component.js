@@ -3,7 +3,7 @@
  */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { map, filter, includes } from 'lodash';
+import { map, filter, reduce, includes, isArray } from 'lodash';
 import { InnerBlocks } from '@wordpress/editor';
 import { select } from '@wordpress/data';
 import './style.pcss';
@@ -41,6 +41,12 @@ export default class PluginBlockHooks extends PureComponent {
 		 *  		[ 'tribe/event-pro-recurring', {}],
 		 *			[ 'tribe/event-pro-exclusion', {}],
 		 *		],
+		 *		'events-cool': [
+		 *	 		[ 'tribe/event-cool-container', {}, [
+		 *	  			[ 'tribe/event-cool-column', {}],
+		 *				[ 'tribe/event-cool-column', {}],
+		 *			]]
+		 *		],
 		 *	}
 		 *	```
 		 */
@@ -77,12 +83,36 @@ export default class PluginBlockHooks extends PureComponent {
 			const pluginTemplate = this.props.pluginTemplates[ plugin ];
 			if ( pluginTemplate ) {
 				// Block needs to be registered, otherwise it's dropped
-				const blockTemplates = filter( pluginTemplate, ( [ name ] ) => includes( blockNames, name ) ); // eslint-disable-line max-len
+				const blockTemplates = this.filterPluginTemplates( blockNames, pluginTemplate );
 				return [
 					...acc,
 					...blockTemplates,
 				];
 			}
+			return acc;
+		}, [] );
+	}
+
+	/**
+	 *	Recursively filters out unregistered blocks
+	 *
+	 * @param {Array} blockNames block names currently registered
+	 * @param {Array} pluginTemplate Template for plugins
+	 * @returns {Array} Array of plugin template
+	 */
+	filterPluginTemplates( blockNames, pluginTemplate ) {
+		return reduce( pluginTemplate, ( acc, [ name, attributes, nestedBlockTemplates ] ) => {
+			if ( includes( blockNames, name ) ) {
+				const blockTemplate = isArray( nestedBlockTemplates )
+					? [ name, attributes, /* Recursive call */ this.filterPluginTemplates( blockNames, nestedBlockTemplates ) ] // eslint-disable-line max-len
+					: [ name, attributes ];
+
+				return [
+					...acc,
+					blockTemplate,
+				];
+			}
+
 			return acc;
 		}, [] );
 	}

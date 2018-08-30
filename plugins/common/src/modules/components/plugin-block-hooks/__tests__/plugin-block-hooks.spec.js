@@ -18,6 +18,8 @@ jest.mock( '@wordpress/data', () => ( {
 			{ name: 'tribe/event-datetime' },
 			{ name: 'tribe/event-pro-recurring' },
 			{ name: 'tribe/event-pro-exclusion' },
+			{ name: 'tribe/event-cool-container1' },
+			{ name: 'tribe/event-cool-container2' },
 		] ) ),
 	} ) ),
 } ) );
@@ -26,7 +28,7 @@ describe( 'PluginBlockHooks', () => {
 	let props;
 	beforeEach( () => {
 		props = {
-			plugins: [ 'events', 'events-pro' ],
+			plugins: [ 'events', 'events-pro', 'events-cool' ],
 			pluginTemplates: {
 				'events': [
 					[ 'tribe/event-datetime', {}],
@@ -61,6 +63,27 @@ describe( 'PluginBlockHooks', () => {
 	} );
 	test( 'should not hook in unregistered blocks', () => {
 		props.pluginTemplates.events.push( [ 'i-dont-exist', {}] );
+		const component = renderer.create(
+			<PluginBlockHooks { ...props } />
+		);
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+	test( 'should recursively hook blocks', () => {
+		delete props.pluginTemplates.events;
+		delete props.pluginTemplates[ 'events-pro' ];
+		props.pluginTemplates[ 'events-cool' ] = [
+			[ 'tribe/event-pro-recurring', {}],
+			[ 'tribe/event-cool-container1', {}, [
+				[ 'tribe/event-pro-recurring', {}],
+				[ 'tribe/event-cool-container2', {}, [
+					[ 'tribe/event-pro-recurring', {}],
+					[ 'dont-register-me', {}],
+				] ],
+				[ 'dont-register-2me', {}],
+			],
+			[ 'dont-register-me', {}],
+			],
+		];
 		const component = renderer.create(
 			<PluginBlockHooks { ...props } />
 		);
