@@ -6,13 +6,11 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './style.pcss';
 
-const Fieldset = ( { children, className } ) => {
-	return (
-		<fieldset className={ classnames( 'tribe-events-pro__fieldset', className ) }>
-			{ children }
-		</fieldset>
-	);
-};
+const Fieldset = ( { children, className } ) => (
+	<fieldset className={ classnames( 'tribe-events-pro__fieldset', className ) }>
+		{ children }
+	</fieldset>
+);
 
 Fieldset.propTypes = {
 	children: PropTypes.node.isRequired,
