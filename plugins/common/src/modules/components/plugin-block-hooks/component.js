@@ -3,7 +3,7 @@
  */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { map, filter, reduce, includes, isArray } from 'lodash';
+import { map, reduce, includes, isArray } from 'lodash';
 import { InnerBlocks } from '@wordpress/editor';
 import { select } from '@wordpress/data';
 import './style.pcss';

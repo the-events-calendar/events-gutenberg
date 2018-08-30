@@ -48,14 +48,14 @@ describe( 'PluginBlockHooks', () => {
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 	test( 'should only render events templates', () => {
-		props.plugins.pop();
+		props.plugins = props.plugins.filter( plugin => plugin === 'events' );
 		const component = renderer.create(
 			<PluginBlockHooks { ...props } />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 	test( 'should only render events-pro templates', () => {
-		props.plugins.unshift();
+		props.plugins = props.plugins.filter( plugin => plugin === 'events-pro' );
 		const component = renderer.create(
 			<PluginBlockHooks { ...props } />
 		);
