@@ -1,14 +1,29 @@
-var tribe.tickets.block = {
+// @TODO: Take this line off once we actually have the tribe object
+if ( 'undefined' === typeof tribe ) {
+	tribe = {};
+}
+
+// Define the tickets object if not defined
+if ( 'undefined' === typeof tribe.tickets ) {
+	tribe.tickets = {};
+}
+
+tribe.tickets.block = {
 	num_attendees: 0,
 	event        : {}
 };
 
-(function( $, my ) {
+( function( $, obj ) {
 	'use strict';
 
-	var $tribe_ticket = $( '.tribe-block__tickets' );
+	obj.selector = {
+		container: '.tribe-block__tickets',
+		item     : '.tribe-block__tickets__item'
+	};
 
-	// Bail if we don't have what we need
+	var $tribe_ticket = $( obj.selector.container );
+
+	// Bail if there are no tickets on the current event/page/post
 	if ( 0 === $tribe_ticket.length ) {
 		return;
 	}
@@ -20,7 +35,7 @@ var tribe.tickets.block = {
 	 *
 	 * @return void
 	 */
-	$( '.tribe-block__tickets__item' )
+	$( obj.selector.item )
 		.on( 'click',
 		'.tribe-block__tickets__item__quantity__remove, .tribe-block__tickets__item__quantity__add' ,
 		function( e ) {
