@@ -15,6 +15,7 @@ import Panel from '@moderntribe/events-pro/elements/panel/element';
 export default class EventRecurring extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
+		removeField: PropTypes.func.isRequired,
 		exceptions: PropTypes.array.isRequired,
 		initialExceptionPanelClick: PropTypes.func.isRequired,
 		isExceptionPanelExpanded: PropTypes.bool.isRequired,
@@ -32,7 +33,10 @@ export default class EventRecurring extends PureComponent {
 						isExpanded={ this.props.isExceptionPanelExpanded }
 						panelTitle={ __( 'Exceptions', 'events-gutenberg' ) }
 					>
-						<ExceptionForm exceptions={ this.props.exceptions } />
+						<ExceptionForm
+							exceptions={ this.props.exceptions }
+							removeField={ this.props.removeField }
+						/>
 						<ExceptionAddField onClick={ this.props.addField } noBorder />
 					</Panel>
 				)

@@ -15,6 +15,7 @@ import Panel from '@moderntribe/events-pro/elements/panel/element';
 export default class EventRecurring extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
+		removeField: PropTypes.func.isRequired,
 		initialRulePanelClick: PropTypes.func.isRequired,
 		isRulePanelExpanded: PropTypes.bool.isRequired,
 		isRulePanelVisible: PropTypes.bool.isRequired,
@@ -31,7 +32,10 @@ export default class EventRecurring extends PureComponent {
 						isExpanded={ this.props.isRulePanelExpanded }
 						panelTitle={ __( 'Recurrence Rules', 'events-gutenberg' ) }
 					>
-						<RecurringForm rules={ this.props.rules } />
+						<RecurringForm
+							rules={ this.props.rules }
+							removeField={ this.props.removeField }
+						/>
 						<RecurringAddField onClick={ this.props.addField } noBorder />
 					</Panel>
 				)
