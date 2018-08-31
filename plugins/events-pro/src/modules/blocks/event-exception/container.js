@@ -25,6 +25,7 @@ const mapStateToProps = state => ( {
 const mapDispatchToProps = dispatch => ( {
 	toggleExceptionPanelVisibility: () => dispatch( ui.actions.toggleExceptionPanelVisibility() ),
 	toggleExceptionPanelExpand: () => dispatch( ui.actions.toggleExceptionPanelExpand() ),
+	expandExceptionPanel: () => dispatch( ui.actions.expandExceptionPanel() ),
 	addField: ( payload ) => dispatch( exception.actions.addField( payload ) ),
 	removeField: ( id ) => dispatch( exception.actions.removeField( id ) ),
 } );
@@ -35,7 +36,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...ownProps,
 	initialExceptionPanelClick: compose(
 		dispatchProps.toggleExceptionPanelVisibility,
-		dispatchProps.toggleExceptionPanelExpand,
+		dispatchProps.expandExceptionPanel,
 		// TODO: Add fields properly
 		() => dispatchProps.addField( { id: Date.now() } )
 	),
