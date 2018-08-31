@@ -76,6 +76,7 @@ class Tribe__Gutenberg__Plugin {
 		// Register the Service Provider
 		tribe_register_provider( 'Tribe__Gutenberg__Common__Provider' );
 		tribe_register_provider( 'Tribe__Gutenberg__Events__Provider' );
+		tribe_register_provider( 'Tribe__Gutenberg__Tickets__Provider' );
 	}
 
 	/**
