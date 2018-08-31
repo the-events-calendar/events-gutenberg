@@ -17,10 +17,11 @@ tribe.tickets.block = {
 	'use strict';
 
 	obj.selector = {
-		container           : '.tribe-block__tickets',
-		item                : '.tribe-block__tickets__item',
-		item_quantity       : '.tribe-block__tickets__item__quantity',
-		item_extra_available: '.tribe-block__tickets__item__extra__available',
+		container                    : '.tribe-block__tickets',
+		item                         : '.tribe-block__tickets__item',
+		item_quantity                : '.tribe-block__tickets__item__quantity',
+		item_quantity_input          : '.tribe-ticket-quantity',
+		item_extra_available         : '.tribe-block__tickets__item__extra__available',
 		item_extra_available_quantity: '.tribe-block__tickets__item__extra__available_quantity'
 	};
 
@@ -99,7 +100,7 @@ tribe.tickets.block = {
 			}
 
 			if ( 1 < available ) { // Ticket in stock, we may want to update values
-				$ticketEl.find( '.tribe-ticket-quantity' ).attr( { 'max' : available } );
+				$ticketEl.find( obj.selector.item_quantity_input ).attr( { 'max' : available } );
 				$ticketEl.find( obj.selector.item_extra_available_quantity ).html( available );
 			}
 
