@@ -74,7 +74,7 @@ const SingularField = ( {
 						allDay={ allDay }
 						// TODO: Add onChange handler
 					/>
-					<div>
+					<div className="tribe-events-pro-rule-field__time__multi-day">
 						<ToggleControl
 							label={ __( 'Multi-Day', 'events-gutenberg' ) }
 							checked={ multiDay }

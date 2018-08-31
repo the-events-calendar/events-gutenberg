@@ -44,7 +44,7 @@ const SingularField = ( {
 						datetime={ start }
 						// TODO: Add onChange handler
 					/>
-					<div>
+					<div className="tribe-events-pro-exception-field__time__multi-day">
 						<ToggleControl
 							label={ __( 'Multi-Day', 'events-gutenberg' ) }
 							checked={ multiDay }
