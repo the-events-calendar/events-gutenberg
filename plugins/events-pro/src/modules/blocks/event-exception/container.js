@@ -36,9 +36,11 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	initialExceptionPanelClick: compose(
 		dispatchProps.toggleExceptionPanelVisibility,
 		dispatchProps.toggleExceptionPanelExpand,
-		() => dispatchProps.addField( { id: 1 } )
+		// TODO: Add fields properly
+		() => dispatchProps.addField( { id: Date.now() } )
 	),
-	addField: () => dispatchProps.addField( { id: 2 } ),
+	// TODO: Add fields properly
+	addField: () => dispatchProps.addField( { id: Date.now() } ),
 } );
 
 export default compose(

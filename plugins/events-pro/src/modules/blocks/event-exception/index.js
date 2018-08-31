@@ -28,7 +28,7 @@ export default {
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
-	parent: [ 'tribe/event-datetime' ],
+	parent: [ 'tribe/event-pro-recurring-entry' ],
 
 	supports: {
 		html: false,

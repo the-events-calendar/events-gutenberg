@@ -9,6 +9,7 @@ import { compose } from 'redux';
  */
 import { withStore } from '@moderntribe/common/hoc';
 import { selectors, actions } from '@moderntribe/events-pro/data/ui';
+import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
 import EventRecurringBlock from './template';
 
 /**
@@ -23,6 +24,7 @@ const mapDispatchToProps = dispatch => ( {
 	toggleRepeatBlocksVisibility: () => dispatch( actions.toggleRepeatBlocksVisibility() ),
 	toggleRulePanelVisibility: () => dispatch( actions.toggleRulePanelVisibility() ),
 	toggleRulePanelExpand: () => dispatch( actions.toggleRulePanelExpand() ),
+	addField: ( payload ) => dispatch( recurring.actions.addField( payload ) ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
@@ -33,6 +35,8 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 		dispatchProps.toggleRulePanelVisibility,
 		dispatchProps.toggleRulePanelExpand,
 		dispatchProps.toggleRepeatBlocksVisibility,
+		// TODO: Add fields properly
+		() => dispatchProps.addField( { id: Date.now() } )
 	),
 } );
 
