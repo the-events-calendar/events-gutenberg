@@ -121,7 +121,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 *
 	 * @since  TBD
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function render_shortcode_attendees( $atts, $content = '' ) {
 
@@ -162,7 +162,7 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 	 *
 	 * @param  array $tickets (IDs of tickets to check)
 	 *
-	 * @return int
+	 * @return void
 	 */
 	public function ticket_availability( $tickets = array() ) {
 
