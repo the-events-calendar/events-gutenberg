@@ -12,9 +12,9 @@ import { PluginBlockHooks } from '@moderntribe/common/components';
 
 const PLUGIN_TEMPLATES = {
 	[ constants.EVENTS_PRO_PLUGIN ]: [
-		[ 'tribe/event-pro-recurring-entry', {}, [
-			[ 'tribe/event-pro-recurring', {}],
-			[ 'tribe/event-pro-exception', {}],
+		[ 'tribe/event-pro-recurrence', {}, [
+			[ 'tribe/event-pro-recurrence-rule', {}],
+			[ 'tribe/event-pro-recurrence-exception', {}],
 		] ],
 	],
 };
