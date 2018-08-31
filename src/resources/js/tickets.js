@@ -58,7 +58,7 @@ tribe.tickets.block = {
 	 *
 	 * @return array
 	 */
-	function get_tickets() {
+	obj.getTickets = function() {
 
 		var $tickets = $( obj.selector.item ).map( function() {
 			return $( this ).data( 'ticket-id' );
@@ -74,12 +74,12 @@ tribe.tickets.block = {
 	 *
 	 * @return void
 	 */
-	function check_availability() {
+	obj.checkAvailability = function() {
 
 		// We're checking availability for all the tickets at once
 		var params = {
 			action  : 'ticket-availability-check',
-			tickets : get_tickets(),
+			tickets : obj.getTickets(),
 		};
 
 		$.post(
@@ -126,6 +126,6 @@ tribe.tickets.block = {
 	}
 
 	// Check tickets availability every 15 seconds
-	var check = setInterval( check_availability, 15000 );
+	var check = setInterval( obj.checkAvailability, 15000 );
 
 })( jQuery, tribe.tickets.block );
