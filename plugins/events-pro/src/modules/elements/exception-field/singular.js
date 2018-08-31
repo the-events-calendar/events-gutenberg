@@ -6,14 +6,21 @@ import PropTypes from 'prop-types';
 import {
 	ToggleControl,
 } from '@wordpress/components';
-
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
 import { Select } from '@moderntribe/common/components/form';
 import { DatePicker } from '@moderntribe/events/elements';
 import { Row, Label } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const SingularField = ( props ) => {
+const SingularField = ( {
+	fieldType,
+	multiDay,
+	start,
+} ) => {
 	return (
 		<Fragment>
 			<Row>
@@ -23,7 +30,8 @@ const SingularField = ( props ) => {
 				<div>
 					<Select
 						options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
-						value="single"
+						value={ fieldType }
+						// TODO: Add onChange handler
 					/>
 				</div>
 			</Row>
@@ -32,11 +40,15 @@ const SingularField = ( props ) => {
 					{ __( 'On', 'events-gutenberg' ) }
 				</Label>
 				<div>
-					<DatePicker datetime="1999-01-01 12:00:00" />
+					<DatePicker
+						datetime={ start }
+						// TODO: Add onChange handler
+					/>
 					<div>
 						<ToggleControl
 							label={ __( 'Multi-Day', 'events-gutenberg' ) }
-							checked={ false }
+							checked={ multiDay }
+							// TODO: Add onChange handler
 							onChange={ () => {} }
 						/>
 					</div>
@@ -46,6 +58,10 @@ const SingularField = ( props ) => {
 	);
 };
 
-SingularField.propTypes = {};
+SingularField.propTypes = {
+	fieldType: PropTypes.string.isRequired,
+	multiDay: PropTypes.bool.isRequired,
+	start: PropTypes.string.isRequired,
+};
 
 export default SingularField;

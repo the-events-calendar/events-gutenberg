@@ -6,17 +6,31 @@ import { takeEvery, put, select } from 'redux-saga/effects';
 /**
  * Internal dependencies
  */
-import { selectors, types } from '@moderntribe/events-pro/data/blocks/exception';
-import { actions } from '@moderntribe/events-pro/data/ui';
+import * as exception from '@moderntribe/events-pro/data/blocks/exception';
+import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
+import * as ui from '@moderntribe/events-pro/data/ui';
+import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
 
 export function* handleExceptionRemoval() {
-	const exceptions = yield select( selectors.getExceptions );
+	const exceptions = yield select( exception.selectors.getExceptions );
 
 	if ( ! exceptions.length ) {
-		yield put( actions.hideExceptionPanel() );
+		yield put( ui.actions.hideExceptionPanel() );
 	}
 }
 
+export function* handleExceptionAddition() {
+	const payload = yield select( datetime.datetimeSelector );
+	yield put( exception.actions.addException( {
+		// TODO: Need a better identifier
+		id: Date.now(),
+		// NOTE: Set default fieldType
+		fieldType: recurring.constants.SINGLE,
+		...payload,
+	} ) );
+}
+
 export default function* watchers() {
-	yield takeEvery( [ types.REMOVE_EXCEPTION_FIELD ], handleExceptionRemoval );
+	yield takeEvery( [ exception.types.REMOVE_EXCEPTION ], handleExceptionRemoval );
+	yield takeEvery( [ exception.types.ADD_EXCEPTION_FIELD ], handleExceptionAddition );
 }
