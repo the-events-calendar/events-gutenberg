@@ -4,15 +4,27 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default class ExceptionForm extends PureComponent {
-	static propTypes = {}
+import { ExceptionField } from '@moderntribe/events-pro/elements';
 
-	constructor( props ) {
-		super( props );
+export default class ExceptionForm extends PureComponent {
+	static propTypes = {
+		exceptions: PropTypes.arrayOf( PropTypes.shape( {} ) ),
+		removeField: PropTypes.func.isRequired,
 	}
+
+	static defaultProps = {
+		exceptions: [],
+	}
+
 	render() {
 		return (
-			<div>Exception Form</div>
+			<section className="tribe-events-pro-recurring-block">
+				{
+					this.props.exceptions.map( exception => (
+						<ExceptionField { ...exception } removeField={ this.props.removeField } />
+					) )
+				}
+			</section>
 		);
 	}
 }

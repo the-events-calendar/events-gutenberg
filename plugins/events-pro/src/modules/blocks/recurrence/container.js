@@ -9,6 +9,7 @@ import { compose } from 'redux';
  */
 import { withStore } from '@moderntribe/common/hoc';
 import { selectors, actions } from '@moderntribe/events-pro/data/ui';
+import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
 import EventRecurringBlock from './template';
 
 /**
@@ -17,18 +18,13 @@ import EventRecurringBlock from './template';
 
 const mapStateToProps = state => ( {
 	isRepeatBlockVisible: selectors.isRepeatBlockVisible( state ),
-	isRulePanelVisible: selectors.isRulePanelVisible( state ),
-	isExceptionPanelVisible: selectors.isExceptionPanelVisible( state ),
-	isRulePanelExpanded: selectors.isRulePanelExpanded( state ),
-	isExceptionPanelExpanded: selectors.isExceptionPanelExpanded( state ),
 } );
 
 const mapDispatchToProps = dispatch => ( {
 	toggleRepeatBlocksVisibility: () => dispatch( actions.toggleRepeatBlocksVisibility() ),
 	toggleRulePanelVisibility: () => dispatch( actions.toggleRulePanelVisibility() ),
-	toggleExceptionPanelVisibility: () => dispatch( actions.toggleExceptionPanelVisibility() ),
 	toggleRulePanelExpand: () => dispatch( actions.toggleRulePanelExpand() ),
-	toggleExceptionPanelExpand: () => dispatch( actions.toggleExceptionPanelExpand() ),
+	addField: ( payload ) => dispatch( recurring.actions.addField( payload ) ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
@@ -39,14 +35,8 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 		dispatchProps.toggleRulePanelVisibility,
 		dispatchProps.toggleRulePanelExpand,
 		dispatchProps.toggleRepeatBlocksVisibility,
-	),
-	initialRulePanelClick: compose(
-		dispatchProps.toggleRulePanelVisibility,
-		dispatchProps.toggleRulePanelExpand,
-	),
-	initialExceptionPanelClick: compose(
-		dispatchProps.toggleExceptionPanelVisibility,
-		dispatchProps.toggleExceptionPanelExpand,
+		// TODO: Add fields properly
+		() => dispatchProps.addField( { id: Date.now() } )
 	),
 } );
 
