@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
 import { Fieldset } from '@moderntribe/events-pro/src/modules/elements';
 import RemoveField from '@moderntribe/events-pro/src/modules/elements/remove-field/element';
-import Singular from '@moderntribe/events-pro/src/modules/elements/recurring-field/singular';
+import Singular from '@moderntribe/events-pro/src/modules/elements/exception-field/singular';
 
 export default class RecurringField extends PureComponent {
 	static propTypes = {
