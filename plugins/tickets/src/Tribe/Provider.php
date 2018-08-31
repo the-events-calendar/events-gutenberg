@@ -19,9 +19,12 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		if (
 			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
 			|| ! tribe( 'gutenberg.events.editor' )->is_blocks_editor_active()
+			|| ! class_exists( 'Tribe__Tickets__Main' )
 		) {
 			return;
 		}
+
+		$this->container->singleton( 'gutenberg.tickets.template', 'Tribe__Gutenberg__Events__Template' );
 
 		$this->container->singleton(
 			'gutenberg.tickets.compatibility.tickets',
@@ -33,10 +36,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 			'gutenberg.tickets.assets', 'Tribe__Gutenberg__Tickets__Assets', array( 'register' )
 		);
 
-		$this->container->singleton(
-			'gutenberg.tickets.blocks.tickets',
-			'Tribe__Gutenberg__Tickets__Blocks__Tickets'
-		);
+		$this->container->singleton( 'gutenberg.tickets.blocks.tickets', 'Tribe__Gutenberg__Tickets__Blocks__Tickets' );
 
 		$this->hook();
 		/**
@@ -56,6 +56,11 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	protected function hook() {
 		// Initialize the correct Singleton
 		tribe( 'gutenberg.tickets.assets' );
+		// Register blocks
+		add_action(
+			'tribe_events_editor_register_blocks',
+			tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' )
+		);
 	}
 
 	/**
@@ -66,10 +71,6 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	 * @return bool
 	 */
 	private function load_compatibility_tickets() {
-		if ( ! class_exists( 'Tribe__Tickets__Main' ) ) {
-			return false;
-		}
-
 		tribe( 'gutenberg.tickets.compatibility.tickets' );
 		return true;
 	}
