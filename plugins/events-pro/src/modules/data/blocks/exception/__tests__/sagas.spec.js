@@ -27,7 +27,7 @@ describe( 'exception sagas', () => {
 		it( 'should watch actions', () => {
 			const gen = watchers();
 			expect( gen.next().value ).toEqual(
-				takeEvery( [ exception.types.REMOVE_EXCEPTION_FIELD ], sagas.handleExceptionRemoval )
+				takeEvery( [ exception.types.REMOVE_EXCEPTION ], sagas.handleExceptionRemoval )
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( [ exception.types.ADD_EXCEPTION_FIELD ], sagas.handleExceptionAddition )
