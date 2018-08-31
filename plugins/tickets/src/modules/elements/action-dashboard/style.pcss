@@ -54,4 +54,20 @@
 	font-size: 1rem;
 	font-weight: bold;
 	line-height: 1.25rem;
+	transition: background-color 0.2s ease;
+
+	&:hover,
+	&:focus {
+		background-color: #007bb4
+	}
+
+	&[disabled] {
+
+		&,
+		&:hover,
+		&:focus {
+			background-color: #f3f4f5;
+			color: #8d949b;
+		}
+	}
 }
