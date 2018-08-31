@@ -3,7 +3,14 @@
  */
 import { registerBlockType } from '@wordpress/blocks';
 
-const blocks = [];
+/**
+ * Internal dependencies
+ */
+import tickets from '@moderntribe/tickets/blocks/tickets';
+
+const blocks = [
+	tickets,
+];
 
 blocks.forEach( ( block ) => registerBlockType( `tribe/${ block.id }`, block ) );
 

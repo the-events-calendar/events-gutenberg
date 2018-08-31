@@ -14,21 +14,38 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	public function register() {
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.tickets.plugin', 'Tribe__Gutenberg__Tickets__Plugin' );
+
 		// Should we continue loading?
+		// @todo: make this part of common and not part of events only
 		if (
 			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
 			|| ! tribe( 'gutenberg.events.editor' )->is_blocks_editor_active()
+			|| ! class_exists( 'Tribe__Tickets__Main' )
 		) {
 			return;
 		}
+
+		$this->container->singleton( 'gutenberg.tickets.template', 'Tribe__Gutenberg__Tickets__Template' );
+
 		$this->container->singleton(
-			'gutenberg.events-tickets.assets', 'Tribe__Gutenberg__Tickets__Assets', array( 'register' )
+			'gutenberg.tickets.compatibility.tickets',
+			'Tribe__Gutenberg__Tickets__Compatibility__Tickets',
+			array( 'hook' )
 		);
+
 		$this->container->singleton(
-			'gutenberg.tickets.blocks.tickets',
-			'Tribe__Gutenberg__Tickets__Blocks__Tickets'
+			'gutenberg.tickets.assets', 'Tribe__Gutenberg__Tickets__Assets', array( 'register' )
 		);
+
+		$this->container->singleton( 'gutenberg.tickets.blocks.tickets', 'Tribe__Gutenberg__Tickets__Blocks__Tickets' );
+
 		$this->hook();
+		/**
+		 * Lets load all compatibility related methods
+		 *
+		 * @todo remove once RSVP and tickets blocks are completed
+		 */
+		$this->load_compatibility_tickets();
 	}
 
 	/**
@@ -41,7 +58,24 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	 */
 	protected function hook() {
 		// Initialize the correct Singleton
-		tribe( 'gutenberg.events-tickets.assets' );
+		tribe( 'gutenberg.tickets.assets' );
+		// Register blocks
+		add_action(
+			'tribe_events_editor_register_blocks',
+			tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' )
+		);
+	}
+
+	/**
+	 * Initializes the correct classes for when Tickets is active.
+	 *
+	 * @since  0.2.4-alpha
+	 *
+	 * @return bool
+	 */
+	private function load_compatibility_tickets() {
+		tribe( 'gutenberg.tickets.compatibility.tickets' );
+		return true;
 	}
 
 	/**
