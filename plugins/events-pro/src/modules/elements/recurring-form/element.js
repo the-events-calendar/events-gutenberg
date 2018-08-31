@@ -10,7 +10,7 @@ import './style.pcss';
 export default class RecurringForm extends PureComponent {
 	static propTypes = {
 		rules: PropTypes.arrayOf( PropTypes.shape( {} ) ),
-		removeField: PropTypes.func.isRequired,
+		removeRule: PropTypes.func.isRequired,
 	}
 
 	static defaultProps = {
@@ -22,7 +22,7 @@ export default class RecurringForm extends PureComponent {
 			<section className="tribe-events-pro-recurring-block">
 				{
 					this.props.rules.map( rule => (
-						<RecurringField { ...rule } removeField={ this.props.removeField } />
+						<RecurringField { ...rule } onRemoveClick={ this.props.removeRule } />
 					) )
 				}
 			</section>

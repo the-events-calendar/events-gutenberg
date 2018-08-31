@@ -3,12 +3,20 @@
  */
 import * as types from './types';
 
-export const addField = ( payload ) => ( {
-	type: types.ADD_RECURRING_FIELD,
+export const addField = () => ( {
+	type: types.ADD_RULE_FIELD,
+} );
+
+export const addRule = ( payload ) => ( {
+	type: types.ADD_RULE,
 	payload,
 } );
 
-export const removeField = ( id ) => ( {
-	type: types.REMOVE_RECURRING_FIELD,
+export const removeField = () => ( {
+	type: types.REMOVE_RULE_FIELD,
+} );
+
+export const removeRule = ( id ) => ( {
+	type: types.REMOVE_RULE,
 	payload: { id },
 } );

@@ -14,21 +14,21 @@ import Singular from '@moderntribe/events-pro/src/modules/elements/recurring-fie
 
 export default class RecurringField extends PureComponent {
 	static propTypes = {
-		removeField: PropTypes.func.isRequired,
+		onRemoveClick: PropTypes.func.isRequired,
 		id: PropTypes.string.isRequired,
+		fieldType: PropTypes.string.isRequired,
 	}
 
-	handleClick = () => this.props.removeField( this.props.id )
+	handleClick = () => this.props.onRemoveClick( this.props.id )
 
 	renderFieldType = () => {
-		// TODO: Incorporate fieldType
 		switch ( this.props.fieldType ) {
 			case constants.MONTHLY:
 			case constants.DAILY:
 			case constants.WEEKLY:
 			case constants.YEARLY:
 			default:
-				return <Singular />;
+				return <Singular { ...this.props } />;
 		}
 	}
 

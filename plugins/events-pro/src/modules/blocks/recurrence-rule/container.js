@@ -26,8 +26,8 @@ const mapDispatchToProps = dispatch => ( {
 	toggleRulePanelVisibility: () => dispatch( ui.actions.toggleRulePanelVisibility() ),
 	toggleRulePanelExpand: () => dispatch( ui.actions.toggleRulePanelExpand() ),
 	expandRulePanel: () => dispatch( ui.actions.expandRulePanel() ),
-	addField: ( payload ) => dispatch( recurring.actions.addField( payload ) ),
-	removeField: ( id ) => dispatch( recurring.actions.removeField( id ) ),
+	addField: () => dispatch( recurring.actions.addField() ),
+	removeRule: ( id ) => dispatch( recurring.actions.removeRule( id ) ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
@@ -37,11 +37,8 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	initialRulePanelClick: compose(
 		dispatchProps.toggleRulePanelVisibility,
 		dispatchProps.expandRulePanel,
-		// TODO: Add fields properly
-		() => dispatchProps.addField( { id: Date.now() } )
+		dispatchProps.addField
 	),
-	// TODO: Add fields properly
-	addField: () => dispatchProps.addField( { id: Date.now() } ),
 } );
 
 export default compose(
