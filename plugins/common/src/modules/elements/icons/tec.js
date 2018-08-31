@@ -5,8 +5,10 @@ import React from 'react';
 
 /**
  * Internal dependencies
+ *
+ * @todo: replace this import with the alias to the icons
  */
-import TECIcon from 'icons/tec.svg';
+import TECIcon from '@moderntribe/common/src/resources/icons/tec.svg';
 import './style.pcss';
 
 export default () => (
