@@ -16,6 +16,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.tickets.plugin', 'Tribe__Gutenberg__Tickets__Plugin' );
 
 		// Should we continue loading?
+		// @todo: make this part of common and not part of events only
 		if (
 			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
 			|| ! tribe( 'gutenberg.events.editor' )->is_blocks_editor_active()
@@ -24,7 +25,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 			return;
 		}
 
-		$this->container->singleton( 'gutenberg.tickets.template', 'Tribe__Gutenberg__Events__Template' );
+		$this->container->singleton( 'gutenberg.tickets.template', 'Tribe__Gutenberg__Tickets__Template' );
 
 		$this->container->singleton(
 			'gutenberg.tickets.compatibility.tickets',
