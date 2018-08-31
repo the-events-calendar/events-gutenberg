@@ -17,8 +17,11 @@ tribe.tickets.block = {
 	'use strict';
 
 	obj.selector = {
-		container: '.tribe-block__tickets',
-		item     : '.tribe-block__tickets__item'
+		container           : '.tribe-block__tickets',
+		item                : '.tribe-block__tickets__item',
+		item_quantity       : '.tribe-block__tickets__item__quantity',
+		item_extra_available: '.tribe-block__tickets__item__extra__available',
+		item_extra_available_quantity: '.tribe-block__tickets__item__extra__available_quantity'
 	};
 
 	var $tribe_ticket = $( obj.selector.container );
@@ -68,6 +71,44 @@ tribe.tickets.block = {
 	}
 
 	/**
+	 * Make dom updates for the AJAX response
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	obj.updateAvailability = function( tickets ) {
+
+		console.log( 'pasamo por aca');
+
+		Object.keys( tickets ).forEach( function( ticket_id ) {
+
+			var available = tickets[ ticket_id ].available;
+			var $ticketEl = $( obj.selector.item + "[data-ticket-id='" + ticket_id + "']" );
+
+			if ( 0 === available ) { // ticket is out of stock
+
+				var unavailable_html = tickets[ ticket_id ].unavailable_html;
+				// Set the availability data attribute to false
+				$ticketEl.attr( 'available', false );
+				// Remove classes for instock and purchasable
+				$ticketEl.removeClass( 'instock' );
+				$ticketEl.removeClass( 'purchasable' );
+
+				// Update HTML elements with the "Out of Stock" messages
+				$ticketEl.find( obj.selector.item_extra_available ).replaceWith( unavailable_html );
+				$ticketEl.find( obj.selector.item_quantity ).html( unavailable_html );
+			}
+
+			if ( 1 < available ) { // Ticket in stock, we may want to update values
+				$ticketEl.find( '.tribe-ticket-quantity' ).attr( { 'max' : available } );
+				$ticketEl.find( obj.selector.item_extra_available_quantity ).html( available );
+			}
+
+		});
+	}
+
+	/**
 	 * Check tickets availability
 	 *
 	 * @since TBD
@@ -96,31 +137,8 @@ tribe.tickets.block = {
 				// Get the tickets response with availability
 				var tickets = response.data.tickets;
 
-				Object.keys( tickets ).forEach( function( ticket_id ) {
-
-					var available = tickets[ ticket_id ].available;
-					var ticketEl = $( obj.selector.item + "[data-ticket-id='" + ticket_id + "']" );
-
-					if ( 0 === available ) { // ticket is out of stock
-
-						var unavailable_html = tickets[ ticket_id ].unavailable_html;
-						// Set the availability data attribute to false
-						ticketEl.attr( 'available', false );
-						// Remove classes for instock and purchasable
-						ticketEl.removeClass( 'instock' );
-						ticketEl.removeClass( 'purchasable' );
-
-						// Update HTML elements with the "Out of Stock" messages
-						ticketEl.find( '.tribe-block__tickets__item__extra__available' ).replaceWith( unavailable_html );
-						ticketEl.find( '.tribe-block__tickets__item__quantity' ).html( unavailable_html );
-					}
-
-					if ( 1 < available ) { // Ticket in stock, we may want to update values
-						ticketEl.find( '.tribe-ticket-quantity' ).attr( { 'max' : available } );
-						ticketEl.find( '.tribe-block__tickets__item__extra__available span' ).html( available );
-					}
-
-				});
+				// Make DOM updates
+				obj.updateAvailability( tickets );
 
 			}
 		);
