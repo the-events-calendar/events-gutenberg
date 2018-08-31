@@ -8,8 +8,8 @@ class Tribe__Events_Gutenberg__Blocks__Tickets
 extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 	public function hook() {
-		add_action( 'wp_ajax_ticket-availability-check', array( $this, 'ticket_availability' ) );
-		add_action( 'wp_ajax_nopriv_ticket-availability-check', array( $this, 'ticket_availability' ) );
+		add_action( 'wp_ajax_ticket_availability_check', array( $this, 'ticket_availability' ) );
+		add_action( 'wp_ajax_nopriv_ticket_availability_check', array( $this, 'ticket_availability' ) );
 
 		add_shortcode( 'gutti_tickets_purchase', array( $this, 'render_shortcode_attendees' ) );
 	}

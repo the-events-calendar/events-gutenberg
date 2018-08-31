@@ -117,7 +117,7 @@ tribe.tickets.block = {
 
 		// We're checking availability for all the tickets at once
 		var params = {
-			action  : 'ticket-availability-check',
+			action  : 'ticket_availability_check',
 			tickets : obj.getTickets(),
 		};
 
