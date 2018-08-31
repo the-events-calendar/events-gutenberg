@@ -1,3 +1,4 @@
 #! /bin/bash
 
 ln -sf "$(pwd)"/src/modules/blocks "$(pwd)"
+ln -sf "$(pwd)"/src/modules/elements "$(pwd)"
