@@ -142,9 +142,23 @@ tribe.tickets.block = {
 			}
 		);
 
+		// Repeat every 15 seconds
+		setTimeout( obj.checkAvailability, 15000 );
+
 	}
 
-	// Check tickets availability every 15 seconds
-	var check = setInterval( obj.checkAvailability, 15000 );
+	/**
+	 * Init the tickets script
+	 *
+	 * @since TBD
+	 *
+	 * @return void
+	 */
+	obj.init = function() {
+		obj.checkAvailability();
+	}
+
+	obj.init();
+
 
 })( jQuery, tribe.tickets.block );
