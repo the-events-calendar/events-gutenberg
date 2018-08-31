@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventException from './container';
+import EventRecurring from './container';
 import { Icons } from '@moderntribe/events/elements';
 
 /**
@@ -18,17 +18,17 @@ import { Icons } from '@moderntribe/events/elements';
  */
 
 export default {
-	id: 'event-pro-exception',
-	title: __( 'Exception', 'events-gutenberg' ),
+	id: 'event-pro-recurrence-rule',
+	title: __( 'Rules', 'events-gutenberg' ),
 	description: __(
-		'Add exceptions to your event.',
+		'Add recurrence to your event.',
 		'events-gutenberg'
 	),
 	icon: Icons.TEC,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
-	parent: [ 'tribe/event-pro-recurring-entry' ],
+	parent: [ 'tribe/event-pro-recurrence' ],
 
 	supports: {
 		html: false,
@@ -37,7 +37,7 @@ export default {
 	attributes: {
 	},
 
-	edit: EventException,
+	edit: EventRecurring,
 
 	save( props ) {
 		return null;

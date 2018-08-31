@@ -21,7 +21,8 @@ export default class RecurringField extends PureComponent {
 	handleClick = () => this.props.removeField( this.props.id )
 
 	renderFieldType = () => {
-		switch ( this.props.field ) {
+		// TODO: Incorporate fieldType
+		switch ( this.props.fieldType ) {
 			case constants.DAILY:
 			case constants.WEEKLY:
 			case constants.MONTHLY:

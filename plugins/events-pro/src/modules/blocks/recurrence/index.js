@@ -18,17 +18,17 @@ import { Icons } from '@moderntribe/events/elements';
  */
 
 export default {
-	id: 'event-pro-recurring',
-	title: __( 'Rules', 'events-gutenberg' ),
+	id: 'event-pro-recurrence',
+	title: __( 'Recurring', 'events-gutenberg' ),
 	description: __(
-		'Add recurrence to your event.',
+		'Entry for recurrence',
 		'events-gutenberg'
 	),
 	icon: Icons.TEC,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
-	parent: [ 'tribe/event-pro-recurring-entry' ],
+	parent: [ 'tribe/event-datetime' ],
 
 	supports: {
 		html: false,
