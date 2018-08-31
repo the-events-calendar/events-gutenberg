@@ -24,8 +24,6 @@ class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.events.template', 'Tribe__Gutenberg__Events__Template' );
 		$this->container->singleton( 'gutenberg.events.template.overwrite', 'Tribe__Gutenberg__Events__Template__Overwrite', array( 'hook' ) );
 
-		$this->container->singleton( 'gutenberg.events.compatibility.tickets', 'Tribe__Gutenberg__Events__Compatibility__Tickets', array( 'hook' ) );
-
 		$this->container->singleton( 'gutenberg.events.blocks.classic-event-details', 'Tribe__Gutenberg__Events__Blocks__Classic_Event_Details' );
 		$this->container->singleton( 'gutenberg.events.blocks.event-datetime', 'Tribe__Gutenberg__Events__Blocks__Event_Datetime' );
 		$this->container->singleton( 'gutenberg.events.blocks.event-venue', 'Tribe__Gutenberg__Events__Blocks__Event_Venue' );
@@ -44,27 +42,6 @@ class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
 		 */
 		tribe( 'gutenberg.events.i18n' );
 		tribe( 'gutenberg.events.template.overwrite' );
-
-		/**
-		 * Lets load all compatibility related methods
-		 */
-		$this->load_compatibility_tickets();
-	}
-
-	/**
-	 * Initializes the correct classes for when Tickets is active.
-	 *
-	 * @since  0.2.4-alpha
-	 *
-	 * @return bool
-	 */
-	private function load_compatibility_tickets() {
-		if ( ! class_exists( 'Tribe__Tickets__Main' ) ) {
-			return false;
-		}
-
-		tribe( 'gutenberg.events.compatibility.tickets' );
-		return true;
 	}
 
 	/**

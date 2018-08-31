@@ -14,6 +14,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	public function register() {
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.tickets.plugin', 'Tribe__Gutenberg__Tickets__Plugin' );
+
 		// Should we continue loading?
 		if (
 			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
@@ -21,14 +22,27 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		) {
 			return;
 		}
+
 		$this->container->singleton(
-			'gutenberg.events-tickets.assets', 'Tribe__Gutenberg__Tickets__Assets', array( 'register' )
+			'gutenberg.tickets.compatibility.tickets',
+			'Tribe__Gutenberg__Tickets__Compatibility__Tickets',
+			array( 'hook' )
 		);
+
+		$this->container->singleton(
+			'gutenberg.tickets.assets', 'Tribe__Gutenberg__Tickets__Assets', array( 'register' )
+		);
+
 		$this->container->singleton(
 			'gutenberg.tickets.blocks.tickets',
 			'Tribe__Gutenberg__Tickets__Blocks__Tickets'
 		);
+
 		$this->hook();
+		/**
+		 * Lets load all compatibility related methods
+		 */
+		$this->load_compatibility_tickets();
 	}
 
 	/**
@@ -41,7 +55,23 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	 */
 	protected function hook() {
 		// Initialize the correct Singleton
-		tribe( 'gutenberg.events-tickets.assets' );
+		tribe( 'gutenberg.tickets.assets' );
+	}
+
+	/**
+	 * Initializes the correct classes for when Tickets is active.
+	 *
+	 * @since  0.2.4-alpha
+	 *
+	 * @return bool
+	 */
+	private function load_compatibility_tickets() {
+		if ( ! class_exists( 'Tribe__Tickets__Main' ) ) {
+			return false;
+		}
+
+		tribe( 'gutenberg.tickets.compatibility.tickets' );
+		return true;
 	}
 
 	/**

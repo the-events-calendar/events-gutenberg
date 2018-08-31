@@ -5,7 +5,7 @@
  *
  * @since 0.2.4-alpha
  */
-class Tribe__Gutenberg__Events__Compatibility__Tickets {
+class Tribe__Gutenberg__Tickets__Compatibility__Tickets {
 
 	/**
 	 * Hook into the Events Template single page to allow Blocks to be properly reordered
