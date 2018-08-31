@@ -79,8 +79,6 @@ tribe.tickets.block = {
 	 */
 	obj.updateAvailability = function( tickets ) {
 
-		console.log( 'pasamo por aca');
-
 		Object.keys( tickets ).forEach( function( ticket_id ) {
 
 			var available = tickets[ ticket_id ].available;
