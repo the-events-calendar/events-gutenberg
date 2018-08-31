@@ -8,6 +8,8 @@ class Tribe__Events_Gutenberg__Blocks__Tickets
 extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 	public function hook() {
+		add_action( 'wp_ajax_ticket-availability-check', array( $this, 'ticket_availability' ) );
+		add_action( 'wp_ajax_nopriv_ticket-availability-check', array( $this, 'ticket_availability' ) );
 
 		add_shortcode( 'gutti_tickets_purchase', array( $this, 'render_shortcode_attendees' ) );
 	}
@@ -153,4 +155,40 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		return $content;
 	}
 
+	/**
+	 * Check for ticket availability
+	 *
+	 * @since  TBD
+	 *
+	 * @param  array $tickets (IDs of tickets to check)
+	 *
+	 * @return int
+	 */
+	public function ticket_availability( $tickets = array() ) {
+
+		$response  = array( 'html' => '' );
+		$tickets   = tribe_get_request_var( 'tickets', array() );
+
+		// Bail if we receive no tickets
+		if ( empty( $tickets ) ) {
+			wp_send_json_error( $response );
+		}
+
+
+		// Parse the tickets and create the array for the response
+		foreach ( $tickets as $ticket_id ) {
+
+			$ticket    = Tribe__Tickets__Tickets::load_ticket_object( $ticket_id );
+			$available = $ticket->available();
+			$response['tickets'][ $ticket_id ]['available'] = $available;
+
+			// If there are no more available we will send the template part HTML to update the DOM
+			if ( 0 === $available ) {
+				$response['tickets'][ $ticket_id ]['unavailable_html'] = tribe( 'gutenberg.template' )->template( 'blocks/tickets/quantity-unavailable', $ticket, false );
+			}
+
+		}
+
+		wp_send_json_success( $response );
+	}
 }
