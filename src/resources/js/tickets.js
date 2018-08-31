@@ -17,11 +17,11 @@ tribe.tickets.block = {
 	'use strict';
 
 	obj.selector = {
-		container                    : '.tribe-block__tickets',
-		item                         : '.tribe-block__tickets__item',
-		itemQuantity                : '.tribe-block__tickets__item__quantity',
-		itemQuantityInput          : '.tribe-ticket-quantity',
-		itemExtraAvailable         : '.tribe-block__tickets__item__extra__available',
+		container                 : '.tribe-block__tickets',
+		item                      : '.tribe-block__tickets__item',
+		itemQuantity              : '.tribe-block__tickets__item__quantity',
+		itemQuantityInput         : '.tribe-ticket-quantity',
+		itemExtraAvailable        : '.tribe-block__tickets__item__extra__available',
 		itemExtraAvailableQuantity: '.tribe-block__tickets__item__extra__available_quantity'
 	};
 
