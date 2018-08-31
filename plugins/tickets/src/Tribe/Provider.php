@@ -42,6 +42,8 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		$this->hook();
 		/**
 		 * Lets load all compatibility related methods
+		 *
+		 * @todo remove once RSVP and tickets blocks are completed
 		 */
 		$this->load_compatibility_tickets();
 	}
