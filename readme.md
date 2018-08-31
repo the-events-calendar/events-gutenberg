@@ -93,6 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.2.8-alpha - 2018-08-30
+
+* Feature - Add Tickets inside of the `plugins/` directory 
+
 #### 0.2.7-alpha - 2018-08-30
 
 * Feature - Add store registration in `common`
