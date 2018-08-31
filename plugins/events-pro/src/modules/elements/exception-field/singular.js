@@ -12,8 +12,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { Select } from '@moderntribe/common/components/form';
-import { DatePicker } from '@moderntribe/events/elements';
-import { Row, Label } from '@moderntribe/events-pro/elements';
+import { Row, Label, DatePickerInput } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
 const SingularField = ( {
@@ -40,7 +39,7 @@ const SingularField = ( {
 					{ __( 'On', 'events-gutenberg' ) }
 				</Label>
 				<div className="tribe-events-pro-exception-field__time">
-					<DatePicker
+					<DatePickerInput
 						datetime={ start }
 						// TODO: Add onChange handler
 					/>

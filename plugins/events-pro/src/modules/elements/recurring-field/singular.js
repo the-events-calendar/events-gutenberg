@@ -16,8 +16,8 @@ import {
 	toMoment,
 } from '@moderntribe/events/editor/utils/moment';
 import { Select } from '@moderntribe/common/components/form';
-import { DatePicker, TimePicker } from '@moderntribe/events/elements';
-import { Row, Label } from '@moderntribe/events-pro/elements';
+import { TimePicker } from '@moderntribe/events/elements';
+import { Row, Label, DatePickerInput } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 const SingularField = ( {
@@ -48,7 +48,7 @@ const SingularField = ( {
 					{ __( 'On', 'events-gutenberg' ) }
 				</Label>
 				<div className="tribe-events-pro-rule-field__date">
-					<DatePicker
+					<DatePickerInput
 						datetime={ start }
 						// TODO: Add onChange handler
 					/>
