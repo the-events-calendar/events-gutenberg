@@ -19,10 +19,10 @@ tribe.tickets.block = {
 	obj.selector = {
 		container                    : '.tribe-block__tickets',
 		item                         : '.tribe-block__tickets__item',
-		item_quantity                : '.tribe-block__tickets__item__quantity',
-		item_quantity_input          : '.tribe-ticket-quantity',
-		item_extra_available         : '.tribe-block__tickets__item__extra__available',
-		item_extra_available_quantity: '.tribe-block__tickets__item__extra__available_quantity'
+		itemQuantity                : '.tribe-block__tickets__item__quantity',
+		itemQuantityInput          : '.tribe-ticket-quantity',
+		itemExtraAvailable         : '.tribe-block__tickets__item__extra__available',
+		itemExtraAvailableQuantity: '.tribe-block__tickets__item__extra__available_quantity'
 	};
 
 	var $tribe_ticket = $( obj.selector.container );
@@ -87,7 +87,7 @@ tribe.tickets.block = {
 
 			if ( 0 === available ) { // ticket is out of stock
 
-				var unavailable_html = tickets[ ticket_id ].unavailable_html;
+				var unavailableHtml = tickets[ ticket_id ].unavailable_html;
 				// Set the availability data attribute to false
 				$ticketEl.attr( 'available', false );
 				// Remove classes for instock and purchasable
@@ -95,13 +95,13 @@ tribe.tickets.block = {
 				$ticketEl.removeClass( 'purchasable' );
 
 				// Update HTML elements with the "Out of Stock" messages
-				$ticketEl.find( obj.selector.item_extra_available ).replaceWith( unavailable_html );
-				$ticketEl.find( obj.selector.item_quantity ).html( unavailable_html );
+				$ticketEl.find( obj.selector.itemExtraAvailable ).replaceWith( unavailableHtml );
+				$ticketEl.find( obj.selector.itemQuantity ).html( unavailableHtml );
 			}
 
 			if ( 1 < available ) { // Ticket in stock, we may want to update values
-				$ticketEl.find( obj.selector.item_quantity_input ).attr( { 'max' : available } );
-				$ticketEl.find( obj.selector.item_extra_available_quantity ).html( available );
+				$ticketEl.find( obj.selector.itemQuantityInput ).attr( { 'max' : available } );
+				$ticketEl.find( obj.selector.itemExtraAvailableQuantity ).html( available );
 			}
 
 		});
