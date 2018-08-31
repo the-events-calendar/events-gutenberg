@@ -47,7 +47,7 @@ const SingularField = ( {
 				<Label>
 					{ __( 'On', 'events-gutenberg' ) }
 				</Label>
-				<div>
+				<div className="tribe-events-pro-rule-field__date">
 					<DatePicker
 						datetime={ start }
 						// TODO: Add onChange handler
@@ -58,7 +58,7 @@ const SingularField = ( {
 				<Label>
 					{ __( 'From', 'events-gutenberg' ) }
 				</Label>
-				<div className="tribe-events-pro-recurring-block__row__time">
+				<div className="tribe-events-pro-rule-field__time">
 					<TimePicker
 						current={ startMoment }
 						start={ startMoment.clone().startOf( 'day' ) }

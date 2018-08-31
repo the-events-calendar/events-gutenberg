@@ -27,7 +27,7 @@ const SingularField = ( {
 				<Label>
 					{ __( 'A', 'events-gutenberg' ) }
 				</Label>
-				<div>
+				<div className="tribe-events-pro-exception-field__date">
 					<Select
 						options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 						value={ fieldType }
@@ -39,7 +39,7 @@ const SingularField = ( {
 				<Label>
 					{ __( 'On', 'events-gutenberg' ) }
 				</Label>
-				<div>
+				<div className="tribe-events-pro-exception-field__time">
 					<DatePicker
 						datetime={ start }
 						// TODO: Add onChange handler

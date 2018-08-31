@@ -18,7 +18,7 @@ export default class ExceptionForm extends PureComponent {
 
 	render() {
 		return (
-			<section className="tribe-events-pro-recurring-block">
+			<section>
 				{
 					this.props.exceptions.map( exception => (
 						<ExceptionField { ...exception } onRemoveClick={ this.props.removeException } />
