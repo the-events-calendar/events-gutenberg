@@ -11,7 +11,7 @@ export default function recurring( state = [], action ) {
 				action.payload,
 			];
 		case types.REMOVE_RECURRING_FIELD:
-			return state.filter( field => field.id === action.payload.id );
+			return state.filter( field => field.id !== action.payload.id );
 		default:
 			return state;
 	}
