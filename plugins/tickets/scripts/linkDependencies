@@ -2,3 +2,4 @@
 
 ln -sf "$(pwd)"/src/modules/blocks "$(pwd)"
 ln -sf "$(pwd)"/src/modules/data "$(pwd)"
+ln -sf "$(pwd)"/src/modules/icons "$(pwd)"
