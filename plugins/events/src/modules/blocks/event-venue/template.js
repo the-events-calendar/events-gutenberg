@@ -32,8 +32,8 @@ import {
 } from '@moderntribe/events/elements';
 import { VENUE } from '@moderntribe/events/editor/post-types';
 import VenueDetails from './venue-details';
-import VenueIcon from 'icons/venue.svg';
-import CloseIcon from 'icons/close.svg';
+import { Venue as VenueIcon } from '@moderntribe/events/icons';
+import { Cross as CloseIcon } from '@moderntribe/common/icons';
 import { utils } from '@moderntribe/events/data/blocks/venue';
 import './style.pcss';
 

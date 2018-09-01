@@ -16,11 +16,6 @@ const config = merge( common, {
 		path: __dirname,
 		library: [ 'tribe', PLUGIN_SCOPE, '[name]' ],
 	},
-	resolve: {
-		alias: {
-			icons: resolve( __dirname, 'src/resources/icons' ),
-		},
-	},
 } );
 
 module.exports = config;
