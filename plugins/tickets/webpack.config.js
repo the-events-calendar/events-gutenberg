@@ -23,12 +23,7 @@ const config = merge( common, {
 	output: {
 		path: __dirname,
 		library: [ 'tribe', PLUGIN_SCOPE, '[name]' ],
-	},
-	resolve: {
-		alias: {
-			icons: resolve( __dirname, 'src/resources/icons' ),
-		},
-	},
+	}
 } );
 
 //
