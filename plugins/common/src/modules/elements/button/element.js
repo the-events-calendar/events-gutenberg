@@ -24,6 +24,7 @@ const Button = ( {
 
 Button.defaultProps = {
 	type: 'button',
+	onClick: () => {},
 };
 
 Button.propTypes = {
