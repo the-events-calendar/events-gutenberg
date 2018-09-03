@@ -35,5 +35,17 @@ class Tribe__Gutenberg__Tickets__Assets {
 				'localize'  => array(),
 			)
 		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-tickets-gutenberg-blocks-styles',
+			'blocks.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+			)
+		);
 	}
 }
