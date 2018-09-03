@@ -107,6 +107,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 * Feature - Add store registration in `common`
 * Feature - Move `events` reducer into the `common` store
+* Feature - Add `<TicketIcon />` component for the ticket
 * Tweak - Use event timezone as default value
 * Tweak - Separate logic and presentation in event venue block
 * Tweak - Move `request` mechanism into `common`
