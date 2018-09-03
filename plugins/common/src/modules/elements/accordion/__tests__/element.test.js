@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { noop } from 'lodash';
 
 /**
  * Internal dependencies
@@ -22,6 +23,7 @@ describe( 'Accordion Element', () => {
 				headerClassName: "header-class",
 				headerId: "header-id-1",
 				isActive: true,
+				onClick: noop,
 			},
 		];
 	} );

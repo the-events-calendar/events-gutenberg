@@ -9,6 +9,7 @@ import classnames from 'classnames';
  * Internal dependencies
  */
 import { Button } from '@moderntribe/common/elements';
+import { slide } from '@moderntribe/common/utils';
 
 const Accordion = ( {
 	className,
@@ -33,8 +34,17 @@ const Accordion = ( {
 		role: 'tabpanel',
 	} );
 
+	const onClick = ( e, row ) => {
+		const content = e.target.nextElementSibling;
+		row.isActive
+			? slide.up( content, row.contentId, 200 )
+			: slide.down( content, row.contentId, 200 );
+		row.onClick && row.onClick( e );
+	};
+
 	return (
-		rows.length && (
+		rows.length
+		? (
 			<div
 				aria-multiselectable="true"
 				className={ classnames( 'tribe-editor__accordion', className ) }
@@ -59,7 +69,7 @@ const Accordion = ( {
 									row.headerClassName,
 								) }
 								label={ row.header }
-								onClick={ () => {} }
+								onClick={ ( e ) => onClick( e, row ) }
 								attrs={ headerAttrs }
 							>
 								{ row.header }
@@ -78,6 +88,7 @@ const Accordion = ( {
 				} ) }
 			</div>
 		)
+		: null
 	);
 };
 
@@ -96,7 +107,8 @@ Accordion.propTypes = {
 		header: PropTypes.node,
 		headerClassName: PropTypes.string,
 		headerId: PropTypes.string.isRequired,
-		isActive: PropTypes.bool.isRequired
+		isActive: PropTypes.bool.isRequired,
+		onClick: PropTypes.func,
 	} ).isRequired ).isRequired,
 };
 
