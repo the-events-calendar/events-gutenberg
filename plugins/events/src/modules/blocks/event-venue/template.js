@@ -33,7 +33,7 @@ import {
 import { VENUE } from '@moderntribe/events/editor/post-types';
 import VenueDetails from './venue-details';
 import { Venue as VenueIcon } from '@moderntribe/events/icons';
-import { Cross as CloseIcon } from '@moderntribe/common/icons';
+import { Close as CloseIcon } from '@moderntribe/common/icons';
 import { utils } from '@moderntribe/events/data/blocks/venue';
 import './style.pcss';
 
