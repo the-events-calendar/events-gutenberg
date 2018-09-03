@@ -6,16 +6,12 @@ import {
 	TicketInactive,
 } from '@moderntribe/tickets/icons';
 
-const TicketIcon = ( { unlimited, disabled } ) => (
-	unlimited ?
-		(
-			disabled ? <ClockActive /> : <ClockInactive />
-		)
-		: (
-			disabled ? <TicketActive /> : <TicketInactive />
-		)
-);
-
+const TicketIcon = ( { unlimited, disabled } ) => {
+	if ( unlimited ) {
+		return disabled ? <ClockActive /> : <ClockInactive />;
+	}
+	return disabled ? <TicketActive /> : <TicketInactive />;
+};
 
 TicketIcon.defaultProps = {
 	unlimited: false,
