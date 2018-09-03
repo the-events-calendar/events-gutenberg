@@ -11,5 +11,6 @@ $ticket = $this->get( 'ticket' );
 <div
 	class="tribe-block__tickets__item__extra__available"
 >
-	<?php echo sprintf( __( '%d available', 'events-gutenberg' ), $ticket->available() ); ?>
+	<span class="tribe-block__tickets__item__extra__available_quantity"><?php echo esc_html( $ticket->available() ); ?></span>
+	<?php esc_html_e( 'available', 'events-gutenberg' ); ?>
 </div>
