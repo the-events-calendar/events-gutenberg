@@ -8,7 +8,7 @@ import classnames from 'classnames';
 /**
  * Internal dependencies
  */
-import { Button } from '@moderntribe/tickets/elements'
+import { Button } from '@moderntribe/common/elements'
 import './style.pcss';
 
 const ActionDashboard = ( {
