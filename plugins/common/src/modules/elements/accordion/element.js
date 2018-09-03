@@ -10,6 +10,7 @@ import classnames from 'classnames';
  */
 import { Button } from '@moderntribe/common/elements';
 import { slide } from '@moderntribe/common/utils';
+import 'style.pcss';
 
 const Accordion = ( {
 	className,
@@ -47,7 +48,11 @@ const Accordion = ( {
 		? (
 			<div
 				aria-multiselectable="true"
-				className={ classnames( 'tribe-editor__accordion', className ) }
+				className={ classnames(
+					'tribe-editor__accordion',
+					'tribe-editor__accordion--active',
+					className,
+				) }
 				role="tablist"
 				{ ...containerAttrs }
 			>
