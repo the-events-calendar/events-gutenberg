@@ -67,6 +67,8 @@ const ActionDashboard = ( {
 ActionDashboard.defaultProps = {
 	showCancel: true,
 	showConfirm: true,
+	onCancelClick: () => {},
+	onConfirmClick: () => {},
 };
 
 ActionDashboard.propTypes = {
