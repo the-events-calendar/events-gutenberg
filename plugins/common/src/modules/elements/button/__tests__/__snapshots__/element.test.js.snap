@@ -2,7 +2,7 @@
 
 exports[`Button Element renders button 1`] = `
 <button
-  className="tribe-tickets__button"
+  className="tribe-editor__button"
   onClick={[Function]}
   type="button"
 />
@@ -10,7 +10,7 @@ exports[`Button Element renders button 1`] = `
 
 exports[`Button Element renders button with class 1`] = `
 <button
-  className="tribe-tickets__button test-class"
+  className="tribe-editor__button test-class"
   onClick={[Function]}
   type="button"
 />
@@ -18,7 +18,7 @@ exports[`Button Element renders button with class 1`] = `
 
 exports[`Button Element renders button with label 1`] = `
 <button
-  className="tribe-tickets__button"
+  className="tribe-editor__button"
   onClick={[Function]}
   type="button"
 >
@@ -28,7 +28,7 @@ exports[`Button Element renders button with label 1`] = `
 
 exports[`Button Element renders button with onClick handler 1`] = `
 <button
-  className="tribe-tickets__button"
+  className="tribe-editor__button"
   onClick={[Function]}
   type="button"
 />
@@ -36,7 +36,7 @@ exports[`Button Element renders button with onClick handler 1`] = `
 
 exports[`Button Element renders button with set type 1`] = `
 <button
-  className="tribe-tickets__button"
+  className="tribe-editor__button"
   onClick={[Function]}
   type="submit"
 />
@@ -44,7 +44,7 @@ exports[`Button Element renders button with set type 1`] = `
 
 exports[`Button Element renders disabled button 1`] = `
 <button
-  className="tribe-tickets__button"
+  className="tribe-editor__button"
   disabled={true}
   onClick={[Function]}
   type="button"

@@ -13,7 +13,7 @@ const Button = ( {
 	type,
 } ) => (
 	<button
-		className={ classnames( 'tribe-tickets__button', className ) }
+		className={ classnames( 'tribe-editor__button', className ) }
 		disabled={ isDisabled }
 		type={ type }
 		onClick={ onClick }

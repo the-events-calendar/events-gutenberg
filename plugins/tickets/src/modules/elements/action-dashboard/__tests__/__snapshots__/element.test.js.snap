@@ -2,18 +2,18 @@
 
 exports[`Action Dashboard Element renders action dashboard 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     />
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     />
@@ -23,32 +23,32 @@ exports[`Action Dashboard Element renders action dashboard 1`] = `
 
 exports[`Action Dashboard Element renders action dashboard with actions 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-left"
+    className="tribe-editor__action-dashboard__group-left"
   >
     <span
-      className="tribe-tickets__action-dashboard__action-wrapper"
+      className="tribe-editor__action-dashboard__action-wrapper"
     >
       test-1
     </span>
     <span
-      className="tribe-tickets__action-dashboard__action-wrapper"
+      className="tribe-editor__action-dashboard__action-wrapper"
     >
       test-2
     </span>
   </div>
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     />
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     />
@@ -58,19 +58,19 @@ exports[`Action Dashboard Element renders action dashboard with actions 1`] = `
 
 exports[`Action Dashboard Element renders action dashboard with cancel button disabled 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       disabled={true}
       onClick={[Function]}
       type="button"
     />
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     />
@@ -80,13 +80,13 @@ exports[`Action Dashboard Element renders action dashboard with cancel button di
 
 exports[`Action Dashboard Element renders action dashboard with cancel button hidden 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     />
@@ -96,18 +96,18 @@ exports[`Action Dashboard Element renders action dashboard with cancel button hi
 
 exports[`Action Dashboard Element renders action dashboard with cancel click handler 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     />
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     />
@@ -117,20 +117,20 @@ exports[`Action Dashboard Element renders action dashboard with cancel click han
 
 exports[`Action Dashboard Element renders action dashboard with cancel label 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     >
       Cancel
     </button>
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     />
@@ -140,18 +140,18 @@ exports[`Action Dashboard Element renders action dashboard with cancel label 1`]
 
 exports[`Action Dashboard Element renders action dashboard with class 1`] = `
 <section
-  className="tribe-tickets__action-dashboard test-class"
+  className="tribe-editor__action-dashboard test-class"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     />
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     />
@@ -161,18 +161,18 @@ exports[`Action Dashboard Element renders action dashboard with class 1`] = `
 
 exports[`Action Dashboard Element renders action dashboard with confirm button disabled 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     />
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       disabled={true}
       onClick={[Function]}
       type="button"
@@ -183,13 +183,13 @@ exports[`Action Dashboard Element renders action dashboard with confirm button d
 
 exports[`Action Dashboard Element renders action dashboard with confirm button hidden 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     />
@@ -199,18 +199,18 @@ exports[`Action Dashboard Element renders action dashboard with confirm button h
 
 exports[`Action Dashboard Element renders action dashboard with confirm click handler 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     />
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     />
@@ -220,18 +220,18 @@ exports[`Action Dashboard Element renders action dashboard with confirm click ha
 
 exports[`Action Dashboard Element renders action dashboard with confirm label 1`] = `
 <section
-  className="tribe-tickets__action-dashboard"
+  className="tribe-editor__action-dashboard"
 >
   <div
-    className="tribe-tickets__action-dashboard__group-right"
+    className="tribe-editor__action-dashboard__group-right"
   >
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__cancel-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
       onClick={[Function]}
       type="button"
     />
     <button
-      className="tribe-tickets__button tribe-tickets__action-dashboard__confirm-button"
+      className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
       onClick={[Function]}
       type="button"
     >

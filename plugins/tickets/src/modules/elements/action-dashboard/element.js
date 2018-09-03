@@ -25,16 +25,16 @@ const ActionDashboard = ( {
 } ) => (
 	<section
 		className={ classnames(
-			'tribe-tickets__action-dashboard',
+			'tribe-editor__action-dashboard',
 			className,
 		) }
 	>
 		{ actions && actions.length && (
-			<div className="tribe-tickets__action-dashboard__group-left">
+			<div className="tribe-editor__action-dashboard__group-left">
 				{ actions.map( ( action, index ) => (
 					<span
 						key={ `action-${index}`}
-						className="tribe-tickets__action-dashboard__action-wrapper"
+						className="tribe-editor__action-dashboard__action-wrapper"
 					>
 						{ action }
 					</span>
@@ -42,10 +42,10 @@ const ActionDashboard = ( {
 			</div>
 		) }
 		{ ( showCancel || showConfirm ) && (
-			<div className="tribe-tickets__action-dashboard__group-right">
+			<div className="tribe-editor__action-dashboard__group-right">
 				{ showCancel && (
 					<Button
-						className="tribe-tickets__action-dashboard__cancel-button"
+						className="tribe-editor__action-dashboard__cancel-button"
 						isDisabled={ isCancelDisabled }
 						label={ cancelLabel }
 						onClick={ onCancelClick }
@@ -53,7 +53,7 @@ const ActionDashboard = ( {
 				) }
 				{ showConfirm && (
 					<Button
-						className="tribe-tickets__action-dashboard__confirm-button"
+						className="tribe-editor__action-dashboard__confirm-button"
 						isDisabled={ isConfirmDisabled }
 						label={ confirmLabel }
 						onClick={ onConfirmClick }
