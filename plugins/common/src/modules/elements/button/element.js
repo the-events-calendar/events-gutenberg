@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 const Button = ( {
+	attrs,
 	className,
 	isDisabled,
 	label,
@@ -17,17 +18,20 @@ const Button = ( {
 		disabled={ isDisabled }
 		type={ type }
 		onClick={ onClick }
+		{ ...attrs }
 	>
 		{ label }
 	</button>
 );
 
 Button.defaultProps = {
-	type: 'button',
+	attrs: {},
 	onClick: () => {},
+	type: 'button',
 };
 
 Button.propTypes = {
+	attrs: PropTypes.object,
 	className: PropTypes.string,
 	isDisabled: PropTypes.bool,
 	label: PropTypes.node,
