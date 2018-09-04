@@ -1,6 +1,6 @@
 <?php
-class Tribe__Events_Gutenberg__Blocks__Rsvp
-extends Tribe__Events_Gutenberg__Blocks__Abstract {
+class Tribe__Gutenberg__Tickets__Blocks__Rsvp
+extends Tribe__Gutenberg__Common__Blocks__Abstract {
 
 	/**
 	 * Init class

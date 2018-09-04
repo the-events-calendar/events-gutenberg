@@ -1,7 +1,7 @@
 <?php
 
-abstract class Tribe__Gutenberg__Events__Blocks__Abstract
-implements Tribe__Gutenberg__Events__Blocks__Interface {
+abstract class Tribe__Gutenberg__Common__Blocks__Abstract
+implements Tribe__Gutenberg__Common__Blocks__Interface {
 
 	/**
 	 * Namespace for Blocks from tribe
