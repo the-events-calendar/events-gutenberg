@@ -20,12 +20,13 @@ const DisabledTickets = ( { title, children, icon } ) => (
 		(
 			<aside className="tribe-editor__tickets__disabled__content">
 				{ title && <h3 className="tribe-editor__tickets__disabled__title">{ title }</h3> }
-				{ children && <section className="tribe-editor__tickets__disabled__description">
-					{ children }
-				</section> }
+				{ children && (
+					<section className="tribe-editor__tickets__disabled__description">
+						{ children }
+					</section>
+				) }
 			</aside>
-		)
-		}
+		) }
 	</section>
 );
 
