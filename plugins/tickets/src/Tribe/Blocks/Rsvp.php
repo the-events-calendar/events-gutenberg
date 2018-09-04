@@ -53,12 +53,12 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
-		$post_id            = tribe( 'gutenberg.template' )->get( 'post_id' );
+		$post_id            = tribe( 'gutenberg.tickets.template' )->get( 'post_id' );
 		$args['attributes'] = $this->attributes( $attributes );
 		$args['tickets']    = $this->get_tickets( $post_id );
 
 		// Add the rendering attributes into global context
-		tribe( 'gutenberg.template' )->add_template_globals( $args );
+		tribe( 'gutenberg.tickets.template' )->add_template_globals( $args );
 
 		// enqueue assets
 		tribe_asset_enqueue( 'tribe-tickets-gutenberg-rsvp' );
@@ -163,7 +163,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 			'going'     => $going,
 		);
 
-		$html = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/form/form', $args, false );
+		$html = tribe( 'gutenberg.tickets.template' )->template( 'blocks/rsvp/form/form', $args, false );
 
 		$response['html']    = $html;
 
@@ -274,13 +274,12 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 		$remaining = $ticket->remaining();
 
 		if ( ! $remaining ) {
-			$response['status_html'] = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/status', $args, false );
+			$response['status_html'] = tribe( 'gutenberg.tickets.template' )->template( 'blocks/rsvp/status', $args, false );
 		}
 
-
 		$response['remaining']      = $ticket->remaining();
-		$response['remaining_html'] = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/details/availability', $args, false );
-		$response['html']           = tribe( 'gutenberg.template' )->template( 'blocks/rsvp/messages/success', $args, false );
+		$response['remaining_html'] = tribe( 'gutenberg.tickets.template' )->template( 'blocks/rsvp/details/availability', $args, false );
+		$response['html']           = tribe( 'gutenberg.tickets.template' )->template( 'blocks/rsvp/messages/success', $args, false );
 
 		wp_send_json_success( $response );
 

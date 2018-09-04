@@ -18,6 +18,9 @@ class Tribe__Gutenberg__Tickets__Template extends Tribe__Template {
 
 		// Configures this templating class extract variables
 		$this->set_template_context_extract( true );
+
+		// Uses the public folders
+		$this->set_template_folder_lookup( true );
 	}
 
 	/**
