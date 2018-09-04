@@ -374,9 +374,6 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 	 * @return array
 	 */
 	public function block_categories( $categories, $post ) {
-		/**
-		 * @todo: make compatible with standalone ET options in the future
-		 */
 		if ( Tribe__Events__Main::POSTTYPE !== $post->post_type ) {
 			return $categories;
 		}
@@ -390,7 +387,6 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 				),
 			)
 		);
-
 	}
 
 	/************************
