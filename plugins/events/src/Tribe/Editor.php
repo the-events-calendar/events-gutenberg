@@ -5,8 +5,7 @@
  *
  * @since 0.1.0-alpha
  */
-class Tribe__Gutenberg__Events__Editor
-extends Tribe__Gutenberg__Common__Editor {
+class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor {
 
 	/**
 	 * Gets the classic template, used for migration and setup new events with classic look
