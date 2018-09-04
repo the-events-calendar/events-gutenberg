@@ -15,11 +15,8 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.tickets.plugin', 'Tribe__Gutenberg__Tickets__Plugin' );
 
-		// Should we continue loading?
-		// @todo: make this part of common and not part of events only
 		if (
-			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
-			|| ! tribe( 'gutenberg.events.editor' )->is_blocks_editor_active()
+			! tribe( 'gutenberg.common.editor' )->should_load_blocks()
 			|| ! class_exists( 'Tribe__Tickets__Main' )
 		) {
 			return;
