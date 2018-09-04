@@ -99,6 +99,41 @@ describe( '[STORE] - wp-request middleware', () => {
 		expect( meta.actions.success ).toHaveBeenCalledTimes( 1 );
 	} );
 
+	it( 'execute success actions on 201 response code - creation code', async () => {
+		const { invoke } = create();
+
+		const body = {
+			id: 201,
+			date: '2018-05-26T23:07:05',
+			meta: {
+				title: 'Creating a post....'
+			},
+		};
+
+		const headers = new Headers();
+
+		global.fetch = jest.fn().mockImplementation( () =>
+			Promise.resolve( {
+				ok: true,
+				status: 201,
+				json: () => body,
+				headers,
+			} ),
+		);
+
+		await invoke( actions.wpRequest( { ...meta, path: 'tribe_organizer/1217' } ) );
+
+		expect.assertions( 8 );
+		expect( meta.actions.none ).not.toHaveBeenCalled();
+		expect( meta.actions.error ).not.toHaveBeenCalled();
+		expect( meta.actions.start ).toHaveBeenCalledWith( 'wp/v2/tribe_organizer/1217', {} );
+		expect( meta.actions.start ).toHaveBeenCalled();
+		expect( meta.actions.start ).toHaveBeenCalledTimes( 1 );
+		expect( meta.actions.success ).toHaveBeenCalled();
+		expect( meta.actions.success ).toHaveBeenCalledWith( { body, headers } );
+		expect( meta.actions.success ).toHaveBeenCalledTimes( 1 );
+	} );
+
 	it( 'Should reject on 404 status code', async () => {
 		const { invoke } = create();
 

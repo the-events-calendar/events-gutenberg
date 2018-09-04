@@ -75,12 +75,12 @@ describe( '[STORE] - form thunk actions', () => {
 	afterEach( () => store.clearActions() );
 
 	test( 'Send the form action when creating', () => {
-		store.dispatch( actions.sendForm( 20, { ititle: 'Modern Tribe' } ) );
+		store.dispatch( actions.sendForm( 20, { title: 'Modern Tribe' } ) );
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 
-	test( 'Seend the form when editing', () => {
-		store.dispatch( actions.sendForm( 21, { ititle: 'Tribe' } ) );
+	test( 'Send the form when editing', () => {
+		store.dispatch( actions.sendForm( 21, { title: 'Tribe' } ) );
 		expect( store.getActions() ).toMatchSnapshot();
 	} );
 

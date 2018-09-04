@@ -99,11 +99,13 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Register ticket block to make it available in the block list
 * Feature - Register PHP files to use tickets templates
 * Feature - Add `store` for tickets plugins
-* Tweak - Create an icons module for the plugins and shared one on common to create a set of icons
+* Feature - Add Tickets inside of the `plugins/` directory 
 * Feature - Add button component to common elements
 * Feature - Add action dashboard to tickets elements
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
+* Tweak - Create an icons module for the plugins and shared one on common to create a set of icons
+* Fix - Accept responses between `200` and `299` HTTP codes as valid responses
 
 #### 0.2.7-alpha - 2018-08-30
 
