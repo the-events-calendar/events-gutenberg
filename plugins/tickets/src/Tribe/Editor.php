@@ -19,10 +19,9 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 		foreach ( $this->supported_types() as $post_type ) {
 			$post_type_object = get_post_type_object( $post_type );
 			if ( ! $post_type_object ) {
-				var_dump( $post_type );
 				continue;
 			}
-			$template = isset( $post_type->template )
+			$template = isset( $post_type_object->template )
 				? (array) $post_type_object->template
 				: array();
 			$template[] = array( 'tribe/event-tickets' );
