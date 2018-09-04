@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { noop, get } from 'lodash';
+import { noop, get, inRange } from 'lodash';
 import 'whatwg-fetch';
 
 /**
@@ -24,7 +24,7 @@ export default () => ( next ) => async ( action ) => {
 
 	next( action );
 
-	const rest = get( config(), 'rest', {} )
+	const rest = get( config(), 'rest', {} );
 	const { url = '', nonce = '' } = rest;
 	const namespaces = rest.namespaces || {};
 	const core = namespaces.core || 'wp/v2';
@@ -48,13 +48,13 @@ export default () => ( next ) => async ( action ) => {
 	actions.start( endpoint, params );
 
 	const headers = {
+		'Accept': 'application/json',
 		'Content-Type': 'application/json',
 		...get( params, 'headers', {} ),
 		'X-WP-Nonce': nonce,
 	};
 
 	try {
-
 		const response = await fetch( endpoint, {
 			...params,
 			credentials: 'include',
@@ -62,7 +62,7 @@ export default () => ( next ) => async ( action ) => {
 		} );
 
 		const { status } = response;
-		if ( status !== 200 ) {
+		if ( ! inRange( status, 200, 300 ) ) {
 			throw response;
 		}
 		const body = await response.json();

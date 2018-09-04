@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.2.8-alpha - 2018-08-30
 
 * Feature - Add Tickets inside of the `plugins/` directory 
+* Fix - Accept responses between `200` and `299` HTTP codes as valid responses
 
 #### 0.2.7-alpha - 2018-08-30
 
