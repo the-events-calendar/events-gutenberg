@@ -14,6 +14,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	public function register() {
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.tickets.plugin', 'Tribe__Gutenberg__Tickets__Plugin' );
+		$this->container->singleton( 'gutenberg.tickets.editor', 'Tribe__Gutenberg__Tickets__Editor' );
 
 		if (
 			! tribe( 'gutenberg.common.editor' )->should_load_blocks()
@@ -60,6 +61,11 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		add_action(
 			'tribe_events_editor_register_blocks',
 			tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' )
+		);
+
+		add_filter(
+			'tribe_events_editor_default_template',
+			tribe_callback( 'gutenberg.tickets.editor', 'add_tickets_block_in_editor' )
 		);
 	}
 
