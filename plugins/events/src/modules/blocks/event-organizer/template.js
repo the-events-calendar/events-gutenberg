@@ -27,7 +27,7 @@ import {
 } from '@moderntribe/events/elements';
 import OrganizerDetails from './details';
 import OrganizerForm from './details/form';
-import OrganizerIcon from 'icons/organizer.svg';
+import { Organizer as OrganizerIcon } from '@moderntribe/events/icons';
 import { toFields } from '@moderntribe/events/elements/organizer-form/utils';
 
 class EventOrganizer extends Component {

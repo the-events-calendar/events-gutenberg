@@ -6,7 +6,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { Icons } from '@moderntribe/common/elements';
+import { BlockIcon } from '@moderntribe/common/elements';
+import { TicketActive } from '@moderntribe/tickets/icons';
 
 /**
  * Module Code
@@ -16,9 +17,9 @@ export default {
 	title: __( 'Event Tickets', 'events-gutenberg' ),
 	description: __(
 		'Basic ticket functionality',
-		'events-gutenberg'
+		'events-gutenberg',
 	),
-	icon: Icons.TEC,
+	icon: BlockIcon,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
@@ -28,7 +29,11 @@ export default {
 
 	attributes: {},
 
-	edit: () => ( <div>Event Tickets Placeholder</div> ),
+	edit: () => (
+		<div>
+			<TicketActive /> Event Tickets Placeholder
+		</div>
+	),
 
 	save: () => null,
 };
