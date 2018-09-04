@@ -22,15 +22,12 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 import {
-	DAY_IN_SECONDS,
-	MINUTE_IN_SECONDS,
 	HALF_HOUR_IN_SECONDS,
 } from '@moderntribe/events/editor/utils/time';
 import {
 	toFormat,
 	setTimeInSeconds,
 	totalSeconds,
-	roundTime,
 } from '@moderntribe/events/editor/utils/moment';
 
 const TimePicker = ( {
@@ -166,10 +163,6 @@ const TimePicker = ( {
 
 TimePicker.defaultProps = {
 	current: moment(),
-	min: undefined,
-	max: undefined,
-	start: undefined,
-	end: undefined,
 	step: HALF_HOUR_IN_SECONDS,
 	timeFormat: 'H:i',
 	allDay: false,
