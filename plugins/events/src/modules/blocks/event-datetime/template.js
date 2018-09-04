@@ -20,8 +20,8 @@ import { InspectorControls, PlainText } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
+import { TimePicker } from '@moderntribe/common/elements';
 import {
-	TimePicker,
 	Dashboard,
 	Month,
 	DateInput,
