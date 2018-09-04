@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { noop } from 'lodash';
 
 const Button = ( {
 	className,
@@ -24,7 +25,7 @@ const Button = ( {
 
 Button.defaultProps = {
 	type: 'button',
-	onClick: () => {},
+	onClick: noop,
 };
 
 Button.propTypes = {

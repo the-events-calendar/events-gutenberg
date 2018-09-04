@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { noop } from 'lodash';
 
 /**
  * Internal dependencies
@@ -67,8 +68,8 @@ const ActionDashboard = ( {
 ActionDashboard.defaultProps = {
 	showCancel: true,
 	showConfirm: true,
-	onCancelClick: () => {},
-	onConfirmClick: () => {},
+	onCancelClick: noop,
+	onConfirmClick: noop,
 };
 
 ActionDashboard.propTypes = {
