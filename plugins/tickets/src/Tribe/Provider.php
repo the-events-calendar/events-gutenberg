@@ -26,6 +26,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton(
 			'gutenberg.tickets.assets', 'Tribe__Gutenberg__Tickets__Assets', array( 'register' )
 		);
+		$this->container->singleton( 'gutenberg.tickets.template', 'Tribe__Gutenberg__Tickets__Template' );
 
 		$this->container->singleton( 'gutenberg.tickets.blocks.tickets', 'Tribe__Gutenberg__Tickets__Blocks__Tickets' );
 		$this->container->singleton( 'gutenberg.tickets.blocks.rsvp', 'Tribe__Gutenberg__Tickets__Blocks__Rsvp' );

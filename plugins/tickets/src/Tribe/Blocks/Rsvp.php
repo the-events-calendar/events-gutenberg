@@ -61,9 +61,9 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 		tribe( 'gutenberg.template' )->add_template_globals( $args );
 
 		// enqueue assets
-		tribe_asset_enqueue( 'tribe-gutenberg-rsvp' );
+		tribe_asset_enqueue( 'tribe-tickets-gutenberg-rsvp' );
 
-		return tribe( 'gutenberg.template' )->template( array( 'blocks', $this->slug() ), $args, false );
+		return tribe( 'gutenberg.tickets.template' )->template( array( 'blocks', $this->slug() ), $args, false );
 	}
 
 	/*
@@ -125,16 +125,15 @@ extends Tribe__Events_Gutenberg__Blocks__Abstract {
 
 		tribe_asset(
 			$gutenberg,
-			'tribe-gutenberg-rsvp',
-			'rsvp.js',
+			'tribe-tickets-gutenberg-rsvp',
+			'views/rsvp.js',
 			array( 'jquery', 'jquery-ui-datepicker' ),
 			null,
 			array(
-				'type'         => 'js',
 				'localize'     => array(
 					'name' => 'TribeRsvp',
 					'data' => array(
-						'ajaxurl' => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) )
+						'ajaxurl' => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
 					),
 				),
 			)
