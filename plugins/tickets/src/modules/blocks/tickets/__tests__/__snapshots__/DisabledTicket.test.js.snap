@@ -27,11 +27,11 @@ exports[`Disabled Tickets render the component with description 1`] = `
     </span>
   </aside>
   <aside
-    className="editor__tickets__disabled__content"
+    className="tribe-editor__tickets__disabled__content"
   >
     
     <section
-      className="editor__tickets__disabled__description"
+      className="tribe-editor__tickets__disabled__description"
     >
       Custom Description
     </section>
@@ -51,10 +51,10 @@ exports[`Disabled Tickets render the component with title 1`] = `
     </span>
   </aside>
   <aside
-    className="editor__tickets__disabled__content"
+    className="tribe-editor__tickets__disabled__content"
   >
     <h3
-      className="editor__tickets__disabled__title"
+      className="tribe-editor__tickets__disabled__title"
     >
       Custom Title
     </h3>
