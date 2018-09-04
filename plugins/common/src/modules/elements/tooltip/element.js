@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { Tooltip } from '@wordpress/components';
+import { Tooltip as WpTooltip } from '@wordpress/components';
 
 const Tooltip = ( {
 	label,
@@ -19,13 +19,13 @@ const Tooltip = ( {
 	};
 
 	return (
-		<Tooltip text={ text } position={ position}>
+		<WpTooltip text={ text } position={ position}>
 			<Button
 				attrs={ attrs }
 				className={ classNames( 'tribe-editor__tooltip-icon', iconClassName ) }
 				label={ label }
 			/>
-		</Tooltip>
+		</WpTooltip>
 	)
 };
 
