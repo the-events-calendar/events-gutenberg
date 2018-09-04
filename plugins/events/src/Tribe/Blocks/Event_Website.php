@@ -1,6 +1,6 @@
 <?php
 class Tribe__Gutenberg__Events__Blocks__Event_Website
-extends Tribe__Gutenberg__Events__Blocks__Abstract {
+extends Tribe__Gutenberg__Common__Blocks__Abstract {
 
 	/**
 	 * Which is the name/slug of this block

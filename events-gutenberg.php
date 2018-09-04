@@ -31,6 +31,15 @@ class Tribe__Gutenberg__Plugin {
 	);
 
 	/**
+	 * Where in the themes we will look for templates
+	 *
+	 * @since  TBD
+	 *
+	 * @var string
+	 */
+	public $template_namespace = 'gutenberg';
+
+	/**
 	 * The constructor; delays initializing the extension until all other plugins are loaded.
 	 *
 	 * @since  0.1.0-alpha
