@@ -23,11 +23,38 @@ const config = merge( common, {
 	output: {
 		path: __dirname,
 		library: [ 'tribe', PLUGIN_SCOPE, '[name]' ],
-	},
-	resolve: {
-		alias: {
-			icons: resolve( __dirname, 'src/resources/icons' ),
-		},
+	}
+} );
+
+//
+// ──────────────────────────────────────────────────────────────────────────────────────────── II ──────────
+//   :::::: G E N E R A T E   S T Y L E S   F R O M   V I E W S : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────────────────────────────────
+//
+
+const stylePath = resolve( __dirname, './src/styles' );
+const styleDirectories = getDirectories( stylePath );
+const styleDirectoryNames = getDirectoryNames( stylePath );
+const styleEntries = zipObject( styleDirectoryNames, styleDirectories );
+
+const removeExtension = ( str ) => str.slice( 0, str.lastIndexOf( '.' ) );
+
+const entries = reduce( styleEntries, ( result, dirPath, dirName ) => {
+	const jsFiles = getJSFiles( dirPath );
+	const jsFileNames = getJSFileNames( dirPath );
+	const entryNames = jsFileNames.map(
+		filename => `${ dirName }/${ removeExtension( filename ) }`
+	);
+	return {
+		...result,
+		...zipObject( entryNames, jsFiles ),
+	};
+}, { } );
+
+const styleConfig = merge( common, {
+	entry: entries,
+	output: {
+		path: __dirname,
 	},
 } );
 
@@ -36,5 +63,6 @@ const config = merge( common, {
 //
 
 module.exports = [
-	config
+	config,
+	styleConfig,
 ];

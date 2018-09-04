@@ -12,7 +12,7 @@ import { get } from 'lodash';
  * Internal dependencies
  */
 import EventDateTime from './container';
-import { Icons } from '@moderntribe/common/elements';
+import { BlockIcon } from '@moderntribe/common/elements';
 import { config } from '@moderntribe/common/utils/globals';
 import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
@@ -29,7 +29,7 @@ export default {
 		'Define the date, time, and duration for your event.',
 		'events-gutenberg'
 	),
-	icon: Icons.TEC,
+	icon: BlockIcon,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
