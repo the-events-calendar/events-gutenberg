@@ -41,6 +41,7 @@ const TimePicker = ( {
 	allDay,
 	onChange,
 	onClick,
+	showAllDay,
 } ) => {
 	const renderLabel = ( onToggle ) => {
 		if ( allDay ) {
@@ -138,7 +139,10 @@ const TimePicker = ( {
 					role="menu"
 					className={ classNames( 'tribe-editor__timepicker__items' ) }
 				>
-					{ renderItem( { text: __( 'All Day', 'events-gutenberg' ), value: 'all-day' }, onClose ) }
+					{ showAllDay && renderItem(
+						{ text: __( 'All Day', 'events-gutenberg' ), value: 'all-day' },
+						onClose,
+					) }
 					{ getItems().map( ( item ) => renderItem( item, onClose ) ) }
 				</ScrollArea>
 			) }
@@ -181,6 +185,7 @@ TimePicker.propTypes = {
 	allDay: PropTypes.bool,
 	onChange: PropTypes.func.isRequired,
 	onClick: PropTypes.func.isRequired,
+	showAllDay: PropTypes.bool,
 };
 
 export default TimePicker;

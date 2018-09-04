@@ -323,6 +323,7 @@ class EventDateTime extends Component {
 			onChange: onStartTimePickerChange,
 			onClick: onStartTimePickerClick,
 			timeFormat: FORMATS.WP.time,
+			showAllDay: true,
 			allDay,
 		};
 
@@ -368,6 +369,7 @@ class EventDateTime extends Component {
 			onChange: onEndTimePickerChange,
 			onClick: onEndTimePickerClick,
 			timeFormat: FORMATS.WP.time,
+			showAllDay: true,
 			allDay,
 		};
 
