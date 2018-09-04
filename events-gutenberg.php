@@ -2,7 +2,7 @@
 /**
  * Plugin Name: The Events Calendar: Gutenberg Extension
  * Description: This plugin allows you to use The Events Calendar with the Gutenberg development plugin's block editor.
- * Version: 0.2.6-alpha
+ * Version: 0.2.7-alpha
  * Author: Modern Tribe, Inc.
  * Author URI: https://github.com/moderntribe/events-gutenberg
  * License: GPLv2 or later
@@ -10,14 +10,14 @@
 
 defined( 'WPINC' ) || die;
 
-class Tribe__Events_Gutenberg__Plugin {
+class Tribe__Gutenberg__Plugin {
 
 	/**
 	 * The semantic version number of this extension; should always match the plugin header.
 	 *
 	 * @since  0.1.0-alpha
 	 */
-	const VERSION = '0.2.6-alpha';
+	const VERSION = '0.2.7-alpha';
 
 	/**
 	 * Each plugin required by this extension
@@ -43,6 +43,8 @@ class Tribe__Events_Gutenberg__Plugin {
 		$this->plugin_path = trailingslashit( dirname( $this->plugin_file ) );
 		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );
 		$this->plugin_url  = plugins_url( $this->plugin_dir );
+		// todo: remove after migration of the extension
+		$this->extension_url = trailingslashit( $this->plugin_url . 'plugins/events' );
 	}
 
 	/**
@@ -62,15 +64,19 @@ class Tribe__Events_Gutenberg__Plugin {
 			return;
 		}
 
+		// Register this a the Base for the Gutenberg plugin
+		tribe_singleton( 'gutenberg', $this );
+
+		// After loading unset on the global scope
+		unset( $GLOBALS['__tribe_events_gutenberg_plugin'] );
+
 		// Setup the Autoloading of classes
 		$this->autoloading();
 
 		// Register the Service Provider
-		tribe_register_provider( 'Tribe__Events_Gutenberg__Provider' );
-
-		// Assets loader
-		tribe_singleton( 'gutenberg.assets', 'Tribe__Events_Gutenberg__Assets', array( 'register', 'hook' ) );
-		tribe( 'gutenberg.assets' );
+		tribe_register_provider( 'Tribe__Gutenberg__Common__Provider' );
+		tribe_register_provider( 'Tribe__Gutenberg__Events__Provider' );
+		tribe_register_provider( 'Tribe__Gutenberg__Tickets__Provider' );
 	}
 
 	/**
@@ -83,7 +89,11 @@ class Tribe__Events_Gutenberg__Plugin {
 	 */
 	protected function autoloading() {
 		$prefixes = array(
-			'Tribe__Events_Gutenberg__' => $this->plugin_path . 'src/Tribe',
+			'Tribe__Gutenberg__Events__' => $this->plugin_path . 'plugins/events/src/Tribe',
+			'Tribe__Gutenberg__Events_Pro__' => $this->plugin_path . 'plugins/events-pro/src/Tribe',
+			'Tribe__Gutenberg__Tickets__' => $this->plugin_path . 'plugins/tickets/src/Tribe',
+			'Tribe__Gutenberg__Tickets_Plus__' => $this->plugin_path . 'plugins/tickets-plus/src/Tribe',
+			'Tribe__Gutenberg__Common__' => $this->plugin_path . 'plugins/common/src/Tribe',
 		);
 
 		$autoloader = Tribe__Autoloader::instance();
@@ -97,7 +107,7 @@ class Tribe__Events_Gutenberg__Plugin {
 
 		$autoloader->register_autoloader();
 	}
-
 }
 
-$GLOBALS['__tribe_events_gutenberg_plugin'] = new Tribe__Events_Gutenberg__Plugin();
+// This will be unset later on `plugins_loaded`
+$GLOBALS['__tribe_events_gutenberg_plugin'] = new Tribe__Gutenberg__Plugin();

@@ -1,6 +1,6 @@
 {
 	"name": "events-gutenberg",
-	"version": "0.2.6-alpha",
+	"version": "0.2.7-alpha",
 	"description": "A new WordPress editor experience",
 	"repository": "git+https://github.com/WordPress/gutenberg.git",
 	"author": "Modern Tribe",
@@ -16,15 +16,21 @@
 		"npm": ">=5.0.0"
 	},
 	"scripts": {
-		"build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
+		"test": "TZ=UTC jest --config jest.config.json",
 		"gettext-strings": "cross-env BABEL_ENV=gettext webpack",
-		"dev": "cross-env BABEL_ENV=default webpack --watch",
-		"test": "TZ=UTC jest",
 		"test:travis": "npm run test -- --maxWorkers=4",
-		"lint": "eslint --quiet --parser=babel-eslint 'src/modules/**/*.js'",
-		"lint:fix": "eslint --fix --quiet --parser=babel-eslint 'src/modules/**/*.js'"
+		"lint": "eslint --quiet --parser=babel-eslint 'plugins/**/src/modules/**/*.js'",
+		"lint:fix": "npm run lint -- --fix",
+		"bootstrap": "lerna bootstrap && npx lerna run bootstrap",
+		"build": "lerna run build",
+		"dev": "lerna run --parallel dev",
+		"analyze": "lerna run --parallel analyze"
 	},
 	"dependencies": {
+		"@moderntribe/common": "file:plugins/common",
+		"@moderntribe/events": "file:plugins/events",
+		"@moderntribe/tickets": "file:plugins/tickets",
+		"@nfen/redux-reducer-injector": "0.0.3",
 		"@wordpress/a11y": "1.0.3",
 		"@wordpress/data": "^1.1.0",
 		"@wordpress/i18n": "^1.2.2",
@@ -35,7 +41,7 @@
 		"file-loader": "^1.1.6",
 		"google-maps-react": "^1.1.11",
 		"he": "^1.1.1",
-		"jest": "^23.3",
+		"jest": "^23.4.2",
 		"jquery": "3.2.1",
 		"lodash": "^4.17.10",
 		"moment": "2.19.3",
@@ -56,7 +62,8 @@
 		"reselect": "^3.0.1",
 		"url-loader": "^0.6.2",
 		"uuid": "^3.3.2",
-		"validator": "^9.4.1"
+		"validator": "^9.4.1",
+		"whatwg-fetch": "^2.0.4"
 	},
 	"devDependencies": {
 		"@babel/runtime": "7.0.0-beta.52",
@@ -65,18 +72,20 @@
 		"babel-core": "^6.26.3",
 		"babel-eslint": "^8.2.6",
 		"babel-jest": "^23.4.0",
-		"babel-loader": "7.1.2",
+		"babel-loader": "^7.1.5",
 		"babel-plugin-import-glob": "2.0.0",
 		"babel-plugin-lodash": "3.2.11",
 		"babel-plugin-syntax-class-properties": "^6.13.0",
+		"babel-plugin-transform-async-to-generator": "^6.24.1",
 		"babel-plugin-transform-class-properties": "^6.24.1",
 		"babel-plugin-transform-object-rest-spread": "6.26.0",
 		"babel-plugin-transform-react-jsx": "6.24.1",
-		"babel-plugin-transform-runtime": "6.23.0",
+		"babel-plugin-transform-runtime": "^6.23.0",
 		"babel-preset-env": "^1.7.0",
 		"babel-preset-es2015": "^6.24.1",
 		"babel-preset-stage-0": "^6.24.1",
 		"babel-traverse": "6.26.0",
+		"clean-webpack-plugin": "^0.1.19",
 		"cross-env": "^5.2.0",
 		"css-loader": "0.28.9",
 		"css-mqpacker": "^4.0.1",
@@ -84,12 +93,16 @@
 		"enzyme-adapter-react-16": "^1.1.1",
 		"eslint": "^4.19.1",
 		"eslint-config-products": "github:moderntribe/eslint-config-products#v0.1.1",
+		"eslint-import-resolver-babel-module": "^4.0.0",
+		"eslint-plugin-import": "^2.13.0",
 		"eslint-plugin-react": "^7.10.0",
-		"extract-text-webpack-plugin": "^3.0.2",
 		"gettext-parser": "1.3.0",
+		"identity-obj-proxy": "^3.0.0",
 		"jest-cli": "^23.5.0",
 		"jest-environment-jsdom": "^23.4.0",
 		"jest-environment-jsdom-global": "^1.1.0",
+		"lerna": "^3.0.0-rc.0",
+		"mini-css-extract-plugin": "^0.4.1",
 		"node-sass": "^4.9.2",
 		"postcss-cssnext": "^2.5.2",
 		"postcss-hexrgba": "^1.0.0",
@@ -101,37 +114,12 @@
 		"react-test-renderer": "^16.4.1",
 		"redux-devtools-extension": "^2.13.5",
 		"redux-mock-store": "^1.5.3",
-		"regenerator-runtime": "^0.11.1",
 		"sass-variables-loader": "0.1.3",
 		"snapshot-diff": "^0.4.0",
 		"style-loader": "0.18.2",
-		"webpack": "3.10.0"
-	},
-	"jest": {
-		"verbose": true,
-		"testURL": "http://localhost/",
-		"globals": {
-			"NODE_ENV": "test"
-		},
-		"setupFiles": [
-			"<rootDir>/jest.setup.js"
-		],
-		"moduleNameMapper": {
-			"^utils(.*)$": "<rootDir>/src/modules/editor/utils$1",
-			"^editor(.*)$": "<rootDir>/src/modules/editor$1",
-			"^data(.*)$": "<rootDir>/src/modules/data$1",
-			"^elements(.*)$": "<rootDir>/src/modules/elements$1",
-			"\\.(css|pcss)$": "<rootDir>/__mocks__/style.js",
-			"\\.(svg)$": "<rootDir>/__mocks__/icons.js"
-		},
-		"testEnvironment": "jest-environment-jsdom-global",
-		"testPathIgnorePatterns": [
-			"/node_modules/",
-			"/lang/",
-			"/i18n/",
-			"/src/views",
-			"/src/Tribe",
-			"/src/resources"
-		]
+		"webpack": "^4.16.5",
+		"webpack-bundle-analyzer": "^2.13.1",
+		"webpack-cli": "^3.1.0",
+		"webpack-merge": "^4.1.4"
 	}
 }

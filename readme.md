@@ -12,22 +12,106 @@ This plugin is our first attempt at integrating the Event post type with the Gut
 
 ---
 
-### Using developement Version from GitHub
+### Using development version from GitHub
 
 1. Clone the Repository
-2. Install [Yarn](https://yarnpkg.com) _(better)_ or [NPM](https://www.npmjs.com/)
-3. Run `yarn install` on the repository
-4. Run `yarn run build` to generate Assets for the Plugin
+2. Install [NPM](https://www.npmjs.com/)
+3. Run `npm install` on the repository
+4. Run `npm run bootstrap` to bootstrap the plugins
+5. Run `npm run build` to build out the assets
 
+#### Production
+
+To build for production
+
+```sh
+npm run build
+# To only build for certain plugins
+npm run build -- --scope=@moderntribe/common,@moderntribe/events
+```
+
+#### Development
+
+To watch files for development
+
+```sh
+npm run dev
+# To only run watchers for certain plugins
+npm run dev -- --scope=@moderntribe/common,@moderntribe/events
+```
+
+#### Analyze bundles
+
+This will open a browser window showing current bundle sizes for a plugin.
+
+```sh
+npm run analyze
+# To only analyze certain plugins
+npm run analyze -- --scope=@moderntribe/common
+```
+
+### Adding new plugins
+
+From the root, we'll need to symlink the new plugin so that it can be looked up via npm. Just doing the command below will do the trick.
+
+```sh
+npm install --save plugins/*
+```
+
+#### Symlinking folders
+
+Since the folder structure we use is not node-friendly, we have to symlink directories from within the plugin's `src/modules` directory into the root of the plugin. This allows plugins to be properly imported when importing a module i.e. `@moderntribe/events/blocks` would have to be `@moderntribe/events/src/modules/blocks` if we did not do this.
+
+Add a new `scripts` folder within the plugin with a `linkDependencies` bash script.
+
+```sh
+mkdir scripts
+touch scripts/linkDependencies
+chmod +x scripts/linkDependencies
+```
+
+Add into the script something like:
+
+```sh
+#! /bin/bash
+
+ln -sf $PWD/src/modules/[bundleName] $PWD # Add one for each bundle
+```
+
+Now add in a `bootstrap` script into the plugin's `package.json`
+```json
+{
+    "scripts": {
+        "bootstrap": "./scripts/linkDependencies"
+    }
+}
+```
+
+Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ---
 
 ### Changelog
 
-#### 0.2.7-alpha - TBD
+#### 0.2.8-alpha - 2018-08-30
 
+* Feature - Add Tickets inside of the `plugins/` directory 
+
+#### 0.2.7-alpha - 2018-08-30
+
+* Feature - Add store registration in `common`
+* Feature - Move `events` reducer into the `common` store
 * Tweak - Use event timezone as default value
+* Tweak - Separate logic and presentation in event venue block
+* Tweak - Move `request` mechanism into `common`
+* Tweak - Make sure organizers are removed from classic editor when the organizer block is removed
+* Tweak - Favor `fetch` instead of `window.wp.apiRequest` to make API calls
+* Tweak - Move `globals` utils into `common` instead of being located in events
+* Tweak - Move `__mocks__` into the root directory
+* Tweak - Remove `withAPIData` by `getEntityRecords` on `TermsList` component
+* Fix - Display timezone label when selection is a UTC offset
 * Fix - Allow removal of organizers from classic block if the organizer block is removed
+* Fix - Separate logic and presentation from date time block
 
 #### 0.2.6-alpha - 2018-08-10
 

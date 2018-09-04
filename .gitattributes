@@ -1,0 +1,3 @@
+*.lock -diff
+package-lock.json -diff
+*.map -diff

@@ -1,0 +1,3 @@
+#! /bin/bash
+
+ln -sf "$(pwd)"/src/modules/blocks "$(pwd)"

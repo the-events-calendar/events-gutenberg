@@ -22,6 +22,11 @@
 		"transform-class-properties",
 		"syntax-class-properties",
 		"transform-object-rest-spread",
+		"transform-async-to-generator",
+		["transform-runtime", {
+			"polyfill": false,
+			"regenerator": true
+		}],
 		[ "transform-react-jsx", {
 			"pragma": "wp.element.createElement"
 		} ]
@@ -32,8 +37,7 @@
 				"transform-class-properties",
 				"syntax-class-properties",
 				"import-glob",
-				"lodash",
-				"transform-runtime"
+				"lodash"
 			]
 		},
 		"test": {
