@@ -19,3 +19,4 @@ yarn-error.log
 yarn.lock
 stats.json
 report.html
+!/plugins/common/src/resources/icons/

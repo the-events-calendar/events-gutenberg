@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import Organizer from './container';
-import { Icons } from '@moderntribe/events/elements';
+import { Icons } from '@moderntribe/common/elements';
 
 export default {
 	id: 'event-organizer',

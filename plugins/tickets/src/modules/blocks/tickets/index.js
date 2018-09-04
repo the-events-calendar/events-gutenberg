@@ -1,8 +1,4 @@
 /**
- * External dependencies
- */
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -10,17 +6,16 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import EventCategory from './block';
 import { Icons } from '@moderntribe/common/elements';
 
 /**
  * Module Code
  */
 export default {
-	id: 'event-category',
-	title: __( 'Event Category', 'events-gutenberg' ),
+	id: 'event-tickets',
+	title: __( 'Event Tickets', 'events-gutenberg' ),
 	description: __(
-		'Show assigned event categories as links to their respective archives.',
+		'Basic ticket functionality',
 		'events-gutenberg'
 	),
 	icon: Icons.TEC,
@@ -33,9 +28,7 @@ export default {
 
 	attributes: {},
 
-	edit: EventCategory,
-	save( props ) {
-		return null;
-	},
-};
+	edit: () => ( <div>Event Tickets Placeholder</div> ),
 
+	save: () => null,
+};
