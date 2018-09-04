@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Disabled Tickets render the component 1`] = `
+<section
+  className="tribe-editor__tickets__disabled"
+>
+  <aside
+    className="tribe-editor__tickets__disabled__icon"
+  >
+    <span>
+      Ticket Inactive - Icon Placeholder
+    </span>
+  </aside>
+  
+</section>
+`;
+
+exports[`Disabled Tickets render the component with description 1`] = `
+<section
+  className="tribe-editor__tickets__disabled"
+>
+  <aside
+    className="tribe-editor__tickets__disabled__icon"
+  >
+    <span>
+      Ticket Inactive - Icon Placeholder
+    </span>
+  </aside>
+  <aside
+    className="editor__tickets__disabled__content"
+  >
+    
+    <section
+      className="editor__tickets__disabled__description"
+    >
+      Custom Description
+    </section>
+  </aside>
+</section>
+`;
+
+exports[`Disabled Tickets render the component with title 1`] = `
+<section
+  className="tribe-editor__tickets__disabled"
+>
+  <aside
+    className="tribe-editor__tickets__disabled__icon"
+  >
+    <span>
+      Ticket Inactive - Icon Placeholder
+    </span>
+  </aside>
+  <aside
+    className="editor__tickets__disabled__content"
+  >
+    <h3
+      className="editor__tickets__disabled__title"
+    >
+      Custom Title
+    </h3>
+    
+  </aside>
+</section>
+`;
+
+exports[`Disabled Tickets uses a custom icon 1`] = `
+<section
+  className="tribe-editor__tickets__disabled"
+>
+  <aside
+    className="tribe-editor__tickets__disabled__icon"
+  >
+    <span>
+      Icon Placeholder
+    </span>
+  </aside>
+  
+</section>
+`;
