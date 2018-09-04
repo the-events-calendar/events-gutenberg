@@ -62,6 +62,7 @@ export default () => ( next ) => async ( action ) => {
 		} );
 
 		const { status } = response;
+		// inRange includes 200 but excludes 300 from the range so it's from 200 up to 299
 		if ( ! inRange( status, 200, 300 ) ) {
 			throw response;
 		}
