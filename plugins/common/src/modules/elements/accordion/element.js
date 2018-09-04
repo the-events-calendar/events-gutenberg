@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 /**
  * Internal dependencies
@@ -48,7 +48,7 @@ const Accordion = ( {
 		? (
 			<div
 				aria-multiselectable="true"
-				className={ classnames(
+				className={ classNames(
 					'tribe-editor__accordion',
 					'tribe-editor__accordion--active',
 					className,
@@ -62,14 +62,14 @@ const Accordion = ( {
 
 					return (
 						<article
-							className={ classnames(
+							className={ classNames(
 								'tribe-editor__accordion__row',
 								{ 'active': row.isActive },
 							) }
 							key={ index }
 						>
 							<Button
-								className={ classnames(
+								className={ classNames(
 									'tribe-editor__accordion__row-header',
 									row.headerClassName,
 								) }
@@ -80,7 +80,7 @@ const Accordion = ( {
 								{ row.header }
 							</Button>
 							<div
-								className={ classnames(
+								className={ classNames(
 									'tribe-editor__accordion__row-content',
 									row.contentClassName,
 								) }

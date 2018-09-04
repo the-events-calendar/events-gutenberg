@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -20,10 +20,9 @@ const Tooltip = ( {
 
 	return (
 		<Tooltip text={ text } position={ position}>
-			{/* @TODO: Fill in with icon */}
 			<Button
 				attrs={ attrs }
-				className={ classnames( 'tribe-editor__tooltip-icon', iconClassName ) }
+				className={ classNames( 'tribe-editor__tooltip-icon', iconClassName ) }
 				label={ label }
 			/>
 		</Tooltip>

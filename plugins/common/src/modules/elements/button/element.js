@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { noop } from 'lodash';
 
 const Button = ( {
@@ -15,7 +15,7 @@ const Button = ( {
 	type,
 } ) => (
 	<button
-		className={ classnames( 'tribe-editor__button', className ) }
+		className={ classNames( 'tribe-editor__button', className ) }
 		disabled={ isDisabled }
 		type={ type }
 		onClick={ onClick }
