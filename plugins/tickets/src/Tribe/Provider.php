@@ -59,19 +59,25 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		// Initialize the correct Singleton
 		tribe( 'gutenberg.tickets.assets' );
 
+		// Register blocks
 		add_action(
 			'tribe_events_editor_register_blocks',
 			tribe_callback( 'gutenberg.tickets.blocks.rsvp', 'register' )
 		);
-		// Register blocks
+
 		add_action(
 			'tribe_events_editor_register_blocks',
 			tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' )
 		);
 
-		add_filter(
-			'tribe_events_editor_default_template',
+		add_action(
+			'admin_init',
 			tribe_callback( 'gutenberg.tickets.editor', 'add_tickets_block_in_editor' )
+		);
+
+		add_action(
+			'block_categories',
+			tribe_callback( 'gutenberg.tickets.editor', 'block_categories' )
 		);
 	}
 

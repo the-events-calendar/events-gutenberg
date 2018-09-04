@@ -29,7 +29,7 @@ export default {
 		'events-gutenberg',
 	),
 	icon: BlockIcon,
-	category: 'tribe-events',
+	category: 'tribe-tickets',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {
