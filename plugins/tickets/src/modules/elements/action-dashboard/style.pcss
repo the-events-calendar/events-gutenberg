@@ -1,0 +1,77 @@
+.tribe-editor__action-dashboard {
+	background-color: #f8f9fb;
+	display: flex;
+	margin: -14px -14px 0;
+	padding: 15px 17px 15px 20px;
+	position: relative;
+	bottom: -14px;
+
+	@media (min-width: 600px) {
+		margin: -14px -28px 0;
+	}
+}
+
+.tribe-editor__action-dashboard__group-left {
+	display: flex;
+	align-items: center;
+	flex: 1;
+	justify-self: start;
+}
+
+.tribe-editor__action-dashboard__group-right {
+	display: flex;
+	align-items: center;
+	flex: none;
+	justify-self: end;
+}
+
+.tribe-editor__action-dashboard__action-wrapper {
+	flex: none;
+	margin-right: 25px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.tribe-editor__action-dashboard__cancel-button,
+.tribe-editor__action-dashboard__confirm-button {
+	flex: none;
+	font-family: 'Helvetica', 'sans-serif';
+	border: none;
+}
+
+.tribe-editor__action-dashboard__cancel-button {
+	background-color: transparent;
+	padding: 0;
+	margin-right: 20px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.tribe-editor__action-dashboard__confirm-button {
+	background-color: #00a0d4;
+	color: #ffffff;
+	padding: 9px 21px;
+	font-size: 1rem;
+	font-weight: bold;
+	line-height: 1.25rem;
+	transition: background-color 0.2s ease;
+
+	&:hover,
+	&:focus {
+		background-color: #007bb4
+	}
+
+	&[disabled] {
+
+		&,
+		&:hover,
+		&:focus {
+			background-color: #f3f4f5;
+			color: #8d949b;
+		}
+	}
+}

@@ -95,10 +95,12 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 #### 0.2.8-alpha - 2018-08-30
 
-* Feature - Add Tickets inside of the `plugins/` directory 
+* Feature - Add Tickets inside of the `plugins/` directory
 * Feature - Register ticket block to make it available in the block list
 * Feature - Register PHP files to use tickets templates
 * Feature - Add `store` for tickets plugins
+* Feature - Add button component to common elements
+* Feature - Add action dashboard to tickets elements
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 
