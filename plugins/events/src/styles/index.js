@@ -11,4 +11,3 @@ import './event-price/style.pcss';
 import './event-category/style.pcss';
 import './event-tags/style.pcss';
 import './event-website/style.pcss';
-import './rsvp/style.pcss';
