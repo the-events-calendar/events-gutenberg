@@ -75,6 +75,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 
 		// enqueue assets
 		tribe_asset_enqueue( 'tribe-tickets-gutenberg-tickets' );
+		tribe_asset_enqueue( 'tribe-tickets-gutenberg-block-tickets-style' );
 
 		return tribe( 'gutenberg.tickets.template' )->template( array( 'blocks', $this->slug() ), $args, false );
 	}
@@ -88,7 +89,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 	 * @return void
 	 */
 	public function assets() {
-		$gutenberg = tribe( 'gutenberg' );
+		$gutenberg = tribe( 'gutenberg.tickets.plugin' );
 
 		tribe_asset(
 			$gutenberg,
@@ -106,21 +107,13 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 				),
 			)
 		);
+
 		tribe_asset(
 			$gutenberg,
 			'tribe-tickets-gutenberg-block-tickets-style',
-			'views/tickets.js',
-			array( 'jquery', 'jquery-ui-datepicker' ),
-			null,
-			array(
-				'type'         => 'js',
-				'localize'     => array(
-					'name' => 'TribeTickets',
-					'data' => array(
-						'ajaxurl' => admin_url( 'admin-ajax.php', ( is_ssl() ? 'https' : 'http' ) ),
-					),
-				),
-			)
+			'tickets/frontend.css',
+			array(),
+			null
 		);
 	}
 

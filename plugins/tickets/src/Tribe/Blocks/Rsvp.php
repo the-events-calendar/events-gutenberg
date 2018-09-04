@@ -62,6 +62,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 
 		// enqueue assets
 		tribe_asset_enqueue( 'tribe-tickets-gutenberg-rsvp' );
+		tribe_asset_enqueue( 'tribe-tickets-gutenberg-block-rsvp-style' );
 
 		return tribe( 'gutenberg.tickets.template' )->template( array( 'blocks', $this->slug() ), $args, false );
 	}
@@ -121,7 +122,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 	 * @return void
 	 */
 	public function assets() {
-		$gutenberg = tribe( 'gutenberg' );
+		$gutenberg = tribe( 'gutenberg.tickets.plugin' );
 
 		tribe_asset(
 			$gutenberg,
@@ -138,6 +139,15 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 				),
 			)
 		);
+
+		tribe_asset(
+			$gutenberg,
+			'tribe-tickets-gutenberg-block-rsvp-style',
+			'rsvp/frontend.css',
+			array(),
+			null
+		);
+
 	}
 
 	/**
