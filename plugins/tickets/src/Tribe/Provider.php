@@ -14,6 +14,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	public function register() {
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.tickets.plugin', 'Tribe__Gutenberg__Tickets__Plugin' );
+
 		// Should we continue loading?
 		if (
 			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
@@ -21,13 +22,14 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		) {
 			return;
 		}
+
 		$this->container->singleton(
-			'gutenberg.events-tickets.assets', 'Tribe__Gutenberg__Tickets__Assets', array( 'register' )
+			'gutenberg.tickets.assets', 'Tribe__Gutenberg__Tickets__Assets', array( 'register' )
 		);
-		$this->container->singleton(
-			'gutenberg.tickets.blocks.tickets',
-			'Tribe__Gutenberg__Tickets__Blocks__Tickets'
-		);
+
+		$this->container->singleton( 'gutenberg.tickets.blocks.tickets', 'Tribe__Gutenberg__Tickets__Blocks__Tickets' );
+		$this->container->singleton( 'gutenberg.tickets.blocks.rsvp', 'Tribe__Gutenberg__Tickets__Blocks__Rsvp' );
+
 		$this->hook();
 	}
 
@@ -41,7 +43,10 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	 */
 	protected function hook() {
 		// Initialize the correct Singleton
-		tribe( 'gutenberg.events-tickets.assets' );
+		tribe( 'gutenberg.tickets.assets' );
+
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' ) );
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.tickets.blocks.rsvp', 'register' ) );
 	}
 
 	/**
