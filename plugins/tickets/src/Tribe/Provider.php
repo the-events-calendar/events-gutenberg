@@ -38,6 +38,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		);
 
 		$this->container->singleton( 'gutenberg.tickets.blocks.tickets', 'Tribe__Gutenberg__Tickets__Blocks__Tickets' );
+		$this->container->singleton( 'gutenberg.tickets.blocks.rsvp', 'Tribe__Gutenberg__Tickets__Blocks__Rsvp' );
 
 		$this->hook();
 		/**
@@ -59,11 +60,11 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	protected function hook() {
 		// Initialize the correct Singleton
 		tribe( 'gutenberg.tickets.assets' );
+
+		// add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' ) );
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.tickets.blocks.rsvp', 'register' ) );
 		// Register blocks
-		add_action(
-			'tribe_events_editor_register_blocks',
-			tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' )
-		);
+		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' ) );
 	}
 
 	/**

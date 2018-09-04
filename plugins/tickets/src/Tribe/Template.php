@@ -3,13 +3,13 @@
 /**
  * Allow including of Gutenberg Template
  *
- * @since 0.1.1-alpha
+ * @since TBD
  */
 class Tribe__Gutenberg__Tickets__Template extends Tribe__Template {
 	/**
 	 * Building of the Class template configuration
 	 *
-	 * @since  0.1.1-alpha
+	 * @since  TBD
 	 */
 	public function __construct() {
 		$this->set_template_origin( tribe( 'gutenberg' ) );
@@ -18,12 +18,15 @@ class Tribe__Gutenberg__Tickets__Template extends Tribe__Template {
 
 		// Configures this templating class extract variables
 		$this->set_template_context_extract( true );
+
+		// Uses the public folders
+		$this->set_template_folder_lookup( true );
 	}
 
 	/**
 	 * Return the attributes of the template
 	 *
-	 * @since 0.2.4-alpha
+	 * @since TBD
 	 *
 	 * @param array $default_attributes
 	 * @return array
@@ -38,7 +41,7 @@ class Tribe__Gutenberg__Tickets__Template extends Tribe__Template {
 	/**
 	 * Return a specific attribute
 	 *
-	 * @since 0.2.4-alpha
+	 * @since TBD
 	 *
 	 * @param  mixed $default
 	 * @return mixed

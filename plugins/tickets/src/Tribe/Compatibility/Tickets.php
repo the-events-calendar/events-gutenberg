@@ -47,6 +47,9 @@ class Tribe__Gutenberg__Tickets__Compatibility__Tickets {
 
 		$hook = tribe( 'tickets.rsvp' )->get_ticket_form_hook();
 
+		// Remove iCal to prevent infinite loops
+		remove_all_filters( $hook );
+
 		ob_start();
 		do_action( $hook );
 		$form = ob_get_clean();
