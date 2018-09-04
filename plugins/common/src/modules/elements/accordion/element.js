@@ -10,7 +10,7 @@ import classnames from 'classnames';
  */
 import { Button } from '@moderntribe/common/elements';
 import { slide } from '@moderntribe/common/utils';
-import 'style.pcss';
+import './style.pcss';
 
 const Accordion = ( {
 	className,
