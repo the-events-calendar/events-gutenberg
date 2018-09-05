@@ -20,7 +20,7 @@ export function isTruthy( value ) {
 		'yes',
 		'1',
 	];
-	return hasAnyOf( validValues, value );
+	return validValues.indexOf( value ) !== -1;
 }
 
 /**
@@ -36,7 +36,7 @@ export function isFalsy( value ) {
 		'0',
 		'',
 	];
-	return hasAnyOf( validValues, value );
+	return validValues.indexOf( value ) !== -1;
 }
 
 export const replaceWithObject = ( str = '', pairs = {} ) => {
