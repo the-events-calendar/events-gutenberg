@@ -12,17 +12,21 @@ import { identity } from 'lodash';
 import { numericLabel } from '@moderntribe/common/utils/string';
 import './style.pcss';
 
-const TicketAvailability = ( { available, total, separator, ...labels } ) => (
-	<div className="tribe-editor__availability">
-		{
-			[
-				numericLabel( { count: available, singular: labels.availableSingular, plural: labels.availablePlural } ),
-				numericLabel( { count: total, singular: labels.totalSingular, plural: labels.totalPlural } )
-			].filter( identity )
-				.join( separator )
-		}
-	</div>
-)
+const TicketAvailability = ( { available, total, separator, ...labels } ) => {
+	const items = [
+		numericLabel( {
+			count: available, singular: labels.availableSingular, plural: labels.availablePlural,
+		} ),
+		numericLabel( {
+			count: total, singular: labels.totalSingular, plural: labels.totalPlural,
+		} ),
+	].filter( identity )
+		.join( separator );
+
+	return (
+		<div className="tribe-editor__availability">{ items }</div>
+	);
+};
 
 TicketAvailability.propTypes = {
 	available: PropTypes.number,
