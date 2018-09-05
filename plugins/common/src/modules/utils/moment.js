@@ -7,10 +7,10 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import { replaceWithObject } from '@moderntribe/events/editor/utils/string';
 import {
 	date as dateUtil,
 	time,
+	string,
 } from '@moderntribe/common/utils';
 
 /**
@@ -60,7 +60,7 @@ export const toFormat = ( format ) => {
 		U: 'X',
 	};
 
-	return replaceWithObject( format, replacements );
+	return string.replaceWithObject( format, replacements );
 }
 
 /**
