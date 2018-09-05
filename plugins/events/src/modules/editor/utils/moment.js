@@ -4,7 +4,7 @@
 import { isString } from 'lodash';
 import moment from 'moment/moment';
 import { FORMATS } from './date';
-import { replaceWithObject } from './string';
+import { replaceWithObject } from '@moderntribe/common/utils/string';
 import { HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 
 /**

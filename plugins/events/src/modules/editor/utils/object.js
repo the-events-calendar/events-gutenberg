@@ -7,7 +7,7 @@ import {
 	isEmpty,
 	mapValues,
 } from 'lodash';
-import { isTruthy, isFalsy } from './string';
+import { isTruthy, isFalsy } from '@moderntribe/common/utils/string';
 
 export function removeEmptyStrings( object ) {
 	return pickBy( object, ( item ) => {
