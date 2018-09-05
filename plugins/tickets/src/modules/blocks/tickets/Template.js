@@ -26,18 +26,18 @@ const disabled = {
 
 const TicketsTemplate = ( props ) => {
 	const {
-		selected,
+		isSelected,
 		available,
 		total,
 		footerActions,
 		footerConfirmLabel,
 	} = props;
 
-	const availability = selected && (
+	const availability = isSelected && (
 		<Availability available={ available } total={ total } />
 	);
 
-	const actionDashboard = selected && (
+	const actionDashboard = isSelected && (
 		<ActionDashboard
 			actions={ footerActions }
 			confirmLabel={ footerConfirmLabel }
@@ -48,7 +48,7 @@ const TicketsTemplate = ( props ) => {
 		<div
 			className={ classNames(
 				'tribe-editor__tickets-container',
-				{ 'tribe-editor__tickets-container--selected': selected },
+				{ 'tribe-editor__tickets-container--selected': isSelected },
 			) }
 		>
 			<div className="tribe-editor__tickets-body">
@@ -63,13 +63,13 @@ const TicketsTemplate = ( props ) => {
 }
 
 TicketsTemplate.propTypes = {
-	selected: PropTypes.bool,
+	isSelected: PropTypes.bool,
 	footerActions: PropTypes.arrayOf( PropTypes.node ),
 	footerConfirmLabel: PropTypes.string,
 }
 
 TicketsTemplate.defaultProps = {
-	selected: false,
+	isSelected: false,
 	footerActions: [],
 	footerConfirmLabel: __( 'Add Tickets', 'events-gutenberg' ),
 }
