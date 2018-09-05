@@ -21,8 +21,10 @@ import { InspectorControls } from '@wordpress/editor';
  * Internal dependencies
  */
 import { Dashboard } from '@moderntribe/events/elements';
-import { parser } from '@moderntribe/events/editor/utils/range';
-import { input as inputUtil } from '@moderntribe/common/utils';
+import {
+	input as inputUtil,
+	range,
+} from '@moderntribe/common/utils';
 import './style.pcss';
 
 /**
@@ -51,7 +53,7 @@ const renderPlaceholder = ({ showCost, currencySymbol, currencyPosition }) => {
 };
 
 const renderCost = ({ showCost, isFree, cost }) => {
-	const parsed = parser( cost );
+	const parsed = range.parser( cost );
 
 	let value = parsed;
 
