@@ -27,12 +27,10 @@ export const HOUR_IN_MS = 3600000;
 export const MINUTE_IN_MS = 60000;
 export const SECOND_IN_MS = 1000;
 
-export const TIME_FORMAT_ERRMSG = 'Time format error';
-
 export const fromMs = (ms, format = TIME_FORMAT_MM_SS) => {
 	if (typeof ms !== 'number' || Number.isNaN(ms)) {
 		/* eslint-disable-next-line max-len */
-		throw new Error('Argument `ms` provided to `fromMs` from `' + fromMs.caller + '` is not a number or is NaN.');
+		throw new Error('Argument `ms` provided to `fromMs` is not a number or is NaN.');
 	}
 
 	let absMs = Math.abs(ms);
@@ -51,7 +49,7 @@ export const fromMs = (ms, format = TIME_FORMAT_MM_SS) => {
 export const fromS = (s, format = TIME_FORMAT_MM_SS) => {
 	if (typeof s !== 'number' || Number.isNaN(s)) {
  		/* eslint-disable-next-line max-len */
-		throw new Error('Argument `s` provided to `fromS` from `' + fromS.caller + '` is not a number or is NaN.');
+		throw new Error('Argument `s` provided to `fromS` is not a number or is NaN.');
 	}
 
 	let ms = s * SECOND_IN_MS;
@@ -73,12 +71,12 @@ export const toMs = (time, format = TIME_FORMAT_MM_SS) => {
 		re = /^(-)?(\d\d):(\d\d)(?::(\d\d)(?:(\.\d+))?)?$/;
 	} else {
  		/* eslint-disable-next-line max-len */
-		throw new Error('Argument `format` provided to `toMs` from `' + toMs.caller + '` is not a recognized format.');
+		throw new Error('Argument `format` provided to `toMs` is not a recognized format.');
 	}
 
 	let result = re.exec(time);
 	/* eslint-disable-next-line max-len */
-	if (!result) throw new Error('Argument `time` provided to `toMs` from `' + toMs.caller + '` is not a recognized format.');
+	if (!result) throw new Error('Argument `time` provided to `toMs` is not a recognized format.');
 
 	let negative = result[1] === '-';
 	let hours = result[2] | 0;
@@ -88,7 +86,7 @@ export const toMs = (time, format = TIME_FORMAT_MM_SS) => {
 
 	if (minutes > 60 || seconds > 60) {
 		/* eslint-disable-next-line max-len */
-		throw new Error('Argument `time` provided to `toMs` from `' + toMs.caller + '` contains minutes or seconds greater than 60.');
+		throw new Error('Argument `time` provided to `toMs` contains minutes or seconds greater than 60.');
 	}
 
 	return (negative ? -1 : 1) * (
@@ -134,7 +132,7 @@ export const formatTime = (time, format) => {
 			break;
 		default:
 			/* eslint-disable-next-line max-len */
-			throw new Error('Argument `format` provided to `toMs` from `' + toMs.caller + '` is not a recognized format.');
+			throw new Error('Argument `format` provided to `toMs` is not a recognized format.');
 	}
 
 	let hh = zeroFill(2, time.hours);
