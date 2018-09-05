@@ -32,7 +32,7 @@ describe( 'Availability element', () => {
 
 	it( 'renders component with custom separator', () => {
 		const component = renderer.create(
-			<Availability available={ 2 } total={ 20 } separator={ ' [*] '} />
+			<Availability available={ 2 } total={ 20 } separator={ ' [*] ' } />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );

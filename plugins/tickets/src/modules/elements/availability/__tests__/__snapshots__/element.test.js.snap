@@ -3,16 +3,28 @@
 exports[`Availability element render component 1`] = `
 <div
   className="tribe-editor__availability"
->
-  
-</div>
+/>
 `;
 
 exports[`Availability element render component with available property 1`] = `
 <div
   className="tribe-editor__availability"
 >
-  10 tickets available
+  <span
+    className="tribe-editor__label--numeric"
+  >
+    
+    <span
+      className="tribe-editor__label--count"
+    >
+      10
+    </span>
+    <span
+      className="tribe-editor__label--after"
+    >
+       tickets available
+    </span>
+  </span>
 </div>
 `;
 
@@ -20,7 +32,41 @@ exports[`Availability element renders component with available and total propert
 <div
   className="tribe-editor__availability"
 >
-  1 ticket available | 20 total tickets
+  <span
+    className="tribe-editor__label--numeric"
+  >
+    
+    <span
+      className="tribe-editor__label--count"
+    >
+      1
+    </span>
+    <span
+      className="tribe-editor__label--after"
+    >
+       ticket available
+    </span>
+  </span>
+  <span
+    className="tribe-editor__availability--separator"
+  >
+    |
+  </span>
+  <span
+    className="tribe-editor__label--numeric"
+  >
+    
+    <span
+      className="tribe-editor__label--count"
+    >
+      20
+    </span>
+    <span
+      className="tribe-editor__label--after"
+    >
+       total tickets
+    </span>
+  </span>
 </div>
 `;
 
@@ -28,7 +74,41 @@ exports[`Availability element renders component with custom separator 1`] = `
 <div
   className="tribe-editor__availability"
 >
-  2 tickets available [*] 20 total tickets
+  <span
+    className="tribe-editor__label--numeric"
+  >
+    
+    <span
+      className="tribe-editor__label--count"
+    >
+      2
+    </span>
+    <span
+      className="tribe-editor__label--after"
+    >
+       tickets available
+    </span>
+  </span>
+  <span
+    className="tribe-editor__availability--separator"
+  >
+     [*] 
+  </span>
+  <span
+    className="tribe-editor__label--numeric"
+  >
+    
+    <span
+      className="tribe-editor__label--count"
+    >
+      20
+    </span>
+    <span
+      className="tribe-editor__label--after"
+    >
+       total tickets
+    </span>
+  </span>
 </div>
 `;
 
@@ -36,6 +116,20 @@ exports[`Availability element renders component with total property 1`] = `
 <div
   className="tribe-editor__availability"
 >
-  20 total tickets
+  <span
+    className="tribe-editor__label--numeric"
+  >
+    
+    <span
+      className="tribe-editor__label--count"
+    >
+      20
+    </span>
+    <span
+      className="tribe-editor__label--after"
+    >
+       total tickets
+    </span>
+  </span>
 </div>
 `;
