@@ -1,21 +1,21 @@
 /**
  * Internal dependencies
  */
-import {
-	FORMATS,
-	TODAY,
-	equalDates,
-	timezones,
-	timezonesAsSelectData,
-	toNaturalLanguage,
-	rangeToNaturalLanguage,
-} from '@moderntribe/events/editor/utils/date';
-
+import { date } from '@moderntribe/common/utils';
 import {
 	toMoment,
 } from '@moderntribe/events/editor/utils/moment';
 
-jest.mock( '@moderntribe/events/elements/timezone-picker/element', () => ( {
+const {
+	FORMATS,
+	TODAY,
+	timezones,
+	timezonesAsSelectData,
+	toNaturalLanguage,
+	rangeToNaturalLanguage,
+} = date;
+
+jest.mock( '@moderntribe/common/utils/timezone', () => ( {
 	getItems: () => [
 		{
 			options: [
@@ -37,7 +37,7 @@ jest.mock( '@moderntribe/events/elements/timezone-picker/element', () => ( {
 } ) );
 
 afterAll( () => {
-	jest.unmock( '@moderntribe/events/elements/timezone-picker/element' );
+	jest.unmock( '@moderntribe/common/utils/timezone' );
 } );
 
 describe( 'Tests for date.js', () => {

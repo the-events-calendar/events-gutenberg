@@ -29,8 +29,7 @@ import {
 	toMoment,
 	adjustStart,
 } from '@moderntribe/events/editor/utils/moment';
-import { time } from '@moderntribe/common/utils';
-import { rangeToNaturalLanguage } from '@moderntribe/events/editor/utils/date';
+import { date, time } from '@moderntribe/common/utils';
 
 export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
 	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
@@ -127,7 +126,7 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		dispatch( setEndDateTime( values.end ) );
 	}
 
-	dispatch( setNaturalLanguageLabel( rangeToNaturalLanguage( values.start, values.end ) ) );
+	dispatch( setNaturalLanguageLabel( date.rangeToNaturalLanguage( values.start, values.end ) ) );
 
 	dispatch( setMultiDayAction( ! isSameDay( values.start, values.end ) ) );
 };

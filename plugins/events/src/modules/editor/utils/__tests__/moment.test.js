@@ -8,8 +8,7 @@ import moment from 'moment/moment';
  */
 import * as m from '@moderntribe/events/editor/utils/moment';
 
-import { time } from '@moderntribe/common/utils';
-import { FORMATS } from '@moderntribe/events/editor/utils/date';
+import { date, time } from '@moderntribe/common/utils';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
 
@@ -128,7 +127,7 @@ describe( 'Tests for moment.js', () => {
 	test( 'toDateTime', () => {
 		const converted = m.toDateTime( moment() );
 		expect( typeof converted ).toBe( 'string' );
-		const format = m.toFormat( FORMATS.DATABASE.datetime );
+		const format = m.toFormat( date.FORMATS.DATABASE.datetime );
 		expect( converted ).toBe( moment().format( format ) );
 	} );
 
@@ -136,7 +135,7 @@ describe( 'Tests for moment.js', () => {
 		const converted = m.toDate( moment() );
 		expect( typeof converted ).toBe( 'string' );
 		expect( typeof converted ).toBe( 'string' );
-		const format = m.toFormat( FORMATS.WP.date );
+		const format = m.toFormat( date.FORMATS.WP.date );
 		expect( converted ).toBe( moment().format( format ) );
 	} );
 

@@ -11,8 +11,7 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import { time } from '@moderntribe/common/utils';
-import { FORMATS } from '@moderntribe/events/editor/utils/date';
+import { date, time } from '@moderntribe/common/utils';
 import { roundTime, toDateTime } from '@moderntribe/events/editor/utils/moment';
 import { getSetting } from '@moderntribe/events/editor/settings';
 import * as types from './types';
@@ -25,8 +24,8 @@ export const DEFAULT_STATE = {
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),
 	allDay: false,
 	multiDay: false,
-	timeZone: FORMATS.TIMEZONE.string,
-	timeZoneLabel: FORMATS.TIMEZONE.string,
+	timeZone: date.FORMATS.TIMEZONE.string,
+	timeZoneLabel: date.FORMATS.TIMEZONE.string,
 	showTimeZone: false,
 	showDateInput: false,
 };
