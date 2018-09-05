@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionButton component rendered 1`] = `
+<button
+  className="tribe-editor__button tribe-editor__btn--label tribe-editor__tickets-btn--action"
+  onClick={[Function]}
+  type="button"
+>
+  Custom Action
+</button>
+`;
