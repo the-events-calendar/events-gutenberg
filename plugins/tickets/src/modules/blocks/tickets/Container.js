@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { connect } from 'react-redux';
-import { compose, bindActionCreators } from 'redux';
+import { compose } from 'redux';
 import React from 'react';
 
 /**
@@ -11,7 +11,6 @@ import React from 'react';
 import Template from './Template';
 
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
-import { Button } from '@moderntribe/common/elements';
 import { ActionButton } from '@moderntribe/tickets/elements';
 import {
 	Cog as CogIcon,
