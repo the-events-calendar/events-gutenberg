@@ -20,8 +20,7 @@ import {
 	selectors as priceSelectors,
 	actions as priceActions,
 } from '@moderntribe/events/data/blocks/price';
-import { moment } from '@moderntribe/common/utils';
-import { hasClass, searchParent } from '@moderntribe/events/editor/utils/dom';
+import { moment, dom } from '@moderntribe/common/utils';
 import { withStore, withSaveData } from '@moderntribe/common/hoc';
 import EventDateTime from './template';
 
@@ -32,7 +31,7 @@ import EventDateTime from './template';
 const ESCAPE_KEY = 27;
 
 const isTargetInBlock = ( target ) => (
-	searchParent( target, ( testNode ) => {
+	dom.searchParent( target, ( testNode ) => {
 		if ( testNode.classList.contains( 'editor-block-list__block' ) ) {
 			return Boolean( testNode.querySelector( '.tribe-editor__date-time' ) );
 		}
@@ -41,7 +40,7 @@ const isTargetInBlock = ( target ) => (
 );
 
 const isTargetInParents = ( target, parents ) => (
-	searchParent( target, ( testNode ) => hasClass( testNode, parents ) )
+	dom.searchParent( target, ( testNode ) => dom.hasClass( testNode, parents ) )
 );
 
 const onKeyDown = ( dispatchProps ) => ( e ) => {
