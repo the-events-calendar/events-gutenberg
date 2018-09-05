@@ -11,7 +11,7 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { time } from '@moderntribe/common/utils';
 import { FORMATS } from '@moderntribe/events/editor/utils/date';
 import { roundTime, toDateTime } from '@moderntribe/events/editor/utils/moment';
 import { getSetting } from '@moderntribe/events/editor/settings';
@@ -19,7 +19,7 @@ import * as types from './types';
 
 export const DEFAULT_STATE = {
 	start: toDateTime( roundTime( moment() ) ),
-	end: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
+	end: toDateTime( roundTime( moment() ).add( time.HALF_HOUR_IN_SECONDS, 'seconds' ) ),
 	naturalLanguage: '',
 	dateTimeSeparator: getSetting( 'dateTimeSeparator', __( '@', 'events-gutenberg' ) ),
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),

@@ -8,7 +8,7 @@ import moment from 'moment/moment';
  */
 import * as m from '@moderntribe/events/editor/utils/moment';
 
-import { HALF_HOUR_IN_SECONDS, HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { time } from '@moderntribe/common/utils';
 import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
 const FORMAT = 'MM-DD-YYYY HH:mm:ss';
@@ -122,7 +122,7 @@ describe( 'Tests for moment.js', () => {
 		expect( m.totalSeconds( new Date() ) ).toEqual( 0 );
 		expect( m.totalSeconds( moment().startOf( 'day' ) ) ).toEqual( 0 );
 		expect( m.totalSeconds( moment( 'May 23, 2018 12:30 am', 'MMM D, YYYY k:m a' ) ) )
-			.toEqual( HALF_HOUR_IN_SECONDS );
+			.toEqual( time.HALF_HOUR_IN_SECONDS );
 	} );
 
 	test( 'toDateTime', () => {

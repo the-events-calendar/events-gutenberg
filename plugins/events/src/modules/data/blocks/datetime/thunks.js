@@ -29,7 +29,7 @@ import {
 	toMoment,
 	adjustStart,
 } from '@moderntribe/events/editor/utils/moment';
-import { DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { time } from '@moderntribe/common/utils';
 import { rangeToNaturalLanguage } from '@moderntribe/events/editor/utils/date';
 
 export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
@@ -45,7 +45,7 @@ export const setEndTime = ( { end, seconds } ) => ( dispatch ) => {
 export const setAllDay = ( { start, end, isAllDay } ) => ( dispatch ) => {
 	if ( isAllDay ) {
 		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
-		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), DAY_IN_SECONDS - 1 ) );
+		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), time.DAY_IN_SECONDS - 1 ) );
 		dispatch( setStartDateTime( startDateTime ) );
 		dispatch( setEndDateTime( endDateTime ) );
 	}

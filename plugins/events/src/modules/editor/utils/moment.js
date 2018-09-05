@@ -5,7 +5,7 @@ import { isString } from 'lodash';
 import moment from 'moment/moment';
 import { FORMATS } from './date';
 import { replaceWithObject } from './string';
-import { HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+import { time } from '@moderntribe/common/utils';
 
 /**
  * Make sure the format provided matches the spec used by moment.js
@@ -245,14 +245,14 @@ export const isSameYear = ( start, end ) => (
  * @returns {{start: {moment}, end: {moment}}} Object with two keys: start, end
  */
 export const resetTimes = ( start ) => {
-	const testMoment = start.clone().add( HOUR_IN_SECONDS, 'seconds' );
+	const testMoment = start.clone().add( time.HOUR_IN_SECONDS, 'seconds' );
 
 	// Rollback an hour before adding half an hour as we are on the edge of the day
 	if ( ! isSameDay( start, testMoment ) ) {
-		start.subtract( HOUR_IN_SECONDS, 'seconds' );
+		start.subtract( time.HOUR_IN_SECONDS, 'seconds' );
 	}
 
-	const end = start.clone().add( HOUR_IN_SECONDS, 'seconds' );
+	const end = start.clone().add( time.HOUR_IN_SECONDS, 'seconds' );
 
 	return {
 		start,

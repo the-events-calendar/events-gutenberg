@@ -23,14 +23,10 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 import {
-	HALF_HOUR_IN_SECONDS,
-	HH_MM_SS_TIME_FORMAT,
-} from '@moderntribe/events/editor/utils/time';
-import {
 	toFormat,
 	setTimeInSeconds,
 } from '@moderntribe/events/editor/utils/moment';
-import { TribePropTypes } from '@moderntribe/common/utils';
+import { time, TribePropTypes } from '@moderntribe/common/utils';
 
 const TimePicker = ( {
 	current,
@@ -94,14 +90,14 @@ const TimePicker = ( {
 	const getItems = () => {
 		const items = [];
 
-		const startSeconds = TimeFormat.toS( start, HH_MM_SS_TIME_FORMAT );
-		const endSeconds = TimeFormat.toS( end, HH_MM_SS_TIME_FORMAT );
+		const startSeconds = TimeFormat.toS( start, time.HH_MM_SS_TIME_FORMAT );
+		const endSeconds = TimeFormat.toS( end, time.HH_MM_SS_TIME_FORMAT );
 
 		for ( let time = startSeconds; time <= endSeconds; time += step ) {
 			items.push( {
 				value: time,
 				text: formatLabel( time ),
-				isCurrent: time === TimeFormat.toS( current, HH_MM_SS_TIME_FORMAT ),
+				isCurrent: time === TimeFormat.toS( current, time.HH_MM_SS_TIME_FORMAT ),
 			} );
 		}
 
@@ -167,7 +163,7 @@ const TimePicker = ( {
 }
 
 TimePicker.defaultProps = {
-	step: HALF_HOUR_IN_SECONDS,
+	step: time.HALF_HOUR_IN_SECONDS,
 	timeFormat: 'H:i',
 	allDay: false,
 	onChange: noop,

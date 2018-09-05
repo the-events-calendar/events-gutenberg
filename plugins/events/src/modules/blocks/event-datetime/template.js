@@ -21,6 +21,7 @@ import { InspectorControls, PlainText } from '@wordpress/editor';
  * Internal dependencies
  */
 import { TimePicker } from '@moderntribe/common/elements';
+import { time } from '@moderntribe/common/utils';
 import {
 	Dashboard,
 	Month,
@@ -42,11 +43,6 @@ import {
 	TODAY,
 	timezonesAsSelectData
 } from '@moderntribe/events/editor/utils/date';
-import {
-	HALF_HOUR_IN_SECONDS,
-	START_OF_DAY,
-	END_OF_DAY,
-} from '@moderntribe/events/editor/utils/time';
 import './style.pcss';
 
 /**
@@ -322,8 +318,8 @@ class EventDateTime extends Component {
 
 		const timePickerProps = {
 			current: startMoment.format( 'HH:mm' ),
-			start: START_OF_DAY,
-			end: END_OF_DAY,
+			start: time.START_OF_DAY,
+			end: time.END_OF_DAY,
 			onChange: onStartTimePickerChange,
 			onClick: onStartTimePickerClick,
 			timeFormat: FORMATS.WP.time,
@@ -369,8 +365,8 @@ class EventDateTime extends Component {
 
 		const timePickerProps = {
 			current: endMoment.format( 'HH:mm' ),
-			start: START_OF_DAY,
-			end: END_OF_DAY,
+			start: time.START_OF_DAY,
+			end: time.END_OF_DAY,
 			onChange: onEndTimePickerChange,
 			onClick: onEndTimePickerClick,
 			timeFormat: FORMATS.WP.time,
@@ -381,7 +377,7 @@ class EventDateTime extends Component {
 
 		if ( ! multiDay ) {
 			// if the start time has less than half an hour left in the day
-			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= HALF_HOUR_IN_SECONDS ) {
+			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= time.HALF_HOUR_IN_SECONDS ) {
 				timePickerProps.start = endMoment.clone().endOf( 'day' ).format( 'HH:mm' );
 			} else {
 				timePickerProps.start = roundTime( startMoment ).add( 30, 'minutes' ).format( 'HH:mm' );
