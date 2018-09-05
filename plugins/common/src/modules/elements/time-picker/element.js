@@ -90,14 +90,14 @@ const TimePicker = ( {
 	const getItems = () => {
 		const items = [];
 
-		const startSeconds = TimeFormat.toS( start, time.HH_MM_SS_TIME_FORMAT );
-		const endSeconds = TimeFormat.toS( end, time.HH_MM_SS_TIME_FORMAT );
+		const startSeconds = TimeFormat.toS( start, time.TIME_FORMAT_HH_MM );
+		const endSeconds = TimeFormat.toS( end, time.TIME_FORMAT_HH_MM );
 
 		for ( let time = startSeconds; time <= endSeconds; time += step ) {
 			items.push( {
 				value: time,
 				text: formatLabel( time ),
-				isCurrent: time === TimeFormat.toS( current, time.HH_MM_SS_TIME_FORMAT ),
+				isCurrent: time === TimeFormat.toS( current, time.TIME_FORMAT_HH_MM ),
 			} );
 		}
 
