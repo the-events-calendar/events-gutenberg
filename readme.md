@@ -103,10 +103,13 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add button component to common elements
 * Feature - Add action dashboard to tickets elements
 * Feature - Add TribePropTypes functions to check custom time format
+* Feature - Add time to seconds and ms and vice versa utility
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 * Tweak - Create an icons module for the plugins and shared one on common to create a set of icons
 * Tweak - Move most utilities from events plugin to common plugin
+* Tweak - Move time picker element from events plugin to common plugin
+* Tweak - Adjust time picker element to accept time string in hh:mm format rather than moments
 * Fix - Accept responses between `200` and `299` HTTP codes as valid responses
 
 #### 0.2.7-alpha - 2018-08-30
