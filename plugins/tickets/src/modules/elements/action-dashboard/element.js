@@ -44,9 +44,10 @@ const ActionDashboard = ( {
 			<Button
 				className="tribe-editor__action-dashboard__cancel-button"
 				isDisabled={ isCancelDisabled }
-				label={ cancelLabel }
 				onClick={ onCancelClick }
-			/>
+			>
+				{ cancelLabel }
+			</Button>
 		)
 		: null;
 
@@ -55,9 +56,10 @@ const ActionDashboard = ( {
 			<Button
 				className="tribe-editor__action-dashboard__confirm-button"
 				isDisabled={ isConfirmDisabled }
-				label={ confirmLabel }
 				onClick={ onConfirmClick }
-			/>
+			>
+				{ cancelLabel }
+			</Button>
 		)
 		: null;
 

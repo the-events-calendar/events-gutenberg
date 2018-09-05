@@ -9,7 +9,7 @@ import { noop } from 'lodash';
 const Button = ( {
 	className,
 	isDisabled,
-	label,
+	children,
 	onClick,
 	type,
 	...props
@@ -21,7 +21,7 @@ const Button = ( {
 		onClick={ onClick }
 		{ ...props }
 	>
-		{ label }
+		{ children }
 	</button>
 );
 
@@ -33,7 +33,7 @@ Button.defaultProps = {
 Button.propTypes = {
 	className: PropTypes.string,
 	isDisabled: PropTypes.bool,
-	label: PropTypes.node,
+	children: PropTypes.node,
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 };
