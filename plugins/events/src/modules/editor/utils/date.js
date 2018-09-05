@@ -7,7 +7,7 @@ import { get, identity } from 'lodash';
  * Internal dependencies
  */
 import { toMoment } from '@moderntribe/events/editor/utils/moment';
-import { timezone } from '@moderntribe/common/utils';
+import { timezone as timezoneUtil } from '@moderntribe/common/utils';
 
 const WPDateSettings = get( window, 'tribe_date_settings', {} );
 const { formats = {}, timezone = {} } = WPDateSettings;
@@ -43,7 +43,7 @@ export const timezonesAsSelectData = () => {
 };
 
 export const timezones = () => {
-	return timezone.getItems()
+	return timezoneUtil.getItems()
 		.map( ( group ) => group.options || [] )
 		.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
 };

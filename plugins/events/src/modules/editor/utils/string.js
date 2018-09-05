@@ -4,11 +4,6 @@
 import { escapeRegExp, isUndefined } from 'lodash';
 
 /**
- * Internal dependencies
- */
-import { hasAnyOf } from './array';
-
-/**
  * Test if a string is equivalent to a true value
  *
  * @param {string} value The value to be tested
