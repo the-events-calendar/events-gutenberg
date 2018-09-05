@@ -106,6 +106,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 * Tweak - Create an icons module for the plugins and shared one on common to create a set of icons
+* Tweak - Move most utilities from events plugin to common plugin
 * Fix - Accept responses between `200` and `299` HTTP codes as valid responses
 
 #### 0.2.7-alpha - 2018-08-30
