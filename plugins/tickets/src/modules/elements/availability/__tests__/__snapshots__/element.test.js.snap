@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Availability element render component 1`] = `
+<div
+  className="tribe-editor__availability"
+>
+  
+</div>
+`;
+
+exports[`Availability element render component with available property 1`] = `
+<div
+  className="tribe-editor__availability"
+>
+  10 tickets available
+</div>
+`;
+
+exports[`Availability element renders component with available and total properties 1`] = `
+<div
+  className="tribe-editor__availability"
+>
+  1 ticket available | 20 total tickets
+</div>
+`;
+
+exports[`Availability element renders component with custom sapartor 1`] = `
+<div
+  className="tribe-editor__availability"
+>
+  2 tickets available [*] 20 total tickets
+</div>
+`;
+
+exports[`Availability element renders component with custom separator 1`] = `
+<div
+  className="tribe-editor__availability"
+>
+  2 tickets available [*] 20 total tickets
+</div>
+`;
+
+exports[`Availability element renders component with total property 1`] = `
+<div
+  className="tribe-editor__availability"
+>
+  20 total tickets
+</div>
+`;
