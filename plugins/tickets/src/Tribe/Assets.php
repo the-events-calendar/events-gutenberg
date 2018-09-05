@@ -33,6 +33,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
+				'conditionals' => tribe_callback( 'gutenberg.tickets.editor', 'current_type_support_tickets' ),
 			)
 		);
 
@@ -45,6 +46,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
+				'conditionals' => tribe_callback( 'gutenberg.tickets.editor', 'current_type_support_tickets' ),
 			)
 		);
 	}

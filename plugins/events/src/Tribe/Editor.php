@@ -5,8 +5,7 @@
  *
  * @since 0.1.0-alpha
  */
-class Tribe__Gutenberg__Events__Editor
-extends Tribe__Gutenberg__Common__Editor {
+class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor {
 
 	/**
 	 * Gets the classic template, used for migration and setup new events with classic look
@@ -375,9 +374,6 @@ extends Tribe__Gutenberg__Common__Editor {
 	 * @return array
 	 */
 	public function block_categories( $categories, $post ) {
-		/**
-		 * @todo: make compatible with standalone ET options in the future
-		 */
 		if ( Tribe__Events__Main::POSTTYPE !== $post->post_type ) {
 			return $categories;
 		}
@@ -391,7 +387,6 @@ extends Tribe__Gutenberg__Common__Editor {
 				),
 			)
 		);
-
 	}
 
 	/************************
