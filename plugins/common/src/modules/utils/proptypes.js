@@ -33,7 +33,8 @@ export const createChainableValidator = ( validator ) => {
 }
 
 /**
- * PropTypes check for type string and time format
+ * PropTypes check for type string and time format using 24h clock in hh:mm format
+ * e.g. 00:24, 03:57, 21:12
  * @param {object} props
  * @param {string} propName
  * @param {string} componentName

@@ -7,6 +7,7 @@ import moment from 'moment';
 import { noop } from 'lodash';
 import classNames from 'classnames';
 import { ScrollTo, ScrollArea } from 'react-scroll-to';
+import TimeFormat from 'hh-mm-ss';
 
 /**
  * WordPress dependencies
@@ -23,12 +24,13 @@ import { __ } from '@wordpress/i18n';
 import './style.pcss';
 import {
 	HALF_HOUR_IN_SECONDS,
+	HH_MM_SS_TIME_FORMAT,
 } from '@moderntribe/events/editor/utils/time';
 import {
 	toFormat,
 	setTimeInSeconds,
-	totalSeconds,
 } from '@moderntribe/events/editor/utils/moment';
+import { TribePropTypes } from '@moderntribe/common/utils';
 
 const TimePicker = ( {
 	current,
@@ -55,14 +57,13 @@ const TimePicker = ( {
 			);
 		}
 
-		const label = current.format( 'HH:mm' );
 		const additionalProps = {};
 		if ( min ) {
-			additionalProps.min = min.format( 'HH:mm' );
+			additionalProps.min = min;
 		}
 
 		if ( max ) {
-			additionalProps.max = max.format( 'HH:mm' );
+			additionalProps.max = max;
 		}
 
 		return (
@@ -70,7 +71,7 @@ const TimePicker = ( {
 				name="google-calendar-label"
 				className="tribe-editor__btn-input"
 				type="time"
-				value={ label }
+				value={ current }
 				onChange={ onChange }
 				{ ...additionalProps }
 			/>
@@ -93,14 +94,14 @@ const TimePicker = ( {
 	const getItems = () => {
 		const items = [];
 
-		const startSeconds = totalSeconds( start );
-		const endSeconds = totalSeconds( end );
+		const startSeconds = TimeFormat.toS( start, HH_MM_SS_TIME_FORMAT );
+		const endSeconds = TimeFormat.toS( end, HH_MM_SS_TIME_FORMAT );
 
 		for ( let time = startSeconds; time <= endSeconds; time += step ) {
 			items.push( {
 				value: time,
 				text: formatLabel( time ),
-				isCurrent: time === totalSeconds( current ),
+				isCurrent: time === TimeFormat.toS( current, HH_MM_SS_TIME_FORMAT ),
 			} );
 		}
 
@@ -166,7 +167,6 @@ const TimePicker = ( {
 }
 
 TimePicker.defaultProps = {
-	current: moment(),
 	step: HALF_HOUR_IN_SECONDS,
 	timeFormat: 'H:i',
 	allDay: false,
@@ -175,11 +175,16 @@ TimePicker.defaultProps = {
 };
 
 TimePicker.propTypes = {
-	current: PropTypes.instanceOf( moment ),
-	min: PropTypes.instanceOf( moment ),
-	max: PropTypes.instanceOf( moment ),
-	start: PropTypes.instanceOf( moment ).isRequired,
-	end: PropTypes.instanceOf( moment ).isRequired,
+	/**
+	 * TribePropTypes.timeFormat check for string formatted as a time
+	 * using 24h clock in hh:mm format
+	 * e.g. 00:24, 03:57, 21:12
+	 */
+	current: TribePropTypes.timeFormat.isRequired,
+	min: TribePropTypes.timeFormat,
+	max: TribePropTypes.timeFormat,
+	start: TribePropTypes.timeFormat.isRequired,
+	end: TribePropTypes.timeFormat.isRequired,
 	step: PropTypes.number,
 	timeFormat: PropTypes.string,
 	allDay: PropTypes.bool,
