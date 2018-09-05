@@ -1,13 +1,16 @@
-import { getItems } from '@moderntribe/events/elements/timezone-picker/element';
+/**
+ * External dependencies
+ */
 import { get, identity } from 'lodash';
 
 /**
  * Internal dependencies
  */
+import { toMoment } from '@moderntribe/events/editor/utils/moment';
+import { timezone } from '@moderntribe/common/utils';
 
 const WPDateSettings = get( window, 'tribe_date_settings', {} );
 const { formats = {}, timezone = {} } = WPDateSettings;
-import { toMoment } from '@moderntribe/events/editor/utils/moment';
 
 export const FORMATS = {
 	TIME: 'HH:mm:ss',
@@ -40,7 +43,7 @@ export const timezonesAsSelectData = () => {
 };
 
 export const timezones = () => {
-	return getItems()
+	return timezone.getItems()
 		.map( ( group ) => group.options || [] )
 		.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
 };
