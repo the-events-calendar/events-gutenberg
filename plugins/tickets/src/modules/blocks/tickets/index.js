@@ -7,16 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BlockIcon } from '@moderntribe/common/elements';
-import { TicketActive } from '@moderntribe/tickets/icons';
-import DisabledTickets from './DisabledTickets';
-
-const disabled = {
-	title: __( 'No Active Tickets', 'events-gutenberg' ),
-	description: __(
-		'The time is curently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
-		'events-gutenberg'
-	),
-}
+import TicketsBlock from './Container';
 
 /**
  * Module Code
@@ -38,13 +29,6 @@ export default {
 
 	attributes: {},
 
-	edit: () => (
-		<div>
-			<DisabledTickets title={ disabled.title }>
-				{ disabled.description }
-			</DisabledTickets>
-		</div>
-	),
-
+	edit: TicketsBlock,
 	save: () => null,
 };
