@@ -84,7 +84,7 @@ export const toMs = (time, format = TIME_FORMAT_MM_SS) => {
 	let seconds = result[4] | 0;
 	let miliseconds = Math.floor(1000 * result[5] | 0);
 
-	if (minutes > 60 || seconds > 60) {
+	if (minutes >= 60 || seconds >= 60) {
 		/* eslint-disable-next-line max-len */
 		throw new Error('Argument `time` provided to `toMs` contains minutes or seconds greater than 60.');
 	}
