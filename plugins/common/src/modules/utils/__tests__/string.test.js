@@ -5,6 +5,7 @@ import {
 	isTruthy,
 	isFalsy,
 	replaceWithObject,
+	numericLabel,
 } from '../string';
 
 describe( 'Tests for string.js', () => {
@@ -34,5 +35,24 @@ describe( 'Tests for string.js', () => {
 		expect( replaceWithObject( 'abcd', { z: 'a' } ) ).toEqual( 'abcd' );
 		expect( replaceWithObject( 'abcd', { a: 'b', c: 'd' } ) ).toEqual( 'bbdd' );
 		expect( replaceWithObject( 'abcd', { a: '', c: '' } ) ).toEqual( 'bd' );
+	} );
+
+	test( 'numericLabel', () => {
+		let params = {};
+		expect( numericLabel( params ) ).toBe( undefined );
+		params = { fallback: 'My fallback value' };
+		expect( numericLabel( params ) ).toBe( 'My fallback value' );
+		params = { count: 0, singular: 'Just %d item', plural: 'We have %d items' };
+		expect( numericLabel( params ) ).toBe( undefined );
+		params = { count: 0, singular: 'Just %d item', plural: 'We have %d items', fallback: '' };
+		expect( numericLabel( params ) ).toBe( '' );
+		params = { count: 1, singular: 'Just item', plural: 'We have %d items', fallback: '' };
+		expect( numericLabel( params ) ).toBe( 'Just item' );
+		params = { count: -10, singular: 'Just %d item', plural: 'We have %d items', fallback: '' };
+		expect( numericLabel( params ) ).toBe( '' );
+		params = { count: 1, singular: 'Just %d item', plural: 'We have %d items', fallback: '' };
+		expect( numericLabel( params ) ).toBe( 'Just 1 item' );
+		params = { count: 3, singular: 'Just %d item', plural: 'We have %d items', fallback: '' };
+		expect( numericLabel( params ) ).toBe( 'We have 3 items' );
 	} );
 } );
