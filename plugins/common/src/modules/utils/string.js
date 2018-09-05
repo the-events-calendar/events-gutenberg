@@ -6,7 +6,7 @@ import { escapeRegExp, isUndefined } from 'lodash';
 /**
  * Internal dependencies
  */
-import { hasAnyOf } from './array';
+import { hasAnyOf } from '../../../../events/src/modules/editor/utils/array';
 
 /**
  * Test if a string is equivalent to a true value
