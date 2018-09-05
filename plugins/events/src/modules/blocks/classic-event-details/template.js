@@ -16,9 +16,8 @@ import { PlainText, InspectorControls } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import { date, moment } from '@moderntribe/common/utils';
+import { date, input, moment } from '@moderntribe/common/utils';
 import { TermsList, MetaGroup } from '@moderntribe/events/elements';
-import { sendValue } from '@moderntribe/events/editor/utils/input';
 import EventDetailsOrganizers from './event-details-organizers/container';
 
 /**
@@ -37,7 +36,7 @@ const ClassicEventDetails = ( props ) => {
 				className="tribe-editor__events-section__headline trigger-dashboard-datetime"
 				value={ detailsTitle }
 				placeholder={ __( 'Details', 'events-gutenberg' ) }
-				onChange={ sendValue( setDetailsTitle ) }
+				onChange={ input.sendValue( setDetailsTitle ) }
 			/>
 		);
 	};
@@ -162,7 +161,7 @@ const ClassicEventDetails = ( props ) => {
 						className="tribe-editor__events-section__headline"
 						value={ organizerTitle }
 						placeholder={ __( 'Organizer', 'events-gutenberg' ) }
-						onChange={ sendValue( setOrganizerTitle ) }
+						onChange={ input.sendValue( setOrganizerTitle ) }
 					/>
 					<EventDetailsOrganizers />
 				</MetaGroup>
