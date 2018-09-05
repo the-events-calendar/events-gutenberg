@@ -14,12 +14,10 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	public function register() {
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.tickets.plugin', 'Tribe__Gutenberg__Tickets__Plugin' );
+		$this->container->singleton( 'gutenberg.tickets.editor', 'Tribe__Gutenberg__Tickets__Editor' );
 
-		// Should we continue loading?
-		// @todo: make this part of common and not part of events only
 		if (
-			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
-			|| ! tribe( 'gutenberg.events.editor' )->is_blocks_editor_active()
+			! tribe( 'gutenberg.common.editor' )->should_load_blocks()
 			|| ! class_exists( 'Tribe__Tickets__Main' )
 		) {
 			return;
@@ -61,10 +59,26 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		// Initialize the correct Singleton
 		tribe( 'gutenberg.tickets.assets' );
 
-		// add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' ) );
-		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.tickets.blocks.rsvp', 'register' ) );
 		// Register blocks
-		add_action( 'tribe_events_editor_register_blocks', tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' ) );
+		add_action(
+			'tribe_events_editor_register_blocks',
+			tribe_callback( 'gutenberg.tickets.blocks.rsvp', 'register' )
+		);
+
+		add_action(
+			'tribe_events_editor_register_blocks',
+			tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' )
+		);
+
+		add_action(
+			'admin_init',
+			tribe_callback( 'gutenberg.tickets.editor', 'add_tickets_block_in_editor' )
+		);
+
+		add_action(
+			'block_categories',
+			tribe_callback( 'gutenberg.tickets.editor', 'block_categories' )
+		);
 	}
 
 	/**

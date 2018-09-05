@@ -13,8 +13,7 @@ class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.events.plugin', 'Tribe__Gutenberg__Events__Plugin' );
 		$this->container->singleton( 'gutenberg.events.editor', 'Tribe__Gutenberg__Events__Editor' );
 
-		// Should we continue loading?
-		if ( ! tribe( 'gutenberg.events.editor' )->is_gutenberg_active() || ! tribe( 'gutenberg.events.editor' )->is_blocks_editor_active() ) {
+		if ( ! tribe( 'gutenberg.common.editor' )->should_load_blocks() ) {
 			return;
 		}
 

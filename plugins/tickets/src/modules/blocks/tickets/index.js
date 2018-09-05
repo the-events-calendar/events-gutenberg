@@ -7,8 +7,9 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BlockIcon } from '@moderntribe/common/elements';
-import { TicketActive } from '@moderntribe/tickets/icons';
 import DisabledTickets from './DisabledTickets';
+import TicketIcon from './TicketIcon';
+import { ActionDashboard } from '@moderntribe/tickets/elements';
 
 const disabled = {
 	title: __( 'No Active Tickets', 'events-gutenberg' ),
@@ -29,7 +30,7 @@ export default {
 		'events-gutenberg',
 	),
 	icon: BlockIcon,
-	category: 'tribe-events',
+	category: 'tribe-tickets',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
 	supports: {
@@ -43,6 +44,10 @@ export default {
 			<DisabledTickets title={ disabled.title }>
 				{ disabled.description }
 			</DisabledTickets>
+			<TicketIcon disabled={ true } unlimited={ true } />
+			<TicketIcon disabled={ false } unlimited={ true } />
+			<TicketIcon />
+			<TicketIcon disabled={ true } />
 		</div>
 	),
 

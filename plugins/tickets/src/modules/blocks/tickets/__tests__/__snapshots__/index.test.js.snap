@@ -3,7 +3,7 @@
 exports[`Ticket block declaration register the ticket block 1`] = `
 Object {
   "attributes": Object {},
-  "category": "tribe-events",
+  "category": "tribe-tickets",
   "description": "Basic ticket functionality",
   "edit": [Function],
   "icon": [Function],
