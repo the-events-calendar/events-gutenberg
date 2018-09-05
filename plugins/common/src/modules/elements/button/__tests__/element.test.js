@@ -26,7 +26,7 @@ describe( 'Button Element', () => {
 	} );
 
 	it( 'renders button with label', () => {
-		const component = renderer.create( <Button label="Hello" /> );
+		const component = renderer.create( <Button>Hello</Button> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
