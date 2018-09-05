@@ -29,7 +29,7 @@ exports[`Button Element renders button with label 1`] = `
 exports[`Button Element renders button with onClick handler 1`] = `
 <button
   className="tribe-editor__button"
-  onClick={[Function]}
+  onClick={[MockFunction]}
   type="button"
 />
 `;

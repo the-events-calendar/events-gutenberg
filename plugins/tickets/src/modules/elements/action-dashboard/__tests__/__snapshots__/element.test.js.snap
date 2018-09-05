@@ -103,7 +103,7 @@ exports[`Action Dashboard Element renders action dashboard with cancel click han
   >
     <button
       className="tribe-editor__button tribe-editor__action-dashboard__cancel-button"
-      onClick={[Function]}
+      onClick={[MockFunction]}
       type="button"
     />
     <button
@@ -211,7 +211,7 @@ exports[`Action Dashboard Element renders action dashboard with confirm click ha
     />
     <button
       className="tribe-editor__button tribe-editor__action-dashboard__confirm-button"
-      onClick={[Function]}
+      onClick={[MockFunction]}
       type="button"
     />
   </div>

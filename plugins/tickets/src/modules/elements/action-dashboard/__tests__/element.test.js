@@ -47,17 +47,13 @@ describe( 'Action Dashboard Element', () => {
 	} );
 
 	it( 'renders action dashboard with cancel click handler', () => {
-		const onClick = () => {
-			console.log( 'hello' )
-		};
+		const onClick = jest.fn();
 		const component = renderer.create( <ActionDashboard onCancelClick={ onClick } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'renders action dashboard with confirm click handler', () => {
-		const onClick = () => {
-			console.log( 'hello' )
-		};
+		const onClick = jest.fn();
 		const component = renderer.create( <ActionDashboard onConfirmClick={ onClick } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );

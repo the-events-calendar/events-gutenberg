@@ -31,9 +31,7 @@ describe( 'Button Element', () => {
 	} );
 
 	it( 'renders button with onClick handler', () => {
-		const onClick = () => {
-			console.log('hello')
-		};
+		const onClick = jest.fn();
 		const component = renderer.create( <Button onClick={ onClick } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );

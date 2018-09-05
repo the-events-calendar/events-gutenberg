@@ -24,14 +24,6 @@ exports[`Availability element renders component with available and total propert
 </div>
 `;
 
-exports[`Availability element renders component with custom sapartor 1`] = `
-<div
-  className="tribe-editor__availability"
->
-  2 tickets available [*] 20 total tickets
-</div>
-`;
-
 exports[`Availability element renders component with custom separator 1`] = `
 <div
   className="tribe-editor__availability"
