@@ -50,8 +50,12 @@ export const timeFormat = ( props, propName, componentName ) => {
 	const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 	if ( ! timeRegex.test( propValue ) ) {
 		/* eslint-disable-next-line max-len */
-		return new Error('Invalid prop `' + propName + '` shape supplied to `' + componentName + '`, expected `hh:mm`.' );
+		return new Error('Invalid prop `' + propName + '` format supplied to `' + componentName + '`, expected `hh:mm`.' );
 	}
 
 	return null;
+};
+
+export default {
+	timeFormat: createChainableValidator( timeFormat ),
 };

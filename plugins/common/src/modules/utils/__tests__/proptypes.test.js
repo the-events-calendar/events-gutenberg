@@ -95,7 +95,7 @@ describe( 'Tests for proptypes utils', () => {
 			timeFormat();
 
 			expect( timeFormat ).toHaveReturned();
-			expect( timeFormat ).toHaveReturnedWith( Error( 'Invalid prop `time` shape supplied to `component`, expected `hh:mm`.' ) );
+			expect( timeFormat ).toHaveReturnedWith( Error( 'Invalid prop `time` format supplied to `component`, expected `hh:mm`.' ) );
 		} );
 	} );
 } );
