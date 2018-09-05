@@ -20,7 +20,7 @@ import {
 	selectors as priceSelectors,
 	actions as priceActions,
 } from '@moderntribe/events/data/blocks/price';
-import { toMoment } from '@moderntribe/events/editor/utils/moment';
+import { moment } from '@moderntribe/common/utils';
 import { hasClass, searchParent } from '@moderntribe/events/editor/utils/dom';
 import { withStore, withSaveData } from '@moderntribe/common/hoc';
 import EventDateTime from './template';
@@ -83,8 +83,8 @@ const onStartTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	const { setStartTime } = dispatchProps;
 	const [ hour, minute ] = e.target.value.split( ':' );
 
-	const startMoment = toMoment( start );
-	const max = toMoment( end ).clone().subtract( 1, 'minutes' );
+	const startMoment = moment.toMoment( start );
+	const max = moment.toMoment( end ).clone().subtract( 1, 'minutes' );
 
 	const startMomentCopy = startMoment.clone();
 	startMomentCopy.set( 'hour', parseInt( hour, 10 ) );
@@ -118,8 +118,8 @@ const onEndTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	const { setEndTime } = dispatchProps;
 	const [ hour, minute ] = e.target.value.split( ':' );
 
-	const endMoment = toMoment( end );
-	const min = toMoment( start ).clone().add( 1, 'minutes' );
+	const endMoment = moment.toMoment( end );
+	const min = moment.toMoment( start ).clone().add( 1, 'minutes' );
 
 	const endMomentCopy = endMoment.clone();
 	endMomentCopy.set( 'hour', parseInt( hour, 10 ) );

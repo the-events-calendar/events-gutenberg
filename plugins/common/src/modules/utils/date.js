@@ -6,8 +6,10 @@ import { get, identity } from 'lodash';
 /**
  * Internal dependencies
  */
-import { toMoment } from '@moderntribe/events/editor/utils/moment';
-import { timezone as timezoneUtil } from '@moderntribe/common/utils';
+import {
+	moment as momentUtil,
+	timezone as timezoneUtil,
+} from '@moderntribe/common/utils';
 
 const WPDateSettings = get( window, 'tribe_date_settings', {} );
 const { formats = {}, timezone = {} } = WPDateSettings;
@@ -51,7 +53,7 @@ export const timezones = () => {
 export const toNaturalLanguage = ( date = null, format = { date: 'MMM D YYYY', time: 'h:mm a' } ) => {
 	const parsed = {
 		text: '',
-		moment: date && toMoment( date ),
+		moment: date && momentUtil.toMoment( date ),
 	};
 
 	const { moment } = parsed;

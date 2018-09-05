@@ -21,12 +21,12 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import './style.pcss';
 import {
-	toFormat,
-	setTimeInSeconds,
-} from '@moderntribe/events/editor/utils/moment';
-import { time, TribePropTypes } from '@moderntribe/common/utils';
+	moment as momentUtil,
+	time,
+	TribePropTypes,
+} from '@moderntribe/common/utils';
+import './style.pcss';
 
 const TimePicker = ( {
 	current,
@@ -105,7 +105,7 @@ const TimePicker = ( {
 	}
 
 	const formatLabel = ( seconds ) => {
-		return setTimeInSeconds( moment(), seconds ).format( toFormat( timeFormat ) );
+		return momentUtil.setTimeInSeconds( moment(), seconds ).format( momentUtil.toFormat( timeFormat ) );
 	};
 
 	const renderItem = ( item, onClose ) => {

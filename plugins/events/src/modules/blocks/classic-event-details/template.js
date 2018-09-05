@@ -16,15 +16,16 @@ import { PlainText, InspectorControls } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import { date } from '@moderntribe/common/utils';
+import { date, moment } from '@moderntribe/common/utils';
 import { TermsList, MetaGroup } from '@moderntribe/events/elements';
-import { toMoment, toDate, toTime } from '@moderntribe/events/editor/utils/moment';
 import { sendValue } from '@moderntribe/events/editor/utils/input';
 import EventDetailsOrganizers from './event-details-organizers/container';
 
 /**
  * Module Code
  */
+
+const { toMoment, toDate, toTime } = moment;
 
 const ClassicEventDetails = ( props ) => {
 

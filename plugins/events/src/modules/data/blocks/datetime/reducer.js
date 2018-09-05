@@ -11,14 +11,17 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import { date, time } from '@moderntribe/common/utils';
-import { roundTime, toDateTime } from '@moderntribe/events/editor/utils/moment';
+import {
+	date,
+	moment as momentUtil,
+	time,
+} from '@moderntribe/common/utils';
 import { getSetting } from '@moderntribe/events/editor/settings';
 import * as types from './types';
 
 export const DEFAULT_STATE = {
-	start: toDateTime( roundTime( moment() ) ),
-	end: toDateTime( roundTime( moment() ).add( time.HALF_HOUR_IN_SECONDS, 'seconds' ) ),
+	start: momentUtil.toDateTime( momentUtil.roundTime( moment() ) ),
+	end: momentUtil.toDateTime( momentUtil.roundTime( moment() ).add( time.HALF_HOUR_IN_SECONDS, 'seconds' ) ),
 	naturalLanguage: '',
 	dateTimeSeparator: getSetting( 'dateTimeSeparator', __( '@', 'events-gutenberg' ) ),
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),

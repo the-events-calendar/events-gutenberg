@@ -20,7 +20,9 @@ import {
 } from './actions';
 import { DEFAULT_STATE } from './reducer';
 import { maybeBulkDispatch } from '@moderntribe/events/data/utils';
-import {
+import { date, moment, time } from '@moderntribe/common/utils';
+
+const {
 	isSameDay,
 	parseFormats,
 	replaceDate,
@@ -28,9 +30,7 @@ import {
 	toDateTime,
 	toMoment,
 	adjustStart,
-} from '@moderntribe/events/editor/utils/moment';
-import { date, time } from '@moderntribe/common/utils';
-
+} = moment;
 export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
 	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
 	dispatch( setStartDateTime( startDateTime ) );

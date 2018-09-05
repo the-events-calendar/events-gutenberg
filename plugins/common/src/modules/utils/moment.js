@@ -3,7 +3,11 @@
  */
 import { isString } from 'lodash';
 import moment from 'moment/moment';
-import { replaceWithObject } from './string';
+
+/**
+ * Internal dependencies
+ */
+import { replaceWithObject } from '@moderntribe/events/editor/utils/string';
 import {
 	date as dateUtil,
 	time,
