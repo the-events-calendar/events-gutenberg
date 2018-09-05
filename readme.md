@@ -102,6 +102,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add Tickets inside of the `plugins/` directory 
 * Feature - Add button component to common elements
 * Feature - Add action dashboard to tickets elements
+* Feature - Create `Available` component
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 * Tweak - Create an icons module for the plugins and shared one on common to create a set of icons
