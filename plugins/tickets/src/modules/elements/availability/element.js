@@ -4,27 +4,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
-import { identity } from 'lodash';
 
 /**
  * Internal dependencies
  */
-import { numericLabel } from '@moderntribe/common/utils/string';
+import { NumericLabel } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
 const Availability = ( { available, total, separator, ...labels } ) => {
-	const items = [
-		numericLabel( {
-			count: available, singular: labels.availableSingular, plural: labels.availablePlural,
-		} ),
-		numericLabel( {
-			count: total, singular: labels.totalSingular, plural: labels.totalPlural,
-		} ),
-	].filter( identity )
-		.join( separator );
+	const Available = (
+		<NumericLabel
+			count={ available }
+			singular={ labels.availableSingular }
+			plural={ labels.availablePlural }
+		/>
+	);
+
+	const Total = (
+		<NumericLabel
+			count={ total }
+			singular={ labels.totalSingular }
+			plural={ labels.totalPlural }
+		/>
+	);
+
+	const Separator = ( ( !! available && !! total ) &&
+		<span className="tribe-editor__availability--separator">{ separator }</span>
+	);
 
 	return (
-		<div className="tribe-editor__availability">{ items }</div>
+		<div className="tribe-editor__availability">
+			{ Available }
+			{ Separator }
+			{ Total }
+		</div>
 	);
 };
 
@@ -45,7 +58,7 @@ Availability.defaultProps = {
 	availablePlural: __( '%d tickets available', 'events-gutenberg' ),
 	totalSingular: __( '%d total ticket', 'events-gutenberg' ),
 	totalPlural: __( '%d total tickets', 'events-gutenberg' ),
-	separator: ' | ',
+	separator: '|',
 };
 
 export default Availability;
