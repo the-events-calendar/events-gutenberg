@@ -52,10 +52,26 @@ describe( 'Action Dashboard Element', () => {
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
+	it( 'executes the cancel handler', () => {
+		const onClick = jest.fn();
+		const component = mount( <ActionDashboard onCancelClick={ onClick } /> );
+		component.find( 'button.tribe-editor__action-dashboard__cancel-button' ).simulate( 'click' );
+		expect( onClick ).toHaveBeenCalled();
+		expect( onClick ).toHaveBeenCalledTimes( 1 );
+	} );
+
 	it( 'renders action dashboard with confirm click handler', () => {
 		const onClick = jest.fn();
 		const component = renderer.create( <ActionDashboard onConfirmClick={ onClick } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
+	it( 'executes the confirm handler', () => {
+		const onClick = jest.fn();
+		const component = mount( <ActionDashboard onConfirmClick={ onClick } /> );
+		component.find( 'button.tribe-editor__action-dashboard__confirm-button' ).simulate( 'click' );
+		expect( onClick ).toHaveBeenCalled();
+		expect( onClick ).toHaveBeenCalledTimes( 1 );
 	} );
 
 	it( 'renders action dashboard with cancel button hidden', () => {
