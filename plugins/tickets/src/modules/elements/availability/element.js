@@ -12,7 +12,7 @@ import { identity } from 'lodash';
 import { numericLabel } from '@moderntribe/common/utils/string';
 import './style.pcss';
 
-const TicketAvailability = ( { available, total, separator, ...labels } ) => {
+const Availability = ( { available, total, separator, ...labels } ) => {
 	const items = [
 		numericLabel( {
 			count: available, singular: labels.availableSingular, plural: labels.availablePlural,
@@ -28,7 +28,7 @@ const TicketAvailability = ( { available, total, separator, ...labels } ) => {
 	);
 };
 
-TicketAvailability.propTypes = {
+Availability.propTypes = {
 	available: PropTypes.number,
 	total: PropTypes.number,
 	availableSingular: PropTypes.string,
@@ -38,7 +38,7 @@ TicketAvailability.propTypes = {
 	separator: PropTypes.string,
 }
 
-TicketAvailability.defaultProps = {
+Availability.defaultProps = {
 	available: 0,
 	total: 0,
 	availableSingular: __( '%d ticket available', 'events-gutenberg' ),
@@ -48,4 +48,4 @@ TicketAvailability.defaultProps = {
 	separator: ' | ',
 };
 
-export default TicketAvailability;
+export default Availability;
