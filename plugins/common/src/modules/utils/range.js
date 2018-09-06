@@ -9,7 +9,7 @@ import { trim, isEmpty } from 'lodash';
  * @param {string} input The original string
  * @returns {string} A formatted range string.
  */
-export function parser( input ) {
+export const parser = ( input ) => {
 	const range = trim( input );
 
 	if ( isEmpty( range ) ) {
@@ -30,7 +30,7 @@ export function parser( input ) {
 	}
 
 	return num_a >= num_b ? `${ trim( b ) } - ${ trim( a ) }` : `${ trim( a ) } - ${ trim( b ) }`;
-}
+};
 
 /**
  * Remove any char that is not a: number, dash, dot or comma.
@@ -38,16 +38,16 @@ export function parser( input ) {
  * @param {string} input The string from where to extract the chars
  * @returns {string} A string with only valid chars
  */
-export function parseChars( input ) {
-	return input
+export const parseChars = ( input ) => (
+	input
 		.split( ' ' )
 		.map( ( part ) => {
 			// Remove anything that is not a number a period or a dash
 			return part.replace( /[^0-9.,-]/g, '' );
 		} )
 		.join( ' ' )
-		.trim();
-}
+		.trim()
+);
 
 /**
  * Extract only valid numbers from the string
@@ -55,8 +55,8 @@ export function parseChars( input ) {
  * @param {string} chars The chars to be split into parts.
  * @returns {array} An array with the parts
  */
-export function extractParts( chars ) {
-	return chars
+export const extractParts = ( chars ) => (
+	chars
 	// Convert , into . so we can parse into numbers
 		.replace( /,/g, '.' )
 		.split( '-' )
@@ -72,8 +72,8 @@ export function extractParts( chars ) {
 			return parseFloat( item ).toFixed( decimals );
 		} )
 		.filter( ( item ) => ! isNaN( item ) )
-		.slice( 0, 2 );
-}
+		.slice( 0, 2 )
+);
 
 /**
  * Test to see if an input range is free of cost
@@ -81,7 +81,7 @@ export function extractParts( chars ) {
  * @param {string} input Range input
  * @returns {boolean} true if the event has 0 on all parts of the range, false otherwise
  */
-export function isFree( input ) {
+export const isFree = ( input ) => {
 	const parts = input.split( '-' );
 
 	const test = parts
@@ -90,4 +90,4 @@ export function isFree( input ) {
 		.filter( ( item ) => item === 0 );
 
 	return parts.length === test.length;
-}
+};

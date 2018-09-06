@@ -10,7 +10,7 @@ import { noop, debounce } from 'lodash';
  * Internal dependencies
  */
 import './style.pcss';
-import { toDateTime, toMoment } from '@moderntribe/events/editor/utils/moment';
+import { moment as momentUtil } from '@moderntribe/common/utils';
 
 const parseValue = ( value, setDateTime ) => {
 	const [ parsed ] = chrono.parse( value );
@@ -21,8 +21,8 @@ const parseValue = ( value, setDateTime ) => {
 	const { start, end } = parsed;
 
 	const dates = {
-		start: start ? toDateTime( toMoment( start.date() ) ) : null,
-		end: end ? toDateTime( toMoment( end.date() ) ) : null,
+		start: start ? momentUtil.toDateTime( momentUtil.toMoment( start.date() ) ) : null,
+		end: end ? momentUtil.toDateTime( momentUtil.toMoment( end.date() ) ) : null,
 	};
 	setDateTime( dates );
 };

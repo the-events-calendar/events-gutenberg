@@ -3,9 +3,15 @@
  */
 import { isString } from 'lodash';
 import moment from 'moment/moment';
-import { FORMATS } from './date';
-import { replaceWithObject } from '@moderntribe/common/utils/string';
-import { HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
+
+/**
+ * Internal dependencies
+ */
+import {
+	date as dateUtil,
+	time,
+	string,
+} from '@moderntribe/common/utils';
 
 /**
  * Make sure the format provided matches the spec used by moment.js
@@ -54,7 +60,7 @@ export const toFormat = ( format ) => {
 		U: 'X',
 	};
 
-	return replaceWithObject( format, replacements );
+	return string.replaceWithObject( format, replacements );
 }
 
 /**
@@ -87,7 +93,7 @@ export const roundTime = ( date ) => {
  * @param {array} formats The list of formats used to format
  * @returns {moment} moment Object with the date or current date if is non valid
  */
-export const parseFormats = ( date, formats = [ FORMATS.DATABASE.datetime, FORMATS.WP.datetime ] ) => {
+export const parseFormats = ( date, formats = [ dateUtil.FORMATS.DATABASE.datetime, dateUtil.FORMATS.WP.datetime ] ) => {
 	for ( let i = 0; i < formats.length; i ++ ) {
 		const format = formats[ i ];
 		const result = toMoment( date, format );
@@ -108,7 +114,7 @@ export const parseFormats = ( date, formats = [ FORMATS.DATABASE.datetime, FORMA
  * @param {string} format The format of the data to be used
  * @returns {moment} A moment object
  */
-export const toMoment = ( date, format = FORMATS.DATABASE.datetime ) => {
+export const toMoment = ( date, format = dateUtil.FORMATS.DATABASE.datetime ) => {
 	if ( date instanceof moment || date instanceof Date ) {
 		return moment( date );
 	} else if ( isString( date ) ) {
@@ -194,19 +200,19 @@ export const totalSeconds = ( date ) => {
  * @param {string} format Format used to output the date
  * @returns {string} A date time format
  */
-export const toDateTime = ( date, format = FORMATS.DATABASE.datetime ) => {
+export const toDateTime = ( date, format = dateUtil.FORMATS.DATABASE.datetime ) => {
 	return date.format( toFormat( format ) );
 }
 
-export const toDate = ( date, format = FORMATS.WP.date ) => {
+export const toDate = ( date, format = dateUtil.FORMATS.WP.date ) => {
 	return date.format( toFormat( format ) );
 }
 
-export const toDateNoYear = ( date, format = FORMATS.WP.dateNoYear ) => {
+export const toDateNoYear = ( date, format = dateUtil.FORMATS.WP.dateNoYear ) => {
 	return date.format( toFormat( format ) );
 }
 
-export const toTime = ( date, format = FORMATS.WP.time ) => {
+export const toTime = ( date, format = dateUtil.FORMATS.WP.time ) => {
 	return date.format( toFormat( format ) );
 }
 
@@ -245,14 +251,14 @@ export const isSameYear = ( start, end ) => (
  * @returns {{start: {moment}, end: {moment}}} Object with two keys: start, end
  */
 export const resetTimes = ( start ) => {
-	const testMoment = start.clone().add( HOUR_IN_SECONDS, 'seconds' );
+	const testMoment = start.clone().add( time.HOUR_IN_SECONDS, 'seconds' );
 
 	// Rollback an hour before adding half an hour as we are on the edge of the day
 	if ( ! isSameDay( start, testMoment ) ) {
-		start.subtract( HOUR_IN_SECONDS, 'seconds' );
+		start.subtract( time.HOUR_IN_SECONDS, 'seconds' );
 	}
 
-	const end = start.clone().add( HOUR_IN_SECONDS, 'seconds' );
+	const end = start.clone().add( time.HOUR_IN_SECONDS, 'seconds' );
 
 	return {
 		start,

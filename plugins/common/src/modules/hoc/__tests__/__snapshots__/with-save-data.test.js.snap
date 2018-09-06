@@ -5,6 +5,7 @@ exports[`HOC - With Details Should render a component 1`] = `
   attributes={
     Object {
       "description": "",
+      "organizers": Array [],
       "title": "Modern Tribe",
     }
   }
@@ -13,6 +14,7 @@ exports[`HOC - With Details Should render a component 1`] = `
   name="tribe/event"
   onBlockCreated={[Function]}
   onBlockRemoved={[Function]}
+  organizers={Array []}
   setAttributes={[MockFunction]}
   setInitialState={
     [MockFunction] {
@@ -21,6 +23,7 @@ exports[`HOC - With Details Should render a component 1`] = `
           Object {
             "attributes": Object {
               "description": "",
+              "organizers": Array [],
               "title": "Modern Tribe",
             },
             "description": "The Next Generation of Digital Agency",
@@ -29,6 +32,7 @@ exports[`HOC - With Details Should render a component 1`] = `
             "name": "tribe/event",
             "onBlockCreated": [Function],
             "onBlockRemoved": [Function],
+            "organizers": Array [],
             "setAttributes": [MockFunction],
             "setInitialState": [MockFunction] {
               "calls": [Circular],

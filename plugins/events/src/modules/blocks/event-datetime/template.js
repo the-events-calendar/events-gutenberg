@@ -20,8 +20,9 @@ import { InspectorControls, PlainText } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
+import { TimePicker } from '@moderntribe/common/elements';
+import { date, moment, time } from '@moderntribe/common/utils';
 import {
-	TimePicker,
 	Dashboard,
 	Month,
 	DateInput,
@@ -29,26 +30,21 @@ import {
 	TimeZone,
 } from '@moderntribe/events/elements';
 import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
-import {
-	roundTime,
-	toMoment,
-	toDate,
-	toDateNoYear,
-	toTime,
-	isSameYear,
-} from '@moderntribe/events/editor/utils/moment';
-import {
-	FORMATS,
-	TODAY,
-	timezonesAsSelectData
-} from '@moderntribe/events/editor/utils/date';
-import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
 import './style.pcss';
 
 /**
  * Module Code
  */
 
+const { FORMATS, TODAY, timezonesAsSelectData } = date;
+const {
+	roundTime,
+	toMoment,
+	toDate,
+	toDateNoYear,
+	toTime,
+	isSameYear,
+} = moment;
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 
 class EventDateTime extends Component {
@@ -317,18 +313,20 @@ class EventDateTime extends Component {
 		const endMoment = toMoment( end );
 
 		const timePickerProps = {
-			current: startMoment,
-			start: startMoment.clone().startOf( 'day' ),
-			end: startMoment.clone().endOf( 'day' ),
+			current: startMoment.format( 'HH:mm' ),
+			start: time.START_OF_DAY,
+			end: time.END_OF_DAY,
 			onChange: onStartTimePickerChange,
 			onClick: onStartTimePickerClick,
 			timeFormat: FORMATS.WP.time,
+			showAllDay: true,
 			allDay,
 		};
 
 		if ( ! multiDay ) {
-			timePickerProps.end = roundTime( endMoment.clone().subtract( 1, 'minutes' ) );
-			timePickerProps.max = endMoment.clone().subtract( 1, 'minutes' );
+			const max = endMoment.clone().subtract( 1, 'minutes' );
+			timePickerProps.end = roundTime( max ).format( 'HH:mm' );
+			timePickerProps.max = max.format( 'HH:mm' );
 		}
 
 		let startDate = toDate( toMoment( start ) );
@@ -362,24 +360,25 @@ class EventDateTime extends Component {
 		const endMoment = toMoment( end );
 
 		const timePickerProps = {
-			current: endMoment,
-			start: endMoment.clone().startOf( 'day' ),
-			end: roundTime( endMoment.clone().endOf( 'day' ) ),
+			current: endMoment.format( 'HH:mm' ),
+			start: time.START_OF_DAY,
+			end: time.END_OF_DAY,
 			onChange: onEndTimePickerChange,
 			onClick: onEndTimePickerClick,
 			timeFormat: FORMATS.WP.time,
+			showAllDay: true,
 			allDay,
 		};
 
 
 		if ( ! multiDay ) {
 			// if the start time has less than half an hour left in the day
-			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= HALF_HOUR_IN_SECONDS ) {
-				timePickerProps.start = endMoment.clone().endOf( 'day' );
+			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= time.HALF_HOUR_IN_SECONDS ) {
+				timePickerProps.start = endMoment.clone().endOf( 'day' ).format( 'HH:mm' );
 			} else {
-				timePickerProps.start = roundTime( startMoment ).add( 30, 'minutes' );
+				timePickerProps.start = roundTime( startMoment ).add( 30, 'minutes' ).format( 'HH:mm' );
 			}
-			timePickerProps.min = startMoment.clone().add( 1, 'minutes' );
+			timePickerProps.min = startMoment.clone().add( 1, 'minutes' ).format( 'HH:mm' );
 		}
 
 		let endDate = toDate( toMoment( end ) );

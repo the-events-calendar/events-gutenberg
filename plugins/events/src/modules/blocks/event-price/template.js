@@ -21,8 +21,10 @@ import { InspectorControls } from '@wordpress/editor';
  * Internal dependencies
  */
 import { Dashboard } from '@moderntribe/events/elements';
-import { parser } from '@moderntribe/events/editor/utils/range';
-import { sendValue } from '@moderntribe/events/editor/utils/input';
+import {
+	input as inputUtil,
+	range,
+} from '@moderntribe/common/utils';
 import './style.pcss';
 
 /**
@@ -51,7 +53,7 @@ const renderPlaceholder = ({ showCost, currencySymbol, currencyPosition }) => {
 };
 
 const renderCost = ({ showCost, isFree, cost }) => {
-	const parsed = parser( cost );
+	const parsed = range.parser( cost );
 
 	let value = parsed;
 
@@ -105,7 +107,7 @@ const renderDashboard = ({
 					name="description"
 					type="text"
 					placeholder={ __( 'Fixed Price or Range', 'events-gutenberg' ) }
-					onChange={ sendValue( setCost ) }
+					onChange={ inputUtil.sendValue( setCost ) }
 					value={ cost }
 				/>
 				<input
@@ -113,7 +115,7 @@ const renderDashboard = ({
 					name="description"
 					type="text"
 					placeholder={ __( 'Description', 'events-gutenberg' ) }
-					onChange={ sendValue( setDescription ) }
+					onChange={ inputUtil.sendValue( setDescription ) }
 					value={ costDescription }
 				/>
 			</section>

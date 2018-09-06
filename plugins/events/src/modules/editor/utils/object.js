@@ -7,7 +7,7 @@ import {
 	isEmpty,
 	mapValues,
 } from 'lodash';
-import { isTruthy, isFalsy } from '@moderntribe/common/utils/string';
+import { string } from '@moderntribe/common/utils';
 
 export function removeEmptyStrings( object ) {
 	return pickBy( object, ( item ) => {
@@ -27,8 +27,8 @@ export function castBooleanStrings( object ) {
 			return value;
 		}
 
-		const falsy = isFalsy( value );
-		const truthy = isTruthy( value );
+		const falsy = string.isFalsy( value );
+		const truthy = string.isTruthy( value );
 
 		// We just return the truthy value as if "truthy" is false "falsy" is true which means the
 		// string should be converted into false value, otherwise just return regular value

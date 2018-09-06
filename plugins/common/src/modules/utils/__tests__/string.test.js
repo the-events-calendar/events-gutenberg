@@ -5,8 +5,7 @@ import {
 	isTruthy,
 	isFalsy,
 	replaceWithObject,
-	numericLabel,
-} from '../string';
+} from '@moderntribe/common/utils/string';
 
 describe( 'Tests for string.js', () => {
 	test( 'isTruthy', () => {

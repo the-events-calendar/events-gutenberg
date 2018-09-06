@@ -7,10 +7,10 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { getSetting, getPriceSettings } from '@moderntribe/events/editor/settings';
-import { isTruthy } from '@moderntribe/common/utils/string';
+import { string } from '@moderntribe/common/utils';
 import * as types from './types';
 
-const position = isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) )
+const position = string.isTruthy( getSetting( 'reverseCurrencyPosition', 0 ) )
 	? 'suffix'
 	: 'prefix';
 
