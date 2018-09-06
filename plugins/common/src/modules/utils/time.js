@@ -23,9 +23,9 @@ export const TIME_FORMAT_HH_MM = 'hh:mm';
 export const TIME_FORMAT_MM_SS_SSS = 'mm:ss.sss';
 export const TIME_FORMAT_MM_SS = 'mm:ss';
 
-export const HOUR_IN_MS = 3600000;
-export const MINUTE_IN_MS = 60000;
 export const SECOND_IN_MS = 1000;
+export const MINUTE_IN_MS = MINUTE_IN_SECONDS * SECOND_IN_MS;
+export const HOUR_IN_MS = HOUR_IN_SECONDS * SECOND_IN_MS;
 
 export const fromMs = (ms, format = TIME_FORMAT_MM_SS) => {
 	if (typeof ms !== 'number' || Number.isNaN(ms)) {
