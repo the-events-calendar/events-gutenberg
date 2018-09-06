@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`[STORE] - Price actions Should set initial state 1`] = `
+Object {
+  "payload": Object {},
+  "type": "@@MT/EVENTS/PRICE_BLOCK/SET_INITIAL_STATE",
+}
+`;
+
 exports[`[STORE] - Price actions Should set the cost 1`] = `
 Object {
   "payload": Object {
@@ -52,33 +59,4 @@ Object {
   },
   "type": "@@MT/EVENTS/SET_PRICE_POSITION",
 }
-`;
-
-exports[`[STORE] - Price thunk actions Should set the initial state 1`] = `
-Array [
-  Object {
-    "payload": Object {
-      "position": "suffix",
-    },
-    "type": "@@MT/EVENTS/SET_PRICE_POSITION",
-  },
-  Object {
-    "payload": Object {
-      "symbol": "€",
-    },
-    "type": "@@MT/EVENTS/SET_PRICE_SYMBOL",
-  },
-  Object {
-    "payload": Object {
-      "cost": 10,
-    },
-    "type": "@@MT/EVENTS/SET_PRICE_COST",
-  },
-  Object {
-    "payload": Object {
-      "description": "Not so expensive",
-    },
-    "type": "@@MT/EVENTS/SET_PRICE_DESCRIPTION",
-  },
-]
 `;
