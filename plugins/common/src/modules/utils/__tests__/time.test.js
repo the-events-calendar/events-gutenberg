@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import { time } from '@moderntribe/common/utils';
+import { roundTime } from '../moment';
 
 describe( 'Tests for time.js', () => {
 	test( 'MINUTE_IN_SECONDS', () => {
@@ -18,6 +19,29 @@ describe( 'Tests for time.js', () => {
 
 	test( 'DAY_IN_SECONDS', () => {
 		expect( time.DAY_IN_SECONDS ).toEqual( 86400 );
+	} );
+
+	test( 'roundTime', () => {
+		expect( time.roundTime( '01:23:54.423', time.TIME_FORMAT_HH_MM_SS_SSS ) )
+			.toEqual( '01:00:00.000' );
+		expect( time.roundTime( '14:46:13.042', time.TIME_FORMAT_HH_MM_SS_SSS ) )
+			.toEqual( '14:30:00.000' );
+		expect( time.roundTime( '01:23:54', time.TIME_FORMAT_HH_MM_SS ) )
+			.toEqual( '01:00:00' );
+		expect( time.roundTime( '14:46:13', time.TIME_FORMAT_HH_MM_SS ) )
+			.toEqual( '14:30:00' );
+		expect( time.roundTime( '01:23', time.TIME_FORMAT_HH_MM ) )
+			.toEqual( '01:00' );
+		expect( time.roundTime( '14:46', time.TIME_FORMAT_HH_MM ) )
+			.toEqual( '14:30' );
+		expect( time.roundTime( '23:54.423', time.TIME_FORMAT_MM_SS_SSS ) )
+			.toEqual( '00:00.000' );
+		expect( time.roundTime( '46:13.042', time.TIME_FORMAT_MM_SS_SSS ) )
+			.toEqual( '30:00.000' );
+		expect( time.roundTime( '23:54', time.TIME_FORMAT_MM_SS ) )
+			.toEqual( '00:00' );
+		expect( time.roundTime( '46:13', time.TIME_FORMAT_MM_SS ) )
+			.toEqual( '30:00' );
 	} );
 
 	test( 'START_OF_DAY', () => {
