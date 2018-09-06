@@ -16,9 +16,11 @@ const props = {
 	setAttributes: jest.fn(),
 	title: 'Modern Tribe!',
 	description: 'The Next Generation of Digital Agency',
+	organizers: [],
 	attributes: {
 		title: 'Modern Tribe',
 		description: '',
+		organizers: [],
 	},
 };
 
@@ -61,6 +63,41 @@ describe( 'HOC - With Details', () => {
 	it( 'Should generate the keys', () => {
 		const HOC = component.getInstance();
 		expect( HOC.keys ).toEqual( Object.keys( props.attributes ) );
+	} );
+
+	it( 'Simulate componentDidUpdate call', () => {
+		const wrapper = shallow( <Wrapper { ...props } /> );
+		const wrapperInstance = wrapper.instance();
+		expect( wrapperInstance.calculateDiff() ).toEqual( {
+			description: 'The Next Generation of Digital Agency',
+			title: 'Modern Tribe!',
+		} );
+		wrapper.setProps( {
+			attributes: {
+				title: 'Modern Tribe!',
+				description: 'The Next Generation of Digital Agency',
+				organizers: [],
+			}
+		} );
+		expect( wrapperInstance.calculateDiff() ).toEqual( {} );
+		wrapper.setProps( {
+			organizers: [ 3 ],
+			attributes: {
+				title: 'Modern Tribe!',
+				description: 'The Next Generation of Digital Agency',
+				organizers: [ 3 ],
+			},
+		} );
+		expect( wrapperInstance.calculateDiff() ).toEqual( {} );
+		wrapper.setProps( {
+			organizers: [ 2, 3 ],
+			attributes: {
+				title: 'Modern Tribe!',
+				description: 'The Next Generation of Digital Agency',
+				organizers: [ 3, 2 ],
+			},
+		} );
+		expect( wrapperInstance.calculateDiff() ).toEqual( { organizers: [ 2, 3 ] } );
 	} );
 
 	it( 'Should calculate the diff', () => {

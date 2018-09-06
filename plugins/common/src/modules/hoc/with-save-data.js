@@ -90,6 +90,8 @@ export default ( selectedAttributes = null ) => ( WrappedComponent ) => {
 						return key in attributes ? attributes[ key ] : defaultValue;
 					},
 				} );
+
+				this.saving = this.calculateDiff();
 			}
 
 			componentWillUnmount() {
@@ -121,16 +123,18 @@ export default ( selectedAttributes = null ) => ( WrappedComponent ) => {
 				}
 
 				this.saving = diff;
+
 				if ( isEmpty( diff ) ) {
 					return;
 				}
+
 				this.props.setAttributes( diff );
 			}
 
 			calculateDiff() {
 				const attributes = this.attrs;
 				return this.keys.reduce( ( diff, key ) => {
-					if ( key in this.props && attributes[ key ] !== this.props[ key ] ) {
+					if ( key in this.props && ! isShallowEqual( attributes[ key ], this.props[ key ] ) ) {
 						diff[ key ] = this.props[ key ];
 					}
 					return diff;
