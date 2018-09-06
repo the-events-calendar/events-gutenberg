@@ -34,7 +34,7 @@ describe( 'ActionButton', () => {
 	} );
 
 	test( 'component has class', () => {
-		const component = mount( <ActionButton>Custom Action</ActionButton> );
+		const component = mount( <ActionButton icon={ <Icon /> }>Custom Action</ActionButton> );
 		const button = component.find( Button );
 		expect( button.hasClass( 'tribe-editor__tickets-btn--action' ) ).toBe( true );
 	} );
