@@ -24,6 +24,8 @@ describe( 'Accordion Element', () => {
 				headerId: "header-id-1",
 				isActive: true,
 				onClick: noop,
+				onClose: noop,
+				onOpen: noop,
 			},
 		];
 	} );
