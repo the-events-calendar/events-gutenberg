@@ -14,7 +14,7 @@ import { isTruthy } from '@moderntribe/events/editor/utils/string';
 import { getPriceSettings } from '@moderntribe/events/editor/settings';
 import watchers, * as sagas from '../sagas';
 
-describe( 'exception sagas', () => {
+describe( 'Price Block sagas', () => {
 	describe( 'watchers', () => {
 		it( 'should watch actions', () => {
 			const gen = watchers();
