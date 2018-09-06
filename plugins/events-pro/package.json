@@ -1,7 +1,7 @@
 {
-  "name": "@moderntribe/tickets",
+  "name": "@moderntribe/events-pro",
   "version": "0.0.1",
-  "description": "Event Tickets",
+  "description": "Events Pro",
   "repository": "git+https://github.com/moderntribe/events-gutenberg.git",
   "author": "Modern Tribe",
   "license": "GPL-2.0-or-later",
