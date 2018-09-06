@@ -27,6 +27,13 @@ export const SECOND_IN_MS = 1000;
 export const MINUTE_IN_MS = MINUTE_IN_SECONDS * SECOND_IN_MS;
 export const HOUR_IN_MS = HOUR_IN_SECONDS * SECOND_IN_MS;
 
+/**
+ * Converts milliseconds to time in the format provided
+ *
+ * @param {int} ms Milliseconds to convert from
+ * @param {string} format Format of time to convert to
+ * @returns {string} Time string equivalent of milliseconds in format provided
+ */
 export const fromMilliseconds = ( ms, format = TIME_FORMAT_MM_SS ) => {
 	if ( typeof ms !== 'number' || Number.isNaN( ms ) ) {
 		/* eslint-disable-next-line max-len */
@@ -50,6 +57,13 @@ export const fromMilliseconds = ( ms, format = TIME_FORMAT_MM_SS ) => {
 	}, format );
 };
 
+/**
+ * Converts seconds to time in the format provided
+ *
+ * @param {int} s Seconds to convert from
+ * @param {string} format Format of time to convert to
+ * @returns {string} Time string equivalent of seconds in format provided
+ */
 export const fromSeconds = ( s, format = TIME_FORMAT_MM_SS ) => {
 	if ( typeof s !== 'number' || Number.isNaN( s ) ) {
  		/* eslint-disable-next-line max-len */
@@ -61,6 +75,13 @@ export const fromSeconds = ( s, format = TIME_FORMAT_MM_SS ) => {
 	return fromMilliseconds( ms, format );
 };
 
+/**
+ * Converts time in the format provided to milliseconds
+ *
+ * @param {string} time Time string to convert from
+ * @param {string} format Format of time to convert from
+ * @returns {int} Milliseconds equivalent of time string in format provided
+ */
 export const toMilliseconds = ( time, format = TIME_FORMAT_MM_SS ) => {
 	let re;
 
@@ -103,11 +124,25 @@ export const toMilliseconds = ( time, format = TIME_FORMAT_MM_SS ) => {
 	);
 };
 
+/**
+ * Converts time in the format provided to seconds
+ *
+ * @param {string} time Time string to convert from
+ * @param {string} format Format of time to convert from
+ * @returns {int} Seconds equivalent of time string in format provided
+ */
 export const toSeconds = ( time, format = TIME_FORMAT_MM_SS ) => {
 	let ms = toMilliseconds( time, format );
 	return Math.floor( ms / SECOND_IN_MS );
 };
 
+/**
+ * Formats time object to time string in the format provided
+ *
+ * @param {object} time Time object to format from
+ * @param {string} format Format of time to format to
+ * @returns {string} Time string in format provided
+ */
 export const formatTime = ( time, format ) => {
 	let showMs;
 	let showSc;
