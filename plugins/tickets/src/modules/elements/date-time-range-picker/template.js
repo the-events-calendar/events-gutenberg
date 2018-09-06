@@ -1,8 +1,9 @@
 /**
  * External dependencies
  */
-import React, { createRef } from 'react';
+import React, { createRef, Component } from 'react';
 import PropTypes from 'prop-types';
+import { noop } from 'lodash';
 import classNames from 'classnames';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
@@ -12,13 +13,40 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
  */
 import { TimePicker } from '@moderntribe/common/elements';
 import {
-	moment as momentUtil,
+	date,
 	time,
 	TribePropTypes,
 } from '@moderntribe/common/utils';
-import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
 class DateTimeRangePicker extends Component {
+	static defaultProps = {
+		fromDateFormat: 'LL',
+		onFromDateChange: noop,
+		onToDateChange: noop,
+		separatorDateTime: 'at',
+		separatorTimeRange: 'to',
+		toDateFormat: 'LL',
+	};
+
+	static propTypes = {
+		fromDate: PropTypes.string,
+		fromDateFormat: PropTypes.string,
+		fromTime: TribePropTypes.timeFormat.isRequired,
+		isSameDay: PropTypes.bool,
+		onFromDateChange: PropTypes.func,
+		onFromTimePickerChange: PropTypes.func,
+		onFromTimePickerClick: PropTypes.func,
+		onToDateChange: PropTypes.func,
+		onToTimePickerChange: PropTypes.func,
+		onToTimePickerClick: PropTypes.func,
+		separatorDateTime: PropTypes.string,
+		separatorTimeRange: PropTypes.string,
+		shiftFocus: PropTypes.bool,
+		toDate: PropTypes.string,
+		toDateFormat: PropTypes.string,
+		toTime: TribePropTypes.timeFormat.isRequired,
+	};
+
 	constructor( props ) {
 		super( props );
 		this.toDayPickerInput = createRef();
@@ -28,8 +56,8 @@ class DateTimeRangePicker extends Component {
 		const { fromDate, toDate } = this.props;
 
 		return {
-			start: fromDate,
-			end: toDate,
+			start: new Date( fromDate ),
+			end: new Date( toDate ),
 		};
 	};
 
@@ -37,10 +65,13 @@ class DateTimeRangePicker extends Component {
 		const {
 			fromDate,
 			fromDateFormat,
-			handleFromDateChange,
+			onFromDateChange,
 			shiftFocus,
 			toDate,
 		} = this.props;
+
+		const fromDateObj = new Date( fromDate );
+		const toDateObj = new Date( toDate );
 
 		const props = {
 			value: fromDate,
@@ -48,13 +79,13 @@ class DateTimeRangePicker extends Component {
 			formatDate: formatDate,
 			parseDate: parseDate,
 			dayPickerProps: {
-				selectedDays: [ fromDate, { fromDate, toDate } ],
-				disabledDays: { after: toDate },
-				modifiers: this.getModifiers( fromDate, toDate ),
-				toMonth: toDate,
+				selectedDays: [ fromDateObj, { fromDateObj, toDateObj } ],
+				disabledDays: { after: toDateObj },
+				modifiers: this.getModifiers(),
+				toMonth: toDateObj,
 				numberOfMonths: 1,
 			},
-			onDayChange: handleFromDateChange,
+			onDayChange: onFromDateChange,
 		};
 
 		/**
@@ -73,11 +104,14 @@ class DateTimeRangePicker extends Component {
 	getToDayPickerInputProps = () => {
 		const {
 			fromDate,
-			handleToDateChange,
+			onToDateChange,
 			shiftFocus,
 			toDate,
 			toDateFormat,
 		} = this.props;
+
+		const fromDateObj = new Date( fromDate );
+		const toDateObj = new Date( toDate );
 
 		const props = {
 			value: toDate,
@@ -85,13 +119,14 @@ class DateTimeRangePicker extends Component {
 			formatDate: formatDate,
 			parseDate: parseDate,
 			dayPickerProps: {
-				selectedDays: [ fromDate, { fromDate, toDate } ],
-				disabledDays: { before: fromDate },
-				month: fromDate,
-				fromMonth: fromDate,
+				selectedDays: [ fromDateObj, { fromDateObj, toDateObj } ],
+				disabledDays: { before: fromDateObj },
+				modifiers: this.getModifiers(),
+				month: fromDateObj,
+				fromMonth: fromDateObj,
 				numberOfMonths: 1,
 			},
-			onDayChange: handleToDateChange,
+			onDayChange: onToDateChange,
 		};
 
 		/**
@@ -120,7 +155,7 @@ class DateTimeRangePicker extends Component {
 			end: time.END_OF_DAY,
 			onChange: onFromTimePickerChange,
 			onClick: onFromTimePickerClick,
-			timeFormat: FORMATS.WP.time,
+			timeFormat: date.FORMATS.WP.time,
 		};
 
 		if ( isSameDay ) {
@@ -151,7 +186,7 @@ class DateTimeRangePicker extends Component {
 			end: time.END_OF_DAY,
 			onChange: onToTimePickerChange,
 			onClick: onToTimePickerClick,
-			timeFormat: FORMATS.WP.time,
+			timeFormat: date.FORMATS.WP.time,
 		};
 
 		if ( isSameDay ) {
@@ -220,30 +255,6 @@ class DateTimeRangePicker extends Component {
 			</div>
 		)
 	}
-};
-
-DateTimeRangePicker.defaultProps = {
-	fromDateFormat: 'LL',
-	handleFromDateChange: noop,
-	handleToDateChange: noop,
-	separatorDateTime: 'at',
-	separatorTimeRange: 'to',
-	toDateFormat: 'LL',
-};
-
-DateTimeRangePicker.propTypes = {
-	fromDate: PropTypes.string,
-	fromDateFormat: PropTypes.string,
-	fromTime: TribePropTypes.timeFormat.isRequired,
-	handleFromDateChange: PropTypes.func,
-	handleToDateChange: PropTypes.func,
-	isSameDay: PropTypes.bool,
-	separatorDateTime: PropTypes.string,
-	separatorTimeRange: PropTypes.string,
-	shiftFocus: PropTypes.bool,
-	toDate: PropTypes.string,
-	toDateFormat: PropTypes.string,
-	toTime: TribePropTypes.timeFormat.isRequired,
-};
+}
 
 export default DateTimeRangePicker;

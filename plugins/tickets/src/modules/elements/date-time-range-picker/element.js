@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { connect } from 'redux';
+import { connect } from 'react-redux';
 
 /**
  * Internal dependencies
@@ -9,14 +9,20 @@ import { connect } from 'redux';
 import DateTimeRangePicker from './template';
 
 const mapStateToProps = ( state ) => ( {
-	fromDate: 'January 1, 2018',
-	fromTime: '12:00:00',
-	toDate: 'January 1, 2018',
-	toTime: '12:00:00',
+	fromDate: 'September 3, 2018',
+	fromTime: '09:00',
+	isSameDay: false,
+	toDate: 'September 6, 2018',
+	toTime: '15:00',
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
-
+	onFromDateChange: () => {},
+	onFromTimePickerChange: () => {},
+	onFromTimePickerClick: () => {},
+	onToDateChange: () => {},
+	onToTimePickerChange: () => {},
+	onToTimePickerClick: () => {},
 } );
 
 export default connect(
