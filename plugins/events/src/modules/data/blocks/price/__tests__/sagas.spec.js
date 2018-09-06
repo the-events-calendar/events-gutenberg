@@ -58,6 +58,7 @@ describe( 'exception sagas', () => {
 					),
 				] )
 			);
+			expect( gen.next().done ).toEqual( true );
 		} );
 		it( 'should handle existing events', () => {
 			settings.is_new_event = 'false';
@@ -78,6 +79,7 @@ describe( 'exception sagas', () => {
 					),
 				] )
 			);
+			expect( clone.next().done ).toEqual( true );
 		} );
 	} );
 } );
