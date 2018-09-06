@@ -30,38 +30,46 @@ const ActionDashboard = ( {
 			className,
 		) }
 	>
-		{ actions && actions.length && (
-			<div className="tribe-editor__action-dashboard__group-left">
-				{ actions.map( ( action, index ) => (
-					<span
-						key={ `action-${index}`}
-						className="tribe-editor__action-dashboard__action-wrapper"
-					>
-						{ action }
-					</span>
-				) ) }
-			</div>
-		) }
-		{ ( showCancel || showConfirm ) && (
-			<div className="tribe-editor__action-dashboard__group-right">
-				{ showCancel && (
-					<Button
-						className="tribe-editor__action-dashboard__cancel-button"
-						isDisabled={ isCancelDisabled }
-						label={ cancelLabel }
-						onClick={ onCancelClick }
-					/>
-				) }
-				{ showConfirm && (
-					<Button
-						className="tribe-editor__action-dashboard__confirm-button"
-						isDisabled={ isConfirmDisabled }
-						label={ confirmLabel }
-						onClick={ onConfirmClick }
-					/>
-				) }
-			</div>
-		) }
+		{
+			( actions && actions.length )
+			? (
+				<div className="tribe-editor__action-dashboard__group-left">
+					{ actions.map( ( action, index ) => (
+						<span
+							key={ `action-${index}`}
+							className="tribe-editor__action-dashboard__action-wrapper"
+						>
+							{ action }
+						</span>
+					) ) }
+				</div>
+			)
+			: null
+		}
+		{
+			( showCancel || showConfirm )
+			? (
+				<div className="tribe-editor__action-dashboard__group-right">
+					{ showCancel && (
+						<Button
+							className="tribe-editor__action-dashboard__cancel-button"
+							isDisabled={ isCancelDisabled }
+							label={ cancelLabel }
+							onClick={ onCancelClick }
+						/>
+					) }
+					{ showConfirm && (
+						<Button
+							className="tribe-editor__action-dashboard__confirm-button"
+							isDisabled={ isConfirmDisabled }
+							label={ confirmLabel }
+							onClick={ onConfirmClick }
+						/>
+					) }
+				</div>
+			)
+			: null
+		}
 	</section>
 );
 
