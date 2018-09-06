@@ -98,6 +98,7 @@ describe( 'HOC - With Details', () => {
 			},
 		} );
 		expect( wrapperInstance.calculateDiff() ).toEqual( { organizers: [ 2, 3 ] } );
+		wrapperInstance.unregisterBlock();
 	} );
 
 	it( 'Should calculate the diff', () => {
