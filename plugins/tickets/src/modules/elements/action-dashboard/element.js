@@ -23,55 +23,65 @@ const ActionDashboard = ( {
 	onConfirmClick,
 	showCancel,
 	showConfirm,
-} ) => (
-	<section
-		className={ classnames(
-			'tribe-editor__action-dashboard',
-			className,
-		) }
-	>
-		{
-			( actions && actions.length )
-			? (
-				<div className="tribe-editor__action-dashboard__group-left">
-					{ actions.map( ( action, index ) => (
-						<span
-							key={ `action-${index}`}
-							className="tribe-editor__action-dashboard__action-wrapper"
-						>
-							{ action }
-						</span>
-					) ) }
-				</div>
-			)
-			: null
-		}
-		{
-			( showCancel || showConfirm )
-			? (
-				<div className="tribe-editor__action-dashboard__group-right">
-					{ showCancel && (
-						<Button
-							className="tribe-editor__action-dashboard__cancel-button"
-							isDisabled={ isCancelDisabled }
-							label={ cancelLabel }
-							onClick={ onCancelClick }
-						/>
-					) }
-					{ showConfirm && (
-						<Button
-							className="tribe-editor__action-dashboard__confirm-button"
-							isDisabled={ isConfirmDisabled }
-							label={ confirmLabel }
-							onClick={ onConfirmClick }
-						/>
-					) }
-				</div>
-			)
-			: null
-		}
-	</section>
-);
+} ) => {
+	const actionsList = ( actions && actions.length )
+		? (
+			<div className="tribe-editor__action-dashboard__group-left">
+				{ actions.map( ( action, index ) => (
+					<span
+						key={ `action-${index}`}
+						className="tribe-editor__action-dashboard__action-wrapper"
+					>
+						{ action }
+					</span>
+				) ) }
+			</div>
+		)
+		: null;
+
+	const cancelButton = showCancel
+		? (
+			<Button
+				className="tribe-editor__action-dashboard__cancel-button"
+				isDisabled={ isCancelDisabled }
+				label={ cancelLabel }
+				onClick={ onCancelClick }
+			/>
+		)
+		: null;
+
+	const confirmButton = showConfirm
+		? (
+			<Button
+				className="tribe-editor__action-dashboard__confirm-button"
+				isDisabled={ isConfirmDisabled }
+				label={ confirmLabel }
+				onClick={ onConfirmClick }
+			/>
+		)
+		: null;
+
+	const groupRight = ( showCancel || showConfirm )
+		? (
+			<div className="tribe-editor__action-dashboard__group-right">
+				{ cancelButton }
+				{ confirmButton }
+			</div>
+		)
+		: null;
+
+	return (
+		<section
+			className={ classnames(
+				'tribe-editor__action-dashboard',
+				className,
+			) }
+		>
+			{ actionsList }
+			{ groupRight }
+		</section>
+	)
+};
 
 ActionDashboard.defaultProps = {
 	showCancel: true,
