@@ -19,18 +19,18 @@ const PanelHeader = ( {
 	return (
 		<header className={
 			classnames(
-				'tribe-events-pro__panel-header',
+				'tribe-editor__events-pro__panel-header',
 				{
-					'tribe-events-pro__panel-header--expanded': isExpanded,
+					'tribe-editor__events-pro__panel-header--expanded': isExpanded,
 				}
 			) }
 		>
 			<button
-				className="tribe-events-pro__panel-header__button"
+				className="tribe-editor__events-pro__panel-header__button"
 				onClick={ onClick }
 				type="button"
 			>
-				<span className="tribe-events-pro__panel-header__button__title">{ children }</span>
+				<span className="tribe-editor__events-pro__panel-header__button__title">{ children }</span>
 				<ArrowIcon />
 			</button>
 		</header>

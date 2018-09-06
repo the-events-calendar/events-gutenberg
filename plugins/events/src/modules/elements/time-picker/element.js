@@ -20,6 +20,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { PreventBlockClose } from '@moderntribe/common/components';
 import './style.pcss';
 import {
 	DAY_IN_SECONDS,
@@ -79,7 +80,7 @@ const TimePicker = ( {
 		);
 	};
 
-	const toggleDropdown = ({ onToggle, isOpen }) => (
+	const toggleDropdown = ( { onToggle, isOpen } ) => (
 		<div className="tribe-editor__timepicker-label-container">
 			{ renderLabel( onToggle ) }
 			<button
@@ -107,7 +108,7 @@ const TimePicker = ( {
 		}
 
 		return items;
-	}
+	};
 
 	const formatLabel = ( seconds ) => {
 		return setTimeInSeconds( moment(), seconds ).format( toFormat( timeFormat ) );
@@ -132,18 +133,20 @@ const TimePicker = ( {
 		);
 	};
 
-	const renderDropdownContent = ({ onClose }) => (
+	const renderDropdownContent = ( { onClose } ) => (
 		<ScrollTo>
 			{ () => (
-				<ScrollArea
-					id="tribe-element-timepicker-items"
-					key="tribe-element-timepicker-items"
-					role="menu"
-					className={ classNames( 'tribe-editor__timepicker__items' ) }
-				>
-					{ renderItem( { text: __( 'All Day', 'events-gutenberg' ), value: 'all-day' }, onClose ) }
-					{ getItems().map( ( item ) => renderItem( item, onClose ) ) }
-				</ScrollArea>
+				<PreventBlockClose>
+					<ScrollArea
+						id="tribe-element-timepicker-items"
+						key="tribe-element-timepicker-items"
+						role="menu"
+						className={ classNames( 'tribe-editor__timepicker__items' ) }
+					>
+						{ renderItem( { text: __( 'All Day', 'events-gutenberg' ), value: 'all-day' }, onClose ) }
+						{ getItems().map( ( item ) => renderItem( item, onClose ) ) }
+					</ScrollArea>
+				</PreventBlockClose>
 			) }
 		</ScrollTo>
 	);
@@ -162,7 +165,7 @@ const TimePicker = ( {
 			/>
 		</div>
 	);
-}
+};
 
 TimePicker.defaultProps = {
 	current: moment(),

@@ -7,9 +7,9 @@ import classnames from 'classnames';
 import './style.pcss';
 
 const Label = ( { children, className } ) => (
-	<div className={ classnames( 'tribe-events-pro__label', className ) }>
+	<div className={ classnames( 'tribe-editor__events-pro__label', className ) }>
 		<span>{ children }</span>
-		<span className="tribe-events-pro__label__bar">&nbsp;</span>
+		<span className="tribe-editor__events-pro__label__bar">&nbsp;</span>
 	</div>
 );
 

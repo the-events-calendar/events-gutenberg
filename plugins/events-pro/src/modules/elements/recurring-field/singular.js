@@ -6,14 +6,29 @@ import PropTypes from 'prop-types';
 import {
 	ToggleControl,
 } from '@wordpress/components';
-
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
+import {
+	roundTime,
+	toMoment,
+} from '@moderntribe/events/editor/utils/moment';
 import { Select } from '@moderntribe/common/components/form';
-import { DatePicker, TimePicker } from '@moderntribe/events/elements';
-import { Row, Label } from '@moderntribe/events-pro/elements';
+import { TimePicker } from '@moderntribe/events/elements';
+import { Row, Label, DatePickerInput } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-const SingularField = ( props ) => {
+const SingularField = ( {
+	allDay,
+	end,
+	multiDay,
+	start,
+} ) => {
+	const startMoment = toMoment( start );
+	const endMoment = toMoment( end );
+
 	return (
 		<Fragment>
 			<Row>
@@ -24,6 +39,7 @@ const SingularField = ( props ) => {
 					<Select
 						options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 						value="single"
+						// TODO: Add onChange handler
 					/>
 				</div>
 			</Row>
@@ -31,22 +47,38 @@ const SingularField = ( props ) => {
 				<Label>
 					{ __( 'On', 'events-gutenberg' ) }
 				</Label>
-				<div>
-					<DatePicker datetime="1999-01-01 12:00:00" />
+				<div className="tribe-editor__events-pro-rule-field__date">
+					<DatePickerInput
+						datetime={ start }
+						// TODO: Add onChange handler
+					/>
 				</div>
 			</Row>
 			<Row>
 				<Label>
 					{ __( 'From', 'events-gutenberg' ) }
 				</Label>
-				<div className="tribe-events-pro-recurring-block__row__time">
-					<TimePicker />
+				<div className="tribe-editor__events-pro-rule-field__time">
+					<TimePicker
+						current={ startMoment }
+						start={ startMoment.clone().startOf( 'day' ) }
+						end={ roundTime( startMoment.clone().endOf( 'day' ) ) }
+						allDay={ allDay }
+						// TODO: Add onChange handler
+					/>
 					<span>{ __( 'to', 'events-gutenberg' ) }</span>
-					<TimePicker />
-					<div>
+					<TimePicker
+						current={ endMoment }
+						start={ endMoment.clone().startOf( 'day' ) }
+						end={ roundTime( endMoment.clone().endOf( 'day' ) ) }
+						allDay={ allDay }
+						// TODO: Add onChange handler
+					/>
+					<div className="tribe-editor__events-pro-rule-field__time__multi-day">
 						<ToggleControl
 							label={ __( 'Multi-Day', 'events-gutenberg' ) }
-							checked={ false }
+							checked={ multiDay }
+							// TODO: Add onChange handler
 							onChange={ () => {} }
 						/>
 					</div>
@@ -56,6 +88,11 @@ const SingularField = ( props ) => {
 	);
 };
 
-SingularField.propTypes = {};
+SingularField.propTypes = {
+	allDay: PropTypes.bool.isRequired,
+	end: PropTypes.string.isRequired,
+	multiDay: PropTypes.bool.isRequired,
+	start: PropTypes.string.isRequired,
+};
 
 export default SingularField;

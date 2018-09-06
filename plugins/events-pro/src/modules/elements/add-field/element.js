@@ -7,16 +7,16 @@ import classnames from 'classnames';
 import './style.pcss';
 
 const AddField = ( { children, noBorder, onClick } ) => (
-	<aside className={ classnames( 'tribe-events-pro__add-field', {
-		'tribe-events-pro__add-field--no-border': noBorder,
+	<aside className={ classnames( 'tribe-editor__events-pro__add-field', {
+		'tribe-editor__events-pro__add-field--no-border': noBorder,
 	} ) }
 	>
 		<button
-			className="tribe-events-pro__add-field__button"
+			className="tribe-editor__events-pro__add-field__button"
 			onClick={ onClick }
 			type="button"
 		>
-			<span className="tribe-events-pro__add-field__button__plus">+</span>
+			<span className="tribe-editor__events-pro__add-field__button__plus">+</span>
 			<span>{ children }</span>
 		</button>
 	</aside>

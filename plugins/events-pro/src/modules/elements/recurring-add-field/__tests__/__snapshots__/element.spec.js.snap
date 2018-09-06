@@ -2,15 +2,15 @@
 
 exports[`RecurringAddField should match snapshot 1`] = `
 <aside
-  className="tribe-events-pro__add-field"
+  className="tribe-editor__events-pro__add-field"
 >
   <button
-    className="tribe-events-pro__add-field__button"
+    className="tribe-editor__events-pro__add-field__button"
     onClick={[MockFunction]}
     type="button"
   >
     <span
-      className="tribe-events-pro__add-field__button__plus"
+      className="tribe-editor__events-pro__add-field__button__plus"
     >
       +
     </span>

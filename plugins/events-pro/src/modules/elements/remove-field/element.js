@@ -13,7 +13,7 @@ import './style.pcss';
 
 const RemoveField = ( { onClick } ) => (
 	<button
-		className="tribe-events-pro__remove-field"
+		className="tribe-editor__events-pro__remove-field"
 		onClick={ onClick }
 		type="button"
 	>

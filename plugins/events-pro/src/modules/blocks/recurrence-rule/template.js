@@ -15,7 +15,7 @@ import Panel from '@moderntribe/events-pro/elements/panel/element';
 export default class EventRecurring extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
-		removeField: PropTypes.func.isRequired,
+		removeRule: PropTypes.func.isRequired,
 		initialRulePanelClick: PropTypes.func.isRequired,
 		isRulePanelExpanded: PropTypes.bool.isRequired,
 		isRulePanelVisible: PropTypes.bool.isRequired,
@@ -34,7 +34,7 @@ export default class EventRecurring extends PureComponent {
 					>
 						<RecurringForm
 							rules={ this.props.rules }
-							removeField={ this.props.removeField }
+							removeRule={ this.props.removeRule }
 						/>
 						<RecurringAddField onClick={ this.props.addField } noBorder />
 					</Panel>
