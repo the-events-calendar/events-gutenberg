@@ -15,10 +15,10 @@ export const createChainableValidator = ( validator ) => {
 			if ( isRequired ) {
 				if ( propValue === null ) {
 					/* eslint-disable-next-line max-len */
-					return new Error( 'The prop `' + propName + '` is marked as required in `' + componentName + '`, but its value is `null`.' );
+					return new Error( `The prop \`${propName}\` is marked as required in \`${componentName}\`, but its value is \`null\`.` );
 				}
 				/* eslint-disable-next-line max-len */
-				return new Error( 'The prop `' + propName + '` is marked as required in `' + componentName + '`, but its value is `undefined`.' );
+				return new Error( `The prop \`${propName}\` is marked as required in \`${componentName}\`, but its value is \`undefined\`.` );
 			}
 			return null;
 		} else {
@@ -45,13 +45,13 @@ export const timeFormat = ( props, propName, componentName ) => {
 	if ( typeof propValue !== 'string' ) {
 		const type = typeof propValue;
 		/* eslint-disable-next-line max-len */
-		return new Error('Invalid prop `' + propName + '` of type `' + type + '` supplied to `' + componentName + '`, expected `string`.' );
+		return new Error( `Invalid prop \`${propName}\` of type \`${type}\` supplied to \`${componentName}\`, expected \`string\`.` );
 	}
 
 	const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 	if ( ! timeRegex.test( propValue ) ) {
 		/* eslint-disable-next-line max-len */
-		return new Error('Invalid prop `' + propName + '` format supplied to `' + componentName + '`, expected `hh:mm`.' );
+		return new Error( `Invalid prop \`${propName}\` format supplied to \`${componentName}\`, expected \`hh:mm\`.` );
 	}
 
 	return null;
