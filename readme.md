@@ -111,6 +111,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Tweak - Move time picker element from events plugin to common plugin
 * Tweak - Adjust time picker element to accept time string in hh:mm format rather than moments
 * Fix - Accept responses between `200` and `299` HTTP codes as valid responses
+* Fix - Prevent to set attributes when arrays have the same content
 
 #### 0.2.7-alpha - 2018-08-30
 
