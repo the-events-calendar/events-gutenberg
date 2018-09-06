@@ -12,6 +12,9 @@ const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
 
 describe( '[STORE] - Price actions', () => {
+	it( 'Should set initial state', () => {
+		expect( actions.setInitialState( {} ) ).toMatchSnapshot();
+	} );
 	it( 'Should set the cost', () => {
 		expect( actions.setCost( 10 ) ).toMatchSnapshot();
 	} );
@@ -31,26 +34,5 @@ describe( '[STORE] - Price actions', () => {
 	it( 'Should toggle the prefix', () => {
 		expect( actions.togglePosition( true ) ).toMatchSnapshot();
 		expect( actions.togglePosition( false ) ).toMatchSnapshot();
-	} );
-} );
-
-describe( '[STORE] - Price thunk actions', () => {
-	it( 'Should set the initial state', () => {
-		const store = mockStore( {} );
-		const get = jest.fn( ( key ) => {
-			const values = {
-				cost: 10,
-				currencySymbol: '€',
-				costDescription: 'Not so expensive',
-				currencyPosition: 'suffix',
-			};
-			return values[ key ];
-		} );
-
-		store.dispatch( actions.setInitialState( { get } ) );
-
-		expect( get ).toHaveBeenCalled();
-		expect( get ).toHaveBeenCalledTimes( 4 );
-		expect( store.getActions() ).toMatchSnapshot();
 	} );
 } );
