@@ -30,7 +30,7 @@ const SingularField = ( {
 				<Label>
 					{ __( 'A', 'events-gutenberg' ) }
 				</Label>
-				<div className="tribe-events-pro-exception-field__date">
+				<div className="tribe-editor__events-pro-exception-field__date">
 					<Select
 						options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 						value={ fieldType }
@@ -46,7 +46,7 @@ const SingularField = ( {
 							: __( 'On', 'events-gutenberg' )
 					}
 				</Label>
-				<div className="tribe-events-pro-exception-field__time">
+				<div className="tribe-editor__events-pro-exception-field__time">
 					<DatePickerInput
 						datetime={ toMoment( start ).add( 1, 'day' ) }
 						// TODO: Add onChange handler
@@ -61,7 +61,7 @@ const SingularField = ( {
 							</Fragment>
 						)
 					}
-					<div className="tribe-events-pro-exception-field__time__multi-day">
+					<div className="tribe-editor__events-pro-exception-field__time__multi-day">
 						<ToggleControl
 							label={ __( 'Multi-Day', 'events-gutenberg' ) }
 							checked={ multiDay }

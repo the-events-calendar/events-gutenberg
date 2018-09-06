@@ -47,7 +47,7 @@ const SingularField = ( {
 				<Label>
 					{ __( 'On', 'events-gutenberg' ) }
 				</Label>
-				<div className="tribe-events-pro-rule-field__date">
+				<div className="tribe-editor__events-pro-rule-field__date">
 					<DatePickerInput
 						datetime={ start }
 						// TODO: Add onChange handler
@@ -58,7 +58,7 @@ const SingularField = ( {
 				<Label>
 					{ __( 'From', 'events-gutenberg' ) }
 				</Label>
-				<div className="tribe-events-pro-rule-field__time">
+				<div className="tribe-editor__events-pro-rule-field__time">
 					<TimePicker
 						current={ startMoment }
 						start={ startMoment.clone().startOf( 'day' ) }
@@ -74,7 +74,7 @@ const SingularField = ( {
 						allDay={ allDay }
 						// TODO: Add onChange handler
 					/>
-					<div className="tribe-events-pro-rule-field__time__multi-day">
+					<div className="tribe-editor__events-pro-rule-field__time__multi-day">
 						<ToggleControl
 							label={ __( 'Multi-Day', 'events-gutenberg' ) }
 							checked={ multiDay }

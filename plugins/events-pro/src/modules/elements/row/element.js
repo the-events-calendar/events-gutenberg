@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import './style.pcss';
 
 const Row = ( { children, className } ) => (
-	<div className={ classnames( 'tribe-events-pro__row', className ) }>
+	<div className={ classnames( 'tribe-editor__events-pro__row', className ) }>
 		{ children }
 	</div>
 );
