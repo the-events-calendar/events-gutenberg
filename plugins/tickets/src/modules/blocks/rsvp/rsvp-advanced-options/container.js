@@ -1,7 +1,12 @@
 /**
  * External dependencies
  */
-import { connect } from 'redux';
+import { connect } from 'react-redux';
+
+/**
+ * Internal dependencies
+ */
+import RSVPAdvancedOptions from './template';
 
 const mapStateToProps = ( state ) => ( {
 	accordionId: 'placeholder',

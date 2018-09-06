@@ -131,8 +131,8 @@ Accordion.propTypes = {
 		headerId: PropTypes.string.isRequired,
 		isActive: PropTypes.bool.isRequired,
 		onClick: PropTypes.func,
-		onOpen: PropTypes.func,
 		onClose: PropTypes.func,
+		onOpen: PropTypes.func,
 	} ).isRequired ).isRequired,
 };
 
