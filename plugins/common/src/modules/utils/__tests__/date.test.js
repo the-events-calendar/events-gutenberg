@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { date, moment } from '@moderntribe/common/utils';
+import { date, moment as momentUtil } from '@moderntribe/common/utils';
 
 const {
 	FORMATS,
@@ -105,12 +105,12 @@ describe( 'Tests for date.js', () => {
 		it( 'Should return the parsed date', () => {
 			expect( toNaturalLanguage( '2018-05-04 17:00:00' ) )
 				.toEqual( {
-					moment: moment.toMoment( '2018-05-04 17:00:00' ),
+					moment: momentUtil.toMoment( '2018-05-04 17:00:00' ),
 					text: 'May 4 2018 at 5:00 pm',
 				} );
 			expect( toNaturalLanguage( '2019-12-24 12:00:00' ) )
 				.toEqual( {
-					moment: moment.toMoment( '2019-12-24 12:00:00' ),
+					moment: momentUtil.toMoment( '2019-12-24 12:00:00' ),
 					text: 'Dec 24 2019 at 12:00 pm',
 				} );
 		} );

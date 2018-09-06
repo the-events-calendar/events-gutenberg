@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { moment } from '@moderntribe/common/utils';
+import { moment as momentUtil } from '@moderntribe/common/utils';
 
 export const toggleDashboardDateTime = () => ( {
 	type: types.TOGGLE_DASHBOARD_DATE_TIME,
@@ -49,6 +49,6 @@ export const setInitialState = ( { get } ) => ( dispatch ) => {
 		return;
 	}
 
-	const month = moment.toMoment( moment.parseFormats( start ) ).startOf( 'month' ).toDate();
+	const month = momentUtil.toMoment( momentUtil.parseFormats( start ) ).startOf( 'month' ).toDate();
 	dispatch( setVisibleMonth( month ) );
 };
