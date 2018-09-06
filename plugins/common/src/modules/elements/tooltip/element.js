@@ -10,6 +10,11 @@ import classNames from 'classnames';
  */
 import { Tooltip as WpTooltip } from '@wordpress/components';
 
+/**
+ * Internal dependencies
+ */
+import { Button } from '@moderntribe/common/elements';
+
 const Tooltip = ( {
 	label,
 	labelClassName,
@@ -20,13 +25,15 @@ const Tooltip = ( {
 		<Button
 			aria-label={ text }
 			className={ classNames( 'tribe-editor__tooltip-label', labelClassName ) }
-			label={ label }
-		/>
+		>
+			{ label }
+		</Button>
 	</WpTooltip>
 );
 
 Tooltip.defaultProps = {
 	position: 'top right',
+	text: '',
 };
 
 Tooltip.propTypes = {
@@ -40,5 +47,7 @@ Tooltip.propTypes = {
 		'bottom center',
 		'bottom right',
 	] ),
-	text: PropTypes.string.isRequired,
+	text: PropTypes.string,
 };
+
+export default Tooltip;

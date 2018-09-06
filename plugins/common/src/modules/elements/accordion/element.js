@@ -72,7 +72,6 @@ const Accordion = ( {
 									'tribe-editor__accordion__row-header',
 									row.headerClassName,
 								) }
-								label={ row.header }
 								onClick={ ( e ) => onClick( e, row ) }
 								{ ...headerAttrs }
 							>
