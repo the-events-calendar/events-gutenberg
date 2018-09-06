@@ -23,9 +23,9 @@ const mapStateToProps = ( state, props ) => ( {
 	available: 48,
 	total: 166,
 	footerActions: [
-		<ActionButton><CogIcon /> Settings</ActionButton>,
-		<ActionButton><UserIcon /> Attendees </ActionButton>,
-		<ActionButton><TagIcon /> Orders</ActionButton>,
+		<ActionButton icon={ <CogIcon /> }>Settings</ActionButton>,
+		<ActionButton icon={ <UserIcon /> }>Attendees </ActionButton>,
+		<ActionButton icon={ <TagIcon /> }>Orders</ActionButton>,
 	],
 } );
 
