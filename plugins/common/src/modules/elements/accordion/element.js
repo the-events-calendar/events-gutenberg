@@ -74,7 +74,7 @@ const Accordion = ( {
 								) }
 								label={ row.header }
 								onClick={ ( e ) => onClick( e, row ) }
-								attrs={ headerAttrs }
+								{ ...headerAttrs }
 							>
 								{ row.header }
 							</Button>

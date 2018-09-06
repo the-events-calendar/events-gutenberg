@@ -12,22 +12,18 @@ import { Tooltip as WpTooltip } from '@wordpress/components';
 
 const Tooltip = ( {
 	label,
+	labelClassName,
+	position,
 	text,
-} ) => {
-	const attrs = {
-		'aria-label': text,
-	};
-
-	return (
-		<WpTooltip text={ text } position={ position}>
-			<Button
-				attrs={ attrs }
-				className={ classNames( 'tribe-editor__tooltip-icon', iconClassName ) }
-				label={ label }
-			/>
-		</WpTooltip>
-	)
-};
+} ) => (
+	<WpTooltip text={ text } position={ position }>
+		<Button
+			aria-label={ text }
+			className={ classNames( 'tribe-editor__tooltip-label', labelClassName ) }
+			label={ label }
+		/>
+	</WpTooltip>
+);
 
 Tooltip.defaultProps = {
 	position: 'top right',
@@ -35,6 +31,7 @@ Tooltip.defaultProps = {
 
 Tooltip.propTypes = {
 	label: PropTypes.node,
+	labelClassName: PropTypes.string,
 	position: PropTypes.oneOf( [
 		'top left',
 		'top center',
