@@ -8,13 +8,13 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import Organizer from './container';
-import { Icons } from '@moderntribe/common/elements';
+import { BlockIcon } from '@moderntribe/common/elements';
 
 export default {
 	id: 'event-organizer',
 	title: __( 'Event Organizer', 'events-gutenberg' ),
 	description: __( 'List a host or coordinator for this event.', 'events-gutenberg' ),
-	icon: Icons.TEC,
+	icon: BlockIcon,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

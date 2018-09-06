@@ -16,6 +16,20 @@ class Tribe__Gutenberg__Common__Editor {
 	public $key_flag_classic_editor = '_tribe_is_classic_editor';
 
 	/**
+	 * Utility function to check if we should load the blocks or not based on two assumptions
+	 *
+	 * a) Is gutenberg active?
+	 * b) Is the blocks editor active?
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	public function should_load_blocks() {
+		return $this->is_gutenberg_active() && $this->is_blocks_editor_active();
+	}
+
+	/**
 	 * Checks if we have Gutenberg Project online, only useful while
 	 * its a external plugin
 	 *

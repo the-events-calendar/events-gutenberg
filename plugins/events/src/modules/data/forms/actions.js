@@ -91,7 +91,7 @@ export const sendForm = ( id, fields = {}, completed ) => ( dispatch, getState )
 		path,
 		params: {
 			method: create ? 'POST' : 'PUT',
-			data: fields,
+			body: JSON.stringify( fields ),
 		},
 		actions: {
 			start: () => dispatch( setSaving( id, true ) ),
