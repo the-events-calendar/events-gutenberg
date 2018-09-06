@@ -50,7 +50,6 @@ const Accordion = ( {
 				aria-multiselectable="true"
 				className={ classNames(
 					'tribe-editor__accordion',
-					'tribe-editor__accordion--active',
 					className,
 				) }
 				role="tablist"
