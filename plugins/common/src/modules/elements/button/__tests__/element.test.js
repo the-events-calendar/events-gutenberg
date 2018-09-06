@@ -48,7 +48,7 @@ describe( 'Button Element', () => {
 			test: 'one-two-three',
 			hello: 'world',
 		};
-		const component = renderer.create( <Button attrs={ attrs } /> );
+		const component = renderer.create( <Button { ...attrs } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 } );

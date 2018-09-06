@@ -7,32 +7,30 @@ import classNames from 'classnames';
 import { noop } from 'lodash';
 
 const Button = ( {
-	attrs,
 	className,
 	isDisabled,
 	label,
 	onClick,
 	type,
+	...props
 } ) => (
 	<button
 		className={ classNames( 'tribe-editor__button', className ) }
 		disabled={ isDisabled }
 		type={ type }
 		onClick={ onClick }
-		{ ...attrs }
+		{ ...props }
 	>
 		{ label }
 	</button>
 );
 
 Button.defaultProps = {
-	attrs: {},
 	onClick: noop,
 	type: 'button',
 };
 
 Button.propTypes = {
-	attrs: PropTypes.object,
 	className: PropTypes.string,
 	isDisabled: PropTypes.bool,
 	label: PropTypes.node,
