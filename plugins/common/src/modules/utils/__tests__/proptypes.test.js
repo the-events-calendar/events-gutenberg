@@ -64,6 +64,28 @@ describe( 'Tests for proptypes utils', () => {
 		} );
 	} );
 
+	describe( 'timeRegex', () => {
+		it( 'should return true when provided proper time formatted string', () => {
+			expect( proptypes.timeRegex.test( '00:00' ) ).toEqual( true );
+			expect( proptypes.timeRegex.test( '23:59' ) ).toEqual( true );
+			expect( proptypes.timeRegex.test( '12:42' ) ).toEqual( true );
+			expect( proptypes.timeRegex.test( '03:01' ) ).toEqual( true );
+			expect( proptypes.timeRegex.test( '19:47' ) ).toEqual( true );
+			expect( proptypes.timeRegex.test( '05:56' ) ).toEqual( true );
+			expect( proptypes.timeRegex.test( '14:11' ) ).toEqual( true );
+		} );
+
+		it( 'should return false when not provided proper time formatted string', () => {
+			expect( proptypes.timeRegex.test( 'random string' ) ).toEqual( false );
+			expect( proptypes.timeRegex.test( '-00:00' ) ).toEqual( false );
+			expect( proptypes.timeRegex.test( '24:00' ) ).toEqual( false );
+			expect( proptypes.timeRegex.test( '00:60' ) ).toEqual( false );
+			expect( proptypes.timeRegex.test( '24:60' ) ).toEqual( false );
+			expect( proptypes.timeRegex.test( '75:93' ) ).toEqual( false );
+			expect( proptypes.timeRegex.test( '90:90' ) ).toEqual( false );
+		} );
+	} );
+
 	describe( 'timeFormat', () => {
 		it( 'should not return an error when provided proper time formatted string', () => {
 			const props = {

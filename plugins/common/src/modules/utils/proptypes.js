@@ -32,6 +32,8 @@ export const createChainableValidator = ( validator ) => {
 	return chainedValidator;
 }
 
+export const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+
 /**
  * PropTypes check for type string and time format using 24h clock in hh:mm format
  * e.g. 00:24, 03:57, 21:12
@@ -48,7 +50,6 @@ export const timeFormat = ( props, propName, componentName ) => {
 		return new Error( `Invalid prop \`${propName}\` of type \`${type}\` supplied to \`${componentName}\`, expected \`string\`.` );
 	}
 
-	const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 	if ( ! timeRegex.test( propValue ) ) {
 		/* eslint-disable-next-line max-len */
 		return new Error( `Invalid prop \`${propName}\` format supplied to \`${componentName}\`, expected \`hh:mm\`.` );
