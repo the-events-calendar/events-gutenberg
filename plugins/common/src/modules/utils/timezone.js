@@ -1,17 +1,7 @@
 /**
  * External dependencies
  */
-import {
-	find,
-	flatten,
-	map,
-	get,
-} from 'lodash';
-
-/**
- * Wordpress Dependencies
- */
-import { __ } from '@wordpress/i18n';
+import { find, flatten, map, get } from 'lodash';
 
 /**
  * Module Code
@@ -21,7 +11,7 @@ const $timezoneOpts = jQuery( options );
 
 let timezoneOpts;
 
-export function getTimezoneOpts() {
+export const getTimezoneOpts = () => {
 	// Verify if we have it in cache solved
 	if ( timezoneOpts ) {
 		return timezoneOpts;
@@ -30,7 +20,7 @@ export function getTimezoneOpts() {
 	const groups = [];
 	let number = 0;
 
-	$timezoneOpts.each( function( index, item ) {
+	$timezoneOpts.each( ( index, item ) => {
 		const $group = jQuery( item );
 
 		if ( ! $group.is( 'optgroup' ) ) {
@@ -46,7 +36,7 @@ export function getTimezoneOpts() {
 			options: [],
 		};
 
-		$group.find( 'option' ).each( function( optIndex, optionEl ) {
+		$group.find( 'option' ).each( ( optIndex, optionEl ) => {
 			number++;
 
 			const $option = jQuery( optionEl );
@@ -66,7 +56,7 @@ export function getTimezoneOpts() {
 	return groups;
 }
 
-export function getItems( searchFor ) {
+export const getItems = ( searchFor ) => {
 	const groups = getTimezoneOpts();
 
 	if ( searchFor ) {
@@ -75,19 +65,4 @@ export function getItems( searchFor ) {
 	}
 
 	return groups;
-}
-
-export function currentValue( current ) {
-	if ( current ) {
-		return current;
-	}
-
-	const timezone = siteTimezone.string ? siteTimezone.string : `UTC${ siteTimezone.offset }`;
-	const search = { key: timezone };
-	const items = this.getItems( search );
-
-	if ( ! items ) {
-		return __( 'Invalid Timezone', 'events-gutenberg' );
-	}
-	return items.key;
 }

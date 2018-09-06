@@ -5,7 +5,7 @@ import {
 	hasClass,
 	isRootNode,
 	searchParent,
-} from '@moderntribe/events/editor/utils/dom';
+} from '@moderntribe/common/utils/dom';
 
 describe( 'Tests for dom.js', () => {
 	beforeAll( () => {

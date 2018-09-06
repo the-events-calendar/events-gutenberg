@@ -10,14 +10,14 @@ import { noop } from 'lodash';
  * @param {array} classNames List of class names as an array of strings
  * @returns {boolean} `true` if has any of the classes or false if does not have any
  */
-export function hasClass( node, classNames = [] ) {
+export const hasClass = ( node, classNames = [] ) => {
 	for ( let i = 0; i < classNames.length; i++ ) {
 		if ( node.classList.contains( classNames[ i ] ) ) {
 			return true;
 		}
 	}
 	return false;
-}
+};
 
 /**
  * Utility to search the parent of a node looking from the current node Up to the highest
@@ -27,7 +27,7 @@ export function hasClass( node, classNames = [] ) {
  * @param {function} callback - Is executed on every iteration, it should return a boolean
  * @returns {boolean} Returns tre if the callback returns true with any of the parents.
  */
-export function searchParent( node = {}, callback = noop ) {
+export const searchParent = ( node = {}, callback = noop ) => {
 	let found = false;
 	let testNode = node;
 	do {
@@ -39,7 +39,7 @@ export function searchParent( node = {}, callback = noop ) {
 	} while ( ! found && testNode !== null );
 
 	return found;
-}
+};
 
 /**
  * Test if a node is the same as the root element or the base node of the document.
@@ -47,6 +47,4 @@ export function searchParent( node = {}, callback = noop ) {
  * @param {Element} node A Document Node
  * @returns {boolean} true if node is the root Node Document
  */
-export function isRootNode( node ) {
-	return node === window.top.document;
-}
+export const isRootNode = ( node ) => node === window.top.document;

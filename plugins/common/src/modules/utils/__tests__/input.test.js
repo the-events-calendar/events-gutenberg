@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { sendValue } from '@moderntribe/events/editor/utils/input';
+import { sendValue } from '@moderntribe/common/utils/input';
 
 describe( 'Tests for input.js', () => {
 	const event = {

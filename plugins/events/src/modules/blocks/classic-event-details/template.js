@@ -16,15 +16,19 @@ import { PlainText, InspectorControls } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
+import {
+	date,
+	input,
+	moment as momentUtil,
+} from '@moderntribe/common/utils';
 import { TermsList, MetaGroup } from '@moderntribe/events/elements';
-import { toMoment, toDate, toTime } from '@moderntribe/events/editor/utils/moment';
-import { sendValue } from '@moderntribe/events/editor/utils/input';
-import { FORMATS } from '@moderntribe/events/editor/utils';
 import EventDetailsOrganizers from './event-details-organizers/container';
 
 /**
  * Module Code
  */
+
+const { toMoment, toDate, toTime } = momentUtil;
 
 const ClassicEventDetails = ( props ) => {
 
@@ -36,7 +40,7 @@ const ClassicEventDetails = ( props ) => {
 				className="tribe-editor__events-section__headline trigger-dashboard-datetime"
 				value={ detailsTitle }
 				placeholder={ __( 'Details', 'events-gutenberg' ) }
-				onChange={ sendValue( setDetailsTitle ) }
+				onChange={ input.sendValue( setDetailsTitle ) }
 			/>
 		);
 	};
@@ -51,11 +55,11 @@ const ClassicEventDetails = ( props ) => {
 					onClick={ toggleDashboardDateTime }
 				>
 					<strong>{ __( 'Start: ', 'events-gutenberg' ) }</strong>
-					{ toDate( toMoment( start ), FORMATS.WP.date ) }
+					{ toDate( toMoment( start ), date.FORMATS.WP.date ) }
 					{ ! allDay && (
 						<Fragment>
 							<span>{ ' '.concat( separatorDate, ' ' ) }</span>
-							<span>{ toTime( toMoment( start ), FORMATS.WP.time ) }</span>
+							<span>{ toTime( toMoment( start ), date.FORMATS.WP.time ) }</span>
 						</Fragment>
 					) }
 				</button>
@@ -73,11 +77,11 @@ const ClassicEventDetails = ( props ) => {
 					onClick={ toggleDashboardDateTime }
 				>
 					<strong>{ __( 'End: ', 'events-gutenberg' ) }</strong>
-					{ toDate( toMoment( end ), FORMATS.WP.date ) }
+					{ toDate( toMoment( end ), date.FORMATS.WP.date ) }
 					{ ! allDay && (
 						<Fragment>
 							<span>{ ' '.concat( separatorDate, ' ' ) }</span>
-							<span>{ toTime( toMoment( end ), FORMATS.WP.time ) }</span>
+							<span>{ toTime( toMoment( end ), date.FORMATS.WP.time ) }</span>
 						</Fragment>
 					) }
 				</button>
@@ -161,7 +165,7 @@ const ClassicEventDetails = ( props ) => {
 						className="tribe-editor__events-section__headline"
 						value={ organizerTitle }
 						placeholder={ __( 'Organizer', 'events-gutenberg' ) }
-						onChange={ sendValue( setOrganizerTitle ) }
+						onChange={ input.sendValue( setOrganizerTitle ) }
 					/>
 					<EventDetailsOrganizers />
 				</MetaGroup>

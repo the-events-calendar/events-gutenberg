@@ -20,15 +20,12 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import {
+	moment as momentUtil,
+	time,
+	TribePropTypes,
+} from '@moderntribe/common/utils';
 import './style.pcss';
-import {
-	HALF_HOUR_IN_SECONDS,
-} from '@moderntribe/events/editor/utils/time';
-import {
-	toFormat,
-	setTimeInSeconds,
-	totalSeconds,
-} from '@moderntribe/events/editor/utils/moment';
 
 const TimePicker = ( {
 	current,
@@ -41,6 +38,7 @@ const TimePicker = ( {
 	allDay,
 	onChange,
 	onClick,
+	showAllDay,
 } ) => {
 	const renderLabel = ( onToggle ) => {
 		if ( allDay ) {
@@ -54,14 +52,13 @@ const TimePicker = ( {
 			);
 		}
 
-		const label = current.format( 'HH:mm' );
 		const additionalProps = {};
 		if ( min ) {
-			additionalProps.min = min.format( 'HH:mm' );
+			additionalProps.min = min;
 		}
 
 		if ( max ) {
-			additionalProps.max = max.format( 'HH:mm' );
+			additionalProps.max = max;
 		}
 
 		return (
@@ -69,7 +66,7 @@ const TimePicker = ( {
 				name="google-calendar-label"
 				className="tribe-editor__btn-input"
 				type="time"
-				value={ label }
+				value={ current }
 				onChange={ onChange }
 				{ ...additionalProps }
 			/>
@@ -92,14 +89,14 @@ const TimePicker = ( {
 	const getItems = () => {
 		const items = [];
 
-		const startSeconds = totalSeconds( start );
-		const endSeconds = totalSeconds( end );
+		const startSeconds = time.toS( start, time.TIME_FORMAT_HH_MM );
+		const endSeconds = time.toS( end, time.TIME_FORMAT_HH_MM );
 
 		for ( let time = startSeconds; time <= endSeconds; time += step ) {
 			items.push( {
 				value: time,
 				text: formatLabel( time ),
-				isCurrent: time === totalSeconds( current ),
+				isCurrent: time === time.toS( current, time.TIME_FORMAT_HH_MM ),
 			} );
 		}
 
@@ -107,7 +104,7 @@ const TimePicker = ( {
 	}
 
 	const formatLabel = ( seconds ) => {
-		return setTimeInSeconds( moment(), seconds ).format( toFormat( timeFormat ) );
+		return momentUtil.setTimeInSeconds( moment(), seconds ).format( momentUtil.toFormat( timeFormat ) );
 	};
 
 	const renderItem = ( item, onClose ) => {
@@ -138,7 +135,10 @@ const TimePicker = ( {
 					role="menu"
 					className={ classNames( 'tribe-editor__timepicker__items' ) }
 				>
-					{ renderItem( { text: __( 'All Day', 'events-gutenberg' ), value: 'all-day' }, onClose ) }
+					{ showAllDay && renderItem(
+						{ text: __( 'All Day', 'events-gutenberg' ), value: 'all-day' },
+						onClose,
+					) }
 					{ getItems().map( ( item ) => renderItem( item, onClose ) ) }
 				</ScrollArea>
 			) }
@@ -162,8 +162,7 @@ const TimePicker = ( {
 }
 
 TimePicker.defaultProps = {
-	current: moment(),
-	step: HALF_HOUR_IN_SECONDS,
+	step: time.HALF_HOUR_IN_SECONDS,
 	timeFormat: 'H:i',
 	allDay: false,
 	onChange: noop,
@@ -171,16 +170,22 @@ TimePicker.defaultProps = {
 };
 
 TimePicker.propTypes = {
-	current: PropTypes.instanceOf( moment ),
-	min: PropTypes.instanceOf( moment ),
-	max: PropTypes.instanceOf( moment ),
-	start: PropTypes.instanceOf( moment ).isRequired,
-	end: PropTypes.instanceOf( moment ).isRequired,
+	/**
+	 * TribePropTypes.timeFormat check for string formatted as a time
+	 * using 24h clock in hh:mm format
+	 * e.g. 00:24, 03:57, 21:12
+	 */
+	current: TribePropTypes.timeFormat.isRequired,
+	min: TribePropTypes.timeFormat,
+	max: TribePropTypes.timeFormat,
+	start: TribePropTypes.timeFormat.isRequired,
+	end: TribePropTypes.timeFormat.isRequired,
 	step: PropTypes.number,
 	timeFormat: PropTypes.string,
 	allDay: PropTypes.bool,
 	onChange: PropTypes.func.isRequired,
 	onClick: PropTypes.func.isRequired,
+	showAllDay: PropTypes.bool,
 };
 
 export default TimePicker;

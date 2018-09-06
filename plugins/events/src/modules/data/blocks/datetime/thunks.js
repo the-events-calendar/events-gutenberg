@@ -20,7 +20,9 @@ import {
 } from './actions';
 import { DEFAULT_STATE } from './reducer';
 import { maybeBulkDispatch } from '@moderntribe/events/data/utils';
-import {
+import { date, moment, time } from '@moderntribe/common/utils';
+
+const {
 	isSameDay,
 	parseFormats,
 	replaceDate,
@@ -28,10 +30,7 @@ import {
 	toDateTime,
 	toMoment,
 	adjustStart,
-} from '@moderntribe/events/editor/utils/moment';
-import { DAY_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
-import { rangeToNaturalLanguage } from '@moderntribe/events/editor/utils/date';
-
+} = moment;
 export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
 	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
 	dispatch( setStartDateTime( startDateTime ) );
@@ -45,7 +44,7 @@ export const setEndTime = ( { end, seconds } ) => ( dispatch ) => {
 export const setAllDay = ( { start, end, isAllDay } ) => ( dispatch ) => {
 	if ( isAllDay ) {
 		const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), 0 ) );
-		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), DAY_IN_SECONDS - 1 ) );
+		const endDateTime = toDateTime( setTimeInSeconds( toMoment( end ), time.DAY_IN_SECONDS - 1 ) );
 		dispatch( setStartDateTime( startDateTime ) );
 		dispatch( setEndDateTime( endDateTime ) );
 	}
@@ -127,7 +126,7 @@ export const setInitialState = ( { get, attributes } ) => ( dispatch ) => {
 		dispatch( setEndDateTime( values.end ) );
 	}
 
-	dispatch( setNaturalLanguageLabel( rangeToNaturalLanguage( values.start, values.end ) ) );
+	dispatch( setNaturalLanguageLabel( date.rangeToNaturalLanguage( values.start, values.end ) ) );
 
 	dispatch( setMultiDayAction( ! isSameDay( values.start, values.end ) ) );
 };

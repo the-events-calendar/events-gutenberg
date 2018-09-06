@@ -17,9 +17,10 @@ import {
 /**
  * Internal dependencies
  */
-import { toMoment, toDate, toDatePicker, toDateTime } from '@moderntribe/events/editor/utils/moment';
-
+import { moment as momentUtil } from '@moderntribe/common/utils';
 import './style.pcss';
+
+const { toMoment, toDate, toDatePicker, toDateTime } = momentUtil;
 
 export default class DatePicker extends Component {
 	static propTypes = {
