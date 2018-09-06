@@ -3,6 +3,12 @@
  */
 import { escapeRegExp, isUndefined } from 'lodash';
 
+/**
+ * Test if a string is equivalent to a true value
+ *
+ * @param {string} value The value to be tested
+ * @returns {boolean} true if the value is a valid "true" value.
+ */
 export const isTruthy = ( value ) => {
 	const validValues = [
 		'true',
