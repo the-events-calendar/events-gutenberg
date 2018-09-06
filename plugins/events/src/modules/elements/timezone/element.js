@@ -9,7 +9,7 @@ import { noop } from 'lodash';
 /**
  * Internal dependencies
  */
-import { sendValue } from '@moderntribe/events/editor/utils/input';
+import { input } from '@moderntribe/common/utils';
 import './style.pcss';
 
 const Timezone = ( { value, placeholder, className, onChange } ) => (
@@ -17,7 +17,7 @@ const Timezone = ( { value, placeholder, className, onChange } ) => (
 		className={ className }
 		value={ value }
 		placeholder={ placeholder }
-		onChange={ sendValue( onChange ) }
+		onChange={ input.sendValue( onChange ) }
 	/>
 )
 

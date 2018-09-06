@@ -3,7 +3,7 @@
  */
 import * as types from './types';
 import { DEFAULT_STATE } from './reducer';
-import { isTruthy } from '@moderntribe/events/editor/utils/string';
+import { string } from '@moderntribe/common/utils';
 import { getPriceSettings } from '@moderntribe/events/editor/settings';
 
 export const setCost = ( cost ) => ( {
@@ -39,7 +39,7 @@ export const setDescription = ( description ) => ( {
 } );
 
 export const setInitialState = ( { get } ) => ( dispatch ) => {
-	const isNewEvent = isTruthy( getPriceSettings().is_new_event );
+	const isNewEvent = string.isTruthy( getPriceSettings().is_new_event );
 	const currencySymbol = isNewEvent
 		? getPriceSettings().default_currency_symbol
 		: get( 'currencySymbol', DEFAULT_STATE.symbol );

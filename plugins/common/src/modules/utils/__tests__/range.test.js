@@ -6,7 +6,7 @@ import {
 	extractParts,
 	parser,
 	isFree,
-} from '@moderntribe/events/editor/utils/range';
+} from '@moderntribe/common/utils/range';
 
 describe( 'Tests for range.js', () => {
 	test( 'parseChars', () => {

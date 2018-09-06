@@ -11,12 +11,12 @@ import AutosizeInput from 'react-input-autosize';
  */
 import { Dashicon } from '@wordpress/components';
 import { URLInput } from '@wordpress/editor';
-import { sendValue } from '@moderntribe/events/editor/utils/input';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
+import { input } from '@moderntribe/common/utils';
 import './style.pcss';
 
 /**
@@ -59,7 +59,7 @@ const renderLabelInput = ({ isSelected, isEmpty, urlLabel, setLabel }) => {
 				className={ inputClassNames }
 				value={ urlLabel }
 				placeholder={ placeholder }
-				onChange={ sendValue( setLabel ) }
+				onChange={ input.sendValue( setLabel ) }
 			/>
 		</div>
 	);

@@ -63,7 +63,8 @@
 		"url-loader": "^0.6.2",
 		"uuid": "^3.3.2",
 		"validator": "^9.4.1",
-		"whatwg-fetch": "^2.0.4"
+		"whatwg-fetch": "^2.0.4",
+		"zero-fill": "^2.2.3"
 	},
 	"devDependencies": {
 		"@babel/runtime": "7.0.0-beta.52",
