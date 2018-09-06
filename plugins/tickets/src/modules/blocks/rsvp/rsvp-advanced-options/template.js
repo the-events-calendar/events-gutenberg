@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import RSVPDuration from '../rsvp-duration/template';
 import { Accordion } from '@moderntribe/common/elements';
 
 class RSVPAdvancedOptions extends Component {
@@ -22,6 +23,14 @@ class RSVPAdvancedOptions extends Component {
 		isActive: PropTypes.bool.isRequired,
 		onClick: PropTypes.func.isRequired,
 	};
+
+	componentDidMount() {
+		// dispatch action here to create object with accordion state
+	}
+
+	componentWillUnmount() {
+		// dispatch action here to delete object with accordion state
+	}
 
 	getContent = () => (
 		<Fragment>
