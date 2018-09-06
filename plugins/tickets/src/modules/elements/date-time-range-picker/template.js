@@ -12,10 +12,10 @@ import { formatDate, parseDate } from 'react-day-picker/moment';
  */
 import { TimePicker } from '@moderntribe/common/elements';
 import {
-	roundTime,
-	toMoment,
-	isSameDay,
-} from '@moderntribe/events/editor/utils/moment';
+	moment as momentUtil,
+	time,
+	TribePropTypes,
+} from '@moderntribe/common/utils';
 import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
 class DateTimeRangePicker extends Component {
@@ -107,26 +107,74 @@ class DateTimeRangePicker extends Component {
 
 	getFromTimePickerProps = () => {
 		const {
-			from,
+			fromTime,
+			isSameDay,
 			onFromTimePickerChange,
 			onFromTimePickerClick,
-			to,
+			toTime,
 		} = this.props;
-		const _fromMoment = toMoment( from );
-		const _toMoment = toMoment( to );
+
 		const props = {
-			current: _fromMoment,
-			start: _fromMoment.clone().startOf( 'day' ),
-			end: _fromMoment.clone().endOf( 'day' ),
+			current: fromTime,
+			start: time.START_OF_DAY,
+			end: time.END_OF_DAY,
 			onChange: onFromTimePickerChange,
 			onClick: onFromTimePickerClick,
 			timeFormat: FORMATS.WP.time,
+		};
+
+		if ( isSameDay ) {
+			// subtract one minute from toTime
+			const maxTime = time.fromSeconds(
+				time.toSeconds( toTime, time.TIME_FORMAT_HH_MM ) - time.MINUTE_IN_SECONDS,
+				time.TIME_FORMAT_HH_MM,
+			);
+			props.end = time.roundTime( maxTime, time.TIME_FORMAT_HH_MM );
+			props.max = maxTime;
 		}
 
-		if ( isSameDay( _fromMoment, _toMoment ) ) {
-			props.end = roundTime( _toMoment.clone().subtract( 1, 'minutes' ) );
-			props.max = _toMoment.clone().subtract( 1, 'minutes' );
+		return props;
+	};
+
+	getToTimePickerProps = () => {
+		const {
+			fromTime,
+			isSameDay,
+			onToTimePickerChange,
+			onToTimePickerClick,
+			toTime,
+		} = this.props;
+
+		const props = {
+			current: toTime,
+			start: time.START_OF_DAY,
+			end: time.END_OF_DAY,
+			onChange: onToTimePickerChange,
+			onClick: onToTimePickerClick,
+			timeFormat: FORMATS.WP.time,
+		};
+
+		if ( isSameDay ) {
+			// if the start time has less than half an hour left in the day
+			if ( ( time.DAY_IN_SECONDS - time.toSeconds( fromTime ) ) <= time.HALF_HOUR_IN_SECONDS ) {
+				props.start = time.END_OF_DAY;
+			} else {
+				// add 30 minutes to fromTime and round time to closest 30 min interval
+				props.start = time.roundTime(
+					time.fromSeconds(
+						time.toSeconds( fromTime, time.TIME_FORMAT_HH_MM ) + time.HALF_HOUR_IN_SECONDS,
+						time.TIME_FORMAT_HH_MM,
+					),
+					time.TIME_FORMAT_HH_MM,
+				);
+			}
+			props.min = time.fromSeconds(
+				time.toSeconds( fromTime, time.TIME_FORMAT_HH_MM ) + time.MINUTE_IN_SECONDS,
+				time.TIME_FORMAT_HH_MM,
+			);
 		}
+
+		return props;
 	};
 
 	render() {
@@ -167,7 +215,7 @@ class DateTimeRangePicker extends Component {
 					>
 						{ separatorDateTime }
 					</span>
-					<TimePicker />
+					<TimePicker { ...this.getToTimePickerProps() } />
 				</div>
 			</div>
 		)
@@ -181,22 +229,21 @@ DateTimeRangePicker.defaultProps = {
 	separatorDateTime: 'at',
 	separatorTimeRange: 'to',
 	toDateFormat: 'LL',
-}
+};
 
 DateTimeRangePicker.propTypes = {
-	from: PropTypes.string,
 	fromDate: PropTypes.string,
 	fromDateFormat: PropTypes.string,
-	fromTime: PropTypes.string,
+	fromTime: TribePropTypes.timeFormat.isRequired,
 	handleFromDateChange: PropTypes.func,
 	handleToDateChange: PropTypes.func,
+	isSameDay: PropTypes.bool,
 	separatorDateTime: PropTypes.string,
 	separatorTimeRange: PropTypes.string,
 	shiftFocus: PropTypes.bool,
-	to: PropTypes.string,
 	toDate: PropTypes.string,
 	toDateFormat: PropTypes.string,
-	toTime: PropTypes.string,
+	toTime: TribePropTypes.timeFormat.isRequired,
 };
 
 export default DateTimeRangePicker;

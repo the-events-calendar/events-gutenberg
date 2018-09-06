@@ -15,7 +15,7 @@ export const isTruthy = ( value ) => {
 		'yes',
 		'1',
 	];
-	return validValues.indexOf( value ) !== -1;
+	return validValues.includes( value );
 };
 
 /**
@@ -31,7 +31,7 @@ export const isFalsy = ( value ) => {
 		'0',
 		'',
 	];
-	return validValues.indexOf( value ) !== -1;
+	return validValues.includes( value );
 };
 
 export const replaceWithObject = ( str = '', pairs = {} ) => {
