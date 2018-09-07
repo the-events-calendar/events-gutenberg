@@ -34,7 +34,11 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-	className: PropTypes.string,
+	className: PropTypes.oneOfType( [
+		PropTypes.string,
+		PropTypes.arrayOf( PropTypes.string ),
+		PropTypes.object,
+	] ),
 	isDisabled: PropTypes.bool,
 	children: PropTypes.node,
 	onClick: PropTypes.func,
