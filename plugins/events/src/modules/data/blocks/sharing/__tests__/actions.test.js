@@ -12,6 +12,10 @@ const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
 
 describe( '[STORE] - Sharing actions', () => {
+	it( 'Should set initial state', () => {
+		expect( actions.setInitialState( {} ) ).toMatchSnapshot();
+	} );
+
 	it( 'Should set the iCal Label', () => {
 		expect( actions.setiCalLabel( 'Modern Tribe iCal' ) ).toMatchSnapshot();
 	} );
@@ -36,26 +40,5 @@ describe( '[STORE] - Sharing actions', () => {
 
 	it( 'Should toggle if has the iCal label', () => {
 		expect( actions.toggleIcalLabel() ).toMatchSnapshot();
-	} );
-} );
-
-describe( '[STORE] - Sharing thunk actions', () => {
-	it( 'Should set the initial state', () => {
-		const store = mockStore( {} );
-		const get = jest.fn( ( key ) => {
-			const values = {
-				googleCalendarLabel: 'Modern Tribe Google Calendar',
-				iCalLabel: 'Modern Tribe iCal',
-				hasiCal: true,
-				hasGoogleCalendar: true,
-			};
-			return values[ key ];
-		} );
-
-		store.dispatch( actions.setInitialState( { get } ) );
-
-		expect( get ).toHaveBeenCalled();
-		expect( get ).toHaveBeenCalledTimes( 4 );
-		expect( store.getActions() ).toMatchSnapshot();
 	} );
 } );

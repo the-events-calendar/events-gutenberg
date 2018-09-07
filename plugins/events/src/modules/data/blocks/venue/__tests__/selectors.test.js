@@ -9,7 +9,7 @@ const state = {
 		blocks: {
 			venue: DEFAULT_STATE,
 		},
-	}
+	},
 };
 
 describe( '[STORE] - Venue selectors', () => {
