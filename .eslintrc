@@ -140,5 +140,6 @@
     "tribe_blocks_editor": true,
     "mount": true,
     "shallow": true,
+    "renderer": true
   }
 }
