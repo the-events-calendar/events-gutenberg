@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderImage render the component 1`] = `
+<div
+  className="tribe-editor__header-image"
+>
+  <strong
+    className="tribe-editor__header-image__title"
+  >
+    Header Image
+  </strong>
+  <div
+    className="tribe-editor__header-image__content"
+  >
+    <div
+      className="tribe-editor__header-image__description"
+    >
+      Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.
+    </div>
+    <button>
+      Media Upload
+    </button>
+  </div>
+</div>
+`;
+
+exports[`HeaderImage render with custom description 1`] = `
+<div
+  className="tribe-editor__header-image"
+>
+  <strong
+    className="tribe-editor__header-image__title"
+  >
+    Header Image
+  </strong>
+  <div
+    className="tribe-editor__header-image__content"
+  >
+    <div
+      className="tribe-editor__header-image__description"
+    >
+      The Next Generation of Digital Agency
+    </div>
+    <button>
+      Media Upload
+    </button>
+  </div>
+</div>
+`;
+
+exports[`HeaderImage render with custom title 1`] = `
+<div
+  className="tribe-editor__header-image"
+>
+  <strong
+    className="tribe-editor__header-image__title"
+  >
+    Modern Tribe
+  </strong>
+  <div
+    className="tribe-editor__header-image__content"
+  >
+    <div
+      className="tribe-editor__header-image__description"
+    >
+      Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.
+    </div>
+    <button>
+      Media Upload
+    </button>
+  </div>
+</div>
+`;
+
+exports[`renderMediaUpload render the button 1`] = `
+<button
+  className="tribe-editor__button tribe-editor__btn--label tribe-editor__header-image__btn--upload"
+  onClick={[MockFunction]}
+  type="button"
+>
+  Upload Image
+</button>
+`;
