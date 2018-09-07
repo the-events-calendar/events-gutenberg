@@ -13,6 +13,7 @@ import DisabledTickets from './DisabledTickets';
 import {
 	Availability,
 	ActionDashboard,
+	HeaderImage,
 } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
@@ -56,6 +57,7 @@ const TicketsTemplate = ( props ) => {
 					{ disabled.description }
 				</DisabledTickets>
 			</div>
+			<HeaderImage />
 			{ availability }
 			{ actionDashboard }
 		</div>
