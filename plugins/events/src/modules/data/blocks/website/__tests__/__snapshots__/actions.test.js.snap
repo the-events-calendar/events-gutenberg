@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`[STORE] - Website actions Should set initial state 1`] = `
+Object {
+  "payload": Object {},
+  "type": "@@MT/EVENTS/WEBSITE_BLOCK/SET_INITIAL_STATE",
+}
+`;
+
 exports[`[STORE] - Website actions Should set the website URL 1`] = `
 Object {
   "payload": Object {
@@ -16,21 +23,4 @@ Object {
   },
   "type": "@@MT/EVENTS/SET_WEBSITE_LABEL",
 }
-`;
-
-exports[`[STORE] - Website thunk actions Should set the initial state 1`] = `
-Array [
-  Object {
-    "payload": Object {
-      "url": "https://tri.be/",
-    },
-    "type": "@@MT/EVENTS/SET_WEBSITE_URL",
-  },
-  Object {
-    "payload": Object {
-      "label": "Modern Tribe",
-    },
-    "type": "@@MT/EVENTS/SET_WEBSITE_LABEL",
-  },
-]
 `;
