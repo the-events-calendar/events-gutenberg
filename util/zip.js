@@ -5,7 +5,7 @@ const json          = JSON.parse( fs.readFileSync( 'package.json' ) );
 const zip_whitelist = JSON.parse( fs.readFileSync( 'package-whitelist.json' ) );
 
 // create a file to stream archive data to.
-var output = fs.createWriteStream( '/tmp/' + json._zipname + '.' + json.version + '.zip' );
+var output = fs.createWriteStream( __dirname + '/../' + json._zipname + '.' + json.version + '.zip' );
 var archive = archiver( 'zip', {
 	zlib: { level: 9 } // Sets the compression level.
 } );
