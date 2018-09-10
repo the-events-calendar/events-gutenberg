@@ -58,7 +58,7 @@ const ActionDashboard = ( {
 				isDisabled={ isConfirmDisabled }
 				onClick={ onConfirmClick }
 			>
-				{ cancelLabel }
+				{ confirmLabel }
 			</Button>
 		)
 		: null;

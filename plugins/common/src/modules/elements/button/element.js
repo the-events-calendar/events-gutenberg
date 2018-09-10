@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { noop } from 'lodash';
 
+/**
+ * Internal dependencies
+ */
+import './style.pcss';
+
 const Button = ( {
 	className,
 	isDisabled,

@@ -102,6 +102,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add Tickets inside of the `plugins/` directory
 * Feature - Add button component to common elements
 * Feature - Add action dashboard to tickets elements
+* Feature - Create `Available` component
 * Feature - Add TribePropTypes functions to check custom time format
 * Feature - Add time to seconds and ms and vice versa utility
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
