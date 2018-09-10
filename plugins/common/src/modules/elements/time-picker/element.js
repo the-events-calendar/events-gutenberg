@@ -63,7 +63,6 @@ const TimePicker = ( {
 
 		return (
 			<input
-				name="google-calendar-label"
 				className="tribe-editor__btn-input"
 				type="time"
 				value={ current }

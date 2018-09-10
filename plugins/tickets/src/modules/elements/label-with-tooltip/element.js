@@ -9,6 +9,7 @@ import classNames from 'classnames';
  * Internal dependencies
  */
 import { Tooltip } from '@moderntribe/common/elements';
+import './style.pcss';
 
 const LabelWithTooltip = ( {
 	className,
@@ -23,7 +24,11 @@ const LabelWithTooltip = ( {
 		<span className="tribe-editor__label-with-tooltip__label">
 			{ label }
 		</span>
-		<Tooltip label={ tooltipLabel } text={ tooltipText } />
+		<Tooltip
+			label={ tooltipLabel }
+			labelClassName="tribe-editor__label-with-tooltip__tooltip-label"
+			text={ tooltipText }
+		/>
 	</div>
 );
 

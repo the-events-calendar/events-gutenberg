@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
  */
 import RSVPDuration from '../rsvp-duration/template';
 import { Accordion } from '@moderntribe/common/elements';
+import './style.pcss';
 
 class RSVPAdvancedOptions extends Component {
 	static propTypes = {
@@ -22,6 +23,14 @@ class RSVPAdvancedOptions extends Component {
 		headerId: PropTypes.string.isRequired,
 		isActive: PropTypes.bool.isRequired,
 		onClick: PropTypes.func.isRequired,
+	};
+
+	static defaultProps = {
+		accordionId: 'placeholder',
+		contentId: 'placeholder',
+		headerId: 'placeholder',
+		isActive: false,
+		onClick: () => {},
 	};
 
 	componentDidMount() {
@@ -58,7 +67,7 @@ class RSVPAdvancedOptions extends Component {
 	};
 
 	render() {
-		(
+		return (
 			<Accordion
 				className="tribe-editor__rsvp__advanced-options"
 				rows={ this.getRows() }

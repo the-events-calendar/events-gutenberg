@@ -29,6 +29,7 @@ class DateTimeRangePicker extends Component {
 	};
 
 	static propTypes = {
+		className: PropTypes.string,
 		fromDate: PropTypes.string,
 		fromDateFormat: PropTypes.string,
 		fromTime: TribePropTypes.timeFormat.isRequired,
@@ -52,15 +53,6 @@ class DateTimeRangePicker extends Component {
 		this.toDayPickerInput = createRef();
 	}
 
-	getModifiers = () => {
-		const { fromDate, toDate } = this.props;
-
-		return {
-			start: new Date( fromDate ),
-			end: new Date( toDate ),
-		};
-	};
-
 	getFromDayPickerInputProps = () => {
 		const {
 			fromDate,
@@ -70,8 +62,8 @@ class DateTimeRangePicker extends Component {
 			toDate,
 		} = this.props;
 
-		const fromDateObj = new Date( fromDate );
-		const toDateObj = new Date( toDate );
+		const from = new Date( fromDate );
+		const to = new Date( toDate );
 
 		const props = {
 			value: fromDate,
@@ -79,11 +71,13 @@ class DateTimeRangePicker extends Component {
 			formatDate: formatDate,
 			parseDate: parseDate,
 			dayPickerProps: {
-				selectedDays: [ fromDateObj, { fromDateObj, toDateObj } ],
-				disabledDays: { after: toDateObj },
-				modifiers: this.getModifiers(),
-				toMonth: toDateObj,
-				numberOfMonths: 1,
+				selectedDays: [ from, { from, to } ],
+				disabledDays: { after: to },
+				modifiers: {
+					start: from,
+					end: to,
+				},
+				toMonth: to,
 			},
 			onDayChange: onFromDateChange,
 		};
@@ -110,8 +104,8 @@ class DateTimeRangePicker extends Component {
 			toDateFormat,
 		} = this.props;
 
-		const fromDateObj = new Date( fromDate );
-		const toDateObj = new Date( toDate );
+		const from = new Date( fromDate );
+		const to = new Date( toDate );
 
 		const props = {
 			value: toDate,
@@ -119,12 +113,14 @@ class DateTimeRangePicker extends Component {
 			formatDate: formatDate,
 			parseDate: parseDate,
 			dayPickerProps: {
-				selectedDays: [ fromDateObj, { fromDateObj, toDateObj } ],
-				disabledDays: { before: fromDateObj },
-				modifiers: this.getModifiers(),
-				month: fromDateObj,
-				fromMonth: fromDateObj,
-				numberOfMonths: 1,
+				selectedDays: [ from, { from, to } ],
+				disabledDays: { before: from },
+				modifiers: {
+					start: from,
+					end: to,
+				},
+				month: from,
+				fromMonth: from,
 			},
 			onDayChange: onToDateChange,
 		};
@@ -214,12 +210,13 @@ class DateTimeRangePicker extends Component {
 
 	render() {
 		const {
+			className,
 			separatorDateTime,
 			separatorTimeRange,
 		} = this.props;
 
 		return (
-			<div className="tribe-editor__date-time-range-picker">
+			<div className={ classNames( 'tribe-editor__date-time-range-picker', className ) }>
 				<div className="tribe-editor__date-time-range-picker__start">
 					<DayPickerInput { ...this.getFromDayPickerInputProps() } />
 					<span
