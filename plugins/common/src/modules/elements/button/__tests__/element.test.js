@@ -26,16 +26,22 @@ describe( 'Button Element', () => {
 	} );
 
 	it( 'renders button with label', () => {
-		const component = renderer.create( <Button label="Hello" /> );
+		const component = renderer.create( <Button>Hello</Button> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'renders button with onClick handler', () => {
-		const onClick = () => {
-			console.log('hello')
-		};
+		const onClick = jest.fn();
 		const component = renderer.create( <Button onClick={ onClick } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
+	it( 'executes the onClick handler', () => {
+		const onClick = jest.fn();
+		const component = mount( <Button onClick={ onClick } /> );
+		component.find( 'button' ).simulate( 'click' );
+		expect( onClick ).toHaveBeenCalled();
+		expect( onClick ).toHaveBeenCalledTimes( 1 );
 	} );
 
 	it( 'renders button with set type', () => {

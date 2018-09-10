@@ -3,23 +3,28 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { noop } from 'lodash';
+
+/**
+ * Internal dependencies
+ */
+import './style.pcss';
 
 const Button = ( {
 	className,
 	isDisabled,
-	label,
+	children,
 	onClick,
 	type,
 } ) => (
 	<button
-		className={ classnames( 'tribe-editor__button', className ) }
+		className={ classNames( 'tribe-editor__button', className ) }
 		disabled={ isDisabled }
 		type={ type }
 		onClick={ onClick }
 	>
-		{ label }
+		{ children }
 	</button>
 );
 
@@ -31,7 +36,7 @@ Button.defaultProps = {
 Button.propTypes = {
 	className: PropTypes.string,
 	isDisabled: PropTypes.bool,
-	label: PropTypes.node,
+	children: PropTypes.node,
 	onClick: PropTypes.func,
 	type: PropTypes.string,
 };
