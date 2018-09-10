@@ -21,6 +21,8 @@ const checkRequestIds = ( id ) => {
 			down: null,
 		};
 	}
+
+	return requestIds[ id ];
 };
 
 /**
