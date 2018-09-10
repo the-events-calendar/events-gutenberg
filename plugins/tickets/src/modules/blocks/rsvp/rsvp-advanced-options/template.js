@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 /**
  * WordPress dependencies
  */
+import { Dashicon } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -49,7 +50,20 @@ class RSVPAdvancedOptions extends Component {
 		</Fragment>
 	);
 
-	getHeader = () => __( 'Advanced Options', 'events-gutenberg' );
+	getHeader = () => {
+		const { isActive } = this.props;
+		return (
+			<Fragment>
+				<Dashicon
+					className="tribe-editor__rsvp__advanced-options-header-icon"
+					icon={ isActive ? 'arrow-up' : 'arrow-down' }
+				/>
+				<span className="tribe-editor__rsvp__advanced-options-header-text">
+					{ __( 'Advanced Options', 'events-gutenberg' ) }
+				</span>
+			</Fragment>
+		);
+	};
 
 	getRows = () => {
 		const { contentId, headerId, isActive, onClick } = this.props;

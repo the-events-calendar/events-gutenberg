@@ -1,9 +1,49 @@
 .tribe-editor__rsvp__advanced-options {
 
-	.tribe-editor__accordion__row.open {
+	.tribe-editor__accordion__row {
+		position: relative;
 
-		.tribe-editor__accordion__row-content {
-			overflow: visible;
+		&.active {
+
+			&:before {
+				content: '';
+				height: 1px;
+				width: calc( 100% + 12px );
+				background-color: #E1E3E6;
+				position: absolute;
+				top: 10px;
+				left: 0;
+			}
+		}
+
+		&.open {
+
+			.tribe-editor__accordion__row-content {
+				overflow: visible;
+			}
 		}
 	}
+
+}
+
+.tribe-editor__rsvp__advanced-options-header {
+	border: none;
+	background-color: #f8f9f9;
+	display: inline-flex;
+	align-items: center;
+	padding: 0;
+	position: relative;
+}
+
+svg.tribe-editor__rsvp__advanced-options-header-icon {
+	fill: #8D949B;
+	margin-left: -5px;
+	margin-right: 3px;
+}
+
+.tribe-editor__rsvp__advanced-options-header-text {
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 18px;
+	padding-right: 10px;
 }
