@@ -29,10 +29,10 @@ const NumericLabel = ( { count, singular, plural, fallback, className } ) => {
 	const targetStr = count === 1 ? singular : plural;
 	const [ before, after ] = targetStr.split( '%d' );
 	return (
-		<span className={ classNames( 'tribe-editor__label--numeric', className ) }>
-			{ before && <span className="tribe-editor__label--before">{ before }</span> }
-			{ count && <span className="tribe-editor__label--count">{ count }</span> }
-			{ after && <span className="tribe-editor__label--after">{ after }</span> }
+		<span className={ classNames( 'tribe-editor__numeric-label', className ) }>
+			{ before && <span className="tribe-editor__numeric-label--before">{ before }</span> }
+			{ count && <span className="tribe-editor__numeric-label--count">{ count }</span> }
+			{ after && <span className="tribe-editor__numeric-label--after">{ after }</span> }
 		</span>
 	);
 }
