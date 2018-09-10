@@ -2,20 +2,20 @@
 
 exports[`NumericLabel plural with multiple placeholder 1`] = `
 <span
-  className="tribe-editor__label--numeric"
+  className="tribe-editor__numeric-label"
 >
   <span
-    className="tribe-editor__label--before"
+    className="tribe-editor__numeric-label--before"
   >
     We have 
   </span>
   <span
-    className="tribe-editor__label--count"
+    className="tribe-editor__numeric-label--count"
   >
     3
   </span>
   <span
-    className="tribe-editor__label--after"
+    className="tribe-editor__numeric-label--after"
   >
      items, more 
   </span>
@@ -24,20 +24,20 @@ exports[`NumericLabel plural with multiple placeholder 1`] = `
 
 exports[`NumericLabel plural with placeholder 1`] = `
 <span
-  className="tribe-editor__label--numeric"
+  className="tribe-editor__numeric-label"
 >
   <span
-    className="tribe-editor__label--before"
+    className="tribe-editor__numeric-label--before"
   >
     We have 
   </span>
   <span
-    className="tribe-editor__label--count"
+    className="tribe-editor__numeric-label--count"
   >
     3
   </span>
   <span
-    className="tribe-editor__label--after"
+    className="tribe-editor__numeric-label--after"
   >
      items
   </span>
@@ -46,15 +46,15 @@ exports[`NumericLabel plural with placeholder 1`] = `
 
 exports[`NumericLabel plural without placeholder 1`] = `
 <span
-  className="tribe-editor__label--numeric"
+  className="tribe-editor__numeric-label"
 >
   <span
-    className="tribe-editor__label--before"
+    className="tribe-editor__numeric-label--before"
   >
     We have items
   </span>
   <span
-    className="tribe-editor__label--count"
+    className="tribe-editor__numeric-label--count"
   >
     3
   </span>
@@ -63,20 +63,20 @@ exports[`NumericLabel plural without placeholder 1`] = `
 
 exports[`NumericLabel singular item with multiple placeholders 1`] = `
 <span
-  className="tribe-editor__label--numeric"
+  className="tribe-editor__numeric-label"
 >
   <span
-    className="tribe-editor__label--before"
+    className="tribe-editor__numeric-label--before"
   >
     Just 
   </span>
   <span
-    className="tribe-editor__label--count"
+    className="tribe-editor__numeric-label--count"
   >
     1
   </span>
   <span
-    className="tribe-editor__label--after"
+    className="tribe-editor__numeric-label--after"
   >
      Item 
   </span>
@@ -85,15 +85,15 @@ exports[`NumericLabel singular item with multiple placeholders 1`] = `
 
 exports[`NumericLabel singular item with no placeholder 1`] = `
 <span
-  className="tribe-editor__label--numeric"
+  className="tribe-editor__numeric-label"
 >
   <span
-    className="tribe-editor__label--before"
+    className="tribe-editor__numeric-label--before"
   >
     Just Item
   </span>
   <span
-    className="tribe-editor__label--count"
+    className="tribe-editor__numeric-label--count"
   >
     1
   </span>
@@ -102,20 +102,20 @@ exports[`NumericLabel singular item with no placeholder 1`] = `
 
 exports[`NumericLabel singular item with placeholder 1`] = `
 <span
-  className="tribe-editor__label--numeric"
+  className="tribe-editor__numeric-label"
 >
   <span
-    className="tribe-editor__label--before"
+    className="tribe-editor__numeric-label--before"
   >
     Just 
   </span>
   <span
-    className="tribe-editor__label--count"
+    className="tribe-editor__numeric-label--count"
   >
     1
   </span>
   <span
-    className="tribe-editor__label--after"
+    className="tribe-editor__numeric-label--after"
   >
      Item
   </span>
