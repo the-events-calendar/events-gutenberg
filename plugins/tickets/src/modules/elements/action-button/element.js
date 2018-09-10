@@ -28,7 +28,8 @@ const ActionButton = ( { children, icon, position, ...props } ) => {
 			className={ containerClass }
 			{ ...props }
 		>
-			{ icon }{ children }
+			{ icon }
+			<span className="tribe-editor__btn--label-children">{ children }</span>
 		</Button>
 	);
 }

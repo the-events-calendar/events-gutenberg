@@ -36,8 +36,8 @@ export const setShowMapLink = ( showMapLink ) => ( {
 	},
 } );
 
-export const setInitialState = ( { get } ) => ( dispatch ) => {
-	dispatch( setVenue( get( 'venue', DEFAULT_STATE.venue ) ) );
-	dispatch( setShowMap( get( 'showMap', DEFAULT_STATE.showMap ) ) );
-	dispatch( setShowMapLink( get( 'showMapLink', DEFAULT_STATE.showMapLink ) ) );
-};
+export const setInitialState = ( props ) => ( {
+	type: types.SET_INITIAL_STATE,
+	payload: props,
+} );
+

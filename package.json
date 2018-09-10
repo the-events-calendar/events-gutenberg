@@ -6,6 +6,8 @@
 	"author": "Modern Tribe",
 	"license": "GPL-2.0-or-later",
 	"private": true,
+	"_zipname": "events-gutenberg",
+	"_zipfoldername": "events-gutenberg",
 	"keywords": [
 		"WordPress",
 		"editor",
@@ -24,7 +26,8 @@
 		"bootstrap": "lerna bootstrap && npx lerna run bootstrap",
 		"build": "lerna run build",
 		"dev": "lerna run --parallel dev",
-		"analyze": "lerna run --parallel analyze"
+		"analyze": "lerna run --parallel analyze",
+		"zip": "node util/zip.js"
 	},
 	"dependencies": {
 		"@moderntribe/common": "file:plugins/common",
@@ -70,6 +73,7 @@
 	"devDependencies": {
 		"@babel/runtime": "7.0.0-beta.52",
 		"@wordpress/hooks": "^1.3.2",
+		"archiver": "^3.0.0",
 		"autoprefixer": "6.7.7",
 		"babel-core": "^6.26.3",
 		"babel-eslint": "^8.2.6",

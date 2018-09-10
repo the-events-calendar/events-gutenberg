@@ -36,6 +36,13 @@ Object {
 }
 `;
 
+exports[`[STORE] - Sharing actions Should set initial state 1`] = `
+Object {
+  "payload": Object {},
+  "type": "@@MT/EVENTS/SHARING_BLOCK/SET_INITIAL_STATE",
+}
+`;
+
 exports[`[STORE] - Sharing actions Should set the Google calendar label 1`] = `
 Object {
   "payload": Object {
@@ -64,33 +71,4 @@ exports[`[STORE] - Sharing actions Should toggle if has the iCal label 1`] = `
 Object {
   "type": "@@MT/EVENTS/TOGGLE_ICAL",
 }
-`;
-
-exports[`[STORE] - Sharing thunk actions Should set the initial state 1`] = `
-Array [
-  Object {
-    "payload": Object {
-      "label": "Modern Tribe Google Calendar",
-    },
-    "type": "@@MT/EVENTS/SET_GOOGLE_CALENDAR_LABEL",
-  },
-  Object {
-    "payload": Object {
-      "label": "Modern Tribe iCal",
-    },
-    "type": "@@MT/EVENTS/SET_ICAL_LABEL",
-  },
-  Object {
-    "payload": Object {
-      "hasiCal": true,
-    },
-    "type": "@@MT/EVENTS/SET_HAS_ICAL",
-  },
-  Object {
-    "payload": Object {
-      "hasGoogleCalendar": true,
-    },
-    "type": "@@MT/EVENTS/SET_HAS_GOOGLE_CALENDAR",
-  },
-]
 `;

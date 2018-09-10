@@ -2,7 +2,6 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { DEFAULT_STATE } from './reducer';
 
 export const setWebsite = ( url ) => ( {
 	type: types.SET_WEBSITE_URL,
@@ -18,8 +17,7 @@ export const setLabel = ( label ) => ( {
 	},
 } );
 
-export const setInitialState = ( { get } ) => ( dispatch ) => {
-	dispatch( setWebsite( get( 'url' ) ) );
-	dispatch( setLabel( get( 'urlLabel', DEFAULT_STATE.label ) ) );
-};
-
+export const setInitialState = ( props ) => ( {
+	type: types.SET_INITIAL_STATE,
+	payload: props,
+} );

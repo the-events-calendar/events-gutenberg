@@ -12,7 +12,11 @@ exports[`ActionButton component rendered 1`] = `
   >
     🦖
   </span>
-  Custom Action
+  <span
+    className="tribe-editor__btn--label-children"
+  >
+    Custom Action
+  </span>
 </button>
 `;
 
@@ -28,6 +32,10 @@ exports[`ActionButton component rendered with the correct class when icon is on 
   >
     🦖
   </span>
-  Custom Action
+  <span
+    className="tribe-editor__btn--label-children"
+  >
+    Custom Action
+  </span>
 </button>
 `;
