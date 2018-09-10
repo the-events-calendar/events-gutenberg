@@ -18,19 +18,9 @@ Object {
 }
 `;
 
-exports[`[STORE] - Classic thunk actions Action to set the initial state 1`] = `
-Array [
-  Object {
-    "payload": Object {
-      "title": "Events",
-    },
-    "type": "@@MT/EVENTS/SET_CLASSIC_DETAILS_TITLE",
-  },
-  Object {
-    "payload": Object {
-      "title": "Modern Tribe",
-    },
-    "type": "@@MT/EVENTS/SET_CLASSIC_ORGANIZERS_TITLE",
-  },
-]
+exports[`[STORE] - Classic actions Should set initial state 1`] = `
+Object {
+  "payload": Object {},
+  "type": "@@MT/EVENTS/CLASSIC_BLOCK/SET_INITIAL_STATE",
+}
 `;

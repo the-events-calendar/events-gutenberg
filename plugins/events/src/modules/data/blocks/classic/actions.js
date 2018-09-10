@@ -2,7 +2,6 @@
  * Internal dependencies
  */
 import * as types from './types';
-import { DEFAULT_STATE } from './reducer';
 
 export const setDetailsTitle = ( title ) => ( {
 	type: types.SET_CLASSIC_DETAILS_TITLE,
@@ -18,7 +17,7 @@ export const setOrganizerTitle = ( title ) => ( {
 	},
 } );
 
-export const setInitialState = ( { get } ) => ( dispatch ) => {
-	dispatch( setDetailsTitle( get( 'detailsTitle', DEFAULT_STATE.detailsTitle ) ) );
-	dispatch( setOrganizerTitle( get( 'organizerTitle', DEFAULT_STATE.organizerTitle ) ) );
-};
+export const setInitialState = ( props ) => ( {
+	type: types.SET_INITIAL_STATE,
+	payload: props,
+} );

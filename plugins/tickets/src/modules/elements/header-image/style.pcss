@@ -1,0 +1,48 @@
+.tribe-editor__header-image {
+}
+
+.tribe-editor__header-image__title {
+	margin-bottom: 12px;
+	display: inline-block;
+	color: #000000;
+	font-size: 0.9375rem;
+}
+
+.tribe-editor__header-image__content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.tribe-editor__header-image__description {
+	flex-basis: 52%;
+	font-size: 0.875rem;
+	color: #545D66;
+	line-height: 1.28;
+}
+
+.tribe-editor__btn--label.tribe-editor__header-image__btn--upload {
+	background-color: #00a0d4;
+	color: #FFF;
+	padding: 9px 21px;
+	font-size: 1rem;
+	font-weight: bold;
+	line-height: 1.25rem;
+	transition: background-color 0.2s ease;
+	margin-right:  10px;
+
+	&:hover,
+	&:focus {
+		background-color: #007bb4
+	}
+
+	&[disabled] {
+
+		&,
+		&:hover,
+		&:focus {
+			background-color: #f3f4f5;
+			color: #8d949b;
+		}
+	}
+}
