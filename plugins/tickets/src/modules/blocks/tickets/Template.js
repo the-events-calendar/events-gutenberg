@@ -20,8 +20,9 @@ import './style.pcss';
 
 const disabled = {
 	title: __( 'No Active Tickets', 'events-gutenberg' ),
+	/* eslint-disable max-len */
 	description: __(
-		'The time is curently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
+		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
 		'events-gutenberg'
 	),
 }
