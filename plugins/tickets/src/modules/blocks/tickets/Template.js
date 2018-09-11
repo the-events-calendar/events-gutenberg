@@ -5,15 +5,16 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { InnerBlocks } from '@wordpress/editor';
 
 /**
  * Internal dependencies
  */
-import DisabledTickets from './DisabledTickets';
 import {
 	Availability,
 	ActionDashboard,
 	HeaderImage,
+	DisabledTickets,
 } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
@@ -32,6 +33,11 @@ const TicketsTemplate = ( props ) => {
 		total,
 		footerActions,
 		footerConfirmLabel,
+		// @todo limit the usage of the available blocks for this one, however at this point the
+		// appender button is only available on the paragraph block
+		// see https://github.com/WordPress/gutenberg/issues/8589 once is resolved we should be able
+		// to address this one and limit this to only this property
+		allowedBlockTypes,
 	} = props;
 
 	const availability = isSelected && (
@@ -53,6 +59,7 @@ const TicketsTemplate = ( props ) => {
 			) }
 		>
 			<div className="tribe-editor__tickets-body">
+				<InnerBlocks />
 				<DisabledTickets title={ disabled.title }>
 					{ disabled.description }
 				</DisabledTickets>
@@ -68,12 +75,14 @@ TicketsTemplate.propTypes = {
 	isSelected: PropTypes.bool,
 	footerActions: PropTypes.arrayOf( PropTypes.node ),
 	footerConfirmLabel: PropTypes.string,
+	allowedBlockTypes: PropTypes.arrayOf( PropTypes.string ),
 }
 
 TicketsTemplate.defaultProps = {
 	isSelected: false,
 	footerActions: [],
 	footerConfirmLabel: __( 'Add Tickets', 'events-gutenberg' ),
+	allowedBlockTypes: [],
 }
 
 export default TicketsTemplate;
