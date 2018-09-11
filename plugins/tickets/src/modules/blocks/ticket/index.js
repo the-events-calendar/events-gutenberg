@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BlockIcon } from '@moderntribe/common/elements';
+import Ticket from './Container';
 
 export default {
 	id: 'event-tickets-ticket',
@@ -23,7 +24,6 @@ export default {
 	},
 
 	attributes: {},
-	
-	edit: ( { clientId })  => <div>Ticket { clientId }</div>,
+	edit: Ticket,
 	save: () => null,
 };

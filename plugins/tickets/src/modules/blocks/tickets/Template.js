@@ -10,10 +10,10 @@ import { InnerBlocks } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import DisabledTickets from './DisabledTickets';
 import {
 	Availability,
 	ActionDashboard,
+	DisabledTickets,
 } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
