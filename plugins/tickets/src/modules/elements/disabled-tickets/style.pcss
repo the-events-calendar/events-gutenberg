@@ -1,5 +1,7 @@
 .tribe-editor__tickets__disabled {
 	display: flex;
+	flex: 1;
+	justify-content: space-between;
 }
 
 .tribe-editor__tickets__disabled__icon {
@@ -7,11 +9,16 @@
 	margin-right: 20px;
 	display: flex;
 	align-items: center;
+	flex: none;
+
+	svg {
+		flex: none;
+	}
 }
 
 .tribe-editor__tickets__disabled__content {
-	width: 84%;
-	flex-grow: 1;
+	max-width: 84%;
+	flex: 1;
 }
 
 .tribe-editor__tickets__disabled__title {

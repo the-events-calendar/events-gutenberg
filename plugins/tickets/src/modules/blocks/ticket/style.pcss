@@ -2,10 +2,17 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex: 1;
 }
 
 .tribe-editor__ticket-icon {
 	background-color: #F8F9F9;
+	flex: none;
+}
+
+.tribe-editor__ticket-content {
+	flex: 1;
+	padding: 0 26px;
 }
 
 .tribe-editor__ticket-description {
@@ -16,6 +23,7 @@
 
 .tribe-editor__ticket-title {
 	margin: 0 0 9px;
+	line-height: 1;
 }
 
 .tribe-editor__ticket-title,
@@ -24,4 +32,8 @@
 	font-weight: bold;
 	color: #000;
 	font-family: Helvetica, sans-serif, arial;
+}
+
+.tribe-editor__ticket-quantity {
+	flex: none;
 }
