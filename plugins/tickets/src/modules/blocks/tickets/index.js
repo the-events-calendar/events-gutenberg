@@ -15,10 +15,7 @@ import TicketsBlock from './Container';
 export default {
 	id: 'event-tickets',
 	title: __( 'Event Tickets', 'events-gutenberg' ),
-	description: __(
-		'Basic ticket functionality',
-		'events-gutenberg',
-	),
+	description: __( 'Basic ticket functionality', 'events-gutenberg' ),
 	icon: BlockIcon,
 	category: 'tribe-tickets',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
