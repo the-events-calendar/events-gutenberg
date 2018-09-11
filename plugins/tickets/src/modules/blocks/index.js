@@ -8,9 +8,11 @@ import { registerBlockType } from '@wordpress/blocks';
  */
 import { initStore } from '@moderntribe/tickets/data';
 import tickets from '@moderntribe/tickets/blocks/tickets';
+import rsvp from '@moderntribe/tickets/blocks/rsvp';
 
 const blocks = [
 	tickets,
+	rsvp,
 ];
 
 blocks.forEach( ( block ) => registerBlockType( `tribe/${ block.id }`, block ) );
