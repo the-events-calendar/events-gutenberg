@@ -4,11 +4,11 @@ exports[`HeaderImage render the component 1`] = `
 <div
   className="tribe-editor__header-image"
 >
-  <strong
+  <h3
     className="tribe-editor__header-image__title"
   >
     Header Image
-  </strong>
+  </h3>
   <div
     className="tribe-editor__header-image__content"
   >
@@ -28,11 +28,11 @@ exports[`HeaderImage render with custom description 1`] = `
 <div
   className="tribe-editor__header-image"
 >
-  <strong
+  <h3
     className="tribe-editor__header-image__title"
   >
     Header Image
-  </strong>
+  </h3>
   <div
     className="tribe-editor__header-image__content"
   >
@@ -52,11 +52,11 @@ exports[`HeaderImage render with custom title 1`] = `
 <div
   className="tribe-editor__header-image"
 >
-  <strong
+  <h3
     className="tribe-editor__header-image__title"
   >
     Modern Tribe
-  </strong>
+  </h3>
   <div
     className="tribe-editor__header-image__content"
   >

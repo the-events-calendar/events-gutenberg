@@ -4,3 +4,5 @@ export { default as ActionButton } from './action-button/element';
 export { default as NumericLabel } from './numeric-label/element';
 export { default as CapacityTable } from './capacity-table/element';
 export { default as HeaderImage } from './header-image/element';
+export { default as DisabledTickets } from './disabled-tickets/element';
+export { default as TicketStatus } from './ticket-status/element';

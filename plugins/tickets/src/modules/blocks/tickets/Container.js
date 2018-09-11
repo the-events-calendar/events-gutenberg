@@ -27,6 +27,7 @@ const mapStateToProps = ( state, props ) => ( {
 		<ActionButton icon={ <UserIcon /> }>Attendees </ActionButton>,
 		<ActionButton icon={ <TagIcon /> }>Orders</ActionButton>,
 	],
+	allowedBlockTypes: [ 'tribe/event-tickets', 'tribe/event-tickets-ticket',  'core/image' ],
 } );
 
 export default compose(

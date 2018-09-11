@@ -25,7 +25,6 @@ const NumericLabel = ( { count, singular, plural, fallback, className } ) => {
 	if ( count <= 0 ) {
 		return fallback;
 	}
-	const regex = /%d/gi;
 	const targetStr = count === 1 ? singular : plural;
 	const [ before, after ] = targetStr.split( '%d' );
 	return (

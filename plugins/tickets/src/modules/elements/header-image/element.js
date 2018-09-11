@@ -24,9 +24,11 @@ export const renderMediaUpload = ( { open } ) => (
 
 const HeaderImage = ( { title, description, buttonLabel, onSelect, mediaId } ) => (
 	<div className="tribe-editor__header-image">
-		{ title && <strong className="tribe-editor__header-image__title">{ title }</strong> }
+		{ title && <h3 className="tribe-editor__header-image__title">{ title }</h3> }
 		<div className="tribe-editor__header-image__content">
-			<div className="tribe-editor__header-image__description">{ description }</div>
+			{ description && (
+				<div className="tribe-editor__header-image__description">{ description }</div>
+			) }
 			<MediaUpload
 				onSelect={ onSelect }
 				type="image"
@@ -46,6 +48,7 @@ HeaderImage.propTypes = {
 
 HeaderImage.defaultProps = {
 	title: __( 'Header Image', 'events-gutenberg' ),
+	/* eslint-disable max-len */
 	description: __(
 		'Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.',
 		'events-gutenberg'
