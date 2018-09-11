@@ -22,8 +22,8 @@ export default {
 		html: false,
 	},
 
-	attributes: {
-	},
+	attributes: {},
+	
 	edit: ( { clientId })  => <div>Ticket { clientId }</div>,
 	save: () => null,
 };
