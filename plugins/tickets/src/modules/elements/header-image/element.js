@@ -24,9 +24,11 @@ export const renderMediaUpload = ( { open } ) => (
 
 const HeaderImage = ( { title, description, buttonLabel, onSelect, mediaId } ) => (
 	<div className="tribe-editor__header-image">
-		{ title && <strong className="tribe-editor__header-image__title">{ title }</strong> }
+		{ title && <h3 className="tribe-editor__header-image__title">{ title }</h3> }
 		<div className="tribe-editor__header-image__content">
-			<div className="tribe-editor__header-image__description">{ description }</div>
+			{ description && (
+				<div className="tribe-editor__header-image__description">{ description }</div>
+			) }
 			<MediaUpload
 				onSelect={ onSelect }
 				type="image"
