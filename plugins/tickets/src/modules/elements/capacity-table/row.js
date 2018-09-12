@@ -21,11 +21,13 @@ const CapacityRow = ( { label, items, right } ) => (
 CapacityRow.propTypes = {
 	label: PropTypes.string,
 	items: PropTypes.string,
+	right: PropTypes.node,
 };
 
 CapacityRow.defaultProps = {
 	label: '',
 	items: '',
+	right: '',
 };
 
 export default CapacityRow;
