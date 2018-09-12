@@ -1,0 +1,40 @@
+.tribe-editor__quantity-bar {
+	border: 1px solid #E1E3E6;
+	position: relative;
+	height: 10px;
+	margin: 5px 0;
+}
+
+.tribe-editor__quantity-bar--available,
+.tribe-editor__quantity-bar--shared,
+.tribe-editor__quantity-bar--capacity {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.tribe-editor__quantity-bar--capacity {
+	z-index: 3;
+
+	&:after {
+		width: 1px;
+		content: '';
+		height: 20px;
+		position: absolute;
+		background-color: #009FD4;
+		right: 0;
+		top: -5px;
+	}
+}
+
+.tribe-editor__quantity-bar--available {
+	background-color: #009FD4;
+	z-index: 2;
+}
+
+.tribe-editor__quantity-bar--shared {
+	background-color: #C9EBF7;
+	z-index: 1;
+}
+
