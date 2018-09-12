@@ -7,7 +7,10 @@ import PropTypes from 'prop-types';
 /**
  * Internal dependencies
  */
-import { TicketStatus } from '@moderntribe/tickets/elements';
+import {
+	TicketStatus,
+	QuantityBar,
+} from '@moderntribe/tickets/elements';
 import './style.pcss';
 
 const Ticket = ( props ) => {
@@ -39,6 +42,8 @@ const Ticket = ( props ) => {
 			<div className="tribe-editor__ticket-quantity">
 				{ `${available} of ${ sold } sold` }
 				{ unlimited ? 'unlimited' : null }
+				<QuantityBar sold={ 40 } total={ 156 } />
+				<QuantityBar sold={ 40 } shared={ 120 } total={ 156 } />
 			</div>
 		</div>
 	)

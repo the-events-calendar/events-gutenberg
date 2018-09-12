@@ -4,3 +4,4 @@ export { default as ActionButton } from './action-button/element';
 export { default as NumericLabel } from './numeric-label/element';
 export { default as DisabledTickets } from './disabled-tickets/element';
 export { default as TicketStatus } from './ticket-status/element';
+export { default as QuantityBar } from './quantity-bar/element';
