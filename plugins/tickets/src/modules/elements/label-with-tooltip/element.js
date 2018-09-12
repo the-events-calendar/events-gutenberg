@@ -15,6 +15,7 @@ const LabelWithTooltip = ( {
 	className,
 	label,
 	tooltipLabel,
+	tooltipPosition,
 	tooltipText,
 } ) => (
 	<div className={ classNames(
@@ -27,6 +28,7 @@ const LabelWithTooltip = ( {
 		<Tooltip
 			label={ tooltipLabel }
 			labelClassName="tribe-editor__label-with-tooltip__tooltip-label"
+			position={ tooltipPosition }
 			text={ tooltipText }
 		/>
 	</div>
@@ -40,6 +42,14 @@ LabelWithTooltip.propTypes = {
 	className: PropTypes.string,
 	label: PropTypes.node,
 	tooltipLabel: PropTypes.node,
+	tooltipPosition: PropTypes.oneOf( [
+		'top left',
+		'top center',
+		'top right',
+		'bottom left',
+		'bottom center',
+		'bottom right',
+	] ),
 	tooltipText: PropTypes.string,
 };
 
