@@ -44,6 +44,7 @@ const Ticket = ( props ) => {
 				{ unlimited ? 'unlimited' : null }
 				<QuantityBar sold={ 40 } total={ 156 } />
 				<QuantityBar sold={ 40 } shared={ 120 } total={ 156 } />
+				<QuantityBar sold={ 40 } capacity={ 70 } shared={ 120 } total={ 156 } />
 			</div>
 		</div>
 	)

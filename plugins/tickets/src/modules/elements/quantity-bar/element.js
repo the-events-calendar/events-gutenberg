@@ -8,30 +8,9 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import './style.pcss';
-import { number } from '@moderntribe/common/utils/';
+import Bar from './bar';
 
-const Bar = ( { className, value = 0, total = 0 } ) => {
-
-	if ( value === 0 || total === 0 ) {
-		return null;
-	}
-
-	const percentage = number.percentage( value, total );
-	const style = {
-		width: percentage === 0 ? null : `${ percentage }%`,
-	};
-
-	return (
-		<span className={ className } style={ style }></span>
-	);
-}
-
-Bar.propTypes = {
-	className: PropTypes.string,
-	value: PropTypes.number,
-	total: PropTypes.number,
-}
-
+// todo: add tooltip into the capacity bar
 const QuantityBar = ( { shared, sold, capacity, total } ) => {
 	return (
 		<div className="tribe-editor__quantity-bar">
