@@ -7,6 +7,7 @@ import * as range from './range';
 import * as string from './string';
 import * as time from './time';
 import * as timezone from './timezone';
+import * as number from './number';
 
 export { date };
 export { dom };
@@ -17,4 +18,5 @@ export { range };
 export { string };
 export { time };
 export { timezone };
+export { number };
 export { default as TribePropTypes } from './proptypes';
