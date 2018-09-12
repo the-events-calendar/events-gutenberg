@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Bar /> render percentage with custom class name 1`] = `
+<span
+  className="jest-test"
+  style={
+    Object {
+      "width": "45%",
+    }
+  }
+/>
+`;
