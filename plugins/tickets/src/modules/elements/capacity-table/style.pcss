@@ -14,6 +14,7 @@
 	padding: 18px 0;
 	display: flex;
 	justify-content: space-between;
+	flex: 1;
 
 	&:nth-last-of-type(2) {
 		border-bottom: 1px solid #E1E3E6;
@@ -21,12 +22,21 @@
 }
 
 .tribe-editor__capacity-row--left {
-	flex-grow: 1;
+	flex: 1;
 }
 
 .tribe-editor__capacity-row--right {
-	flex-basis: 10%;
+	flex: none;
+	width: 10%;
 	text-align: right;
+
+	input {
+		width: 100%;
+		border-radius: 4px;
+		border: 1px solid #E1E3E6;
+		text-align: right;
+		padding: 10px 12px;
+	}
 }
 
 .tribe-editor__capacity-row__label {
