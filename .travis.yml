@@ -5,7 +5,7 @@ env:
   - NODE_ENV=test
 install: false
 script:
-  - npm run bootstrap -- --dev
+  - npm run bootstrap
   - npm run test:travis
 cache:
   directories:
