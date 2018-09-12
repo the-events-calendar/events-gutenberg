@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Single ticket block declaration Block declaration 1`] = `
+Object {
+  "attributes": Object {},
+  "category": "tribe-tickets",
+  "description": "Entry for ticket",
+  "edit": [Function],
+  "icon": [Function],
+  "id": "event-tickets-ticket",
+  "keywords": Array [
+    "event",
+    "events-tickets",
+    "tribe",
+  ],
+  "parent": Array [
+    "tribe/event-tickets",
+  ],
+  "save": [Function],
+  "supports": Object {
+    "html": false,
+  },
+  "title": "Event Ticket",
+}
+`;
