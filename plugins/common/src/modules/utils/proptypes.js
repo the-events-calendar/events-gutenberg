@@ -58,6 +58,15 @@ export const timeFormat = ( props, propName, componentName ) => {
 	return null;
 };
 
+export const nullType = ( props, propName, componentName ) => {
+	if ( null !== props[ propName ] ) {
+		return new Error(
+			`Invalid prop: \`${propName}\` supplied to \`${ componentName }\`, expect null.`
+		);
+	}
+}
+
 export default {
 	timeFormat: createChainableValidator( timeFormat ),
+	nullType,
 };
