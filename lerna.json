@@ -3,5 +3,5 @@
     "plugins/*"
   ],
   "version": "independent",
-  "npmClientArgs": ["--no-optional"]
+  "npmClientArgs": ["--production", "--no-optional"]
 }

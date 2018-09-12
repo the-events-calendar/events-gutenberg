@@ -3,8 +3,9 @@ node_js:
   - "8"
 env:
   - NODE_ENV=test
+install: false
 script:
-  - npm run bootstrap
+  - npm run bootstrap -- --dev
   - npm run test:travis
 cache:
   directories:
