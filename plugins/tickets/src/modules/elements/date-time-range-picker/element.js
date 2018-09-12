@@ -17,6 +17,7 @@ import {
 	time,
 	TribePropTypes,
 } from '@moderntribe/common/utils';
+import './style.pcss';
 
 class DateTimeRangePicker extends Component {
 	static defaultProps = {

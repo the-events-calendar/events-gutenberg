@@ -18,7 +18,6 @@ import { __ } from '@wordpress/i18n';
 import { Link as LinkIcon } from '@moderntribe/events/icons';
 import { input } from '@moderntribe/common/utils';
 import './style.pcss';
-import RSVPAdvancedOptions from '@moderntribe/tickets/blocks/rsvp/rsvp-advanced-options/template';
 
 /**
  * Module Code
@@ -87,7 +86,6 @@ const renderButtons = ( props ) => (
 	<div key="event-links" className="tribe-editor__block tribe-editor__events-link">
 		{ renderGoogleCalendar( props ) }
 		{ renderiCal( props ) }
-		<RSVPAdvancedOptions />
 	</div>
 );
 
