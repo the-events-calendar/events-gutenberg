@@ -18,12 +18,12 @@ let row;
 describe( 'Accordion Row Element', () => {
 	beforeEach( () => {
 		row = {
-			content: "this is a content",
-			contentClassName: "content-class",
-			contentId: "content-id-1",
-			header: "this is header",
-			headerClassName: "header-class",
-			headerId: "header-id-1",
+			content: 'this is a content',
+			contentClassName: 'content-class',
+			contentId: 'content-id-1',
+			header: 'this is header',
+			headerClassName: 'header-class',
+			headerId: 'header-id-1',
 			isActive: true,
 			onClick: jest.fn(),
 			onClose: jest.fn(),

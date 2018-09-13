@@ -16,12 +16,13 @@ describe( 'Accordion Element', () => {
 	beforeEach( () => {
 		rows = [
 			{
-				content: "this is a content",
-				contentClassName: "content-class",
-				contentId: "content-id-1",
-				header: "this is header",
-				headerClassName: "header-class",
-				headerId: "header-id-1",
+				content: 'this is a content',
+				contentClassName: 'content-class',
+				contentId: 'content-id-1',
+				header: 'this is header',
+				headerClassName: 'header-class',
+				headerId: 'header-id-1',
+				id: 'accordion-id',
 				isActive: true,
 				onClick: noop,
 				onClose: noop,

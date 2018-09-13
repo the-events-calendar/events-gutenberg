@@ -28,7 +28,7 @@ const Accordion = ( {
 			{ ...containerAttrs }
 		>
 			{ rows.map( ( row, index ) => (
-				<AccordionRow row={ row } index={ index } />
+				<AccordionRow row={ row } key={ index } />
 			) ) }
 		</div>
 	)
@@ -50,6 +50,7 @@ Accordion.propTypes = {
 		header: PropTypes.node,
 		headerClassName: PropTypes.string,
 		headerId: PropTypes.string.isRequired,
+		id: PropTypes.string.isRequired,
 		isActive: PropTypes.bool.isRequired,
 		onClick: PropTypes.func,
 		onClose: PropTypes.func,
