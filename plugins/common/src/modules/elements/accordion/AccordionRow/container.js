@@ -20,7 +20,7 @@ const mapStateToProps = ( state, ownProps ) => ( {
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	onClick: ( e ) => {
 		ownProps.onClick && ownProps.onClick( e );
-		dispatch( actions.toggleAccordion( ownProps.id ) );
+		dispatch( actions.toggleAccordion( ownProps.accordionId ) );
 	},
 } );
 

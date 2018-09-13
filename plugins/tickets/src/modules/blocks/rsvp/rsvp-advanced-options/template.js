@@ -20,7 +20,8 @@ import './style.pcss';
 
 class RSVPAdvancedOptions extends Component {
 	static propTypes = {
-		onClick: PropTypes.func,
+		addAccordion: PropTypes.func.isRequired,
+		removeAccordion: PropTypes.func.isRequired,
 	};
 
 	constructor( props ) {
@@ -29,11 +30,11 @@ class RSVPAdvancedOptions extends Component {
 	}
 
 	componentDidMount() {
-		// this.props.addAccordion( this.accordionId );
+		this.props.addAccordion( this.accordionId );
 	}
 
 	componentWillUnmount() {
-		// this.props.removeAccordion( this.accordionId );
+		this.props.removeAccordion( this.accordionId );
 	}
 
 	getContent = () => (
@@ -44,33 +45,25 @@ class RSVPAdvancedOptions extends Component {
 		</Fragment>
 	);
 
-	getHeader = () => {
-		const { isActive } = this.props;
-		return (
-			<Fragment>
-				<Dashicon
-					className="tribe-editor__rsvp__advanced-options-header-icon"
-					icon={ isActive ? 'arrow-up' : 'arrow-down' }
-				/>
-				<span className="tribe-editor__rsvp__advanced-options-header-text">
-					{ __( 'Advanced Options', 'events-gutenberg' ) }
-				</span>
-			</Fragment>
-		);
-	};
+	getHeader = () => (
+		<Fragment>
+			<Dashicon
+				className="tribe-editor__rsvp__advanced-options-header-icon"
+				icon="arrow-down"
+			/>
+			<span className="tribe-editor__rsvp__advanced-options-header-text">
+				{ __( 'Advanced Options', 'events-gutenberg' ) }
+			</span>
+		</Fragment>
+	);
 
-	getRows = () => {
-		const { onClick } = this.props;
-
-		return [ {
-			accordionId: this.accordionId,
-			content: this.getContent(),
-			contentClassName: 'tribe-editor__rsvp__advanced-options-content',
-			header: this.getHeader(),
-			headerClassName: 'tribe-editor__rsvp__advanced-options-header',
-			onClick,
-		} ];
-	};
+	getRows = () => ( [ {
+		accordionId: this.accordionId,
+		content: this.getContent(),
+		contentClassName: 'tribe-editor__rsvp__advanced-options-content',
+		header: this.getHeader(),
+		headerClassName: 'tribe-editor__rsvp__advanced-options-header',
+	} ] );
 
 	render() {
 		return (
