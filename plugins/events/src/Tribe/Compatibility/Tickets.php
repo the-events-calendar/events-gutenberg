@@ -15,7 +15,7 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 	 * @return void
 	 */
 	public function hook() {
-		add_filter( 'the_content', array( $this, 'include_frontend_form' ), 1, 50 );
+		add_filter( 'the_content', array( $this, 'include_frontend_form' ), 50 );
 	}
 
 	/**
@@ -49,15 +49,12 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 			return $content;
 		}
 
-		add_filter( 'the_content', 'strip_dynamic_blocks', 8 ); // Before do_blocks().
-
 		$hook = tribe( 'tickets.rsvp' )->get_ticket_form_hook();
+		remove_filter( 'the_content', array( $this, 'include_frontend_form' ), 50 );
 
 		ob_start();
 		do_action( $hook );
 		$form = ob_get_clean();
-
-		remove_filter( 'the_content', 'strip_dynamic_blocks', 8 );
 
 		if ( false === strpos( $hook, 'before' ) ) {
 			return $content . $form;

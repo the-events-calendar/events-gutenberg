@@ -42,11 +42,17 @@ extends Tribe__Gutenberg__Events__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
+		add_filter( 'the_content', 'strip_dynamic_blocks', 1 );
+
 		$args['attributes'] = $this->attributes( $attributes );
 
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.events.template' )->add_template_globals( $args );
 
-		return tribe( 'gutenberg.events.template' )->template( array( 'blocks', $this->slug() ), $args, false );
+		$html = tribe( 'gutenberg.events.template' )->template( array( 'blocks', $this->slug() ), $args, false );
+
+		remove_filter( 'the_content', 'strip_dynamic_blocks', 1 );
+
+		return $html;
 	}
 }
