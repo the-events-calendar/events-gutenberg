@@ -5,19 +5,18 @@ import * as types from '../types';
 
 export default ( state = {}, action ) => {
 	switch ( action.type ) {
-		case types.OPEN_ACCORDION:
+		case types.TOGGLE_ACCORDION:
 			return {
 				...state,
-				[ action.payload.id ]: true,
+				[ action.payload.accordionId ]: ! state[ action.payload.accordionId ],
 			};
-		case types.CLOSE_ACCORDION:
 		case types.ADD_ACCORDION:
 			return {
 				...state,
-				[ action.payload.id ]: false,
+				[ action.payload.accordionId ]: false,
 			};
 		case types.REMOVE_ACCORDION:
-			const { [ action.payload.id ]: value, ...filteredState } = state;
+			const { [ action.payload.accordionId ]: value, ...filteredState } = state;
 			return filteredState;
 		default:
 			return state;

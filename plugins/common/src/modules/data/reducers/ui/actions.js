@@ -3,30 +3,23 @@
  */
 import { types } from '@moderntribe/common/data/reducers/ui';
 
-export const openAccordion = ( id ) => ( {
-	type: types.OPEN_ACCORDION,
-	payload: {
-		id,
-	},
-} );
-
-export const closeAccordion = ( id ) => ( {
-	type: types.CLOSE_ACCORDION,
-	payload: {
-		id,
-	},
-} );
-
-export const addAccordion = ( id ) => ( {
+export const addAccordion = ( accordionId ) => ( {
 	type: types.ADD_ACCORDION,
 	payload: {
-		id,
+		accordionId,
 	},
 } );
 
-export const removeAccordion = ( id ) => ( {
+export const removeAccordion = ( accordionId ) => ( {
 	type: types.REMOVE_ACCORDION,
 	payload: {
-		id,
+		accordionId,
+	},
+} );
+
+export const toggleAccordion = ( accordionId ) => ( {
+	type: types.TOGGLE_ACCORDION,
+	payload: {
+		accordionId,
 	},
 } );

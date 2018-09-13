@@ -3,6 +3,7 @@
  */
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 /**
  * WordPress dependencies
@@ -19,27 +20,20 @@ import './style.pcss';
 
 class RSVPAdvancedOptions extends Component {
 	static propTypes = {
-		accordionId: PropTypes.string.isRequired,
-		contentId: PropTypes.string.isRequired,
-		headerId: PropTypes.string.isRequired,
-		isActive: PropTypes.bool.isRequired,
-		onClick: PropTypes.func.isRequired,
+		onClick: PropTypes.func,
 	};
 
-	static defaultProps = {
-		accordionId: 'placeholder',
-		contentId: 'placeholder',
-		headerId: 'placeholder',
-		isActive: false,
-		onClick: () => {},
-	};
+	constructor( props ) {
+		super( props );
+		this.accordionId = uniqid();
+	}
 
 	componentDidMount() {
-		// dispatch action here to create object with accordion state
+		// this.props.addAccordion( this.accordionId );
 	}
 
 	componentWillUnmount() {
-		// dispatch action here to delete object with accordion state
+		// this.props.removeAccordion( this.accordionId );
 	}
 
 	getContent = () => (
@@ -66,16 +60,14 @@ class RSVPAdvancedOptions extends Component {
 	};
 
 	getRows = () => {
-		const { contentId, headerId, isActive, onClick } = this.props;
+		const { onClick } = this.props;
 
 		return [ {
+			accordionId: this.accordionId,
 			content: this.getContent(),
 			contentClassName: 'tribe-editor__rsvp__advanced-options-content',
-			contentId,
 			header: this.getHeader(),
 			headerClassName: 'tribe-editor__rsvp__advanced-options-header',
-			headerId,
-			isActive,
 			onClick,
 		} ];
 	};

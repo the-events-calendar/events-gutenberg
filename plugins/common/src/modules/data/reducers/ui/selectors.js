@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 
 export const getUi = ( state ) => state.ui;
 
-export const getAccordionId = ( state, props ) => props.id;
+export const getAccordionId = ( state, ownProps ) => ownProps.accordionId;
 
 export const getAccordions = createSelector(
 	[ getUi ],

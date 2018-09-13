@@ -11,13 +11,14 @@ import {
 	default as AccordionRow,
 	getHeaderAttrs,
 	getContentAttrs,
-} from '@moderntribe/common/elements/accordion/AccordionRow';
+} from '@moderntribe/common/elements/accordion/AccordionRow/template';
 
 let row;
 
 describe( 'Accordion Row Element', () => {
 	beforeEach( () => {
 		row = {
+			accordionId: '123',
 			content: 'this is a content',
 			contentClassName: 'content-class',
 			contentId: 'content-id-1',
@@ -33,25 +34,25 @@ describe( 'Accordion Row Element', () => {
 
 	describe( 'AccordionRow', () => {
 		it( 'renders an accordion row', () => {
-			const component = renderer.create( <AccordionRow row={ row } /> );
+			const component = renderer.create( <AccordionRow { ...row } /> );
 			expect( component.toJSON() ).toMatchSnapshot();
 		} );
 
 		it( 'renders an accordion row with inactive state', () => {
 			row.isActive = false;
-			const component = renderer.create( <AccordionRow row={ row } /> );
+			const component = renderer.create( <AccordionRow { ...row } /> );
 			expect( component.toJSON() ).toMatchSnapshot();
 		} );
 
 		it( 'executes onClick handler', () => {
-			const component = mount( <AccordionRow row={ row } /> );
+			const component = mount( <AccordionRow { ...row } /> );
 			component.find( 'button' ).simulate( 'click' );
 			expect( row.onClick ).toHaveBeenCalled();
 			expect( row.onClick ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'executes onClose handler', ( done ) => {
-			const component = mount( <AccordionRow row={ row } /> );
+			const component = mount( <AccordionRow { ...row } /> );
 			component.find( 'button' ).simulate( 'click' );
 			setTimeout( () => {
 				expect( row.onClose ).toHaveBeenCalled();
@@ -64,7 +65,7 @@ describe( 'Accordion Row Element', () => {
 
 		it( 'executes onOpen handler', ( done ) => {
 			row.isActive = false;
-			const component = mount( <AccordionRow row={ row } /> );
+			const component = mount( <AccordionRow { ...row } /> );
 			component.find( 'button' ).simulate( 'click' );
 			setTimeout( () => {
 				expect( row.onOpen ).toHaveBeenCalled();
