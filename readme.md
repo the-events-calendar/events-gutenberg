@@ -106,6 +106,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add TribePropTypes functions to check custom time format
 * Feature - Add time to seconds and ms and vice versa utility
 * Feature - Create `<HeaderImage>` component to upload / select an image from the media library
+* Feature - Add `CapacityTable` compoent to render the capacity of the tickets
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 * Tweak - Create an icons module for the plugins and shared one on common to create a set of icons

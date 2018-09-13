@@ -48,8 +48,8 @@ HeaderImage.propTypes = {
 
 HeaderImage.defaultProps = {
 	title: __( 'Header Image', 'events-gutenberg' ),
-	/* eslint-disable max-len */
 	description: __(
+		/* eslint-disable-next-line max-len */
 		'Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.',
 		'events-gutenberg'
 	),
