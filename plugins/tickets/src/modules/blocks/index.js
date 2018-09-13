@@ -7,10 +7,12 @@ import { registerBlockType } from '@wordpress/blocks';
  * Internal dependencies
  */
 import { initStore } from '@moderntribe/tickets/data';
+import rsvp from '@moderntribe/tickets/blocks/rsvp';
 import tickets from '@moderntribe/tickets/blocks/tickets';
 import ticket from '@moderntribe/tickets/blocks/ticket';
 
 const blocks = [
+	rsvp,
 	tickets,
 	ticket,
 ];

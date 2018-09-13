@@ -7,7 +7,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import DisabledTickets from './../DisabledTickets';
+import DisabledTickets from './../element';
 
 // Mock to overwrite the default SVG icons mock
 jest.mock( '@moderntribe/tickets/icons', () => ( {

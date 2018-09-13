@@ -16,6 +16,16 @@ exports[`Button Element renders button with class 1`] = `
 />
 `;
 
+exports[`Button Element renders button with extra attributes 1`] = `
+<button
+  className="tribe-editor__button"
+  hello="world"
+  onClick={[Function]}
+  test="one-two-three"
+  type="button"
+/>
+`;
+
 exports[`Button Element renders button with label 1`] = `
 <button
   className="tribe-editor__button"

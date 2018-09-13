@@ -11,6 +11,7 @@ import AutosizeInput from 'react-input-autosize';
  */
 import { Dashicon } from '@wordpress/components';
 import { URLInput } from '@wordpress/editor';
+import { sendValue } from '@moderntribe/events/editor/utils/input';
 import { __ } from '@wordpress/i18n';
 
 /**
