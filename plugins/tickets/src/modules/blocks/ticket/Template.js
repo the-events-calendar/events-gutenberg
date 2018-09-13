@@ -8,6 +8,11 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import {
+	Alert,
+	Clipboard,
+	Pencil,
+} from '@moderntribe/common/icons';
+import {
 	TicketStatus,
 	QuantityBar,
 } from '@moderntribe/tickets/elements';
@@ -21,6 +26,7 @@ const Ticket = ( props ) => {
 		currencySign,
 		currencyPosition,
 		unlimited,
+		expires,
 		available,
 		sold,
 	} = props;
@@ -30,10 +36,14 @@ const Ticket = ( props ) => {
 	return (
 		<div className="tribe-editor__ticket">
 			<div className="tribe-editor__ticket-icon">
-				<TicketStatus unlimited={ unlimited }/>
+				<TicketStatus expires={ expires } />
 			</div>
 			<div className="tribe-editor__ticket-content">
-				<h3 className="tribe-editor__ticket-title">{ title }</h3>
+				<div className="tribe-editor__ticket-title-container">
+					<h3 className="tribe-editor__ticket-title">{ title }</h3>
+					<button className="tribe-editor__btn--label"><Pencil /></button>
+					<button className="tribe-editor__btn--label"><Clipboard /></button>
+				</div>
 				{ description && <div className="tribe-editor__ticket-description">{ description }</div> }
 			</div>
 			<div className="tribe-editor__ticket-price">
@@ -41,13 +51,14 @@ const Ticket = ( props ) => {
 			</div>
 			<div className="tribe-editor__ticket-quantity">
 				{ `${available} of ${ sold } sold` }
-				{ unlimited ? 'unlimited' : null }
 				<QuantityBar sold={ 40 } total={ 156 } />
+				<span className="tribe-editor__quantity-label">7 of 10 sold <Alert /></span>
 				<QuantityBar sold={ 40 } shared={ 120 } total={ 156 } />
 				<QuantityBar sold={ 40 } capacity={ 70 } shared={ 120 } total={ 156 } />
+				<span className="tribe-editor__quantity--unlimited">unlimited</span>
 			</div>
 		</div>
-	)
+	);
 }
 
 Ticket.propTypes = {
@@ -59,6 +70,7 @@ Ticket.propTypes = {
 	unlimited: PropTypes.bool,
 	available: PropTypes.number,
 	sold: PropTypes.number,
+	expires: PropTypes.bool,
 }
 
 Ticket.defaultProps = {
@@ -70,6 +82,7 @@ Ticket.defaultProps = {
 	unlimited: false,
 	available: 0,
 	sold: 0,
+	expires: true,
 }
 
 export default Ticket;
