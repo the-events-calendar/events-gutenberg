@@ -19,11 +19,17 @@ const Bar = ( { className, value, total } ) => {
 		return null;
 	}
 
-	const percentage = number.percentage( value, total );
+	// Prevent to have numbers above 100 and below 0
+	const percentage = Math.max(
+		0,
+		Math.min(
+			100, number.percentage( value, total ),
+		),
+	);
 	const style = {};
 
 	if ( percentage > 0 ) {
-		style.width = `${ percentage }%`;
+		style.width = `${ percentage.toFixed( 2 ) }%`;
 	}
 
 	return (

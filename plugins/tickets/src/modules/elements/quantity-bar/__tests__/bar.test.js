@@ -20,11 +20,25 @@ describe( '<Bar />', () => {
 		expect( component.toJSON() ).toBe( null );
 	} );
 
+	test( 'renders 100 when percentage is above 100', () => {
+		const component = shallow( <Bar value={ 200 } total={ 100 } /> );
+		const span = component.get( 0 );
+		const { style } = span.props;
+		expect( style ).toEqual( { width: '100.00%' } );
+	} );
+
+	test( 'renders 0 when percentage is negative', () => {
+		const component = shallow( <Bar value={ -200 } total={ 100 } /> );
+		const span = component.get( 0 );
+		const { style } = span.props;
+		expect( style ).toEqual( {} );
+	} );
+
 	test( 'render percentage as inline style', () => {
 		const component = shallow( <Bar value={ 33 } total={ 100 } /> );
 		const span = component.get( 0 );
 		const { style } = span.props;
-		expect( style ).toEqual( { width: '33%' } );
+		expect( style ).toEqual( { width: '33.00%' } );
 	} );
 
 	test( 'render percentage with custom class name', () => {
