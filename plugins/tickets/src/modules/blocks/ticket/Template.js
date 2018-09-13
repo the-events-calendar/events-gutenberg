@@ -32,9 +32,10 @@ const Ticket = ( props ) => {
 	} = props;
 
 	const priceLabel = [ currencySign, price ];
+	const amountSold = `${available} of ${ sold } sold`;
 
 	return (
-		<div className="tribe-editor__ticket">
+		<article className="tribe-editor__ticket">
 			<div className="tribe-editor__ticket-icon">
 				<TicketStatus expires={ expires } />
 			</div>
@@ -50,14 +51,13 @@ const Ticket = ( props ) => {
 				{ 'suffix' === currencyPosition ? [ ...priceLabel ].reverse() : priceLabel }
 			</div>
 			<div className="tribe-editor__ticket-quantity">
-				{ `${available} of ${ sold } sold` }
 				<QuantityBar sold={ 40 } total={ 156 } />
-				<span className="tribe-editor__quantity-label">7 of 10 sold <Alert /></span>
+				<span className="tribe-editor__quantity-label">{ amountSold }<Alert /></span>
 				<QuantityBar sold={ 40 } shared={ 120 } total={ 156 } />
 				<QuantityBar sold={ 40 } capacity={ 70 } shared={ 120 } total={ 156 } />
 				<span className="tribe-editor__quantity--unlimited">unlimited</span>
 			</div>
-		</div>
+		</article>
 	);
 }
 
