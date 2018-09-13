@@ -48,4 +48,13 @@ describe( 'Button Element', () => {
 		const component = renderer.create( <Button type="submit" /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
+
+	it( 'renders button with extra attributes', () => {
+		const attrs = {
+			test: 'one-two-three',
+			hello: 'world',
+		};
+		const component = renderer.create( <Button { ...attrs } /> );
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
 } );
