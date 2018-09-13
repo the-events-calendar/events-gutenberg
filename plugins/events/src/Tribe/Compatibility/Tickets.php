@@ -49,11 +49,15 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 			return $content;
 		}
 
+		add_filter( 'the_content', 'strip_dynamic_blocks', 8 ); // Before do_blocks().
+
 		$hook = tribe( 'tickets.rsvp' )->get_ticket_form_hook();
 
 		ob_start();
 		do_action( $hook );
 		$form = ob_get_clean();
+
+		remove_filter( 'the_content', 'strip_dynamic_blocks', 8 );
 
 		if ( false === strpos( $hook, 'before' ) ) {
 			return $content . $form;
