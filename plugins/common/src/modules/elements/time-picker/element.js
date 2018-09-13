@@ -22,7 +22,7 @@ import { __ } from '@wordpress/i18n';
  */
 import {
 	moment as momentUtil,
-	time,
+	time as timeUtil,
 	TribePropTypes,
 } from '@moderntribe/common/utils';
 import './style.pcss';
@@ -63,7 +63,6 @@ const TimePicker = ( {
 
 		return (
 			<input
-				name="google-calendar-label"
 				className="tribe-editor__btn-input"
 				type="time"
 				value={ current }
@@ -89,14 +88,14 @@ const TimePicker = ( {
 	const getItems = () => {
 		const items = [];
 
-		const startSeconds = time.toS( start, time.TIME_FORMAT_HH_MM );
-		const endSeconds = time.toS( end, time.TIME_FORMAT_HH_MM );
+		const startSeconds = timeUtil.toSeconds( start, timeUtil.TIME_FORMAT_HH_MM );
+		const endSeconds = timeUtil.toSeconds( end, timeUtil.TIME_FORMAT_HH_MM );
 
 		for ( let time = startSeconds; time <= endSeconds; time += step ) {
 			items.push( {
 				value: time,
 				text: formatLabel( time ),
-				isCurrent: time === time.toS( current, time.TIME_FORMAT_HH_MM ),
+				isCurrent: time === timeUtil.toSeconds( current, timeUtil.TIME_FORMAT_HH_MM ),
 			} );
 		}
 
@@ -162,7 +161,7 @@ const TimePicker = ( {
 }
 
 TimePicker.defaultProps = {
-	step: time.HALF_HOUR_IN_SECONDS,
+	step: timeUtil.HALF_HOUR_IN_SECONDS,
 	timeFormat: 'H:i',
 	allDay: false,
 	onChange: noop,
