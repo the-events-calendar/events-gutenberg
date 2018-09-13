@@ -1,7 +1,11 @@
 /**
- * @todo replace state with "real" reducers
- *
- * @param {mixed} state The initial state
- * @return {mixed} returns a new reducer
+ * External dependencies
  */
-export default ( state = {} ) => state;
+import { combineReducers } from 'redux';
+
+/**
+ * Internal dependencies
+ */
+// @TODO: fill in reducers
+
+export default combineReducers( {} );
