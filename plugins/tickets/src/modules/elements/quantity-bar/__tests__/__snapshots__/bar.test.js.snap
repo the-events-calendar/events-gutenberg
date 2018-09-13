@@ -5,7 +5,7 @@ exports[`<Bar /> render percentage with custom class name 1`] = `
   className="jest-test"
   style={
     Object {
-      "width": "45%",
+      "width": "45.00%",
     }
   }
 />

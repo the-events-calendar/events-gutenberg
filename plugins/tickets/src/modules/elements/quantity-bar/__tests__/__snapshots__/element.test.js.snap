@@ -8,7 +8,7 @@ exports[`<QuantityBar> independent capacity 1`] = `
     className="tribe-editor__quantity-bar--available"
     style={
       Object {
-        "width": "20%",
+        "width": "20.00%",
       }
     }
   />
@@ -23,7 +23,7 @@ exports[`<QuantityBar> shared capacity 1`] = `
     className="tribe-editor__quantity-bar--shared"
     style={
       Object {
-        "width": "80%",
+        "width": "80.00%",
       }
     }
   />
@@ -31,7 +31,7 @@ exports[`<QuantityBar> shared capacity 1`] = `
     className="tribe-editor__quantity-bar--available"
     style={
       Object {
-        "width": "20%",
+        "width": "20.00%",
       }
     }
   />
@@ -46,7 +46,7 @@ exports[`<QuantityBar> with limited capacity 1`] = `
     className="tribe-editor__quantity-bar--shared"
     style={
       Object {
-        "width": "80%",
+        "width": "80.00%",
       }
     }
   />
@@ -54,7 +54,7 @@ exports[`<QuantityBar> with limited capacity 1`] = `
     className="tribe-editor__quantity-bar--available"
     style={
       Object {
-        "width": "20%",
+        "width": "20.00%",
       }
     }
   />
@@ -62,7 +62,7 @@ exports[`<QuantityBar> with limited capacity 1`] = `
     className="tribe-editor__quantity-bar--capacity"
     style={
       Object {
-        "width": "50%",
+        "width": "50.00%",
       }
     }
   />
