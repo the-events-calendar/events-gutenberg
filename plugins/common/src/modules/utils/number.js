@@ -6,16 +6,11 @@
  * @returns {number} total percentage value
  */
 export const percentage = ( value = 0, total = 0 ) => {
-	if ( total <= 0 ) {
+	if ( total === 0 ) {
 		return 0;
 	}
 
-	const result = Math.floor( ( value / total ) * 100 );
+	const result = Number.parseFloat( ( value / total ) * 100 );
 
-	if ( isNaN( result ) ) {
-		return 0;
-	}
-
-	// ensure number does not goes out of 100%
-	return Math.min( 100, result );
+	return isNaN( result ) ? 0 : result;
 };
