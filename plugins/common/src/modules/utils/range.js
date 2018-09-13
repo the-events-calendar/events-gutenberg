@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { trim, isEmpty } from 'lodash';
+import { trim, isEmpty, split } from 'lodash';
 
 /**
  * Parse a string into a range type of string {a} - {b} where a and b are numbers
@@ -38,9 +38,8 @@ export const parser = ( input ) => {
  * @param {string} input The string from where to extract the chars
  * @returns {string} A string with only valid chars
  */
-export const parseChars = ( input ) => (
-	input
-		.split( ' ' )
+export const parseChars = ( input = '' ) => (
+	split( input, ' ' )
 		.map( ( part ) => {
 			// Remove anything that is not a number a period or a dash
 			return part.replace( /[^0-9.,-]/g, '' );
@@ -56,10 +55,8 @@ export const parseChars = ( input ) => (
  * @returns {array} An array with the parts
  */
 export const extractParts = ( chars ) => (
-	chars
+	split( chars.replace( /,/g, '.' ), '-' )
 	// Convert , into . so we can parse into numbers
-		.replace( /,/g, '.' )
-		.split( '-' )
 		.map( ( item ) => {
 			const re = /([0-9]+(.[0-9]+)?)/g;
 			const result = re.exec( item.trim() );
@@ -68,7 +65,7 @@ export const extractParts = ( chars ) => (
 		.filter( ( item ) => ! isEmpty( item ) )
 		.map( ( item ) => {
 			// If the user input the price with decimals (even .00) we want to keep them
-			const decimals = 0 < item.indexOf( '.' ) ? 2 : 0 ;
+			const decimals = 0 < item.indexOf( '.' ) ? 2 : 0;
 			return parseFloat( item ).toFixed( decimals );
 		} )
 		.filter( ( item ) => ! isNaN( item ) )
@@ -82,8 +79,7 @@ export const extractParts = ( chars ) => (
  * @returns {boolean} true if the event has 0 on all parts of the range, false otherwise
  */
 export const isFree = ( input ) => {
-	const parts = input.split( '-' );
-
+	const parts = split( input, '-' );
 	const test = parts
 		.map( ( item ) => parseFloat( item ) )
 		.filter( ( item ) => ! isNaN( item ) )
