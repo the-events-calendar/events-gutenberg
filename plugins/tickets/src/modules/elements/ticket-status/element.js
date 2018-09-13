@@ -14,20 +14,20 @@ import {
 	TicketInactive,
 } from '@moderntribe/tickets/icons';
 
-const TicketIcon = ( { unlimited, disabled } ) => {
-	if ( unlimited ) {
-		return disabled ? <ClockActive /> : <ClockInactive />;
+const TicketIcon = ( { expires, disabled } ) => {
+	if ( expires ) {
+		return disabled ? <TicketInactive /> : <TicketActive />;
 	}
-	return disabled ? <TicketActive /> : <TicketInactive />;
+	return disabled ? <ClockInactive /> : <ClockActive />;
 };
 
 TicketIcon.defaultProps = {
-	unlimited: false,
+	expires: false,
 	disabled: false,
 }
 
 TicketIcon.propTypes = {
-	unlimited: PropTypes.bool,
+	expires: PropTypes.bool,
 	disabled: PropTypes.bool,
 }
 
