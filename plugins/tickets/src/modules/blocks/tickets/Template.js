@@ -13,6 +13,8 @@ import { InnerBlocks } from '@wordpress/editor';
 import {
 	Availability,
 	ActionDashboard,
+	CapacityTable,
+	HeaderImage,
 	DisabledTickets,
 } from '@moderntribe/tickets/elements';
 import './style.pcss';
@@ -20,7 +22,8 @@ import './style.pcss';
 const disabled = {
 	title: __( 'No Active Tickets', 'events-gutenberg' ),
 	description: __(
-		'The time is curently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
+		/* eslint-disable-next-line max-len */
+		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
 		'events-gutenberg'
 	),
 }
@@ -63,6 +66,8 @@ const TicketsTemplate = ( props ) => {
 					{ disabled.description }
 				</DisabledTickets>
 			</div>
+			<CapacityTable />
+			<HeaderImage />
 			{ availability }
 			{ actionDashboard }
 		</div>

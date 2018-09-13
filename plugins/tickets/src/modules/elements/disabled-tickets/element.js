@@ -13,19 +13,19 @@ import './style.pcss';
 
 const DisabledTickets = ( { title, children, icon } ) => (
 	<section className="tribe-editor__tickets__disabled">
-		<aside className="tribe-editor__tickets__disabled__icon">
+		<div className="tribe-editor__tickets__disabled__icon">
 			{ icon }
-		</aside>
+		</div>
 		{ ( children || title ) &&
 		(
-			<aside className="tribe-editor__tickets__disabled__content">
+			<div className="tribe-editor__tickets__disabled__content">
 				{ title && <h3 className="tribe-editor__tickets__disabled__title">{ title }</h3> }
 				{ children && (
-					<section className="tribe-editor__tickets__disabled__description">
+					<div className="tribe-editor__tickets__disabled__description">
 						{ children }
-					</section>
+					</div>
 				) }
-			</aside>
+			</div>
 		) }
 	</section>
 );

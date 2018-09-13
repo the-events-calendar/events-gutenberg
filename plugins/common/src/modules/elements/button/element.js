@@ -17,24 +17,30 @@ const Button = ( {
 	children,
 	onClick,
 	type,
+	...props
 } ) => (
 	<button
 		className={ classNames( 'tribe-editor__button', className ) }
 		disabled={ isDisabled }
 		type={ type }
 		onClick={ onClick }
+		{ ...props }
 	>
 		{ children }
 	</button>
 );
 
 Button.defaultProps = {
-	type: 'button',
 	onClick: noop,
+	type: 'button',
 };
 
 Button.propTypes = {
-	className: PropTypes.string,
+	className: PropTypes.oneOfType( [
+		PropTypes.string,
+		PropTypes.arrayOf( PropTypes.string ),
+		PropTypes.object,
+	] ),
 	isDisabled: PropTypes.bool,
 	children: PropTypes.node,
 	onClick: PropTypes.func,

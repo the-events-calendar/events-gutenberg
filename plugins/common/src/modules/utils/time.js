@@ -12,6 +12,21 @@ export const START_OF_DAY = '00:00';
 export const END_OF_DAY = '23:59';
 
 /**
+ * Round the time of a time string
+ * If the minutes is lower than 30, it will round the minutes to 0
+ * If the minutes is greater than or equal to 30, it will round the minutes to 30
+ *
+ * @param {string} time
+ * @returns {moment} A moment object
+ */
+export const roundTime = ( time, format = TIME_FORMAT_MM_SS ) => {
+	const seconds = toSeconds( time, format );
+	const overage = seconds % ( MINUTE_IN_SECONDS * 30 );
+	const roundedSeconds = seconds - overage;
+	return fromSeconds( roundedSeconds, format );
+}
+
+/**
  * The code below is copied from the library hh-mm-ss
  * Link: https://www.npmjs.com/package/hh-mm-ss
  * The code has been copied so that Modern Tribe can maintain this library
@@ -40,13 +55,13 @@ export const fromMilliseconds = ( ms, format = TIME_FORMAT_MM_SS ) => {
 		throw new Error( 'Argument `ms` provided to `fromMilliseconds` is not a number or is NaN.' );
 	}
 
-	let absMs = Math.abs( ms );
+	const absMs = Math.abs( ms );
 
-	let negative = ( ms < 0 );
-	let hours = Math.floor( absMs / HOUR_IN_MS );
-	let minutes = Math.floor( absMs % HOUR_IN_MS / MINUTE_IN_MS );
-	let seconds = Math.floor( absMs % MINUTE_IN_MS / SECOND_IN_MS );
-	let miliseconds = Math.floor( absMs % SECOND_IN_MS );
+	const negative = ( ms < 0 );
+	const hours = Math.floor( absMs / HOUR_IN_MS );
+	const minutes = Math.floor( absMs % HOUR_IN_MS / MINUTE_IN_MS );
+	const seconds = Math.floor( absMs % MINUTE_IN_MS / SECOND_IN_MS );
+	const miliseconds = Math.floor( absMs % SECOND_IN_MS );
 
 	return formatTime( {
 		negative,
@@ -70,7 +85,7 @@ export const fromSeconds = ( s, format = TIME_FORMAT_MM_SS ) => {
 		throw new Error( 'Argument `s` provided to `fromSeconds` is not a number or is NaN.' );
 	}
 
-	let ms = s * SECOND_IN_MS;
+	const ms = s * SECOND_IN_MS;
 
 	return fromMilliseconds( ms, format );
 };
@@ -99,17 +114,17 @@ export const toMilliseconds = ( time, format = TIME_FORMAT_MM_SS ) => {
 		throw new Error( 'Argument `format` provided to `toMilliseconds` is not a recognized format.' );
 	}
 
-	let result = re.exec( time );
+	const result = re.exec( time );
 	if ( ! result ) {
 		/* eslint-disable-next-line max-len */
 		throw new Error( 'Argument `time` provided to `toMilliseconds` is not a recognized format.' );
 	}
 
-	let negative = result[ 1 ] === '-';
-	let hours = result[ 2 ] | 0;
-	let minutes = result[ 3 ] | 0;
-	let seconds = result[ 4 ] | 0;
-	let miliseconds = Math.floor( 1000 * result[ 5 ] | 0 );
+	const negative = result[ 1 ] === '-';
+	const hours = result[ 2 ] | 0;
+	const minutes = result[ 3 ] | 0;
+	const seconds = result[ 4 ] | 0;
+	const miliseconds = Math.floor( 1000 * result[ 5 ] | 0 );
 
 	if ( minutes >= 60 || seconds >= 60 ) {
 		/* eslint-disable-next-line max-len */
@@ -132,7 +147,7 @@ export const toMilliseconds = ( time, format = TIME_FORMAT_MM_SS ) => {
  * @returns {int} Seconds equivalent of time string in format provided
  */
 export const toSeconds = ( time, format = TIME_FORMAT_MM_SS ) => {
-	let ms = toMilliseconds( time, format );
+	const ms = toMilliseconds( time, format );
 	return Math.floor( ms / SECOND_IN_MS );
 };
 
@@ -179,10 +194,10 @@ export const formatTime = ( time, format ) => {
 			throw new Error( 'Argument `format` provided to `formatTime` is not a recognized format.' );
 	}
 
-	let hh = zeroFill( 2, time.hours );
-	let mm = zeroFill( 2, time.minutes );
-	let ss = zeroFill( 2, time.seconds );
-	let sss = zeroFill( 3, time.miliseconds );
+	const hh = zeroFill( 2, time.hours );
+	const mm = zeroFill( 2, time.minutes );
+	const ss = zeroFill( 2, time.seconds );
+	const sss = zeroFill( 3, time.miliseconds );
 
 	return ( time.negative ? '-' : '' ) + ( showHr ? (
 		showMs ? `${hh}:${mm}:${ss}.${sss}` : showSc ? `${hh}:${mm}:${ss}` : `${hh}:${mm}`

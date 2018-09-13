@@ -21,7 +21,6 @@ import { InspectorControls, PlainText } from '@wordpress/editor';
  * Internal dependencies
  */
 import { TimePicker } from '@moderntribe/common/elements';
-import { date, moment, time } from '@moderntribe/common/utils';
 import {
 	Dashboard,
 	Month,
@@ -29,6 +28,11 @@ import {
 	Upsell,
 	TimeZone,
 } from '@moderntribe/events/elements';
+import {
+	date,
+	moment as momentUtil,
+	time,
+} from '@moderntribe/common/utils';
 import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
 import './style.pcss';
 
@@ -44,7 +48,7 @@ const {
 	toDateNoYear,
 	toTime,
 	isSameYear,
-} = moment;
+} = momentUtil;
 FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
 
 class EventDateTime extends Component {
