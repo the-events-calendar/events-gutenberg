@@ -29,7 +29,11 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 	 */
 	public function include_frontend_form( $content = '' ) {
 		if ( is_admin() ) {
-			return $content ;
+			return $content;
+		}
+
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			return $content;
 		}
 
 		// Fetch the post
