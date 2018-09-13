@@ -42,10 +42,4 @@ describe( 'Accordion Element', () => {
 		const component = renderer.create( <Accordion className="test-class" rows={ rows } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
-
-	it( 'renders an accordion with inactive state', () => {
-		rows[0].isActive = false;
-		const component = renderer.create( <Accordion rows={ rows } /> );
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
 } );
