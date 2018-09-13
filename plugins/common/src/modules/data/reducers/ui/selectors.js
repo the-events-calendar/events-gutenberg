@@ -3,12 +3,12 @@
  */
 import { createSelector } from 'reselect';
 
-export const getUi = ( state ) => state.ui;
+export const getUI = ( state ) => state.ui;
 
 export const getAccordionId = ( state, ownProps ) => ownProps.accordionId;
 
 export const getAccordions = createSelector(
-	[ getUi ],
+	[ getUI ],
 	( ui ) => ui.accordion,
 );
 
