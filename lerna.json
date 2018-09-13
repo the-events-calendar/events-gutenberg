@@ -3,5 +3,12 @@
     "plugins/*"
   ],
   "version": "independent",
-  "npmClientArgs": ["--production", "--no-optional"]
+  "command": {
+    "bootstrap": {
+      "npmClientArgs": ["--no-optional"]
+    },
+    "build": {
+      "npmClientArgs": ["--production", "--no-optional"]
+    }
+  }
 }
