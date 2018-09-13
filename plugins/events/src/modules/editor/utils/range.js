@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { trim, isEmpty } from 'lodash';
+import { trim, isEmpty, split } from 'lodash';
 
 /**
  * Parse a string into a range type of string {a} - {b} where a and b are numbers
@@ -39,8 +39,7 @@ export function parser( input ) {
  * @returns {string} A string with only valid chars
  */
 export function parseChars( input ) {
-	return input
-		.split( ' ' )
+	return split( input, ' ' )
 		.map( ( part ) => {
 			// Remove anything that is not a number a period or a dash
 			return part.replace( /[^0-9.,-]/g, '' );
@@ -56,10 +55,10 @@ export function parseChars( input ) {
  * @returns {array} An array with the parts
  */
 export function extractParts( chars ) {
-	return chars
 	// Convert , into . so we can parse into numbers
-		.replace( /,/g, '.' )
-		.split( '-' )
+	chars = chars.replace( /,/g, '.' )
+
+	return split( chars, '-' )
 		.map( ( item ) => {
 			const re = /([0-9]+(.[0-9]+)?)/g;
 			const result = re.exec( item.trim() );
@@ -82,7 +81,7 @@ export function extractParts( chars ) {
  * @returns {boolean} true if the event has 0 on all parts of the range, false otherwise
  */
 export function isFree( input ) {
-	const parts = input.split( '-' );
+	const parts = split( input, '-' );
 
 	const test = parts
 		.map( ( item ) => parseFloat( item ) )

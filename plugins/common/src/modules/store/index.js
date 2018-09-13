@@ -6,6 +6,6 @@ import 'regenerator-runtime/runtime';
 /**
  * Internal dependencies
  */
-import configureStore from './configureStore';
+import configureStore from './configure-store';
 
 export const store = configureStore();

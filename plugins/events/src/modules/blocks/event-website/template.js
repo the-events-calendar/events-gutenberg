@@ -10,7 +10,7 @@ import AutosizeInput from 'react-input-autosize';
  * WordPress dependencies
  */
 import { Dashicon } from '@wordpress/components';
-import { UrlInput } from '@wordpress/editor';
+import { URLInput } from '@wordpress/editor';
 import { sendValue } from '@moderntribe/events/editor/utils/input';
 import { __ } from '@wordpress/i18n';
 
@@ -29,7 +29,7 @@ const renderUrlInput = ({ isSelected, url, setWebsite }) => (
 	isSelected && (
 		<div key="tribe-events-website-url" className="tribe-editor__event-website__url">
 			<Dashicon icon="admin-links" />
-			<UrlInput
+			<URLInput
 				autoFocus={ false }
 				value={ url }
 				onChange={ setWebsite }
