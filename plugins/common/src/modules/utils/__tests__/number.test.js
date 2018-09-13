@@ -9,7 +9,7 @@ describe( 'percentage', () => {
 	} );
 
 	test( 'with non numbers', () => {
-		expect( percentage( 'modern', 'tribe' ) ).toBe( 0 );
+		expect( () => percentage( 'modern', 'tribe' ) ).toThrow();
 	} );
 
 	test( 'limits outside 100 percent', () => {

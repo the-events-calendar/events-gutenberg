@@ -12,5 +12,11 @@ export const percentage = ( value = 0, total = 0 ) => {
 
 	const result = Number.parseFloat( ( value / total ) * 100 );
 
-	return isNaN( result ) ? 0 : result;
+	if ( isNaN( result ) ) {
+		throw new RangeError(
+			`Make sure ${value} and ${total} are valid numbers, operation result in NaN value`
+		);
+	}
+
+	return result;
 };
