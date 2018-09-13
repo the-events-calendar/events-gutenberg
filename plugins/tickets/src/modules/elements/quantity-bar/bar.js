@@ -8,8 +8,10 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import TribeTypes from '@moderntribe/common/utils/proptypes';
-import { number } from '@moderntribe/common/utils/';
+import {
+	number,
+	TribePropTypes,
+} from '@moderntribe/common/utils/';
 
 const Bar = ( { className, value, total } ) => {
 
@@ -33,7 +35,7 @@ Bar.propTypes = {
 	className: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.arrayOf( PropTypes.string ),
-		TribeTypes.nullType,
+		TribePropTypes.nullType,
 	] ),
 	value: PropTypes.number,
 	total: PropTypes.number,
