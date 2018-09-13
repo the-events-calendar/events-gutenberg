@@ -37,6 +37,7 @@ export const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 /**
  * PropTypes check for type string and time format using 24h clock in hh:mm format
  * e.g. 00:24, 03:57, 21:12
+ *
  * @param {object} props
  * @param {string} propName
  * @param {string} componentName
@@ -68,5 +69,5 @@ export const nullType = ( props, propName, componentName ) => {
 
 export default {
 	timeFormat: createChainableValidator( timeFormat ),
-	nullType,
+	nullType: createChainableValidator( nullType ),
 };
