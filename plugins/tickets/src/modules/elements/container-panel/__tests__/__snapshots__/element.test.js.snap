@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container Panel Element renders container panel 1`] = `
+<div
+  className="tribe-editor__container-panel"
+>
+  <section
+    className="tribe-editor__container-panel__left-section"
+  />
+  <section
+    className="tribe-editor__container-panel__right-section"
+  >
+    <div
+      className="tribe-editor__container-panel__right-section-header"
+    />
+  </section>
+</div>
+`;
+
+exports[`Container Panel Element renders container panel with classes 1`] = `
+<div
+  className="tribe-editor__container-panel test-class-name"
+>
+  <section
+    className="tribe-editor__container-panel__left-section"
+  >
+    left section
+  </section>
+  <section
+    className="tribe-editor__container-panel__right-section"
+  >
+    <div
+      className="tribe-editor__container-panel__right-section-header"
+    >
+      right section header
+    </div>
+  </section>
+</div>
+`;
+
+exports[`Container Panel Element renders container panel with left and right sections 1`] = `
+<div
+  className="tribe-editor__container-panel"
+>
+  <section
+    className="tribe-editor__container-panel__left-section"
+  >
+    left section
+  </section>
+  <section
+    className="tribe-editor__container-panel__right-section"
+  >
+    <div
+      className="tribe-editor__container-panel__right-section-header"
+    >
+      right section header
+    </div>
+  </section>
+</div>
+`;
+
+exports[`Container Panel Element renders container panel with right section content 1`] = `
+<div
+  className="tribe-editor__container-panel"
+>
+  <section
+    className="tribe-editor__container-panel__left-section"
+  >
+    left section
+  </section>
+  <section
+    className="tribe-editor__container-panel__right-section"
+  >
+    <div
+      className="tribe-editor__container-panel__right-section-header"
+    >
+      right section header
+    </div>
+    <div
+      className="tribe-editor__container-panel__right-section-content"
+    >
+      right section content
+    </div>
+  </section>
+</div>
+`;

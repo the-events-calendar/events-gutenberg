@@ -11,7 +11,11 @@ import classNames from 'classnames';
 import './style.pcss';
 
 const ContainerPanel = ( {
-	...props
+	className,
+	leftSection,
+	rightSectionContent,
+	rightSectionHeader,
+	showContent,
 } ) => (
 	<div
 		className={ classNames(
