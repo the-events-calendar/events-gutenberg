@@ -6,7 +6,7 @@ import { selectors } from '@moderntribe/common/data/reducers/ui';
 const state = {
 	ui: {
 		accordion: {
-			'id1': false,
+			id1: false,
 		}
 	}
 };
