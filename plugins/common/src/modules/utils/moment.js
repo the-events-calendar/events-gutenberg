@@ -200,29 +200,29 @@ export const totalSeconds = ( date ) => {
  * @param {string} format Format used to output the date
  * @returns {string} A date time format
  */
-export const toDateTime = ( date, format = dateUtil.FORMATS.DATABASE.datetime ) => {
-	return date.format( toFormat( format ) );
-}
+export const toDateTime = ( date, format = dateUtil.FORMATS.DATABASE.datetime ) => (
+	date.format( toFormat( format ) )
+);
 
-export const toDate = ( date, format = dateUtil.FORMATS.WP.date ) => {
-	return date.format( toFormat( format ) );
-}
+export const toDate = ( date, format = dateUtil.FORMATS.WP.date ) => (
+	date.format( toFormat( format ) )
+);
 
-export const toDateNoYear = ( date, format = dateUtil.FORMATS.WP.dateNoYear ) => {
-	return date.format( toFormat( format ) );
-}
+export const toDateNoYear = ( date, format = dateUtil.FORMATS.WP.dateNoYear ) => (
+	date.format( toFormat( format ) )
+);
 
-export const toTime = ( date, format = dateUtil.FORMATS.WP.time ) => {
-	return date.format( toFormat( format ) );
-}
+export const toTime = ( date, format = dateUtil.FORMATS.WP.time ) => (
+	date.format( toFormat( format ) )
+);
 
-export const toTime24Hr = ( date, format = dateUtil.FORMATS.WP.time24Hr ) => {
-	return date.format( toFormat( format ) );
-}
+export const toTime24Hr = ( date, format = dateUtil.FORMATS.WP.time24Hr ) => (
+	date.format( toFormat( format ) )
+);
 
-export const toDatePicker = ( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) => {
-	return date.format( format );
-}
+export const toDatePicker = ( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) => (
+	date.format( format )
+);
 
 /**
  * Test if the start and end dates are the same day.
