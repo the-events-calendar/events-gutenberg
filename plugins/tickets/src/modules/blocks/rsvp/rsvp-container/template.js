@@ -1,13 +1,14 @@
 /**
  * External dependencies
  */
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 /**
  * Internal dependencies
  */
 import { ContainerPanel } from '@moderntribe/tickets/elements';
+import RSVPContainerHeader from '@moderntribe/tickets/blocks/rsvp/rsvp-container-header/container';
 import { RSVPActive, RSVPInactive } from '@moderntribe/tickets/icons';
 
 const RSVPContainerSectionLeft = () => {
@@ -26,13 +27,15 @@ const RSVPContainerSectionLeft = () => {
 const RSVPContainer = ( {
 	showContent,
 } ) => {
-	<ContainerPanel
-		className="tribe-editor__rsvp-container"
-		leftSection={ <RSVPContainerSectionLeft /> }
-		rightSectionHeader={ '' }
-		rightSectionContent={ '' }
-		showContent={ showContent }
-	/>
+	return (
+		<ContainerPanel
+			className="tribe-editor__rsvp-container"
+			leftSection={ <RSVPContainerSectionLeft /> }
+			rightSectionHeader={ <RSVPContainerHeader /> }
+			rightSectionContent={ '' }
+			showContent={ showContent }
+		/>
+	);
 };
 
 RSVPContainer.propTypes = {
