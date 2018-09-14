@@ -145,6 +145,32 @@ implements Tribe__Gutenberg__Common__Blocks__Interface {
 	}
 
 	/**
+	 * Determine whether a post or content string has this block.
+	 *
+	 * This test optimizes for performance rather than strict accuracy, detecting
+	 * the pattern of a block but not validating its structure. For strict accuracy
+	 * you should use the block parser on post content.
+	 *
+	 * @since 0.2.8-alpha
+	 *
+	 * @see gutenberg_parse_blocks()
+	 *
+	 * @param int|string|WP_Post|null $post Optional. Post content, post ID, or post object. Defaults to global $post.
+	 *
+	 * @return bool Whether the post has this block.
+	 */
+	public function has_block( $post = null ) {
+		if ( ! is_numeric( $post ) ) {
+			$wp_post = get_post( $post );
+			if ( $wp_post instanceof WP_Post ) {
+				$post = $wp_post->post_content;
+			}
+		}
+
+		return false !== strpos( (string) $post, '<!-- wp:' . $this->name() );
+	}
+
+	/**
 	 * Fetches the name for the block we are working with and converts it to the
 	 * correct `wp_ajax_{$action}` string for us to Hook
 	 *
