@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RSVP block reducer should set the capacity 1`] = `
+Object {
+  "capacity": 20,
+  "created": false,
+  "description": "",
+  "enableNotGoing": false,
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the created flag to false 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "enableNotGoing": false,
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the created flag to true 1`] = `
+Object {
+  "capacity": "",
+  "created": true,
+  "description": "",
+  "enableNotGoing": false,
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the description 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "new description",
+  "enableNotGoing": false,
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the enable not going 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "enableNotGoing": true,
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the end date 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "enableNotGoing": false,
+  "endDate": "January 1, 2018",
+  "endTime": "19:30",
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the end time 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "enableNotGoing": false,
+  "endDate": "July 19, 2018",
+  "endTime": "13:45",
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the start date 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "enableNotGoing": false,
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "startDate": "January 1, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the start time 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "enableNotGoing": false,
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "startDate": "July 19, 2018",
+  "startTime": "13:45",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the title 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "enableNotGoing": false,
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "new title",
+}
+`;

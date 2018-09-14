@@ -153,6 +153,12 @@ describe( 'Tests for moment.js', () => {
 		expect( converted ).toBe( moment().format( 'h:mm a' ) );
 	} );
 
+	test( 'toTime24Hr', () => {
+		const converted = momentUtil.toTime24Hr( moment() );
+		expect( typeof converted ).toBe( 'string' );
+		expect( converted ).toBe( moment().format( 'H:mm' ) );
+	} );
+
 	test( 'toDatePicker', () => {
 		const converted = momentUtil.toDatePicker( moment() );
 		expect( typeof converted ).toBe( 'string' );

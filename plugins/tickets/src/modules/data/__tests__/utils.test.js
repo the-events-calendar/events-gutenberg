@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { PREFIX_TICKETS_STORE } from './../prefix';
+import { PREFIX_TICKETS_STORE } from '@moderntribe/tickets/data/utils';
 
 describe( 'Tickets prefix', () => {
 	it( 'should follow prefix convention', () => {

@@ -6,6 +6,8 @@ import { combineReducers } from 'redux';
 /**
  * Internal dependencies
  */
-// @TODO: fill in reducers
+import { accordion } from './reducers';
 
-export default combineReducers( {} );
+export default combineReducers( {
+	accordion,
+} );

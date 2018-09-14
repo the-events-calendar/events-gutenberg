@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI Selectors should return the UI state 1`] = `
+Object {
+  "accordion": Object {
+    "id1": false,
+  },
+}
+`;
+
+exports[`UI Selectors should return the accordion id 1`] = `"id1"`;
+
+exports[`UI Selectors should return the accordion state 1`] = `
+Object {
+  "id1": false,
+}
+`;
+
+exports[`UI Selectors should return the accordion state of accordion id 1`] = `false`;
