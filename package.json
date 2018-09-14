@@ -1,6 +1,6 @@
 {
 	"name": "events-gutenberg",
-	"version": "0.2.7-alpha",
+	"version": "0.2.8-alpha",
 	"description": "A new WordPress editor experience for Events",
 	"repository": "git+https://github.com/moderntribe/events-gutenberg.git",
 	"author": "Modern Tribe",

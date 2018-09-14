@@ -93,11 +93,19 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.2.8-alpha - 2018-08-30
+#### 0.2.8-alpha - 2018-09-14
 
-* Feature - Add Tickets inside of the `plugins/` directory 
+* Feature - Add Tickets inside of the `plugins/` directory
+* Feature - Add Events Pro inside of the `plugins/` directory
+* Feature - Each block now loads their CSS and JavaScript only when it is present in the post
+* Tweak - Smaller internal changes to accommodate Gutenberg 3.8 code
+* Fix - Properly load the frontend assets for the Blocks
 * Fix - Accept responses between `200` and `299` HTTP codes as valid responses
 * Fix - Prevent to set attributes when arrays have the same content
+* Fix - Resolve problems with Infite looping around Google Calendar on the Links Block
+* Fix - Properly load Price block, avoiding breaking on new Events
+* Fix - Floating block settings button from Gutenberg 3.8 on the correct place
+* Fix - Migration from Classic Editor no longer duplicates Blocks
 
 #### 0.2.7-alpha - 2018-08-30
 
