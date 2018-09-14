@@ -2,11 +2,24 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	/*
+	this negative margin is to fit the blocks to the bounds of the pseudo element :before of
+	the drag block
+	 */
+	margin: -14px;
 }
 
 .tribe-editor__ticket-icon {
 	background-color: #F8F9F9;
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+	padding: 0 7px;
 	flex: none;
+
+	svg {
+		flex: none;
+	}
 }
 
 .tribe-editor__ticket-content {
@@ -18,10 +31,27 @@
 	color: #545D66;
 	font-size: 0.75rem;
 	font-family: Helvetica, sans-serif, arial;
+	flex: none;
+}
+
+.tribe-editor__ticket-title-container {
+	display: flex;
+	align-items: center;
+
+	button {
+		flex: none;
+	}
+
+	svg {
+		path {
+			fill: #8D949B;
+		}
+	}
 }
 
 .tribe-editor__ticket-title {
-	margin: 0 0 9px;
+	margin: 10px 10px 10px 0;
+	flex: none;
 	line-height: 1;
 }
 
@@ -33,10 +63,29 @@
 	font-family: Helvetica, sans-serif, arial;
 }
 
+.tribe-editor__ticket-quantity {
+	padding-right: 25px;
+	flex: none;
+}
+
 .tribe-editor__ticket-price {
 	flex: none;
 }
 
-.tribe-editor__ticket-quantity {
-	flex: none;
+.tribe-editor__quantity-label {
+	color: #000;
+	font-size: 0.9375rem;
+	margin-bottom: 12px;
+	display: inline-block;
 }
+
+.tribe-editor__quantity--unlimited {
+	color: #AEB4BB;
+	font-family: Helvetica, sans-serif, arial;
+	font-size: 0.75rem;
+	line-height: 1;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+}
+
