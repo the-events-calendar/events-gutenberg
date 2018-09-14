@@ -55,4 +55,24 @@ extends Tribe__Gutenberg__Events__Blocks__Abstract {
 
 		return $html;
 	}
+
+	/**
+	 * Register the Assets for when this block is active
+	 *
+	 * @since  0.2.8-alpha
+	 *
+	 * @return void
+	 */
+	public function assets() {
+		tribe_asset(
+			tribe( 'gutenberg.events.plugin' ),
+			'tribe-events-block-' . $this->slug(),
+			$this->slug() . '/frontend.css',
+			array(),
+			'wp_enqueue_scripts',
+			array(
+				'conditionals' => array( $this, 'has_block' ),
+			)
+		);
+	}
 }
