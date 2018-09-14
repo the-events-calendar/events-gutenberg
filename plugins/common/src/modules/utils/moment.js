@@ -216,6 +216,10 @@ export const toTime = ( date, format = dateUtil.FORMATS.WP.time ) => {
 	return date.format( toFormat( format ) );
 }
 
+export const toTime24Hr = ( date, format = dateUtil.FORMATS.WP.time24Hr ) => {
+	return date.format( toFormat( format ) );
+}
+
 export const toDatePicker = ( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) => {
 	return date.format( format );
 }
