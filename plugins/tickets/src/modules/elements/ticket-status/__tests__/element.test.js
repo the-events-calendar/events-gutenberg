@@ -7,7 +7,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import TicketIcon from '../element';
+import TicketIcon from './../element';
 
 // Mock to overwrite the default SVG icons mock
 jest.mock( '@moderntribe/tickets/icons', () => ( {
@@ -29,12 +29,12 @@ describe( 'Ticket Icon', () => {
 	} );
 
 	it( 'render the unlimited icon', () => {
-		const tree = renderer.create( <TicketIcon unlimited={ true } /> );
+		const tree = renderer.create( <TicketIcon expires={ true } /> );
 		expect( tree.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'render the unlimited icon when is disabled', () => {
-		const tree = renderer.create( <TicketIcon unlimited={ true } disabled={ true } /> );
+		const tree = renderer.create( <TicketIcon expires={ true } disabled={ true } /> );
 		expect( tree.toJSON() ).toMatchSnapshot();
 	} );
 } );

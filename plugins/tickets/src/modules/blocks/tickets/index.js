@@ -27,6 +27,5 @@ export default {
 	attributes: {},
 
 	edit: TicketsBlock,
-
 	save: () => null,
 };

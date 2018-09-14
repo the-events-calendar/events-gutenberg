@@ -12,8 +12,8 @@ import Template from './Template';
 
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
 
-const mapStateToProps = ( state, props ) => ( {
-	isSelected: props.isSelected,
+const mapStateToProps = ( state, ownProps ) => ( {
+	isSelected: ownProps.isSelected,
 	title: 'Balcony',
 	description: 'General admission',
 	price: 125,
