@@ -9,6 +9,7 @@ import { compose } from 'redux';
  */
 import RSVP from './template';
 import { selectors } from '@moderntribe/tickets/data/blocks/rsvp';
+import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),

@@ -41,7 +41,7 @@ const RSVP = ( {
 			<RSVPContainer showContent={ isSelected } />
 			{ getActionDashboard() }
 		</div>
-	)
+	);
 };
 
 RSVP.propTypes = {
