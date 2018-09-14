@@ -1,0 +1,171 @@
+
+.tribe-editor__tickets-form__container {
+	border: 1px solid #AEB4BB;
+	border-top: 1px dashed #AEB4BB;
+	padding: 30px 23px;
+	background-color: #F8F9F9;
+}
+
+.tribe-editor__tickets-form__row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.tribe-editor__tickets-form__labels {
+	flex: none;
+	width: 31%;
+}
+
+.tribe-editor__tickets-form__input-group {
+	flex: 1;
+
+	select {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+}
+
+.tribe-editor__tickets-form__input-row {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	align-items: center;
+	padding-bottom: 12px;
+
+	label {
+		flex: none;
+		margin-right: 10px;
+		font-size: 0.9375rem;
+		font-family: Helvetica, sans-serif, arial;
+		color: #000;
+	}
+
+	input {
+		flex: none;
+		border-radius: 4px;
+		border: 1px solid #E1E3E6;
+		width: 15%;
+	}
+
+	&:before {
+		content: '';
+		display: inline-block;
+		flex: 1;
+		height: 1px;
+		margin-right: 10px;
+		background-color: #E1E3E6;
+	}
+
+	&:after {
+		content: '';
+		width: 1px;
+		background-color: #E1E3E6;
+		position: absolute;
+		left: 0;
+		height: 100%;
+	}
+
+	&:first-of-type {
+		margin-top:  10px;
+	}
+
+	&:last-of-type {
+		margin-bottom:  10px;
+	}
+
+	&:last-of-type:after {
+		height: calc(50% + 6px);
+		top: -12px;
+	}
+}
+
+.tribe-editor__tickets-attendee {
+	display: flex;
+	justify-content: space-between;
+	background-color: #FFF;
+	border: 1px solid #E1E3E6;
+	border-radius: 4px;
+	padding: 10px 15px;
+	margin: 15px 0;
+
+	span {
+		flex: 1;
+		color: #545D66;
+		font-family: Helvetica, sans-serif, arial;
+		font-size: 0.9375rem;
+	}
+
+	button {
+		flex: none;
+		color: #009FD4;
+
+		&:hover {
+			color: #027BB4;
+		}
+	}
+}
+
+.tribe-editor__tickets-form__footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+
+	button {
+		flex: none;
+		padding: 10px 20px;
+	}
+}
+
+.tribe-editor__btn--label.tribe-editor__tickets-form__btn-cancel {
+	margin-right: 15px;
+	color: #545D66;
+
+	&:hover {
+		color: #000;
+	}
+}
+
+.tribe-editor__btn--label.tribe-editor__tickets-form__btn-create {
+	background-color: #009FD4;
+	color: #FFF;
+
+	&:hover {
+		background-color: #027BB4;
+		color: #FFF;
+	}
+
+	&:disabled {
+		background-color: #F0F0F0;
+		color: #8D949B;
+
+		&:hover {
+			background-color: #F0F0F0;
+			color: #8D949B;
+		}
+	}
+}
+
+.tribe-editor__tickets-form__labels-group {
+	display: flex;
+	align-items: center;
+
+	label {
+		flex: none;
+		color: #000000;
+		font-size: 0.9375rem;
+		font-family: Helvetica, sans-serif, arial;
+		margin-right: 5px;
+	}
+
+	button {
+		line-height: 1;
+		flex: none;
+		height: 20px;
+	}
+
+	svg {
+		path {
+			fill: #A2AAB2;
+		}
+	}
+}
