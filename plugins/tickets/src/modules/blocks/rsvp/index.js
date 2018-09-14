@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BlockIcon } from '@moderntribe/common/elements';
+import RSVP from './container';
 
 /**
  * Module Code
@@ -28,7 +29,7 @@ export default {
 
 	attributes: {},
 
-	edit: () => <div>{ 'RSVP Block' }</div>,
+	edit: () => RSVP,
 
 	save: () => null,
 };
