@@ -12,7 +12,7 @@ import noop from 'lodash/noop';
 import { sendValue } from '@moderntribe/common/utils/input';
 import itemsSchema, { getValues } from './schema';
 import { toLabel } from './utils';
-import Row from './row';
+import Row from './capacity-row';
 import './style.pcss';
 
 const CapacityTable = ( props ) => {
