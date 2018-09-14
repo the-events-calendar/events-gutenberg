@@ -8,6 +8,7 @@ import * as slide from './slide';
 import * as string from './string';
 import * as time from './time';
 import * as timezone from './timezone';
+import * as number from './number';
 
 export { date };
 export { dom };
@@ -20,4 +21,5 @@ export { slide };
 export { string };
 export { time };
 export { timezone };
+export { number };
 export { default as TribePropTypes } from './proptypes';
