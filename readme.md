@@ -104,7 +104,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add TribePropTypes functions to check custom time format
 * Feature - Add time to seconds and ms and vice versa utility
 * Feature - Create `<HeaderImage>` component to upload / select an image from the media library
-* Feature - Add `CapacityTable` compoent to render the capacity of the tickets
+* Feature - Add `CapacityTable` component to render the capacity of the tickets
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 * Tweak - Create an icons module for the plugins and shared one on common to create a set of icons
@@ -121,7 +121,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Properly load the frontend assets for the Blocks
 * Fix - Accept responses between `200` and `299` HTTP codes as valid responses
 * Fix - Prevent to set attributes when arrays have the same content
-* Fix - Resolve problems with Infite looping around Google Calendar on the Links Block
+* Fix - Resolve problems with Infinite looping around Google Calendar on the Links Block
 * Fix - Properly load Price block, avoiding breaking on new Events
 * Fix - Floating block settings button from Gutenberg 3.8 on the correct place
 * Fix - Migration from Classic Editor no longer duplicates Blocks
@@ -131,7 +131,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add store registration in `common`
 * Feature - Move `events` reducer into the `common` store
 * Feature - Add `<TicketIcon />` component for the ticket
-* Feathre - Add `<DisabledTickets />` component when no tickets are active
+* Feature - Add `<DisabledTickets />` component when no tickets are active
 * Tweak - Use event timezone as default value
 * Tweak - Separate logic and presentation in event venue block
 * Tweak - Move `request` mechanism into `common`
@@ -182,7 +182,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Problem when multiple sync copies were not initialized
 * Fix - Use default timezone selected by the user on the admin instead of `UTC`
 * Tweak - Consolidate multiple stores into a single store
-* Tweak - Use native redux store implementation
+* Tweak - Use native `redux` store implementation
 * Tweak - Remove references to `withSelect` and `withDispatch` and replace with `connect`
 * Tweak - Prevent errors when a new organizer block is created
 * Tweak - `showMap` and `showMapLink` are enabled by default on Location block
