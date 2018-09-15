@@ -27,9 +27,9 @@ Array [
   },
   Object {
     "payload": Object {
-      "enableNotGoing": true,
+      "notGoingResponses": true,
     },
-    "type": "@@MT/TICKETS/SET_RSVP_ENABLE_NOT_GOING",
+    "type": "@@MT/TICKETS/SET_RSVP_NOT_GOING_RESPONSES",
   },
   Object {
     "payload": Object {

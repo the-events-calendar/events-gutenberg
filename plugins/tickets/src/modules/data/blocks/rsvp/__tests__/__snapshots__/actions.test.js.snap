@@ -30,15 +30,6 @@ Object {
 }
 `;
 
-exports[`RSVP block actions set RSVP enable not going 1`] = `
-Object {
-  "payload": Object {
-    "enableNotGoing": true,
-  },
-  "type": "@@MT/TICKETS/SET_RSVP_ENABLE_NOT_GOING",
-}
-`;
-
 exports[`RSVP block actions set RSVP end date 1`] = `
 Object {
   "payload": Object {
@@ -54,6 +45,15 @@ Object {
     "endTime": "12:34",
   },
   "type": "@@MT/TICKETS/SET_RSVP_END_TIME",
+}
+`;
+
+exports[`RSVP block actions set RSVP not going responses 1`] = `
+Object {
+  "payload": Object {
+    "notGoingResponses": true,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_NOT_GOING_RESPONSES",
 }
 `;
 

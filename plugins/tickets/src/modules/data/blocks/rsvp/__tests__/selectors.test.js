@@ -29,8 +29,8 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPCapacity( state ) ).toBe( DEFAULT_STATE.capacity );
 	} );
 
-	it( 'should return the enable not going', () => {
-		expect( selectors.getRSVPEnableNotGoing( state ) ).toBe( DEFAULT_STATE.enableNotGoing );
+	it( 'should return the not going responses', () => {
+		expect( selectors.getRSVPNotGoingResponses( state ) ).toBe( DEFAULT_STATE.notGoingResponses );
 	} );
 
 	it( 'should return the start date', () => {

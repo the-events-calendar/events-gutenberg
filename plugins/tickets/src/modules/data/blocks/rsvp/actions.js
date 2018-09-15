@@ -32,10 +32,10 @@ export const setRSVPCapacity = ( capacity ) => ( {
 	},
 } );
 
-export const setRSVPEnableNotGoing = ( enableNotGoing ) => ( {
-	type: types.SET_RSVP_ENABLE_NOT_GOING,
+export const setRSVPNotGoingResponses = ( notGoingResponses ) => ( {
+	type: types.SET_RSVP_NOT_GOING_RESPONSES,
 	payload: {
-		enableNotGoing,
+		notGoingResponses,
 	},
 } );
 

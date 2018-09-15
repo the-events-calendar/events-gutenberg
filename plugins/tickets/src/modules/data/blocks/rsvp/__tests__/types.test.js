@@ -25,8 +25,8 @@ describe( 'RSVP block types', () => {
 		expect( types.SET_RSVP_CAPACITY ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_CAPACITY` );
 	} );
 
-	test( 'set RSVP enable not going', () => {
-		expect( types.SET_RSVP_ENABLE_NOT_GOING ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_ENABLE_NOT_GOING` );
+	test( 'set RSVP not going responses', () => {
+		expect( types.SET_RSVP_NOT_GOING_RESPONSES ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_NOT_GOING_RESPONSES` );
 	} );
 
 	test( 'set RSVP start date', () => {

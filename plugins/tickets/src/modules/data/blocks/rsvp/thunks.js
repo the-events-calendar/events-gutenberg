@@ -10,7 +10,7 @@ export const setRSVPHeader = ( data ) => ( dispatch ) => {
 
 export const setRSVPDetails = ( data ) => ( dispatch ) => {
 	dispatch( actions.setRSVPCapacity( data.capacity ) );
-	dispatch( actions.setRSVPEnableNotGoing( data.enableNotGoing ) );
+	dispatch( actions.setRSVPNotGoingResponses( data.notGoingResponses ) );
 	dispatch( actions.setRSVPStartDate( data.startDate ) );
 	dispatch( actions.setRSVPStartTime( data.startTime) );
 	dispatch( actions.setRSVPEndDate( data.endDate ) );

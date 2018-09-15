@@ -42,7 +42,7 @@ describe( 'RSVP block thunks', () => {
 	test( 'set RSVP header', () => {
 		const data = {
 			capacity: 20,
-			enableNotGoing: true,
+			notGoingResponses: true,
 			startDate: 'January 1, 2018',
 			endDate: 'January 2, 2018',
 			startTime: '12:34',
