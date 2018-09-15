@@ -14,6 +14,7 @@ import {
 	Availability,
 	ActionDashboard,
 	DisabledTickets,
+	TicketForm,
 } from '@moderntribe/tickets/elements';
 
 import './style.pcss';
@@ -23,7 +24,7 @@ const disabled = {
 	description: __(
 		/* eslint-disable-next-line max-len */
 		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
-		'events-gutenberg'
+		'events-gutenberg',
 	),
 };
 
@@ -42,7 +43,7 @@ const TicketsTemplate = ( props ) => {
 	} = props;
 
 	const availability = isSelected && (
-		<Availability available={ available } total={ total }/>
+		<Availability available={ available } total={ total } />
 	);
 
 	const actionDashboard = isSelected && (
@@ -62,6 +63,7 @@ const TicketsTemplate = ( props ) => {
 			<div className="tribe-editor__tickets-body">
 				<InnerBlocks />
 			</div>
+			<TicketForm />
 			{ availability }
 			{ actionDashboard }
 		</div>
