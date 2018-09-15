@@ -29,7 +29,7 @@ export default {
 
 	attributes: {},
 
-	edit: () => RSVP,
+	edit: RSVP,
 
 	save: () => null,
 };
