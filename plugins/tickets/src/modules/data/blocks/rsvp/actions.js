@@ -66,3 +66,13 @@ export const setRSVPEndTime = ( endTime ) => ( {
 		endTime,
 	},
 } );
+
+export const setRSVPHeader = ( payload ) => ( {
+	type: types.SET_RSVP_HEADER,
+	payload,
+} );
+
+export const setRSVPDetails = ( payload ) => ( {
+	type: types.SET_RSVP_DETAILS,
+	payload,
+} );

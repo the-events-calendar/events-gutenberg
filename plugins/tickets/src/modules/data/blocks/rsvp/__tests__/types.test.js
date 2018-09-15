@@ -44,4 +44,12 @@ describe( 'RSVP block types', () => {
 	test( 'set RSVP end time', () => {
 		expect( types.SET_RSVP_END_TIME ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_END_TIME` );
 	} );
+
+	test( 'set RSVP header', () => {
+		expect( types.SET_RSVP_HEADER ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER` );
+	} );
+
+	test( 'set RSVP details', () => {
+		expect( types.SET_RSVP_DETAILS ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_DETAILS` );
+	} );
 } );
