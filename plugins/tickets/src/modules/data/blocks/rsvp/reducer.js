@@ -13,7 +13,7 @@ export const DEFAULT_STATE = {
 	title: '',
 	description: '',
 	capacity: '',
-	enableNotGoing: false,
+	notGoingResponses: false,
 	startDate: momentUtil.toDate( moment() ),
 	endDate: momentUtil.toDate( moment() ),
 	startTime: momentUtil.toTime24Hr( moment() ),
@@ -45,10 +45,10 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				capacity: action.payload.capacity,
 			}
-		case types.SET_RSVP_ENABLE_NOT_GOING:
+		case types.SET_RSVP_NOT_GOING_RESPONSES:
 			return {
 				...state,
-				enableNotGoing: action.payload.enableNotGoing,
+				notGoingResponses: action.payload.notGoingResponses,
 			}
 		case types.SET_RSVP_START_DATE:
 			return {

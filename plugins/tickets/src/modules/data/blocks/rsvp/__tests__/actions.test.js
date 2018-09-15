@@ -24,8 +24,8 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPCapacity( 20 ) ).toMatchSnapshot();
 	} );
 
-	test( 'set RSVP enable not going', () => {
-		expect( actions.setRSVPEnableNotGoing( true ) ).toMatchSnapshot();
+	test( 'set RSVP not going responses', () => {
+		expect( actions.setRSVPNotGoingResponses( true ) ).toMatchSnapshot();
 	} );
 
 	test( 'set RSVP start date', () => {

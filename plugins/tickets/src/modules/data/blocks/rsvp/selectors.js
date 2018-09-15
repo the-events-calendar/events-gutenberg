@@ -20,9 +20,9 @@ export const getRSVPCapacity = createSelector(
 	( rsvp ) => rsvp.capacity,
 );
 
-export const getRSVPEnableNotGoing = createSelector(
+export const getRSVPNotGoingResponses = createSelector(
 	[ getRSVPBlock ],
-	( rsvp ) => rsvp.enableNotGoing,
+	( rsvp ) => rsvp.notGoingResponses,
 );
 
 export const getRSVPStartDate = createSelector(

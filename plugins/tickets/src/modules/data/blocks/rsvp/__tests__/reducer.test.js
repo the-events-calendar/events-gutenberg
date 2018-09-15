@@ -38,8 +38,8 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPCapacity( 20 ) ) ).toMatchSnapshot();
 	} );
 
-	it( 'should set the enable not going', () => {
-		expect( reducer( DEFAULT_STATE, actions.setRSVPEnableNotGoing( true ) ) ).toMatchSnapshot();
+	it( 'should set the not going responses', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPNotGoingResponses( true ) ) ).toMatchSnapshot();
 	} );
 
 	it( 'should set the start date', () => {

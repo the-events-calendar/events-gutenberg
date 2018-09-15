@@ -25,8 +25,8 @@ describe( 'RSVP block types', () => {
 		expect( types.SET_RSVP_CAPACITY ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_CAPACITY` );
 	} );
 
-	test( 'set RSVP enable not going', () => {
-		expect( types.SET_RSVP_ENABLE_NOT_GOING ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_ENABLE_NOT_GOING` );
+	test( 'set RSVP not going responses', () => {
+		expect( types.SET_RSVP_NOT_GOING_RESPONSES ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_NOT_GOING_RESPONSES` );
 	} );
 
 	test( 'set RSVP start date', () => {
@@ -43,5 +43,13 @@ describe( 'RSVP block types', () => {
 
 	test( 'set RSVP end time', () => {
 		expect( types.SET_RSVP_END_TIME ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_END_TIME` );
+	} );
+
+	test( 'set RSVP header', () => {
+		expect( types.SET_RSVP_HEADER ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER` );
+	} );
+
+	test( 'set RSVP details', () => {
+		expect( types.SET_RSVP_DETAILS ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_DETAILS` );
 	} );
 } );
