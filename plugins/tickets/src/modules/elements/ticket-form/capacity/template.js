@@ -18,8 +18,8 @@ export const TYPES = {
 };
 
 // todo: replace with custom select from Events Pro
-const Select = ( { options, selected, onSelect } ) => (
-	<select value={ selected } onChange={ onSelect }>
+const Select = ( { id, options, selected, onSelect } ) => (
+	<select id={ id } value={ selected } onChange={ onSelect }>
 		{ options.map( ( { name, value }, index ) => (
 			<option key={ index } value={ value }>{ name }</option>
 		) ) }
@@ -27,6 +27,7 @@ const Select = ( { options, selected, onSelect } ) => (
 );
 
 Select.propTypes = {
+	id: PropTypes.string,
 	selected: PropTypes.string,
 	onSelect: PropTypes.func.isRequired,
 	options: PropTypes.arrayOf( PropTypes.shape( {
@@ -64,10 +65,15 @@ Input.propTypes = {
 const Capacity = ( { capacityLabel, capacityOptions, type, onSelectType, independent, shared } ) => (
 	<div className="tribe-editor__tickets-form__row">
 		<div className="tribe-editor__tickets-form__labels">
-			<label>{ capacityLabel }</label>
+			<label htmlFor="tickets-capacity-type">{ capacityLabel }</label>
 		</div>
 		<div className="tribe-editor__tickets-form__input-group">
-			<Select selected={ type } options={ capacityOptions } onSelect={ onSelectType } />
+			<Select
+				selected={ type }
+				options={ capacityOptions }
+				onSelect={ onSelectType }
+				id="tickets-capacity-type"
+			/>
 			<Input selected={ type } input={ shared } type={ TYPES.shared } />
 			<Input selected={ type } input={ independent } type={ TYPES.independent } />
 		</div>
