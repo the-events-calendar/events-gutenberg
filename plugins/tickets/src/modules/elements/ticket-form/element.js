@@ -21,6 +21,7 @@ import { DateTimeRangePicker } from '@moderntribe/tickets/elements';
 import AttendeesRegistration from './attendees-registration/template';
 import Capacity from './capacity/template';
 import Footer from './footer/template';
+import SKU from './sku/template';
 import './style.pcss';
 
 const TicketForm = ( props ) => {
@@ -39,6 +40,7 @@ const TicketForm = ( props ) => {
 				<div className="tribe-editor__tickets-form__body">
 					<Capacity label={ ticketCapacityLabel } tooltip={ ticketCapacityToolTip } />
 					<AttendeesRegistration />
+					<SKU onChange={ ( v ) => console.log( v ) }/>
 				</div>
 				<Footer />
 			</div>
