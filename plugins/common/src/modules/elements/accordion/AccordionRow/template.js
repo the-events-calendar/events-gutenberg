@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import { Button } from '@moderntribe/common/elements';
+import Button from '@moderntribe/common/elements/button/element';
 import { slide } from '@moderntribe/common/utils';
 
 export const getHeaderAttrs = ( { contentId, headerId, isActive } ) => {
@@ -54,13 +54,12 @@ const onClick = ( e, row ) => {
 	row.onClick && row.onClick( e );
 };
 
-const AccordionRow = ( { row, index } ) => (
+const AccordionRow = ( { ...row } ) => (
 	<article
 		className={ classNames(
 			'tribe-editor__accordion__row',
 			{ 'active': row.isActive },
 		) }
-		key={ index }
 	>
 		<Button
 			className={ classNames(
@@ -85,19 +84,17 @@ const AccordionRow = ( { row, index } ) => (
 );
 
 AccordionRow.propTypes = {
-	row: PropTypes.shape( {
-		content: PropTypes.node,
-		contentClassName: PropTypes.string,
-		contentId: PropTypes.string.isRequired,
-		header: PropTypes.node,
-		headerClassName: PropTypes.string,
-		headerId: PropTypes.string.isRequired,
-		isActive: PropTypes.bool.isRequired,
-		onClick: PropTypes.func,
-		onClose: PropTypes.func,
-		onOpen: PropTypes.func,
-	} ).isRequired,
-	index: PropTypes.number,
+	accordionId: PropTypes.string.isRequired,
+	content: PropTypes.node,
+	contentClassName: PropTypes.string,
+	contentId: PropTypes.string.isRequired,
+	header: PropTypes.node,
+	headerClassName: PropTypes.string,
+	headerId: PropTypes.string.isRequired,
+	isActive: PropTypes.bool.isRequired,
+	onClick: PropTypes.func,
+	onClose: PropTypes.func,
+	onOpen: PropTypes.func,
 };
 
 export default AccordionRow;

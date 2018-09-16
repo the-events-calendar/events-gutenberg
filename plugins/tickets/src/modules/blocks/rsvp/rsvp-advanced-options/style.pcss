@@ -29,7 +29,7 @@
 .tribe-editor__rsvp__advanced-options-header {
 	border: none;
 	background-color: #f8f9f9;
-	display: inline-flex;
+	display: flex;
 	align-items: center;
 	padding: 0;
 	position: relative;
@@ -39,6 +39,10 @@ svg.tribe-editor__rsvp__advanced-options-header-icon {
 	fill: #8D949B;
 	margin-left: -5px;
 	margin-right: 3px;
+
+	.tribe-editor__accordion__row.active & {
+		transform: rotate(180deg) translateX(-2px);
+	}
 }
 
 .tribe-editor__rsvp__advanced-options-header-text {

@@ -19,6 +19,7 @@ export const FORMATS = {
 	DATE_TIME: 'YYYY-MM-DD HH:mm:ss',
 	WP: {
 		time: 'g:i a',
+		time24Hr: 'G:i',
 		date: 'F j, Y',
 		datetime: 'F j, Y g:i a',
 		dateNoYear: 'F j',

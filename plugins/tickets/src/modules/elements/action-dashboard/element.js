@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { noop } from 'lodash';
 
 /**
@@ -74,7 +74,7 @@ const ActionDashboard = ( {
 
 	return (
 		<section
-			className={ classnames(
+			className={ classNames(
 				'tribe-editor__action-dashboard',
 				className,
 			) }
