@@ -31,21 +31,13 @@ const RSVPContainerSectionLeft = () => {
 	);
 };
 
-const RSVPContainer = ( {
-	isSelected,
-} ) => {
-	return (
-		<ContainerPanel
-			className="tribe-editor__rsvp-container"
-			leftSection={ <RSVPContainerSectionLeft /> }
-			rightSectionHeader={ <RSVPContainerHeader /> }
-			rightSectionContent={ <RSVPContainerContent /> }
-		/>
-	);
-};
-
-RSVPContainer.propTypes = {
-	showContent: PropTypes.bool.isRequired,
-};
+const RSVPContainer = () => (
+	<ContainerPanel
+		className="tribe-editor__rsvp-container"
+		leftSection={ <RSVPContainerSectionLeft /> }
+		rightSectionHeader={ <RSVPContainerHeader /> }
+		rightSectionContent={ <RSVPContainerContent /> }
+	/>
+);
 
 export default RSVPContainer;

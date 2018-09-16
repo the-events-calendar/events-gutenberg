@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import RSVPAdvancedOptions from '@moderntribe/tickets/blocks/rsvp/rsvp-advanced-options/container';
+import { Checkbox } from '@moderntribe/common/elements';
 import './style.pcss';
 
 const RSVPContainerContentLabels = () => (
@@ -41,20 +42,12 @@ const RSVPContainerContentOptions = ( {
 			type="number"
 			value={ capacity }
 		/>
-		<div className="tribe-editor__rsvp-container-content__not-going-responses">
-			<input
-				className="tribe-editor__rsvp-container-content__not-going-responses-checkbox"
-				id={ notGoingId }
-				type="checkbox"
-				value={ notGoingResponses }
-			/>
-			<label
-				className="tribe-editor__rsvp-container-content__not-going-responses-label"
-				htmlFor={ notGoingId }
-			>
-				{ __( 'Enable Not Going responses', 'events-gutenberg' ) }
-			</label>
-		</div>
+		<Checkbox
+			checked={ notGoingResponses }
+			className="tribe-editor__rsvp-container-content__not-going-responses"
+			id={ notGoingId }
+			label={ __( 'Enable Not Going responses', 'events-gutenberg' ) }
+		/>
 	</div>
 );
 
