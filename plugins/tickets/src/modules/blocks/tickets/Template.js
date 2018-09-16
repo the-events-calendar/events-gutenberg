@@ -15,11 +15,13 @@ import {
 	ActionDashboard,
 	CapacityTable,
 	HeaderImage,
-	DisabledTickets,
+	InactiveBlock,
 } from '@moderntribe/tickets/elements';
+import { TicketInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
 const disabled = {
+	icon: <TicketInactive />,
 	title: __( 'No Active Tickets', 'events-gutenberg' ),
 	description: __(
 		/* eslint-disable-next-line max-len */
@@ -62,9 +64,11 @@ const TicketsTemplate = ( props ) => {
 		>
 			<div className="tribe-editor__tickets-body">
 				<InnerBlocks />
-				<DisabledTickets title={ disabled.title }>
-					{ disabled.description }
-				</DisabledTickets>
+				<InactiveBlock
+					icon={ disabled.icon }
+					title={ disabled.title }
+					description={ disabled.description }
+				/>
 			</div>
 			<CapacityTable />
 			<HeaderImage />
