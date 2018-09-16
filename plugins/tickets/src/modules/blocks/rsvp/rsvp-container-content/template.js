@@ -37,6 +37,7 @@ const RSVPContainerContentOptions = ( {
 		<input
 			className="tribe-editor__rsvp-container-content__capacity-input"
 			id={ capacityId }
+			min="0"
 			type="number"
 			value={ capacity }
 		/>
@@ -44,7 +45,6 @@ const RSVPContainerContentOptions = ( {
 			<input
 				className="tribe-editor__rsvp-container-content__not-going-responses-checkbox"
 				id={ notGoingId }
-				min="0"
 				type="checkbox"
 				value={ notGoingResponses }
 			/>

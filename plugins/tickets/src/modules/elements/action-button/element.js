@@ -41,7 +41,7 @@ ActionButton.propTypes = {
 };
 
 ActionButton.defaultProps = {
-	position: positions.right,
+	position: positions.left,
 }
 
 export default ActionButton;
