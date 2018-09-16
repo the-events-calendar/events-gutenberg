@@ -16,11 +16,18 @@ export const positions = {
 	left: 'left',
 };
 
-const ActionButton = ( { children, icon, position, ...props } ) => {
+const ActionButton = ( {
+	children,
+	className,
+	icon,
+	position,
+	...props
+} ) => {
 	const containerClass = classNames(
 		'tribe-editor__btn--label',
 		'tribe-editor__tickets-btn--action',
 		`tribe-editor__tickets-btn--action-${ position }`,
+		className,
 	);
 
 	return (
@@ -36,6 +43,7 @@ const ActionButton = ( { children, icon, position, ...props } ) => {
 
 ActionButton.propTypes = {
 	children: PropTypes.node,
+	className: PropTypes.string,
 	icon: PropTypes.node.isRequired,
 	position: PropTypes.oneOf( Object.keys( positions ) ),
 };

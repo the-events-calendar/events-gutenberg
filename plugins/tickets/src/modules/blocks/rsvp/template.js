@@ -14,6 +14,10 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import RSVPContainer from './rsvp-container/template';
+import {
+	SettingsActionButton,
+	AttendeesActionButton,
+} from './rsvp-action-buttons';
 import { ActionDashboard } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
@@ -22,7 +26,10 @@ const RSVP = ( {
 	isSelected,
 } ) => {
 	const getActionDashboard = () => {
-		const actions = [ 'test-1', 'test-2' ];
+		const actions = [
+			<SettingsActionButton />,
+			<AttendeesActionButton />,
+		];
 		const confirmLabel = created
 			? __( 'Update RSVP', 'events-gutenberg' )
 			: __( 'Create RSVP', 'events-gutenberg' );
