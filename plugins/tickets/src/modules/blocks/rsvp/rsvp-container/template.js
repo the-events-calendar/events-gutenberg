@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { ContainerPanel } from '@moderntribe/tickets/elements';
 import RSVPContainerHeader from '@moderntribe/tickets/blocks/rsvp/rsvp-container-header/container';
+import RSVPContainerContent from '@moderntribe/tickets/blocks/rsvp/rsvp-container-content/template';
 import { RSVPActive, RSVPInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
@@ -31,15 +32,14 @@ const RSVPContainerSectionLeft = () => {
 };
 
 const RSVPContainer = ( {
-	showContent,
+	isSelected,
 } ) => {
 	return (
 		<ContainerPanel
 			className="tribe-editor__rsvp-container"
 			leftSection={ <RSVPContainerSectionLeft /> }
 			rightSectionHeader={ <RSVPContainerHeader /> }
-			rightSectionContent={ '' }
-			showContent={ showContent }
+			rightSectionContent={ <RSVPContainerContent /> }
 		/>
 	);
 };

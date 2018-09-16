@@ -1,8 +1,9 @@
 /**
  * External dependencies
  */
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -37,8 +38,11 @@ const RSVP = ( {
 	};
 
 	return (
-		<div className="tribe-editor__rsvp">
-			<RSVPContainer showContent={ isSelected } />
+		<div className={ classNames(
+			'tribe-editor__rsvp',
+			{ 'tribe-editor__rsvp--selected': isSelected },
+		) }>
+			<RSVPContainer isSelected={ isSelected } />
 			{ getActionDashboard() }
 		</div>
 	);

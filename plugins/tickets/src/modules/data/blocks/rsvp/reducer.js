@@ -10,9 +10,9 @@ import { types } from '@moderntribe/tickets/data/blocks/rsvp';
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
 export const DEFAULT_STATE = {
-	title: '',
-	description: '',
-	capacity: '',
+	title: 'July Meetup',
+	description: 'Drinks and food provided',
+	capacity: '30',
 	notGoingResponses: false,
 	startDate: momentUtil.toDate( moment() ),
 	endDate: momentUtil.toDate( moment() ),

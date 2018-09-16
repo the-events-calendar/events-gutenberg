@@ -15,7 +15,6 @@ const ContainerPanel = ( {
 	leftSection,
 	rightSectionContent,
 	rightSectionHeader,
-	showContent,
 } ) => (
 	<div
 		className={ classNames(
@@ -30,25 +29,18 @@ const ContainerPanel = ( {
 			<div className="tribe-editor__container-panel__right-section-header">
 				{ rightSectionHeader }
 			</div>
-			{ showContent && (
-				<div className="tribe-editor__container-panel__right-section-content">
-					{ rightSectionContent }
-				</div>
-			) }
+			<div className="tribe-editor__container-panel__right-section-content">
+				{ rightSectionContent }
+			</div>
 		</section>
 	</div>
 );
-
-ContainerPanel.defaultProps = {
-	showContent: false,
-};
 
 ContainerPanel.propTypes = {
 	className: PropTypes.string,
 	leftSection: PropTypes.node,
 	rightSectionContent: PropTypes.node,
 	rightSectionHeader: PropTypes.node,
-	showContent: PropTypes.bool.isRequired,
 };
 
 export default ContainerPanel;
