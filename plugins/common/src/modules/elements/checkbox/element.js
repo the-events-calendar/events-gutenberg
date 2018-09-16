@@ -42,6 +42,7 @@ const Checkbox = ( {
 };
 
 Checkbox.defaultProps = {
+	checked: false,
 	onChange: noop,
 }
 
