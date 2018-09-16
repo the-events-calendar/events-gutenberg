@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 
@@ -50,7 +50,7 @@ const RSVPContainerContentOptions = ( {
 			/>
 			<label
 				className="tribe-editor__rsvp-container-content__not-going-responses-label"
-				for={ notGoingId }
+				htmlFor={ notGoingId }
 			>
 				{ __( 'Enable Not Going responses', 'events-gutenberg' ) }
 			</label>
@@ -65,7 +65,7 @@ RSVPContainerContentOptions.propTypes = {
 	notGoingResponses: PropTypes.bool,
 };
 
-class RSVPContainerContent extends Component {
+class RSVPContainerContent extends PureComponent {
 	static propTypes = {
 		capacity: PropTypes.string,
 		notGoingResponses: PropTypes.bool,

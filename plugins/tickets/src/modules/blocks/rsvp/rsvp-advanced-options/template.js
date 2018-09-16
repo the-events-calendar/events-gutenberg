@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 
@@ -18,7 +18,7 @@ import RSVPDuration from '../rsvp-duration/template';
 import { Accordion } from '@moderntribe/common/elements';
 import './style.pcss';
 
-class RSVPAdvancedOptions extends Component {
+class RSVPAdvancedOptions extends PureComponent {
 	static propTypes = {
 		addAccordion: PropTypes.func.isRequired,
 		removeAccordion: PropTypes.func.isRequired,
