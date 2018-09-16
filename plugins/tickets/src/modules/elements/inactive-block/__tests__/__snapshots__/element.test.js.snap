@@ -1,79 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Disabled Tickets render the component 1`] = `
+exports[`Disabled Tickets renders the component 1`] = `
 <section
-  className="tribe-editor__tickets__disabled"
+  className="tribe-editor__inactive-block"
 >
   <div
-    className="tribe-editor__tickets__disabled__icon"
-  >
-    <span>
-      Ticket Inactive - Icon Placeholder
-    </span>
-  </div>
-  
+    className="tribe-editor__inactive-block__icon"
+  />
 </section>
 `;
 
-exports[`Disabled Tickets render the component with description 1`] = `
+exports[`Disabled Tickets renders the component with a custom icon 1`] = `
 <section
-  className="tribe-editor__tickets__disabled"
+  className="tribe-editor__inactive-block"
 >
   <div
-    className="tribe-editor__tickets__disabled__icon"
-  >
-    <span>
-      Ticket Inactive - Icon Placeholder
-    </span>
-  </div>
-  <div
-    className="tribe-editor__tickets__disabled__content"
-  >
-    
-    <div
-      className="tribe-editor__tickets__disabled__description"
-    >
-      Custom Description
-    </div>
-  </div>
-</section>
-`;
-
-exports[`Disabled Tickets render the component with title 1`] = `
-<section
-  className="tribe-editor__tickets__disabled"
->
-  <div
-    className="tribe-editor__tickets__disabled__icon"
-  >
-    <span>
-      Ticket Inactive - Icon Placeholder
-    </span>
-  </div>
-  <div
-    className="tribe-editor__tickets__disabled__content"
-  >
-    <h3
-      className="tribe-editor__tickets__disabled__title"
-    >
-      Custom Title
-    </h3>
-    
-  </div>
-</section>
-`;
-
-exports[`Disabled Tickets uses a custom icon 1`] = `
-<section
-  className="tribe-editor__tickets__disabled"
->
-  <div
-    className="tribe-editor__tickets__disabled__icon"
+    className="tribe-editor__inactive-block__icon"
   >
     <span>
       Icon Placeholder
     </span>
   </div>
-  
+</section>
+`;
+
+exports[`Disabled Tickets renders the component with classes 1`] = `
+<section
+  className="tribe-editor__inactive-block custom-class"
+>
+  <div
+    className="tribe-editor__inactive-block__icon"
+  />
+</section>
+`;
+
+exports[`Disabled Tickets renders the component with description 1`] = `
+<section
+  className="tribe-editor__inactive-block"
+>
+  <div
+    className="tribe-editor__inactive-block__icon"
+  />
+  <div
+    className="tribe-editor__inactive-block__content"
+  >
+    <p
+      className="tribe-editor__inactive-block__description"
+    >
+      Custom Description
+    </p>
+  </div>
+</section>
+`;
+
+exports[`Disabled Tickets renders the component with title 1`] = `
+<section
+  className="tribe-editor__inactive-block"
+>
+  <div
+    className="tribe-editor__inactive-block__icon"
+  />
+  <div
+    className="tribe-editor__inactive-block__content"
+  >
+    <h2
+      className="tribe-editor__inactive-block__title"
+    >
+      Custom Title
+    </h2>
+  </div>
 </section>
 `;

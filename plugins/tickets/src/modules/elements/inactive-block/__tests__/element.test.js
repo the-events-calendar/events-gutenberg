@@ -7,32 +7,32 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import DisabledTickets from './../element';
-
-// Mock to overwrite the default SVG icons mock
-jest.mock( '@moderntribe/tickets/icons', () => ( {
-	TicketInactive: () => <span>Ticket Inactive - Icon Placeholder</span>,
-} ) );
+import InactiveBlock from './../element';
 
 describe( 'Disabled Tickets', () => {
-	it( 'render the component', () => {
-		const tree = renderer.create( <DisabledTickets /> );
+	it( 'renders the component', () => {
+		const tree = renderer.create( <InactiveBlock /> );
 		expect( tree.toJSON() ).toMatchSnapshot();
 	} );
 
-	it( 'render the component with title', () => {
-		const tree = renderer.create( <DisabledTickets title={ 'Custom Title' }/> );
+	it( 'renders the component with classes', () => {
+		const tree = renderer.create( <InactiveBlock className="custom-class" /> );
 		expect( tree.toJSON() ).toMatchSnapshot();
 	} );
 
-	it( 'render the component with description', () => {
-		const tree = renderer.create( <DisabledTickets>Custom Description</DisabledTickets> );
+	it( 'renders the component with title', () => {
+		const tree = renderer.create( <InactiveBlock title="Custom Title" /> );
 		expect( tree.toJSON() ).toMatchSnapshot();
 	} );
 
-	it( 'uses a custom icon', () => {
+	it( 'renders the component with description', () => {
+		const tree = renderer.create( <InactiveBlock description="Custom Description" /> );
+		expect( tree.toJSON() ).toMatchSnapshot();
+	} );
+
+	it( 'renders the component with a custom icon', () => {
 		const Icon = () => <span>Icon Placeholder</span>;
-		const tree = renderer.create( <DisabledTickets icon={ <Icon /> } /> );
+		const tree = renderer.create( <InactiveBlock icon={ <Icon /> } /> );
 		expect( tree.toJSON() ).toMatchSnapshot();
 	} );
 } );

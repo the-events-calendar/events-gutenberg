@@ -3,14 +3,18 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 /**
  * Internal dependencies
  */
 import './style.pcss';
 
-const InactiveBlock = ( { description, icon, title } ) => (
-	<section className="tribe-editor__inactive-block">
+const InactiveBlock = ( { className, description, icon, title } ) => (
+	<section className={ classNames(
+		'tribe-editor__inactive-block',
+		className,
+	) }>
 		<div className="tribe-editor__inactive-block__icon">
 			{ icon }
 		</div>
@@ -28,9 +32,10 @@ const InactiveBlock = ( { description, icon, title } ) => (
 );
 
 InactiveBlock.propTypes = {
-	title: PropTypes.string,
-	icon: PropTypes.node,
+	className: PropTypes.string,
 	description: PropTypes.string,
+	icon: PropTypes.node,
+	title: PropTypes.string,
 }
 
 export default InactiveBlock;
