@@ -24,9 +24,8 @@ const ActionButton = ( {
 	...props
 } ) => {
 	const containerClass = classNames(
-		'tribe-editor__btn--label',
-		'tribe-editor__tickets-btn--action',
-		`tribe-editor__tickets-btn--action-${ position }`,
+		'tribe-editor__action-button',
+		`tribe-editor__action-button--icon-${ position }`,
 		className,
 	);
 

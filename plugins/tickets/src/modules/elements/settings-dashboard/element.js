@@ -35,7 +35,7 @@ const SettingsDashboard = ( {
 					{ headerLeft }
 				</span>
 				<Button
-					className="tribe-editor__settings-dashboard__close-button tribe-editor__btn--label"
+					className="tribe-editor__settings-dashboard__close-button"
 					onClick={ onCloseClick }
 				>
 					{ closeButtonLabel }

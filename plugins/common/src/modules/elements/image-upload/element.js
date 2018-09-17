@@ -20,7 +20,7 @@ import './style.pcss';
 export const renderMediaUpload = ( label ) => ( { open } ) => (
 	<Button
 		onClick={ open }
-		className={ [ 'tribe-editor__btn--label', 'tribe-editor__image-upload__upload-button' ] }
+		className={ [ 'tribe-editor__button--sm', 'tribe-editor__image-upload__upload-button' ] }
 	>
 		{ label }
 	</Button>
