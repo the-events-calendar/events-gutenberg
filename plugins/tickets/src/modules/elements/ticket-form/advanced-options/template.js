@@ -54,9 +54,10 @@ class AdvancedOptions extends Component {
 	);
 
 	getRows = () => {
-		const { accordionTitle, contentId, headerId, isActive, onClick } = this.props;
+		const { accordionId, accordionTitle, contentId, headerId, isActive, onClick } = this.props;
 
 		return [ {
+			accordionId,
 			content: this.getContent(),
 			contentClassName: 'tribe-editor__tickets__advanced-options-content',
 			contentId,
