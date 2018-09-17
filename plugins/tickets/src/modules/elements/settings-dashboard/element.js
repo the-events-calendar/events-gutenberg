@@ -35,7 +35,7 @@ const SettingsDashboard = ( {
 					{ headerLeft }
 				</span>
 				<Button
-					className="tribe-editor__settings-dashboard__close-button"
+					className="tribe-editor__settings-dashboard__close-button tribe-editor__btn--label"
 					onClick={ onCloseClick }
 				>
 					{ closeButtonLabel }
@@ -52,7 +52,9 @@ SettingsDashboard.defaultProps = {
 	closeButtonLabel: (
 		<Fragment>
 			<CloseIcon />
-			<span className="tribe-editor">{ __( 'close', 'events-gutenberg' ) }</span>
+			<span className="tribe-editor__settings-dashboard__close-button-text">
+				{ __( 'close', 'events-gutenberg' ) }
+			</span>
 		</Fragment>
 	),
 	headerLeft: (
