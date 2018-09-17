@@ -115,7 +115,7 @@ Capacity.defaultProps = {
 	independent: {
 		value: 0,
 		onChange: noop,
-		label: __( 'Number of tickets available', 'events-gutengerg' ),
+		label: __( 'Number of tickets available', 'events-gutenberg' ),
 	},
 	shared: {
 		value: 0,
