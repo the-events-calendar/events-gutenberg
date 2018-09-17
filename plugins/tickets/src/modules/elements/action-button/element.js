@@ -35,7 +35,7 @@ const ActionButton = ( {
 			{ ...props }
 		>
 			{ icon }
-			<span className="tribe-editor__btn--label-children">{ children }</span>
+			<span className="tribe-editor__action-button__label">{ children }</span>
 		</Button>
 	);
 }
