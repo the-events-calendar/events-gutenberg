@@ -57,10 +57,28 @@
 			fill: #A2AAB2;
 		}
 	}
+
+	&:hover,
+	&:focus {
+
+		& > svg {
+			fill: #009FD4;
+			margin-right: 6px;
+
+			path {
+				fill: #009FD4;
+			}
+		}
+	}
 }
 
 .tribe-editor__settings-dashboard__close-button-text {
 	color: #8D949B;
+
+	.tribe-editor__settings-dashboard__close-button:hover &,
+	.tribe-editor__settings-dashboard__close-button:focus & {
+		color: #009FD4;
+	}
 }
 
 .tribe-editor__settings-dashboard__content {

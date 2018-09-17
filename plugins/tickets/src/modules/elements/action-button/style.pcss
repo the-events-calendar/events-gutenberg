@@ -7,24 +7,56 @@
 	letter-spacing: 0.38px;
 	color: #545D66;
 
-	svg {
+	& > svg {
 		fill: #545D66;
 
 		path {
 			fill: #545D66;
 		}
 	}
+
+	&:hover,
+	&:focus {
+		color: #009fd4;
+
+		& > svg {
+			fill: #009fd4;
+
+			path {
+				fill: #009fd4;
+			}
+		}
+	}
+
+	&[disabled] {
+
+		&,
+		&:hover,
+		&:focus {
+			color: #8d949b;
+
+			& > svg {
+				fill: #8d949b;
+
+				path {
+					fill: #8d949b;
+				}
+			}
+		}
+	}
 }
 
 .tribe-editor__action-button--icon-right {
-	svg {
+
+	& > svg {
 		margin-left: 6px;
 		order: 2;
 	}
 }
 
 .tribe-editor__action-button--icon-left {
-	svg {
+
+	& > svg {
 		margin-right: 6px;
 	}
 }

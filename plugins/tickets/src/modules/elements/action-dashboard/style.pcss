@@ -42,10 +42,27 @@
 
 .tribe-editor__action-dashboard__cancel-button {
 	background-color: transparent;
+	font-size: 15px;
+	line-height: 18px;
 	padding: 0;
 	margin-right: 20px;
+	transition: color 0.2s ease;
 
 	&:last-child {
 		margin-right: 0;
+	}
+
+	&:hover,
+	&:focus {
+		color: #009fd4;
+	}
+
+	&[disabled] {
+
+		&,
+		&:hover,
+		&:focus {
+			color: #8d949b;
+		}
 	}
 }
