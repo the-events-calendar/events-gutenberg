@@ -2,24 +2,28 @@
  * External dependencies
  */
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 /**
  * Internal dependencies
  */
 import RSVPAdvancedOptions from './template';
-
-const mapStateToProps = ( state ) => ( {
-	accordionId: 'placeholder',
-	contentId: 'placeholder',
-	headerId: 'placeholder',
-	isActive: false,
-} );
+import { actions } from '@moderntribe/common/data/reducers/ui';
+import { withStore } from '@moderntribe/common/hoc';
 
 const mapDispatchToProps = ( dispatch ) => ( {
-	onClick: () => {},
+	addAccordion: ( accordionId ) => (
+		dispatch( actions.addAccordion( accordionId ) )
+	),
+	removeAccordion: ( accordionId ) => (
+		dispatch( actions.removeAccordion( accordionId ) )
+	),
 } );
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+export default compose(
+	withStore(),
+	connect(
+		null,
+		mapDispatchToProps,
+	),
 )( RSVPAdvancedOptions );

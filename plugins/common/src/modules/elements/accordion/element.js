@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import AccordionRow from './AccordionRow';
+import AccordionRow from './AccordionRow/container';
 import './style.pcss';
 
 const Accordion = ( {
@@ -28,7 +28,7 @@ const Accordion = ( {
 			{ ...containerAttrs }
 		>
 			{ rows.map( ( row, index ) => (
-				<AccordionRow key={ index } row={ row } index={ index } />
+				<AccordionRow key={ index } { ...row } />
 			) ) }
 		</div>
 	)
@@ -44,13 +44,11 @@ Accordion.propTypes = {
 	className: PropTypes.string,
 	containerAttrs: PropTypes.object,
 	rows: PropTypes.arrayOf( PropTypes.shape( {
+		accordionId: PropTypes.string.isRequired,
 		content: PropTypes.node,
 		contentClassName: PropTypes.string,
-		contentId: PropTypes.string.isRequired,
 		header: PropTypes.node,
 		headerClassName: PropTypes.string,
-		headerId: PropTypes.string.isRequired,
-		isActive: PropTypes.bool.isRequired,
 		onClick: PropTypes.func,
 		onClose: PropTypes.func,
 		onOpen: PropTypes.func,

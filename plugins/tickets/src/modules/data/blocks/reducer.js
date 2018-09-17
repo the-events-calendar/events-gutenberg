@@ -6,8 +6,8 @@ import { combineReducers } from 'redux';
 /**
  * Internal dependencies
  */
-import blocks from './blocks';
+import rsvp from './rsvp';
 
 export default combineReducers( {
-	blocks,
+	rsvp,
 } );

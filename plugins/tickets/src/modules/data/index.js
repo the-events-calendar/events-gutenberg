@@ -10,7 +10,7 @@ export const initStore = () => {
 	const { dispatch, injectReducers } = store;
 	// TODO: use `constants` from `recurrence` branch to add the plugin name into the constants.
 	dispatch( actions.addPlugin( 'tickets' ) );
-	injectReducers( { [ 'tickets' ]: reducer } );
+	injectReducers( { tickets: reducer } );
 };
 
 export const getStore = () => store;
