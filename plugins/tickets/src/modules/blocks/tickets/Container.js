@@ -23,9 +23,15 @@ const mapStateToProps = ( state, props ) => ( {
 	available: 48,
 	total: 166,
 	footerActions: [
-		<ActionButton icon={ <CogIcon /> }>Settings</ActionButton>,
-		<ActionButton icon={ <UserIcon /> }>Attendees </ActionButton>,
-		<ActionButton icon={ <TagIcon /> }>Orders</ActionButton>,
+		<ActionButton icon={ <CogIcon /> }>
+			{ __( 'Settings', 'events-gutenberg' ) }
+		</ActionButton>,
+		<ActionButton icon={ <UserIcon /> }>
+			{ __( 'Attendees', 'events-gutenberg' ) }
+		</ActionButton>,
+		<ActionButton icon={ <TagIcon /> }>
+			{ __( 'Orders', 'events-gutenberg' ) }
+		</ActionButton>,
 	],
 	allowedBlockTypes: [ 'tribe/event-tickets', 'tribe/event-tickets-ticket',  'core/image' ],
 } );
