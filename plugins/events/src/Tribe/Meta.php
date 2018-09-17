@@ -24,6 +24,7 @@ class Tribe__Gutenberg__Events__Meta {
 		register_meta( 'post', '_EventCostDescription', $this->text() );
 		register_meta( 'post', '_EventCurrencySymbol', $this->text() );
 		register_meta( 'post', '_EventCurrencyPosition', $this->text() );
+
 		// Use sanitize_textarea_field to allow whitespaces
 		register_meta(
 			'post',

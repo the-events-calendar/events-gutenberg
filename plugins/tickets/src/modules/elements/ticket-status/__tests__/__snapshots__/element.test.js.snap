@@ -2,24 +2,24 @@
 
 exports[`Ticket Icon render the disabled ticket icon 1`] = `
 <span>
-  Ticket Active
+  Clock Inactive
 </span>
 `;
 
 exports[`Ticket Icon render the ticket icon 1`] = `
 <span>
-  Ticket Inactive
+  Clock Active
 </span>
 `;
 
 exports[`Ticket Icon render the unlimited icon 1`] = `
 <span>
-  Clock Inactive
+  Ticket Active
 </span>
 `;
 
 exports[`Ticket Icon render the unlimited icon when is disabled 1`] = `
 <span>
-  Clock Active
+  Ticket Inactive
 </span>
 `;
