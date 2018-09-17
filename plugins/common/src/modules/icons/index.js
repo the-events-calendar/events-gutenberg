@@ -1,5 +1,5 @@
 export { default as TEC } from './tec.svg';
-export { default as Close } from './cross.svg';
+export { default as Close } from './close.svg';
 export { default as Alert } from './alert.svg';
 export { default as Clipboard } from './clipboard.svg';
 export { default as Cog } from './cog.svg';
