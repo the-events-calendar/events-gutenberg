@@ -23,8 +23,22 @@
 			margin-left: 12px;
 		}
 	}
+
+	.tribe-editor__accordion__row {
+		position: relative;
+
+		&.open {
+			.tribe-editor__accordion__row-content {
+				overflow: visible;
+			}
+		}
+	}
 }
 
 .tribe-editor__tickets__advanced-options-content {
 	margin-top: 20px;
+}
+
+.tribe-editor__accordion__row.active button svg {
+	transform: rotate(180deg) translateX(-2px);
 }
