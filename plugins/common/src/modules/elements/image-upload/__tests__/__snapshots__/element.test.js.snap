@@ -54,7 +54,7 @@ exports[`ImageUpload render with custom title 1`] = `
 
 exports[`renderMediaUpload render the button 1`] = `
 <button
-  className="tribe-editor__button tribe-editor__btn--label tribe-editor__image-upload__upload-button"
+  className="tribe-editor__button tribe-editor__button--sm tribe-editor__image-upload__upload-button"
   onClick={[MockFunction]}
   type="button"
 >
