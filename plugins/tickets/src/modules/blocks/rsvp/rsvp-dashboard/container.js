@@ -12,7 +12,7 @@ import { selectors } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state ) => ( {
-	isSettingsOpen: true,
+	isSettingsOpen: selectors.getRSVPSettingsOpen( state ),
 } );
 
 export default compose(

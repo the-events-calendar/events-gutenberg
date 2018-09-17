@@ -20,6 +20,7 @@ const ActionButton = ( {
 	children,
 	className,
 	icon,
+	onClick,
 	position,
 	...props
 } ) => {
@@ -32,6 +33,7 @@ const ActionButton = ( {
 	return (
 		<Button
 			className={ containerClass }
+			onClick={ onClick }
 			{ ...props }
 		>
 			{ icon }
@@ -44,6 +46,7 @@ ActionButton.propTypes = {
 	children: PropTypes.node,
 	className: PropTypes.string,
 	icon: PropTypes.node.isRequired,
+	onClick: PropTypes.func,
 	position: PropTypes.oneOf( Object.keys( positions ) ),
 };
 
