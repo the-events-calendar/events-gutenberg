@@ -10,11 +10,11 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
     className="tribe-editor__accordion__row"
   >
     <button
-      aria-controls="ticketsPlaceholder"
+      aria-controls="accordion-content-ticketsPlaceholder"
       aria-expanded="false"
       aria-selected="false"
       className="tribe-editor__button tribe-editor__accordion__row-header tribe-editor__tickets__advanced-options-header"
-      id="ticketsPlaceholder"
+      id="accordion-header-ticketsPlaceholder"
       onClick={[Function]}
       role="tab"
       type="button"
@@ -32,9 +32,9 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
     </button>
     <div
       aria-hidden="true"
-      aria-labelledby="ticketsPlaceholder"
+      aria-labelledby="accordion-header-ticketsPlaceholder"
       className="tribe-editor__accordion__row-content tribe-editor__tickets__advanced-options-content"
-      id="ticketsPlaceholder"
+      id="accordion-content-ticketsPlaceholder"
       role="tabpanel"
     >
       <div
