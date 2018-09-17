@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AccordionHeader /> Active with title 1`] = `
+Array [
+  <span
+    className="tribe-editor__options-header-icon"
+  >
+    arrow-up
+  </span>,
+  <span
+    className="tribe-editor__options-header-text"
+  >
+    Modern Tribe
+  </span>,
+]
+`;
+
+exports[`<AccordionHeader /> Inactive with title 1`] = `
+Array [
+  <span
+    className="tribe-editor__options-header-icon"
+  >
+    arrow-down
+  </span>,
+  <span
+    className="tribe-editor__options-header-text"
+  >
+    Modern Tribe
+  </span>,
+]
+`;
