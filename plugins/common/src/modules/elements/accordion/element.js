@@ -28,7 +28,7 @@ const Accordion = ( {
 			{ ...containerAttrs }
 		>
 			{ rows.map( ( row, index ) => (
-				<AccordionRow row={ row } index={ index } />
+				<AccordionRow key={ index } row={ row } index={ index } />
 			) ) }
 		</div>
 	)
