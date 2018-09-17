@@ -18,6 +18,7 @@ import {
 	SettingsActionButton,
 	AttendeesActionButton,
 } from './rsvp-action-buttons';
+import { ImageUpload } from '@moderntribe/common/elements';
 import { ActionDashboard, SettingsDashboard } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
@@ -45,10 +46,20 @@ const RSVP = ( {
 	};
 
 	const getSettingsDashboard = () => {
+		const imageUploadProps = {
+			title: __( 'Ticket Header Image', 'events-gutenberg' ),
+			description: __(
+				/* eslint-disable-next-line max-len */
+				'Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.',
+				'events-gutenberg'
+			),
+			buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
+		};
+
 		return isSelected && (
 			<SettingsDashboard
 				className="tribe-editor__rsvp__settings-dashboard"
-				content={ <span>stuff</span> }
+				content={ <ImageUpload { ...imageUploadProps } /> }
 			/>
 		);
 	};
