@@ -18,7 +18,7 @@ import {
 	SettingsActionButton,
 	AttendeesActionButton,
 } from './rsvp-action-buttons';
-import { ActionDashboard } from '@moderntribe/tickets/elements';
+import { ActionDashboard, SettingsDashboard } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
 const RSVP = ( {
@@ -44,6 +44,15 @@ const RSVP = ( {
 		);
 	};
 
+	const getSettingsDashboard = () => {
+		return isSelected && (
+			<SettingsDashboard
+				className="tribe-editor__rsvp__settings-dashboard"
+				content={ <span>stuff</span> }
+			/>
+		);
+	};
+
 	return (
 		<div className={ classNames(
 			'tribe-editor__rsvp',
@@ -51,6 +60,7 @@ const RSVP = ( {
 		) }>
 			<RSVPContainer isSelected={ isSelected } />
 			{ getActionDashboard() }
+			{ getSettingsDashboard() }
 		</div>
 	);
 };

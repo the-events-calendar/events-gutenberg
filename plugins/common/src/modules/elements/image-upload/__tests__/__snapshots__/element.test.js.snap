@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageUpload render the component 1`] = `
+<div
+  className="tribe-editor__image-upload"
+>
+  <div
+    className="tribe-editor__image-upload__content"
+  >
+    <button>
+      Media Upload
+    </button>
+  </div>
+</div>
+`;
+
+exports[`ImageUpload render with custom description 1`] = `
+<div
+  className="tribe-editor__image-upload"
+>
+  <div
+    className="tribe-editor__image-upload__content"
+  >
+    <p
+      className="tribe-editor__image-upload__description"
+    >
+      The Next Generation of Digital Agency
+    </p>
+    <button>
+      Media Upload
+    </button>
+  </div>
+</div>
+`;
+
+exports[`ImageUpload render with custom title 1`] = `
+<div
+  className="tribe-editor__image-upload"
+>
+  <h3
+    className="tribe-editor__image-upload__title"
+  >
+    Modern Tribe
+  </h3>
+  <div
+    className="tribe-editor__image-upload__content"
+  >
+    <button>
+      Media Upload
+    </button>
+  </div>
+</div>
+`;
+
+exports[`renderMediaUpload render the button 1`] = `
+<button
+  className="tribe-editor__button tribe-editor__btn--label tribe-editor__image-upload__upload-button"
+  onClick={[MockFunction]}
+  type="button"
+>
+  label
+</button>
+`;
