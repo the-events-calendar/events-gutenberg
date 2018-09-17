@@ -6,8 +6,8 @@ import { combineReducers } from 'redux';
 /**
  * Internal dependencies
  */
-import blocks from './blocks';
+import { accordion } from './reducers';
 
 export default combineReducers( {
-	blocks,
+	accordion,
 } );

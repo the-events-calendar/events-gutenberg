@@ -16,13 +16,11 @@ describe( 'Accordion Element', () => {
 	beforeEach( () => {
 		rows = [
 			{
-				content: "this is a content",
-				contentClassName: "content-class",
-				contentId: "content-id-1",
-				header: "this is header",
-				headerClassName: "header-class",
-				headerId: "header-id-1",
-				isActive: true,
+				accordionId: '123',
+				content: 'this is a content',
+				contentClassName: 'content-class',
+				header: 'this is header',
+				headerClassName: 'header-class',
 				onClick: noop,
 				onClose: noop,
 				onOpen: noop,
@@ -42,12 +40,6 @@ describe( 'Accordion Element', () => {
 
 	it( 'renders an accordion with wrapper class', () => {
 		const component = renderer.create( <Accordion className="test-class" rows={ rows } /> );
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
-
-	it( 'renders an accordion with inactive state', () => {
-		rows[0].isActive = false;
-		const component = renderer.create( <Accordion rows={ rows } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 } );

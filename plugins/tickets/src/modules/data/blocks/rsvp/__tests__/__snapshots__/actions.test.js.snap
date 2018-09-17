@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RSVP block actions create RSVP 1`] = `
+Object {
+  "type": "@@MT/TICKETS/CREATE_RSVP",
+}
+`;
+
+exports[`RSVP block actions delete RSVP 1`] = `
+Object {
+  "type": "@@MT/TICKETS/DELETE_RSVP",
+}
+`;
+
+exports[`RSVP block actions set RSVP capacity 1`] = `
+Object {
+  "payload": Object {
+    "capacity": 20,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_CAPACITY",
+}
+`;
+
+exports[`RSVP block actions set RSVP description 1`] = `
+Object {
+  "payload": Object {
+    "description": "description",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_DESCRIPTION",
+}
+`;
+
+exports[`RSVP block actions set RSVP end date 1`] = `
+Object {
+  "payload": Object {
+    "endDate": "January 1, 2018",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_END_DATE",
+}
+`;
+
+exports[`RSVP block actions set RSVP end time 1`] = `
+Object {
+  "payload": Object {
+    "endTime": "12:34",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_END_TIME",
+}
+`;
+
+exports[`RSVP block actions set RSVP not going responses 1`] = `
+Object {
+  "payload": Object {
+    "notGoingResponses": true,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_NOT_GOING_RESPONSES",
+}
+`;
+
+exports[`RSVP block actions set RSVP start date 1`] = `
+Object {
+  "payload": Object {
+    "startDate": "January 1, 2018",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_START_DATE",
+}
+`;
+
+exports[`RSVP block actions set RSVP start time 1`] = `
+Object {
+  "payload": Object {
+    "startTime": "12:34",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_START_TIME",
+}
+`;
+
+exports[`RSVP block actions set RSVP title 1`] = `
+Object {
+  "payload": Object {
+    "title": "title",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TITLE",
+}
+`;
