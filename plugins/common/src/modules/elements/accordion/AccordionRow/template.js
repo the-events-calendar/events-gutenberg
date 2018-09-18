@@ -16,10 +16,8 @@ class AccordionRow extends PureComponent {
 		accordionId: PropTypes.string.isRequired,
 		content: PropTypes.node,
 		contentClassName: PropTypes.string,
-		contentId: PropTypes.string.isRequired,
 		header: PropTypes.node,
 		headerClassName: PropTypes.string,
-		headerId: PropTypes.string.isRequired,
 		onClick: PropTypes.func,
 		onClose: PropTypes.func,
 		onOpen: PropTypes.func,
@@ -30,26 +28,26 @@ class AccordionRow extends PureComponent {
 		this.state = {
 			isActive: false,
 		};
+		this.headerId = `accordion-header-${ this.props.accordionId }`;
+		this.contentId = `accordion-content-${ this.props.accordionId }`;
 	}
 
 	getHeaderAttrs = () => {
-		const { contentId, headerId } = this.props;
 		const _isActive = this.state.isActive ? 'true' : 'false';
 		return {
-			'aria-controls': contentId,
+			'aria-controls': this.contentId,
 			'aria-expanded': _isActive,
 			'aria-selected': _isActive,
-			id: headerId,
+			id: this.headerId,
 			role: 'tab',
 		};
 	};
 
 	getContentAttrs = () => {
-		const { contentId, headerId } = this.props;
 		return {
 			'aria-hidden': this.state.isActive ? 'false' : 'true',
-			'aria-labelledby': headerId,
-			id: contentId,
+			'aria-labelledby': this.headerId,
+			id: this.contentId,
 			role: 'tabpanel',
 		};
 	};

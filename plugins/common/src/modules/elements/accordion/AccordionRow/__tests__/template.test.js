@@ -7,11 +7,7 @@ import renderer from 'react-test-renderer';
 /**
  * Internal dependencies
  */
-import {
-	default as AccordionRow,
-	getHeaderAttrs,
-	getContentAttrs,
-} from '@moderntribe/common/elements/accordion/AccordionRow/template';
+import AccordionRow from '@moderntribe/common/elements/accordion/AccordionRow/template';
 
 let row;
 
@@ -21,10 +17,8 @@ describe( 'Accordion Row Element', () => {
 			accordionId: '123',
 			content: 'this is a content',
 			contentClassName: 'content-class',
-			contentId: 'content-id-1',
 			header: 'this is header',
 			headerClassName: 'header-class',
-			headerId: 'header-id-1',
 			onClick: jest.fn(),
 			onClose: jest.fn(),
 			onOpen: jest.fn(),
@@ -33,12 +27,6 @@ describe( 'Accordion Row Element', () => {
 
 	describe( 'AccordionRow', () => {
 		it( 'renders an accordion row', () => {
-			const component = renderer.create( <AccordionRow { ...row } /> );
-			expect( component.toJSON() ).toMatchSnapshot();
-		} );
-
-		it( 'renders an accordion row with inactive state', () => {
-			row.isActive = false;
 			const component = renderer.create( <AccordionRow { ...row } /> );
 			expect( component.toJSON() ).toMatchSnapshot();
 		} );
