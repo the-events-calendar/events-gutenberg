@@ -41,7 +41,7 @@ describe( 'Accordion Row Element', () => {
 		component.find( 'button' ).simulate( 'click' );
 		setTimeout( () => {
 			component.find( 'button' ).simulate( 'click' );
-		}, 250 );
+		}, 300 );
 		setTimeout( () => {
 			expect( row.onOpen ).toHaveBeenCalled();
 			expect( row.onOpen ).toHaveBeenCalledTimes( 1 );
@@ -50,6 +50,6 @@ describe( 'Accordion Row Element', () => {
 			expect( row.onClick ).toHaveBeenCalled();
 			expect( row.onClick ).toHaveBeenCalledTimes( 2 );
 			done();
-		}, 500 );
+		}, 600 );
 	} );
 } );
