@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
+import uniqid from 'uniqid';
 
 /**
  * Wordpress dependencies
@@ -42,19 +43,22 @@ Select.propTypes = {
 };
 
 // Custom input for this type of form
-const Input = ( { type, input, selected } ) => (
-	type === selected && (
-		<div className="tribe-editor__tickets-form__input-row">
-			<label htmlFor={ `ticket-input-${ type }` }>{ input.label }</label>
-			<input
-				type="number"
-				id={ `ticket-input-${ type }` }
-				value={ input.value }
-				onChange={ input.onChange }
-			/>
-		</div>
-	)
-);
+const Input = ( { type, input, selected } ) => {
+	const id = uniqid( `ticket-input-${ type }-` );
+	return (
+		type === selected && (
+			<div className="tribe-editor__tickets-form__input-row">
+				<label htmlFor={ id }>{ input.label }</label>
+				<input
+					type="number"
+					id={ id }
+					value={ input.value }
+					onChange={ input.onChange }
+				/>
+			</div>
+		)
+	);
+};
 
 Input.propTypes = {
 	type: PropTypes.oneOf( Object.keys( TYPES ) ),
@@ -77,11 +81,13 @@ const Capacity = ( props ) => {
 		independent,
 		shared
 	} = props;
+
+	const selectID =  uniqid( 'capacity-type-' );
 	return (
 		<div className="tribe-editor__tickets-form__row">
 			<div className="tribe-editor__tickets-form__labels">
 				<LabelWithTooltip
-					id="tickets-capacity-type"
+					id={ selectID }
 					label={ capacityLabel }
 					tooltipText={ capacityToolTip }
 					tooltipLabel={ <Dashicon icon="info-outline" /> }
@@ -92,7 +98,7 @@ const Capacity = ( props ) => {
 					selected={ type }
 					options={ capacityOptions }
 					onSelect={ onSelectType }
-					id="tickets-capacity-type"
+					id={ selectID }
 				/>
 				<Input selected={ type } input={ shared } type={ TYPES.shared } />
 				<Input selected={ type } input={ independent } type={ TYPES.independent } />

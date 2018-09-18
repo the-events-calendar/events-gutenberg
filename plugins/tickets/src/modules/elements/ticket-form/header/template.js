@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AutosizeInput from 'react-input-autosize';
 import noop from 'lodash/noop';
+import uniqid from 'uniqid';
 
 /**
  * Wordpress dependencies
@@ -42,7 +43,7 @@ const Header = ( props ) => {
 	const priceInput = (
 		<AutosizeInput
 			key="price-input"
-			id="ticket-creation-description"
+			id={ uniqid( 'ticket-creation-price-' ) }
 			name="ticket-creation-description"
 			className="tribe-editor__new-ticket__description"
 			value={ price }
@@ -59,7 +60,7 @@ const Header = ( props ) => {
 			</div>
 			<div className="tribe-editor__new-ticket__content">
 				<AutosizeInput
-					id="ticket-creation-title"
+					id={ uniqid( 'ticket-creation-title-' ) }
 					name="ticket-creation-title"
 					className="tribe-editor__new-ticket__title"
 					value={ title }
@@ -67,7 +68,7 @@ const Header = ( props ) => {
 					onChange={ sendValue( setTitle ) }
 				/>
 				<AutosizeInput
-					id="ticket-creation-description"
+					id={ uniqid( 'ticket-creation-description-' ) }
 					name="ticket-creation-description"
 					className="tribe-editor__new-ticket__description"
 					value={ description }

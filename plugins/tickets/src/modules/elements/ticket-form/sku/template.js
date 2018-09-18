@@ -10,6 +10,7 @@ import noop from 'lodash/noop';
  */
 import { __ } from '@wordpress/i18n';
 import { Dashicon } from '@wordpress/components';
+import uniqid from 'uniqid';
 
 /**
  * Internal dependencies
@@ -17,21 +18,24 @@ import { Dashicon } from '@wordpress/components';
 import { sendValue } from '@moderntribe/common/utils/input';
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 
-const SKU = ( { onChange, value, label, tooltip } ) => (
-	<div className="tribe-editor__tickets-form__row">
-		<div className="tribe-editor__tickets-form__labels">
-			<LabelWithTooltip
-				id="ticket-sku"
-				label={ label }
-				tooltipText={ tooltip }
-				tooltipLabel={ <Dashicon icon="info-outline" /> }
-			/>
+const SKU = ( { onChange, value, label, tooltip } ) => {
+	const id = uniqid( 'ticket-sku' );
+	return (
+		<div className="tribe-editor__tickets-form__row">
+			<div className="tribe-editor__tickets-form__labels">
+				<LabelWithTooltip
+					id={ id }
+					label={ label }
+					tooltipText={ tooltip }
+					tooltipLabel={ <Dashicon icon="info-outline" /> }
+				/>
+			</div>
+			<div className="tribe-editor__tickets-form__input-group">
+				<input id={ id } type="text" value={ value } onChange={ sendValue( onChange ) } />
+			</div>
 		</div>
-		<div className="tribe-editor__tickets-form__input-group">
-			<input id="ticket-sku" type="text" value={ value } onChange={ sendValue( onChange ) } />
-		</div>
-	</div>
-);
+	);
+}
 
 SKU.propTypes = {
 	label: PropTypes.string,
