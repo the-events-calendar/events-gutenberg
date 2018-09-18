@@ -18,7 +18,6 @@ import './style.pcss';
 const getCapacityLabel = ( capacity ) => {
 	const singular = __( '%d available', 'events-gutenberg' );
 	const plural = singular;
-	const fallback = null;
 
 	return (
 		<NumericLabel
