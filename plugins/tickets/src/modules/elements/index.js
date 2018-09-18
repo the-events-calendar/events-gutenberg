@@ -10,4 +10,3 @@ export { default as DisabledTickets } from './disabled-tickets/element';
 export { default as TicketStatus } from './ticket-status/element';
 export { default as QuantityBar } from './quantity-bar/element';
 export { default as TicketForm } from './ticket-form/element';
-export { default as AccordionHeader } from './accordion-header/element';
