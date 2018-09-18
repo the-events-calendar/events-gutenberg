@@ -19,13 +19,12 @@ const TicketDurationPicker = ( props ) => {
 	const { label, tooltip } = props;
 	return (
 		<div className="tribe-editor__tickets-form__row">
-			<div className="tribe-editor__tickets-form__labels">
-				<LabelWithTooltip
-					label={ label }
-					tooltipText={ tooltip }
-					tooltipLabel={ <Dashicon icon="info-outline" /> }
-				/>
-			</div>
+			<LabelWithTooltip
+				className="tribe-editor__tickets-form__label"
+				label={ label }
+				tooltipText={ tooltip }
+				tooltipLabel={ <Dashicon icon="info-outline" /> }
+			/>
 			<div className="tribe-editor__tickets-form__input-group">
 				<DateTimeRangePicker { ...props } />
 			</div>

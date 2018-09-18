@@ -22,14 +22,13 @@ const SKU = ( { onChange, value, label, tooltip } ) => {
 	const id = uniqid( 'ticket-sku' );
 	return (
 		<div className="tribe-editor__tickets-form__row">
-			<div className="tribe-editor__tickets-form__labels">
-				<LabelWithTooltip
-					id={ id }
-					label={ label }
-					tooltipText={ tooltip }
-					tooltipLabel={ <Dashicon icon="info-outline" /> }
-				/>
-			</div>
+			<LabelWithTooltip
+				className="tribe-editor__tickets-form__label"
+				id={ id }
+				label={ label }
+				tooltipText={ tooltip }
+				tooltipLabel={ <Dashicon icon="info-outline" /> }
+			/>
 			<div className="tribe-editor__tickets-form__input-group">
 				<input id={ id } type="text" value={ value } onChange={ sendValue( onChange ) } />
 			</div>

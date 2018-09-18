@@ -85,14 +85,13 @@ const Capacity = ( props ) => {
 	const selectID =  uniqid( 'capacity-type-' );
 	return (
 		<div className="tribe-editor__tickets-form__row">
-			<div className="tribe-editor__tickets-form__labels">
-				<LabelWithTooltip
-					id={ selectID }
-					label={ capacityLabel }
-					tooltipText={ capacityToolTip }
-					tooltipLabel={ <Dashicon icon="info-outline" /> }
-				/>
-			</div>
+			<LabelWithTooltip
+				className="tribe-editor__tickets-form__label"
+				id={ selectID }
+				label={ capacityLabel }
+				tooltipText={ capacityToolTip }
+				tooltipLabel={ <Dashicon icon="info-outline" /> }
+			/>
 			<div className="tribe-editor__tickets-form__input-group">
 				<Select
 					selected={ type }
