@@ -19,12 +19,12 @@ class ModalButton extends PureComponent {
 	static propTypes = {
 		className: PropTypes.string,
 		closeLabel: PropTypes.string,
+		label: PropTypes.string,
+		modalTitle: PropTypes.string,
 		onClick: PropTypes.func,
 		onClose: PropTypes.func,
 		onCloseClick: PropTypes.func,
 		onOpen: PropTypes.func,
-		label: PropTypes.string,
-		modalTitle: PropTypes.string,
 	}
 
 	constructor( props ) {
