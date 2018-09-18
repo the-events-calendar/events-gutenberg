@@ -7,19 +7,24 @@ import React from 'react';
  * Wordpress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { Dashicon } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { DateTimeRangePicker } from '@moderntribe/tickets/elements';
+import { DateTimeRangePicker, LabelWithTooltip } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
 const TicketDurationPicker = ( props ) => {
-	const { label } = props;
+	const { label, tooltip } = props;
 	return (
 		<div className="tribe-editor__tickets-form__row">
 			<div className="tribe-editor__tickets-form__labels">
-				<span>{ label }</span>
+				<LabelWithTooltip
+					label={ label }
+					tooltipText={ tooltip }
+					tooltipLabel={ <Dashicon icon="info-outline" /> }
+				/>
 			</div>
 			<div className="tribe-editor__tickets-form__input-group">
 				<DateTimeRangePicker { ...props } />
@@ -42,6 +47,10 @@ TicketDurationPicker.defaultProps = {
 	onToTimePickerChange: () => {},
 	onToTimePickerClick: () => {},
 	label: __( 'Sale Duration', 'events-gutenberg' ),
+	tooltip: __(
+		'If you do not set a start sale date, tickets will be available immediately.',
+		'events-gutenberg'
+	),
 };
 
 export default TicketDurationPicker;
