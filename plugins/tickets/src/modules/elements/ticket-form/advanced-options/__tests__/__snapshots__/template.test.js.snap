@@ -20,12 +20,12 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
       type="button"
     >
       <span
-        className="tribe-editor__options-header-icon"
+        className="tribe-editor__tickets__advanced-options-header-icon"
       >
         arrow-down
       </span>
       <span
-        className="tribe-editor__options-header-text"
+        className="tribe-editor__tickets__advanced-options-header-text"
       >
         Advanced Options
       </span>
@@ -134,7 +134,7 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
         >
           <label
             className="tribe-editor__label-with-tooltip__label"
-            htmlFor="ticket-skuefzeclz7pjm8aehcf"
+            htmlFor="ticket-sku"
           >
             Ticket SKU
           </label>
@@ -146,7 +146,7 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
           className="tribe-editor__tickets-form__input-group"
         >
           <input
-            id="ticket-skuefzeclz7pjm8aehcf"
+            id="ticket-sku"
             onChange={[Function]}
             type="text"
             value=""
