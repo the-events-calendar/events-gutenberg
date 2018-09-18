@@ -9,6 +9,11 @@ import noop from 'lodash/noop';
  * Wordpress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { Dashicon } from '@wordpress/components';
+
+/**
+ * Internal dependencies
+ */
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 
 export const TYPES = {
@@ -62,26 +67,43 @@ Input.propTypes = {
 };
 
 /* eslint-disable-next-line max-len */
-const Capacity = ( { capacityLabel, capacityOptions, type, onSelectType, independent, shared } ) => (
-	<div className="tribe-editor__tickets-form__row">
-		<div className="tribe-editor__tickets-form__labels">
-			<label htmlFor="tickets-capacity-type">{ capacityLabel }</label>
+const Capacity = ( props ) => {
+	const {
+		capacityLabel,
+		capacityToolTip,
+		capacityOptions,
+		type,
+		onSelectType,
+		independent,
+		shared
+	} = props;
+	return (
+		<div className="tribe-editor__tickets-form__row">
+			<div className="tribe-editor__tickets-form__labels">
+				<LabelWithTooltip
+					id="tickets-capacity-type"
+					label={ capacityLabel }
+					tooltipText={ capacityToolTip }
+					tooltipLabel={ <Dashicon icon="info-outline" /> }
+				/>
+			</div>
+			<div className="tribe-editor__tickets-form__input-group">
+				<Select
+					selected={ type }
+					options={ capacityOptions }
+					onSelect={ onSelectType }
+					id="tickets-capacity-type"
+				/>
+				<Input selected={ type } input={ shared } type={ TYPES.shared } />
+				<Input selected={ type } input={ independent } type={ TYPES.independent } />
+			</div>
 		</div>
-		<div className="tribe-editor__tickets-form__input-group">
-			<Select
-				selected={ type }
-				options={ capacityOptions }
-				onSelect={ onSelectType }
-				id="tickets-capacity-type"
-			/>
-			<Input selected={ type } input={ shared } type={ TYPES.shared } />
-			<Input selected={ type } input={ independent } type={ TYPES.independent } />
-		</div>
-	</div>
-);
+	);
+};
 
 Capacity.propTypes = {
 	capacityLabel: PropTypes.string,
+	capacityToolTip: PropTypes.string,
 	type: PropTypes.oneOf( Object.keys( TYPES ) ),
 	capacityOptions: PropTypes.arrayOf( PropTypes.shape( {
 		name: PropTypes.string,
@@ -102,6 +124,10 @@ Capacity.propTypes = {
 
 Capacity.defaultProps = {
 	capacityLabel: __( 'Ticket Capacity', 'events-gutenberg' ),
+	capacityToolTip: __(
+		'Ticket capacity will only be used by attendees buying this ticket type',
+		'events-gutenberg',
+	),
 	type: TYPES.independent,
 	capacityOptions: [
 		{ name: __( 'Share capacity with other tickets', 'events-gutenberg' ), value: TYPES.shared },
