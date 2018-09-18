@@ -2,7 +2,6 @@
  * External dependencies
  */
 import React from 'react';
-import renderer from 'react-test-renderer';
 
 /**
  * Internal dependencies
@@ -25,34 +24,32 @@ describe( 'Accordion Row Element', () => {
 		};
 	} );
 
-	describe( 'AccordionRow', () => {
-		it( 'renders an accordion row', () => {
-			const component = renderer.create( <AccordionRow { ...row } /> );
-			expect( component.toJSON() ).toMatchSnapshot();
-		} );
+	it( 'renders an accordion row', () => {
+		const component = renderer.create( <AccordionRow { ...row } /> );
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
 
-		it( 'executes onClick handler', () => {
-			const component = mount( <AccordionRow { ...row } /> );
+	it( 'executes onClick handler', () => {
+		const component = mount( <AccordionRow { ...row } /> );
+		component.find( 'button' ).simulate( 'click' );
+		expect( row.onClick ).toHaveBeenCalled();
+		expect( row.onClick ).toHaveBeenCalledTimes( 1 );
+	} );
+
+	it( 'executes onOpen and onClose handlers', ( done ) => {
+		const component = mount( <AccordionRow { ...row } /> );
+		component.find( 'button' ).simulate( 'click' );
+		setTimeout( () => {
 			component.find( 'button' ).simulate( 'click' );
+		}, 250 );
+		setTimeout( () => {
+			expect( row.onOpen ).toHaveBeenCalled();
+			expect( row.onOpen ).toHaveBeenCalledTimes( 1 );
+			expect( row.onClose ).toHaveBeenCalled();
+			expect( row.onClose ).toHaveBeenCalledTimes( 1 );
 			expect( row.onClick ).toHaveBeenCalled();
-			expect( row.onClick ).toHaveBeenCalledTimes( 1 );
-		} );
-
-		it( 'executes onOpen and onClose handlers', ( done ) => {
-			const component = mount( <AccordionRow { ...row } /> );
-			component.find( 'button' ).simulate( 'click' );
-			setTimeout( () => {
-				component.find( 'button' ).simulate( 'click' );
-			}, 250 );
-			setTimeout( () => {
-				expect( row.onOpen ).toHaveBeenCalled();
-				expect( row.onOpen ).toHaveBeenCalledTimes( 1 );
-				expect( row.onClose ).toHaveBeenCalled();
-				expect( row.onClose ).toHaveBeenCalledTimes( 1 );
-				expect( row.onClick ).toHaveBeenCalled();
-				expect( row.onClick ).toHaveBeenCalledTimes( 2 );
-				done();
-			}, 500 );
-		} );
+			expect( row.onClick ).toHaveBeenCalledTimes( 2 );
+			done();
+		}, 500 );
 	} );
 } );

@@ -30,7 +30,7 @@ class ModalButton extends PureComponent {
 	constructor( props ) {
 		super( props );
 		this.state = {
-			isOpen: false;
+			isOpen: false,
 		};
 	}
 

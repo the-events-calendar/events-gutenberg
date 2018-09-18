@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Accordion Row Element AccordionRow renders an accordion row 1`] = `
+exports[`Accordion Row Element renders an accordion row 1`] = `
 <article
   className="tribe-editor__accordion__row"
 >
