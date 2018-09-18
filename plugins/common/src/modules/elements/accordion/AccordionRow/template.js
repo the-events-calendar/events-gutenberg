@@ -76,8 +76,8 @@ class AccordionRow extends PureComponent {
 			? slide.up( content, contentId, 200, this.onClose( parent, e ) )
 			: slide.down( content, contentId, 200, this.onOpen( parent, e ) );
 
-		this.setState( ( state ) => ( { isActive: ! state.isActive } ) );
 		onClick && onClick( e );
+		this.setState( ( state ) => ( { isActive: ! state.isActive } ) );
 	};
 
 	render() {
