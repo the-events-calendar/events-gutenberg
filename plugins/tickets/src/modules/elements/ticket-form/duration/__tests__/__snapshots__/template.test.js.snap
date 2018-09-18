@@ -5,20 +5,16 @@ exports[`Ticket Duration picker and label default properties 1`] = `
   className="tribe-editor__tickets-form__row"
 >
   <div
-    className="tribe-editor__tickets-form__labels"
+    className="tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
   >
-    <div
-      className="tribe-editor__label-with-tooltip"
+    <span
+      className="tribe-editor__label-with-tooltip__label"
     >
-      <span
-        className="tribe-editor__label-with-tooltip__label"
-      >
-        Sale Duration
-      </span>
-      <span>
-        Tooltip
-      </span>
-    </div>
+      Sale Duration
+    </span>
+    <span>
+      Tooltip
+    </span>
   </div>
   <div
     className="tribe-editor__tickets-form__input-group"

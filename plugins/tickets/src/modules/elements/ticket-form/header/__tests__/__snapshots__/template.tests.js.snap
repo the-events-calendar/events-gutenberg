@@ -14,7 +14,7 @@ exports[`Ticket Form Header Header with default values 1`] = `
   >
     <span
       className="tribe-editor__new-ticket__title"
-      id="ticket-creation-title"
+      id="ticket-creation-title-efzeclz7qjm8aeh9b"
       name="ticket-creation-title"
       onChange={[Function]}
       placeholder="Ticket Type"
@@ -24,7 +24,7 @@ exports[`Ticket Form Header Header with default values 1`] = `
     </span>
     <span
       className="tribe-editor__new-ticket__description"
-      id="ticket-creation-description"
+      id="ticket-creation-description-efzeclz7qjm8aeh9c"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="Description"
@@ -41,7 +41,7 @@ exports[`Ticket Form Header Header with default values 1`] = `
     </span>
     <span
       className="tribe-editor__new-ticket__description"
-      id="ticket-creation-description"
+      id="ticket-creation-price-efzeclz7qjm8aeh9a"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="0"
@@ -67,7 +67,7 @@ exports[`Ticket Form Header Header with expiration 1`] = `
   >
     <span
       className="tribe-editor__new-ticket__title"
-      id="ticket-creation-title"
+      id="ticket-creation-title-efzeclz7qjm8aeh98"
       name="ticket-creation-title"
       onChange={[Function]}
       placeholder="Ticket Type"
@@ -77,7 +77,7 @@ exports[`Ticket Form Header Header with expiration 1`] = `
     </span>
     <span
       className="tribe-editor__new-ticket__description"
-      id="ticket-creation-description"
+      id="ticket-creation-description-efzeclz7qjm8aeh99"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="Description"
@@ -94,7 +94,7 @@ exports[`Ticket Form Header Header with expiration 1`] = `
     </span>
     <span
       className="tribe-editor__new-ticket__description"
-      id="ticket-creation-description"
+      id="ticket-creation-price-efzeclz7qjm8aeh97"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="0"
@@ -120,7 +120,7 @@ exports[`Ticket Form Header Header with no expiration 1`] = `
   >
     <span
       className="tribe-editor__new-ticket__title"
-      id="ticket-creation-title"
+      id="ticket-creation-title-efzeclz7qjm8aeh94"
       name="ticket-creation-title"
       onChange={[Function]}
       placeholder="Ticket Type"
@@ -130,7 +130,7 @@ exports[`Ticket Form Header Header with no expiration 1`] = `
     </span>
     <span
       className="tribe-editor__new-ticket__description"
-      id="ticket-creation-description"
+      id="ticket-creation-description-efzeclz7qjm8aeh95"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="Description"
@@ -147,7 +147,7 @@ exports[`Ticket Form Header Header with no expiration 1`] = `
     </span>
     <span
       className="tribe-editor__new-ticket__description"
-      id="ticket-creation-description"
+      id="ticket-creation-price-efzeclz7qjm8aeh93"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="0"

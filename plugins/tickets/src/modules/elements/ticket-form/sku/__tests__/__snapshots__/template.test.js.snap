@@ -5,27 +5,23 @@ exports[`SKU Render the component with no errors 1`] = `
   className="tribe-editor__tickets-form__row"
 >
   <div
-    className="tribe-editor__tickets-form__labels"
+    className="tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
   >
-    <div
-      className="tribe-editor__label-with-tooltip"
+    <label
+      className="tribe-editor__label-with-tooltip__label"
+      htmlFor="ticket-skuefzeclz7pjm8aegvz"
     >
-      <label
-        className="tribe-editor__label-with-tooltip__label"
-        htmlFor="ticket-sku"
-      >
-        Ticket SKU
-      </label>
-      <span>
-        Tooltip
-      </span>
-    </div>
+      Ticket SKU
+    </label>
+    <span>
+      Tooltip
+    </span>
   </div>
   <div
     className="tribe-editor__tickets-form__input-group"
   >
     <input
-      id="ticket-sku"
+      id="ticket-skuefzeclz7pjm8aegvz"
       onChange={[Function]}
       type="text"
       value=""
