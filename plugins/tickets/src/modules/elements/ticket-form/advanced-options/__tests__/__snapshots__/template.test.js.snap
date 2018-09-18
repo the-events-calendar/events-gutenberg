@@ -43,9 +43,18 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
         <div
           className="tribe-editor__tickets-form__labels"
         >
-          <span>
-            Sale Duration
-          </span>
+          <div
+            className="tribe-editor__label-with-tooltip"
+          >
+            <span
+              className="tribe-editor__label-with-tooltip__label"
+            >
+              Sale Duration
+            </span>
+            <span>
+              Tooltip
+            </span>
+          </div>
         </div>
         <div
           className="tribe-editor__tickets-form__input-group"
@@ -127,11 +136,19 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
         <div
           className="tribe-editor__tickets-form__labels"
         >
-          <label
-            htmlFor="ticket-sku"
+          <div
+            className="tribe-editor__label-with-tooltip"
           >
-            Ticket SKU
-          </label>
+            <label
+              className="tribe-editor__label-with-tooltip__label"
+              htmlFor="ticket-sku"
+            >
+              Ticket SKU
+            </label>
+            <span>
+              Tooltip
+            </span>
+          </div>
         </div>
         <div
           className="tribe-editor__tickets-form__input-group"
