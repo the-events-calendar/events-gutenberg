@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import { Tooltip } from '@moderntribe/common/elements';
+import { LabeledItem, Tooltip } from '@moderntribe/common/elements';
 import './style.pcss';
 
 const LabelWithTooltip = ( {
@@ -18,20 +18,17 @@ const LabelWithTooltip = ( {
 	tooltipPosition,
 	tooltipText,
 } ) => (
-	<div className={ classNames(
-		'tribe-editor__label-with-tooltip',
-		className,
-	) }>
-		<span className="tribe-editor__label-with-tooltip__label">
-			{ label }
-		</span>
+	<LabeledItem
+		className={ classNames( 'tribe-editor__label-with-tooltip', className ) }
+		label={ label }
+	>
 		<Tooltip
 			label={ tooltipLabel }
 			labelClassName="tribe-editor__label-with-tooltip__tooltip-label"
 			position={ tooltipPosition }
 			text={ tooltipText }
 		/>
-	</div>
+	</LabeledItem>
 );
 
 LabelWithTooltip.defaultProps = {
