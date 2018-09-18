@@ -15,6 +15,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import RSVPDuration from '../rsvp-duration/template';
+import RSVPAttendeeRegistration from '../rsvp-attendee-registration/template';
 import { Accordion } from '@moderntribe/common/elements';
 import './style.pcss';
 
@@ -40,8 +41,7 @@ class RSVPAdvancedOptions extends PureComponent {
 	getContent = () => (
 		<Fragment>
 			<RSVPDuration />
-			{/* @TODO: attendee registration */}
-			{/* <RSVPAttendeeRegistration /> */}
+			<RSVPAttendeeRegistration />
 		</Fragment>
 	);
 
