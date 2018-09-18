@@ -14,7 +14,6 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { Accordion } from '@moderntribe/common/elements';
-import { AccordionHeader } from '@moderntribe/tickets/elements';
 import './style.pcss';
 import Duration from '../duration/template';
 import SKU from '../sku/template';
@@ -46,6 +45,21 @@ class AdvancedOptions extends Component {
 		// dispatch action here to delete object with accordion state
 	}
 
+	getHeader = () => {
+		const { accordionTitle } = this.props;
+		return (
+			<Fragment>
+				<Dashicon
+					className="tribe-editor__tickets__advanced-options-header-icon"
+					icon="arrow-down"
+				/>
+				<span className="tribe-editor__tickets__advanced-options-header-text">
+					{ accordionTitle }
+				</span>
+			</Fragment>
+		);
+	}
+
 	getContent = () => (
 		<Fragment>
 			<Duration />
@@ -61,7 +75,7 @@ class AdvancedOptions extends Component {
 			content: this.getContent(),
 			contentClassName: 'tribe-editor__tickets__advanced-options-content',
 			contentId,
-			header: <AccordionHeader title={ accordionTitle } active={ isActive } />,
+			header: this.getHeader(),
 			headerClassName: 'tribe-editor__tickets__advanced-options-header',
 			headerId,
 			isActive,
