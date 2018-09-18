@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { LabelWithModal } from '@moderntribe/common/elements';
+import './style.pcss';
 
 const RSVPAttendeeRegistration = () => {
 	const closeButtonLabel = __( 'close', 'events-gutenberg' );
