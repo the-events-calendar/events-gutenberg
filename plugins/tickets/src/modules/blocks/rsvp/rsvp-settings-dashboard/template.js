@@ -12,10 +12,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { ImageUpload } from '@moderntribe/common/elements';
+import ImageUpload from '@moderntribe/common/elements/image-upload/element';
 import { SettingsDashboard } from '@moderntribe/tickets/elements';
 
-const RSVPSettingsDashboard = ( { onCloseClick } ) => {
+const RSVPSettingsDashboard = ( { onCloseClick, onSelect } ) => {
 	const imageUploadProps = {
 		title: __( 'Ticket Header Image', 'events-gutenberg' ),
 		description: __(
@@ -24,6 +24,7 @@ const RSVPSettingsDashboard = ( { onCloseClick } ) => {
 			'events-gutenberg'
 		),
 		buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
+		onSelect: onSelect,
 	};
 
 	return (
