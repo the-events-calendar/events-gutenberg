@@ -93,7 +93,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.2.9-alpha - 2018-09-14
+#### 0.2.9-alpha - TBD
 
 * Fix - Prevent empty diff on new event creation
 
