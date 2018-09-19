@@ -57,6 +57,10 @@ const ContainerPanel = ( {
 	);
 };
 
+ContainerPanel.defaultProps = {
+	layout: RSVP,
+};
+
 ContainerPanel.propTypes = {
 	className: PropTypes.string,
 	content: PropTypes.node,

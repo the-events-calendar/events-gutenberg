@@ -2,98 +2,102 @@
 
 exports[`Container Panel Element renders container panel 1`] = `
 <div
-  className="tribe-editor__container-panel"
+  className="tribe-editor__container-panel tribe-editor__container-panel--rsvp"
 >
-  <section
-    className="tribe-editor__container-panel__left-section"
+  <div
+    className="tribe-editor__container-panel__icon"
   />
-  <section
-    className="tribe-editor__container-panel__right-section"
+  <div
+    className="tribe-editor__container-panel__header-content-wrapper"
   >
     <div
-      className="tribe-editor__container-panel__right-section-header"
+      className="tribe-editor__container-panel__header"
     />
     <div
-      className="tribe-editor__container-panel__right-section-content"
+      className="tribe-editor__container-panel__content"
     />
-  </section>
+  </div>
+</div>
+`;
+
+exports[`Container Panel Element renders container panel in rsvp layout 1`] = `
+<div
+  className="tribe-editor__container-panel tribe-editor__container-panel--rsvp"
+>
+  <div
+    className="tribe-editor__container-panel__icon"
+  />
+  <div
+    className="tribe-editor__container-panel__header-content-wrapper"
+  >
+    <div
+      className="tribe-editor__container-panel__header"
+    />
+    <div
+      className="tribe-editor__container-panel__content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Container Panel Element renders container panel in ticket layout 1`] = `
+<div
+  className="tribe-editor__container-panel tribe-editor__container-panel--ticket"
+>
+  <div
+    className="tribe-editor__container-panel__icon"
+  />
+  <div
+    className="tribe-editor__container-panel__header"
+  />
+  <div
+    className="tribe-editor__container-panel__content"
+  />
 </div>
 `;
 
 exports[`Container Panel Element renders container panel with classes 1`] = `
 <div
-  className="tribe-editor__container-panel test-class-name"
+  className="tribe-editor__container-panel tribe-editor__container-panel--rsvp test-class-name"
 >
-  <section
-    className="tribe-editor__container-panel__left-section"
-  >
-    left section
-  </section>
-  <section
-    className="tribe-editor__container-panel__right-section"
+  <div
+    className="tribe-editor__container-panel__icon"
+  />
+  <div
+    className="tribe-editor__container-panel__header-content-wrapper"
   >
     <div
-      className="tribe-editor__container-panel__right-section-header"
-    >
-      right section header
-    </div>
+      className="tribe-editor__container-panel__header"
+    />
     <div
-      className="tribe-editor__container-panel__right-section-content"
-    >
-      right section content
-    </div>
-  </section>
+      className="tribe-editor__container-panel__content"
+    />
+  </div>
 </div>
 `;
 
-exports[`Container Panel Element renders container panel with left and right sections 1`] = `
+exports[`Container Panel Element renders container panel with icon, header, and content 1`] = `
 <div
-  className="tribe-editor__container-panel"
+  className="tribe-editor__container-panel tribe-editor__container-panel--rsvp"
 >
-  <section
-    className="tribe-editor__container-panel__left-section"
+  <div
+    className="tribe-editor__container-panel__icon"
   >
-    left section
-  </section>
-  <section
-    className="tribe-editor__container-panel__right-section"
-  >
-    <div
-      className="tribe-editor__container-panel__right-section-header"
-    >
-      right section header
-    </div>
-    <div
-      className="tribe-editor__container-panel__right-section-content"
-    >
-      right section content
-    </div>
-  </section>
-</div>
-`;
-
-exports[`Container Panel Element renders container panel with right section content 1`] = `
-<div
-  className="tribe-editor__container-panel"
->
-  <section
-    className="tribe-editor__container-panel__left-section"
-  >
-    left section
-  </section>
-  <section
-    className="tribe-editor__container-panel__right-section"
+    icon
+  </div>
+  <div
+    className="tribe-editor__container-panel__header-content-wrapper"
   >
     <div
-      className="tribe-editor__container-panel__right-section-header"
+      className="tribe-editor__container-panel__header"
     >
-      right section header
+      header
     </div>
     <div
-      className="tribe-editor__container-panel__right-section-content"
+      className="tribe-editor__container-panel__content"
     >
-      right section content
+      content
     </div>
-  </section>
+  </div>
 </div>
 `;
