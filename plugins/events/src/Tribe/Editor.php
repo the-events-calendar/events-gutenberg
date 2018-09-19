@@ -105,14 +105,17 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 	 * @return bool
 	 */
 	public function update_post_content_to_blocks( $post ) {
-		$post = get_post( $post );
-		$blocks = $this->get_classic_template();
+		$post    = get_post( $post );
+		$blocks  = $this->get_classic_template();
 		$content = array();
 
 		foreach ( $blocks as $key => $block_param ) {
 			$slug = reset( $block_param );
 
 			if ( 'core/paragraph' === $slug ) {
+				if ( '' === $post->post_content ) {
+					continue;
+				}
 				$content[] = '<!-- wp:freeform -->';
 				$content[] = $post->post_content;
 				$content[] = '<!-- /wp:freeform -->';

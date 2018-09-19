@@ -18,14 +18,12 @@ import './style.pcss';
 const getCapacityLabel = ( capacity ) => {
 	const singular = __( '%d available', 'events-gutenberg' );
 	const plural = singular;
-	const fallback = null;
 
 	return (
 		<NumericLabel
 			count={ parseInt( capacity ) }
 			singular={ singular }
 			plural={ plural }
-			fallback={ fallback }
 			className="tribe-editor__rsvp-container-header__capacity-label"
 		/>
 	)
