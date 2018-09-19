@@ -1,25 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Container Panel Element renders container panel 1`] = `
-<div
-  className="tribe-editor__container-panel tribe-editor__container-panel--rsvp"
->
-  <div
-    className="tribe-editor__container-panel__icon"
-  />
-  <div
-    className="tribe-editor__container-panel__header-content-wrapper"
-  >
-    <div
-      className="tribe-editor__container-panel__header"
-    />
-    <div
-      className="tribe-editor__container-panel__content"
-    />
-  </div>
-</div>
-`;
-
 exports[`Container Panel Element renders container panel in rsvp layout 1`] = `
 <div
   className="tribe-editor__container-panel tribe-editor__container-panel--rsvp"

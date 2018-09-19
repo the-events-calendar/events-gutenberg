@@ -9,11 +9,6 @@ import React from 'react';
 import ContainerPanel, { RSVP, TICKET } from '@moderntribe/tickets/elements/container-panel/element';
 
 describe( 'Container Panel Element', () => {
-	it( 'renders container panel', () => {
-		const component = renderer.create( <ContainerPanel /> );
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
-
 	it( 'renders container panel in rsvp layout', () => {
 		const component = renderer.create( <ContainerPanel layout={ RSVP } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
@@ -29,6 +24,7 @@ describe( 'Container Panel Element', () => {
 			icon: 'icon',
 			header: 'header',
 			content: 'content',
+			layout: RSVP,
 		};
 		const component = renderer.create( <ContainerPanel { ...props } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
@@ -37,6 +33,7 @@ describe( 'Container Panel Element', () => {
 	it( 'renders container panel with classes', () => {
 		const props = {
 			className: 'test-class-name',
+			layout: RSVP,
 		};
 		const component = renderer.create( <ContainerPanel { ...props } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
