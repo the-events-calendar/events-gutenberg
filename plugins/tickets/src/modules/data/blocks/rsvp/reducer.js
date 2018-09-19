@@ -20,6 +20,7 @@ export const DEFAULT_STATE = {
 	endTime: momentUtil.toTime24Hr( moment() ),
 	created: false,
 	settingsOpen: false,
+	headerImage: '',
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -75,6 +76,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				settingsOpen: action.payload.settingsOpen,
+			};
+		case types.SET_RSVP_HEADER_IMAGE:
+			return {
+				...state,
+				headerImage: action.payload.headerImage,
 			};
 		default:
 			return state;

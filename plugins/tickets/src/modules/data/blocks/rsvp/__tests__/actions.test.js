@@ -48,4 +48,7 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPSettingsOpen( true ) ).toMatchSnapshot();
 	} );
 
+	test( 'set RSVP header image', () => {
+		expect( actions.setRSVPHeaderImage( '3' ) ).toMatchSnapshot();
+	} );
 } );

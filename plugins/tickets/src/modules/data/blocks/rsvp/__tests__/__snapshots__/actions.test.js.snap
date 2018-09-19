@@ -48,6 +48,15 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP header image 1`] = `
+Object {
+  "payload": Object {
+    "headerImage": "3",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_HEADER_IMAGE",
+}
+`;
+
 exports[`RSVP block actions set RSVP not going responses 1`] = `
 Object {
   "payload": Object {

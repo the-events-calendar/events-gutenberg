@@ -49,6 +49,10 @@ describe( 'RSVP block types', () => {
 		expect( types.SET_RSVP_SETTINGS_OPEN ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_SETTINGS_OPEN` );
 	} );
 
+	test( 'set RSVP header image', () => {
+		expect( types.SET_RSVP_HEADER_IMAGE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER_IMAGE` );
+	} );
+
 	test( 'set RSVP header', () => {
 		expect( types.SET_RSVP_HEADER ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER` );
 	} );
