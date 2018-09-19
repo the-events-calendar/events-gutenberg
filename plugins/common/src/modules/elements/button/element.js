@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { noop } from 'lodash';
@@ -11,40 +11,46 @@ import { noop } from 'lodash';
  */
 import './style.pcss';
 
-const Button = ( {
-	className,
-	isDisabled,
-	children,
-	onClick,
-	type,
-	...props
-} ) => (
-	<button
-		className={ classNames( 'tribe-editor__button', className ) }
-		disabled={ isDisabled }
-		type={ type }
-		onClick={ onClick }
-		{ ...props }
-	>
-		{ children }
-	</button>
-);
+class Button extends PureComponent {
+	static defaultProps = {
+		onClick: noop,
+		type: 'button',
+	};
 
-Button.defaultProps = {
-	onClick: noop,
-	type: 'button',
-};
+	static propTypes = {
+		className: PropTypes.oneOfType( [
+			PropTypes.string,
+			PropTypes.arrayOf( PropTypes.string ),
+			PropTypes.object,
+		] ),
+		isDisabled: PropTypes.bool,
+		children: PropTypes.node,
+		onClick: PropTypes.func,
+		type: PropTypes.string,
+	};
 
-Button.propTypes = {
-	className: PropTypes.oneOfType( [
-		PropTypes.string,
-		PropTypes.arrayOf( PropTypes.string ),
-		PropTypes.object,
-	] ),
-	isDisabled: PropTypes.bool,
-	children: PropTypes.node,
-	onClick: PropTypes.func,
-	type: PropTypes.string,
-};
+	render() {
+		const {
+			children,
+			className,
+			isDisabled,
+			onClick,
+			type,
+			...props
+		} = this.props;
+
+		return (
+			<button
+				className={ classNames( 'tribe-editor__button', className ) }
+				disabled={ isDisabled }
+				type={ type }
+				onClick={ onClick }
+				{ ...props }
+			>
+				{ children }
+			</button>
+		);
+	}
+}
 
 export default Button;
