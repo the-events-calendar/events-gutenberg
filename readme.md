@@ -93,9 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.2.8-alpha - 2018-08-30
+#### 0.2.9-alpha - TBD
 
-* Feature - Add Tickets inside of the `plugins/` directory
+* Fix - Prevent empty diff on new event creation
+* Fix - Prevent generation of empty classic blocks when migrating events to gutenberg with empty content
 * Feature - Register ticket block to make it available in the block list
 * Feature - Register PHP files to use tickets templates
 * Feature - Add `store` for tickets plugins
@@ -106,22 +107,34 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add TribePropTypes functions to check custom time format
 * Feature - Add time to seconds and ms and vice versa utility
 * Feature - Create `<HeaderImage>` component to upload / select an image from the media library
-* Feature - Add `CapacityTable` compoent to render the capacity of the tickets
+* Feature - Add `CapacityTable` component to render the capacity of the tickets
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 * Tweak - Create an icons module for the plugins and shared one on common to create a set of icons
 * Tweak - Move most utilities from events plugin to common plugin
 * Tweak - Move time picker element from events plugin to common plugin
 * Tweak - Adjust time picker element to accept time string in hh:mm format rather than moments
+
+#### 0.2.8-alpha - 2018-09-14
+
+* Feature - Add Tickets inside of the `plugins/` directory
+* Feature - Add Events Pro inside of the `plugins/` directory
+* Feature - Each block now loads their CSS and JavaScript only when it is present in the post
+* Tweak - Smaller internal changes to accommodate Gutenberg 3.8 code
+* Fix - Properly load the frontend assets for the Blocks
 * Fix - Accept responses between `200` and `299` HTTP codes as valid responses
 * Fix - Prevent to set attributes when arrays have the same content
+* Fix - Resolve problems with Infinite looping around Google Calendar on the Links Block
+* Fix - Properly load Price block, avoiding breaking on new Events
+* Fix - Floating block settings button from Gutenberg 3.8 on the correct place
+* Fix - Migration from Classic Editor no longer duplicates Blocks
 
 #### 0.2.7-alpha - 2018-08-30
 
 * Feature - Add store registration in `common`
 * Feature - Move `events` reducer into the `common` store
 * Feature - Add `<TicketIcon />` component for the ticket
-* Feathre - Add `<DisabledTickets />` component when no tickets are active
+* Feature - Add `<DisabledTickets />` component when no tickets are active
 * Tweak - Use event timezone as default value
 * Tweak - Separate logic and presentation in event venue block
 * Tweak - Move `request` mechanism into `common`
@@ -172,7 +185,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Problem when multiple sync copies were not initialized
 * Fix - Use default timezone selected by the user on the admin instead of `UTC`
 * Tweak - Consolidate multiple stores into a single store
-* Tweak - Use native redux store implementation
+* Tweak - Use native `redux` store implementation
 * Tweak - Remove references to `withSelect` and `withDispatch` and replace with `connect`
 * Tweak - Prevent errors when a new organizer block is created
 * Tweak - `showMap` and `showMapLink` are enabled by default on Location block
