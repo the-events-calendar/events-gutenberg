@@ -22,7 +22,7 @@ import classNames from 'classnames';
  * @returns {*} return fallback if count is zero or negative otherwise singular or plural
  */
 const NumericLabel = ( { count, singular, plural, fallback, className } ) => {
-	if ( count <= 0 ) {
+	if ( ! ( count > 0 ) ) {
 		return fallback;
 	}
 	const targetStr = count === 1 ? singular : plural;
