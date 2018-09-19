@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ImageUpload render the component 1`] = `
+exports[`ImageUpload renders the component 1`] = `
 <div
   className="tribe-editor__image-upload"
 >
@@ -14,7 +14,54 @@ exports[`ImageUpload render the component 1`] = `
 </div>
 `;
 
-exports[`ImageUpload render with custom description 1`] = `
+exports[`ImageUpload renders uploaded image 1`] = `
+<div
+  className="tribe-editor__image-upload tribe-editor__image-upload--has-image"
+>
+  <div
+    className="tribe-editor__image-upload__content"
+  >
+    <div
+      className="tribe-editor__image-upload__image-wrapper"
+    >
+      <img
+        className="tribe-editor__image-upload__image"
+        src="test-src"
+      />
+      <button
+        className="tribe-editor__button tribe-editor__image-upload__remove-button"
+        onClick={[MockFunction]}
+        type="button"
+      >
+        <span>
+          icon
+        </span>
+        <span
+          className="tribe-editor__image-upload__remove-button-text"
+        >
+          remove
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ImageUpload renders with class 1`] = `
+<div
+  className="tribe-editor__image-upload test-class"
+>
+  <div
+    className="tribe-editor__image-upload__content"
+  >
+    <button>
+      Media Upload
+    </button>
+  </div>
+</div>
+`;
+
+exports[`ImageUpload renders with description 1`] = `
 <div
   className="tribe-editor__image-upload"
 >
@@ -33,7 +80,7 @@ exports[`ImageUpload render with custom description 1`] = `
 </div>
 `;
 
-exports[`ImageUpload render with custom title 1`] = `
+exports[`ImageUpload renders with title 1`] = `
 <div
   className="tribe-editor__image-upload"
 >
@@ -52,7 +99,33 @@ exports[`ImageUpload render with custom title 1`] = `
 </div>
 `;
 
-exports[`renderMediaUpload render the button 1`] = `
+exports[`renderImage renders the image and button 1`] = `
+<div
+  className="tribe-editor__image-upload__image-wrapper"
+>
+  <img
+    alt="test-alt"
+    className="tribe-editor__image-upload__image"
+    src="test-src"
+  />
+  <button
+    className="tribe-editor__button tribe-editor__image-upload__remove-button"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    <span>
+      icon
+    </span>
+    <span
+      className="tribe-editor__image-upload__remove-button-text"
+    >
+      remove
+    </span>
+  </button>
+</div>
+`;
+
+exports[`renderImageUploadButton renders the button 1`] = `
 <button
   className="tribe-editor__button tribe-editor__button--sm tribe-editor__image-upload__upload-button"
   onClick={[MockFunction]}
