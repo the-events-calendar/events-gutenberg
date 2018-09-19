@@ -26,9 +26,9 @@ const ContainerPanel = ( {
 			{ leftSection }
 		</section>
 		<section className="tribe-editor__container-panel__right-section">
-			<div className="tribe-editor__container-panel__right-section-header">
+			<header className="tribe-editor__container-panel__right-section-header">
 				{ rightSectionHeader }
-			</div>
+			</header>
 			<div className="tribe-editor__container-panel__right-section-content">
 				{ rightSectionContent }
 			</div>
