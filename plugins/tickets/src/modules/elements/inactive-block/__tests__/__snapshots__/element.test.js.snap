@@ -10,6 +10,26 @@ exports[`Disabled Tickets renders the component 1`] = `
 </section>
 `;
 
+exports[`Disabled Tickets renders the component as rsvp layout 1`] = `
+<section
+  className="tribe-editor__inactive-block tribe-editor__inactive-block--undefined"
+>
+  <div
+    className="tribe-editor__inactive-block__icon"
+  />
+</section>
+`;
+
+exports[`Disabled Tickets renders the component as ticket layout 1`] = `
+<section
+  className="tribe-editor__inactive-block tribe-editor__inactive-block--undefined"
+>
+  <div
+    className="tribe-editor__inactive-block__icon"
+  />
+</section>
+`;
+
 exports[`Disabled Tickets renders the component with a custom icon 1`] = `
 <section
   className="tribe-editor__inactive-block"

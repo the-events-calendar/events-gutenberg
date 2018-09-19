@@ -17,10 +17,11 @@ import {
 	HeaderImage,
 	InactiveBlock,
 } from '@moderntribe/tickets/elements';
+import { TICKET } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
-const disabled = {
+const inactiveBlockProps = {
 	icon: <TicketInactive />,
 	title: __( 'No Active Tickets', 'events-gutenberg' ),
 	description: __(
@@ -28,6 +29,7 @@ const disabled = {
 		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
 		'events-gutenberg'
 	),
+	layout: TICKET,
 }
 
 const TicketsTemplate = ( props ) => {
@@ -64,11 +66,7 @@ const TicketsTemplate = ( props ) => {
 		>
 			<div className="tribe-editor__tickets-body">
 				<InnerBlocks />
-				<InactiveBlock
-					icon={ disabled.icon }
-					title={ disabled.title }
-					description={ disabled.description }
-				/>
+				<InactiveBlock { ...inactiveBlockProps } />
 			</div>
 			<CapacityTable />
 			<HeaderImage />

@@ -10,9 +10,19 @@ import classNames from 'classnames';
  */
 import './style.pcss';
 
-const InactiveBlock = ( { className, description, icon, title } ) => (
+export const RSVP = 'rsvp';
+export const TICKET = 'ticket';
+
+const InactiveBlock = ( {
+	className,
+	description,
+	icon,
+	layout,
+	title,
+} ) => (
 	<section className={ classNames(
 		'tribe-editor__inactive-block',
+		`tribe-editor__inactive-block--${ layout }`,
 		className,
 	) }>
 		<div className="tribe-editor__inactive-block__icon">
@@ -35,7 +45,8 @@ InactiveBlock.propTypes = {
 	className: PropTypes.string,
 	description: PropTypes.string,
 	icon: PropTypes.node,
+	layout: PropTypes.oneOf( [ RSVP, TICKET ] ).isRequired,
 	title: PropTypes.string,
-}
+};
 
 export default InactiveBlock;

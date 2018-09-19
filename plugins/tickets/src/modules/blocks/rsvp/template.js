@@ -19,6 +19,7 @@ import {
 	AttendeesActionButton,
 } from './rsvp-action-buttons';
 import { ActionDashboard, InactiveBlock } from '@moderntribe/tickets/elements';
+import { RSVP as RSVPLayout } from '@moderntribe/tickets/elements/inactive-block/element';
 import { RSVPInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
@@ -38,6 +39,8 @@ const RSVP = ( {
 		title: __( 'No Active RSVP', 'events-gutenberg' ),
 		/* eslint-disable-next-line max-len */
 		description: __( 'The time is curently outside of the RSVP window. Make adjustments to the start and end date to activate this RSVP.', 'events-gutenberg' ),
+		className: 'tribe-editor__rsvp__inactive-block',
+		layout: RSVPLayout,
 	};
 
 	const getActionDashboard = () => {
@@ -64,12 +67,7 @@ const RSVP = ( {
 			'tribe-editor__rsvp',
 			{ 'tribe-editor__rsvp--selected': isSelected },
 		) }>
-			<InactiveBlock
-				className="tribe-editor__rsvp__inactive-block"
-				icon={ inactiveBlockData.icon }
-				title={ inactiveBlockData.title }
-				description={ inactiveBlockData.description }
-			/>
+			<InactiveBlock { ...inactiveBlockData } />
 			<RSVPContainer isSelected={ isSelected } />
 			{ getActionDashboard() }
 		</div>
