@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { ContainerPanel } from '@moderntribe/tickets/elements';
-import { RSVP } from '@moderntribe/tickets/elements/container-panel/element';
+import { TICKET } from '@moderntribe/tickets/elements/container-panel/element';
 import RSVPContainerHeader from '@moderntribe/tickets/blocks/rsvp/rsvp-container-header/container';
 import RSVPContainerContent from '@moderntribe/tickets/blocks/rsvp/rsvp-container-content/template';
 import { RSVPActive, RSVPInactive } from '@moderntribe/tickets/icons';
@@ -35,7 +35,7 @@ const RSVPContainerIcon = () => {
 const RSVPContainer = () => (
 	<ContainerPanel
 		className="tribe-editor__rsvp-container"
-		layout={ RSVP }
+		layout={ TICKET }
 		icon={ <RSVPContainerIcon /> }
 		header={ <RSVPContainerHeader /> }
 		content={ <RSVPContainerContent /> }
