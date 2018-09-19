@@ -90,8 +90,6 @@ export default ( selectedAttributes = null ) => ( WrappedComponent ) => {
 						return key in attributes ? attributes[ key ] : defaultValue;
 					},
 				} );
-
-				this.saving = this.calculateDiff();
 			}
 
 			componentWillUnmount() {

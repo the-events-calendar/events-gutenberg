@@ -95,7 +95,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 #### 0.2.9-alpha - TBD
 
- * Fix - Prevent generation of empty classic blocks when migrating events to gutenberg with empty content
+* Fix - Prevent empty diff on new event creation
+* Fix - Prevent generation of empty classic blocks when migrating events to gutenberg with empty content
 
 #### 0.2.8-alpha - 2018-09-14
 
