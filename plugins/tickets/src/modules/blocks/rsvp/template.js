@@ -23,26 +23,26 @@ import { RSVP as RSVPLayout } from '@moderntribe/tickets/elements/inactive-block
 import { RSVPInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
+const inactiveBlockData = {
+	icon: (
+		<Fragment>
+			<RSVPInactive />
+			<span className="tribe-editor__rsvp__inactive-block-icon-label">
+				{ __( 'RSVP', 'events-gutenberg' ) }
+			</span>
+		</Fragment>
+	),
+	title: __( 'No Active RSVP', 'events-gutenberg' ),
+	/* eslint-disable-next-line max-len */
+	description: __( 'The time is curently outside of the RSVP window. Make adjustments to the start and end date to activate this RSVP.', 'events-gutenberg' ),
+	className: 'tribe-editor__rsvp__inactive-block',
+	layout: RSVPLayout,
+};
+
 const RSVP = ( {
 	created,
 	isSelected,
 } ) => {
-	const inactiveBlockData = {
-		icon: (
-			<Fragment>
-				<RSVPInactive />
-				<span className="tribe-editor__rsvp__inactive-block-icon-label">
-					{ __( 'RSVP', 'events-gutenberg' ) }
-				</span>
-			</Fragment>
-		),
-		title: __( 'No Active RSVP', 'events-gutenberg' ),
-		/* eslint-disable-next-line max-len */
-		description: __( 'The time is curently outside of the RSVP window. Make adjustments to the start and end date to activate this RSVP.', 'events-gutenberg' ),
-		className: 'tribe-editor__rsvp__inactive-block',
-		layout: RSVPLayout,
-	};
-
 	const getActionDashboard = () => {
 		const actions = [
 			<SettingsActionButton />,
