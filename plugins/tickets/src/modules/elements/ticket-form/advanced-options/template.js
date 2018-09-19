@@ -3,6 +3,7 @@
  */
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
 
 /**
  * WordPress dependencies
@@ -37,12 +38,9 @@ class AdvancedOptions extends Component {
 		onClick: () => {},
 	};
 
-	componentDidMount() {
-		// dispatch action here to create object with accordion state
-	}
-
-	componentWillUnmount() {
-		// dispatch action here to delete object with accordion state
+	constructor( props ) {
+		super( props );
+		this.accordionId = uniqid();
 	}
 
 	getHeader = () => {
@@ -67,21 +65,15 @@ class AdvancedOptions extends Component {
 		</Fragment>
 	);
 
-	getRows = () => {
-		const { accordionId, accordionTitle, contentId, headerId, isActive, onClick } = this.props;
-
-		return [ {
-			accordionId,
+	getRows = () => ( [
+		{
+			accordionId: this.props.accordionId,
 			content: this.getContent(),
 			contentClassName: 'tribe-editor__tickets__advanced-options-content',
-			contentId,
 			header: this.getHeader(),
 			headerClassName: 'tribe-editor__tickets__advanced-options-header',
-			headerId,
-			isActive,
-			onClick,
-		} ];
-	};
+		},
+	] );
 
 	render() {
 		return (
