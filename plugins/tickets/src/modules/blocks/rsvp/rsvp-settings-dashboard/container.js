@@ -13,11 +13,6 @@ import { withStore } from '@moderntribe/common/hoc';
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	onCloseClick: () => dispatch( actions.setRSVPSettingsOpen( false ) ),
-	onSelect: ( image ) => dispatch( actions.setRSVPHeaderImage( {
-		headerImageSrc: image.sizes.medium.url,
-		headerImageAlt: image.alt,
-	} ) ),
-	onRemove: () => {},
 } );
 
 export default compose(

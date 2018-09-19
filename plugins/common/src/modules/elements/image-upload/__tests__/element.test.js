@@ -6,22 +6,24 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import ImageUpload, { renderMediaUpload } from '@moderntribe/common/elements/image-upload/element';
+import ImageUpload, {
+	renderImageUploadButton
+} from '@moderntribe/common/elements/image-upload/element';
 
 jest.mock( '@wordpress/editor', () => ( {
 	MediaUpload: () => ( <button>Media Upload</button> ),
 } ) );
 
-describe( 'renderMediaUpload', () => {
+describe( 'renderImageUploadButton', () => {
 	it( 'render the button', () => {
 		const open = jest.fn();
-		const component = renderer.create( renderMediaUpload( 'label' )( { open } ) );
+		const component = renderer.create( renderImageUploadButton( 'label' )( { open } ) );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'executes the open action when the mediaUpload is fired', () => {
 		const open = jest.fn();
-		const component = mount( renderMediaUpload( 'label' )( { open } ) );
+		const component = mount( renderImageUploadButton( 'label' )( { open } ) );
 		component.find( 'button' ).simulate( 'click' );
 		expect( open ).toHaveBeenCalled();
 		expect( open ).toHaveBeenCalledTimes( 1 );
