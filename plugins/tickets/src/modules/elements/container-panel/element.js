@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -19,25 +19,43 @@ const ContainerPanel = ( {
 	header,
 	icon,
 	layout,
-} ) => (
-	<div
-		className={ classNames(
-			'tribe-editor__container-panel',
-			`tribe-editor__container-panel--${ layout }`,
-			className,
-		) }
-	>
-		<div className="tribe-editor__container-panel__icon">
-			{ icon }
+} ) => {
+	const headerContent = (
+		<Fragment>
+			<div className="tribe-editor__container-panel__header">
+				{ header }
+			</div>
+			<div className="tribe-editor__container-panel__content">
+				{ content }
+			</div>
+		</Fragment>
+	);
+
+	const getHeaderContent = () => (
+		layout === TICKET
+			? headerContent
+			: (
+				<div className="tribe-editor__container-panel__header-content-wrapper">
+					{ headerContent }
+				</div>
+			)
+	);
+
+	return (
+		<div
+			className={ classNames(
+				'tribe-editor__container-panel',
+				`tribe-editor__container-panel--${ layout }`,
+				className,
+			) }
+		>
+			<div className="tribe-editor__container-panel__icon">
+				{ icon }
+			</div>
+			{ getHeaderContent() }
 		</div>
-		<div className="tribe-editor__container-panel__header">
-			{ header }
-		</div>
-		<div className="tribe-editor__container-panel__content">
-			{ content }
-		</div>
-	</div>
-);
+	);
+};
 
 ContainerPanel.propTypes = {
 	className: PropTypes.string,
