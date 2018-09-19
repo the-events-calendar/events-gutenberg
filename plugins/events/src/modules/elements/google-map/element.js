@@ -143,6 +143,7 @@ export default class GoogleMap extends Component {
 			...props,
 			error: '',
 			isLoading: true,
+			rendered: false,
 		};
 
 		this.interactiveMapContainer = React.createRef();
@@ -153,6 +154,25 @@ export default class GoogleMap extends Component {
 		this.interval = noop;
 		this.tries = 0;
 		this.MAX_TRIES = 5;
+	}
+
+	static getDerivedStateFromProps( nextProps, prevState ) {
+
+		// return if it was rendered already
+		if ( true === prevState.rendered ) {
+			return null;
+		}
+
+		// return if the coordinates haven't changed
+		if (
+			nextProps.coordinates.lat === prevState.coordinates.lat
+			&& nextProps.coordinates.lng === prevState.coordinates.lng
+		) {
+			return null;
+		}
+
+		return { rendered: true, loadingMap: false };
+
 	}
 
 	componentDidMount() {
@@ -175,6 +195,7 @@ export default class GoogleMap extends Component {
 		// There's no valid coordinatees fallback to the image map.
 		if ( this.invalidLocation() ) {
 			const { address } = this.props;
+
 			if ( isEmpty( address ) ) {
 				this.setState( {
 					interactive: false,
@@ -187,12 +208,6 @@ export default class GoogleMap extends Component {
 				return;
 			}
 
-			console.warn(
-				__(
-					'The coordinates of this map are not correct, fallback to an image instead',
-					'events-gutenberg',
-				)
-			);
 			this.setState( {
 				interactive: false,
 				isLoading: false,
@@ -234,7 +249,8 @@ export default class GoogleMap extends Component {
 
 	getLocation() {
 		const { coordinates } = this.props;
-		const { lat, lng } = coordinates;
+		let   { lat, lng }    = coordinates;
+
 		return {
 			lat,
 			lng,
@@ -262,20 +278,36 @@ export default class GoogleMap extends Component {
 	}
 
 	render() {
-		const { isLoading } = this.state;
+		const { isLoading, rendered, loadingMap } = this.state;
 		const containerClass = classNames( 'tribe-editor__map', {
 			'tribe-editor__map--loading': isLoading,
 		} );
 
+		let renderMap = this.renderMap();
+
+		if (
+			true === rendered
+			&& true !== loadingMap
+		) {
+			renderMap = this.renderMapUpdate();
+		}
+
 		return (
 			<div className={ containerClass }>
-				{ this.renderMap() }
+				{ renderMap }
 			</div>
 		);
 	}
 
+	renderMapUpdate() {
+		this.setState( { loadingMap: true } );
+		this.loadMap();
+		return this.renderMap();
+	}
+
 	renderMap() {
-		const { isLoading, error, interactive, apiKey } = this.state;
+		const { isLoading, error, interactive, apiKey, rendered } = this.state;
+
 
 		if ( isLoading ) {
 			return <Spinner />;
@@ -289,6 +321,10 @@ export default class GoogleMap extends Component {
 			return (
 				<h4> { __( 'A Google Map API KEY is required to view the map', 'events-gutenberg' ) }</h4>
 			);
+		}
+
+		if ( rendered ) {
+			return this.renderInteractive();
 		}
 
 		if ( interactive ) {

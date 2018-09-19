@@ -35,6 +35,7 @@ import VenueDetails from './venue-details';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
 import { utils } from '@moderntribe/events/data/blocks/venue';
+import { google, mapsAPI } from '@moderntribe/common/utils/globals';
 import './style.pcss';
 
 /**
@@ -67,6 +68,11 @@ class EventVenue extends Component {
 		removeVenue: PropTypes.func,
 		editVenue: PropTypes.func,
 	};
+
+	constructor( props ) {
+		super( props );
+		this.state = { coords: { lat: null, lng: null } }
+	}
 
 	componentDidUpdate( prevProps ) {
 		const { isSelected, edit, create, setSubmit } = this.props;
@@ -177,10 +183,12 @@ class EventVenue extends Component {
 
 		const { getCoordinates, getAddress } = utils;
 
+		this.getCoordinates( details );
+		const { coords } = this.state;
 		return (
 			<GoogleMap
 				size={ { width: 450, height: 353 } }
-				coordinates={ getCoordinates( details ) }
+				coordinates={ coords }
 				address={ addressToMapString( getAddress( details ) ) }
 				interactive={ true }
 			/>
@@ -276,6 +284,26 @@ class EventVenue extends Component {
 		if ( this.hasVenue() && volatile ) {
 			return editVenue;
 		}
+	}
+
+	// Get the coordinates according to the venue address
+	// So we can display the map on the backend
+	getCoordinates = ( details )  => {
+
+		const { maps }       = google();
+		const geocoder       = new maps.Geocoder();
+		const { getAddress } = utils;
+
+		const address = addressToMapString( getAddress( details ) );
+
+		geocoder.geocode( { 'address' : address }, ( results, status ) => {
+			if ( 'OK' === status ) {
+				let lat = results[0].geometry.location.lat();
+				let lng = results[0].geometry.location.lng();
+				this.setState( { coords: { lat, lng } } );
+				return;
+			}
+		} );
 	}
 }
 
