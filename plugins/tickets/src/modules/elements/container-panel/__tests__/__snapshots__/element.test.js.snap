@@ -10,7 +10,7 @@ exports[`Container Panel Element renders container panel 1`] = `
   <section
     className="tribe-editor__container-panel__right-section"
   >
-    <div
+    <header
       className="tribe-editor__container-panel__right-section-header"
     />
     <div
@@ -32,11 +32,11 @@ exports[`Container Panel Element renders container panel with classes 1`] = `
   <section
     className="tribe-editor__container-panel__right-section"
   >
-    <div
+    <header
       className="tribe-editor__container-panel__right-section-header"
     >
       right section header
-    </div>
+    </header>
     <div
       className="tribe-editor__container-panel__right-section-content"
     >
@@ -58,11 +58,11 @@ exports[`Container Panel Element renders container panel with left and right sec
   <section
     className="tribe-editor__container-panel__right-section"
   >
-    <div
+    <header
       className="tribe-editor__container-panel__right-section-header"
     >
       right section header
-    </div>
+    </header>
     <div
       className="tribe-editor__container-panel__right-section-content"
     >
@@ -84,11 +84,11 @@ exports[`Container Panel Element renders container panel with right section cont
   <section
     className="tribe-editor__container-panel__right-section"
   >
-    <div
+    <header
       className="tribe-editor__container-panel__right-section-header"
     >
       right section header
-    </div>
+    </header>
     <div
       className="tribe-editor__container-panel__right-section-content"
     >
