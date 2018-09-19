@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HeaderImage render image if provided 1`] = `
+<div
+  className="tribe-editor__header-image"
+>
+  <h3
+    className="tribe-editor__header-image__title"
+  >
+    Header Image
+  </h3>
+  <div
+    className="tribe-editor__header-image__content"
+  >
+    <div
+      className="tribe-editor__header-image__description"
+    >
+      Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.
+    </div>
+    <button>
+      Media Upload
+    </button>
+  </div>
+  <figure
+    className="tribe-editor__header-image__display"
+  >
+    <img
+      alt="Header Image"
+      src="http://gutenberg.local/wp-content/uploads/2018/08/belize-2468-1024x680.jpg"
+    />
+    <button
+      className="tribe-editor__btn--label"
+      onClick={[Function]}
+    >
+      Remove
+    </button>
+  </figure>
+</div>
+`;
+
 exports[`HeaderImage render the component 1`] = `
 <div
   className="tribe-editor__header-image"
