@@ -10,37 +10,41 @@ import classNames from 'classnames';
  */
 import './style.pcss';
 
+export const RSVP = 'rsvp';
+export const TICKET = 'ticket';
+
 const ContainerPanel = ( {
 	className,
-	leftSection,
-	rightSectionContent,
-	rightSectionHeader,
+	content,
+	header,
+	icon,
+	layout,
 } ) => (
 	<div
 		className={ classNames(
 			'tribe-editor__container-panel',
+			`tribe-editor__container-panel--${ layout }`,
 			className,
 		) }
 	>
-		<section className="tribe-editor__container-panel__left-section">
-			{ leftSection }
-		</section>
-		<section className="tribe-editor__container-panel__right-section">
-			<div className="tribe-editor__container-panel__right-section-header">
-				{ rightSectionHeader }
-			</div>
-			<div className="tribe-editor__container-panel__right-section-content">
-				{ rightSectionContent }
-			</div>
-		</section>
+		<div className="tribe-editor__container-panel__icon">
+			{ icon }
+		</div>
+		<div className="tribe-editor__container-panel__header">
+			{ header }
+		</div>
+		<div className="tribe-editor__container-panel__content">
+			{ content }
+		</div>
 	</div>
 );
 
 ContainerPanel.propTypes = {
 	className: PropTypes.string,
-	leftSection: PropTypes.node,
-	rightSectionContent: PropTypes.node,
-	rightSectionHeader: PropTypes.node,
+	content: PropTypes.node,
+	header: PropTypes.node,
+	icon: PropTypes.node,
+	layout: PropTypes.oneOf( [ RSVP, TICKET ] ).isRequired,
 };
 
 export default ContainerPanel;
