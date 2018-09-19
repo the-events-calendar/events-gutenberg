@@ -20,7 +20,7 @@ const ContainerPanel = ( {
 	icon,
 	layout,
 } ) => {
-	const headerContent = (
+	const headerAndContent = (
 		<Fragment>
 			<div className="tribe-editor__container-panel__header">
 				{ header }
@@ -31,12 +31,12 @@ const ContainerPanel = ( {
 		</Fragment>
 	);
 
-	const getHeaderContent = () => (
+	const getHeaderAndContent = () => (
 		layout === TICKET
-			? headerContent
+			? headerAndContent
 			: (
 				<div className="tribe-editor__container-panel__header-content-wrapper">
-					{ headerContent }
+					{ headerAndContent }
 				</div>
 			)
 	);
@@ -52,7 +52,7 @@ const ContainerPanel = ( {
 			<div className="tribe-editor__container-panel__icon">
 				{ icon }
 			</div>
-			{ getHeaderContent() }
+			{ getHeaderAndContent() }
 		</div>
 	);
 };
