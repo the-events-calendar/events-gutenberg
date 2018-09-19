@@ -94,6 +94,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 ### Changelog
 
 #### 0.2.9-alpha - TBD
+
+* Fix - Prevent generation of empty classic blocks when migrating events to gutenberg with empty content
 * Feature - Register ticket block to make it available in the block list
 * Feature - Register PHP files to use tickets templates
 * Feature - Add `store` for tickets plugins
