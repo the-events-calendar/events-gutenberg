@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -18,8 +18,26 @@ import {
 	SettingsActionButton,
 	AttendeesActionButton,
 } from './rsvp-action-buttons';
-import { ActionDashboard } from '@moderntribe/tickets/elements';
+import { ActionDashboard, InactiveBlock } from '@moderntribe/tickets/elements';
+import { RSVP as RSVPLayout } from '@moderntribe/tickets/elements/inactive-block/element';
+import { RSVPInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
+
+const inactiveBlockData = {
+	icon: (
+		<Fragment>
+			<RSVPInactive />
+			<span className="tribe-editor__rsvp__inactive-block-icon-label">
+				{ __( 'RSVP', 'events-gutenberg' ) }
+			</span>
+		</Fragment>
+	),
+	title: __( 'No Active RSVP', 'events-gutenberg' ),
+	/* eslint-disable-next-line max-len */
+	description: __( 'The time is curently outside of the RSVP window. Make adjustments to the start and end date to activate this RSVP.', 'events-gutenberg' ),
+	className: 'tribe-editor__rsvp__inactive-block',
+	layout: RSVPLayout,
+};
 
 const RSVP = ( {
 	created,
@@ -49,6 +67,7 @@ const RSVP = ( {
 			'tribe-editor__rsvp',
 			{ 'tribe-editor__rsvp--selected': isSelected },
 		) }>
+			<InactiveBlock { ...inactiveBlockData } />
 			<RSVPContainer isSelected={ isSelected } />
 			{ getActionDashboard() }
 		</div>

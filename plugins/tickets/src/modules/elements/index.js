@@ -7,6 +7,6 @@ export { default as LabelWithTooltip } from './label-with-tooltip/element';
 export { default as NumericLabel } from './numeric-label/element';
 export { default as CapacityTable } from './capacity-table/element';
 export { default as HeaderImage } from './header-image/element';
-export { default as DisabledTickets } from './disabled-tickets/element';
+export { default as InactiveBlock } from './inactive-block/element';
 export { default as TicketStatus } from './ticket-status/element';
 export { default as QuantityBar } from './quantity-bar/element';
