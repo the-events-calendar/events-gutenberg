@@ -74,11 +74,23 @@ export const setRSVPSettingsOpen = ( settingsOpen ) => ( {
 	},
 } );
 
-export const setRSVPHeaderImage = ( headerImage ) => ( {
-	type: types.SET_RSVP_HEADER_IMAGE,
+export const setRSVPHeaderImageSrc = ( headerImageSrc ) => ( {
+	type: types.SET_RSVP_HEADER_IMAGE_SRC,
 	payload: {
-		headerImage,
+		headerImageSrc,
 	},
+} );
+
+export const setRSVPHeaderImageAlt = ( headerImageAlt ) => ( {
+	type: types.SET_RSVP_HEADER_IMAGE_ALT,
+	payload: {
+		headerImageAlt,
+	},
+} );
+
+export const setRSVPHeaderImage = ( payload ) => ( {
+	type: types.SET_RSVP_HEADER_IMAGE,
+	payload,
 } );
 
 export const setRSVPHeader = ( payload ) => ( {

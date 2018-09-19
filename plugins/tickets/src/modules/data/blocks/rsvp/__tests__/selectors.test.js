@@ -53,7 +53,11 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPSettingsOpen( state ) ).toBe( DEFAULT_STATE.settingsOpen );
 	} );
 
-	it( 'should return the header image', () => {
-		expect( selectors.getRSVPHeaderImage( state ) ).toBe( DEFAULT_STATE.headerImage );
+	it( 'should return the header image src', () => {
+		expect( selectors.getRSVPHeaderImageSrc( state ) ).toBe( DEFAULT_STATE.headerImageSrc );
+	} );
+
+	it( 'should return the header image alt', () => {
+		expect( selectors.getRSVPHeaderImageAlt( state ) ).toBe( DEFAULT_STATE.headerImageAlt );
 	} );
 } );

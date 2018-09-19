@@ -48,7 +48,36 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPSettingsOpen( true ) ).toMatchSnapshot();
 	} );
 
+	test( 'set RSVP header image src', () => {
+		expect( actions.setRSVPHeaderImageSrc( 'test-src' ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP header image alt', () => {
+		expect( actions.setRSVPHeaderImageAlt( 'test-alt' ) ).toMatchSnapshot();
+	} );
+
 	test( 'set RSVP header image', () => {
-		expect( actions.setRSVPHeaderImage( '3' ) ).toMatchSnapshot();
+		expect( actions.setRSVPHeaderImage( {
+			headerImageSrc: 'test-src',
+			headerImageAlt: 'test-alt',
+		} ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP header', () => {
+		expect( actions.setRSVPHeader( {
+			title: 'test title',
+			description: 'test description',
+		} ) ).toMatchSnapshot()
+	} );
+
+	test( 'set RSVP details', () => {
+		expect( actions.setRSVPDetails( {
+			capacity: 20,
+			notGoingResponses: true,
+			startDate: 'January 1, 2018',
+			endDate: 'January 4, 2018',
+			startTime: '12:34',
+			endTime: '23:45',
+		} ) ).toMatchSnapshot()
 	} );
 } );

@@ -8,7 +8,6 @@ import { cloneableGenerator } from 'redux-saga/utils';
  * Internal Dependencies
  */
 import * as types from '../types';
-import { DEFAULT_STATE } from '../reducer';
 import * as actions from '../actions';
 import watchers, * as sagas from '../sagas';
 
@@ -17,11 +16,35 @@ describe( 'RSVP block sagas', () => {
 		it( 'should watch actions', () => {
 			const gen = watchers();
 			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_RSVP_HEADER_IMAGE, sagas.setRSVPHeaderImage )
+			);
+			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_RSVP_HEADER, sagas.setRSVPHeader )
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_RSVP_DETAILS, sagas.setRSVPDetails ),
 			)
+			expect( gen.next().done ).toEqual( true );
+		} );
+	} );
+
+	describe( 'setRSVPHeaderImage', () => {
+		let action;
+		beforeEach( () => {
+			action = { payload: {
+				headerImageSrc: 'test-src',
+				headerImageAlt: 'test-alt',
+			} };
+		} );
+
+		it( 'should set header image state properties', () => {
+			const gen = cloneableGenerator( sagas.setRSVPHeaderImage )( action );
+			expect( gen.next().value ).toEqual(
+				all( [
+					put( actions.setRSVPHeaderImageSrc( 'test-src' ) ),
+					put( actions.setRSVPHeaderImageAlt( 'test-alt' ) ),
+				] )
+			);
 			expect( gen.next().done ).toEqual( true );
 		} );
 	} );
