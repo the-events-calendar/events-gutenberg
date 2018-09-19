@@ -12,13 +12,7 @@ describe( 'AdvancedOptions', () => {
 	test( 'default props of and state of <AdvancedOptions />', () => {
 		const onClick = jest.fn();
 		const component = renderer.create(
-			<AdvancedOptions
-				accordionId="ticketsPlaceholder"
-				contentId="ticketsPlaceholder"
-				headerId="ticketsPlaceholder"
-				isActive={ false }
-				onClick={ onClick }
-			/>
+			<AdvancedOptions />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
