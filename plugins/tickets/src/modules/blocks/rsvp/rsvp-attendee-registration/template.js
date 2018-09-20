@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * WordPress dependencies
@@ -20,13 +21,18 @@ const label = __( 'Attendee Registration', 'events-gutenberg' );
 
 const modalButtonLabel = __( '+ Add', 'events-gutenberg' );
 
-const RSVPAttendeeRegistration = () => (
+const RSVPAttendeeRegistration = ( { isDisabled } ) => (
 	<LabelWithModal
 		className="tribe-editor__rsvp__attendee-registration"
 		closeButtonLabel={ closeButtonLabel }
 		label={ label }
+		modalButtonDisabled={ isDisabled }
 		modalButtonLabel={ modalButtonLabel }
 	/>
 );
+
+RSVPAttendeeRegistration.propTypes = {
+	isDisabled: PropTypes.bool,
+};
 
 export default RSVPAttendeeRegistration;
