@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React, { Fragment, PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 
 /**
@@ -19,6 +20,10 @@ import { Accordion } from '@moderntribe/common/elements';
 import './style.pcss';
 
 class RSVPAdvancedOptions extends PureComponent {
+	static propTypes = {
+		isDisabled: PropTypes.bool.isRequired,
+	};
+
 	constructor( props ) {
 		super( props );
 		this.accordionId = uniqid();
@@ -48,6 +53,7 @@ class RSVPAdvancedOptions extends PureComponent {
 		content: this.getContent(),
 		contentClassName: 'tribe-editor__rsvp__advanced-options-content',
 		header: this.getHeader(),
+		headerAttrs: { disabled: this.props.isDisabled },
 		headerClassName: 'tribe-editor__rsvp__advanced-options-header',
 	} ] );
 
@@ -57,7 +63,7 @@ class RSVPAdvancedOptions extends PureComponent {
 				className="tribe-editor__rsvp__advanced-options"
 				rows={ this.getRows() }
 			/>
-		)
+		);
 	}
 };
 

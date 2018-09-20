@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import RSVPAdvancedOptions from '@moderntribe/tickets/blocks/rsvp/rsvp-advanced-options/template';
+import RSVPAdvancedOptions from '@moderntribe/tickets/blocks/rsvp/rsvp-advanced-options/container';
 import { Checkbox } from '@moderntribe/common/elements';
 import './style.pcss';
 
