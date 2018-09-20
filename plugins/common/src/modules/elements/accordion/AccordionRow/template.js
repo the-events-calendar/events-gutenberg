@@ -58,7 +58,7 @@ const AccordionRow = ( { ...row } ) => (
 	<article
 		className={ classNames(
 			'tribe-editor__accordion__row',
-			{ 'active': row.isActive },
+			{ active: row.isActive },
 		) }
 	>
 		<Button
