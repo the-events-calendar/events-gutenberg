@@ -19,30 +19,22 @@ const RSVPCounters = ( {
 	goingCount,
 	notGoingCount,
 	showNotGoing,
-} ) => {
-	return (
-		<div className="tribe-editor__rsvp-container-header__counters">
+} ) => (
+	<div className="tribe-editor__rsvp-container-header__counters">
+		<Counter
+			className="tribe-editor__rsvp-container-header__going-counter"
+			count={ goingCount }
+			label={ __( 'Going', 'events-gutenberg' ) }
+		/>
+		{ showNotGoing && (
 			<Counter
-				className="tribe-editor__rsvp-container-header__going-counter"
-				count={ goingCount }
-				label={ __( 'Going', 'events-gutenberg' ) }
+				className="tribe-editor__rsvp-container-header__not-going-counter"
+				count={ notGoingCount }
+				label={ __( 'Not going', 'events-gutenberg' ) }
 			/>
-			{ showNotGoing && (
-				<Counter
-					className="tribe-editor__rsvp-container-header__not-going-counter"
-					count={ notGoingCount }
-					label={ __( 'Not going', 'events-gutenberg' ) }
-				/>
-			) }
-		</div>
-	);
-};
-
-RSVPCounters.defaultProps = {
-	goingCount: 42,
-	notGoingCount: 24,
-	showNotGoing: true,
-};
+		) }
+	</div>
+);
 
 RSVPCounters.propTypes = {
 	goingCount: PropTypes.number,
