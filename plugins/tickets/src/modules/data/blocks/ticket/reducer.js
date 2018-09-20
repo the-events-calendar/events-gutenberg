@@ -1,0 +1,27 @@
+/**
+ * Internal dependencies
+ */
+import { types } from '@moderntribe/tickets/data/blocks/ticket';
+
+export const DEFAULT_STATE = {
+	sharedCapacity: 0,
+	header: null,
+	tickets: [],
+};
+
+export default ( state = DEFAULT_STATE, action ) => {
+	switch ( action.type ) {
+		case types.SET_TICKET_HEADER:
+			return {
+				...state,
+				header: action.payload.header,
+			};
+		case types.SET_TICKET_SHARED_CAPACITY:
+			return {
+				...state,
+				sharedCapacity: action.payload.sharedCapacity,
+			}
+		default:
+			return state;
+	}
+}
