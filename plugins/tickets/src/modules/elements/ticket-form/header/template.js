@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import AutosizeInput from 'react-input-autosize';
 import noop from 'lodash/noop';
@@ -19,98 +19,119 @@ import { TicketStatus } from '@moderntribe/tickets/elements';
 import './style.pcss';
 import { sendValue } from '@moderntribe/common/utils/input';
 
-const PRICE_POSITIONS = {
-	suffix: 'suffix',
-	prefix: 'prefix',
-};
+class Header extends PureComponent {
+	static PRICE_POSITIONS = {
+		suffix: 'suffix',
+		prefix: 'prefix',
+	};
 
-const Header = ( props ) => {
-	const {
-		title,
-		titlePlaceholder,
-		setTitle,
-		description,
-		descriptionPlaceholder,
-		setDescription,
-		price,
-		pricePosition,
-		priceCurrency,
-		pricePlaceholder,
-		setPrice,
-		expires,
-	} = props;
+	static propTypes = {
+		title: PropTypes.string,
+		titlePlaceholder: PropTypes.string,
+		setTitle: PropTypes.func,
+		description: PropTypes.string,
+		descriptionPlaceholder: PropTypes.string,
+		setDescription: PropTypes.func,
+		price: PropTypes.number,
+		priceCurrency: PropTypes.string,
+		pricePosition: PropTypes.oneOf( Object.keys( Header.PRICE_POSITIONS ) ),
+		pricePlaceholder: PropTypes.string,
+		setPrice: PropTypes.func,
+		expires: PropTypes.bool,
+	};
 
-	const priceInput = (
-		<AutosizeInput
-			key="price-input"
-			id={ uniqid( 'ticket-creation-price-' ) }
-			name="ticket-creation-description"
-			className="tribe-editor__new-ticket__description"
-			value={ price }
-			placeholder={ pricePlaceholder }
-			onChange={ sendValue( setPrice ) }
-		/>
-	);
-	const priceLabel = [ <span key="price-currency">{priceCurrency}</span>, priceInput ];
+	static defaultProps = {
+		title: '',
+		titlePlaceholder: __( 'Ticket Type', 'events-gutenberg' ),
+		setTitle: noop,
+		description: '',
+		descriptionPlaceholder: __( 'Description', 'events-gutenberg' ),
+		setDescription: noop,
+		price: 0,
+		pricePlaceholder: __( '0', 'events-gutenberg' ),
+		setPrice: noop,
+		priceCurrency: __( '$', 'events-gutenberg' ),
+		pricePosition: Header.PRICE_POSITIONS.prefix,
+		expires: true,
+	};
 
-	return (
-		<header className="tribe-editor__new-ticket__header">
-			<div className="tribe-editor__new-ticket__icon">
-				<TicketStatus expires={ expires } />
-			</div>
-			<div className="tribe-editor__new-ticket__content">
-				<AutosizeInput
-					id={ uniqid( 'ticket-creation-title-' ) }
-					name="ticket-creation-title"
-					className="tribe-editor__new-ticket__title"
-					value={ title }
-					placeholder={ titlePlaceholder }
-					onChange={ sendValue( setTitle ) }
-				/>
-				<AutosizeInput
-					id={ uniqid( 'ticket-creation-description-' ) }
-					name="ticket-creation-description"
-					className="tribe-editor__new-ticket__description"
-					value={ description }
-					placeholder={ descriptionPlaceholder }
-					onChange={ sendValue( setDescription ) }
-				/>
-			</div>
-			<div className="tribe-editor__new-ticket__price">
-				{ pricePosition === PRICE_POSITIONS.prefix ? priceLabel : [ ...priceLabel ].reverse() }
-			</div>
-		</header>
-	);
-};
+	constructor( props ) {
+		super( props );
+		this.ids = {
+			price: uniqid( 'ticket-creation-price-' ),
+			title: uniqid( 'ticket-creation-title-' ),
+			description: uniqid( 'ticket-creation-description-' ),
+		};
+	}
 
-Header.propTypes = {
-	title: PropTypes.string,
-	titlePlaceholder: PropTypes.string,
-	setTitle: PropTypes.func,
-	description: PropTypes.string,
-	descriptionPlaceholder: PropTypes.string,
-	setDescription: PropTypes.func,
-	price: PropTypes.number,
-	priceCurrency: PropTypes.string,
-	pricePosition: PropTypes.oneOf( Object.keys( PRICE_POSITIONS ) ),
-	pricePlaceholder: PropTypes.string,
-	setPrice: PropTypes.func,
-	expires: PropTypes.bool,
-};
+	renderPriceInput() {
+		const { price, pricePlaceholder, setPrice } = this.props;
 
-Header.defaultProps = {
-	title: '',
-	titlePlaceholder: __( 'Ticket Type', 'events-gutenberg' ),
-	setTitle: noop,
-	description: '',
-	descriptionPlaceholder: __( 'Description', 'events-gutenberg' ),
-	setDescription: noop,
-	price: 0,
-	pricePlaceholder: __( '0', 'events-gutenberg' ),
-	setPrice: noop,
-	priceCurrency: __( '$', 'events-gutenberg' ),
-	pricePosition: PRICE_POSITIONS.prefix,
-	expires: true,
-};
+		return (
+			<AutosizeInput
+				key="price-input"
+				id={ this.ids.price }
+				name="ticket-creation-description"
+				className="tribe-editor__new-ticket__description"
+				value={ price }
+				placeholder={ pricePlaceholder }
+				onChange={ sendValue( setPrice ) }
+			/>
+		);
+	}
+
+	renderPriceLabel() {
+		const { priceCurrency } = this.props;
+		return [ <span key="price-currency">{ priceCurrency }</span>, this.renderPriceInput() ];
+	}
+
+	renderPrice() {
+		const { pricePosition } = this.props;
+		return pricePosition === Header.PRICE_POSITIONS.prefix
+			? this.renderPriceLabel()
+			: [ ...this.renderPriceLabel() ].reverse();
+	}
+
+	render() {
+		const {
+			title,
+			titlePlaceholder,
+			setTitle,
+			description,
+			descriptionPlaceholder,
+			setDescription,
+			expires,
+		} = this.props;
+
+		return (
+			<header className="tribe-editor__new-ticket__header">
+				<div className="tribe-editor__new-ticket__icon">
+					<TicketStatus expires={ expires } />
+				</div>
+				<div className="tribe-editor__new-ticket__content">
+					<AutosizeInput
+						id={ this.ids.title }
+						name="ticket-creation-title"
+						className="tribe-editor__new-ticket__title"
+						value={ title }
+						placeholder={ titlePlaceholder }
+						onChange={ sendValue( setTitle ) }
+					/>
+					<AutosizeInput
+						id={ this.ids.description }
+						name="ticket-creation-description"
+						className="tribe-editor__new-ticket__description"
+						value={ description }
+						placeholder={ descriptionPlaceholder }
+						onChange={ sendValue( setDescription ) }
+					/>
+				</div>
+				<div className="tribe-editor__new-ticket__price">
+					{ this.renderPrice() }
+				</div>
+			</header>
+		);
+	}
+}
 
 export default Header;
