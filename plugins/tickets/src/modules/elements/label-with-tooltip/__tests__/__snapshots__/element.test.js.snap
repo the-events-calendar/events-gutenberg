@@ -1,34 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tooltip Element renders a <label> when ID is provided 1`] = `
-<div
-  className="tribe-editor__label-with-tooltip"
->
-  <label
-    className="tribe-editor__label-with-tooltip__label"
-    htmlFor="my-custom-input"
-  >
-    Custom label
-  </label>
-  <div>
-    <span>
-      
-    </span>
-    <span>
-      top right
-    </span>
-    <span>
-      <button
-        aria-label=""
-        className="tribe-editor__button tribe-editor__tooltip-label tribe-editor__label-with-tooltip__tooltip-label"
-        onClick={[Function]}
-        type="button"
-      />
-    </span>
-  </div>
-</div>
-`;
-
 exports[`Tooltip Element renders a tooltip 1`] = `
 <div
   className="tribe-editor__labeled-item tribe-editor__label-with-tooltip element-class"

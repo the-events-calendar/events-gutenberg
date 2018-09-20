@@ -41,10 +41,10 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
         className="tribe-editor__tickets-form__row"
       >
         <div
-          className="tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
+          className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
         >
           <span
-            className="tribe-editor__label-with-tooltip__label"
+            className="tribe-editor__labeled-item__label"
           >
             Sale Duration
           </span>
@@ -130,10 +130,10 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
         className="tribe-editor__tickets-form__row"
       >
         <div
-          className="tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
+          className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
         >
           <label
-            className="tribe-editor__label-with-tooltip__label"
+            className="tribe-editor__labeled-item__label"
             htmlFor="ticket-sku"
           >
             Ticket SKU
