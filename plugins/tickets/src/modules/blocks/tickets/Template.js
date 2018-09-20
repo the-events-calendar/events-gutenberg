@@ -22,8 +22,6 @@ import {
 	CapacityTable,
 	TicketForm,
 	InactiveBlock,
-	CapacityTable,
-	HeaderImage,
 } from '@moderntribe/tickets/elements';
 import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';
@@ -49,7 +47,6 @@ const imageUploadProps = {
 	),
 	buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
 };
-// <HeaderImage onSelect={ setHeaderImage } mediaId={ headerImageId } image={ headerImage } />
 
 const TicketsTemplate = ( props ) => {
 	const {
