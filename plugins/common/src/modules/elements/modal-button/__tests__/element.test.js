@@ -9,15 +9,6 @@ import { noop } from 'lodash';
  */
 import ModalButton from '@moderntribe/common/elements/modal-button/element';
 
-jest.mock( '@wordpress/components', () => ( {
-	Modal: ( { title, children } ) => (
-		<div>
-			<span>{ title }</span>
-			<span>{ children }</span>
-		</div>
-	),
-} ) );
-
 describe( 'Modal Button Element', () => {
 	it( 'renders a modal button', () => {
 		const component = renderer.create( <ModalButton /> );

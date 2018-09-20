@@ -36,20 +36,19 @@ describe( 'Accordion Row Element', () => {
 		expect( row.onClick ).toHaveBeenCalledTimes( 1 );
 	} );
 
-	it( 'executes onOpen and onClose handlers', ( done ) => {
+	it( 'executes onOpen and onClose handlers', async () => {
 		const component = mount( <AccordionRow { ...row } /> );
 		component.find( 'button' ).simulate( 'click' );
-		setTimeout( () => {
+		await setTimeout( () => {
 			component.find( 'button' ).simulate( 'click' );
+			setTimeout( () => {
+				expect( row.onOpen ).toHaveBeenCalled();
+				expect( row.onOpen ).toHaveBeenCalledTimes( 1 );
+				expect( row.onClose ).toHaveBeenCalled();
+				expect( row.onClose ).toHaveBeenCalledTimes( 1 );
+				expect( row.onClick ).toHaveBeenCalled();
+				expect( row.onClick ).toHaveBeenCalledTimes( 2 );
+			}, 250 );
 		}, 250 );
-		setTimeout( () => {
-			expect( row.onOpen ).toHaveBeenCalled();
-			expect( row.onOpen ).toHaveBeenCalledTimes( 1 );
-			expect( row.onClose ).toHaveBeenCalled();
-			expect( row.onClose ).toHaveBeenCalledTimes( 1 );
-			expect( row.onClick ).toHaveBeenCalled();
-			expect( row.onClick ).toHaveBeenCalledTimes( 2 );
-			done();
-		}, 500 );
 	} );
 } );

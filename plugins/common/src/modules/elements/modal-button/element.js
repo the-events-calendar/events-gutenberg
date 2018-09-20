@@ -54,8 +54,25 @@ class ModalButton extends PureComponent {
 
 	onClose = () => this.props.onClose && this.props.onClose();
 
+	renderModal = () => {
+		const { closeLabel, modalTitle } = this.props;
+		return ( this.state.isOpen && (
+			<Modal
+				title={ modalTitle }
+				onRequestClose={ this.onRequestClose }
+			>
+				<Button
+					className="tribe-editor__modal-button__close-button"
+					onClick={ this.onCloseClick }
+				>
+					{ closeLabel }
+				</Button>
+			</Modal>
+		) );
+	};
+
 	render() {
-		const { className, closeLabel, label, modalTitle } = this.props;
+		const { className, label } = this.props;
 		return (
 			<div className={ classNames(
 				'tribe-editor__modal-button',
@@ -67,19 +84,7 @@ class ModalButton extends PureComponent {
 				>
 					{ label }
 				</Button>
-				{ this.state.isOpen && (
-					<Modal
-						title={ modalTitle }
-						onRequestClose={ this.onRequestClose }
-					>
-						<Button
-							className="tribe-editor__modal-button__close-button"
-							onClick={ this.onCloseClick }
-						>
-							{ closeLabel }
-						</Button>
-					</Modal>
-				) }
+				{ this.renderModal() }
 			</div>
 		);
 	}

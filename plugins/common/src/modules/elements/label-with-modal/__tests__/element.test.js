@@ -8,10 +8,6 @@ import React from 'react';
  */
 import LabelWithModal from '@moderntribe/common/elements/label-with-modal/element';
 
-jest.mock( '@wordpress/components', () => ( {
-	Modal,
-} ) );
-
 describe( 'Label With Modal Element', () => {
 	it( 'renders a label with modal', () => {
 		const component = renderer.create( <LabelWithModal /> );
