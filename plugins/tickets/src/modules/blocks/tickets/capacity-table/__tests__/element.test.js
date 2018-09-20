@@ -6,7 +6,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { CapacityTable } from '@moderntribe/tickets/elements';
+import CapacityTable from './../element';
 
 describe( '<CapacityTable />', () => {
 	test( 'title property', () => {

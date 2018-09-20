@@ -55,17 +55,4 @@ describe( 'ImageUpload', () => {
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
-
-	it( 'render image if provided', () => {
-		const image = {
-			height: 400,
-			width: 600,
-			url: 'http://gutenberg.local/wp-content/uploads/2018/08/belize-2468-1024x680.jpg',
-			orientation: 'landscape',
-		}
-		const component = renderer.create(
-			<HeaderImage image={ image } />
-		);
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
 } );

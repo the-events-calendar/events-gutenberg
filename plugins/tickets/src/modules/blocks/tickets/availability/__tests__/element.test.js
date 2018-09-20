@@ -7,7 +7,8 @@ import renderer from 'react-test-renderer';
 /**
  * Internal dependencies
  */
-import { ActionDashboard, Availability } from '@moderntribe/tickets/elements';
+import { ActionDashboard } from '@moderntribe/tickets/elements';
+import Availability from './../element';
 
 describe( 'Availability element', () => {
 	it( 'render component', () => {
