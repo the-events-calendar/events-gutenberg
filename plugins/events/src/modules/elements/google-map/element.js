@@ -156,6 +156,10 @@ export default class GoogleMap extends Component {
 		this.MAX_TRIES = 5;
 	}
 
+	/**
+	 * @todo  We need to not do this Logic over in this template
+	 * @see   https://github.com/moderntribe/events-gutenberg/pull/327#discussion_r219090823
+	 */
 	static getDerivedStateFromProps( nextProps, prevState ) {
 
 		// return if it was rendered already
@@ -249,7 +253,7 @@ export default class GoogleMap extends Component {
 
 	getLocation() {
 		const { coordinates } = this.props;
-		let   { lat, lng }    = coordinates;
+		const { lat, lng } = coordinates;
 
 		return {
 			lat,

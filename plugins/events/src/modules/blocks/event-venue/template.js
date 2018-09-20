@@ -71,6 +71,10 @@ class EventVenue extends Component {
 
 	constructor( props ) {
 		super( props );
+
+		/**
+		 * @todo move this into the Store
+		 */
 		this.state = { coords: { lat: null, lng: null } }
 	}
 
@@ -269,16 +273,26 @@ class EventVenue extends Component {
 		return [ this.renderBlock(), this.renderControls() ];
 	}
 
-	// TODO: this hasVenue is coupled to the existence of details, not the venue ID.
-	// Given how withDetails is currently tightly coupled with the state, this cannot
-	// be moved to the container. withDetails should be decoupled from state.
+	/**
+	 * Given how withDetails is currently tightly coupled with the state, this cannot
+	 * be moved to the container. withDetails should be decoupled from state.
+	 *
+	 * @todo  this hasVenue is coupled to the existence of details, not the venue ID.
+	 *
+	 * @return {Boolean}
+	 */
 	hasVenue() {
 		const { details } = this.props;
 		return ! isEmpty( details );
 	}
 
-	// TODO: this function cannot be moved to container as it depends on hasVenue().
-	// Once withDetails is decoupled from state, this should move to container.
+	/**
+	 * Once withDetails is decoupled from state, this should move to container.
+	 *
+	 * @todo this function cannot be moved to container as it depends on hasVenue().
+	 *
+	 * @return {void}
+	 */
 	maybeEdit = () => {
 		const { volatile, editVenue } = this.props;
 		if ( this.hasVenue() && volatile ) {
@@ -286,23 +300,36 @@ class EventVenue extends Component {
 		}
 	}
 
-	// Get the coordinates according to the venue address
-	// So we can display the map on the backend
+	/**
+	 * Get the coordinates according to the venue address
+	 * So we can display the map on the backend
+	 *
+	 * @todo  We need to save the data into Meta Fields to avoid redoing the Geocode
+	 * @todo  Move the Maps into Pro
+	 *
+	 * @param  {object} details Information to pass along to the geocoder
+	 *
+	 * @return {void}
+	 */
 	getCoordinates = ( details )  => {
-
 		const { maps }       = google();
 		const geocoder       = new maps.Geocoder();
 		const { getAddress } = utils;
 
 		const address = addressToMapString( getAddress( details ) );
 
+		/**
+		 * @todo Need to move this out of the template
+		 */
 		geocoder.geocode( { 'address' : address }, ( results, status ) => {
-			if ( 'OK' === status ) {
-				let lat = results[0].geometry.location.lat();
-				let lng = results[0].geometry.location.lng();
-				this.setState( { coords: { lat, lng } } );
+			if ( 'OK' !== status ) {
 				return;
 			}
+
+			const { location } = results[0].geometry;
+
+			this.setState( { coords: { location.lat(), location.lng() } } );
+			return;
 		} );
 	}
 }
