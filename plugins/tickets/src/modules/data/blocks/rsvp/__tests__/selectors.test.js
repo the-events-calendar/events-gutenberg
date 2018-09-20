@@ -48,4 +48,8 @@ describe( 'RSVP block selectors', () => {
 	it( 'should return the end time', () => {
 		expect( selectors.getRSVPEndTime( state ) ).toBe( DEFAULT_STATE.endTime );
 	} );
+
+	it( 'should return the settings open', () => {
+		expect( selectors.getRSVPSettingsOpen( state ) ).toBe( DEFAULT_STATE.settingsOpen );
+	} );
 } );

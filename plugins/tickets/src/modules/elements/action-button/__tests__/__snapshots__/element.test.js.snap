@@ -2,7 +2,7 @@
 
 exports[`ActionButton component rendered 1`] = `
 <button
-  className="tribe-editor__button tribe-editor__btn--label tribe-editor__tickets-btn--action tribe-editor__tickets-btn--action-left"
+  className="tribe-editor__button tribe-editor__action-button tribe-editor__action-button--icon-left"
   onClick={[Function]}
   type="button"
 >
@@ -13,7 +13,7 @@ exports[`ActionButton component rendered 1`] = `
     🦖
   </span>
   <span
-    className="tribe-editor__btn--label-children"
+    className="tribe-editor__action-button__label"
   >
     Custom Action
   </span>
@@ -22,7 +22,7 @@ exports[`ActionButton component rendered 1`] = `
 
 exports[`ActionButton component rendered with the correct class when icon is on the right 1`] = `
 <button
-  className="tribe-editor__button tribe-editor__btn--label tribe-editor__tickets-btn--action tribe-editor__tickets-btn--action-right"
+  className="tribe-editor__button tribe-editor__action-button tribe-editor__action-button--icon-right"
   onClick={[Function]}
   type="button"
 >
@@ -33,7 +33,7 @@ exports[`ActionButton component rendered with the correct class when icon is on 
     🦖
   </span>
   <span
-    className="tribe-editor__btn--label-children"
+    className="tribe-editor__action-button__label"
   >
     Custom Action
   </span>

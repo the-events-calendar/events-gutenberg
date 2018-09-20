@@ -1,25 +1,31 @@
 /**
  * External dependencies
  */
-import { __ } from '@wordpress/i18n';
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
 import { InnerBlocks } from '@wordpress/editor';
 import noop from 'lodash/noop';
 
 /**
  * Internal dependencies
  */
+import { ImageUpload } from '@moderntribe/common/elements';
 import {
 	Availability,
 	ActionDashboard,
+	CapacityTable,
 	TicketForm,
 	InactiveBlock,
 	CapacityTable,
 	HeaderImage,
 } from '@moderntribe/tickets/elements';
-import { TICKET } from '@moderntribe/tickets/elements/inactive-block/element';
+import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
@@ -31,8 +37,19 @@ const inactiveBlockProps = {
 		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
 		'events-gutenberg',
 	),
-	layout: TICKET,
+	layout: LAYOUT.ticket,
 };
+
+const imageUploadProps = {
+	title: __( 'Ticket Header Image', 'events-gutenberg' ),
+	description: __(
+		/* eslint-disable-next-line max-len */
+		'Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.',
+		'events-gutenberg'
+	),
+	buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
+};
+// <HeaderImage onSelect={ setHeaderImage } mediaId={ headerImageId } image={ headerImage } />
 
 const TicketsTemplate = ( props ) => {
 	const {
@@ -75,7 +92,7 @@ const TicketsTemplate = ( props ) => {
 				<InactiveBlock { ...inactiveBlockProps } />
 			</div>
 			<CapacityTable />
-			<HeaderImage onSelect={ setHeaderImage } mediaId={ headerImageId } image={ headerImage } />
+			<ImageUpload { ...imageUploadProps } />
 			<TicketForm />
 			{ availability }
 			{ actionDashboard }

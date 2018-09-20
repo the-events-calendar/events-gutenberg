@@ -6,7 +6,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import HeaderImage, { renderMediaUpload } from '@moderntribe/tickets/elements/header-image/element';
+import ImageUpload, { renderMediaUpload } from '@moderntribe/common/elements/image-upload/element';
 
 jest.mock( '@wordpress/editor', () => ( {
 	MediaUpload: () => ( <button>Media Upload</button> ),
@@ -15,20 +15,20 @@ jest.mock( '@wordpress/editor', () => ( {
 describe( 'renderMediaUpload', () => {
 	it( 'render the button', () => {
 		const open = jest.fn();
-		const component = renderer.create( renderMediaUpload( { open } ) );
+		const component = renderer.create( renderMediaUpload( 'label' )( { open } ) );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'executes the open action when the mediaUpload is fired', () => {
 		const open = jest.fn();
-		const component = mount( renderMediaUpload( { open } ) );
+		const component = mount( renderMediaUpload( 'label' )( { open } ) );
 		component.find( 'button' ).simulate( 'click' );
 		expect( open ).toHaveBeenCalled();
 		expect( open ).toHaveBeenCalledTimes( 1 );
 	} );
 } );
 
-describe( 'HeaderImage', () => {
+describe( 'ImageUpload', () => {
 	const onSelect = jest.fn();
 
 	afterEach( () => {
@@ -37,21 +37,21 @@ describe( 'HeaderImage', () => {
 
 	it( 'render the component', () => {
 		const component = renderer.create(
-			<HeaderImage onSelect={ onSelect } />
+			<ImageUpload onSelect={ onSelect } />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'render with custom title', () => {
 		const component = renderer.create(
-			<HeaderImage onSelect={ onSelect } title="Modern Tribe" />
+			<ImageUpload onSelect={ onSelect } title="Modern Tribe" />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'render with custom description', () => {
 		const component = renderer.create(
-			<HeaderImage onSelect={ onSelect} description="The Next Generation of Digital Agency" />
+			<ImageUpload onSelect={ onSelect} description="The Next Generation of Digital Agency" />
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
