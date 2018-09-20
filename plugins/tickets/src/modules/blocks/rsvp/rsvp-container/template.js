@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -37,7 +38,10 @@ RSVPContainerSectionLeft.propTypes = {
 
 const RSVPContainer = ( { isDisabled, isSelected } ) => (
 	<ContainerPanel
-		className="tribe-editor__rsvp-container"
+		className={ classNames(
+			'tribe-editor__rsvp-container',
+			{ 'tribe-editor__rsvp-container--disabled': isDisabled },
+		) }
 		leftSection={ <RSVPContainerSectionLeft isDisabled={ isDisabled } /> }
 		rightSectionHeader={ <RSVPContainerHeader isSelected={ isSelected } /> }
 		rightSectionContent={ <RSVPContainerContent /> }

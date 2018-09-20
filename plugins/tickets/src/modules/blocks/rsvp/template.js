@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import RSVPContainer from './rsvp-container/template';
+import RSVPContainer from './rsvp-container/container';
 import RSVPDashboard from './rsvp-dashboard/container';
 import './style.pcss';
 

@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import AutosizeInput from 'react-input-autosize';
 
 /**
  * WordPress dependencies
@@ -14,6 +15,37 @@ import { __ } from '@wordpress/i18n';
  */
 import { NumericLabel } from '@moderntribe/tickets/elements';
 import './style.pcss';
+
+const getTitle = ( isSelected, onTempTitleChange, tempTitle, title ) => (
+	isSelected
+		? <AutosizeInput
+			className="tribe-editor__rsvp-container-header__title-input"
+			value={ tempTitle }
+			placeholder={ __( 'RSVP Title', 'events-gutenberg' ) }
+			onChange={ onTempTitleChange }
+		/>
+		: <h2 className="tribe-editor__rsvp-container-header__title">{ title }</h2>
+);
+
+const getDescription = (
+	isSelected,
+	onTempDescriptionChange,
+	tempDescription,
+	description,
+) => (
+	isSelected
+		? <AutosizeInput
+			className="tribe-editor__rsvp-container-header__description-input"
+			value={ tempDescription }
+			placeholder={ __( 'description', 'events-gutenberg' ) }
+			onChange={ onTempDescriptionChange }
+		/>
+		: description && (
+			<span className="tribe-editor__rsvp-container-header__description">
+				{ description }
+			</span>
+		)
+);
 
 const getCapacityLabel = ( capacity ) => {
 	const singular = __( '%d available', 'events-gutenberg' );
@@ -30,18 +62,24 @@ const getCapacityLabel = ( capacity ) => {
 };
 
 const RSVPContainerHeader = ( {
-	title,
-	description,
 	capacity,
+	description,
+	isSelected,
+	onTempDescriptionChange,
+	onTempTitleChange,
+	tempDescription,
+	tempTitle,
+	title,
 } ) => {
 	return (
 		<Fragment>
 			<div className="tribe-editor__rsvp-container-header__header-details">
-				<h2 className="tribe-editor__rsvp-container-header__title">{ title }</h2>
-				{ description && (
-						<span className="tribe-editor__rsvp-container-header__description">
-							{ description }
-						</span>
+				{ getTitle( isSelected, onTempTitleChange, tempTitle, title ) }
+				{ getDescription(
+					isSelected,
+					onTempDescriptionChange,
+					tempDescription,
+					description,
 				) }
 				{ getCapacityLabel( capacity ) }
 			</div>
@@ -52,9 +90,10 @@ const RSVPContainerHeader = ( {
 };
 
 RSVPContainerHeader.propTypes = {
-	title: PropTypes.string.isRequired,
-	description: PropTypes.string,
 	capacity: PropTypes.string,
+	description: PropTypes.string,
+	isSelected: PropTypes.bool.isRequired,
+	title: PropTypes.string.isRequired,
 };
 
 export default RSVPContainerHeader;
