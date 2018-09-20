@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -15,39 +15,40 @@ import { Tooltip as WpTooltip } from '@wordpress/components';
  */
 import { Button } from '@moderntribe/common/elements';
 
-const Tooltip = ( {
-	label,
-	labelClassName,
-	position,
-	text,
-} ) => (
-	<WpTooltip text={ text } position={ position }>
-		<Button
-			aria-label={ text }
-			className={ classNames( 'tribe-editor__tooltip-label', labelClassName ) }
-		>
-			{ label }
-		</Button>
-	</WpTooltip>
-);
+class Tooltip extends PureComponent {
+	static defaultProps = {
+		position: 'top right',
+		text: '',
+	};
 
-Tooltip.defaultProps = {
-	position: 'top right',
-	text: '',
-};
+	static propTypes = {
+		label: PropTypes.node,
+		labelClassName: PropTypes.string,
+		position: PropTypes.oneOf( [
+			'top left',
+			'top center',
+			'top right',
+			'bottom left',
+			'bottom center',
+			'bottom right',
+		] ),
+		text: PropTypes.string,
+	};
 
-Tooltip.propTypes = {
-	label: PropTypes.node,
-	labelClassName: PropTypes.string,
-	position: PropTypes.oneOf( [
-		'top left',
-		'top center',
-		'top right',
-		'bottom left',
-		'bottom center',
-		'bottom right',
-	] ),
-	text: PropTypes.string,
-};
+	render() {
+		const { label, labelClassName, position, text } = this.props;
+
+		return (
+			<WpTooltip text={ text } position={ position }>
+				<Button
+					aria-label={ text }
+					className={ classNames( 'tribe-editor__tooltip-label', labelClassName ) }
+				>
+					{ label }
+				</Button>
+			</WpTooltip>
+		);
+	}
+}
 
 export default Tooltip;

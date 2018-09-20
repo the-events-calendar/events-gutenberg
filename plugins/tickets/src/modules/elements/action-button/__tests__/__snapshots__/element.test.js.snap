@@ -2,7 +2,7 @@
 
 exports[`ActionButton component rendered 1`] = `
 <button
-  className="tribe-editor__button tribe-editor__btn--label tribe-editor__tickets-btn--action tribe-editor__tickets-btn--action-right"
+  className="tribe-editor__button tribe-editor__btn--label tribe-editor__tickets-btn--action tribe-editor__tickets-btn--action-left"
   onClick={[Function]}
   type="button"
 >

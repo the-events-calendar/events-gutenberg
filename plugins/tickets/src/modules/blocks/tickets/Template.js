@@ -13,19 +13,22 @@ import { InnerBlocks } from '@wordpress/editor';
 import {
 	Availability,
 	ActionDashboard,
-	DisabledTickets,
 	TicketForm,
+	InactiveBlock,
 } from '@moderntribe/tickets/elements';
-
+import { TICKET } from '@moderntribe/tickets/elements/inactive-block/element';
+import { TicketInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
-const disabled = {
+const inactiveBlockProps = {
+	icon: <TicketInactive />,
 	title: __( 'No Active Tickets', 'events-gutenberg' ),
 	description: __(
 		/* eslint-disable-next-line max-len */
 		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
 		'events-gutenberg',
 	),
+	layout: TICKET,
 };
 
 const TicketsTemplate = ( props ) => {
@@ -62,6 +65,7 @@ const TicketsTemplate = ( props ) => {
 		>
 			<div className="tribe-editor__tickets-body">
 				<InnerBlocks />
+				<InactiveBlock { ...inactiveBlockProps } />
 			</div>
 			<TicketForm />
 			{ availability }

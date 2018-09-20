@@ -1,0 +1,28 @@
+/* extra selector required to override gutenberg styles */
+input.tribe-editor__checkbox__input {
+
+	.tribe-editor__checkbox & {
+		background-color: #ffffff;
+		border: 1px solid #E0E5E9;
+		border-radius: 0;
+
+		&:focus {
+			border: 1px solid #E0E5E9;
+			box-shadow: 0 0 0 1px #E0E5E9;
+		}
+
+		&:checked {
+			background-color: #ffffff;
+			border: 1px solid #E0E5E9;
+
+			&:focus {
+				border: 1px solid #E0E5E9;
+				box-shadow: 0 0 0 1px #E0E5E9;
+			}
+
+			&:before {
+				color: #11A0D2;
+			}
+		}
+	}
+}
