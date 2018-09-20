@@ -31,7 +31,11 @@ const CapacityTable = ( props ) => {
 	const independentData = getValues( independent );
 
 	const sharedInput = (
-		<input onChange={ sendValue( onSharedCapacityChange ) } value={ sharedData.total } />
+		<input
+			onChange={ sendValue( onSharedCapacityChange ) }
+			value={ sharedData.total }
+			type="number"
+		/>
 	);
 
 	return (

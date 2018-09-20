@@ -13,8 +13,7 @@ import { InnerBlocks } from '@wordpress/editor';
 import {
 	Availability,
 	ActionDashboard,
-	CapacityTable,
-	HeaderImage,
+	TicketForm,
 	InactiveBlock,
 } from '@moderntribe/tickets/elements';
 import { TICKET } from '@moderntribe/tickets/elements/inactive-block/element';
@@ -27,10 +26,10 @@ const inactiveBlockProps = {
 	description: __(
 		/* eslint-disable-next-line max-len */
 		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
-		'events-gutenberg'
+		'events-gutenberg',
 	),
 	layout: TICKET,
-}
+};
 
 const TicketsTemplate = ( props ) => {
 	const {
@@ -68,26 +67,25 @@ const TicketsTemplate = ( props ) => {
 				<InnerBlocks />
 				<InactiveBlock { ...inactiveBlockProps } />
 			</div>
-			<CapacityTable />
-			<HeaderImage />
+			<TicketForm />
 			{ availability }
 			{ actionDashboard }
 		</div>
 	);
-}
+};
 
 TicketsTemplate.propTypes = {
 	isSelected: PropTypes.bool,
 	footerActions: PropTypes.arrayOf( PropTypes.node ),
 	footerConfirmLabel: PropTypes.string,
 	allowedBlockTypes: PropTypes.arrayOf( PropTypes.string ),
-}
+};
 
 TicketsTemplate.defaultProps = {
 	isSelected: false,
 	footerActions: [],
 	footerConfirmLabel: __( 'Add Tickets', 'events-gutenberg' ),
 	allowedBlockTypes: [],
-}
+};
 
 export default TicketsTemplate;
