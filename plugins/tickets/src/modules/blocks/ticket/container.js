@@ -8,7 +8,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import Template from './Template';
+import Template from './template';
 
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
 

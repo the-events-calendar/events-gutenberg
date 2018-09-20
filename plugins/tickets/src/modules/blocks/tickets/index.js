@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BlockIcon } from '@moderntribe/common/elements';
-import TicketsBlock from './Container';
+import TicketsBlock from './container';
 
 /**
  * Module Code

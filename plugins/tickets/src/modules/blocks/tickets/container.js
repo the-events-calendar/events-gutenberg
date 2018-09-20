@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import Template from './Template';
+import Template from './template';
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
 import { ActionButton } from '@moderntribe/tickets/elements';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
