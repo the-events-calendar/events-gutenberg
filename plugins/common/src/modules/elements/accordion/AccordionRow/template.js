@@ -15,12 +15,19 @@ class AccordionRow extends PureComponent {
 	static propTypes = {
 		accordionId: PropTypes.string.isRequired,
 		content: PropTypes.node,
+		contentAttrs: PropTypes.object,
 		contentClassName: PropTypes.string,
 		header: PropTypes.node,
+		headerAttrs: PropTypes.object,
 		headerClassName: PropTypes.string,
 		onClick: PropTypes.func,
 		onClose: PropTypes.func,
 		onOpen: PropTypes.func,
+	};
+
+	static defaultProps = {
+		contentAttrs: {},
+		headerAttrs: {},
 	};
 
 	constructor( props ) {
@@ -40,6 +47,7 @@ class AccordionRow extends PureComponent {
 			'aria-selected': _isActive,
 			id: this.headerId,
 			role: 'tab',
+			...this.props.headerAttrs,
 		};
 	};
 
@@ -48,6 +56,7 @@ class AccordionRow extends PureComponent {
 		'aria-labelledby': this.headerId,
 		id: this.contentId,
 		role: 'tabpanel',
+		...this.props.contentAttrs,
 	} );
 
 	onClose = ( parent, e ) => () => {
