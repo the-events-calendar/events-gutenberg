@@ -10,8 +10,10 @@ import classNames from 'classnames';
  */
 import './style.pcss';
 
-export const RSVP = 'rsvp';
-export const TICKET = 'ticket';
+export const LAYOUT = {
+	rsvp: 'rsvp',
+	ticket: 'ticket',
+};
 
 const ContainerPanel = ( {
 	className,
@@ -62,7 +64,7 @@ ContainerPanel.propTypes = {
 	content: PropTypes.node,
 	header: PropTypes.node,
 	icon: PropTypes.node,
-	layout: PropTypes.oneOf( [ RSVP, TICKET ] ).isRequired,
+	layout: PropTypes.oneOf( Object.keys( LAYOUT ) ).isRequired,
 };
 
 export default ContainerPanel;
