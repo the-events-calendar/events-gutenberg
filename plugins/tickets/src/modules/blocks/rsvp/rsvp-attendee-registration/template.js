@@ -14,21 +14,19 @@ import { __ } from '@wordpress/i18n';
 import { LabelWithModal } from '@moderntribe/common/elements';
 import './style.pcss';
 
-const RSVPAttendeeRegistration = () => {
-	const closeButtonLabel = __( 'close', 'events-gutenberg' );
+const closeButtonLabel = __( 'close', 'events-gutenberg' );
 
-	const label = __( 'Attendee Registration', 'events-gutenberg' );
+const label = __( 'Attendee Registration', 'events-gutenberg' );
 
-	const modalButtonLabel = __( '+ Add', 'events-gutenberg' );
+const modalButtonLabel = __( '+ Add', 'events-gutenberg' );
 
-	return (
-		<LabelWithModal
-			className="tribe-editor__rsvp__attendee-registration"
-			closeButtonLabel={ closeButtonLabel }
-			label={ label }
-			modalButtonLabel={ modalButtonLabel }
-		/>
-	);
-};
+const RSVPAttendeeRegistration = () => (
+	<LabelWithModal
+		className="tribe-editor__rsvp__attendee-registration"
+		closeButtonLabel={ closeButtonLabel }
+		label={ label }
+		modalButtonLabel={ modalButtonLabel }
+	/>
+);
 
 export default RSVPAttendeeRegistration;

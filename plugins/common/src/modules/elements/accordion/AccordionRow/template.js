@@ -43,14 +43,12 @@ class AccordionRow extends PureComponent {
 		};
 	};
 
-	getContentAttrs = () => {
-		return {
-			'aria-hidden': this.state.isActive ? 'false' : 'true',
-			'aria-labelledby': this.headerId,
-			id: this.contentId,
-			role: 'tabpanel',
-		};
-	};
+	getContentAttrs = () => ( {
+		'aria-hidden': this.state.isActive ? 'false' : 'true',
+		'aria-labelledby': this.headerId,
+		id: this.contentId,
+		role: 'tabpanel',
+	} );
 
 	onClose = ( parent, e ) => () => {
 		parent.classList.remove( 'closing' );
@@ -92,7 +90,7 @@ class AccordionRow extends PureComponent {
 			<article
 				className={ classNames(
 					'tribe-editor__accordion__row',
-					{ 'active': this.state.isActive },
+					{ active: this.state.isActive },
 				) }
 			>
 				<Button

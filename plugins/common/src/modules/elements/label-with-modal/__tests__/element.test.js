@@ -9,12 +9,7 @@ import React from 'react';
 import LabelWithModal from '@moderntribe/common/elements/label-with-modal/element';
 
 jest.mock( '@wordpress/components', () => ( {
-	Modal: ( { title, children } ) => (
-		<div>
-			<span>{ title }</span>
-			<span>{ children }</span>
-		</div>
-	),
+	Modal,
 } ) );
 
 describe( 'Label With Modal Element', () => {
