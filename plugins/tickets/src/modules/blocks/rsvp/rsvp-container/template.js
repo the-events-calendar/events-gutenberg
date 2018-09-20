@@ -18,26 +18,35 @@ import RSVPContainerContent from '@moderntribe/tickets/blocks/rsvp/rsvp-containe
 import { RSVPActive, RSVPInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
-const RSVPContainerSectionLeft = () => {
-	// TODO: logic to show RSVPInactive
+const RSVPContainerSectionLeft = ( { isDisabled } ) => (
+	<Fragment>
+		{
+			isDisabled
+				? <RSVPInactive />
+				: <RSVPActive />
+		}
+		<span className="tribe-editor__rsvp-container__section-left-label">
+			{ __( 'RSVP', 'events-gutenberg' ) }
+		</span>
+	</Fragment>
+);
 
-	return (
-		<Fragment>
-			<RSVPActive />
-			<span className="tribe-editor__rsvp-container__section-left-label">
-				{ __( 'RSVP', 'events-gutenberg' ) }
-			</span>
-		</Fragment>
-	);
+RSVPContainerSectionLeft.propTypes = {
+	isDisabled: PropTypes.bool.isRequired,
 };
 
-const RSVPContainer = () => (
+const RSVPContainer = ( { isDisabled, isSelected } ) => (
 	<ContainerPanel
 		className="tribe-editor__rsvp-container"
-		leftSection={ <RSVPContainerSectionLeft /> }
-		rightSectionHeader={ <RSVPContainerHeader /> }
+		leftSection={ <RSVPContainerSectionLeft isDisabled={ isDisabled } /> }
+		rightSectionHeader={ <RSVPContainerHeader isSelected={ isSelected } /> }
 		rightSectionContent={ <RSVPContainerContent /> }
 	/>
 );
+
+RSVPContainer.propTypes = {
+	isDisabled: PropTypes.bool.isRequired,
+	isSelected: PropTypes.bool.isRequired,
+};
 
 export default RSVPContainer;
