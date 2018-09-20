@@ -34,7 +34,7 @@ const ContainerPanel = ( {
 	);
 
 	const getHeaderAndContent = () => (
-		layout === TICKET
+		layout === LAYOUT.ticket
 			? headerAndContent
 			: (
 				<div className="tribe-editor__container-panel__header-content-wrapper">
