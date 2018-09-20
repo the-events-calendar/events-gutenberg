@@ -9,16 +9,10 @@ import { put, all, takeEvery } from 'redux-saga/effects';
 import * as types from './types';
 import * as actions from './actions';
 
-export function* setRSVPHeader( action ) {
-	const { title, description } = action.payload;
-	yield all( [
-		put( actions.setRSVPTitle( title ) ),
-		put( actions.setRSVPDescription( description ) ),
-	] );
-}
-
 export function* setRSVPDetails( action ) {
 	const {
+		title,
+		description,
 		capacity,
 		notGoingResponses,
 		startDate,
@@ -27,6 +21,8 @@ export function* setRSVPDetails( action ) {
 		endTime,
 	} = action.payload;
 	yield all( [
+		put( actions.setRSVPTitle( title ) ),
+		put( actions.setRSVPDescription( description ) ),
 		put( actions.setRSVPCapacity( capacity ) ),
 		put( actions.setRSVPNotGoingResponses( notGoingResponses ) ),
 		put( actions.setRSVPStartDate( startDate ) ),
@@ -36,7 +32,30 @@ export function* setRSVPDetails( action ) {
 	] );
 }
 
+export function* setRSVPTempDetails( action ) {
+	const {
+		tempTitle,
+		tempDescription,
+		tempCapacity,
+		tempNotGoingResponses,
+		tempStartDate,
+		tempStartTime,
+		tempEndDate,
+		tempEndTime,
+	} = action.payload;
+	yield all( [
+		put( actions.setRSVPTempTitle( tempTitle ) ),
+		put( actions.setRSVPTempDescription( tempDescription ) ),
+		put( actions.setRSVPTempCapacity( tempCapacity ) ),
+		put( actions.setRSVPTempNotGoingResponses( tempNotGoingResponses ) ),
+		put( actions.setRSVPTempStartDate( tempStartDate ) ),
+		put( actions.setRSVPTempStartTime( tempStartTime) ),
+		put( actions.setRSVPTempEndDate( tempEndDate ) ),
+		put( actions.setRSVPTempEndTime( tempEndTime ) ),
+	] );
+}
+
 export default function* watchers() {
-	yield takeEvery( types.SET_RSVP_HEADER, setRSVPHeader );
 	yield takeEvery( types.SET_RSVP_DETAILS, setRSVPDetails );
+	yield takeEvery( types.SET_RSVP_TEMP_DETAILS, setRSVPTempDetails );
 }

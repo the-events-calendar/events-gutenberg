@@ -45,6 +45,46 @@ export const getRSVPEndTime = createSelector(
 	( rsvp ) => rsvp.endTime,
 );
 
+export const getRSVPTempTitle = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempTitle,
+);
+
+export const getRSVPTempDescription = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempDescription,
+);
+
+export const getRSVPTempCapacity = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempCapacity,
+);
+
+export const getRSVPTempNotGoingResponses = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempNotGoingResponses,
+);
+
+export const getRSVPTempStartDate = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempStartDate,
+);
+
+export const getRSVPTempStartTime = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempStartTime,
+);
+
+export const getRSVPTempEndDate = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempEndDate,
+);
+
+export const getRSVPTempEndTime = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempEndTime,
+);
+
 export const getRSVPCreated = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.created,
@@ -53,4 +93,9 @@ export const getRSVPCreated = createSelector(
 export const getRSVPSettingsOpen = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.settingsOpen,
+);
+
+export const getRSVPHasChanges = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.hasChanges,
 );

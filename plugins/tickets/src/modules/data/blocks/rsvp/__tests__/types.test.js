@@ -49,11 +49,15 @@ describe( 'RSVP block types', () => {
 		expect( types.SET_RSVP_SETTINGS_OPEN ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_SETTINGS_OPEN` );
 	} );
 
-	test( 'set RSVP header', () => {
-		expect( types.SET_RSVP_HEADER ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER` );
+	test( 'set RSVP has changes', () => {
+		expect( types.SET_RSVP_HAS_CHANGES ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HAS_CHANGES` );
 	} );
 
 	test( 'set RSVP details', () => {
 		expect( types.SET_RSVP_DETAILS ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_DETAILS` );
+	} );
+
+	test( 'set RSVP temp details', () => {
+		expect( types.SET_RSVP_TEMP_DETAILS ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_DETAILS` );
 	} );
 } );
