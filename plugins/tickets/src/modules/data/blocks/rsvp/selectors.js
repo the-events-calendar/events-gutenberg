@@ -49,3 +49,8 @@ export const getRSVPCreated = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.created,
 );
+
+export const getRSVPSettingsOpen = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.settingsOpen,
+);

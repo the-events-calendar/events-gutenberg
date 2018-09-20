@@ -8,27 +8,14 @@ Object {
   "endDate": "July 19, 2018",
   "endTime": "19:30",
   "notGoingResponses": false,
+  "settingsOpen": false,
   "startDate": "July 19, 2018",
   "startTime": "19:30",
   "title": "",
 }
 `;
 
-exports[`RSVP block reducer should set the created flag to false 1`] = `
-Object {
-  "capacity": "",
-  "created": false,
-  "description": "",
-  "endDate": "July 19, 2018",
-  "endTime": "19:30",
-  "notGoingResponses": false,
-  "startDate": "July 19, 2018",
-  "startTime": "19:30",
-  "title": "",
-}
-`;
-
-exports[`RSVP block reducer should set the created flag to true 1`] = `
+exports[`RSVP block reducer should set the created flag 1`] = `
 Object {
   "capacity": "",
   "created": true,
@@ -36,6 +23,7 @@ Object {
   "endDate": "July 19, 2018",
   "endTime": "19:30",
   "notGoingResponses": false,
+  "settingsOpen": false,
   "startDate": "July 19, 2018",
   "startTime": "19:30",
   "title": "",
@@ -50,6 +38,7 @@ Object {
   "endDate": "July 19, 2018",
   "endTime": "19:30",
   "notGoingResponses": false,
+  "settingsOpen": false,
   "startDate": "July 19, 2018",
   "startTime": "19:30",
   "title": "",
@@ -64,6 +53,7 @@ Object {
   "endDate": "January 1, 2018",
   "endTime": "19:30",
   "notGoingResponses": false,
+  "settingsOpen": false,
   "startDate": "July 19, 2018",
   "startTime": "19:30",
   "title": "",
@@ -78,6 +68,7 @@ Object {
   "endDate": "July 19, 2018",
   "endTime": "13:45",
   "notGoingResponses": false,
+  "settingsOpen": false,
   "startDate": "July 19, 2018",
   "startTime": "19:30",
   "title": "",
@@ -92,6 +83,22 @@ Object {
   "endDate": "July 19, 2018",
   "endTime": "19:30",
   "notGoingResponses": true,
+  "settingsOpen": false,
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
+exports[`RSVP block reducer should set the settings open 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "notGoingResponses": false,
+  "settingsOpen": true,
   "startDate": "July 19, 2018",
   "startTime": "19:30",
   "title": "",
@@ -106,6 +113,7 @@ Object {
   "endDate": "July 19, 2018",
   "endTime": "19:30",
   "notGoingResponses": false,
+  "settingsOpen": false,
   "startDate": "January 1, 2018",
   "startTime": "19:30",
   "title": "",
@@ -120,6 +128,7 @@ Object {
   "endDate": "July 19, 2018",
   "endTime": "19:30",
   "notGoingResponses": false,
+  "settingsOpen": false,
   "startDate": "July 19, 2018",
   "startTime": "13:45",
   "title": "",
@@ -134,6 +143,7 @@ Object {
   "endDate": "July 19, 2018",
   "endTime": "19:30",
   "notGoingResponses": false,
+  "settingsOpen": false,
   "startDate": "July 19, 2018",
   "startTime": "19:30",
   "title": "new title",

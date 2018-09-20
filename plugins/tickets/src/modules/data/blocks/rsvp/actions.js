@@ -67,6 +67,13 @@ export const setRSVPEndTime = ( endTime ) => ( {
 	},
 } );
 
+export const setRSVPSettingsOpen = ( settingsOpen ) => ( {
+	type: types.SET_RSVP_SETTINGS_OPEN,
+	payload: {
+		settingsOpen,
+	},
+} );
+
 export const setRSVPHeader = ( payload ) => ( {
 	type: types.SET_RSVP_HEADER,
 	payload,

@@ -22,8 +22,5 @@ const mapDispatchToProps = ( dispatch ) => ( {
 
 export default compose(
 	withStore(),
-	connect(
-		null,
-		mapDispatchToProps,
-	),
+	connect( null, mapDispatchToProps ),
 )( RSVPAdvancedOptions );

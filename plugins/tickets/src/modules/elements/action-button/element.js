@@ -20,23 +20,24 @@ const ActionButton = ( {
 	children,
 	className,
 	icon,
+	onClick,
 	position,
 	...props
 } ) => {
 	const containerClass = classNames(
-		'tribe-editor__btn--label',
-		'tribe-editor__tickets-btn--action',
-		`tribe-editor__tickets-btn--action-${ position }`,
+		'tribe-editor__action-button',
+		`tribe-editor__action-button--icon-${ position }`,
 		className,
 	);
 
 	return (
 		<Button
 			className={ containerClass }
+			onClick={ onClick }
 			{ ...props }
 		>
 			{ icon }
-			<span className="tribe-editor__btn--label-children">{ children }</span>
+			<span className="tribe-editor__action-button__label">{ children }</span>
 		</Button>
 	);
 }
@@ -45,6 +46,7 @@ ActionButton.propTypes = {
 	children: PropTypes.node,
 	className: PropTypes.string,
 	icon: PropTypes.node.isRequired,
+	onClick: PropTypes.func,
 	position: PropTypes.oneOf( Object.keys( positions ) ),
 };
 
