@@ -6,16 +6,16 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import ContainerPanel, { RSVP, TICKET } from '@moderntribe/tickets/elements/container-panel/element';
+import ContainerPanel, { LAYOUT } from '@moderntribe/tickets/elements/container-panel/element';
 
 describe( 'Container Panel Element', () => {
 	it( 'renders container panel in rsvp layout', () => {
-		const component = renderer.create( <ContainerPanel layout={ RSVP } /> );
+		const component = renderer.create( <ContainerPanel layout={ LAYOUT.rsvp } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'renders container panel in ticket layout', () => {
-		const component = renderer.create( <ContainerPanel layout={ TICKET } /> );
+		const component = renderer.create( <ContainerPanel layout={ LAYOUT.ticket } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
@@ -24,7 +24,7 @@ describe( 'Container Panel Element', () => {
 			icon: 'icon',
 			header: 'header',
 			content: 'content',
-			layout: RSVP,
+			layout: LAYOUT.rsvp,
 		};
 		const component = renderer.create( <ContainerPanel { ...props } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
@@ -33,7 +33,7 @@ describe( 'Container Panel Element', () => {
 	it( 'renders container panel with classes', () => {
 		const props = {
 			className: 'test-class-name',
-			layout: RSVP,
+			layout: LAYOUT.rsvp,
 		};
 		const component = renderer.create( <ContainerPanel { ...props } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
