@@ -36,6 +36,16 @@ const inactiveBlockProps = {
 	layout: TICKET,
 }
 
+const imageUploadProps = {
+	title: __( 'Ticket Header Image', 'events-gutenberg' ),
+	description: __(
+		/* eslint-disable-next-line max-len */
+		'Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.',
+		'events-gutenberg'
+	),
+	buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
+};
+
 const TicketsTemplate = ( props ) => {
 	const {
 		isSelected,
@@ -60,16 +70,6 @@ const TicketsTemplate = ( props ) => {
 			confirmLabel={ footerConfirmLabel }
 		/>
 	);
-
-	const imageUploadProps = {
-		title: __( 'Ticket Header Image', 'events-gutenberg' ),
-		description: __(
-			/* eslint-disable-next-line max-len */
-			'Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.',
-			'events-gutenberg'
-		),
-		buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
-	};
 
 	return (
 		<div
