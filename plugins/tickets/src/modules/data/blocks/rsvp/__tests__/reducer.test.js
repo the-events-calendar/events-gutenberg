@@ -14,16 +14,8 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( undefined, {} ) ).toEqual( DEFAULT_STATE );
 	} );
 
-	it( 'should set the created flag to true', () => {
+	it( 'should set the created flag', () => {
 		expect( reducer( DEFAULT_STATE, actions.createRSVP() ) ).toMatchSnapshot();
-	} );
-
-	it( 'should set the created flag to false', () => {
-		const state = {
-			...DEFAULT_STATE,
-			created: true,
-		};
-		expect( reducer( state, actions.deleteRSVP() ) ).toMatchSnapshot();
 	} );
 
 	it( 'should set the title', () => {
@@ -56,5 +48,9 @@ describe( 'RSVP block reducer', () => {
 
 	it( 'should set the end time', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPEndTime( '13:45' ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the settings open', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPSettingsOpen( true ) ) ).toMatchSnapshot();
 	} );
 } );

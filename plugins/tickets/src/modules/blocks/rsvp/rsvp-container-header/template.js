@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import RSVPCounters from '@moderntribe/tickets/blocks/rsvp/rsvp-counters/container';
 import { NumericLabel } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
@@ -45,8 +46,7 @@ const RSVPContainerHeader = ( {
 				) }
 				{ getCapacityLabel( capacity ) }
 			</div>
-			<div className="tribe-editor__rsvp-container-header__counters">
-			</div>
+			<RSVPCounters />
 		</Fragment>
 	)
 };
