@@ -39,6 +39,7 @@ const TimePicker = ( {
 	onChange,
 	onClick,
 	showAllDay,
+	disabled,
 } ) => {
 	const renderLabel = ( onToggle ) => {
 		if ( allDay ) {
@@ -46,6 +47,7 @@ const TimePicker = ( {
 				<button
 					className="tribe-editor__timepicker__all-day-btn"
 					onClick={ onToggle }
+					disabled={ disabled }
 				>
 					{ __( 'All Day', 'events-gutenberg' ) }
 				</button>
@@ -67,6 +69,7 @@ const TimePicker = ( {
 				type="time"
 				value={ current }
 				onChange={ onChange }
+				disabled={ disabled }
 				{ ...additionalProps }
 			/>
 		);
@@ -79,6 +82,7 @@ const TimePicker = ( {
 				type="button"
 				aria-expanded={ isOpen }
 				onClick={ onToggle }
+				disabled={ disabled }
 			>
 				<Dashicon className="btn--icon" icon={ isOpen ? 'arrow-up' : 'arrow-down' } />
 			</button>
@@ -185,6 +189,7 @@ TimePicker.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	onClick: PropTypes.func.isRequired,
 	showAllDay: PropTypes.bool,
+	disabled: PropTypes.bool,
 };
 
 export default TimePicker;

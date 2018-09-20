@@ -91,10 +91,14 @@ const onToTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) 
 
 const mapStateToProps = ( state ) => ( {
 	fromDate: selectors.getRSVPTempStartDate( state ),
+	fromDateDisabled: selectors.getRSVPSettingsOpen( state ),
 	fromTime: selectors.getRSVPTempStartTime( state ),
+	fromTimeDisabled: selectors.getRSVPSettingsOpen( state ),
 	isSameDay: getIsSameDay( state ),
 	toDate: selectors.getRSVPTempEndDate( state ),
+	toDateDisabled: selectors.getRSVPSettingsOpen( state ),
 	toTime: selectors.getRSVPTempEndTime( state ),
+	toTimeDisabled: selectors.getRSVPSettingsOpen( state ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
