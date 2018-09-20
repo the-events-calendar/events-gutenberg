@@ -6,19 +6,25 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import { ContainerPanel } from '@moderntribe/tickets/elements';
+import ContainerPanel, { LAYOUT } from '@moderntribe/tickets/elements/container-panel/element';
 
 describe( 'Container Panel Element', () => {
-	it( 'renders container panel', () => {
-		const component = renderer.create( <ContainerPanel /> );
+	it( 'renders container panel in rsvp layout', () => {
+		const component = renderer.create( <ContainerPanel layout={ LAYOUT.rsvp } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
-	it( 'renders container panel with left and right sections', () => {
+	it( 'renders container panel in ticket layout', () => {
+		const component = renderer.create( <ContainerPanel layout={ LAYOUT.ticket } /> );
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
+	it( 'renders container panel with icon, header, and content', () => {
 		const props = {
-			leftSection: 'left section',
-			rightSectionHeader: 'right section header',
-			rightSectionContent: 'right section content',
+			icon: 'icon',
+			header: 'header',
+			content: 'content',
+			layout: LAYOUT.rsvp,
 		};
 		const component = renderer.create( <ContainerPanel { ...props } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
@@ -27,20 +33,7 @@ describe( 'Container Panel Element', () => {
 	it( 'renders container panel with classes', () => {
 		const props = {
 			className: 'test-class-name',
-			leftSection: 'left section',
-			rightSectionHeader: 'right section header',
-			rightSectionContent: 'right section content',
-		};
-		const component = renderer.create( <ContainerPanel { ...props } /> );
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
-
-	it( 'renders container panel with right section content', () => {
-		const props = {
-			leftSection: 'left section',
-			rightSectionHeader: 'right section header',
-			rightSectionContent: 'right section content',
-			showContent: true,
+			layout: LAYOUT.rsvp,
 		};
 		const component = renderer.create( <ContainerPanel { ...props } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
