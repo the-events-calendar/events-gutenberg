@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gutenberg actions Header actions Set null to remove header 1`] = `
+Object {
+  "payload": Object {
+    "header": null,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_HEADER",
+}
+`;
+
+exports[`Gutenberg actions Header actions Set object into header 1`] = `
+Object {
+  "payload": Object {
+    "header": Object {
+      "image": 10,
+    },
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_HEADER",
+}
+`;
+
+exports[`Gutenberg actions Set shared capacity actions Set a large number 1`] = `
+Object {
+  "payload": Object {
+    "sharedCapacity": 999,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_SHARED_CAPACITY",
+}
+`;
+
+exports[`Gutenberg actions Set shared capacity actions Set empty value 1`] = `
+Object {
+  "payload": Object {
+    "sharedCapacity": 0,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_SHARED_CAPACITY",
+}
+`;
