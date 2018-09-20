@@ -25,7 +25,6 @@ const RSVPDurationLabel = () => (
 	<LabelWithTooltip
 		className="tribe-editor__rsvp-duration__duration-label"
 		label="Duration"
-		// @TODO: get dashicon for tooltip label
 		tooltipLabel={ tooltipLabel }
 		// @TODO: get tooltip text based on post type
 		tooltipText={ 'By default, sales will begin as soon as you save the ticket and end when the event begins' }

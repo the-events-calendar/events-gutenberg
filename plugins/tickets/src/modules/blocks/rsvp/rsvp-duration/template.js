@@ -7,7 +7,7 @@ import React from 'react';
  * Internal dependencies
  */
 import RSVPDurationLabel from '../rsvp-duration-label/template';
-import RSVPDurationPicker from '../rsvp-duration-picker/template';
+import RSVPDurationPicker from '../rsvp-duration-picker/container';
 import './style.pcss';
 
 const RSVPDuration = () => (
