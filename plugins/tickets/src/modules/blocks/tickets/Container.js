@@ -6,10 +6,14 @@ import { compose } from 'redux';
 import React from 'react';
 
 /**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+
+/**
  * Internal dependencies
  */
 import Template from './Template';
-
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
 import { ActionButton } from '@moderntribe/tickets/elements';
 import {
@@ -18,14 +22,20 @@ import {
 	User as UserIcon,
 } from '@moderntribe/common/src/modules/icons';
 
-const mapStateToProps = ( state, props ) => ( {
-	isSelected: props.isSelected,
+const mapStateToProps = ( state, ownProps ) => ( {
+	isSelected: ownProps.isSelected,
 	available: 48,
 	total: 166,
 	footerActions: [
-		<ActionButton icon={ <CogIcon /> }>Settings</ActionButton>,
-		<ActionButton icon={ <UserIcon /> }>Attendees </ActionButton>,
-		<ActionButton icon={ <TagIcon /> }>Orders</ActionButton>,
+		<ActionButton icon={ <CogIcon /> }>
+			{ __( 'Settings', 'events-gutenberg' ) }
+		</ActionButton>,
+		<ActionButton icon={ <UserIcon /> }>
+			{ __( 'Attendees', 'events-gutenberg' ) }
+		</ActionButton>,
+		<ActionButton icon={ <TagIcon /> }>
+			{ __( 'Orders', 'events-gutenberg' ) }
+		</ActionButton>,
 	],
 	allowedBlockTypes: [ 'tribe/event-tickets', 'tribe/event-tickets-ticket',  'core/image' ],
 } );

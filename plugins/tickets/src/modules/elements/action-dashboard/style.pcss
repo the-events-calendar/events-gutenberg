@@ -2,12 +2,13 @@
 	background-color: #f8f9fb;
 	display: flex;
 	margin: -14px -14px 0;
-	padding: 15px 17px 15px 20px;
+	padding: 15px 14px;
 	position: relative;
 	bottom: -14px;
 
 	@media (min-width: 600px) {
 		margin: -14px -28px 0;
+		padding: 15px 28px;
 	}
 }
 
@@ -37,32 +38,23 @@
 .tribe-editor__action-dashboard__confirm-button {
 	flex: none;
 	font-family: 'Helvetica', 'sans-serif';
-	border: none;
-	cursor: pointer;
 }
 
 .tribe-editor__action-dashboard__cancel-button {
 	background-color: transparent;
+	font-size: 15px;
+	line-height: 18px;
 	padding: 0;
 	margin-right: 20px;
+	transition: color 0.2s ease;
 
 	&:last-child {
 		margin-right: 0;
 	}
-}
-
-.tribe-editor__action-dashboard__confirm-button {
-	background-color: #00a0d4;
-	color: #ffffff;
-	padding: 9px 21px;
-	font-size: 1rem;
-	font-weight: bold;
-	line-height: 1.25rem;
-	transition: background-color 0.2s ease;
 
 	&:hover,
 	&:focus {
-		background-color: #007bb4
+		color: #009fd4;
 	}
 
 	&[disabled] {
@@ -70,7 +62,6 @@
 		&,
 		&:hover,
 		&:focus {
-			background-color: #f3f4f5;
 			color: #8d949b;
 		}
 	}

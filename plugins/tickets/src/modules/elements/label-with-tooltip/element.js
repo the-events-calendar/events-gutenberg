@@ -37,9 +37,12 @@ const LabelWithTooltip = ( {
 
 LabelWithTooltip.defaultProps = {
 	label: '',
+	id: '',
+	tooltipPosition: 'top right',
 };
 
 LabelWithTooltip.propTypes = {
+	id: PropTypes.string,
 	className: PropTypes.string,
 	label: PropTypes.node,
 	tooltipLabel: PropTypes.node,

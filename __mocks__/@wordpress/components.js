@@ -11,3 +11,6 @@ export const Modal = ( { title, children } ) => (
 		<span>{ children }</span>
 	</div>
 );
+export const Dashicon = ( { className, icon } ) => <span className={ className }>{ icon }</span>;
+export const Dropdown = () => <span>Dropdown</span>;
+export const Tooltip = () => <span>Tooltip</span>;
