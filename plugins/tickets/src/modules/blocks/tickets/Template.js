@@ -1,18 +1,24 @@
 /**
  * External dependencies
  */
-import { __ } from '@wordpress/i18n';
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
 import { InnerBlocks } from '@wordpress/editor';
 
 /**
  * Internal dependencies
  */
+import { ImageUpload } from '@moderntribe/common/elements';
 import {
 	Availability,
 	ActionDashboard,
+	CapacityTable,
 	TicketForm,
 	InactiveBlock,
 } from '@moderntribe/tickets/elements';
@@ -29,6 +35,16 @@ const inactiveBlockProps = {
 		'events-gutenberg',
 	),
 	layout: TICKET,
+};
+
+const imageUploadProps = {
+	title: __( 'Ticket Header Image', 'events-gutenberg' ),
+	description: __(
+		/* eslint-disable-next-line max-len */
+		'Select an image from your Media Library to display on emailed tickets. For best results, use a .jpg, .png, or .gif at least 1160px wide.',
+		'events-gutenberg'
+	),
+	buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
 };
 
 const TicketsTemplate = ( props ) => {
@@ -67,6 +83,8 @@ const TicketsTemplate = ( props ) => {
 				<InnerBlocks />
 				<InactiveBlock { ...inactiveBlockProps } />
 			</div>
+			<CapacityTable />
+			<ImageUpload { ...imageUploadProps } />
 			<TicketForm />
 			{ availability }
 			{ actionDashboard }

@@ -43,4 +43,9 @@ describe( 'RSVP block actions', () => {
 	test( 'set RSVP end time', () => {
 		expect( actions.setRSVPEndTime( '12:34' ) ).toMatchSnapshot();
 	} );
+
+	test( 'set RSVP settings open', () => {
+		expect( actions.setRSVPSettingsOpen( true ) ).toMatchSnapshot();
+	} );
+
 } );

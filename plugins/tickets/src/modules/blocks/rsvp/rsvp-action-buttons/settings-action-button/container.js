@@ -7,20 +7,15 @@ import { compose } from 'redux';
 /**
  * Internal dependencies
  */
-import RSVPAdvancedOptions from './template';
-import { actions } from '@moderntribe/common/data/reducers/ui';
+import SettingsActionButton from './template';
+import { actions } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapDispatchToProps = ( dispatch ) => ( {
-	addAccordion: ( accordionId ) => (
-		dispatch( actions.addAccordion( accordionId ) )
-	),
-	removeAccordion: ( accordionId ) => (
-		dispatch( actions.removeAccordion( accordionId ) )
-	),
+	onClick: () => dispatch( actions.setRSVPSettingsOpen( true ) ),
 } );
 
 export default compose(
 	withStore(),
 	connect( null, mapDispatchToProps ),
-)( RSVPAdvancedOptions );
+)( SettingsActionButton );

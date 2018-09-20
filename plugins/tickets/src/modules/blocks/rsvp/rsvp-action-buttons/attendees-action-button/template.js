@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 import { noop } from 'lodash';
 
 /**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+
+/**
  * Internal dependencies
  */
 import { ActionButton } from '@moderntribe/tickets/elements';
@@ -18,7 +23,7 @@ const AttendeesActionButton = ( {
 		className="tribe-editor__rsvp__action-button tribe-editor__rsvp__action-button--attendees"
 		icon={ <UserIcon /> }
 	>
-		Attendees
+		{ __( 'Attendees', 'events-gutenberg' ) }
 	</ActionButton>
 );
 

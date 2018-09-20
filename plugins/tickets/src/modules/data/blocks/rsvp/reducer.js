@@ -19,6 +19,7 @@ export const DEFAULT_STATE = {
 	startTime: momentUtil.toTime24Hr( moment() ),
 	endTime: momentUtil.toTime24Hr( moment() ),
 	created: false,
+	settingsOpen: false,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -44,32 +45,37 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				capacity: action.payload.capacity,
-			}
+			};
 		case types.SET_RSVP_NOT_GOING_RESPONSES:
 			return {
 				...state,
 				notGoingResponses: action.payload.notGoingResponses,
-			}
+			};
 		case types.SET_RSVP_START_DATE:
 			return {
 				...state,
 				startDate: action.payload.startDate,
-			}
+			};
 		case types.SET_RSVP_END_DATE:
 			return {
 				...state,
 				endDate: action.payload.endDate,
-			}
+			};
 		case types.SET_RSVP_START_TIME:
 			return {
 				...state,
 				startTime: action.payload.startTime,
-			}
+			};
 		case types.SET_RSVP_END_TIME:
 			return {
 				...state,
 				endTime: action.payload.endTime,
-			}
+			};
+		case types.SET_RSVP_SETTINGS_OPEN:
+			return {
+				...state,
+				settingsOpen: action.payload.settingsOpen,
+			};
 		default:
 			return state;
 	}
