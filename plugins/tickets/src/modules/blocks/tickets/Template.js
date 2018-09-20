@@ -6,6 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { InnerBlocks } from '@wordpress/editor';
+import noop from 'lodash/noop';
 
 /**
  * Internal dependencies
@@ -40,6 +41,10 @@ const TicketsTemplate = ( props ) => {
 		// see https://github.com/WordPress/gutenberg/issues/8589 once is resolved we should be able
 		// to address this one and limit this to only this property
 		allowedBlockTypes,
+		sharedCapacity,
+		setHeaderImage,
+		headerImageId,
+		headerImage,
 	} = props;
 
 	const availability = isSelected && (
@@ -67,7 +72,7 @@ const TicketsTemplate = ( props ) => {
 				</DisabledTickets>
 			</div>
 			<CapacityTable />
-			<HeaderImage />
+			<HeaderImage onSelect={ setHeaderImage } mediaId={ headerImageId } image={ headerImage } />
 			{ availability }
 			{ actionDashboard }
 		</div>
@@ -79,6 +84,9 @@ TicketsTemplate.propTypes = {
 	footerActions: PropTypes.arrayOf( PropTypes.node ),
 	footerConfirmLabel: PropTypes.string,
 	allowedBlockTypes: PropTypes.arrayOf( PropTypes.string ),
+	setHeaderImage: PropTypes.func,
+	headerImageId: PropTypes.number,
+	headerImage: PropTypes.string,
 }
 
 TicketsTemplate.defaultProps = {
@@ -86,6 +94,7 @@ TicketsTemplate.defaultProps = {
 	footerActions: [],
 	footerConfirmLabel: __( 'Add Tickets', 'events-gutenberg' ),
 	allowedBlockTypes: [],
+	setHeaderImage: noop,
 }
 
 export default TicketsTemplate;
