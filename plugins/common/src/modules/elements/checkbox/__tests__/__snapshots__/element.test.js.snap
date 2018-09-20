@@ -134,6 +134,23 @@ exports[`Checkbox Element renders checked checkbox 1`] = `
 </div>
 `;
 
+exports[`Checkbox Element renders disabled checkbox 1`] = `
+<div
+  className="tribe-editor__checkbox"
+>
+  <input
+    checked={false}
+    className="tribe-editor__checkbox__input"
+    disabled={true}
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <label
+    className="tribe-editor__checkbox__label"
+  />
+</div>
+`;
+
 exports[`Checkbox Element renders unchecked checkbox 1`] = `
 <div
   className="tribe-editor__checkbox"

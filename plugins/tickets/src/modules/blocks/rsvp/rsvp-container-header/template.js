@@ -109,7 +109,7 @@ const RSVPContainerHeader = ( {
 RSVPContainerHeader.propTypes = {
 	capacity: PropTypes.string,
 	description: PropTypes.string,
-	isDisabled: PropTypes.isDisabled.isRequired,
+	isDisabled: PropTypes.bool.isRequired,
 	isSelected: PropTypes.bool.isRequired,
 	onTempDescriptionChange: PropTypes.func,
 	onTempTitleChange: PropTypes.func,

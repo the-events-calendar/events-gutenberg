@@ -29,24 +29,31 @@ const RSVPContainerContentLabels = () => (
 );
 
 const RSVPContainerContentOptions = ( {
-	capacity,
 	capacityId,
+	isDisabled,
 	notGoingId,
-	notGoingResponses
+	onTempCapacityChange,
+	onTempNotGoingResponsesChange,
+	tempCapacity,
+	tempNotGoingResponses,
 } ) => (
 	<div className="tribe-editor__rsvp-container-content__options">
 		<input
 			className="tribe-editor__rsvp-container-content__capacity-input"
+			disabled={ isDisabled }
 			id={ capacityId }
 			min="0"
+			onChange={ onTempCapacityChange }
 			type="number"
-			value={ capacity }
+			value={ tempCapacity }
 		/>
 		<Checkbox
-			checked={ notGoingResponses }
+			checked={ tempNotGoingResponses }
 			className="tribe-editor__rsvp-container-content__not-going-responses"
+			disabled={ isDisabled }
 			id={ notGoingId }
 			label={ __( 'Enable Not Going responses', 'events-gutenberg' ) }
+			onChange={ onTempNotGoingResponsesChange }
 		/>
 	</div>
 );
@@ -71,12 +78,21 @@ class RSVPContainerContent extends PureComponent {
 	}
 
 	render() {
-		const { capacity, notGoingResponses } = this.props;
+		const {
+			isDisabled,
+			onTempCapacityChange,
+			onTempNotGoingResponsesChange,
+			tempCapacity,
+			tempNotGoingResponses,
+		} = this.props;
 		const optionsProps = {
-			capacity,
 			capacityId: this.capacityId,
+			isDisabled,
 			notGoingId: this.notGoingId,
-			notGoingResponses,
+			onTempCapacityChange,
+			onTempNotGoingResponsesChange,
+			tempCapacity,
+			tempNotGoingResponses,
 		}
 
 		return (
