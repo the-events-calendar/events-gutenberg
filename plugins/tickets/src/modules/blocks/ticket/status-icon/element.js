@@ -14,21 +14,21 @@ import {
 	TicketInactive,
 } from '@moderntribe/tickets/icons';
 
-const TicketIcon = ( { expires, disabled } ) => {
+const StatusIcon = ( { expires, disabled } ) => {
 	if ( expires ) {
 		return disabled ? <TicketInactive /> : <TicketActive />;
 	}
 	return disabled ? <ClockInactive /> : <ClockActive />;
 };
 
-TicketIcon.defaultProps = {
+StatusIcon.defaultProps = {
 	expires: false,
 	disabled: false,
 }
 
-TicketIcon.propTypes = {
+StatusIcon.propTypes = {
 	expires: PropTypes.bool,
 	disabled: PropTypes.bool,
 }
 
-export default TicketIcon;
+export default StatusIcon;
