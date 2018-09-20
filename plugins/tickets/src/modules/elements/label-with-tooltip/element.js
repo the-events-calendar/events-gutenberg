@@ -13,6 +13,8 @@ import './style.pcss';
 
 const LabelWithTooltip = ( {
 	className,
+	forId,
+	isLabel,
 	label,
 	tooltipLabel,
 	tooltipPosition,
@@ -20,6 +22,8 @@ const LabelWithTooltip = ( {
 } ) => (
 	<LabeledItem
 		className={ classNames( 'tribe-editor__label-with-tooltip', className ) }
+		forId={ forId }
+		isLabel={ isLabel }
 		label={ label }
 	>
 		<Tooltip

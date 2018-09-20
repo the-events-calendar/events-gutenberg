@@ -23,4 +23,17 @@ describe( 'Labeled Item Element', () => {
 		const component = renderer.create( <LabeledItem label="test label">Test</LabeledItem> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
+
+	it( 'renders labeled item with label element and for id', () => {
+		const component = renderer.create(
+			<LabeledItem
+				label="test label"
+				isLabel={ true }
+				forId="test-id"
+			>
+				Test
+			</LabeledItem>
+		);
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
 } );
