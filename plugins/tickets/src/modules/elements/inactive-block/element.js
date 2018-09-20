@@ -10,8 +10,10 @@ import classNames from 'classnames';
  */
 import './style.pcss';
 
-export const RSVP = 'rsvp';
-export const TICKET = 'ticket';
+export const LAYOUT = {
+	rsvp: 'rsvp',
+	ticket: 'ticket',
+};
 
 const InactiveBlock = ( {
 	className,
@@ -45,7 +47,7 @@ InactiveBlock.propTypes = {
 	className: PropTypes.string,
 	description: PropTypes.string,
 	icon: PropTypes.node,
-	layout: PropTypes.oneOf( [ RSVP, TICKET ] ).isRequired,
+	layout: PropTypes.oneOf( Object.keys( LAYOUT ) ).isRequired,
 	title: PropTypes.string,
 };
 
