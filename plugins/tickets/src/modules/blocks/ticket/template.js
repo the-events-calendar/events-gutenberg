@@ -12,10 +12,8 @@ import {
 	Clipboard,
 	Pencil,
 } from '@moderntribe/common/icons';
-import {
-	TicketStatus,
-	QuantityBar,
-} from '@moderntribe/tickets/elements';
+import StatusIcon from './status-icon/element';
+import QuantityBar from './quantity-bar/element';
 import './style.pcss';
 
 const Ticket = ( props ) => {
@@ -37,7 +35,7 @@ const Ticket = ( props ) => {
 	return (
 		<article className="tribe-editor__ticket">
 			<div className="tribe-editor__ticket-icon">
-				<TicketStatus expires={ expires } />
+				<StatusIcon expires={ expires } />
 			</div>
 			<div className="tribe-editor__ticket-content">
 				<div className="tribe-editor__ticket-title-container">

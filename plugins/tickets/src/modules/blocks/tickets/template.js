@@ -17,14 +17,14 @@ import noop from 'lodash/noop';
  */
 import { ImageUpload } from '@moderntribe/common/elements';
 import {
-	Availability,
 	ActionDashboard,
-	CapacityTable,
-	TicketForm,
 	InactiveBlock,
 } from '@moderntribe/tickets/elements';
 import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';
+import Availability from './availability/element';
+import CapacityTable from './capacity-table/element';
+import TicketForm from './ticket-form/element';
 import './style.pcss';
 
 const inactiveBlockProps = {
@@ -86,13 +86,13 @@ const TicketsTemplate = ( props ) => {
 		>
 			<div className="tribe-editor__tickets-body">
 				<InnerBlocks />
-				<InactiveBlock { ...inactiveBlockProps } />
 			</div>
-			<CapacityTable />
 			<ImageUpload { ...imageUploadProps } />
-			<TicketForm />
 			{ availability }
 			{ actionDashboard }
+			<InactiveBlock { ...inactiveBlockProps } />
+			<CapacityTable />
+			<TicketForm />
 		</div>
 	);
 };
