@@ -70,8 +70,22 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPTempStartDate( 'January 1, 2018' ) ) ).toMatchSnapshot();
 	} );
 
+	it( 'should set the temp start date object', () => {
+		expect( reducer(
+			DEFAULT_STATE,
+			actions.setRSVPTempStartDateObj( new Date( 'January 1, 2018' ) ),
+		) ).toMatchSnapshot();
+	} );
+
 	it( 'should set the temp end date', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPTempEndDate( 'January 1, 2018' ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the temp end date object', () => {
+		expect( reducer(
+			DEFAULT_STATE,
+			actions.setRSVPTempEndDate( new Date( 'January 1, 2018' ) ),
+		) ).toMatchSnapshot();
 	} );
 
 	it( 'should set the temp start time', () => {

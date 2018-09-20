@@ -64,8 +64,16 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPTempStartDate( 'January 1, 2018' ) ).toMatchSnapshot();
 	} );
 
+	test( 'set RSVP temp start date', () => {
+		expect( actions.setRSVPTempStartDateObj( new Date( 'January 1, 2018' ) ) ).toMatchSnapshot();
+	} );
+
 	test( 'set RSVP temp end date', () => {
 		expect( actions.setRSVPTempEndDate( 'January 1, 2018' ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP temp end date', () => {
+		expect( actions.setRSVPTempEndDateObj( new Date( 'January 1, 2018' ) ) ).toMatchSnapshot();
 	} );
 
 	test( 'set RSVP temp start time', () => {
@@ -104,8 +112,10 @@ describe( 'RSVP block actions', () => {
 			tempCapacity: 20,
 			tempNotGoingResponses: true,
 			tempStartDate: 'January 1, 2018',
+			tempStartDateObj: new Date( 'January 1, 2018' ),
 			tempStartTime: '12:34',
 			tempEndDate: 'January 4, 2018',
+			tempEndDateObj: new Date( 'January 4, 2018' ),
 			tempEndTime: '23:32'
 		} ) ).toMatchSnapshot();
 	} );

@@ -116,10 +116,24 @@ export const setRSVPTempStartDate = ( tempStartDate ) => ( {
 	},
 } );
 
+export const setRSVPTempStartDateObj = ( tempStartDateObj ) => ( {
+	type: types.SET_RSVP_TEMP_START_DATE_OBJ,
+	payload: {
+		tempStartDateObj,
+	},
+} );
+
 export const setRSVPTempEndDate = ( tempEndDate ) => ( {
 	type: types.SET_RSVP_TEMP_END_DATE,
 	payload: {
 		tempEndDate,
+	},
+} );
+
+export const setRSVPTempEndDateObj = ( tempEndDateObj ) => ( {
+	type: types.SET_RSVP_TEMP_END_DATE_OBJ,
+	payload: {
+		tempEndDateObj,
 	},
 } );
 

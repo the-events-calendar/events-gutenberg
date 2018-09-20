@@ -23,7 +23,9 @@ export const DEFAULT_STATE = {
 	tempCapacity: '',
 	tempNotGoingResponses: false,
 	tempStartDate: momentUtil.toDate( moment() ),
+	tempStartDateObj: new Date( momentUtil.toDate( moment() ) ),
 	tempEndDate: momentUtil.toDate( moment() ),
+	tempEndDateObj: new Date( momentUtil.toDate( moment() ) ),
 	tempStartTime: momentUtil.toTime24Hr( moment() ),
 	tempEndTime: momentUtil.toTime24Hr( moment() ),
 	created: false,
@@ -105,10 +107,20 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				tempStartDate: action.payload.tempStartDate,
 			};
+		case types.SET_RSVP_TEMP_START_DATE_OBJ:
+			return {
+				...state,
+				tempStartDateObj: action.payload.tempStartDateObj,
+			};
 		case types.SET_RSVP_TEMP_END_DATE:
 			return {
 				...state,
 				tempEndDate: action.payload.tempEndDate,
+			};
+		case types.SET_RSVP_TEMP_END_DATE_OBJ:
+			return {
+				...state,
+				tempEndDateObj: action.payload.tempEndDateObj,
 			};
 		case types.SET_RSVP_TEMP_START_TIME:
 			return {

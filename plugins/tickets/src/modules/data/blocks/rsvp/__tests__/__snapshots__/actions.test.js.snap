@@ -133,9 +133,11 @@ Object {
     "tempCapacity": 20,
     "tempDescription": "description",
     "tempEndDate": "January 4, 2018",
+    "tempEndDateObj": 2018-01-04T00:00:00.000Z,
     "tempEndTime": "23:32",
     "tempNotGoingResponses": true,
     "tempStartDate": "January 1, 2018",
+    "tempStartDateObj": 2018-01-01T00:00:00.000Z,
     "tempStartTime": "12:34",
     "tempTitle": "title",
   },
@@ -149,6 +151,15 @@ Object {
     "tempEndDate": "January 1, 2018",
   },
   "type": "@@MT/TICKETS/SET_RSVP_TEMP_END_DATE",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp end date 2`] = `
+Object {
+  "payload": Object {
+    "tempEndDateObj": 2018-01-01T00:00:00.000Z,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_END_DATE_OBJ",
 }
 `;
 
@@ -176,6 +187,15 @@ Object {
     "tempStartDate": "January 1, 2018",
   },
   "type": "@@MT/TICKETS/SET_RSVP_TEMP_START_DATE",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp start date 2`] = `
+Object {
+  "payload": Object {
+    "tempStartDateObj": 2018-01-01T00:00:00.000Z,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_START_DATE_OBJ",
 }
 `;
 

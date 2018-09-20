@@ -53,6 +53,46 @@ describe( 'RSVP block types', () => {
 		expect( types.SET_RSVP_HAS_CHANGES ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HAS_CHANGES` );
 	} );
 
+	test( 'set RSVP temp title', () => {
+		expect( types.SET_RSVP_TEMP_TITLE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_TITLE` );
+	} );
+
+	test( 'set RSVP temp description', () => {
+		expect( types.SET_RSVP_TEMP_DESCRIPTION ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_DESCRIPTION` );
+	} );
+
+	test( 'set RSVP temp capacity', () => {
+		expect( types.SET_RSVP_TEMP_CAPACITY ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_CAPACITY` );
+	} );
+
+	test( 'set RSVP temp not going responses', () => {
+		expect( types.SET_RSVP_TEMP_NOT_GOING_RESPONSES ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_NOT_GOING_RESPONSES` );
+	} );
+
+	test( 'set RSVP temp start date', () => {
+		expect( types.SET_RSVP_TEMP_START_DATE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_START_DATE` );
+	} );
+
+	test( 'set RSVP temp start date object', () => {
+		expect( types.SET_RSVP_TEMP_START_DATE_OBJ ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_START_DATE_OBJ` );
+	} );
+
+	test( 'set RSVP temp end date', () => {
+		expect( types.SET_RSVP_TEMP_END_DATE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_END_DATE` );
+	} );
+
+	test( 'set RSVP temp end date object', () => {
+		expect( types.SET_RSVP_TEMP_END_DATE_OBJ ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_END_DATE_OBJ` );
+	} );
+
+	test( 'set RSVP temp start time', () => {
+		expect( types.SET_RSVP_TEMP_START_TIME ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_START_TIME` );
+	} );
+
+	test( 'set RSVP temp end time', () => {
+		expect( types.SET_RSVP_TEMP_END_TIME ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TEMP_END_TIME` );
+	} );
+
 	test( 'set RSVP details', () => {
 		expect( types.SET_RSVP_DETAILS ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_DETAILS` );
 	} );

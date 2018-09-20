@@ -69,12 +69,20 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPTempStartDate( state ) ).toBe( DEFAULT_STATE.tempStartDate );
 	} );
 
+	it( 'should return the temp start date object', () => {
+		expect( selectors.getRSVPTempStartDateObj( state ) ).toBe( DEFAULT_STATE.tempStartDateObj );
+	} );
+
 	it( 'should return the temp start time', () => {
 		expect( selectors.getRSVPTempStartTime( state ) ).toBe( DEFAULT_STATE.tempStartTime );
 	} );
 
 	it( 'should return the temp end date', () => {
 		expect( selectors.getRSVPTempEndDate( state ) ).toBe( DEFAULT_STATE.tempEndDate );
+	} );
+
+	it( 'should return the temp end date object', () => {
+		expect( selectors.getRSVPTempEndDateObj( state ) ).toBe( DEFAULT_STATE.tempEndDateObj );
 	} );
 
 	it( 'should return the temp end time', () => {

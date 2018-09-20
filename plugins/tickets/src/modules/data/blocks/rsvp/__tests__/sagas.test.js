@@ -68,8 +68,10 @@ describe( 'RSVP block sagas', () => {
 				tempCapacity: '20',
 				tempNotGoingResponses: true,
 				tempStartDate: 'January 1, 2018',
+				tempStartDateObj: new Date( 'January 1, 2018' ),
 				tempStartTime: '12:34',
 				tempEndDate: 'January 4, 2018',
+				tempEndDateObj: new Date( 'January 4, 2018' ),
 				tempEndTime: '23:32'
 			} };
 		} );
@@ -83,8 +85,10 @@ describe( 'RSVP block sagas', () => {
 					put( actions.setRSVPTempCapacity( '20' ) ),
 					put( actions.setRSVPTempNotGoingResponses( true ) ),
 					put( actions.setRSVPTempStartDate( 'January 1, 2018' ) ),
+					put( actions.setRSVPTempStartDateObj( new Date( 'January 1, 2018' ) ) ),
 					put( actions.setRSVPTempStartTime( '12:34') ),
 					put( actions.setRSVPTempEndDate( 'January 4, 2018' ) ),
+					put( actions.setRSVPTempEndDateObj( new Date( 'January 4, 2018' ) ) ),
 					put( actions.setRSVPTempEndTime( '23:32' ) ),
 				] )
 			);

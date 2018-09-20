@@ -39,8 +39,10 @@ export function* setRSVPTempDetails( action ) {
 		tempCapacity,
 		tempNotGoingResponses,
 		tempStartDate,
+		tempStartDateObj,
 		tempStartTime,
 		tempEndDate,
+		tempEndDateObj,
 		tempEndTime,
 	} = action.payload;
 	yield all( [
@@ -49,8 +51,10 @@ export function* setRSVPTempDetails( action ) {
 		put( actions.setRSVPTempCapacity( tempCapacity ) ),
 		put( actions.setRSVPTempNotGoingResponses( tempNotGoingResponses ) ),
 		put( actions.setRSVPTempStartDate( tempStartDate ) ),
+		put( actions.setRSVPTempStartDateObj( tempStartDateObj ) ),
 		put( actions.setRSVPTempStartTime( tempStartTime) ),
 		put( actions.setRSVPTempEndDate( tempEndDate ) ),
+		put( actions.setRSVPTempEndDateObj( tempEndDateObj ) ),
 		put( actions.setRSVPTempEndTime( tempEndTime ) ),
 	] );
 }
