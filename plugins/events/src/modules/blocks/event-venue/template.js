@@ -35,6 +35,7 @@ import VenueDetails from './venue-details';
 import VenueIcon from 'icons/venue.svg';
 import CloseIcon from 'icons/close.svg';
 import { utils } from '@moderntribe/events/data/blocks/venue';
+import { google, mapsAPI } from '@moderntribe/common/utils/globals';
 import './style.pcss';
 
 /**
@@ -67,6 +68,15 @@ class EventVenue extends Component {
 		removeVenue: PropTypes.func,
 		editVenue: PropTypes.func,
 	};
+
+	constructor( props ) {
+		super( props );
+
+		/**
+		 * @todo move this into the Store
+		 */
+		this.state = { coords: { lat: null, lng: null } }
+	}
 
 	componentDidUpdate( prevProps ) {
 		const { isSelected, edit, create, setSubmit } = this.props;
@@ -177,10 +187,12 @@ class EventVenue extends Component {
 
 		const { getCoordinates, getAddress } = utils;
 
+		this.getCoordinates( details );
+		const { coords } = this.state;
 		return (
 			<GoogleMap
 				size={ { width: 450, height: 353 } }
-				coordinates={ getCoordinates( details ) }
+				coordinates={ coords }
 				address={ addressToMapString( getAddress( details ) ) }
 				interactive={ true }
 			/>
@@ -261,21 +273,64 @@ class EventVenue extends Component {
 		return [ this.renderBlock(), this.renderControls() ];
 	}
 
-	// TODO: this hasVenue is coupled to the existence of details, not the venue ID.
-	// Given how withDetails is currently tightly coupled with the state, this cannot
-	// be moved to the container. withDetails should be decoupled from state.
+	/**
+	 * Given how withDetails is currently tightly coupled with the state, this cannot
+	 * be moved to the container. withDetails should be decoupled from state.
+	 *
+	 * @todo  this hasVenue is coupled to the existence of details, not the venue ID.
+	 *
+	 * @return {Boolean}
+	 */
 	hasVenue() {
 		const { details } = this.props;
 		return ! isEmpty( details );
 	}
 
-	// TODO: this function cannot be moved to container as it depends on hasVenue().
-	// Once withDetails is decoupled from state, this should move to container.
+	/**
+	 * Once withDetails is decoupled from state, this should move to container.
+	 *
+	 * @todo this function cannot be moved to container as it depends on hasVenue().
+	 *
+	 * @return {void}
+	 */
 	maybeEdit = () => {
 		const { volatile, editVenue } = this.props;
 		if ( this.hasVenue() && volatile ) {
 			return editVenue;
 		}
+	}
+
+	/**
+	 * Get the coordinates according to the venue address
+	 * So we can display the map on the backend
+	 *
+	 * @todo  We need to save the data into Meta Fields to avoid redoing the Geocode
+	 * @todo  Move the Maps into Pro
+	 *
+	 * @param  {object} details Information to pass along to the geocoder
+	 *
+	 * @return {void}
+	 */
+	getCoordinates = ( details )  => {
+		const { maps }       = google();
+		const geocoder       = new maps.Geocoder();
+		const { getAddress } = utils;
+
+		const address = addressToMapString( getAddress( details ) );
+
+		/**
+		 * @todo Need to move this out of the template
+		 */
+		geocoder.geocode( { 'address' : address }, ( results, status ) => {
+			if ( 'OK' !== status ) {
+				return;
+			}
+
+			const { location } = results[0].geometry;
+
+			this.setState( { coords: { location.lat(), location.lng() } } );
+			return;
+		} );
 	}
 }
 
