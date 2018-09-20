@@ -15,7 +15,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { TicketStatus } from '@moderntribe/tickets/elements';
+import StatusIcons from '@moderntribe/tickets/blocks/ticket/status-icon/element';
 import './style.pcss';
 import { sendValue } from '@moderntribe/common/utils/input';
 
@@ -106,7 +106,7 @@ class Header extends PureComponent {
 		return (
 			<header className="tribe-editor__new-ticket__header">
 				<div className="tribe-editor__new-ticket__icon">
-					<TicketStatus expires={ expires } />
+					<StatusIcons expires={ expires } />
 				</div>
 				<div className="tribe-editor__new-ticket__content">
 					<AutosizeInput
