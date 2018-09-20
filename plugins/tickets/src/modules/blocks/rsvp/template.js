@@ -19,7 +19,7 @@ import {
 	AttendeesActionButton,
 } from './rsvp-action-buttons';
 import { ActionDashboard, InactiveBlock } from '@moderntribe/tickets/elements';
-import { RSVP as RSVPLayout } from '@moderntribe/tickets/elements/inactive-block/element';
+import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { RSVPInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
@@ -36,7 +36,7 @@ const inactiveBlockData = {
 	/* eslint-disable-next-line max-len */
 	description: __( 'The time is curently outside of the RSVP window. Make adjustments to the start and end date to activate this RSVP.', 'events-gutenberg' ),
 	className: 'tribe-editor__rsvp__inactive-block',
-	layout: RSVPLayout,
+	layout: LAYOUT.rsvp,
 };
 
 const RSVP = ( {

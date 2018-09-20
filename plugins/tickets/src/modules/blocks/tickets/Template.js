@@ -17,7 +17,7 @@ import {
 	HeaderImage,
 	InactiveBlock,
 } from '@moderntribe/tickets/elements';
-import { TICKET } from '@moderntribe/tickets/elements/inactive-block/element';
+import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
@@ -29,7 +29,7 @@ const inactiveBlockProps = {
 		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
 		'events-gutenberg'
 	),
-	layout: TICKET,
+	layout: LAYOUT.ticket,
 }
 
 const TicketsTemplate = ( props ) => {
