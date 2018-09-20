@@ -2,7 +2,6 @@
  * External dependencies
  */
 import React, { Fragment, PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 
 /**
@@ -15,33 +14,20 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import RSVPDuration from '../rsvp-duration/template';
+import RSVPAttendeeRegistration from '../rsvp-attendee-registration/template';
 import { Accordion } from '@moderntribe/common/elements';
 import './style.pcss';
 
 class RSVPAdvancedOptions extends PureComponent {
-	static propTypes = {
-		addAccordion: PropTypes.func.isRequired,
-		removeAccordion: PropTypes.func.isRequired,
-	};
-
 	constructor( props ) {
 		super( props );
 		this.accordionId = uniqid();
 	}
 
-	componentDidMount() {
-		this.props.addAccordion( this.accordionId );
-	}
-
-	componentWillUnmount() {
-		this.props.removeAccordion( this.accordionId );
-	}
-
 	getContent = () => (
 		<Fragment>
 			<RSVPDuration />
-			{/* @TODO: attendee registration */}
-			{/* <RSVPAttendeeRegistration /> */}
+			<RSVPAttendeeRegistration />
 		</Fragment>
 	);
 

@@ -8,30 +8,31 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import { Tooltip } from '@moderntribe/common/elements';
+import { LabeledItem, Tooltip } from '@moderntribe/common/elements';
 import './style.pcss';
 
 const LabelWithTooltip = ( {
 	className,
+	forId,
+	isLabel,
 	label,
 	tooltipLabel,
 	tooltipPosition,
 	tooltipText,
 } ) => (
-	<div className={ classNames(
-		'tribe-editor__label-with-tooltip',
-		className,
-	) }>
-		<span className="tribe-editor__label-with-tooltip__label">
-			{ label }
-		</span>
+	<LabeledItem
+		className={ classNames( 'tribe-editor__label-with-tooltip', className ) }
+		forId={ forId }
+		isLabel={ isLabel }
+		label={ label }
+	>
 		<Tooltip
 			label={ tooltipLabel }
 			labelClassName="tribe-editor__label-with-tooltip__tooltip-label"
 			position={ tooltipPosition }
 			text={ tooltipText }
 		/>
-	</div>
+	</LabeledItem>
 );
 
 LabelWithTooltip.defaultProps = {

@@ -2,10 +2,10 @@
 
 exports[`Tooltip Element renders a tooltip 1`] = `
 <div
-  className="tribe-editor__label-with-tooltip element-class"
+  className="tribe-editor__labeled-item tribe-editor__label-with-tooltip element-class"
 >
   <span
-    className="tribe-editor__label-with-tooltip__label"
+    className="tribe-editor__labeled-item__label"
   >
     some label
   </span>
