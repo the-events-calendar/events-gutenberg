@@ -14,20 +14,25 @@ import noop from 'lodash/noop';
 import {
 	Availability,
 	ActionDashboard,
+	TicketForm,
+	InactiveBlock,
 	CapacityTable,
 	HeaderImage,
-	DisabledTickets,
 } from '@moderntribe/tickets/elements';
+import { TICKET } from '@moderntribe/tickets/elements/inactive-block/element';
+import { TicketInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
-const disabled = {
+const inactiveBlockProps = {
+	icon: <TicketInactive />,
 	title: __( 'No Active Tickets', 'events-gutenberg' ),
 	description: __(
 		/* eslint-disable-next-line max-len */
 		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
-		'events-gutenberg'
+		'events-gutenberg',
 	),
-}
+	layout: TICKET,
+};
 
 const TicketsTemplate = ( props ) => {
 	const {
@@ -67,17 +72,16 @@ const TicketsTemplate = ( props ) => {
 		>
 			<div className="tribe-editor__tickets-body">
 				<InnerBlocks />
-				<DisabledTickets title={ disabled.title }>
-					{ disabled.description }
-				</DisabledTickets>
+				<InactiveBlock { ...inactiveBlockProps } />
 			</div>
 			<CapacityTable />
 			<HeaderImage onSelect={ setHeaderImage } mediaId={ headerImageId } image={ headerImage } />
+			<TicketForm />
 			{ availability }
 			{ actionDashboard }
 		</div>
 	);
-}
+};
 
 TicketsTemplate.propTypes = {
 	isSelected: PropTypes.bool,
@@ -86,8 +90,13 @@ TicketsTemplate.propTypes = {
 	allowedBlockTypes: PropTypes.arrayOf( PropTypes.string ),
 	setHeaderImage: PropTypes.func,
 	headerImageId: PropTypes.number,
-	headerImage: PropTypes.string,
-}
+	headerImage: PropTypes.shape( {
+		height: PropTypes.number,
+		width: PropTypes.number,
+		url: PropTypes.string,
+		orientation: PropTypes.string,
+	} ),
+};
 
 TicketsTemplate.defaultProps = {
 	isSelected: false,
@@ -95,6 +104,6 @@ TicketsTemplate.defaultProps = {
 	footerConfirmLabel: __( 'Add Tickets', 'events-gutenberg' ),
 	allowedBlockTypes: [],
 	setHeaderImage: noop,
-}
+};
 
 export default TicketsTemplate;

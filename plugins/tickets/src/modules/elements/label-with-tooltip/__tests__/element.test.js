@@ -10,7 +10,7 @@ import renderer from 'react-test-renderer';
 import LabelWithTooltip from '@moderntribe/tickets/elements/label-with-tooltip/element';
 
 jest.mock( '@wordpress/components', () => ( {
-	Tooltip: ({ text, position, children }) => (
+	Tooltip: ( { text, position, children } ) => (
 		<div>
 			<span>{ text }</span>
 			<span>{ position }</span>
@@ -30,5 +30,14 @@ describe( 'Tooltip Element', () => {
 		};
 		const component = renderer.create( <LabelWithTooltip { ...props } />)
 		expect( component.toJSON() ).toMatchSnapshot()
+	} );
+
+	it( 'renders a <label> when ID is provided', () => {
+		const props = {
+			label: 'Custom label',
+			id: 'my-custom-input',
+		};
+		const component = renderer.create( <LabelWithTooltip { ...props } /> );
+		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 } );

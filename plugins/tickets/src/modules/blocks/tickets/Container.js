@@ -20,7 +20,7 @@ import {
 } from '@moderntribe/common/src/modules/icons';
 
 const mapStateToProps = ( state, ownProps ) => ( {
-	isSelected: ownProps.isSelected,
+	isSelected: true,
 	available: 48,
 	total: 166,
 	footerActions: [
