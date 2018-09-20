@@ -16,18 +16,26 @@ import { __ } from '@wordpress/i18n';
 import { NumericLabel } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
-const getTitle = ( isSelected, onTempTitleChange, tempTitle, title ) => (
+const getTitle = (
+	isDisabled,
+	isSelected,
+	onTempTitleChange,
+	tempTitle,
+	title,
+) => (
 	isSelected
 		? <AutosizeInput
 			className="tribe-editor__rsvp-container-header__title-input"
 			value={ tempTitle }
 			placeholder={ __( 'RSVP Title', 'events-gutenberg' ) }
 			onChange={ onTempTitleChange }
+			disabled={ isDisabled }
 		/>
 		: <h2 className="tribe-editor__rsvp-container-header__title">{ title }</h2>
 );
 
 const getDescription = (
+	isDisabled,
 	isSelected,
 	onTempDescriptionChange,
 	tempDescription,
@@ -39,6 +47,7 @@ const getDescription = (
 			value={ tempDescription }
 			placeholder={ __( 'description', 'events-gutenberg' ) }
 			onChange={ onTempDescriptionChange }
+			disabled={ isDisabled }
 		/>
 		: description && (
 			<span className="tribe-editor__rsvp-container-header__description">
@@ -64,6 +73,7 @@ const getCapacityLabel = ( capacity ) => {
 const RSVPContainerHeader = ( {
 	capacity,
 	description,
+	isDisabled,
 	isSelected,
 	onTempDescriptionChange,
 	onTempTitleChange,
@@ -74,8 +84,15 @@ const RSVPContainerHeader = ( {
 	return (
 		<Fragment>
 			<div className="tribe-editor__rsvp-container-header__header-details">
-				{ getTitle( isSelected, onTempTitleChange, tempTitle, title ) }
+				{ getTitle(
+					isDisabled,
+					isSelected,
+					onTempTitleChange,
+					tempTitle,
+					title,
+				) }
 				{ getDescription(
+					isDisabled,
 					isSelected,
 					onTempDescriptionChange,
 					tempDescription,
@@ -92,8 +109,13 @@ const RSVPContainerHeader = ( {
 RSVPContainerHeader.propTypes = {
 	capacity: PropTypes.string,
 	description: PropTypes.string,
+	isDisabled: PropTypes.isDisabled.isRequired,
 	isSelected: PropTypes.bool.isRequired,
-	title: PropTypes.string.isRequired,
+	onTempDescriptionChange: PropTypes.func,
+	onTempTitleChange: PropTypes.func,
+	tempDescription: PropTypes.string,
+	tempTitle: PropTypes.string,
+	title: PropTypes.string,
 };
 
 export default RSVPContainerHeader;

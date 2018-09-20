@@ -14,6 +14,7 @@ import { withStore } from '@moderntribe/common/hoc';
 const mapStateToProps = ( state ) => ( {
 	capacity: selectors.getRSVPCapacity( state ),
 	description: selectors.getRSVPDescription( state ),
+	isDisabled: selectors.getRSVPSettingsOpen( state ),
 	tempDescription: selectors.getRSVPTempDescription( state ),
 	tempTitle: selectors.getRSVPTempTitle( state ),
 	title: selectors.getRSVPTitle( state ),
