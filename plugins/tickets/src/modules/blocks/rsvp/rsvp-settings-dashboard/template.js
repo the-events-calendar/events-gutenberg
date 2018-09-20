@@ -12,7 +12,6 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import ImageUpload from '@moderntribe/common/elements/image-upload/element';
 import RSVPHeaderImage from '@moderntribe/tickets/blocks/rsvp/rsvp-header-image/container';
 import { SettingsDashboard } from '@moderntribe/tickets/elements';
 

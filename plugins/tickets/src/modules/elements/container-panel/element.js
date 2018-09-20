@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -10,37 +10,61 @@ import classNames from 'classnames';
  */
 import './style.pcss';
 
+export const LAYOUT = {
+	rsvp: 'rsvp',
+	ticket: 'ticket',
+};
+
 const ContainerPanel = ( {
 	className,
-	leftSection,
-	rightSectionContent,
-	rightSectionHeader,
-} ) => (
-	<div
-		className={ classNames(
-			'tribe-editor__container-panel',
-			className,
-		) }
-	>
-		<section className="tribe-editor__container-panel__left-section">
-			{ leftSection }
-		</section>
-		<section className="tribe-editor__container-panel__right-section">
-			<header className="tribe-editor__container-panel__right-section-header">
-				{ rightSectionHeader }
-			</header>
-			<div className="tribe-editor__container-panel__right-section-content">
-				{ rightSectionContent }
+	content,
+	header,
+	icon,
+	layout,
+} ) => {
+	const headerAndContent = (
+		<Fragment>
+			<div className="tribe-editor__container-panel__header">
+				{ header }
 			</div>
-		</section>
-	</div>
-);
+			<div className="tribe-editor__container-panel__content">
+				{ content }
+			</div>
+		</Fragment>
+	);
+
+	const getHeaderAndContent = () => (
+		layout === LAYOUT.ticket
+			? headerAndContent
+			: (
+				<div className="tribe-editor__container-panel__header-content-wrapper">
+					{ headerAndContent }
+				</div>
+			)
+	);
+
+	return (
+		<div
+			className={ classNames(
+				'tribe-editor__container-panel',
+				`tribe-editor__container-panel--${ layout }`,
+				className,
+			) }
+		>
+			<div className="tribe-editor__container-panel__icon">
+				{ icon }
+			</div>
+			{ getHeaderAndContent() }
+		</div>
+	);
+};
 
 ContainerPanel.propTypes = {
 	className: PropTypes.string,
-	leftSection: PropTypes.node,
-	rightSectionContent: PropTypes.node,
-	rightSectionHeader: PropTypes.node,
+	content: PropTypes.node,
+	header: PropTypes.node,
+	icon: PropTypes.node,
+	layout: PropTypes.oneOf( Object.keys( LAYOUT ) ).isRequired,
 };
 
 export default ContainerPanel;

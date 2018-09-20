@@ -24,29 +24,27 @@ const SettingsDashboard = ( {
 	content,
 	headerLeft,
 	onCloseClick,
-} ) => {
-	return (
-		<div className={ classNames(
-			'tribe-editor__settings-dashboard',
-			className,
-		) }>
-			<header className="tribe-editor__settings-dashboard__header">
-				<span className="tribe-editor__settings-dashboard__header-left">
-					{ headerLeft }
-				</span>
-				<Button
-					className="tribe-editor__settings-dashboard__close-button"
-					onClick={ onCloseClick }
-				>
-					{ closeButtonLabel }
-				</Button>
-			</header>
-			<div className="tribe-editor__settings-dashboard__content">
-				{ content }
-			</div>
+} ) => (
+	<div className={ classNames(
+		'tribe-editor__settings-dashboard',
+		className,
+	) }>
+		<header className="tribe-editor__settings-dashboard__header">
+			<span className="tribe-editor__settings-dashboard__header-left">
+				{ headerLeft }
+			</span>
+			<Button
+				className="tribe-editor__settings-dashboard__close-button"
+				onClick={ onCloseClick }
+			>
+				{ closeButtonLabel }
+			</Button>
+		</header>
+		<div className="tribe-editor__settings-dashboard__content">
+			{ content }
 		</div>
-	)
-};
+	</div>
+);
 
 SettingsDashboard.defaultProps = {
 	closeButtonLabel: (
