@@ -23,4 +23,16 @@ describe( 'Gutenberg actions', () => {
 			expect( actions.setSharedCapacity( 999 ) ).toMatchSnapshot();
 		} );
 	} );
+
+	describe( 'Set the status of the settings dashboard', () => {
+		test( 'Open the settings dashboard', () => {
+			expect( actions.openSettings() ).toMatchSnapshot();
+			expect( actions.setSettingsOpen( true ) ).toMatchSnapshot();
+		} );
+
+		test( 'Close the settings dashboard', () => {
+			expect( actions.closeSettings() ).toMatchSnapshot();
+			expect( actions.setSettingsOpen( false ) ).toMatchSnapshot();
+		} );
+	} );
 } );

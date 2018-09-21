@@ -16,3 +16,13 @@ export const setSharedCapacity = ( sharedCapacity ) => ( {
 		sharedCapacity,
 	},
 } );
+
+export const setSettingsOpen = ( isSettingsOpen ) => ( {
+	type: types.SET_TICKET_SETTINGS_OPEN,
+	payload: {
+		isSettingsOpen,
+	},
+} );
+
+export const openSettings = () => setSettingsOpen( true );
+export const closeSettings = () => setSettingsOpen( false );
