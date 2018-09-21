@@ -31,12 +31,9 @@ const confirmLabel = ( created ) => (
 		: __( 'Create Ticket', 'events-gutenberg' )
 );
 
-const cancelLabel = __( 'Cancel', 'events-gutenberg' );
-
 const TicketsDashboardAction = ( { created } ) => (
 	<ActionDashboard
 		actions={ actions }
-		cancelLabel={ cancelLabel }
 		confirmLabel={ confirmLabel( created ) }
 	/>
 );
