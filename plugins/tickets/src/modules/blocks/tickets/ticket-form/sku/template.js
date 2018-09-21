@@ -47,7 +47,8 @@ class SKU extends PureComponent {
 			<div className="tribe-editor__tickets-form__row">
 				<LabelWithTooltip
 					className="tribe-editor__tickets-form__label"
-					id={ this.id }
+					forId={ this.id }
+					isLabel={ true }
 					label={ label }
 					tooltipText={ tooltip }
 					tooltipLabel={ <Dashicon icon="info-outline" /> }

@@ -140,7 +140,8 @@ class Capacity extends PureComponent {
 			<div className="tribe-editor__tickets-form__row">
 				<LabelWithTooltip
 					className="tribe-editor__tickets-form__label"
-					id={ this.ids.select }
+					forId={ this.ids.select }
+					isLabel={ true }
 					label={ capacityLabel }
 					tooltipText={ capacityToolTip }
 					tooltipLabel={ <Dashicon icon="info-outline" /> }

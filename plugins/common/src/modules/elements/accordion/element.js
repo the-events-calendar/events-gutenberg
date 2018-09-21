@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import AccordionRow from './AccordionRow/container';
+import AccordionRow from './AccordionRow/template';
 import './style.pcss';
 
 const Accordion = ( {
