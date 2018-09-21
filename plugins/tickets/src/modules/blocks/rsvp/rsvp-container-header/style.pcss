@@ -24,6 +24,44 @@
 	}
 }
 
+.tribe-editor__rsvp-container-header__title-input {
+	/* !important required to override styles from react-input-autosize */
+	display: flex !important;
+	margin: 0;
+	padding-top: 3px;
+
+	& > * {
+		flex: none;
+	}
+
+	& > input {
+		background-color: transparent;
+		color: #000000;
+		margin: 0;
+		padding: 0;
+		border: none;
+		font-weight: bold;
+		font-size: 21px;
+		line-height: 25px;
+		letter-spacing: 0.16px;
+
+		&:hover,
+		&:focus {
+			background-color: #FFFFFF;
+		}
+
+		&:disabled {
+
+			&,
+			&:hover,
+			&:focus {
+				background-color: transparent;
+				color: #AEB4BB;
+			}
+		}
+	}
+}
+
 .tribe-editor__rsvp-container-header__description {
 	display: block;
 	color: #545D66;
@@ -34,6 +72,42 @@
 
 	.tribe-editor__rsvp-container--disabled & {
 		color: #AEB4BB;
+	}
+}
+
+.tribe-editor__rsvp-container-header__description-input {
+	/* !important required to override styles from react-input-autosize */
+	display: flex !important;
+	padding-top: 7px;
+
+	& > * {
+		flex: none;
+	}
+
+	& > input {
+		background-color: transparent;
+		color: #545D66;
+		margin: 0;
+		padding: 0;
+		border: none;
+		font-size: 12px;
+		line-height: 18px;
+		letter-spacing: 0.04px;
+
+		&:hover,
+		&:focus {
+			background-color: #FFFFFF;
+		}
+
+		&:disabled {
+
+			&,
+			&:hover,
+			&:focus {
+				background-color: transparent;
+				color: #AEB4BB;
+			}
+		}
 	}
 }
 
