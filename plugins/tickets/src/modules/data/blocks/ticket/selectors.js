@@ -10,6 +10,11 @@ export const getSharedCapacity = createSelector(
 	( ticket ) => ticket.sharedCapacity,
 );
 
+export const getSettingsIsOpen = createSelector(
+	[ getTicketBlock ],
+	( ticket ) => ticket.isSettingsOpen,
+);
+
 export const getHeader = createSelector(
 	[ getTicketBlock ],
 	( ticket ) => ticket.header,

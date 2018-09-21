@@ -47,51 +47,38 @@ const image = {
 };
 
 describe( 'Ticket blocks selectors', () => {
+	let newState = {};
+
+	beforeEach( () => {
+		newState = {
+			tickets: {
+				blocks: {
+					ticket: {
+						...DEFAULT_STATE,
+					},
+				},
+			},
+		};
+	} );
+
 	describe( 'Header image', () => {
 		test( 'Select default image', () => {
 			expect( selectors.getHeader( state ) ).toBe( null );
 		} );
 
 		test( 'Select set image', () => {
-			const newState = {
-				tickets: {
-					blocks: {
-						ticket: {
-							...DEFAULT_STATE,
-							header: image,
-						},
-					},
-				},
-			};
+			newState.tickets.blocks.ticket.header = image;
 			expect( selectors.getHeader( newState ) ).toEqual( image );
 		} );
 
 		test( 'Select image id', () => {
-			const newState = {
-				tickets: {
-					blocks: {
-						ticket: {
-							...DEFAULT_STATE,
-							header: image,
-						},
-					},
-				},
-			};
+			newState.tickets.blocks.ticket.header = image;
 			expect( selectors.getImageID( state ) ).toBe( null );
 			expect( selectors.getImageID( newState ) ).toBe( 4961 );
 		} );
 
 		test( 'Select image size', () => {
-			const newState = {
-				tickets: {
-					blocks: {
-						ticket: {
-							...DEFAULT_STATE,
-							header: image,
-						},
-					},
-				},
-			};
+			newState.tickets.blocks.ticket.header = image;
 			expect( selectors.getHeaderSize( newState, { size: 'large' } ) ).toEqual( image.sizes.large );
 			expect( selectors.getHeaderSize( newState, { size: 'unknown' } ) ).toBe( null );
 		} );
@@ -103,17 +90,17 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Select shared capacity after being set', () => {
-			const newState = {
-				tickets: {
-					blocks: {
-						ticket: {
-							...DEFAULT_STATE,
-							sharedCapacity: 99,
-						},
-					},
-				},
-			};
+			newState.tickets.blocks.ticket.sharedCapacity = 99;
 			expect( selectors.getSharedCapacity( newState ) ).toBe( 99 );
 		} );
+	} );
+
+	test( 'Default value of settings dashboard', () => {
+		expect( selectors.getSettingsIsOpen( state ) ).toBe( false );
+	} );
+
+	test( 'Custom value of settings dashboard', () => {
+		newState.tickets.blocks.ticket.isSettingsOpen = true;
+		expect( selectors.getSettingsIsOpen( newState ) ).toBe( true );
 	} );
 } );
