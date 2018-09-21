@@ -7,6 +7,7 @@ export const DEFAULT_STATE = {
 	sharedCapacity: 0,
 	header: null,
 	tickets: [],
+	isSettingsOpen: false,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -20,7 +21,12 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				sharedCapacity: action.payload.sharedCapacity,
-			}
+			};
+		case types.SET_TICKET_SETTINGS_OPEN:
+			return {
+				...state,
+				isSettingsOpen: action.payload.isSettingsOpen,
+			};
 		default:
 			return state;
 	}
