@@ -16,6 +16,7 @@ const LabelWithTooltip = ( {
 	forId,
 	isLabel,
 	label,
+	tooltipDisabled,
 	tooltipLabel,
 	tooltipPosition,
 	tooltipText,
@@ -27,6 +28,7 @@ const LabelWithTooltip = ( {
 		label={ label }
 	>
 		<Tooltip
+			disabled={ tooltipDisabled }
 			label={ tooltipLabel }
 			labelClassName="tribe-editor__label-with-tooltip__tooltip-label"
 			position={ tooltipPosition }
@@ -41,7 +43,10 @@ LabelWithTooltip.defaultProps = {
 
 LabelWithTooltip.propTypes = {
 	className: PropTypes.string,
+	forId: PropTypes.string,
+	isLabel: PropTypes.bool,
 	label: PropTypes.node,
+	tooltipDisabled: PropTypes.bool,
 	tooltipLabel: PropTypes.node,
 	tooltipPosition: PropTypes.oneOf( [
 		'top left',

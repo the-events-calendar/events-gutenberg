@@ -54,6 +54,7 @@ LabelWithModal.propTypes = {
 	className: PropTypes.string,
 	closeButtonLabel: PropTypes.string,
 	label: PropTypes.node,
+	modalButtonDisabled: PropTypes.bool,
 	modalButtonLabel: PropTypes.string,
 	modalTitle: PropTypes.string,
 	onClick: PropTypes.func,
