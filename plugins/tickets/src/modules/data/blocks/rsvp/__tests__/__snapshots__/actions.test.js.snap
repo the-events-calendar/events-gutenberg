@@ -36,9 +36,11 @@ Object {
     "capacity": 20,
     "description": "description",
     "endDate": "January 4, 2018",
+    "endDateObj": 2018-01-04T00:00:00.000Z,
     "endTime": "23:32",
     "notGoingResponses": true,
     "startDate": "January 1, 2018",
+    "startDateObj": 2018-01-01T00:00:00.000Z,
     "startTime": "12:34",
     "title": "title",
   },
@@ -79,6 +81,24 @@ Object {
     "hasChanges": true,
   },
   "type": "@@MT/TICKETS/SET_RSVP_HAS_CHANGES",
+}
+`;
+
+exports[`RSVP block actions set RSVP header image alt 1`] = `
+Object {
+  "payload": Object {
+    "headerImageAlt": "test-alt",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_HEADER_IMAGE_ALT",
+}
+`;
+
+exports[`RSVP block actions set RSVP header image src 1`] = `
+Object {
+  "payload": Object {
+    "headerImageSrc": "test-src",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_HEADER_IMAGE_SRC",
 }
 `;
 

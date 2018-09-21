@@ -119,3 +119,13 @@ export const getRSVPHasChanges = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.hasChanges,
 );
+
+export const getRSVPHeaderImageSrc = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.headerImageSrc,
+);
+
+export const getRSVPHeaderImageAlt = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.headerImageAlt,
+);

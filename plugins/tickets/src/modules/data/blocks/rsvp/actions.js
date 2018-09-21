@@ -95,6 +95,20 @@ export const setRSVPHasChanges = ( hasChanges ) => ( {
 	},
 } );
 
+export const setRSVPHeaderImageSrc = ( headerImageSrc ) => ( {
+	type: types.SET_RSVP_HEADER_IMAGE_SRC,
+	payload: {
+		headerImageSrc,
+	},
+} );
+
+export const setRSVPHeaderImageAlt = ( headerImageAlt ) => ( {
+	type: types.SET_RSVP_HEADER_IMAGE_ALT,
+	payload: {
+		headerImageAlt,
+	},
+} );
+
 export const setRSVPTempTitle = ( tempTitle ) => ( {
 	type: types.SET_RSVP_TEMP_TITLE,
 	payload: {
@@ -163,6 +177,11 @@ export const setRSVPTempEndTime = ( tempEndTime ) => ( {
 	payload: {
 		tempEndTime,
 	},
+} );
+
+export const setRSVPHeaderImage = ( payload ) => ( {
+	type: types.SET_RSVP_HEADER_IMAGE,
+	payload,
 } );
 
 export const setRSVPDetails = ( payload ) => ( {

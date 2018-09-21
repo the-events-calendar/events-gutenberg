@@ -100,6 +100,14 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPHasChanges( true ) ).toMatchSnapshot();
 	} );
 
+	test( 'set RSVP header image src', () => {
+		expect( actions.setRSVPHeaderImageSrc( 'test-src' ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP header image alt', () => {
+		expect( actions.setRSVPHeaderImageAlt( 'test-alt' ) ).toMatchSnapshot();
+	} );
+
 	test( 'set RSVP details', () => {
 		expect( actions.setRSVPDetails( {
 			title: 'title',
@@ -107,9 +115,11 @@ describe( 'RSVP block actions', () => {
 			capacity: 20,
 			notGoingResponses: true,
 			startDate: 'January 1, 2018',
+			startDateObj: new Date( 'January 1, 2018' ),
 			startTime: '12:34',
 			endDate: 'January 4, 2018',
-			endTime: '23:32'
+			endDateObj: new Date( 'January 4, 2018' ),
+			endTime: '23:32',
 	} ) ).toMatchSnapshot();
 	} );
 
@@ -124,7 +134,7 @@ describe( 'RSVP block actions', () => {
 			tempStartTime: '12:34',
 			tempEndDate: 'January 4, 2018',
 			tempEndDateObj: new Date( 'January 4, 2018' ),
-			tempEndTime: '23:32'
+			tempEndTime: '23:32',
 		} ) ).toMatchSnapshot();
 	} );
 } );

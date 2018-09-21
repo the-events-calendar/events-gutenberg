@@ -33,6 +33,8 @@ export const DEFAULT_STATE = {
 	created: false,
 	settingsOpen: false,
 	hasChanges: false,
+	headerImageSrc: '',
+	headerImageAlt: '',
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -72,7 +74,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_RSVP_START_DATE_OBJ:
 			return {
 				...state,
-				startDate: action.payload.startDateObj,
+				startDateObj: action.payload.startDateObj,
 			};
 		case types.SET_RSVP_END_DATE:
 			return {
@@ -82,7 +84,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_RSVP_END_DATE_OBJ:
 			return {
 				...state,
-				endDate: action.payload.endDateObj,
+				endDateObj: action.payload.endDateObj,
 			};
 		case types.SET_RSVP_START_TIME:
 			return {
@@ -153,6 +155,16 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				hasChanges: action.payload.hasChanges,
+			};
+		case types.SET_RSVP_HEADER_IMAGE_SRC:
+			return {
+				...state,
+				headerImageSrc: action.payload.headerImageSrc,
+			};
+		case types.SET_RSVP_HEADER_IMAGE_ALT:
+			return {
+				...state,
+				headerImageAlt: action.payload.headerImageAlt,
 			};
 		default:
 			return state;

@@ -104,4 +104,12 @@ describe( 'RSVP block selectors', () => {
 	it( 'should return the has changes', () => {
 		expect( selectors.getRSVPHasChanges( state ) ).toBe( DEFAULT_STATE.hasChanges );
 	} );
+
+	it( 'should return the header image src', () => {
+		expect( selectors.getRSVPHeaderImageSrc( state ) ).toBe( DEFAULT_STATE.headerImageSrc );
+	} );
+
+	it( 'should return the header image alt', () => {
+		expect( selectors.getRSVPHeaderImageAlt( state ) ).toBe( DEFAULT_STATE.headerImageAlt );
+	} );
 } );

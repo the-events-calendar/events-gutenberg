@@ -117,4 +117,12 @@ describe( 'RSVP block reducer', () => {
 	it( 'should set the has changes', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPHasChanges( true ) ) ).toMatchSnapshot();
 	} );
+
+	it( 'should set the header image src', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPHeaderImageSrc( 'test-src' ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the header image alt', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPHeaderImageAlt( 'test-alt' ) ) ).toMatchSnapshot();
+	} );
 } );
