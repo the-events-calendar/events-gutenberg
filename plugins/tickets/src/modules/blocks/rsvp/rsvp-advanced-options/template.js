@@ -48,14 +48,16 @@ class RSVPAdvancedOptions extends PureComponent {
 		</Fragment>
 	);
 
-	getRows = () => ( [ {
-		accordionId: this.accordionId,
-		content: this.getContent(),
-		contentClassName: 'tribe-editor__rsvp__advanced-options-content',
-		header: this.getHeader(),
-		headerAttrs: { disabled: this.props.isDisabled },
-		headerClassName: 'tribe-editor__rsvp__advanced-options-header',
-	} ] );
+	getRows = () => ( [
+		{
+			accordionId: this.accordionId,
+			content: this.getContent(),
+			contentClassName: 'tribe-editor__rsvp__advanced-options-content',
+			header: this.getHeader(),
+			headerAttrs: { disabled: this.props.isDisabled },
+			headerClassName: 'tribe-editor__rsvp__advanced-options-header',
+		},
+	] );
 
 	render() {
 		return (

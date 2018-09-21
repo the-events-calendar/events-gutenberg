@@ -19,9 +19,10 @@ import {
 	Availability,
 	ActionDashboard,
 	CapacityTable,
+	TicketForm,
 	InactiveBlock,
 } from '@moderntribe/tickets/elements';
-import { TICKET } from '@moderntribe/tickets/elements/inactive-block/element';
+import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
@@ -31,10 +32,10 @@ const inactiveBlockProps = {
 	description: __(
 		/* eslint-disable-next-line max-len */
 		'The time is currently outside of the ticket sales window. Make adjustments to the start and end date to activate these tickets.',
-		'events-gutenberg'
+		'events-gutenberg',
 	),
-	layout: TICKET,
-}
+	layout: LAYOUT.ticket,
+};
 
 const imageUploadProps = {
 	title: __( 'Ticket Header Image', 'events-gutenberg' ),
@@ -84,24 +85,25 @@ const TicketsTemplate = ( props ) => {
 			</div>
 			<CapacityTable />
 			<ImageUpload { ...imageUploadProps } />
+			<TicketForm />
 			{ availability }
 			{ actionDashboard }
 		</div>
 	);
-}
+};
 
 TicketsTemplate.propTypes = {
 	isSelected: PropTypes.bool,
 	footerActions: PropTypes.arrayOf( PropTypes.node ),
 	footerConfirmLabel: PropTypes.string,
 	allowedBlockTypes: PropTypes.arrayOf( PropTypes.string ),
-}
+};
 
 TicketsTemplate.defaultProps = {
 	isSelected: false,
 	footerActions: [],
 	footerConfirmLabel: __( 'Add Tickets', 'events-gutenberg' ),
 	allowedBlockTypes: [],
-}
+};
 
 export default TicketsTemplate;

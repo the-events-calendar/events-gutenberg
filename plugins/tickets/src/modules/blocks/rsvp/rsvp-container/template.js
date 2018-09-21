@@ -14,12 +14,13 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { ContainerPanel } from '@moderntribe/tickets/elements';
+import { LAYOUT } from '@moderntribe/tickets/elements/container-panel/element';
 import RSVPContainerHeader from '@moderntribe/tickets/blocks/rsvp/rsvp-container-header/container';
 import RSVPContainerContent from '@moderntribe/tickets/blocks/rsvp/rsvp-container-content/container';
 import { RSVPActive, RSVPInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
-const RSVPContainerSectionLeft = ( { isDisabled } ) => (
+const RSVPContainerIcon = ( { isDisabled } ) => (
 	<Fragment>
 		{
 			isDisabled
@@ -42,9 +43,10 @@ const RSVPContainer = ( { isDisabled, isSelected } ) => (
 			'tribe-editor__rsvp-container',
 			{ 'tribe-editor__rsvp-container--disabled': isDisabled },
 		) }
-		leftSection={ <RSVPContainerSectionLeft isDisabled={ isDisabled } /> }
-		rightSectionHeader={ <RSVPContainerHeader isSelected={ isSelected } /> }
-		rightSectionContent={ <RSVPContainerContent /> }
+		layout={ LAYOUT.rsvp }
+		icon={ <RSVPContainerIcon isDisabled={ isDisabled } /> }
+		header={ <RSVPContainerHeader isSelected={ isSelected } /> }
+		content={ <RSVPContainerContent /> }
 	/>
 );
 
