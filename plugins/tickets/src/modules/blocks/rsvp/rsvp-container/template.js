@@ -27,13 +27,13 @@ const RSVPContainerIcon = ( { isDisabled } ) => (
 				? <RSVPInactive />
 				: <RSVPActive />
 		}
-		<span className="tribe-editor__rsvp-container__section-left-label">
+		<span className="tribe-editor__rsvp-container__icon-label">
 			{ __( 'RSVP', 'events-gutenberg' ) }
 		</span>
 	</Fragment>
 );
 
-RSVPContainerSectionLeft.propTypes = {
+RSVPContainerIcon.propTypes = {
 	isDisabled: PropTypes.bool.isRequired,
 };
 
