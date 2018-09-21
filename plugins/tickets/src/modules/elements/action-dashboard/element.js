@@ -24,53 +24,46 @@ const ActionDashboard = ( {
 	showCancel,
 	showConfirm,
 } ) => {
-	const actionsList = ( actions && actions.length )
-		? (
-			<div className="tribe-editor__action-dashboard__group-left">
-				{ actions.map( ( action, index ) => (
-					<span
-						key={ `action-${index}`}
-						className="tribe-editor__action-dashboard__action-wrapper"
-					>
-						{ action }
-					</span>
-				) ) }
-			</div>
-		)
-		: null;
 
-	const cancelButton = showCancel
-		? (
-			<Button
-				className="tribe-editor__action-dashboard__cancel-button"
-				isDisabled={ isCancelDisabled }
-				onClick={ onCancelClick }
-			>
-				{ cancelLabel }
-			</Button>
-		)
-		: null;
+	const actionsList = ( actions && actions.length ) && (
+		<div className="tribe-editor__action-dashboard__group-left">
+			{ actions.map( ( action, index ) => (
+				<span
+					key={ `action-${index}` }
+					className="tribe-editor__action-dashboard__action-wrapper"
+				>
+					{ action }
+				</span>
+			) ) }
+		</div>
+	);
 
-	const confirmButton = showConfirm
-		? (
-			<Button
-				className="tribe-editor__action-dashboard__confirm-button tribe-editor__button--sm"
-				isDisabled={ isConfirmDisabled }
-				onClick={ onConfirmClick }
-			>
-				{ confirmLabel }
-			</Button>
-		)
-		: null;
+	const cancelButton = showCancel && (
+		<Button
+			className="tribe-editor__action-dashboard__cancel-button"
+			isDisabled={ isCancelDisabled }
+			onClick={ onCancelClick }
+		>
+			{ cancelLabel }
+		</Button>
+	);
 
-	const groupRight = ( showCancel || showConfirm )
-		? (
-			<div className="tribe-editor__action-dashboard__group-right">
-				{ cancelButton }
-				{ confirmButton }
-			</div>
-		)
-		: null;
+	const confirmButton = showConfirm && (
+		<Button
+			className="tribe-editor__action-dashboard__confirm-button tribe-editor__button--sm"
+			isDisabled={ isConfirmDisabled }
+			onClick={ onConfirmClick }
+		>
+			{ confirmLabel }
+		</Button>
+	);
+
+	const groupRight = ( showCancel || showConfirm ) && (
+		<div className="tribe-editor__action-dashboard__group-right">
+			{ cancelButton }
+			{ confirmButton }
+		</div>
+	);
 
 	return (
 		<section
