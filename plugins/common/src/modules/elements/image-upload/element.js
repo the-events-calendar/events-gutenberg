@@ -15,7 +15,7 @@ import { MediaUpload } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import { Button } from '@moderntribe/common/elements';
+import { Button, Image } from '@moderntribe/common/elements';
 import { Close as CloseIcon } from '@moderntribe/common/icons';
 import './style.pcss';
 
@@ -30,7 +30,7 @@ export const renderImageUploadButton = ( label ) => ( { open } ) => (
 
 export const renderImage = ( imageAlt, imageSrc, onRemove ) => (
 	<div className="tribe-editor__image-upload__image-wrapper">
-		<img
+		<Image
 			src={ imageSrc }
 			alt={ imageAlt }
 			className="tribe-editor__image-upload__image"
