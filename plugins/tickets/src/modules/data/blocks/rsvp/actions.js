@@ -46,10 +46,24 @@ export const setRSVPStartDate = ( startDate ) => ( {
 	},
 } );
 
+export const setRSVPStartDateObj = ( startDateObj ) => ( {
+	type: types.SET_RSVP_START_DATE_OBJ,
+	payload: {
+		startDateObj,
+	},
+} );
+
 export const setRSVPEndDate = ( endDate ) => ( {
 	type: types.SET_RSVP_END_DATE,
 	payload: {
 		endDate,
+	},
+} );
+
+export const setRSVPEndDateObj = ( endDateObj ) => ( {
+	type: types.SET_RSVP_END_DATE_OBJ,
+	payload: {
+		endDateObj,
 	},
 } );
 

@@ -55,6 +55,15 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP end date object 1`] = `
+Object {
+  "payload": Object {
+    "endDateObj": 2018-01-01T00:00:00.000Z,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_END_DATE_OBJ",
+}
+`;
+
 exports[`RSVP block actions set RSVP end time 1`] = `
 Object {
   "payload": Object {
@@ -97,6 +106,15 @@ Object {
     "startDate": "January 1, 2018",
   },
   "type": "@@MT/TICKETS/SET_RSVP_START_DATE",
+}
+`;
+
+exports[`RSVP block actions set RSVP start date object 1`] = `
+Object {
+  "payload": Object {
+    "startDateObj": 2018-01-01T00:00:00.000Z,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_START_DATE_OBJ",
 }
 `;
 

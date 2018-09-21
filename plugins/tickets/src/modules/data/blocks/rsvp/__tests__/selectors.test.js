@@ -37,12 +37,20 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPStartDate( state ) ).toBe( DEFAULT_STATE.startDate );
 	} );
 
+	it( 'should return the start date object', () => {
+		expect( selectors.getRSVPStartDateObj( state ) ).toBe( DEFAULT_STATE.startDateObj );
+	} );
+
 	it( 'should return the start time', () => {
 		expect( selectors.getRSVPStartTime( state ) ).toBe( DEFAULT_STATE.startTime );
 	} );
 
 	it( 'should return the end date', () => {
 		expect( selectors.getRSVPEndDate( state ) ).toBe( DEFAULT_STATE.endDate );
+	} );
+
+	it( 'should return the end date object', () => {
+		expect( selectors.getRSVPEndDateObj( state ) ).toBe( DEFAULT_STATE.endDateObj );
 	} );
 
 	it( 'should return the end time', () => {

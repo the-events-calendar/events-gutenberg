@@ -30,6 +30,11 @@ export const getRSVPStartDate = createSelector(
 	( rsvp ) => rsvp.startDate,
 );
 
+export const getRSVPStartDateObj = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.startDateObj,
+);
+
 export const getRSVPStartTime = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.startTime,
@@ -38,6 +43,11 @@ export const getRSVPStartTime = createSelector(
 export const getRSVPEndDate = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.endDate,
+);
+
+export const getRSVPEndDateObj = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.endDateObj,
 );
 
 export const getRSVPEndTime = createSelector(

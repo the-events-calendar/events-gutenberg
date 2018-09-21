@@ -32,8 +32,16 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPStartDate( 'January 1, 2018' ) ).toMatchSnapshot();
 	} );
 
+	test( 'set RSVP start date object', () => {
+		expect( actions.setRSVPStartDateObj( new Date( 'January 1, 2018' ) ) ).toMatchSnapshot();
+	} );
+
 	test( 'set RSVP end date', () => {
 		expect( actions.setRSVPEndDate( 'January 1, 2018' ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP end date object', () => {
+		expect( actions.setRSVPEndDateObj( new Date( 'January 1, 2018' ) ) ).toMatchSnapshot();
 	} );
 
 	test( 'set RSVP start time', () => {

@@ -38,8 +38,22 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPStartDate( 'January 1, 2018' ) ) ).toMatchSnapshot();
 	} );
 
+	it( 'should set the start date object', () => {
+		expect( reducer(
+			DEFAULT_STATE,
+			actions.setRSVPStartDateObj( new Date( 'January 1, 2018' ) ),
+		) ).toMatchSnapshot();
+	} );
+
 	it( 'should set the end date', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPEndDate( 'January 1, 2018' ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the end date object', () => {
+		expect( reducer(
+			DEFAULT_STATE,
+			actions.setRSVPEndDateObj( new Date( 'January 1, 2018' ) ),
+		) ).toMatchSnapshot();
 	} );
 
 	it( 'should set the start time', () => {

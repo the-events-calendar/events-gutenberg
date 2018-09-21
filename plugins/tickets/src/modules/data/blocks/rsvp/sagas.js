@@ -16,8 +16,10 @@ export function* setRSVPDetails( action ) {
 		capacity,
 		notGoingResponses,
 		startDate,
+		startDateObj,
 		startTime,
 		endDate,
+		endDateObj,
 		endTime,
 	} = action.payload;
 	yield all( [
@@ -26,8 +28,10 @@ export function* setRSVPDetails( action ) {
 		put( actions.setRSVPCapacity( capacity ) ),
 		put( actions.setRSVPNotGoingResponses( notGoingResponses ) ),
 		put( actions.setRSVPStartDate( startDate ) ),
+		put( actions.setRSVPStartDateObj( startDateObj ) ),
 		put( actions.setRSVPStartTime( startTime) ),
 		put( actions.setRSVPEndDate( endDate ) ),
+		put( actions.setRSVPEndDateObj( endDateObj ) ),
 		put( actions.setRSVPEndTime( endTime ) ),
 	] );
 }

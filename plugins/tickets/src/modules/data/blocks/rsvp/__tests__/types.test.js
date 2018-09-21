@@ -33,8 +33,16 @@ describe( 'RSVP block types', () => {
 		expect( types.SET_RSVP_START_DATE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_START_DATE` );
 	} );
 
+	test( 'set RSVP start date object', () => {
+		expect( types.SET_RSVP_START_DATE_OBJ ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_START_DATE_OBJ` );
+	} );
+
 	test( 'set RSVP end date', () => {
 		expect( types.SET_RSVP_END_DATE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_END_DATE` );
+	} );
+
+	test( 'set RSVP end date object', () => {
+		expect( types.SET_RSVP_END_DATE_OBJ ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_END_DATE_OBJ` );
 	} );
 
 	test( 'set RSVP start time', () => {
