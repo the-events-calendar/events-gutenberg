@@ -98,11 +98,11 @@ class Tribe__Gutenberg__Plugin {
 	 */
 	protected function autoloading() {
 		$prefixes = array(
+			'Tribe__Gutenberg__Common__' => $this->plugin_path . 'plugins/common/src/Tribe',
 			'Tribe__Gutenberg__Events__' => $this->plugin_path . 'plugins/events/src/Tribe',
 			'Tribe__Gutenberg__Events_Pro__' => $this->plugin_path . 'plugins/events-pro/src/Tribe',
 			'Tribe__Gutenberg__Tickets__' => $this->plugin_path . 'plugins/tickets/src/Tribe',
 			'Tribe__Gutenberg__Tickets_Plus__' => $this->plugin_path . 'plugins/tickets-plus/src/Tribe',
-			'Tribe__Gutenberg__Common__' => $this->plugin_path . 'plugins/common/src/Tribe',
 		);
 
 		$autoloader = Tribe__Autoloader::instance();
