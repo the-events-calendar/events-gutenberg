@@ -97,7 +97,7 @@ class Tribe__Gutenberg__Events__Meta {
 	 */
 	private function text() {
 		return array(
-			'auth_callback' => array( $this,'auth_callback' ),
+			'auth_callback' => array( $this, 'auth_callback' ),
 			'sanitize_callback' => 'sanitize_text_field',
 			'type' => 'string',
 			'single' => true,
@@ -157,7 +157,9 @@ class Tribe__Gutenberg__Events__Meta {
 	public function auth_callback( $allowed, $meta_key, $post_id, $user_id, $cap, $caps ) {
 		$post = get_post( $post_id );
 		$post_type_obj = get_post_type_object( $post->post_type );
-		return current_user_can( $post_type_obj->cap->edit_post, $post_id );
+		$current_user_can = current_user_can( $post_type_obj->cap->edit_post, $post_id );
+
+		return $current_user_can;
 	}
 
 	/**
