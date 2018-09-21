@@ -101,9 +101,7 @@ const mapStateToProps = ( state ) => ( {
 	toTimeDisabled: selectors.getRSVPSettingsOpen( state ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => ( {
-	dispatch,
-} );
+const mapDispatchToProps = ( dispatch ) => ( { dispatch } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...ownProps,

@@ -32,17 +32,34 @@ const confirmLabel = ( created ) => (
 
 const cancelLabel = __( 'Cancel', 'events-gutenberg' );
 
-const RSVPActionDashboard = ( { created } ) => (
+const RSVPActionDashboard = ( {
+	created,
+	isCancelDisabled,
+	isConfirmDisabled,
+	onCancelClick,
+	onConfirmClick,
+	showCancel,
+} ) => (
 	<ActionDashboard
 		className="tribe-editor__rsvp__action-dashboard"
 		actions={ actions }
 		cancelLabel={ cancelLabel }
 		confirmLabel={ confirmLabel( created ) }
+		isCancelDisabled={ isCancelDisabled }
+		isConfirmDisabled={ isConfirmDisabled }
+		onCancelClick={ onCancelClick }
+		onConfirmClick={ onConfirmClick }
+		showCancel={ showCancel }
 	/>
 );
 
 RSVPActionDashboard.propTypes = {
 	created: PropTypes.bool.isRequired,
+	isCancelDisabled: PropTypes.bool.isRequired,
+	isConfirmDisabled: PropTypes.bool.isRequired,
+	onCancelClick: PropTypes.func.isRequired,
+	onConfirmClick: PropTypes.func.isRequired,
+	showCancel: PropTypes.bool.isRequired,
 };
 
 export default RSVPActionDashboard;
