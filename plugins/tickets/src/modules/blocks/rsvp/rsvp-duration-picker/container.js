@@ -49,7 +49,7 @@ const onFromTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	dispatch( actions.setRSVPHasChanges( true ) );
 };
 
-const onFromTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) => {
+const onFromTimePickerClick = ( dispatchProps ) => ( value, onClose ) => {
 	const { dispatch } = dispatchProps;
 	const startTime = timeUtil.fromSeconds( value, timeUtil.TIME_FORMAT_HH_MM );
 	dispatch( actions.setRSVPTempStartTime( startTime ) );
@@ -81,7 +81,7 @@ const onToTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	dispatch( actions.setRSVPHasChanges( true ) );
 };
 
-const onToTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) => {
+const onToTimePickerClick = ( dispatchProps ) => ( value, onClose ) => {
 	const { dispatch } = dispatchProps;
 	const endTime = timeUtil.fromSeconds( value, timeUtil.TIME_FORMAT_HH_MM );
 	dispatch( actions.setRSVPTempEndTime( endTime ) );
@@ -109,10 +109,10 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...dispatchProps,
 	onFromDateChange: onFromDateChange( stateProps, dispatchProps ),
 	onFromTimePickerChange: onFromTimePickerChange( stateProps, dispatchProps ),
-	onFromTimePickerClick: onFromTimePickerClick( stateProps, dispatchProps ),
+	onFromTimePickerClick: onFromTimePickerClick( dispatchProps ),
 	onToDateChange: onToDateChange( stateProps, dispatchProps ),
 	onToTimePickerChange: onToTimePickerChange( stateProps, dispatchProps ),
-	onToTimePickerClick: onToTimePickerClick( stateProps, dispatchProps ),
+	onToTimePickerClick: onToTimePickerClick( dispatchProps ),
 } );
 
 export default compose(
