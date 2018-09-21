@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import TicketsActionDashboard from '@moderntribe/tickets/blocks/tickets/action-dashboard/template';
-import TicketsSettingsDashboard from '@moderntribe/tickets/blocks/tickets/settings/template';
+import TicketsSettingsDashboard from '@moderntribe/tickets/blocks/tickets/settings/container';
 
 const TicketsDashboard = ( { isSelected, isSettingsOpen } ) => ( isSelected && (
 	isSettingsOpen ? <TicketsSettingsDashboard /> : <TicketsActionDashboard />
