@@ -56,31 +56,35 @@ const ImageUpload = ( {
 	onRemove,
 	onSelect,
 	title,
-} ) => (
-	<div className={ classNames(
-		'tribe-editor__image-upload',
-		{ 'tribe-editor__image-upload--has-image': imageSrc },
-		className,
-	) }>
-		{ title && <h3 className="tribe-editor__image-upload__title">{ title }</h3> }
-		<div className="tribe-editor__image-upload__content">
-			{ description && (
-				<p className="tribe-editor__image-upload__description">{ description }</p>
-			) }
-			{
-				imageSrc
-					? renderImage( imageAlt, imageSrc, onRemove )
-					: (
-						<MediaUpload
-							onSelect={ onSelect }
-							type="image"
-							render={ renderImageUploadButton( buttonLabel ) }
-						/>
-					)
-			}
+} ) => {
+	const hasImageClass = imageSrc && 'tribe-editor__image-upload--has-image';
+
+	return (
+		<div className={ classNames(
+			'tribe-editor__image-upload',
+			hasImageClass,
+			className,
+		) }>
+			{ title && <h3 className="tribe-editor__image-upload__title">{ title }</h3> }
+			<div className="tribe-editor__image-upload__content">
+				{ description && (
+					<p className="tribe-editor__image-upload__description">{ description }</p>
+				) }
+				{
+					imageSrc
+						? renderImage( imageAlt, imageSrc, onRemove )
+						: (
+							<MediaUpload
+								onSelect={ onSelect }
+								type="image"
+								render={ renderImageUploadButton( buttonLabel ) }
+							/>
+						)
+				}
+			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 ImageUpload.propTypes = {
 	buttonLabel: PropTypes.string,
