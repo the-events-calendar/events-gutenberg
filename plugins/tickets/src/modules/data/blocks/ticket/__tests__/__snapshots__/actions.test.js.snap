@@ -37,3 +37,39 @@ Object {
   "type": "@@MT/TICKETS/SET_TICKET_SHARED_CAPACITY",
 }
 `;
+
+exports[`Gutenberg actions Set the status of the settings dashboard Close the settings dashboard 1`] = `
+Object {
+  "payload": Object {
+    "isSettingsOpen": false,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_SETTINGS_OPEN",
+}
+`;
+
+exports[`Gutenberg actions Set the status of the settings dashboard Close the settings dashboard 2`] = `
+Object {
+  "payload": Object {
+    "isSettingsOpen": false,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_SETTINGS_OPEN",
+}
+`;
+
+exports[`Gutenberg actions Set the status of the settings dashboard Open the settings dashboard 1`] = `
+Object {
+  "payload": Object {
+    "isSettingsOpen": true,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_SETTINGS_OPEN",
+}
+`;
+
+exports[`Gutenberg actions Set the status of the settings dashboard Open the settings dashboard 2`] = `
+Object {
+  "payload": Object {
+    "isSettingsOpen": true,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_SETTINGS_OPEN",
+}
+`;
