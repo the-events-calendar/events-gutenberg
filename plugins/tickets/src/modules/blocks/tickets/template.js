@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import TicketsDashboard from './dashboard/template';
+import TicketsDashboard from './dashboard/container';
 import TicketsContainer from './container/template';
 import './style.pcss';
 
@@ -31,7 +31,7 @@ const TicketsTemplate = ( { isSelected } ) => (
 		) }
 	>
 		<TicketsContainer isSelected={ isSelected } />
-		<TicketsDashboard isSelected={ isSelected } isSettingsOpen={ true } />
+		<TicketsDashboard isSelected={ isSelected } />
 	</div>
 );
 
