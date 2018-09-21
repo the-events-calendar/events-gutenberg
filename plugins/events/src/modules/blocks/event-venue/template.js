@@ -328,7 +328,7 @@ class EventVenue extends Component {
 
 			const { location } = results[0].geometry;
 
-			this.setState( { coords: { location.lat(), location.lng() } } );
+			this.setState( { coords: { lat: location.lat(), lng: location.lng() } } );
 			return;
 		} );
 	}

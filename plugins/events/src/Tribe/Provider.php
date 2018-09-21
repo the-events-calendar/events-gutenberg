@@ -77,7 +77,7 @@ class Tribe__Gutenberg__Events__Provider extends tad_DI52_ServiceProvider {
 	 */
 	protected function hook() {
 		// Setup the Meta registration
-		add_action( 'init', tribe_callback( 'gutenberg.events.meta', 'register' ), 25 );
+		add_action( 'init', tribe_callback( 'gutenberg.events.meta', 'register' ), 15 );
 
 		tribe( 'gutenberg.events.editor' )->hook();
 
