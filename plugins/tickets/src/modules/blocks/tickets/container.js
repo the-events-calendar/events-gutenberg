@@ -16,7 +16,7 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	isSelected: ownProps.isSelected,
 	available: 48,
 	total: 166,
-	allowedBlockTypes: [ 'tribe/event-tickets', 'tribe/event-tickets-ticket',  'core/image' ],
+	allowedBlockTypes: [ 'tribe/event-tickets', 'tribe/event-tickets-ticket', 'core/image' ],
 	headerImageId: selectors.getImageID( state ),
 	headerImage: selectors.getHeaderSize( state, { size: 'large' } ),
 } );
