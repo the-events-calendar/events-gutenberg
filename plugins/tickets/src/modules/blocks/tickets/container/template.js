@@ -12,7 +12,7 @@ import { InnerBlocks } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import TicketForm from '../ticket-form/element';
+import TicketEditContainer from '../edit-container/template';
 import Availability from '../availability/element';
 
 const TicketContainer = ( { isSelected } ) => {
@@ -27,7 +27,7 @@ const TicketContainer = ( { isSelected } ) => {
 				<InnerBlocks />
 			</div>
 			{ availability }
-			<TicketForm />
+			<TicketEditContainer />
 		</Fragment>
 	);
 };
