@@ -16,8 +16,8 @@ import { __ } from '@wordpress/i18n';
  */
 import { Accordion } from '@moderntribe/common/elements';
 import './style.pcss';
-import Duration from '../duration/template';
-import SKU from '../sku/template';
+import Duration from './duration/template';
+import SKU from './sku/template';
 
 class AdvancedOptions extends Component {
 	static propTypes = {

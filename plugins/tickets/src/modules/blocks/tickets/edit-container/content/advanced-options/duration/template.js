@@ -18,14 +18,14 @@ import './style.pcss';
 const TicketDurationPicker = ( props ) => {
 	const { label, tooltip } = props;
 	return (
-		<div className="tribe-editor__tickets-form__row">
+		<div className="tribe-editor__container-panel__row">
 			<LabelWithTooltip
-				className="tribe-editor__tickets-form__label"
+				className="tribe-editor__container-panel__label"
 				label={ label }
 				tooltipText={ tooltip }
 				tooltipLabel={ <Dashicon icon="info-outline" /> }
 			/>
-			<div className="tribe-editor__tickets-form__input-group">
+			<div className="tribe-editor__container-panel__input-group">
 				<DateTimeRangePicker { ...props } />
 			</div>
 		</div>

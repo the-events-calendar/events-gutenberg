@@ -44,16 +44,16 @@ class SKU extends PureComponent {
 	render() {
 		const { onChange, value, label, tooltip } = this.props;
 		return (
-			<div className="tribe-editor__tickets-form__row">
+			<div className="tribe-editor__container-panel__row">
 				<LabelWithTooltip
-					className="tribe-editor__tickets-form__label"
+					className="tribe-editor__container-panel__label"
 					forId={ this.id }
 					isLabel={ true }
 					label={ label }
 					tooltipText={ tooltip }
 					tooltipLabel={ <Dashicon icon="info-outline" /> }
 				/>
-				<div className="tribe-editor__tickets-form__input-group">
+				<div className="tribe-editor__container-panel__input-group">
 					<input id={ this.id } type="text" value={ value } onChange={ sendValue( onChange ) } />
 				</div>
 			</div>
