@@ -16,6 +16,7 @@ import { Dashicon } from '@wordpress/components';
  * Internal dependencies
  */
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
+import './style.pcss';
 
 export const TYPES = {
 	unlimited: 'unlimited',
@@ -44,7 +45,7 @@ Select.propTypes = {
 
 // Custom input for this type of form
 const Input = ( { id, type, input, selected } ) => ( type === selected && (
-	<div className="tribe-editor__tickets-form__input-row">
+	<div className="tribe-editor__container-panel__input-row">
 		<label htmlFor={ id }>{ input.label }</label>
 		<input
 			type="number"
@@ -137,16 +138,16 @@ class Capacity extends PureComponent {
 		} = this.props;
 
 		return (
-			<div className="tribe-editor__tickets-form__row">
+			<div className="tribe-editor__container-panel__row">
 				<LabelWithTooltip
-					className="tribe-editor__tickets-form__label"
+					className="tribe-editor__container-panel__label"
 					forId={ this.ids.select }
 					isLabel={ true }
 					label={ capacityLabel }
 					tooltipText={ capacityToolTip }
 					tooltipLabel={ <Dashicon icon="info-outline" /> }
 				/>
-				<div className="tribe-editor__tickets-form__input-group">
+				<div className="tribe-editor__container-panel__input-group">
 					<Select
 						selected={ type }
 						options={ capacityOptions }
