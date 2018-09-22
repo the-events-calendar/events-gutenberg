@@ -15,7 +15,6 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import StatusIcons from '@moderntribe/tickets/blocks/ticket/status-icon/element';
 import './style.pcss';
 import { sendValue } from '@moderntribe/common/utils/input';
 
@@ -37,7 +36,6 @@ class Header extends PureComponent {
 		pricePosition: PropTypes.oneOf( Object.keys( Header.PRICE_POSITIONS ) ),
 		pricePlaceholder: PropTypes.string,
 		setPrice: PropTypes.func,
-		expires: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -52,7 +50,6 @@ class Header extends PureComponent {
 		setPrice: noop,
 		priceCurrency: __( '$', 'events-gutenberg' ),
 		pricePosition: Header.PRICE_POSITIONS.prefix,
-		expires: true,
 	};
 
 	constructor( props ) {
@@ -100,19 +97,15 @@ class Header extends PureComponent {
 			description,
 			descriptionPlaceholder,
 			setDescription,
-			expires,
 		} = this.props;
 
 		return (
-			<header className="tribe-editor__new-ticket__header">
-				<div className="tribe-editor__new-ticket__icon">
-					<StatusIcons expires={ expires } />
-				</div>
-				<div className="tribe-editor__new-ticket__content">
+			<div className="tribe-editor__ticket-container__header">
+				<div className="tribe-editor__ticket-container__header-content">
 					<AutosizeInput
 						id={ this.ids.title }
 						name="ticket-creation-title"
-						className="tribe-editor__new-ticket__title"
+						className="tribe-editor__ticket-container__header-title"
 						value={ title }
 						placeholder={ titlePlaceholder }
 						onChange={ sendValue( setTitle ) }
@@ -120,16 +113,16 @@ class Header extends PureComponent {
 					<AutosizeInput
 						id={ this.ids.description }
 						name="ticket-creation-description"
-						className="tribe-editor__new-ticket__description"
+						className="tribe-editor__ticket-container__header-description"
 						value={ description }
 						placeholder={ descriptionPlaceholder }
 						onChange={ sendValue( setDescription ) }
 					/>
 				</div>
-				<div className="tribe-editor__new-ticket__price">
+				<div className="tribe-editor__ticket-container__header-price">
 					{ this.renderPrice() }
 				</div>
-			</header>
+			</div>
 		);
 	}
 }
