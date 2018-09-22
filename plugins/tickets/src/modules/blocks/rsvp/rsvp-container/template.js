@@ -2,7 +2,6 @@
  * External dependencies
  */
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 
 /**
  * WordPress dependencies
