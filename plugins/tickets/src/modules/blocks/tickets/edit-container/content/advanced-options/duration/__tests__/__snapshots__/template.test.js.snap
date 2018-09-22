@@ -2,10 +2,10 @@
 
 exports[`Ticket Duration picker and label default properties 1`] = `
 <div
-  className="tribe-editor__tickets-form__row"
+  className="tribe-editor__container-panel__row"
 >
   <div
-    className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
+    className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__container-panel__label"
   >
     <span
       className="tribe-editor__labeled-item__label"
@@ -17,7 +17,7 @@ exports[`Ticket Duration picker and label default properties 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__tickets-form__input-group"
+    className="tribe-editor__container-panel__input-group"
   >
     <div
       className="tribe-editor__date-time-range-picker tribe-editor__ticket-duration__duration-picker"

@@ -1,19 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Ticket Form Header Header with default values 1`] = `
-<header
-  className="tribe-editor__new-ticket__header"
+<div
+  className="tribe-editor__ticket-container__header"
 >
   <div
-    className="tribe-editor__new-ticket__icon"
-  >
-    <<svg>icon mock</svg> />
-  </div>
-  <div
-    className="tribe-editor__new-ticket__content"
+    className="tribe-editor__ticket-container__header-content"
   >
     <span
-      className="tribe-editor__new-ticket__title"
+      className="tribe-editor__ticket-container__header-title"
       id="ticket-creation-title-"
       name="ticket-creation-title"
       onChange={[Function]}
@@ -23,7 +18,7 @@ exports[`Ticket Form Header Header with default values 1`] = `
       Auto Size Input
     </span>
     <span
-      className="tribe-editor__new-ticket__description"
+      className="tribe-editor__ticket-container__header-description"
       id="ticket-creation-description-"
       name="ticket-creation-description"
       onChange={[Function]}
@@ -34,7 +29,7 @@ exports[`Ticket Form Header Header with default values 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__new-ticket__price"
+    className="tribe-editor__ticket-container__header-price"
   >
     <span>
       $
@@ -50,23 +45,18 @@ exports[`Ticket Form Header Header with default values 1`] = `
       Auto Size Input
     </span>
   </div>
-</header>
+</div>
 `;
 
 exports[`Ticket Form Header Header with expiration 1`] = `
-<header
-  className="tribe-editor__new-ticket__header"
+<div
+  className="tribe-editor__ticket-container__header"
 >
   <div
-    className="tribe-editor__new-ticket__icon"
-  >
-    <<svg>icon mock</svg> />
-  </div>
-  <div
-    className="tribe-editor__new-ticket__content"
+    className="tribe-editor__ticket-container__header-content"
   >
     <span
-      className="tribe-editor__new-ticket__title"
+      className="tribe-editor__ticket-container__header-title"
       id="ticket-creation-title-"
       name="ticket-creation-title"
       onChange={[Function]}
@@ -76,7 +66,7 @@ exports[`Ticket Form Header Header with expiration 1`] = `
       Auto Size Input
     </span>
     <span
-      className="tribe-editor__new-ticket__description"
+      className="tribe-editor__ticket-container__header-description"
       id="ticket-creation-description-"
       name="ticket-creation-description"
       onChange={[Function]}
@@ -87,7 +77,7 @@ exports[`Ticket Form Header Header with expiration 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__new-ticket__price"
+    className="tribe-editor__ticket-container__header-price"
   >
     <span>
       $
@@ -103,23 +93,18 @@ exports[`Ticket Form Header Header with expiration 1`] = `
       Auto Size Input
     </span>
   </div>
-</header>
+</div>
 `;
 
 exports[`Ticket Form Header Header with no expiration 1`] = `
-<header
-  className="tribe-editor__new-ticket__header"
+<div
+  className="tribe-editor__ticket-container__header"
 >
   <div
-    className="tribe-editor__new-ticket__icon"
-  >
-    <<svg>icon mock</svg> />
-  </div>
-  <div
-    className="tribe-editor__new-ticket__content"
+    className="tribe-editor__ticket-container__header-content"
   >
     <span
-      className="tribe-editor__new-ticket__title"
+      className="tribe-editor__ticket-container__header-title"
       id="ticket-creation-title-"
       name="ticket-creation-title"
       onChange={[Function]}
@@ -129,7 +114,7 @@ exports[`Ticket Form Header Header with no expiration 1`] = `
       Auto Size Input
     </span>
     <span
-      className="tribe-editor__new-ticket__description"
+      className="tribe-editor__ticket-container__header-description"
       id="ticket-creation-description-"
       name="ticket-creation-description"
       onChange={[Function]}
@@ -140,7 +125,7 @@ exports[`Ticket Form Header Header with no expiration 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__new-ticket__price"
+    className="tribe-editor__ticket-container__header-price"
   >
     <span>
       $
@@ -156,5 +141,5 @@ exports[`Ticket Form Header Header with no expiration 1`] = `
       Auto Size Input
     </span>
   </div>
-</header>
+</div>
 `;

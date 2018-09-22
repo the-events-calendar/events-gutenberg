@@ -38,10 +38,10 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
       role="tabpanel"
     >
       <div
-        className="tribe-editor__tickets-form__row"
+        className="tribe-editor__container-panel__row"
       >
         <div
-          className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
+          className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__container-panel__label"
         >
           <span
             className="tribe-editor__labeled-item__label"
@@ -53,7 +53,7 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
           </span>
         </div>
         <div
-          className="tribe-editor__tickets-form__input-group"
+          className="tribe-editor__container-panel__input-group"
         >
           <div
             className="tribe-editor__date-time-range-picker tribe-editor__ticket-duration__duration-picker"
@@ -127,10 +127,10 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
         </div>
       </div>
       <div
-        className="tribe-editor__tickets-form__row"
+        className="tribe-editor__container-panel__row"
       >
         <div
-          className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
+          className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__container-panel__label"
         >
           <label
             className="tribe-editor__labeled-item__label"
@@ -143,7 +143,7 @@ exports[`AdvancedOptions default props of and state of <AdvancedOptions /> 1`] =
           </span>
         </div>
         <div
-          className="tribe-editor__tickets-form__input-group"
+          className="tribe-editor__container-panel__input-group"
         >
           <input
             id="ticket-sku"
