@@ -23,7 +23,7 @@ const image = {
 			url: 'http://gutenberg.local/wp-content/uploads/2018/09/aircraft-1362586_1920.jpg',
 			height: 1211,
 			width: 1920,
-			orientation: 'landscape'
+			orientation: 'landscape',
 		},
 		large: {
 			height: 331,
@@ -43,7 +43,7 @@ const image = {
 			url: 'http://gutenberg.local/wp-content/uploads/2018/09/aircraft-1362586_1920-150x150.jpg',
 			orientation: 'landscape',
 		},
-	}
+	},
 };
 
 describe( 'Ticket blocks selectors', () => {
@@ -86,7 +86,7 @@ describe( 'Ticket blocks selectors', () => {
 
 	describe( 'Shared capacity', () => {
 		test( 'Select shared capacity', () => {
-			expect( selectors.getSharedCapacity( state ) ).toBe( 0 );
+			expect( selectors.getSharedCapacity( state ) ).toBe( '' );
 		} );
 
 		test( 'Select shared capacity after being set', () => {
@@ -95,12 +95,25 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 	} );
 
-	test( 'Default value of settings dashboard', () => {
-		expect( selectors.getSettingsIsOpen( state ) ).toBe( false );
+	describe( 'Total capacity', () => {
+		test( 'Default value of total capacity', () => {
+			expect( selectors.getTotalCapacity( state ) ).toBe( 0 );
+		} );
+
+		test( 'Value of total capacity when sharedCapacity is only set', () => {
+			newState.tickets.blocks.ticket.sharedCapacity = 15;
+			expect( selectors.getTotalCapacity( newState ) ).toBe( 15 );
+		} );
 	} );
 
-	test( 'Custom value of settings dashboard', () => {
-		newState.tickets.blocks.ticket.isSettingsOpen = true;
-		expect( selectors.getSettingsIsOpen( newState ) ).toBe( true );
+	describe( 'Dashboard settings', () => {
+		test( 'Default value of settings dashboard', () => {
+			expect( selectors.getSettingsIsOpen( state ) ).toBe( false );
+		} );
+
+		test( 'Custom value of settings dashboard', () => {
+			newState.tickets.blocks.ticket.isSettingsOpen = true;
+			expect( selectors.getSettingsIsOpen( newState ) ).toBe( true );
+		} );
 	} );
 } );
