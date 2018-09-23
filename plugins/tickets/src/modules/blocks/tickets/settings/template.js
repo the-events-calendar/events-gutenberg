@@ -15,7 +15,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { SettingsDashboard } from '@moderntribe/tickets/elements';
 import { ImageUpload } from '@moderntribe/common/elements';
-import CapacityTable from '@moderntribe/tickets/blocks/tickets/capacity-table/element';
+import CapacityTable from '@moderntribe/tickets/blocks/tickets/capacity-table/container';
 
 const TicketsSettingsDashboard = ( { onCloseClick, content } ) => (
 	<SettingsDashboard
