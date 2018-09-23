@@ -6,7 +6,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import CapacityRow from './../capacity-row';
+import CapacityRow from './../template';
 
 describe( '<CapacityRow />', () => {
 	test( 'label', () => {
