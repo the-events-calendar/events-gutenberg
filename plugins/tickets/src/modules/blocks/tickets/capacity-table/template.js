@@ -12,7 +12,7 @@ import noop from 'lodash/noop';
 import { sendValue } from '@moderntribe/common/utils/input';
 import itemsSchema, { getValues } from './schema';
 import { toLabel } from './utils';
-import Row from './capacity-row';
+import Row from './row/template';
 import './style.pcss';
 
 const CapacityTable = ( props ) => {
@@ -25,6 +25,7 @@ const CapacityTable = ( props ) => {
 		totalLabel,
 		total,
 		onSharedCapacityChange,
+		sharedValue,
 	} = props;
 
 	const sharedData = getValues( shared );
@@ -33,7 +34,7 @@ const CapacityTable = ( props ) => {
 	const sharedInput = (
 		<input
 			onChange={ sendValue( onSharedCapacityChange ) }
-			value={ sharedData.total }
+			value={ sharedValue }
 			type="number"
 		/>
 	);
@@ -67,6 +68,7 @@ CapacityTable.propTypes = {
 	independentLabel: PropTypes.string,
 	totalLabel: PropTypes.string,
 	total: PropTypes.number,
+	sharedValue: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	onSharedCapacityChange: PropTypes.func,
 }
 

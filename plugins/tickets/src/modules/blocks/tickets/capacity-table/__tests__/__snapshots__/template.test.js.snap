@@ -28,7 +28,6 @@ exports[`<CapacityTable /> independent property 1`] = `
       <input
         onChange={[Function]}
         type="number"
-        value={0}
       />
     </span>
   </div>
@@ -109,7 +108,6 @@ exports[`<CapacityTable /> shared property 1`] = `
       <input
         onChange={[Function]}
         type="number"
-        value={30}
       />
     </span>
   </div>
@@ -182,7 +180,6 @@ exports[`<CapacityTable /> title property 1`] = `
       <input
         onChange={[Function]}
         type="number"
-        value={0}
       />
     </span>
   </div>

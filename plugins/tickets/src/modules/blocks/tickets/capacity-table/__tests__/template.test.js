@@ -6,7 +6,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import CapacityTable from './../element';
+import CapacityTable from './../template';
 
 describe( '<CapacityTable />', () => {
 	test( 'title property', () => {
@@ -37,6 +37,7 @@ describe( '<CapacityTable />', () => {
 					{ name: 'Early Bird', quantity: 10 },
 					{ name: 'Balcony', quantity: 20 },
 				] }
+				sharedValue={ 30 }
 				onSharedCapacityChange={ onChange }
 			/>,
 		);
