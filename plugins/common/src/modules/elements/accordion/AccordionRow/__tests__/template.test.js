@@ -15,10 +15,10 @@ describe( 'Accordion Row Element', () => {
 		row = {
 			accordionId: '123',
 			content: 'this is a content',
-			contentAttrs: { 'data-attr': 'attr-value' },
+			contentAttrs: { 'data-attr': 'content-attr-value' },
 			contentClassName: 'content-class',
 			header: 'this is header',
-			headerAttrs: { 'data-attr': 'attr-value' },
+			headerAttrs: { 'data-attr': 'header-attr-value' },
 			headerClassName: 'header-class',
 			onClick: jest.fn(),
 			onClose: jest.fn(),
