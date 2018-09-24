@@ -19,8 +19,8 @@ import {
 	Availability,
 	ActionDashboard,
 	CapacityTable,
-	TicketForm,
 	InactiveBlock,
+	TicketForm,
 } from '@moderntribe/tickets/elements';
 import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';
@@ -45,6 +45,11 @@ const imageUploadProps = {
 		'events-gutenberg'
 	),
 	buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
+	image: {
+		id: 0,
+		src: '',
+		alt: '',
+	},
 };
 
 const TicketsTemplate = ( props ) => {

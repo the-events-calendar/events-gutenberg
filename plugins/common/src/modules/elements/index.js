@@ -3,6 +3,7 @@ export { default as BlockIcon } from '@moderntribe/common/elements/block-icon';
 export { default as Button } from './button/element';
 export { default as Checkbox } from './checkbox/element';
 export { default as Counter } from './counter/element';
+export { default as Image } from './image/element';
 export { default as ImageUpload } from './image-upload/element';
 export { default as LabeledItem } from './labeled-item/element';
 export { default as LabelWithModal } from './label-with-modal/element';

@@ -74,6 +74,11 @@ export const setRSVPSettingsOpen = ( settingsOpen ) => ( {
 	},
 } );
 
+export const setRSVPHeaderImage = ( payload ) => ( {
+	type: types.SET_RSVP_HEADER_IMAGE,
+	payload,
+} );
+
 export const setRSVPHeader = ( payload ) => ( {
 	type: types.SET_RSVP_HEADER,
 	payload,
