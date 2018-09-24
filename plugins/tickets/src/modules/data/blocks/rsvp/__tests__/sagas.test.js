@@ -8,7 +8,6 @@ import { cloneableGenerator } from 'redux-saga/utils';
  * Internal Dependencies
  */
 import * as types from '../types';
-import { DEFAULT_STATE } from '../reducer';
 import * as actions from '../actions';
 import watchers, * as sagas from '../sagas';
 

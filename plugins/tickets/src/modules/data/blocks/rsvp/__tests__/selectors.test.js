@@ -52,4 +52,20 @@ describe( 'RSVP block selectors', () => {
 	it( 'should return the settings open', () => {
 		expect( selectors.getRSVPSettingsOpen( state ) ).toBe( DEFAULT_STATE.settingsOpen );
 	} );
+
+	it( 'should return the header image object', () => {
+		expect( selectors.getRSVPHeaderImage( state ) ).toBe( DEFAULT_STATE.headerImage );
+	} );
+
+	it( 'should return the header image id', () => {
+		expect( selectors.getRSVPHeaderImageId( state ) ).toBe( DEFAULT_STATE.headerImage.id );
+	} );
+
+	it( 'should return the header image src', () => {
+		expect( selectors.getRSVPHeaderImageSrc( state ) ).toBe( DEFAULT_STATE.headerImage.src );
+	} );
+
+	it( 'should return the header image alt', () => {
+		expect( selectors.getRSVPHeaderImageAlt( state ) ).toBe( DEFAULT_STATE.headerImage.alt );
+	} );
 } );

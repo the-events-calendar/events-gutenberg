@@ -30,6 +30,20 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP details 1`] = `
+Object {
+  "payload": Object {
+    "capacity": 20,
+    "endDate": "January 4, 2018",
+    "endTime": "23:45",
+    "notGoingResponses": true,
+    "startDate": "January 1, 2018",
+    "startTime": "12:34",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_DETAILS",
+}
+`;
+
 exports[`RSVP block actions set RSVP end date 1`] = `
 Object {
   "payload": Object {
@@ -45,6 +59,27 @@ Object {
     "endTime": "12:34",
   },
   "type": "@@MT/TICKETS/SET_RSVP_END_TIME",
+}
+`;
+
+exports[`RSVP block actions set RSVP header 1`] = `
+Object {
+  "payload": Object {
+    "description": "test description",
+    "title": "test title",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_HEADER",
+}
+`;
+
+exports[`RSVP block actions set RSVP header image 1`] = `
+Object {
+  "payload": Object {
+    "alt": "test-alt",
+    "id": 42,
+    "src": "test-src",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_HEADER_IMAGE",
 }
 `;
 

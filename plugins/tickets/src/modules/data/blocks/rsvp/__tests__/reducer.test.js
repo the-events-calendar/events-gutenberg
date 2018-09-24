@@ -53,4 +53,13 @@ describe( 'RSVP block reducer', () => {
 	it( 'should set the settings open', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPSettingsOpen( true ) ) ).toMatchSnapshot();
 	} );
+
+	it( 'should set the header image state', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPHeaderImage( {
+			id: 42,
+			src: 'test-src',
+			alt: 'test-alt',
+		} ) ) ).toMatchSnapshot();
+	} );
+
 } );

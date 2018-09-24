@@ -54,3 +54,23 @@ export const getRSVPSettingsOpen = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.settingsOpen,
 );
+
+export const getRSVPHeaderImage = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.headerImage,
+);
+
+export const getRSVPHeaderImageId = createSelector(
+	[ getRSVPHeaderImage ],
+	( headerImage ) => headerImage.id,
+);
+
+export const getRSVPHeaderImageSrc = createSelector(
+	[ getRSVPHeaderImage ],
+	( headerImage ) => headerImage.src,
+);
+
+export const getRSVPHeaderImageAlt = createSelector(
+	[ getRSVPHeaderImage ],
+	( headerImage ) => headerImage.alt,
+);
