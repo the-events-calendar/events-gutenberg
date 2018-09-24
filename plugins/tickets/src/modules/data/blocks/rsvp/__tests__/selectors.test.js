@@ -109,6 +109,10 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPHeaderImage( state ) ).toBe( DEFAULT_STATE.headerImage );
 	} );
 
+	it( 'should return the header image id', () => {
+		expect( selectors.getRSVPHeaderImageId( state ) ).toBe( DEFAULT_STATE.headerImage.id );
+	} );
+
 	it( 'should return the header image src', () => {
 		expect( selectors.getRSVPHeaderImageSrc( state ) ).toBe( DEFAULT_STATE.headerImage.src );
 	} );
