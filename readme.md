@@ -93,10 +93,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.2.9-alpha - TBD
+#### 0.3.0-alpha - TBD
 
-* Fix - Prevent empty diff on new event creation
-* Fix - Prevent generation of empty classic blocks when migrating events to gutenberg with empty content
 * Feature - Register ticket block to make it available in the block list
 * Feature - Register PHP files to use tickets templates
 * Feature - Add `store` for tickets plugins
@@ -114,6 +112,12 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Tweak - Move most utilities from events plugin to common plugin
 * Tweak - Move time picker element from events plugin to common plugin
 * Tweak - Adjust time picker element to accept time string in hh:mm format rather than moments
+
+#### 0.2.9-alpha - 2018-09-21
+
+* Fix - Prevent empty diff on new event creation, allowing Meta to be saved
+* Fix - Prevent generation of empty classic blocks when migrating events to gutenberg with empty content
+* Fix - Render the Google Map in the Event Venue Block.
 
 #### 0.2.8-alpha - 2018-09-14
 

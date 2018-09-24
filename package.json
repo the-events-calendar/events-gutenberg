@@ -1,6 +1,6 @@
 {
 	"name": "events-gutenberg",
-	"version": "0.2.8-alpha",
+	"version": "0.2.9-alpha",
 	"description": "A new WordPress editor experience for Events",
 	"repository": "git+https://github.com/moderntribe/events-gutenberg.git",
 	"author": "Modern Tribe",
@@ -109,7 +109,7 @@
 		"lerna": "^3.0.0-rc.0",
 		"mini-css-extract-plugin": "^0.4.1",
 		"node-sass": "^4.9.2",
-		"postcss-cssnext": "^2.5.2",
+		"postcss-preset-env": "^6.0.2",
 		"postcss-hexrgba": "^1.0.0",
 		"postcss-import": "^11.0.0",
 		"postcss-loader": "2.0.6",

@@ -5,10 +5,10 @@ exports[`SKU Render the component with no errors 1`] = `
   className="tribe-editor__tickets-form__row"
 >
   <div
-    className="tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
+    className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__tickets-form__label"
   >
     <label
-      className="tribe-editor__label-with-tooltip__label"
+      className="tribe-editor__labeled-item__label"
       htmlFor="ticket-sku"
     >
       Ticket SKU

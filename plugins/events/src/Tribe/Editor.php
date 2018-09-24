@@ -16,7 +16,6 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 	 */
 	public function hook() {
 		add_filter( 'tribe_events_register_event_type_args', array( $this, 'add_event_template_blocks' ) );
-		add_filter( 'tribe_events_register_event_type_args', array( $this, 'add_template_blocks' ) );
 
 		// Add Rest API support
 		add_filter( 'tribe_events_register_event_type_args', array( $this, 'add_rest_support' ) );

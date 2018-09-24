@@ -131,6 +131,11 @@ class EventOrganizer extends Component {
 
 		removeOrganizerInBlock( clientId, organizer );
 
+		/**
+		 * @todo make sure this one is provided by the container in mapDispatchToProps, as both
+		 * @todo methods / logic are very similar.
+		 * @todo Seee https://github.com/moderntribe/events-gutenberg/pull/259/files#r211099809
+		 */
 		if ( volatile ) {
 			maybeRemoveEntry( details );
 			removeOrganizerInClassic( organizer );
