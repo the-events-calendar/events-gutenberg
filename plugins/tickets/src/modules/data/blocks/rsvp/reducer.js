@@ -6,6 +6,9 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
+import headerImage, {
+	DEFAULT_STATE as HEADER_IMAGE_DEFAULT_STATE,
+} from './reducers/header-image';
 import { types } from '@moderntribe/tickets/data/blocks/rsvp';
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
@@ -20,8 +23,7 @@ export const DEFAULT_STATE = {
 	endTime: momentUtil.toTime24Hr( moment() ),
 	created: false,
 	settingsOpen: false,
-	headerImageSrc: '',
-	headerImageAlt: '',
+	headerImage: HEADER_IMAGE_DEFAULT_STATE,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -78,15 +80,10 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				settingsOpen: action.payload.settingsOpen,
 			};
-		case types.SET_RSVP_HEADER_IMAGE_SRC:
+		case types.SET_RSVP_HEADER_IMAGE:
 			return {
 				...state,
-				headerImageSrc: action.payload.headerImageSrc,
-			};
-		case types.SET_RSVP_HEADER_IMAGE_ALT:
-			return {
-				...state,
-				headerImageAlt: action.payload.headerImageAlt,
+				headerImage: headerImage( state.headerImage, action ),
 			};
 		default:
 			return state;

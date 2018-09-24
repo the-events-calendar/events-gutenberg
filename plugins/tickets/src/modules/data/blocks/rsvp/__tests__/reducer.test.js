@@ -54,11 +54,12 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPSettingsOpen( true ) ) ).toMatchSnapshot();
 	} );
 
-	it( 'should set the header image src', () => {
-		expect( reducer( DEFAULT_STATE, actions.setRSVPHeaderImageSrc( 'test-src' ) ) ).toMatchSnapshot();
+	it( 'should set the header image state', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPHeaderImage( {
+			id: 42,
+			src: 'test-src',
+			alt: 'test-alt',
+		} ) ) ).toMatchSnapshot();
 	} );
 
-	it( 'should set the header image alt', () => {
-		expect( reducer( DEFAULT_STATE, actions.setRSVPHeaderImageAlt( 'test-alt' ) ) ).toMatchSnapshot();
-	} );
 } );

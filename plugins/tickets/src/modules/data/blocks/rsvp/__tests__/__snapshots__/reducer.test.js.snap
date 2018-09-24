@@ -119,6 +119,26 @@ Object {
 }
 `;
 
+exports[`RSVP block reducer should set the header image state 1`] = `
+Object {
+  "capacity": "",
+  "created": false,
+  "description": "",
+  "endDate": "July 19, 2018",
+  "endTime": "19:30",
+  "headerImage": Object {
+    "alt": "test-alt",
+    "id": 42,
+    "src": "test-src",
+  },
+  "notGoingResponses": false,
+  "settingsOpen": false,
+  "startDate": "July 19, 2018",
+  "startTime": "19:30",
+  "title": "",
+}
+`;
+
 exports[`RSVP block reducer should set the not going responses 1`] = `
 Object {
   "capacity": "",

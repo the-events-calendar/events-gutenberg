@@ -9,14 +9,6 @@ import { put, all, takeEvery } from 'redux-saga/effects';
 import * as types from './types';
 import * as actions from './actions';
 
-export function* setRSVPHeaderImage( action ) {
-	const { headerImageSrc, headerImageAlt } = action.payload;
-	yield all( [
-		put( actions.setRSVPHeaderImageSrc( headerImageSrc ) ),
-		put( actions.setRSVPHeaderImageAlt( headerImageAlt ) ),
-	] );
-}
-
 export function* setRSVPHeader( action ) {
 	const { title, description } = action.payload;
 	yield all( [
@@ -45,7 +37,6 @@ export function* setRSVPDetails( action ) {
 }
 
 export default function* watchers() {
-	yield takeEvery( types.SET_RSVP_HEADER_IMAGE, setRSVPHeaderImage );
 	yield takeEvery( types.SET_RSVP_HEADER, setRSVPHeader );
 	yield takeEvery( types.SET_RSVP_DETAILS, setRSVPDetails );
 }
