@@ -3,6 +3,10 @@
  */
 import { types } from '@moderntribe/tickets/data/blocks/rsvp';
 
+/**
+ * Full payload from gutenberg media upload is not used,
+ * only id, alt, and src are used for this specific case.
+ */
 export const DEFAULT_STATE = {
 	id: 0,
 	src: '',
