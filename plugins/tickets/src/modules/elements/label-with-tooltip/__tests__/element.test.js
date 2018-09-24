@@ -31,13 +31,4 @@ describe( 'Tooltip Element', () => {
 		const component = renderer.create( <LabelWithTooltip { ...props } />)
 		expect( component.toJSON() ).toMatchSnapshot()
 	} );
-
-	it( 'renders a <label> when ID is provided', () => {
-		const props = {
-			label: 'Custom label',
-			id: 'my-custom-input',
-		};
-		const component = renderer.create( <LabelWithTooltip { ...props } /> );
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
 } );
