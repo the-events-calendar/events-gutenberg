@@ -15,7 +15,7 @@ import { MediaUpload } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import { Button } from '@moderntribe/common/elements';
+import { Button, Image } from '@moderntribe/common/elements';
 import { Close as CloseIcon } from '@moderntribe/common/icons';
 import './style.pcss';
 
@@ -28,11 +28,11 @@ export const renderImageUploadButton = ( label ) => ( { open } ) => (
 	</Button>
 );
 
-export const renderImage = ( imageAlt, imageSrc, onRemove ) => (
+export const renderImage = ( image, onRemove ) => (
 	<div className="tribe-editor__image-upload__image-wrapper">
-		<img
-			src={ imageSrc }
-			alt={ imageAlt }
+		<Image
+			src={ image.src }
+			alt={ image.alt }
 			className="tribe-editor__image-upload__image"
 		/>
 		<Button
@@ -51,43 +51,50 @@ const ImageUpload = ( {
 	buttonLabel,
 	className,
 	description,
-	imageAlt,
-	imageSrc,
+	image,
 	onRemove,
 	onSelect,
 	title,
-} ) => (
-	<div className={ classNames(
-		'tribe-editor__image-upload',
-		{ 'tribe-editor__image-upload--has-image': imageSrc },
-		className,
-	) }>
-		{ title && <h3 className="tribe-editor__image-upload__title">{ title }</h3> }
-		<div className="tribe-editor__image-upload__content">
-			{ description && (
-				<p className="tribe-editor__image-upload__description">{ description }</p>
-			) }
-			{
-				imageSrc
-					? renderImage( imageAlt, imageSrc, onRemove )
-					: (
-						<MediaUpload
-							onSelect={ onSelect }
-							type="image"
-							render={ renderImageUploadButton( buttonLabel ) }
-						/>
-					)
-			}
+} ) => {
+	const hasImageClass = { 'tribe-editor__image-upload--has-image': image.id };
+
+	return (
+		<div className={ classNames(
+			'tribe-editor__image-upload',
+			hasImageClass,
+			className,
+		) }>
+			{ title && <h3 className="tribe-editor__image-upload__title">{ title }</h3> }
+			<div className="tribe-editor__image-upload__content">
+				{ description && (
+					<p className="tribe-editor__image-upload__description">{ description }</p>
+				) }
+				{
+					image.id
+						? renderImage( image, onRemove )
+						: (
+							<MediaUpload
+								onSelect={ onSelect }
+								type="image"
+								render={ renderImageUploadButton( buttonLabel ) }
+								value={ image.id }
+							/>
+						)
+				}
+			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 ImageUpload.propTypes = {
 	buttonLabel: PropTypes.string,
 	className: PropTypes.string,
 	description: PropTypes.string,
-	imageAlt: PropTypes.string,
-	imageSrc: PropTypes.string,
+	image: PropTypes.shape( {
+		alt: PropTypes.string.isRequired,
+		id: PropTypes.number.isRequired,
+		src: PropTypes.string.isRequired,
+	} ).isRequired,
 	onRemove: PropTypes.func.isRequired,
 	onSelect: PropTypes.func.isRequired,
 	title: PropTypes.string,

@@ -100,12 +100,12 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPHasChanges( true ) ).toMatchSnapshot();
 	} );
 
-	test( 'set RSVP header image src', () => {
-		expect( actions.setRSVPHeaderImageSrc( 'test-src' ) ).toMatchSnapshot();
-	} );
-
-	test( 'set RSVP header image alt', () => {
-		expect( actions.setRSVPHeaderImageAlt( 'test-alt' ) ).toMatchSnapshot();
+	test( 'set RSVP header image', () => {
+		expect( actions.setRSVPHeaderImage( {
+			id: 42,
+			src: 'test-src',
+			alt: 'test-alt',
+		} ) ).toMatchSnapshot();
 	} );
 
 	test( 'set RSVP details', () => {

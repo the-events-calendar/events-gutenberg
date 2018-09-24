@@ -45,6 +45,11 @@ const imageUploadProps = {
 		'events-gutenberg'
 	),
 	buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
+	image: {
+		id: 0,
+		src: '',
+		alt: '',
+	},
 };
 
 const TicketsTemplate = ( props ) => {

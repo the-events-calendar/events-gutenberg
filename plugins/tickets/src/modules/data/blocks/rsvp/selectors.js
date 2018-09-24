@@ -120,12 +120,22 @@ export const getRSVPHasChanges = createSelector(
 	( rsvp ) => rsvp.hasChanges,
 );
 
-export const getRSVPHeaderImageSrc = createSelector(
+export const getRSVPHeaderImage = createSelector(
 	[ getRSVPBlock ],
-	( rsvp ) => rsvp.headerImageSrc,
+	( rsvp ) => rsvp.headerImage,
+);
+
+export const getRSVPHeaderImageId = createSelector(
+	[ getRSVPHeaderImage ],
+	( headerImage ) => headerImage.id,
+);
+
+export const getRSVPHeaderImageSrc = createSelector(
+	[ getRSVPHeaderImage ],
+	( headerImage ) => headerImage.src,
 );
 
 export const getRSVPHeaderImageAlt = createSelector(
-	[ getRSVPBlock ],
-	( rsvp ) => rsvp.headerImageAlt,
+	[ getRSVPHeaderImage ],
+	( headerImage ) => headerImage.alt,
 );

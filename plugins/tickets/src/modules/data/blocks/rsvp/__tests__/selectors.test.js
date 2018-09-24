@@ -105,11 +105,15 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPHasChanges( state ) ).toBe( DEFAULT_STATE.hasChanges );
 	} );
 
+	it( 'should return the header image object', () => {
+		expect( selectors.getRSVPHeaderImage( state ) ).toBe( DEFAULT_STATE.headerImage );
+	} );
+
 	it( 'should return the header image src', () => {
-		expect( selectors.getRSVPHeaderImageSrc( state ) ).toBe( DEFAULT_STATE.headerImageSrc );
+		expect( selectors.getRSVPHeaderImageSrc( state ) ).toBe( DEFAULT_STATE.headerImage.src );
 	} );
 
 	it( 'should return the header image alt', () => {
-		expect( selectors.getRSVPHeaderImageAlt( state ) ).toBe( DEFAULT_STATE.headerImageAlt );
+		expect( selectors.getRSVPHeaderImageAlt( state ) ).toBe( DEFAULT_STATE.headerImage.alt );
 	} );
 } );

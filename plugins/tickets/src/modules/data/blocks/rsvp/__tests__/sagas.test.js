@@ -16,34 +16,10 @@ describe( 'RSVP block sagas', () => {
 		it( 'should watch actions', () => {
 			const gen = watchers();
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_RSVP_HEADER_IMAGE, sagas.setRSVPHeaderImage )
-			);
-			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_RSVP_DETAILS, sagas.setRSVPDetails ),
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_RSVP_TEMP_DETAILS, sagas.setRSVPTempDetails ),
-			);
-			expect( gen.next().done ).toEqual( true );
-		} );
-	} );
-
-	describe( 'setRSVPHeaderImage', () => {
-		let action;
-		beforeEach( () => {
-			action = { payload: {
-				headerImageSrc: 'test-src',
-				headerImageAlt: 'test-alt',
-			} };
-		} );
-
-		it( 'should set header image state properties', () => {
-			const gen = cloneableGenerator( sagas.setRSVPHeaderImage )( action );
-			expect( gen.next().value ).toEqual(
-				all( [
-					put( actions.setRSVPHeaderImageSrc( 'test-src' ) ),
-					put( actions.setRSVPHeaderImageAlt( 'test-alt' ) ),
-				] )
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );

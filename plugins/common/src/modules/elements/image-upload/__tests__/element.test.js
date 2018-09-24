@@ -41,18 +41,23 @@ describe( 'renderImageUploadButton', () => {
 
 describe( 'renderImage', () => {
 	const onRemove = jest.fn();
+	const image = {
+		id: 42,
+		src: 'test-src',
+		alt: 'test-alt',
+	};
 
 	afterEach( () => {
 		onRemove.mockClear();
 	} );
 
 	it( 'renders the image and button', () => {
-		const component = renderer.create( renderImage( 'test-alt', 'test-src', onRemove ) );
+		const component = renderer.create( renderImage( image, onRemove ) );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'executes onRemove on click', () => {
-		const component = mount( renderImage( 'test-alt', 'test-src', onRemove ) );
+		const component = mount( renderImage( image, onRemove ) );
 		component.find( 'button' ).simulate( 'click' );
 		expect( onRemove ).toHaveBeenCalled();
 		expect( onRemove ).toHaveBeenCalledTimes( 1 );
@@ -62,6 +67,15 @@ describe( 'renderImage', () => {
 describe( 'ImageUpload', () => {
 	const onRemove = jest.fn();
 	const onSelect = jest.fn();
+	let image;
+
+	beforeEach( () => {
+		image = {
+			id: 0,
+			src: '',
+			alt: '',
+		};
+	} );
 
 	afterEach( () => {
 		onRemove.mockClear();
@@ -71,6 +85,7 @@ describe( 'ImageUpload', () => {
 	it( 'renders the component', () => {
 		const component = renderer.create(
 			<ImageUpload
+				image={ image }
 				onSelect={ onSelect }
 				onRemove={ onRemove }
 			/>
@@ -81,6 +96,7 @@ describe( 'ImageUpload', () => {
 	it( 'renders with title', () => {
 		const component = renderer.create(
 			<ImageUpload
+				image={ image }
 				onSelect={ onSelect }
 				onRemove={ onRemove }
 				title="Modern Tribe"
@@ -92,6 +108,7 @@ describe( 'ImageUpload', () => {
 	it( 'renders with description', () => {
 		const component = renderer.create(
 			<ImageUpload
+				image={ image }
 				onSelect={ onSelect}
 				onRemove={ onRemove }
 				description="The Next Generation of Digital Agency"
@@ -103,6 +120,7 @@ describe( 'ImageUpload', () => {
 	it( 'renders with class', () => {
 		const component = renderer.create(
 			<ImageUpload
+				image={ image }
 				onSelect={ onSelect }
 				onRemove={ onRemove }
 				className="test-class"
@@ -112,11 +130,27 @@ describe( 'ImageUpload', () => {
 	} );
 
 	it( 'renders uploaded image', () => {
+		image = {
+			id: 42,
+			src: 'test-src',
+			alt: 'test-alt',
+		};
 		const component = renderer.create(
 			<ImageUpload
+				image={ image }
 				onSelect={ onSelect }
 				onRemove={ onRemove }
-				imageSrc="test-src"
+			/>
+		);
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
+	it( 'renders upload image button', () => {
+		const component = renderer.create(
+			<ImageUpload
+				image={ image }
+				onSelect={ onSelect }
+				onRemove={ onRemove }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();

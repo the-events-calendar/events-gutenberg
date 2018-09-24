@@ -14,6 +14,20 @@ exports[`ImageUpload renders the component 1`] = `
 </div>
 `;
 
+exports[`ImageUpload renders upload image button 1`] = `
+<div
+  className="tribe-editor__image-upload"
+>
+  <div
+    className="tribe-editor__image-upload__content"
+  >
+    <button>
+      Media Upload
+    </button>
+  </div>
+</div>
+`;
+
 exports[`ImageUpload renders uploaded image 1`] = `
 <div
   className="tribe-editor__image-upload tribe-editor__image-upload--has-image"
@@ -25,7 +39,8 @@ exports[`ImageUpload renders uploaded image 1`] = `
       className="tribe-editor__image-upload__image-wrapper"
     >
       <img
-        className="tribe-editor__image-upload__image"
+        alt="test-alt"
+        className="tribe-editor__image tribe-editor__image-upload__image"
         src="test-src"
       />
       <button
@@ -105,7 +120,7 @@ exports[`renderImage renders the image and button 1`] = `
 >
   <img
     alt="test-alt"
-    className="tribe-editor__image-upload__image"
+    className="tribe-editor__image tribe-editor__image-upload__image"
     src="test-src"
   />
   <button

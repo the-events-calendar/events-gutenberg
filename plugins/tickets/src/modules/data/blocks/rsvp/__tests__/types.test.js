@@ -61,12 +61,8 @@ describe( 'RSVP block types', () => {
 		expect( types.SET_RSVP_HAS_CHANGES ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HAS_CHANGES` );
 	} );
 
-	test( 'set RSVP header image src', () => {
-		expect( types.SET_RSVP_HEADER_IMAGE_SRC ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER_IMAGE_SRC` );
-	} );
-
-	test( 'set RSVP header image alt', () => {
-		expect( types.SET_RSVP_HEADER_IMAGE_ALT ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER_IMAGE_ALT` );
+	test( 'set RSVP header image', () => {
+		expect( types.SET_RSVP_HEADER_IMAGE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER_IMAGE` );
 	} );
 
 	test( 'set RSVP temp title', () => {

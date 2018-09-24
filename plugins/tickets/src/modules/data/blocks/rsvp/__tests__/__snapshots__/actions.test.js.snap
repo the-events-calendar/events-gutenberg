@@ -84,21 +84,14 @@ Object {
 }
 `;
 
-exports[`RSVP block actions set RSVP header image alt 1`] = `
+exports[`RSVP block actions set RSVP header image 1`] = `
 Object {
   "payload": Object {
-    "headerImageAlt": "test-alt",
+    "alt": "test-alt",
+    "id": 42,
+    "src": "test-src",
   },
-  "type": "@@MT/TICKETS/SET_RSVP_HEADER_IMAGE_ALT",
-}
-`;
-
-exports[`RSVP block actions set RSVP header image src 1`] = `
-Object {
-  "payload": Object {
-    "headerImageSrc": "test-src",
-  },
-  "type": "@@MT/TICKETS/SET_RSVP_HEADER_IMAGE_SRC",
+  "type": "@@MT/TICKETS/SET_RSVP_HEADER_IMAGE",
 }
 `;
 
