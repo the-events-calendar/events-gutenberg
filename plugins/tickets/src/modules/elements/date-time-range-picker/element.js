@@ -20,6 +20,9 @@ import {
 import './style.pcss';
 
 class DateTimeRangePicker extends Component {
+	/**
+	 * @todo remove the need to specify the: fromDate, fromTime, toDate, toTime
+	 */
 	static defaultProps = {
 		fromDateFormat: 'LL',
 		onFromDateChange: noop,
