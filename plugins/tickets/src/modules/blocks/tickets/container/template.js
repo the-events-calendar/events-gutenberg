@@ -12,25 +12,16 @@ import { InnerBlocks } from '@wordpress/editor';
 /**
  * Internal dependencies
  */
-import TicketEditContainer from '../edit-container/template';
 import Availability from '../availability/element';
 
-const TicketContainer = ( { isSelected } ) => {
-
-	const availability = isSelected && (
-		<Availability available={ 48 } total={ 168 } />
-	);
-
-	return (
-		<Fragment>
-			<div className="tribe-editor__tickets-body">
-				<InnerBlocks />
-			</div>
-			{ availability }
-			<TicketEditContainer />
-		</Fragment>
-	);
-};
+const TicketContainer = ( { isSelected } ) => (
+	<div className="tribe-editor__ticket-container">
+		<div className="tribe-editor__tickets-body">
+			<InnerBlocks />
+		</div>
+		{ isSelected && <Availability available={ 48 } total={ 168 } /> }
+	</div>
+);
 
 TicketContainer.propTypes = {
 	isSelected: PropTypes.bool,

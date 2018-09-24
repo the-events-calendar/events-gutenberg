@@ -6,7 +6,6 @@ import { types } from '@moderntribe/tickets/data/blocks/ticket';
 export const DEFAULT_STATE = {
 	sharedCapacity: '',
 	header: null,
-	tickets: [],
 	isSettingsOpen: false,
 };
 
