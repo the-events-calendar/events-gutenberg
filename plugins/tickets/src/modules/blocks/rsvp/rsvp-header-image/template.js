@@ -15,8 +15,7 @@ import { __ } from '@wordpress/i18n';
 import { ImageUpload } from '@moderntribe/common/elements';
 
 const RSVPHeaderImage = ( {
-	headerImageAlt,
-	headerImageSrc,
+	image,
 	onRemove,
 	onSelect
 } ) => {
@@ -29,20 +28,22 @@ const RSVPHeaderImage = ( {
 		),
 		className: 'tribe-editor__rsvp__image-upload',
 		buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
-		onRemove: onRemove,
-		onSelect: onSelect,
-		imageAlt: headerImageAlt,
-		imageSrc: headerImageSrc,
+		image,
+		onRemove,
+		onSelect,
 	};
 
 	return <ImageUpload { ...imageUploadProps } />;
 };
 
 RSVPHeaderImage.propTypes = {
-	headerImageAlt: PropTypes.string,
-	headerImageSrc: PropTypes.string,
-	onRemove: PropTypes.func,
-	onSelect: PropTypes.func,
+	image: PropTypes.shape( {
+		alt: PropTypes.string.isRequired,
+		id: PropTypes.number.isRequired,
+		src: PropTypes.string.isRequired,
+	} ).isRequired,
+	onRemove: PropTypes.func.isRequired,
+	onSelect: PropTypes.func.isRequired,
 };
 
 export default RSVPHeaderImage;

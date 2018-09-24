@@ -28,11 +28,11 @@ export const renderImageUploadButton = ( label ) => ( { open } ) => (
 	</Button>
 );
 
-export const renderImage = ( imageAlt, imageSrc, onRemove ) => (
+export const renderImage = ( image, onRemove ) => (
 	<div className="tribe-editor__image-upload__image-wrapper">
 		<Image
-			src={ imageSrc }
-			alt={ imageAlt }
+			src={ image.src }
+			alt={ image.alt }
 			className="tribe-editor__image-upload__image"
 		/>
 		<Button
@@ -51,13 +51,12 @@ const ImageUpload = ( {
 	buttonLabel,
 	className,
 	description,
-	imageAlt,
-	imageSrc,
+	image,
 	onRemove,
 	onSelect,
 	title,
 } ) => {
-	const hasImageClass = imageSrc && 'tribe-editor__image-upload--has-image';
+	const hasImageClass = { 'tribe-editor__image-upload--has-image': image.id };
 
 	return (
 		<div className={ classNames(
@@ -71,13 +70,14 @@ const ImageUpload = ( {
 					<p className="tribe-editor__image-upload__description">{ description }</p>
 				) }
 				{
-					imageSrc
-						? renderImage( imageAlt, imageSrc, onRemove )
+					image.id
+						? renderImage( image, onRemove )
 						: (
 							<MediaUpload
 								onSelect={ onSelect }
 								type="image"
 								render={ renderImageUploadButton( buttonLabel ) }
+								value={ image.id }
 							/>
 						)
 				}
@@ -90,8 +90,11 @@ ImageUpload.propTypes = {
 	buttonLabel: PropTypes.string,
 	className: PropTypes.string,
 	description: PropTypes.string,
-	imageAlt: PropTypes.string,
-	imageSrc: PropTypes.string,
+	image: PropTypes.shape( {
+		alt: PropTypes.string.isRequired,
+		id: PropTypes.number.isRequired,
+		src: PropTypes.string.isRequired,
+	} ).isRequired,
 	onRemove: PropTypes.func.isRequired,
 	onSelect: PropTypes.func.isRequired,
 	title: PropTypes.string,
