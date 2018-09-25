@@ -14,8 +14,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import RSVPDuration from '../rsvp-duration/template';
-import RSVPAttendeeRegistration from '../rsvp-attendee-registration/container';
+import RSVPDuration from '../duration/template';
+import RSVPAttendeeRegistration from '../attendee-registration/container';
 import { Accordion } from '@moderntribe/common/elements';
 import './style.pcss';
 

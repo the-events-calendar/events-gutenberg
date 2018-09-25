@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import RSVPHeaderImage from '@moderntribe/tickets/blocks/rsvp/rsvp-header-image/container';
+import RSVPHeaderImage from '@moderntribe/tickets/blocks/rsvp/header-image/container';
 import { SettingsDashboard } from '@moderntribe/tickets/elements';
 
 const RSVPSettingsDashboard = ( { onCloseClick } ) => (

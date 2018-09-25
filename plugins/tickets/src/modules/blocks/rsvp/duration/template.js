@@ -6,8 +6,8 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import RSVPDurationLabel from '../rsvp-duration-label/container';
-import RSVPDurationPicker from '../rsvp-duration-picker/container';
+import RSVPDurationLabel from '@moderntribe/tickets/blocks/rsvp/duration-label/container';
+import RSVPDurationPicker from '@moderntribe/tickets/blocks/rsvp/duration-picker/container';
 import './style.pcss';
 
 const RSVPDuration = () => (

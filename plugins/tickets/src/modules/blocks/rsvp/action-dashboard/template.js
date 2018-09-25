@@ -16,7 +16,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	SettingsActionButton,
 	AttendeesActionButton,
-} from '@moderntribe/tickets/blocks/rsvp/rsvp-action-buttons';
+} from '@moderntribe/tickets/blocks/rsvp/action-buttons';
 import { ActionDashboard } from '@moderntribe/tickets/elements';
 
 const actions = [

@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import RSVPCounters from '@moderntribe/tickets/blocks/rsvp/rsvp-counters/container';
+import RSVPCounters from '@moderntribe/tickets/blocks/rsvp/counters/container';
 import { NumericLabel } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
