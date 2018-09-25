@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -23,24 +23,49 @@ import './style.pcss';
 	} = props;
 	*/
 
-const TicketsTemplate = ( { isSelected } ) => (
-	<div
-		className={ classNames(
-			'tribe-editor__tickets-container',
-			{ 'tribe-editor__tickets-container--selected': isSelected },
-		) }
-	>
-		<TicketsContainer isSelected={ isSelected } />
-		<TicketsDashboard isSelected={ isSelected } />
-	</div>
-);
+class TicketsTemplate extends PureComponent {
+	static propTypes = {
+		isSelected: PropTypes.bool,
+		setIsSelected: PropTypes.func,
+	};
 
-TicketsTemplate.propTypes = {
-	isSelected: PropTypes.bool,
-};
+	static defaultProps = {
+		isSelected: false,
+	};
 
-TicketsTemplate.defaultProps = {
-	isSelected: false,
-};
+	updateIsSelected = () => {
+		const { setIsSelected, isSelected } = this.props;
+		setIsSelected( isSelected );
+	};
+
+	componentDidMount() {
+		this.updateIsSelected();
+	}
+
+	componentDidUpdate( prevProps ) {
+		if ( prevProps.isSelected !== this.props.isSelected ) {
+			this.updateIsSelected();
+		}
+	}
+
+	componentWillUnmount() {
+		this.updateIsSelected();
+	}
+
+	render() {
+		const { isBlockSelected } = this.props;
+		return (
+			<div
+				className={ classNames(
+					'tribe-editor__tickets-container',
+					{ 'tribe-editor__tickets-container--selected': isBlockSelected },
+				) }
+			>
+				<TicketsContainer isSelected={ isBlockSelected } />
+				<TicketsDashboard isSelected={ isBlockSelected } />
+			</div>
+		);
+	}
+}
 
 export default TicketsTemplate;
