@@ -40,6 +40,7 @@ const TimePicker = ( {
 	onClick,
 	showAllDay,
 } ) => {
+
 	const renderLabel = ( onToggle ) => {
 		if ( allDay ) {
 			return (
@@ -61,12 +62,19 @@ const TimePicker = ( {
 			additionalProps.max = max;
 		}
 
+		const ref = React.createRef();
+
+		function onChangeCallback() {
+			onChange( ref.current.value );
+		}
+
 		return (
 			<input
+				ref={ ref }
 				className="tribe-editor__btn-input"
 				type="time"
 				value={ current }
-				onChange={ onChange }
+				onChange={ onChangeCallback }
 				{ ...additionalProps }
 			/>
 		);
