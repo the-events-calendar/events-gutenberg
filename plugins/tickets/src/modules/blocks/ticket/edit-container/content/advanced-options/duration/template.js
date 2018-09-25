@@ -39,12 +39,6 @@ TicketDurationPicker.defaultProps = {
 	isSameDay: false,
 	toDate: 'September 6, 2018',
 	toTime: '15:00',
-	onFromDateChange: () => {},
-	onFromTimePickerChange: () => {},
-	onFromTimePickerClick: () => {},
-	onToDateChange: () => {},
-	onToTimePickerChange: () => {},
-	onToTimePickerClick: () => {},
 	label: __( 'Sale Duration', 'events-gutenberg' ),
 	tooltip: __(
 		'If you do not set a start sale date, tickets will be available immediately.',
