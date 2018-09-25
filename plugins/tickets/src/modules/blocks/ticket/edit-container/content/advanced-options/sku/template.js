@@ -3,7 +3,6 @@
  */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import noop from 'lodash/noop';
 
 /**
  * Wordpress dependencies
@@ -32,17 +31,23 @@ class SKU extends PureComponent {
 			'A unique identifying code for each ticket type you\'re selling',
 			'events-gutenberg',
 		),
-		onChange: noop,
 		value: '',
 	};
 
 	constructor( props ) {
 		super( props );
 		this.id = uniqid( 'ticket-sku' );
+		this.input = React.createRef();
+	}
+
+	onChange = () => {
+		const { current } = this.input;
+		const { onChange } = this.props;
+		onChange( current.value );
 	}
 
 	render() {
-		const { onChange, value, label, tooltip } = this.props;
+		const { value, label, tooltip } = this.props;
 		return (
 			<div className="tribe-editor__container-panel__row">
 				<LabelWithTooltip
@@ -54,7 +59,13 @@ class SKU extends PureComponent {
 					tooltipLabel={ <Dashicon icon="info-outline" /> }
 				/>
 				<div className="tribe-editor__container-panel__input-group">
-					<input id={ this.id } type="text" value={ value } onChange={ sendValue( onChange ) } />
+					<input
+						ref={ this.input }
+						id={ this.id }
+						type="text"
+						value={ value }
+						onChange={ this.onChange }
+					/>
 				</div>
 			</div>
 		);
