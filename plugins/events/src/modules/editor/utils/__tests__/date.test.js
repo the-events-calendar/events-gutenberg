@@ -95,7 +95,7 @@ describe( 'Tests for date.js', () => {
 				label: 'Argentina - Catamarca',
 			},
 		];
-		expect( timezonesAsSelectData() ).toEqual( expected );
+		expect( timezonesAsSelectData ).toEqual( expected );
 	} );
 
 	describe( 'toNaturalLanguage', () => {
