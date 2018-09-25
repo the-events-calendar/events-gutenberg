@@ -25,13 +25,22 @@ export const TYPES = {
 };
 
 // todo: replace with custom select from Events Pro
-const Select = ( { id, options, selected, onSelect } ) => (
-	<select id={ id } value={ selected } onChange={ onSelect }>
-		{ options.map( ( { name, value }, index ) => (
-			<option key={ index } value={ value }>{ name }</option>
-		) ) }
-	</select>
-);
+const Select = ( { id, options, selected, onSelect } ) => {
+	const ref = React.createRef();
+
+	function onChange() {
+		const { current } = ref;
+		onSelect( current.value );
+	}
+
+	return (
+		<select ref={ ref } id={ id } value={ selected } onChange={ onChange }>
+			{ options.map( ( { name, value }, index ) => (
+				<option key={ index } value={ value }>{ name }</option>
+			) ) }
+		</select>
+	);
+}
 
 Select.propTypes = {
 	id: PropTypes.string,
@@ -44,24 +53,35 @@ Select.propTypes = {
 };
 
 // Custom input for this type of form
-const Input = ( { id, type, input, selected } ) => ( type === selected && (
-	<div className="tribe-editor__container-panel__input-row">
-		<label htmlFor={ id }>{ input.label }</label>
-		<input
-			type="number"
-			id={ id }
-			value={ input.value }
-			onChange={ input.onChange }
-		/>
-	</div>
-) );
+const Input = ( { id, type, input, selected, ...props } ) => {
+	const ref = React.createRef();
+
+	function onChange() {
+		const { current } = ref;
+		input.onChange( current.value );
+	}
+
+	return ( type === selected && (
+		<div className="tribe-editor__container-panel__input-row">
+			<label htmlFor={ id }>{ input.label }</label>
+			<input
+				type="number"
+				id={ id }
+				value={ input.value }
+				onChange={ onChange }
+				ref={ ref }
+				{ ...props }
+			/>
+		</div>
+	) );
+}
 
 Input.propTypes = {
 	id: PropTypes.string,
 	type: PropTypes.oneOf( Object.keys( TYPES ) ),
 	selected: PropTypes.oneOf( Object.keys( TYPES ) ),
 	input: PropTypes.shape( {
-		value: PropTypes.number,
+		value: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 		onChange: PropTypes.func.isRequired,
 		label: PropTypes.string,
 	} ),
@@ -77,16 +97,12 @@ class Capacity extends PureComponent {
 			value: PropTypes.oneOf( Object.keys( TYPES ) ),
 		} ) ),
 		onSelectType: PropTypes.func,
-		independent: PropTypes.shape( {
-			value: PropTypes.number,
-			onChange: PropTypes.func.isRequired,
-			label: PropTypes.string,
-		} ),
-		shared: PropTypes.shape( {
-			value: PropTypes.number,
-			onChange: PropTypes.func.isRequired,
-			label: PropTypes.string,
-		} ),
+		independentValue: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
+		independentOnChange: PropTypes.func.isRequired,
+		independentLabel: PropTypes.string,
+		sharedValue: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
+		sharedOnChange: PropTypes.func.isRequired,
+		sharedLabel: PropTypes.string,
 	};
 
 	static defaultProps = {
@@ -105,16 +121,10 @@ class Capacity extends PureComponent {
 			{ name: __( 'unlimited', 'events-gutenberg' ), value: TYPES.unlimited },
 		],
 		onSelectType: noop,
-		independent: {
-			value: 0,
-			onChange: noop,
-			label: __( 'Number of tickets available', 'events-gutenberg' ),
-		},
-		shared: {
-			value: 0,
-			onChange: noop,
-			label: __( '(optional) Limit sales of this ticket to:', 'events-gutenberg' ),
-		},
+		independentValue: 0,
+		independentLabel: __( 'Number of tickets available', 'events-gutenberg' ),
+		sharedValue: 0,
+		sharedLabel: __( '(optional) Limit sales of this ticket to:', 'events-gutenberg' ),
 	};
 
 	constructor( props ) {
@@ -133,8 +143,12 @@ class Capacity extends PureComponent {
 			capacityOptions,
 			type,
 			onSelectType,
-			independent,
-			shared,
+			independentValue,
+			independentOnChange,
+			independentLabel,
+			sharedValue,
+			sharedLabel,
+			sharedOnChange,
 		} = this.props;
 
 		return (
@@ -157,14 +171,20 @@ class Capacity extends PureComponent {
 					<Input
 						id={ this.ids.shared }
 						selected={ type }
-						input={ shared }
+						input={ { onChange: sharedOnChange, label: sharedLabel, value: sharedValue } }
 						type={ TYPES.shared }
+						min="0"
 					/>
 					<Input
 						id={ this.ids.independent }
 						selected={ type }
-						input={ independent }
+						input={ {
+							onChange: independentOnChange,
+							label: independentLabel,
+							value: independentValue,
+						} }
 						type={ TYPES.independent }
+						min="0"
 					/>
 				</div>
 			</div>
