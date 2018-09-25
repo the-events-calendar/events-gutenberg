@@ -36,6 +36,7 @@ const CapacityTable = ( props ) => {
 			onChange={ sendValue( onSharedCapacityChange ) }
 			value={ sharedValue }
 			type="number"
+			min="0"
 		/>
 	);
 
