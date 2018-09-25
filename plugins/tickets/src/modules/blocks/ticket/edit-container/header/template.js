@@ -4,7 +4,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import AutosizeInput from 'react-input-autosize';
-import noop from 'lodash/noop';
 import uniqid from 'uniqid';
 
 /**
@@ -27,27 +26,24 @@ class Header extends PureComponent {
 	static propTypes = {
 		title: PropTypes.string,
 		titlePlaceholder: PropTypes.string,
-		setTitle: PropTypes.func,
+		setTitle: PropTypes.func.isRequired,
 		description: PropTypes.string,
 		descriptionPlaceholder: PropTypes.string,
-		setDescription: PropTypes.func,
-		price: PropTypes.number,
+		setDescription: PropTypes.func.isRequired,
+		price: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 		priceCurrency: PropTypes.string,
 		pricePosition: PropTypes.oneOf( Object.keys( Header.PRICE_POSITIONS ) ),
 		pricePlaceholder: PropTypes.string,
-		setPrice: PropTypes.func,
+		setPrice: PropTypes.func.isRequired,
 	};
 
 	static defaultProps = {
 		title: '',
 		titlePlaceholder: __( 'Ticket Type', 'events-gutenberg' ),
-		setTitle: noop,
 		description: '',
 		descriptionPlaceholder: __( 'Description', 'events-gutenberg' ),
-		setDescription: noop,
 		price: 0,
 		pricePlaceholder: __( '0', 'events-gutenberg' ),
-		setPrice: noop,
 		priceCurrency: __( '$', 'events-gutenberg' ),
 		pricePosition: Header.PRICE_POSITIONS.prefix,
 	};
@@ -73,6 +69,7 @@ class Header extends PureComponent {
 				value={ price }
 				placeholder={ pricePlaceholder }
 				onChange={ sendValue( setPrice ) }
+				type="number"
 			/>
 		);
 	}

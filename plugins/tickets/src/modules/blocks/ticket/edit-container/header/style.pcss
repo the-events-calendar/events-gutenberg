@@ -64,7 +64,7 @@
 		flex: none;
 	}
 
-	input {
+	input[type="number"] {
 		flex: none;
 		color: inherit;
 		font-weight: inherit;
@@ -72,6 +72,13 @@
 		font-size: inherit;
 		border: none;
 		background-color: transparent;
+		padding: 0 8px;
+
+		&:hover,
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
 
 		&::placeholder {
 			color: inherit;
