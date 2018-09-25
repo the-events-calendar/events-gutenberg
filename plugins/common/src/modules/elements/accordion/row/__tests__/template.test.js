@@ -6,7 +6,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
-import AccordionRow from '@moderntribe/common/elements/accordion/AccordionRow/template';
+import Row from '@moderntribe/common/elements/accordion/row/template';
 
 let row;
 
@@ -27,19 +27,19 @@ describe( 'Accordion Row Element', () => {
 	} );
 
 	it( 'renders an accordion row', () => {
-		const component = renderer.create( <AccordionRow { ...row } /> );
+		const component = renderer.create( <Row { ...row } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'executes onClick handler', () => {
-		const component = mount( <AccordionRow { ...row } /> );
+		const component = mount( <Row { ...row } /> );
 		component.find( 'button' ).simulate( 'click' );
 		expect( row.onClick ).toHaveBeenCalled();
 		expect( row.onClick ).toHaveBeenCalledTimes( 1 );
 	} );
 
 	it( 'executes onOpen and onClose handlers', async () => {
-		const component = mount( <AccordionRow { ...row } /> );
+		const component = mount( <Row { ...row } /> );
 		component.find( 'button' ).simulate( 'click' );
 		await setTimeout( () => {
 			component.find( 'button' ).simulate( 'click' );

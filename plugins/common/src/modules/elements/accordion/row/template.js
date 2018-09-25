@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import Button from '@moderntribe/common/elements/button/element';
 import { slide } from '@moderntribe/common/utils';
 
-class AccordionRow extends PureComponent {
+class Row extends PureComponent {
 	static propTypes = {
 		accordionId: PropTypes.string.isRequired,
 		content: PropTypes.node,
@@ -126,4 +126,4 @@ class AccordionRow extends PureComponent {
 	}
 }
 
-export default AccordionRow;
+export default Row;
