@@ -147,7 +147,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 		);
 
 		// enqueue assets
-		tribe_asset_enqueue( 'tribe-tickets-gutenberg-views' );
+		tribe_asset_enqueue( 'tribe-tickets-gutenberg-block-tickets-style' );
 
 		// set arguments. Let's just use the ticket we receive as the shortcode argument
 		// to display the results
