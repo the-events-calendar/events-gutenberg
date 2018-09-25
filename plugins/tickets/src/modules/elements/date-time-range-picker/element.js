@@ -19,6 +19,10 @@ import {
 } from '@moderntribe/common/utils';
 import './style.pcss';
 
+/**
+ * @todo rename onClick property for something more meaningful like, onSelectedTime
+ */
+
 class DateTimeRangePicker extends Component {
 	/**
 	 * @todo remove the need to specify the: fromDate, fromTime, toDate, toTime
