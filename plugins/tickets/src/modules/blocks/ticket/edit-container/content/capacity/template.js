@@ -97,7 +97,6 @@ class Capacity extends PureComponent {
 		} ) ),
 		onSelectType: PropTypes.func,
 		capacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
-		independentOnChange: PropTypes.func.isRequired,
 		independentLabel: PropTypes.string,
 		sharedLabel: PropTypes.string,
 		totalSharedCapacity: PropTypes.string,
