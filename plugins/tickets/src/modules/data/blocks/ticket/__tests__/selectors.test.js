@@ -3,6 +3,14 @@
  */
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 import { DEFAULT_STATE } from '@moderntribe/tickets/data/blocks/ticket/reducers/ui';
+import {
+	DEFAULT_STATE as TICKET_DEFAULT_STATE,
+} from '@moderntribe/tickets/data/blocks/ticket/reducers/ticket';
+
+jest.mock( 'moment', () => () => {
+	const moment = require.requireActual( 'moment' );
+	return moment( 'September 1, 2018 10:30 pm', 'MMMM D, Y h:mm a' );
+} );
 
 const state = {
 	tickets: {
@@ -63,11 +71,13 @@ describe( 'Ticket blocks selectors', () => {
 				blocks: {
 					ticket: {
 						ui: {
-							...DEFAULT_STATE
+							...DEFAULT_STATE,
 						},
 						tickets: {
-							byId: {},
-							allIds: [],
+							allIds: [ 'modern-tribe' ],
+							byId: {
+								'modern-tribe': { ...TICKET_DEFAULT_STATE },
+							},
 						},
 					},
 				},
@@ -131,4 +141,74 @@ describe( 'Ticket blocks selectors', () => {
 			expect( selectors.getSettingsIsOpen( newState ) ).toBe( true );
 		} );
 	} );
+
+	describe( 'Ticket selectors', () => {
+		const ownProps = { blockId: 'modern-tribe' };
+
+		test( 'Expires value', () => {
+			expect( selectors.getTicketExpires( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Expiring ticket', () => {
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].dateIsPristine = false;
+			expect( selectors.getTicketExpires( newState, ownProps ) ).toBe( true );
+		} );
+
+		test( 'Select the group of tickets', () => {
+			expect( selectors.getTicketsIds( newState ) ).toMatchSnapshot();
+			expect( selectors.getTicketsIds( newState ) ).toMatchSnapshot();
+			expect( selectors.getTicketsObject( newState ) ).toMatchSnapshot();
+		} );
+
+		test( 'Select type of tickets', () => {
+			expect( selectors.getIndependentTickets( newState ) ).toMatchSnapshot();
+			expect( selectors.getSharedTickets( newState ) ).toMatchSnapshot();
+			expect( selectors.getUnlimitedTickets( newState ) ).toMatchSnapshot();
+		} );
+
+		test( 'Select ticket capacity', () => {
+			expect( selectors.getTicketsSharedCapacity( newState ) ).toBe( 0 );
+			expect( selectors.getTicketsIndependentCapacity( newState ) ).toBe( 0 );
+			expect( selectors.getTotalCapacity( newState ) ).toBe( 0 );
+		} );
+
+		test( 'Select totals sold', () => {
+			expect( selectors.getTotalSold( newState ) ).toBe( 0 );
+		} );
+
+		test( 'Ticket dates and times', () => {
+			expect( selectors.getTicketStartTime( newState, ownProps ) )
+				.toMatchSnapshot();
+			expect( selectors.getTicketEndTime( newState, ownProps ) )
+				.toMatchSnapshot();
+			expect( selectors.getTicketEndDate( newState, ownProps ) )
+				.toMatchSnapshot();
+			expect( selectors.getTicketStartDate( newState, ownProps ) )
+				.toMatchSnapshot();
+		} );
+
+		test( 'Ticket fields', () => {
+			expect( selectors.getTicketTitle( newState, ownProps ) ).toMatchSnapshot();
+			expect( selectors.getTicketDescription( newState, ownProps ) ).toMatchSnapshot();
+			expect( selectors.getTicketSKU( newState, ownProps ) ).toMatchSnapshot();
+			expect( selectors.getTicketPrice( newState, ownProps ) ).toMatchSnapshot();
+			expect( selectors.getTicketCapacityType( newState, ownProps ) ).toMatchSnapshot();
+			expect( selectors.getTicketEditing( newState, ownProps ) ).toMatchSnapshot();
+			expect( selectors.getTicketSold( newState, ownProps ) ).toMatchSnapshot();
+			expect( selectors.getTicketCapacity( newState, ownProps ) ).toBe( 0 );
+			expect( selectors.isUnlimitedTicket( newState, ownProps ) ).toBe( false );
+			expect( selectors.isSharedTicket( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Ticket validness', () => {
+			newState.tickets.blocks.ticket.tickets.byId[ 'modern-tribe' ].title = 'Modern Tribe';
+			newState.tickets.blocks.ticket.tickets.byId[ 'modern-tribe' ].capacity = '20';
+			expect( selectors.getTicketValidness( newState, ownProps ) ).toBe( true );
+		} );
+
+		test( 'Ticket invalidness', () => {
+			expect( selectors.getTicketValidness( newState, ownProps ) ).toBe( false );
+		} );
+	} );
 } );
+

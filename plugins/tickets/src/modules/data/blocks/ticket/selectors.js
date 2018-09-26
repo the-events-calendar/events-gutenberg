@@ -214,7 +214,6 @@ export const getTicketValidness = createSelector(
 	[ getTicketBlock ],
 	( block ) => {
 		const isTitleValid = trim( block.title ) !== '';
-
 		if ( block.capacityType === TYPES.unlimited ) {
 			return isTitleValid;
 		}
