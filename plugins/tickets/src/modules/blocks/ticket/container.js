@@ -37,7 +37,7 @@ export default compose(
 	withStore(),
 	connect(
 		mapStateToProps,
-		mapDispatchToProps
+		mapDispatchToProps,
 	),
 	withSaveData(),
 )( Template );
