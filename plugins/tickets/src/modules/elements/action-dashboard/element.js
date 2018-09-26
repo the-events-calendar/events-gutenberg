@@ -25,7 +25,7 @@ const ActionDashboard = ( {
 	showConfirm,
 } ) => {
 
-	const actionsList = ( actions && actions.length ) && (
+	const actionsList = ( actions && !! actions.length ) && (
 		<div className="tribe-editor__action-dashboard__group-left">
 			{ actions.map( ( action, index ) => (
 				<span
