@@ -16,16 +16,17 @@ import TicketContent from './content/template';
 class TicketEditContainer extends PureComponent {
 	static propTypes = {
 		blockId: PropTypes.string.isRequired,
+		expires: PropTypes.bool,
 	}
 
 	render() {
-		const { blockId } = this.props;
+		const { blockId, expires } = this.props;
 
 		return (
 			<ContainerPanel
 				className="tribe-editor__edit-ticket-container"
 				layout={ LAYOUT.ticket }
-				icon={ <StatusIcons expires={ true } /> }
+				icon={ <StatusIcons expires={ expires } /> }
 				header={ <TicketHeader blockId={ blockId } /> }
 				content={ <TicketContent blockId={ blockId } /> }
 			/>
