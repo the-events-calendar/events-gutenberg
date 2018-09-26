@@ -31,15 +31,33 @@ const confirmLabel = ( created ) => (
 		: __( 'Create Ticket', 'events-gutenberg' )
 );
 
-const TicketsDashboardAction = ( { created } ) => (
-	<ActionDashboard
-		actions={ actions }
-		confirmLabel={ confirmLabel( created ) }
-	/>
-);
+const TicketsDashboardAction = ( props ) => {
+	const { onConfirmClick, isEditing, created, isEditFormValid, isVolatile, onCancelClick } = props;
+
+	const dashboardProps = {
+		actions: isEditing ? [] : actions,
+		confirmLabel: __( 'Add Tickets', 'events-gutenberg' ),
+		onConfirmClick,
+		onCancelClick,
+	};
+
+	if ( isEditing ) {
+		dashboardProps.isConfirmDisabled = ! isEditFormValid;
+		dashboardProps.cancelLabel = __( 'Cancel', 'events-gutenberg' );
+		dashboardProps.confirmLabel = confirmLabel( ! isVolatile );
+	}
+
+	return (
+		<ActionDashboard { ...dashboardProps } />
+	);
+}
 
 TicketsDashboardAction.propTypes = {
 	created: PropTypes.bool,
+	isEditing: PropTypes.bool,
+	isEditFormValid: PropTypes.bool,
+	activeBlockId: PropTypes.string,
+	isVolatile: PropTypes.bool,
 };
 
 export default TicketsDashboardAction;
