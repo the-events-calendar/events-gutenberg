@@ -85,10 +85,6 @@ class Tribe__Gutenberg__Tickets__Meta {
 			$this->text()
 		);
 
-		// $woo = tribe( 'tickets-plus.commerce.woo' );
-		// $edd = tribe( 'tickets-plus.commerce.edd' );
-		// $paypal = tribe( 'tickets-plus.commerce.paypal' );
-
 		// Fetch RSVP keys
 		$rsvp = tribe( 'tickets.rsvp' );
 
