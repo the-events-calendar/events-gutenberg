@@ -16,6 +16,8 @@ import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 const mapStateToProps = ( state, ownProps ) => ( {
 	type: selectors.getTicketCapacityType( state, ownProps ),
 	capacity: selectors.getTicketCapacity( state, ownProps ),
+	totalSharedCapacity: selectors.getSharedCapacity( state ),
+	tmpSharedCapacity: selectors.getTmpSharedCapacity( state ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
@@ -23,13 +25,12 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 		const { blockId } = ownProps;
 		dispatch( actions.setCapacityType( blockId, type ) );
 	},
-	sharedOnChange( value ) {
+	onCapacityChange( value ) {
 		const { blockId } = ownProps;
 		dispatch( actions.setCapacity( blockId, value ) );
 	},
-	independentOnChange( value ) {
-		const { blockId } = ownProps;
-		dispatch( actions.setCapacity( blockId, value ) );
+	setTemporarilySharedCapacity( capacity ) {
+		dispatch( actions.setTempSharedCapacity( capacity ) );
 	},
 } );
 
