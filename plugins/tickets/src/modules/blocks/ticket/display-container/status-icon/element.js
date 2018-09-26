@@ -16,9 +16,9 @@ import {
 
 const StatusIcon = ( { expires, disabled } ) => {
 	if ( expires ) {
-		return disabled ? <TicketInactive /> : <TicketActive />;
+		return disabled ? <ClockInactive /> : <ClockActive />;
 	}
-	return disabled ? <ClockInactive /> : <ClockActive />;
+	return disabled ? <TicketInactive /> : <TicketActive />;
 };
 
 StatusIcon.defaultProps = {
