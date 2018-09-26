@@ -34,11 +34,6 @@ const TicketDurationPicker = ( props ) => {
 
 TicketDurationPicker.defaultProps = {
 	className: 'tribe-editor__ticket-duration__duration-picker',
-	fromDate: 'September 3, 2018',
-	fromTime: '09:00',
-	isSameDay: false,
-	toDate: 'September 6, 2018',
-	toTime: '15:00',
 	label: __( 'Sale Duration', 'events-gutenberg' ),
 	tooltip: __(
 		'If you do not set a start sale date, tickets will be available immediately.',
