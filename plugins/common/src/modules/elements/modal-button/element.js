@@ -19,6 +19,7 @@ class ModalButton extends PureComponent {
 	static propTypes = {
 		className: PropTypes.string,
 		closeLabel: PropTypes.string,
+		disabled: PropTypes.bool,
 		label: PropTypes.string,
 		modalTitle: PropTypes.string,
 		onClick: PropTypes.func,
@@ -72,7 +73,7 @@ class ModalButton extends PureComponent {
 	};
 
 	render() {
-		const { className, label } = this.props;
+		const { className, disabled, label } = this.props;
 		return (
 			<div className={ classNames(
 				'tribe-editor__modal-button',
@@ -81,6 +82,7 @@ class ModalButton extends PureComponent {
 				<Button
 					className="tribe-editor__modal-button__button"
 					onClick={ this.onClick }
+					disabled={ disabled }
 				>
 					{ label }
 				</Button>

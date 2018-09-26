@@ -14,6 +14,7 @@ import './style.pcss';
 const Checkbox = ( {
 	checked,
 	className,
+	disabled,
 	id,
 	label,
 	onChange,
@@ -25,6 +26,7 @@ const Checkbox = ( {
 			<input
 				checked={ checked }
 				className="tribe-editor__checkbox__input"
+				disabled={ disabled }
 				id={ id }
 				name={ name }
 				onChange={ onChange }
@@ -49,6 +51,7 @@ Checkbox.defaultProps = {
 Checkbox.propTypes = {
 	checked: PropTypes.bool.isRequired,
 	className: PropTypes.string,
+	disabled: PropTypes.bool,
 	id: PropTypes.string,
 	label: PropTypes.string,
 	name: PropTypes.string,

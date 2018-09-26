@@ -22,6 +22,7 @@ class Tooltip extends PureComponent {
 	};
 
 	static propTypes = {
+		disabled: PropTypes.bool,
 		label: PropTypes.node,
 		labelClassName: PropTypes.string,
 		position: PropTypes.oneOf( [
@@ -36,13 +37,14 @@ class Tooltip extends PureComponent {
 	};
 
 	render() {
-		const { label, labelClassName, position, text } = this.props;
+		const { disabled, label, labelClassName, position, text } = this.props;
 
 		return (
 			<WpTooltip text={ text } position={ position }>
 				<Button
 					aria-label={ text }
 					className={ classNames( 'tribe-editor__tooltip-label', labelClassName ) }
+					disabled={ disabled }
 				>
 					{ label }
 				</Button>

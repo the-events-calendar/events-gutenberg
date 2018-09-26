@@ -18,11 +18,24 @@ export const DEFAULT_STATE = {
 	capacity: '',
 	notGoingResponses: false,
 	startDate: momentUtil.toDate( moment() ),
+	startDateObj: new Date( momentUtil.toDate( moment() ) ),
 	endDate: momentUtil.toDate( moment() ),
+	endDateObj: new Date( momentUtil.toDate( moment() ) ),
 	startTime: momentUtil.toTime24Hr( moment() ),
 	endTime: momentUtil.toTime24Hr( moment() ),
+	tempTitle: '',
+	tempDescription: '',
+	tempCapacity: '',
+	tempNotGoingResponses: false,
+	tempStartDate: momentUtil.toDate( moment() ),
+	tempStartDateObj: new Date( momentUtil.toDate( moment() ) ),
+	tempEndDate: momentUtil.toDate( moment() ),
+	tempEndDateObj: new Date( momentUtil.toDate( moment() ) ),
+	tempStartTime: momentUtil.toTime24Hr( moment() ),
+	tempEndTime: momentUtil.toTime24Hr( moment() ),
 	created: false,
 	settingsOpen: false,
+	hasChanges: false,
 	headerImage: HEADER_IMAGE_DEFAULT_STATE,
 };
 
@@ -60,10 +73,20 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				startDate: action.payload.startDate,
 			};
+		case types.SET_RSVP_START_DATE_OBJ:
+			return {
+				...state,
+				startDateObj: action.payload.startDateObj,
+			};
 		case types.SET_RSVP_END_DATE:
 			return {
 				...state,
 				endDate: action.payload.endDate,
+			};
+		case types.SET_RSVP_END_DATE_OBJ:
+			return {
+				...state,
+				endDateObj: action.payload.endDateObj,
 			};
 		case types.SET_RSVP_START_TIME:
 			return {
@@ -75,10 +98,65 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				endTime: action.payload.endTime,
 			};
+		case types.SET_RSVP_TEMP_TITLE:
+			return {
+				...state,
+				tempTitle: action.payload.tempTitle,
+			};
+		case types.SET_RSVP_TEMP_DESCRIPTION:
+			return {
+				...state,
+				tempDescription: action.payload.tempDescription,
+			};
+		case types.SET_RSVP_TEMP_CAPACITY:
+			return {
+				...state,
+				tempCapacity: action.payload.tempCapacity,
+			};
+		case types.SET_RSVP_TEMP_NOT_GOING_RESPONSES:
+			return {
+				...state,
+				tempNotGoingResponses: action.payload.tempNotGoingResponses,
+			};
+		case types.SET_RSVP_TEMP_START_DATE:
+			return {
+				...state,
+				tempStartDate: action.payload.tempStartDate,
+			};
+		case types.SET_RSVP_TEMP_START_DATE_OBJ:
+			return {
+				...state,
+				tempStartDateObj: action.payload.tempStartDateObj,
+			};
+		case types.SET_RSVP_TEMP_END_DATE:
+			return {
+				...state,
+				tempEndDate: action.payload.tempEndDate,
+			};
+		case types.SET_RSVP_TEMP_END_DATE_OBJ:
+			return {
+				...state,
+				tempEndDateObj: action.payload.tempEndDateObj,
+			};
+		case types.SET_RSVP_TEMP_START_TIME:
+			return {
+				...state,
+				tempStartTime: action.payload.tempStartTime,
+			};
+		case types.SET_RSVP_TEMP_END_TIME:
+			return {
+				...state,
+				tempEndTime: action.payload.tempEndTime,
+			};
 		case types.SET_RSVP_SETTINGS_OPEN:
 			return {
 				...state,
 				settingsOpen: action.payload.settingsOpen,
+			};
+		case types.SET_RSVP_HAS_CHANGES:
+			return {
+				...state,
+				hasChanges: action.payload.hasChanges,
 			};
 		case types.SET_RSVP_HEADER_IMAGE:
 			return {
