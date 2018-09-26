@@ -26,12 +26,13 @@ const ticketsById = ( state = {}, action ) => {
 		case types.SET_TICKET_IS_EDITING:
 		case types.SET_TICKET_POST_ID:
 		case types.SET_UPDATE_TICKET:
+		case types.SET_TICKET_DATE_PRISTINE:
 			return {
 				...state,
 				[ action.payload.blockId ]: ticket( state[ action.payload.blockId ], action ),
 			};
 		case types.REMOVE_TICKET_BLOCK:
-			return omit( state, action.payload.blockId );
+			return omit( state, [ action.payload.blockId ] );
 		default:
 			return state;
 	}
