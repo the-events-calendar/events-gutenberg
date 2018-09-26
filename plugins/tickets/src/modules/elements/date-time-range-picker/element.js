@@ -32,8 +32,10 @@ class DateTimeRangePicker extends Component {
 	static propTypes = {
 		className: PropTypes.string,
 		fromDate: PropTypes.string,
+		fromDateDisabled: PropTypes.bool,
 		fromDateFormat: PropTypes.string,
 		fromTime: TribePropTypes.timeFormat.isRequired,
+		fromTimeDisabled: PropTypes.bool,
 		isSameDay: PropTypes.bool,
 		onFromDateChange: PropTypes.func,
 		onFromTimePickerChange: PropTypes.func,
@@ -45,8 +47,10 @@ class DateTimeRangePicker extends Component {
 		separatorTimeRange: PropTypes.string,
 		shiftFocus: PropTypes.bool,
 		toDate: PropTypes.string,
+		toDateDisabled: PropTypes.bool,
 		toDateFormat: PropTypes.string,
 		toTime: TribePropTypes.timeFormat.isRequired,
+		toTimeDisabled: PropTypes.bool,
 	};
 
 	constructor( props ) {
@@ -57,6 +61,7 @@ class DateTimeRangePicker extends Component {
 	getFromDayPickerInputProps = () => {
 		const {
 			fromDate,
+			fromDateDisabled,
 			fromDateFormat,
 			onFromDateChange,
 			shiftFocus,
@@ -81,6 +86,9 @@ class DateTimeRangePicker extends Component {
 				toMonth: to,
 			},
 			onDayChange: onFromDateChange,
+			inputProps: {
+				disabled: fromDateDisabled,
+			}
 		};
 
 		/**
@@ -102,6 +110,7 @@ class DateTimeRangePicker extends Component {
 			onToDateChange,
 			shiftFocus,
 			toDate,
+			toDateDisabled,
 			toDateFormat,
 		} = this.props;
 
@@ -124,6 +133,9 @@ class DateTimeRangePicker extends Component {
 				fromMonth: from,
 			},
 			onDayChange: onToDateChange,
+			inputProps: {
+				disabled: toDateDisabled,
+			}
 		};
 
 		/**
@@ -140,6 +152,7 @@ class DateTimeRangePicker extends Component {
 	getFromTimePickerProps = () => {
 		const {
 			fromTime,
+			fromTimeDisabled,
 			isSameDay,
 			onFromTimePickerChange,
 			onFromTimePickerClick,
@@ -153,6 +166,7 @@ class DateTimeRangePicker extends Component {
 			onChange: onFromTimePickerChange,
 			onClick: onFromTimePickerClick,
 			timeFormat: date.FORMATS.WP.time,
+			disabled: fromTimeDisabled,
 		};
 
 		if ( isSameDay ) {
@@ -175,6 +189,7 @@ class DateTimeRangePicker extends Component {
 			onToTimePickerChange,
 			onToTimePickerClick,
 			toTime,
+			toTimeDisabled,
 		} = this.props;
 
 		const props = {
@@ -184,6 +199,7 @@ class DateTimeRangePicker extends Component {
 			onChange: onToTimePickerChange,
 			onClick: onToTimePickerClick,
 			timeFormat: date.FORMATS.WP.time,
+			disabled: toTimeDisabled,
 		};
 
 		if ( isSameDay ) {

@@ -44,7 +44,7 @@ describe( 'Tests for date.js', () => {
 			DATE_TIME: 'YYYY-MM-DD HH:mm:ss',
 			WP: {
 				time: 'g:i a',
-				time24Hr: 'G:i',
+				time24Hr: 'H:i',
 				date: 'F j, Y',
 				datetime: 'F j, Y g:i a',
 				dateNoYear: 'F j',

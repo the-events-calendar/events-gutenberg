@@ -34,11 +34,15 @@ exports[`RSVP block actions set RSVP details 1`] = `
 Object {
   "payload": Object {
     "capacity": 20,
+    "description": "description",
     "endDate": "January 4, 2018",
-    "endTime": "23:45",
+    "endDateObj": 2018-01-04T00:00:00.000Z,
+    "endTime": "23:32",
     "notGoingResponses": true,
     "startDate": "January 1, 2018",
+    "startDateObj": 2018-01-01T00:00:00.000Z,
     "startTime": "12:34",
+    "title": "title",
   },
   "type": "@@MT/TICKETS/SET_RSVP_DETAILS",
 }
@@ -53,6 +57,15 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP end date object 1`] = `
+Object {
+  "payload": Object {
+    "endDateObj": 2018-01-01T00:00:00.000Z,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_END_DATE_OBJ",
+}
+`;
+
 exports[`RSVP block actions set RSVP end time 1`] = `
 Object {
   "payload": Object {
@@ -62,13 +75,12 @@ Object {
 }
 `;
 
-exports[`RSVP block actions set RSVP header 1`] = `
+exports[`RSVP block actions set RSVP has changes 1`] = `
 Object {
   "payload": Object {
-    "description": "test description",
-    "title": "test title",
+    "hasChanges": true,
   },
-  "type": "@@MT/TICKETS/SET_RSVP_HEADER",
+  "type": "@@MT/TICKETS/SET_RSVP_HAS_CHANGES",
 }
 `;
 
@@ -110,12 +122,129 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP start date object 1`] = `
+Object {
+  "payload": Object {
+    "startDateObj": 2018-01-01T00:00:00.000Z,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_START_DATE_OBJ",
+}
+`;
+
 exports[`RSVP block actions set RSVP start time 1`] = `
 Object {
   "payload": Object {
     "startTime": "12:34",
   },
   "type": "@@MT/TICKETS/SET_RSVP_START_TIME",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp capacity 1`] = `
+Object {
+  "payload": Object {
+    "tempCapacity": 20,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_CAPACITY",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp description 1`] = `
+Object {
+  "payload": Object {
+    "tempDescription": "temp description",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_DESCRIPTION",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp details 1`] = `
+Object {
+  "payload": Object {
+    "tempCapacity": 20,
+    "tempDescription": "description",
+    "tempEndDate": "January 4, 2018",
+    "tempEndDateObj": 2018-01-04T00:00:00.000Z,
+    "tempEndTime": "23:32",
+    "tempNotGoingResponses": true,
+    "tempStartDate": "January 1, 2018",
+    "tempStartDateObj": 2018-01-01T00:00:00.000Z,
+    "tempStartTime": "12:34",
+    "tempTitle": "title",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_DETAILS",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp end date 1`] = `
+Object {
+  "payload": Object {
+    "tempEndDate": "January 1, 2018",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_END_DATE",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp end date 2`] = `
+Object {
+  "payload": Object {
+    "tempEndDateObj": 2018-01-01T00:00:00.000Z,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_END_DATE_OBJ",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp end time 1`] = `
+Object {
+  "payload": Object {
+    "tempEndTime": "12:34",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_END_TIME",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp not going responses 1`] = `
+Object {
+  "payload": Object {
+    "tempNotGoingResponses": true,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_NOT_GOING_RESPONSES",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp start date 1`] = `
+Object {
+  "payload": Object {
+    "tempStartDate": "January 1, 2018",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_START_DATE",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp start date 2`] = `
+Object {
+  "payload": Object {
+    "tempStartDateObj": 2018-01-01T00:00:00.000Z,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_START_DATE_OBJ",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp start time 1`] = `
+Object {
+  "payload": Object {
+    "tempStartTime": "12:34",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_START_TIME",
+}
+`;
+
+exports[`RSVP block actions set RSVP temp title 1`] = `
+Object {
+  "payload": Object {
+    "tempTitle": "temp title",
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_TEMP_TITLE",
 }
 `;
 

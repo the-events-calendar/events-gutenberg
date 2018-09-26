@@ -29,6 +29,11 @@ describe( 'Checkbox Element', () => {
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
+	it( 'renders disabled checkbox', () => {
+		const component = renderer.create( <Checkbox disabled={ true } /> );
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
 	it( 'renders checkbox with id', () => {
 		const component = renderer.create( <Checkbox id="test-id" /> );
 		expect( component.toJSON() ).toMatchSnapshot();

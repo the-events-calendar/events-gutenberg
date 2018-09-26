@@ -30,6 +30,11 @@ export const getRSVPStartDate = createSelector(
 	( rsvp ) => rsvp.startDate,
 );
 
+export const getRSVPStartDateObj = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.startDateObj,
+);
+
 export const getRSVPStartTime = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.startTime,
@@ -40,9 +45,64 @@ export const getRSVPEndDate = createSelector(
 	( rsvp ) => rsvp.endDate,
 );
 
+export const getRSVPEndDateObj = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.endDateObj,
+);
+
 export const getRSVPEndTime = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.endTime,
+);
+
+export const getRSVPTempTitle = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempTitle,
+);
+
+export const getRSVPTempDescription = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempDescription,
+);
+
+export const getRSVPTempCapacity = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempCapacity,
+);
+
+export const getRSVPTempNotGoingResponses = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempNotGoingResponses,
+);
+
+export const getRSVPTempStartDate = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempStartDate,
+);
+
+export const getRSVPTempStartDateObj = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempStartDateObj,
+);
+
+export const getRSVPTempStartTime = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempStartTime,
+);
+
+export const getRSVPTempEndDate = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempEndDate,
+);
+
+export const getRSVPTempEndDateObj = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempEndDateObj,
+);
+
+export const getRSVPTempEndTime = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.tempEndTime,
 );
 
 export const getRSVPCreated = createSelector(
@@ -53,6 +113,11 @@ export const getRSVPCreated = createSelector(
 export const getRSVPSettingsOpen = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.settingsOpen,
+);
+
+export const getRSVPHasChanges = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.hasChanges,
 );
 
 export const getRSVPHeaderImage = createSelector(

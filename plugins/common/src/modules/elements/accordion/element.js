@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import AccordionRow from './AccordionRow/template';
+import Row from './row/template';
 import './style.pcss';
 
 const Accordion = ( {
@@ -28,7 +28,7 @@ const Accordion = ( {
 			{ ...containerAttrs }
 		>
 			{ rows.map( ( row, index ) => (
-				<AccordionRow key={ index } { ...row } />
+				<Row key={ index } { ...row } />
 			) ) }
 		</div>
 	)
