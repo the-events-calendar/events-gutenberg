@@ -1,86 +1,64 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 /**
  * Internal dependencies
  */
-import {
-	Alert,
-	Clipboard,
-	Pencil,
-} from '@moderntribe/common/icons';
-import StatusIcon from './status-icon/element';
-import QuantityBar from './quantity-bar/element';
 import './style.pcss';
+import TicketEditContainer from './edit-container/container';
+import TicketDisplayContainer from './display-container/container';
 
-const Ticket = ( props ) => {
-	const {
-		title,
-		description,
-		price,
-		currencySign,
-		currencyPosition,
-		unlimited,
-		expires,
-		available,
-		sold,
-	} = props;
+class Ticket extends PureComponent {
 
-	const priceLabel = [ currencySign, price ];
-	const amountSold = `${available} of ${ sold } sold`;
+	static propTypes = {
+		isEditing: PropTypes.bool,
+		setIsSelected: PropTypes.func,
+		register: PropTypes.func.isRequired,
+		unregister: PropTypes.func.isRequired,
+		isSelected: PropTypes.bool,
+		clientId: PropTypes.string.isRequired,
+	};
 
-	return (
-		<article className="tribe-editor__ticket">
-			<div className="tribe-editor__ticket-icon">
-				<StatusIcon expires={ expires } />
-			</div>
-			<div className="tribe-editor__ticket-content">
-				<div className="tribe-editor__ticket-title-container">
-					<h3 className="tribe-editor__ticket-title">{ title }</h3>
-					<button className="tribe-editor__btn--label"><Pencil /></button>
-					<button className="tribe-editor__btn--label"><Clipboard /></button>
-				</div>
-				{ description && <div className="tribe-editor__ticket-description">{ description }</div> }
-			</div>
-			<div className="tribe-editor__ticket-price">
-				{ 'suffix' === currencyPosition ? [ ...priceLabel ].reverse() : priceLabel }
-			</div>
-			<div className="tribe-editor__ticket-quantity">
-				<QuantityBar sold={ 40 } total={ 156 } />
-				<span className="tribe-editor__quantity-label">{ amountSold }<Alert /></span>
-				<QuantityBar sold={ 40 } shared={ 120 } total={ 156 } />
-				<QuantityBar sold={ 40 } capacity={ 70 } shared={ 120 } total={ 156 } />
-				<span className="tribe-editor__quantity--unlimited">unlimited</span>
-			</div>
-		</article>
-	);
-}
+	static defaultProps = {
+		isEditing: false,
+	};
 
-Ticket.propTypes = {
-	title: PropTypes.string.isRequired,
-	description: PropTypes.string,
-	price: PropTypes.number,
-	currencySign: PropTypes.string,
-	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix' ] ),
-	unlimited: PropTypes.bool,
-	available: PropTypes.number,
-	sold: PropTypes.number,
-	expires: PropTypes.bool,
-}
+	updateIsSelected = () => {
+		const { setIsSelected, isSelected } = this.props;
+		setIsSelected( isSelected );
+	};
 
-Ticket.defaultProps = {
-	title: '',
-	description: '',
-	price: 0,
-	currencySign: '$',
-	currencyPosition: 'prefix',
-	unlimited: false,
-	available: 0,
-	sold: 0,
-	expires: true,
+	componentDidMount() {
+		const { register } = this.props;
+		register();
+		this.updateIsSelected();
+	}
+
+	componentDidUpdate( prevProps ) {
+		if ( prevProps.isSelected !== this.props.isSelected ) {
+			this.updateIsSelected();
+		}
+	}
+
+	componentWillUnmount() {
+		const { unregister } = this.props;
+		unregister();
+		this.updateIsSelected();
+	}
+
+	render() {
+		const  { isEditing, clientId, isSelected }  = this.props;
+		return (
+			<article className="tribe-editor__ticket">
+				{ isEditing
+					? <TicketEditContainer blockId={ clientId } />
+					: <TicketDisplayContainer blockId={ clientId } isSelected={ isSelected } /> }
+			</article>
+		);
+	}
 }
 
 export default Ticket;
