@@ -12,7 +12,6 @@ import {
 	number,
 	TribePropTypes,
 } from '@moderntribe/common/utils/';
-import { percentage } from '@moderntribe/common/src/modules/utils/number';
 
 const Bar = ( { className, value, total } ) => {
 
