@@ -3,7 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import React from 'react';
 
 /**
  * Internal dependencies
@@ -11,24 +10,27 @@ import React from 'react';
 import Template from './template';
 
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
-import { actions } from '@moderntribe/tickets/data/blocks/ticket';
-import * as selectors from '../../data/blocks/ticket/selectors';
+import { actions, selectors } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state, ownProps ) => ( {
-	title: 'Balcony',
-	description: 'General admission',
-	price: 125,
-	sold: 71,
-	available: 156,
-	isEditing: true,
 	isBlockSelected: selectors.getParentOrChildSelected( state ),
-	...ownProps,
+	isEditing: selectors.getTicketEditing( state, { blockId: ownProps.clientId } ),
+	blockId: ownProps.clientId,
+	isSelected: ownProps.isSelected,
 } );
 
-const mapDispatchToProps = ( dispatch ) => ( {
+const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	setIsSelected( selected ) {
 		dispatch( actions.setChildBlockSelected( selected ) );
-	}
+	},
+	register() {
+		const { clientId } = ownProps;
+		dispatch( actions.registerTicketBlock( clientId ) );
+	},
+	unregister() {
+		const { clientId } = ownProps;
+		dispatch( actions.removeTicketBlock( clientId ) );
+	},
 } );
 
 export default compose(
