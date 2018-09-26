@@ -21,6 +21,12 @@ class Tribe__Gutenberg__Tickets__Meta {
 			$this->text()
 		);
 
+		register_meta(
+			'post',
+			'_stock',
+			$this->text()
+		);
+
 		// Tickets Hander Keys
 		$handler = tribe( 'tickets.handler' );
 
