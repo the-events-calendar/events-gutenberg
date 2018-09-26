@@ -9,6 +9,7 @@ export const DEFAULT_STATE = {
 	isSettingsOpen: false,
 	isParentBlockSelected: false,
 	isChildBlockSelected: false,
+	activeChildBlockId: '',
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -38,6 +39,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				isChildBlockSelected: action.payload.selected,
 			};
+		case types.SET_ACTIVE_CHILD_BLOCK_ID:
+			return {
+				...state,
+				activeChildBlockId: action.payload.activeChildBlockId,
+			}
 		default:
 			return state;
 	}
