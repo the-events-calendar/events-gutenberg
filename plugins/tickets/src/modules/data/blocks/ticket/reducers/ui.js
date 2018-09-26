@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import * as types from './../types';
+import tmp from './temp';
 
 export const DEFAULT_STATE = {
 	sharedCapacity: '',
@@ -10,6 +11,7 @@ export const DEFAULT_STATE = {
 	isParentBlockSelected: false,
 	isChildBlockSelected: false,
 	activeChildBlockId: '',
+	tmp: {},
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -44,6 +46,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				activeChildBlockId: action.payload.activeChildBlockId,
 			}
+		case types.SET_TICKET_TMP_TICKET_SHARED_CAPACITY:
+			return {
+				...state,
+				tmp: tmp( state.tmp, action ),
+			};
 		default:
 			return state;
 	}
