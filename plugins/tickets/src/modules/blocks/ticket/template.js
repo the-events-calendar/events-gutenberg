@@ -3,6 +3,7 @@
  */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 /**
  * Internal dependencies
@@ -51,8 +52,12 @@ class Ticket extends PureComponent {
 
 	render() {
 		const  { isEditing, clientId, isSelected }  = this.props;
+		const containerClass = classNames( 'tribe-editor__ticket', {
+			'tribe-editor__ticket--edit': isEditing,
+			'tribe-editor__ticket--display': ! isEditing,
+		} );
 		return (
-			<article className="tribe-editor__ticket">
+			<article className={ containerClass }>
 				{ isEditing
 					? <TicketEditContainer blockId={ clientId } />
 					: <TicketDisplayContainer blockId={ clientId } isSelected={ isSelected } /> }
