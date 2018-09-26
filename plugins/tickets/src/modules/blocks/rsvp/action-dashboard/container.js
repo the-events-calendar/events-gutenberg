@@ -19,8 +19,6 @@ const mapStateToProps = ( state ) => ( {
 	state,
 } );
 
-const mapDisaptchToProps = ( dispatch ) => ( { dispatch } );
-
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...ownProps,
 	created: stateProps.created,
@@ -64,5 +62,5 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 
 export default compose(
 	withStore(),
-	connect( mapStateToProps, mapDisaptchToProps, mergeProps ),
+	connect( mapStateToProps, null, mergeProps ),
 )( RSVPActionDashboard );
