@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import './style.pcss';
-import TicketEditContainer from './edit-container/container';
+import TicketEditContainer from './edit-container/template';
 import TicketDisplayContainer from './display-container/container';
 
 class Ticket extends PureComponent {
