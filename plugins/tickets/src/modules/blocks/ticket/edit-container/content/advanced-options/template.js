@@ -16,8 +16,8 @@ import { __ } from '@wordpress/i18n';
  */
 import { Accordion } from '@moderntribe/common/elements';
 import './style.pcss';
-import Duration from './duration/template';
-import SKU from './sku/template';
+import Duration from './duration/container';
+import SKU from './sku/container';
 
 class AdvancedOptions extends Component {
 	static propTypes = {
@@ -26,6 +26,7 @@ class AdvancedOptions extends Component {
 		headerId: PropTypes.string.isRequired,
 		isActive: PropTypes.bool.isRequired,
 		onClick: PropTypes.func.isRequired,
+		blockId: PropTypes.string.isRequired,
 		accordionTitle: PropTypes.string,
 	};
 
@@ -60,8 +61,8 @@ class AdvancedOptions extends Component {
 
 	getContent = () => (
 		<Fragment>
-			<Duration />
-			<SKU />
+			<Duration blockId={ this.props.blockId } />
+			<SKU blockId={ this.props.blockId } />
 		</Fragment>
 	);
 
