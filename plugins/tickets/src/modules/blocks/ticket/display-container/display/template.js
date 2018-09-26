@@ -16,6 +16,13 @@ import QuantityBar from './quantity-bar/element';
 import { Button } from '@moderntribe/common/elements';
 import './style.pcss';
 
+/**
+ * @todo render and handle the next possible items:
+ *
+ * - has attendees information use Clipboard icon: <button className="tribe-editor__btn--label"><Clipboard /></button>
+ */
+ */
+
 const TicketDisplay = ( props ) => {
 	const {
 		title,
@@ -74,13 +81,6 @@ const TicketDisplay = ( props ) => {
 		</div>
 	);
 };
-
-/**
- <button className="tribe-editor__btn--label"><Clipboard /></button>
- <span className="tribe-editor__quantity-label">{ amountSold }<Alert /></span>
- <QuantityBar sold={ 40 } shared={ 120 } total={ 156 } />
- <QuantityBar sold={ 40 } capacity={ 70 } shared={ 120 } total={ 156 } />
- */
 
 TicketDisplay.propTypes = {
 	title: PropTypes.string.isRequired,
