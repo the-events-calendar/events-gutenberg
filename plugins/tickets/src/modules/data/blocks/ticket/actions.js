@@ -172,3 +172,18 @@ export const setTicketPostId = ( blockId, postId ) => ( {
 		postId,
 	},
 } );
+
+export const setTicketDateIsPristine = ( blockId, dateIsPristine ) => ( {
+	type: types.SET_TICKET_DATE_PRISTINE,
+	payload: {
+		blockId,
+		dateIsPristine,
+	},
+} );
+
+export const setTempSharedCapacity = ( sharedCapacity ) => ( {
+	type: types.SET_TICKET_TMP_TICKET_SHARED_CAPACITY,
+	payload: {
+		sharedCapacity,
+	},
+} );
