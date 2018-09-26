@@ -9,28 +9,21 @@ import classNames from 'classnames';
  * Internal dependencies
  */
 import TicketsDashboard from './dashboard/container';
-import TicketsContainer from './container/template';
+import TicketsContainer from './container/container';
 import './style.pcss';
-
-/*
-	const {
-		isSelected,
-		// @todo limit the usage of the available blocks for this one, however at this point the
-		// appender button is only available on the paragraph block
-		// see https://github.com/WordPress/gutenberg/issues/8589 once is resolved we should be able
-		// to address this one and limit this to only this property
-		allowedBlockTypes,
-	} = props;
-	*/
 
 class TicketsTemplate extends PureComponent {
 	static propTypes = {
 		isSelected: PropTypes.bool,
+		isBlockSelected: PropTypes.bool,
 		setIsSelected: PropTypes.func,
+		isEditing: PropTypes.bool,
 	};
 
 	static defaultProps = {
 		isSelected: false,
+		isEditing: false,
+		isBlockSelected: false,
 	};
 
 	updateIsSelected = () => {
@@ -53,7 +46,7 @@ class TicketsTemplate extends PureComponent {
 	}
 
 	render() {
-		const { isBlockSelected } = this.props;
+		const { isBlockSelected, isEditing, clientId } = this.props;
 		return (
 			<div
 				className={ classNames(
@@ -61,8 +54,16 @@ class TicketsTemplate extends PureComponent {
 					{ 'tribe-editor__tickets-container--selected': isBlockSelected },
 				) }
 			>
-				<TicketsContainer isSelected={ isBlockSelected } />
-				<TicketsDashboard isSelected={ isBlockSelected } />
+				<TicketsContainer
+					isSelected={ isBlockSelected }
+					isEditing={ isEditing }
+					clientId={ clientId }
+				/>
+				<TicketsDashboard
+					isSelected={ isBlockSelected }
+					isEditing={ isEditing }
+					clientId={ clientId }
+				/>
 			</div>
 		);
 	}
