@@ -18,7 +18,7 @@ export const getTickets = createSelector( [ getBlock ], ( block ) => block.ticke
 
 export const getBlockParentSelected = createSelector(
 	[ getTicketUI ],
-	( ui ) => ui.isParentBlockSelected
+	( ui ) => ui.isParentBlockSelected,
 );
 
 export const getChildParentSelected = createSelector(
@@ -38,6 +38,18 @@ export const getActiveBlockId = createSelector( [ getTicketUI ], ( ui ) => ui.ac
 export const hasActiveBlockId = createSelector(
 	[ getActiveBlockId ],
 	( blockId ) => blockId !== '',
+);
+
+// Temporarily UI selectors
+
+export const getTmpUI = createSelector(
+	[ getTicketUI ],
+	( ui ) => ui.tmp,
+);
+
+export const getTmpSharedCapacity = createSelector(
+	[ getTmpUI ],
+	( tmp ) => tmp.sharedCapacity,
 );
 
 // Header Image
@@ -86,21 +98,21 @@ export const getIndependentTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
 		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.independent )
-	)
+	),
 );
 
 export const getSharedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
 		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.shared )
-	)
+	),
 );
 
 export const getUnlimitedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
 		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.unlimited )
-	)
+	),
 );
 
 export const getTicketsIndependentCapacity = createSelector(
@@ -121,7 +133,7 @@ export const getTicketsSharedCapacity = createSelector(
 			return total + ( isNaN( capacity ) ? 0 : capacity );
 		}, 0 );
 	},
-)
+);
 
 export const getTotalSold = createSelector(
 	[ getTicketsIds, getTicketsObject ],
@@ -221,11 +233,7 @@ export const getTicketVolatile = createSelector(
 
 export const getTicketExpires = createSelector(
 	[ getTicketBlock ],
-	( block ) => {
-		const { startDate, endDate, startTime, endTime } = block;
-		const dates = [ startDate, endDate, startTime, endTime ];
-		return dates.filter( ( date ) => date !== null ).length > 0;
-	},
+	( block ) => ! block.dateIsPristine,
 );
 
 export const getTicketSold = createSelector(
