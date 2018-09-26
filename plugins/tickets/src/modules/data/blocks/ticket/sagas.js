@@ -29,15 +29,21 @@ export function* removeActiveTicketBlock( action ) {
 	const currentId = yield select( selectors.getActiveBlockId );
 
 	if ( currentId === blockId ) {
-		yield all( [
-			put( actions.setActiveChildBlockId( '' ) ),
-			put( actions.setTicketIsEditing( blockId, false ) ),
-		] );
+		yield put( actions.setActiveChildBlockId( '' ) );
 	}
 }
 
 export function* createNewTicket( action ) {
 	const { blockId } = action.payload;
+	const tmpSharedCapacity = yield select( selectors.getTmpSharedCapacity );
+	const sharedValue = parseInt( tmpSharedCapacity, 10 );
+
+	if ( ! isNaN( sharedValue ) && sharedValue > 0 ) {
+		yield all( [
+			put( actions.setTotalSharedCapacity( sharedValue ) ),
+			put( actions.setTempSharedCapacity( '' ) ),
+		] );
+	}
 
 	yield all( [
 		put( actions.setActiveChildBlockId( '' ) ),
@@ -69,10 +75,19 @@ export function* preventSharedNegative( action ) {
 	}
 }
 
+export function* setDatePristine( action ) {
+	const { blockId } = action.payload;
+	yield put( actions.setTicketDateIsPristine( blockId, false ) );
+}
+
 export default function* watchers() {
 	yield takeEvery( types.SET_TICKET_BLOCK_ID, setEditInTicketBlock );
 	yield takeEvery( types.REMOVE_TICKET_BLOCK, removeActiveTicketBlock );
 	yield takeEvery( types.SET_CREATE_NEW_TICKET, createNewTicket );
 	yield takeEvery( types.SET_TICKET_IS_EDITING, updateActiveEditBlock );
 	yield takeEvery( types.SET_TICKET_TOTAL_SHARED_CAPACITY, preventSharedNegative );
+	yield takeEvery( types.SET_TICKET_START_DATE, setDatePristine );
+	yield takeEvery( types.SET_TICKET_END_DATE, setDatePristine );
+	yield takeEvery( types.SET_TICKET_START_TIME, setDatePristine );
+	yield takeEvery( types.SET_TICKET_END_TIME, setDatePristine );
 }
