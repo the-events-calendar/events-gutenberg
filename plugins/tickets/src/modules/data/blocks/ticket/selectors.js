@@ -199,7 +199,10 @@ export const getTicketEndTime = createSelector(
 
 export const getTicketCapacity = createSelector(
 	[ getTicketBlock ],
-	( block ) => block.capacity,
+	( block ) => {
+		const capacity = parseInt( block.capacity, 10 );
+		return capacity || 0;
+	}
 );
 
 export const getTicketCapacityType = createSelector(
