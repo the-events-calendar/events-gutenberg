@@ -53,7 +53,7 @@ Select.propTypes = {
 };
 
 // Custom input for this type of form
-const Input = ( { id, type, input, selected, ...props } ) => {
+const Input = ( { id, input, shouldRender, ...props } ) => {
 	const ref = React.createRef();
 
 	function onChange() {
@@ -61,7 +61,7 @@ const Input = ( { id, type, input, selected, ...props } ) => {
 		input.onChange( current.value );
 	}
 
-	return ( type === selected && (
+	return ( shouldRender && (
 		<div className="tribe-editor__container-panel__input-row">
 			<label htmlFor={ id }>{ input.label }</label>
 			<input
@@ -78,8 +78,7 @@ const Input = ( { id, type, input, selected, ...props } ) => {
 
 Input.propTypes = {
 	id: PropTypes.string,
-	type: PropTypes.oneOf( Object.keys( TYPES ) ),
-	selected: PropTypes.oneOf( Object.keys( TYPES ) ),
+	shouldRender: PropTypes.bool,
 	input: PropTypes.shape( {
 		value: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 		onChange: PropTypes.func.isRequired,
@@ -100,8 +99,11 @@ class Capacity extends PureComponent {
 		capacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 		independentOnChange: PropTypes.func.isRequired,
 		independentLabel: PropTypes.string,
-		sharedOnChange: PropTypes.func.isRequired,
 		sharedLabel: PropTypes.string,
+		totalSharedCapacity: PropTypes.string,
+		setTemporarilySharedCapacity: PropTypes.func,
+		tmpSharedCapacity: PropTypes.string,
+		onCapacityChange: PropTypes.func,
 	};
 
 	static defaultProps = {
@@ -123,14 +125,16 @@ class Capacity extends PureComponent {
 		capacity: 0,
 		independentLabel: __( 'Number of tickets available', 'events-gutenberg' ),
 		sharedLabel: __( '(optional) Limit sales of this ticket to:', 'events-gutenberg' ),
+		totalSharedCapacity: '',
+		tmpSharedCapacity: '',
 	};
 
 	constructor( props ) {
 		super( props );
 		this.ids = {
 			select: uniqid( 'capacity-type-' ),
-			independent: uniqid( `ticket-input-independent-` ),
-			shared: uniqid( `ticket-input-shared-` ),
+			capacity: uniqid( 'ticket-input-capacity-' ),
+			globalShared: uniqid( 'ticket-input-global-shared-' ),
 		};
 	}
 
@@ -142,11 +146,25 @@ class Capacity extends PureComponent {
 			type,
 			onSelectType,
 			capacity,
-			independentOnChange,
 			independentLabel,
 			sharedLabel,
-			sharedOnChange,
+			totalSharedCapacity,
+			setTemporarilySharedCapacity,
+			tmpSharedCapacity,
+			onCapacityChange,
 		} = this.props;
+
+		const inputProps = {
+			onChange: onCapacityChange,
+			label: independentLabel,
+			value: capacity,
+		};
+
+		const extraInputProps = {};
+
+		if ( type === TYPES.shared && ( totalSharedCapacity || tmpSharedCapacity ) ) {
+			extraInputProps.max = totalSharedCapacity ? totalSharedCapacity : tmpSharedCapacity;
+		}
 
 		return (
 			<div className="tribe-editor__container-panel__row">
@@ -166,21 +184,20 @@ class Capacity extends PureComponent {
 						id={ this.ids.select }
 					/>
 					<Input
-						id={ this.ids.shared }
-						selected={ type }
-						input={ { onChange: sharedOnChange, label: sharedLabel, value: capacity } }
-						type={ TYPES.shared }
+						id={ this.ids.capacity }
+						shouldRender={ type !== TYPES.unlimited }
+						input={ inputProps }
 						min="0"
+						{ ...extraInputProps }
 					/>
 					<Input
-						id={ this.ids.independent }
-						selected={ type }
+						id={ this.ids.globalShared }
+						shouldRender={ type === TYPES.shared && totalSharedCapacity === '' }
 						input={ {
-							onChange: independentOnChange,
-							label: independentLabel,
-							value: capacity,
+							onChange: setTemporarilySharedCapacity,
+							label: sharedLabel,
+							value: tmpSharedCapacity,
 						} }
-						type={ TYPES.independent }
 						min="0"
 					/>
 				</div>
