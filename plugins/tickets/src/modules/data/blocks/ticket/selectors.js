@@ -241,7 +241,12 @@ export const getTicketSold = createSelector(
 	( block ) => block.sold,
 );
 
-export const getTicketUnlimited = createSelector(
+export const isUnlimitedTicket = createSelector(
 	[ getTicketBlock ],
 	( block ) => block.capacityType === TYPES.unlimited,
+);
+
+export const isSharedTicket = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.capacityType === TYPES.shared,
 );
