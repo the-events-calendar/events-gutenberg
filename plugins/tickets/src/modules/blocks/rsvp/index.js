@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BlockIcon } from '@moderntribe/common/elements';
-import RSVP from './template';
+import RSVP from './container';
 
 /**
  * Module Code
