@@ -15,11 +15,13 @@ import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 const mapStateToProps = ( state ) => ( {
 	sharedValue: selectors.getSharedCapacity( state ),
 	total: selectors.getTotalCapacity( state ),
+	independent: selectors.getIndependentTickets( state ),
+	shared: selectors.getSharedTickets( state ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	onSharedCapacityChange: ( value ) => {
-		dispatch( actions.setSharedCapacity( value ) );
+		dispatch( actions.setTotalSharedCapacity( value ) );
 	},
 } );
 
