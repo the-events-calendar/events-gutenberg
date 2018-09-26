@@ -15,20 +15,14 @@ import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 const mapStateToProps = ( state, ownProps ) => ( {
 	isSelected: ownProps.isSelected,
 	isBlockSelected: selectors.getParentOrChildSelected( state ),
-	available: 48,
-	total: 166,
-	allowedBlockTypes: [ 'tribe/event-tickets', 'tribe/event-tickets-ticket', 'core/image' ],
-	headerImageId: selectors.getImageID( state ),
-	headerImage: selectors.getHeaderSize( state, { size: 'large' } ),
+	isEditing: selectors.hasActiveBlockId( state ),
+	clientId: ownProps.clientId,
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	setHeaderImage( image ) {
-		dispatch( actions.setHeader( image ) );
-	},
 	setIsSelected( selected ) {
 		dispatch( actions.setParentBlockSelected( selected ) );
-	}
+	},
 } );
 
 export default compose(
