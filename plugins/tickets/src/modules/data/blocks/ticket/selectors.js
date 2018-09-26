@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { createSelector } from 'reselect';
+import trim from 'lodash/trim';
 
 /**
  * Internal dependencies
@@ -10,20 +11,15 @@ import { TYPES } from '@moderntribe/tickets/blocks/ticket/edit-container/content
 
 export const getBlock = ( state ) => state.tickets.blocks.ticket;
 
-export const getTicketUI = createSelector(
-	[ getBlock ],
-	( block ) => block.ui,
-);
+// UI selectors
 
-export const getTickets = createSelector(
-	[ getBlock ],
-	( block ) => block.tickets,
-);
+export const getTicketUI = createSelector( [ getBlock ], ( block ) => block.ui );
+export const getTickets = createSelector( [ getBlock ], ( block ) => block.tickets );
 
 export const getBlockParentSelected = createSelector(
 	[ getTicketUI ],
-	( ui ) => ui.isParentBlockSelected,
-)
+	( ui ) => ui.isParentBlockSelected
+);
 
 export const getChildParentSelected = createSelector(
 	[ getTicketUI ],
@@ -35,35 +31,36 @@ export const getParentOrChildSelected = createSelector(
 	( parentSelected, childSelected ) => parentSelected || childSelected,
 );
 
-export const getSharedCapacity = createSelector(
-	[ getTicketUI ],
-	( ticket ) => ticket.sharedCapacity,
+export const getSharedCapacity = createSelector( [ getTicketUI ], ( ui ) => ui.sharedCapacity );
+export const getSettingsIsOpen = createSelector( [ getTicketUI ], ( ui ) => ui.isSettingsOpen );
+
+export const getActiveBlockId = createSelector( [ getTicketUI ], ( ui ) => ui.activeChildBlockId );
+export const hasActiveBlockId = createSelector(
+	[ getActiveBlockId ],
+	( blockId ) => blockId !== '',
 );
 
-export const getSettingsIsOpen = createSelector(
-	[ getTicketUI ],
-	( ticket ) => ticket.isSettingsOpen,
-);
+// Header Image
 
-export const getHeader = createSelector(
-	[ getTicketUI ],
-	( ticket ) => ticket.header,
-);
-
+export const getHeader = createSelector( [ getTicketUI ], ( ui ) => ui.header );
 export const getImageSize = ( state, props ) => props.size;
-
 export const getImageID = createSelector(
 	[ getHeader ],
-	( header ) => header === null ? null : header.id,
+	( header ) => header === null ? 0 : header.id,
+);
+
+export const getImageAlt = createSelector(
+	[ getHeader ],
+	( header ) => header === null ? '' : header.alt,
 );
 
 export const getHeaderSize = createSelector(
 	[ getHeader, getImageSize ],
 	( header, size ) => {
 		if ( header === null || ! header.sizes || ! header.sizes[ size ] ) {
-			return null;
+			return '';
 		}
-		return header.sizes[ size ];
+		return header.sizes[ size ].url;
 	},
 );
 
@@ -80,49 +77,67 @@ export const getTicketsObject = createSelector(
 	( tickets ) => tickets.byId,
 );
 
-export const getIndependentTickets = createSelector(
+export const getTicketsArray = createSelector(
 	[ getTicketsIds, getTicketsObject ],
-	( ids, tickets ) => {
-		return ids.filter( ( id ) => {
-			const item = tickets[ id ];
-			return item.capacityType === TYPES.independent;
-		} )
-			.map( ( id ) => tickets[ id ] )
-			.map( ( ticket ) => {
-				const quantity = parseInt( ticket.independentCapacity, 10 );
-				return {
-					name: ticket.title,
-					quantity: isNaN( quantity ) ? 0 : quantity,
-				};
-			} );
+	( ids, tickets ) => ids.map( ( id ) => tickets[ id ] ),
+);
+
+export const getIndependentTickets = createSelector(
+	[ getTicketsArray ],
+	( tickets ) => (
+		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.independent )
+	)
+);
+
+export const getSharedTickets = createSelector(
+	[ getTicketsArray ],
+	( tickets ) => (
+		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.shared )
+	)
+);
+
+export const getUnlimitedTickets = createSelector(
+	[ getTicketsArray ],
+	( tickets ) => (
+		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.unlimited )
+	)
+);
+
+export const getTicketsIndependentCapacity = createSelector(
+	[ getIndependentTickets ],
+	( tickets ) => {
+		return tickets.reduce( ( total, ticket ) => {
+			const capacity = parseInt( ticket.capacity, 10 );
+			return total + ( isNaN( capacity ) ? 0 : capacity );
+		}, 0 );
 	},
 );
 
-export const getIndependentCapacity = createSelector(
+export const getTicketsSharedCapacity = createSelector(
+	[ getSharedTickets ],
+	( tickets ) => {
+		return tickets.reduce( ( total, ticket ) => {
+			const capacity = parseInt( ticket.capacity, 10 );
+			return total + ( isNaN( capacity ) ? 0 : capacity );
+		}, 0 );
+	},
+)
+
+export const getTotalSold = createSelector(
 	[ getTicketsIds, getTicketsObject ],
 	( ids, tickets ) => {
 		return ids.reduce( ( total, id ) => {
 			const item = tickets[ id ];
-			const capacity = parseInt( item.independentCapacity, 10 );
-			const independent = isNaN( capacity ) ? 0 : capacity;
-			return total + independent;
+			const sold = parseInt( item.sold, 10 );
+			const value = isNaN( sold ) ? 0 : sold;
+			return total + value;
 		}, 0 );
-	}
-)
+	},
+);
 
 export const getTotalCapacity = createSelector(
-	[ getSharedCapacity, getIndependentCapacity ],
-	( shared, independent ) => {
-		/**
-		 * values can be empty string on initial load so we need to fallback to a number in order
-		 * to return a number to the total so in case of NaN we fallback to zero as the default value
-		 * absence of value is not same as zero on inputs so it can't be used as: null or zero,
-		 * inputs needs to have undefined or empty string instead.
-		 */
-		const totalShared = parseInt( shared, 10 );
-		const sharedCapacity = isNaN( totalShared ) ? 0 : totalShared;
-		return sharedCapacity + independent;
-	},
+	[ getTicketsSharedCapacity, getTicketsIndependentCapacity ],
+	( shared, independent ) => shared + independent,
 );
 
 export const getTicketBlock = createSelector(
@@ -170,17 +185,55 @@ export const getTicketEndTime = createSelector(
 	( block ) => block.endTime,
 );
 
-export const getTicketIndependentCapacity = createSelector(
+export const getTicketCapacity = createSelector(
 	[ getTicketBlock ],
-	( block ) => block.independentCapacity,
-);
-
-export const getTicketSharedCapacity = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.sharedCapacity,
+	( block ) => block.capacity,
 );
 
 export const getTicketCapacityType = createSelector(
 	[ getTicketBlock ],
 	( block ) => block.capacityType,
+);
+
+export const getTicketValidness = createSelector(
+	[ getTicketBlock ],
+	( block ) => {
+		const isTitleValid = trim( block.title ) !== '';
+
+		if ( block.capacityType === TYPES.unlimited ) {
+			return isTitleValid;
+		}
+
+		const isCapacityValid = trim( block.capacity ) !== '';
+		return isTitleValid && isCapacityValid;
+	},
+);
+
+export const getTicketEditing = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.isEditing,
+);
+
+export const getTicketVolatile = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.postId === null,
+);
+
+export const getTicketExpires = createSelector(
+	[ getTicketBlock ],
+	( block ) => {
+		const { startDate, endDate, startTime, endTime } = block;
+		const dates = [ startDate, endDate, startTime, endTime ];
+		return dates.filter( ( date ) => date !== null ).length > 0;
+	},
+);
+
+export const getTicketSold = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.sold,
+);
+
+export const getTicketUnlimited = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.capacityType === TYPES.unlimited,
 );
