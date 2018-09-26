@@ -38,6 +38,8 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.tickets.blocks.tickets', 'Tribe__Gutenberg__Tickets__Blocks__Tickets' );
 		$this->container->singleton( 'gutenberg.tickets.blocks.rsvp', 'Tribe__Gutenberg__Tickets__Blocks__Rsvp' );
 
+		$this->container->singleton( 'gutenberg.tickets.meta', 'Tribe__Gutenberg__Tickets__Meta' );
+
 		$this->hook();
 		/**
 		 * Lets load all compatibility related methods
@@ -58,6 +60,9 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	protected function hook() {
 		// Initialize the correct Singleton
 		tribe( 'gutenberg.tickets.assets' );
+
+		// Setup the Meta registration
+		add_action( 'init', tribe_callback( 'gutenberg.tickets.meta', 'register' ), 15 );
 
 		// Register blocks
 		add_action(
