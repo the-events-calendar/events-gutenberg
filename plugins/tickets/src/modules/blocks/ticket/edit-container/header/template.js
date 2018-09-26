@@ -70,6 +70,7 @@ class Header extends PureComponent {
 				placeholder={ pricePlaceholder }
 				onChange={ sendValue( setPrice ) }
 				type="number"
+				min="0"
 			/>
 		);
 	}
