@@ -14,8 +14,10 @@ export const DEFAULT_STATE = {
 	startTime: null,
 	endTime: null,
 	capacityType: TYPES.independent,
-	independentCapacity: '',
-	sharedCapacity: '',
+	capacity: '',
+	isEditing: false,
+	postId: null,
+	sold: 0,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -60,20 +62,25 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				endTime: action.payload.endTime,
 			};
-		case types.SET_TICKET_INDEPENDENT_CAPACITY:
+		case types.SET_TICKET_CAPACITY:
 			return {
 				...state,
-				independentCapacity: action.payload.independentCapacity,
-			};
-		case types.SET_TICKET_SHARED_CAPACITY:
-			return {
-				...state,
-				sharedCapacity: action.payload.sharedCapacity,
+				capacity: action.payload.capacity,
 			};
 		case types.SET_TICKET_CAPACITY_TYPE:
 			return {
 				...state,
 				capacityType: action.payload.capacityType,
+			};
+		case types.SET_TICKET_IS_EDITING:
+			return {
+				...state,
+				isEditing: action.payload.isEditing,
+			}
+		case types.SET_TICKET_POST_ID:
+			return {
+				...state,
+				postId: action.payload.postId,
 			};
 		default:
 			return state;
