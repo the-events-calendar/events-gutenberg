@@ -27,9 +27,11 @@ const ContainerPanel = ( {
 			<div className="tribe-editor__container-panel__header">
 				{ header }
 			</div>
-			<div className="tribe-editor__container-panel__content">
-				{ content }
-			</div>
+			{ content && (
+				<div className="tribe-editor__container-panel__content">
+					{ content }
+				</div>
+			) }
 		</Fragment>
 	);
 
