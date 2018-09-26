@@ -2,18 +2,19 @@ import PropTypes from 'prop-types';
 
 export default PropTypes.arrayOf(
 	PropTypes.shape( {
-		name: PropTypes.string,
-		quantity: PropTypes.number,
+		title: PropTypes.string,
+		capacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	} ),
 )
 
 export const getValues = ( items ) => (
 	items.reduce( ( accumulator, item ) => {
-		if ( item.name ) {
-			accumulator.names.push( item.name );
+		if ( item.title ) {
+			accumulator.names.push( item.title );
 		}
-		if ( 'quantity' in item && ! isNaN( item.quantity ) ) {
-			accumulator.total += item.quantity;
+		const capacity = parseInt( item.capacity, 10 );
+		if ( 'capacity' in item && ! isNaN( capacity ) ) {
+			accumulator.total += capacity;
 		}
 		return accumulator;
 	}, { names: [], total: 0 } )
