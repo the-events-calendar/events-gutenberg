@@ -1,9 +1,8 @@
 /**
  * External dependencies
  */
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import noop from 'lodash/noop';
 
 /**
  * Internal dependencies
@@ -17,18 +16,6 @@ import TicketContent from './content/template';
 class TicketEditContainer extends PureComponent {
 	static propTypes = {
 		blockId: PropTypes.string.isRequired,
-		register: PropTypes.func.isRequired,
-		unregister: PropTypes.func.isRequired,
-	};
-
-	componentDidMount() {
-		const { register } = this.props;
-		register();
-	}
-
-	componentWillUnmount() {
-		const { unregister } = this.props;
-		unregister();
 	}
 
 	render() {
