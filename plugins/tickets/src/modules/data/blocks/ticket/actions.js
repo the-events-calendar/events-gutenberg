@@ -48,6 +48,13 @@ export const setActiveChildBlockId = ( activeChildBlockId ) => ( {
 	},
 } );
 
+export const setTempSharedCapacity = ( sharedCapacity ) => ( {
+	type: types.SET_TICKET_TMP_TICKET_SHARED_CAPACITY,
+	payload: {
+		sharedCapacity,
+	},
+} );
+
 // individual ticket actions
 export const registerTicketBlock = ( blockId ) => ( {
 	type: types.SET_TICKET_BLOCK_ID,
@@ -178,12 +185,5 @@ export const setTicketDateIsPristine = ( blockId, dateIsPristine ) => ( {
 	payload: {
 		blockId,
 		dateIsPristine,
-	},
-} );
-
-export const setTempSharedCapacity = ( sharedCapacity ) => ( {
-	type: types.SET_TICKET_TMP_TICKET_SHARED_CAPACITY,
-	payload: {
-		sharedCapacity,
 	},
 } );

@@ -35,4 +35,88 @@ describe( 'Gutenberg actions', () => {
 			expect( actions.setSettingsOpen( false ) ).toMatchSnapshot();
 		} );
 	} );
+
+	describe( 'Block selection', () => {
+		test( 'Parent block selection', () => {
+			expect( actions.setParentBlockSelected( true ) ).toMatchSnapshot();
+			expect( actions.setParentBlockSelected( false ) ).toMatchSnapshot();
+		} );
+
+		test( 'Child block selection', () => {
+			expect( actions.setChildBlockSelected( true ) ).toMatchSnapshot();
+			expect( actions.setChildBlockSelected( false ) ).toMatchSnapshot();
+		} );
+	} );
+
+	describe( 'Active block selected', () => {
+		test( 'Active block', () => {
+			expect( actions.setActiveChildBlockId( 'modern-tribe' ) ).toMatchSnapshot();
+		} );
+	} );
+
+	describe( 'Temporarily values', () => {
+		test( 'Temporarily capacity', () => {
+			expect( actions.setTempSharedCapacity( 99 ) ).toMatchSnapshot();
+		} );
+	} );
+
+	describe( 'Single block actions', () => {
+		const blockId = 'modern-tribe';
+
+		test( 'Block registration process', () => {
+			expect( actions.registerTicketBlock( blockId ) ).toMatchSnapshot();
+			expect( actions.removeTicketBlock( blockId ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket title', () => {
+			expect( actions.setTitle( blockId, 'Modern Tribe' ) );
+		} );
+
+		test( 'Ticket description', () => {
+			expect( actions.setDescription( blockId, 'The Next Generation of Digital Agency' ) )
+				.toMatchSnapshot();
+		} );
+
+		test( 'Ticket price', () => {
+			expect( actions.setPrice( blockId, 99 ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket SKU', () => {
+			expect( actions.setSKU( blockId, 'my-sku' ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket dates', () => {
+			expect( actions.setStartDate( blockId, 'January 1, 2018' ) ).toMatchSnapshot();
+			expect( actions.setStartTime( blockId, '10:00' ) ).toMatchSnapshot();
+			expect( actions.setEndDate( blockId, 'January 10, 2018' ) ).toMatchSnapshot();
+			expect( actions.setEndTime( blockId, '12:34' ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket Capacity', () => {
+			expect( actions.setCapacity( blockId, 'unlimited' ) ).toMatchSnapshot();
+			expect( actions.setCapacityType( blockId, 'unlimited' ) ).toMatchSnapshot();
+		} );
+
+		test( 'Create a new ticket', () => {
+			expect( actions.createNewTicket( blockId ) ).toMatchSnapshot();
+		} );
+
+		test( 'Update ticket', () => {
+			expect( actions.updateTicket( blockId ) ).toMatchSnapshot();
+		} );
+
+		test( 'Set ticket date is pristine', () => {
+			expect( actions.setTicketDateIsPristine( blockId, false ) ).toMatchSnapshot();
+			expect( actions.setTicketDateIsPristine( blockId, true ) ).toMatchSnapshot();
+		} );
+
+		test( 'Set ticket post ID', () => {
+			expect( actions.setTicketPostId( blockId, 99 ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket editing flag', () => {
+			expect( actions.setTicketIsEditing( true ) ).toMatchSnapshot();
+			expect( actions.setTicketIsEditing( false ) ).toMatchSnapshot();
+		} );
+	} );
 } );
