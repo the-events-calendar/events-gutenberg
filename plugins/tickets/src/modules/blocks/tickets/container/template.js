@@ -27,7 +27,7 @@ const TicketContainer = ( { isSelected, isEditing, total, sold, tickets } ) => (
 			<InactiveBlock
 				layout={ LAYOUT.ticket }
 				title={ __( 'No Active Tickets', 'events-gutenberg' ) }
-				icon={ <StatusIcon disabled={ true } expires={ true } /> }
+				icon={ <StatusIcon disabled={ true } /> }
 			/>
 		) }
 		{ isSelected && ! isEditing && <Availability available={ total - sold } total={ total } /> }
