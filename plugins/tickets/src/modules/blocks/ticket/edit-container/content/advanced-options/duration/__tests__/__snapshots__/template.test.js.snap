@@ -36,7 +36,7 @@ exports[`Ticket Duration picker and label default properties 1`] = `
             onKeyDown={[Function]}
             onKeyUp={[Function]}
             placeholder="YYYY-M-D"
-            value="September 3, 2018"
+            value=""
           />
         </div>
         <span
@@ -71,7 +71,7 @@ exports[`Ticket Duration picker and label default properties 1`] = `
             onKeyDown={[Function]}
             onKeyUp={[Function]}
             placeholder="YYYY-M-D"
-            value="September 6, 2018"
+            value=""
           />
         </div>
         <span

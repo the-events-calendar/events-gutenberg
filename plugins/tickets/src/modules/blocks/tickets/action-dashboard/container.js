@@ -74,7 +74,6 @@ export default compose(
 		mapStateToProps,
 		mapDispatchToProps,
 	),
-	withSaveData(),
 	applyWithSelect,
 	applyWithDispatch,
 )( Template );

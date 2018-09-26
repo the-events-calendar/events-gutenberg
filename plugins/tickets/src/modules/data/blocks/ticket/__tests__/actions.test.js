@@ -16,11 +16,11 @@ describe( 'Gutenberg actions', () => {
 
 	describe( 'Set shared capacity actions', () => {
 		test( 'Set empty value', () => {
-			expect( actions.setSharedCapacity( 0 ) ).toMatchSnapshot();
+			expect( actions.setTotalSharedCapacity( 0 ) ).toMatchSnapshot();
 		} );
 
 		test( 'Set a large number', () => {
-			expect( actions.setSharedCapacity( 999 ) ).toMatchSnapshot();
+			expect( actions.setTotalSharedCapacity( 999 ) ).toMatchSnapshot();
 		} );
 	} );
 

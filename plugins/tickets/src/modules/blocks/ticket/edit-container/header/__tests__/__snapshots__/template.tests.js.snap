@@ -37,9 +37,11 @@ exports[`Ticket Form Header Header with default values 1`] = `
     <span
       className="tribe-editor__new-ticket__description"
       id="ticket-creation-price-"
+      min="0"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="0"
+      type="number"
       value={20}
     >
       Auto Size Input
@@ -85,9 +87,11 @@ exports[`Ticket Form Header Header with expiration 1`] = `
     <span
       className="tribe-editor__new-ticket__description"
       id="ticket-creation-price-"
+      min="0"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="0"
+      type="number"
       value={0}
     >
       Auto Size Input
@@ -133,9 +137,11 @@ exports[`Ticket Form Header Header with no expiration 1`] = `
     <span
       className="tribe-editor__new-ticket__description"
       id="ticket-creation-price-"
+      min="0"
       name="ticket-creation-description"
       onChange={[Function]}
       placeholder="0"
+      type="number"
       value={0}
     >
       Auto Size Input

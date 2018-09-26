@@ -26,6 +26,7 @@ exports[`<CapacityTable /> independent property 1`] = `
       className="tribe-editor__capacity-row--right"
     >
       <input
+        min="0"
         onChange={[Function]}
         type="number"
       />
@@ -42,16 +43,12 @@ exports[`<CapacityTable /> independent property 1`] = `
       >
         Independent capacity
       </span>
-      <span
-        className="tribe-editor__capacity-row__items"
-      >
-         ( Floor, VIP ) 
-      </span>
+      
     </span>
     <span
       className="tribe-editor__capacity-row--right"
     >
-      70
+      0
     </span>
   </div>
   <div
@@ -96,16 +93,13 @@ exports[`<CapacityTable /> shared property 1`] = `
       >
         Shared Capacity
       </span>
-      <span
-        className="tribe-editor__capacity-row__items"
-      >
-         ( Early Bird, Balcony ) 
-      </span>
+      
     </span>
     <span
       className="tribe-editor__capacity-row--right"
     >
       <input
+        min="0"
         onChange={[Function]}
         type="number"
       />
@@ -178,6 +172,7 @@ exports[`<CapacityTable /> title property 1`] = `
       className="tribe-editor__capacity-row--right"
     >
       <input
+        min="0"
         onChange={[Function]}
         type="number"
       />

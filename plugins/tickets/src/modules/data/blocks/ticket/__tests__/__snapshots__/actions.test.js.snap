@@ -25,7 +25,7 @@ Object {
   "payload": Object {
     "sharedCapacity": 999,
   },
-  "type": "@@MT/TICKETS/SET_TICKET_SHARED_CAPACITY",
+  "type": "@@MT/TICKETS/SET_TICKET_TOTAL_SHARED_CAPACITY",
 }
 `;
 
@@ -34,7 +34,7 @@ Object {
   "payload": Object {
     "sharedCapacity": 0,
   },
-  "type": "@@MT/TICKETS/SET_TICKET_SHARED_CAPACITY",
+  "type": "@@MT/TICKETS/SET_TICKET_TOTAL_SHARED_CAPACITY",
 }
 `;
 

@@ -2,12 +2,20 @@
  * Internal dependencies
  */
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
-import { DEFAULT_STATE } from '@moderntribe/tickets/data/blocks/ticket/reducer';
+import { DEFAULT_STATE } from '@moderntribe/tickets/data/blocks/ticket/reducers/ui';
 
 const state = {
 	tickets: {
 		blocks: {
-			ticket: DEFAULT_STATE,
+			ticket: {
+				ui: {
+					...DEFAULT_STATE,
+				},
+				tickets: {
+					byId: {},
+					allIds: [],
+				},
+			},
 		},
 	},
 };
@@ -54,7 +62,13 @@ describe( 'Ticket blocks selectors', () => {
 			tickets: {
 				blocks: {
 					ticket: {
-						...DEFAULT_STATE,
+						ui: {
+							...DEFAULT_STATE
+						},
+						tickets: {
+							byId: {},
+							allIds: [],
+						},
 					},
 				},
 			},
@@ -67,20 +81,21 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Select set image', () => {
-			newState.tickets.blocks.ticket.header = image;
+			newState.tickets.blocks.ticket.ui.header = image;
 			expect( selectors.getHeader( newState ) ).toEqual( image );
 		} );
 
 		test( 'Select image id', () => {
-			newState.tickets.blocks.ticket.header = image;
-			expect( selectors.getImageID( state ) ).toBe( null );
+			newState.tickets.blocks.ticket.ui.header = image;
+			expect( selectors.getImageID( state ) ).toBe( 0 );
 			expect( selectors.getImageID( newState ) ).toBe( 4961 );
 		} );
 
 		test( 'Select image size', () => {
-			newState.tickets.blocks.ticket.header = image;
-			expect( selectors.getHeaderSize( newState, { size: 'large' } ) ).toEqual( image.sizes.large );
-			expect( selectors.getHeaderSize( newState, { size: 'unknown' } ) ).toBe( null );
+			newState.tickets.blocks.ticket.ui.header = image;
+			expect( selectors.getHeaderSize( newState, { size: 'large' } ) )
+				.toEqual( image.sizes.large.url );
+			expect( selectors.getHeaderSize( newState, { size: 'unknown' } ) ).toBe( '' );
 		} );
 	} );
 
@@ -90,7 +105,7 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Select shared capacity after being set', () => {
-			newState.tickets.blocks.ticket.sharedCapacity = 99;
+			newState.tickets.blocks.ticket.ui.sharedCapacity = 99;
 			expect( selectors.getSharedCapacity( newState ) ).toBe( 99 );
 		} );
 	} );
@@ -101,8 +116,8 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Value of total capacity when sharedCapacity is only set', () => {
-			newState.tickets.blocks.ticket.sharedCapacity = 15;
-			expect( selectors.getTotalCapacity( newState ) ).toBe( 15 );
+			newState.tickets.blocks.ticket.ui.sharedCapacity = 15;
+			expect( selectors.getTotalCapacity( newState ) ).toBe( 0 );
 		} );
 	} );
 
@@ -112,7 +127,7 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Custom value of settings dashboard', () => {
-			newState.tickets.blocks.ticket.isSettingsOpen = true;
+			newState.tickets.blocks.ticket.ui.isSettingsOpen = true;
 			expect( selectors.getSettingsIsOpen( newState ) ).toBe( true );
 		} );
 	} );

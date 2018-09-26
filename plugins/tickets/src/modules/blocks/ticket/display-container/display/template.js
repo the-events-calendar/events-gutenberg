@@ -21,7 +21,6 @@ import './style.pcss';
  *
  * - has attendees information use Clipboard icon: <button className="tribe-editor__btn--label"><Clipboard /></button>
  */
- */
 
 const TicketDisplay = ( props ) => {
 	const {
