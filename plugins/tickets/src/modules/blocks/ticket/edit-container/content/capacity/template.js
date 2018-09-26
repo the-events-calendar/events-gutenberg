@@ -97,10 +97,9 @@ class Capacity extends PureComponent {
 			value: PropTypes.oneOf( Object.keys( TYPES ) ),
 		} ) ),
 		onSelectType: PropTypes.func,
-		independentValue: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
+		capacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 		independentOnChange: PropTypes.func.isRequired,
 		independentLabel: PropTypes.string,
-		sharedValue: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 		sharedOnChange: PropTypes.func.isRequired,
 		sharedLabel: PropTypes.string,
 	};
@@ -121,9 +120,8 @@ class Capacity extends PureComponent {
 			{ name: __( 'unlimited', 'events-gutenberg' ), value: TYPES.unlimited },
 		],
 		onSelectType: noop,
-		independentValue: 0,
+		capacity: 0,
 		independentLabel: __( 'Number of tickets available', 'events-gutenberg' ),
-		sharedValue: 0,
 		sharedLabel: __( '(optional) Limit sales of this ticket to:', 'events-gutenberg' ),
 	};
 
@@ -143,10 +141,9 @@ class Capacity extends PureComponent {
 			capacityOptions,
 			type,
 			onSelectType,
-			independentValue,
+			capacity,
 			independentOnChange,
 			independentLabel,
-			sharedValue,
 			sharedLabel,
 			sharedOnChange,
 		} = this.props;
@@ -171,7 +168,7 @@ class Capacity extends PureComponent {
 					<Input
 						id={ this.ids.shared }
 						selected={ type }
-						input={ { onChange: sharedOnChange, label: sharedLabel, value: sharedValue } }
+						input={ { onChange: sharedOnChange, label: sharedLabel, value: capacity } }
 						type={ TYPES.shared }
 						min="0"
 					/>
@@ -181,7 +178,7 @@ class Capacity extends PureComponent {
 						input={ {
 							onChange: independentOnChange,
 							label: independentLabel,
-							value: independentValue,
+							value: capacity,
 						} }
 						type={ TYPES.independent }
 						min="0"
