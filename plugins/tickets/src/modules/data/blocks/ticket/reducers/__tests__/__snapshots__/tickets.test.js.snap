@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tickets reducer Add a new block inside of the reducer 1`] = `
+Object {
+  "allIds": Array [
+    "modern-tribe",
+  ],
+  "byId": Object {
+    "modern-tribe": Object {
+      "SKU": "",
+      "capacity": "",
+      "capacityType": "independent",
+      "dateIsPristine": true,
+      "description": "",
+      "endDate": "January 10, 2018",
+      "endTime": "17:30",
+      "isEditing": false,
+      "postId": null,
+      "price": 0,
+      "sold": 0,
+      "startDate": "January 10, 2018",
+      "startTime": "17:30",
+      "title": "",
+    },
+  },
+}
+`;
+
+exports[`Tickets reducer Remove an existing block from the reducer 1`] = `
+Object {
+  "allIds": Array [],
+  "byId": Object {},
+}
+`;

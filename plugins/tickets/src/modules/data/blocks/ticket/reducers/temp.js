@@ -7,7 +7,7 @@ export const DEFAULT_STATE = {
 	sharedCapacity: '',
 };
 
-export default ( state = {}, action ) => {
+export default ( state = DEFAULT_STATE, action ) => {
 	switch ( action.type ) {
 		case types.SET_TICKET_TMP_TICKET_SHARED_CAPACITY: {
 			return {

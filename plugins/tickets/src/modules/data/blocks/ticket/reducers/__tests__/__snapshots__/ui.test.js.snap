@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UI reducer Header image 1`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": Object {
+    "id": 100,
+  },
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Header image 2`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Is Active Child block 1`] = `
+Object {
+  "activeChildBlockId": "modern-tribe",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Is Child block selected 1`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": true,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Is Child block selected 2`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Is Parent Block selected 1`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": true,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Is Parent Block selected 2`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Settings Open 1`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": true,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Settings Open 2`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Shared capacity 1`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": 50,
+  "tmp": Object {},
+}
+`;
