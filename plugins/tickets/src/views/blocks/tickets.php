@@ -24,7 +24,7 @@ if ( ! $provider ) {
 	data-provider="<?php echo esc_attr( $provider->class_name ); ?>"
 	novalidate
 >
-	<input name="provider" value="<?php echo esc_attr( $provider->class_name ); ?>" type="hidden">
+	<input name="provider" value="<?php echo esc_attr( $provider->class_name ); ?>" class="tribe-tickets-provider" type="hidden">
 	<?php foreach ( $tickets as $key => $ticket ) : ?>
 		<?php $this->template( 'blocks/tickets/item', array( 'ticket' => $ticket, 'key' => $key ) ); ?>
 	<?php endforeach; ?>
