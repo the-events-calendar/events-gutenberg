@@ -38,7 +38,7 @@ describe( 'Tickets block types', () => {
 		expect( types.SET_TICKET_POST_ID ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_POST_ID` );
 		expect( types.SET_UPDATE_TICKET ).toBe( `${ PREFIX_TICKETS_STORE }/SET_UPDATE_TICKET` );
 		expect( types.REMOVE_TICKET_BLOCK ).toBe( `${ PREFIX_TICKETS_STORE }/REMOVE_TICKET_BLOCK` );
-		expect( types.SET_TICKET_TITLE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_TITLE` )
+		expect( types.SET_TICKET_TITLE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_TITLE` );
 		expect( types.SET_TICKET_DESCRIPTION )
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_DESCRIPTION` );
 		expect( types.SET_TICKET_PRICE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_PRICE` );
@@ -47,6 +47,9 @@ describe( 'Tickets block types', () => {
 		expect( types.SET_TICKET_CAPACITY ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_CAPACITY` );
 		expect( types.SET_CREATE_NEW_TICKET ).toBe( `${ PREFIX_TICKETS_STORE }/SET_CREATE_NEW_TICKET` );
 		expect( types.SET_TICKET_IS_EDITING ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_IS_EDITING` );
+		expect( types.SET_INITIAL_STATE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_INITIAL_STATE` );
+		expect( types.SET_PARENT_BLOCK_LOADING )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_PARENT_BLOCK_LOADING` );
 	} );
 } );
 
