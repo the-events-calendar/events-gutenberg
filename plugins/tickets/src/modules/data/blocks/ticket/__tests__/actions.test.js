@@ -15,6 +15,11 @@ describe( 'Gutenberg actions', () => {
 		expect( actions.setInitialState( props ) ).toMatchSnapshot();
 	} );
 
+	describe( 'Parent block is loading', () => {
+		expect( actions.setParentBlockIsLoading( true ) ).toMatchSnapshot();
+		expect( actions.setParentBlockIsLoading( false ) ).toMatchSnapshot();
+	} );
+
 	describe( 'Header actions', () => {
 		test( 'Set null to remove header', () => {
 			expect( actions.setHeader( null ) ).toMatchSnapshot();

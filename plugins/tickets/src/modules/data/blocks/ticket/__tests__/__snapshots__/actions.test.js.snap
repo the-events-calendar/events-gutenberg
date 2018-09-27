@@ -13,6 +13,24 @@ Object {
 }
 `;
 
+exports[` 2`] = `
+Object {
+  "payload": Object {
+    "isParentBlockLoading": true,
+  },
+  "type": "@@MT/TICKETS/SET_PARENT_BLOCK_LOADING",
+}
+`;
+
+exports[` 3`] = `
+Object {
+  "payload": Object {
+    "isParentBlockLoading": false,
+  },
+  "type": "@@MT/TICKETS/SET_PARENT_BLOCK_LOADING",
+}
+`;
+
 exports[`Gutenberg actions Active block selected Active block 1`] = `
 Object {
   "payload": Object {
