@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `
+Object {
+  "payload": Object {
+    "attributes": Object {
+      "header": 99,
+      "sharedCapacity": 19,
+    },
+    "clientId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/SET_INITIAL_STATE",
+}
+`;
+
 exports[`Gutenberg actions Active block selected Active block 1`] = `
 Object {
   "payload": Object {
