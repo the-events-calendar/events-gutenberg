@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { InnerBlocks } from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -23,7 +24,8 @@ export default {
 		html: false,
 	},
 
-	attributes: {},
+	attributes: {
+	},
 	edit: Ticket,
-	save: () => null,
+	save: () => <div><InnerBlocks.Content /></div>,
 };
