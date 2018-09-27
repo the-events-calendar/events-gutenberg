@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import { takeEvery, put, select, call } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
 
 /**
@@ -42,6 +42,9 @@ describe( 'Sharing Block sagas', () => {
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_TICKET_END_TIME, sagas.setDatePristine ),
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_INITIAL_STATE, sagas.setInitialState ),
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
@@ -114,9 +117,53 @@ describe( 'Sharing Block sagas', () => {
 					.toEqual( put( actions.setActiveChildBlockId( 'modern-tribe' ) ) );
 				expect( gen.next().done ).toEqual( true );
 			} );
+		} );
 
-			test( 'when editing and active block is different than new block', () => {
+		describe( 'setInitialState', () => {
+			let props;
+			beforeEach( () => {
+				props = {
+					attributes: {
+						header: '0',
+						sharedCapacity: '0',
+					},
+					get( value, defaultValue ) {
+						return props.attributes[ value ] ? props.attributes[ value ] : defaultValue;
+					},
+				};
+			} );
+
+			test( 'default values', () => {
+				const gen = sagas.setInitialState( { payload: props } );
+				expect( gen.next().done ).toBe( true );
+			} );
+
+			test( 'Shared capacity is other than the default', () => {
+				props.attributes.sharedCapacity = '33';
+				const gen = sagas.setInitialState( { payload: props } );
+				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( '33' ) ) );
+				expect( gen.next().done ).toBe( true );
+			} );
+
+			test( 'Shared capacity and header are valid values', () => {
+				props.attributes.sharedCapacity = '20';
+				props.attributes.header = '509';
+				const gen = sagas.setInitialState( { payload: props } );
+				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( '20' ) ) );
+				expect( gen.next().value ).toEqual( call( sagas.getMedia, 509 ) );
+				expect( gen.next().done ).toBe( true );
 			} );
 		} );
 	} );
 } );
+
+/*
+
+const header = parseInt( get( 'header', DEFAULT_UI_STATE.header ), 10 ) || 0;
+
+const sharedCapacity = get( 'sharedCapacity' );
+
+if ( header > 0 ) {
+	yield call( getMedia, header );
+}
+*/
