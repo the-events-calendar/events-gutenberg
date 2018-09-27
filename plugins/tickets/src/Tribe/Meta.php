@@ -63,7 +63,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 		register_meta(
 			'post',
 			$handler->key_show_description,
-			$this->boolean()
+			$this->text()
 		);
 
 		// Global Stock
