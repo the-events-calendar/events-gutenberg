@@ -38,18 +38,16 @@ export const FORMATS = {
 
 export const TODAY = new Date();
 
-export const timezonesAsSelectData = () => {
-	return timezones().map( ( tzone ) => ( {
-		value: tzone.key,
-		label: tzone.text,
-	} ) );
-};
-
 export const timezones = () => {
 	return timezoneUtil.getItems()
 		.map( ( group ) => group.options || [] )
 		.reduce( ( prev, current ) => [ ...prev, ...current ], [] );
 };
+
+export const timezonesAsSelectData = timezones().map( ( tzone ) => ( {
+	value: tzone.key,
+	label: tzone.text,
+} ) );
 
 export const toNaturalLanguage = ( date = null, format = { date: 'MMM D YYYY', time: 'h:mm a' } ) => {
 	const parsed = {

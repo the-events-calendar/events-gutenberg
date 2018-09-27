@@ -32,6 +32,12 @@ class Tribe__Gutenberg__Tickets__Meta {
 
 		register_meta(
 			'post',
+			$handler->key_image_header,
+			$this->text()
+		);
+
+		register_meta(
+			'post',
 			$handler->key_provider_field,
 			$this->text()
 		);
