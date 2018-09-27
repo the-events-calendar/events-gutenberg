@@ -36,7 +36,7 @@ export default {
 			type: 'string',
 			source: 'meta',
 			meta: '_tribe_ticket_header',
-		}
+		},
 	},
 
 	edit: Tickets,
@@ -44,5 +44,5 @@ export default {
 		<div>
 			<InnerBlocks.Content />
 		</div>
-	);
+	),
 };
