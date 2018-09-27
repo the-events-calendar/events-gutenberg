@@ -60,7 +60,9 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
-		// @todo: We'll need to get the post id from ET later, so support it as standalone
+		/**
+		 * @todo: We'll need to get the post id from ET later, so support it as standalone
+		 */
 		$post_id            = tribe( 'gutenberg.events.template' )->get( 'post_id' );
 		$args['attributes'] = $this->attributes( $attributes );
 		$args['tickets']    = $this->get_tickets( $post_id );
