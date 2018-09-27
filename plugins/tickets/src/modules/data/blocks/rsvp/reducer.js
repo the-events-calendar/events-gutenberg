@@ -13,6 +13,7 @@ import { types } from '@moderntribe/tickets/data/blocks/rsvp';
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
 export const DEFAULT_STATE = {
+	id: 0,
 	title: '',
 	description: '',
 	capacity: '',
@@ -48,6 +49,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			};
 		case types.DELETE_RSVP:
 			return DEFAULT_STATE;
+		case types.SET_RSVP_ID:
+			return {
+				...state,
+				id: action.payload.id,
+			};
 		case types.SET_RSVP_TITLE:
 			return {
 				...state,

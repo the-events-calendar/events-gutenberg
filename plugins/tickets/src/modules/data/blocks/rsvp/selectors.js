@@ -5,6 +5,11 @@ import { createSelector } from 'reselect';
 
 export const getRSVPBlock = ( state ) => state.tickets.blocks.rsvp;
 
+export const getRSVPId = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.id,
+);
+
 export const getRSVPTitle = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.title,

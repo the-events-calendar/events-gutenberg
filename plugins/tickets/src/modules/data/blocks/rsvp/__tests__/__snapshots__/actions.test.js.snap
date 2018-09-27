@@ -95,6 +95,15 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP id 1`] = `
+Object {
+  "payload": Object {
+    "id": 42,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_ID",
+}
+`;
+
 exports[`RSVP block actions set RSVP not going responses 1`] = `
 Object {
   "payload": Object {

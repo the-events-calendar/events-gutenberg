@@ -18,6 +18,10 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.createRSVP() ) ).toMatchSnapshot();
 	} );
 
+	it( 'should set the id', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPId( 42  ) ) ).toMatchSnapshot();
+	} );
+
 	it( 'should set the title', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPTitle( 'new title' ) ) ).toMatchSnapshot();
 	} );

@@ -17,6 +17,10 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPBlock( state ) ).toEqual( DEFAULT_STATE );
 	} );
 
+	it( 'should return the id', () => {
+		expect( selectors.getRSVPId( state ) ).toBe( DEFAULT_STATE.id );
+	} );
+
 	it( 'should return the title', () => {
 		expect( selectors.getRSVPTitle( state ) ).toBe( DEFAULT_STATE.title );
 	} );

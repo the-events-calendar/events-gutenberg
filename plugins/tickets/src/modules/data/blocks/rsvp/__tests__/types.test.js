@@ -13,6 +13,10 @@ describe( 'RSVP block types', () => {
 		expect( types.DELETE_RSVP ).toBe( `${ PREFIX_TICKETS_STORE }/DELETE_RSVP` );
 	} );
 
+	test( 'set RSVP id', () => {
+		expect( types.SET_RSVP_ID ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_ID` );
+	} );
+
 	test( 'set RSVP title', () => {
 		expect( types.SET_RSVP_TITLE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TITLE` );
 	} );

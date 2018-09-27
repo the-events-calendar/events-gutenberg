@@ -11,6 +11,13 @@ export const deleteRSVP = () => ( {
 	type: types.DELETE_RSVP,
 } );
 
+export const setRSVPId = ( id ) => ( {
+	type: types.SET_RSVP_ID,
+	payload: {
+		id,
+	},
+} );
+
 export const setRSVPTitle = ( title ) => ( {
 	type: types.SET_RSVP_TITLE,
 	payload: {
