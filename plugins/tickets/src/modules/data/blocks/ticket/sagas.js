@@ -54,12 +54,12 @@ export function* createNewTicket( action ) {
 
 export function* updateActiveEditBlock( action ) {
 	const { blockId, isEditing } = action.payload;
-	const currentId = yield select( selectors.getActiveBlockId );
 
 	if ( ! isEditing ) {
 		return;
 	}
 
+	const currentId = yield select( selectors.getActiveBlockId );
 	if ( currentId && currentId !== blockId ) {
 		yield put( actions.setTicketIsEditing( currentId, false ) );
 	}
