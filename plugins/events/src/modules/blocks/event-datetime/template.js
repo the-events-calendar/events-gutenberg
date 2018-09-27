@@ -500,7 +500,7 @@ class EventDateTime extends Component {
 					label={ __( 'Time Zone', 'events-gutenberg' ) }
 					value={ timeZone }
 					onChange={ setTimeZone }
-					options={ timezonesAsSelectData() }
+					options={ timezonesAsSelectData }
 					className="tribe-editor__date-time__time-zone-setting"
 				/>
 				<ToggleControl

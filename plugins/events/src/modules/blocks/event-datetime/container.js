@@ -21,6 +21,7 @@ import {
 	actions as priceActions,
 } from '@moderntribe/events/data/blocks/price';
 import { moment, dom } from '@moderntribe/common/utils';
+import { timezonesAsSelectData } from '@moderntribe/events/editor/utils/date';
 import { withStore, withSaveData } from '@moderntribe/common/hoc';
 import EventDateTime from './template';
 
@@ -192,6 +193,15 @@ const mapDispatchToProps = ( dispatch ) => ( {
 	},
 	onTimeZoneVisibilityChange: onTimeZoneVisibilityChange( dispatch ),
 	onDateTimeLabelClick: onDateTimeLabelClick( dispatch ),
+	setTimeZone: ( value ) => {
+		const filteredTimezones = timezonesAsSelectData.filter( ( timezone ) => (
+			timezone.value === value
+		) );
+		if ( filteredTimezones.length ) {
+			dispatch( dateTimeActions.setTimeZoneLabel( filteredTimezones[0].label ) );
+		}
+		dispatch( dateTimeActions.setTimeZone( value ) );
+	},
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
