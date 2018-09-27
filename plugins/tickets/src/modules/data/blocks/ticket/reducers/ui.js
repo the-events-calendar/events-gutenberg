@@ -10,6 +10,7 @@ export const DEFAULT_STATE = {
 	isSettingsOpen: false,
 	isParentBlockSelected: false,
 	isChildBlockSelected: false,
+	isParentBlockLoading: false,
 	activeChildBlockId: '',
 	tmp: {},
 };
@@ -45,11 +46,16 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				activeChildBlockId: action.payload.activeChildBlockId,
-			}
+			};
 		case types.SET_TICKET_TMP_TICKET_SHARED_CAPACITY:
 			return {
 				...state,
 				tmp: tmp( state.tmp, action ),
+			};
+		case types.SET_PARENT_BLOCK_LOADING:
+			return {
+				...state,
+				isParentBlockLoading: action.payload.isParentBlockLoading,
 			};
 		default:
 			return state;

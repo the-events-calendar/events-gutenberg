@@ -93,6 +93,58 @@ Object {
 }
 `;
 
+exports[`UI reducer Set loading on the parent block 1`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockLoading": true,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Set loading on the parent block 2`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockLoading": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Set the parent block reducer 1`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockLoading": true,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
+exports[`UI reducer Set the parent block reducer 2`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockLoading": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
 exports[`UI reducer Settings Open 1`] = `
 Object {
   "activeChildBlockId": "",
