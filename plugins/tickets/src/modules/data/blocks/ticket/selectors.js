@@ -40,6 +40,11 @@ export const hasActiveBlockId = createSelector(
 	( blockId ) => blockId !== '',
 );
 
+export const isParentBlockLoading = createSelector(
+	[ getTicketUI ],
+	( ui ) => ui.isParentBlockLoading,
+);
+
 // Temporarily UI selectors
 
 export const getTmpUI = createSelector(
@@ -56,7 +61,7 @@ export const getTmpSharedCapacity = createSelector(
 
 export const getHeader = createSelector( [ getTicketUI ], ( ui ) => ui.header );
 export const getImageSize = ( state, props ) => props.size;
-export const getImageID = createSelector(
+export const getImageId = createSelector(
 	[ getHeader ],
 	( header ) => header === null ? 0 : header.id,
 );
@@ -72,7 +77,7 @@ export const getHeaderSize = createSelector(
 		if ( header === null || ! header.sizes || ! header.sizes[ size ] ) {
 			return '';
 		}
-		return header.sizes[ size ].url;
+		return header.sizes[ size ].url || header.sizes[ size ].source_url;
 	},
 );
 
