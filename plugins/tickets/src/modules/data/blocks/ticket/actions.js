@@ -187,3 +187,15 @@ export const setTicketDateIsPristine = ( blockId, dateIsPristine ) => ( {
 		dateIsPristine,
 	},
 } );
+
+export const setInitialState = ( props ) => ( {
+	type: types.SET_INITIAL_STATE,
+	payload: props,
+} );
+
+export const setParentBlockIsLoading = ( isParentBlockLoading ) => ( {
+	type: types.SET_PARENT_BLOCK_LOADING,
+	payload: {
+		isParentBlockLoading,
+	},
+} );
