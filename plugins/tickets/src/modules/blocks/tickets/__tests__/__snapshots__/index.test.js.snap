@@ -2,7 +2,18 @@
 
 exports[`Ticket block declaration register the ticket block 1`] = `
 Object {
-  "attributes": Object {},
+  "attributes": Object {
+    "header": Object {
+      "meta": "_tribe_ticket_header",
+      "source": "meta",
+      "type": "string",
+    },
+    "sharedCapacity": Object {
+      "meta": "_tribe_ticket_capacity",
+      "source": "meta",
+      "type": "string",
+    },
+  },
   "category": "tribe-tickets",
   "description": "Basic ticket functionality",
   "edit": [Function],
