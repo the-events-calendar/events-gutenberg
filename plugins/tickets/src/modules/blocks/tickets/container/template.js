@@ -26,7 +26,8 @@ const TicketContainer = ( { isSelected, isEditing, total, sold, tickets } ) => (
 		{ tickets.length === 0 && (
 			<InactiveBlock
 				layout={ LAYOUT.ticket }
-				title={ __( 'No Active Tickets', 'events-gutenberg' ) }
+				title={ __( 'There are no tickets yet', 'events-gutenberg' ) }
+				description={ __( 'Edit this block to create your first ticket.', 'events-gutenberg' ) }
 				icon={ <StatusIcon disabled={ true } /> }
 			/>
 		) }
