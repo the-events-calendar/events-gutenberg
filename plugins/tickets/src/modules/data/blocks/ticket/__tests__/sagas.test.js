@@ -156,14 +156,3 @@ describe( 'Sharing Block sagas', () => {
 		} );
 	} );
 } );
-
-/*
-
-const header = parseInt( get( 'header', DEFAULT_UI_STATE.header ), 10 ) || 0;
-
-const sharedCapacity = get( 'sharedCapacity' );
-
-if ( header > 0 ) {
-	yield call( getMedia, header );
-}
-*/
