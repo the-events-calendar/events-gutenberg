@@ -23,6 +23,7 @@ $context = array(
 	data-ticket-id="<?php echo esc_attr( $ticket->ID ); ?>"
 	data-available="<?php echo ( 0 === $ticket->available() ) ? 'false' : 'true'; ?>"
 >
+	<input type="hidden" name="product_id[]" value="<?php echo esc_attr( $ticket->ID ); ?>" />
 	<?php $this->template( 'blocks/tickets/icon', $context ); ?>
 	<?php $this->template( 'blocks/tickets/content', $context ); ?>
 	<?php $this->template( 'blocks/tickets/extra', $context ); ?>

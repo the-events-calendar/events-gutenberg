@@ -18,6 +18,7 @@ tribe.tickets.block = {
 
 	obj.selector = {
 		container                 : '.tribe-block__tickets',
+		submit                    : '.tribe-block__tickets__buy',
 		item                      : '.tribe-block__tickets__item',
 		itemQuantity              : '.tribe-block__tickets__item__quantity',
 		itemQuantityInput         : '.tribe-ticket-quantity',
@@ -54,6 +55,160 @@ tribe.tickets.block = {
 			input.trigger( 'change' );
 
 	} );
+
+	/**
+	 * Handle the TPP form
+	 *
+	 * @since TBD
+	 *
+	 * @return void
+	 */
+	$( obj.selector.item )
+		.on( 'change',
+		'.tribe-ticket-quantity',
+		function( e ) {
+			var $this      = $( this );
+			var $ticket    = $this.closest( obj.selector.item );
+			var $ticket_id = $ticket.data( 'ticket-id' );
+
+			var $form = $this.closest( obj.selector.container );
+
+			// Only disable / enable if is a Tribe Commerce Paypal form.
+			if ( 'Tribe__Tickets__Commerce__PayPal__Main' !== $form.data( 'provider' ) ) {
+				return;
+			}
+
+			var new_quantity = parseInt( $this.val(), 10 );
+			new_quantity     = isNaN( new_quantity ) ? 0 : new_quantity;
+
+			if ( new_quantity > 0 ) {
+				$form
+					.find( '[data-ticket-id]:not([data-ticket-id="' + $ticket_id + '"])' )
+					.closest( 'div' )
+					.find( 'input, button' )
+					.attr( 'disabled', 'disabled' )
+					.closest( 'div' )
+					.addClass( 'tribe-tickets-purchase-disabled' );
+			} else {
+				$form
+					.find( 'input, button' )
+					.removeAttr( 'disabled' )
+					.closest( 'div' )
+					.removeClass( 'tribe-tickets-purchase-disabled' );
+			}
+
+	} );
+
+	/**
+	 * Handle the tickets form submission
+	 *
+	 * @since TBD
+	 *
+	 * @return void
+	 */
+	$( obj.selector.container )
+		.on( 'click',
+		obj.selector.submit,
+		function( e ) {
+			e.preventDefault();
+
+			var provider = obj.getProvider();
+			var submit   = obj.handleSubmit( provider );
+
+			if ( submit ) {
+				$( obj.selector.container ).submit();
+			}
+	} );
+
+	/**
+	 * Get the Tickets Provider
+	 *
+	 * @since TBD
+	 *
+	 * @return void
+	 */
+	obj.getProvider = function() {
+		return $( obj.selector.container ).data( 'provider' );
+	}
+
+	/**
+	 * Trigger form submission handlers for
+	 * the different providers
+	 *
+	 * @since TBD
+	 *
+	 * @return void
+	 */
+	obj.handleSubmit = function( provider ) {
+
+		switch ( provider ) {
+			case 'Tribe__Tickets__Commerce__PayPal__Main' :
+				return obj.handleSubmitTpp();
+				break;
+			case 'Tribe__Tickets_Plus__Commerce__WooCommerce__Main' :
+				return obj.handleSubmitWoo();
+				break;
+			case 'Tribe__Tickets_Plus__Commerce__EDD__Main' :
+				return obj.handleSubmitEdd();
+				break;
+			default:
+				return false;
+		}
+	}
+
+	/**
+	 * Handle Woo Tickets submit
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	obj.handleSubmitWoo = function() {
+
+		// Set the flag to process WooTickets
+		$( '<input>' ).attr( {
+			type  : 'hidden',
+			id    : 'wootickets_process',
+			name  : 'wootickets_process',
+			value : 1
+		} ).appendTo( obj.selector.container );
+
+		return true;
+	}
+
+	/**
+	 * Handle TPP Tickets submit
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	obj.handleSubmitTpp = function() {
+
+		// Reset form action as needed
+		$( obj.selector.container ).attr( 'action', '' );
+
+		// Add required post var
+		$( '<input>' ).attr( {
+			type  : 'hidden',
+			id    : 'add',
+			name  : 'add',
+			value : 1
+		} ).appendTo( obj.selector.container );
+
+		return true;
+	}
+
+	/**
+	 * Handle Edd tickets submit
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	obj.handleSubmitEdd = function() {
+		return true;
+	}
 
 	/**
 	 * Get the tickets IDs
