@@ -26,6 +26,53 @@ const getIsConfirmDisabled = ( state ) => (
 		|| selectors.getRSVPLoading( state )
 );
 
+const onCancelClick = ( state, dispatch ) => () => {
+	dispatch( actions.setRSVPTempDetails( {
+		tempTitle: selectors.getRSVPTitle( state ),
+		tempDescription: selectors.getRSVPDescription( state ),
+		tempCapacity: selectors.getRSVPCapacity( state ),
+		tempNotGoingResponses: selectors.getRSVPNotGoingResponses( state ),
+		tempStartDate: selectors.getRSVPStartDate( state ),
+		tempStartDateObj: selectors.getRSVPStartDateObj( state ),
+		tempEndDate: selectors.getRSVPEndDate( state ),
+		tempEndDateObj: selectors.getRSVPEndDateObj( state ),
+		tempStartTime: selectors.getRSVPStartTime( state ),
+		tempEndTime: selectors.getRSVPEndTime( state ),
+	} ) );
+	dispatch( actions.setRSVPHasChanges( false ) );
+};
+
+const onConfirmClick = ( state, dispatch, ownProps ) => () => {
+	const payload = {
+		title: selectors.getRSVPTempTitle( state ),
+		description: selectors.getRSVPTempDescription( state ),
+		capacity: selectors.getRSVPTempCapacity( state ),
+		notGoingResponses: selectors.getRSVPTempNotGoingResponses( state ),
+		startDate: selectors.getRSVPTempStartDate( state ),
+		startDateObj: selectors.getRSVPTempStartDateObj( state ),
+		endDate: selectors.getRSVPTempEndDate( state ),
+		endDateObj: selectors.getRSVPTempEndDateObj( state ),
+		startTime: selectors.getRSVPTempStartTime( state ),
+		endTime: selectors.getRSVPTempEndTime( state ),
+	};
+
+	dispatch( actions.setRSVPDetails( payload ) );
+	dispatch( actions.setRSVPHasChanges( false ) );
+
+	if ( ! selectors.getRSVPCreated( state ) ) {
+		dispatch( actions.createRSVP() );
+		dispatch( thunks.createRSVP( {
+			...payload,
+			postId: ownProps.postId,
+		} ) );
+	} else {
+		dispatch( thunks.updateRSVP( {
+			...payload,
+			id: selectors.getRSVPId( state ),
+		} ) );
+	}
+};
+
 const mapSelectToProps = ( select ) => ( {
 	postId: select( 'core/editor' ).getCurrentPostId(),
 } );
@@ -38,61 +85,17 @@ const mapStateToProps = ( state ) => ( {
 	state,
 } );
 
-const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
-	...ownProps,
-	created: stateProps.created,
-	isCancelDisabled: stateProps.isCancelDisabled,
-	isConfirmDisabled: stateProps.isConfirmDisabled,
-	showCancel: stateProps.showCancel,
-	onCancelClick: () => {
-		const { dispatch } = dispatchProps;
-		dispatch( actions.setRSVPTempDetails( {
-			tempTitle: selectors.getRSVPTitle( stateProps.state ),
-			tempDescription: selectors.getRSVPDescription( stateProps.state ),
-			tempCapacity: selectors.getRSVPCapacity( stateProps.state ),
-			tempNotGoingResponses: selectors.getRSVPNotGoingResponses( stateProps.state ),
-			tempStartDate: selectors.getRSVPStartDate( stateProps.state ),
-			tempStartDateObj: selectors.getRSVPStartDateObj( stateProps.state ),
-			tempEndDate: selectors.getRSVPEndDate( stateProps.state ),
-			tempEndDateObj: selectors.getRSVPEndDateObj( stateProps.state ),
-			tempStartTime: selectors.getRSVPStartTime( stateProps.state ),
-			tempEndTime: selectors.getRSVPEndTime( stateProps.state ),
-		} ) );
-		dispatch( actions.setRSVPHasChanges( false ) );
-	},
-	onConfirmClick: () => {
-		const { dispatch } = dispatchProps;
-		const { postId } = ownProps;
-		const payload = {
-			title: selectors.getRSVPTempTitle( stateProps.state ),
-			description: selectors.getRSVPTempDescription( stateProps.state ),
-			capacity: selectors.getRSVPTempCapacity( stateProps.state ),
-			notGoingResponses: selectors.getRSVPTempNotGoingResponses( stateProps.state ),
-			startDate: selectors.getRSVPTempStartDate( stateProps.state ),
-			startDateObj: selectors.getRSVPTempStartDateObj( stateProps.state ),
-			endDate: selectors.getRSVPTempEndDate( stateProps.state ),
-			endDateObj: selectors.getRSVPTempEndDateObj( stateProps.state ),
-			startTime: selectors.getRSVPTempStartTime( stateProps.state ),
-			endTime: selectors.getRSVPTempEndTime( stateProps.state ),
-		};
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
+	const { state, ...restStateProps } = stateProps;
+	const { dispatch } = dispatchProps;
 
-		dispatch( actions.setRSVPDetails( payload ) );
-		dispatch( actions.setRSVPHasChanges( false ) );
-
-		if ( ! stateProps.created ) {
-			dispatch( actions.createRSVP() );
-			dispatch( thunks.createRSVP( {
-				...payload,
-				postId,
-			} ) );
-		} else {
-			dispatch( thunks.updateRSVP( {
-				...payload,
-				id: selectors.getRSVPId( stateProps.state ),
-			} ) );
-		}
-	},
-} );
+	return {
+		...ownProps,
+		...restStateProps,
+		onCancelClick: onCancelClick( state, dispatch ),
+		onConfirmClick: onConfirmClick( state, dispatch, ownProps ),
+	};
+};
 
 export default compose(
 	withStore(),

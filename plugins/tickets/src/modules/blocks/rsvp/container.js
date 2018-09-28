@@ -9,7 +9,11 @@ import moment from 'moment';
  * Internal dependencies
  */
 import RSVP from './template';
-import { actions, selectors } from '@moderntribe/tickets/data/blocks/rsvp';
+import {
+	actions,
+	selectors,
+	thunks
+} from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore, withSaveData } from '@moderntribe/common/hoc';
 
 const getDateTimeMoment = ( date, time ) => {
@@ -38,18 +42,37 @@ const getIsInactive = ( state ) => {
 
 const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),
+	rsvpId: selectors.getRSVPId( state ),
 	isInactive: getIsInactive( state ),
 	isLoading: selectors.getRSVPLoading( state ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
+	dispatch,
 	setInitialState: ( props ) => {
 		// @todo: set initial state here
 	},
 } );
 
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
+	const { rsvpId, ...restStateProps } = stateProps;
+	const { dispatch, ...restDispatchProps } = dispatchProps;
+
+	return {
+		...ownProps,
+		...restStateProps,
+		...restDispatchProps,
+		deleteRSVP: () => {
+			dispatch( actions.deleteRSVP() );
+			if ( stateProps.created && rsvpId ) {
+				dispatch( thunks.deleteRSVP( rsvpId ) );
+			}
+		},
+	};
+};
+
 export default compose(
 	withStore(),
-	connect( mapStateToProps, mapDispatchToProps ),
+	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
 	withSaveData(),
 )( RSVP );

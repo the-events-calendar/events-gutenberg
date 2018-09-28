@@ -16,6 +16,7 @@ import * as utils from '@moderntribe/tickets/data/utils';
  * @todo: until we can abstract out wpRequest() better, these should remain as a thunk
  */
 const METHODS = {
+	DELETE: 'DELETE',
 	POST: 'POST',
 	PUT: 'PUT',
 };
@@ -78,7 +79,7 @@ const createOrUpdateRSVP = ( method ) => ( payload ) => ( dispatch ) => {
 				}
 				dispatch( actions.setRSVPLoading( false ) );
 			},
-			error: ( err ) => {
+			error: () => {
 				dispatch( actions.setRSVPLoading( false ) );
 			},
 		},
@@ -90,3 +91,15 @@ const createOrUpdateRSVP = ( method ) => ( payload ) => ( dispatch ) => {
 export const createRSVP = createOrUpdateRSVP( METHODS.POST );
 
 export const updateRSVP = createOrUpdateRSVP( METHODS.PUT );
+
+export const deleteRSVP = ( id ) => ( dispatch ) => {
+	const path = `${ utils.TICKET_POST_TYPE }/${ id }`;
+	const options = {
+		path,
+		params: {
+			method: METHODS.DELETE,
+		},
+	};
+
+	dispatch( requestActions.wpRequest( options ) );
+};
