@@ -122,6 +122,10 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPHasChanges( true ) ) ).toMatchSnapshot();
 	} );
 
+	it( 'should set the disabled', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPDisabled( true ) ) ).toMatchSnapshot();
+	} );
+
 	it( 'should set the header image state', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPHeaderImage( {
 			id: 42,

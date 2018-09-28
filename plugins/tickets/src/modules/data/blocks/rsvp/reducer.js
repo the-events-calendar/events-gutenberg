@@ -37,6 +37,7 @@ export const DEFAULT_STATE = {
 	created: false,
 	settingsOpen: false,
 	hasChanges: false,
+	disabled: false,
 	headerImage: HEADER_IMAGE_DEFAULT_STATE,
 };
 
@@ -163,6 +164,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				hasChanges: action.payload.hasChanges,
+			};
+		case types.SET_RSVP_DISABLED:
+			return {
+				...state,
+				disabled: action.payload.disabled,
 			};
 		case types.SET_RSVP_HEADER_IMAGE:
 			return {

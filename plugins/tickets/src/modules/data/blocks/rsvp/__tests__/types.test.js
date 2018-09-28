@@ -65,6 +65,10 @@ describe( 'RSVP block types', () => {
 		expect( types.SET_RSVP_HAS_CHANGES ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HAS_CHANGES` );
 	} );
 
+	test( 'set RSVP disabled', () => {
+		expect( types.SET_RSVP_DISABLED ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_DISABLED` );
+	} );
+
 	test( 'set RSVP header image', () => {
 		expect( types.SET_RSVP_HEADER_IMAGE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER_IMAGE` );
 	} );

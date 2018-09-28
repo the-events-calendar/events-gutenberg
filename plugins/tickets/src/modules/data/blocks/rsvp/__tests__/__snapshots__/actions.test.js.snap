@@ -48,6 +48,15 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP disabled 1`] = `
+Object {
+  "payload": Object {
+    "disabled": true,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_DISABLED",
+}
+`;
+
 exports[`RSVP block actions set RSVP end date 1`] = `
 Object {
   "payload": Object {

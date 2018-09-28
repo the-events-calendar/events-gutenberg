@@ -102,6 +102,13 @@ export const setRSVPHasChanges = ( hasChanges ) => ( {
 	},
 } );
 
+export const setRSVPDisabled = ( disabled ) => ( {
+	type: types.SET_RSVP_DISABLED,
+	payload: {
+		disabled,
+	},
+} );
+
 export const setRSVPHeaderImage = ( payload ) => ( {
 	type: types.SET_RSVP_HEADER_IMAGE,
 	payload,
