@@ -5,11 +5,20 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 /**
+ * WordPress dependencies
+ */
+import { withSelect } from '@wordpress/data';
+
+/**
  * Internal dependencies
  */
 import RSVPActionDashboard from './template';
-import { actions, selectors } from '@moderntribe/tickets/data/blocks/rsvp';
+import { actions, selectors, thunks } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
+
+const mapSelectToProps = ( select ) => ( {
+	postId: select( 'core/editor' ).getCurrentPostId(),
+} );
 
 const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),
@@ -43,7 +52,8 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	},
 	onConfirmClick: () => {
 		const { dispatch } = dispatchProps;
-		dispatch( actions.setRSVPDetails( {
+		const { postId } = ownProps;
+		const payload = {
 			title: selectors.getRSVPTempTitle( stateProps.state ),
 			description: selectors.getRSVPTempDescription( stateProps.state ),
 			capacity: selectors.getRSVPTempCapacity( stateProps.state ),
@@ -54,13 +64,28 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 			endDateObj: selectors.getRSVPTempEndDateObj( stateProps.state ),
 			startTime: selectors.getRSVPTempStartTime( stateProps.state ),
 			endTime: selectors.getRSVPTempEndTime( stateProps.state ),
-		} ) );
+		};
+
+		dispatch( actions.setRSVPDetails( payload ) );
 		dispatch( actions.setRSVPHasChanges( false ) );
-		! stateProps.created && dispatch( actions.createRSVP() );
+
+		if ( ! stateProps.created ) {
+			dispatch( actions.createRSVP() );
+			dispatch( thunks.createRSVP( {
+				...payload,
+				postId,
+			} ) );
+		} else {
+			dispatch( thunks.updateRSVP( {
+				...payload,
+				id: selectors.getRSVPId( stateProps.state ),
+			} ) );
+		}
 	},
 } );
 
 export default compose(
 	withStore(),
+	withSelect( mapSelectToProps ),
 	connect( mapStateToProps, null, mergeProps ),
 )( RSVPActionDashboard );
