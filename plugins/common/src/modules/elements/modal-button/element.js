@@ -18,15 +18,15 @@ import Button from '@moderntribe/common/elements/button/element';
 class ModalButton extends PureComponent {
 	static propTypes = {
 		className: PropTypes.string,
-		closeLabel: PropTypes.string,
 		disabled: PropTypes.bool,
 		label: PropTypes.string,
+		modalContent: PropTypes.node,
 		modalTitle: PropTypes.string,
 		onClick: PropTypes.func,
 		onClose: PropTypes.func,
 		onCloseClick: PropTypes.func,
 		onOpen: PropTypes.func,
-	}
+	};
 
 	constructor( props ) {
 		super( props );
@@ -56,18 +56,13 @@ class ModalButton extends PureComponent {
 	onClose = () => this.props.onClose && this.props.onClose();
 
 	renderModal = () => {
-		const { closeLabel, modalTitle } = this.props;
+		const { modalContent, modalTitle } = this.props;
 		return ( this.state.isOpen && (
 			<Modal
 				title={ modalTitle }
 				onRequestClose={ this.onRequestClose }
 			>
-				<Button
-					className="tribe-editor__modal-button__close-button"
-					onClick={ this.onCloseClick }
-				>
-					{ closeLabel }
-				</Button>
+				{ modalContent }
 			</Modal>
 		) );
 	};

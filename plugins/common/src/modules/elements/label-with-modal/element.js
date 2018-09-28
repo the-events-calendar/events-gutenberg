@@ -15,11 +15,11 @@ import './style.pcss';
 
 const LabelWithModal = ( {
 	className,
-	closeButtonLabel,
 	label,
 	modalButtonDisabled,
 	modalButtonLabel,
 	modalTitle,
+	modalContent,
 	onClick,
 	onClose,
 	onCloseClick,
@@ -31,9 +31,9 @@ const LabelWithModal = ( {
 	>
 		<ModalButton
 			className="tribe-editor__label-with-modal__modal-button"
-			closeLabel={ closeButtonLabel }
 			disabled={ modalButtonDisabled }
 			label={ modalButtonLabel }
+			modalContent={ modalContent }
 			modalTitle={ modalTitle }
 			onClick={ onClick }
 			onClose={ onClose }
@@ -52,10 +52,10 @@ LabelWithModal.defaultProps = {
 
 LabelWithModal.propTypes = {
 	className: PropTypes.string,
-	closeButtonLabel: PropTypes.string,
 	label: PropTypes.node,
 	modalButtonDisabled: PropTypes.bool,
 	modalButtonLabel: PropTypes.string,
+	modalContent: PropTypes.node,
 	modalTitle: PropTypes.string,
 	onClick: PropTypes.func,
 	onClose: PropTypes.func,
