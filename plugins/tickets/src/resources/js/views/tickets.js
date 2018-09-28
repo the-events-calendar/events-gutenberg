@@ -40,9 +40,8 @@ tribe.tickets.block = {
 	 *
 	 * @return void
 	 */
-	$( obj.selector.item )
-		.on( 'click',
-		'.tribe-block__tickets__item__quantity__remove, .tribe-block__tickets__item__quantity__add' ,
+	$( obj.selector.item ).on( 'click',
+		'.tribe-block__tickets__item__quantity__remove, .tribe-block__tickets__item__quantity__add',
 		function( e ) {
 			e.preventDefault();
 			var input  = $( this ).parent().find( 'input[type="number"]' );
@@ -63,8 +62,7 @@ tribe.tickets.block = {
 	 *
 	 * @return void
 	 */
-	$( obj.selector.item )
-		.on( 'change',
+	$( obj.selector.item ).on( 'change',
 		'.tribe-ticket-quantity',
 		function( e ) {
 			var $this      = $( this );
@@ -106,8 +104,7 @@ tribe.tickets.block = {
 	 *
 	 * @return void
 	 */
-	$( obj.selector.container )
-		.on( 'click',
+	$( obj.selector.container ).on( 'click',
 		obj.selector.submit,
 		function( e ) {
 			e.preventDefault();
