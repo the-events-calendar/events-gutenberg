@@ -54,13 +54,9 @@ const mapStateToProps = ( state ) => ( {
 	isLoading: selectors.getRSVPLoading( state ),
 } );
 
-/* @todo: add set initial state */
-
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	dispatch,
-	setInitialState: () => {
-		dispatch( thunks.getRSVP( ownProps.postId ) )
-	},
+	setInitialState: () => dispatch( thunks.getRSVP( ownProps.postId ) ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
