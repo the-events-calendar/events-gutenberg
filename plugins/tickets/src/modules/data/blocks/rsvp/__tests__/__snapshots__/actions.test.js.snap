@@ -48,15 +48,6 @@ Object {
 }
 `;
 
-exports[`RSVP block actions set RSVP disabled 1`] = `
-Object {
-  "payload": Object {
-    "disabled": true,
-  },
-  "type": "@@MT/TICKETS/SET_RSVP_DISABLED",
-}
-`;
-
 exports[`RSVP block actions set RSVP end date 1`] = `
 Object {
   "payload": Object {
@@ -110,6 +101,15 @@ Object {
     "id": 42,
   },
   "type": "@@MT/TICKETS/SET_RSVP_ID",
+}
+`;
+
+exports[`RSVP block actions set RSVP loading 1`] = `
+Object {
+  "payload": Object {
+    "loading": true,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_LOADING",
 }
 `;
 

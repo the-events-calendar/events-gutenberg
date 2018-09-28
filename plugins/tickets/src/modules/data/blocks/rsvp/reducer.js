@@ -37,7 +37,7 @@ export const DEFAULT_STATE = {
 	created: false,
 	settingsOpen: false,
 	hasChanges: false,
-	disabled: false,
+	loading: false,
 	headerImage: HEADER_IMAGE_DEFAULT_STATE,
 };
 
@@ -165,10 +165,10 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				hasChanges: action.payload.hasChanges,
 			};
-		case types.SET_RSVP_DISABLED:
+		case types.SET_RSVP_LOADING:
 			return {
 				...state,
-				disabled: action.payload.disabled,
+				loading: action.payload.loading,
 			};
 		case types.SET_RSVP_HEADER_IMAGE:
 			return {

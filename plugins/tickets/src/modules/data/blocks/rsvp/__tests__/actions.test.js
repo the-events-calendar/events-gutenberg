@@ -104,8 +104,8 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPHasChanges( true ) ).toMatchSnapshot();
 	} );
 
-	test( 'set RSVP disabled', () => {
-		expect( actions.setRSVPDisabled( true ) ).toMatchSnapshot();
+	test( 'set RSVP loading', () => {
+		expect( actions.setRSVPLoading( true ) ).toMatchSnapshot();
 	} );
 
 	test( 'set RSVP header image', () => {

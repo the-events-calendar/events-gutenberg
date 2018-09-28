@@ -125,9 +125,9 @@ export const getRSVPHasChanges = createSelector(
 	( rsvp ) => rsvp.hasChanges,
 );
 
-export const getRSVPDisabled = createSelector(
+export const getRSVPLoading = createSelector(
 	[ getRSVPBlock ],
-	( rsvp ) => rsvp.disabled,
+	( rsvp ) => rsvp.loading,
 );
 
 export const getRSVPHeaderImage = createSelector(
