@@ -41,7 +41,7 @@ const createOrUpdateRSVP = ( method ) => ( payload ) => ( dispatch ) => {
 		toSeconds( endTime, TIME_FORMAT_HH_MM )
 	);
 
-	let path = `${ utils.TICKET_POST_TYPE }`;
+	let path = `${ utils.RSVP_POST_TYPE }`;
 	const body = {
 		title,
 		excerpt: description,
@@ -90,7 +90,7 @@ export const createRSVP = createOrUpdateRSVP( METHODS.POST );
 export const updateRSVP = createOrUpdateRSVP( METHODS.PUT );
 
 export const deleteRSVP = ( id ) => ( dispatch ) => {
-	const path = `${ utils.TICKET_POST_TYPE }/${ id }`;
+	const path = `${ utils.RSVP_POST_TYPE }/${ id }`;
 	const options = {
 		path,
 		params: {
@@ -102,7 +102,7 @@ export const deleteRSVP = ( id ) => ( dispatch ) => {
 };
 
 export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
-	const path = `${ utils.TICKET_POST_TYPE }?per_page=100&page=${ page }`;
+	const path = `${ utils.RSVP_POST_TYPE }?per_page=100&page=${ page }`;
 
 	const options = {
 		path,
