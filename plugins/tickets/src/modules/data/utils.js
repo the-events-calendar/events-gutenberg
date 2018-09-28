@@ -1,6 +1,6 @@
 export const PREFIX_TICKETS_STORE = '@@MT/TICKETS';
 
-export const TICKET_POST_TYPE = 'tribe_rsvp_tickets';
+export const RSVP_POST_TYPE = 'tribe_rsvp_tickets';
 
 /* @todo: these are expected to change based on BE changes */
 export const KEY_RSVP_FOR_EVENT = '_tribe_rsvp_for_event';
