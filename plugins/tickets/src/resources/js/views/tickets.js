@@ -83,13 +83,13 @@ tribe.tickets.block = {
 				$form
 					.find( '[data-ticket-id]:not([data-ticket-id="' + $ticket_id + '"])' )
 					.closest( 'div' )
-					.find( 'input, button' )
+					.find( 'input.tribe-ticket-quantity, button.tribe-block__tickets__item__quantity__add, button.tribe-block__tickets__item__quantity__remove' )
 					.attr( 'disabled', 'disabled' )
 					.closest( 'div' )
 					.addClass( 'tribe-tickets-purchase-disabled' );
 			} else {
 				$form
-					.find( 'input, button' )
+					.find( 'input.tribe-ticket-quantity, button.tribe-block__tickets__item__quantity__add, button.tribe-block__tickets__item__quantity__remove' )
 					.removeAttr( 'disabled' )
 					.closest( 'div' )
 					.removeClass( 'tribe-tickets-purchase-disabled' );
