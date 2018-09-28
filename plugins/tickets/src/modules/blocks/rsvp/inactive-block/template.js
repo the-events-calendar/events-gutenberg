@@ -17,23 +17,18 @@ import { RSVPInactive } from '@moderntribe/tickets/icons';
 
 const inactiveBlockProps = {
 	className: 'tribe-editor__rsvp__inactive-block',
-	title: __( 'No Active RSVP', 'events-gutenberg' ),
 	icon: <RSVPInactive />,
 	layout: LAYOUT.rsvp,
 };
 
 const RSVPInactiveBlock = ( { created } ) => {
+	inactiveBlock.title = created
+		? __( 'There is no RSVP configured', 'events-gutenberg' )
+		: __( 'RSVP is not currently active', 'events-gutenberg' );
+
 	inactiveBlockProps.description = created
-		? __(
-			/* eslint-disable-next-line max-len */
-			'The time is currently outside of the RSVP window. Make adjustments to the start and end date to activate this RSVP.',
-			'events-gutenberg',
-		)
-		: __ (
-			/* eslint-disable-next-line max-len */
-			'The RSVP has not yet been created. Add a title and create the RSVP to activate this RSVP.',
-			'events-gutenberg',
-		);
+		? __( 'Edit this block to create an RSVP form.', 'events-gutenberg' )
+		: __( 'Edit this block to change RSVP settings.', 'events-gutenberg' );
 
 	return <InactiveBlock { ...inactiveBlockProps } />
 };
