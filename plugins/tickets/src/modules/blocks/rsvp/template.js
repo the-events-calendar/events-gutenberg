@@ -21,6 +21,7 @@ import './style.pcss';
 class RSVP extends PureComponent {
 	static propTypes = {
 		created: PropTypes.bool.isRequired,
+		deleteRSVP: PropTypes.func.isRequired,
 		isInactive: PropTypes.bool.isRequired,
 		isLoading: PropTypes.bool.isRequired,
 		isSelected: PropTypes.bool.isRequired,

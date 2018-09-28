@@ -6,6 +6,11 @@ import { compose } from 'redux';
 import moment from 'moment';
 
 /**
+ * WordPress dependencies
+ */
+import { withSelect } from '@wordpress/data';
+
+/**
  * Internal dependencies
  */
 import RSVP from './template';
@@ -38,7 +43,9 @@ const getIsInactive = ( state ) => {
 	return ! ( currentMoment.isAfter( startMoment ) && currentMoment.isBefore( endMoment ) );
 };
 
-/* @todo: add set initial state, add onUnmount */
+const mapSelectToProps = ( select ) => ( {
+	postId: select( 'core/editor' ).getCurrentPostId(),
+} );
 
 const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),
@@ -47,10 +54,13 @@ const mapStateToProps = ( state ) => ( {
 	isLoading: selectors.getRSVPLoading( state ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => ( {
+/* @todo: add set initial state */
+
+const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	dispatch,
-	setInitialState: ( props ) => {
-		// @todo: set initial state here
+	setInitialState: () => {
+		console.log('here setting init state');
+		dispatch( thunks.getRSVP( ownProps.postId ) )
 	},
 } );
 
@@ -73,6 +83,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 
 export default compose(
 	withStore(),
+	withSelect( mapSelectToProps ),
 	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
 	withSaveData(),
 )( RSVP );
