@@ -7,19 +7,15 @@ import { compose } from 'redux';
 /**
  * Internal dependencies
  */
-import RSVPAdvancedOptions from './template';
+import AttendeesActionButton from './template';
 import { selectors } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
-const getIsDisabled = ( state ) => (
-	selectors.getRSVPLoading( state ) || selectors.getRSVPSettingsOpen( state )
-);
-
 const mapStateToProps = ( state ) => ( {
-	isDisabled: getIsDisabled( state ),
+	isDisabled: selectors.getRSVPLoading( state ),
 } );
 
 export default compose(
 	withStore(),
 	connect( mapStateToProps ),
-)( RSVPAdvancedOptions );
+)( AttendeesActionButton );

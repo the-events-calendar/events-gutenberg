@@ -11,10 +11,14 @@ import RSVPContainerHeader from './template';
 import { actions, selectors } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
+const getIsDisabled = ( state ) => (
+	selectors.getRSVPLoading( state ) || selectors.getRSVPSettingsOpen( state )
+);
+
 const mapStateToProps = ( state ) => ( {
 	capacity: selectors.getRSVPCapacity( state ),
 	description: selectors.getRSVPDescription( state ),
-	isDisabled: selectors.getRSVPSettingsOpen( state ),
+	isDisabled: getIsDisabled( state ),
 	tempDescription: selectors.getRSVPTempDescription( state ),
 	tempTitle: selectors.getRSVPTempTitle( state ),
 	title: selectors.getRSVPTitle( state ),

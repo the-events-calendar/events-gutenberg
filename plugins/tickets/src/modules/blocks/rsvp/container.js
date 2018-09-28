@@ -9,8 +9,8 @@ import moment from 'moment';
  * Internal dependencies
  */
 import RSVP from './template';
-import { selectors } from '@moderntribe/tickets/data/blocks/rsvp';
-import { withStore } from '@moderntribe/common/hoc';
+import { actions, selectors } from '@moderntribe/tickets/data/blocks/rsvp';
+import { withStore, withSaveData } from '@moderntribe/common/hoc';
 
 const getDateTimeMoment = ( date, time ) => {
 	const [ hours, minutes ] = time.split( ':' );
@@ -34,12 +34,22 @@ const getIsInactive = ( state ) => {
 	return ! ( currentMoment.isAfter( startMoment ) && currentMoment.isBefore( endMoment ) );
 };
 
+/* @todo: add set initial state, add onUnmount */
+
 const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),
 	isInactive: getIsInactive( state ),
+	isLoading: selectors.getRSVPLoading( state ),
+} );
+
+const mapDispatchToProps = ( dispatch ) => ( {
+	setInitialState: ( props ) => {
+		// @todo: set initial state here
+	},
 } );
 
 export default compose(
 	withStore(),
-	connect( mapStateToProps ),
+	connect( mapStateToProps, mapDispatchToProps ),
+	withSaveData(),
 )( RSVP );

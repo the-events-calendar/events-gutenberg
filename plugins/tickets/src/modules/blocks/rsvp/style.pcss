@@ -1,5 +1,6 @@
 .tribe-editor__rsvp {
 	font-family: Helvetica, sans-serif, arial;
+	position: relative;
 }
 
 .tribe-editor__inactive-block__icon {
@@ -19,4 +20,17 @@
 	font-size: 16px;
 	line-height: 19px;
 	letter-spacing: 0.05px;
+}
+
+.components-spinner {
+
+	.tribe-editor__rsvp & {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		float: none;
+		margin: 0;
+		opacity: 0.8;
+	}
 }

@@ -16,9 +16,10 @@ import { __ } from '@wordpress/i18n';
 import { ActionButton } from '@moderntribe/tickets/elements';
 import { Cog as CogIcon } from '@moderntribe/common/src/modules/icons';
 
-const SettingsActionButton = ( { onClick } ) => (
+const SettingsActionButton = ( { isDisabled, onClick } ) => (
 	<ActionButton
 		className="tribe-editor__rsvp__action-button tribe-editor__rsvp__action-button--settings"
+		disabled={ isDisabled }
 		icon={ <CogIcon /> }
 		onClick={ onClick }
 	>
@@ -31,6 +32,7 @@ SettingsActionButton.defaultProps = {
 };
 
 SettingsActionButton.propTypes = {
+	isDisabled: PropTypes.bool,
 	onClick: PropTypes.func,
 };
 

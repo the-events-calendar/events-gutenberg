@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 /**
+ * WordPress dependencies
+ */
+import { Spinner } from '@wordpress/components';
+
+/**
  * Internal dependencies
  */
 import RSVPContainer from './container/container';
@@ -13,7 +18,7 @@ import RSVPDashboard from './dashboard/container';
 import RSVPInactiveBlock from './inactive-block/container';
 import './style.pcss';
 
-const RSVP = ( { created, isInactive, isSelected } ) => (
+const RSVP = ( { created, isInactive, isLoading, isSelected } ) => (
 	! isSelected && ( ( created && isInactive ) || ! created )
 		? <RSVPInactiveBlock />
 		: (
@@ -23,6 +28,7 @@ const RSVP = ( { created, isInactive, isSelected } ) => (
 			) }>
 				<RSVPContainer isSelected={ isSelected } />
 				<RSVPDashboard isSelected={ isSelected } />
+				{ isLoading && <Spinner /> }
 			</div>
 		)
 );
@@ -30,6 +36,7 @@ const RSVP = ( { created, isInactive, isSelected } ) => (
 RSVP.propTypes = {
 	created: PropTypes.bool.isRequired,
 	isInactive: PropTypes.bool.isRequired,
+	isLoading: PropTypes.bool.isRequired,
 	isSelected: PropTypes.bool.isRequired,
 };
 

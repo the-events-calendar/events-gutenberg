@@ -16,12 +16,12 @@ import { __ } from '@wordpress/i18n';
 import { ActionButton } from '@moderntribe/tickets/elements';
 import { User as UserIcon } from '@moderntribe/common/src/modules/icons';
 
-const AttendeesActionButton = ( {
-	onClick,
-} ) => (
+const AttendeesActionButton = ( { isDisabled, onClick } ) => (
 	<ActionButton
 		className="tribe-editor__rsvp__action-button tribe-editor__rsvp__action-button--attendees"
+		disabled={ isDisabled }
 		icon={ <UserIcon /> }
+		onClick={ onClick }
 	>
 		{ __( 'Attendees', 'events-gutenberg' ) }
 	</ActionButton>
@@ -32,6 +32,7 @@ AttendeesActionButton.defaultProps = {
 };
 
 AttendeesActionButton.propTypes = {
+	isDisabled: PropTypes.bool,
 	onClick: PropTypes.func,
 };
 

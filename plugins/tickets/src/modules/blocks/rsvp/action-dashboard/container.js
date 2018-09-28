@@ -16,14 +16,24 @@ import RSVPActionDashboard from './template';
 import { actions, selectors, thunks } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
+const getIsCancelDisabled = ( state ) => (
+	! selectors.getRSVPHasChanges( state ) || selectors.getRSVPLoading( state )
+);
+
+const getIsConfirmDisabled = ( state ) => (
+	! selectors.getRSVPTempTitle( state )
+		|| ! selectors.getRSVPHasChanges( state )
+		|| selectors.getRSVPLoading( state )
+);
+
 const mapSelectToProps = ( select ) => ( {
 	postId: select( 'core/editor' ).getCurrentPostId(),
 } );
 
 const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),
-	isCancelDisabled: ! selectors.getRSVPHasChanges( state ),
-	isConfirmDisabled: ! selectors.getRSVPTempTitle( state ) || ! selectors.getRSVPHasChanges( state ),
+	isCancelDisabled: getIsCancelDisabled( state ),
+	isConfirmDisabled: getIsConfirmDisabled( state ),
 	showCancel: selectors.getRSVPCreated( state ),
 	state,
 } );
