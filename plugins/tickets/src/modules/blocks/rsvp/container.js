@@ -59,7 +59,6 @@ const mapStateToProps = ( state ) => ( {
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	dispatch,
 	setInitialState: () => {
-		console.log('here setting init state');
 		dispatch( thunks.getRSVP( ownProps.postId ) )
 	},
 } );
