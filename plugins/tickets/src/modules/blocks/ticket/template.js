@@ -21,10 +21,12 @@ class Ticket extends PureComponent {
 		unregister: PropTypes.func.isRequired,
 		isSelected: PropTypes.bool,
 		clientId: PropTypes.string.isRequired,
+		hasBeenCreated: PropTypes.bool,
 	};
 
 	static defaultProps = {
 		isEditing: false,
+		hasBeenCreated: false,
 	};
 
 	updateIsSelected = () => {
@@ -51,14 +53,17 @@ class Ticket extends PureComponent {
 	}
 
 	render() {
-		const  { isEditing, clientId, isSelected }  = this.props;
+		const { isEditing, clientId, isSelected, hasBeenCreated }  = this.props;
 		const containerClass = classNames( 'tribe-editor__ticket', {
 			'tribe-editor__ticket--edit': isEditing,
 			'tribe-editor__ticket--display': ! isEditing,
 		} );
+
+		const showEditContainer = isEditing && ! hasBeenCreated;
+
 		return (
 			<article className={ containerClass }>
-				{ isEditing
+				{ showEditContainer
 					? <TicketEditContainer blockId={ clientId } />
 					: <TicketDisplayContainer blockId={ clientId } isSelected={ isSelected } /> }
 			</article>
