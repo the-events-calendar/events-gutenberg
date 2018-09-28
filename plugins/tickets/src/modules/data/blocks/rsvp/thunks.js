@@ -6,6 +6,7 @@ import moment from 'moment';
 /**
  * Internal dependencies
  */
+import * as actions from './actions';
 import { actions as requestActions } from '@moderntribe/common/store/middlewares/request';
 import { toDateTime } from '@moderntribe/common/utils/moment';
 import { toSeconds, TIME_FORMAT_HH_MM } from '@moderntribe/common/utils/time';
@@ -69,13 +70,16 @@ const createOrUpdateRSVP = ( method ) => ( payload ) => ( dispatch ) => {
 		},
 		actions: {
 			start: () => {
-				/* handle start here */
+				dispatch( actions.setRSVPLoading( true ) );
 			},
 			success: ( res ) => {
-				/* handle success here */
+				if ( method === METHODS.POST ) {
+					dispatch( actions.setRSVPId( res.body.id ) );
+				}
+				dispatch( actions.setRSVPLoading( false ) );
 			},
 			error: ( err ) => {
-				/* handle error here */
+				dispatch( actions.setRSVPLoading( false ) );
 			},
 		},
 	};
