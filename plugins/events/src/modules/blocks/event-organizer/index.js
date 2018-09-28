@@ -25,7 +25,7 @@ export default {
 	attributes: {
 		organizer: {
 			type: 'html',
-			default: '',
+			default: tribe_blocks_editor_defaults.organizer ? tribe_blocks_editor_defaults.organizer : '',
 		},
 		organizers: {
 			type: 'array',

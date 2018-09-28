@@ -16,17 +16,18 @@ import { RichText } from '@wordpress/editor';
  */
 import { Input } from '@moderntribe/events/elements';
 import list, { getCountries, getStates, getCountryCode, getStateCode } from '@moderntribe/events/editor/utils/geo-data';
+import { getVenueAddress, getVenueCity, getVenueCountry, getVenueStateProvince, getVenueZip, getVenuePhone } from '@moderntribe/events/data/blocks/venue/utils';
 import './style.pcss';
 
 export function toFields( venue ) {
 	const title = get( venue, 'title', {} );
 	const meta = get( venue, 'meta', {} );
-	const address = get( meta, '_VenueAddress', '' );
-	const city = get( meta, '_VenueCity', '' );
-	const country = get( meta, '_VenueCountry', '' );
-	const stateProvince = get( meta, '_VenueStateProvince', '' );
-	const zip = get( meta, '_VenueZip', '' );
-	const phone = get( meta, '_VenuePhone', '' );
+	const address = getVenueAddress( meta );
+	const city = getVenueCity( meta );
+	const country = getVenueCountry( meta );
+	const stateProvince = getVenueStateProvince( meta );
+	const zip = getVenueZip( meta );
+	const phone = getVenuePhone( meta );
 	const url = get( meta, '_VenueURL', '' );
 
 	const countryCode = getCountryCode( country );

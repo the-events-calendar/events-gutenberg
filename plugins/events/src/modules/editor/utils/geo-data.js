@@ -40,6 +40,12 @@ export function getStateCode( countryCode, name ) {
 	return get( result, 'code', '' );
 }
 
+export function getStateName( countryCode, code ) {
+	const states = getStates( countryCode );
+	const result = find( states, ( state ) => state.code === code );
+	return get( result, 'name', '' );
+}
+
 /**
  * Return the list of al the states based on the country code
  *
