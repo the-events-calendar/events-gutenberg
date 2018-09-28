@@ -24,7 +24,6 @@ class ModalButton extends PureComponent {
 		modalTitle: PropTypes.string,
 		onClick: PropTypes.func,
 		onClose: PropTypes.func,
-		onCloseClick: PropTypes.func,
 		onOpen: PropTypes.func,
 	};
 
@@ -40,11 +39,6 @@ class ModalButton extends PureComponent {
 		this.onOpen();
 		this.setState( { isOpen: true } );
 	};
-
-	onCloseClick = ( e ) => {
-		this.props.onCloseClick && this.props.onCloseClick( e );
-		this.onRequestClose();
-	}
 
 	onRequestClose = () => {
 		this.onClose();

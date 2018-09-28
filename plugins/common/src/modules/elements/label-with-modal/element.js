@@ -22,7 +22,6 @@ const LabelWithModal = ( {
 	modalContent,
 	onClick,
 	onClose,
-	onCloseClick,
 	onOpen,
 } ) => (
 	<LabeledItem
@@ -37,7 +36,6 @@ const LabelWithModal = ( {
 			modalTitle={ modalTitle }
 			onClick={ onClick }
 			onClose={ onClose }
-			onCloseClick={ onCloseClick }
 			onOpen={ onOpen }
 		/>
 	</LabeledItem>
@@ -46,7 +44,6 @@ const LabelWithModal = ( {
 LabelWithModal.defaultProps = {
 	onClick: noop,
 	onClose: noop,
-	onCloseClick: noop,
 	onOpen: noop,
 };
 
@@ -59,7 +56,6 @@ LabelWithModal.propTypes = {
 	modalTitle: PropTypes.string,
 	onClick: PropTypes.func,
 	onClose: PropTypes.func,
-	onCloseClick: PropTypes.func,
 	onOpen: PropTypes.func,
 };
 
