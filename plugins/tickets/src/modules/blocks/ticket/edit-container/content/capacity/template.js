@@ -87,8 +87,6 @@ Input.propTypes = {
 
 class Capacity extends PureComponent {
 	static propTypes = {
-		capacityLabel: PropTypes.string,
-		capacityToolTip: PropTypes.string,
 		type: PropTypes.oneOf( Object.keys( TYPES ) ),
 		capacityOptions: PropTypes.arrayOf( PropTypes.shape( {
 			name: PropTypes.string,
@@ -96,8 +94,6 @@ class Capacity extends PureComponent {
 		} ) ),
 		onSelectType: PropTypes.func,
 		capacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
-		independentLabel: PropTypes.string,
-		sharedLabel: PropTypes.string,
 		totalSharedCapacity: PropTypes.string,
 		setTemporarilySharedCapacity: PropTypes.func,
 		tmpSharedCapacity: PropTypes.string,
@@ -105,11 +101,6 @@ class Capacity extends PureComponent {
 	};
 
 	static defaultProps = {
-		capacityLabel: __( 'Ticket Capacity', 'events-gutenberg' ),
-		capacityToolTip: __(
-			'Ticket capacity will only be used by attendees buying this ticket type',
-			'events-gutenberg',
-		),
 		type: TYPES.independent,
 		capacityOptions: [
 			{ name: __( 'Share capacity with other tickets', 'events-gutenberg' ), value: TYPES.shared },
@@ -121,8 +112,6 @@ class Capacity extends PureComponent {
 		],
 		onSelectType: noop,
 		capacity: 0,
-		independentLabel: __( 'Number of tickets available', 'events-gutenberg' ),
-		sharedLabel: __( '(optional) Limit sales of this ticket to:', 'events-gutenberg' ),
 		totalSharedCapacity: '',
 		tmpSharedCapacity: '',
 	};
@@ -138,14 +127,10 @@ class Capacity extends PureComponent {
 
 	render() {
 		const {
-			capacityLabel,
-			capacityToolTip,
 			capacityOptions,
 			type,
 			onSelectType,
 			capacity,
-			independentLabel,
-			sharedLabel,
 			totalSharedCapacity,
 			setTemporarilySharedCapacity,
 			tmpSharedCapacity,
@@ -154,7 +139,7 @@ class Capacity extends PureComponent {
 
 		const inputProps = {
 			onChange: onCapacityChange,
-			label: independentLabel,
+			label: __( 'Number of tickets available', 'events-gutenberg' ),
 			value: capacity,
 		};
 
@@ -170,8 +155,11 @@ class Capacity extends PureComponent {
 					className="tribe-editor__container-panel__label"
 					forId={ this.ids.select }
 					isLabel={ true }
-					label={ capacityLabel }
-					tooltipText={ capacityToolTip }
+					label={ __( 'Ticket Capacity', 'events-gutenberg' ) }
+					tooltipText={ __(
+						'Ticket capacity will only be used by attendees buying this ticket type',
+						'events-gutenberg',
+					) }
 					tooltipLabel={ <Dashicon icon="info-outline" /> }
 				/>
 				<div className="tribe-editor__container-panel__input-group">
@@ -193,7 +181,7 @@ class Capacity extends PureComponent {
 							id={ this.ids.globalShared }
 							input={ {
 								onChange: setTemporarilySharedCapacity,
-								label: sharedLabel,
+								label: __( '(optional) Limit sales of this ticket to:', 'events-gutenberg' ),
 								value: tmpSharedCapacity,
 							} }
 							min="0"
