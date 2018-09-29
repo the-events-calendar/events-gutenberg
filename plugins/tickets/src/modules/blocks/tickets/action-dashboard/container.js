@@ -3,7 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import React from 'react';
 
 /**
  * WordPress dependencies
