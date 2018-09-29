@@ -47,6 +47,10 @@ describe( 'Tickets block types', () => {
 		expect( types.SET_TICKET_CAPACITY ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_CAPACITY` );
 		expect( types.SET_CREATE_NEW_TICKET ).toBe( `${ PREFIX_TICKETS_STORE }/SET_CREATE_NEW_TICKET` );
 		expect( types.SET_TICKET_IS_EDITING ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_IS_EDITING` );
+		expect( types.SET_TICKET_START_DATE_MOMENT )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_START_DATE_MOMENT` );
+		expect( types.SET_TICKET_END_DATE_MOMENT )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_END_DATE_MOMENT` );
 	} );
 } );
 
