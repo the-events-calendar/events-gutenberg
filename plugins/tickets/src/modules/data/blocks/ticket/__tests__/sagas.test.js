@@ -56,7 +56,7 @@ describe( 'Sharing Block sagas', () => {
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
-		
+
 		describe( 'updateActiveEditBlock', () => {
 			test( 'when is not editing', () => {
 				const gen = cloneableGenerator( sagas.updateActiveEditBlock )( {

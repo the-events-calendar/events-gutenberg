@@ -53,7 +53,7 @@ Select.propTypes = {
 };
 
 // Custom input for this type of form
-const Input = ( { id, input, shouldRender, ...props } ) => {
+const Input = ( { id, input, ...props } ) => {
 	const ref = React.createRef();
 
 	function onChange() {
@@ -61,7 +61,7 @@ const Input = ( { id, input, shouldRender, ...props } ) => {
 		input.onChange( current.value );
 	}
 
-	return ( shouldRender && (
+	return (
 		<div className="tribe-editor__container-panel__input-row">
 			<label htmlFor={ id }>{ input.label }</label>
 			<input
@@ -73,12 +73,11 @@ const Input = ( { id, input, shouldRender, ...props } ) => {
 				{ ...props }
 			/>
 		</div>
-	) );
+	);
 }
 
 Input.propTypes = {
 	id: PropTypes.string,
-	shouldRender: PropTypes.bool,
 	input: PropTypes.shape( {
 		value: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 		onChange: PropTypes.func.isRequired,
@@ -182,23 +181,24 @@ class Capacity extends PureComponent {
 						onSelect={ onSelectType }
 						id={ this.ids.select }
 					/>
-					<Input
-						id={ this.ids.capacity }
-						shouldRender={ type !== TYPES.unlimited }
-						input={ inputProps }
-						min="0"
-						{ ...extraInputProps }
-					/>
-					<Input
-						id={ this.ids.globalShared }
-						shouldRender={ type === TYPES.shared && totalSharedCapacity === '' }
-						input={ {
-							onChange: setTemporarilySharedCapacity,
-							label: sharedLabel,
-							value: tmpSharedCapacity,
-						} }
-						min="0"
-					/>
+					{ type !== TYPES.unlimited && (
+						<Input
+							id={ this.ids.capacity }
+							input={ inputProps }
+							min="0"
+							{ ...extraInputProps }
+						/> ) }
+					{ type === TYPES.shared && totalSharedCapacity === '' && (
+						<Input
+							id={ this.ids.globalShared }
+							input={ {
+								onChange: setTemporarilySharedCapacity,
+								label: sharedLabel,
+								value: tmpSharedCapacity,
+							} }
+							min="0"
+						/>
+					) }
 				</div>
 			</div>
 		);
