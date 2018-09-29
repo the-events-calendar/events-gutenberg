@@ -18,7 +18,7 @@ const mapStateToProps = ( state ) => ( {
 	sharedTickets: selectors.getSharedTickets( state ),
 } );
 
-const mapDispatchToProps = ( dispatch, ownProps ) => ( {
+const mapDispatchToProps = ( dispatch ) => ( {
 	onSharedCapacityChange: ( value ) => {
 		dispatch( actions.setTotalSharedCapacity( value ) );
 	},
