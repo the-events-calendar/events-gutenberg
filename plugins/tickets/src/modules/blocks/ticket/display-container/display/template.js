@@ -5,6 +5,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 /**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+
+/**
  * Internal dependencies
  */
 import {
@@ -14,6 +19,7 @@ import {
 } from '@moderntribe/common/icons';
 import QuantityBar from './quantity-bar/element';
 import { Button } from '@moderntribe/common/elements';
+import { interpolateNumbers } from '@moderntribe/common/utils/string';
 import './style.pcss';
 
 /**
@@ -41,9 +47,10 @@ const TicketDisplay = ( props ) => {
 	} = props;
 
 	const priceLabel = [ currencySign, price ];
-	const amountSold = isUnlimited
-		? `${ available } sold`
-		: `${ available } of ${ quantity } sold`;
+	const labels = {
+		unlimited: interpolateNumbers( __( '%d sold', 'events-gutenberg' ), available ),
+		normal: interpolateNumbers( __( '%d of %d sold', 'events-gutenberg' ), available, quantity ),
+	};
 
 	let quantityBar = <span className="tribe-editor__quantity--unlimited">unlimited</span>;
 
@@ -74,7 +81,9 @@ const TicketDisplay = ( props ) => {
 				{ 'suffix' === currencyPosition ? [ ...priceLabel ].reverse() : priceLabel }
 			</div>
 			<div className="tribe-editor__ticket-quantity">
-				<span className="tribe-editor__quantity-label">{ amountSold }</span>
+				<span className="tribe-editor__quantity-label">
+					{ isUnlimited ? labels.unlimited : labels.normal }
+				</span>
 				{ quantityBar }
 			</div>
 		</div>

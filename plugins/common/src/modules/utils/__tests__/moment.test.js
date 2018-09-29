@@ -166,6 +166,9 @@ describe( 'Tests for moment.js', () => {
 	} );
 
 	test( 'isSameDay', () => {
+		expect( momentUtil.isSameDay() ).toBe( false );
+		expect( momentUtil.isSameDay( false, '' ) ).toBe( false );
+		expect( momentUtil.isSameDay( 0, null ) ).toBe( false );
 		expect( momentUtil.isSameDay( moment(), moment().endOf( 'day' ) ) ).toBeTruthy();
 		expect( momentUtil.isSameDay( moment().endOf( 'day' ), moment().endOf( 'day' ) ) ).toBeTruthy();
 		expect( momentUtil.isSameDay( moment(), moment().add( 10, 'days' ) ) ).toBeFalsy();

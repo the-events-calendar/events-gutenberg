@@ -3,7 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import React from 'react';
 
 /**
  * WordPress dependencies
@@ -15,7 +14,7 @@ import { createBlock } from '@wordpress/blocks';
  * Internal dependencies
  */
 import Template from './template';
-import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
+import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state, ownProps ) => ( {

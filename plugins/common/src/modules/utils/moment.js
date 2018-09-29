@@ -232,6 +232,11 @@ export const toDatePicker = ( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) 
  * @returns {boolean} if the start and end dates are the same day
  */
 export const isSameDay = ( start, end ) => {
+
+	if ( ! start || ! end ) {
+		return false;
+	}
+
 	return moment( start ).isSame( end, 'day' );
 }
 

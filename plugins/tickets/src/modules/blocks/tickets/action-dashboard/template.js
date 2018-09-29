@@ -41,6 +41,13 @@ const TicketsDashboardAction = ( props ) => {
 		onCancelClick,
 	};
 
+	/**
+	 * @todo: Remove the dependency of the current/active child block on this dashboard and move the
+	 * editing dashboard into each child ticket instead.
+	 *
+	 * For a more detail explanation of what's required here take a look at:
+	 * - https://github.com/moderntribe/events-gutenberg/pull/336#discussion_r221192383
+	 */
 	if ( isEditing ) {
 		dashboardProps.isConfirmDisabled = ! isEditFormValid;
 		dashboardProps.cancelLabel = __( 'Cancel', 'events-gutenberg' );

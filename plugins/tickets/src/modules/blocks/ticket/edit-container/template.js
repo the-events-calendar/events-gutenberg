@@ -13,25 +13,19 @@ import StatusIcons from '@moderntribe/tickets/blocks/ticket/display-container/st
 import TicketHeader from './header/container';
 import TicketContent from './content/template';
 
-class TicketEditContainer extends PureComponent {
-	static propTypes = {
-		blockId: PropTypes.string.isRequired,
-		expires: PropTypes.bool,
-	}
+const TicketEditContainer = ( { blockId, expires } ) => (
+	<ContainerPanel
+		className="tribe-editor__edit-ticket-container"
+		layout={ LAYOUT.ticket }
+		icon={ <StatusIcons expires={ expires } /> }
+		header={ <TicketHeader blockId={ blockId } /> }
+		content={ <TicketContent blockId={ blockId } /> }
+	/>
+);
 
-	render() {
-		const { blockId, expires } = this.props;
-
-		return (
-			<ContainerPanel
-				className="tribe-editor__edit-ticket-container"
-				layout={ LAYOUT.ticket }
-				icon={ <StatusIcons expires={ expires } /> }
-				header={ <TicketHeader blockId={ blockId } /> }
-				content={ <TicketContent blockId={ blockId } /> }
-			/>
-		);
-	}
-}
+TicketEditContainer.propTypes = {
+	blockId: PropTypes.string.isRequired,
+	expires: PropTypes.bool,
+};
 
 export default TicketEditContainer;

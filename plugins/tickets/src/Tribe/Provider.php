@@ -60,6 +60,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	protected function hook() {
 		// Initialize the correct Singleton
 		tribe( 'gutenberg.tickets.assets' );
+		tribe( 'gutenberg.tickets.editor' )->hook();
 
 		// Setup the Meta registration
 		add_action( 'init', tribe_callback( 'gutenberg.tickets.meta', 'register' ), 15 );

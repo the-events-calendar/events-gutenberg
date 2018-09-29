@@ -18,23 +18,23 @@ import './style.pcss';
 const CapacityTable = ( props ) => {
 	const {
 		title,
-		shared,
-		independent,
+		sharedTickets,
+		independentTickets,
 		sharedLabel,
 		independentLabel,
 		totalLabel,
-		total,
+		totalCapacity,
 		onSharedCapacityChange,
-		sharedValue,
+		sharedCapacity,
 	} = props;
 
-	const sharedData = getValues( shared );
-	const independentData = getValues( independent );
+	const sharedData = getValues( sharedTickets );
+	const independentData = getValues( independentTickets );
 
 	const sharedInput = (
 		<input
 			onChange={ sendValue( onSharedCapacityChange ) }
-			value={ sharedValue }
+			value={ sharedCapacity }
 			type="number"
 			min="0"
 		/>
@@ -55,7 +55,7 @@ const CapacityTable = ( props ) => {
 			/>
 			<Row
 				label={ totalLabel }
-				right={ total }
+				right={ totalCapacity }
 			/>
 		</div>
 	);
@@ -63,24 +63,24 @@ const CapacityTable = ( props ) => {
 
 CapacityTable.propTypes = {
 	title: PropTypes.string,
-	shared: itemsSchema,
+	sharedTickets: itemsSchema,
 	sharedLabel: PropTypes.string,
-	independent: itemsSchema,
+	independentTickets: itemsSchema,
 	independentLabel: PropTypes.string,
 	totalLabel: PropTypes.string,
-	total: PropTypes.number,
-	sharedValue: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
+	totalCapacity: PropTypes.number,
+	sharedCapacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	onSharedCapacityChange: PropTypes.func,
 }
 
 CapacityTable.defaultProps = {
 	title: __( 'Capacity', 'events-gutenberg' ),
-	shared: [],
-	independent: [],
+	sharedTickets: [],
+	independentTickets: [],
 	sharedLabel: __( 'Shared Capacity', 'events-gutenberg' ),
 	independentLabel: __( 'Independent capacity', 'events-gutenberg' ),
 	totalLabel: __( 'Total Capacity', 'events-gutenberg' ),
-	total: 0,
+	totalCapacity: 0,
 	onSharedCapacityChange: noop,
 }
 
