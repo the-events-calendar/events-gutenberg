@@ -118,5 +118,15 @@ describe( 'Gutenberg actions', () => {
 			expect( actions.setTicketIsEditing( true ) ).toMatchSnapshot();
 			expect( actions.setTicketIsEditing( false ) ).toMatchSnapshot();
 		} );
+
+		test( 'Ticket start moment object', () => {
+			expect( actions.setTicketStartDateMoment( blockId, { type: 'moment' } ) ).toMatchSnapshot();
+			expect( actions.setTicketStartDateMoment( blockId, null ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket end moment object', () => {
+			expect( actions.setTicketEndDateMoment( blockId, { type: 'moment' } ) ).toMatchSnapshot();
+			expect( actions.setTicketEndDateMoment( blockId, null ) ).toMatchSnapshot();
+		} );
 	} );
 } );

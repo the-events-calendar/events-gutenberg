@@ -276,6 +276,28 @@ Object {
 }
 `;
 
+exports[`Gutenberg actions Single block actions Ticket end moment object 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "endDateMoment": Object {
+      "type": "moment",
+    },
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_END_DATE_MOMENT",
+}
+`;
+
+exports[`Gutenberg actions Single block actions Ticket end moment object 2`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "endDateMoment": null,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_END_DATE_MOMENT",
+}
+`;
+
 exports[`Gutenberg actions Single block actions Ticket price 1`] = `
 Object {
   "payload": Object {
@@ -283,6 +305,28 @@ Object {
     "price": 99,
   },
   "type": "@@MT/TICKETS/SET_TICKET_PRICE",
+}
+`;
+
+exports[`Gutenberg actions Single block actions Ticket start moment object 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "startDateMoment": Object {
+      "type": "moment",
+    },
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_START_DATE_MOMENT",
+}
+`;
+
+exports[`Gutenberg actions Single block actions Ticket start moment object 2`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "startDateMoment": null,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_START_DATE_MOMENT",
 }
 `;
 

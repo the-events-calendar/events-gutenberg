@@ -187,3 +187,19 @@ export const setTicketDateIsPristine = ( blockId, dateIsPristine ) => ( {
 		dateIsPristine,
 	},
 } );
+
+export const setTicketStartDateMoment = ( blockId, startDateMoment ) => ( {
+	type: types.SET_TICKET_START_DATE_MOMENT,
+	payload: {
+		blockId,
+		startDateMoment,
+	},
+} );
+
+export const setTicketEndDateMoment = ( blockId, endDateMoment ) => ( {
+	type: types.SET_TICKET_END_DATE_MOMENT,
+	payload: {
+		blockId,
+		endDateMoment,
+	},
+} );
