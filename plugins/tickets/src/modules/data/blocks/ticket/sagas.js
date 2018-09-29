@@ -67,14 +67,6 @@ export function* updateActiveEditBlock( action ) {
 	yield put( actions.setActiveChildBlockId( blockId ) );
 }
 
-export function* preventSharedNegative( action ) {
-	const { sharedCapacity } = action.payload;
-	const value = parseInt( sharedCapacity, 10 );
-	if ( value < 0 ) {
-		yield put( actions.setTotalSharedCapacity( 0 ) );
-	}
-}
-
 export function* setDatePristine( action ) {
 	const { blockId } = action.payload;
 	yield put( actions.setTicketDateIsPristine( blockId, false ) );
@@ -85,7 +77,6 @@ export default function* watchers() {
 	yield takeEvery( types.REMOVE_TICKET_BLOCK, removeActiveTicketBlock );
 	yield takeEvery( types.SET_CREATE_NEW_TICKET, createNewTicket );
 	yield takeEvery( types.SET_TICKET_IS_EDITING, updateActiveEditBlock );
-	yield takeEvery( types.SET_TICKET_TOTAL_SHARED_CAPACITY, preventSharedNegative );
 	yield takeEvery( types.SET_TICKET_START_DATE, setDatePristine );
 	yield takeEvery( types.SET_TICKET_END_DATE, setDatePristine );
 	yield takeEvery( types.SET_TICKET_START_TIME, setDatePristine );

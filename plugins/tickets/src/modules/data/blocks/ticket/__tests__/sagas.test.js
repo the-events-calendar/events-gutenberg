@@ -29,9 +29,6 @@ describe( 'Sharing Block sagas', () => {
 				takeEvery( types.SET_TICKET_IS_EDITING, sagas.updateActiveEditBlock ),
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_TICKET_TOTAL_SHARED_CAPACITY, sagas.preventSharedNegative ),
-			);
-			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_TICKET_START_DATE, sagas.setDatePristine ),
 			);
 			expect( gen.next().value ).toEqual(
@@ -59,37 +56,7 @@ describe( 'Sharing Block sagas', () => {
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
-
-		describe( 'preventSharedNegative', () => {
-			test( 'when the value is negative', () => {
-				const gen = cloneableGenerator( sagas.preventSharedNegative )( {
-					payload: {
-						sharedCapacity: '-20',
-					},
-				} );
-				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( 0 ) ) );
-				expect( gen.next().done ).toEqual( true );
-			} );
-
-			test( 'when the value is zero', () => {
-				const gen = cloneableGenerator( sagas.preventSharedNegative )( {
-					payload: {
-						sharedCapacity: '0',
-					},
-				} );
-				expect( gen.next().done ).toEqual( true );
-			} );
-
-			test( 'when the value is positive', () => {
-				const gen = cloneableGenerator( sagas.preventSharedNegative )( {
-					payload: {
-						sharedCapacity: '10',
-					},
-				} );
-				expect( gen.next().done ).toEqual( true );
-			} );
-		} );
-
+		
 		describe( 'updateActiveEditBlock', () => {
 			test( 'when is not editing', () => {
 				const gen = cloneableGenerator( sagas.updateActiveEditBlock )( {
