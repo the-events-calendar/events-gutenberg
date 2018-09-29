@@ -64,15 +64,12 @@ const TimePicker = ( {
 			additionalProps.max = max;
 		}
 
-		const ref = React.createRef();
-
-		function onChangeCallback() {
-			onChange( ref.current.value );
+		function onChangeCallback( event ) {
+			onChange( event.target.value );
 		}
 
 		return (
 			<input
-				ref={ ref }
 				className="tribe-editor__btn-input"
 				type="time"
 				value={ current }

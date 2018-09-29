@@ -26,15 +26,12 @@ export const TYPES = {
 
 // todo: replace with custom select from Events Pro
 const Select = ( { id, options, selected, onSelect } ) => {
-	const ref = React.createRef();
-
-	function onChange() {
-		const { current } = ref;
-		onSelect( current.value );
+	function onChange( event ) {
+		onSelect( event.target.value );
 	}
 
 	return (
-		<select ref={ ref } id={ id } value={ selected } onChange={ onChange }>
+		<select id={ id } value={ selected } onChange={ onChange }>
 			{ options.map( ( { name, value }, index ) => (
 				<option key={ index } value={ value }>{ name }</option>
 			) ) }
@@ -54,11 +51,9 @@ Select.propTypes = {
 
 // Custom input for this type of form
 const Input = ( { id, input, ...props } ) => {
-	const ref = React.createRef();
 
-	function onChange() {
-		const { current } = ref;
-		input.onChange( current.value );
+	function onChange( event ) {
+		input.onChange( event.target.value );
 	}
 
 	return (
@@ -69,7 +64,6 @@ const Input = ( { id, input, ...props } ) => {
 				id={ id }
 				value={ input.value }
 				onChange={ onChange }
-				ref={ ref }
 				{ ...props }
 			/>
 		</div>
