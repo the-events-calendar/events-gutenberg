@@ -10,15 +10,18 @@ import * as types from './../types';
 import { TYPES } from '@moderntribe/tickets/blocks/ticket/edit-container/content/capacity/template';
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
+const currentMoment = moment();
 export const DEFAULT_STATE = {
 	title: '',
 	description: '',
 	price: 0,
 	SKU: '',
-	startDate: momentUtil.toDate( moment() ),
-	endDate: momentUtil.toDate( moment() ),
-	startTime: momentUtil.toTime24Hr( moment() ),
-	endTime: momentUtil.toTime24Hr( moment() ),
+	startDate: momentUtil.toDate( currentMoment ),
+	startDateMoment: currentMoment,
+	endDate: momentUtil.toDate( currentMoment ),
+	endDateMoment: currentMoment,
+	startTime: momentUtil.toTime24Hr( currentMoment ),
+	endTime: momentUtil.toTime24Hr( currentMoment ),
 	dateIsPristine: true,
 	capacityType: TYPES.independent,
 	capacity: '',
@@ -83,7 +86,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				isEditing: action.payload.isEditing,
-			}
+			};
 		case types.SET_TICKET_POST_ID:
 			return {
 				...state,
@@ -93,7 +96,17 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				dateIsPristine: action.payload.dateIsPristine,
-			}
+			};
+		case types.SET_TICKET_START_DATE_MOMENT:
+			return {
+				...state,
+				startDateMoment: action.payload.startDateMoment,
+			};
+		case types.SET_TICKET_END_DATE_MOMENT:
+			return {
+				...state,
+				endDateMoment: action.payload.endDateMoment,
+			};
 		default:
 			return state;
 	}
