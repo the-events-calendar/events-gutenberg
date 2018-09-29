@@ -6,6 +6,18 @@
  */
 class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor {
 	/**
+	 * Hooks actions from the editor into the correct places
+	 *
+	 * @since  0.2.8-alpha
+	 *
+	 * @return bool
+	 */
+	public function hook() {
+		// Add Rest API support
+		add_filter( 'tribe_tickets_register_ticket_post_type_args', array( $this, 'add_rest_support' ) );
+	}
+
+	/**
 	 * Adds the ticket block into the editor
 	 *
 	 * @since  TBD
