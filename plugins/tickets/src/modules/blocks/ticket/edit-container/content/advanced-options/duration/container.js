@@ -19,7 +19,10 @@ import {
 const mapStateToProps = ( state, ownProps ) => ( {
 	fromDate: selectors.getTicketStartDate( state, ownProps ),
 	fromTime: selectors.getTicketStartTime( state, ownProps ),
-	isSameDay: false,
+	isSameDay: momentUtil.isSameDay(
+		selectors.getTicketStartDateMoment( state, ownProps ),
+		selectors.getTicketEndDateMoment( state, ownProps ),
+	),
 	toDate: selectors.getTicketEndDate( state, ownProps ),
 	toTime: selectors.getTicketEndTime( state, ownProps ),
 } );
@@ -27,7 +30,9 @@ const mapStateToProps = ( state, ownProps ) => ( {
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	onFromDateChange: ( date ) => {
 		const { blockId } = ownProps;
-		dispatch( actions.setStartDate( blockId, momentUtil.toDate( moment( date ) ) ) );
+		const momentObj = moment( date );
+		dispatch( actions.setStartDate( blockId, momentUtil.toDate( momentObj ) ) );
+		dispatch( actions.setTicketStartDateMoment( blockId, momentObj ) );
 	},
 	onFromTimePickerChange: ( value ) => {
 		const { blockId } = ownProps;
@@ -41,7 +46,9 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	},
 	onToDateChange: ( date ) => {
 		const { blockId } = ownProps;
-		dispatch( actions.setEndDate( blockId, momentUtil.toDate( moment( date ) ) ) );
+		const momentObj = moment( date );
+		dispatch( actions.setEndDate( blockId, momentUtil.toDate( momentObj ) ) );
+		dispatch( actions.setTicketEndDateMoment( blockId, momentObj ) );
 		dispatch( actions.setTicketDateIsPristine( blockId, false ) );
 	},
 	onToTimePickerChange: ( value ) => {
