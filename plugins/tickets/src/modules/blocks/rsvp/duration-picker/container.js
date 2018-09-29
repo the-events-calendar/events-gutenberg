@@ -19,9 +19,6 @@ import {
 const getIsSameDay = ( state ) => {
 	const startDateObj = selectors.getRSVPTempStartDateObj( state );
 	const endDateObj = selectors.getRSVPTempEndDateObj( state );
-	if ( ! startDateObj || ! endDateObj ) {
-		return false;
-	}
 	return momentUtil.isSameDay( startDateObj, endDateObj );
 };
 
