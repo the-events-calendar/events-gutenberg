@@ -28,35 +28,11 @@ describe( 'Sharing Block sagas', () => {
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_TICKET_IS_EDITING, sagas.updateActiveEditBlock ),
 			);
-			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_TICKET_START_DATE, sagas.setDatePristine ),
-			);
-			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_TICKET_END_DATE, sagas.setDatePristine ),
-			);
-			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_TICKET_START_TIME, sagas.setDatePristine ),
-			);
-			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_TICKET_END_TIME, sagas.setDatePristine ),
-			);
 			expect( gen.next().done ).toEqual( true );
 		} );
 	} );
 
 	describe( 'sagas', () => {
-		test( 'setDatePristine', () => {
-			const gen = cloneableGenerator( sagas.setDatePristine )( {
-				payload: {
-					blockId: 'modern-tribe',
-				},
-			} );
-			expect( gen.next().value ).toEqual(
-				put( actions.setTicketDateIsPristine( 'modern-tribe', false ) ),
-			);
-			expect( gen.next().done ).toEqual( true );
-		} );
-
 		describe( 'updateActiveEditBlock', () => {
 			test( 'when is not editing', () => {
 				const gen = cloneableGenerator( sagas.updateActiveEditBlock )( {

@@ -67,18 +67,9 @@ export function* updateActiveEditBlock( action ) {
 	yield put( actions.setActiveChildBlockId( blockId ) );
 }
 
-export function* setDatePristine( action ) {
-	const { blockId } = action.payload;
-	yield put( actions.setTicketDateIsPristine( blockId, false ) );
-}
-
 export default function* watchers() {
 	yield takeEvery( types.SET_TICKET_BLOCK_ID, setEditInTicketBlock );
 	yield takeEvery( types.REMOVE_TICKET_BLOCK, removeActiveTicketBlock );
 	yield takeEvery( types.SET_CREATE_NEW_TICKET, createNewTicket );
 	yield takeEvery( types.SET_TICKET_IS_EDITING, updateActiveEditBlock );
-	yield takeEvery( types.SET_TICKET_START_DATE, setDatePristine );
-	yield takeEvery( types.SET_TICKET_END_DATE, setDatePristine );
-	yield takeEvery( types.SET_TICKET_START_TIME, setDatePristine );
-	yield takeEvery( types.SET_TICKET_END_TIME, setDatePristine );
 }

@@ -42,15 +42,18 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	onToDateChange: ( date ) => {
 		const { blockId } = ownProps;
 		dispatch( actions.setEndDate( blockId, momentUtil.toDate( moment( date ) ) ) );
+		dispatch( actions.setTicketDateIsPristine( blockId, false ) );
 	},
 	onToTimePickerChange: ( value ) => {
 		const { blockId } = ownProps;
 		dispatch( actions.setEndTime( blockId, value ) );
+		dispatch( actions.setTicketDateIsPristine( blockId, false ) );
 	},
 	onToTimePickerClick: ( value, onClose ) => {
 		const { blockId } = ownProps;
 		const endTime = timeUtil.fromSeconds( value, timeUtil.TIME_FORMAT_HH_MM );
 		dispatch( actions.setEndTime( blockId, endTime ) );
+		dispatch( actions.setTicketDateIsPristine( blockId, false ) );
 		onClose();
 	},
 } );
