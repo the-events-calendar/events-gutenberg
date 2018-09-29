@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import * as types from './../types';
-import tmp from './temp';
+import tmp from './tmp';
 
 export const DEFAULT_STATE = {
 	sharedCapacity: '',

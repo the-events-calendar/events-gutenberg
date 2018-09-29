@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import tmp, { DEFAULT_STATE } from '../temp';
+import tmp, { DEFAULT_STATE } from '../tmp';
 import { actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 describe( 'Temporarily reducer', () => {
