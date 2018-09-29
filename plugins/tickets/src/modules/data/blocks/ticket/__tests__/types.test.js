@@ -50,6 +50,10 @@ describe( 'Tickets block types', () => {
 		expect( types.SET_INITIAL_STATE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_INITIAL_STATE` );
 		expect( types.SET_PARENT_BLOCK_LOADING )
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_PARENT_BLOCK_LOADING` );
+		expect( types.SET_TICKET_START_DATE_MOMENT )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_START_DATE_MOMENT` );
+		expect( types.SET_TICKET_END_DATE_MOMENT )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_END_DATE_MOMENT` );
 	} );
 } );
 

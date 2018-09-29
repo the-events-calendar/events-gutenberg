@@ -18,11 +18,11 @@ describe( '<CapacityTable />', () => {
 		const component = renderer.create(
 			<CapacityTable
 				title="Modern Tribe"
-				shared={ [
+				sharedTickets={ [
 					{ name: 'Early Bird', quantity: 10 },
 					{ name: 'Balcony', quantity: 20 },
 				] }
-				total={ 30 }
+				totalCapacity={ 30 }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
@@ -33,11 +33,11 @@ describe( '<CapacityTable />', () => {
 		const mounted = mount(
 			<CapacityTable
 				title="Modern Tribe"
-				shared={ [
+				sharedTickets={ [
 					{ name: 'Early Bird', quantity: 10 },
 					{ name: 'Balcony', quantity: 20 },
 				] }
-				sharedValue={ 30 }
+				sharedCapacity={ 30 }
 				onSharedCapacityChange={ onChange }
 			/>,
 		);
@@ -50,11 +50,11 @@ describe( '<CapacityTable />', () => {
 		const component = renderer.create(
 			<CapacityTable
 				title="Modern Tribe"
-				independent={ [
+				independentTickets={ [
 					{ name: 'Floor', quantity: 25 },
 					{ name: 'VIP', quantity: 45 },
 				] }
-				total={ 70 }
+				totalCapacity={ 70 }
 			/>,
 		);
 		expect( component.toJSON() ).toMatchSnapshot();

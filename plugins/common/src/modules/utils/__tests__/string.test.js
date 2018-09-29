@@ -5,6 +5,7 @@ import {
 	isTruthy,
 	isFalsy,
 	replaceWithObject,
+	interpolateNumbers,
 } from '@moderntribe/common/utils/string';
 
 describe( 'Tests for string.js', () => {
@@ -34,5 +35,30 @@ describe( 'Tests for string.js', () => {
 		expect( replaceWithObject( 'abcd', { z: 'a' } ) ).toEqual( 'abcd' );
 		expect( replaceWithObject( 'abcd', { a: 'b', c: 'd' } ) ).toEqual( 'bbdd' );
 		expect( replaceWithObject( 'abcd', { a: '', c: '' } ) ).toEqual( 'bd' );
+	} );
+
+	describe( 'interpolateNumbers', () => {
+		test( 'Strings with no values', () => {
+			expect( interpolateNumbers( '' ) ).toBe( '' );
+			expect( interpolateNumbers( '   Modern     Tribe    ' ) ).toBe( '   Modern     Tribe    ' );
+		} );
+
+		test( 'Interpolation with no params', () => {
+			expect( interpolateNumbers( 'Modern Tribe - %d projects' ) )
+				.toBe( 'Modern Tribe - %d projects' );
+			expect( interpolateNumbers( '%d %d %d' ) ).toBe( '%d %d %d' );
+		} );
+
+		test( 'Interpolate with numeric values', () => {
+			expect( interpolateNumbers( 'WordPress %d', 5 ) ).toBe( 'WordPress 5' );
+			expect( interpolateNumbers( '%d apples', 12 ) ).toBe( '12 apples' );
+			expect( interpolateNumbers( '%d bugs were found on %d projects on %d', 10, 20, 2018 ) )
+				.toBe( '10 bugs were found on 20 projects on 2018' );
+		} );
+
+		test( 'Unbalance interpolation', () => {
+			expect( interpolateNumbers( '%d bugs were found on %d projects on %d', 10 ) )
+				.toBe( '10 bugs were found on %d projects on %d' );
+		} );
 	} );
 } );

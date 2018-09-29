@@ -63,7 +63,16 @@ class Tribe__Gutenberg__Tickets__Meta {
 		register_meta(
 			'post',
 			$handler->key_show_description,
-			$this->boolean()
+			$this->text()
+		);
+
+		/**
+		 * @todo  move this into the `tickets.handler` class
+		 */
+		register_meta(
+			'post',
+			'_tribe_ticket_show_not_going',
+			$this->text()
 		);
 
 		// Global Stock

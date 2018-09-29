@@ -15,24 +15,19 @@ import { __ } from '@wordpress/i18n';
  */
 import { ActionButton } from '@moderntribe/tickets/elements';
 import { User as UserIcon } from '@moderntribe/common/src/modules/icons';
-import SettingsActionButton from '../settings/template';
 
-const AttendeesActionButton = ( { label, onClick, icon } ) => (
-	<ActionButton icon={ icon } onClick={ onClick }>
-		{ label }
+const AttendeesActionButton = ( { onClick } ) => (
+	<ActionButton icon={ <UserIcon /> } onClick={ onClick }>
+		{ __( 'Attendees', 'events-gutenberg' ) }
 	</ActionButton>
 );
 
 AttendeesActionButton.propTypes = {
 	onClick: PropTypes.func,
-	label: PropTypes.string,
-	icon: PropTypes.node,
 };
 
 AttendeesActionButton.defaultProps = {
 	onClick: noop,
-	label: __( 'Attendees', 'events-gutenberg' ),
-	icon: <UserIcon />,
 };
 
 export default AttendeesActionButton;

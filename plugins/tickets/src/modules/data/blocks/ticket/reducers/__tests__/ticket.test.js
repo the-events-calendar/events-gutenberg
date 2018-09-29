@@ -70,11 +70,29 @@ describe( 'Individual Ticket reducer', () => {
 	} );
 
 	test( 'Set ticket post ID', () => {
-		expect( ticket( DEFAULT_STATE, actions.setTicketPostId( 10 ) ) ).toMatchSnapshot();
+		expect( ticket( DEFAULT_STATE, actions.setTicketPostId( blockId, 10 ) ) ).toMatchSnapshot();
 	} );
 
 	test( 'Set ticket pristine', () => {
-		expect( ticket( DEFAULT_STATE, actions.setTicketDateIsPristine( true ) ) ).toMatchSnapshot();
-		expect( ticket( DEFAULT_STATE, actions.setTicketDateIsPristine( false ) ) ).toMatchSnapshot();
+		expect( ticket( DEFAULT_STATE, actions.setTicketDateIsPristine( blockId, true ) ) )
+			.toMatchSnapshot();
+		expect( ticket( DEFAULT_STATE, actions.setTicketDateIsPristine( blockId, false ) ) )
+			.toMatchSnapshot();
+	} );
+
+	test( 'Set start date moment object', () => {
+		const expected = ticket(
+			DEFAULT_STATE,
+			actions.setTicketStartDateMoment( blockId, { title: 'Start Moment' } ),
+		);
+		expect( expected ).toMatchSnapshot();
+	} );
+
+	test( 'Set end date moment object', () => {
+		const expected = ticket(
+			DEFAULT_STATE,
+			actions.setTicketEndDateMoment( blockId, { title: 'End Moment' } ),
+		);
+		expect( expected ).toMatchSnapshot();
 	} );
 } );

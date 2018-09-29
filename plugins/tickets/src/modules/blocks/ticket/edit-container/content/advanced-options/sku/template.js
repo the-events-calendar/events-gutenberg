@@ -37,13 +37,11 @@ class SKU extends PureComponent {
 	constructor( props ) {
 		super( props );
 		this.id = uniqid( 'ticket-sku' );
-		this.input = React.createRef();
 	}
 
-	onChange = () => {
-		const { current } = this.input;
+	onChange = ( event ) => {
 		const { onChange } = this.props;
-		onChange( current.value );
+		onChange( event.target.value );
 	}
 
 	render() {
@@ -60,7 +58,6 @@ class SKU extends PureComponent {
 				/>
 				<div className="tribe-editor__container-panel__input-group">
 					<input
-						ref={ this.input }
 						id={ this.id }
 						type="text"
 						value={ value }

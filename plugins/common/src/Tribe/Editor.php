@@ -104,6 +104,31 @@ class Tribe__Gutenberg__Common__Editor {
 			$args['supports'][] = 'custom-fields';
 		}
 
+		// Add Post Title Support
+		if ( ! in_array( 'title', $args['supports'] ) ) {
+			$args['supports'][] = 'title';
+		}
+
+		// Add Post Excerpt Support
+		if ( ! in_array( 'excerpt', $args['supports'] ) ) {
+			$args['supports'][] = 'excerpt';
+		}
+
+		// Add Post Content Support
+		if ( ! in_array( 'editor', $args['supports'] ) ) {
+			$args['supports'][] = 'editor';
+		}
+
+		// Add Post Author Support
+		if ( ! in_array( 'author', $args['supports'] ) ) {
+			$args['supports'][] = 'author';
+		}
+
+		// Add Thumbnail Support
+		if ( ! in_array( 'thumbnail', $args['supports'] ) ) {
+			$args['supports'][] = 'thumbnail';
+		}
+
 		return $args;
 	}
 

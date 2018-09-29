@@ -16,9 +16,9 @@ import { __ } from '@wordpress/i18n';
 import { ActionButton } from '@moderntribe/tickets/elements';
 import { Cog as CogIcon } from '@moderntribe/common/src/modules/icons';
 
-const SettingsActionButton = ( { label, onClick, icon } ) => (
-	<ActionButton icon={ icon } onClick={ onClick }>
-		{ label }
+const SettingsActionButton = ( { onClick } ) => (
+	<ActionButton icon={ <CogIcon /> } onClick={ onClick }>
+		{ __( 'Settings', 'events-gutenberg' ) }
 	</ActionButton>
 );
 
@@ -30,8 +30,6 @@ SettingsActionButton.propTypes = {
 
 SettingsActionButton.defaultProps = {
 	onClick: noop,
-	label: __( 'Settings', 'events-gutenberg' ),
-	icon: <CogIcon />,
 };
 
 export default SettingsActionButton;

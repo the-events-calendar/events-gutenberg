@@ -15,8 +15,6 @@ import { actions, selectors } from '@moderntribe/tickets/data/blocks/ticket';
 const mapStateToProps = ( state, ownProps ) => ( {
 	isBlockSelected: selectors.getParentOrChildSelected( state ),
 	isEditing: selectors.getTicketEditing( state, { blockId: ownProps.clientId } ),
-	blockId: ownProps.clientId,
-	isSelected: ownProps.isSelected,
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
