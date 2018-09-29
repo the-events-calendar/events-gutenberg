@@ -202,7 +202,7 @@ export const getTicketCapacity = createSelector(
 	( block ) => {
 		const capacity = parseInt( block.capacity, 10 );
 		return capacity || 0;
-	}
+	},
 );
 
 export const getTicketCapacityType = createSelector(
@@ -251,4 +251,14 @@ export const isUnlimitedTicket = createSelector(
 export const isSharedTicket = createSelector(
 	[ getTicketBlock ],
 	( block ) => block.capacityType === TYPES.shared,
+);
+
+export const getTicketStartDateMoment = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.startDateMoment,
+);
+
+export const getTicketEndDateMoment = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.endDateMoment,
 );
