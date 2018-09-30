@@ -60,5 +60,12 @@ describe( 'Tests for string.js', () => {
 			expect( interpolateNumbers( '%d bugs were found on %d projects on %d', 10 ) )
 				.toBe( '10 bugs were found on %d projects on %d' );
 		} );
+
+		test( 'Interpolation with non strings values', () => {
+			expect( interpolateNumbers( null ) ).toBe( '' );
+			expect( interpolateNumbers( 2 ) ).toBe( '' );
+			expect( interpolateNumbers( [] ) ).toBe( '' );
+			expect( interpolateNumbers( {} ) ).toBe( '' );
+		} );
 	} );
 } );
