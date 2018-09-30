@@ -13,9 +13,6 @@ exports[`Container Panel Element renders container panel in rsvp layout 1`] = `
     <div
       className="tribe-editor__container-panel__header"
     />
-    <div
-      className="tribe-editor__container-panel__content"
-    />
   </div>
 </div>
 `;
@@ -29,9 +26,6 @@ exports[`Container Panel Element renders container panel in ticket layout 1`] = 
   />
   <div
     className="tribe-editor__container-panel__header"
-  />
-  <div
-    className="tribe-editor__container-panel__content"
   />
 </div>
 `;
@@ -48,9 +42,6 @@ exports[`Container Panel Element renders container panel with classes 1`] = `
   >
     <div
       className="tribe-editor__container-panel__header"
-    />
-    <div
-      className="tribe-editor__container-panel__content"
     />
   </div>
 </div>

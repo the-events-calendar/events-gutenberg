@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BlockIcon } from '@moderntribe/common/elements';
-import TicketsBlock from './Container';
+import Tickets from './container';
 
 /**
  * Module Code
@@ -26,6 +26,6 @@ export default {
 
 	attributes: {},
 
-	edit: TicketsBlock,
+	edit: Tickets,
 	save: () => null,
 };

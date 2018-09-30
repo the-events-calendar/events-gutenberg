@@ -107,6 +107,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Create `<HeaderImage>` component to upload / select an image from the media library
 * Feature - Add `CapacityTable` component to render the capacity of the tickets
 * Feature - Add RSVP block
+* Feature - Connect `Tickets` block with `store` to manage state of component
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 * Tweak - Create an icons module for the plugins and shared one on common to create a set of icons

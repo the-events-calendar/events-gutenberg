@@ -2,8 +2,10 @@
  * Internal dependencies
  */
 import { store } from '@moderntribe/common/store';
-import * as rsvp from '@moderntribe/tickets/data/blocks/rsvp';
+import { sagas as RSVPSagas } from '@moderntribe/tickets/data/blocks/rsvp';
+import { sagas as TicketSagas } from '@moderntribe/tickets/data/blocks/ticket';
 
 [
-	rsvp.sagas,
+	RSVPSagas,
+	TicketSagas,
 ].forEach( sagas => store.run( sagas ) );

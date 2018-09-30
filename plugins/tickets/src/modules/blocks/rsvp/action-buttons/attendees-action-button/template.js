@@ -27,13 +27,13 @@ const AttendeesActionButton = ( { isDisabled, onClick } ) => (
 	</ActionButton>
 );
 
-AttendeesActionButton.defaultProps = {
-	onClick: noop,
-};
-
 AttendeesActionButton.propTypes = {
 	isDisabled: PropTypes.bool,
 	onClick: PropTypes.func,
+};
+
+AttendeesActionButton.defaultProps = {
+	onClick: noop,
 };
 
 export default AttendeesActionButton;
