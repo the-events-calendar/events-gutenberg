@@ -10,19 +10,13 @@ import PropTypes from 'prop-types';
 import RSVPActionDashboard from '@moderntribe/tickets/blocks/rsvp/action-dashboard/container';
 import RSVPSettingsDashboard from '@moderntribe/tickets/blocks/rsvp/settings-dashboard/container';
 
-const RSVPDashboard = ( {
-	isSelected,
-	isSettingsOpen,
-} ) => {
+const RSVPDashboard = ( { isSelected, isSettingsOpen } ) => {
+
 	if ( ! isSelected ) {
 		return null;
 	}
 
-	return (
-		isSettingsOpen
-		? <RSVPSettingsDashboard />
-		: <RSVPActionDashboard />
-	);
+	return isSettingsOpen ? <RSVPSettingsDashboard /> : <RSVPActionDashboard />;
 };
 
 RSVPDashboard.propTypes = {

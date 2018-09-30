@@ -1,0 +1,362 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Individual Ticket reducer Set end date moment object 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": Object {
+    "title": "End Moment",
+  },
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer Set start date moment object 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": Object {
+    "title": "Start Moment",
+  },
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer Set ticket post ID 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": 10,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer Set ticket pristine 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer Set ticket pristine 2`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": false,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket capacity 1`] = `
+Object {
+  "SKU": "",
+  "capacity": 49,
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket capacity type 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": 59,
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket description 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "The Next Generation of Digital Agency",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket end date 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": undefined,
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket end time 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": undefined,
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket is editing 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": true,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket is editing 2`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": true,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket price 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 102,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket sku 1`] = `
+Object {
+  "SKU": "MODERN-TRIBE",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket start date 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": undefined,
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket start time 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": undefined,
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer ticket title 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "isEditing": false,
+  "postId": null,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "title": "Modern Tribe",
+}
+`;

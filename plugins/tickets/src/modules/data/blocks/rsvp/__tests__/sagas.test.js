@@ -89,7 +89,7 @@ describe( 'RSVP block sagas', () => {
 					put( actions.setRSVPTempNotGoingResponses( true ) ),
 					put( actions.setRSVPTempStartDate( 'January 1, 2018' ) ),
 					put( actions.setRSVPTempStartDateObj( new Date( 'January 1, 2018' ) ) ),
-					put( actions.setRSVPTempStartTime( '12:34') ),
+					put( actions.setRSVPTempStartTime( '12:34' ) ),
 					put( actions.setRSVPTempEndDate( 'January 4, 2018' ) ),
 					put( actions.setRSVPTempEndDateObj( new Date( 'January 4, 2018' ) ) ),
 					put( actions.setRSVPTempEndTime( '23:32' ) ),
