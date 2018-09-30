@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { escapeRegExp, isUndefined } from 'lodash';
+import { escapeRegExp, isUndefined, isString } from 'lodash';
 
 /**
  * Test if a string is equivalent to a true value
@@ -15,7 +15,7 @@ export const isTruthy = ( value ) => {
 		'yes',
 		'1',
 	];
-	return validValues.indexOf( value ) !== - 1;
+	return validValues.indexOf( value ) !== -1;
 };
 
 /**
@@ -31,7 +31,7 @@ export const isFalsy = ( value ) => {
 		'0',
 		'',
 	];
-	return validValues.indexOf( value ) !== - 1;
+	return validValues.indexOf( value ) !== -1;
 };
 
 export const replaceWithObject = ( str = '', pairs = {} ) => {
@@ -50,6 +50,10 @@ export const replaceWithObject = ( str = '', pairs = {} ) => {
  */
 export const interpolateNumbers = ( str = '', ...params ) => {
 	const [ number, ...remaining ] = params;
+
+	if ( ! isString( str ) ) {
+		return '';
+	}
 
 	const position = str.indexOf( '%d' );
 	if ( position === -1 || params.length === 0 ) {
