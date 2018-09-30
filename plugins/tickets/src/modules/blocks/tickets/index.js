@@ -37,6 +37,11 @@ export default {
 			source: 'meta',
 			meta: '_tribe_ticket_header',
 		},
+		provider: {
+			type: 'string',
+			source: 'meta',
+			meta: '_tribe_default_ticket_provider',
+		},
 	},
 
 	edit: Tickets,
