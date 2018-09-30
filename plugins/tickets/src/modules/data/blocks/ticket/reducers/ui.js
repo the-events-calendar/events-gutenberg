@@ -12,6 +12,7 @@ export const DEFAULT_STATE = {
 	isChildBlockSelected: false,
 	isParentBlockLoading: false,
 	activeChildBlockId: '',
+	provider: '',
 	tmp: {},
 };
 
@@ -56,6 +57,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				isParentBlockLoading: action.payload.isParentBlockLoading,
+			};
+		case types.SET_PROVIDER:
+			return {
+				...state,
+				provider: action.payload.provider,
 			};
 		default:
 			return state;

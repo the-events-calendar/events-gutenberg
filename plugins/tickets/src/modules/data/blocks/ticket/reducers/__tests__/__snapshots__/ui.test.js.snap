@@ -93,6 +93,20 @@ Object {
 }
 `;
 
+exports[`UI reducer Provider 1`] = `
+Object {
+  "activeChildBlockId": "",
+  "header": null,
+  "isChildBlockSelected": false,
+  "isParentBlockLoading": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "provider": "Tribe__Tickets__Commerce__PayPal__Main",
+  "sharedCapacity": "",
+  "tmp": Object {},
+}
+`;
+
 exports[`UI reducer Set loading on the parent block 1`] = `
 Object {
   "activeChildBlockId": "",
