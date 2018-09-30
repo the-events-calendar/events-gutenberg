@@ -378,3 +378,12 @@ Object {
   "type": "@@MT/TICKETS/SET_TICKET_TMP_TICKET_SHARED_CAPACITY",
 }
 `;
+
+exports[`Gutenberg actions Ticket Provider Set default provider 1`] = `
+Object {
+  "payload": Object {
+    "provider": "Tribe__Tickets__Commerce__PayPal__Main",
+  },
+  "type": "@@MT/TICKETS/SET_PROVIDER",
+}
+`;

@@ -76,6 +76,12 @@ describe( 'Gutenberg actions', () => {
 		} );
 	} );
 
+	describe( 'Ticket Provider', () => {
+		test( 'Set default provider', () => {
+			expect( actions.setProvider( 'Tribe__Tickets__Commerce__PayPal__Main' ) ).toMatchSnapshot();
+		} );
+	} );
+
 	describe( 'Single block actions', () => {
 		const blockId = 'modern-tribe';
 

@@ -55,6 +55,18 @@ export const setTempSharedCapacity = ( sharedCapacity ) => ( {
 	},
 } );
 
+export const setInitialState = ( props ) => ( {
+	type: types.SET_INITIAL_STATE,
+	payload: props,
+} );
+
+export const setProvider = ( provider ) => ( {
+	type: types.SET_PROVIDER,
+	payload: {
+		provider,
+	},
+} );
+
 // individual ticket actions
 export const registerTicketBlock = ( blockId ) => ( {
 	type: types.SET_TICKET_BLOCK_ID,
@@ -186,11 +198,6 @@ export const setTicketDateIsPristine = ( blockId, dateIsPristine ) => ( {
 		blockId,
 		dateIsPristine,
 	},
-} );
-
-export const setInitialState = ( props ) => ( {
-	type: types.SET_INITIAL_STATE,
-	payload: props,
 } );
 
 export const setParentBlockIsLoading = ( isParentBlockLoading ) => ( {
