@@ -15,6 +15,7 @@ import { Spinner } from '@wordpress/components';
  */
 import TicketsDashboard from './dashboard/container';
 import TicketsContainer from './container/container';
+import TicketControls from './controls/container';
 import './style.pcss';
 
 class TicketsTemplate extends PureComponent {
@@ -60,13 +61,13 @@ class TicketsTemplate extends PureComponent {
 					<Spinner />
 				</div>
 			</Fragment>
-		)
+		);
 	}
 
 	renderComponents() {
 		const { isBlockSelected, isEditing, clientId } = this.props;
 
-		return (
+		return [
 			<Fragment>
 				<TicketsContainer
 					isSelected={ isBlockSelected }
@@ -78,8 +79,9 @@ class TicketsTemplate extends PureComponent {
 					isEditing={ isEditing }
 					clientId={ clientId }
 				/>
-			</Fragment>
-		)
+			</Fragment>,
+			<TicketControls />,
+		];
 	}
 
 	render() {
