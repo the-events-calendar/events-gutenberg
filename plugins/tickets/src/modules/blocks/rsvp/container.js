@@ -20,11 +20,7 @@ import {
 	thunks
 } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore, withSaveData } from '@moderntribe/common/hoc';
-
-const getDateTimeMoment = ( date, time ) => {
-	const [ hours, minutes ] = time.split( ':' );
-	return moment( date ).hours( hours ).minutes( minutes );
-};
+import { toMomentFromDateTime } from '@moderntribe/common/utils/moment';
 
 const getIsInactive = ( state ) => {
 	const startDateObj = selectors.getRSVPStartDateObj( state );
@@ -36,8 +32,8 @@ const getIsInactive = ( state ) => {
 		return false;
 	}
 
-	const startMoment = getDateTimeMoment( startDateObj, startTime );
-	const endMoment = getDateTimeMoment( endDateObj, endTime );
+	const startMoment = toMomentFromDateTime( startDateObj, startTime );
+	const endMoment = toMomentFromDateTime( endDateObj, endTime );
 	const currentMoment = moment();
 
 	return ! ( currentMoment.isAfter( startMoment ) && currentMoment.isBefore( endMoment ) );

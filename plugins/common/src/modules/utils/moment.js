@@ -61,7 +61,7 @@ export const toFormat = ( format ) => {
 	};
 
 	return string.replaceWithObject( format, replacements );
-}
+};
 
 /**
  * Round the time of a moment object if the minutes on the date is lower than 30 will set to 0 if
@@ -84,7 +84,7 @@ export const roundTime = ( date ) => {
 		.clone()
 		.subtract( minutes, 'm' )
 		.seconds( 0 );
-}
+};
 
 /**
  * Parse multiple formats in a date to ensure the generated dates are valid
@@ -104,7 +104,7 @@ export const parseFormats = ( date, formats = [ dateUtil.FORMATS.DATABASE.dateti
 
 	const noFormat = moment( date );
 	return noFormat.isValid() ? noFormat : moment();
-}
+};
 
 /**
  * Convert a Date() object into a Moment.js object avoiding warnings of different formats
@@ -122,7 +122,7 @@ export const toMoment = ( date, format = dateUtil.FORMATS.DATABASE.datetime ) =>
 	}
 
 	return moment();
-}
+};
 
 export const toMomentFromDate = ( date ) => {
 	if ( ! ( date instanceof Date ) ) {
@@ -138,7 +138,19 @@ export const toMomentFromDate = ( date ) => {
 		.month( month )
 		.date( day )
 		.startOf( 'day' );
-}
+};
+
+/**
+ * Convert a Date() object or date string and time into a moment object
+ *
+ * @param {(Date|moment|string)} date The date to be converted.
+ * @param {string} time The time string in HH:mm format..
+ * @returns {moment} A moment object
+ */
+export const toMomentFromDateTime = ( date, time ) => {
+	const [ hours, minutes ] = time.split( ':' );
+	return moment( date ).hours( hours ).minutes( minutes );
+};
 
 /**
  * Replace the date of a moment object with another date from another moment object
@@ -156,7 +168,7 @@ export const replaceDate = ( original, replaced ) => {
 		.year( replaced.year() )
 		.month( replaced.month() )
 		.date( replaced.date() );
-}
+};
 
 /**
  * Set time in seconds to a moment object
@@ -177,7 +189,7 @@ export const setTimeInSeconds = ( original, seconds = 0 ) => {
 	return original
 		.startOf( 'day' )
 		.seconds( seconds || original.seconds() );
-}
+};
 
 /**
  * Total seconds of a current date from moment
@@ -191,7 +203,7 @@ export const totalSeconds = ( date ) => {
 	}
 
 	return date.diff( moment( date ).startOf( 'day' ), 'seconds' );
-}
+};
 
 /**
  * Convert a moment object into a WP date time format
@@ -233,7 +245,7 @@ export const toDatePicker = ( date = moment(), format = 'YYYY-MM-DDTHH:mm:ss' ) 
  */
 export const isSameDay = ( start, end ) => {
 	return moment( start ).isSame( end, 'day' );
-}
+};
 
 /**
  * Test if the start and end dates have the same year.
@@ -286,4 +298,4 @@ export const adjustStart = ( start, end ) => {
 		start,
 		end,
 	};
-}
+};
