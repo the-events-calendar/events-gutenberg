@@ -154,6 +154,18 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 	} );
 
+	describe( 'Provider', () => {
+		test( 'Default value for provider', () => {
+			expect( selectors.getSelectedProvider( state ) ).toBe( '' );
+		} );
+
+		test( 'Custom provider', () => {
+			newState.tickets.blocks.ticket.ui.provider = 'Tribe__Tickets__Commerce__PayPal__Main';
+			expect( selectors.getSelectedProvider( newState ) )
+				.toBe( 'Tribe__Tickets__Commerce__PayPal__Main' );
+		} );
+	} );
+
 	describe( 'Ticket selectors', () => {
 		const ownProps = { blockId: 'modern-tribe' };
 
@@ -221,6 +233,7 @@ describe( 'Ticket blocks selectors', () => {
 		test( 'Ticket invalidness', () => {
 			expect( selectors.getTicketValidness( newState, ownProps ) ).toBe( false );
 		} );
+
 	} );
 } );
 

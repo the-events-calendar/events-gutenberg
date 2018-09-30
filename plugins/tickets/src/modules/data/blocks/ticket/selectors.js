@@ -45,6 +45,11 @@ export const isParentBlockLoading = createSelector(
 	( ui ) => ui.isParentBlockLoading,
 );
 
+export const getSelectedProvider = createSelector(
+	[ getTicketUI ],
+	( ui ) => ui.provider,
+);
+
 // Temporarily UI selectors
 
 export const getTmpUI = createSelector(
