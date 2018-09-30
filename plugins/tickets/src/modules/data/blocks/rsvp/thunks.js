@@ -71,14 +71,14 @@ const createOrUpdateRSVP = ( method ) => ( payload ) => ( dispatch ) => {
 			body: JSON.stringify( body ),
 		},
 		actions: {
-			start: () => dispatch( actions.setRSVPLoading( true ) ),
+			start: () => dispatch( actions.setRSVPIsLoading( true ) ),
 			success: ( { body } ) => {
 				if ( method === METHODS.POST ) {
 					dispatch( actions.setRSVPId( body.id ) );
 				}
-				dispatch( actions.setRSVPLoading( false ) );
+				dispatch( actions.setRSVPIsLoading( false ) );
 			},
-			error: () => dispatch( actions.setRSVPLoading( false ) ),
+			error: () => dispatch( actions.setRSVPIsLoading( false ) ),
 		},
 	};
 
@@ -110,7 +110,7 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 			method: METHODS.GET,
 		},
 		actions: {
-			start: () => dispatch( actions.setRSVPLoading( true ) ),
+			start: () => dispatch( actions.setRSVPIsLoading( true ) ),
 			success: ( { body, headers }) => {
 				const filteredRSVPs = body.filter( ( rsvp ) => (
 					rsvp.meta[ utils.KEY_RSVP_FOR_EVENT ] == postId
@@ -152,14 +152,14 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 						tempStartTime: momentUtil.toTime24Hr( startMoment ),
 						tempEndTime: momentUtil.toTime24Hr( endMoment ),
 					} ) );
-					dispatch( actions.setRSVPLoading( false ) );
+					dispatch( actions.setRSVPIsLoading( false ) );
 				} else if ( page < totalPages ) {
 					dispatch( getRSVP( postId, page + 1 ) );
 				} else {
-					dispatch( actions.setRSVPLoading( false ) );
+					dispatch( actions.setRSVPIsLoading( false ) );
 				}
 			},
-			error: () => dispatch( actions.setRSVPLoading( false ) ),
+			error: () => dispatch( actions.setRSVPIsLoading( false ) ),
 		},
 	};
 

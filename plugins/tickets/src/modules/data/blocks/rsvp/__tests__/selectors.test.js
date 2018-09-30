@@ -109,8 +109,8 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPHasChanges( state ) ).toBe( DEFAULT_STATE.hasChanges );
 	} );
 
-	it( 'should return the loading', () => {
-		expect( selectors.getRSVPLoading( state ) ).toBe( DEFAULT_STATE.loading );
+	it( 'should return the is loading', () => {
+		expect( selectors.getRSVPIsLoading( state ) ).toBe( DEFAULT_STATE.isLoading );
 	} );
 
 	it( 'should return the header image object', () => {

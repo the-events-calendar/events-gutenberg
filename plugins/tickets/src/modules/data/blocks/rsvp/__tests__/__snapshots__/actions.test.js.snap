@@ -104,12 +104,12 @@ Object {
 }
 `;
 
-exports[`RSVP block actions set RSVP loading 1`] = `
+exports[`RSVP block actions set RSVP is loading 1`] = `
 Object {
   "payload": Object {
-    "loading": true,
+    "isLoading": true,
   },
-  "type": "@@MT/TICKETS/SET_RSVP_LOADING",
+  "type": "@@MT/TICKETS/SET_RSVP_IS_LOADING",
 }
 `;
 

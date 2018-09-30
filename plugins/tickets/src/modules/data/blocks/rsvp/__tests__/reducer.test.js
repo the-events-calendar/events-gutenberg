@@ -122,8 +122,8 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPHasChanges( true ) ) ).toMatchSnapshot();
 	} );
 
-	it( 'should set the loading', () => {
-		expect( reducer( DEFAULT_STATE, actions.setRSVPLoading( true ) ) ).toMatchSnapshot();
+	it( 'should set the is loading', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPIsLoading( true ) ) ).toMatchSnapshot();
 	} );
 
 	it( 'should set the header image state', () => {

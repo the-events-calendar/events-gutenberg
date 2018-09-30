@@ -102,10 +102,10 @@ export const setRSVPHasChanges = ( hasChanges ) => ( {
 	},
 } );
 
-export const setRSVPLoading = ( loading ) => ( {
-	type: types.SET_RSVP_LOADING,
+export const setRSVPIsLoading = ( isLoading ) => ( {
+	type: types.SET_RSVP_IS_LOADING,
 	payload: {
-		loading,
+		isLoading,
 	},
 } );
 
