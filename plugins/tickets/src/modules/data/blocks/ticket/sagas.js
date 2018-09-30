@@ -13,6 +13,7 @@ import {
 	DEFAULT_STATE as DEFAULT_UI_STATE,
 } from '@moderntribe/tickets/data/blocks/ticket/reducers/ui';
 import { endpointUrl } from '@moderntribe/common/utils/api';
+import { config } from '@moderntribe/common/src/modules/utils/globals';
 
 /**
  * @todo missing tests.
@@ -109,7 +110,6 @@ export function* setInitialState( action ) {
 	const { get } = action.payload;
 
 	const header = parseInt( get( 'header', DEFAULT_UI_STATE.header ), 10 ) || 0;
-
 	const sharedCapacity = get( 'sharedCapacity' );
 
 	// Meta value is '0' however fields use empty string as default
@@ -120,6 +120,11 @@ export function* setInitialState( action ) {
 	if ( header > 0 ) {
 		yield call( getMedia, header );
 	}
+
+	const tickets = config().tickets || {};
+	const defaultProvider = tickets.default_provider || '';
+	const provider = get( 'provider', DEFAULT_UI_STATE.provider );
+	yield put( actions.setProvider( provider || defaultProvider ) );
 }
 
 export default function* watchers() {
