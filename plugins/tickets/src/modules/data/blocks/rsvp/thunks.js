@@ -118,6 +118,13 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 				const totalPages = headers.get( 'x-wp-totalpages' );
 
 				if ( filteredRSVPs.length ) {
+					/* If RSVP for event exists in fetched data */
+					/**
+					 * @todo We are currently only fetching the first RSVP.
+					 *       If an event has more than 1 RSVP set up from
+					 *       the classic editor, only one will be displayed.
+					 *       The strategy to handle this is is being worked on.
+					 */
 					const rsvp = filteredRSVPs[0];
 					const startMoment = moment( rsvp.meta[ utils.KEY_TICKET_START_DATE ] );
 					const endMoment = moment( rsvp.meta[ utils.KEY_TICKET_END_DATE ] );
@@ -154,8 +161,10 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 					} ) );
 					dispatch( actions.setRSVPIsLoading( false ) );
 				} else if ( page < totalPages ) {
+					/* If there are more pages */
 					dispatch( getRSVP( postId, page + 1 ) );
 				} else {
+					/* Did not find RSVP */
 					dispatch( actions.setRSVPIsLoading( false ) );
 				}
 			},
