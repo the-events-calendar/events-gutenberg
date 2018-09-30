@@ -104,6 +104,10 @@ TicketDisplay.propTypes = {
 	isSelected: PropTypes.bool,
 };
 
+/**
+ * @todo Populate the values like currency sign and position from the event date  time block
+ */
+
 TicketDisplay.defaultProps = {
 	title: '',
 	description: '',
