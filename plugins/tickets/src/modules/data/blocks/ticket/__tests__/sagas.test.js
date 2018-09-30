@@ -69,6 +69,7 @@ describe( 'Sharing Block sagas', () => {
 					attributes: {
 						header: '0',
 						sharedCapacity: '0',
+						provider: '',
 					},
 					get( value, defaultValue ) {
 						return props.attributes[ value ] ? props.attributes[ value ] : defaultValue;
@@ -78,6 +79,7 @@ describe( 'Sharing Block sagas', () => {
 
 			test( 'default values', () => {
 				const gen = sagas.setInitialState( { payload: props } );
+				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
 				expect( gen.next().done ).toBe( true );
 			} );
 
@@ -85,6 +87,7 @@ describe( 'Sharing Block sagas', () => {
 				props.attributes.sharedCapacity = '33';
 				const gen = sagas.setInitialState( { payload: props } );
 				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( '33' ) ) );
+				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
 				expect( gen.next().done ).toBe( true );
 			} );
 
@@ -94,6 +97,15 @@ describe( 'Sharing Block sagas', () => {
 				const gen = sagas.setInitialState( { payload: props } );
 				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( '20' ) ) );
 				expect( gen.next().value ).toEqual( call( sagas.getMedia, 509 ) );
+				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
+				expect( gen.next().done ).toBe( true );
+			} );
+
+			test( 'Custom provider is present', () => {
+				props.attributes.provider = 'Tribe__Tickets__Commerce__PayPal__Main';
+				const gen = sagas.setInitialState( { payload: props } );
+				expect( gen.next().value )
+					.toEqual( put( actions.setProvider( 'Tribe__Tickets__Commerce__PayPal__Main' ) ) );
 				expect( gen.next().done ).toBe( true );
 			} );
 		} );

@@ -8,6 +8,11 @@ Object {
       "source": "meta",
       "type": "string",
     },
+    "provider": Object {
+      "meta": "_tribe_default_ticket_provider",
+      "source": "meta",
+      "type": "string",
+    },
     "sharedCapacity": Object {
       "meta": "_tribe_ticket_capacity",
       "source": "meta",
