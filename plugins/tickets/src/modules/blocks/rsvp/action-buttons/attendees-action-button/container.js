@@ -12,7 +12,7 @@ import { selectors } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state ) => ( {
-	isDisabled: selectors.getRSVPLoading( state ),
+	isDisabled: selectors.getRSVPIsLoading( state ),
 } );
 
 export default compose(

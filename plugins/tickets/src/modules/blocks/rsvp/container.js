@@ -51,7 +51,7 @@ const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),
 	rsvpId: selectors.getRSVPId( state ),
 	isInactive: getIsInactive( state ),
-	isLoading: selectors.getRSVPLoading( state ),
+	isLoading: selectors.getRSVPIsLoading( state ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {

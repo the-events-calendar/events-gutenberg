@@ -12,7 +12,7 @@ import { selectors } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
 const getIsDisabled = ( state ) => (
-	selectors.getRSVPLoading( state ) || selectors.getRSVPSettingsOpen( state )
+	selectors.getRSVPIsLoading( state ) || selectors.getRSVPSettingsOpen( state )
 );
 
 const mapStateToProps = ( state ) => ( {

@@ -17,13 +17,13 @@ import { actions, selectors, thunks } from '@moderntribe/tickets/data/blocks/rsv
 import { withStore } from '@moderntribe/common/hoc';
 
 const getIsCancelDisabled = ( state ) => (
-	! selectors.getRSVPHasChanges( state ) || selectors.getRSVPLoading( state )
+	! selectors.getRSVPHasChanges( state ) || selectors.getRSVPIsLoading( state )
 );
 
 const getIsConfirmDisabled = ( state ) => (
 	! selectors.getRSVPTempTitle( state )
 		|| ! selectors.getRSVPHasChanges( state )
-		|| selectors.getRSVPLoading( state )
+		|| selectors.getRSVPIsLoading( state )
 );
 
 const onCancelClick = ( state, dispatch ) => () => {
