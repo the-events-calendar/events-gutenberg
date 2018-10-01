@@ -49,4 +49,9 @@ describe( 'UI reducer', () => {
 		expect( tmp ).toHaveBeenCalledTimes( 1 );
 		expect( tmp ).toHaveBeenCalledWith( DEFAULT_STATE.tmp, actions.setTempSharedCapacity( 100 ) );
 	} );
+
+	test( 'Set loading on the parent block', () => {
+		expect( ui( DEFAULT_STATE, actions.setParentBlockIsLoading( true ) ) ).toMatchSnapshot()
+		expect( ui( DEFAULT_STATE, actions.setParentBlockIsLoading( false ) ) ).toMatchSnapshot();
+	} );
 } );

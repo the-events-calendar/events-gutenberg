@@ -4,6 +4,22 @@
 import { actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 describe( 'Gutenberg actions', () => {
+	describe( 'Initial state', () => {
+		const props = {
+			clientId: 'modern-tribe',
+			attributes: {
+				header: 99,
+				sharedCapacity: 19,
+			},
+		};
+		expect( actions.setInitialState( props ) ).toMatchSnapshot();
+	} );
+
+	describe( 'Parent block is loading', () => {
+		expect( actions.setParentBlockIsLoading( true ) ).toMatchSnapshot();
+		expect( actions.setParentBlockIsLoading( false ) ).toMatchSnapshot();
+	} );
+
 	describe( 'Header actions', () => {
 		test( 'Set null to remove header', () => {
 			expect( actions.setHeader( null ) ).toMatchSnapshot();

@@ -14,7 +14,7 @@ import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state ) => ( {
 	image: {
-		id: selectors.getImageID( state ),
+		id: selectors.getImageId( state ),
 		alt: selectors.getImageAlt( state ),
 		src: selectors.getHeaderSize( state, { size: 'medium' } ),
 	},

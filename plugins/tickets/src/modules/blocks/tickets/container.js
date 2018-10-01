@@ -14,11 +14,17 @@ import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 const mapStateToProps = ( state ) => ( {
 	isBlockSelected: selectors.getParentOrChildSelected( state ),
 	isEditing: selectors.hasActiveBlockId( state ),
+	header: `${ selectors.getImageId( state ) }`,
+	sharedCapacity: selectors.getSharedCapacity( state ),
+	isLoading: selectors.isParentBlockLoading( state ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	setIsSelected( selected ) {
 		dispatch( actions.setParentBlockSelected( selected ) );
+	},
+	setInitialState: ( props ) => {
+		dispatch( actions.setInitialState( props ) );
 	},
 } );
 

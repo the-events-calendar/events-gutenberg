@@ -3,6 +3,8 @@
  */
 import { __ } from '@wordpress/i18n';
 
+import { InnerBlocks } from '@wordpress/editor';
+
 /**
  * Internal dependencies
  */
@@ -24,8 +26,23 @@ export default {
 		html: false,
 	},
 
-	attributes: {},
+	attributes: {
+		sharedCapacity: {
+			type: 'string',
+			source: 'meta',
+			meta: '_tribe_ticket_capacity',
+		},
+		header: {
+			type: 'string',
+			source: 'meta',
+			meta: '_tribe_ticket_header',
+		},
+	},
 
 	edit: Tickets,
-	save: () => null,
+	save: () => (
+		<div>
+			<InnerBlocks.Content />
+		</div>
+	),
 };
