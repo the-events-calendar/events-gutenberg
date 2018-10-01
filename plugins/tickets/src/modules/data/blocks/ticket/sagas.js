@@ -29,6 +29,11 @@ import { config, restNonce } from '@moderntribe/common/src/modules/utils/globals
 export function* setEditInTicketBlock( action ) {
 	const { blockId } = action.payload;
 	const currentId = yield select( selectors.getActiveBlockId );
+	const hasBeenCreated = yield select( selectors.getTicketHasBeenCreated, { blockId } );
+
+	if ( hasBeenCreated ) {
+		return;
+	}
 
 	if ( currentId !== '' ) {
 		yield put( actions.setTicketIsEditing( currentId, false ) );
@@ -146,7 +151,9 @@ export function* getMedia( id ) {
 		};
 		yield put( actions.setHeader( header ) );
 	} catch ( e ) {
-		return null;
+		/**
+		 * @todo: handle error scenario
+		 */
 	} finally {
 		yield put( actions.setParentBlockIsLoading( false ) );
 	}
