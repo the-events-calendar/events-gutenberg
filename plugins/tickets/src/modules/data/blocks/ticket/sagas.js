@@ -4,6 +4,11 @@
 import { put, all, select, takeEvery, call } from 'redux-saga/effects';
 
 /**
+ * Wordpress dependencies
+ */
+import { select as wpSelect } from '@wordpress/data';
+
+/**
  * Internal dependencies
  */
 import * as types from './types';
@@ -12,8 +17,11 @@ import * as selectors from './selectors';
 import {
 	DEFAULT_STATE as DEFAULT_UI_STATE,
 } from '@moderntribe/tickets/data/blocks/ticket/reducers/ui';
-import { endpointUrl } from '@moderntribe/common/utils/api';
-import { config } from '@moderntribe/common/src/modules/utils/globals';
+import {
+	DEFAULT_STATE as DEFAULT_TICKET_STATE,
+} from '@moderntribe/tickets/data/blocks/ticket/reducers/ticket';
+import { wpREST } from '@moderntribe/common/utils/api';
+import { config, restNonce } from '@moderntribe/common/src/modules/utils/globals';
 
 /**
  * @todo missing tests.
@@ -41,6 +49,46 @@ export function* removeActiveTicketBlock( action ) {
 
 	if ( currentId === blockId ) {
 		yield put( actions.setActiveChildBlockId( '' ) );
+	}
+
+	const hasBeenCreated = yield select( selectors.getTicketHasBeenCreated, { blockId } );
+
+	if ( ! hasBeenCreated ) {
+		yield put( actions.removeTicketBlock( blockId ) );
+		return;
+	}
+
+	const ticketId = yield select( selectors.getTicketId, { blockId } );
+	const { remove_ticket_nonce = '' } = restNonce();
+
+	const postId = wpSelect( 'core/editor' ).getCurrentPostId();
+	/**
+	 * Encode params to be passed into the DELETE request as PHP doesn’t transform the request body
+	 * of a DELETE request into a super global.
+	 */
+	const body = [
+		`${ encodeURIComponent( 'post_id' ) }=${ encodeURIComponent( postId ) }`,
+		`${ encodeURIComponent( 'remove_ticket_nonce' ) }=${ encodeURIComponent( remove_ticket_nonce ) }`,
+	];
+
+	try {
+		yield put( actions.setTicketIsLoading( blockId, true ) );
+		const ticket = yield call( wpREST, {
+			path: `tickets/${ ticketId }`,
+			namespace: 'tribe/tickets/v1',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+			},
+			initParams: {
+				method: 'DELETE',
+				body: body.join( '&' ),
+			},
+		} );
+		yield put( actions.removeTicketBlock( ticketId ) );
+	} catch ( e ) {
+		/**
+		 * @todo handle error on removal
+		 */
 	}
 }
 
@@ -127,7 +175,7 @@ export function* setInitialState( action ) {
 
 export default function* watchers() {
 	yield takeEvery( types.SET_TICKET_BLOCK_ID, setEditInTicketBlock );
-	yield takeEvery( types.REMOVE_TICKET_BLOCK, removeActiveTicketBlock );
+	yield takeEvery( types.REQUEST_REMOVAL_OF_TICKET_BLOCK, removeActiveTicketBlock );
 	yield takeEvery( types.SET_CREATE_NEW_TICKET, createNewTicket );
 	yield takeEvery( types.SET_TICKET_IS_EDITING, updateActiveEditBlock );
 	yield takeEvery( types.SET_INITIAL_STATE, setInitialState );

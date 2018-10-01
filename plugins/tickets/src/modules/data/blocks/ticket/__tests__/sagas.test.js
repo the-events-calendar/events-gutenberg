@@ -20,7 +20,7 @@ describe( 'Sharing Block sagas', () => {
 				takeEvery( types.SET_TICKET_BLOCK_ID, sagas.setEditInTicketBlock ),
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.REMOVE_TICKET_BLOCK, sagas.removeActiveTicketBlock ),
+				takeEvery( types.REQUEST_REMOVAL_OF_TICKET_BLOCK, sagas.removeActiveTicketBlock ),
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_CREATE_NEW_TICKET, sagas.createNewTicket ),
@@ -30,6 +30,9 @@ describe( 'Sharing Block sagas', () => {
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_INITIAL_STATE, sagas.setInitialState ),
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_TICKET_INITIAL_STATE, sagas.setTicketInitialState ),
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
