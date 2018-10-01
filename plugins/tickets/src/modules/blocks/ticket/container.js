@@ -17,12 +17,10 @@ const mapStateToProps = ( state, ownProps ) => {
 	return {
 		isBlockSelected: selectors.getParentOrChildSelected( state ),
 		isEditing: selectors.getTicketEditing( state, props ),
-		hasBeenCreated: false,
-		title: selectors.getTicketTitle( state, props ),
-		description: selectors.getTicketDescription( state, props ),
-		price: selectors.getTicketPrice( state, props ),
-		SKU: selectors.getTicketSKU( state, props ),
 		dateIsPristine: ! selectors.getTicketExpires( state, props ),
+		hasBeenCreated: selectors.getTicketHasBeenCreated( state, props ),
+		isLoading: selectors.getTicketIsLoading( state, props ),
+		ticketId: selectors.getTicketId( state, props ),
 	};
 };
 
@@ -30,20 +28,20 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	setIsSelected( selected ) {
 		dispatch( actions.setChildBlockSelected( selected ) );
 	},
-	register() {
-		const { clientId } = ownProps;
-		dispatch( actions.registerTicketBlock( clientId ) );
-	},
-	unregister() {
+	onBlockRemoved() {
 		const { clientId } = ownProps;
 		dispatch( actions.removeTicketBlock( clientId ) );
 	},
 	setInitialState( props ) {
+		const hasBeenCreated = props.get( 'hasBeenCreated', false );
+		dispatch( actions.setTicketInitialState( props ) );
+		const { clientId } = ownProps;
+		dispatch( actions.registerTicketBlock( clientId ) );
 	},
 } );
 
 export default compose(
-	withStore(),
+	withStore( { isolated: true } ),
 	connect(
 		mapStateToProps,
 		mapDispatchToProps,
