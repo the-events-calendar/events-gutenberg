@@ -111,7 +111,7 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 		},
 		actions: {
 			start: () => dispatch( actions.setRSVPIsLoading( true ) ),
-			success: ( { body, headers }) => {
+			success: ( { body, headers } ) => {
 				const filteredRSVPs = body.filter( ( rsvp ) => (
 					rsvp.meta[ utils.KEY_RSVP_FOR_EVENT ] == postId
 				) );
@@ -172,5 +172,27 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 		},
 	};
 
-	dispatch( requestActions. wpRequest( options ) );
+	dispatch( requestActions.wpRequest( options ) );
 };
+
+export const getRSVPHeaderImage = ( id ) => ( dispatch ) => {
+	const path = `media/${ id }`;
+
+	const options = {
+		path,
+		params: {
+			method: METHODS.GET,
+		},
+		actions: {
+			success: ( { body } ) => {
+				dispatch( actions.setRSVPHeaderImage( {
+					id: body.id,
+					alt: body.alt_text,
+					src: body.media_details.sizes.medium.source_url,
+				} ) );
+			},
+		},
+	};
+
+	dispatch( requestActions.wpRequest( options ) );
+}
