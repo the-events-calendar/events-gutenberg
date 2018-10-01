@@ -329,6 +329,42 @@ Object {
 }
 `;
 
+exports[`Gutenberg actions Single block actions Ticket has been created 1`] = `
+Object {
+  "payload": Object {
+    "hasBeenCreated": true,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_HAS_BEEN_CREATED",
+}
+`;
+
+exports[`Gutenberg actions Single block actions Ticket has been created 2`] = `
+Object {
+  "payload": Object {
+    "hasBeenCreated": false,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_HAS_BEEN_CREATED",
+}
+`;
+
+exports[`Gutenberg actions Single block actions Ticket is loading 1`] = `
+Object {
+  "payload": Object {
+    "isLoading": true,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_IS_LOADING",
+}
+`;
+
+exports[`Gutenberg actions Single block actions Ticket is loading 2`] = `
+Object {
+  "payload": Object {
+    "isLoading": false,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_IS_LOADING",
+}
+`;
+
 exports[`Gutenberg actions Single block actions Ticket price 1`] = `
 Object {
   "payload": Object {

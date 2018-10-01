@@ -150,5 +150,15 @@ describe( 'Gutenberg actions', () => {
 			expect( actions.setTicketEndDateMoment( blockId, { type: 'moment' } ) ).toMatchSnapshot();
 			expect( actions.setTicketEndDateMoment( blockId, null ) ).toMatchSnapshot();
 		} );
+
+		test( 'Ticket has been created', () => {
+			expect( actions.seTicketHasBeenCreated( blockId, true ) ).toMatchSnapshot();
+			expect( actions.seTicketHasBeenCreated( blockId, false ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket is loading', () => {
+			expect( actions.setTicketIsLoading( blockId, true ) ).toMatchSnapshot();
+			expect( actions.setTicketIsLoading( blockId, false ) ).toMatchSnapshot();
+		} );
 	} );
 } );

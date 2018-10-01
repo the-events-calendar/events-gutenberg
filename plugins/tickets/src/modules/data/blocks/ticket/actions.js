@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import { types } from '@moderntribe/tickets/data/blocks/ticket';
+import { TYPES } from '../../../blocks/ticket/edit-container/content/capacity/template';
 
 export const setHeader = ( header ) => ( {
 	type: types.SET_TICKET_HEADER,
@@ -184,11 +185,11 @@ export const setTicketIsEditing = ( blockId, isEditing ) => ( {
 	},
 } );
 
-export const setTicketId = ( blockId, postId ) => ( {
+export const setTicketId = ( blockId, ticketId ) => ( {
 	type: types.SET_TICKET_ID,
 	payload: {
 		blockId,
-		postId,
+		ticketId,
 	},
 } );
 
@@ -221,4 +222,25 @@ export const setTicketEndDateMoment = ( blockId, endDateMoment ) => ( {
 		blockId,
 		endDateMoment,
 	},
+} );
+
+export const setTicketIsLoading = ( blockId, isLoading ) => ( {
+	type: types.SET_TICKET_IS_LOADING,
+	payload: {
+		blockId,
+		isLoading,
+	},
+} );
+
+export const seTicketHasBeenCreated = ( blockId, hasBeenCreated ) => ( {
+	type: types.SET_TICKET_HAS_BEEN_CREATED,
+	payload: {
+		blockId,
+		hasBeenCreated,
+	},
+} );
+
+export const setTicketInitialState = ( props ) => ( {
+	type: types.SET_TICKET_INITIAL_STATE,
+	payload: props,
 } );
