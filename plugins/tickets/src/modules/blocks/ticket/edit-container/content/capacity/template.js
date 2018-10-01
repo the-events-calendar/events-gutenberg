@@ -81,10 +81,10 @@ Input.propTypes = {
 
 class Capacity extends PureComponent {
 	static propTypes = {
-		type: PropTypes.oneOf( Object.keys( TYPES ) ),
+		type: PropTypes.oneOf( Object.keys( [ 'unlimited', 'capped', 'own' ] ) ),
 		capacityOptions: PropTypes.arrayOf( PropTypes.shape( {
 			name: PropTypes.string,
-			value: PropTypes.oneOf( Object.keys( TYPES ) ),
+			value: PropTypes.oneOf( [ 'unlimited', 'capped', 'own' ] ),
 		} ) ),
 		onSelectType: PropTypes.func,
 		capacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
