@@ -247,6 +247,7 @@ export const getRSVPHeaderImage = ( id ) => ( dispatch ) => {
 			method: METHODS.GET,
 		},
 		actions: {
+			start: () => dispatch( actions.setRSVPIsSettingsLoading( true ) ),
 			success: ( { body } ) => {
 				dispatch( actions.setRSVPHeaderImage( {
 					id: body.id,
@@ -254,6 +255,7 @@ export const getRSVPHeaderImage = ( id ) => ( dispatch ) => {
 					src: body.media_details.sizes.medium.source_url,
 				} ) );
 			},
+			error: () => dispatch( actions.setRSVPIsSettingsLoading( false ) ),
 		},
 	};
 
