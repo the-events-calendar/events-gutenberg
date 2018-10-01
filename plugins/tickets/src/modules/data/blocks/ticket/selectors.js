@@ -238,11 +238,6 @@ export const getTicketEditing = createSelector(
 	( block ) => block.isEditing,
 );
 
-export const getTicketVolatile = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.postId === null,
-);
-
 export const getTicketExpires = createSelector(
 	[ getTicketBlock ],
 	( block ) => ! block.dateIsPristine,
@@ -271,4 +266,19 @@ export const getTicketStartDateMoment = createSelector(
 export const getTicketEndDateMoment = createSelector(
 	[ getTicketBlock ],
 	( block ) => block.endDateMoment,
+);
+
+export const getTicketIsLoading = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.isLoading,
+);
+
+export const getTicketHasBeenCreated = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.hasBeenCreated,
+);
+
+export const getTicketId = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.ticketId,
 );
