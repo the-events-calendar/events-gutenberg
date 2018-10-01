@@ -26,8 +26,10 @@ export const DEFAULT_STATE = {
 	capacityType: TYPES.independent,
 	capacity: '',
 	isEditing: false,
-	ticketId: null,
+	ticketId: 0,
 	sold: 0,
+	isLoading: false,
+	hasBeenCreated: false,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -106,6 +108,16 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				endDateMoment: action.payload.endDateMoment,
+			};
+		case types.SET_TICKET_IS_LOADING:
+			return {
+				...state,
+				isLoading: action.payload.isLoading,
+			};
+		case types.SET_TICKET_HAS_BEEN_CREATED:
+			return {
+				...state,
+				hasBeenCreated: action.payload.hasBeenCreated,
 			};
 		default:
 			return state;

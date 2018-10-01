@@ -95,4 +95,18 @@ describe( 'Individual Ticket reducer', () => {
 		);
 		expect( expected ).toMatchSnapshot();
 	} );
+
+	test( 'Set is loading value', () => {
+		expect( ticket( DEFAULT_STATE, actions.setTicketIsLoading( blockId, false ) ) )
+			.toMatchSnapshot();
+		expect( ticket( DEFAULT_STATE, actions.setTicketIsLoading( blockId, true ) ) )
+			.toMatchSnapshot();
+	} );
+
+	test( 'Set has been created value', () => {
+		expect( ticket( DEFAULT_STATE, actions.seTicketHasBeenCreated( blockId, false ) ) )
+			.toMatchSnapshot();
+		expect( ticket( DEFAULT_STATE, actions.seTicketHasBeenCreated( blockId, true ) ) )
+			.toMatchSnapshot();
+	} );
 } );

@@ -23,6 +23,98 @@ Object {
 }
 `;
 
+exports[`Individual Ticket reducer Set has been created value 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "hasBeenCreated": false,
+  "isEditing": false,
+  "isLoading": false,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "ticketId": null,
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer Set has been created value 2`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "hasBeenCreated": true,
+  "isEditing": false,
+  "isLoading": false,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "ticketId": null,
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer Set is loading value 1`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "hasBeenCreated": false,
+  "isEditing": false,
+  "isLoading": false,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "ticketId": null,
+  "title": "",
+}
+`;
+
+exports[`Individual Ticket reducer Set is loading value 2`] = `
+Object {
+  "SKU": "",
+  "capacity": "",
+  "capacityType": "independent",
+  "dateIsPristine": true,
+  "description": "",
+  "endDate": "January 10, 2018",
+  "endDateMoment": "2018-01-10T17:30:00.000Z",
+  "endTime": "17:30",
+  "hasBeenCreated": false,
+  "isEditing": false,
+  "isLoading": true,
+  "price": 0,
+  "sold": 0,
+  "startDate": "January 10, 2018",
+  "startDateMoment": "2018-01-10T17:30:00.000Z",
+  "startTime": "17:30",
+  "ticketId": null,
+  "title": "",
+}
+`;
+
 exports[`Individual Ticket reducer Set start date moment object 1`] = `
 Object {
   "SKU": "",
