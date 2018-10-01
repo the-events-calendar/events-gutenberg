@@ -12,6 +12,10 @@ describe( 'RSVP block actions', () => {
 		expect( actions.deleteRSVP() ).toMatchSnapshot();
 	} );
 
+	test( 'set RSVP id', () => {
+		expect( actions.setRSVPId( 42 ) ).toMatchSnapshot();
+	} );
+
 	test( 'set RSVP title', () => {
 		expect( actions.setRSVPTitle( 'title' ) ).toMatchSnapshot();
 	} );
@@ -98,6 +102,10 @@ describe( 'RSVP block actions', () => {
 
 	test( 'set RSVP has changes', () => {
 		expect( actions.setRSVPHasChanges( true ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP is loading', () => {
+		expect( actions.setRSVPIsLoading( true ) ).toMatchSnapshot();
 	} );
 
 	test( 'set RSVP header image', () => {

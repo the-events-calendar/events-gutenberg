@@ -8,8 +8,12 @@ import { compose } from 'redux';
  * Internal dependencies
  */
 import SettingsActionButton from './template';
-import { actions } from '@moderntribe/tickets/data/blocks/rsvp';
+import { actions, selectors } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
+
+const mapStateToProps = ( state ) => ( {
+	isDisabled: selectors.getRSVPIsLoading( state ),
+} );
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	onClick: () => dispatch( actions.setRSVPSettingsOpen( true ) ),
@@ -17,5 +21,5 @@ const mapDispatchToProps = ( dispatch ) => ( {
 
 export default compose(
 	withStore(),
-	connect( null, mapDispatchToProps ),
+	connect( mapStateToProps, mapDispatchToProps ),
 )( SettingsActionButton );

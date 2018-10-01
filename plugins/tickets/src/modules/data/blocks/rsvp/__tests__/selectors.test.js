@@ -17,6 +17,10 @@ describe( 'RSVP block selectors', () => {
 		expect( selectors.getRSVPBlock( state ) ).toEqual( DEFAULT_STATE );
 	} );
 
+	it( 'should return the id', () => {
+		expect( selectors.getRSVPId( state ) ).toBe( DEFAULT_STATE.id );
+	} );
+
 	it( 'should return the title', () => {
 		expect( selectors.getRSVPTitle( state ) ).toBe( DEFAULT_STATE.title );
 	} );
@@ -103,6 +107,10 @@ describe( 'RSVP block selectors', () => {
 
 	it( 'should return the has changes', () => {
 		expect( selectors.getRSVPHasChanges( state ) ).toBe( DEFAULT_STATE.hasChanges );
+	} );
+
+	it( 'should return the is loading', () => {
+		expect( selectors.getRSVPIsLoading( state ) ).toBe( DEFAULT_STATE.isLoading );
 	} );
 
 	it( 'should return the header image object', () => {
