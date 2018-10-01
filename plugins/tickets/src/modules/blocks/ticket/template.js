@@ -1,9 +1,14 @@
 /**
  * External dependencies
  */
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
+/**
+ * WordPress dependencies
+ */
+import { Spinner } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -17,16 +22,16 @@ class Ticket extends PureComponent {
 	static propTypes = {
 		isEditing: PropTypes.bool,
 		setIsSelected: PropTypes.func,
-		register: PropTypes.func.isRequired,
-		unregister: PropTypes.func.isRequired,
 		isSelected: PropTypes.bool,
 		clientId: PropTypes.string.isRequired,
 		hasBeenCreated: PropTypes.bool,
+		isLoading: PropTypes.bool,
 	};
 
 	static defaultProps = {
 		isEditing: false,
 		hasBeenCreated: false,
+		isLoading: false,
 	};
 
 	updateIsSelected = () => {
@@ -35,8 +40,6 @@ class Ticket extends PureComponent {
 	};
 
 	componentDidMount() {
-		const { register } = this.props;
-		register();
 		this.updateIsSelected();
 	}
 
@@ -47,25 +50,35 @@ class Ticket extends PureComponent {
 	}
 
 	componentWillUnmount() {
-		const { unregister } = this.props;
-		unregister();
 		this.updateIsSelected();
 	}
 
+	renderComponents() {
+		const { isEditing, clientId, isSelected } = this.props;
+
+		return isEditing
+			? <TicketEditContainer blockId={ clientId } />
+			: <TicketDisplayContainer blockId={ clientId } isSelected={ isSelected } />;
+	}
+
+	renderSpinner() {
+		return (
+			<div className="tribe-editor__ticket--loading">
+				<Spinner />
+			</div>
+		);
+	}
+
 	render() {
-		const { isEditing, clientId, isSelected, hasBeenCreated }  = this.props;
+		const { isLoading, isEditing } = this.props;
 		const containerClass = classNames( 'tribe-editor__ticket', {
 			'tribe-editor__ticket--edit': isEditing,
 			'tribe-editor__ticket--display': ! isEditing,
 		} );
 
-		const showEditContainer = isEditing && ! hasBeenCreated;
-
 		return (
 			<article className={ containerClass }>
-				{ showEditContainer
-					? <TicketEditContainer blockId={ clientId } />
-					: <TicketDisplayContainer blockId={ clientId } isSelected={ isSelected } /> }
+				{ isLoading ? this.renderSpinner() : this.renderComponents() }
 			</article>
 		);
 	}
