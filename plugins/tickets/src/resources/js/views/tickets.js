@@ -98,26 +98,6 @@ tribe.tickets.block = {
 	} );
 
 	/**
-	 * Handle the tickets form submission
-	 *
-	 * @since TBD
-	 *
-	 * @return void
-	 */
-	$( obj.selector.container ).on( 'click',
-		obj.selector.submit,
-		function( e ) {
-			e.preventDefault();
-
-			var provider = obj.getProvider();
-			var submit   = obj.handleSubmit( provider );
-
-			if ( submit ) {
-				$( obj.selector.container ).submit();
-			}
-	} );
-
-	/**
 	 * Get the tickets IDs
 	 *
 	 * @since TBD
