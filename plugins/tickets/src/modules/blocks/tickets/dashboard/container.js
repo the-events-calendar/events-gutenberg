@@ -14,6 +14,7 @@ import { withStore } from '@moderntribe/common/hoc';
 const mapStateToProps = ( state ) => ( {
 	isSettingsOpen: selectors.getSettingsIsOpen( state ),
 	activeBlockId: selectors.getActiveBlockId( state ),
+	isLoading: selectors.isParentBlockLoading( state ),
 } );
 
 export default compose(

@@ -1,8 +1,13 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+
+/**
+ * Wordpress dependencies
+ */
+import { Spinner } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -10,8 +15,24 @@ import PropTypes from 'prop-types';
 import TicketsActionDashboard from '@moderntribe/tickets/blocks/tickets/action-dashboard/container';
 import TicketsSettingsDashboard from '@moderntribe/tickets/blocks/tickets/settings/container';
 
-const TicketsDashboard = ( { isSelected, isSettingsOpen, activeBlockId, isEditing, clientId } ) => ( isSelected && (
-	isSettingsOpen
+const TicketsDashboard = ( props ) => {
+	const { isLoading, isSelected, isSettingsOpen, activeBlockId, isEditing, clientId } = props;
+
+	if ( isLoading ) {
+		return (
+			<Fragment>
+				<div className="tribe-editor__tickets-container--loading">
+					<Spinner />
+				</div>
+			</Fragment>
+		);
+	}
+
+	if ( ! isSelected ) {
+		return null;
+	}
+
+	return ( isSettingsOpen
 		? <TicketsSettingsDashboard />
 		: (
 			<TicketsActionDashboard
@@ -19,8 +40,8 @@ const TicketsDashboard = ( { isSelected, isSettingsOpen, activeBlockId, isEditin
 				isEditing={ isEditing }
 				clientId={ clientId }
 			/>
-		)
-) );
+		) );
+}
 
 TicketsDashboard.propTypes = {
 	isSelected: PropTypes.bool.isRequired,
