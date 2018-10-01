@@ -28,7 +28,7 @@ const RSVPSettingsDashboard = ( { isSettingsLoading, onCloseClick } ) => (
 			content={ (
 				<Fragment>
 					<RSVPHeaderImage />
-					{ isSettingsLoading && <Spinner />}
+					{ isSettingsLoading && <Spinner /> }
 				</Fragment>
 			) }
 			onCloseClick={ onCloseClick }
