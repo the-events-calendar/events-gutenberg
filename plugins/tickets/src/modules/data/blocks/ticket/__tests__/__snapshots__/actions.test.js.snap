@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `
+Object {
+  "payload": Object {
+    "attributes": Object {
+      "header": 99,
+      "sharedCapacity": 19,
+    },
+    "clientId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/SET_INITIAL_STATE",
+}
+`;
+
+exports[` 2`] = `
+Object {
+  "payload": Object {
+    "isParentBlockLoading": true,
+  },
+  "type": "@@MT/TICKETS/SET_PARENT_BLOCK_LOADING",
+}
+`;
+
+exports[` 3`] = `
+Object {
+  "payload": Object {
+    "isParentBlockLoading": false,
+  },
+  "type": "@@MT/TICKETS/SET_PARENT_BLOCK_LOADING",
+}
+`;
+
 exports[`Gutenberg actions Active block selected Active block 1`] = `
 Object {
   "payload": Object {

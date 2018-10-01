@@ -1,9 +1,14 @@
 /**
  * External dependencies
  */
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
+/**
+ * Wordpress dependencies
+ */
+import { Spinner } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -18,12 +23,15 @@ class TicketsTemplate extends PureComponent {
 		isBlockSelected: PropTypes.bool,
 		setIsSelected: PropTypes.func,
 		isEditing: PropTypes.bool,
+		isLoading: PropTypes.bool,
+		clientId: PropTypes.string,
 	};
 
 	static defaultProps = {
 		isSelected: false,
 		isEditing: false,
 		isBlockSelected: false,
+		isLoading: false,
 	};
 
 	updateIsSelected = () => {
@@ -45,15 +53,19 @@ class TicketsTemplate extends PureComponent {
 		this.updateIsSelected();
 	}
 
-	render() {
-		const { isBlockSelected, isEditing, clientId } = this.props;
+	renderSpinner() {
 		return (
-			<div
-				className={ classNames(
-					'tribe-editor__tickets-container',
-					{ 'tribe-editor__tickets-container--selected': isBlockSelected },
-				) }
-			>
+			<div className="tribe-editor__tickets-container--loading">
+				<Spinner />
+			</div>
+		);
+	}
+
+	renderComponents() {
+		const { isBlockSelected, isEditing, clientId } = this.props;
+
+		return (
+			<Fragment>
 				<TicketsContainer
 					isSelected={ isBlockSelected }
 					isEditing={ isEditing }
@@ -64,6 +76,20 @@ class TicketsTemplate extends PureComponent {
 					isEditing={ isEditing }
 					clientId={ clientId }
 				/>
+			</Fragment>
+		)
+	}
+
+	render() {
+		const { isBlockSelected, isLoading } = this.props;
+		return (
+			<div
+				className={ classNames(
+					'tribe-editor__tickets-container',
+					{ 'tribe-editor__tickets-container--selected': isBlockSelected },
+				) }
+			>
+				{ isLoading ? this.renderSpinner() : this.renderComponents() }
 			</div>
 		);
 	}

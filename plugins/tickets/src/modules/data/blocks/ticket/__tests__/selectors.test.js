@@ -59,6 +59,12 @@ const image = {
 			url: 'http://gutenberg.local/wp-content/uploads/2018/09/aircraft-1362586_1920-150x150.jpg',
 			orientation: 'landscape',
 		},
+		media_size: {
+			height: 150,
+			width: 150,
+			source_url: 'http://gutenberg.local/wp-content/uploads/2018/09/aircraft-1362586_1920-150x150.jpg',
+			orientation: 'landscape',
+		},
 	},
 };
 
@@ -97,8 +103,8 @@ describe( 'Ticket blocks selectors', () => {
 
 		test( 'Select image id', () => {
 			newState.tickets.blocks.ticket.ui.header = image;
-			expect( selectors.getImageID( state ) ).toBe( 0 );
-			expect( selectors.getImageID( newState ) ).toBe( 4961 );
+			expect( selectors.getImageId( state ) ).toBe( 0 );
+			expect( selectors.getImageId( newState ) ).toBe( 4961 );
 		} );
 
 		test( 'Select image size', () => {
@@ -106,6 +112,12 @@ describe( 'Ticket blocks selectors', () => {
 			expect( selectors.getHeaderSize( newState, { size: 'large' } ) )
 				.toEqual( image.sizes.large.url );
 			expect( selectors.getHeaderSize( newState, { size: 'unknown' } ) ).toBe( '' );
+		} );
+
+		test( 'Select the image size when coming from media endpoint', () => {
+			newState.tickets.blocks.ticket.ui.header = image;
+			expect( selectors.getHeaderSize( newState, { size: 'media_size' } ) )
+				.toEqual( image.sizes.media_size.source_url );
 		} );
 	} );
 
