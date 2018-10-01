@@ -65,6 +65,8 @@ describe( 'Tickets block types', () => {
 				.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_IS_LOADING` );
 			expect( types.SET_TICKET_HAS_BEEN_CREATED )
 				.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_HAS_BEEN_CREATED` );
+			expect( types.REQUEST_REMOVAL_OF_TICKET_BLOCK )
+				.toBe( `${ PREFIX_TICKETS_STORE }/REQUEST_REMOVAL_OF_TICKET_BLOCK` );
 		} );
 	} );
 } );

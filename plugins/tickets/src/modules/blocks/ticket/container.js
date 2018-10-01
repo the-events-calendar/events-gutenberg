@@ -30,7 +30,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	},
 	onBlockRemoved() {
 		const { clientId } = ownProps;
-		dispatch( actions.removeTicketBlock( clientId ) );
+		dispatch( actions.requestRemovalOfTicketBlock( clientId ) );
 	},
 	setInitialState( props ) {
 		const hasBeenCreated = props.get( 'hasBeenCreated', false );

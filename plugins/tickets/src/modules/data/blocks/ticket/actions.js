@@ -76,6 +76,13 @@ export const registerTicketBlock = ( blockId ) => ( {
 	},
 } );
 
+export const requestRemovalOfTicketBlock = ( blockId ) => ( {
+	type: types.REQUEST_REMOVAL_OF_TICKET_BLOCK,
+	payload: {
+		blockId,
+	},
+} );
+
 export const removeTicketBlock = ( blockId ) => ( {
 	type: types.REMOVE_TICKET_BLOCK,
 	payload: {
