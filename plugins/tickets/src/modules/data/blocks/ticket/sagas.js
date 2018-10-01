@@ -90,9 +90,7 @@ export function* updateActiveEditBlock( action ) {
 export function* getMedia( id ) {
 	yield put( actions.setParentBlockIsLoading( true ) );
 	try {
-		const endpoint = endpointUrl( `/media/${ id }` );
-		const response = yield call( fetch, endpoint );
-		const media = yield call( [ response, 'json' ] );
+		const media = yield call( wpREST, { path: `media/${ id }` } );
 		const header = {
 			id: media.id,
 			alt: media.alt_text,
