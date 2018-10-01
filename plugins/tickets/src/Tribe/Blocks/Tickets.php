@@ -206,7 +206,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 
 	public function get_provider_id( $provider ) {
 
-		switch ( $provider ) {
+		switch ( $provider->class_name ) {
 			case 'Tribe__Tickets__Commerce__PayPal__Main' :
 				return 'tpp';
 				break;
