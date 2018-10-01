@@ -13,12 +13,12 @@ Object {
   },
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -34,7 +34,6 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
@@ -42,6 +41,7 @@ Object {
     "title": "Start Moment",
   },
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -57,12 +57,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": 10,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": undefined,
   "title": "",
 }
 `;
@@ -78,12 +78,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -99,12 +99,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -120,12 +120,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -141,12 +141,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -162,12 +162,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -183,12 +183,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": undefined,
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -204,12 +204,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": undefined,
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -225,12 +225,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": true,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -246,12 +246,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": true,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -267,12 +267,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 102,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -288,12 +288,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -309,12 +309,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": undefined,
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -330,12 +330,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": undefined,
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "",
 }
 `;
@@ -351,12 +351,12 @@ Object {
   "endDateMoment": "2018-01-10T17:30:00.000Z",
   "endTime": "17:30",
   "isEditing": false,
-  "postId": null,
   "price": 0,
   "sold": 0,
   "startDate": "January 10, 2018",
   "startDateMoment": "2018-01-10T17:30:00.000Z",
   "startTime": "17:30",
+  "ticketId": null,
   "title": "Modern Tribe",
 }
 `;

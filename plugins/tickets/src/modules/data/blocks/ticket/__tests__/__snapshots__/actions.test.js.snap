@@ -203,7 +203,7 @@ Object {
     "blockId": "modern-tribe",
     "postId": 99,
   },
-  "type": "@@MT/TICKETS/SET_TICKET_POST_ID",
+  "type": "@@MT/TICKETS/SET_TICKET_ID",
 }
 `;
 

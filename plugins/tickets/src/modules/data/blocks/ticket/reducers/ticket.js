@@ -26,7 +26,7 @@ export const DEFAULT_STATE = {
 	capacityType: TYPES.independent,
 	capacity: '',
 	isEditing: false,
-	postId: null,
+	ticketId: null,
 	sold: 0,
 };
 
@@ -87,10 +87,10 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				isEditing: action.payload.isEditing,
 			};
-		case types.SET_TICKET_POST_ID:
+		case types.SET_TICKET_ID:
 			return {
 				...state,
-				postId: action.payload.postId,
+				ticketId: action.payload.ticketId,
 			};
 		case types.SET_TICKET_DATE_PRISTINE:
 			return {

@@ -70,7 +70,7 @@ describe( 'Individual Ticket reducer', () => {
 	} );
 
 	test( 'Set ticket post ID', () => {
-		expect( ticket( DEFAULT_STATE, actions.setTicketPostId( blockId, 10 ) ) ).toMatchSnapshot();
+		expect( ticket( DEFAULT_STATE, actions.setTicketId( blockId, 10 ) ) ).toMatchSnapshot();
 	} );
 
 	test( 'Set ticket pristine', () => {

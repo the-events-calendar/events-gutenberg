@@ -35,7 +35,7 @@ describe( 'Tickets block types', () => {
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_END_DATE` );
 		expect( types.SET_TICKET_DATE_PRISTINE )
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_DATE_PRISTINE` );
-		expect( types.SET_TICKET_POST_ID ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_POST_ID` );
+		expect( types.SET_TICKET_ID ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_ID` );
 		expect( types.SET_UPDATE_TICKET ).toBe( `${ PREFIX_TICKETS_STORE }/SET_UPDATE_TICKET` );
 		expect( types.REMOVE_TICKET_BLOCK ).toBe( `${ PREFIX_TICKETS_STORE }/REMOVE_TICKET_BLOCK` );
 		expect( types.SET_TICKET_TITLE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_TITLE` );

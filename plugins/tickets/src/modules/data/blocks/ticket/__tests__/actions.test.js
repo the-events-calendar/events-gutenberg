@@ -133,7 +133,7 @@ describe( 'Gutenberg actions', () => {
 		} );
 
 		test( 'Set ticket post ID', () => {
-			expect( actions.setTicketPostId( blockId, 99 ) ).toMatchSnapshot();
+			expect( actions.setTicketId( blockId, 99 ) ).toMatchSnapshot();
 		} );
 
 		test( 'Ticket editing flag', () => {

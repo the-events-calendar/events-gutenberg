@@ -62,7 +62,7 @@ export function* createNewTicket( action ) {
 	yield all( [
 		put( actions.setActiveChildBlockId( '' ) ),
 		put( actions.setTicketIsEditing( blockId, false ) ),
-		put( actions.setTicketPostId( blockId, 99 ) ),
+		put( actions.setTicketId( blockId, 99 ) ),
 	] );
 }
 

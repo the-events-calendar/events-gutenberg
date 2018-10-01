@@ -184,8 +184,8 @@ export const setTicketIsEditing = ( blockId, isEditing ) => ( {
 	},
 } );
 
-export const setTicketPostId = ( blockId, postId ) => ( {
-	type: types.SET_TICKET_POST_ID,
+export const setTicketId = ( blockId, postId ) => ( {
+	type: types.SET_TICKET_ID,
 	payload: {
 		blockId,
 		postId,
