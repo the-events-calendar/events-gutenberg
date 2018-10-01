@@ -234,6 +234,23 @@ describe( 'Ticket blocks selectors', () => {
 			expect( selectors.getTicketValidness( newState, ownProps ) ).toBe( false );
 		} );
 
+		test( 'Ticket default loading value', () => {
+			expect( selectors.getTicketIsLoading( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Ticket custom loading value', () => {
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].isLoading = true;
+			expect( selectors.getTicketIsLoading( newState, ownProps ) ).toBe( true );
+		} );
+
+		test( 'Ticket has been created default value', () => {
+			expect( selectors.getTicketHasBeenCreated( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Ticket has been created custom value', () => {
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].hasBeenCreated = true;
+			expect( selectors.getTicketHasBeenCreated( newState, ownProps ) ).toBe( true );
+		} );
 	} );
 } );
 
