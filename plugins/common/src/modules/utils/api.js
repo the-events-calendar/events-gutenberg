@@ -36,7 +36,11 @@ export const wpREST = async ( params ) => {
 			credentials: 'include',
 			headers,
 		} );
-		return await response.json();
+
+		if ( response.ok ) {
+			return await response.json();
+		}
+		throw new Error( 'Response was not completed correctly' );
 	} catch ( e ) {
 		throw e;
 	}
