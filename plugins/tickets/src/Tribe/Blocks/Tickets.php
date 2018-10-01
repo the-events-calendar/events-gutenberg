@@ -60,15 +60,21 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
-		$post_id            = tribe( 'gutenberg.tickets.template' )->get( 'post_id' );
+		/**
+		 * @todo: We'll need to get the post id from ET later, so support it as standalone
+		 */
+		$post_id            = tribe( 'gutenberg.events.template' )->get( 'post_id' );
 		$args['attributes'] = $this->attributes( $attributes );
 		$args['tickets']    = $this->get_tickets( $post_id );
 
 		// Fetch the default provider
-		$provider = Tribe__Tickets__Tickets::get_event_ticket_provider( $post_id );
-		$provider = call_user_func( array( $provider, 'get_instance' ) );
+		$provider    = Tribe__Tickets__Tickets::get_event_ticket_provider( $post_id );
+		$provider    = call_user_func( array( $provider, 'get_instance' ) );
+		$provider_id = $this->get_provider_id( $provider );
 
-		$args['provider'] = $provider;
+		$args['provider']    = $provider;
+		$args['provider_id'] = $provider_id;
+		$args['cart_url']    = 'tpp' !== $provider_id ? $provider->get_cart_url() : '';
 
 		// Add the rendering attributes into global context
 		tribe( 'gutenberg.tickets.template' )->add_template_globals( $args );
@@ -196,5 +202,23 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 		}
 
 		wp_send_json_success( $response );
+	}
+
+	public function get_provider_id( $provider ) {
+
+		switch ( $provider->class_name ) {
+			case 'Tribe__Tickets__Commerce__PayPal__Main' :
+				return 'tpp';
+				break;
+			case 'Tribe__Tickets_Plus__Commerce__WooCommerce__Main' :
+				return 'woo';
+				break;
+			case 'Tribe__Tickets_Plus__Commerce__EDD__Main' :
+				return 'edd';
+				break;
+			default:
+				return 'tpp';
+		}
+
 	}
 }

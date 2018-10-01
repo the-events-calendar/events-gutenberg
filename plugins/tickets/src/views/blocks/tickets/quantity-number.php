@@ -23,6 +23,7 @@ $max_quantity = tribe( 'tickets.handler' )->get_ticket_max_purchase( $ticket->ID
 		<?php endif; ?>
 		name="quantity_<?php echo absint( $ticket->ID ); ?>"
 		value="0"
+		autocomplete="off"
 		<?php disabled( $must_login ); ?>
 	/>
 </div>
