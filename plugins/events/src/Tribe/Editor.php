@@ -295,6 +295,8 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 				'nonce' => array(
 					'wp_rest' => wp_create_nonce( 'wp_rest' ),
 					'add_ticket_nonce' => wp_create_nonce( 'add_ticket_nonce' ),
+					'edit_ticket_nonce' => wp_create_nonce( 'edit_ticket_nonce' ),
+					'remove_ticket_nonce' => wp_create_nonce( 'remove_ticket_nonce' ),
 				),
 				'namespaces' => array(
 					'core' => 'wp/v2',
