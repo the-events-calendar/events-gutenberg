@@ -102,52 +102,52 @@ export const getRSVPTempDetails = createSelector(
 
 export const getRSVPTempTitle = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempTitle,
+	( tempDetails ) => tempDetails.title,
 );
 
 export const getRSVPTempDescription = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempDescription,
+	( tempDetails ) => tempDetails.description,
 );
 
 export const getRSVPTempCapacity = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempCapacity,
+	( tempDetails ) => tempDetails.capacity,
 );
 
 export const getRSVPTempNotGoingResponses = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempNotGoingResponses,
+	( tempDetails ) => tempDetails.notGoingResponses,
 );
 
 export const getRSVPTempStartDate = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempStartDate,
+	( tempDetails ) => tempDetails.startDate,
 );
 
 export const getRSVPTempStartDateObj = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempStartDateObj,
+	( tempDetails ) => tempDetails.startDateObj,
 );
 
 export const getRSVPTempStartTime = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempStartTime,
+	( tempDetails ) => tempDetails.startTime,
 );
 
 export const getRSVPTempEndDate = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempEndDate,
+	( tempDetails ) => tempDetails.endDate,
 );
 
 export const getRSVPTempEndDateObj = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempEndDateObj,
+	( tempDetails ) => tempDetails.endDateObj,
 );
 
 export const getRSVPTempEndTime = createSelector(
 	[ getRSVPTempDetails ],
-	( tempDetails ) => tempDetails.tempEndTime,
+	( tempDetails ) => tempDetails.endTime,
 );
 
 /**

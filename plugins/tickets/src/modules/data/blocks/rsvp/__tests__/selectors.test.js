@@ -100,52 +100,54 @@ describe( 'RSVP block selectors', () => {
 
 	it( 'should return the temp title', () => {
 		expect( selectors.getRSVPTempTitle( state ) )
-			.toBe( DEFAULT_STATE.tempDetailstitle );
+			.toBe( DEFAULT_STATE.tempDetails.title );
 	} );
 
 	it( 'should return the temp description', () => {
 		expect( selectors.getRSVPTempDescription( state ) )
-			.toBe( DEFAULT_STATE.tempDetailsdescription );
+			.toBe( DEFAULT_STATE.tempDetails.description );
 	} );
 
 	it( 'should return the temp capacity', () => {
 		expect( selectors.getRSVPTempCapacity( state ) )
-			.toBe( DEFAULT_STATE.tempDetailscapacity );
+			.toBe( DEFAULT_STATE.tempDetails.capacity );
 	} );
 
 	it( 'should return the temp not going responses', () => {
+		console.log('selector', selectors.getRSVPTempNotGoingResponses( state ));
+		console.log('state', DEFAULT_STATE.tempDetails.notGoingResponses);
 		expect( selectors.getRSVPTempNotGoingResponses( state ) )
-			.toBe( DEFAULT_STATE.tempDetailsnotGoingResponses );
+			.toBe( DEFAULT_STATE.tempDetails.notGoingResponses );
 	} );
 
 	it( 'should return the temp start date', () => {
 		expect( selectors.getRSVPTempStartDate( state ) )
-			.toBe( DEFAULT_STATE.tempDetailsstartDate );
+			.toBe( DEFAULT_STATE.tempDetails.startDate );
 	} );
 
 	it( 'should return the temp start date object', () => {
 		expect( selectors.getRSVPTempStartDateObj( state ) )
-			.toBe( DEFAULT_STATE.tempDetailsstartDateObj );
+			.toBe( DEFAULT_STATE.tempDetails.startDateObj );
 	} );
 
 	it( 'should return the temp start time', () => {
 		expect( selectors.getRSVPTempStartTime( state ) )
-			.toBe( DEFAULT_STATE.tempDetailsstartTime );
+			.toBe( DEFAULT_STATE.tempDetails.startTime );
 	} );
 
 	it( 'should return the temp end date', () => {
 		expect( selectors.getRSVPTempEndDate( state ) )
-			.toBe( DEFAULT_STATE.tempDetailsendDate );
+			.toBe( DEFAULT_STATE.tempDetails.endDate );
 	} );
 
 	it( 'should return the temp end date object', () => {
 		expect( selectors.getRSVPTempEndDateObj( state ) )
-			.toBe( DEFAULT_STATE.tempDetailsendDateObj );
+			.toBe( DEFAULT_STATE.tempDetails.endDateObj );
 	} );
 
 	it( 'should return the temp end time', () => {
 		expect( selectors.getRSVPTempEndTime( state ) )
-			.toBe( DEFAULT_STATE.tempDetailsendTime );
+			.toBe( DEFAULT_STATE.tempDetails.endTime );
 	} );
 
 	it( 'should return the header image object', () => {
