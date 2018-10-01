@@ -19,16 +19,17 @@ import { Button, Image } from '@moderntribe/common/elements';
 import { Close as CloseIcon } from '@moderntribe/common/icons';
 import './style.pcss';
 
-export const renderImageUploadButton = ( label ) => ( { open } ) => (
+export const renderImageUploadButton = ( disabled, label ) => ( { open } ) => (
 	<Button
 		onClick={ open }
 		className={ [ 'tribe-editor__button--sm', 'tribe-editor__image-upload__upload-button' ] }
+		disabled={ disabled }
 	>
 		{ label }
 	</Button>
 );
 
-export const renderImage = ( image, onRemove ) => (
+export const renderImage = ( disabled, image, onRemove ) => (
 	<div className="tribe-editor__image-upload__image-wrapper">
 		<Image
 			src={ image.src }
@@ -38,6 +39,7 @@ export const renderImage = ( image, onRemove ) => (
 		<Button
 			className="tribe-editor__image-upload__remove-button"
 			onClick={ onRemove }
+			disabled={ disabled }
 		>
 			<CloseIcon />
 			<span className="tribe-editor__image-upload__remove-button-text">
@@ -48,12 +50,14 @@ export const renderImage = ( image, onRemove ) => (
 );
 
 const ImageUpload = ( {
+	buttonDisabled,
 	buttonLabel,
 	className,
 	description,
 	image,
 	onRemove,
 	onSelect,
+	removeButtonDisabled,
 	title,
 } ) => {
 	const hasImageClass = { 'tribe-editor__image-upload--has-image': image.id };
@@ -71,12 +75,12 @@ const ImageUpload = ( {
 				) }
 				{
 					image.id
-						? renderImage( image, onRemove )
+						? renderImage( removeButtonDisabled, image, onRemove )
 						: (
 							<MediaUpload
 								onSelect={ onSelect }
 								type="image"
-								render={ renderImageUploadButton( buttonLabel ) }
+								render={ renderImageUploadButton( buttonDisabled, buttonLabel ) }
 								value={ image.id }
 							/>
 						)
@@ -87,6 +91,7 @@ const ImageUpload = ( {
 };
 
 ImageUpload.propTypes = {
+	buttonDisabled: PropTypes.bool,
 	buttonLabel: PropTypes.string,
 	className: PropTypes.string,
 	description: PropTypes.string,
@@ -97,6 +102,7 @@ ImageUpload.propTypes = {
 	} ).isRequired,
 	onRemove: PropTypes.func.isRequired,
 	onSelect: PropTypes.func.isRequired,
+	removeButtonDisabled: PropTypes.bool,
 	title: PropTypes.string,
 };
 

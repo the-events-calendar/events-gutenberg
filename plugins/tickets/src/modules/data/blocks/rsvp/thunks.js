@@ -7,6 +7,7 @@ import moment from 'moment';
  * Internal dependencies
  */
 import * as actions from './actions';
+import { DEFAULT_STATE } from './reducers/header-image';
 import { actions as requestActions } from '@moderntribe/common/store/middlewares/request';
 import * as momentUtil from '@moderntribe/common/utils/moment';
 import { toSeconds, TIME_FORMAT_HH_MM } from '@moderntribe/common/utils/time';
@@ -196,6 +197,37 @@ export const updateRSVPHeaderImage = ( postId, image ) => ( dispatch ) => {
 					id: image.id,
 					alt: image.alt,
 					src: image.sizes.medium.url,
+				} ) );
+				dispatch( actions.setRSVPIsSettingsLoading( false ) );
+			},
+			error: () => dispatch( actions.setRSVPIsSettingsLoading( false ) ),
+		},
+	};
+
+	dispatch( requestActions.wpRequest( options ) );
+};
+
+export const deleteRSVPHeaderImage = ( postId ) => ( dispatch ) => {
+	const path = `tribe_events/${ postId }`;
+	const body = {
+		meta: {
+			[ utils.KEY_TICKET_HEADER ]: null,
+		},
+	};
+
+	const options = {
+		path,
+		params: {
+			method: METHODS.PUT,
+			body: JSON.stringify( body ),
+		},
+		actions: {
+			start: () => dispatch( actions.setRSVPIsSettingsLoading( true ) ),
+			success: () => {
+				dispatch( actions.setRSVPHeaderImage( {
+					id: DEFAULT_STATE.id,
+					alt: DEFAULT_STATE.alt,
+					src: DEFAULT_STATE.src,
 				} ) );
 				dispatch( actions.setRSVPIsSettingsLoading( false ) );
 			},

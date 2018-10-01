@@ -125,6 +125,34 @@ exports[`renderImage renders the image and button 1`] = `
   />
   <button
     className="tribe-editor__button tribe-editor__image-upload__remove-button"
+    disabled={false}
+    onClick={[MockFunction]}
+    type="button"
+  >
+    <span>
+      icon
+    </span>
+    <span
+      className="tribe-editor__image-upload__remove-button-text"
+    >
+      remove
+    </span>
+  </button>
+</div>
+`;
+
+exports[`renderImage renders the image and disabled button 1`] = `
+<div
+  className="tribe-editor__image-upload__image-wrapper"
+>
+  <img
+    alt="test-alt"
+    className="tribe-editor__image tribe-editor__image-upload__image"
+    src="test-src"
+  />
+  <button
+    className="tribe-editor__button tribe-editor__image-upload__remove-button"
+    disabled={true}
     onClick={[MockFunction]}
     type="button"
   >
@@ -143,6 +171,18 @@ exports[`renderImage renders the image and button 1`] = `
 exports[`renderImageUploadButton renders the button 1`] = `
 <button
   className="tribe-editor__button tribe-editor__button--sm tribe-editor__image-upload__upload-button"
+  disabled={false}
+  onClick={[MockFunction]}
+  type="button"
+>
+  label
+</button>
+`;
+
+exports[`renderImageUploadButton renders the button disabled 1`] = `
+<button
+  className="tribe-editor__button tribe-editor__button--sm tribe-editor__image-upload__upload-button"
+  disabled={true}
   onClick={[MockFunction]}
   type="button"
 >

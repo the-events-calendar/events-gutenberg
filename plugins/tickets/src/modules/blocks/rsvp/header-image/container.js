@@ -13,8 +13,7 @@ import { withSelect } from '@wordpress/data';
  * Internal dependencies
  */
 import RSVPHeaderImage from './template';
-import { actions, selectors, thunks } from '@moderntribe/tickets/data/blocks/rsvp';
-import { DEFAULT_STATE } from '@moderntribe/tickets/data/blocks/rsvp/reducers/header-image';
+import { selectors, thunks } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapSelectToProps = ( select ) => ( {
@@ -31,15 +30,11 @@ const mapStateToProps = ( state ) => ( {
 		alt: selectors.getRSVPHeaderImageAlt( state ),
 		src: selectors.getRSVPHeaderImageSrc( state ),
 	},
-	isLoading: selectors.getRSVPIsLoading( state ),
+	isSettingsLoading: selectors.getRSVPIsSettingsLoading( state ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	onRemove: () => dispatch( actions.setRSVPHeaderImage( {
-		id: DEFAULT_STATE.id,
-		alt: DEFAULT_STATE.alt,
-		src: DEFAULT_STATE.src,
-	} ) ),
+	onRemove: () => dispatch( thunks.deleteRSVPHeaderImage( ownProps.postId ) ),
 	/**
 	 * Full payload from gutenberg media upload is not used,
 	 * only id, alt, and medium src are used for this specific case.
