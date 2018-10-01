@@ -34,6 +34,10 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPIsLoading( true ) ) ).toMatchSnapshot();
 	} );
 
+	it( 'should set the is settings loading', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPIsSettingsLoading( true ) ) ).toMatchSnapshot();
+	} );
+
 	it( 'should set the title', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPTitle( 'new title' ) ) ).toMatchSnapshot();
 	} );

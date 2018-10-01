@@ -23,6 +23,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -62,6 +63,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -101,6 +103,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -140,6 +143,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -179,6 +183,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -218,6 +223,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -257,6 +263,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -296,6 +303,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -335,6 +343,7 @@ Object {
   },
   "id": 42,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -374,6 +383,47 @@ Object {
   },
   "id": 0,
   "isLoading": true,
+  "isSettingsLoading": false,
+  "settingsOpen": false,
+  "tempDetails": Object {
+    "capacity": "",
+    "description": "",
+    "endDate": "July 19, 2018",
+    "endDateObj": 2018-07-19T00:00:00.000Z,
+    "endTime": "19:30",
+    "notGoingResponses": false,
+    "startDate": "July 19, 2018",
+    "startDateObj": 2018-07-19T00:00:00.000Z,
+    "startTime": "19:30",
+    "title": "",
+  },
+}
+`;
+
+exports[`RSVP block reducer should set the is settings loading 1`] = `
+Object {
+  "created": false,
+  "details": Object {
+    "capacity": "",
+    "description": "",
+    "endDate": "July 19, 2018",
+    "endDateObj": 2018-07-19T00:00:00.000Z,
+    "endTime": "19:30",
+    "notGoingResponses": false,
+    "startDate": "July 19, 2018",
+    "startDateObj": 2018-07-19T00:00:00.000Z,
+    "startTime": "19:30",
+    "title": "",
+  },
+  "hasChanges": false,
+  "headerImage": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
+  "id": 0,
+  "isLoading": false,
+  "isSettingsLoading": true,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -413,6 +463,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -452,6 +503,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": true,
   "tempDetails": Object {
     "capacity": "",
@@ -491,6 +543,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -530,6 +583,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -569,6 +623,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -608,6 +663,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": 20,
@@ -647,6 +703,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -686,6 +743,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -725,6 +783,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -764,6 +823,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -803,6 +863,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -842,6 +903,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -881,6 +943,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -920,6 +983,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -959,6 +1023,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",
@@ -998,6 +1063,7 @@ Object {
   },
   "id": 0,
   "isLoading": false,
+  "isSettingsLoading": false,
   "settingsOpen": false,
   "tempDetails": Object {
     "capacity": "",

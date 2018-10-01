@@ -18,6 +18,7 @@ export const DEFAULT_STATE = {
 	settingsOpen: false,
 	hasChanges: false,
 	isLoading: false,
+	isSettingsLoading: false,
 	details: DETAILS_DEFAULT_STATE,
 	tempDetails: TEMP_DETAILS_DEFAULT_STATE,
 	headerImage: HEADER_IMAGE_DEFAULT_STATE,
@@ -51,6 +52,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				isLoading: action.payload.isLoading,
+			};
+		case types.SET_RSVP_IS_SETTINGS_LOADING:
+			return {
+				...state,
+				isSettingsLoading: action.payload.isSettingsLoading,
 			};
 		case types.SET_RSVP_TITLE:
 		case types.SET_RSVP_DESCRIPTION:

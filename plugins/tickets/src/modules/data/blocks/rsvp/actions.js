@@ -39,6 +39,13 @@ export const setRSVPIsLoading = ( isLoading ) => ( {
 	},
 } );
 
+export const setRSVPIsSettingsLoading = ( isSettingsLoading ) => ( {
+	type: types.SET_RSVP_IS_SETTINGS_LOADING,
+	payload: {
+		isSettingsLoading,
+	},
+} );
+
 export const setRSVPTitle = ( title ) => ( {
 	type: types.SET_RSVP_TITLE,
 	payload: {

@@ -113,6 +113,15 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP is settings loading 1`] = `
+Object {
+  "payload": Object {
+    "isSettingsLoading": true,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_IS_SETTINGS_LOADING",
+}
+`;
+
 exports[`RSVP block actions set RSVP not going responses 1`] = `
 Object {
   "payload": Object {

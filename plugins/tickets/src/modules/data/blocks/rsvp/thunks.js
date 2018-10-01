@@ -175,6 +175,37 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 	dispatch( requestActions.wpRequest( options ) );
 };
 
+export const updateRSVPHeaderImage = ( postId, image ) => ( dispatch ) => {
+	const path = `tribe_events/${ postId }`;
+	const body = {
+		meta: {
+			[ utils.KEY_TICKET_HEADER ]: `${ image.id }`,
+		},
+	};
+
+	const options = {
+		path,
+		params: {
+			method: METHODS.PUT,
+			body: JSON.stringify( body ),
+		},
+		actions: {
+			start: () => dispatch( actions.setRSVPIsSettingsLoading( true ) ),
+			success: () => {
+				dispatch( actions.setRSVPHeaderImage( {
+					id: image.id,
+					alt: image.alt,
+					src: image.sizes.medium.url,
+				} ) );
+				dispatch( actions.setRSVPIsSettingsLoading( false ) );
+			},
+			error: () => dispatch( actions.setRSVPIsSettingsLoading( false ) ),
+		},
+	};
+
+	dispatch( requestActions.wpRequest( options ) );
+};
+
 export const getRSVPHeaderImage = ( id ) => ( dispatch ) => {
 	const path = `media/${ id }`;
 
@@ -195,4 +226,4 @@ export const getRSVPHeaderImage = ( id ) => ( dispatch ) => {
 	};
 
 	dispatch( requestActions.wpRequest( options ) );
-}
+};

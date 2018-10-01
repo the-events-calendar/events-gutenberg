@@ -85,6 +85,11 @@ describe( 'RSVP block types', () => {
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_IS_LOADING` );
 	} );
 
+	test( 'set RSVP is settings loading', () => {
+		expect( types.SET_RSVP_IS_SETTINGS_LOADING )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_IS_SETTINGS_LOADING` );
+	} );
+
 	test( 'set RSVP header image', () => {
 		expect( types.SET_RSVP_HEADER_IMAGE )
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER_IMAGE` );

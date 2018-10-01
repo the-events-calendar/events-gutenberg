@@ -43,6 +43,11 @@ describe( 'RSVP block selectors', () => {
 			.toBe( DEFAULT_STATE.isLoading );
 	} );
 
+	it( 'should return the is settings loading', () => {
+		expect( selectors.getRSVPIsSettingsLoading( state ) )
+			.toBe( DEFAULT_STATE.isSettingsLoading );
+	} );
+
 	it( 'should return the details object', () => {
 		expect( selectors.getRSVPDetails( state ) )
 			.toBe( DEFAULT_STATE.details );
@@ -114,8 +119,6 @@ describe( 'RSVP block selectors', () => {
 	} );
 
 	it( 'should return the temp not going responses', () => {
-		console.log('selector', selectors.getRSVPTempNotGoingResponses( state ));
-		console.log('state', DEFAULT_STATE.tempDetails.notGoingResponses);
 		expect( selectors.getRSVPTempNotGoingResponses( state ) )
 			.toBe( DEFAULT_STATE.tempDetails.notGoingResponses );
 	} );

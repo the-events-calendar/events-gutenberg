@@ -30,6 +30,11 @@ export const getRSVPIsLoading = createSelector(
 	( rsvp ) => rsvp.isLoading,
 );
 
+export const getRSVPIsSettingsLoading = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.isSettingsLoading,
+);
+
 /**
  * ------------------------------------------------------------
  * RSVP Details
