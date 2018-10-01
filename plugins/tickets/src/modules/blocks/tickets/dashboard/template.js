@@ -16,9 +16,17 @@ import TicketsActionDashboard from '@moderntribe/tickets/blocks/tickets/action-d
 import TicketsSettingsDashboard from '@moderntribe/tickets/blocks/tickets/settings/container';
 
 const TicketsDashboard = ( props ) => {
-	const { isLoading, isSelected, isSettingsOpen, activeBlockId, isEditing, clientId } = props;
+	const {
+		isLoading,
+		isSelected,
+		isSettingsOpen,
+		activeBlockId,
+		isEditing,
+		clientId,
+		isTicketLoading,
+	} = props;
 
-	if ( isLoading ) {
+	if ( isLoading || isTicketLoading ) {
 		return (
 			<Fragment>
 				<div className="tribe-editor__tickets-container--loading">
@@ -47,11 +55,15 @@ TicketsDashboard.propTypes = {
 	isSelected: PropTypes.bool.isRequired,
 	isEditing: PropTypes.bool,
 	isSettingsOpen: PropTypes.bool.isRequired,
+	isLoading: PropTypes.bool,
+	isTicketLoading: PropTypes.bool,
 };
 
 TicketsDashboard.defaultProps = {
 	isSelected: false,
 	isEditing: false,
+	isLoading: false,
+	isTicketLoading: false,
 }
 
 export default TicketsDashboard;
