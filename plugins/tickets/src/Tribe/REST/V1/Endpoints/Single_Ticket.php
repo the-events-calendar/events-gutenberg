@@ -174,6 +174,12 @@ class Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket
 	public function CREATE_args() {
 		return array(
 			array(
+				'post_id' => array(
+					'type' => 'integer',
+					'in' => 'body',
+					'required' => true,
+					'validate_callback' => array( $this->validator, 'is_positive_int' ),
+				),
 				'add_ticket_nonce' => array(
 					'type' => 'string',
 					'in' => 'body',
