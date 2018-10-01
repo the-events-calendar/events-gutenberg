@@ -16,7 +16,6 @@ const mapStateToProps = ( state ) => ( {
 	isEditing: selectors.hasActiveBlockId( state ),
 	header: `${ selectors.getImageId( state ) }`,
 	sharedCapacity: selectors.getSharedCapacity( state ),
-	isLoading: selectors.isParentBlockLoading( state ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {

@@ -6,11 +6,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 /**
- * Wordpress dependencies
- */
-import { Spinner } from '@wordpress/components';
-
-/**
  * Internal dependencies
  */
 import TicketsDashboard from './dashboard/container';
@@ -54,16 +49,6 @@ class TicketsTemplate extends PureComponent {
 		this.updateIsSelected();
 	}
 
-	renderSpinner() {
-		return (
-			<Fragment>
-				<div className="tribe-editor__tickets-container--loading">
-					<Spinner />
-				</div>
-			</Fragment>
-		);
-	}
-
 	renderComponents() {
 		const { isBlockSelected, isEditing, clientId } = this.props;
 
@@ -85,7 +70,7 @@ class TicketsTemplate extends PureComponent {
 	}
 
 	render() {
-		const { isBlockSelected, isLoading } = this.props;
+		const { isBlockSelected } = this.props;
 		return (
 			<div
 				className={ classNames(
@@ -93,7 +78,7 @@ class TicketsTemplate extends PureComponent {
 					{ 'tribe-editor__tickets-container--selected': isBlockSelected },
 				) }
 			>
-				{ isLoading ? this.renderSpinner() : this.renderComponents() }
+				{ this.renderComponents() }
 			</div>
 		);
 	}
