@@ -21,6 +21,11 @@ const label = __( 'Attendee Registration', 'events-gutenberg' );
 
 const modalButtonLabel = __( '+ Add', 'events-gutenberg' );
 
+const modalContent = __(
+	'Adding Attendee Fields is not yet supported in the Gutenberg block editor.',
+	'events-gutenberg',
+);
+
 const RSVPAttendeeRegistration = ( { isDisabled } ) => (
 	<LabelWithModal
 		className="tribe-editor__rsvp__attendee-registration"
@@ -28,6 +33,7 @@ const RSVPAttendeeRegistration = ( { isDisabled } ) => (
 		label={ label }
 		modalButtonDisabled={ isDisabled }
 		modalButtonLabel={ modalButtonLabel }
+		modalContent={ modalContent }
 	/>
 );
 

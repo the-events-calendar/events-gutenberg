@@ -7,7 +7,8 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BlockIcon } from '@moderntribe/common/elements';
-import RSVP from './template';
+import RSVP from './container';
+import { KEY_TICKET_HEADER } from '@moderntribe/tickets/data/utils';
 
 /**
  * Module Code
@@ -27,7 +28,13 @@ export default {
 		html: false,
 	},
 
-	attributes: {},
+	attributes: {
+		ticketHeader: {
+			type: 'integer',
+			source: 'meta',
+			_meta: KEY_TICKET_HEADER,
+		},
+	},
 
 	edit: RSVP,
 

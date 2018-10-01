@@ -13,6 +13,7 @@ import { types } from '@moderntribe/tickets/data/blocks/rsvp';
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
 export const DEFAULT_STATE = {
+	id: 0,
 	title: '',
 	description: '',
 	capacity: '',
@@ -36,6 +37,7 @@ export const DEFAULT_STATE = {
 	created: false,
 	settingsOpen: false,
 	hasChanges: false,
+	isLoading: false,
 	headerImage: HEADER_IMAGE_DEFAULT_STATE,
 };
 
@@ -48,6 +50,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			};
 		case types.DELETE_RSVP:
 			return DEFAULT_STATE;
+		case types.SET_RSVP_ID:
+			return {
+				...state,
+				id: action.payload.id,
+			};
 		case types.SET_RSVP_TITLE:
 			return {
 				...state,
@@ -157,6 +164,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				hasChanges: action.payload.hasChanges,
+			};
+		case types.SET_RSVP_IS_LOADING:
+			return {
+				...state,
+				isLoading: action.payload.isLoading,
 			};
 		case types.SET_RSVP_HEADER_IMAGE:
 			return {

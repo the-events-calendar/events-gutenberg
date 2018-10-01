@@ -13,6 +13,10 @@ describe( 'RSVP block types', () => {
 		expect( types.DELETE_RSVP ).toBe( `${ PREFIX_TICKETS_STORE }/DELETE_RSVP` );
 	} );
 
+	test( 'set RSVP id', () => {
+		expect( types.SET_RSVP_ID ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_ID` );
+	} );
+
 	test( 'set RSVP title', () => {
 		expect( types.SET_RSVP_TITLE ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TITLE` );
 	} );
@@ -59,6 +63,10 @@ describe( 'RSVP block types', () => {
 
 	test( 'set RSVP has changes', () => {
 		expect( types.SET_RSVP_HAS_CHANGES ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HAS_CHANGES` );
+	} );
+
+	test( 'set RSVP is loading', () => {
+		expect( types.SET_RSVP_IS_LOADING ).toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_IS_LOADING` );
 	} );
 
 	test( 'set RSVP header image', () => {

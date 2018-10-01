@@ -5,6 +5,11 @@ import { createSelector } from 'reselect';
 
 export const getRSVPBlock = ( state ) => state.tickets.blocks.rsvp;
 
+export const getRSVPId = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.id,
+);
+
 export const getRSVPTitle = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.title,
@@ -118,6 +123,11 @@ export const getRSVPSettingsOpen = createSelector(
 export const getRSVPHasChanges = createSelector(
 	[ getRSVPBlock ],
 	( rsvp ) => rsvp.hasChanges,
+);
+
+export const getRSVPIsLoading = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.isLoading,
 );
 
 export const getRSVPHeaderImage = createSelector(
