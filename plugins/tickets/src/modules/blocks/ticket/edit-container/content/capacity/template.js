@@ -20,8 +20,8 @@ import './style.pcss';
 
 export const TYPES = {
 	unlimited: 'unlimited',
-	independent: 'independent',
-	shared: 'shared',
+	independent: 'own',
+	shared: 'capped',
 };
 
 // todo: replace with custom select from Events Pro
