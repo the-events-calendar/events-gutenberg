@@ -1,18 +1,43 @@
-import { config } from '@moderntribe/common/utils/globals';
+import { rest } from '@moderntribe/common/utils/globals';
+import 'whatwg-fetch';
 
 /**
- * Returns a URL that is part of the WP-JSON endpoint associated with the site where the
- * extensions is being used.
+ * Send a request into a wp-json endpoint
  *
- * @param {string} path The path pointing to the endpoint
- * @param {string} namespace The namespace location of the endpoint
- * @returns {string} The URL used to hit the endpoint
+ * @param {Object} params An object with the following properties:
+ * - path: Path for the endpoint
+ * - headers: Array of extra headers for the request
+ * - initParams: Params send into the fetch along with headers and credentials
+ * - namespace: Endpoint namespace default to `wp/v2`
+ *
+ * @returns {Promise<Response>} return a fetch promise
  */
-export const endpointUrl = ( path = '', namespace = 'wp/v2' ) => {
-	const tribe = config();
-	const rest = tribe.rest || {};
-	const { url = '' } = rest;
-	const namespaces = rest.namespaces || {};
-	const core = namespaces.core || namespace;
-	return `${ url }${ core }${ path }`;
+export const wpREST = async ( params ) => {
+	const { url = '', nonce = {}, namespaces = {} } = rest();
+
+	const options = {
+		path: '',
+		headers: {},
+		initParams: {},
+		namespace: namespaces.core || 'wp/v2',
+		...params,
+	};
+
+	const endpoint = `${ url }${ options.namespace }/${ options.path }`;
+
+	const headers = {
+		'X-WP-Nonce': nonce.wp_rest || '',
+		...options.headers,
+	};
+
+	try {
+		const response = await fetch( endpoint, {
+			...options.initParams,
+			credentials: 'include',
+			headers,
+		} );
+		return await response.json();
+	} catch ( e ) {
+		throw e;
+	}
 };
