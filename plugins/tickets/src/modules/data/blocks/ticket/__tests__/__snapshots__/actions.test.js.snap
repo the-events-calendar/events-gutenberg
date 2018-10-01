@@ -201,7 +201,7 @@ exports[`Gutenberg actions Single block actions Set ticket post ID 1`] = `
 Object {
   "payload": Object {
     "blockId": "modern-tribe",
-    "postId": 99,
+    "ticketId": 99,
   },
   "type": "@@MT/TICKETS/SET_TICKET_ID",
 }
@@ -332,6 +332,7 @@ Object {
 exports[`Gutenberg actions Single block actions Ticket has been created 1`] = `
 Object {
   "payload": Object {
+    "blockId": "modern-tribe",
     "hasBeenCreated": true,
   },
   "type": "@@MT/TICKETS/SET_TICKET_HAS_BEEN_CREATED",
@@ -341,6 +342,7 @@ Object {
 exports[`Gutenberg actions Single block actions Ticket has been created 2`] = `
 Object {
   "payload": Object {
+    "blockId": "modern-tribe",
     "hasBeenCreated": false,
   },
   "type": "@@MT/TICKETS/SET_TICKET_HAS_BEEN_CREATED",
@@ -350,6 +352,7 @@ Object {
 exports[`Gutenberg actions Single block actions Ticket is loading 1`] = `
 Object {
   "payload": Object {
+    "blockId": "modern-tribe",
     "isLoading": true,
   },
   "type": "@@MT/TICKETS/SET_TICKET_IS_LOADING",
@@ -359,6 +362,7 @@ Object {
 exports[`Gutenberg actions Single block actions Ticket is loading 2`] = `
 Object {
   "payload": Object {
+    "blockId": "modern-tribe",
     "isLoading": false,
   },
   "type": "@@MT/TICKETS/SET_TICKET_IS_LOADING",
