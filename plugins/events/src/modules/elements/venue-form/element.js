@@ -16,18 +16,18 @@ import { RichText } from '@wordpress/editor';
  */
 import { Input } from '@moderntribe/events/elements';
 import list, { getCountries, getStates, getCountryCode, getStateCode } from '@moderntribe/events/editor/utils/geo-data';
-import { getVenueAddress, getVenueCity, getVenueCountry, getVenueStateProvince, getVenueZip, getVenuePhone } from '@moderntribe/events/data/blocks/venue/utils';
+import { setDefault, getVenueCountry, getVenueStateProvince } from '@moderntribe/events/data/blocks/venue/utils';
 import './style.pcss';
 
 export function toFields( venue ) {
 	const title = get( venue, 'title', {} );
 	const meta = get( venue, 'meta', {} );
-	const address = getVenueAddress( meta );
-	const city = getVenueCity( meta );
+	const address = setDefault( get( meta, '_VenueAddress', '' ), tribe_blocks_editor_defaults.venueAddress );
+	const city = setDefault( get( meta, '_VenueCity', '' ), tribe_blocks_editor_defaults.venueCity );
 	const country = getVenueCountry( meta );
 	const stateProvince = getVenueStateProvince( meta );
-	const zip = getVenueZip( meta );
-	const phone = getVenuePhone( meta );
+	const zip = setDefault( get( meta, '_VenueZip', '' ), tribe_blocks_editor_defaults.venueZip );
+	const phone = setDefault( get( meta, '_VenuePhone', '' ), tribe_blocks_editor_defaults.venuePhone );
 	const url = get( meta, '_VenueURL', '' );
 
 	const countryCode = getCountryCode( country );

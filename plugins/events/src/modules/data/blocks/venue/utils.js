@@ -32,31 +32,7 @@ export const getCoordinates = ( details = {} ) => {
 	};
 };
 
-/**
- * Get Venue Address
- */
-export function getVenueAddress( meta ) {
-	let address = get( meta, '_VenueAddress', '' );
-
-	if ( '' === address ) {
-		const defaultAddress = tribe_blocks_editor_defaults.venueAddress;
-		address = defaultAddress ? defaultAddress : '';
-	}
-	return address;
-}
-
-/**
- * Get Venue City
- */
-export function getVenueCity( meta ) {
-	let city = get( meta, '_VenueCity', '' );
-
-	if ( '' === city ) {
-		const defaultCity = tribe_blocks_editor_defaults.venueCity;
-		city = defaultCity ? defaultCity : '';
-	}
-	return city;
-}
+const setDefault = ( value, defaultValue ) => value === '' ? defaultValue : value;
 
 /**
  * Get Venue Country
@@ -91,37 +67,4 @@ export function getVenueStateProvince( meta ) {
 		}
 	}
 	return stateProvince;
-}
-
-/**
- * Get Venue ZIP
- */
-export function getVenueZip( meta ) {
-	let zip = get( meta, '_VenueZip', '' );
-
-	if ( '' === zip ) {
-		const defaultZip = tribe_blocks_editor_defaults.venueZip;
-		zip = defaultZip ? defaultZip : '';
-	}
-	return zip;
-}
-
-/**
- * Get Venue Phone
- */
-export function getVenuePhone( meta ) {
-	let phone = get( meta, '_VenuePhone', '' );
-
-	if ( '' === phone ) {
-		const defaultPhone = tribe_blocks_editor_defaults.venuePhone;
-		phone = defaultPhone ? defaultPhone : '';
-	}
-	return phone;
-}
-
-/**
- * Get Venue URL
- */
-export function getVenueUrl( meta ) {
-	return get( meta, '_VenueURL', '' );
 }
