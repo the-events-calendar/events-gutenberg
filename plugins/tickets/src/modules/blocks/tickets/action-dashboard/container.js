@@ -21,7 +21,7 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	isEditFormValid: selectors.getTicketValidness( state, {
 		blockId: ownProps.activeBlockId,
 	} ),
-	isVolatile: selectors.getTicketVolatile( state, {
+	hasBeenCreated: selectors.getTicketHasBeenCreated( state, {
 		blockId: ownProps.activeBlockId,
 	} ),
 } );
@@ -49,8 +49,8 @@ const applyWithDispatch = withDispatch( ( dispatch, ownProps ) => {
 	return {
 		onCancelClick() {
 			const { activeBlockId } = ownProps;
-			const { isVolatile } = ownProps;
-			if ( isVolatile ) {
+			const { hasBeenCreated } = ownProps;
+			if ( ! hasBeenCreated ) {
 				removeBlock( activeBlockId );
 			}
 		},

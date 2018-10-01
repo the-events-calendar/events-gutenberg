@@ -32,7 +32,7 @@ const confirmLabel = ( created ) => (
 );
 
 const TicketsDashboardAction = ( props ) => {
-	const { onConfirmClick, isEditing, created, isEditFormValid, isVolatile, onCancelClick } = props;
+	const { onConfirmClick, isEditing, created, isEditFormValid, hasBeenCreated, onCancelClick } = props;
 
 	const dashboardProps = {
 		actions: isEditing ? [] : actions,
@@ -51,7 +51,7 @@ const TicketsDashboardAction = ( props ) => {
 	if ( isEditing ) {
 		dashboardProps.isConfirmDisabled = ! isEditFormValid;
 		dashboardProps.cancelLabel = __( 'Cancel', 'events-gutenberg' );
-		dashboardProps.confirmLabel = confirmLabel( ! isVolatile );
+		dashboardProps.confirmLabel = confirmLabel( hasBeenCreated );
 	}
 
 	return (
@@ -64,7 +64,7 @@ TicketsDashboardAction.propTypes = {
 	isEditing: PropTypes.bool,
 	isEditFormValid: PropTypes.bool,
 	activeBlockId: PropTypes.string,
-	isVolatile: PropTypes.bool,
+	hasBeenCreated: PropTypes.bool,
 };
 
 export default TicketsDashboardAction;
