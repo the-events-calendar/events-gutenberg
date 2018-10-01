@@ -22,9 +22,8 @@ const getIsSameDay = ( state ) => {
 	return momentUtil.isSameDay( startDateObj, endDateObj );
 };
 
-const onFromDateChange = ( stateProps, dispatchProps ) => ( date, modifiers, dayPickerInput ) => {
+const onFromDateChange = ( stateProps, dispatch ) => ( date, modifiers, dayPickerInput ) => {
 	/* TODO: prevent onchange to type/select a date after toDate */
-	const { dispatch } = dispatchProps;
 	let startDate;
 
 	if ( date ) {
@@ -38,25 +37,22 @@ const onFromDateChange = ( stateProps, dispatchProps ) => ( date, modifiers, day
 	dispatch( actions.setRSVPHasChanges( true ) );
 };
 
-const onFromTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
+const onFromTimePickerChange = ( stateProps, dispatch ) => ( e ) => {
 	/* TODO: prevent change to a time out of range */
-	const { dispatch } = dispatchProps;
 	const startTime = e.target.value;
 	dispatch( actions.setRSVPTempStartTime( startTime ) );
 	dispatch( actions.setRSVPHasChanges( true ) );
 };
 
-const onFromTimePickerClick = ( dispatchProps ) => ( value, onClose ) => {
-	const { dispatch } = dispatchProps;
+const onFromTimePickerClick = ( dispatch ) => ( value, onClose ) => {
 	const startTime = timeUtil.fromSeconds( value, timeUtil.TIME_FORMAT_HH_MM );
 	dispatch( actions.setRSVPTempStartTime( startTime ) );
 	dispatch( actions.setRSVPHasChanges( true ) );
 	onClose();
 };
 
-const onToDateChange = ( stateProps, dispatchProps ) => ( date, modifiers, dayPickerInput ) => {
+const onToDateChange = ( stateProps, dispatch ) => ( date, modifiers, dayPickerInput ) => {
 	/* TODO: prevent onchange to type/select a date before fromDate */
-	const { dispatch } = dispatchProps;
 	let endDate;
 
 	if ( date ) {
@@ -70,16 +66,14 @@ const onToDateChange = ( stateProps, dispatchProps ) => ( date, modifiers, dayPi
 	dispatch( actions.setRSVPHasChanges( true ) );
 };
 
-const onToTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
+const onToTimePickerChange = ( stateProps, dispatch ) => ( e ) => {
 	/* TODO: prevent change to a time out of range */
-	const { dispatch } = dispatchProps;
 	const endTime = e.target.value;
 	dispatch( actions.setRSVPTempEndTime( endTime ) );
 	dispatch( actions.setRSVPHasChanges( true ) );
 };
 
-const onToTimePickerClick = ( dispatchProps ) => ( value, onClose ) => {
-	const { dispatch } = dispatchProps;
+const onToTimePickerClick = ( dispatch ) => ( value, onClose ) => {
 	const endTime = timeUtil.fromSeconds( value, timeUtil.TIME_FORMAT_HH_MM );
 	dispatch( actions.setRSVPTempEndTime( endTime ) );
 	dispatch( actions.setRSVPHasChanges( true ) );
@@ -98,21 +92,22 @@ const mapStateToProps = ( state ) => ( {
 	toTimeDisabled: selectors.getRSVPSettingsOpen( state ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => ( { dispatch } );
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
+	const { dispatch } = dispatchProps;
 
-const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
-	...ownProps,
-	...stateProps,
-	...dispatchProps,
-	onFromDateChange: onFromDateChange( stateProps, dispatchProps ),
-	onFromTimePickerChange: onFromTimePickerChange( stateProps, dispatchProps ),
-	onFromTimePickerClick: onFromTimePickerClick( dispatchProps ),
-	onToDateChange: onToDateChange( stateProps, dispatchProps ),
-	onToTimePickerChange: onToTimePickerChange( stateProps, dispatchProps ),
-	onToTimePickerClick: onToTimePickerClick( dispatchProps ),
-} );
+	return {
+		...ownProps,
+		...stateProps,
+		onFromDateChange: onFromDateChange( stateProps, dispatch ),
+		onFromTimePickerChange: onFromTimePickerChange( stateProps, dispatch ),
+		onFromTimePickerClick: onFromTimePickerClick( dispatch ),
+		onToDateChange: onToDateChange( stateProps, dispatch ),
+		onToTimePickerChange: onToTimePickerChange( stateProps, dispatch ),
+		onToTimePickerClick: onToTimePickerClick( dispatch ),
+	};
+};
 
 export default compose(
 	withStore(),
-	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
+	connect( mapStateToProps, null, mergeProps ),
 )( DateTimeRangePicker );

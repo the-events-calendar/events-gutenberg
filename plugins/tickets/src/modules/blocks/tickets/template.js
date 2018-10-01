@@ -49,6 +49,14 @@ class TicketsTemplate extends PureComponent {
 		this.updateIsSelected();
 	}
 
+	renderSpinner() {
+		return (
+			<div className="tribe-editor__tickets-container--loading">
+				<Spinner />
+			</div>
+		);
+	}
+	
 	renderComponents() {
 		const { isBlockSelected, isEditing, clientId } = this.props;
 
