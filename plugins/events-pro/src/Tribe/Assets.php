@@ -55,8 +55,9 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 	public function set_editor_defaults( $defaults ) {
 
 		// If defined set the default Venue
-		if ( (int) tribe_get_option( 'eventsDefaultVenueID', 0 ) ) {
-			$defaults['venue'] = (int) tribe_get_option( 'eventsDefaultVenueID', 0 );
+		$default_venue = (int) tribe_get_option( 'eventsDefaultVenueID', 0 );
+		if ( $default_venue ) {
+			$defaults['venue'] = $default_venue;
 		}
 
 		// If defined, set the default Venue Address
@@ -96,8 +97,9 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		}
 
 		// If defined, set the default Organizer
-		if ( (int) tribe_get_option( 'eventsDefaultOrganizerID', 0 ) ) {
-			$defaults['organizer'] = (int) tribe_get_option( 'eventsDefaultOrganizerID', 0 );
+		$default_organizer = (int) tribe_get_option( 'eventsDefaultOrganizerID', 0 );
+		if ( $default_organizer ) {
+			$defaults['organizer'] = $default_organizer;
 		}
 
 		return $defaults;
