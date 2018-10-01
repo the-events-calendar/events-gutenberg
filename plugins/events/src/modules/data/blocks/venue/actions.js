@@ -7,7 +7,7 @@ import { DEFAULT_STATE } from './reducer';
 export const setVenue = ( id ) => ( {
 	type: types.SET_VENUE,
 	payload: {
-		venue: id ? id : tribe_blocks_editor_defaults.venue,
+		venue: id,
 	},
 } );
 

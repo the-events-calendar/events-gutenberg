@@ -4,7 +4,7 @@
 import * as types from './types';
 
 export const DEFAULT_STATE = {
-	venue: undefined,
+	venue: tribe_blocks_editor_defaults.venue ? tribe_blocks_editor_defaults.venue : undefined,
 	showMap: true,
 	showMapLink: true,
 };
@@ -14,7 +14,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_VENUE:
 			return {
 				...state,
-				venue: action.payload.venue,
+				venue: state.venue,
 			};
 		case types.TOGGLE_VENUE_MAP:
 			return {
