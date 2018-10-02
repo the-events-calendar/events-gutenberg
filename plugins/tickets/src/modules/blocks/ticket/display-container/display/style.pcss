@@ -2,6 +2,17 @@
 	display: flex;
 }
 
+.tribe-editor__ticket-display-header--disabled {
+	pointer-events: none;
+
+	.tribe-editor__ticket-title,
+	.tribe-editor__ticket-description,
+	.tribe-editor__ticket-price,
+	.tribe-editor__quantity-label {
+		color: #AEB4BB;
+	}
+}
+
 .tribe-editor__ticket-title-container {
 	display: flex;
 	align-items: center;
@@ -48,12 +59,14 @@
 .tribe-editor__ticket-quantity {
 	padding-right: 25px;
 	flex: none;
+	min-width: 120px;
 }
 
 .tribe-editor__ticket-price {
 	flex: none;
 	min-width: 65px;
 	margin-right: 20px;
+	text-align: center;
 }
 
 .tribe-editor__quantity-label {
