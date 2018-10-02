@@ -14,6 +14,7 @@ import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	expires: selectors.getTicketExpires( state, ownProps ),
+	isTicketDisabled: selectors.isTicketDisabled( state, ownProps ),
 } );
 
 export default compose(
