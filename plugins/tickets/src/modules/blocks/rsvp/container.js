@@ -39,6 +39,25 @@ const getIsInactive = ( state ) => {
 	return ! ( currentMoment.isAfter( startMoment ) && currentMoment.isBefore( endMoment ) );
 };
 
+const setInitialState = ( dispatch, ownProps ) => () => {
+	dispatch( thunks.getRSVP( ownProps.postId ) );
+	if ( ownProps.attributes.headerImageId ) {
+		dispatch( thunks.getRSVPHeaderImage(
+			ownProps.attributes.headerImageId
+		) );
+	}
+	if ( ownProps.attributes.goingCount ) {
+		dispatch( actions.setRSVPGoingCount(
+			parseInt( ownProps.attributes.goingCount, 10 )
+		) );
+	}
+	if ( ownProps.attributes.goingCount ) {
+		dispatch( actions.setRSVPGoingCount(
+			parseInt( ownProps.attributes.goingCount, 10 )
+		) );
+	}
+};
+
 const mapSelectToProps = ( select ) => ( {
 	postId: select( 'core/editor' ).getCurrentPostId(),
 } );
@@ -52,12 +71,7 @@ const mapStateToProps = ( state ) => ( {
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	dispatch,
-	setInitialState: () => {
-		dispatch( thunks.getRSVP( ownProps.postId ) );
-		if ( ownProps.attributes.headerImageId ) {
-			dispatch( thunks.getRSVPHeaderImage( ownProps.attributes.headerImageId ) );
-		}
-	},
+	setInitialState: setInitialState( dispatch, ownProps ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
