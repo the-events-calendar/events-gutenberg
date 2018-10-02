@@ -124,7 +124,11 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 		}
 
 		$data['capacity_type'] = $capacity_type;
+		$data['available_from_start_time'] = get_post_meta( $ticket_id, '_ticket_start_time', true );
+		$data['available_from_end_time'] = get_post_meta( $ticket_id, '_ticket_end_time', true );
 		$data['sku'] = get_post_meta( $ticket_id, '_sku', true );
+		$data['description'] = get_the_excerpt( $ticket_id );
+
 		return $data;
 	}
 }
