@@ -29,10 +29,10 @@ export default {
 	},
 
 	attributes: {
-		ticketHeader: {
+		headerImageId: {
 			type: 'integer',
 			source: 'meta',
-			_meta: KEY_TICKET_HEADER,
+			meta: KEY_TICKET_HEADER,
 		},
 	},
 

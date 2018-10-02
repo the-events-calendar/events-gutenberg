@@ -3,8 +3,8 @@
 exports[`RSVP block declaration register the RSVP block 1`] = `
 Object {
   "attributes": Object {
-    "ticketHeader": Object {
-      "_meta": "_tribe_ticket_header",
+    "headerImageId": Object {
+      "meta": "_tribe_ticket_header",
       "source": "meta",
       "type": "integer",
     },
