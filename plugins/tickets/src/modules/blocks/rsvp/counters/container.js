@@ -12,6 +12,8 @@ import { selectors } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state ) => ( {
+	goingCount: selectors.getRSVPGoingCount( state ),
+	notGoingCount: selectors.getRSVPNotGoingCount( state ),
 	showNotGoing: selectors.getRSVPNotGoingResponses( state ),
 } );
 

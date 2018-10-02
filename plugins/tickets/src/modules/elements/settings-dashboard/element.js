@@ -20,6 +20,7 @@ import './style.pcss';
 
 const SettingsDashboard = ( {
 	className,
+	closeButtonDisabled,
 	closeButtonLabel,
 	content,
 	headerLeft,
@@ -36,6 +37,7 @@ const SettingsDashboard = ( {
 			<Button
 				className="tribe-editor__settings-dashboard__close-button"
 				onClick={ onCloseClick }
+				disabled={ closeButtonDisabled }
 			>
 				{ closeButtonLabel }
 			</Button>
@@ -68,6 +70,7 @@ SettingsDashboard.defaultProps = {
 
 SettingsDashboard.propTypes = {
 	className: PropTypes.string,
+	closeButtonDisabled: PropTypes.bool,
 	closeButtonLabel: PropTypes.node,
 	headerLeft: PropTypes.node,
 	onCloseClick: PropTypes.func,

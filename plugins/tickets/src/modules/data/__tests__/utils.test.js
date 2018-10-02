@@ -48,5 +48,13 @@ describe( 'Tickets Utils', () => {
 		test( 'ticket header', () => {
 			expect( utils.KEY_TICKET_HEADER ).toBe( '_tribe_ticket_header' );
 		} );
+
+		test( 'ticket going count', () => {
+			expect( utils.KEY_TICKET_GOING_COUNT ).toBe( '_tribe_ticket_going_count' );
+		} );
+
+		test( 'ticket not going count', () => {
+			expect( utils.KEY_TICKET_NOT_GOING_COUNT ).toBe( '_tribe_ticket_not_going_count' );
+		} );
 	} );
 } );

@@ -8,7 +8,11 @@ import { __ } from '@wordpress/i18n';
  */
 import { BlockIcon } from '@moderntribe/common/elements';
 import RSVP from './container';
-import { KEY_TICKET_HEADER } from '@moderntribe/tickets/data/utils';
+import {
+	KEY_TICKET_GOING_COUNT,
+	KEY_TICKET_NOT_GOING_COUNT,
+	KEY_TICKET_HEADER,
+} from '@moderntribe/tickets/data/utils';
 
 /**
  * Module Code
@@ -29,10 +33,20 @@ export default {
 	},
 
 	attributes: {
-		ticketHeader: {
+		goingCount: {
 			type: 'integer',
 			source: 'meta',
-			_meta: KEY_TICKET_HEADER,
+			meta: KEY_TICKET_GOING_COUNT,
+		},
+		notGoingCount: {
+			type: 'integer',
+			source: 'meta',
+			meta: KEY_TICKET_NOT_GOING_COUNT,
+		},
+		headerImageId: {
+			type: 'integer',
+			source: 'meta',
+			meta: KEY_TICKET_HEADER,
 		},
 	},
 

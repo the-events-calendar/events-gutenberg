@@ -13,9 +13,11 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { ImageUpload } from '@moderntribe/common/elements';
+import './style.pcss';
 
 const RSVPHeaderImage = ( {
 	image,
+	isSettingsLoading,
 	onRemove,
 	onSelect
 } ) => {
@@ -27,10 +29,12 @@ const RSVPHeaderImage = ( {
 			'events-gutenberg'
 		),
 		className: 'tribe-editor__rsvp__image-upload',
+		buttonDisabled: isSettingsLoading,
 		buttonLabel: __( 'Upload Image', 'events-gutenberg' ),
 		image,
 		onRemove,
 		onSelect,
+		removeButtonDisabled: isSettingsLoading,
 	};
 
 	return <ImageUpload { ...imageUploadProps } />;
@@ -42,6 +46,7 @@ RSVPHeaderImage.propTypes = {
 		id: PropTypes.number.isRequired,
 		src: PropTypes.string.isRequired,
 	} ).isRequired,
+	isSettingsLoading: PropTypes.bool.isRequired,
 	onRemove: PropTypes.func.isRequired,
 	onSelect: PropTypes.func.isRequired,
 };
