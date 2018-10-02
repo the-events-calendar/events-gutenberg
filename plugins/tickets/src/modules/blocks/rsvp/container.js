@@ -52,7 +52,12 @@ const mapStateToProps = ( state ) => ( {
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	dispatch,
-	setInitialState: () => dispatch( thunks.getRSVP( ownProps.postId ) ),
+	setInitialState: () => {
+		dispatch( thunks.getRSVP( ownProps.postId ) );
+		if ( ownProps.attributes.headerImageId ) {
+			dispatch( thunks.getRSVPHeaderImage( ownProps.attributes.headerImageId ) );
+		}
+	},
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {

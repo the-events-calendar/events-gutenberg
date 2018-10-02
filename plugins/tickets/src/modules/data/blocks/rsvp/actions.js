@@ -18,6 +18,34 @@ export const setRSVPId = ( id ) => ( {
 	},
 } );
 
+export const setRSVPSettingsOpen = ( settingsOpen ) => ( {
+	type: types.SET_RSVP_SETTINGS_OPEN,
+	payload: {
+		settingsOpen,
+	},
+} );
+
+export const setRSVPHasChanges = ( hasChanges ) => ( {
+	type: types.SET_RSVP_HAS_CHANGES,
+	payload: {
+		hasChanges,
+	},
+} );
+
+export const setRSVPIsLoading = ( isLoading ) => ( {
+	type: types.SET_RSVP_IS_LOADING,
+	payload: {
+		isLoading,
+	},
+} );
+
+export const setRSVPIsSettingsLoading = ( isSettingsLoading ) => ( {
+	type: types.SET_RSVP_IS_SETTINGS_LOADING,
+	payload: {
+		isSettingsLoading,
+	},
+} );
+
 export const setRSVPTitle = ( title ) => ( {
 	type: types.SET_RSVP_TITLE,
 	payload: {
@@ -88,101 +116,79 @@ export const setRSVPEndTime = ( endTime ) => ( {
 	},
 } );
 
-export const setRSVPSettingsOpen = ( settingsOpen ) => ( {
-	type: types.SET_RSVP_SETTINGS_OPEN,
+export const setRSVPTempTitle = ( title ) => ( {
+	type: types.SET_RSVP_TEMP_TITLE,
 	payload: {
-		settingsOpen,
+		title,
 	},
 } );
 
-export const setRSVPHasChanges = ( hasChanges ) => ( {
-	type: types.SET_RSVP_HAS_CHANGES,
+export const setRSVPTempDescription = ( description ) => ( {
+	type: types.SET_RSVP_TEMP_DESCRIPTION,
 	payload: {
-		hasChanges,
+		description,
 	},
 } );
 
-export const setRSVPIsLoading = ( isLoading ) => ( {
-	type: types.SET_RSVP_IS_LOADING,
+export const setRSVPTempCapacity = ( capacity ) => ( {
+	type: types.SET_RSVP_TEMP_CAPACITY,
 	payload: {
-		isLoading,
+		capacity,
+	},
+} );
+
+export const setRSVPTempNotGoingResponses = ( notGoingResponses ) => ( {
+	type: types.SET_RSVP_TEMP_NOT_GOING_RESPONSES,
+	payload: {
+		notGoingResponses,
+	},
+} );
+
+export const setRSVPTempStartDate = ( startDate ) => ( {
+	type: types.SET_RSVP_TEMP_START_DATE,
+	payload: {
+		startDate,
+	},
+} );
+
+export const setRSVPTempStartDateObj = ( startDateObj ) => ( {
+	type: types.SET_RSVP_TEMP_START_DATE_OBJ,
+	payload: {
+		startDateObj,
+	},
+} );
+
+export const setRSVPTempEndDate = ( endDate ) => ( {
+	type: types.SET_RSVP_TEMP_END_DATE,
+	payload: {
+		endDate,
+	},
+} );
+
+export const setRSVPTempEndDateObj = ( endDateObj ) => ( {
+	type: types.SET_RSVP_TEMP_END_DATE_OBJ,
+	payload: {
+		endDateObj,
+	},
+} );
+
+export const setRSVPTempStartTime = ( startTime ) => ( {
+	type: types.SET_RSVP_TEMP_START_TIME,
+	payload: {
+		startTime,
+	},
+} );
+
+export const setRSVPTempEndTime = ( endTime ) => ( {
+	type: types.SET_RSVP_TEMP_END_TIME,
+	payload: {
+		endTime,
 	},
 } );
 
 export const setRSVPHeaderImage = ( payload ) => ( {
 	type: types.SET_RSVP_HEADER_IMAGE,
 	payload,
-} );
-
-
-export const setRSVPTempTitle = ( tempTitle ) => ( {
-	type: types.SET_RSVP_TEMP_TITLE,
-	payload: {
-		tempTitle,
-	},
-} );
-
-export const setRSVPTempDescription = ( tempDescription ) => ( {
-	type: types.SET_RSVP_TEMP_DESCRIPTION,
-	payload: {
-		tempDescription,
-	},
-} );
-
-export const setRSVPTempCapacity = ( tempCapacity ) => ( {
-	type: types.SET_RSVP_TEMP_CAPACITY,
-	payload: {
-		tempCapacity,
-	},
-} );
-
-export const setRSVPTempNotGoingResponses = ( tempNotGoingResponses ) => ( {
-	type: types.SET_RSVP_TEMP_NOT_GOING_RESPONSES,
-	payload: {
-		tempNotGoingResponses,
-	},
-} );
-
-export const setRSVPTempStartDate = ( tempStartDate ) => ( {
-	type: types.SET_RSVP_TEMP_START_DATE,
-	payload: {
-		tempStartDate,
-	},
-} );
-
-export const setRSVPTempStartDateObj = ( tempStartDateObj ) => ( {
-	type: types.SET_RSVP_TEMP_START_DATE_OBJ,
-	payload: {
-		tempStartDateObj,
-	},
-} );
-
-export const setRSVPTempEndDate = ( tempEndDate ) => ( {
-	type: types.SET_RSVP_TEMP_END_DATE,
-	payload: {
-		tempEndDate,
-	},
-} );
-
-export const setRSVPTempEndDateObj = ( tempEndDateObj ) => ( {
-	type: types.SET_RSVP_TEMP_END_DATE_OBJ,
-	payload: {
-		tempEndDateObj,
-	},
-} );
-
-export const setRSVPTempStartTime = ( tempStartTime ) => ( {
-	type: types.SET_RSVP_TEMP_START_TIME,
-	payload: {
-		tempStartTime,
-	},
-} );
-
-export const setRSVPTempEndTime = ( tempEndTime ) => ( {
-	type: types.SET_RSVP_TEMP_END_TIME,
-	payload: {
-		tempEndTime,
-	},
 } );
 
 export const setRSVPDetails = ( payload ) => ( {

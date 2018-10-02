@@ -70,6 +70,22 @@
 			}
 		}
 	}
+
+	&:disabled {
+
+		&,
+		&:hover,
+		&:focus {
+
+			& > svg {
+
+				&,
+				& path {
+					fill: #AEB4BB;
+				}
+			}
+		}
+	}
 }
 
 .tribe-editor__settings-dashboard__close-button-text {
@@ -78,6 +94,12 @@
 	.tribe-editor__settings-dashboard__close-button:hover &,
 	.tribe-editor__settings-dashboard__close-button:focus & {
 		color: #009FD4;
+	}
+
+	.tribe-editor__settings-dashboard__close-button:disabled &,
+	.tribe-editor__settings-dashboard__close-button:disabled:hover &,
+	.tribe-editor__settings-dashboard__close-button:disabled:focus & {
+		color: #AEB4BB;
 	}
 }
 

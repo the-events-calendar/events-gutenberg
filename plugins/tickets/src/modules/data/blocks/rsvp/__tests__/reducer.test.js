@@ -19,7 +19,23 @@ describe( 'RSVP block reducer', () => {
 	} );
 
 	it( 'should set the id', () => {
-		expect( reducer( DEFAULT_STATE, actions.setRSVPId( 42  ) ) ).toMatchSnapshot();
+		expect( reducer( DEFAULT_STATE, actions.setRSVPId( 42 ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the settings open', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPSettingsOpen( true ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the has changes', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPHasChanges( true ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the is loading', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPIsLoading( true ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the is settings loading', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPIsSettingsLoading( true ) ) ).toMatchSnapshot();
 	} );
 
 	it( 'should set the title', () => {
@@ -112,18 +128,6 @@ describe( 'RSVP block reducer', () => {
 
 	it( 'should set the temp end time', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPTempEndTime( '13:45' ) ) ).toMatchSnapshot();
-	} );
-
-	it( 'should set the settings open', () => {
-		expect( reducer( DEFAULT_STATE, actions.setRSVPSettingsOpen( true ) ) ).toMatchSnapshot();
-	} );
-
-	it( 'should set the has changes', () => {
-		expect( reducer( DEFAULT_STATE, actions.setRSVPHasChanges( true ) ) ).toMatchSnapshot();
-	} );
-
-	it( 'should set the is loading', () => {
-		expect( reducer( DEFAULT_STATE, actions.setRSVPIsLoading( true ) ) ).toMatchSnapshot();
 	} );
 
 	it( 'should set the header image state', () => {
