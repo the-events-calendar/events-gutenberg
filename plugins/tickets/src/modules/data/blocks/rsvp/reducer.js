@@ -4,9 +4,7 @@
 import details, {
 	DEFAULT_STATE as DETAILS_DEFAULT_STATE,
 } from './reducers/details';
-import tempDetails, {
-	DEFAULT_STATE as TEMP_DETAILS_DEFAULT_STATE,
-} from './reducers/temp-details';
+import tempDetails from './reducers/temp-details';
 import headerImage, {
 	DEFAULT_STATE as HEADER_IMAGE_DEFAULT_STATE,
 } from './reducers/header-image';
@@ -22,7 +20,7 @@ export const DEFAULT_STATE = {
 	goingCount: 0,
 	notGoingCount: 0,
 	details: DETAILS_DEFAULT_STATE,
-	tempDetails: TEMP_DETAILS_DEFAULT_STATE,
+	tempDetails: DETAILS_DEFAULT_STATE,
 	headerImage: HEADER_IMAGE_DEFAULT_STATE,
 };
 
