@@ -39,7 +39,8 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 				'localize'  => array(),
 			)
 		);
-		add_filter( 'tribe_blocks_editor_defaults', array( $this, 'set_editor_defaults' ), 10 );
+
+		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'set_editor_defaults' ), 10 );
 
 	}
 
@@ -52,7 +53,9 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 	 *
 	 * @return array
 	 */
-	public function set_editor_defaults( $defaults ) {
+	public function set_editor_defaults( $js_config ) {
+
+		$defaults = array();
 
 		// If defined set the default Venue
 		$default_venue = (int) tribe_get_option( 'eventsDefaultVenueID', 0 );
@@ -102,6 +105,10 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			$defaults['organizer'] = $default_organizer;
 		}
 
-		return $defaults;
+		$js_config['editor_defaults'] = $defaults;
+
+		return $js_config;
+
 	}
+
 }

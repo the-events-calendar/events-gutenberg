@@ -2,9 +2,10 @@
  * Internal dependencies
  */
 import * as types from './types';
+import { editorDefaults } from '@moderntribe/common/utils/globals';
 
 export const DEFAULT_STATE = {
-	venue: tribe_blocks_editor_defaults.venue ? tribe_blocks_editor_defaults.venue : undefined,
+	venue: editorDefaults().venue ? editorDefaults().venue : undefined,
 	showMap: true,
 	showMapLink: true,
 };

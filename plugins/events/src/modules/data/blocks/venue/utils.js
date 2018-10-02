@@ -3,6 +3,7 @@
  */
 import { isEmpty, get } from 'lodash';
 import { getStateName } from '@moderntribe/events/editor/utils/geo-data';
+import { editorDefaults } from '@moderntribe/common/utils/globals';
 
 export const getAddress = ( details = {} ) => {
 	const { meta = {} } = details;
@@ -32,7 +33,7 @@ export const getCoordinates = ( details = {} ) => {
 	};
 };
 
-const setDefault = ( value, defaultValue ) => value === '' ? defaultValue : value;
+export const setDefault = ( value, defaultValue ) => value === '' ? defaultValue : value;
 
 /**
  * Get Venue Country
@@ -41,7 +42,7 @@ export function getVenueCountry( meta ) {
 	let country = get( meta, '_VenueCountry', '' );
 
 	if ( '' === country ) {
-		const defaultCountry = tribe_blocks_editor_defaults.venueCountry;
+		const defaultCountry = editorDefaults().venueCountry;
 		country = defaultCountry !== undefined || array.length > 0 ? defaultCountry[1] : '';
 	}
 	return country;
@@ -61,9 +62,9 @@ export function getVenueStateProvince( meta ) {
 			'US' === country
 			|| 'United States' === country
 		) {
-			stateProvince = getStateName( 'US', tribe_blocks_editor_defaults.venueState );
+			stateProvince = getStateName( 'US', editorDefaults().venueState );
 		} else {
-			stateProvince = tribe_blocks_editor_defaults.venueProvince;
+			stateProvince = editorDefaults().venueProvince;
 		}
 	}
 	return stateProvince;

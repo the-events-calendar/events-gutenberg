@@ -370,17 +370,6 @@ extends Tribe__Gutenberg__Common__Editor {
 					'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ) ? 'true' : 'false',
 				),
 			),
-			array(
-				'name' => 'tribe_blocks_editor_defaults',
-				/**
-				 * Array used to setup the Defaults from the options to the editor
-				 *
-				 * @since TBD
-				 *
-				 * @param array An array with the variables to be localized
-				 */
-				'data' => apply_filters( 'tribe_blocks_editor_defaults', array() ),
-			)
 		);
 
 		$is_classic_editor = $this->post_is_from_classic_editor( tribe_get_request_var( 'post', 0 ) );
