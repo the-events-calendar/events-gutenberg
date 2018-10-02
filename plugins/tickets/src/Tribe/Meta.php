@@ -172,9 +172,9 @@ class Tribe__Gutenberg__Tickets__Meta {
 
 		foreach ( $attendees as $attendee ) {
 			if ( true === $attendee['rsvp_going'] ) {
-				$going ++;
+				$going++;
 			} else {
-				$not_going ++;
+				$not_going++;
 			}
 		}
 
