@@ -18,10 +18,12 @@ import { Dashicon } from '@wordpress/components';
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
+const TYPES_VALUES = [ 'unlimited', 'capped', 'own' ];
+
 export const TYPES = {
-	unlimited: 'unlimited',
-	independent: 'own',
-	shared: 'capped',
+	unlimited: TYPES_VALUES[ 0 ],
+	shared: TYPES_VALUES[ 1 ],
+	independent: TYPES_VALUES[ 2 ],
 };
 
 // todo: replace with custom select from Events Pro
@@ -81,10 +83,10 @@ Input.propTypes = {
 
 class Capacity extends PureComponent {
 	static propTypes = {
-		type: PropTypes.oneOf( Object.keys( [ 'unlimited', 'capped', 'own' ] ) ),
+		type: PropTypes.oneOf( TYPES_VALUES ),
 		capacityOptions: PropTypes.arrayOf( PropTypes.shape( {
 			name: PropTypes.string,
-			value: PropTypes.oneOf( [ 'unlimited', 'capped', 'own' ] ),
+			value: PropTypes.oneOf( TYPES_VALUES ),
 		} ) ),
 		onSelectType: PropTypes.func,
 		capacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
