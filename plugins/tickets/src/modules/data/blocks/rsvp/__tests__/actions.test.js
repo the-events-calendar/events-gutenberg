@@ -32,6 +32,14 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPIsSettingsLoading( true ) ).toMatchSnapshot();
 	} );
 
+	test( 'set RSVP going count', () => {
+		expect( actions.setRSVPGoingCount( 10 ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP not going count', () => {
+		expect( actions.setRSVPNotGoingCount( 10 ) ).toMatchSnapshot();
+	} );
+
 	test( 'set RSVP title', () => {
 		expect( actions.setRSVPTitle( 'title' ) ).toMatchSnapshot();
 	} );
