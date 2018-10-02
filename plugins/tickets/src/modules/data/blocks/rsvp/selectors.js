@@ -35,6 +35,16 @@ export const getRSVPIsSettingsLoading = createSelector(
 	( rsvp ) => rsvp.isSettingsLoading,
 );
 
+export const getRSVPGoingCount = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.goingCount,
+);
+
+export const getRSVPNotGoingCount = createSelector(
+	[ getRSVPBlock ],
+	( rsvp ) => rsvp.notGoingCount,
+);
+
 /**
  * ------------------------------------------------------------
  * RSVP Details

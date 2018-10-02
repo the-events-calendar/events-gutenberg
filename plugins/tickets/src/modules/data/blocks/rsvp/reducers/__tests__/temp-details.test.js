@@ -2,7 +2,9 @@
  * Internal dependencies
  */
 import { actions } from '@moderntribe/tickets/data/blocks/rsvp';
-import reducer, { DEFAULT_STATE } from '@moderntribe/tickets/data/blocks/rsvp/reducers/temp-details';
+import reducer from '@moderntribe/tickets/data/blocks/rsvp/reducers/temp-details';
+import { DEFAULT_STATE } from '@moderntribe/tickets/data/blocks/rsvp/reducers/details';
+
 
 jest.mock( 'moment', () => () => {
 	const moment = require.requireActual( 'moment' );

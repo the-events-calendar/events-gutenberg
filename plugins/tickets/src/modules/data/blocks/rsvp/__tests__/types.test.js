@@ -20,6 +20,36 @@ describe( 'RSVP block types', () => {
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_ID` );
 	} );
 
+	test( 'set RSVP settings open', () => {
+		expect( types.SET_RSVP_SETTINGS_OPEN )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_SETTINGS_OPEN` );
+	} );
+
+	test( 'set RSVP has changes', () => {
+		expect( types.SET_RSVP_HAS_CHANGES )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HAS_CHANGES` );
+	} );
+
+	test( 'set RSVP is loading', () => {
+		expect( types.SET_RSVP_IS_LOADING )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_IS_LOADING` );
+	} );
+
+	test( 'set RSVP is settings loading', () => {
+		expect( types.SET_RSVP_IS_SETTINGS_LOADING )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_IS_SETTINGS_LOADING` );
+	} );
+
+	test( 'set RSVP going count', () => {
+		expect( types.SET_RSVP_GOING_COUNT )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_GOING_COUNT` );
+	} );
+
+	test( 'set RSVP not going count', () => {
+		expect( types.SET_RSVP_NOT_GOING_COUNT )
+			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_NOT_GOING_COUNT` );
+	} );
+
 	test( 'set RSVP title', () => {
 		expect( types.SET_RSVP_TITLE )
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_TITLE` );
@@ -68,31 +98,6 @@ describe( 'RSVP block types', () => {
 	test( 'set RSVP end time', () => {
 		expect( types.SET_RSVP_END_TIME )
 			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_END_TIME` );
-	} );
-
-	test( 'set RSVP settings open', () => {
-		expect( types.SET_RSVP_SETTINGS_OPEN )
-			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_SETTINGS_OPEN` );
-	} );
-
-	test( 'set RSVP has changes', () => {
-		expect( types.SET_RSVP_HAS_CHANGES )
-			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HAS_CHANGES` );
-	} );
-
-	test( 'set RSVP is loading', () => {
-		expect( types.SET_RSVP_IS_LOADING )
-			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_IS_LOADING` );
-	} );
-
-	test( 'set RSVP is settings loading', () => {
-		expect( types.SET_RSVP_IS_SETTINGS_LOADING )
-			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_IS_SETTINGS_LOADING` );
-	} );
-
-	test( 'set RSVP header image', () => {
-		expect( types.SET_RSVP_HEADER_IMAGE )
-			.toBe( `${ PREFIX_TICKETS_STORE }/SET_RSVP_HEADER_IMAGE` );
 	} );
 
 	test( 'set RSVP temp title', () => {

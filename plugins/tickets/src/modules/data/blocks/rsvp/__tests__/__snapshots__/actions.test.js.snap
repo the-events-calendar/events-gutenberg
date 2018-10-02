@@ -75,6 +75,15 @@ Object {
 }
 `;
 
+exports[`RSVP block actions set RSVP going count 1`] = `
+Object {
+  "payload": Object {
+    "goingCount": 10,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_GOING_COUNT",
+}
+`;
+
 exports[`RSVP block actions set RSVP has changes 1`] = `
 Object {
   "payload": Object {
@@ -119,6 +128,15 @@ Object {
     "isSettingsLoading": true,
   },
   "type": "@@MT/TICKETS/SET_RSVP_IS_SETTINGS_LOADING",
+}
+`;
+
+exports[`RSVP block actions set RSVP not going count 1`] = `
+Object {
+  "payload": Object {
+    "notGoingCount": 10,
+  },
+  "type": "@@MT/TICKETS/SET_RSVP_NOT_GOING_COUNT",
 }
 `;
 

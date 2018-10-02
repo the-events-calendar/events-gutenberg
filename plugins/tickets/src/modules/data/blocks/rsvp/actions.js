@@ -46,6 +46,20 @@ export const setRSVPIsSettingsLoading = ( isSettingsLoading ) => ( {
 	},
 } );
 
+export const setRSVPGoingCount = ( goingCount ) => ( {
+	type: types.SET_RSVP_GOING_COUNT,
+	payload: {
+		goingCount,
+	},
+} );
+
+export const setRSVPNotGoingCount = ( notGoingCount ) => ( {
+	type: types.SET_RSVP_NOT_GOING_COUNT,
+	payload: {
+		notGoingCount,
+	},
+} );
+
 export const setRSVPTitle = ( title ) => ( {
 	type: types.SET_RSVP_TITLE,
 	payload: {
