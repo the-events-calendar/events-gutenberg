@@ -22,7 +22,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 	public function register() {
 		tribe_singleton(
 			'gutenberg.tickets.rest-v1.endpoints.tickets-single',
-			new Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket(
+			new Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_Ticket(
 				tribe( 'tickets.rest-v1.messages' ),
 				tribe( 'tickets.rest-v1.repository' ),
 				tribe( 'tickets.rest-v1.validator' )
