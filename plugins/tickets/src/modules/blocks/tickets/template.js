@@ -55,12 +55,10 @@ class TicketsTemplate extends PureComponent {
 
 	renderSpinner() {
 		return (
-			<Fragment>
-				<div className="tribe-editor__tickets-container--loading">
-					<Spinner />
-				</div>
-			</Fragment>
-		)
+			<div className="tribe-editor__tickets-container--loading">
+				<Spinner />
+			</div>
+		);
 	}
 
 	renderComponents() {

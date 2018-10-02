@@ -18,6 +18,7 @@ tribe.tickets.block = {
 
 	obj.selector = {
 		container                 : '.tribe-block__tickets',
+		submit                    : '.tribe-block__tickets__buy',
 		item                      : '.tribe-block__tickets__item',
 		itemQuantity              : '.tribe-block__tickets__item__quantity',
 		itemQuantityInput         : '.tribe-ticket-quantity',
@@ -39,9 +40,8 @@ tribe.tickets.block = {
 	 *
 	 * @return void
 	 */
-	$( obj.selector.item )
-		.on( 'click',
-		'.tribe-block__tickets__item__quantity__remove, .tribe-block__tickets__item__quantity__add' ,
+	$( obj.selector.item ).on( 'click',
+		'.tribe-block__tickets__item__quantity__remove, .tribe-block__tickets__item__quantity__add',
 		function( e ) {
 			e.preventDefault();
 			var input  = $( this ).parent().find( 'input[type="number"]' );
@@ -52,6 +52,48 @@ tribe.tickets.block = {
 
 			// Trigger the on Change for the input as it's not handled via stepUp() || stepDown()
 			input.trigger( 'change' );
+
+	} );
+
+	/**
+	 * Handle the TPP form
+	 *
+	 * @since TBD
+	 *
+	 * @return void
+	 */
+	$( obj.selector.item ).on( 'change',
+		'.tribe-ticket-quantity',
+		function( e ) {
+			var $this      = $( this );
+			var $ticket    = $this.closest( obj.selector.item );
+			var $ticket_id = $ticket.data( 'ticket-id' );
+
+			var $form = $this.closest( obj.selector.container );
+
+			// Only disable / enable if is a Tribe Commerce Paypal form.
+			if ( 'Tribe__Tickets__Commerce__PayPal__Main' !== $form.data( 'provider' ) ) {
+				return;
+			}
+
+			var new_quantity = parseInt( $this.val(), 10 );
+			new_quantity     = isNaN( new_quantity ) ? 0 : new_quantity;
+
+			if ( new_quantity > 0 ) {
+				$form
+					.find( '[data-ticket-id]:not([data-ticket-id="' + $ticket_id + '"])' )
+					.closest( 'div' )
+					.find( 'input.tribe-ticket-quantity, button.tribe-block__tickets__item__quantity__add, button.tribe-block__tickets__item__quantity__remove' )
+					.attr( 'disabled', 'disabled' )
+					.closest( 'div' )
+					.addClass( 'tribe-tickets-purchase-disabled' );
+			} else {
+				$form
+					.find( 'input.tribe-ticket-quantity, button.tribe-block__tickets__item__quantity__add, button.tribe-block__tickets__item__quantity__remove' )
+					.removeAttr( 'disabled' )
+					.closest( 'div' )
+					.removeClass( 'tribe-tickets-purchase-disabled' );
+			}
 
 	} );
 
