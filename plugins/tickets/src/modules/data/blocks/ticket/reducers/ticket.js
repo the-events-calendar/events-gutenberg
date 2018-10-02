@@ -11,14 +11,15 @@ import { TYPES } from '@moderntribe/tickets/blocks/ticket/edit-container/content
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
 const currentMoment = moment();
+const ADDITIONAL_DAYS = 3;
 export const DEFAULT_STATE = {
 	title: '',
 	description: '',
-	price: 0,
+	price: '',
 	SKU: '',
 	startDate: momentUtil.toDate( currentMoment ),
 	startDateMoment: currentMoment,
-	endDate: momentUtil.toDate( currentMoment ),
+	endDate: momentUtil.toDate( currentMoment.clone().add( ADDITIONAL_DAYS, 'days' ) ),
 	endDateMoment: currentMoment,
 	startTime: momentUtil.toTime24Hr( currentMoment ),
 	endTime: momentUtil.toTime24Hr( currentMoment ),
