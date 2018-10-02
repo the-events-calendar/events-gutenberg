@@ -160,5 +160,13 @@ describe( 'Gutenberg actions', () => {
 			expect( actions.setTicketIsLoading( blockId, true ) ).toMatchSnapshot();
 			expect( actions.setTicketIsLoading( blockId, false ) ).toMatchSnapshot();
 		} );
+
+		test( 'fetch ticket details', () => {
+			expect( actions.fetchTicketDetails( blockId, 99 ) ).toMatchSnapshot();
+		} );
+
+		test( 'cancel ticket edit', () => {
+			expect( actions.cancelTicketEdit( blockId ) ).toMatchSnapshot();
+		} );
 	} );
 } );

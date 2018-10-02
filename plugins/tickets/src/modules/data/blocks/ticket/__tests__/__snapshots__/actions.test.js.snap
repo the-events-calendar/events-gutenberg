@@ -410,6 +410,25 @@ Object {
 }
 `;
 
+exports[`Gutenberg actions Single block actions cancel ticket edit 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/CANCEL_EDIT_OF_TICKET",
+}
+`;
+
+exports[`Gutenberg actions Single block actions fetch ticket details 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "ticketId": 99,
+  },
+  "type": "@@MT/TICKETS/FETCH_TICKET_DETAILS",
+}
+`;
+
 exports[`Gutenberg actions Temporarily values Temporarily capacity 1`] = `
 Object {
   "payload": Object {

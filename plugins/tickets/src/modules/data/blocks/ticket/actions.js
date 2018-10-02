@@ -251,3 +251,18 @@ export const setTicketInitialState = ( props ) => ( {
 	type: types.SET_TICKET_INITIAL_STATE,
 	payload: props,
 } );
+
+export const fetchTicketDetails = ( blockId, ticketId ) => ( {
+	type: types.FETCH_TICKET_DETAILS,
+	payload: {
+		blockId,
+		ticketId,
+	},
+} );
+
+export const cancelTicketEdit = ( blockId ) => ( {
+	type: types.CANCEL_EDIT_OF_TICKET,
+	payload: {
+		blockId,
+	},
+} );
