@@ -158,13 +158,15 @@ class Capacity extends PureComponent {
 					) }
 					tooltipLabel={ <Dashicon icon="info-outline" /> }
 				/>
-				<div className="tribe-editor__container-panel__input-group">
-					<Select
-						selected={ type }
-						options={ capacityOptions }
-						onSelect={ onSelectType }
-						id={ this.ids.select }
-					/>
+				<div className="tribe-editor__container-panel__input-group tribe-editor__ticket-fields__capacity">
+					<div className="tribe-editor__ticket-fields__select-container">
+						<Select
+							selected={ type }
+							options={ capacityOptions }
+							onSelect={ onSelectType }
+							id={ this.ids.select }
+						/>
+					</div>
 					{ type !== TYPES.unlimited && (
 						<Input
 							id={ this.ids.capacity }
