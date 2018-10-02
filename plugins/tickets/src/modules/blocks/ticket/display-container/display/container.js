@@ -27,6 +27,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		isUnlimited: selectors.isUnlimitedTicket( state, ownProps ),
 		isShared: selectors.isSharedTicket( state, ownProps ),
 		shared: shared || 0,
+		isTicketDisabled: selectors.isTicketDisabled( state, ownProps ),
 	};
 };
 
