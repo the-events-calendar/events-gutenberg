@@ -51,9 +51,9 @@ const setInitialState = ( dispatch, ownProps ) => () => {
 			parseInt( ownProps.attributes.goingCount, 10 )
 		) );
 	}
-	if ( ownProps.attributes.goingCount ) {
-		dispatch( actions.setRSVPGoingCount(
-			parseInt( ownProps.attributes.goingCount, 10 )
+	if ( ownProps.attributes.notGoingCount ) {
+		dispatch( actions.setRSVPNotGoingCount(
+			parseInt( ownProps.attributes.notGoingCount, 10 )
 		) );
 	}
 };
