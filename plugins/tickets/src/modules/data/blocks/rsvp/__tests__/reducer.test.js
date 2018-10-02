@@ -38,6 +38,14 @@ describe( 'RSVP block reducer', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPIsSettingsLoading( true ) ) ).toMatchSnapshot();
 	} );
 
+	it( 'should set the going count', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPGoingCount( 10 ) ) ).toMatchSnapshot();
+	} );
+
+	it( 'should set the not going count', () => {
+		expect( reducer( DEFAULT_STATE, actions.setRSVPNotGoingCount( 10 ) ) ).toMatchSnapshot();
+	} );
+
 	it( 'should set the title', () => {
 		expect( reducer( DEFAULT_STATE, actions.setRSVPTitle( 'new title' ) ) ).toMatchSnapshot();
 	} );

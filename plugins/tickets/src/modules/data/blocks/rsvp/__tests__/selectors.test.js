@@ -48,6 +48,16 @@ describe( 'RSVP block selectors', () => {
 			.toBe( DEFAULT_STATE.isSettingsLoading );
 	} );
 
+	it( 'should return the going count', () => {
+		expect( selectors.getRSVPGoingCount( state ) )
+			.toBe( DEFAULT_STATE.goingCount );
+	} );
+
+	it( 'should return the not going count', () => {
+		expect( selectors.getRSVPNotGoingCount( state ) )
+			.toBe( DEFAULT_STATE.notGoingCount );
+	} );
+
 	it( 'should return the details object', () => {
 		expect( selectors.getRSVPDetails( state ) )
 			.toBe( DEFAULT_STATE.details );
