@@ -21,6 +21,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		hasBeenCreated: selectors.getTicketHasBeenCreated( state, props ),
 		isLoading: selectors.getTicketIsLoading( state, props ),
 		ticketId: selectors.getTicketId( state, props ),
+		isTicketDisabled: selectors.isTicketDisabled( state, props ),
 	};
 };
 
@@ -33,7 +34,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 		dispatch( actions.requestRemovalOfTicketBlock( clientId ) );
 	},
 	setInitialState( props ) {
-		const hasBeenCreated = props.get( 'hasBeenCreated', false );
 		dispatch( actions.setTicketInitialState( props ) );
 		const { clientId } = ownProps;
 		dispatch( actions.registerTicketBlock( clientId ) );
