@@ -254,6 +254,7 @@ export const getRSVPHeaderImage = ( id ) => ( dispatch ) => {
 					alt: body.alt_text,
 					src: body.media_details.sizes.medium.source_url,
 				} ) );
+				dispatch( actions.setRSVPIsSettingsLoading( false ) );
 			},
 			error: () => dispatch( actions.setRSVPIsSettingsLoading( false ) ),
 		},
