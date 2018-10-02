@@ -19,7 +19,7 @@ import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import StatusIcon from '@moderntribe/tickets/blocks/ticket/display-container/status-icon/element';
 import './style.pcss';
 
-const TicketContainer = ( { isSelected, isEditing, total, sold, tickets, isLoading } ) => (
+const TicketContainer = ( { isSelected, isEditing, total, sold, tickets, isLoading, isTicketDisabled } ) => (
 	<div className="tribe-editor__ticket-container">
 		<div className="tribe-editor__tickets-body">
 			<InnerBlocks allowedBlocks={ [ 'tribe/event-tickets-ticket' ] } />
@@ -33,7 +33,7 @@ const TicketContainer = ( { isSelected, isEditing, total, sold, tickets, isLoadi
 			/>
 		) }
 		{ isSelected && ! isEditing && ! isLoading && (
-			<Availability available={ total - sold } total={ total } />
+			<Availability available={ total - sold } total={ total } isDisabled={ isTicketDisabled } />
 		) }
 	</div>
 );
@@ -42,6 +42,7 @@ TicketContainer.propTypes = {
 	isSelected: PropTypes.bool,
 	isEditing: PropTypes.bool,
 	isLoading: PropTypes.bool,
+	isTicketDisabled: PropTypes.bool,
 	total: PropTypes.number,
 	sold: PropTypes.number,
 };
