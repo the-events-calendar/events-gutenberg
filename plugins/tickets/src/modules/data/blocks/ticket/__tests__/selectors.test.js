@@ -251,6 +251,25 @@ describe( 'Ticket blocks selectors', () => {
 			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].hasBeenCreated = true;
 			expect( selectors.getTicketHasBeenCreated( newState, ownProps ) ).toBe( true );
 		} );
+
+		test( 'Ticket is been edited', () => {
+			expect( selectors.getTicketIsBeenEdited( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Ticket is been edited - when is Editing and has been created', () => {
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].isEditing = true;
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].hasBeenCreated = true;
+			expect( selectors.getTicketIsBeenEdited( newState, ownProps ) ).toBe( true );
+		} );
+
+		test( 'Is ticket disabled - default state', () => {
+			expect( selectors.isTicketDisabled( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Is ticket disabled - when settings is open', () => {
+			newState.tickets.blocks.ticket.ui.isSettingsOpen = true;
+ 			expect( selectors.isTicketDisabled( newState, ownProps ) ).toBe( true );
+		} );
 	} );
 } );
 

@@ -282,3 +282,15 @@ export const getTicketId = createSelector(
 	[ getTicketBlock ],
 	( block ) => block.ticketId,
 );
+
+export const getTicketIsBeenEdited = createSelector(
+	[ getTicketEditing, getTicketHasBeenCreated ],
+	( isEditing, hasBeenCreated ) => isEditing && hasBeenCreated,
+);
+
+export const isTicketDisabled = createSelector(
+	[ getSettingsIsOpen, getActiveBlockId, getTicketEditing ],
+	( isSettingsOpen, activeBlockId, isEditing ) => (
+		isSettingsOpen || ( activeBlockId && ! isEditing )
+	),
+);

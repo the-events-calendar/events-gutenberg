@@ -20,13 +20,13 @@ Object {
     "capacityType": "own",
     "dateIsPristine": true,
     "description": "",
-    "endDate": "September 1, 2018",
+    "endDate": "September 4, 2018",
     "endDateMoment": "2018-09-01T22:30:00.000Z",
     "endTime": "22:30",
     "hasBeenCreated": false,
     "isEditing": false,
     "isLoading": false,
-    "price": 0,
+    "price": "",
     "sold": 0,
     "startDate": "September 1, 2018",
     "startDateMoment": "2018-09-01T22:30:00.000Z",
@@ -45,13 +45,13 @@ Array [
     "capacityType": "own",
     "dateIsPristine": true,
     "description": "",
-    "endDate": "September 1, 2018",
+    "endDate": "September 4, 2018",
     "endDateMoment": "2018-09-01T22:30:00.000Z",
     "endTime": "22:30",
     "hasBeenCreated": false,
     "isEditing": false,
     "isLoading": false,
-    "price": 0,
+    "price": "",
     "sold": 0,
     "startDate": "September 1, 2018",
     "startDateMoment": "2018-09-01T22:30:00.000Z",
@@ -70,7 +70,7 @@ exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 1`] = `
 
 exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 2`] = `"22:30"`;
 
-exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 3`] = `"September 1, 2018"`;
+exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 3`] = `"September 4, 2018"`;
 
 exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 4`] = `"September 1, 2018"`;
 
@@ -80,7 +80,7 @@ exports[`Ticket blocks selectors Ticket selectors Ticket fields 2`] = `""`;
 
 exports[`Ticket blocks selectors Ticket selectors Ticket fields 3`] = `""`;
 
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 4`] = `0`;
+exports[`Ticket blocks selectors Ticket selectors Ticket fields 4`] = `""`;
 
 exports[`Ticket blocks selectors Ticket selectors Ticket fields 5`] = `"own"`;
 
