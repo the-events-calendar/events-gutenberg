@@ -14,7 +14,6 @@ import uniqid from 'uniqid';
 /**
  * Internal dependencies
  */
-import { sendValue } from '@moderntribe/common/utils/input';
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 
 class SKU extends PureComponent {
@@ -58,6 +57,7 @@ class SKU extends PureComponent {
 				/>
 				<div className="tribe-editor__container-panel__input-group">
 					<input
+						className="tribe-editor__ticket-field__sku"
 						id={ this.id }
 						type="text"
 						value={ value }
