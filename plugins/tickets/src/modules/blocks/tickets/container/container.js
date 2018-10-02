@@ -17,6 +17,9 @@ const mapStateToProps = ( state ) => ( {
 	sold: selectors.getTotalSold( state ),
 	tickets: selectors.getTicketsArray( state ),
 	isLoading: selectors.isParentBlockLoading( state ),
+	isTicketDisabled: selectors.isTicketDisabled( state, {
+		blockId: selectors.getActiveBlockId( state ),
+	} ),
 } );
 
 export default compose(
