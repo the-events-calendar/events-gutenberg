@@ -12,7 +12,7 @@ import * as actions from '../actions';
 import watchers, * as sagas from '../sagas';
 import * as selectors from '../selectors';
 
-describe( 'Sharing Block sagas', () => {
+describe( 'Ticket Block sagas', () => {
 	describe( 'watchers', () => {
 		test( 'actions', () => {
 			const gen = watchers();
@@ -33,6 +33,15 @@ describe( 'Sharing Block sagas', () => {
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_TICKET_INITIAL_STATE, sagas.setTicketInitialState ),
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.FETCH_TICKET_DETAILS, sagas.fetchTicketDetails )
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.CANCEL_EDIT_OF_TICKET, sagas.cancelEditTicket )
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_UPDATE_TICKET, sagas.updateTicket )
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
@@ -107,8 +116,9 @@ describe( 'Sharing Block sagas', () => {
 			test( 'Custom provider is present', () => {
 				props.attributes.provider = 'Tribe__Tickets__Commerce__PayPal__Main';
 				const gen = sagas.setInitialState( { payload: props } );
-				expect( gen.next().value )
-					.toEqual( put( actions.setProvider( 'Tribe__Tickets__Commerce__PayPal__Main' ) ) );
+				expect( gen.next().value ).toEqual(
+					put( actions.setProvider( 'Tribe__Tickets__Commerce__PayPal__Main' ) )
+				);
 				expect( gen.next().done ).toBe( true );
 			} );
 		} );
