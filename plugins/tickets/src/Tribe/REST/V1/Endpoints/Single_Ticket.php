@@ -352,7 +352,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket
 			'ticket' => array(
 				'in' => 'body',
 				'type' => 'object',
-				'defaults' => [],
+				'defaults' => null,
 			),
 		);
 	}
