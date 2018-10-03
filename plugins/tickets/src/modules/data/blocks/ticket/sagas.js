@@ -129,13 +129,6 @@ export function* setBodyDetails( blockId ) {
 	const isUnlimited = capacity.type === 'unlimited';
 	body.append( 'ticket[mode]', isUnlimited ? '' : capacity.type );
 	body.append( 'ticket[capacity]', isUnlimited ? '' : capacity.amount );
-	/*
-const ticketData = {
-	'tribe-ticket': {
-		event_capacity: '',
-	},
-/*
-*/
 
 	return body;
 }
