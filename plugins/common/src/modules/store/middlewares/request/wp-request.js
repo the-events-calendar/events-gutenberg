@@ -1,17 +1,16 @@
 /**
  * External dependencies
  */
-import { noop, get } from 'lodash';
+import { noop, get, inRange } from 'lodash';
+import 'whatwg-fetch';
 
 /**
  * Internal dependencies
  */
+import { config } from '@moderntribe/common/utils/globals';
 import { types } from '@moderntribe/common/store/middlewares/request';
-import { getResponseHeaders } from '@moderntribe/common/utils/request';
 
-export const BASE = '/wp/v2';
-
-export default () => ( next ) => ( action ) => {
+export default () => ( next ) => async ( action ) => {
 	if ( action.type !== types.WP_REQUEST ) {
 		return next( action );
 	}
@@ -24,6 +23,12 @@ export default () => ( next ) => ( action ) => {
 	} = meta;
 
 	next( action );
+
+	const rest = get( config(), 'rest', {} );
+	const { url = '', nonce = '' } = rest;
+	const namespaces = rest.namespaces || {};
+	const core = namespaces.core || 'wp/v2';
+	const BASE = `${ url }${ core }`;
 
 	const actions = {
 		start: noop,
@@ -38,18 +43,34 @@ export default () => ( next ) => ( action ) => {
 		return;
 	}
 
-	const { apiRequest } = wp;
-	const url = `${ BASE }/${ path }`;
+	const endpoint = `${ BASE }/${ path }`;
 
-	actions.start( url, params );
+	actions.start( endpoint, params );
 
-	return apiRequest( {
-		...params,
-		path: url,
-	} ).then( ( body, status = '', xhr = {} ) => {
-		const headers = getResponseHeaders( xhr );
-		actions.success( { body, headers, status, xhr } );
-	} ).fail( ( error ) => {
+	const headers = {
+		'Accept': 'application/json',
+		'Content-Type': 'application/json',
+		...get( params, 'headers', {} ),
+		'X-WP-Nonce': nonce,
+	};
+
+	try {
+		const response = await fetch( endpoint, {
+			...params,
+			credentials: 'include',
+			headers,
+		} );
+
+		const { status } = response;
+		// inRange includes 200 but excludes 300 from the range so it's from 200 up to 299
+		if ( ! inRange( status, 200, 300 ) ) {
+			throw response;
+		}
+		const body = await response.json();
+		actions.success( { body, headers: response.headers } );
+		return [ response, body ];
+	} catch ( error ) {
 		actions.error( error );
-	} );
+		return error;
+	}
 };

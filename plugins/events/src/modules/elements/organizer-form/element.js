@@ -82,7 +82,7 @@ class OrganizerForm extends Component {
 		const request = wp.apiRequest( {
 			path: `/wp/v2/${ basePath }`,
 			method: 'POST',
-			data: toSend,
+			body: JSON.stringify( toSend ),
 		} );
 
 		// Set the organizer state

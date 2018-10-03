@@ -9,6 +9,7 @@ import { __ } from '@wordpress/i18n';
  */
 import Organizer from './container';
 import { Icons } from '@moderntribe/events/elements';
+import { editorDefaults } from '@moderntribe/common/utils/globals';
 
 export default {
 	id: 'event-organizer',
@@ -25,7 +26,7 @@ export default {
 	attributes: {
 		organizer: {
 			type: 'html',
-			default: '',
+			default: editorDefaults().organizer ? editorDefaults().organizer : '',
 		},
 		organizers: {
 			type: 'array',

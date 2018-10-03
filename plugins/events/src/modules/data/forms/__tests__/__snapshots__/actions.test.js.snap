@@ -106,28 +106,6 @@ Array [
 
 exports[`[STORE] - form thunk actions Maybe remove entry action without details 1`] = `Array []`;
 
-exports[`[STORE] - form thunk actions Seend the form when editing 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "actions": Object {
-        "error": [Function],
-        "start": [Function],
-        "success": [Function],
-      },
-      "params": Object {
-        "data": Object {
-          "ititle": "Tribe",
-        },
-        "method": "PUT",
-      },
-      "path": "tribe_venue/21",
-    },
-    "type": "@@MT/COMMON/WP_REQUEST",
-  },
-]
-`;
-
 exports[`[STORE] - form thunk actions Send the form action when creating 1`] = `
 Array [
   Object {
@@ -138,12 +116,30 @@ Array [
         "success": [Function],
       },
       "params": Object {
-        "data": Object {
-          "ititle": "Modern Tribe",
-        },
+        "body": "{\\"title\\":\\"Modern Tribe\\"}",
         "method": "POST",
       },
       "path": "tribe_organizer",
+    },
+    "type": "@@MT/COMMON/WP_REQUEST",
+  },
+]
+`;
+
+exports[`[STORE] - form thunk actions Send the form when editing 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "actions": Object {
+        "error": [Function],
+        "start": [Function],
+        "success": [Function],
+      },
+      "params": Object {
+        "body": "{\\"title\\":\\"Tribe\\"}",
+        "method": "PUT",
+      },
+      "path": "tribe_venue/21",
     },
     "type": "@@MT/COMMON/WP_REQUEST",
   },

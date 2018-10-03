@@ -9,6 +9,130 @@ class Tribe__Gutenberg__Events__Editor
 extends Tribe__Gutenberg__Common__Editor {
 
 	/**
+	 * Hooks actions from the editor into the correct places
+	 *
+	 * @since  0.2.8-alpha
+	 *
+	 * @return bool
+	 */
+	public function hook() {
+		add_filter( 'tribe_events_register_event_type_args', array( $this, 'add_event_template_blocks' ) );
+
+		// Add Rest API support
+		add_filter( 'tribe_events_register_event_type_args', array( $this, 'add_rest_support' ) );
+		add_filter( 'tribe_events_register_venue_type_args', array( $this, 'add_rest_support' ) );
+		add_filter( 'tribe_events_register_organizer_type_args', array( $this, 'add_rest_support' ) );
+
+		// Maybe add flag from classic editor
+		add_action( 'init', array( $this, 'flag_post_from_classic_editor' ), 0 );
+
+		// Update Post content to use blocks
+		add_action( 'tribe_blocks_editor_flag_post_classic_editor', array( $this, 'update_post_content_to_blocks' ) );
+
+		// Remove assets that are not relevant for Gutenberg Editor
+		add_action( 'wp_print_scripts', array( $this, 'deregister_scripts' ) );
+
+		// Setup the registration of Blocks
+		add_action( 'init', array( $this, 'register_blocks' ), 20 );
+
+		// Load assets of the blocks
+		add_action( 'admin_init', array( $this, 'assets' ) );
+
+		// Add Block Categories to Editor
+		add_action( 'block_categories', array( $this, 'block_categories' ), 10, 2 );
+	}
+
+	/**
+	 * When initially loading a post in gutenberg flags if came from classic editor
+	 *
+	 * @since  0.2.7-alpha
+	 *
+	 * @return bool
+	 */
+	public function flag_post_from_classic_editor() {
+		$post = absint( tribe_get_request_var( 'post' ) );
+
+		// Bail on empty post
+		if ( empty( $post ) ) {
+			return false;
+		}
+
+		// Bail on non numeric post
+		if ( ! is_numeric( $post ) ) {
+			return false;
+		}
+
+		$on_classic_editor_page = tribe_get_request_var( 'classic-editor', false );
+		// Bail if in classic editor
+		if ( $on_classic_editor_page ) {
+			return false;
+		}
+
+		// Bail if not an event (might need to be removed later)
+		if ( ! tribe_is_event( $post ) ) {
+			return false;
+		}
+
+		// Bail if it already has Blocks
+		if ( has_blocks( $post ) ) {
+			return false;
+		}
+
+		$status = update_post_meta( $post, $this->key_flag_classic_editor, 1 );
+
+		// Only trigger when we actually have the correct post
+		if ( $status ) {
+			/**
+			 * Triggers
+			 *
+			 * @since  0.2.2-alpha
+			 *
+			 * @param  int $post Which post is getting updated
+			 */
+			do_action( 'tribe_blocks_editor_flag_post_classic_editor', $post );
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Making sure we have correct post content for blocks after going into Gutenberg
+	 *
+	 * @since  0.2.8-alpha
+	 *
+	 * @param  int $post Which post we will migrate
+	 *
+	 * @return bool
+	 */
+	public function update_post_content_to_blocks( $post ) {
+		$post    = get_post( $post );
+		$blocks  = $this->get_classic_template();
+		$content = array();
+
+		foreach ( $blocks as $key => $block_param ) {
+			$slug = reset( $block_param );
+
+			if ( 'core/paragraph' === $slug ) {
+				if ( '' === $post->post_content ) {
+					continue;
+				}
+				$content[] = '<!-- wp:freeform -->';
+				$content[] = $post->post_content;
+				$content[] = '<!-- /wp:freeform -->';
+			} else {
+				$content[] = '<!-- wp:' . $slug . ' /-->';
+			}
+		}
+
+		$status = wp_update_post( array(
+			'ID' => $post->ID,
+			'post_content' => implode( "\n\r", $content ),
+		) );
+
+		return $status;
+	}
+
+	/**
 	 * Gets the classic template, used for migration and setup new events with classic look
 	 *
 	 * @since  0.2.2-alpha
@@ -166,6 +290,13 @@ extends Tribe__Gutenberg__Common__Editor {
 			'timeZone' => array(
 				'show_time_zone' => false,
 				'label' => $this->get_timezone_label(),
+			),
+			'rest' => array(
+				'url' => get_rest_url(),
+				'nonce' => wp_create_nonce( 'wp_rest' ),
+				'namespaces' => array(
+					'core' => 'wp/v2',
+				),
 			),
 		);
 

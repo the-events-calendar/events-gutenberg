@@ -1,3 +1,3 @@
-import * as request from './request';
+import * as globals from './globals';
 
-export { request };
+export { globals };

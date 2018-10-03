@@ -12,6 +12,9 @@ const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
 
 describe( '[STORE] - Venue actions', () => {
+	test( 'action to set initial state', () => {
+		expect( actions.setInitialState() ).toMatchSnapshot();
+	} );
 	test( 'action to set the venue', () => {
 		expect( actions.setVenue( 99 ) ).toMatchSnapshot();
 	} );
@@ -38,25 +41,3 @@ describe( '[STORE] - Venue actions', () => {
 		expect( actions.toggleVenueMapLink() ).toMatchSnapshot();
 	} );
 } );
-
-describe( '[STORE] - Venue thunk actions', () => {
-	test( 'Initial set of state', () => {
-		const store = mockStore( {} );
-
-		const get = jest.fn( ( key ) => {
-			const values = {
-				venue: 99,
-				showMap: true,
-				showMapLink: true,
-			};
-			return values[ key ];
-		} );
-
-		store.dispatch( actions.setInitialState( { get } ) );
-
-		expect( get ).toHaveBeenCalled();
-		expect( get ).toHaveBeenCalledTimes( 3 );
-		expect( store.getActions() ).toMatchSnapshot();
-	} );
-} );
-

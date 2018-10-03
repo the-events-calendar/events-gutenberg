@@ -109,8 +109,13 @@
 		}
 
 		.tribe-editor__terms {
-			.spinner {
-				float: none;
+			display: block;
+
+			.components-spinner {
+				position: absolute;
+				left: 50%;
+				right: 50%;
+				margin: 0;
 			}
 		}
 
@@ -121,6 +126,14 @@
 				display: inline;
 			}
 		}
+	}
+
+	.tribe-editor__terms__spinner {
+		height: 20px;
+		width: 100%;
+		position: relative;
+		margin: 5px 0;
+		padding: 0 11px;
 	}
 
 	.blocks-plain-text {

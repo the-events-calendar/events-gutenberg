@@ -2,9 +2,10 @@
  * Internal dependencies
  */
 import * as types from './types';
+import { editorDefaults } from '@moderntribe/common/utils/globals';
 
 export const DEFAULT_STATE = {
-	venue: undefined,
+	venue: editorDefaults().venue ? editorDefaults().venue : undefined,
 	showMap: true,
 	showMapLink: true,
 };
@@ -14,7 +15,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_VENUE:
 			return {
 				...state,
-				venue: action.payload.venue,
+				venue: state.venue,
 			};
 		case types.TOGGLE_VENUE_MAP:
 			return {

@@ -13,7 +13,7 @@ import { get } from 'lodash';
  */
 import EventDateTime from './container';
 import { Icons } from '@moderntribe/events/elements';
-import { config } from '@moderntribe/events/editor/utils/globals';
+import { config } from '@moderntribe/common/utils/globals';
 import { FORMATS } from '@moderntribe/events/editor/utils/date';
 
 /**

@@ -40,10 +40,22 @@ describe( 'Request utils', () => {
 	} );
 
 	it( 'Should return the total of pages', () => {
-		expect( utils.getTotalPages( { 'x-wp-totalpages': 5 } ) ).toBe( 5 );
-		expect( utils.getTotalPages( { 'x-wp-totalpages': '5' } ) ).toBe( 5 );
-		expect( utils.getTotalPages( { 'x-wp-totalpages': '5.3' } ) ).toBe( 5 );
-		expect( utils.getTotalPages( { 'x-wp': 5 } ) ).toBe( 0 );
-		expect( utils.getTotalPages( {} ) ).toBe( 0 );
+		const headers = new Headers();
+		headers.append( 'x-wp-totalpages', 5 );
+		expect( headers.get( 'x-wp-totalpages' ) ).toBe( '5' );
+		expect( utils.getTotalPages( headers ) ).toBe( 5 );
+
+		headers.set( 'x-wp-totalpages', '5' );
+		expect( headers.get( 'x-wp-totalpages' ) ).toBe( '5' );
+		expect( utils.getTotalPages( headers ) ).toBe( 5 );
+
+		headers.set( 'x-wp-totalpages', '5.3' );
+		expect( headers.get( 'x-wp-totalpages' ) ).toBe( '5.3' );
+		expect( utils.getTotalPages( headers ) ).toBe( 5 );
+
+		headers.delete( 'x-wp-totalpages' );
+		headers.set( 'x-wp', 5 );
+		expect( utils.getTotalPages( headers ) ).toBe( 0 );
+		expect( utils.getTotalPages( new Headers() ) ).toBe( 0 );
 	} );
 } );

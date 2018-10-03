@@ -93,12 +93,43 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.2.7-alpha - TBD
+#### 0.3.0-alpha - TBD
 
+* Feature - Add Events Calendar PRO integration and make the editor take de default values from the Settings
+
+#### 0.2.9-alpha - 2018-09-21
+
+* Fix - Prevent empty diff on new event creation, allowing Meta to be saved
+* Fix - Prevent generation of empty classic blocks when migrating events to gutenberg with empty content
+* Fix - Render the Google Map in the Event Venue Block.
+* Fix - Change timezone label on timezone switch.
+
+#### 0.2.8-alpha - 2018-09-14
+
+* Feature - Add Tickets inside of the `plugins/` directory
+* Feature - Add Events Pro inside of the `plugins/` directory
+* Feature - Each block now loads their CSS and JavaScript only when it is present in the post
+* Tweak - Smaller internal changes to accommodate Gutenberg 3.8 code
+* Fix - Properly load the frontend assets for the Blocks
+* Fix - Accept responses between `200` and `299` HTTP codes as valid responses
+* Fix - Prevent to set attributes when arrays have the same content
+* Fix - Resolve problems with Infite looping around Google Calendar on the Links Block
+* Fix - Properly load Price block, avoiding breaking on new Events
+* Fix - Floating block settings button from Gutenberg 3.8 on the correct place
+* Fix - Migration from Classic Editor no longer duplicates Blocks
+
+#### 0.2.7-alpha - 2018-08-30
+
+* Feature - Add store registration in `common`
+* Feature - Move `events` reducer into the `common` store
 * Tweak - Use event timezone as default value
 * Tweak - Separate logic and presentation in event venue block
 * Tweak - Move `request` mechanism into `common`
 * Tweak - Make sure organizers are removed from classic editor when the organizer block is removed
+* Tweak - Favor `fetch` instead of `window.wp.apiRequest` to make API calls
+* Tweak - Move `globals` utils into `common` instead of being located in events
+* Tweak - Move `__mocks__` into the root directory
+* Tweak - Remove `withAPIData` by `getEntityRecords` on `TermsList` component
 * Fix - Display timezone label when selection is a UTC offset
 * Fix - Allow removal of organizers from classic block if the organizer block is removed
 * Fix - Separate logic and presentation from date time block

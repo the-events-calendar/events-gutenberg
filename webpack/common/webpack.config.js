@@ -22,6 +22,7 @@ module.exports = {
 			images,
 			svg,
 		],
+		noParse: /node_modules\/lodash\/lodash\.js/,
 	},
 	plugins: [
 		styles.plugin(),
