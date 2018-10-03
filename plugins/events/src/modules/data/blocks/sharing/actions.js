@@ -36,13 +36,7 @@ export const setHasIcal = ( hasiCal ) => ( {
 
 export const toggleIcalLabel = () => ( { type: types.TOGGLE_ICAL } );
 
-export const setInitialState = ( { get } ) => ( dispatch ) => {
-	dispatch(
-		setGoogleCalendarLabel(
-			get( 'googleCalendarLabel', DEFAULT_STATE.googleCalendarLabel )
-		)
-	);
-	dispatch( setiCalLabel( get( 'iCalLabel', DEFAULT_STATE.iCalLabel ) ) );
-	dispatch( setHasIcal( get( 'hasiCal', DEFAULT_STATE.hasiCal ) ) );
-	dispatch( setHasGoogleCalendar( get( 'hasGoogleCalendar', DEFAULT_STATE.hasGoogleCalendar ) ) );
-};
+export const setInitialState = ( props ) => ( {
+	type: types.SET_INITIAL_STATE,
+	payload: props,
+} );

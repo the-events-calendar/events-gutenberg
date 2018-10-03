@@ -1,6 +1,6 @@
 {
   "name": "@moderntribe/common",
-  "version": "0.0.1",
+  "version": "0.2.9-alpha",
   "description": "Common gutenberg modules",
   "main": "src/resources/main.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "common"
   ],
   "private": true,
-  "repository": "git+https://github.com/WordPress/gutenberg.git",
+  "repository": "git+https://github.com/moderntribe/events-gutenberg.git",
   "author": "Modern Tribe",
   "license": "GPL-2.0-or-later",
   "dependencies": {

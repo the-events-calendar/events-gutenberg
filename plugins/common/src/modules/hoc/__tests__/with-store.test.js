@@ -24,7 +24,11 @@ describe( 'HOC - With Store', () => {
 
 		const instance = component.root;
 		expect( instance ).not.toBe( null );
-		expect( instance.findByType( Block ).props ).toEqual( { store: {} } );
+		const props = instance.findByType( Block ).props;
+		expect( props ).toHaveProperty( 'store' );
+		const { store } = props;
+		expect( store ).toHaveProperty( 'dispatch' );
+		expect( store ).toHaveProperty( 'getState' );
 	} );
 } );
 

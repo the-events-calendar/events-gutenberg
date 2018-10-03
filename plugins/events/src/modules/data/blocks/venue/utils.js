@@ -2,6 +2,8 @@
  * External dependencies
  */
 import { isEmpty, get } from 'lodash';
+import { getStateName } from '@moderntribe/events/editor/utils/geo-data';
+import { editorDefaults } from '@moderntribe/common/utils/globals';
 
 export const getAddress = ( details = {} ) => {
 	const { meta = {} } = details;
@@ -30,3 +32,40 @@ export const getCoordinates = ( details = {} ) => {
 		lng: isNaN( lng ) ? null : lng,
 	};
 };
+
+export const setDefault = ( value, defaultValue ) => value === '' ? defaultValue : value;
+
+/**
+ * Get Venue Country
+ */
+export function getVenueCountry( meta ) {
+	let country = get( meta, '_VenueCountry', '' );
+
+	if ( '' === country ) {
+		const defaultCountry = editorDefaults().venueCountry;
+		country = defaultCountry !== undefined || array.length > 0 ? defaultCountry[1] : '';
+	}
+	return country;
+}
+
+/**
+ * Get Venue State/Province
+ */
+export function getVenueStateProvince( meta ) {
+	let stateProvince = get( meta, '_VenueStateProvince', '' );
+
+	if ( '' === stateProvince ) {
+
+		const country = getVenueCountry( meta );
+
+		if (
+			'US' === country
+			|| 'United States' === country
+		) {
+			stateProvince = getStateName( 'US', editorDefaults().venueState );
+		} else {
+			stateProvince = editorDefaults().venueProvince;
+		}
+	}
+	return stateProvince;
+}

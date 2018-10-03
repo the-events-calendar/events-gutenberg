@@ -27,6 +27,6 @@ export const toWpParams = ( args = {} ) => {
 export const toWPQuery = ( args = {} ) => stringify( toWpParams( args ) );
 
 export const getTotalPages = ( headers ) => {
-	const totalPages = parseInt( headers[ 'x-wp-totalpages' ], 10 );
+	const totalPages = parseInt( headers.get( 'x-wp-totalpages' ), 10 );
 	return isNaN( totalPages ) ? 0 : totalPages;
 };

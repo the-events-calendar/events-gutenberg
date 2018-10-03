@@ -138,6 +138,7 @@
     "afterEach": true,
     "it": true,
     "tribe_blocks_editor": true,
-    "mount": true
+    "mount": true,
+    "shallow": true,
   }
 }

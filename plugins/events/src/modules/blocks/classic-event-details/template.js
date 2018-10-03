@@ -152,7 +152,7 @@ const ClassicEventDetails = ( props ) => {
 						label={ __( 'Event Category:', 'events-gutenberg' ) }
 					/>
 					<TermsList
-						slug="tags"
+						slug="post_tag"
 						label={ __( 'Event Tags:', 'events-gutenberg' ) }
 					/>
 				</MetaGroup>

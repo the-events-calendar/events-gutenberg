@@ -15,7 +15,7 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 	 * @return void
 	 */
 	public function hook() {
-		add_filter( 'the_content', array( $this, 'include_frontend_form' ), 1, 50 );
+		add_filter( 'the_content', array( $this, 'include_frontend_form' ), 50 );
 	}
 
 	/**
@@ -29,7 +29,11 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 	 */
 	public function include_frontend_form( $content = '' ) {
 		if ( is_admin() ) {
-			return $content ;
+			return $content;
+		}
+
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			return $content;
 		}
 
 		// Fetch the post
@@ -46,6 +50,7 @@ class Tribe__Gutenberg__Events__Compatibility__Tickets {
 		}
 
 		$hook = tribe( 'tickets.rsvp' )->get_ticket_form_hook();
+		remove_filter( 'the_content', array( $this, 'include_frontend_form' ), 50 );
 
 		ob_start();
 		do_action( $hook );

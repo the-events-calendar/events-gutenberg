@@ -44,7 +44,7 @@ exports[`[STORE] - Venue reducer Should set the venue 1`] = `
 Object {
   "showMap": true,
   "showMapLink": true,
-  "venue": 99,
+  "venue": undefined,
 }
 `;
 
