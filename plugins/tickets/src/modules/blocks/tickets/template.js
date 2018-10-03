@@ -49,11 +49,15 @@ class TicketsTemplate extends PureComponent {
 		this.updateIsSelected();
 	}
 
-	renderComponents() {
+	render() {
 		const { isBlockSelected, isEditing, clientId } = this.props;
-
-		return [
-			<Fragment>
+		return (
+			<div
+				className={ classNames(
+					'tribe-editor__tickets-container',
+					{ 'tribe-editor__tickets-container--selected': isBlockSelected },
+				) }
+			>
 				<TicketsContainer
 					isSelected={ isBlockSelected }
 					isEditing={ isEditing }
@@ -64,21 +68,7 @@ class TicketsTemplate extends PureComponent {
 					isEditing={ isEditing }
 					clientId={ clientId }
 				/>
-			</Fragment>,
-			<TicketControls />,
-		];
-	}
-
-	render() {
-		const { isBlockSelected } = this.props;
-		return (
-			<div
-				className={ classNames(
-					'tribe-editor__tickets-container',
-					{ 'tribe-editor__tickets-container--selected': isBlockSelected },
-				) }
-			>
-				{ this.renderComponents() }
+				<TicketControls />
 			</div>
 		);
 	}
