@@ -24,7 +24,7 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	hasBeenCreated: selectors.getTicketHasBeenCreated( state, {
 		blockId: ownProps.activeBlockId,
 	} ),
-	isBeenEdited: selectors.getTicketIsBeenEdited( state, {
+	isBeingEdited: selectors.getTicketIsBeingEdited( state, {
 		blockId: ownProps.activeBlockId,
 	} ),
 } );
@@ -57,17 +57,17 @@ const applyWithDispatch = withDispatch( ( dispatch, ownProps ) => {
 
 	return {
 		onCancelClick() {
-			const { activeBlockId, hasBeenCreated, isBeenEdited, cancelEdit } = ownProps;
+			const { activeBlockId, hasBeenCreated, isBeingEdited, cancelEdit } = ownProps;
 
-			if ( isBeenEdited ) {
+			if ( isBeingEdited ) {
 				cancelEdit();
 			} else if ( ! hasBeenCreated ) {
 				removeBlock( activeBlockId );
 			}
 		},
 		onConfirmClick() {
-			const { isEditing, createNewEntry, nextChildPosition, isBeenEdited, updateTicket } = ownProps;
-			if ( isBeenEdited ) {
+			const { isEditing, createNewEntry, nextChildPosition, isBeingEdited, updateTicket } = ownProps;
+			if ( isBeingEdited ) {
 				updateTicket();
 			} else if ( isEditing ) {
 				createNewEntry();

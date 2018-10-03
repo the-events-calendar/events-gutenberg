@@ -253,13 +253,13 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Ticket is been edited', () => {
-			expect( selectors.getTicketIsBeenEdited( newState, ownProps ) ).toBe( false );
+			expect( selectors.getTicketIsBeingEdited( newState, ownProps ) ).toBe( false );
 		} );
 
 		test( 'Ticket is been edited - when is Editing and has been created', () => {
 			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].isEditing = true;
 			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].hasBeenCreated = true;
-			expect( selectors.getTicketIsBeenEdited( newState, ownProps ) ).toBe( true );
+			expect( selectors.getTicketIsBeingEdited( newState, ownProps ) ).toBe( true );
 		} );
 
 		test( 'Is ticket disabled - default state', () => {
