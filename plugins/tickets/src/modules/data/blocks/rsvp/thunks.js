@@ -7,6 +7,7 @@ import moment from 'moment';
  * Internal dependencies
  */
 import * as actions from './actions';
+import { DEFAULT_STATE } from './reducers/header-image';
 import { actions as requestActions } from '@moderntribe/common/store/middlewares/request';
 import * as momentUtil from '@moderntribe/common/utils/moment';
 import { toSeconds, TIME_FORMAT_HH_MM } from '@moderntribe/common/utils/time';
@@ -111,7 +112,7 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 		},
 		actions: {
 			start: () => dispatch( actions.setRSVPIsLoading( true ) ),
-			success: ( { body, headers }) => {
+			success: ( { body, headers } ) => {
 				const filteredRSVPs = body.filter( ( rsvp ) => (
 					rsvp.meta[ utils.KEY_RSVP_FOR_EVENT ] == postId
 				) );
@@ -172,5 +173,92 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 		},
 	};
 
-	dispatch( requestActions. wpRequest( options ) );
+	dispatch( requestActions.wpRequest( options ) );
+};
+
+export const updateRSVPHeaderImage = ( postId, image ) => ( dispatch ) => {
+	const path = `tribe_events/${ postId }`;
+	const body = {
+		meta: {
+			[ utils.KEY_TICKET_HEADER ]: `${ image.id }`,
+		},
+	};
+
+	const options = {
+		path,
+		params: {
+			method: METHODS.PUT,
+			body: JSON.stringify( body ),
+		},
+		actions: {
+			start: () => dispatch( actions.setRSVPIsSettingsLoading( true ) ),
+			success: () => {
+				dispatch( actions.setRSVPHeaderImage( {
+					id: image.id,
+					alt: image.alt,
+					src: image.sizes.medium.url,
+				} ) );
+				dispatch( actions.setRSVPIsSettingsLoading( false ) );
+			},
+			error: () => dispatch( actions.setRSVPIsSettingsLoading( false ) ),
+		},
+	};
+
+	dispatch( requestActions.wpRequest( options ) );
+};
+
+export const deleteRSVPHeaderImage = ( postId ) => ( dispatch ) => {
+	const path = `tribe_events/${ postId }`;
+	const body = {
+		meta: {
+			[ utils.KEY_TICKET_HEADER ]: null,
+		},
+	};
+
+	const options = {
+		path,
+		params: {
+			method: METHODS.PUT,
+			body: JSON.stringify( body ),
+		},
+		actions: {
+			start: () => dispatch( actions.setRSVPIsSettingsLoading( true ) ),
+			success: () => {
+				dispatch( actions.setRSVPHeaderImage( {
+					id: DEFAULT_STATE.id,
+					alt: DEFAULT_STATE.alt,
+					src: DEFAULT_STATE.src,
+				} ) );
+				dispatch( actions.setRSVPIsSettingsLoading( false ) );
+			},
+			error: () => dispatch( actions.setRSVPIsSettingsLoading( false ) ),
+		},
+	};
+
+	dispatch( requestActions.wpRequest( options ) );
+};
+
+export const getRSVPHeaderImage = ( id ) => ( dispatch ) => {
+	const path = `media/${ id }`;
+
+	const options = {
+		path,
+		params: {
+			method: METHODS.GET,
+		},
+		actions: {
+			start: () => dispatch( actions.setRSVPIsSettingsLoading( true ) ),
+			success: ( { body } ) => {
+				dispatch( actions.setRSVPHeaderImage( {
+					id: body.id,
+					alt: body.alt_text,
+					src: body.media_details.sizes.medium.source_url,
+				} ) );
+				dispatch( actions.setRSVPIsSettingsLoading( false ) );
+			},
+			error: () => dispatch( actions.setRSVPIsSettingsLoading( false ) ),
+		},
+	};
+
+	dispatch( requestActions.wpRequest( options ) );
 };

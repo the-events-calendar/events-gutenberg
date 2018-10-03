@@ -27,12 +27,17 @@ describe( 'renderImageUploadButton', () => {
 	} );
 
 	it( 'renders the button', () => {
-		const component = renderer.create( renderImageUploadButton( 'label' )( { open } ) );
+		const component = renderer.create( renderImageUploadButton( false, 'label' )( { open } ) );
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
+	it( 'renders the button disabled', () => {
+		const component = renderer.create( renderImageUploadButton( true, 'label' )( { open } ) );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'executes the open action when the mediaUpload is fired', () => {
-		const component = mount( renderImageUploadButton( 'label' )( { open } ) );
+		const component = mount( renderImageUploadButton( false, 'label' )( { open } ) );
 		component.find( 'button' ).simulate( 'click' );
 		expect( open ).toHaveBeenCalled();
 		expect( open ).toHaveBeenCalledTimes( 1 );
@@ -52,12 +57,17 @@ describe( 'renderImage', () => {
 	} );
 
 	it( 'renders the image and button', () => {
-		const component = renderer.create( renderImage( image, onRemove ) );
+		const component = renderer.create( renderImage( false, image, onRemove ) );
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
+	it( 'renders the image and disabled button', () => {
+		const component = renderer.create( renderImage( true, image, onRemove ) );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'executes onRemove on click', () => {
-		const component = mount( renderImage( image, onRemove ) );
+		const component = mount( renderImage( false, image, onRemove ) );
 		component.find( 'button' ).simulate( 'click' );
 		expect( onRemove ).toHaveBeenCalled();
 		expect( onRemove ).toHaveBeenCalledTimes( 1 );

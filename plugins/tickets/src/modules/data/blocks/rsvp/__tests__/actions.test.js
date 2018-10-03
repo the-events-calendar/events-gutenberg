@@ -16,6 +16,30 @@ describe( 'RSVP block actions', () => {
 		expect( actions.setRSVPId( 42 ) ).toMatchSnapshot();
 	} );
 
+	test( 'set RSVP settings open', () => {
+		expect( actions.setRSVPSettingsOpen( true ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP has changes', () => {
+		expect( actions.setRSVPHasChanges( true ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP is loading', () => {
+		expect( actions.setRSVPIsLoading( true ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP is settings loading', () => {
+		expect( actions.setRSVPIsSettingsLoading( true ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP going count', () => {
+		expect( actions.setRSVPGoingCount( 10 ) ).toMatchSnapshot();
+	} );
+
+	test( 'set RSVP not going count', () => {
+		expect( actions.setRSVPNotGoingCount( 10 ) ).toMatchSnapshot();
+	} );
+
 	test( 'set RSVP title', () => {
 		expect( actions.setRSVPTitle( 'title' ) ).toMatchSnapshot();
 	} );
@@ -94,18 +118,6 @@ describe( 'RSVP block actions', () => {
 
 	test( 'set RSVP temp end time', () => {
 		expect( actions.setRSVPTempEndTime( '12:34' ) ).toMatchSnapshot();
-	} );
-
-	test( 'set RSVP settings open', () => {
-		expect( actions.setRSVPSettingsOpen( true ) ).toMatchSnapshot();
-	} );
-
-	test( 'set RSVP has changes', () => {
-		expect( actions.setRSVPHasChanges( true ) ).toMatchSnapshot();
-	} );
-
-	test( 'set RSVP is loading', () => {
-		expect( actions.setRSVPIsLoading( true ) ).toMatchSnapshot();
 	} );
 
 	test( 'set RSVP header image', () => {

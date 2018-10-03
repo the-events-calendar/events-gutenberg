@@ -80,17 +80,22 @@ const onToTimePickerClick = ( dispatch ) => ( value, onClose ) => {
 	onClose();
 };
 
-const mapStateToProps = ( state ) => ( {
-	fromDate: selectors.getRSVPTempStartDate( state ),
-	fromDateDisabled: selectors.getRSVPSettingsOpen( state ),
-	fromTime: selectors.getRSVPTempStartTime( state ),
-	fromTimeDisabled: selectors.getRSVPSettingsOpen( state ),
-	isSameDay: getIsSameDay( state ),
-	toDate: selectors.getRSVPTempEndDate( state ),
-	toDateDisabled: selectors.getRSVPSettingsOpen( state ),
-	toTime: selectors.getRSVPTempEndTime( state ),
-	toTimeDisabled: selectors.getRSVPSettingsOpen( state ),
-} );
+const mapStateToProps = ( state ) => {
+	const isDisabled = selectors.getRSVPIsLoading( state )
+		|| selectors.getRSVPSettingsOpen( state );
+
+	return {
+		fromDate: selectors.getRSVPTempStartDate( state ),
+		fromDateDisabled: isDisabled,
+		fromTime: selectors.getRSVPTempStartTime( state ),
+		fromTimeDisabled: isDisabled,
+		isSameDay: getIsSameDay( state ),
+		toDate: selectors.getRSVPTempEndDate( state ),
+		toDateDisabled: isDisabled,
+		toTime: selectors.getRSVPTempEndTime( state ),
+		toTimeDisabled: isDisabled,
+	};
+};
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 	const { dispatch } = dispatchProps;
