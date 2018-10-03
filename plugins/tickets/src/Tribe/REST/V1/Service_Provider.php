@@ -40,7 +40,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 		add_action( 'rest_api_init', array( $this, 'register_endpoints' ) );
 		add_filter(
 			'tribe_rest_single_ticket_data',
-			array( $this, 'tribe_rest_single_ticket_data' ),
+			array( $this, 'filter_single_ticket_data' ),
 			10,
 			2
 		);
@@ -111,23 +111,28 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 	 * @param $request
 	 * @return mixed
 	 */
-	public function tribe_rest_single_ticket_data( $data, $request ) {
+	public function filter_single_ticket_data( $data, $request ) {
 		$ticket_id = $request['id'];
-		$type = get_post_meta( $ticket_id, Tribe__Tickets__Global_Stock::TICKET_STOCK_MODE, true );
+		$ticket = Tribe__Tickets__Tickets::load_ticket_object( $ticket_id );
+
+		if ( $ticket === null ) {
+			return $data;
+		}
 
 		$capacity_details = empty( $data['capacity_details'] ) ? array() : $data['capacity_details'];
 		$available = empty( $capacity_details['available'] ) ? 0 : $capacity_details['available'];
-		$capacity_type = $type;
+		$capacity_type = $ticket->global_stock_mode();
+
 		// Check for unlimited types
-		if ( $available === -1 || $type === '' ) {
+		if ( $available === -1 || $capacity_type === '' ) {
 			$capacity_type = 'unlimited';
 		}
 
 		$data['capacity_type'] = $capacity_type;
-		$data['available_from_start_time'] = get_post_meta( $ticket_id, '_ticket_start_time', true );
-		$data['available_from_end_time'] = get_post_meta( $ticket_id, '_ticket_end_time', true );
-		$data['sku'] = get_post_meta( $ticket_id, '_sku', true );
-		$data['description'] = get_the_excerpt( $ticket_id );
+		$data['sku'] = $ticket->sku;
+		$data['description'] = $ticket->description;
+		$data['available_from_start_time'] = $ticket->start_time;
+		$data['available_from_end_time'] = $ticket->end_time;
 
 		return $data;
 	}
