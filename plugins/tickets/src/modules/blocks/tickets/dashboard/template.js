@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -28,11 +28,9 @@ const TicketsDashboard = ( props ) => {
 
 	if ( isLoading || isTicketLoading ) {
 		return (
-			<Fragment>
-				<div className="tribe-editor__tickets-container--loading">
-					<Spinner />
-				</div>
-			</Fragment>
+			<div className="tribe-editor__tickets-container--loading">
+				<Spinner />
+			</div>
 		);
 	}
 
