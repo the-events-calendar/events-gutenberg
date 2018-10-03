@@ -40,6 +40,8 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 
 		$this->container->singleton( 'gutenberg.tickets.meta', 'Tribe__Gutenberg__Tickets__Meta' );
 
+		$this->container->singleton( 'gutenberg.tickets.rest.compatibility', 'Tribe__Gutenberg__Tickets__REST__Compatibility', array( 'hook' ) );
+
 		$this->hook();
 		/**
 		 * Lets load all compatibility related methods
@@ -64,6 +66,9 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 
 		// Setup the Meta registration
 		add_action( 'init', tribe_callback( 'gutenberg.tickets.meta', 'register' ), 15 );
+
+		// Setup the Rest compatibility layer for WP
+		tribe( 'gutenberg.tickets.rest.compatibility' );
 
 		// Register blocks
 		add_action(

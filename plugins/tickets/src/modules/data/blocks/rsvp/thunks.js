@@ -138,7 +138,7 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 					dispatch( actions.setRSVPId( rsvp.id ) );
 					dispatch( actions.setRSVPDetails( {
 						title: rsvp.title.rendered,
-						description: rsvp.excerpt.rendered,
+						description: rsvp.excerpt.raw,
 						capacity,
 						notGoingResponses,
 						startDate: momentUtil.toDate( startMoment ),
@@ -150,7 +150,7 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 					} ) );
 					dispatch( actions.setRSVPTempDetails( {
 						tempTitle: rsvp.title.rendered,
-						tempDescription: rsvp.excerpt.rendered,
+						tempDescription: rsvp.excerpt.raw,
 						tempCapacity: capacity,
 						tempNotGoingResponses: notGoingResponses,
 						tempStartDate: momentUtil.toDate( startMoment ),
