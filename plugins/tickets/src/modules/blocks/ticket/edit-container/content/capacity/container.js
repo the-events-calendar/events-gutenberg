@@ -11,7 +11,7 @@ import React from 'react';
 import Template from './template';
 import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
-
+import { TYPES } from './template';
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	type: selectors.getTicketCapacityType( state, ownProps ),
@@ -25,19 +25,43 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 		const { blockId } = ownProps;
 		dispatch( actions.setCapacityType( blockId, type ) );
 	},
-	onCapacityChange( value ) {
+	setCapacity( type, total, value ) {
 		const { blockId } = ownProps;
-		dispatch( actions.setCapacity( blockId, value ) );
+		const totalValue = parseInt( total, 10 );
+		let capacity = value;
+		/**
+		 * Make sure shared capacity does not overflow the total capacity on the FE, this is handled
+		 * already by the BE API
+		 */
+		if ( type === TYPES.shared && ! isNaN( totalValue ) ) {
+			const currentValue = parseInt( value, 10 );
+			if ( ! isNaN( currentValue ) && currentValue > totalValue ) {
+				capacity = totalValue;
+			}
+		}
+		dispatch( actions.setCapacity( blockId, capacity ) );
 	},
 	setTemporarilySharedCapacity( capacity ) {
 		dispatch( actions.setTempSharedCapacity( capacity ) );
 	},
 } );
 
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
+	return {
+		...stateProps,
+		...dispatchProps,
+		onCapacityChange( value ) {
+			dispatchProps.setCapacity( stateProps.type, stateProps.totalSharedCapacity, value );
+		},
+		...ownProps,
+	};
+}
+
 export default compose(
 	withStore(),
 	connect(
 		mapStateToProps,
 		mapDispatchToProps,
+		mergeProps,
 	),
 )( Template );
