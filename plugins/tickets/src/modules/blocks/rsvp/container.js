@@ -8,7 +8,7 @@ import moment from 'moment';
 /**
  * WordPress dependencies
  */
-import { withSelect } from '@wordpress/data';
+import { select } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -40,7 +40,8 @@ const getIsInactive = ( state ) => {
 };
 
 const setInitialState = ( dispatch, ownProps ) => () => {
-	dispatch( thunks.getRSVP( ownProps.postId ) );
+	const postId = select( 'core/editor' ).getCurrentPostId();
+	dispatch( thunks.getRSVP( postId ) );
 	if ( ownProps.attributes.headerImageId ) {
 		dispatch( thunks.getRSVPHeaderImage(
 			ownProps.attributes.headerImageId
@@ -57,10 +58,6 @@ const setInitialState = ( dispatch, ownProps ) => () => {
 		) );
 	}
 };
-
-const mapSelectToProps = ( select ) => ( {
-	postId: select( 'core/editor' ).getCurrentPostId(),
-} );
 
 const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),
@@ -93,7 +90,6 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 
 export default compose(
 	withStore(),
-	withSelect( mapSelectToProps ),
 	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
 	withSaveData(),
 )( RSVP );

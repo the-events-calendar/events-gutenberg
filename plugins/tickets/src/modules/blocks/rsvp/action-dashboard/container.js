@@ -7,7 +7,7 @@ import { compose } from 'redux';
 /**
  * WordPress dependencies
  */
-import { withSelect } from '@wordpress/data';
+import { select } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -63,7 +63,7 @@ const onConfirmClick = ( state, dispatch, ownProps ) => () => {
 		dispatch( actions.createRSVP() );
 		dispatch( thunks.createRSVP( {
 			...payload,
-			postId: ownProps.postId,
+			postId: select( 'core/editor' ).getCurrentPostId(),
 		} ) );
 	} else {
 		dispatch( thunks.updateRSVP( {
@@ -72,10 +72,6 @@ const onConfirmClick = ( state, dispatch, ownProps ) => () => {
 		} ) );
 	}
 };
-
-const mapSelectToProps = ( select ) => ( {
-	postId: select( 'core/editor' ).getCurrentPostId(),
-} );
 
 const mapStateToProps = ( state ) => ( {
 	created: selectors.getRSVPCreated( state ),
@@ -99,6 +95,5 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 
 export default compose(
 	withStore(),
-	withSelect( mapSelectToProps ),
 	connect( mapStateToProps, null, mergeProps ),
 )( RSVPActionDashboard );
