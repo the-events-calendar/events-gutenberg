@@ -16,17 +16,19 @@ import { RichText } from '@wordpress/editor';
  */
 import { Input } from '@moderntribe/events/elements';
 import list, { getCountries, getStates, getCountryCode, getStateCode } from '@moderntribe/events/editor/utils/geo-data';
+import { setDefault, getVenueCountry, getVenueStateProvince } from '@moderntribe/events/data/blocks/venue/utils';
+import { editorDefaults } from '@moderntribe/common/utils/globals';
 import './style.pcss';
 
 export function toFields( venue ) {
 	const title = get( venue, 'title', {} );
 	const meta = get( venue, 'meta', {} );
-	const address = get( meta, '_VenueAddress', '' );
-	const city = get( meta, '_VenueCity', '' );
-	const country = get( meta, '_VenueCountry', '' );
-	const stateProvince = get( meta, '_VenueStateProvince', '' );
-	const zip = get( meta, '_VenueZip', '' );
-	const phone = get( meta, '_VenuePhone', '' );
+	const address = setDefault( get( meta, '_VenueAddress', '' ), editorDefaults().venueAddress );
+	const city = setDefault( get( meta, '_VenueCity', '' ), editorDefaults().venueCity );
+	const country = getVenueCountry( meta );
+	const stateProvince = getVenueStateProvince( meta );
+	const zip = setDefault( get( meta, '_VenueZip', '' ), editorDefaults().venueZip );
+	const phone = setDefault( get( meta, '_VenuePhone', '' ), editorDefaults().venuePhone );
 	const url = get( meta, '_VenueURL', '' );
 
 	const countryCode = getCountryCode( country );
