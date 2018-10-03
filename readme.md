@@ -93,6 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.0-alpha - TBD
+
+* Feature - Add Events Calendar PRO integration and make the editor take de default values from the Settings
+
 #### 0.2.9-alpha - 2018-09-21
 
 * Fix - Prevent empty diff on new event creation, allowing Meta to be saved
