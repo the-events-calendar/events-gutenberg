@@ -6,6 +6,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 /**
+ * Internal dependencies
+ */
+import './style.pcss';
+
+/**
  * @todo this needs to be moved to common once event tickets is merged
  */
 const Input = ( {
