@@ -22,6 +22,7 @@ import {
 } from '@moderntribe/tickets/data/blocks/ticket/reducers/ticket';
 import { wpREST } from '@moderntribe/common/utils/api';
 import { config, restNonce } from '@moderntribe/common/src/modules/utils/globals';
+import { TYPES } from '@moderntribe/tickets/blocks/ticket/edit-container/content/capacity/template';
 
 /**
  * @todo missing tests.
@@ -126,7 +127,7 @@ export function* setBodyDetails( blockId ) {
 		amount: yield select( selectors.getTicketCapacity, props ),
 	};
 
-	const isUnlimited = capacity.type === 'unlimited';
+	const isUnlimited = capacity.type === TYPES.unlimited;
 	body.append( 'ticket[mode]', isUnlimited ? '' : capacity.type );
 	body.append( 'ticket[capacity]', isUnlimited ? '' : capacity.amount );
 
