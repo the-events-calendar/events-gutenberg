@@ -22,7 +22,7 @@ import {
 } from '@moderntribe/tickets/data/blocks/ticket/reducers/ticket';
 import { wpREST } from '@moderntribe/common/utils/api';
 import { config, restNonce } from '@moderntribe/common/src/modules/utils/globals';
-import { TYPES } from '@moderntribe/tickets/blocks/ticket/edit-container/content/capacity/template';
+import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
 
 /**
  * @todo missing tests.
@@ -127,11 +127,11 @@ export function* setBodyDetails( blockId ) {
 		amount: yield select( selectors.getTicketCapacity, props ),
 	};
 
-	const isUnlimited = capacity.type === TYPES.unlimited;
+	const isUnlimited = capacity.type === TICKET_TYPES.unlimited;
 	body.append( 'ticket[mode]', isUnlimited ? '' : capacity.type );
 	body.append( 'ticket[capacity]', isUnlimited ? '' : capacity.amount );
 
-	if ( capacity.type === TYPES.shared ) {
+	if ( capacity.type === TICKET_TYPES.shared ) {
 		body.append( 'ticket[event_capacity]', yield select( selectors.getSharedCapacity ) );
 	}
 

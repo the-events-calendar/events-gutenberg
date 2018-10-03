@@ -11,7 +11,7 @@ import React from 'react';
 import Template from './template';
 import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
-import { TYPES } from './template';
+import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	type: selectors.getTicketCapacityType( state, ownProps ),
@@ -33,7 +33,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 		 * Make sure shared capacity does not overflow the total capacity on the FE, this is handled
 		 * already by the BE API
 		 */
-		if ( type === TYPES.shared && ! isNaN( totalValue ) ) {
+		if ( type === TICKET_TYPES.shared && ! isNaN( totalValue ) ) {
 			const currentValue = parseInt( value, 10 );
 			if ( ! isNaN( currentValue ) && currentValue > totalValue ) {
 				capacity = totalValue;

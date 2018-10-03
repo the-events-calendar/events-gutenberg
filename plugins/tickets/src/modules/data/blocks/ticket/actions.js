@@ -2,7 +2,6 @@
  * Internal dependencies
  */
 import { types } from '@moderntribe/tickets/data/blocks/ticket';
-import { TYPES } from '../../../blocks/ticket/edit-container/content/capacity/template';
 
 export const setHeader = ( header ) => ( {
 	type: types.SET_TICKET_HEADER,

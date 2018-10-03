@@ -7,7 +7,7 @@ import trim from 'lodash/trim';
 /**
  * Internal dependencies
  */
-import { TYPES } from '@moderntribe/tickets/blocks/ticket/edit-container/content/capacity/template';
+import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
 
 export const getBlock = ( state ) => state.tickets.blocks.ticket;
 
@@ -107,21 +107,21 @@ export const getTicketsArray = createSelector(
 export const getIndependentTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.independent )
+		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES.independent )
 	),
 );
 
 export const getSharedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.shared )
+		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES.shared )
 	),
 );
 
 export const getUnlimitedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TYPES.unlimited )
+		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES.unlimited )
 	),
 );
 
@@ -224,7 +224,7 @@ export const getTicketValidness = createSelector(
 	[ getTicketBlock ],
 	( block ) => {
 		const isTitleValid = trim( block.title ) !== '';
-		if ( block.capacityType === TYPES.unlimited ) {
+		if ( block.capacityType === TICKET_TYPES.unlimited ) {
 			return isTitleValid;
 		}
 
@@ -250,12 +250,12 @@ export const getTicketSold = createSelector(
 
 export const isUnlimitedTicket = createSelector(
 	[ getTicketBlock ],
-	( block ) => block.capacityType === TYPES.unlimited,
+	( block ) => block.capacityType === TICKET_TYPES.unlimited,
 );
 
 export const isSharedTicket = createSelector(
 	[ getTicketBlock ],
-	( block ) => block.capacityType === TYPES.shared,
+	( block ) => block.capacityType === TICKET_TYPES.shared,
 );
 
 export const getTicketStartDateMoment = createSelector(
