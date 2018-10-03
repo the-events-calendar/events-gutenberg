@@ -17,6 +17,7 @@ const NumberInput = ( {
 	className,
 	max,
 	min,
+	onChange,
 	step,
 	...props
 } ) => (
@@ -24,6 +25,7 @@ const NumberInput = ( {
 		className={ classNames( 'tribe-editor__input--number', className ) }
 		max={ max }
 		min={ min }
+		onChange={ onChange }
 		step={ step }
 		type="number"
 		{ ...props }
@@ -34,6 +36,7 @@ NumberInput.propTypes = {
 	className: PropTypes.string,
 	max: PropTypes.number,
 	min: PropTypes.number,
+	onChange: PropTypes.func,
 	step: PropTypes.number,
 };
 
