@@ -174,6 +174,12 @@ class Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket
 	public function CREATE_args() {
 		return array(
 			array(
+				'post_id' => array(
+					'type' => 'integer',
+					'in' => 'body',
+					'required' => true,
+					'validate_callback' => array( $this->validator, 'is_positive_int' ),
+				),
 				'add_ticket_nonce' => array(
 					'type' => 'string',
 					'in' => 'body',
@@ -226,7 +232,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket
 
 		if ( $ticket_id === null && $provider_name !== null ) {
 			$provider = call_user_func( array( $provider_name, 'get_instance' ) );
-		}  else {
+		} else {
 			$provider = tribe_tickets_get_ticket_provider( $ticket_id );
 		}
 
@@ -247,7 +253,8 @@ class Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket
 			'ticket_start_time' => $body['start_time'],
 			'ticket_end_date' => $body['end_date'],
 			'ticket_end_time' => $body['end_time'],
-			'tribe-ticket' => $body['tribe-ticket'],
+			'ticket_sku' => $body['sku'],
+			'tribe-ticket' => $body['ticket'],
 		);
 
 		if ( $ticket_id !== null ) {
@@ -335,10 +342,17 @@ class Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket
 				'sanitize_callback' => 'sanitize_text_field',
 				'default' => '',
 			),
+			'sku' => array(
+				'type' => 'string',
+				'in' => 'body',
+				'validate_callback' => array( $this->validator, 'is_string_or_empty' ),
+				'sanitize_callback' => 'sanitize_text_field',
+				'default' => '',
+			),
 			'ticket' => array(
 				'in' => 'body',
-				'type' => 'array',
-				'defaults' => [],
+				'type' => 'object',
+				'defaults' => null,
 			),
 		);
 	}

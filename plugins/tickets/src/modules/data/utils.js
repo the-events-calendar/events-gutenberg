@@ -13,6 +13,7 @@ export const KEY_TICKET_START_DATE = '_ticket_start_date';
 export const KEY_TICKET_END_DATE = '_ticket_end_date';
 export const KEY_TICKET_SHOW_NOT_GOING = '_tribe_ticket_show_not_going';
 export const KEY_TICKET_HEADER = '_tribe_ticket_header';
+export const KEY_TICKET_DEFAULT_PROVIDER = '_tribe_default_ticket_provider';
 
 export const KEY_TICKET_GOING_COUNT = '_tribe_ticket_going_count';
 export const KEY_TICKET_NOT_GOING_COUNT = '_tribe_ticket_not_going_count';

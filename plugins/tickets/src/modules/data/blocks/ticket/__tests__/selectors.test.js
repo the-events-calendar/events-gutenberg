@@ -154,6 +154,18 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 	} );
 
+	describe( 'Provider', () => {
+		test( 'Default value for provider', () => {
+			expect( selectors.getSelectedProvider( state ) ).toBe( '' );
+		} );
+
+		test( 'Custom provider', () => {
+			newState.tickets.blocks.ticket.ui.provider = 'Tribe__Tickets__Commerce__PayPal__Main';
+			expect( selectors.getSelectedProvider( newState ) )
+				.toBe( 'Tribe__Tickets__Commerce__PayPal__Main' );
+		} );
+	} );
+
 	describe( 'Ticket selectors', () => {
 		const ownProps = { blockId: 'modern-tribe' };
 
@@ -220,6 +232,43 @@ describe( 'Ticket blocks selectors', () => {
 
 		test( 'Ticket invalidness', () => {
 			expect( selectors.getTicketValidness( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Ticket default loading value', () => {
+			expect( selectors.getTicketIsLoading( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Ticket custom loading value', () => {
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].isLoading = true;
+			expect( selectors.getTicketIsLoading( newState, ownProps ) ).toBe( true );
+		} );
+
+		test( 'Ticket has been created default value', () => {
+			expect( selectors.getTicketHasBeenCreated( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Ticket has been created custom value', () => {
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].hasBeenCreated = true;
+			expect( selectors.getTicketHasBeenCreated( newState, ownProps ) ).toBe( true );
+		} );
+
+		test( 'Ticket is been edited', () => {
+			expect( selectors.getTicketIsBeingEdited( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Ticket is been edited - when is Editing and has been created', () => {
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].isEditing = true;
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].hasBeenCreated = true;
+			expect( selectors.getTicketIsBeingEdited( newState, ownProps ) ).toBe( true );
+		} );
+
+		test( 'Is ticket disabled - default state', () => {
+			expect( selectors.isTicketDisabled( newState, ownProps ) ).toBe( false );
+		} );
+
+		test( 'Is ticket disabled - when settings is open', () => {
+			newState.tickets.blocks.ticket.ui.isSettingsOpen = true;
+ 			expect( selectors.isTicketDisabled( newState, ownProps ) ).toBe( true );
 		} );
 	} );
 } );

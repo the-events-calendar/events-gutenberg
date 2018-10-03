@@ -25,7 +25,20 @@ export default {
 	},
 
 	attributes: {
+		hasBeenCreated: {
+			type: 'boolean',
+			default: false,
+		},
+		dateIsPristine: {
+			type: 'boolean',
+			default: true,
+		},
+		ticketId: {
+			type: 'integer',
+			default: 0,
+		},
 	},
+
 	edit: Ticket,
 	save: () => <div><InnerBlocks.Content /></div>,
 };

@@ -51,7 +51,16 @@ describe( 'UI reducer', () => {
 	} );
 
 	test( 'Set loading on the parent block', () => {
-		expect( ui( DEFAULT_STATE, actions.setParentBlockIsLoading( true ) ) ).toMatchSnapshot()
+		expect( ui( DEFAULT_STATE, actions.setParentBlockIsLoading( true ) ) ).toMatchSnapshot();
 		expect( ui( DEFAULT_STATE, actions.setParentBlockIsLoading( false ) ) ).toMatchSnapshot();
+	} );
+
+	test( 'Provider', () => {
+		expect(
+			ui(
+				DEFAULT_STATE,
+				actions.setProvider( 'Tribe__Tickets__Commerce__PayPal__Main' ),
+			),
+		).toMatchSnapshot();
 	} );
 } );

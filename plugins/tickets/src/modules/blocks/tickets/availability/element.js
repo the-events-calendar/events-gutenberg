@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import classNames from 'classnames';
 
 /**
  * Internal dependencies
@@ -11,7 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { NumericLabel } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
-const Availability = ( { available, total, separator, ...labels } ) => {
+const Availability = ( { available, total, isDisabled, separator, ...labels } ) => {
 	const Available = (
 		<NumericLabel
 			count={ available }
@@ -33,7 +34,7 @@ const Availability = ( { available, total, separator, ...labels } ) => {
 	);
 
 	return (
-		<div className="tribe-editor__availability">
+		<div className={ classNames( 'tribe-editor__availability', { 'tribe-editor__availability--disabled': isDisabled } ) }>
 			{ Available }
 			{ Separator }
 			{ Total }
@@ -49,9 +50,11 @@ Availability.propTypes = {
 	totalSingular: PropTypes.string,
 	totalPlural: PropTypes.string,
 	separator: PropTypes.string,
+	isDisabled: PropTypes.bool,
 }
 
 Availability.defaultProps = {
+	isDisabled: false,
 	available: 0,
 	total: 0,
 	availableSingular: __( '%d ticket available', 'events-gutenberg' ),

@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -13,21 +12,22 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { ActionButton } from '@moderntribe/tickets/elements';
 import { User as UserIcon } from '@moderntribe/common/src/modules/icons';
 
-const AttendeesActionButton = ( { onClick } ) => (
-	<ActionButton icon={ <UserIcon /> } onClick={ onClick }>
-		{ __( 'Attendees', 'events-gutenberg' ) }
-	</ActionButton>
+const AttendeesActionButton = ( { href } ) => (
+	<a
+		className="tribe-editor__action-link"
+		href={ href }
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		<UserIcon />
+		<span>{ __( 'Attendees', 'events-gutenberg' ) }</span>
+	</a>
 );
 
 AttendeesActionButton.propTypes = {
-	onClick: PropTypes.func,
-};
-
-AttendeesActionButton.defaultProps = {
-	onClick: noop,
+	href: PropTypes.string.isRequired,
 };
 
 export default AttendeesActionButton;

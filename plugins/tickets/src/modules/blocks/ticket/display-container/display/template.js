@@ -1,8 +1,9 @@
 /**
  * External dependencies
  */
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -44,6 +45,7 @@ const TicketDisplay = ( props ) => {
 		shared,
 		isSelected,
 		isShared,
+		isTicketDisabled,
 	} = props;
 
 	const priceLabel = [ currencySign, price ];
@@ -64,12 +66,17 @@ const TicketDisplay = ( props ) => {
 		);
 	}
 
-	const editIcon = isSelected && (
+	const editIcon = ! isTicketDisabled && isSelected && (
 		<Button className="tribe-editor__btn--label" onClick={ editBlock }><Pencil /></Button>
 	);
 
 	return (
-		<div className="tribe-editor__ticket-display-header">
+		<div className={ classNames(
+			'tribe-editor__ticket-display-header',
+			{
+				'tribe-editor__ticket-display-header--disabled': isTicketDisabled,
+			},
+		) }>
 			<div className="tribe-editor__ticket-content">
 				<div className="tribe-editor__ticket-title-container">
 					<h3 className="tribe-editor__ticket-title">{ title }</h3>
@@ -102,6 +109,7 @@ TicketDisplay.propTypes = {
 	expires: PropTypes.bool,
 	editBlock: PropTypes.func,
 	isSelected: PropTypes.bool,
+	isTicketDisabled: PropTypes.bool,
 };
 
 /**

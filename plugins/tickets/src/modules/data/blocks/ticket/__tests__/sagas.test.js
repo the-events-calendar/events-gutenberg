@@ -12,7 +12,7 @@ import * as actions from '../actions';
 import watchers, * as sagas from '../sagas';
 import * as selectors from '../selectors';
 
-describe( 'Sharing Block sagas', () => {
+describe( 'Ticket Block sagas', () => {
 	describe( 'watchers', () => {
 		test( 'actions', () => {
 			const gen = watchers();
@@ -20,7 +20,7 @@ describe( 'Sharing Block sagas', () => {
 				takeEvery( types.SET_TICKET_BLOCK_ID, sagas.setEditInTicketBlock ),
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.REMOVE_TICKET_BLOCK, sagas.removeActiveTicketBlock ),
+				takeEvery( types.REQUEST_REMOVAL_OF_TICKET_BLOCK, sagas.removeActiveTicketBlock ),
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_CREATE_NEW_TICKET, sagas.createNewTicket ),
@@ -30,6 +30,18 @@ describe( 'Sharing Block sagas', () => {
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_INITIAL_STATE, sagas.setInitialState ),
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_TICKET_INITIAL_STATE, sagas.setTicketInitialState ),
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.FETCH_TICKET_DETAILS, sagas.fetchTicketDetails )
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.CANCEL_EDIT_OF_TICKET, sagas.cancelEditTicket )
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_UPDATE_TICKET, sagas.updateTicket )
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
@@ -69,6 +81,7 @@ describe( 'Sharing Block sagas', () => {
 					attributes: {
 						header: '0',
 						sharedCapacity: '0',
+						provider: '',
 					},
 					get( value, defaultValue ) {
 						return props.attributes[ value ] ? props.attributes[ value ] : defaultValue;
@@ -78,6 +91,7 @@ describe( 'Sharing Block sagas', () => {
 
 			test( 'default values', () => {
 				const gen = sagas.setInitialState( { payload: props } );
+				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
 				expect( gen.next().done ).toBe( true );
 			} );
 
@@ -85,6 +99,7 @@ describe( 'Sharing Block sagas', () => {
 				props.attributes.sharedCapacity = '33';
 				const gen = sagas.setInitialState( { payload: props } );
 				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( '33' ) ) );
+				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
 				expect( gen.next().done ).toBe( true );
 			} );
 
@@ -94,6 +109,16 @@ describe( 'Sharing Block sagas', () => {
 				const gen = sagas.setInitialState( { payload: props } );
 				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( '20' ) ) );
 				expect( gen.next().value ).toEqual( call( sagas.getMedia, 509 ) );
+				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
+				expect( gen.next().done ).toBe( true );
+			} );
+
+			test( 'Custom provider is present', () => {
+				props.attributes.provider = 'Tribe__Tickets__Commerce__PayPal__Main';
+				const gen = sagas.setInitialState( { payload: props } );
+				expect( gen.next().value ).toEqual(
+					put( actions.setProvider( 'Tribe__Tickets__Commerce__PayPal__Main' ) )
+				);
 				expect( gen.next().done ).toBe( true );
 			} );
 		} );

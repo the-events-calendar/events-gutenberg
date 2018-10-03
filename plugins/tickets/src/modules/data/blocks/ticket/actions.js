@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import { types } from '@moderntribe/tickets/data/blocks/ticket';
+import { TYPES } from '../../../blocks/ticket/edit-container/content/capacity/template';
 
 export const setHeader = ( header ) => ( {
 	type: types.SET_TICKET_HEADER,
@@ -55,9 +56,28 @@ export const setTempSharedCapacity = ( sharedCapacity ) => ( {
 	},
 } );
 
+export const setInitialState = ( props ) => ( {
+	type: types.SET_INITIAL_STATE,
+	payload: props,
+} );
+
+export const setProvider = ( provider ) => ( {
+	type: types.SET_PROVIDER,
+	payload: {
+		provider,
+	},
+} );
+
 // individual ticket actions
 export const registerTicketBlock = ( blockId ) => ( {
 	type: types.SET_TICKET_BLOCK_ID,
+	payload: {
+		blockId,
+	},
+} );
+
+export const requestRemovalOfTicketBlock = ( blockId ) => ( {
+	type: types.REQUEST_REMOVAL_OF_TICKET_BLOCK,
 	payload: {
 		blockId,
 	},
@@ -172,11 +192,11 @@ export const setTicketIsEditing = ( blockId, isEditing ) => ( {
 	},
 } );
 
-export const setTicketPostId = ( blockId, postId ) => ( {
-	type: types.SET_TICKET_POST_ID,
+export const setTicketId = ( blockId, ticketId ) => ( {
+	type: types.SET_TICKET_ID,
 	payload: {
 		blockId,
-		postId,
+		ticketId,
 	},
 } );
 
@@ -186,11 +206,6 @@ export const setTicketDateIsPristine = ( blockId, dateIsPristine ) => ( {
 		blockId,
 		dateIsPristine,
 	},
-} );
-
-export const setInitialState = ( props ) => ( {
-	type: types.SET_INITIAL_STATE,
-	payload: props,
 } );
 
 export const setParentBlockIsLoading = ( isParentBlockLoading ) => ( {
@@ -213,5 +228,41 @@ export const setTicketEndDateMoment = ( blockId, endDateMoment ) => ( {
 	payload: {
 		blockId,
 		endDateMoment,
+	},
+} );
+
+export const setTicketIsLoading = ( blockId, isLoading ) => ( {
+	type: types.SET_TICKET_IS_LOADING,
+	payload: {
+		blockId,
+		isLoading,
+	},
+} );
+
+export const seTicketHasBeenCreated = ( blockId, hasBeenCreated ) => ( {
+	type: types.SET_TICKET_HAS_BEEN_CREATED,
+	payload: {
+		blockId,
+		hasBeenCreated,
+	},
+} );
+
+export const setTicketInitialState = ( props ) => ( {
+	type: types.SET_TICKET_INITIAL_STATE,
+	payload: props,
+} );
+
+export const fetchTicketDetails = ( blockId, ticketId ) => ( {
+	type: types.FETCH_TICKET_DETAILS,
+	payload: {
+		blockId,
+		ticketId,
+	},
+} );
+
+export const cancelTicketEdit = ( blockId ) => ( {
+	type: types.CANCEL_EDIT_OF_TICKET,
+	payload: {
+		blockId,
 	},
 } );

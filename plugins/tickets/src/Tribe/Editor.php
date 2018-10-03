@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Initialize Gutenberg editor with specifics for the tickets plugin
  *
@@ -15,6 +16,8 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	public function hook() {
 		// Add Rest API support
 		add_filter( 'tribe_tickets_register_ticket_post_type_args', array( $this, 'add_rest_support' ) );
+		// Make data available to the current ticket
+		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'add_tickets_js_config' ) );
 	}
 
 	/**
@@ -22,7 +25,7 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	 *
 	 * @since  TBD
 	 *
-	 * @param array  $template  Array of all the templates used by default
+	 * @param array $template Array of all the templates used by default
 	 * @param string $post_type The current post type
 	 *
 	 * @return array
@@ -99,5 +102,35 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 				),
 			)
 		);
+	}
+
+	/**
+	 * Add data associated with the tickets into the variable "tribe_js_config"
+	 *
+	 * @since TBD
+	 *
+	 * @param array $js_config
+	 * @return array An array with data to be passed to the FE.
+	 */
+	public function add_tickets_js_config( $js_config ) {
+		$modules = Tribe__Tickets__Tickets::modules();
+		$class_names = array_keys( $modules );
+		$providers = array();
+
+		foreach ( $class_names as $class ) {
+			if ( $modules[ $class ] === 'RSVP' ) {
+				continue;
+			}
+			$providers[] = array(
+				'name' => $modules[ $class ],
+				'class' => $class,
+			);
+		}
+
+		$js_config['tickets'] = array(
+			'providers' => $providers,
+			'default_provider' => Tribe__Tickets__Tickets::get_default_module(),
+		);
+		return $js_config;
 	}
 }

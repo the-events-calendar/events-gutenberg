@@ -10,20 +10,22 @@ import { compose } from 'redux';
 import Template from './template';
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
+import { config } from '@moderntribe/common/utils/globals';
+
+const getProviders = () => {
+	const tickets = config().tickets || {};
+	return tickets.providers || [];
+};
 
 const mapStateToProps = ( state ) => ( {
-	isBlockSelected: selectors.getParentOrChildSelected( state ),
-	isEditing: selectors.hasActiveBlockId( state ),
-	header: `${ selectors.getImageId( state ) }`,
-	sharedCapacity: selectors.getSharedCapacity( state ),
+	providers: getProviders(),
+	selectedProvider: selectors.getSelectedProvider( state ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
-	setIsSelected( selected ) {
-		dispatch( actions.setParentBlockSelected( selected ) );
-	},
-	setInitialState: ( props ) => {
-		dispatch( actions.setInitialState( props ) );
+	onProviderChange( event ) {
+		const target = event.target;
+		dispatch( actions.setProvider( target.name ) );
 	},
 } );
 

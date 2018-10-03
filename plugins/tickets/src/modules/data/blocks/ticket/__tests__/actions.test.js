@@ -76,6 +76,12 @@ describe( 'Gutenberg actions', () => {
 		} );
 	} );
 
+	describe( 'Ticket Provider', () => {
+		test( 'Set default provider', () => {
+			expect( actions.setProvider( 'Tribe__Tickets__Commerce__PayPal__Main' ) ).toMatchSnapshot();
+		} );
+	} );
+
 	describe( 'Single block actions', () => {
 		const blockId = 'modern-tribe';
 
@@ -127,7 +133,7 @@ describe( 'Gutenberg actions', () => {
 		} );
 
 		test( 'Set ticket post ID', () => {
-			expect( actions.setTicketPostId( blockId, 99 ) ).toMatchSnapshot();
+			expect( actions.setTicketId( blockId, 99 ) ).toMatchSnapshot();
 		} );
 
 		test( 'Ticket editing flag', () => {
@@ -143,6 +149,24 @@ describe( 'Gutenberg actions', () => {
 		test( 'Ticket end moment object', () => {
 			expect( actions.setTicketEndDateMoment( blockId, { type: 'moment' } ) ).toMatchSnapshot();
 			expect( actions.setTicketEndDateMoment( blockId, null ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket has been created', () => {
+			expect( actions.seTicketHasBeenCreated( blockId, true ) ).toMatchSnapshot();
+			expect( actions.seTicketHasBeenCreated( blockId, false ) ).toMatchSnapshot();
+		} );
+
+		test( 'Ticket is loading', () => {
+			expect( actions.setTicketIsLoading( blockId, true ) ).toMatchSnapshot();
+			expect( actions.setTicketIsLoading( blockId, false ) ).toMatchSnapshot();
+		} );
+
+		test( 'fetch ticket details', () => {
+			expect( actions.fetchTicketDetails( blockId, 99 ) ).toMatchSnapshot();
+		} );
+
+		test( 'cancel ticket edit', () => {
+			expect( actions.cancelTicketEdit( blockId ) ).toMatchSnapshot();
 		} );
 	} );
 } );

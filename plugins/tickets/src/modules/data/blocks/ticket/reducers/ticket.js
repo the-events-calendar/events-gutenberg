@@ -11,14 +11,15 @@ import { TYPES } from '@moderntribe/tickets/blocks/ticket/edit-container/content
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
 const currentMoment = moment();
+const ADDITIONAL_DAYS = 3;
 export const DEFAULT_STATE = {
 	title: '',
 	description: '',
-	price: 0,
+	price: '',
 	SKU: '',
 	startDate: momentUtil.toDate( currentMoment ),
 	startDateMoment: currentMoment,
-	endDate: momentUtil.toDate( currentMoment ),
+	endDate: momentUtil.toDate( currentMoment.clone().add( ADDITIONAL_DAYS, 'days' ) ),
 	endDateMoment: currentMoment,
 	startTime: momentUtil.toTime24Hr( currentMoment ),
 	endTime: momentUtil.toTime24Hr( currentMoment ),
@@ -26,8 +27,10 @@ export const DEFAULT_STATE = {
 	capacityType: TYPES.independent,
 	capacity: '',
 	isEditing: false,
-	postId: null,
+	ticketId: 0,
 	sold: 0,
+	isLoading: false,
+	hasBeenCreated: false,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -87,10 +90,10 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				isEditing: action.payload.isEditing,
 			};
-		case types.SET_TICKET_POST_ID:
+		case types.SET_TICKET_ID:
 			return {
 				...state,
-				postId: action.payload.postId,
+				ticketId: action.payload.ticketId,
 			};
 		case types.SET_TICKET_DATE_PRISTINE:
 			return {
@@ -106,6 +109,16 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				endDateMoment: action.payload.endDateMoment,
+			};
+		case types.SET_TICKET_IS_LOADING:
+			return {
+				...state,
+				isLoading: action.payload.isLoading,
+			};
+		case types.SET_TICKET_HAS_BEEN_CREATED:
+			return {
+				...state,
+				hasBeenCreated: action.payload.hasBeenCreated,
 			};
 		default:
 			return state;

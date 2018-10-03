@@ -24,11 +24,12 @@ const ticketsById = ( state = {}, action ) => {
 		case types.SET_TICKET_CAPACITY_TYPE:
 		case types.SET_TICKET_CAPACITY:
 		case types.SET_TICKET_IS_EDITING:
-		case types.SET_TICKET_POST_ID:
-		case types.SET_UPDATE_TICKET:
+		case types.SET_TICKET_ID:
 		case types.SET_TICKET_DATE_PRISTINE:
 		case types.SET_TICKET_START_DATE_MOMENT:
 		case types.SET_TICKET_END_DATE_MOMENT:
+		case types.SET_TICKET_IS_LOADING:
+		case types.SET_TICKET_HAS_BEEN_CREATED:
 			return {
 				...state,
 				[ action.payload.blockId ]: ticket( state[ action.payload.blockId ], action ),

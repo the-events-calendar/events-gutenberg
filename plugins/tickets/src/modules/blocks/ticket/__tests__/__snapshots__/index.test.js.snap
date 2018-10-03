@@ -2,7 +2,20 @@
 
 exports[`Single ticket block declaration Block declaration 1`] = `
 Object {
-  "attributes": Object {},
+  "attributes": Object {
+    "dateIsPristine": Object {
+      "default": true,
+      "type": "boolean",
+    },
+    "hasBeenCreated": Object {
+      "default": false,
+      "type": "boolean",
+    },
+    "ticketId": Object {
+      "default": 0,
+      "type": "integer",
+    },
+  },
   "category": "tribe-tickets",
   "description": "Entry for ticket",
   "edit": [Function],
