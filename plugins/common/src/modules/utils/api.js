@@ -15,6 +15,10 @@ import 'whatwg-fetch';
 export const wpREST = async ( params ) => {
 	const { url = '', nonce = {}, namespaces = {} } = rest();
 
+	/**
+	 * @todo refactor this method as for more details look into:
+	 * - https://github.com/moderntribe/events-gutenberg/pull/346#discussion_r222217138
+	 */
 	const options = {
 		path: '',
 		headers: {},
