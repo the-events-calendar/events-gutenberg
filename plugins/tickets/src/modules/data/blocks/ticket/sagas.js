@@ -131,6 +131,10 @@ export function* setBodyDetails( blockId ) {
 	body.append( 'ticket[mode]', isUnlimited ? '' : capacity.type );
 	body.append( 'ticket[capacity]', isUnlimited ? '' : capacity.amount );
 
+	if ( capacity.type === TYPES.shared ) {
+		body.append( 'ticket[event_capacity]', yield select( selectors.getSharedCapacity ) );
+	}
+
 	return body;
 }
 
