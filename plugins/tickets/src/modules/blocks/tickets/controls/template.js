@@ -24,7 +24,7 @@ const message = __(
 const note = __(
 	'Note: adjusting this setting will only impact new tickets. Existing tickets will not change. We highly recommend that all tickets for one event use the same ecommerce plugin',
 	'events-gutenberg',
-)
+);
 
 const Controls = ( { selectedProvider, providers, onProviderChange } ) => {
 	const hasManyProviders = providers.length > 1;
@@ -51,15 +51,20 @@ const Controls = ( { selectedProvider, providers, onProviderChange } ) => {
 								inputProps.checked = true;
 							}
 							return (
-								<div>
+								<div className="tribe-editor__tickets-control-container" key="tickets-provider-control">
 									<input
+										className="tribe-editor__tickets-control__input tribe-editor__tickets-control__input--radio"
 										type="radio"
 										id={ provider.class }
 										name={ provider.class }
 										onChange={ onProviderChange }
 										{ ...inputProps }
 									/>
-									<label htmlFor={ provider.class }>{ provider.name }</label>
+									<label
+										className="tribe-editor__tickets-control__label"
+										htmlFor={ provider.class }>
+										{ provider.name }
+									</label>
 								</div>
 							);
 						} ) }
@@ -77,11 +82,12 @@ Controls.propTypes = {
 		class: PropTypes.string,
 	} ) ),
 	onProviderChange: PropTypes.func,
-}
+};
 
 Controls.defaultProps = {
 	providers: [],
-	onProviderChange: () => {},
-}
+	onProviderChange: () => {
+	},
+};
 
 export default Controls;
