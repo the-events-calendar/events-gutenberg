@@ -50,10 +50,10 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 	return {
 		...stateProps,
 		...dispatchProps,
+		...ownProps,
 		onCapacityChange( value ) {
 			dispatchProps.setCapacity( stateProps.type, stateProps.totalSharedCapacity, value );
 		},
-		...ownProps,
 	};
 }
 
