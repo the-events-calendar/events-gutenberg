@@ -279,7 +279,7 @@ export function* fetchTicketDetails( action ) {
 			put( actions.setPrice( blockId, costValues[ 0 ] ) ),
 			put( actions.setSKU( blockId, ticket.sku ) ),
 			put( actions.setCapacityType( blockId, ticket.capacity_type ) ),
-			put( actions.setTicketSold( blockId, ticket.sold ) ),
+			put( actions.setTicketSold( blockId, ticket.totals.sold ) ),
 		] );
 	} catch ( e ) {
 		/**
