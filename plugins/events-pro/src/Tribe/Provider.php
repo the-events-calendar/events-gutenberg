@@ -9,6 +9,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 */
 	public function register() {
+
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.events-pro.plugin', 'Tribe__Gutenberg__Events_Pro__Plugin' );
 
@@ -16,12 +17,12 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 			return;
 		}
 
-		$this->container->singleton( 'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' ) );
+		$this->container->singleton(
+			'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' )
+		);
 
 		$this->hook();
 
-		// Initialize the correct Singletons
-		tribe( 'gutenberg.events-pro.assets' );
 	}
 
 	/**
@@ -33,7 +34,8 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 */
 	protected function hook() {
-
+		// Initialize the correct Singletons
+		tribe( 'gutenberg.events-pro.assets' );
 	}
 
 	/**

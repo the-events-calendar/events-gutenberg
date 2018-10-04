@@ -108,12 +108,14 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add `CapacityTable` component to render the capacity of the tickets
 * Feature - Add RSVP block
 * Feature - Connect `Tickets` block with `store` to manage state of component
+* Feature - Add Events Calendar PRO integration and make the editor take de default values from the Settings
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
 * Tweak - Move compatibility class into `/tickets` plugin
 * Tweak - Create an icons module for the plugins and shared one on common to create a set of icons
 * Tweak - Move most utilities from events plugin to common plugin
 * Tweak - Move time picker element from events plugin to common plugin
 * Tweak - Adjust time picker element to accept time string in hh:mm format rather than moments
+* Fix - Make sure `meta` fields are returned into the `tribe_events` post type when option `disable_metabox_custom_fields` loads the first time
 
 #### 0.2.9-alpha - 2018-09-21
 

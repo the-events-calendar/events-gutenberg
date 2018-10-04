@@ -5,6 +5,7 @@ export const settings = () => get( 'tribe_blocks_editor_settings' );
 export const config = () => get( 'tribe_js_config', {} );
 export const rest = () => config().rest || {};
 export const restNonce = () => rest().nonce || {};
+export const editorDefaults = () => config().editor_defaults || {};
 export const list = () => ( {
 	countries: get( 'tribe_data_countries' ),
 	us_states: get( 'tribe_data_us_states' ),
