@@ -26,6 +26,24 @@ const note = __(
 	'events-gutenberg',
 );
 
+const RadioInput = ( { provider, onProviderChange, ...additionalProps }) => (
+	<div className="tribe-editor__tickets-control-container">
+		<input
+			className="tribe-editor__tickets-control__input tribe-editor__tickets-control__input--radio"
+			type="radio"
+			id={ provider.class }
+			name={ provider.class }
+			onChange={ onProviderChange }
+			{ ...additionalProps }
+		/>
+		<label
+			className="tribe-editor__tickets-control__label"
+			htmlFor={ provider.class }>
+			{ provider.name }
+		</label>
+	</div>
+);
+
 const Controls = ( { selectedProvider, providers, onProviderChange } ) => {
 	const hasManyProviders = providers.length > 1;
 
@@ -46,26 +64,17 @@ const Controls = ( { selectedProvider, providers, onProviderChange } ) => {
 						) }
 
 						{ hasManyProviders && providers.map( ( provider, key ) => {
-							const inputProps = {};
-							if ( selectedProvider === provider.class ) {
-								inputProps.checked = true;
-							}
+							const inputProps = {
+								checked: selectedProvider === provider.class,
+							};
+
 							return (
-								<div className="tribe-editor__tickets-control-container" key="tickets-provider-control">
-									<input
-										className="tribe-editor__tickets-control__input tribe-editor__tickets-control__input--radio"
-										type="radio"
-										id={ provider.class }
-										name={ provider.class }
-										onChange={ onProviderChange }
-										{ ...inputProps }
-									/>
-									<label
-										className="tribe-editor__tickets-control__label"
-										htmlFor={ provider.class }>
-										{ provider.name }
-									</label>
-								</div>
+								<RadioInput
+									key={ `provider-option-${ key + 1 }` }
+									provider={ provider }
+									onProviderChange={ onProviderChange }
+									{ ...inputProps }
+								/>
 							);
 						} ) }
 					</fieldset>

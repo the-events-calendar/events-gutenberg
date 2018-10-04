@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { Tag as TagIcon } from '@moderntribe/common/src/modules/icons';
 
-const OrdersActionButton = ( { href } ) => (
+const OrdersActionButton = ( { href } ) => ( href && (
 	<a
 		className="tribe-editor__action-link"
 		href={ href }
@@ -24,7 +24,7 @@ const OrdersActionButton = ( { href } ) => (
 		<TagIcon />
 		<span>{ __( 'Orders', 'events-gutenberg' ) }</span>
 	</a>
-);
+) );
 
 OrdersActionButton.propTypes = {
 	href: PropTypes.string.isRequired,

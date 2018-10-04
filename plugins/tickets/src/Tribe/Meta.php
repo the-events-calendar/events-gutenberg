@@ -142,6 +142,23 @@ class Tribe__Gutenberg__Tickets__Meta {
 	}
 
 	/**
+	 * Default definition for an attribute of type text
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	private function numeric() {
+		return array(
+			'auth_callback' => array( $this, 'auth_callback' ),
+			'sanitize_callback' => 'absint',
+			'type' => 'number',
+			'single' => true,
+			'show_in_rest' => true,
+		);
+	}
+
+	/**
 	 * Default definition for an attribute of type boolean
 	 *
 	 * @since TBD

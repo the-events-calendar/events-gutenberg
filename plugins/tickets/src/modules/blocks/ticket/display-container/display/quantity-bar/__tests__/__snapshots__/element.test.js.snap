@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<QuantityBar> avoid render percentage on disabled 1`] = `
+<div
+  className="tribe-editor__quantity-bar"
+/>
+`;
+
 exports[`<QuantityBar> independent capacity 1`] = `
 <div
   className="tribe-editor__quantity-bar"
