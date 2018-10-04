@@ -37,6 +37,7 @@ export const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 /**
  * PropTypes check for type string and time format using 24h clock in hh:mm format
  * e.g. 00:24, 03:57, 21:12
+ * Time value can also be an empty string in case of invalid time format
  *
  * @param {object} props
  * @param {string} propName
@@ -51,9 +52,9 @@ export const timeFormat = ( props, propName, componentName ) => {
 		return new Error( `Invalid prop \`${propName}\` of type \`${type}\` supplied to \`${componentName}\`, expected \`string\`.` );
 	}
 
-	if ( ! timeRegex.test( propValue ) ) {
+	if ( ! timeRegex.test( propValue ) && propValue !== '' ) {
 		/* eslint-disable-next-line max-len */
-		return new Error( `Invalid prop \`${propName}\` format supplied to \`${componentName}\`, expected \`hh:mm\`.` );
+		return new Error( `Invalid prop \`${propName}\` format supplied to \`${componentName}\`, expected \`hh:mm\` or empty \`string\`.` );
 	}
 
 	return null;
