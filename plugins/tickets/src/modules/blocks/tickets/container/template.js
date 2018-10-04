@@ -32,7 +32,7 @@ const TicketContainer = ( { isSelected, isEditing, total, available, tickets, is
 				icon={ <StatusIcon disabled={ true } /> }
 			/>
 		) }
-		{ isSelected && ! isEditing && ! isLoading && (
+		{ isSelected && ! isEditing && ! isLoading && tickets.length !== 0 && (
 			<Availability available={ available } total={ total } isDisabled={ isTicketDisabled } />
 		) }
 	</div>
