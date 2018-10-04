@@ -25,3 +25,8 @@ export const TICKET_TYPES = {
 	shared: TICKET_TYPES_VALUES[ 1 ],
 	independent: TICKET_TYPES_VALUES[ 2 ],
 };
+
+export const TICKET_ORDERS_PAGE_SLUG = {
+	Tribe__Tickets__Commerce__PayPal__Main: 'tpp-orders',
+	Tribe__Tickets_Plus__Commerce__WooCommerce__Main: 'tickets-orders',
+};
