@@ -61,7 +61,7 @@ extends Tribe__Gutenberg__Common__Editor {
 	 */
 	public function get_option( $value, $name ) {
 		// If value is empty string indicates the value hasn't been set into the DB and should be true by default.
-		if ( $name === 'disable_metabox_custom_fields' && $value === '' ) {
+		if ( 'disable_metabox_custom_fields' === $name && '' === $value ) {
 			return true;
 		}
 		return $value;
