@@ -168,5 +168,9 @@ describe( 'Gutenberg actions', () => {
 		test( 'cancel ticket edit', () => {
 			expect( actions.cancelTicketEdit( blockId ) ).toMatchSnapshot();
 		} );
+
+		test( 'Set sold amount on a ticket', () => {
+			expect( actions.setTicketSold( blockId, 23 ) ).toMatchSnapshot();
+		} );
 	} );
 } );

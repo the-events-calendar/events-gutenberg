@@ -177,6 +177,16 @@ Object {
 }
 `;
 
+exports[`Gutenberg actions Single block actions Set sold amount on a ticket 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "sold": 23,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_SOLD",
+}
+`;
+
 exports[`Gutenberg actions Single block actions Set ticket date is pristine 1`] = `
 Object {
   "payload": Object {

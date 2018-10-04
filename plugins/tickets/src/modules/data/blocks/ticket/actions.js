@@ -265,3 +265,11 @@ export const cancelTicketEdit = ( blockId ) => ( {
 		blockId,
 	},
 } );
+
+export const setTicketSold = ( blockId, sold ) => ( {
+	type: types.SET_TICKET_SOLD,
+	payload: {
+		blockId,
+		sold,
+	},
+} );
