@@ -180,4 +180,4 @@
 
 	} );
 
-})( jQuery, tribe_tickets_rsvp );
+})( jQuery, {} );
