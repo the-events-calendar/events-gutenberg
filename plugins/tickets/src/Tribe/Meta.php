@@ -136,7 +136,6 @@ class Tribe__Gutenberg__Tickets__Meta {
 	 * @return array
 	 */
 	public function register_meta_args( $args = array(), $defaults = '', $object_type = '', $meta_key = '' ) {
-		error_log( $meta_key );
 		if ( $meta_key === '_edd_button_behavior' ) {
 			$args['show_in_rest'] = false;
 		}
