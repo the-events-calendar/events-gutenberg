@@ -120,6 +120,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				hasBeenCreated: action.payload.hasBeenCreated,
 			};
+		case types.SET_TICKET_SOLD:
+			return {
+				...state,
+				sold: action.payload.sold,
+			};
 		default:
 			return state;
 	}
