@@ -36,7 +36,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	},
 	onFromTimePickerChange: ( e ) => {
 		const { blockId } = ownProps;
-		dispatch( actions.setStartTime( blockId, e.target.value ) );
+		const startTime = e.target.value;
+		if ( startTime ) {
+			dispatch( actions.setStartTime( blockId, startTime ) );
+		}
 	},
 	onFromTimePickerClick: ( value, onClose ) => {
 		const { blockId } = ownProps;
@@ -53,8 +56,11 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	},
 	onToTimePickerChange: ( e ) => {
 		const { blockId } = ownProps;
-		dispatch( actions.setEndTime( blockId, e.target.value ) );
-		dispatch( actions.setTicketDateIsPristine( blockId, false ) );
+		const endTime = e.target.value;
+		if ( endTime ) {
+			dispatch( actions.setEndTime( blockId, endTime ) );
+			dispatch( actions.setTicketDateIsPristine( blockId, false ) );
+		}
 	},
 	onToTimePickerClick: ( value, onClose ) => {
 		const { blockId } = ownProps;

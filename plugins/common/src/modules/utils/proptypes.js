@@ -52,9 +52,9 @@ export const timeFormat = ( props, propName, componentName ) => {
 		return new Error( `Invalid prop \`${propName}\` of type \`${type}\` supplied to \`${componentName}\`, expected \`string\`.` );
 	}
 
-	if ( ! timeRegex.test( propValue ) && propValue !== '' ) {
+	if ( ! timeRegex.test( propValue ) ) {
 		/* eslint-disable-next-line max-len */
-		return new Error( `Invalid prop \`${propName}\` format supplied to \`${componentName}\`, expected \`hh:mm\` or empty \`string\`.` );
+		return new Error( `Invalid prop \`${propName}\` format supplied to \`${componentName}\`, expected \`hh:mm\`.` );
 	}
 
 	return null;
