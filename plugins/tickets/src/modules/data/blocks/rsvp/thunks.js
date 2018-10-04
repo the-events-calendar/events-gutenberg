@@ -103,7 +103,7 @@ export const deleteRSVP = ( id ) => ( dispatch ) => {
 };
 
 export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
-	const path = `${ utils.RSVP_POST_TYPE }?per_page=100&page=${ page }`;
+	const path = `${ utils.RSVP_POST_TYPE }?per_page=100&page=${ page }&context=edit`;
 
 	const options = {
 		path,
