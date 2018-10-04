@@ -37,7 +37,6 @@ export const timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
 /**
  * PropTypes check for type string and time format using 24h clock in hh:mm format
  * e.g. 00:24, 03:57, 21:12
- * Time value can also be an empty string in case of invalid time format
  *
  * @param {object} props
  * @param {string} propName
