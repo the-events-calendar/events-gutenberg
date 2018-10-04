@@ -71,6 +71,10 @@ describe( 'Tickets block types', () => {
 				.toBe( `${ PREFIX_TICKETS_STORE }/FETCH_TICKET_DETAILS` );
 			expect( types.CANCEL_EDIT_OF_TICKET )
 				.toBe( `${ PREFIX_TICKETS_STORE }/CANCEL_EDIT_OF_TICKET` );
+			expect( types.SET_TICKET_SOLD )
+				.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_SOLD` );
+			expect( types.SET_TICKET_AVAILABLE )
+				.toBe( `${ PREFIX_TICKETS_STORE }/SET_TICKET_AVAILABLE` );
 		} );
 	} );
 } );

@@ -39,7 +39,7 @@ const TicketDisplay = ( props ) => {
 		isUnlimited,
 		expires,
 		available,
-		quantity,
+		capacity,
 		editBlock,
 		sold,
 		shared,
@@ -50,8 +50,8 @@ const TicketDisplay = ( props ) => {
 
 	const priceLabel = [ currencySign, price ];
 	const labels = {
-		unlimited: interpolateNumbers( __( '%d sold', 'events-gutenberg' ), available ),
-		normal: interpolateNumbers( __( '%d of %d sold', 'events-gutenberg' ), available, quantity ),
+		unlimited: interpolateNumbers( __( '%d sold', 'events-gutenberg' ), sold ),
+		normal: interpolateNumbers( __( '%d of %d sold', 'events-gutenberg' ), sold, capacity ),
 	};
 
 	let quantityBar = <span className="tribe-editor__quantity--unlimited">unlimited</span>;
@@ -60,8 +60,8 @@ const TicketDisplay = ( props ) => {
 		quantityBar = (
 			<QuantityBar
 				sold={ sold }
-				shared={ isShared ? quantity : 0 }
-				total={ isShared ? shared : quantity }
+				shared={ isShared ? capacity : 0 }
+				total={ isShared ? shared : capacity }
 			/>
 		);
 	}
@@ -105,6 +105,7 @@ TicketDisplay.propTypes = {
 	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix' ] ),
 	isUnlimited: PropTypes.bool,
 	available: PropTypes.number,
+	capacity: PropTypes.number,
 	sold: PropTypes.number,
 	expires: PropTypes.bool,
 	editBlock: PropTypes.func,
@@ -124,7 +125,7 @@ TicketDisplay.defaultProps = {
 	currencyPosition: 'prefix',
 	isUnlimited: false,
 	available: 0,
-	quantity: 0,
+	capacity: 0,
 	expires: true,
 };
 

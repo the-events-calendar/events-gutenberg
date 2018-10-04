@@ -21,7 +21,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		description: selectors.getTicketDescription( state, ownProps ),
 		price: selectors.getTicketPrice( state, ownProps ),
 		unlimited: selectors.getTicketCapacityType( state, ownProps ),
-		quantity: selectors.getTicketCapacity( state, ownProps ),
+		capacity: selectors.getTicketCapacity( state, ownProps ),
 		expires: selectors.getTicketExpires( state, ownProps ),
 		sold: selectors.getTicketSold( state, ownProps ),
 		isUnlimited: selectors.isUnlimitedTicket( state, ownProps ),

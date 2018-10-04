@@ -270,6 +270,15 @@ describe( 'Ticket blocks selectors', () => {
 			newState.tickets.blocks.ticket.ui.isSettingsOpen = true;
  			expect( selectors.isTicketDisabled( newState, ownProps ) ).toBe( true );
 		} );
+
+		test( 'default ticket availability', () => {
+			expect( selectors.getTicketAvailability( newState, ownProps ) ).toBe( 0 );
+		} );
+
+		test( 'custom ticket availability', () => {
+			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].available = 99;
+			expect( selectors.getTicketAvailability( newState, ownProps ) ).toBe( 99 );
+		} );
 	} );
 } );
 

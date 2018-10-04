@@ -109,4 +109,14 @@ describe( 'Individual Ticket reducer', () => {
 		expect( ticket( DEFAULT_STATE, actions.seTicketHasBeenCreated( blockId, true ) ) )
 			.toMatchSnapshot();
 	} );
+
+	test( 'Set the amount of sold tickets', () => {
+		expect( ticket( DEFAULT_STATE, actions.setTicketSold( blockId, 20 ) ) )
+			.toMatchSnapshot();
+	} );
+
+	test( 'Set the amount of available tickets', () => {
+		expect( ticket( DEFAULT_STATE, actions.setTicketAvailable( blockId, 20 ) ) )
+			.toMatchSnapshot();
+	} );
 } );

@@ -8,6 +8,7 @@ Object {
   "byId": Object {
     "modern-tribe": Object {
       "SKU": "",
+      "available": 0,
       "capacity": "",
       "capacityType": "own",
       "dateIsPristine": true,
