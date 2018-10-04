@@ -24,10 +24,7 @@ const mapStateToProps = ( state ) => {
 	const postId = select( 'core/editor' ).getCurrentPostId();
 	const provider = selectors.getSelectedProvider( state );
 	const page = TICKET_ORDERS_PAGE_SLUG[ provider ];
-
-	/**
-	 * @todo revise page= for other providers
-	 */
+	
 	return {
 		href: page
 			? `${ adminURL }edit.php?post_type=${ postType }&page=${ page }&event_id=${ postId }`
