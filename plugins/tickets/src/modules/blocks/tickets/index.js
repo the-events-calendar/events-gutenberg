@@ -20,7 +20,7 @@ import Tickets from './container';
  * Module Code
  */
 export default {
-	id: 'event-tickets',
+	id: 'tickets',
 	title: __( 'Event Tickets', 'events-gutenberg' ),
 	description: __( 'Basic ticket functionality', 'events-gutenberg' ),
 	icon: BlockIcon,

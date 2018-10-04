@@ -72,7 +72,7 @@ const applyWithDispatch = withDispatch( ( dispatch, ownProps ) => {
 			} else if ( isEditing ) {
 				createNewEntry();
 			} else {
-				const block = createBlock( 'tribe/event-tickets-ticket' );
+				const block = createBlock( 'tribe/event-ticket' );
 				const { clientId } = ownProps;
 				insertBlock( block, nextChildPosition, clientId );
 			}
