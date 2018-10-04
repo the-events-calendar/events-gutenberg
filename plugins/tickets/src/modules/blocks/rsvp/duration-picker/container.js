@@ -40,8 +40,10 @@ const onFromDateChange = ( stateProps, dispatch ) => ( date, modifiers, dayPicke
 const onFromTimePickerChange = ( stateProps, dispatch ) => ( e ) => {
 	/* TODO: prevent change to a time out of range */
 	const startTime = e.target.value;
-	dispatch( actions.setRSVPTempStartTime( startTime ) );
-	dispatch( actions.setRSVPHasChanges( true ) );
+	if ( startTime ) {
+		dispatch( actions.setRSVPTempStartTime( startTime ) );
+		dispatch( actions.setRSVPHasChanges( true ) );
+	}
 };
 
 const onFromTimePickerClick = ( dispatch ) => ( value, onClose ) => {
@@ -69,8 +71,10 @@ const onToDateChange = ( stateProps, dispatch ) => ( date, modifiers, dayPickerI
 const onToTimePickerChange = ( stateProps, dispatch ) => ( e ) => {
 	/* TODO: prevent change to a time out of range */
 	const endTime = e.target.value;
-	dispatch( actions.setRSVPTempEndTime( endTime ) );
-	dispatch( actions.setRSVPHasChanges( true ) );
+	if ( endTime ) {
+		dispatch( actions.setRSVPTempEndTime( endTime ) );
+		dispatch( actions.setRSVPHasChanges( true ) );
+	}
 };
 
 const onToTimePickerClick = ( dispatch ) => ( value, onClose ) => {
