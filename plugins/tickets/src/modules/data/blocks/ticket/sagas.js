@@ -271,6 +271,7 @@ export function* fetchTicketDetails( action ) {
 
 		const costDetails = ticket.cost_details || {};
 		const costValues = costDetails.values || [];
+		const { totals = {} } = ticket;
 
 		yield all( [
 			put( actions.setTitle( blockId, ticket.title ) ),
@@ -279,7 +280,8 @@ export function* fetchTicketDetails( action ) {
 			put( actions.setPrice( blockId, costValues[ 0 ] ) ),
 			put( actions.setSKU( blockId, ticket.sku ) ),
 			put( actions.setCapacityType( blockId, ticket.capacity_type ) ),
-			put( actions.setTicketSold( blockId, ticket.totals.sold ) ),
+			put( actions.setTicketSold( blockId, totals.sold ) ),
+			put( actions.setTicketAvailable( blockId, totals.stock ) ),
 		] );
 	} catch ( e ) {
 		/**
