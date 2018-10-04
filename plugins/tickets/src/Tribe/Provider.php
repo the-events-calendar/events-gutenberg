@@ -66,6 +66,12 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 
 		// Setup the Meta registration
 		add_action( 'init', tribe_callback( 'gutenberg.tickets.meta', 'register' ), 15 );
+		add_filter(
+			'register_meta_args',
+			tribe_callback( 'gutenberg.tickets.meta', 'register_meta_args' ),
+			10,
+			4
+		);
 
 		// Setup the Rest compatibility layer for WP
 		tribe( 'gutenberg.tickets.rest.compatibility' );
