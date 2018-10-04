@@ -294,3 +294,8 @@ export const getTicketSold = createSelector(
 	[ getTicketBlock ],
 	( block ) => parseInt( block.sold, 10 ) || 0,
 );
+
+export const getTicketAvailability = createSelector(
+	[ getTicketBlock ],
+	( block ) => parseInt( block.available, 10 ) || 0,
+);
