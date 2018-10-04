@@ -261,7 +261,7 @@ export function* fetchTicketDetails( action ) {
 
 	try {
 		if ( ticketId === 0 ) {
-			throw new Error( 'Ticket ID is not valid' );
+			return;
 		}
 
 		const ticket = yield call( wpREST, {

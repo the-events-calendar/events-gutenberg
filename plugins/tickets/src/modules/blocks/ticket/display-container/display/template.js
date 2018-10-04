@@ -62,6 +62,7 @@ const TicketDisplay = ( props ) => {
 				sold={ sold }
 				shared={ isShared ? capacity : 0 }
 				total={ isShared ? shared : capacity }
+				isDisabled={ isTicketDisabled }
 			/>
 		);
 	}
