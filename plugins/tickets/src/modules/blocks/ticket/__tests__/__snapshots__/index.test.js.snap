@@ -20,14 +20,14 @@ Object {
   "description": "Entry for ticket",
   "edit": [Function],
   "icon": [Function],
-  "id": "event-tickets-ticket",
+  "id": "tickets-item",
   "keywords": Array [
     "event",
     "events-tickets",
     "tribe",
   ],
   "parent": Array [
-    "tribe/event-tickets",
+    "tribe/tickets",
   ],
   "save": [Function],
   "supports": Object {

@@ -23,7 +23,7 @@ Object {
   "description": "Basic ticket functionality",
   "edit": [Function],
   "icon": [Function],
-  "id": "event-tickets",
+  "id": "tickets",
   "keywords": Array [
     "event",
     "events-gutenberg",

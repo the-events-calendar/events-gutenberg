@@ -22,7 +22,7 @@ import './style.pcss';
 const TicketContainer = ( { isSelected, isEditing, total, sold, tickets, isLoading, isTicketDisabled } ) => (
 	<div className="tribe-editor__ticket-container">
 		<div className="tribe-editor__tickets-body">
-			<InnerBlocks allowedBlocks={ [ 'tribe/event-tickets-ticket' ] } />
+			<InnerBlocks allowedBlocks={ [ 'tribe/tickets-item' ] } />
 		</div>
 		{ tickets.length === 0 && (
 			<InactiveBlock

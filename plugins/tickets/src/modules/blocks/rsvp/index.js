@@ -18,7 +18,7 @@ import {
  * Module Code
  */
 export default {
-	id: 'event-rsvp',
+	id: 'rsvp',
 	title: __( 'RSVP', 'events-gutenberg' ),
 	description: __(
 		'RSVP block',
