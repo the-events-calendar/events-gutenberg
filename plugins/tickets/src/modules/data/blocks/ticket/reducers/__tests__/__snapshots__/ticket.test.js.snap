@@ -3,6 +3,7 @@
 exports[`Individual Ticket reducer Set end date moment object 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -28,6 +29,7 @@ Object {
 exports[`Individual Ticket reducer Set has been created value 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -51,6 +53,7 @@ Object {
 exports[`Individual Ticket reducer Set has been created value 2`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -74,6 +77,7 @@ Object {
 exports[`Individual Ticket reducer Set is loading value 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -97,6 +101,7 @@ Object {
 exports[`Individual Ticket reducer Set is loading value 2`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -120,6 +125,7 @@ Object {
 exports[`Individual Ticket reducer Set start date moment object 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -169,6 +175,7 @@ Object {
 exports[`Individual Ticket reducer Set the amount of sold tickets 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -192,6 +199,7 @@ Object {
 exports[`Individual Ticket reducer Set ticket post ID 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -215,6 +223,7 @@ Object {
 exports[`Individual Ticket reducer Set ticket pristine 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -238,6 +247,7 @@ Object {
 exports[`Individual Ticket reducer Set ticket pristine 2`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": false,
@@ -261,6 +271,7 @@ Object {
 exports[`Individual Ticket reducer ticket capacity 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": 49,
   "capacityType": "own",
   "dateIsPristine": true,
@@ -284,6 +295,7 @@ Object {
 exports[`Individual Ticket reducer ticket capacity type 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": 59,
   "dateIsPristine": true,
@@ -307,6 +319,7 @@ Object {
 exports[`Individual Ticket reducer ticket description 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -330,6 +343,7 @@ Object {
 exports[`Individual Ticket reducer ticket end date 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -353,6 +367,7 @@ Object {
 exports[`Individual Ticket reducer ticket end time 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -376,6 +391,7 @@ Object {
 exports[`Individual Ticket reducer ticket is editing 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -399,6 +415,7 @@ Object {
 exports[`Individual Ticket reducer ticket is editing 2`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -422,6 +439,7 @@ Object {
 exports[`Individual Ticket reducer ticket price 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -445,6 +463,7 @@ Object {
 exports[`Individual Ticket reducer ticket sku 1`] = `
 Object {
   "SKU": "MODERN-TRIBE",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -468,6 +487,7 @@ Object {
 exports[`Individual Ticket reducer ticket start date 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -491,6 +511,7 @@ Object {
 exports[`Individual Ticket reducer ticket start time 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
@@ -514,6 +535,7 @@ Object {
 exports[`Individual Ticket reducer ticket title 1`] = `
 Object {
   "SKU": "",
+  "available": 0,
   "capacity": "",
   "capacityType": "own",
   "dateIsPristine": true,
