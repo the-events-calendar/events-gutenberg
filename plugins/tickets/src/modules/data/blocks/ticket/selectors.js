@@ -243,11 +243,6 @@ export const getTicketExpires = createSelector(
 	( block ) => ! block.dateIsPristine,
 );
 
-export const getTicketSold = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.sold,
-);
-
 export const isUnlimitedTicket = createSelector(
 	[ getTicketBlock ],
 	( block ) => block.capacityType === TICKET_TYPES.unlimited,
@@ -291,6 +286,11 @@ export const getTicketIsBeingEdited = createSelector(
 export const isTicketDisabled = createSelector(
 	[ getSettingsIsOpen, getActiveBlockId, getTicketEditing ],
 	( isSettingsOpen, activeBlockId, isEditing ) => (
-		isSettingsOpen || ( !! activeBlockId && ! isEditing )
+		isSettingsOpen || ( ! ! activeBlockId && ! isEditing )
 	),
+);
+
+export const getTicketSold = createSelector(
+	[ getTicketBlock ],
+	( block ) => parseInt( block.sold, 10 ) || 0,
 );
