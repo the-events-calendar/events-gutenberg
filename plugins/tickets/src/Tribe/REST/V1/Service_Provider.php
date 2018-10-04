@@ -134,13 +134,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 		$data['available_from_start_time'] = $ticket->start_time;
 		$data['available_from_end_time'] = $ticket->end_time;
 
-		$total = $ticket->capacity;
-		$available = 0;
-		if ( ! empty( $data['capacity_details'] ) && ! empty( $data['capacity_details']['available'] ) ) {
-			$available = $data['capacity_details']['available'];
-		}
-
-		$data['sold'] = $total - $available;
+		$data['totals'] = tribe( 'tickets.handler' )->get_ticket_totals( $ticket_id );
 
 		return $data;
 	}
