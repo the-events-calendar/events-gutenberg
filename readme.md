@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.3.0-alpha - TBD
 
 * Feature - Add Events Calendar PRO integration and make the editor take de default values from the Settings
+* Fix - Make sure `meta` fields are returned into the `tribe_events` post type when option `disable_metabox_custom_fields` loads the first time 
 
 #### 0.2.9-alpha - 2018-09-21
 

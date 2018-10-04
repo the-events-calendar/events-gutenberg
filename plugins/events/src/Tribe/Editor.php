@@ -40,6 +40,31 @@ extends Tribe__Gutenberg__Common__Editor {
 
 		// Add Block Categories to Editor
 		add_action( 'block_categories', array( $this, 'block_categories' ), 10, 2 );
+		// Make sure empty string is consider as a "true" value
+		add_filter( 'tribe_get_option', array( $this, 'get_option' ), 10, 2 );
+	}
+
+	/**
+	 * When the plugin loads the option is not set so the value is an empty string and when casting into a bool value
+	 * this returns a `false` positive. As empty string indicates the value has not set already.
+	 *
+	 * This is something should be addressed on TEC as is affecting any new user installing the plugin.
+	 *
+	 * Code is located at: https://github.com/moderntribe/the-events-calendar/blob/f8af49bc41048e8632372fc8da77202d9cb98d86/src/Tribe/Admin/Event_Meta_Box.php#L345
+	 *
+	 * @since TBD
+	 *
+	 * @param $value
+	 * @param $name
+	 *
+	 * @return bool
+	 */
+	public function get_option( $value, $name ) {
+		// If value is empty string indicates the value hasn't been set into the DB and should be true by default.
+		if ( 'disable_metabox_custom_fields' === $name && '' === $value ) {
+			return true;
+		}
+		return $value;
 	}
 
 	/**
