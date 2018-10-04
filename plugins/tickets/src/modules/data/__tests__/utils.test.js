@@ -69,4 +69,13 @@ describe( 'Tickets Utils', () => {
 			expect( utils.TICKET_TYPES.unlimited ).toBe( 'unlimited' );
 		} );
 	} );
+
+	describe( 'TICKET_ORDERS_SLUG', () => {
+		test( 'Values', () => {
+			expect( utils.TICKET_ORDERS_PAGE_SLUG.Tribe__Tickets__Commerce__PayPal__Main )
+				.toBe( 'tpp-orders' );
+			expect( utils.TICKET_ORDERS_PAGE_SLUG.Tribe__Tickets_Plus__Commerce__WooCommerce__Main )
+				.toBe( 'tickets-orders' );
+		} );
+	} );
 } );
