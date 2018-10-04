@@ -273,3 +273,11 @@ export const setTicketSold = ( blockId, sold ) => ( {
 		sold,
 	},
 } );
+
+export const setTicketAvailable = ( blockId, available ) => ( {
+	type: types.SET_TICKET_AVAILABLE,
+	payload: {
+		blockId,
+		available,
+	},
+} );

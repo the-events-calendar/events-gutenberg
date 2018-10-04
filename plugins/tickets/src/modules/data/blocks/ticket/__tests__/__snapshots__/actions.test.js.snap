@@ -187,6 +187,16 @@ Object {
 }
 `;
 
+exports[`Gutenberg actions Single block actions Set ticket availability 1`] = `
+Object {
+  "payload": Object {
+    "available": 99,
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_AVAILABLE",
+}
+`;
+
 exports[`Gutenberg actions Single block actions Set ticket date is pristine 1`] = `
 Object {
   "payload": Object {
