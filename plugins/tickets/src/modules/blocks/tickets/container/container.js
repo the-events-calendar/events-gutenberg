@@ -14,7 +14,7 @@ import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state ) => ( {
 	total: selectors.getTotalCapacity( state ),
-	sold: selectors.getTotalSold( state ),
+	available: selectors.getTotalAvailable( state ),
 	tickets: selectors.getTicketsArray( state ),
 	isLoading: selectors.isParentBlockLoading( state ),
 	isTicketDisabled: selectors.isTicketDisabled( state, {
