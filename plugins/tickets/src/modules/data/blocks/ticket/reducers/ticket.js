@@ -7,7 +7,7 @@ import moment from 'moment/moment';
  * Internal dependencies
  */
 import * as types from './../types';
-import { TYPES } from '@moderntribe/tickets/blocks/ticket/edit-container/content/capacity/template';
+import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
 const currentMoment = moment();
@@ -24,7 +24,7 @@ export const DEFAULT_STATE = {
 	startTime: momentUtil.toTime24Hr( currentMoment ),
 	endTime: momentUtil.toTime24Hr( currentMoment ),
 	dateIsPristine: true,
-	capacityType: TYPES.independent,
+	capacityType: TICKET_TYPES.independent,
 	capacity: '',
 	isEditing: false,
 	ticketId: 0,

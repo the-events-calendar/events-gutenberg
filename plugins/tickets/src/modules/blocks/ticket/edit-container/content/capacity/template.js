@@ -15,16 +15,10 @@ import { Dashicon } from '@wordpress/components';
 /**
  * Internal dependencies
  */
+import { TICKET_TYPES, TICKET_TYPES_VALUES } from '@moderntribe/tickets/data/utils';
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
-const TYPES_VALUES = [ 'unlimited', 'capped', 'own' ];
-
-export const TYPES = {
-	unlimited: TYPES_VALUES[ 0 ],
-	shared: TYPES_VALUES[ 1 ],
-	independent: TYPES_VALUES[ 2 ],
-};
 
 // todo: replace with custom select from Events Pro
 const Select = ( { id, options, selected, onSelect } ) => {
@@ -83,10 +77,10 @@ Input.propTypes = {
 
 class Capacity extends PureComponent {
 	static propTypes = {
-		type: PropTypes.oneOf( TYPES_VALUES ),
+		type: PropTypes.oneOf( TICKET_TYPES_VALUES ),
 		capacityOptions: PropTypes.arrayOf( PropTypes.shape( {
 			name: PropTypes.string,
-			value: PropTypes.oneOf( TYPES_VALUES ),
+			value: PropTypes.oneOf( TICKET_TYPES_VALUES ),
 		} ) ),
 		onSelectType: PropTypes.func,
 		capacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
@@ -97,14 +91,14 @@ class Capacity extends PureComponent {
 	};
 
 	static defaultProps = {
-		type: TYPES.independent,
+		type: TICKET_TYPES.independent,
 		capacityOptions: [
-			{ name: __( 'Share capacity with other tickets', 'events-gutenberg' ), value: TYPES.shared },
+			{ name: __( 'Share capacity with other tickets', 'events-gutenberg' ), value: TICKET_TYPES.shared },
 			{
 				name: __( 'Set capacity for this ticket only', 'events-gutenberg' ),
-				value: TYPES.independent,
+				value: TICKET_TYPES.independent,
 			},
-			{ name: __( 'unlimited', 'events-gutenberg' ), value: TYPES.unlimited },
+			{ name: __( 'unlimited', 'events-gutenberg' ), value: TICKET_TYPES.unlimited },
 		],
 		onSelectType: noop,
 		capacity: 0,
@@ -141,7 +135,7 @@ class Capacity extends PureComponent {
 
 		const extraInputProps = {};
 
-		if ( type === TYPES.shared && ( totalSharedCapacity || tmpSharedCapacity ) ) {
+		if ( type === TICKET_TYPES.shared && ( totalSharedCapacity || tmpSharedCapacity ) ) {
 			extraInputProps.max = totalSharedCapacity ? totalSharedCapacity : tmpSharedCapacity;
 		}
 
@@ -167,14 +161,14 @@ class Capacity extends PureComponent {
 							id={ this.ids.select }
 						/>
 					</div>
-					{ type !== TYPES.unlimited && (
+					{ type !== TICKET_TYPES.unlimited && (
 						<Input
 							id={ this.ids.capacity }
 							input={ inputProps }
 							min="0"
 							{ ...extraInputProps }
 						/> ) }
-					{ type === TYPES.shared && totalSharedCapacity === '' && (
+					{ type === TICKET_TYPES.shared && totalSharedCapacity === '' && (
 						<Input
 							id={ this.ids.globalShared }
 							input={ {
