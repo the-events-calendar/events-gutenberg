@@ -286,7 +286,7 @@ export const getTicketIsBeingEdited = createSelector(
 export const isTicketDisabled = createSelector(
 	[ getSettingsIsOpen, getActiveBlockId, getTicketEditing ],
 	( isSettingsOpen, activeBlockId, isEditing ) => (
-		isSettingsOpen || ( ! ! activeBlockId && ! isEditing )
+		isSettingsOpen || ( !! activeBlockId && ! isEditing )
 	),
 );
 
