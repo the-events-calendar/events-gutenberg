@@ -31,6 +31,7 @@ export const DEFAULT_STATE = {
 	sold: 0,
 	isLoading: false,
 	hasBeenCreated: false,
+	available: 0,
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -124,6 +125,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				sold: action.payload.sold,
+			};
+		case types.SET_TICKET_AVAILABLE:
+			return {
+				...state,
+				available: action.payload.available,
 			};
 		default:
 			return state;
