@@ -159,8 +159,8 @@ export const getTotalAvailable = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => {
 		return tickets.reduce( ( total, ticket ) => {
-			const sold = parseInt( ticket.available, 10 ) || 0;
-			return total + sold;
+			const available = parseInt( ticket.available, 10 ) || 0;
+			return total + available;
 		}, 0 );
 	},
 );
