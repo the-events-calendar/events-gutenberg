@@ -139,20 +139,28 @@ export const getTicketsSharedCapacity = createSelector(
 	[ getSharedTickets ],
 	( tickets ) => {
 		return tickets.reduce( ( total, ticket ) => {
-			const capacity = parseInt( ticket.capacity, 10 );
-			return total + ( isNaN( capacity ) ? 0 : capacity );
+			const capacity = parseInt( ticket.capacity, 10 ) || 0;
+			return total + capacity;
 		}, 0 );
 	},
 );
 
 export const getTotalSold = createSelector(
-	[ getTicketsIds, getTicketsObject ],
-	( ids, tickets ) => {
-		return ids.reduce( ( total, id ) => {
-			const item = tickets[ id ];
-			const sold = parseInt( item.sold, 10 );
-			const value = isNaN( sold ) ? 0 : sold;
-			return total + value;
+	[ getTicketsArray ],
+	( tickets ) => {
+		return tickets.reduce( ( total, ticket ) => {
+			const sold = parseInt( ticket.sold, 10 ) || 0;
+			return total + sold;
+		}, 0 );
+	},
+);
+
+export const getTotalAvailable = createSelector(
+	[ getTicketsArray ],
+	( tickets ) => {
+		return tickets.reduce( ( total, ticket ) => {
+			const sold = parseInt( ticket.available, 10 ) || 0;
+			return total + sold;
 		}, 0 );
 	},
 );
