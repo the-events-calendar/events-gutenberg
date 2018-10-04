@@ -104,7 +104,9 @@ const TimePicker = ( {
 			items.push( {
 				value: time,
 				text: formatLabel( time ),
-				isCurrent: time === timeUtil.toSeconds( current, timeUtil.TIME_FORMAT_HH_MM ),
+				isCurrent: current
+					? time === timeUtil.toSeconds( current, timeUtil.TIME_FORMAT_HH_MM )
+					: false,
 			} );
 		}
 
