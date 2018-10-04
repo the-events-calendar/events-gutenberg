@@ -23,7 +23,7 @@ Object {
   "description": "RSVP block",
   "edit": [Function],
   "icon": [Function],
-  "id": "event-rsvp",
+  "id": "rsvp",
   "keywords": Array [
     "event",
     "events-gutenberg",
