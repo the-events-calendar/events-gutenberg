@@ -5,7 +5,7 @@
  *
  * Add support to: Add / Create / Delete tickets via the WP REST Api
  *
- * @since TBD
+ * @since 0.3.0-alpha
  */
 class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_ServiceProvider {
 
@@ -17,7 +17,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 	/**
 	 * Registers the classes and functionality needed fro REST API
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 */
 	public function register() {
 
@@ -40,7 +40,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 	/**
 	 * Hooks all the methods and actions the class needs.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 */
 	private function hooks() {
 		add_action( 'rest_api_init', array( $this, 'register_endpoints' ) );
@@ -67,7 +67,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 	 * Registers the REST API endpoint that will handle single ticket requests, to edit and remove
 	 * a ticket via the endpoint.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return Tribe__Tickets__REST__V1__Endpoints__Single_Ticket
 	 */
@@ -93,7 +93,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 	 * Registers the REST API endpoint that will handle ticket archive requests to create a new
 	 * ticket inside of the site.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return Tribe__Tickets__REST__V1__Endpoints__Ticket_Archive
 	 */
@@ -111,7 +111,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 	/**
 	 * Add additional data to the single Ticket API when reading data
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param $data
 	 * @param $request

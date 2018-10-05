@@ -2,11 +2,11 @@
 /**
  * Events Gutenberg Assets
  *
- * @since TBD
+ * @since 0.3.0-alpha
  */
 class Tribe__Gutenberg__Tickets__Assets {
 	/**
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return void
 	 */
@@ -16,7 +16,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 	/**
 	 * Registers and Enqueues the assets
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 */
 	public function register() {
 		$plugin = tribe( 'gutenberg.tickets.plugin' );

@@ -202,7 +202,7 @@ class Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket
 	/**
 	 * Add ticket callback executed to update / add a new ticket.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param WP_REST_Request $request
 	 * @param $nonce_action

@@ -2,7 +2,7 @@
 /**
  * Descriptio
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 $required      = isset( $field->required ) && 'on' === $field->required ? true : false;

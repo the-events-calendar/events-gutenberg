@@ -2,7 +2,7 @@
 /**
  * This template renders the tickets
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 $post_id      = $this->get( 'post_id' );

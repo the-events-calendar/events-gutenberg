@@ -2,13 +2,13 @@
 /**
  * Register Event Tickets provider
  *
- * @since TBD
+ * @since 0.3.0-alpha
  */
 class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 */
 	public function register() {
@@ -56,7 +56,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 * In place of delegating the hooking responsibility to the single classes they are all hooked here.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 */
 	protected function hook() {
@@ -108,7 +108,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 	/**
 	 * Binds and sets up implementations at boot time.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 */
 	public function boot() {}
 }

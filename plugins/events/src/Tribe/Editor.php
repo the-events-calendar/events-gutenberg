@@ -51,7 +51,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 	 *
 	 * Code is located at: https://github.com/moderntribe/the-events-calendar/blob/f8af49bc41048e8632372fc8da77202d9cb98d86/src/Tribe/Admin/Event_Meta_Box.php#L345
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param $value
 	 * @param $name
@@ -343,7 +343,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 						/**
 						 * Array used to setup the FE with custom variables from the BE
 						 *
-						 * @since TBD
+						 * @since 0.3.0-alpha
 						 *
 						 * @param array An array with the variables to be localized
 						 */
@@ -510,7 +510,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 	/**
 	 * Returns the site timezone as a string
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return string
 	 */

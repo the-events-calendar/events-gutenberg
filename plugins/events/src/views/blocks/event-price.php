@@ -2,7 +2,7 @@
 /**
  * Renders the event price block
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 $cost             = $this->attr( 'cost' );

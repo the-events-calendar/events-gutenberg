@@ -93,7 +93,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.0-alpha - TBD
+#### 0.3.0-alpha - 2018-10-05
 
 * Feature - Register ticket block to make it available in the block list
 * Feature - Register PHP files to use tickets templates

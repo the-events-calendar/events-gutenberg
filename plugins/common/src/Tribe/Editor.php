@@ -21,7 +21,7 @@ class Tribe__Gutenberg__Common__Editor {
 	 * a) Is gutenberg active?
 	 * b) Is the blocks editor active?
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return bool
 	 */

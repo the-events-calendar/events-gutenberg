@@ -47,7 +47,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 	/**
 	 * Set default values for the editor localization
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param array $defaults Array with the default values
 	 *

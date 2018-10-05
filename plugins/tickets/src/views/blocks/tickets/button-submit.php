@@ -3,7 +3,7 @@
  * This template renders the buy button for the
  * list of all tickets in the Event
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 $must_login = ! is_user_logged_in() && $ticket->get_provider()->login_required();

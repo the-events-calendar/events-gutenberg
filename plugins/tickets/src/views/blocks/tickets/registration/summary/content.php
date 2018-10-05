@@ -2,7 +2,7 @@
 /**
  * This template renders
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 ?>

@@ -2,7 +2,7 @@
 /**
  * This template renders the RSVP ticket form name input
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 /**
@@ -11,7 +11,7 @@
  * @param string
  * @param Tribe__Events_Gutenberg__Template $this
  *
- * @since TBD
+ * @since 0.3.0-alpha
  */
 $name = apply_filters( 'tribe_tickets_rsvp_form_full_name', '', $this );
 ?>

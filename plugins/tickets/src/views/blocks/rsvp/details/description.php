@@ -2,7 +2,7 @@
 /**
  * This template renders the RSVP ticket description
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 if ( ! $ticket->show_description() ) {

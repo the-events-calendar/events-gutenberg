@@ -4,13 +4,13 @@
  *
  * @todo  Remove this on class when we move into using our own API for RSVP
  *
- * @since TBD
+ * @since 0.3.0-alpha
  */
 class Tribe__Gutenberg__Tickets__REST__Compatibility {
 	/**
 	 * Register the required Rest filters fields for good Gutenberg saving
 	 *
-	 * @since  TBD
+	 * @since  0.3.0-alpha
 	 *
 	 * @return void
 	 */
@@ -26,7 +26,7 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 	/**
 	 * When updating the Value of capacity for a RSVP we update Stock and some other Meta values
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param  int    $meta_id
 	 * @param  int    $object_id
@@ -81,7 +81,7 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 	/**
 	 * Populates Going and Not going fields for the Rest API data Endpoint in WordPress
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param  mixed  $check
 	 * @param  int    $object_id

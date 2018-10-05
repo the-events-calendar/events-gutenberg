@@ -2,7 +2,7 @@
 /**
  * This template renders the summary Title
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 ?>

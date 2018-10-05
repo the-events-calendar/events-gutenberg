@@ -2,7 +2,7 @@
 /**
  * This template renders the RSVP ticket form quantity input
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 $must_login = ! is_user_logged_in() && tribe( 'tickets.rsvp' )->login_required();

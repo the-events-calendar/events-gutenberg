@@ -2,7 +2,7 @@
 /**
  * Renders the event links block
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 // don't show on password protected posts

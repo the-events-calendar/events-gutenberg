@@ -2,13 +2,13 @@
 /**
  * Initialize Gutenberg Event Meta fields
  *
- * @since TBD
+ * @since 0.3.0-alpha
  */
 class Tribe__Gutenberg__Tickets__Meta {
 	/**
 	 * Register the required Meta fields for good Gutenberg saving
 	 *
-	 * @since  TBD
+	 * @since  0.3.0-alpha
 	 *
 	 * @return void
 	 */
@@ -127,7 +127,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 	/**
 	 * Removes `_edd_button_behavior` key from the REST API where tickets blocks is used
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param array $args
 	 * @param string $defaults
@@ -146,7 +146,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 	/**
 	 * Default definition for an attribute of type text
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return array
 	 */
@@ -163,7 +163,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 	/**
 	 * Default definition for an attribute of type text
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return array
 	 */
@@ -180,7 +180,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 	/**
 	 * Default definition for an attribute of type boolean
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return array
 	 */
@@ -215,7 +215,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 	/**
 	 * Verify if the current user can edit or not this Post
 	 *
-	 * @since  TBD
+	 * @since  0.3.0-alpha
 	 *
 	 * @param bool   $allowed  Whether the user can add the post meta. Default false.
 	 * @param string $meta_key The meta key.
@@ -237,7 +237,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 	/**
 	 * Checks and sanitize a given value to a numeric array or a numeric string
 	 *
-	 * @since  TBD
+	 * @since  0.3.0-alpha
 	 *
 	 * @param  mixed $value Check agains this value
 	 *
@@ -257,7 +257,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 	 * Make sure sanitization on boolean does not triggered warnings when multiple values are passed
 	 * to the function
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 * @param $value
 	 *
 	 * @return bool
@@ -270,7 +270,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 	 * Sanitize strings allowing the usage of white spaces before or after the separators, as
 	 * - sanitize_text_field removes any whitespace
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 * @param $value
 	 *
 	 * @return mixed

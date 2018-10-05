@@ -2,7 +2,7 @@
 /**
  * This template renders a Single Ticket Title
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 

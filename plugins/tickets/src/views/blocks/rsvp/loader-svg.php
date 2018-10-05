@@ -2,7 +2,7 @@
 /**
  * This template renders the RSVP loader icon
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 ?>

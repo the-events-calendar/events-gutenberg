@@ -2,7 +2,7 @@
 /**
  * This template renders the form fields for Tribe Commerce
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 $provider     = $this->get( 'provider' );

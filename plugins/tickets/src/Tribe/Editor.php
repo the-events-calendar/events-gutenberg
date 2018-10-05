@@ -3,7 +3,7 @@
 /**
  * Initialize Gutenberg editor with specifics for the tickets plugin
  *
- * @since TBD
+ * @since 0.3.0-alpha
  */
 class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor {
 	/**
@@ -27,7 +27,7 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	/**
 	 * Adds the ticket block into the editor
 	 *
-	 * @since  TBD
+	 * @since  0.3.0-alpha
 	 *
 	 * @param array $template Array of all the templates used by default
 	 * @param string $post_type The current post type
@@ -91,7 +91,7 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	/**
 	 * Add the event tickets category into the block categories
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param $categories
 	 * @param $post
@@ -116,7 +116,7 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	/**
 	 * Add data associated with the tickets into the variable "tribe_js_config"
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @param array $js_config
 	 * @return array An array with data to be passed to the FE.

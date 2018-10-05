@@ -2,7 +2,7 @@
 /**
  * This template renders the RSVP ticket form
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 $ticket_id = $this->get( 'ticket_id' );
