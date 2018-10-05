@@ -20,6 +20,12 @@ class Tribe__Gutenberg__Tickets__REST__V1__Service_Provider extends tad_DI52_Ser
 	 * @since TBD
 	 */
 	public function register() {
+
+		// Prevent to crash when even tickets is disabled
+		if ( ! class_exists( 'Tribe__Tickets__REST__V1__Endpoints__Base' ) ) {
+			return;
+		}
+
 		tribe_singleton(
 			'gutenberg.tickets.rest-v1.endpoints.tickets-single',
 			new Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_Ticket(
