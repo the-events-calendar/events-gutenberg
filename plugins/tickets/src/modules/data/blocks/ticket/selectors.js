@@ -8,6 +8,7 @@ import trim from 'lodash/trim';
  * Internal dependencies
  */
 import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
+import { config } from '@moderntribe/common/utils/globals';
 
 export const getBlock = ( state ) => state.tickets.blocks.ticket;
 
@@ -307,3 +308,13 @@ export const getTicketAvailability = createSelector(
 	[ getTicketBlock ],
 	( block ) => parseInt( block.available, 10 ) || 0,
 );
+
+export const getProviders = () => {
+	const tickets = config().tickets || {};
+	return tickets.providers || [];
+};
+
+export const hasTicketProviders = createSelector(
+	[ getProviders ],
+	( providers ) => providers.length > 0
+)
