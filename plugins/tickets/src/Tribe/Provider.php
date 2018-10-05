@@ -88,11 +88,6 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		);
 
 		add_action(
-			'admin_init',
-			tribe_callback( 'gutenberg.tickets.editor', 'add_tickets_block_in_editor' )
-		);
-
-		add_action(
 			'block_categories',
 			tribe_callback( 'gutenberg.tickets.editor', 'block_categories' )
 		);

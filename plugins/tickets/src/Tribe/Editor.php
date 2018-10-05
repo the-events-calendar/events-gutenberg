@@ -16,8 +16,12 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	public function hook() {
 		// Add Rest API support
 		add_filter( 'tribe_tickets_register_ticket_post_type_args', array( $this, 'add_rest_support' ) );
+
 		// Make data available to the current ticket
 		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'add_tickets_js_config' ) );
+
+		// Add RSVP and tickets blocks
+		add_action( 'admin_init', array( $this, 'add_tickets_block_in_editor' ) );
 	}
 
 	/**
@@ -31,15 +35,20 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	 * @return array
 	 */
 	public function add_tickets_block_in_editor() {
-		foreach ( $this->supported_types() as $post_type ) {
+		foreach ( $this->get_enabled_post_types() as $post_type ) {
 			$post_type_object = get_post_type_object( $post_type );
+
 			if ( ! $post_type_object ) {
 				continue;
 			}
+
 			$template = isset( $post_type_object->template )
 				? (array) $post_type_object->template
 				: array();
+
 			$template[] = array( 'tribe/tickets' );
+			$template[] = array( 'tribe/rsvp' );
+
 			$post_type_object->template = $template;
 		}
 	}
@@ -53,14 +62,14 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	 * @return bool
 	 */
 	public function current_type_support_tickets( $post_type = null ) {
-		$post_types = $this->supported_types();
+		$post_types = $this->get_enabled_post_types();
 
 		if ( ! is_null( $post_type ) ) {
 			return in_array( $post_type, $post_types, true );
 		}
 
 		$is_valid_type = false;
-		foreach ( $this->supported_types() as $post_type ) {
+		foreach ( $this->get_enabled_post_types() as $post_type ) {
 			$is_valid_type = Tribe__Admin__Helpers::instance()->is_post_type_screen( $post_type );
 			// Don't operate on following types as current type is valid
 			if ( $is_valid_type ) {
@@ -75,7 +84,7 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	 *
 	 * @return array
 	 */
-	public function supported_types() {
+	public function get_enabled_post_types() {
 		return (array) tribe_get_option( 'ticket-enabled-post-types', array() );
 	}
 
