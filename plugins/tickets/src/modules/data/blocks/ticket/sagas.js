@@ -164,6 +164,7 @@ export function* createNewTicket( action ) {
 			put( actions.setTicketIsEditing( blockId, false ) ),
 			put( actions.setTicketId( blockId, ticket.ID ) ),
 			put( actions.seTicketHasBeenCreated( blockId, true ) ),
+			put( actions.setActiveChildBlockId( '' ) ),
 		] );
 	} catch ( e ) {
 		/**
@@ -172,7 +173,6 @@ export function* createNewTicket( action ) {
 	} finally {
 		yield all( [
 			put( actions.setTicketIsLoading( blockId, false ) ),
-			put( actions.setActiveChildBlockId( '' ) ),
 		] );
 	}
 }
