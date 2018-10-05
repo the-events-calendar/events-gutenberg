@@ -44,6 +44,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 			if ( ! $ticket->date_in_range() ) {
 				continue;
 			}
+
 			$tickets[] = $ticket;
 		}
 

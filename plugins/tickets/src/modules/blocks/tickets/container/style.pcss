@@ -1,11 +1,15 @@
 .tribe-editor__tickets-body {
 	.editor-inner-blocks {
-		.editor-block-list__block.is-hovered > .editor-block-list__block-edit:before {
-			outline: none;
+		.editor-block-list__block {
+			&.is-hovered,
+			&.is-selected {
+
+				> .editor-block-list__block-edit::before {
+					outline: none;
+					transition: none
+				}
+			}
 		}
 
-		.editor-block-list__block.is-selected > .editor-block-list__block-edit:before {
-			outline: none;
-		}
 	}
 }
