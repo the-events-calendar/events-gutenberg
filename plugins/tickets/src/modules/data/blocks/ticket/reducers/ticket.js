@@ -23,7 +23,7 @@ export const DEFAULT_STATE = {
 	endDateMoment: currentMoment,
 	startTime: momentUtil.toTime24Hr( currentMoment ),
 	endTime: momentUtil.toTime24Hr( currentMoment ),
-	dateIsPristine: true,
+	dateIsPristine: false,
 	capacityType: TICKET_TYPES.independent,
 	capacity: '',
 	isEditing: false,
