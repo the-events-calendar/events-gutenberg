@@ -2,31 +2,29 @@
  * External dependencies
  */
 import { __ } from '@wordpress/i18n';
-
-/**
- * External dependencies
- */
 import moment from 'moment/moment';
 
 /**
  * Internal dependencies
  */
-import { HALF_HOUR_IN_SECONDS } from '@moderntribe/events/editor/utils/time';
-import { FORMATS } from '@moderntribe/events/editor/utils/date';
-import { roundTime, toDateTime } from '@moderntribe/events/editor/utils/moment';
+import {
+	date,
+	moment as momentUtil,
+	time,
+} from '@moderntribe/common/utils';
 import { getSetting } from '@moderntribe/events/editor/settings';
 import * as types from './types';
 
 export const DEFAULT_STATE = {
-	start: toDateTime( roundTime( moment() ) ),
-	end: toDateTime( roundTime( moment() ).add( HALF_HOUR_IN_SECONDS, 'seconds' ) ),
+	start: momentUtil.toDateTime( momentUtil.roundTime( moment() ) ),
+	end: momentUtil.toDateTime( momentUtil.roundTime( moment() ).add( time.HALF_HOUR_IN_SECONDS, 'seconds' ) ),
 	naturalLanguage: '',
 	dateTimeSeparator: getSetting( 'dateTimeSeparator', __( '@', 'events-gutenberg' ) ),
 	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),
 	allDay: false,
 	multiDay: false,
-	timeZone: FORMATS.TIMEZONE.string,
-	timeZoneLabel: FORMATS.TIMEZONE.string,
+	timeZone: date.FORMATS.TIMEZONE.string,
+	timeZoneLabel: date.FORMATS.TIMEZONE.string,
 	showTimeZone: false,
 	showDateInput: false,
 };

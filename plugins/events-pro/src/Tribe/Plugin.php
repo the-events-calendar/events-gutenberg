@@ -8,14 +8,14 @@ class Tribe__Gutenberg__Events_Pro__Plugin {
 	/**
 	 * The semantic version number of this extension; should always match the plugin header.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 */
 	const VERSION = Tribe__Gutenberg__Plugin::VERSION;
 
 	/**
 	 * The constructor; delays initializing the extension until all other plugins are loaded.
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 */
 	public function __construct() {
 		// Setup the Configuration file

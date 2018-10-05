@@ -13,11 +13,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.events-pro.plugin', 'Tribe__Gutenberg__Events_Pro__Plugin' );
 
-		// Should we continue loading?
-		if (
-			! tribe( 'gutenberg.events.editor' )->is_gutenberg_active()
-			|| ! tribe( 'gutenberg.events.editor' )->is_blocks_editor_active()
-		) {
+		if ( ! tribe( 'gutenberg.common.editor' )->should_load_blocks() ) {
 			return;
 		}
 

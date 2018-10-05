@@ -2,7 +2,7 @@
 /**
  * Plugin Name: The Events Calendar: Gutenberg Extension
  * Description: This plugin allows you to use The Events Calendar with the Gutenberg development plugin's block editor.
- * Version: 0.2.9-alpha
+ * Version: 0.3.0-alpha
  * Author: Modern Tribe, Inc.
  * Author URI: https://github.com/moderntribe/events-gutenberg
  * License: GPLv2 or later
@@ -17,7 +17,7 @@ class Tribe__Gutenberg__Plugin {
 	 *
 	 * @since  0.1.0-alpha
 	 */
-	const VERSION = '0.2.9-alpha';
+	const VERSION = '0.3.0-alpha';
 
 	/**
 	 * Each plugin required by this extension
@@ -29,6 +29,15 @@ class Tribe__Gutenberg__Plugin {
 	public $plugins_required = array(
 		'Tribe__Events__Main' => '4.6.13',
 	);
+
+	/**
+	 * Where in the themes we will look for templates
+	 *
+	 * @since  0.3.0-alpha
+	 *
+	 * @var string
+	 */
+	public $template_namespace = 'gutenberg';
 
 	/**
 	 * The constructor; delays initializing the extension until all other plugins are loaded.
@@ -78,6 +87,7 @@ class Tribe__Gutenberg__Plugin {
 		tribe_register_provider( 'Tribe__Gutenberg__Events__Provider' );
 		tribe_register_provider( 'Tribe__Gutenberg__Events_Pro__Provider' );
 		tribe_register_provider( 'Tribe__Gutenberg__Tickets__Provider' );
+		tribe_register_provider( 'Tribe__Gutenberg__Tickets__REST__V1__Service_Provider' );
 	}
 
 	/**
@@ -90,11 +100,11 @@ class Tribe__Gutenberg__Plugin {
 	 */
 	protected function autoloading() {
 		$prefixes = array(
+			'Tribe__Gutenberg__Common__' => $this->plugin_path . 'plugins/common/src/Tribe',
 			'Tribe__Gutenberg__Events__' => $this->plugin_path . 'plugins/events/src/Tribe',
 			'Tribe__Gutenberg__Events_Pro__' => $this->plugin_path . 'plugins/events-pro/src/Tribe',
 			'Tribe__Gutenberg__Tickets__' => $this->plugin_path . 'plugins/tickets/src/Tribe',
 			'Tribe__Gutenberg__Tickets_Plus__' => $this->plugin_path . 'plugins/tickets-plus/src/Tribe',
-			'Tribe__Gutenberg__Common__' => $this->plugin_path . 'plugins/common/src/Tribe',
 		);
 
 		$autoloader = Tribe__Autoloader::instance();

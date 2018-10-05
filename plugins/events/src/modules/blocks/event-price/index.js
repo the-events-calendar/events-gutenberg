@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventPrice from './container';
-import { Icons } from '@moderntribe/events/elements';
+import { BlockIcon } from '@moderntribe/common/elements';
 
 /**
  * Module Code
@@ -19,7 +19,7 @@ export default {
 		'Let visitors know the cost of this event or if it’s free to attend.',
 		'events-gutenberg'
 	),
-	icon: Icons.TEC,
+	icon: BlockIcon,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

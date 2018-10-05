@@ -2,7 +2,7 @@
 /**
  * Renders the event website block
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 

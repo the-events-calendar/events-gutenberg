@@ -8,4 +8,6 @@ import { setupCreateReducer } from '@nfen/redux-reducer-injector';
  */
 import plugins from './plugins';
 
-export default setupCreateReducer( { plugins } );
+export default setupCreateReducer( {
+	plugins,
+} );

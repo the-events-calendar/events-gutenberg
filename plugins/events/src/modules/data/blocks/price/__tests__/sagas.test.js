@@ -10,7 +10,7 @@ import { cloneableGenerator } from 'redux-saga/utils';
 import * as types from '../types';
 import { DEFAULT_STATE } from '../reducer';
 import * as actions from '../actions';
-import { isTruthy } from '@moderntribe/events/editor/utils/string';
+import { isTruthy } from '@moderntribe/common/utils/string';
 import { getPriceSettings } from '@moderntribe/events/editor/settings';
 import watchers, * as sagas from '../sagas';
 

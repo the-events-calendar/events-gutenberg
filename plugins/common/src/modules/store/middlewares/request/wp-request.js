@@ -25,7 +25,8 @@ export default () => ( next ) => async ( action ) => {
 	next( action );
 
 	const rest = get( config(), 'rest', {} );
-	const { url = '', nonce = '' } = rest;
+	const { url = '', nonce = {} } = rest;
+	const wpRESTNonce = nonce.wp_rest || '';
 	const namespaces = rest.namespaces || {};
 	const core = namespaces.core || 'wp/v2';
 	const BASE = `${ url }${ core }`;
@@ -51,7 +52,7 @@ export default () => ( next ) => async ( action ) => {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json',
 		...get( params, 'headers', {} ),
-		'X-WP-Nonce': nonce,
+		'X-WP-Nonce': wpRESTNonce,
 	};
 
 	try {

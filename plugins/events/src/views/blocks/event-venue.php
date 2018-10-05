@@ -2,7 +2,7 @@
 /**
  * Renders the event Venue block
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 $event_id = $this->get( 'post_id' );

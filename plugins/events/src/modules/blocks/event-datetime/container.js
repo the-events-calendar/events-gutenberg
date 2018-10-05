@@ -20,9 +20,7 @@ import {
 	selectors as priceSelectors,
 	actions as priceActions,
 } from '@moderntribe/events/data/blocks/price';
-import { timezonesAsSelectData } from '@moderntribe/events/editor/utils/date';
-import { toMoment } from '@moderntribe/events/editor/utils/moment';
-import { hasClass, searchParent } from '@moderntribe/events/editor/utils/dom';
+import { moment, dom } from '@moderntribe/common/utils';
 import { withStore, withSaveData } from '@moderntribe/common/hoc';
 import EventDateTime from './template';
 
@@ -33,7 +31,7 @@ import EventDateTime from './template';
 const ESCAPE_KEY = 27;
 
 const isTargetInBlock = ( target ) => (
-	searchParent( target, ( testNode ) => {
+	dom.searchParent( target, ( testNode ) => {
 		if ( testNode.classList.contains( 'editor-block-list__block' ) ) {
 			return Boolean( testNode.querySelector( '.tribe-editor__date-time' ) );
 		}
@@ -42,7 +40,7 @@ const isTargetInBlock = ( target ) => (
 );
 
 const isTargetInParents = ( target, parents ) => (
-	searchParent( target, ( testNode ) => hasClass( testNode, parents ) )
+	dom.searchParent( target, ( testNode ) => dom.hasClass( testNode, parents ) )
 );
 
 const onKeyDown = ( dispatchProps ) => ( e ) => {
@@ -84,8 +82,8 @@ const onStartTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	const { setStartTime } = dispatchProps;
 	const [ hour, minute ] = e.target.value.split( ':' );
 
-	const startMoment = toMoment( start );
-	const max = toMoment( end ).clone().subtract( 1, 'minutes' );
+	const startMoment = moment.toMoment( start );
+	const max = moment.toMoment( end ).clone().subtract( 1, 'minutes' );
 
 	const startMomentCopy = startMoment.clone();
 	startMomentCopy.set( 'hour', parseInt( hour, 10 ) );
@@ -119,8 +117,8 @@ const onEndTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	const { setEndTime } = dispatchProps;
 	const [ hour, minute ] = e.target.value.split( ':' );
 
-	const endMoment = toMoment( end );
-	const min = toMoment( start ).clone().add( 1, 'minutes' );
+	const endMoment = moment.toMoment( end );
+	const min = moment.toMoment( start ).clone().add( 1, 'minutes' );
 
 	const endMomentCopy = endMoment.clone();
 	endMomentCopy.set( 'hour', parseInt( hour, 10 ) );
@@ -194,15 +192,6 @@ const mapDispatchToProps = ( dispatch ) => ( {
 	},
 	onTimeZoneVisibilityChange: onTimeZoneVisibilityChange( dispatch ),
 	onDateTimeLabelClick: onDateTimeLabelClick( dispatch ),
-	setTimeZone: ( value ) => {
-		const filteredTimezones = timezonesAsSelectData.filter( ( timezone ) => (
-			timezone.value === value
-		) );
-		if ( filteredTimezones.length ) {
-			dispatch( dateTimeActions.setTimeZoneLabel( filteredTimezones[0].label ) );
-		}
-		dispatch( dateTimeActions.setTimeZone( value ) );
-	},
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
