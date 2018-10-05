@@ -244,11 +244,13 @@ class Tribe__Gutenberg__Tickets__REST__V1__Endpoints__Single_ticket
 			);
 		}
 
+		$ticket_args = $this->ticket_args();
+
 		$ticket_data = array(
 			'ticket_name' => $body['name'],
 			'ticket_description' => $body['description'],
 			'ticket_price' => $body['price'],
-			'ticket_show_description' => $body['show_description'],
+			'ticket_show_description' => Tribe__Utils__Array::get( $body, 'show_description', $ticket_args['show_description']['default'] ),
 			'ticket_start_date' => $body['start_date'],
 			'ticket_start_time' => $body['start_time'],
 			'ticket_end_date' => $body['end_date'],
