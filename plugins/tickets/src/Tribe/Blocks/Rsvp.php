@@ -53,8 +53,10 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 	 * @return string
 	 */
 	public function render( $attributes = array() ) {
-		// @TODO: Be sure we get the post ID from tickets so it can run without TEC
-		$post_id            = tribe( 'gutenberg.events.template' )->get( 'post_id' );
+		/**
+		 * @todo Be sure we get the post ID from tickets so it can run without TEC
+		 */
+		$args['post_id']    = $post_id = tribe( 'gutenberg.events.template' )->get( 'post_id' );
 		$args['attributes'] = $this->attributes( $attributes );
 		$args['tickets']    = $this->get_tickets( $post_id );
 
