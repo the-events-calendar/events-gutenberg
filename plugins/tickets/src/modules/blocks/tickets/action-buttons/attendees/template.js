@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { User as UserIcon } from '@moderntribe/common/src/modules/icons';
 
-const AttendeesActionButton = ( { href } ) => (
+const AttendeesActionButton = ( { href, hasProviders } ) => ( hasProviders && (
 	<a
 		className="tribe-editor__action-link"
 		href={ href }
@@ -24,10 +24,11 @@ const AttendeesActionButton = ( { href } ) => (
 		<UserIcon />
 		<span>{ __( 'Attendees', 'events-gutenberg' ) }</span>
 	</a>
-);
+) );
 
 AttendeesActionButton.propTypes = {
 	href: PropTypes.string.isRequired,
+	hasProviders: PropTypes.bool,
 };
 
 export default AttendeesActionButton;
