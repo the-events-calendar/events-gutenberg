@@ -170,7 +170,7 @@ describe( 'Ticket blocks selectors', () => {
 		const ownProps = { blockId: 'modern-tribe' };
 
 		test( 'Expires value', () => {
-			expect( selectors.getTicketExpires( newState, ownProps ) ).toBe( false );
+			expect( selectors.getTicketExpires( newState, ownProps ) ).toBe( true );
 		} );
 
 		test( 'Expiring ticket', () => {
