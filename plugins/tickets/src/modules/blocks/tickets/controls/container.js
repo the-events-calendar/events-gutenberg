@@ -10,15 +10,9 @@ import { compose } from 'redux';
 import Template from './template';
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
-import { config } from '@moderntribe/common/utils/globals';
-
-const getProviders = () => {
-	const tickets = config().tickets || {};
-	return tickets.providers || [];
-};
 
 const mapStateToProps = ( state ) => ( {
-	providers: getProviders(),
+	providers: selectors.getProviders(),
 	selectedProvider: selectors.getSelectedProvider( state ),
 } );
 

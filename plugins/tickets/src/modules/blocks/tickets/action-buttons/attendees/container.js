@@ -13,7 +13,7 @@ import { select } from '@wordpress/data';
  * Internal dependencies
  */
 import AttendeesActionButton from './template';
-
+import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 import { withStore } from '@moderntribe/common/hoc';
 import { config } from '@moderntribe/common/src/modules/utils/globals';
 
@@ -24,6 +24,7 @@ const mapStateToProps = () => {
 
 	return {
 		href: `${ adminURL }edit.php?post_type=${ postType }&page=tickets-attendees&event_id=${ postId }`,
+		hasProviders: selectors.hasTicketProviders(),
 	};
 }
 

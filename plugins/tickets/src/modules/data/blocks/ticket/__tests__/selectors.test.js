@@ -279,6 +279,14 @@ describe( 'Ticket blocks selectors', () => {
 			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].available = 99;
 			expect( selectors.getTicketAvailability( newState, ownProps ) ).toBe( 99 );
 		} );
+
+		test( 'Get providers', () => {
+			expect( selectors.getProviders() ).toEqual( [] );
+		} );
+
+		test( 'Has providers', () => {
+			expect( selectors.hasTicketProviders() ).toBe( false );
+		} );
 	} );
 } );
 

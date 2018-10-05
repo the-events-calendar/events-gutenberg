@@ -19,24 +19,46 @@ import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import StatusIcon from '@moderntribe/tickets/blocks/ticket/display-container/status-icon/element';
 import './style.pcss';
 
-const TicketContainer = ( { isSelected, isEditing, total, available, tickets, isLoading, isTicketDisabled } ) => (
-	<div className="tribe-editor__ticket-container">
-		<div className="tribe-editor__tickets-body">
-			<InnerBlocks allowedBlocks={ [ 'tribe/tickets-item' ] } />
+const TicketContainer = ( props ) => {
+	const {
+		isSelected,
+		isEditing,
+		total,
+		available,
+		tickets,
+		isLoading,
+		isTicketDisabled,
+		hasProviders,
+	} = props;
+
+	const messages = {
+		title: hasProviders
+			? __( 'There are no tickets yet', 'events-gutenberg' )
+			: __( 'There are no providers yet', 'events-gutenberg' ),
+		description: hasProviders
+			? __( 'Edit this block to create your first ticket.', 'events-gutenberg' )
+			: __( 'Enable at least one ticket providers first', 'events-gutenberg' ),
+	};
+
+	return (
+		<div className="tribe-editor__ticket-container">
+			<div className="tribe-editor__tickets-body">
+				<InnerBlocks allowedBlocks={ [ 'tribe/tickets-item' ] } />
+			</div>
+			{ tickets.length === 0 && (
+				<InactiveBlock
+					layout={ LAYOUT.ticket }
+					title={ messages.title  }
+					description={ messages.description }
+					icon={ <StatusIcon disabled={ true } /> }
+				/>
+			) }
+			{ isSelected && ! isEditing && ! isLoading && tickets.length !== 0 && (
+				<Availability available={ available } total={ total } isDisabled={ isTicketDisabled } />
+			) }
 		</div>
-		{ tickets.length === 0 && (
-			<InactiveBlock
-				layout={ LAYOUT.ticket }
-				title={ __( 'There are no tickets yet', 'events-gutenberg' ) }
-				description={ __( 'Edit this block to create your first ticket.', 'events-gutenberg' ) }
-				icon={ <StatusIcon disabled={ true } /> }
-			/>
-		) }
-		{ isSelected && ! isEditing && ! isLoading && tickets.length !== 0 && (
-			<Availability available={ available } total={ total } isDisabled={ isTicketDisabled } />
-		) }
-	</div>
-);
+	);
+}
 
 TicketContainer.propTypes = {
 	isSelected: PropTypes.bool,
@@ -45,6 +67,7 @@ TicketContainer.propTypes = {
 	isTicketDisabled: PropTypes.bool,
 	total: PropTypes.number,
 	available: PropTypes.number,
+	hasProviders: PropTypes.bool,
 };
 
 export default TicketContainer;
