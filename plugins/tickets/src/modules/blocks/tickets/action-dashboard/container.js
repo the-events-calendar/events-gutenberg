@@ -27,6 +27,7 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	isBeingEdited: selectors.getTicketIsBeingEdited( state, {
 		blockId: ownProps.activeBlockId,
 	} ),
+	hasProviders: selectors.hasTicketProviders(),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
