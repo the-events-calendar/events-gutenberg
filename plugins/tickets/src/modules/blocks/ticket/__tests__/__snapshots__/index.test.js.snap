@@ -4,7 +4,7 @@ exports[`Single ticket block declaration Block declaration 1`] = `
 Object {
   "attributes": Object {
     "dateIsPristine": Object {
-      "default": true,
+      "default": false,
       "type": "boolean",
     },
     "hasBeenCreated": Object {
