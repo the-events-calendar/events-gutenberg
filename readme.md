@@ -95,6 +95,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 #### 0.3.0-alpha - 2018-10-05
 
+* Feature - RSVP block
+* Feature - Tickets block
 * Feature - Register ticket block to make it available in the block list
 * Feature - Register PHP files to use tickets templates
 * Feature - Add `store` for tickets plugins
@@ -106,7 +108,6 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add time to seconds and ms and vice versa utility
 * Feature - Create `<HeaderImage>` component to upload / select an image from the media library
 * Feature - Add `CapacityTable` component to render the capacity of the tickets
-* Feature - Add RSVP block
 * Feature - Connect `Tickets` block with `store` to manage state of component
 * Feature - Add Events Calendar PRO integration and make the editor take de default values from the Settings
 * Tweak - Move TEC icon into a `common` to make it available regardless of TEC
