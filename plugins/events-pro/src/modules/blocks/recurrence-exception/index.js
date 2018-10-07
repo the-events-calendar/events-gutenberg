@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventException from './container';
-import { Icons } from '@moderntribe/events/elements';
+import { TEC } from '@moderntribe/common/icons';
 
 /**
  * Module Code
@@ -24,7 +24,7 @@ export default {
 		'Add exceptions to your event.',
 		'events-gutenberg'
 	),
-	icon: Icons.TEC,
+	icon: TEC,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

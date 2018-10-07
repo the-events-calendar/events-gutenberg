@@ -101,7 +101,7 @@ class EventDateTime extends Component {
 
 		return (
 
-			div
+			<div
 				key="tribe-editor-event-cost"
 				className="tribe-editor__event-cost"
 			>

@@ -11,9 +11,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import {
-	toMoment,
-} from '@moderntribe/events/editor/utils/moment';
+import { moment as momentUtils } from '@moderntribe/common/utils';
 import { Select } from '@moderntribe/common/components/form';
 import { Row, Label, DatePickerInput } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
@@ -48,7 +46,7 @@ const SingularField = ( {
 				</Label>
 				<div className="tribe-editor__events-pro-exception-field__time">
 					<DatePickerInput
-						datetime={ toMoment( start ).add( 1, 'day' ) }
+						datetime={ momentUtils.toMoment( start ).add( 1, 'day' ) }
 						// TODO: Add onChange handler
 					/>
 					{
@@ -56,7 +54,7 @@ const SingularField = ( {
 							<Fragment>
 								<span>{ __( 'to', 'events-gutenberg' ) }</span>
 								<DatePickerInput
-									datetime={ toMoment( start ).add( 2, 'days' ) }
+									datetime={ momentUtils.toMoment( start ).add( 2, 'days' ) }
 								/>
 							</Fragment>
 						)
