@@ -9,7 +9,6 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 */
 	public function register() {
-
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.events-pro.plugin', 'Tribe__Gutenberg__Events_Pro__Plugin' );
 
