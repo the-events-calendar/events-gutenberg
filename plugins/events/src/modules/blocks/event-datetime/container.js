@@ -133,14 +133,14 @@ const onEndTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	setEndTime( { end, seconds } );
 };
 
-const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( seconds, onClose ) => {
+const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) => {
 	const { start, end } = stateProps;
 	const { setEndTime, setAllDay } = dispatchProps;
 
-	const isAllDay = seconds === 'all-day';
+	const isAllDay = value === 'all-day';
 
 	if ( ! isAllDay ) {
-		setEndTime( { end, seconds } );
+		setEndTime( { end, seconds: value } );
 	}
 
 	setAllDay( { start, end, isAllDay } );
