@@ -12,7 +12,7 @@ import uniqid from 'uniqid';
 import Checkbox from '@moderntribe/common/elements/checkbox/element';
 
 class MultiDayCheckbox extends PureComponent {
-	static PropTypes = {
+	static propTypes = {
 		checked: PropTypes.bool.isRequired,
 		className: PropTypes.string,
 		disabled: PropTypes.bool,
