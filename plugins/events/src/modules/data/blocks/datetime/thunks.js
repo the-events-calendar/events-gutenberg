@@ -60,7 +60,7 @@ export const setDates = ( { start, end, from, to } ) => ( dispatch ) => {
 	const result = adjustStart(
 		replaceDate( startMoment, toMoment( from ) ),
 		replaceDate( endMoment, toMoment( to || from ) ),
-	)
+	);
 
 	dispatch( setStartDateTime( toDateTime( result.start ) ) );
 	dispatch( setEndDateTime( toDateTime( result.end ) ) );
@@ -70,7 +70,7 @@ export const setDateTime = ( { start, end } ) => ( dispatch ) => {
 	const result = adjustStart(
 		toMoment( start ),
 		toMoment( end || start ),
-	)
+	);
 
 	const isMultiDay = ! isSameDay( result.start, result.end );
 	dispatch( setStartDateTime( toDateTime( result.start ) ) );
