@@ -16,8 +16,8 @@ import { constants, options } from '@moderntribe/events-pro/data/blocks/recurrin
 
 const SeriesEnds = ( {
 	className,
-	onChange,
 	onSeriesEndsAfterTimesChange,
+	onSeriesEndsChange,
 	onSeriesEndsOnDateChange,
 	seriesEndsAfterTimes,
 	seriesEnds,
@@ -58,7 +58,7 @@ const SeriesEnds = ( {
 			<Select
 				options={ options.SERIES_ENDS_OPTIONS }
 				value={ seriesEnds }
-				onOptionClick={ onChange }
+				onOptionClick={ onSeriesEndsChange }
 			/>
 			{ getSeriesEndsPostfix() }
 		</div>
@@ -67,10 +67,10 @@ const SeriesEnds = ( {
 
 SeriesEnds.propTypes = {
 	className: PropTypes.string,
-	onChange: PropTypes.func,
 	onSeriesEndsAfterTimesChange: PropTypes.func,
+	onSeriesEndsChange: PropTypes.func,
 	onSeriesEndsOnDateChange: PropTypes.func,
-	seriesEndsAfterTimes: PropTypes.func,
+	seriesEndsAfterTimes: PropTypes.number,
 	seriesEnds: PropTypes.oneOf( constants.SERIES_END_TYPES ),
 	seriesEndsOnDate: PropTypes.string,
 	seriesEndsOnDateFormat: PropTypes.string,
