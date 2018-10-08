@@ -8,7 +8,8 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import Input from '@moderntribe/events-pro/elements/input/element';
+import Input from '@moderntribe/common/elements/input/element';
+import './style.pcss';
 
 const CheckboxInput = ( {
 	checked,
