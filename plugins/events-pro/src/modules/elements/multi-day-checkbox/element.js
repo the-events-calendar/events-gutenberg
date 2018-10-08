@@ -5,6 +5,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import uniqid from 'uniqid';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal Dependencies
@@ -25,7 +26,7 @@ class MultiDayCheckbox extends PureComponent {
 	}
 
 	render() {
-		const { checked, disabled, onChange } = this.props;
+		const { checked, className, disabled, onChange } = this.props;
 
 		return (
 			<Checkbox
