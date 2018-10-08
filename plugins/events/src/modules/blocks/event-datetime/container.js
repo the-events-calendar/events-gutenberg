@@ -105,7 +105,7 @@ const onStartTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose
 	const isAllDay = value === 'all-day';
 
 	if ( ! isAllDay ) {
-		setStartTime( { start, value } );
+		setStartTime( { start, seconds: value } );
 	}
 
 	setAllDay( { start, end, isAllDay } );
@@ -140,7 +140,7 @@ const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose )
 	const isAllDay = value === 'all-day';
 
 	if ( ! isAllDay ) {
-		setEndTime( { end, value } );
+		setEndTime( { end, seconds: value } );
 	}
 
 	setAllDay( { start, end, isAllDay } );

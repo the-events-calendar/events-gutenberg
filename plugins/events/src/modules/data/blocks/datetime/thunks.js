@@ -31,6 +31,7 @@ const {
 	toMoment,
 	adjustStart,
 } = moment;
+
 export const setStartTime = ( { start, seconds } ) => ( dispatch ) => {
 	const startDateTime = toDateTime( setTimeInSeconds( toMoment( start ), seconds ) );
 	dispatch( setStartDateTime( startDateTime ) );
