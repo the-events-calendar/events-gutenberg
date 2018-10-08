@@ -66,7 +66,18 @@ const SeriesEnds = ( {
 }
 
 SeriesEnds.propTypes = {
+	className: PropTypes.string,
+	onChange: PropTypes.func,
+	onSeriesEndsAfterTimesChange: PropTypes.func,
+	onSeriesEndsOnDateChange: PropTypes.func,
+	seriesEndsAfterTimes: PropTypes.func,
+	seriesEnds: PropTypes.oneOf( constants.SERIES_END_TYPES ),
+	seriesEndsOnDate: PropTypes.string,
+	seriesEndsOnDateFormat: PropTypes.string,
+};
 
+SeriesEnds.defaultProps = {
+	seriesEndsOnDateFormat: 'LL',
 };
 
 export default SeriesEnds;
