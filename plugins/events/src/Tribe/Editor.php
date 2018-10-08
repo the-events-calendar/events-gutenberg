@@ -5,8 +5,7 @@
  *
  * @since 0.1.0-alpha
  */
-class Tribe__Gutenberg__Events__Editor
-extends Tribe__Gutenberg__Common__Editor {
+class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor {
 
 	/**
 	 * Hooks actions from the editor into the correct places
@@ -40,6 +39,31 @@ extends Tribe__Gutenberg__Common__Editor {
 
 		// Add Block Categories to Editor
 		add_action( 'block_categories', array( $this, 'block_categories' ), 10, 2 );
+		// Make sure empty string is consider as a "true" value
+		add_filter( 'tribe_get_option', array( $this, 'get_option' ), 10, 2 );
+	}
+
+	/**
+	 * When the plugin loads the option is not set so the value is an empty string and when casting into a bool value
+	 * this returns a `false` positive. As empty string indicates the value has not set already.
+	 *
+	 * This is something should be addressed on TEC as is affecting any new user installing the plugin.
+	 *
+	 * Code is located at: https://github.com/moderntribe/the-events-calendar/blob/f8af49bc41048e8632372fc8da77202d9cb98d86/src/Tribe/Admin/Event_Meta_Box.php#L345
+	 *
+	 * @since 0.3.0-alpha
+	 *
+	 * @param $value
+	 * @param $name
+	 *
+	 * @return bool
+	 */
+	public function get_option( $value, $name ) {
+		// If value is empty string indicates the value hasn't been set into the DB and should be true by default.
+		if ( 'disable_metabox_custom_fields' === $name && '' === $value ) {
+			return true;
+		}
+		return $value;
 	}
 
 	/**
@@ -293,7 +317,12 @@ extends Tribe__Gutenberg__Common__Editor {
 			),
 			'rest' => array(
 				'url' => get_rest_url(),
-				'nonce' => wp_create_nonce( 'wp_rest' ),
+				'nonce' => array(
+					'wp_rest' => wp_create_nonce( 'wp_rest' ),
+					'add_ticket_nonce' => wp_create_nonce( 'add_ticket_nonce' ),
+					'edit_ticket_nonce' => wp_create_nonce( 'edit_ticket_nonce' ),
+					'remove_ticket_nonce' => wp_create_nonce( 'remove_ticket_nonce' ),
+				),
 				'namespaces' => array(
 					'core' => 'wp/v2',
 				),
@@ -314,7 +343,7 @@ extends Tribe__Gutenberg__Common__Editor {
 						/**
 						 * Array used to setup the FE with custom variables from the BE
 						 *
-						 * @since TBD
+						 * @since 0.3.0-alpha
 						 *
 						 * @param array An array with the variables to be localized
 						 */
@@ -481,7 +510,7 @@ extends Tribe__Gutenberg__Common__Editor {
 	/**
 	 * Returns the site timezone as a string
 	 *
-	 * @since TBD
+	 * @since 0.3.0-alpha
 	 *
 	 * @return string
 	 */
@@ -499,9 +528,6 @@ extends Tribe__Gutenberg__Common__Editor {
 	 * @return array
 	 */
 	public function block_categories( $categories, $post ) {
-		/**
-		 * @todo: make compatible with standalone ET options in the future
-		 */
 		if ( Tribe__Events__Main::POSTTYPE !== $post->post_type ) {
 			return $categories;
 		}
@@ -515,7 +541,6 @@ extends Tribe__Gutenberg__Common__Editor {
 				),
 			)
 		);
-
 	}
 
 	/************************

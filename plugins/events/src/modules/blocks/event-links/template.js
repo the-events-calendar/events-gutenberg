@@ -15,8 +15,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import LinkIcon from '@moderntribe/events/src/resources/icons/link.svg';
-import { sendValue } from '@moderntribe/events/editor/utils/input';
+import { Link as LinkIcon } from '@moderntribe/events/icons';
+import { input } from '@moderntribe/common/utils';
 import './style.pcss';
 
 /**
@@ -51,7 +51,7 @@ const renderGoogleCalendar = ({
 				className="tribe-editor__btn-input"
 				value={ googleCalendarLabel }
 				placeholder={ googleCalendarPlaceholder }
-				onChange={ sendValue( setGoogleCalendarLabel ) }
+				onChange={ input.sendValue( setGoogleCalendarLabel ) }
 			/>
 		</div>
 	);
@@ -76,7 +76,7 @@ const renderiCal = ({
 				className="tribe-editor__btn-input"
 				value={ iCalLabel }
 				placeholder={ iCalExportPlaceholder }
-				onChange={ sendValue( setiCalLabel ) }
+				onChange={ input.sendValue( setiCalLabel ) }
 			/>
 		</div>
 	);

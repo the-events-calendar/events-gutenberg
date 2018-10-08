@@ -8,6 +8,8 @@ import {
 	list,
 	get,
 	config,
+	rest,
+	restNonce,
 } from '@moderntribe/common/utils/globals';
 
 describe( 'Tests for globals.js', () => {
@@ -17,26 +19,42 @@ describe( 'Tests for globals.js', () => {
 		window.tribe_blocks_editor_settings = {};
 		window.tribe_data_countries = {};
 		window.tribe_data_us_states = {};
-		window.tribe_js_config = {};
+		window.tribe_js_config = {
+			rest: {
+				namespaces: {
+					core: 'wp/v2',
+				},
+				nonce: {
+					wp_rest: 'cedcd6967b',
+					add_ticket_nonce: '0878f40fb2',
+				},
+				url: 'http://gutenberg.local/wp-json/',
+			},
+		};
 	} );
 
 	test( 'Should match the default value for the globals values', () => {
 		expect( get( 'random' ) ).toBe( undefined );
 		expect( get( 'google' ) ).toBe( undefined );
 		expect( google() ).toBe( undefined );
-		expect( get( 'tribe_blocks_editor_settings' ) ).toEqual( {} );
+		expect( get( 'tribe_blocks_editor_settings' ) ).toMatchSnapshot();
 		expect( settings() ).toEqual( {} );
 		expect( mapsAPI() ).toEqual( {} );
 		expect( list() ).toEqual( {
 			countries: {},
 			us_states: {},
 		} );
-		expect( config() ).toEqual( {} );
+		expect( config() ).toMatchSnapshot();
 	} );
 
 	test( 'get default value', () => {
 		expect( get( 'UNKNOWN', 10 ) ).toBe( 10 );
-		expect( get( 'tribe_js_config', [] ) ).toEqual( {} );
+		expect( get( 'tribe_js_config', [] ) ).toMatchSnapshot();
+	} );
+
+	test( 'rest value', () => {
+		expect( rest() ).toMatchSnapshot();
+		expect( restNonce() ).toMatchSnapshot();
 	} );
 
 	afterAll( () => {
@@ -45,5 +63,12 @@ describe( 'Tests for globals.js', () => {
 		delete window.tribe_data_countries;
 		delete window.tribe_data_us_states;
 		delete window.tribe_js_config;
-	});
+	} );
+} );
+
+describe( 'Test default values on globals', () => {
+	test( 'rest default values', () => {
+		expect( rest() ).toEqual( {} );
+		expect( restNonce() ).toEqual( {} );
+	} );
 } );

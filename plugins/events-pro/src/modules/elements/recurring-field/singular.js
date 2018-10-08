@@ -11,12 +11,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import {
-	roundTime,
-	toMoment,
-} from '@moderntribe/events/editor/utils/moment';
+import { moment as momentUtils } from '@moderntribe/common/utils';
 import { Select } from '@moderntribe/common/components/form';
-import { TimePicker } from '@moderntribe/events/elements';
+import { TimePicker } from '@moderntribe/common/elements';
 import { Row, Label, DatePickerInput } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
@@ -26,8 +23,8 @@ const SingularField = ( {
 	multiDay,
 	start,
 } ) => {
-	const startMoment = toMoment( start );
-	const endMoment = toMoment( end );
+	const startMoment = momentUtils.toTime24Hr( momentUtils.toMoment( start ) );
+	const endMoment = momentUtils.toTime24Hr( momentUtils.toMoment( end ) );
 
 	return (
 		<Fragment>
@@ -61,16 +58,18 @@ const SingularField = ( {
 				<div className="tribe-editor__events-pro-rule-field__time">
 					<TimePicker
 						current={ startMoment }
-						start={ startMoment.clone().startOf( 'day' ) }
-						end={ roundTime( startMoment.clone().endOf( 'day' ) ) }
+						// TODO: logic to handle start and end times
+						start="00:00"
+						end="23;59"
 						allDay={ allDay }
 						// TODO: Add onChange handler
 					/>
 					<span>{ __( 'to', 'events-gutenberg' ) }</span>
 					<TimePicker
 						current={ endMoment }
-						start={ endMoment.clone().startOf( 'day' ) }
-						end={ roundTime( endMoment.clone().endOf( 'day' ) ) }
+						// TODO: logic to handle start and end times
+						start="00:00"
+						end="23:59"
 						allDay={ allDay }
 						// TODO: Add onChange handler
 					/>

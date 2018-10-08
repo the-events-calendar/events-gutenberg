@@ -8,8 +8,7 @@ import { bindActionCreators, compose } from 'redux';
 /**
  * Internal dependencies
  */
-import { searchParent } from '@moderntribe/events/editor/utils/dom';
-import { parser, isFree } from '@moderntribe/events/editor/utils/range';
+import { dom, range } from '@moderntribe/common/utils';
 import withSaveData from '@moderntribe/common/hoc/with-save-data';
 import { withStore } from '@moderntribe/common/hoc';
 import {
@@ -29,19 +28,19 @@ import EventPrice from './template';
 const ESCAPE_KEY = 27;
 
 const showCurrencySymbol = ( cost ) => {
-	const parsed = parser( cost );
-	return ! isEmpty( trim( parsed ) ) && ! isFree( cost );
+	const parsed = range.parser( cost );
+	return ! isEmpty( trim( parsed ) ) && ! range.isFree( cost );
 };
 
 const showCost = ( cost ) => {
-	const parsed = parser( cost );
-	return ! isEmpty( trim( parsed ) ) || isFree( cost );
+	const parsed = range.parser( cost );
+	return ! isEmpty( trim( parsed ) ) || range.isFree( cost );
 };
 
 const showCostDescription = ( description ) => ! isEmpty( trim( description ) );
 
 const isTargetInBlock = ( target ) => (
-	searchParent( target, ( testNode ) => {
+	dom.searchParent( target, ( testNode ) => {
 		if ( testNode.classList.contains( 'editor-block-list__block' ) ) {
 			return Boolean( testNode.querySelector( '.tribe-editor__event-price' ) );
 		}
@@ -50,7 +49,7 @@ const isTargetInBlock = ( target ) => (
 );
 
 const isTargetInSidebar = ( target ) => (
-	searchParent( target, ( testNode ) => (
+	dom.searchParent( target, ( testNode ) => (
 		testNode.classList.contains( 'edit-post-sidebar' )
 	) )
 );
@@ -80,7 +79,7 @@ const mapStateToProps = ( state ) => ( {
 	showCurrencySymbol: showCurrencySymbol( priceSelectors.getPrice( state ) ),
 	showCost: showCost( priceSelectors.getPrice( state ) ),
 	showCostDescription: showCostDescription( priceSelectors.getDescription( state ) ),
-	isFree: isFree( priceSelectors.getPrice( state ) ),
+	isFree: range.isFree( priceSelectors.getPrice( state ) ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {

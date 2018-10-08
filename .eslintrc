@@ -73,10 +73,11 @@
       "error",
       {
         "words": true,
-        "nonwords": true,
+        "nonwords": false,
         "overrides": {
           "--": false,
-          "++": false
+          "++": false,
+          "!": true
         }
       }
     ],
@@ -140,5 +141,6 @@
     "tribe_blocks_editor": true,
     "mount": true,
     "shallow": true,
+    "renderer": true
   }
 }

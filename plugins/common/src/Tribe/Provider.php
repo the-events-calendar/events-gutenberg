@@ -13,11 +13,7 @@ class Tribe__Gutenberg__Common__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.common.plugin', 'Tribe__Gutenberg__Common__Plugin' );
 		$this->container->singleton( 'gutenberg.common.editor', 'Tribe__Gutenberg__Common__Editor' );
 
-		// Should we continue loading?
-		if (
-			! tribe( 'gutenberg.common.editor' )->is_gutenberg_active()
-			|| ! tribe( 'gutenberg.common.editor' )->is_blocks_editor_active()
-		) {
+		if ( ! tribe( 'gutenberg.common.editor' )->should_load_blocks() ) {
 			return;
 		}
 

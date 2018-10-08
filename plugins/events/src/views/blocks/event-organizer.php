@@ -2,7 +2,7 @@
 /**
  * Renders the event organizer block
  *
- * @version TBD
+ * @version 0.3.0-alpha
  *
  */
 

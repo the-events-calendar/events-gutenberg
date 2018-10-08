@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventLinks from './container';
-import { Icons } from '@moderntribe/events/elements';
+import { BlockIcon } from '@moderntribe/common/elements';
 
 /**
  * Module Code
@@ -23,7 +23,7 @@ export default {
 		'Encourage visitors to add your event to their calendars with handy sharing buttons.',
 		'events-gutenberg'
 	),
-	icon: Icons.TEC,
+	icon: BlockIcon,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

@@ -32,8 +32,8 @@ import {
 } from '@moderntribe/events/elements';
 import { VENUE } from '@moderntribe/events/editor/post-types';
 import VenueDetails from './venue-details';
-import VenueIcon from '@moderntribe/events/src/resources/icons/venue.svg';
-import CloseIcon from '@moderntribe/events/src/resources/icons/close.svg';
+import { Venue as VenueIcon } from '@moderntribe/events/icons';
+import { Close as CloseIcon } from '@moderntribe/common/icons';
 import { utils } from '@moderntribe/events/data/blocks/venue';
 import { google, mapsAPI } from '@moderntribe/common/utils/globals';
 import './style.pcss';

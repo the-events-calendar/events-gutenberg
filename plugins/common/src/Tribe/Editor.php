@@ -16,6 +16,20 @@ class Tribe__Gutenberg__Common__Editor {
 	public $key_flag_classic_editor = '_tribe_is_classic_editor';
 
 	/**
+	 * Utility function to check if we should load the blocks or not based on two assumptions
+	 *
+	 * a) Is gutenberg active?
+	 * b) Is the blocks editor active?
+	 *
+	 * @since 0.3.0-alpha
+	 *
+	 * @return bool
+	 */
+	public function should_load_blocks() {
+		return $this->is_gutenberg_active() && $this->is_blocks_editor_active();
+	}
+
+	/**
 	 * Checks if we have Gutenberg Project online, only useful while
 	 * its a external plugin
 	 *
@@ -88,6 +102,31 @@ class Tribe__Gutenberg__Common__Editor {
 		// Add Custom Fields (meta) Support
 		if ( ! in_array( 'custom-fields', $args['supports'] ) ) {
 			$args['supports'][] = 'custom-fields';
+		}
+
+		// Add Post Title Support
+		if ( ! in_array( 'title', $args['supports'] ) ) {
+			$args['supports'][] = 'title';
+		}
+
+		// Add Post Excerpt Support
+		if ( ! in_array( 'excerpt', $args['supports'] ) ) {
+			$args['supports'][] = 'excerpt';
+		}
+
+		// Add Post Content Support
+		if ( ! in_array( 'editor', $args['supports'] ) ) {
+			$args['supports'][] = 'editor';
+		}
+
+		// Add Post Author Support
+		if ( ! in_array( 'author', $args['supports'] ) ) {
+			$args['supports'][] = 'author';
+		}
+
+		// Add Thumbnail Support
+		if ( ! in_array( 'thumbnail', $args['supports'] ) ) {
+			$args['supports'][] = 'thumbnail';
 		}
 
 		return $args;

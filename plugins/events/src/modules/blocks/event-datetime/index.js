@@ -12,15 +12,14 @@ import { get } from 'lodash';
  * Internal dependencies
  */
 import EventDateTime from './container';
-import { Icons } from '@moderntribe/events/elements';
-import { config } from '@moderntribe/common/utils/globals';
-import { FORMATS } from '@moderntribe/events/editor/utils/date';
+import { BlockIcon } from '@moderntribe/common/elements';
+import { date, globals } from '@moderntribe/common/utils';
 
 /**
  * Module Code
  */
 
-const timeZone = get( config(), 'timeZone', {} );
+const timeZone = get( globals.config(), 'timeZone', {} );
 
 export default {
 	id: 'event-datetime',
@@ -29,7 +28,7 @@ export default {
 		'Define the date, time, and duration for your event.',
 		'events-gutenberg'
 	),
-	icon: Icons.TEC,
+	icon: BlockIcon,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
@@ -74,7 +73,7 @@ export default {
 		},
 		timeZoneLabel: {
 			type: 'string',
-			default: get( timeZone, 'label', FORMATS.TIMEZONE.string ),
+			default: get( timeZone, 'label', date.FORMATS.TIMEZONE.string ),
 		},
 		// Only Available for classic users
 		cost: {
