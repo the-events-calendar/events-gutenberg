@@ -11,3 +11,4 @@ export { default as Fieldset } from './fieldset/element';
 export { default as Label } from './label/element';
 export { default as RemoveField } from './remove-field/element';
 export { default as DatePickerInput } from './date-picker-input/element';
+export { default as MultiDayCheckbox } from './multi-day-checkbox/element';
