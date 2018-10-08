@@ -63,3 +63,13 @@ export const ALL = 'all';
 export const CURRENT = 'current';
 export const CURRENT_THEN_ALL = 'current-then-all';
 export const UPCOMING = 'upcoming';
+
+//
+// ─── SERIES END TYPES ───────────────────────────────────────────────────────────
+//
+
+export const ON = 'on';
+export const AFTER = 'after';
+export const NEVER = 'never';
+
+export const SERIES_END_TYPES = [ ON, AFTER, NEVER ];
