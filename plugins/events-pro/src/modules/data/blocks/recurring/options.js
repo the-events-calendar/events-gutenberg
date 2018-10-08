@@ -15,3 +15,9 @@ export const RECURRENCE_TYPE_RULES_OPTIONS = [
 	{ label: __( 'Year', 'events-gutenberg' ), value: constants.YEARLY },
 	{ label: __( 'Single Occurrence', 'events-gutenberg' ), value: constants.SINGLE },
 ];
+
+export const SERIES_ENDS_OPTIONS = [
+	{ label: __( 'On', 'events-gutenberg' ), value: constants.ON },
+	{ label: __( 'After', 'events-gutenberg' ), value: constants.AFTER },
+	{ label: __( 'Never', 'events-gutenberg' ), value: constants.NEVER },
+];
