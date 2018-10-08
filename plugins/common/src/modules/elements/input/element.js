@@ -10,9 +10,6 @@ import classNames from 'classnames';
  */
 import './style.pcss';
 
-/**
- * @todo this needs to be moved to common once event tickets is merged
- */
 const Input = ( {
 	className,
 	type,
