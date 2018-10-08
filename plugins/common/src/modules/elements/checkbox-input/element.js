@@ -10,31 +10,25 @@ import classNames from 'classnames';
  */
 import Input from '@moderntribe/events-pro/elements/input/element';
 
-const NumberInput = ( {
+const CheckboxInput = ( {
+	checked,
 	className,
-	max,
-	min,
 	onChange,
-	step,
 	...props
 } ) => (
 	<Input
-		className={ classNames( 'tribe-editor__input--number', className ) }
-		max={ max }
-		min={ min }
+		checked={ checked }
+		className={ classNames( 'tribe-editor__input--checkbox', className ) }
 		onChange={ onChange }
-		step={ step }
-		type="number"
+		type="checkbox"
 		{ ...props }
 	/>
 );
 
-NumberInput.propTypes = {
+CheckboxInput.propTypes = {
+	checkbox: PropTypes.bool,
 	className: PropTypes.string,
-	max: PropTypes.number,
-	min: PropTypes.number,
 	onChange: PropTypes.func,
-	step: PropTypes.number,
 };
 
-export default NumberInput;
+export default CheckboxInput;
