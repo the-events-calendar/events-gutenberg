@@ -98,14 +98,14 @@ const onStartTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	setStartTime( { start, seconds } );
 };
 
-const onStartTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) => {
+const onStartTimePickerClick = ( stateProps, dispatchProps ) => ( seconds, onClose ) => {
 	const { start, end } = stateProps;
 	const { setStartTime, setAllDay } = dispatchProps;
 
-	const isAllDay = value === 'all-day';
+	const isAllDay = seconds === 'all-day';
 
 	if ( ! isAllDay ) {
-		setStartTime( { start, value } );
+		setStartTime( { start, seconds } );
 	}
 
 	setAllDay( { start, end, isAllDay } );
@@ -133,14 +133,14 @@ const onEndTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	setEndTime( { end, seconds } );
 };
 
-const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) => {
+const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( seconds, onClose ) => {
 	const { start, end } = stateProps;
 	const { setEndTime, setAllDay } = dispatchProps;
 
-	const isAllDay = value === 'all-day';
+	const isAllDay = seconds === 'all-day';
 
 	if ( ! isAllDay ) {
-		setEndTime( { end, value } );
+		setEndTime( { end, seconds } );
 	}
 
 	setAllDay( { start, end, isAllDay } );
