@@ -93,6 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.1-alpha - TBD
+
+* Fix - Fix error when multi day toggle component was not functional 
+
 #### 0.3.0-alpha - 2018-10-05
 
 * Feature - RSVP block
