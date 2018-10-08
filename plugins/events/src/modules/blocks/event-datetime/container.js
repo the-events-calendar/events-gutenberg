@@ -98,14 +98,14 @@ const onStartTimePickerChange = ( stateProps, dispatchProps ) => ( e ) => {
 	setStartTime( { start, seconds } );
 };
 
-const onStartTimePickerClick = ( stateProps, dispatchProps ) => ( seconds, onClose ) => {
+const onStartTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose ) => {
 	const { start, end } = stateProps;
 	const { setStartTime, setAllDay } = dispatchProps;
 
-	const isAllDay = seconds === 'all-day';
+	const isAllDay = value === 'all-day';
 
 	if ( ! isAllDay ) {
-		setStartTime( { start, seconds } );
+		setStartTime( { start, seconds: value } );
 	}
 
 	setAllDay( { start, end, isAllDay } );
