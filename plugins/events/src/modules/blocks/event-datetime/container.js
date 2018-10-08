@@ -139,7 +139,7 @@ const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose )
 
 	const isAllDay = value === 'all-day';
 
-	if ( ! isAllDay ) {
+	if ( ! isAllDay ) {HEAD
 		setEndTime( { end, seconds: value } );
 	}
 
