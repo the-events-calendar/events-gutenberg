@@ -147,9 +147,9 @@ const onEndTimePickerClick = ( stateProps, dispatchProps ) => ( value, onClose )
 	onClose();
 };
 
-const onMultiDayToggleChange = ( stateProps, dispatchProps ) => ( checked ) => {
+const onMultiDayToggleChange = ( stateProps, dispatchProps ) => ( isMultiDay ) => {
 	const { start, end } = stateProps;
-	dispatchProps.setMultiDay( { start, end, checked } );
+	dispatchProps.setMultiDay( { start, end, isMultiDay } );
 };
 
 const onTimeZoneVisibilityChange = ( dispatch ) => ( checked ) => (
