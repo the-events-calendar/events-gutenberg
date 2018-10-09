@@ -127,7 +127,7 @@ describe( 'Event Date time Block sagas', () => {
 			test( 'On change handler when dates are null', () => {
 				const gen = onHumanReadableChange();
 
-				expect( gen.next().value ).toEqual( call( delay, 350 ) );
+				expect( gen.next().value ).toEqual( call( delay, 700 ) );
 
 				expect( gen.next().value ).toEqual(
 					select( selectors.getNaturalLanguageLabel )
@@ -143,7 +143,7 @@ describe( 'Event Date time Block sagas', () => {
 			test( 'On change handler when dates are set', () => {
 				const gen = onHumanReadableChange();
 
-				expect( gen.next().value ).toEqual( call( delay, 350 ) );
+				expect( gen.next().value ).toEqual( call( delay, 700 ) );
 				const dates = {
 					start: moment( '12-25-1995', 'MM-DD-YYYY' ),
 					end: moment( '12-25-1995', 'MM-DD-YYYY' ),

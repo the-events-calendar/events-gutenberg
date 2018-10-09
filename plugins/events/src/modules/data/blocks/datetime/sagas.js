@@ -87,7 +87,7 @@ export function* resetNaturalLanguageLabel() {
  */
 export function* onHumanReadableChange() {
 	// Wait in case there's a new change on the input
-	const WAIT_PERIOD_IN_MILLISECONDS = 350;
+	const WAIT_PERIOD_IN_MILLISECONDS = 700;
 	yield call( delay, WAIT_PERIOD_IN_MILLISECONDS );
 
 	const label = yield select( selectors.getNaturalLanguageLabel );
