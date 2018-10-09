@@ -98,3 +98,21 @@ export const WEDNESDAY_ABBR = __( 'W', 'events-gutenberg' );
 export const THURSDAY_ABBR = __( 'T', 'events-gutenberg' );
 export const FRIDAY_ABBR = __( 'F', 'events-gutenberg' );
 export const SATURDAY_ABBR = __( 'S', 'events-gutenberg' );
+
+//
+// ─── DAYS OF THE MONTH ──────────────────────────────────────────────────────────
+//
+
+// returns an array from 1 - 31
+export const DAYS_OF_THE_MONTH = Array( 31 ).fill().map( ( _, index ) => index + 1 );
+
+//
+// ─── WEEKS OF THE MONTH ─────────────────────────────────────────────────────────
+//
+
+export const FIRST = 'first';
+export const SECOND = 'second';
+export const THIRD = 'third';
+export const FOURTH = 'fourth';
+export const FIFTH = 'fifth';
+export const LAST = 'last';
