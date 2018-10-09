@@ -11,8 +11,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import NumberInput from '@moderntribe/common/elements/number-input/element';
-import Select from '@moderntribe/common/elements/select/element';
+import { NumberInput, Select } from '@moderntribe/common/elements';
 import { Row, Label } from '@moderntribe/events-pro/elements';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
 

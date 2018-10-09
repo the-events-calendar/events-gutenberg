@@ -8,13 +8,13 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import Select from '@moderntribe/common/elements/select/element';
+import { Select } from '@moderntribe/common/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 const DayOfMonthPicker = ( {
 	dayOfMonth,
-	onDayChange,
 	onDayOfMonthChange,
+	onWeekDayChange,
 	weekDay,
 } ) => {
 	const getPostfix = () => {
@@ -30,7 +30,7 @@ const DayOfMonthPicker = ( {
 					value={ weekDay }
 					isSearchable={ false }
 					options={ options.DAYS_OF_THE_WEEK }
-					onChange={ onDayChange }
+					onChange={ onWeekDayChange }
 				/>
 			);
 		} else {
@@ -56,7 +56,7 @@ const DayOfMonthPicker = ( {
 
 DayOfMonthPicker.propTypes = {
 	dayOfMonth: PropTypes.oneOf( options.MONTH_DAYS_OPTIONS ),
-	onDayChange: PropTypes.func,
+	onWeekDayChange: PropTypes.func,
 	onDayOfMonthChange: PropTypes.func,
 	weekDay: PropTypes.oneOf( options.DAYS_OF_THE_WEEK ),
 };

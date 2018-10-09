@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { __ } from '@wordpress/i18n';
@@ -9,19 +9,24 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import Select from '@moderntribe/common/elements/select/element';
-import TimePicker from '@moderntribe/common/elements/time-picker/element';
-import { Row, Label } from '@moderntribe/events-pro/elements';
-import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
+import { TimePicker } from '@moderntribe/common/elements';
+import {
+	Row,
+	Label,
+	DayOfMonthPicker
+} from '@moderntribe/events-pro/elements';
+import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 import { TribePropTypes } from '@moderntribe/common/utils';
 
 const RecurringToDateTimePicker = ( {
 	className,
-	endDate,
+	endMonthDay,
+	endWeekDay,
 	endTime,
-	onEndDateChange,
+	onEndMonthDayChange,
 	onEndTimeChange,
 	onEndTimeClick,
+	onEndWeekDayChange,
 } ) => (
 	<Row className={ classNames(
 		'tribe-editor__events-pro__row--recurring-to-date-time-picker',
@@ -36,18 +41,17 @@ const RecurringToDateTimePicker = ( {
 				current={ endTime }
 				// TODO: logic to handle start and end times
 				start="00:00"
-				end="23;59"
+				end="23:59"
 				onChange={ onEndTimeChange }
 				onClick={ onEndTimeClick }
 				// TODO: Add onChange handler
 			/>
 			<span>{ __( 'on the', 'events-gutenberg' ) }</span>
-			<Select
-				backspaceRemovesValue={ false }
-				value={ endDate }
-				isSearchable={ false }
-				options={ [] }
-				onChange={ onEndDateChange }
+			<DayOfMonthPicker
+				dayOfMonth={ endMonthDay }
+				onDayOfMonthChange={ onEndMonthDayChange }
+				onWeekDayChange={ onEndWeekDayChange }
+				weekDay={ endWeekDay }
 			/>
 		</div>
 	</Row>
@@ -55,11 +59,13 @@ const RecurringToDateTimePicker = ( {
 
 RecurringToDateTimePicker.propTypes = {
 	className: PropTypes.string,
-	endDate: PropTypes.oneOf( [] ),
+	endMonthDay: PropTypes.oneOf( options.MONTH_DAYS_OPTIONS ),
+	endWeekDay: PropTypes.oneOf( options.DAYS_OF_THE_WEEK ),
 	endTime: TribePropTypes.timeFormat,
-	onEndDateChange: PropTypes.func,
+	onEndMonthDayChange: PropTypes.func,
 	onEndTimeChange: PropTypes.func,
 	onEndTimeClick: PropTypes.func,
+	onEndWeekDayChange: PropTypes.func,
 };
 
 export default RecurringToDateTimePicker;

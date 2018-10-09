@@ -9,7 +9,7 @@ import classNames from 'classnames';
  * Internal dependencies
  */
 import DayOfWeek from './day-of-week/element';
-import * as constants from '@moderntribe/events-pro/data/blocks/recurring/constants';
+import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
 import './style.pcss';
 
 const DayOfWeekPicker = ( {
