@@ -9,7 +9,7 @@ import uniqid from 'uniqid';
 /**
  * Internal dependencies
  */
-import Checkbox from '@moderntribe/common/elements/checkbox/element';
+import { Checkbox } from '@moderntribe/common/elements';
 import './style.pcss';
 
 class DayOfWeek extends PureComponent {

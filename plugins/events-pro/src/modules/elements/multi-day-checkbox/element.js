@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal Dependencies
  */
-import Checkbox from '@moderntribe/common/elements/checkbox/element';
+import { Checkbox } from '@moderntribe/common/elements';
 
 class MultiDayCheckbox extends PureComponent {
 	static propTypes = {

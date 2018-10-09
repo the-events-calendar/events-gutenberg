@@ -83,13 +83,21 @@ export const SERIES_END_TYPES = [ ON, AFTER, NEVER ];
 // ─── DAYS OF THE WEEK ───────────────────────────────────────────────────────────
 //
 
-export const SUNDAY = __( 'Sunday', 'events-gutenberg' );
-export const MONDAY = __( 'Monday', 'events-gutenberg' );
-export const TUESDAY = __( 'Tuesday', 'events-gutenberg' );
-export const WEDNESDAY = __( 'Wednesday', 'events-gutenberg' );
-export const THURSDAY = __( 'Thursday', 'events-gutenberg' );
-export const FRIDAY = __( 'Friday', 'events-gutenberg' );
-export const SATURDAY = __( 'Saturday', 'events-gutenberg' );
+export const SUNDAY = 'sunday';
+export const MONDAY = 'monday';
+export const TUESDAY = 'tuesday';
+export const WEDNESDAY = 'wednesday';
+export const THURSDAY = 'thursday';
+export const FRIDAY = 'friday';
+export const SATURDAY = 'saturday';
+
+export const SUNDAY_LABEL = __( 'Sunday', 'events-gutenberg' );
+export const MONDAY_LABEL = __( 'Monday', 'events-gutenberg' );
+export const TUESDAY_LABEL = __( 'Tuesday', 'events-gutenberg' );
+export const WEDNESDAY_LABEL = __( 'Wednesday', 'events-gutenberg' );
+export const THURSDAY_LABEL = __( 'Thursday', 'events-gutenberg' );
+export const FRIDAY_LABEL = __( 'Friday', 'events-gutenberg' );
+export const SATURDAY_LABEL = __( 'Saturday', 'events-gutenberg' );
 
 export const SUNDAY_ABBR = __( 'S', 'events-gutenberg' );
 export const MONDAY_ABBR = __( 'M', 'events-gutenberg' );
@@ -98,3 +106,21 @@ export const WEDNESDAY_ABBR = __( 'W', 'events-gutenberg' );
 export const THURSDAY_ABBR = __( 'T', 'events-gutenberg' );
 export const FRIDAY_ABBR = __( 'F', 'events-gutenberg' );
 export const SATURDAY_ABBR = __( 'S', 'events-gutenberg' );
+
+//
+// ─── DAYS OF THE MONTH ──────────────────────────────────────────────────────────
+//
+
+// returns an array from 1 - 31
+export const DAYS_OF_THE_MONTH = Array( 31 ).fill().map( ( _, index ) => index + 1 );
+
+//
+// ─── WEEKS OF THE MONTH ─────────────────────────────────────────────────────────
+//
+
+export const FIRST = 'first';
+export const SECOND = 'second';
+export const THIRD = 'third';
+export const FOURTH = 'fourth';
+export const FIFTH = 'fifth';
+export const LAST = 'last';
