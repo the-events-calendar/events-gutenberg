@@ -36,7 +36,7 @@ class Button extends PureComponent {
 			isDisabled,
 			onClick,
 			type,
-			...props
+			...rest
 		} = this.props;
 
 		return (
@@ -45,7 +45,7 @@ class Button extends PureComponent {
 				disabled={ isDisabled }
 				type={ type }
 				onClick={ onClick }
-				{ ...props }
+				{ ...rest }
 			>
 				{ children }
 			</button>

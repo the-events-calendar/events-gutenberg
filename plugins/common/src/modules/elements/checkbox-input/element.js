@@ -15,14 +15,14 @@ const CheckboxInput = ( {
 	checked,
 	className,
 	onChange,
-	...props
+	...rest
 } ) => (
 	<Input
 		checked={ checked }
 		className={ classNames( 'tribe-editor__input--checkbox', className ) }
 		onChange={ onChange }
 		type="checkbox"
-		{ ...props }
+		{ ...rest }
 	/>
 );
 
