@@ -13,3 +13,5 @@ export { default as RemoveField } from './remove-field/element';
 export { default as DatePickerInput } from './date-picker-input/element';
 export { default as MultiDayCheckbox } from './multi-day-checkbox/element';
 export { default as SeriesEnds } from './series-ends/element';
+export { default as DayOfWeekPicker } from './day-of-week-picker/element';
+export { default as OnDayOfWeek } from './on-day-of-week/element';
