@@ -117,9 +117,10 @@ export const rangeToNaturalLanguage = ( start = '', end = '', separators = {} ) 
 			parts.push( to.detail.time );
 		} else if ( momentUtil.isSameMonth( from.moment, to.moment ) ) {
 			/**
-			 * If both dates are happening on the same month and not on the same day
-			 * we don't need to show the same year twice like:  'Oct 8 2018 at 12:00 pm - Dec 20 12:30 pm'
-			 * instead of  'Oct 8 2018 at 12:00 pm - December 24 2018 12:30 pm'
+			 * If both dates are happening on the same month and not on the same day but during the same year
+			 * we don't need to show the same year twice into something like:  'Oct 8 2018 at 12:00 pm - Dec 20 12:30 pm'
+			 * instead of  'Oct 8 2018 at 12:00 pm - Dec 24 2018 12:30 pm' as both be happening during different months
+			 * but on the same year
 			 */
 			parts.push( `${ to.detail.month } ${ to.detail.day } ${ separatorOptions.time } ${ to.detail.time }` );
 		} else {
