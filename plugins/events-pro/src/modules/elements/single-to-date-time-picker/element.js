@@ -16,6 +16,7 @@ import {
 	Label,
 } from '@moderntribe/events-pro/elements';
 import { TribePropTypes } from '@moderntribe/common/utils';
+import './style.pcss';
 
 const SingleToDateTimePicker = ( {
 	className,
