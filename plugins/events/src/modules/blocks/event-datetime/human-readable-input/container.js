@@ -11,7 +11,7 @@ import {
 	actions as dateTimeActions,
 	selectors as dateTimeSelectors,
 } from '@moderntribe/events/data/blocks/datetime';
-import { withStore, withSaveData } from '@moderntribe/common/hoc';
+import { withStore } from '@moderntribe/common/hoc';
 import HumanReadableInput from './template';
 
 const mapStateToProps = ( state ) => ( {
@@ -25,5 +25,4 @@ const mapDispatchToProps = ( dispatch ) => ( {
 export default compose(
 	withStore(),
 	connect( mapStateToProps, mapDispatchToProps ),
-	withSaveData(),
 )( HumanReadableInput );
