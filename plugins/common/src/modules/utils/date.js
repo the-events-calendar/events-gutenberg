@@ -121,7 +121,7 @@ export const rangeToNaturalLanguage = ( start = '', end = '', separators = {} ) 
 			 * we don't need to show the same year twice like:  'Oct 8 2018 at 12:00 pm - Dec 20 12:30 pm'
 			 * instead of  'Oct 8 2018 at 12:00 pm - December 24 2018 12:30 pm'
 			 */
-			parts.push( `${ to.detail.month } ${ to.detail.day } at ${ to.detail.time }` );
+			parts.push( `${ to.detail.month } ${ to.detail.day } ${ separatorOptions.time } ${ to.detail.time }` );
 		} else {
 			// Otherwise just use the full text
 			parts.push( to.text );
