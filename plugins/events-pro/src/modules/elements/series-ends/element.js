@@ -1,17 +1,19 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { Select } from '@moderntribe/common/components/form';
-import { NumberInput } from '@moderntribe/common/elements';
+// import { NumberInput, Select } from '@moderntribe/common/elements';
+import NumberInput from '@moderntribe/common/elements/number-input/element';
+import Select from '@moderntribe/common/elements/select/element';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 const SeriesEnds = ( {
@@ -27,7 +29,7 @@ const SeriesEnds = ( {
 	const getSeriesEndsPostfix = () => {
 		let postfix = null;
 
-		if ( seriesEnds === constants.ON ) {
+		if ( seriesEnds.value === constants.ON ) {
 			postfix = (
 				<DayPickerInput
 					value={ seriesEndsOnDate }
@@ -37,7 +39,7 @@ const SeriesEnds = ( {
 					onDayChange={ onSeriesEndsOnDateChange }
 				/>
 			);
-		} else if ( seriesEnds === constants.AFTER ) {
+		} else if ( seriesEnds.value === constants.AFTER ) {
 			postfix = (
 				<Fragment>
 					<NumberInput
@@ -56,9 +58,11 @@ const SeriesEnds = ( {
 	return (
 		<div className={ classNames( 'tribe-editor__series-ends', className ) }>
 			<Select
-				options={ options.SERIES_ENDS_OPTIONS }
+				backspaceRemovesValue={ false }
 				value={ seriesEnds }
-				onOptionClick={ onSeriesEndsChange }
+				isSearchable={ false }
+				options={ options.SERIES_ENDS_OPTIONS }
+				onChange={ onSeriesEndsChange }
 			/>
 			{ getSeriesEndsPostfix() }
 		</div>
@@ -71,7 +75,7 @@ SeriesEnds.propTypes = {
 	onSeriesEndsChange: PropTypes.func,
 	onSeriesEndsOnDateChange: PropTypes.func,
 	seriesEndsAfterTimes: PropTypes.number,
-	seriesEnds: PropTypes.oneOf( constants.SERIES_END_TYPES ),
+	seriesEnds: PropTypes.oneOf( options.SERIES_ENDS_OPTIONS ),
 	seriesEndsOnDate: PropTypes.string,
 	seriesEndsOnDateFormat: PropTypes.string,
 };
