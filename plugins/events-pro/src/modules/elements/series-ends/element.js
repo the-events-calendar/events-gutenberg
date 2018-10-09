@@ -26,7 +26,7 @@ const SeriesEnds = ( {
 	seriesEndsOnDate,
 	seriesEndsOnDateFormat,
 } ) => {
-	const getSeriesEndsPostfix = () => {
+	const getPostfix = () => {
 		let postfix = null;
 
 		if ( seriesEnds.value === constants.ON ) {
@@ -72,7 +72,7 @@ const SeriesEnds = ( {
 					options={ options.SERIES_ENDS_OPTIONS }
 					onChange={ onSeriesEndsChange }
 				/>
-				{ getSeriesEndsPostfix() }
+				{ getPostfix() }
 			</div>
 		</Row>
 	);
