@@ -45,10 +45,10 @@ export const FORMATS = {
 export const TODAY = new Date();
 
 export const timezonesAsSelectData = () => {
-	return timezones().map( ( tzone ) => ({
+	return timezones().map( ( tzone ) => ( {
 		value: tzone.key,
 		label: tzone.text,
-	}) );
+	} ) );
 };
 
 export const timezones = () => {

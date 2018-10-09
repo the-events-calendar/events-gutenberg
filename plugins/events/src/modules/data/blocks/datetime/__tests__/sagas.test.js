@@ -50,7 +50,7 @@ describe( 'Event Date time Block sagas', () => {
 		} );
 
 		test( 'Custom data is provided', () => {
-			const gen = setHumanReadableLabel({
+			const gen = setHumanReadableLabel( {
 				start: moment( '12-25-2017', 'MM-DD-YYYY' ),
 				end: moment( '12-25-2018', 'MM-DD-YYYY' ),
 			} );
