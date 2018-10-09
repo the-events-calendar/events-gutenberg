@@ -83,13 +83,21 @@ export const SERIES_END_TYPES = [ ON, AFTER, NEVER ];
 // ─── DAYS OF THE WEEK ───────────────────────────────────────────────────────────
 //
 
-export const SUNDAY = __( 'Sunday', 'events-gutenberg' );
-export const MONDAY = __( 'Monday', 'events-gutenberg' );
-export const TUESDAY = __( 'Tuesday', 'events-gutenberg' );
-export const WEDNESDAY = __( 'Wednesday', 'events-gutenberg' );
-export const THURSDAY = __( 'Thursday', 'events-gutenberg' );
-export const FRIDAY = __( 'Friday', 'events-gutenberg' );
-export const SATURDAY = __( 'Saturday', 'events-gutenberg' );
+export const SUNDAY = 'sunday';
+export const MONDAY = 'monday';
+export const TUESDAY = 'tuesday';
+export const WEDNESDAY = 'wednesday';
+export const THURSDAY = 'thursday';
+export const FRIDAY = 'friday';
+export const SATURDAY = 'saturday';
+
+export const SUNDAY_LABEL = __( 'Sunday', 'events-gutenberg' );
+export const MONDAY_LABEL = __( 'Monday', 'events-gutenberg' );
+export const TUESDAY_LABEL = __( 'Tuesday', 'events-gutenberg' );
+export const WEDNESDAY_LABEL = __( 'Wednesday', 'events-gutenberg' );
+export const THURSDAY_LABEL = __( 'Thursday', 'events-gutenberg' );
+export const FRIDAY_LABEL = __( 'Friday', 'events-gutenberg' );
+export const SATURDAY_LABEL = __( 'Saturday', 'events-gutenberg' );
 
 export const SUNDAY_ABBR = __( 'S', 'events-gutenberg' );
 export const MONDAY_ABBR = __( 'M', 'events-gutenberg' );

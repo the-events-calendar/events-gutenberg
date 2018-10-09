@@ -19,7 +19,7 @@ const DayOfMonthPicker = ( {
 } ) => {
 	const getPostfix = () => {
 		const inWeekOfTheMonth = ! ! options.WEEKS_OF_THE_MONTH_OPTIONS.filter(
-			( option ) => option.value === endDate.value
+			( option ) => option.value === dayOfMonth.value
 		).length
 		let postfix;
 

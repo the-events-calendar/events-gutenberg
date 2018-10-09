@@ -31,6 +31,20 @@ export const SERIES_ENDS_OPTIONS = [
 ];
 
 //
+// ─── DAYS OF THE WEEK OPTIONS ────────────────────────────────────────
+//
+
+export const DAYS_OF_THE_WEEK = [
+	{ label: constants.MONDAY_LABEL, value: constants.MONDAY },
+	{ label: constants.TUESDAY_LABEL, value: constants.TUESDAY },
+	{ label: constants.WEDNESDAY_LABEL, value: constants.WEDNESDAY },
+	{ label: constants.THURSDAY_LABEL, value: constants.THURSDAY },
+	{ label: constants.FRIDAY_LABEL, value: constants.FRIDAY },
+	{ label: constants.SATURDAY_LABEL, value: constants.SATURDAY },
+	{ label: constants.SUNDAY_LABEL, value: constants.SUNDAY },
+];
+
+//
 // ─── DAYS AND WEEKS OF THE MONTH OPTIONS ────────────────────────────────────────
 //
 
@@ -39,12 +53,12 @@ export const DAYS_OF_THE_MONTH_OPTIONS = constants.DAYS_OF_THE_MONTH.map(
 );
 
 export const WEEKS_OF_THE_MONTH_OPTIONS = [
-	{ label: __( 'First', 'events-gutenberg' ), value: constants.FIRST }
-	{ label: __( 'Second', 'events-gutenberg' ), value: constants.SECOND }
-	{ label: __( 'Third', 'events-gutenberg' ), value: constants.THIRD }
-	{ label: __( 'Fourth', 'events-gutenberg' ), value: constants.FOURTH }
-	{ label: __( 'Fifth', 'events-gutenberg' ), value: constants.FIFTH }
-	{ label: __( 'Last', 'events-gutenberg' ), value: constants.LAST }
+	{ label: __( 'First', 'events-gutenberg' ), value: constants.FIRST },
+	{ label: __( 'Second', 'events-gutenberg' ), value: constants.SECOND },
+	{ label: __( 'Third', 'events-gutenberg' ), value: constants.THIRD },
+	{ label: __( 'Fourth', 'events-gutenberg' ), value: constants.FOURTH },
+	{ label: __( 'Fifth', 'events-gutenberg' ), value: constants.FIFTH },
+	{ label: __( 'Last', 'events-gutenberg' ), value: constants.LAST },
 ];
 
 export const MONTH_DAYS_OPTIONS = [
