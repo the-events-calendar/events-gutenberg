@@ -175,6 +175,16 @@ describe( 'Tests for moment.js', () => {
 		expect( momentUtil.isSameDay( new Date(), new Date() ) ).toBeTruthy();
 	} );
 
+	test( 'isSameMonth', () => {
+		expect( momentUtil.isSameMonth() ).toBe( false );
+		expect( momentUtil.isSameMonth( false, '' ) ).toBe( false );
+		expect( momentUtil.isSameMonth( 0, null ) ).toBe( false );
+		expect( momentUtil.isSameMonth( moment(), moment().endOf( 'month' ) ) ).toBe( true );
+		expect( momentUtil.isSameMonth( moment().endOf( 'month' ), moment().endOf( 'month' ) ) ).toBe( true );
+		expect( momentUtil.isSameMonth( moment(), moment().add( 10, 'days' ) ) ).toBe( true );
+		expect( momentUtil.isSameMonth( new Date(), new Date() ) ).toBe( true );
+	} );
+
 	test( 'isSameYear', () => {
 		expect( momentUtil.isSameYear(
 			moment( 'May 23, 2018 12:30 am', 'MMM D, YYYY k:m a' ),
