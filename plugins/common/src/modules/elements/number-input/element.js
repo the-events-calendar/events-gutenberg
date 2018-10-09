@@ -8,18 +8,15 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
-import Input from '@moderntribe/events-pro/elements/input/element';
+import Input from '@moderntribe/common/elements/input/element';
 
-/**
- * @todo this needs to be moved to common once event tickets is merged
- */
 const NumberInput = ( {
 	className,
 	max,
 	min,
 	onChange,
 	step,
-	...props
+	...rest
 } ) => (
 	<Input
 		className={ classNames( 'tribe-editor__input--number', className ) }
@@ -28,7 +25,7 @@ const NumberInput = ( {
 		onChange={ onChange }
 		step={ step }
 		type="number"
-		{ ...props }
+		{ ...rest }
 	/>
 );
 

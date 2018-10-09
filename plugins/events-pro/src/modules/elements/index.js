@@ -11,9 +11,4 @@ export { default as Fieldset } from './fieldset/element';
 export { default as Label } from './label/element';
 export { default as RemoveField } from './remove-field/element';
 export { default as DatePickerInput } from './date-picker-input/element';
-
-/**
- * @todo these will be moved to common once event tickets is merged
- */
-export { default as Input } from './input/element';
-export { default as NumberInput } from './number-input/element';
+export { default as MultiDayCheckbox } from './multi-day-checkbox/element';
