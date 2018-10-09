@@ -139,7 +139,7 @@ exports[`SeriesEnds should render component 1`] = `
       </div>
     </div>
     <div
-      className="DayPickerInput"
+      className="tribe-editor__day-picker-input DayPickerInput"
     >
       <input
         onBlur={[Function]}
@@ -285,7 +285,7 @@ exports[`SeriesEnds should render on postfix 1`] = `
       </div>
     </div>
     <div
-      className="DayPickerInput"
+      className="tribe-editor__day-picker-input DayPickerInput"
     >
       <input
         onBlur={[Function]}
