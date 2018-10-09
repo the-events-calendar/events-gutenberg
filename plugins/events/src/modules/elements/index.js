@@ -2,7 +2,6 @@ export { default as Input } from './input/element';
 export { default as TermsList } from './terms-list/element';
 export { default as OrganizerForm } from './organizer-form/element';
 export { default as VenueForm, toFields, toVenue } from './venue-form/element';
-export { default as DatePicker } from './date-picker/element';
 export { default as MetaGroup } from './meta-group/element';
 export { default as SearchPosts } from './search-posts/element';
 export { default as GoogleMap } from './google-map/element';
