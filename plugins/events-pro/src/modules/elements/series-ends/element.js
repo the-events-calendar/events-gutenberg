@@ -11,7 +11,6 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-// import { NumberInput, Select } from '@moderntribe/common/elements';
 import NumberInput from '@moderntribe/common/elements/number-input/element';
 import Select from '@moderntribe/common/elements/select/element';
 import { Row, Label } from '@moderntribe/events-pro/elements';
