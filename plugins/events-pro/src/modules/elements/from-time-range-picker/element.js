@@ -54,6 +54,7 @@ const FromTimeRangePicker = ( {
 				end="23:59"
 				onChange={ onEndTimeChange }
 				onClick={ onEndTimeClick }
+				disabled={ isMultiDay }
 				// TODO: Add onChange handler
 			/>
 			<MultiDayCheckbox
