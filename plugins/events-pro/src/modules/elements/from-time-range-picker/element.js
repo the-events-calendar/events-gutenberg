@@ -16,6 +16,7 @@ import {
 	MultiDayCheckbox
 } from '@moderntribe/events-pro/elements';
 import { TribePropTypes } from '@moderntribe/common/utils';
+import './style.pcss';
 
 const FromTimeRangePicker = ( {
 	className,
@@ -31,6 +32,7 @@ const FromTimeRangePicker = ( {
 	<Row className={ classNames(
 		'tribe-editor__events-pro__row--from-time-range-picker',
 		'tribe-editor__from-time-range-picker',
+		{ 'tribe-editor__from-time-range-picker--multi-day': isMultiDay },
 		className
 	) }>
 		<Label className="tribe-editor__from-time-range-picker__label">
@@ -58,6 +60,7 @@ const FromTimeRangePicker = ( {
 				// TODO: Add onChange handler
 			/>
 			<MultiDayCheckbox
+				className="tribe-editor__from-time-range-picker__multi-day-checkbox"
 				checked={ isMultiDay }
 				onChange={ onMultiDayChange }
 			/>
