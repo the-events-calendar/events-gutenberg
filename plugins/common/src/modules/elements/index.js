@@ -14,3 +14,4 @@ export { default as NumberInput } from './number-input/element';
 export { default as Select } from './select/element';
 export { default as TimePicker } from './time-picker/element';
 export { default as Tooltip } from './tooltip/element';
+export { default as DayPickerInput } from './day-picker-input/element';

@@ -4,14 +4,17 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { formatDate, parseDate } from 'react-day-picker/moment';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { NumberInput, Select } from '@moderntribe/common/elements';
+import {
+	NumberInput,
+	Select,
+	DayPickerInput,
+} from '@moderntribe/common/elements';
 import { Row, Label } from '@moderntribe/events-pro/elements';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
 
@@ -29,12 +32,19 @@ const SeriesEnds = ( {
 		let postfix = null;
 
 		if ( seriesEnds.value === constants.ON ) {
+			const seriesEndsOnDateObj = new Date( seriesEndsOnDate )
 			postfix = (
 				<DayPickerInput
 					value={ seriesEndsOnDate }
 					format={ seriesEndsOnDateFormat }
 					formatDate={ formatDate }
 					parseDate={ parseDate }
+					dayPickerProps={ {
+						modifiers: {
+							start: seriesEndsOnDateObj,
+							end: seriesEndsOnDateObj,
+						},
+					} }
 					onDayChange={ onSeriesEndsOnDateChange }
 				/>
 			);
