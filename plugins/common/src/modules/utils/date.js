@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { get, identity } from 'lodash';
+import chrono from 'chrono-node';
 
 /**
  * Wordpress dependencies
@@ -44,10 +45,10 @@ export const FORMATS = {
 export const TODAY = new Date();
 
 export const timezonesAsSelectData = () => {
-	return timezones().map( ( tzone ) => ( {
+	return timezones().map( ( tzone ) => ({
 		value: tzone.key,
 		label: tzone.text,
-	} ) );
+	}) );
 };
 
 export const timezones = () => {
@@ -101,7 +102,7 @@ export const rangeToNaturalLanguage = ( start = '', end = '', separators = {} ) 
 		time: __( 'at', 'events-gutenberg' ),
 		date: ' - ',
 		...separators,
-	}
+	};
 	const from = toNaturalLanguage( { date: start, separator: separatorOptions.time } );
 	const to = toNaturalLanguage( { date: end, separator: separatorOptions.time } );
 	const parts = [ from.text ];
@@ -128,4 +129,18 @@ export const rangeToNaturalLanguage = ( start = '', end = '', separators = {} ) 
 	}
 
 	return parts.filter( identity ).join( separatorOptions.date );
+};
+
+export const labelToDate = ( label ) => {
+	const [ parsed ] = chrono.parse( label );
+	const dates = {
+		start: null,
+		end: null,
+	};
+	if ( parsed ) {
+		const { start, end } = parsed;
+		dates.start = start ? momentUtil.toDateTime( momentUtil.toMoment( start.date() ) ) : null;
+		dates.end = end ? momentUtil.toDateTime( momentUtil.toMoment( end.date() ) ) : null;
+	}
+	return dates;
 };

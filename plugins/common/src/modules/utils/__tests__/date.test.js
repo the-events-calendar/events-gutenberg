@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import { date, moment as momentUtil } from '@moderntribe/common/utils';
+import moment from 'moment';
 
 const {
 	FORMATS,
@@ -10,9 +11,10 @@ const {
 	timezonesAsSelectData,
 	toNaturalLanguage,
 	rangeToNaturalLanguage,
+	labelToDate,
 } = date;
 
-jest.mock( '@moderntribe/common/utils/timezone', () => ( {
+jest.mock( '@moderntribe/common/utils/timezone', () => ({
 	getItems: () => [
 		{
 			options: [
@@ -31,7 +33,7 @@ jest.mock( '@moderntribe/common/utils/timezone', () => ( {
 			],
 		},
 	],
-} ) );
+}) );
 
 afterAll( () => {
 	jest.unmock( '@moderntribe/common/utils/timezone' );
@@ -100,8 +102,18 @@ describe( 'Tests for date.js', () => {
 		it( 'Should return empty string when non parsed', () => {
 			const defaultDetail = { month: '', day: '', year: '', time: '' };
 			expect( toNaturalLanguage( {} ) ).toEqual( { moment: null, text: '', detail: defaultDetail, isValid: false } );
-			expect( toNaturalLanguage( { date: undefined } ) ).toEqual( { moment: undefined, text: '', detail: defaultDetail, isValid: false } );
-			expect( toNaturalLanguage( { date: '' } ) ).toEqual( { moment: '', text: '', detail: defaultDetail, isValid: false } );
+			expect( toNaturalLanguage( { date: undefined } ) ).toEqual( {
+				moment: undefined,
+				text: '',
+				detail: defaultDetail,
+				isValid: false
+			} );
+			expect( toNaturalLanguage( { date: '' } ) ).toEqual( {
+				moment: '',
+				text: '',
+				detail: defaultDetail,
+				isValid: false
+			} );
 		} );
 
 		it( 'Should return the parsed date', () => {
@@ -117,7 +129,7 @@ describe( 'Tests for date.js', () => {
 					},
 					isValid: true,
 				} );
-			expect( toNaturalLanguage( { date: '2019-12-24 12:00:00' }) )
+			expect( toNaturalLanguage( { date: '2019-12-24 12:00:00' } ) )
 				.toEqual( {
 					moment: momentUtil.toMoment( '2019-12-24 12:00:00' ),
 					text: 'Dec 24 2019  12:00 pm',
@@ -161,4 +173,17 @@ describe( 'Tests for date.js', () => {
 				.toBe( 'Dec 24 2019 at 12:00 pm - Dec 24 2020 at 5:00 pm' );
 		} );
 	} );
+
+	describe( 'labelToDate - be aware chrono module is being mocked to avoid parsing', () => {
+		test( 'Default value when date is invalid', () => {
+			expect( labelToDate() ).toEqual( { start: null, end: null } );
+		} );
+
+		test( 'Valid dates', () => {
+			const momentDate = moment( '12-25-1995', 'MM-DD-YYYY' );
+			expect( labelToDate( momentDate ) )
+				.toEqual( { start: momentUtil.toDateTime( momentDate ), end: momentUtil.toDateTime( momentDate ) } );
+		} );
+	} );
+
 } );
