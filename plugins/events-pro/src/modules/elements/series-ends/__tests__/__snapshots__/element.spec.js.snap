@@ -17,7 +17,7 @@ exports[`SeriesEnds should render after postfix 1`] = `
     className="tribe-editor__series-ends__content"
   >
     <div
-      className="css-10nd86i tribe-editor__select"
+      className="css-10nd86i tribe-editor__select tribe-editor__series-ends__select"
       onKeyDown={[Function]}
     >
       <div
@@ -63,7 +63,7 @@ exports[`SeriesEnds should render after postfix 1`] = `
       </div>
     </div>
     <input
-      className="tribe-editor__input tribe-editor__input--number"
+      className="tribe-editor__input tribe-editor__input--number tribe-editor__series-ends__number-input"
       min={1}
       onChange={[MockFunction]}
       type="number"
@@ -93,7 +93,7 @@ exports[`SeriesEnds should render component 1`] = `
     className="tribe-editor__series-ends__content"
   >
     <div
-      className="css-10nd86i tribe-editor__select"
+      className="css-10nd86i tribe-editor__select tribe-editor__series-ends__select"
       onKeyDown={[Function]}
     >
       <div
@@ -173,7 +173,7 @@ exports[`SeriesEnds should render no postfix 1`] = `
     className="tribe-editor__series-ends__content"
   >
     <div
-      className="css-10nd86i tribe-editor__select"
+      className="css-10nd86i tribe-editor__select tribe-editor__series-ends__select"
       onKeyDown={[Function]}
     >
       <div
@@ -239,7 +239,7 @@ exports[`SeriesEnds should render on postfix 1`] = `
     className="tribe-editor__series-ends__content"
   >
     <div
-      className="css-10nd86i tribe-editor__select"
+      className="css-10nd86i tribe-editor__select tribe-editor__series-ends__select"
       onKeyDown={[Function]}
     >
       <div
