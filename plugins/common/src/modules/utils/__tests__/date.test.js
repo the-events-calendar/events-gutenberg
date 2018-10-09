@@ -132,9 +132,9 @@ describe( 'Tests for date.js', () => {
 			expect( toNaturalLanguage( { date: '2019-12-24 12:00:00' } ) )
 				.toEqual( {
 					moment: momentUtil.toMoment( '2019-12-24 12:00:00' ),
-					text: 'Dec 24 2019  12:00 pm',
+					text: 'December 24 2019  12:00 pm',
 					detail: {
-						month: 'Dec',
+						month: 'December',
 						day: '24',
 						year: '2019',
 						time: '12:00 pm',
@@ -153,24 +153,24 @@ describe( 'Tests for date.js', () => {
 
 		it( 'Should return only the start date', () => {
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00' ) )
-				.toBe( 'Dec 24 2019 at 12:00 pm' );
+				.toBe( 'December 24 2019 at 12:00 pm' );
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '' ) )
-				.toBe( 'Dec 24 2019 at 12:00 pm' );
+				.toBe( 'December 24 2019 at 12:00 pm' );
 		} );
 
 		it( 'Should return the range with time on same day', () => {
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '2019-12-24 17:00:00' ) )
-				.toBe( 'Dec 24 2019 at 12:00 pm - 5:00 pm' );
+				.toBe( 'December 24 2019 at 12:00 pm - 5:00 pm' );
 		} );
 
 		it( 'Should return the range without year on same year', () => {
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '2019-12-29 17:00:00' ) )
-				.toBe( 'Dec 24 2019 at 12:00 pm - Dec 29 at 5:00 pm' );
+				.toBe( 'December 24 2019 at 12:00 pm - December 29 at 5:00 pm' );
 		} );
 
 		it( 'Should return the range on different years', () => {
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '2020-12-24 17:00:00' ) )
-				.toBe( 'Dec 24 2019 at 12:00 pm - Dec 24 2020 at 5:00 pm' );
+				.toBe( 'December 24 2019 at 12:00 pm - December 24 2020 at 5:00 pm' );
 		} );
 	} );
 

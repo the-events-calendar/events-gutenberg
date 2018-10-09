@@ -60,7 +60,7 @@ describe( 'Event Date time Block sagas', () => {
 			);
 
 			expect( gen.next().value ).toEqual(
-				put( actions.setNaturalLanguageLabel( 'Dec 25 2017 at 12:00 am - Dec 25 2018 at 12:00 am' ) ),
+				put( actions.setNaturalLanguageLabel( 'December 25 2017 at 12:00 am - December 25 2018 at 12:00 am' ) ),
 			);
 
 			expect( gen.next().done ).toEqual( true );

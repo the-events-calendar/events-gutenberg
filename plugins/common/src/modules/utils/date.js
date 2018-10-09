@@ -61,7 +61,7 @@ export const toNaturalLanguage = ( params = {} ) => {
 	const options = {
 		date: null,
 		format: {
-			month: 'MMM',
+			month: 'MMMM',
 			day: 'D',
 			year: 'YYYY',
 			time: 'h:mm a',
