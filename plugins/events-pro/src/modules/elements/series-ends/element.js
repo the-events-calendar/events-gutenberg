@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
 // import { NumberInput, Select } from '@moderntribe/common/elements';
 import NumberInput from '@moderntribe/common/elements/number-input/element';
 import Select from '@moderntribe/common/elements/select/element';
+import { Row, Label } from '@moderntribe/events-pro/elements';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 const SeriesEnds = ( {
@@ -56,16 +57,25 @@ const SeriesEnds = ( {
 	};
 
 	return (
-		<div className={ classNames( 'tribe-editor__series-ends', className ) }>
-			<Select
-				backspaceRemovesValue={ false }
-				value={ seriesEnds }
-				isSearchable={ false }
-				options={ options.SERIES_ENDS_OPTIONS }
-				onChange={ onSeriesEndsChange }
-			/>
-			{ getSeriesEndsPostfix() }
-		</div>
+		<Row className={ classNames(
+			'tribe-editor__events-pro__row--series-ends',
+			'tribe-editor__series-ends',
+			className
+		) }>
+			<Label className="tribe-editor__series-ends__label">
+				{ __( 'Series ends', 'events-gutenberg' ) }
+			</Label>
+			<div className="tribe-editor__series-ends__content">
+				<Select
+					backspaceRemovesValue={ false }
+					value={ seriesEnds }
+					isSearchable={ false }
+					options={ options.SERIES_ENDS_OPTIONS }
+					onChange={ onSeriesEndsChange }
+				/>
+				{ getSeriesEndsPostfix() }
+			</div>
+		</Row>
 	);
 }
 
