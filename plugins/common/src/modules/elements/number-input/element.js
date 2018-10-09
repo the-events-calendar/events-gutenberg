@@ -16,7 +16,7 @@ const NumberInput = ( {
 	min,
 	onChange,
 	step,
-	...props
+	...rest
 } ) => (
 	<Input
 		className={ classNames( 'tribe-editor__input--number', className ) }
@@ -25,7 +25,7 @@ const NumberInput = ( {
 		onChange={ onChange }
 		step={ step }
 		type="number"
-		{ ...props }
+		{ ...rest }
 	/>
 );
 

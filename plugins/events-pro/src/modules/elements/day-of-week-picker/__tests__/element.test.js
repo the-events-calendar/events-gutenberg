@@ -2,7 +2,6 @@
  * External dependencies
  */
 import React from 'react';
-import { noop } from 'lodash';
 
 /**
  * Internal dependencies
@@ -21,13 +20,13 @@ describe( 'Day Of Week Picker Element', () => {
 				thursdayChecked={ true }
 				fridayChecked={ false }
 				saturdayChecked={ true }
-				onSundayChange={ noop }
-				onMondayChange={ noop }
-				onTuesdayChange={ noop }
-				onWednesdayChange={ noop }
-				onThursdayChange={ noop }
-				onFridayChange={ noop }
-				onSaturdayChange={ noop }
+				onSundayChange={ jest.fn() }
+				onMondayChange={ jest.fn() }
+				onTuesdayChange={ jest.fn() }
+				onWednesdayChange={ jest.fn() }
+				onThursdayChange={ jest.fn() }
+				onFridayChange={ jest.fn() }
+				onSaturdayChange={ jest.fn() }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
