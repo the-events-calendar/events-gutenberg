@@ -1,3 +1,8 @@
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+
 export const DAILY = 'daily';
 export const WEEKLY = 'weekly';
 export const MONTHLY = 'monthly';
@@ -73,3 +78,23 @@ export const AFTER = 'after';
 export const NEVER = 'never';
 
 export const SERIES_END_TYPES = [ ON, AFTER, NEVER ];
+
+//
+// ─── DAYS OF THE WEEK ───────────────────────────────────────────────────────────
+//
+
+export const SUNDAY = __( 'Sunday', 'events-gutenberg' );
+export const MONDAY = __( 'Monday', 'events-gutenberg' );
+export const TUESDAY = __( 'Tuesday', 'events-gutenberg' );
+export const WEDNESDAY = __( 'Wednesday', 'events-gutenberg' );
+export const THURSDAY = __( 'Thursday', 'events-gutenberg' );
+export const FRIDAY = __( 'Friday', 'events-gutenberg' );
+export const SATURDAY = __( 'Saturday', 'events-gutenberg' );
+
+export const SUNDAY_ABBR = __( 'S', 'events-gutenberg' );
+export const MONDAY_ABBR = __( 'M', 'events-gutenberg' );
+export const TUESDAY_ABBR = __( 'T', 'events-gutenberg' );
+export const WEDNESDAY_ABBR = __( 'W', 'events-gutenberg' );
+export const THURSDAY_ABBR = __( 'T', 'events-gutenberg' );
+export const FRIDAY_ABBR = __( 'F', 'events-gutenberg' );
+export const SATURDAY_ABBR = __( 'S', 'events-gutenberg' );
