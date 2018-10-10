@@ -2,10 +2,10 @@
 
 exports[`SingleToDateTimePicker should render component 1`] = `
 <div
-  className="tribe-editor__events-pro__row tribe-editor__events-pro__row--recurring-to-date-time-picker tribe-editor__recurring-to-date-time-picker test-class"
+  className="tribe-editor__events-pro__row tribe-editor__events-pro__row--single-to-date-time-picker tribe-editor__single-to-date-time-picker test-class"
 >
   <div
-    className="tribe-editor__events-pro__label tribe-editor__recurring-to-date-time-picker__label"
+    className="tribe-editor__events-pro__label tribe-editor__single-to-date-time-picker__label"
   >
     <span
       className="tribe-editor__events-pro__label-text"
@@ -14,7 +14,7 @@ exports[`SingleToDateTimePicker should render component 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__recurring-to-date-time-picker__content"
+    className="tribe-editor__single-to-date-time-picker__content"
   >
     <div
       className="tribe-editor__timepicker"

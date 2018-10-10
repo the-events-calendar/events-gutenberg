@@ -1,8 +1,9 @@
 /**
  * External dependencies
  */
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -10,51 +11,53 @@ import { __ } from '@wordpress/i18n';
  */
 import { Select } from '@moderntribe/common/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
+import './style.pcss';
 
 const DayOfMonthPicker = ( {
+	className,
 	dayOfMonth,
 	onDayOfMonthChange,
 	onWeekDayChange,
 	weekDay,
 } ) => {
-	const getPostfix = () => {
+	const getWeekDaySelect = () => {
 		const inWeekOfTheMonth = ! ! options.WEEKS_OF_THE_MONTH_OPTIONS.filter(
 			( option ) => option.value === dayOfMonth.value
 		).length
-		let postfix;
 
-		if ( inWeekOfTheMonth ) {
-			postfix = (
-				<Select
-					backspaceRemovesValue={ false }
-					value={ weekDay }
-					isSearchable={ false }
-					options={ options.DAYS_OF_THE_WEEK }
-					onChange={ onWeekDayChange }
-				/>
-			);
-		} else {
-			postfix = <span>{ __( 'of the month', 'events-gutenberg' ) }</span>;
-		}
-
-		return postfix;
+		return inWeekOfTheMonth && (
+			<Select
+				className="tribe-editor__day-of-month-picker__week-day-select"
+				backspaceRemovesValue={ false }
+				value={ weekDay }
+				isSearchable={ false }
+				options={ options.DAYS_OF_THE_WEEK }
+				onChange={ onWeekDayChange }
+			/>
+		);
 	};
 
 	return (
-		<Fragment>
+		<div className={ classNames(
+			'tribe-editor__day-of-month-picker',
+			className,
+		) }>
 			<Select
+				className="tribe-editor__day-of-month-picker__day-of-month-select"
 				backspaceRemovesValue={ false }
 				value={ dayOfMonth }
 				isSearchable={ false }
 				options={ options.MONTH_DAYS_OPTIONS }
 				onChange={ onDayOfMonthChange }
 			/>
-			{ getPostfix() }
-		</Fragment>
+			{ getWeekDaySelect() }
+			<span>{ __( 'of the month', 'events-gutenberg' ) }</span>
+		</div>
 	);
 };
 
 DayOfMonthPicker.propTypes = {
+	className: PropTypes.string,
 	dayOfMonth: PropTypes.oneOf( options.MONTH_DAYS_OPTIONS ),
 	onWeekDayChange: PropTypes.func,
 	onDayOfMonthChange: PropTypes.func,

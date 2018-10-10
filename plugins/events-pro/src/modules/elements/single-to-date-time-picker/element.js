@@ -16,6 +16,7 @@ import {
 	Label,
 } from '@moderntribe/events-pro/elements';
 import { TribePropTypes } from '@moderntribe/common/utils';
+import './style.pcss';
 
 const SingleToDateTimePicker = ( {
 	className,
@@ -30,14 +31,14 @@ const SingleToDateTimePicker = ( {
 
 	return (
 		<Row className={ classNames(
-			'tribe-editor__events-pro__row--recurring-to-date-time-picker',
-			'tribe-editor__recurring-to-date-time-picker',
+			'tribe-editor__events-pro__row--single-to-date-time-picker',
+			'tribe-editor__single-to-date-time-picker',
 			className
 		) }>
-			<Label className="tribe-editor__recurring-to-date-time-picker__label">
+			<Label className="tribe-editor__single-to-date-time-picker__label">
 				{ __( 'To', 'events-gutenberg' ) }
 			</Label>
-			<div className="tribe-editor__recurring-to-date-time-picker__content">
+			<div className="tribe-editor__single-to-date-time-picker__content">
 				<TimePicker
 					current={ endTime }
 					// TODO: logic to handle start and end times

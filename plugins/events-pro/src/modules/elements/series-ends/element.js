@@ -17,6 +17,7 @@ import {
 } from '@moderntribe/common/elements';
 import { Row, Label } from '@moderntribe/events-pro/elements';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
+import './style.pcss';
 
 const SeriesEnds = ( {
 	className,
@@ -52,6 +53,7 @@ const SeriesEnds = ( {
 			postfix = (
 				<Fragment>
 					<NumberInput
+						className="tribe-editor__series-ends__number-input"
 						min={ 1 }
 						value={ seriesEndsAfterTimes }
 						onChange={ onSeriesEndsAfterTimesChange }
@@ -75,6 +77,7 @@ const SeriesEnds = ( {
 			</Label>
 			<div className="tribe-editor__series-ends__content">
 				<Select
+					className="tribe-editor__series-ends__select"
 					backspaceRemovesValue={ false }
 					value={ seriesEnds }
 					isSearchable={ false }

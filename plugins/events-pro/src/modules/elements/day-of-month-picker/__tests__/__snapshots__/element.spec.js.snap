@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DayOfMonthPicker should display a date of the month 1`] = `
-Array [
+<div
+  className="tribe-editor__day-of-month-picker"
+>
   <div
-    className="css-10nd86i tribe-editor__select"
+    className="css-10nd86i tribe-editor__select tribe-editor__day-of-month-picker__day-of-month-select"
     onKeyDown={[Function]}
   >
     <div
@@ -47,17 +49,19 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <span>
     of the month
-  </span>,
-]
+  </span>
+</div>
 `;
 
 exports[`DayOfMonthPicker should display a different weekday 1`] = `
-Array [
+<div
+  className="tribe-editor__day-of-month-picker"
+>
   <div
-    className="css-10nd86i tribe-editor__select"
+    className="css-10nd86i tribe-editor__select tribe-editor__day-of-month-picker__day-of-month-select"
     onKeyDown={[Function]}
   >
     <div
@@ -101,9 +105,9 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="css-10nd86i tribe-editor__select"
+    className="css-10nd86i tribe-editor__select tribe-editor__day-of-month-picker__week-day-select"
     onKeyDown={[Function]}
   >
     <div
@@ -147,14 +151,19 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+  <span>
+    of the month
+  </span>
+</div>
 `;
 
 exports[`DayOfMonthPicker should render component 1`] = `
-Array [
+<div
+  className="tribe-editor__day-of-month-picker"
+>
   <div
-    className="css-10nd86i tribe-editor__select"
+    className="css-10nd86i tribe-editor__select tribe-editor__day-of-month-picker__day-of-month-select"
     onKeyDown={[Function]}
   >
     <div
@@ -198,9 +207,9 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
-    className="css-10nd86i tribe-editor__select"
+    className="css-10nd86i tribe-editor__select tribe-editor__day-of-month-picker__week-day-select"
     onKeyDown={[Function]}
   >
     <div
@@ -244,6 +253,9 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
-]
+  </div>
+  <span>
+    of the month
+  </span>
+</div>
 `;

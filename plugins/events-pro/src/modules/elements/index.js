@@ -17,3 +17,4 @@ export { default as OnDayOfWeek } from './on-day-of-week/element';
 export { default as DayOfMonthPicker } from './day-of-month-picker/element';
 export { default as RecurringToDateTimePicker } from './recurring-to-date-time-picker/element';
 export { default as SingleToDateTimePicker } from './single-to-date-time-picker/element';
+export { default as FromTimeRangePicker } from './from-time-range-picker/element';
