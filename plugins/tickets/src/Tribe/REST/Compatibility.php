@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Initialize Gutenberg Rest Compatibility layers for WP api and Tickets
  *
@@ -12,15 +13,15 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 	 *
 	 * @since  0.3.0-alpha
 	 *
-	 * @return void
+	 * @return boolean
 	 */
 	public function hook() {
 		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
 			return false;
 		}
-
 		add_filter( 'get_post_metadata', array( $this, 'filter_going_fields' ), 15, 4 );
 		add_filter( 'updated_post_meta', array( $this, 'trigger_update_capacity' ), 15, 4 );
+		return true;
 	}
 
 	/**
