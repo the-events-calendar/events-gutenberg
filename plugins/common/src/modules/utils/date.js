@@ -122,8 +122,8 @@ export const rangeToNaturalLanguage = ( start = '', end = '', separators = {} ) 
 			 * If both dates are happening on the same month and not on the same day but during the same year
 			 * we don't need to show the same year twice.
 			 *
-			 * Current Behavior: 'Oct 8 2018 at 12:00 pm - Oct 24 2018 12:30 pm'
-			 * New Behavior: 'Oct 8 2018 at 12:00 pm - Oct 24 12:30 pm'
+			 * - Current Behavior: 'Oct 8 2018 at 12:00 pm - Oct 24 2018 12:30 pm'
+			 * - New Behavior: 'Oct 8 2018 at 12:00 pm - Oct 24 12:30 pm'
 			 */
 			parts.push( `${ to.detail.month } ${ to.detail.day } ${ separatorOptions.time } ${ to.detail.time }` );
 		} else {
