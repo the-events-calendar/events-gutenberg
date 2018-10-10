@@ -66,6 +66,7 @@ const getCapacityLabel = ( capacity ) => {
 			count={ capacity }
 			singular={ singular }
 			plural={ plural }
+			useFallback={ false }
 			className="tribe-editor__rsvp-container-header__capacity-label"
 		/>
 	)
