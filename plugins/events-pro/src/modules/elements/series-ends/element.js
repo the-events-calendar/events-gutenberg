@@ -15,7 +15,7 @@ import {
 	Select,
 	DayPickerInput,
 } from '@moderntribe/common/elements';
-import { Row, Label } from '@moderntribe/events-pro/elements';
+import { LabeledRow } from '@moderntribe/events-pro/elements';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
 import './style.pcss';
 
@@ -67,26 +67,20 @@ const SeriesEnds = ( {
 	};
 
 	return (
-		<Row className={ classNames(
-			'tribe-editor__events-pro__row--series-ends',
-			'tribe-editor__series-ends',
-			className
-		) }>
-			<Label className="tribe-editor__series-ends__label">
-				{ __( 'Series ends', 'events-gutenberg' ) }
-			</Label>
-			<div className="tribe-editor__series-ends__content">
-				<Select
-					className="tribe-editor__series-ends__select"
-					backspaceRemovesValue={ false }
-					value={ seriesEnds }
-					isSearchable={ false }
-					options={ options.SERIES_ENDS_OPTIONS }
-					onChange={ onSeriesEndsChange }
-				/>
-				{ getPostfix() }
-			</div>
-		</Row>
+		<LabeledRow
+			className={ classNames( 'tribe-editor__series-ends', className ) }
+			label={ __( 'Series ends', 'events-gutenberg' ) }
+		>
+			<Select
+				className="tribe-editor__series-ends__select"
+				backspaceRemovesValue={ false }
+				value={ seriesEnds }
+				isSearchable={ false }
+				options={ options.SERIES_ENDS_OPTIONS }
+				onChange={ onSeriesEndsChange }
+			/>
+			{ getPostfix() }
+		</LabeledRow>
 	);
 }
 

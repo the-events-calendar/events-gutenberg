@@ -11,10 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { TimePicker, DayPickerInput } from '@moderntribe/common/elements';
-import {
-	Row,
-	Label,
-} from '@moderntribe/events-pro/elements';
+import { LabeledRow } from '@moderntribe/events-pro/elements';
 import { TribePropTypes } from '@moderntribe/common/utils';
 import './style.pcss';
 
@@ -30,40 +27,37 @@ const SingleToDateTimePicker = ( {
 	const endDateObj = new Date( endDate );
 
 	return (
-		<Row className={ classNames(
-			'tribe-editor__events-pro__row--single-to-date-time-picker',
-			'tribe-editor__single-to-date-time-picker',
-			className
-		) }>
-			<Label className="tribe-editor__single-to-date-time-picker__label">
-				{ __( 'To', 'events-gutenberg' ) }
-			</Label>
-			<div className="tribe-editor__single-to-date-time-picker__content">
-				<TimePicker
-					current={ endTime }
-					// TODO: logic to handle start and end times
-					start="00:00"
-					end="23:59"
-					onChange={ onEndTimeChange }
-					onClick={ onEndTimeClick }
-					// TODO: Add onChange handler
-				/>
-				<span>{ __( 'on', 'events-gutenberg' ) }</span>
-				<DayPickerInput
-					value={ endDate }
-					format={ endDateFormat }
-					formatDate={ formatDate }
-					parseDate={ parseDate }
-					dayPickerProps={ {
-						modifiers: {
-							start: endDateObj,
-							end: endDateObj,
-						},
-					} }
-					onDayChange={ onEndDateChange }
-				/>
-			</div>
-		</Row>
+		<LabeledRow
+			className={ classNames(
+				'tribe-editor__single-to-date-time-picker',
+				className,
+			) }
+			label={ __( 'To', 'events-gutenberg' ) }
+		>
+			<TimePicker
+				current={ endTime }
+				// TODO: logic to handle start and end times
+				start="00:00"
+				end="23:59"
+				onChange={ onEndTimeChange }
+				onClick={ onEndTimeClick }
+				// TODO: Add onChange handler
+			/>
+			<span>{ __( 'on', 'events-gutenberg' ) }</span>
+			<DayPickerInput
+				value={ endDate }
+				format={ endDateFormat }
+				formatDate={ formatDate }
+				parseDate={ parseDate }
+				dayPickerProps={ {
+					modifiers: {
+						start: endDateObj,
+						end: endDateObj,
+					},
+				} }
+				onDayChange={ onEndDateChange }
+			/>
+		</LabeledRow>
 	);
 };
 
