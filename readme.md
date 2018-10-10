@@ -98,6 +98,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Error when multi day toggle component was not functional 
 * Fix - Prevent reset of times when set for an event from time pickers
 * Fix - Sync UI of datetime block and human readable input so any changes on any is reflected on the other
+* Fix - Make sure `meta` types matches before send into the request for `Tickets` block
 
 #### 0.3.0-alpha - 2018-10-05
 
