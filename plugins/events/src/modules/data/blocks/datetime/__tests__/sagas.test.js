@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { takeEvery, put, call, select, takeLatest } from 'redux-saga/effects';
+import { takeEvery, put, call, select, takeLatest, all } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 
 /**
@@ -16,6 +16,7 @@ import watchers, {
 } from '@moderntribe/events/data/blocks/datetime/sagas';
 import moment from 'moment';
 import { toDateTime } from '@moderntribe/common/utils/moment';
+import { rangeToNaturalLanguage } from '@moderntribe/common/utils/date';
 
 describe( 'Event Date time Block sagas', () => {
 	describe( 'watchers', () => {
@@ -43,24 +44,34 @@ describe( 'Event Date time Block sagas', () => {
 			);
 
 			expect( gen.next().value ).toEqual(
-				put( actions.setNaturalLanguageLabel( '' ) ),
+				call( rangeToNaturalLanguage, undefined, undefined ),
+			);
+
+			expect( gen.next().value ).toEqual(
+				put( actions.setNaturalLanguageLabel( undefined ) ),
 			);
 
 			expect( gen.next().done ).toEqual( true );
 		} );
 
 		test( 'Custom data is provided', () => {
-			const gen = setHumanReadableLabel( {
+			const dates =  {
 				start: moment( '12-25-2017', 'MM-DD-YYYY' ),
 				end: moment( '12-25-2018', 'MM-DD-YYYY' ),
-			} );
+			};
+			const gen = setHumanReadableLabel( dates );
 
 			expect( gen.next().value ).toEqual(
 				select( selectors.getNaturalLanguageLabel ),
 			);
 
 			expect( gen.next().value ).toEqual(
-				put( actions.setNaturalLanguageLabel( 'December 25 2017 at 12:00 am - December 25 2018 at 12:00 am' ) ),
+				call( rangeToNaturalLanguage, dates.start, dates.end ),
+			);
+
+			const expected = 'December 25 2017 at 12:00 am - December 25 2018 at 12:00 am';
+			expect( gen.next( expected ).value ).toEqual(
+				put( actions.setNaturalLanguageLabel( expected ) ),
 			);
 
 			expect( gen.next().done ).toEqual( true );
@@ -90,7 +101,7 @@ describe( 'Event Date time Block sagas', () => {
 			const formated = toDateTime( moment( '12-25-2018', 'MM-DD-YYYY' ) );
 			const gen = setHumanReadableFromDate( actions.setEndDateTime( formated ) );
 			expect( gen.next().value ).toEqual(
-				select( selectors.getStart ),
+				select( selectors.getStart )
 			);
 			expect( gen.next().value ).toEqual(
 				select( selectors.getEnd ),
@@ -108,15 +119,12 @@ describe( 'Event Date time Block sagas', () => {
 			const start = toDateTime( moment( '12-25-2018 12:30', 'MM-DD-YYYY HH:mm' ) );
 			const end = toDateTime( moment( '12-25-2018 14:40', 'MM-DD-YYYY HH:mm' ) );
 
-			expect( gen.next().value ).toEqual(
-				select( selectors.getStart )
-			);
+			expect( gen.next().value ).toEqual( all( {
+				start: select( selectors.getStart ),
+				end: select( selectors.getEnd ),
+			} ) );
 
-			expect( gen.next( start ).value ).toEqual(
-				select( selectors.getEnd )
-			);
-
-			expect( gen.next( end ).value ).toEqual(
+			expect( gen.next( { start, end } ).value ).toEqual(
 				call( setHumanReadableLabel, { start, end } ),
 			);
 
