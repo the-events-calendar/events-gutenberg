@@ -21,6 +21,7 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 		}
 		add_filter( 'get_post_metadata', array( $this, 'filter_going_fields' ), 15, 4 );
 		add_filter( 'updated_post_meta', array( $this, 'trigger_update_capacity' ), 15, 4 );
+
 		return true;
 	}
 
@@ -51,7 +52,7 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 
 		// Fetch capacity field, if we don't have it use default (defined above)
 		$capacity = trim( $capacity );
-		$stock = absint( get_post_meta( $object_id, '_stock', true ) );
+		$stock    = absint( get_post_meta( $object_id, '_stock', true ) );
 
 		// If empty we need to modify to the default
 		if ( '' === $capacity ) {
@@ -65,7 +66,7 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 
 		if ( -1 !== $capacity ) {
 			$totals = tribe( 'tickets.handler' )->get_ticket_totals( $object_id );
-			$stock -= $totals['pending'] + $totals['sold'];
+			$stock  -= $totals['pending'] + $totals['sold'];
 
 			update_post_meta( $object_id, '_manage_stock', 'yes' );
 			update_post_meta( $object_id, '_stock', $stock );
@@ -92,31 +93,25 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 	 * @return null|int
 	 */
 	public function filter_going_fields( $check, $object_id, $meta_key, $single ) {
-		if (
-			'_tribe_ticket_going_count' !== $meta_key
-			|| '_tribe_ticket_not_going_count' !== $meta_key
-		) {
+
+		$valid_keys = array(
+			'_tribe_ticket_going_count',
+			'_tribe_ticket_not_going_count',
+		);
+
+		if ( ! in_array( $meta_key, $valid_keys ) ) {
 			return $check;
 		}
 
-		if ( ! current_user_can( 'read_private_posts' ) ) {
-			return $check;
-		}
+		$repository    = tribe( 'tickets.rest-v1.repository' );
+		$ticket_object = tribe_tickets_get_ticket_provider( $object_id );
 
-		$repository = tribe( 'tickets.rest-v1.repository' );
-		$ticket_object = $repository->get_ticket_object( $object_id );
-
-		if ( ! $ticket_object instanceof Tribe__Tickets__Ticket_Object ) {
+		if ( ! $ticket_object instanceof Tribe__Tickets__RSVP ) {
 			return $check;
 		}
 
 		$attendees = $repository->get_ticket_attendees( $object_id );
-
 		if ( false === $attendees ) {
-			return $check;
-		}
-
-		if ( 'Tribe__Tickets__RSVP' !== $ticket_object->provider_class ) {
 			return $check;
 		}
 
@@ -131,12 +126,12 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 			}
 		}
 
-		if ( '_tribe_ticket_going_count' === $meta_key ) {
-			return $going;
+		if ( $valid_keys[0] === $meta_key ) {
+			return (string) $going;
 		}
 
-		if ( '_tribe_ticket_not_going_count' === $meta_key ) {
-			return $not_going;
+		if ( $valid_keys[1] === $meta_key ) {
+			return (string) $not_going;
 		}
 	}
 }
