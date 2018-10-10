@@ -2,11 +2,15 @@
 
 exports[`MonthTag should render component 1`] = `
 <button
-  className="tribe-editor__button tribe-editor__month-tag test-class"
+  className="tribe-editor__month-tag test-class"
   onClick={[MockFunction]}
-  type="button"
 >
   <<svg>icon mock</svg> />
+  <span
+    className="tribe-editor__month-tag__remove"
+  >
+    Remove
+  </span>
   Modern Tribe
 </button>
 `;

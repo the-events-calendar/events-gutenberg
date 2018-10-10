@@ -10,8 +10,9 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import MonthTag from './month-tag/element';
-import { Button, Select } from '@moderntribe/common/elements';
+import { Select } from '@moderntribe/common/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
+import './style.pcss';
 
 class MonthPicker extends PureComponent {
 	static propTypes = {
@@ -34,9 +35,11 @@ class MonthPicker extends PureComponent {
 	onSelectBlur = () => this.setState( { isSelecting: false } );
 
 	getSelect = () => (
-		this.state.isSelecting
+		// this.state.isSelecting
+		true
 			? (
 				<Select
+					className="tribe-editor__month-picker__select"
 					autoFocus={ true }
 					backspaceRemovesValue={ false }
 					isClearable={ false }
@@ -47,13 +50,13 @@ class MonthPicker extends PureComponent {
 				/>
 			)
 			: (
-				<Button
+				<button
 					className="tribe-editor__month-picker__add"
 					onClick={ this.onAddClick }
 				>
 					<span className="tribe-editor__month-picker__add-icon">+</span>
 					{ __( 'Add', 'events-gutenberg' ) }
-				</Button>
+				</button>
 			)
 	);
 
