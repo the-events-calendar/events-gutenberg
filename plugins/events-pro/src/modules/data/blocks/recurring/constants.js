@@ -124,3 +124,46 @@ export const THIRD = 'third';
 export const FOURTH = 'fourth';
 export const FIFTH = 'fifth';
 export const LAST = 'last';
+
+//
+// ─── MONTHS OF THE YEAR ─────────────────────────────────────────────────────────
+//
+
+export const JANUARY = 'january';
+export const FEBRUARY = 'february';
+export const MARCH = 'march';
+export const APRIL = 'april';
+export const MAY = 'may';
+export const JUNE = 'june';
+export const JULY = 'july';
+export const AUGUST = 'august';
+export const SEPTEMBER = 'september';
+export const OCTOBER = 'october';
+export const NOVEMBER = 'november';
+export const DECEMBER = 'december';
+
+export const JANUARY_LABEL = __( 'January', 'events-gutenberg' );
+export const FEBRUARY_LABEL = __( 'February', 'events-gutenberg' );
+export const MARCH_LABEL = __( 'March', 'events-gutenberg' );
+export const APRIL_LABEL = __( 'April', 'events-gutenberg' );
+export const MAY_LABEL = __( 'May', 'events-gutenberg' );
+export const JUNE_LABEL = __( 'June', 'events-gutenberg' );
+export const JULY_LABEL = __( 'July', 'events-gutenberg' );
+export const AUGUST_LABEL = __( 'August', 'events-gutenberg' );
+export const SEPTEMBER_LABEL = __( 'September', 'events-gutenberg' );
+export const OCTOBER_LABEL = __( 'October', 'events-gutenberg' );
+export const NOVEMBER_LABEL = __( 'November', 'events-gutenberg' );
+export const DECEMBER_LABEL = __( 'December', 'events-gutenberg' );
+
+export const JANUARY_ABBR = __( 'Jan', 'events-gutenberg' );
+export const FEBRUARY_ABBR = __( 'Feb', 'events-gutenberg' );
+export const MARCH_ABBR = __( 'Mar', 'events-gutenberg' );
+export const APRIL_ABBR = __( 'Apr', 'events-gutenberg' );
+export const MAY_ABBR = __( 'May', 'events-gutenberg' );
+export const JUNE_ABBR = __( 'Jun', 'events-gutenberg' );
+export const JULY_ABBR = __( 'Jul', 'events-gutenberg' );
+export const AUGUST_ABBR = __( 'Aug', 'events-gutenberg' );
+export const SEPTEMBER_ABBR = __( 'Sep', 'events-gutenberg' );
+export const OCTOBER_ABBR = __( 'Oct', 'events-gutenberg' );
+export const NOVEMBER_ABBR = __( 'Nov', 'events-gutenberg' );
+export const DECEMBER_ABBR = __( 'Dec', 'events-gutenberg' );
