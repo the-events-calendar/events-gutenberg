@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { put, takeEvery, select, takeLatest, call } from 'redux-saga/effects';
+import { put, takeEvery, select, takeLatest, call, all } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { date as dateUtil } from '@moderntribe/common/src/modules/utils';
 
@@ -31,7 +31,7 @@ export function* setHumanReadableLabel( dates = {} ) {
 		return;
 	}
 
-	const updatedLabel = rangeToNaturalLanguage( dates.start, dates.end );
+	const updatedLabel = yield call( rangeToNaturalLanguage, dates.start, dates.end );
 	yield put( actions.setNaturalLanguageLabel( updatedLabel ) );
 }
 
@@ -69,10 +69,10 @@ export function* setHumanReadableFromDate( action ) {
  * @returns {IterableIterator<*>}
  */
 export function* resetNaturalLanguageLabel() {
-	const dates = {
-		start: yield select( selectors.getStart ),
-		end: yield select( selectors.getEnd ),
-	};
+	const dates = yield all( {
+		start: select( selectors.getStart ),
+		end: select( selectors.getEnd ),
+	} );
 	yield call( setHumanReadableLabel, dates );
 }
 
@@ -87,8 +87,7 @@ export function* resetNaturalLanguageLabel() {
  */
 export function* onHumanReadableChange() {
 	// Wait in case there's a new change on the input
-	const WAIT_PERIOD_IN_MILLISECONDS = 700;
-	yield call( delay, WAIT_PERIOD_IN_MILLISECONDS );
+	yield call( delay, 700 );
 
 	const label = yield select( selectors.getNaturalLanguageLabel );
 	const dates = dateUtil.labelToDate( label );
