@@ -10,6 +10,7 @@ import classNames from 'classnames';
  */
 import Label from '@moderntribe/events-pro/elements/label/element';
 import Row from '@moderntribe/events-pro/elements/row/element';
+import './style.pcss';
 
 const LabeledRow = ( { children, className, label } ) => (
 	<Row className={ classNames( 'tribe-editor__labeled-row', className ) }>
