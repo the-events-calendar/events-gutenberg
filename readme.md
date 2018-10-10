@@ -99,6 +99,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Prevent reset of times when set for an event from time pickers
 * Fix - Sync UI of datetime block and human readable input so any changes on any is reflected on the other
 * Fix - Make sure `meta` types matches before send into the request for `Tickets` block
+* Fix - Load Going an Not Going values on the RSVP form
 
 #### 0.3.0-alpha - 2018-10-05
 

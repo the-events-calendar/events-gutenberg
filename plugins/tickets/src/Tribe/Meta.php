@@ -109,7 +109,6 @@ class Tribe__Gutenberg__Tickets__Meta {
 			$this->text()
 		);
 
-
 		// "Ghost" Meta fields
 		register_meta(
 			'post',

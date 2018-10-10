@@ -78,6 +78,10 @@ describe( 'RSVP block selectors', () => {
 			.toBe( DEFAULT_STATE.details.capacity );
 	} );
 
+	it( 'should return the total available tickets', () => {
+		expect( selectors.getRSVPAvailable( state ) ).toBe( 0 );
+	} );
+
 	it( 'should return the not going responses', () => {
 		expect( selectors.getRSVPNotGoingResponses( state ) )
 			.toBe( DEFAULT_STATE.details.notGoingResponses );
