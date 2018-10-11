@@ -40,7 +40,7 @@ Array [
   },
   Object {
     "payload": Object {
-      "label": "Jun 5 2018 at 5:00 pm - Jun 5 2018 at 5:30 pm",
+      "label": "June 5 2018 at 5:00 pm - 5:30 pm",
     },
     "type": "@@MT/EVENTS/SET_NATURAL_LANGUAGE_LABEL",
   },
