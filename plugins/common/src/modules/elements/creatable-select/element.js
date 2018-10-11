@@ -4,7 +4,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ReactSelect, { components } from 'react-select';
+import { components } from 'react-select';
+import ReactCreatableSelect from 'react-select/lib/Creatable';
 import { Dashicon } from '@wordpress/components';
 
 /**
@@ -16,7 +17,7 @@ const DropdownIndicator = ( props ) => (
 	components.DropdownIndicator && (
 		<components.DropdownIndicator { ...props }>
 			<Dashicon
-				className="tribe-editor__select__dropdown-indicator"
+				className="tribe-editor__creatable-select__dropdown-indicator"
 				icon={ 'arrow-down' }
 			/>
 		</components.DropdownIndicator>
@@ -25,17 +26,17 @@ const DropdownIndicator = ( props ) => (
 
 const IndicatorSeparator = () => null;
 
-const Select = ( { className, ...rest } ) => (
-	<ReactSelect
-		className={ classNames( 'tribe-editor__select', className ) }
-		classNamePrefix="tribe-editor__select"
+const CreatableSelect = ( { className, ...rest } ) => (
+	<ReactCreatableSelect
+		className={ classNames( 'tribe-editor__creatable-select', className ) }
+		classNamePrefix="tribe-editor__creatable-select"
 		components={ { DropdownIndicator, IndicatorSeparator } }
 		{ ...rest }
 	/>
 );
 
-Select.propTypes = {
+CreatableSelect.propTypes = {
 	className: PropTypes.string,
 };
 
-export default Select;
+export default CreatableSelect;
