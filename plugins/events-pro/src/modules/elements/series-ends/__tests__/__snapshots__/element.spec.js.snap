@@ -2,10 +2,10 @@
 
 exports[`SeriesEnds should render after postfix 1`] = `
 <div
-  className="tribe-editor__events-pro__row tribe-editor__events-pro__row--series-ends tribe-editor__series-ends"
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__series-ends"
 >
   <div
-    className="tribe-editor__events-pro__label tribe-editor__series-ends__label"
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
   >
     <span
       className="tribe-editor__events-pro__label-text"
@@ -14,7 +14,7 @@ exports[`SeriesEnds should render after postfix 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__series-ends__content"
+    className="tribe-editor__labeled-row__content"
   >
     <div
       className="css-10nd86i tribe-editor__select tribe-editor__series-ends__select"
@@ -78,10 +78,10 @@ exports[`SeriesEnds should render after postfix 1`] = `
 
 exports[`SeriesEnds should render component 1`] = `
 <div
-  className="tribe-editor__events-pro__row tribe-editor__events-pro__row--series-ends tribe-editor__series-ends test-class"
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__series-ends test-class"
 >
   <div
-    className="tribe-editor__events-pro__label tribe-editor__series-ends__label"
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
   >
     <span
       className="tribe-editor__events-pro__label-text"
@@ -90,7 +90,7 @@ exports[`SeriesEnds should render component 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__series-ends__content"
+    className="tribe-editor__labeled-row__content"
   >
     <div
       className="css-10nd86i tribe-editor__select tribe-editor__series-ends__select"
@@ -158,10 +158,10 @@ exports[`SeriesEnds should render component 1`] = `
 
 exports[`SeriesEnds should render no postfix 1`] = `
 <div
-  className="tribe-editor__events-pro__row tribe-editor__events-pro__row--series-ends tribe-editor__series-ends"
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__series-ends"
 >
   <div
-    className="tribe-editor__events-pro__label tribe-editor__series-ends__label"
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
   >
     <span
       className="tribe-editor__events-pro__label-text"
@@ -170,7 +170,7 @@ exports[`SeriesEnds should render no postfix 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__series-ends__content"
+    className="tribe-editor__labeled-row__content"
   >
     <div
       className="css-10nd86i tribe-editor__select tribe-editor__series-ends__select"
@@ -224,10 +224,10 @@ exports[`SeriesEnds should render no postfix 1`] = `
 
 exports[`SeriesEnds should render on postfix 1`] = `
 <div
-  className="tribe-editor__events-pro__row tribe-editor__events-pro__row--series-ends tribe-editor__series-ends"
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__series-ends"
 >
   <div
-    className="tribe-editor__events-pro__label tribe-editor__series-ends__label"
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
   >
     <span
       className="tribe-editor__events-pro__label-text"
@@ -236,7 +236,7 @@ exports[`SeriesEnds should render on postfix 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__series-ends__content"
+    className="tribe-editor__labeled-row__content"
   >
     <div
       className="css-10nd86i tribe-editor__select tribe-editor__series-ends__select"

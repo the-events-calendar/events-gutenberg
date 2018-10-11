@@ -11,9 +11,8 @@ import { __ } from '@wordpress/i18n';
  */
 import { TimePicker } from '@moderntribe/common/elements';
 import {
-	Row,
-	Label,
-	MultiDayCheckbox
+	LabeledRow,
+	MultiDayCheckbox,
 } from '@moderntribe/events-pro/elements';
 import { TribePropTypes } from '@moderntribe/common/utils';
 import './style.pcss';
@@ -29,43 +28,40 @@ const FromTimeRangePicker = ( {
 	onStartTimeClick,
 	startTime,
 } ) => (
-	<Row className={ classNames(
-		'tribe-editor__events-pro__row--from-time-range-picker',
-		'tribe-editor__from-time-range-picker',
-		{ 'tribe-editor__from-time-range-picker--multi-day': isMultiDay },
-		className
-	) }>
-		<Label className="tribe-editor__from-time-range-picker__label">
-			{ __( 'From', 'events-gutenberg' ) }
-		</Label>
-		<div className="tribe-editor__from-time-range-picker__content">
-			<TimePicker
-				current={ startTime }
-				// TODO: logic to handle start and end times
-				start="00:00"
-				end="23:59"
-				onChange={ onStartTimeChange }
-				onClick={ onStartTimeClick }
-				// TODO: Add onChange handler
-			/>
-			<span>{ __( 'to', 'events-gutenberg' ) }</span>
-			<TimePicker
-				current={ endTime }
-				// TODO: logic to handle start and end times
-				start="00:00"
-				end="23:59"
-				onChange={ onEndTimeChange }
-				onClick={ onEndTimeClick }
-				disabled={ isMultiDay }
-				// TODO: Add onChange handler
-			/>
-			<MultiDayCheckbox
-				className="tribe-editor__from-time-range-picker__multi-day-checkbox"
-				checked={ isMultiDay }
-				onChange={ onMultiDayChange }
-			/>
-		</div>
-	</Row>
+	<LabeledRow
+		className={ classNames(
+			'tribe-editor__from-time-range-picker',
+			{ 'tribe-editor__from-time-range-picker--multi-day': isMultiDay },
+			className
+		) }
+		label={ __( 'From', 'events-gutenberg' ) }
+	>
+		<TimePicker
+			current={ startTime }
+			// TODO: logic to handle start and end times
+			start="00:00"
+			end="23:59"
+			onChange={ onStartTimeChange }
+			onClick={ onStartTimeClick }
+			// TODO: Add onChange handler
+		/>
+		<span>{ __( 'to', 'events-gutenberg' ) }</span>
+		<TimePicker
+			current={ endTime }
+			// TODO: logic to handle start and end times
+			start="00:00"
+			end="23:59"
+			onChange={ onEndTimeChange }
+			onClick={ onEndTimeClick }
+			disabled={ isMultiDay }
+			// TODO: Add onChange handler
+		/>
+		<MultiDayCheckbox
+			className="tribe-editor__from-time-range-picker__multi-day-checkbox"
+			checked={ isMultiDay }
+			onChange={ onMultiDayChange }
+		/>
+	</LabeledRow>
 );
 
 FromTimeRangePicker.propTypes = {

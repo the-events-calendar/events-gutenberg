@@ -65,3 +65,70 @@ export const MONTH_DAYS_OPTIONS = [
 	...WEEKS_OF_THE_MONTH_OPTIONS,
 	...DAYS_OF_THE_MONTH_OPTIONS,
 ];
+
+//
+// ─── MONTHS OF THE YEAR OPTIONS ─────────────────────────────────────────────────
+//
+
+export const MONTHS_OF_THE_YEAR_OPTIONS = [
+	{
+		label: constants.JANUARY_LABEL,
+		tag: constants.JANUARY_ABBR,
+		value: constants.JANUARY,
+	},
+	{
+		label: constants.FEBRUARY_LABEL,
+		tag: constants.FEBRUARY_ABBR,
+		value: constants.FEBRUARY,
+	},
+	{
+		label: constants.MARCH_LABEL,
+		tag: constants.MARCH_ABBR,
+		value: constants.MARCH,
+	},
+	{
+		label: constants.APRIL_LABEL,
+		tag: constants.APRIL_ABBR,
+		value: constants.APRIL,
+	},
+	{
+		label: constants.MAY_LABEL,
+		tag: constants.MAY_ABBR,
+		value: constants.MAY,
+	},
+	{
+		label: constants.JUNE_LABEL,
+		tag: constants.JUNE_ABBR,
+		value: constants.JUNE,
+	},
+	{
+		label: constants.JULY_LABEL,
+		tag: constants.JULY_ABBR,
+		value: constants.JULY,
+	},
+	{
+		label: constants.AUGUST_LABEL,
+		tag: constants.AUGUST_ABBR,
+		value: constants.AUGUST,
+	},
+	{
+		label: constants.SEPTEMBER_LABEL,
+		tag: constants.SEPTEMBER_ABBR,
+		value: constants.SEPTEMBER,
+	},
+	{
+		label: constants.OCTOBER_LABEL,
+		tag: constants.OCTOBER_ABBR,
+		value: constants.OCTOBER,
+	},
+	{
+		label: constants.NOVEMBER_LABEL,
+		tag: constants.NOVEMBER_ABBR,
+		value: constants.NOVEMBER,
+	},
+	{
+		label: constants.DECEMBER_LABEL,
+		tag: constants.DECEMBER_ABBR,
+		value: constants.DECEMBER,
+	},
+];

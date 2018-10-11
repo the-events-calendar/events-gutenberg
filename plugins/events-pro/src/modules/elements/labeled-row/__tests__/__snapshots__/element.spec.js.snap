@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LabeledRow should render component 1`] = `
+<div
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row test-class"
+>
+  <div
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
+  >
+    <span
+      className="tribe-editor__events-pro__label-text"
+    >
+      hello
+    </span>
+  </div>
+  <div
+    className="tribe-editor__labeled-row__content"
+  >
+    <div>
+      Test
+    </div>
+  </div>
+</div>
+`;

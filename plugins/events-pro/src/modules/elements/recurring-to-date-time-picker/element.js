@@ -10,9 +10,8 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import {
-	Row,
-	Label,
-	DayOfMonthPicker
+	LabeledRow,
+	DayOfMonthPicker,
 } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
@@ -23,23 +22,20 @@ const RecurringToDateTimePicker = ( {
 	onEndMonthDayChange,
 	onEndWeekDayChange,
 } ) => (
-	<Row className={ classNames(
-		'tribe-editor__events-pro__row--recurring-to-date-time-picker',
-		'tribe-editor__recurring-to-date-time-picker',
-		className
-	) }>
-		<Label className="tribe-editor__recurring-to-date-time-picker__label">
-			{ __( 'To', 'events-gutenberg' ) }
-		</Label>
-		<div className="tribe-editor__recurring-to-date-time-picker__content">
-			<DayOfMonthPicker
-				dayOfMonth={ endMonthDay }
-				onDayOfMonthChange={ onEndMonthDayChange }
-				onWeekDayChange={ onEndWeekDayChange }
-				weekDay={ endWeekDay }
-			/>
-		</div>
-	</Row>
+	<LabeledRow
+		className={ classNames(
+			'tribe-editor__recurring-to-date-time-picker',
+			className
+		) }
+		label={ __( 'To', 'events-gutenberg' ) }
+	>
+		<DayOfMonthPicker
+			dayOfMonth={ endMonthDay }
+			onDayOfMonthChange={ onEndMonthDayChange }
+			onWeekDayChange={ onEndWeekDayChange }
+			weekDay={ endWeekDay }
+		/>
+	</LabeledRow>
 );
 
 RecurringToDateTimePicker.propTypes = {

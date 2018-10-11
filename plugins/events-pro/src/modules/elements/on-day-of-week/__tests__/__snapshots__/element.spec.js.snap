@@ -2,10 +2,10 @@
 
 exports[`OnDayOfWeek should render component 1`] = `
 <div
-  className="tribe-editor__events-pro__row tribe-editor__events-pro__row--on-day-of-week tribe-editor__on-day-of-week test-class"
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__on-day-of-week test-class"
 >
   <div
-    className="tribe-editor__events-pro__label tribe-editor__on-day-of-week__label"
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
   >
     <span
       className="tribe-editor__events-pro__label-text"
@@ -14,7 +14,7 @@ exports[`OnDayOfWeek should render component 1`] = `
     </span>
   </div>
   <div
-    className="tribe-editor__on-day-of-week__content"
+    className="tribe-editor__labeled-row__content"
   >
     <div
       className="tribe-editor__day-of-week-picker"

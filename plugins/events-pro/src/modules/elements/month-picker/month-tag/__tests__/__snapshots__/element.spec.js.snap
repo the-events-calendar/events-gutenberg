@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthTag should render component 1`] = `
+<button
+  className="tribe-editor__month-tag test-class"
+  onClick={[MockFunction]}
+>
+  <<svg>icon mock</svg> />
+  <span
+    className="tribe-editor__month-tag__remove"
+  >
+    Remove
+  </span>
+  Modern Tribe
+</button>
+`;
