@@ -9,81 +9,31 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { CreatableSelect, Select } from '@moderntribe/common/elements';
+import FrequencySelect from './frequency-select/element';
+import { Select } from '@moderntribe/common/elements';
 import { LabeledRow } from '@moderntribe/events-pro/elements';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
 import './style.pcss';
 
-const { DAILY, WEEKLY, MONTHLY, YEARLY, SINGLE } = constants;
-const {
-	RECURRENCE_TYPE_RULES_OPTIONS,
-	DAILY_RECURRENCE_FREQUENCY_OPTIONS,
-	WEEKLY_RECURRENCE_FREQUENCY_OPTIONS,
-	MONTHLY_RECURRENCE_FREQUENCY_OPTIONS,
-	YEARLY_RECURRENCE_FREQUENCY_OPTIONS,
-} = options;
-
 const RecurrenceTypePicker = ( {
 	className,
-	onRecurrenceFrequencyChange,
 	onRecurrenceTypeChange,
-	recurrenceFrequency,
 	recurrenceType,
 } ) => {
 	const getLabel = () => (
-		recurrenceType.value === SINGLE
+		recurrenceType.value === constants.SINGLE
 			? __( 'A', 'events-gutenberg' )
 			: __( 'Every', 'events-gutenberg' )
 	);
 
-	const getFrequencyOptions = () => {
-		let frequencyOptions = [];
-
-		switch ( recurrenceType.value ) {
-			case DAILY:
-				frequencyOptions = DAILY_RECURRENCE_FREQUENCY_OPTIONS;
-				break;
-			case WEEKLY:
-				frequencyOptions = WEEKLY_RECURRENCE_FREQUENCY_OPTIONS;
-				break;
-			case MONTHLY:
-				frequencyOptions = MONTHLY_RECURRENCE_FREQUENCY_OPTIONS;
-				break;
-			case YEARLY:
-				frequencyOptions = YEARLY_RECURRENCE_FREQUENCY_OPTIONS;
-				break;
-			default:
-				break;
-		};
-
-		return frequencyOptions;
-	}
-
-	const formatCreateLabel = ( inputValue ) => inputValue;
-
-	const isValidNewOption = ( inputValue, selectValue, selectOptions ) => {
-		const isNotDuplicated = ! selectOptions
-			.filter( ( option ) => option.label === inputValue )
-			.length;
-		const isNotEmpty = inputValue !== '';
-		const isNumber = ! isNaN( inputValue );
-		return isNotEmpty && isNotDuplicated && isNumber;
-	};
-
 	const getFrequencySelect = () => (
-		recurrenceType.value !== SINGLE
+		recurrenceType.value !== constants.SINGLE
 			&& (
-				<CreatableSelect
+				<FrequencySelect
 					className="tribe-editor__recurrence-type-picker__recurrence-frequency-select"
-					backspaceRemovesValue={ false }
-					formatCreateLabel={ formatCreateLabel }
-					isValidNewOption={ isValidNewOption }
-					onChange={ onRecurrenceFrequencyChange }
-					options={ getFrequencyOptions() }
-					value={ recurrenceFrequency }
 				/>
 			)
-		);
+	);
 
 	return (
 		<LabeledRow
@@ -96,7 +46,7 @@ const RecurrenceTypePicker = ( {
 				backspaceRemovesValue={ false }
 				value={ recurrenceType }
 				isSearchable={ false }
-				options={ RECURRENCE_TYPE_RULES_OPTIONS }
+				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 				onChange={ onRecurrenceTypeChange }
 			/>
 		</LabeledRow>
@@ -105,13 +55,8 @@ const RecurrenceTypePicker = ( {
 
 RecurrenceTypePicker.propTypes = {
 	className: PropTypes.string,
-	onRecurrenceFrequencyChange: PropTypes.func,
 	onRecurrenceTypeChange: PropTypes.func,
-	recurrenceFrequency: PropTypes.shape( {
-		label: PropTypes.number,
-		value: PropTypes.number,
-	} ),
-	recurrenceType: PropTypes.oneOf( RECURRENCE_TYPE_RULES_OPTIONS ),
+	recurrenceType: PropTypes.oneOf( options.RECURRENCE_TYPE_RULES_OPTIONS ),
 };
 
 export default RecurrenceTypePicker;
