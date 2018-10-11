@@ -81,7 +81,7 @@ FrequencySelect.propTypes = {
 	className: PropTypes.string,
 	onRecurrenceFrequencyChange: PropTypes.func,
 	recurrenceFrequency: PropTypes.shape( {
-		label: PropTypes.number,
+		label: PropTypes.string,
 		value: PropTypes.number,
 	} ),
 	recurrenceType: PropTypes.oneOf( RECURRENCE_TYPE_RULES_OPTIONS ),
