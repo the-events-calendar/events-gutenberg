@@ -21,3 +21,5 @@ export { default as SingleToDateTimePicker } from './single-to-date-time-picker/
 export { default as FromTimeRangePicker } from './from-time-range-picker/element';
 export { default as MonthPicker } from './month-picker/element';
 export { default as InMonth } from './in-month/element';
+export { default as RecurrenceTypePicker } from './recurrence-type-picker/element';
+export { default as OnDatePicker } from './on-date-picker/element';
