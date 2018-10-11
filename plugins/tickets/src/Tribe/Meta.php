@@ -72,7 +72,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 		register_meta(
 			'post',
 			'_tribe_ticket_show_not_going',
-			$this->text()
+			$this->boolean()
 		);
 
 		// Global Stock
