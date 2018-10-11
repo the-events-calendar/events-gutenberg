@@ -26,6 +26,14 @@ const DropdownIndicator = ( props ) => (
 
 const IndicatorSeparator = () => null;
 
+/**
+ * There seems to be an issue with Creatable and a custom isValidNewOption
+ * prop needs to be passed in for this to work.
+ *
+ * See:
+ * - https://github.com/JedWatson/react-select/issues/2630
+ * - https://github.com/JedWatson/react-select/issues/2944
+ */
 const CreatableSelect = ( { className, ...rest } ) => (
 	<ReactCreatableSelect
 		className={ classNames( 'tribe-editor__creatable-select', className ) }

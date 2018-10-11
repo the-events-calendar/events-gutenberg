@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { Select } from '@moderntribe/common/elements';
+import { CreatableSelect, Select } from '@moderntribe/common/elements';
 import { LabeledRow } from '@moderntribe/events-pro/elements';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
 import './style.pcss';
@@ -59,16 +59,28 @@ const RecurrenceTypePicker = ( {
 		return frequencyOptions;
 	}
 
+	const formatCreateLabel = ( inputValue ) => inputValue;
+
+	const isValidNewOption = ( inputValue, selectValue, selectOptions ) => {
+		const isNotDuplicated = ! selectOptions
+			.filter( ( option ) => option.label === inputValue )
+			.length;
+		const isNotEmpty = inputValue !== '';
+		const isNumber = ! isNaN( inputValue );
+		return isNotEmpty && isNotDuplicated && isNumber;
+	};
+
 	const getFrequencySelect = () => (
 		recurrenceType.value !== SINGLE
 			&& (
-				<Select
+				<CreatableSelect
 					className="tribe-editor__recurrence-type-picker__recurrence-frequency-select"
 					backspaceRemovesValue={ false }
-					value={ recurrenceFrequency }
-					isSearchable={ true }
-					options={ getFrequencyOptions() }
+					formatCreateLabel={ formatCreateLabel }
+					isValidNewOption={ isValidNewOption }
 					onChange={ onRecurrenceFrequencyChange }
+					options={ getFrequencyOptions() }
+					value={ recurrenceFrequency }
 				/>
 			)
 		);

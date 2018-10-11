@@ -29,7 +29,10 @@ export const RECURRENCE_TYPE_RULES_OPTIONS = [
  * @param {number} max The last number in the options list
  */
 export const createNumericalOptions = ( max ) => (
-	Array( max ).fill().map( ( _, index ) => ( { label: index + 1, value: index + 1 } ) )
+	Array( max ).fill().map( ( _, index ) => ( {
+		label: String( index + 1 ),
+		value: index + 1,
+	} ) )
 );
 
 export const DAILY_RECURRENCE_FREQUENCY_OPTIONS = createNumericalOptions( 6 );
@@ -66,7 +69,7 @@ export const DAYS_OF_THE_WEEK = [
 //
 
 export const DAYS_OF_THE_MONTH_OPTIONS = constants.DAYS_OF_THE_MONTH.map(
-	( value ) => ( { label: value, value } )
+	( value ) => ( { label: String( value ), value } )
 );
 
 export const WEEKS_OF_THE_MONTH_OPTIONS = [
