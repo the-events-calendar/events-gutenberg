@@ -98,7 +98,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Error when multi day toggle component was not functional 
 * Fix - Prevent reset of times when set for an event from time pickers
 * Fix - Make sure `meta` types matches before send into the request for `Tickets` block
-* Fix - Load Going an Not Going values on the RSVP form
+* Fix - Load Going an Not Going values on the RSVP block
+* Fix - Render "Not Going" `<button>` on RSVP block conditionally
 
 #### 0.3.0-alpha - 2018-10-05
 
