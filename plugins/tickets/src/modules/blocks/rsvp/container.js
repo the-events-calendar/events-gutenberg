@@ -42,19 +42,16 @@ const getIsInactive = ( state ) => {
 const setInitialState = ( dispatch, ownProps ) => () => {
 	const postId = select( 'core/editor' ).getCurrentPostId();
 	dispatch( thunks.getRSVP( postId ) );
-	if ( ownProps.attributes.headerImageId ) {
-		dispatch( thunks.getRSVPHeaderImage(
-			ownProps.attributes.headerImageId
-		) );
+	const { attributes = {} } = ownProps;
+	if ( attributes.headerImageId ) {
+		dispatch( thunks.getRSVPHeaderImage( attributes.headerImageId ) );
 	}
-	if ( ownProps.attributes.goingCount ) {
-		dispatch( actions.setRSVPGoingCount(
-			parseInt( ownProps.attributes.goingCount, 10 )
-		) );
+	if ( attributes.goingCount ) {
+		dispatch( actions.setRSVPGoingCount( parseInt( attributes.goingCount, 10 ) ) );
 	}
-	if ( ownProps.attributes.notGoingCount ) {
+	if ( attributes.notGoingCount ) {
 		dispatch( actions.setRSVPNotGoingCount(
-			parseInt( ownProps.attributes.notGoingCount, 10 )
+			parseInt( attributes.notGoingCount, 10 )
 		) );
 	}
 };
