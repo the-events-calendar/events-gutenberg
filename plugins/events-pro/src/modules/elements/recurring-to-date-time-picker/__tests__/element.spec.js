@@ -1,20 +1,18 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import DayOfMonthPicker from '../element';
+import RecurringToDateTimePicker from '../element';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-describe( 'DayOfMonthPicker', () => {
+describe( 'RecurringToDateTimePicker', () => {
 	test( 'should render component', () => {
 		const component = renderer.create(
-			<DayOfMonthPicker
+			<RecurringToDateTimePicker
 				className="test-class"
-				endMonthDay={ options.MONTH_DAYS_OPTIONS[0] }
-				endWeekDay={ options.DAYS_OF_THE_WEEK[0] }
-				endTime="14:20"
-				onEndMonthDayChange={ jest.fn() }
+				endTime="12:34"
 				onEndTimeChange={ jest.fn() }
 				onEndTimeClick={ jest.fn() }
-				onEndWeekDayChange={ jest.fn() }
+				onRecurringMultiDayChange={ jest.fn() }
+				recurringMultiDay={ options.RECURRING_MULTI_DAY_OPTIONS[ 0 ] }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
