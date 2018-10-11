@@ -13,21 +13,38 @@ import * as constants from './constants';
 //
 
 export const RECURRENCE_TYPE_RULES_OPTIONS = [
-	{ label: __( 'Day', 'events-gutenberg' ), value: constants.DAILY },
-	{ label: __( 'Week', 'events-gutenberg' ), value: constants.WEEKLY },
-	{ label: __( 'Month', 'events-gutenberg' ), value: constants.MONTHLY },
-	{ label: __( 'Year', 'events-gutenberg' ), value: constants.YEARLY },
-	{ label: __( 'Single Occurrence', 'events-gutenberg' ), value: constants.SINGLE },
+	{ label: constants.DAILY_LABEL, value: constants.DAILY },
+	{ label: constants.WEEKLY_LABEL, value: constants.WEEKLY },
+	{ label: constants.MONTHLY_LABEL, value: constants.MONTHLY },
+	{ label: constants.YEARLY_LABEL, value: constants.YEARLY },
+	{ label: constants.SINGLE_LABEL, value: constants.SINGLE },
 ];
+
+//
+// ─── RECURRENCE TYPES OPTIONS ───────────────────────────────────────────────────
+//
+
+/**
+ * Creates options for select element from 1 to max
+ * @param {number} max The last number in the options list
+ */
+export const createNumericalOptions = ( max ) => (
+	Array( max ).fill().map( ( _, index ) => ( { label: index + 1, value: index + 1 } ) )
+);
+
+export const DAILY_RECURRENCE_FREQUENCY_OPTIONS = createNumericalOptions( 6 );
+export const WEEKLY_RECURRENCE_FREQUENCY_OPTIONS = createNumericalOptions( 6 );
+export const MONTHLY_RECURRENCE_FREQUENCY_OPTIONS = createNumericalOptions( 12 );
+export const YEARLY_RECURRENCE_FREQUENCY_OPTIONS = createNumericalOptions( 6 );
 
 //
 // ─── SERIES ENDS OPTIONS ────────────────────────────────────────────────────────
 //
 
 export const SERIES_ENDS_OPTIONS = [
-	{ label: __( 'On', 'events-gutenberg' ), value: constants.ON },
-	{ label: __( 'After', 'events-gutenberg' ), value: constants.AFTER },
-	{ label: __( 'Never', 'events-gutenberg' ), value: constants.NEVER },
+	{ label: constants.ON_LABEL, value: constants.ON },
+	{ label: constants.AFTER_LABEL, value: constants.AFTER },
+	{ label: constants.NEVER_LABEL, value: constants.NEVER },
 ];
 
 //
@@ -53,12 +70,12 @@ export const DAYS_OF_THE_MONTH_OPTIONS = constants.DAYS_OF_THE_MONTH.map(
 );
 
 export const WEEKS_OF_THE_MONTH_OPTIONS = [
-	{ label: __( 'First', 'events-gutenberg' ), value: constants.FIRST },
-	{ label: __( 'Second', 'events-gutenberg' ), value: constants.SECOND },
-	{ label: __( 'Third', 'events-gutenberg' ), value: constants.THIRD },
-	{ label: __( 'Fourth', 'events-gutenberg' ), value: constants.FOURTH },
-	{ label: __( 'Fifth', 'events-gutenberg' ), value: constants.FIFTH },
-	{ label: __( 'Last', 'events-gutenberg' ), value: constants.LAST },
+	{ label: constants.FIRST_LABEL, value: constants.FIRST },
+	{ label: constants.SECOND_LABEL, value: constants.SECOND },
+	{ label: constants.THIRD_LABEL, value: constants.THIRD },
+	{ label: constants.FOURTH_LABEL, value: constants.FOURTH },
+	{ label: constants.FIFTH_LABEL, value: constants.FIFTH },
+	{ label: constants.LAST_LABEL, value: constants.LAST },
 ];
 
 export const MONTH_DAYS_OPTIONS = [

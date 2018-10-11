@@ -3,11 +3,21 @@
  */
 import { __ } from '@wordpress/i18n';
 
+//
+// ─── RECURRENCE TYPES ───────────────────────────────────────────────────────────
+//
+
 export const DAILY = 'daily';
 export const WEEKLY = 'weekly';
 export const MONTHLY = 'monthly';
 export const YEARLY = 'yearly';
 export const SINGLE = 'single';
+
+export const DAILY_LABEL = __( 'Day', 'events-gutenberg' );
+export const WEEKLY_LABEL = __( 'Week', 'events-gutenberg' );
+export const MONTHLY_LABEL = __( 'Month', 'events-gutenberg' );
+export const YEARLY_LABEL = __( 'Year', 'events-gutenberg' );
+export const SINGLE_LABEL = __( 'Single Recurrence', 'events-gutenberg' );
 
 export const TYPES = [ DAILY, WEEKLY, MONTHLY, YEARLY, SINGLE ];
 
@@ -77,7 +87,9 @@ export const ON = 'on';
 export const AFTER = 'after';
 export const NEVER = 'never';
 
-export const SERIES_END_TYPES = [ ON, AFTER, NEVER ];
+export const ON_LABEL = __( 'On', 'events-gutenberg' );
+export const AFTER_LABEL = __( 'After', 'events-gutenberg' );
+export const NEVER_LABEL = __( 'Never', 'events-gutenberg' );
 
 //
 // ─── DAYS OF THE WEEK ───────────────────────────────────────────────────────────
@@ -125,6 +137,12 @@ export const FOURTH = 'fourth';
 export const FIFTH = 'fifth';
 export const LAST = 'last';
 
+export const FIRST_LABEL = __( 'First', 'events-gutenberg' );
+export const SECOND_LABEL = __( 'Second', 'events-gutenberg' );
+export const THIRD_LABEL = __( 'Third', 'events-gutenberg' );
+export const FOURTH_LABEL = __( 'Fourth', 'events-gutenberg' );
+export const FIFTH_LABEL = __( 'Fifth', 'events-gutenberg' );
+export const LAST_LABEL = __( 'Last', 'events-gutenberg' );
 //
 // ─── MONTHS OF THE YEAR ─────────────────────────────────────────────────────────
 //
