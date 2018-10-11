@@ -143,6 +143,7 @@ export const THIRD_LABEL = __( 'Third', 'events-gutenberg' );
 export const FOURTH_LABEL = __( 'Fourth', 'events-gutenberg' );
 export const FIFTH_LABEL = __( 'Fifth', 'events-gutenberg' );
 export const LAST_LABEL = __( 'Last', 'events-gutenberg' );
+
 //
 // ─── MONTHS OF THE YEAR ─────────────────────────────────────────────────────────
 //
@@ -185,3 +186,23 @@ export const SEPTEMBER_ABBR = __( 'Sep', 'events-gutenberg' );
 export const OCTOBER_ABBR = __( 'Oct', 'events-gutenberg' );
 export const NOVEMBER_ABBR = __( 'Nov', 'events-gutenberg' );
 export const DECEMBER_ABBR = __( 'Dec', 'events-gutenberg' );
+
+//
+// ─── RECURRING MULTI DAY ────────────────────────────────────────────────────────
+//
+
+export const NEXT_DAY = 'next_day';
+export const SECOND_DAY = 'second_day';
+export const THIRD_DAY = 'third_day';
+export const FOURTH_DAY = 'fourth_day';
+export const FIFTH_DAY = 'fifth_day';
+export const SIXTH_DAY = 'sixth_day';
+export const SEVENTH_DAY = 'seventh_day';
+
+export const NEXT_DAY_LABEL = __( 'Next day', 'events-gutenberg' );
+export const SECOND_DAY_LABEL = __( '2nd day', 'events-gutenberg' );
+export const THIRD_DAY_LABEL = __( '3rd day', 'events-gutenberg' );
+export const FOURTH_DAY_LABEL = __( '4th day', 'events-gutenberg' );
+export const FIFTH_DAY_LABEL = __( '5th day', 'events-gutenberg' );
+export const SIXTH_DAY_LABEL = __( '6th day', 'events-gutenberg' );
+export const SEVENTH_DAY_LABEL = __( '7th day', 'events-gutenberg' );
