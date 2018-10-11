@@ -50,7 +50,7 @@ const createOrUpdateRSVP = ( method ) => ( payload ) => ( dispatch ) => {
 			[ utils.KEY_TICKET_CAPACITY ]: capacity,
 			[ utils.KEY_TICKET_START_DATE ]: momentUtil.toDateTime( startMoment ),
 			[ utils.KEY_TICKET_END_DATE ]: momentUtil.toDateTime( endMoment ),
-			[ utils.KEY_TICKET_SHOW_NOT_GOING ]: notGoingResponses ? 'yes' : 'no',
+			[ utils.KEY_TICKET_SHOW_NOT_GOING ]: notGoingResponses,
 		},
 	};
 
@@ -133,7 +133,7 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 					const capacity = meta[ utils.KEY_TICKET_CAPACITY ] >= 0
 						? meta[ utils.KEY_TICKET_CAPACITY ]
 						: '';
-					const notGoingResponses = meta[ utils.KEY_TICKET_SHOW_NOT_GOING ] == 'yes';
+					const notGoingResponses = meta[ utils.KEY_TICKET_SHOW_NOT_GOING ];
 
 					dispatch( actions.createRSVP() );
 					dispatch( actions.setRSVPId( rsvp.id ) );
