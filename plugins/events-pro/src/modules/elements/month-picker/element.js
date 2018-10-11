@@ -43,7 +43,7 @@ class MonthPicker extends PureComponent {
 					autoFocus={ true }
 					backspaceRemovesValue={ false }
 					isClearable={ false }
-					isMulti
+					isMulti={ true }
 					onBlur={ this.onSelectBlur }
 					onChange={ this.props.onSelectChange }
 					options={ options.MONTHS_OF_THE_YEAR_OPTIONS }

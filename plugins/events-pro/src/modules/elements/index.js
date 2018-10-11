@@ -20,3 +20,4 @@ export { default as RecurringToDateTimePicker } from './recurring-to-date-time-p
 export { default as SingleToDateTimePicker } from './single-to-date-time-picker/element';
 export { default as FromTimeRangePicker } from './from-time-range-picker/element';
 export { default as MonthPicker } from './month-picker/element';
+export { default as InMonth } from './in-month/element';

@@ -25,12 +25,12 @@ const DropdownIndicator = ( props ) => (
 
 const IndicatorSeparator = () => null;
 
-const Select = ( { className, ...props } ) => (
+const Select = ( { className, ...rest } ) => (
 	<ReactSelect
 		className={ classNames( 'tribe-editor__select', className ) }
 		classNamePrefix="tribe-editor__select"
 		components={ { DropdownIndicator, IndicatorSeparator } }
-		{ ...props }
+		{ ...rest }
 	/>
 );
 
