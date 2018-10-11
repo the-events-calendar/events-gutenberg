@@ -21,6 +21,7 @@ class MonthPicker extends PureComponent {
 			PropTypes.oneOf( options.MONTHS_OF_THE_YEAR_OPTIONS )
 		),
 		onMonthClick: PropTypes.func,
+		onSelectChange: PropTypes.func,
 	};
 
 	constructor( props ) {
@@ -35,8 +36,7 @@ class MonthPicker extends PureComponent {
 	onSelectBlur = () => this.setState( { isSelecting: false } );
 
 	getSelect = () => (
-		// this.state.isSelecting
-		true
+		this.state.isSelecting
 			? (
 				<Select
 					className="tribe-editor__month-picker__select"
@@ -45,8 +45,9 @@ class MonthPicker extends PureComponent {
 					isClearable={ false }
 					isMulti
 					onBlur={ this.onSelectBlur }
-					value={ this.props.months }
+					onChange={ this.props.onSelectChange }
 					options={ options.MONTHS_OF_THE_YEAR_OPTIONS }
+					value={ this.props.months }
 				/>
 			)
 			: (
