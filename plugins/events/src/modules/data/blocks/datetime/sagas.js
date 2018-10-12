@@ -19,7 +19,7 @@ import { rangeToNaturalLanguage } from '@moderntribe/common/utils/date';
 /**
  * Set the human readable label into the store, based on a start and end date to generate a new label based on those
  *
- * @since TBD
+ * @since 0.3.1-alpha
  *
  * @param {object} dates An object that represents the start / end date
  * @returns {IterableIterator<*>}
@@ -40,7 +40,7 @@ export function* setHumanReadableLabel( dates = {} ) {
  * first selects as default value current start and end dates after that based on the action type selects the
  * date to be replaced or the new date to be set before doing the conversion into text.
  *
- * @since TBD
+ * @since 0.3.1-alpha
  *
  * @param {object} action Dispateched by the component and watched by this generator
  * @returns {IterableIterator<*>}
@@ -64,7 +64,7 @@ export function* setHumanReadableFromDate( action ) {
  * the user enters a data that is not valid or can't be parsed into a valid date so the input always reflects a valid
  * date based on the current values set into the dates of the event.
  *
- * @since TBD
+ * @since 0.3.1-alpha
  *
  * @returns {IterableIterator<*>}
  */
@@ -81,7 +81,7 @@ export function* resetNaturalLanguageLabel() {
  * simulates the debounce functionality as gets executed every WAIT_PERIOD_IN_MILLISECONDS to prevent doing work
  * when the input is handling a new change() events
  *
- * @since TBD
+ * @since 0.3.1-alpha
  *
  * @returns {IterableIterator<*>}
  */
@@ -102,7 +102,7 @@ export function* onHumanReadableChange() {
 /**
  * Watchers of actions and act accordingly to each.
  *
- * @since TBD
+ * @since 0.3.1-alpha
  *
  * @returns {IterableIterator<*|ForkEffect>}
  */

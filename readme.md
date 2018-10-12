@@ -93,7 +93,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.1-alpha - TBD
+#### 0.3.1-alpha - 2018-10-12
 
 * Fix - Make sure Classic Editor migration treats correctly Events with Tickets
 * Fix - Error when multi day toggle component was not functional
