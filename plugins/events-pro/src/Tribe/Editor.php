@@ -170,11 +170,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
         <script type="text/javascript">
 	        ( function() {
 		        function toggleInput( input, isActive ) {
-			        if ( isActive ) {
-				        input.setAttribute( 'value', '0' );
-			        } else {
-				        input.setAttribute( 'value', '1' );
-			        }
+			        input.setAttribute( 'value', isActive ? '1' : '0' );
 			        return input;
 		        }
 
