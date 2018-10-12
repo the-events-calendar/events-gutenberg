@@ -101,6 +101,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Make sure `meta` types matches before send into the request for `Tickets` block
 * Fix - Load Going an Not Going values on the RSVP block
 * Fix - Render "Not Going" `<button>` on RSVP block conditionally
+* Tweak - Remove price rendering from the Date Time block when coming from the classic editor
 
 #### 0.3.0-alpha - 2018-10-05
 
