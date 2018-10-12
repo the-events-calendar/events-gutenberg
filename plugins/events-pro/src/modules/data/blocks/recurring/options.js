@@ -152,3 +152,17 @@ export const MONTHS_OF_THE_YEAR_OPTIONS = [
 		value: constants.DECEMBER,
 	},
 ];
+
+//
+// ─── RECURRING MULTI DAY OPTIONS ────────────────────────────────────────────────
+//
+
+export const RECURRING_MULTI_DAY_OPTIONS = [
+	{ label: constants.NEXT_DAY_LABEL, value: constants.NEXT_DAY },
+	{ label: constants.SECOND_DAY_LABEL, value: constants.SECOND_DAY },
+	{ label: constants.THIRD_DAY_LABEL, value: constants.THIRD_DAY },
+	{ label: constants.FOURTH_DAY_LABEL, value: constants.FOURTH_DAY },
+	{ label: constants.FIFTH_DAY_LABEL, value: constants.FIFTH_DAY },
+	{ label: constants.SIXTH_DAY_LABEL, value: constants.SIXTH_DAY },
+	{ label: constants.SEVENTH_DAY_LABEL, value: constants.SEVENTH_DAY },
+];
