@@ -93,6 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.2-alpha - TBD
+
+* Fix - Adjust vertical alignment of the price section for the classic event date time block
+
 #### 0.3.1-alpha - 2018-10-12
 
 * Fix - Make sure Classic Editor migration treats correctly Events with Tickets
