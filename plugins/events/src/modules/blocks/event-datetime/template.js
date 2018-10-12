@@ -101,31 +101,6 @@ class EventDateTime extends Component {
 		document.removeEventListener( 'click', onClick );
 	}
 
-	renderPrice = () => {
-		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
-
-		// Bail when not classic
-		if ( ! tribe_blocks_editor || ! tribe_blocks_editor.is_classic ) {
-			return null;
-		}
-
-		return (
-			<div
-				key="tribe-editor-event-cost"
-				className="tribe-editor__event-cost"
-			>
-				{ 'prefix' === currencyPosition && <span>{ currencySymbol }</span> }
-				<PlainText
-					className={ classNames( 'tribe-editor__event-cost__value', `tribe-editor-cost-symbol-position-${ currencyPosition }` ) }
-					value={ cost }
-					placeholder={ __( 'Enter price', 'events-gutenberg' ) }
-					onChange={ setCost }
-				/>
-				{ 'suffix' === currencyPosition && <span>{ currencySymbol }</span> }
-			</div>
-		);
-	}
-
 	renderStartDate = () => {
 		const { start, end } = this.props;
 		let startDate = toDate( toMoment( start ) );
@@ -240,7 +215,6 @@ class EventDateTime extends Component {
 		return (
 			<Fragment>
 				{ this.renderTimezone() }
-				{ this.renderPrice() }
 			</Fragment>
 		);
 	}
