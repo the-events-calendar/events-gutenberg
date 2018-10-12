@@ -43,7 +43,7 @@ export function getVenueCountry( meta ) {
 
 	if ( '' === country ) {
 		const defaultCountry = editorDefaults().venueCountry;
-		country = defaultCountry !== undefined || array.length > 0 ? defaultCountry[1] : '';
+		country = defaultCountry !== undefined || defaultCountry.length > 0 ? defaultCountry[1] : '';
 	}
 	return country;
 }
