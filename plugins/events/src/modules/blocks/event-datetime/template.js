@@ -24,7 +24,6 @@ import { TimePicker } from '@moderntribe/common/elements';
 import {
 	Dashboard,
 	Month,
-	DateInput,
 	Upsell,
 	TimeZone,
 } from '@moderntribe/events/elements';
@@ -35,6 +34,7 @@ import {
 } from '@moderntribe/common/utils';
 import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
 import './style.pcss';
+import HumanReadableInput from './human-readable-input/container';
 
 /**
  * Module Code
@@ -71,7 +71,6 @@ class EventDateTime extends Component {
 		naturalLanguageLabel: PropTypes.string,
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
-		setDateTime: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
@@ -421,9 +420,6 @@ class EventDateTime extends Component {
 			allDay,
 			showDateInput,
 			onDateTimeLabelClick,
-			setDateTime,
-			setNaturalLanguageLabel,
-			naturalLanguageLabel,
 		} = this.props;
 
 		return (
@@ -434,12 +430,7 @@ class EventDateTime extends Component {
 				{
 					showDateInput
 					? (
-						<DateInput
-							onChange={ setNaturalLanguageLabel }
-							setDateTime={ setDateTime }
-							value={ naturalLanguageLabel }
-							after={ this.renderExtras() }
-						/>
+						<HumanReadableInput after={ this.renderExtras() } />
 					)
 					: (
 						<h2 className="tribe-editor__subtitle__headline">

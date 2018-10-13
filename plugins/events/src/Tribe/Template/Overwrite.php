@@ -31,7 +31,9 @@ class Tribe__Gutenberg__Events__Template__Overwrite {
 		$slug = (array) $slug;
 
 		$file = implode( '/', array_map( 'sanitize_file_name', $slug ) ) . '.php';
-		// todo: replace with real plugin template, once is moved out of the extension
+		/**
+		 * @todo replace with real plugin template, once is moved out of the extension
+		 */
 		$directory = 'plugins/events/src/views/';
 		return tribe( 'gutenberg' )->plugin_path . $directory . $file;
 	}

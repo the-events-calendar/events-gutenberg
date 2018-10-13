@@ -50,7 +50,7 @@ const createOrUpdateRSVP = ( method ) => ( payload ) => ( dispatch ) => {
 			[ utils.KEY_TICKET_CAPACITY ]: capacity,
 			[ utils.KEY_TICKET_START_DATE ]: momentUtil.toDateTime( startMoment ),
 			[ utils.KEY_TICKET_END_DATE ]: momentUtil.toDateTime( endMoment ),
-			[ utils.KEY_TICKET_SHOW_NOT_GOING ]: notGoingResponses ? 'yes' : 'no',
+			[ utils.KEY_TICKET_SHOW_NOT_GOING ]: notGoingResponses,
 		},
 	};
 
@@ -127,15 +127,26 @@ export const getRSVP = ( postId, page = 1 ) => ( dispatch ) => {
 					 *       The strategy to handle this is is being worked on.
 					 */
 					const rsvp = filteredRSVPs[0];
-					const startMoment = moment( rsvp.meta[ utils.KEY_TICKET_START_DATE ] );
-					const endMoment = moment( rsvp.meta[ utils.KEY_TICKET_END_DATE ] );
-					const capacity = rsvp.meta[ utils.KEY_TICKET_CAPACITY ] >= 0
-						? rsvp.meta[ utils.KEY_TICKET_CAPACITY ]
+					const { meta = {} } = rsvp;
+					const startMoment = moment( meta[ utils.KEY_TICKET_START_DATE ] );
+					const endMoment = moment( meta[ utils.KEY_TICKET_END_DATE ] );
+					const capacity = meta[ utils.KEY_TICKET_CAPACITY ] >= 0
+						? meta[ utils.KEY_TICKET_CAPACITY ]
 						: '';
-					const notGoingResponses = rsvp.meta[ utils.KEY_TICKET_SHOW_NOT_GOING ] == 'yes';
+					const notGoingResponses = meta[ utils.KEY_TICKET_SHOW_NOT_GOING ];
 
 					dispatch( actions.createRSVP() );
 					dispatch( actions.setRSVPId( rsvp.id ) );
+					dispatch(
+						actions.setRSVPGoingCount(
+							parseInt( meta[ utils.KEY_TICKET_GOING_COUNT ], 10 ) || 0
+						)
+					);
+					dispatch(
+						actions.setRSVPNotGoingCount(
+							parseInt( meta[ utils.KEY_TICKET_NOT_GOING_COUNT ], 10 ) || 0
+						)
+					);
 					dispatch( actions.setRSVPDetails( {
 						title: rsvp.title.rendered,
 						description: rsvp.excerpt.raw,
