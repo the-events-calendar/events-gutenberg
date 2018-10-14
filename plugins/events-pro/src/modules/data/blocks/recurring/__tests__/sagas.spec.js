@@ -11,17 +11,7 @@ import * as ui from '@moderntribe/events-pro/data/ui';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
 import watchers, * as sagas from '../sagas';
 
-const _Date = global.Date;
-
 describe( 'recurring sagas', () => {
-	beforeAll( () => {
-		global.Date.now = jest.fn( () => 1 );
-	} );
-
-	afterAll( () => {
-		global.Date.now = _Date.now;
-	} );
-
 	describe( 'watchers', () => {
 		it( 'should watch actions', () => {
 			const gen = watchers();
@@ -62,8 +52,8 @@ describe( 'recurring sagas', () => {
 			const payload = { start: 'start' };
 			expect( gen.next( payload ).value ).toEqual(
 				put( recurring.actions.addRule( {
-					id: Date.now(),
-					fieldType: recurring.constants.SINGLE,
+					id: 'uniqid',
+					type: recurring.constants.SINGLE,
 					...payload,
 				} ) )
 			);
