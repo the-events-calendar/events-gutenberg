@@ -52,7 +52,6 @@ describe( 'recurring sagas', () => {
 			const payload = { start: 'start' };
 			expect( gen.next( payload ).value ).toEqual(
 				put( recurring.actions.addRule( {
-					id: 'uniqid',
 					type: recurring.constants.SINGLE,
 					...payload,
 				} ) )

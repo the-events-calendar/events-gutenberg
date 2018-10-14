@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { takeEvery, put, select } from 'redux-saga/effects';
-import uniqid from 'uniqid';
 
 /**
  * Internal dependencies
@@ -23,7 +22,6 @@ export function* handleExceptionRemoval() {
 export function* handleExceptionAddition() {
 	const payload = yield select( datetime.datetimeSelector );
 	yield put( exception.actions.addException( {
-		id: uniqid(),
 		type: recurring.constants.SINGLE,
 		...payload,
 	} ) );

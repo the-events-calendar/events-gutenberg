@@ -53,7 +53,6 @@ describe( 'exception sagas', () => {
 			const payload = { start: 'start' };
 			expect( gen.next( payload ).value ).toEqual(
 				put( exception.actions.addException( {
-					id: 'uniqid',
 					type: recurring.constants.SINGLE,
 					...payload,
 				} ) )

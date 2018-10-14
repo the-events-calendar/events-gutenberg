@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { takeEvery, put, select } from 'redux-saga/effects';
-import uniqid from 'uniqid';
 
 /**
  * Internal dependencies
@@ -22,7 +21,6 @@ export function* handleRuleRemoval() {
 export function* handleRuleAddition() {
 	const payload = yield select( datetime.datetimeSelector );
 	yield put( recurring.actions.addRule( {
-		id: uniqid(),
 		type: recurring.constants.SINGLE,
 		...payload,
 	} ) );
