@@ -17,7 +17,7 @@ import { Row, Label, DatePickerInput } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
 const SingularField = ( {
-	fieldType,
+	type,
 	multiDay,
 	start,
 	end,
@@ -31,7 +31,7 @@ const SingularField = ( {
 				<div className="tribe-editor__events-pro-exception-field__date">
 					<Select
 						options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
-						value={ fieldType }
+						value={ type }
 						// TODO: Add onChange handler
 					/>
 				</div>
@@ -74,7 +74,7 @@ const SingularField = ( {
 };
 
 SingularField.propTypes = {
-	fieldType: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
 	multiDay: PropTypes.bool.isRequired,
 	start: PropTypes.string.isRequired,
 	end: PropTypes.string.isRequired,
