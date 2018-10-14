@@ -10,4 +10,8 @@ import * as constants from '@moderntribe/events-pro/data/blocks/recurring/consta
 
 export const EXCEPTION_OCCURRENCE_OPTIONS = [
 	{ label: __( 'Single Exception', 'events-gutenberg' ), value: constants.SINGLE },
+	{ label: __( 'Daily', 'events-gutenberg' ), value: constants.DAILY },
+	{ label: __( 'Weekly', 'events-gutenberg' ), value: constants.WEEKLY },
+	{ label: __( 'Monthly', 'events-gutenberg' ), value: constants.MONTHLY },
+	{ label: __( 'Yearly', 'events-gutenberg' ), value: constants.YEARLY },
 ];

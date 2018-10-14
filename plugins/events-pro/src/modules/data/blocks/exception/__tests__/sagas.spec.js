@@ -12,17 +12,7 @@ import * as ui from '@moderntribe/events-pro/data/ui';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
 import watchers, * as sagas from '../sagas';
 
-const _Date = global.Date;
-
 describe( 'exception sagas', () => {
-	beforeAll( () => {
-		global.Date.now = jest.fn( () => 1 );
-	} );
-
-	afterAll( () => {
-		global.Date.now = _Date.now;
-	} );
-
 	describe( 'watchers', () => {
 		it( 'should watch actions', () => {
 			const gen = watchers();
@@ -41,7 +31,7 @@ describe( 'exception sagas', () => {
 			expect( gen.next().value ).toEqual(
 				select( exception.selectors.getExceptions )
 			);
-			expect( gen.next( [{ id: 1 }] ).done ).toEqual( true );
+			expect( gen.next( [{ id: 'uniqid' }] ).done ).toEqual( true );
 		} );
 		it( 'should hide exception panel', () => {
 			const gen = sagas.handleExceptionRemoval();
@@ -63,8 +53,8 @@ describe( 'exception sagas', () => {
 			const payload = { start: 'start' };
 			expect( gen.next( payload ).value ).toEqual(
 				put( exception.actions.addException( {
-					id: Date.now(),
-					fieldType: recurring.constants.SINGLE,
+					id: 'uniqid',
+					type: recurring.constants.SINGLE,
 					...payload,
 				} ) )
 			);

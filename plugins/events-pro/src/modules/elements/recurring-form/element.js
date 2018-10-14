@@ -20,8 +20,13 @@ export default class RecurringForm extends PureComponent {
 		return (
 			<section>
 				{
-					this.props.rules.map( rule => (
-						<RecurringField { ...rule } onRemoveClick={ this.props.removeRule } />
+					this.props.rules.map( ( rule, i ) => (
+						<RecurringField
+							index={ i }
+							key={ i }
+							onRemoveClick={ this.props.removeRule }
+							{ ...rule }
+						/>
 					) )
 				}
 			</section>

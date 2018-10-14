@@ -16,7 +16,13 @@ export const removeField = () => ( {
 	type: types.REMOVE_RULE_FIELD,
 } );
 
-export const removeRule = ( id ) => ( {
+export const removeRule = ( index ) => ( {
 	type: types.REMOVE_RULE,
-	payload: { id },
+	index,
+} );
+
+export const editRule = ( index, payload ) => ( {
+	type: types.EDIT_RULE,
+	index,
+	payload,
 } );

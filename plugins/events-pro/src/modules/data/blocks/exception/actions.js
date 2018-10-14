@@ -16,7 +16,13 @@ export const removeField = () => ( {
 	type: types.REMOVE_EXCEPTION_FIELD,
 } );
 
-export const removeException = ( id ) => ( {
+export const removeException = ( index ) => ( {
 	type: types.REMOVE_EXCEPTION,
-	payload: { id },
+	index,
+} );
+
+export const editException = ( index, payload ) => ( {
+	type: types.EDIT_EXCEPTION,
+	index,
+	payload,
 } );
