@@ -7,13 +7,14 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import DayPickerInput from 'react-day-picker//DayPickerInput';
 
 /**
  * Internal dependencies
  */
 import { moment as momentUtils } from '@moderntribe/common/utils';
 import { Select } from '@moderntribe/common/components/form';
-import { Row, Label, DatePickerInput } from '@moderntribe/events-pro/elements';
+import { Row, Label } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
 const SingularField = ( {
@@ -45,7 +46,7 @@ const SingularField = ( {
 					}
 				</Label>
 				<div className="tribe-editor__events-pro-exception-field__time">
-					<DatePickerInput
+					<DayPickerInput
 						datetime={ momentUtils.toMoment( start ).add( 1, 'day' ) }
 						// TODO: Add onChange handler
 					/>
@@ -53,7 +54,7 @@ const SingularField = ( {
 						multiDay && (
 							<Fragment>
 								<span>{ __( 'to', 'events-gutenberg' ) }</span>
-								<DatePickerInput
+								<DayPickerInput
 									datetime={ momentUtils.toMoment( start ).add( 2, 'days' ) }
 								/>
 							</Fragment>

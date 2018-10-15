@@ -7,6 +7,7 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 
 /**
  * Internal dependencies
@@ -14,7 +15,7 @@ import { __ } from '@wordpress/i18n';
 import { moment as momentUtils } from '@moderntribe/common/utils';
 import { Select } from '@moderntribe/common/components/form';
 import { TimePicker } from '@moderntribe/common/elements';
-import { Row, Label, DatePickerInput } from '@moderntribe/events-pro/elements';
+import { Row, Label } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 const SingularField = ( {
@@ -45,7 +46,7 @@ const SingularField = ( {
 					{ __( 'On', 'events-gutenberg' ) }
 				</Label>
 				<div className="tribe-editor__events-pro-rule-field__date">
-					<DatePickerInput
+					<DayPickerInput
 						datetime={ start }
 						// TODO: Add onChange handler
 					/>
