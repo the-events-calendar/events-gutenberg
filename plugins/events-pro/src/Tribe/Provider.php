@@ -14,8 +14,10 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.events-pro.plugin', 'Tribe__Gutenberg__Events_Pro__Plugin' );
 		
 		// Return if we shouldn't load blocks or Events Pro Plugin is active
-		if ( ! tribe( 'gutenberg.common.editor' )->should_load_blocks()
-		     || ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
+		if (
+			! tribe( 'gutenberg.common.editor' )->should_load_blocks()
+			|| ! class_exists( 'Tribe__Events__Pro__Main' )
+		) {
 			return;
 		}
 
