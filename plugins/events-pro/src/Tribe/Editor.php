@@ -31,6 +31,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 * @param $ticket
 	 * @param $index
 	 * @param $count
+	 *
 	 * @return mixed
 	 */
 	public function after_custom_field_content( $ticket, $index, $count ) {
@@ -53,8 +54,8 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	
 	/**
 	 * Hook into the options before they are stored in the DB, and access the variable used to hold the reference
-     * to the hidden fields, from there we just need to make sure if the fields has been checked or not and update the
-     * custom fields value in the options before they are stored in the DB.
+	 * to the hidden fields, from there we just need to make sure if the fields has been checked or not and update the
+	 * custom fields value in the options before they are stored in the DB.
 	 *
 	 * @since TBD
 	 *
@@ -78,10 +79,10 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	
 	/**
 	 * Make sure the keys of the gutenberg custom fields match the same logic as the custom fields, this logic is
-     * basically if the key or index of a gutenberg field has `_` at the start it means it belongs to an existing
-     * meta field and in order to have the right key we just need to remove the '_'  from the start on the other hand
-     * if does not have one it means it's a new created field which requires to grab the highest max value available
-     * at this point and increase from there every time this scenario is presented.
+	 * basically if the key or index of a gutenberg field has `_` at the start it means it belongs to an existing
+	 * meta field and in order to have the right key we just need to remove the '_'  from the start on the other hand
+	 * if does not have one it means it's a new created field which requires to grab the highest max value available
+	 * at this point and increase from there every time this scenario is presented.
 	 *
 	 * @since TBD
 	 *
@@ -105,7 +106,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	
 	/**
 	 * Return the highest number for the custom fields, this value is created and updated by PRO. Fallback to a zero
-     * value if is not present on the settings or there are no custom fields present yet.
+	 * value if is not present on the settings or there are no custom fields present yet.
 	 *
 	 * @since TBD
 	 *
