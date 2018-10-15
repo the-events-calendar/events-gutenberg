@@ -62,6 +62,7 @@ export const DAYS_OF_THE_WEEK = [
 	{ label: constants.FRIDAY_LABEL, value: constants.FRIDAY },
 	{ label: constants.SATURDAY_LABEL, value: constants.SATURDAY },
 	{ label: constants.SUNDAY_LABEL, value: constants.SUNDAY },
+	{ label: constants.DAY_LABEL, value: constants.DAY },
 ];
 
 //

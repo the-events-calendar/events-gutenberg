@@ -126,6 +126,9 @@ export const SATURDAY_ABBR = __( 'S', 'events-gutenberg' );
 // returns an array from 1 - 31
 export const DAYS_OF_THE_MONTH = Array( 31 ).fill().map( ( _, index ) => index + 1 );
 
+export const DAY = 'day';
+export const DAY_LABEL = __( 'Day', 'events-gutenberg' );
+
 //
 // ─── WEEKS OF THE MONTH ─────────────────────────────────────────────────────────
 //
