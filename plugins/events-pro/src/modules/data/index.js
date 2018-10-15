@@ -3,15 +3,15 @@
  */
 import reducer from './reducers';
 
-import { actions } from '@moderntribe/common/data/plugins';
+import { actions, constants } from '@moderntribe/common/data/plugins';
 import { store } from '@moderntribe/common/store';
-import { EVENTS_PRO_PLUGIN_NAME } from './constants';
+const { EVENTS_PRO_PLUGIN } = constants;
 
 export const initStore = () => {
 	const { dispatch, injectReducers } = store;
 
-	dispatch( actions.addPlugin( EVENTS_PRO_PLUGIN_NAME ) );
-	injectReducers( { [ EVENTS_PRO_PLUGIN_NAME ]: reducer } );
+	dispatch( actions.addPlugin( EVENTS_PRO_PLUGIN ) );
+	injectReducers( { [ EVENTS_PRO_PLUGIN ]: reducer } );
 };
 
 export const getStore = () => store;
