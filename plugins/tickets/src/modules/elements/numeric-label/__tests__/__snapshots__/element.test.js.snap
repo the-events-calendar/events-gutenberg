@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`NumericLabel Disable fallback rendering 1`] = `
+<span
+  className="tribe-editor__numeric-label"
+>
+  
+  0
+</span>
+`;
+
 exports[`NumericLabel plural with multiple placeholder 1`] = `
 <span
   className="tribe-editor__numeric-label"

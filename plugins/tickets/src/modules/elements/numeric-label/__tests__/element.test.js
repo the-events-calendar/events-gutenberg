@@ -20,6 +20,17 @@ describe( 'NumericLabel', () => {
 		expect( component.toJSON() ).toBe( 'My fallback value' );
 	} );
 
+	test( 'Disable fallback rendering', () => {
+		const component = renderer.create(
+			<NumericLabel
+				count={ 0 }
+				fallback="My fallback value"
+				useFallback={ false }
+			/>
+		);
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
 	test( 'render with singular label', () => {
 		const component = renderer.create(
 			<NumericLabel count={ 0 } singular="Just %d item" />
@@ -29,7 +40,7 @@ describe( 'NumericLabel', () => {
 
 	test( 'render with empty and fallback', () => {
 		const component = renderer.create(
-			<NumericLabel count={ 0 } singular="Just %d item" fallback={ '' }/>
+			<NumericLabel count={ 0 } singular="Just %d item" fallback={ '' } />
 		);
 		expect( component.toJSON() ).toBe( '' );
 	} );

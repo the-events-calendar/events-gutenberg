@@ -15,7 +15,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_VENUE:
 			return {
 				...state,
-				venue: state.venue,
+				venue: action.payload.venue,
 			};
 		case types.TOGGLE_VENUE_MAP:
 			return {
