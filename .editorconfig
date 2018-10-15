@@ -1,27 +1,26 @@
 root = true
 
-[*.{php}]
-indent_style = tab
-charset = utf-8
+[*]
+charset=utf - 8
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
-spaces_within_imports = true
+
+[*.php]
+indent_style = tab
+indent_size = 4
+end_of_line = lf
 
 [*.{js,jsx}]
 indent_style = tab
-charset = utf-8
 end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
 spaces_within_imports = true
+indent_size = 2
 
 [*.{css,pcss}]
 indent_style = tab
-charset = utf-8
 end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
+indent_size = 4
 
 [*.{json,yml}]
 indent_style = space
