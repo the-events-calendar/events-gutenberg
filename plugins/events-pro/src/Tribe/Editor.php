@@ -13,55 +13,42 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 * @since TBD
 	 */
 	public function hook() {
-		add_action( 'tribe_events_pro_after_custom_field_content',
-			array( $this, 'after_custom_field_content' ),
-			10,
-			3
-		);
+		add_action( 'tribe_events_pro_after_custom_field_content', array( $this, 'after_custom_field_content' ), 10, 3 );
 		add_filter( 'tribe-events-save-options', array( $this, 'save_custom_field_values' ) );
-		add_action( 'admin_print_styles', array( $this, 'admin_enqueue_styles' ) );
-		add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_scripts' ) );
+		$this->assets();
 	}
 	
 	/**
 	 * Attach a new input after each custom field input is rendered, the value is being stored in a hidden field and
-     * creates a fake <button> to have A11y benefits like focus and so on. The "fake checkbox" is used as we need to send
-     * to the request the value of this operation regardless of is true / false so using a native checkbox send only
-     * the value when the checkbox is mark as "checked", with this approach the "hidden" field is always being send into
-     * the request regardless of the state of it so we can have a valid reference all the time to the value of each custom
-     * field.
+	 * creates a fake <button> to have A11y benefits like focus and so on. The "fake checkbox" is used as we need to send
+	 * to the request the value of this operation regardless of is true / false so using a native checkbox send only
+	 * the value when the checkbox is mark as "checked", with this approach the "hidden" field is always being send into
+	 * the request regardless of the state of it so we can have a valid reference all the time to the value of each custom
+	 * field.
 	 *
 	 * @since TBD
 	 *
 	 * @param $ticket
 	 * @param $index
 	 * @param $count
+	 * @return mixed
 	 */
 	public function after_custom_field_content( $ticket, $index, $count ) {
-		$input_id = 'gutenberg_editor_' . esc_attr( $index );
-		$value    = isset( $ticket['gutenberg_editor'] ) && $ticket['gutenberg_editor'] ? '1' : '0';
-		$class_name = $value === '1' ? 'tribe-custom-field-gutenberg-checkbox--checked' : '';
-		?>
-        <div class="tribe-field-row tribe-field-gutenberg-options">
-            <label for="<?php echo esc_attr( $input_id ); ?>">
-				<?php esc_html_e( 'Hide it in block Editor', 'tribe-events-calendar-pro' ); ?>
-            </label>
-            <button
-                    class="tribe-custom-field-gutenberg-checkbox <?php echo esc_attr( $class_name ); ?>"
-                    name="<?php echo esc_attr( $input_id ); ?>"
-                    type="button"
-                    data-value="<?php echo esc_attr( $value ); ?>">
-            </button>
-            <input
-                    type="hidden"
-                    id="<?php echo esc_attr( $input_id ); ?>"
-                    name="custom-field-gutenberg-editor[<?php echo esc_attr( $index ); ?>]"
-                    data-name-template="custom-field-gutenberg-editor"
-                    data-count="<?php echo esc_attr( $count ); ?>"
-                    value="<?php echo esc_attr( $value ); ?>"
-            />
-        </div>
-		<?php
+		$value = isset( $ticket['gutenberg_editor'] ) && $ticket['gutenberg_editor'] ? '1' : '0';
+		$args  = array(
+			'input_id'   => 'gutenberg_editor_' . esc_attr( $index ),
+			'value'      => $value,
+			'index'      => $index,
+			'class_name' => $value === '1' ? 'tribe-custom-field-gutenberg-checkbox--checked' : '',
+			'count'      => $count,
+		);
+		
+		$html = tribe( 'gutenberg.events.pro.admin.template' )->template( array( 'custom-fields', 'gutenberg' ), $args, false );
+		
+		tribe_asset_enqueue( 'gutenberg-events-pro-admin-additional-fields-style' );
+		tribe_asset_enqueue( 'gutenberg-events-pro-admin-additional-fields-behavior' );
+		
+		echo $html;
 	}
 	
 	/**
@@ -106,7 +93,6 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		$max_index = $this->get_custom_fields_max_index();
 		$mapped = array();
 		foreach ( $gutenberg_custom_fields as $index => $field ) {
-			$assigned_index = $index;
 			if ( 0 === strpos( $index, '_' ) ) {
 				$assigned_index = substr( $index, 1 );
 			} else {
@@ -137,94 +123,49 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	}
 	
 	/**
-	 * Include styles used to style the admin elements added by the gutenberg extension on settings page or
-     * admin screens other that the ones non related to blocks
+	 * Register and Load styles and JS behavior into the admin views
 	 *
 	 * @since TBD
 	 */
-	public function admin_enqueue_styles() {
-		/**
-		 * @todo replace with real plugin template, once is moved out of the extension
-		 */
-		$directory   = 'plugins/events-pro/src/styles/admin.css';
-		$plugins_url = plugins_url(
-			trailingslashit( basename( tribe( 'gutenberg' )->plugin_path ) )
-		);
-		wp_enqueue_style(
-			'gutenberg-pro-admin-css',
-			$plugins_url . $directory,
+	public function assets() {
+		$events_pro = tribe( 'gutenberg.events-pro.plugin' );
+		
+		tribe_asset(
+			$events_pro,
+			'gutenberg-events-pro-admin-additional-fields-admin-style',
+			'admin/custom-fields.css',
 			array(),
-			apply_filters( 'tribe_events_pro_css_version', Tribe__Events__Pro__Main::VERSION )
+			'admin_enqueue_scripts',
+			array(
+				'conditionals' => array( $this, 'maybe_load_custom_field_assets' ),
+			)
+		);
+		
+		tribe_asset(
+			$events_pro,
+			'gutenberg-events-pro-admin-additional-fields-behavior',
+			'admin-custom-fields.js',
+			array(),
+			'admin_enqueue_scripts',
+			array(
+				'conditionals' => array( $this, 'maybe_load_custom_field_assets' ),
+			)
 		);
 	}
 	
 	/**
-	 * Attach JS behavior into the "fake checkbox" and into the "Add Another" button in order to reset and attach behaviors
-     * into each "fake checkbox" as HTML inputs are recreated via JS on PRO side, also this allow to have a single JS logic
-     * for all the fields instead of one per field.
+	 * Callback used to load the assets only when the Additional Fields tab is selected
 	 *
 	 * @since TBD
+	 *
+	 * @return bool
 	 */
-	public function admin_print_scripts() {
-		?>
-        <script type="text/javascript">
-	        ( function() {
-		        function toggleInput( input, isActive ) {
-			        input.setAttribute( 'value', isActive ? '1' : '0' );
-			        return input;
-		        }
-
-		        function toggleButton( button, isActive ) {
-			        if ( isActive ) {
-				        button.classList.remove( 'tribe-custom-field-gutenberg-checkbox--checked' );
-			        } else {
-				        button.classList.add( 'tribe-custom-field-gutenberg-checkbox--checked' );
-			        }
-			        return button;
-		        }
-
-		        function attachBehavior( isCreatingFields ) {
-			        return function( button ) {
-				        if ( button._attached ) {
-					        return;
-				        }
-				        button._attached = true;
-				        var input = button.parentNode.querySelector( 'input[type="hidden"]' );
-				        if ( ! input ) {
-					        return;
-				        }
-				        
-				        // Reset input and button fields is is creating a new duplicate of the same field
-				        if ( isCreatingFields ) {
-				        	toggleInput( input, true );
-				        	toggleButton( button, true );
-                        }
-				        
-				        button.addEventListener( 'click', function() {
-				        	var isActive = input.getAttribute( 'value' ) === '1';
-				        	toggleInput( input, isActive );
-				        	toggleButton( button, isActive );
-				        } );
-			        };
-		        }
-
-		        function init( isCreatingFields ) {
-			        return function() {
-				        [].slice
-                          .call( document.querySelectorAll( '.tribe-custom-field-gutenberg-checkbox' ) )
-                          .map( attachBehavior( isCreatingFields ) );
-			        };
-		        }
-
-		        var addButton = document.querySelector( '.add-another-field.tribe-add-post.button' );
-		        if ( addButton ) {
-			        addButton.addEventListener( 'click', function() {
-				        setTimeout( init( true ) );
-			        } );
-		        }
-		        init( false )();
-	        } )();
-        </script>
-		<?php
+	public function maybe_load_custom_field_assets() {
+		$screen = get_current_screen();
+		if ( $screen === null || $screen->id !== 'tribe_events_page_tribe-common' ) {
+			return false;
+		}
+		$tab = tribe_get_request_var( 'tab' );
+		return 'additional-fields' === $tab;
 	}
 }
