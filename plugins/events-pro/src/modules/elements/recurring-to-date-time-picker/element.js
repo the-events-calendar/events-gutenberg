@@ -9,18 +9,19 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import {
-	LabeledRow,
-	DayOfMonthPicker,
-} from '@moderntribe/events-pro/elements';
+import { Select, TimePicker } from '@moderntribe/common/elements';
+import { TribePropTypes } from '@moderntribe/common/utils';
+import { LabeledRow } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
+import './style.pcss';
 
 const RecurringToDateTimePicker = ( {
 	className,
-	endMonthDay,
-	endWeekDay,
-	onEndMonthDayChange,
-	onEndWeekDayChange,
+	endTime,
+	onEndTimeChange,
+	onEndTimeClick,
+	onRecurringMultiDayChange,
+	recurringMultiDay,
 } ) => (
 	<LabeledRow
 		className={ classNames(
@@ -29,21 +30,34 @@ const RecurringToDateTimePicker = ( {
 		) }
 		label={ __( 'To', 'events-gutenberg' ) }
 	>
-		<DayOfMonthPicker
-			dayOfMonth={ endMonthDay }
-			onDayOfMonthChange={ onEndMonthDayChange }
-			onWeekDayChange={ onEndWeekDayChange }
-			weekDay={ endWeekDay }
+		<TimePicker
+			current={ endTime }
+			// TODO: logic to handle start and end times
+			start="00:00"
+			end="23:59"
+			onChange={ onEndTimeChange }
+			onClick={ onEndTimeClick }
+			// TODO: Add onChange handler
+		/>
+		<span>{ __( 'on the', 'events-gutenberg' ) }</span>
+		<Select
+			className="tribe-editor__recurring-to-date-time-picker__select"
+			backspaceRemovesValue={ false }
+			value={ recurringMultiDay }
+			isSearchable={ false }
+			options={ options.RECURRING_MULTI_DAY_OPTIONS }
+			onChange={ onRecurringMultiDayChange }
 		/>
 	</LabeledRow>
 );
 
 RecurringToDateTimePicker.propTypes = {
 	className: PropTypes.string,
-	endMonthDay: PropTypes.oneOf( options.MONTH_DAYS_OPTIONS ),
-	endWeekDay: PropTypes.oneOf( options.DAYS_OF_THE_WEEK ),
-	onEndMonthDayChange: PropTypes.func,
-	onEndWeekDayChange: PropTypes.func,
+	endTime: TribePropTypes.timeFormat,
+	onEndTimeChange: PropTypes.func,
+	onEndTimeClick: PropTypes.func,
+	onRecurringMultiDayChange: PropTypes.func,
+	recurringMultiDay: PropTypes.oneOf( options.RECURRING_MULTI_DAY_OPTIONS ),
 };
 
 export default RecurringToDateTimePicker;

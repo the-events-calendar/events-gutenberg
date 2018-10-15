@@ -9,24 +9,26 @@ import PropTypes from 'prop-types';
  */
 import {
 	FromTimeRangePicker,
-	OnDatePicker,
+	OnDayOfMonthPicker,
 	RecurrenceTypePicker,
-	SingleToDateTimePicker,
+	RecurringToDateTimePicker,
+	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
 
-const SingularField = ( { isMultiDay } ) => {
+const MonthlyField = ( { isMultiDay } ) => {
 	return (
 		<Fragment>
 			<RecurrenceTypePicker />
-			<OnDatePicker />
+			<OnDayOfMonthPicker />
 			<FromTimeRangePicker />
-			{ isMultiDay && <SingleToDateTimePicker /> }
+			{ isMultiDay && <RecurringToDateTimePicker /> }
+			<SeriesEnds />
 		</Fragment>
 	);
 };
 
-SingularField.propTypes = {
+MonthlyField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
 };
 
-export default SingularField;
+export default MonthlyField;
