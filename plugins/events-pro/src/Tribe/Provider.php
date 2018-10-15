@@ -22,7 +22,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 		}
 
 		$this->container->singleton( 'gutenberg.events.pro.editor', 'Tribe__Gutenberg__Events_Pro__Editor' );
-
+		$this->container->singleton( 'gutenberg.events.pro.admin.template', 'Tribe__Gutenberg__Events_Pro__Template__Admin' );
 		$this->container->singleton(
 			'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' )
 		);
