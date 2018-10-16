@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { actions } from '@moderntribe/common/data/reducers/plugins';
+import { actions } from '@moderntribe/common/data/plugins';
 
 describe( 'Plugin actions', () => {
 	test( 'Add Plugin', () => {

@@ -9,8 +9,7 @@
   "keywords": [
     "WordPress",
     "editor",
-    "The Events Calendar",
-    "events tickets"
+    "The Events Calendar Pro"
   ],
   "engines": {
     "node": ">=8.0.0",
@@ -24,6 +23,5 @@
     "preanalyze": "cross-env NODE_ENV=production webpack -p --profile --json > stats.json",
     "analyze": "webpack-bundle-analyzer -m static stats.json"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
