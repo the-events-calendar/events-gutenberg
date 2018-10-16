@@ -20,8 +20,13 @@ export default class ExceptionForm extends PureComponent {
 		return (
 			<section>
 				{
-					this.props.exceptions.map( exception => (
-						<ExceptionField { ...exception } onRemoveClick={ this.props.removeException } />
+					this.props.exceptions.map( ( exception, i ) => (
+						<ExceptionField
+							key={ i }
+							index={ i }
+							onRemoveClick={ this.props.removeException }
+							{ ...exception }
+						/>
 					) )
 				}
 			</section>

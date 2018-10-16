@@ -17,13 +17,14 @@ export default class ExceptionField extends PureComponent {
 	static propTypes = {
 		onRemoveClick: PropTypes.func.isRequired,
 		id: PropTypes.string.isRequired,
-		fieldType: PropTypes.string.isRequired,
+		index: PropTypes.number.isRequired,
+		type: PropTypes.string.isRequired,
 	}
 
-	handleRemove = () => this.props.onRemoveClick( this.props.id )
+	handleRemove = () => this.props.onRemoveClick( this.props.index )
 
 	renderFieldType = () => {
-		switch ( this.props.fieldType ) {
+		switch ( this.props.type ) {
 			case constants.DAILY:
 			case constants.WEEKLY:
 			case constants.MONTHLY:
