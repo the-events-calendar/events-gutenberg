@@ -131,7 +131,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		tribe_asset(
 			$events_pro,
 			'gutenberg-events-pro-admin-additional-fields-admin-style',
-			'admin/custom-fields.css',
+			'admin/additional-fields.css',
 			array(),
 			'admin_enqueue_scripts',
 			array(
@@ -142,7 +142,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		tribe_asset(
 			$events_pro,
 			'gutenberg-events-pro-admin-additional-fields-behavior',
-			'admin-custom-fields.js',
+			'admin-additional-fields.js',
 			array(),
 			'admin_enqueue_scripts',
 			array(
