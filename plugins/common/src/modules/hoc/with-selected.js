@@ -8,14 +8,11 @@ import {
 } from 'lodash';
 
 /**
- * Higher order component that updates the attributes of a component if any of the properties of the
- * attributes changes.
+ * Higher order component that executes two functions:
  *
- * Only updates the attributes that has changed with the new updates into the properties and only
- * the ones specified as attributes params otherwise will fallback to the property attributes of the
- * component to extract the keys of those to do the comparision.
+ * - `onBlockFocus` when the block is selected
+ * - `onBlockBlur` when the block losses focus after being selected
  *
- * @param {object} selectedAttributes Set of attributes to only update fallback to this.props.attributes
  * @returns {function} Return a new HOC
  */
 export default () => ( WrappedComponent ) => {
