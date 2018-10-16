@@ -45,10 +45,6 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		);
 		
 		$html = tribe( 'gutenberg.events.pro.admin.template' )->template( array( 'custom-fields', 'gutenberg' ), $args, false );
-		
-		tribe_asset_enqueue( 'gutenberg-events-pro-admin-additional-fields-style' );
-		tribe_asset_enqueue( 'gutenberg-events-pro-admin-additional-fields-behavior' );
-		
 		echo $html;
 	}
 	
