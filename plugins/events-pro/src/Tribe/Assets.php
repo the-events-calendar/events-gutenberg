@@ -42,6 +42,18 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		
 		tribe_asset(
 			$plugin,
+			'tribe-pro-gutenberg-blocks-styles',
+			'blocks.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+			)
+		);
+		
+		tribe_asset(
+			$plugin,
 			'tribe-pro-gutenberg-elements',
 			'elements.js',
 			/**
