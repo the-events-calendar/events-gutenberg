@@ -15,6 +15,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	public function hook() {
 		add_action( 'tribe_events_pro_after_custom_field_content', array( $this, 'after_custom_field_content' ), 10, 3 );
 		add_filter( 'tribe-events-save-options', array( $this, 'save_custom_field_values' ) );
+		add_action( 'block_categories', array( $this, 'register_additional_fields_category' ), 10, 2 );
 		$this->assets();
 	}
 	
@@ -165,4 +166,30 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		$tab = tribe_get_request_var( 'tab' );
 		return 'additional-fields' === $tab;
 	}
+	
+	/**
+	 * Add the event custom fields on post that are events only
+	 *
+	 * @since TBD
+	 *
+	 * @param $categories
+	 * @param $post
+	 * @return array
+	 */
+	public function register_additional_fields_category( $categories, $post ) {
+		if ( ! tribe_is_event( $post ) ) {
+			return $categories;
+		}
+
+		return array_merge(
+			$categories,
+			array(
+				array(
+					'slug' => 'tribe-events-pro-additional-fields',
+					'title' => __( 'Additional Fields', 'events-gutenberg' ),
+				),
+			)
+		);
+	}
+	
 }
