@@ -63,16 +63,16 @@ const getCapacityLabel = ( capacity ) => {
 
 	return (
 		<NumericLabel
-			count={ parseInt( capacity ) }
+			count={ capacity }
 			singular={ singular }
 			plural={ plural }
+			useFallback={ false }
 			className="tribe-editor__rsvp-container-header__capacity-label"
 		/>
 	)
 };
 
 const RSVPContainerHeader = ( {
-	capacity,
 	description,
 	isDisabled,
 	isSelected,
@@ -81,6 +81,7 @@ const RSVPContainerHeader = ( {
 	tempDescription,
 	tempTitle,
 	title,
+	available,
 } ) => {
 	return (
 		<Fragment>
@@ -99,7 +100,7 @@ const RSVPContainerHeader = ( {
 					tempDescription,
 					description,
 				) }
-				{ getCapacityLabel( capacity ) }
+				{ getCapacityLabel( available ) }
 			</div>
 			<RSVPCounters />
 		</Fragment>
@@ -107,7 +108,7 @@ const RSVPContainerHeader = ( {
 };
 
 RSVPContainerHeader.propTypes = {
-	capacity: PropTypes.string,
+	available: PropTypes.number,
 	description: PropTypes.string,
 	isDisabled: PropTypes.bool.isRequired,
 	isSelected: PropTypes.bool.isRequired,

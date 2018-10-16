@@ -16,7 +16,7 @@ const getIsDisabled = ( state ) => (
 );
 
 const mapStateToProps = ( state ) => ( {
-	capacity: selectors.getRSVPCapacity( state ),
+	available: selectors.getRSVPAvailable( state ),
 	description: selectors.getRSVPDescription( state ),
 	isDisabled: getIsDisabled( state ),
 	tempDescription: selectors.getRSVPTempDescription( state ),

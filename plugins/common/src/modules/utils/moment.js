@@ -253,6 +253,22 @@ export const isSameDay = ( start, end ) => {
 };
 
 /**
+ * Test if two moment objects are in the same month
+ *
+ * @param {moment} start The start moment
+ * @param {moment} end The end moment
+ * @returns {boolean} true if start and end are on the same month
+ */
+export const isSameMonth = ( start, end ) => {
+
+	if ( ! start || ! end ) {
+		return false;
+	}
+
+	return moment( start ).isSame( end, 'month' );
+};
+
+/**
  * Test if the start and end dates have the same year.
  *
  * @param {moment} start The start date
