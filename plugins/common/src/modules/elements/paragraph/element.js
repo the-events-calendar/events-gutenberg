@@ -16,7 +16,7 @@ export const SIZES = {
 };
 
 const Paragraph = ( { children, size, className } ) => (
-	<div
+	<p
 		className={
 			classNames(
 				'tribe-editor__paragraph',
@@ -26,7 +26,7 @@ const Paragraph = ( { children, size, className } ) => (
 		}
 	>
 		{ children }
-	</div>
+	</p>
 );
 
 Paragraph.propTypes = {
