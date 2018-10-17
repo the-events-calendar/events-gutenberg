@@ -32,8 +32,8 @@
 	"dependencies": {
 		"@moderntribe/common": "file:plugins/common",
 		"@moderntribe/events": "file:plugins/events",
-		"@moderntribe/tickets": "file:plugins/tickets",
 		"@moderntribe/events-pro": "file:plugins/events-pro",
+		"@moderntribe/tickets": "file:plugins/tickets",
 		"@nfen/redux-reducer-injector": "0.0.3",
 		"@wordpress/a11y": "1.0.3",
 		"@wordpress/data": "^1.1.0",
@@ -65,6 +65,7 @@
 		"redux-saga": "^0.16.1",
 		"redux-thunk": "^2.3.0",
 		"reselect": "^3.0.1",
+		"sprintf-js": "^1.1.1",
 		"uniqid": "^5.0.3",
 		"url-loader": "^0.6.2",
 		"validator": "^9.4.1",
