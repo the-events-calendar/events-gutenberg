@@ -20,7 +20,7 @@ import {
 const YearlyField = ( { isMultiDay } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker />
+			<RecurrenceTypePicker rowLabel={ __( 'Excluding', 'events-gutenberg' ) } />
 			<InMonth />
 			<DayOfMonthPicker />
 			<FromTimeRangePicker />

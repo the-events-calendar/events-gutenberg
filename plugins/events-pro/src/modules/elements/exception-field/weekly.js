@@ -19,7 +19,7 @@ import {
 const WeeklyField = ( { isMultiDay } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker />
+			<RecurrenceTypePicker rowLabel={ __( 'Excluding', 'events-gutenberg' ) } />
 			<OnDayOfWeek />
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }

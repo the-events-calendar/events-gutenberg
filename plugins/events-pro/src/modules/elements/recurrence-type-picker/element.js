@@ -38,7 +38,7 @@ const RecurrenceTypePicker = ( {
 	return (
 		<LabeledRow
 			className={ classNames( 'tribe-editor__recurrence-type-picker', className ) }
-			label={ getLabel() }
+			label={ rowLabel || getLabel() }
 		>
 			{ getFrequencySelect() }
 			<Select
@@ -57,6 +57,7 @@ RecurrenceTypePicker.propTypes = {
 	className: PropTypes.string,
 	onRecurrenceTypeChange: PropTypes.func,
 	recurrenceType: PropTypes.oneOf( options.RECURRENCE_TYPE_RULES_OPTIONS ),
+	rowLabel: PropTypes.string,
 };
 
 export default RecurrenceTypePicker;

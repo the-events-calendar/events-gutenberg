@@ -19,7 +19,7 @@ import {
 const MonthlyField = ( { isMultiDay } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker />
+			<RecurrenceTypePicker rowLabel={ __( 'Excluding', 'events-gutenberg' ) } />
 			<DayOfMonthPicker />
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }
