@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { Fragment } from 'react';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -8,6 +13,7 @@ import { __ } from '@wordpress/i18n';
  */
 import {
 	Placeholder,
+	Settings,
 } from './elements';
 
 /**
@@ -31,7 +37,10 @@ export default {
 
 	attributes: {},
 	edit: () => (
+		<Fragment>
 			<Placeholder>Add refreshments</Placeholder>
+			<Settings name="Refreshments" />
+		</Fragment>
 	),
 	save: () => null,
 };
