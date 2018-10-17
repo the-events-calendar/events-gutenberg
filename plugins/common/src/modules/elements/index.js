@@ -13,3 +13,4 @@ export { default as Tooltip } from './tooltip/element';
 export { default as Placeholder } from './placeholder/element';
 export { default as Heading } from './heading/element';
 export { default as Paragraph } from './paragraph/element';
+export { default as Select } from './select/element';
