@@ -12,11 +12,17 @@ import {
 	EditContainer,
 } from './elements';
 
-import { Placeholder } from '@moderntribe/common/elements';
+import { Placeholder, Select } from '@moderntribe/common/elements';
 
 /**
  * Module Code
  */
+
+const options = [
+	{ value: 'chocolate', label: 'Chocolate' },
+	{ value: 'strawberry', label: 'Strawberry' },
+	{ value: 'vanilla', label: 'Vanilla' }
+];
 
 export default {
 	id: 'additional-fields',
@@ -54,15 +60,7 @@ export default {
 					<label htmlFor="claws">Claws</label>
 				</fieldset>
 				<input className="" type="url" name="url" id="url" />
-				<select id="pet-select">
-					<option value="">--Please choose an option--</option>
-					<option value="dog">Dog</option>
-					<option value="cat">Cat</option>
-					<option value="hamster">Hamster</option>
-					<option value="parrot">Parrot</option>
-					<option value="spider">Spider</option>
-					<option value="goldfish">Goldfish</option>
-				</select>
+				<Select options={ options } />
 				<fieldset className="tribe-editor__additional-fields__edit--horizontal-fields">
 					<input type="radio" id="huey" name="drone" value="huey" checked />
 					<label htmlFor="huey">Huey</label>
