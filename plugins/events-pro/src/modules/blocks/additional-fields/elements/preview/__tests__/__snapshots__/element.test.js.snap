@@ -9,10 +9,10 @@ exports[`<Preview> default params 1`] = `
   >
     Modern Tribe
   </h2>
-  <div
+  <p
     className="tribe-editor__paragraph tribe-editor__paragraph--medium"
   >
     The Next Generation of Digital Agency
-  </div>
+  </p>
 </div>
 `;
