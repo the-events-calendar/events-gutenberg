@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import {
 	FromTimeRangePicker,
 	InMonth,
-	OnDayOfMonthPicker,
+	DayOfMonthPicker,
 	RecurrenceTypePicker,
 	RecurringToDateTimePicker,
 	SeriesEnds,
@@ -21,7 +21,7 @@ const YearlyField = ( { isMultiDay } ) => {
 		<Fragment>
 			<RecurrenceTypePicker />
 			<InMonth />
-			<OnDayOfMonthPicker />
+			<DayOfMonthPicker />
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }
 			<SeriesEnds />
