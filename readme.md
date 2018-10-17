@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.3.2-alpha - TBD
 
 * Fix - Adjust vertical alignment of the price section for the classic event date time block
+* Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
 
 #### 0.3.1-alpha - 2018-10-12
 
