@@ -14,7 +14,7 @@ const Heading = ( { level, children, className } ) => {
 	const HeadingLevel = `h${ level }`;
 	const headingClassName = classNames(
 		'tribe-editor__heading',
-		`tribe-editor__h${ level }`,
+		`tribe-editor__heading--h${ level }`,
 		className,
 	);
 	return (
