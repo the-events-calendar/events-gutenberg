@@ -19,6 +19,7 @@ const RecurrenceTypePicker = ( {
 	className,
 	onRecurrenceTypeChange,
 	recurrenceType,
+	rowLabel,
 } ) => {
 	const getLabel = () => (
 		recurrenceType.value === constants.SINGLE
