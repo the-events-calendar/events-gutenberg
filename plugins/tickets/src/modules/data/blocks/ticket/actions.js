@@ -199,6 +199,14 @@ export const setTicketId = ( blockId, ticketId ) => ( {
 	},
 } );
 
+export const setTicketProvider = ( blockId, provider ) => ( {
+	type: types.SET_TICKET_PROVIDER,
+	payload: {
+		blockId,
+		provider,
+	},
+} );
+
 export const setTicketDateIsPristine = ( blockId, dateIsPristine ) => ( {
 	type: types.SET_TICKET_DATE_PRISTINE,
 	payload: {
@@ -271,6 +279,14 @@ export const setTicketSold = ( blockId, sold ) => ( {
 	payload: {
 		blockId,
 		sold,
+	},
+} );
+
+export const setTicketCurrency = ( blockId, currencySymbol ) => ( {
+	type: types.SET_TICKET_CURRENCY,
+	payload: {
+		blockId,
+		currencySymbol,
 	},
 } );
 
