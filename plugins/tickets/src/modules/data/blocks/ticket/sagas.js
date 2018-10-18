@@ -282,6 +282,8 @@ export function* fetchTicketDetails( action ) {
 			put( actions.setCapacityType( blockId, ticket.capacity_type ) ),
 			put( actions.setTicketSold( blockId, totals.sold ) ),
 			put( actions.setTicketAvailable( blockId, totals.stock ) ),
+			put( actions.setTicketCurrency( blockId, ticket.cost_details.currency_symbol ) ),
+			put( actions.setTicketProvider( blockId, ticket.provider ) ),
 		] );
 	} catch ( e ) {
 		/**
