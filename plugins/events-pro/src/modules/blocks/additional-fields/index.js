@@ -11,8 +11,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { Settings } from './checkbox';
+
 import {
-	Settings,
 	Preview,
 	EditContainer,
 } from './elements';
