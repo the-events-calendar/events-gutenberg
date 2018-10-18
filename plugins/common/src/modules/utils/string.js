@@ -64,7 +64,7 @@ export const getWords = ( text = '' ) => {
  * @param {string} endSeparator separator applied between the last words
  * @returns {string} return a string with custom separators between words
  */
-export const wordsAsList = ( words, startSeparator = ',', endSeparator = ' & ' ) => {
+export const wordsAsList = ( words, startSeparator = ', ', endSeparator = ' & ' ) => {
 	if ( words.length <= 1 ) {
 		return words.join( '' );
 	} else {

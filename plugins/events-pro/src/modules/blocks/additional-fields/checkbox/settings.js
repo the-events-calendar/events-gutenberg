@@ -60,7 +60,7 @@ CheckboxSettings.propTypes = {
 };
 
 CheckboxSettings.defaultProps = {
-	listDividerValue: ' , ',
+	listDividerValue: ', ',
 	listEnderValue: ' & ',
 };
 

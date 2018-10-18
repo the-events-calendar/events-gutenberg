@@ -66,7 +66,7 @@ describe( 'Tests for string.js', () => {
 		test( 'A large number of words', () => {
 			expect(
 				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ] )
-			).toEqual( 'Dog,Cat,Hamster,Parrot,Spider & Goldfish' );
+			).toEqual( 'Dog, Cat, Hamster, Parrot, Spider & Goldfish' );
 		} );
 
 		test( 'Custom separators', () => {
