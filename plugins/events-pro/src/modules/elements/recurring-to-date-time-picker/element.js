@@ -13,7 +13,6 @@ import { Select, TimePicker } from '@moderntribe/common/elements';
 import { TribePropTypes } from '@moderntribe/common/utils';
 import { LabeledRow } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
-import './style.pcss';
 
 const RecurringToDateTimePicker = ( {
 	className,

@@ -24,8 +24,9 @@ const SeriesEnds = ( {
 	onSeriesEndsAfterTimesChange,
 	onSeriesEndsChange,
 	onSeriesEndsOnDateChange,
-	seriesEndsAfterTimes,
+	rowLabel,
 	seriesEnds,
+	seriesEndsAfterTimes,
 	seriesEndsOnDate,
 	seriesEndsOnDateFormat,
 } ) => {
@@ -69,7 +70,7 @@ const SeriesEnds = ( {
 	return (
 		<LabeledRow
 			className={ classNames( 'tribe-editor__series-ends', className ) }
-			label={ __( 'Series ends', 'events-gutenberg' ) }
+			label={ rowLabel }
 		>
 			<Select
 				className="tribe-editor__series-ends__select"
@@ -82,21 +83,23 @@ const SeriesEnds = ( {
 			{ getPostfix() }
 		</LabeledRow>
 	);
-}
+};
 
 SeriesEnds.propTypes = {
 	className: PropTypes.string,
 	onSeriesEndsAfterTimesChange: PropTypes.func,
 	onSeriesEndsChange: PropTypes.func,
 	onSeriesEndsOnDateChange: PropTypes.func,
-	seriesEndsAfterTimes: PropTypes.number,
+	rowLabel: PropTypes.string,
 	seriesEnds: PropTypes.oneOf( options.SERIES_ENDS_OPTIONS ),
+	seriesEndsAfterTimes: PropTypes.number,
 	seriesEndsOnDate: PropTypes.string,
 	seriesEndsOnDateFormat: PropTypes.string,
 };
 
 SeriesEnds.defaultProps = {
 	seriesEndsOnDateFormat: 'LL',
+	rowLabel: __( 'Series ends', 'events-gutenberg' ),
 };
 
 export default SeriesEnds;

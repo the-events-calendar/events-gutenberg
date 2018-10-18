@@ -8,10 +8,13 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
-import { Fieldset } from '@moderntribe/events-pro/src/modules/elements';
-import RemoveField from '@moderntribe/events-pro/src/modules/elements/remove-field/element';
-import Singular from '@moderntribe/events-pro/src/modules/elements/exception-field/singular';
-import './style.pcss';
+import { Fieldset } from '@moderntribe/events-pro/elements';
+import RemoveField from '@moderntribe/events-pro/elements/remove-field/element';
+import Singular from './singular';
+import Daily from './daily';
+import Weekly from './weekly';
+import Monthly from './monthly';
+import Yearly from './yearly';
 
 export default class ExceptionField extends PureComponent {
 	static propTypes = {
@@ -26,9 +29,13 @@ export default class ExceptionField extends PureComponent {
 	renderFieldType = () => {
 		switch ( this.props.type ) {
 			case constants.DAILY:
+				return <Daily { ...this.props } />;
 			case constants.WEEKLY:
+				return <Weekly { ...this.props } />;
 			case constants.MONTHLY:
+				return <Monthly { ...this.props } />;
 			case constants.YEARLY:
+				return <Yearly { ...this.props } />;
 			default:
 				return <Singular { ...this.props } />;
 		}

@@ -24,10 +24,14 @@ class MonthPicker extends PureComponent {
 		onSelectChange: PropTypes.func,
 	};
 
+	static defaultProps = {
+		months: [],
+	}
+
 	constructor( props ) {
 		super( props );
 		this.state = {
-			isSelecting: false
+			isSelecting: false,
 		};
 	}
 
@@ -79,6 +83,6 @@ class MonthPicker extends PureComponent {
 			</div>
 		);
 	}
-};
+}
 
 export default MonthPicker;

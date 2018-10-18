@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -18,11 +19,11 @@ import {
 const MonthlyField = ( { isMultiDay } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker />
+			<RecurrenceTypePicker rowLabel={ __( 'Excluding', 'events-gutenberg' ) } />
 			<DayOfMonthPicker />
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }
-			<SeriesEnds />
+			<SeriesEnds rowLabel={ __( 'Exception ends', 'events-gutenberg' ) } />
 		</Fragment>
 	);
 };
