@@ -15,6 +15,7 @@ export { default as MultiDayCheckbox } from './multi-day-checkbox/element';
 export { default as SeriesEnds } from './series-ends/element';
 export { default as DayOfWeekPicker } from './day-of-week-picker/element';
 export { default as OnDayOfWeek } from './on-day-of-week/element';
+export { default as OnDayOfMonthPicker } from './on-day-of-month-picker/element';
 export { default as DayOfMonthPicker } from './day-of-month-picker/element';
 export { default as RecurringToDateTimePicker } from './recurring-to-date-time-picker/element';
 export { default as SingleToDateTimePicker } from './single-to-date-time-picker/element';
