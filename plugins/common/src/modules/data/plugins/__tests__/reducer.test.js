@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import reducer, { actions } from '@moderntribe/common/data/reducers/plugins';
+import reducer, { actions } from '@moderntribe/common/data/plugins';
 
 describe( 'Plugins reducer', () => {
 	it( 'Should return the default state', () => {
@@ -19,6 +19,7 @@ describe( 'Plugins reducer', () => {
 
 	it( 'Should remove the plugin from the reducer', () => {
 		const state = reducer( {}, actions.addPlugin( 'events' ) );
+		expect( state ).toEqual( [ 'events' ] );
 		expect( reducer( state, actions.removePlugin( 'events' ) ) ).toEqual( [] );
 	} );
 } );

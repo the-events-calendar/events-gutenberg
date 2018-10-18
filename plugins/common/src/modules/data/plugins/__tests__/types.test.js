@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import { PREFIX_COMMON_STORE } from '@moderntribe/common/data/utils';
-import { types } from '@moderntribe/common/data/reducers/plugins';
+import { types } from '@moderntribe/common/data/plugins';
 
 describe( 'Plugin types', () => {
 	it( 'Should return the types with a prefix', () => {
