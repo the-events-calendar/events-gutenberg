@@ -4,6 +4,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -11,14 +12,19 @@ import { __ } from '@wordpress/i18n';
 import {
 	FromTimeRangePicker,
 	OnDatePicker,
-	RecurrenceTypePicker,
+	TypePicker,
 	SingleToDateTimePicker,
 } from '@moderntribe/events-pro/elements';
+import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const SingularField = ( { isMultiDay } ) => {
+const SingularField = ( { isMultiDay, typeOption } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker rowLabel={ __( 'Excluding', 'events-gutenberg' ) } />
+			<TypePicker
+				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
+				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
+				selected={ typeOption }
+			/>
 			<OnDatePicker />
 			<FromTimeRangePicker />
 			{ isMultiDay && <SingleToDateTimePicker /> }
@@ -28,6 +34,7 @@ const SingularField = ( { isMultiDay } ) => {
 
 SingularField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
+	typeOption: proptypes.ReactSelectOption,
 };
 
 export default SingularField;

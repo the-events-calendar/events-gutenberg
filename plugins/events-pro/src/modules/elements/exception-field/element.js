@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
+import { selectors } from '@moderntribe/events-pro/data/blocks/exception';
 import { Fieldset } from '@moderntribe/events-pro/elements';
 import RemoveField from '@moderntribe/events-pro/elements/remove-field/element';
 import Singular from './singular';
@@ -26,18 +27,23 @@ export default class ExceptionField extends PureComponent {
 
 	handleRemove = () => this.props.onRemoveClick( this.props.index )
 
+	get typeOption() {
+		return selectors.getExceptionTypeOption( this.props );
+	}
+
 	renderFieldType = () => {
+		console.warn( this.typeOption, this.props );
 		switch ( this.props.type ) {
 			case constants.DAILY:
-				return <Daily { ...this.props } />;
+				return <Daily { ...this.props } typeOption={ this.typeOption } />;
 			case constants.WEEKLY:
-				return <Weekly { ...this.props } />;
+				return <Weekly { ...this.props } typeOption={ this.typeOption } />;
 			case constants.MONTHLY:
-				return <Monthly { ...this.props } />;
+				return <Monthly { ...this.props } typeOption={ this.typeOption } />;
 			case constants.YEARLY:
-				return <Yearly { ...this.props } />;
+				return <Yearly { ...this.props } typeOption={ this.typeOption } />;
 			default:
-				return <Singular { ...this.props } />;
+				return <Singular { ...this.props } typeOption={ this.typeOption } />;
 		}
 	}
 

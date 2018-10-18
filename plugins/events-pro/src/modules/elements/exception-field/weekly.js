@@ -4,6 +4,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
+import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -11,15 +12,20 @@ import { __ } from '@wordpress/i18n';
 import {
 	FromTimeRangePicker,
 	OnDayOfWeek,
-	RecurrenceTypePicker,
+	TypePicker,
 	RecurringToDateTimePicker,
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
+import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const WeeklyField = ( { isMultiDay } ) => {
+const WeeklyField = ( { isMultiDay, typeOption } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker rowLabel={ __( 'Excluding', 'events-gutenberg' ) } />
+			<TypePicker
+				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
+				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
+				selected={ typeOption }
+			/>
 			<OnDayOfWeek />
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }
@@ -30,6 +36,7 @@ const WeeklyField = ( { isMultiDay } ) => {
 
 WeeklyField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
+	typeOption: proptypes.ReactSelectOption,
 };
 
 export default WeeklyField;
