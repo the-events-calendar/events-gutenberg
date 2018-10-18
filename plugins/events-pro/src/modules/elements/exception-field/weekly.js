@@ -3,32 +3,33 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
 import {
 	FromTimeRangePicker,
-	DayOfMonthPicker,
+	OnDayOfWeek,
 	RecurrenceTypePicker,
 	RecurringToDateTimePicker,
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
 
-const MonthlyField = ( { isMultiDay } ) => {
+const WeeklyField = ( { isMultiDay } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker />
-			<DayOfMonthPicker />
+			<RecurrenceTypePicker rowLabel={ __( 'Excluding', 'events-gutenberg' ) } />
+			<OnDayOfWeek />
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }
-			<SeriesEnds />
+			<SeriesEnds rowLabel={ __( 'Exception ends', 'events-gutenberg' ) } />
 		</Fragment>
 	);
 };
 
-MonthlyField.propTypes = {
+WeeklyField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
 };
 
-export default MonthlyField;
+export default WeeklyField;
