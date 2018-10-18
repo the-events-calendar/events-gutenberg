@@ -13,8 +13,9 @@ import { __ } from '@wordpress/i18n';
  */
 import {
 	Placeholder,
-	Settings,
 } from './elements';
+
+import { Settings } from './checkbox';
 
 /**
  * Module Code
