@@ -18,15 +18,11 @@ const Settings = ( { name, before, after, settingsLink } ) => (
 		<PanelBody title={ sprintf( __( '%1$s Settings', 'events-gutenberg' ), name ) }>
 			{ ! ! settingsLink && (
 				<span>
-				{ __( 'Adjust this block’s options under Events → Settings → ', 'events-gutenberg' ) }
-					<a
-						href={ settingsLink }
-						target="_blank"
-						rel="noreferrer noopener"
-					>
-					{ __( 'Additional Fields', 'events-gutenberg' ) }
-				</a>
-			</span>
+					{ __( 'Adjust this block’s options under Events → Settings → ', 'events-gutenberg' ) }
+					<a href={ settingsLink } target="_blank" rel="noreferrer noopener">
+						{ __( 'Additional Fields', 'events-gutenberg' ) }
+					</a>
+				</span>
 			) }
 		</PanelBody>
 		{ after }
