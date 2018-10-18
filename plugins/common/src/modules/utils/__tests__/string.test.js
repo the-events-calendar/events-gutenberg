@@ -5,6 +5,8 @@ import {
 	isTruthy,
 	isFalsy,
 	replaceWithObject,
+	getWords,
+	wordsAsList,
 } from '@moderntribe/common/utils/string';
 
 describe( 'Tests for string.js', () => {
@@ -34,5 +36,43 @@ describe( 'Tests for string.js', () => {
 		expect( replaceWithObject( 'abcd', { z: 'a' } ) ).toEqual( 'abcd' );
 		expect( replaceWithObject( 'abcd', { a: 'b', c: 'd' } ) ).toEqual( 'bbdd' );
 		expect( replaceWithObject( 'abcd', { a: '', c: '' } ) ).toEqual( 'bd' );
+	} );
+
+	describe( 'getWords', () => {
+		test( 'when strings are formed correctly', () => {
+			expect( getWords( 'Modern Tribe' ) ).toEqual( [ 'Modern', 'Tribe' ] );
+			expect( getWords( 'The Next Generation of Digital Agency' ) )
+				.toEqual( [ 'The', 'Next', 'Generation', 'of', 'Digital', 'Agency' ] );
+			expect( getWords( 'A list with numbers: 1, 2, 3' ) )
+				.toEqual( [ 'A', 'list', 'with', 'numbers:', '1,', '2,', '3' ] );
+		} );
+
+		test( 'Words with multiple spaces on it', () => {
+			expect( getWords( '       Modern       Tribe       ' ) ).toEqual( [ 'Modern', 'Tribe' ] );
+		} );
+	} );
+
+	describe( 'applySeparatorsAsCheckboxList', () => {
+		test( 'Single word no separator is applied', () => {
+			expect( wordsAsList( [ 'Modern' ] ) ).toEqual( 'Modern' );
+		} );
+
+		test( 'Two words last separator is applied', () => {
+			expect( wordsAsList( getWords( 'Modern Tribe' ) ) ).toEqual( 'Modern & Tribe' );
+			expect( wordsAsList( getWords( 'Events Calendar' ), ',', ' - ' ) )
+				.toEqual( 'Events - Calendar' );
+		} );
+
+		test( 'A large number of words', () => {
+			expect(
+				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ] )
+			).toEqual( 'Dog,Cat,Hamster,Parrot,Spider & Goldfish' );
+		} );
+
+		test( 'Custom separators', () => {
+			expect(
+				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ], ' - ', ' => ' )
+			).toEqual( 'Dog - Cat - Hamster - Parrot - Spider => Goldfish' );
+		} );
 	} );
 } );
