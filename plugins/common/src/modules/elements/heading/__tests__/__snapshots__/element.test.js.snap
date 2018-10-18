@@ -2,7 +2,7 @@
 
 exports[`<Heading> <h1> 1`] = `
 <h1
-  className="tribe-editor__heading tribe-editor__h1"
+  className="tribe-editor__heading tribe-editor__heading--h1"
 >
   Modern Tribe
 </h1>
@@ -10,7 +10,7 @@ exports[`<Heading> <h1> 1`] = `
 
 exports[`<Heading> <h2> 1`] = `
 <h2
-  className="tribe-editor__heading tribe-editor__h2"
+  className="tribe-editor__heading tribe-editor__heading--h2"
 >
   Modern Tribe
 </h2>
@@ -18,7 +18,7 @@ exports[`<Heading> <h2> 1`] = `
 
 exports[`<Heading> <h3> 1`] = `
 <h3
-  className="tribe-editor__heading tribe-editor__h3"
+  className="tribe-editor__heading tribe-editor__heading--h3"
 >
   Modern Tribe
 </h3>
@@ -26,7 +26,7 @@ exports[`<Heading> <h3> 1`] = `
 
 exports[`<Heading> <h4> 1`] = `
 <h4
-  className="tribe-editor__heading tribe-editor__h4"
+  className="tribe-editor__heading tribe-editor__heading--h4"
 >
   Modern Tribe
 </h4>
@@ -34,7 +34,7 @@ exports[`<Heading> <h4> 1`] = `
 
 exports[`<Heading> <h5> 1`] = `
 <h5
-  className="tribe-editor__heading tribe-editor__h5"
+  className="tribe-editor__heading tribe-editor__heading--h5"
 >
   Modern Tribe
 </h5>
@@ -42,7 +42,7 @@ exports[`<Heading> <h5> 1`] = `
 
 exports[`<Heading> <h6> 1`] = `
 <h6
-  className="tribe-editor__heading tribe-editor__h6"
+  className="tribe-editor__heading tribe-editor__heading--h6"
 >
   Modern Tribe
 </h6>

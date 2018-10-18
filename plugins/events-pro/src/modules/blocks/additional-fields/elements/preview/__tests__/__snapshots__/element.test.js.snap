@@ -5,14 +5,14 @@ exports[`<Preview> default params 1`] = `
   className="tribe-editor__additional-fields__preview"
 >
   <h2
-    className="tribe-editor__heading tribe-editor__h2 tribe-editor__additional-fields__preview-title"
+    className="tribe-editor__heading tribe-editor__heading--h2 tribe-editor__additional-fields__preview-title"
   >
     Modern Tribe
   </h2>
-  <div
+  <p
     className="tribe-editor__paragraph tribe-editor__paragraph--medium"
   >
     The Next Generation of Digital Agency
-  </div>
+  </p>
 </div>
 `;
