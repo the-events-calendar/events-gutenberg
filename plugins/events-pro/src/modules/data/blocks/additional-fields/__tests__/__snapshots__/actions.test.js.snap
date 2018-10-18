@@ -59,7 +59,7 @@ Object {
   "payload": Object {
     "name": "Host",
   },
-  "type": "@@MT/EVENTS-PRO/REMOVE_ADDITIONAL_FIELD",
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_NAME",
 }
 `;
 
