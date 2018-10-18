@@ -1,16 +1,19 @@
+/**
+ * External Dependencies
+ */
 import React from 'react';
 import renderer from 'react-test-renderer';
-import FrequencySelect from '../element';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
+import TypePicker from '../element';
 
-describe( 'FrequencySelect', () => {
+describe( 'TypePicker', () => {
 	test( 'should render component', () => {
 		const component = renderer.create(
-			<FrequencySelect
+			<TypePicker
 				className="test-class"
-				onRecurrenceFrequencyChange={ jest.fn() }
-				recurrenceFrequency={ options.DAILY_RECURRENCE_FREQUENCY_OPTIONS[ 0 ] }
-				recurrenceType={ options.RECURRENCE_TYPE_RULES_OPTIONS[ 0 ] }
+				onChange={ jest.fn() }
+				selected={ options.RECURRENCE_TYPE_RULES_OPTIONS[ 4 ] }
+				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();

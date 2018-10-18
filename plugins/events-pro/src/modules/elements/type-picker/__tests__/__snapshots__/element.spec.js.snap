@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RecurrenceTypePicker should render component 1`] = `
+exports[`TypePicker should render component 1`] = `
 <div
-  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__recurrence-type-picker test-class"
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__type-picker test-class"
 >
   <div
     className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
@@ -17,7 +17,7 @@ exports[`RecurrenceTypePicker should render component 1`] = `
     className="tribe-editor__labeled-row__content"
   >
     <div
-      className="css-10nd86i tribe-editor__select tribe-editor__recurrence-type-picker__recurrence-type-select"
+      className="css-10nd86i tribe-editor__select tribe-editor__type-picker__type-select"
       onKeyDown={[Function]}
     >
       <div
