@@ -35,6 +35,7 @@ const TypePicker = ( {
 			(
 				<FrequencySelect
 					className="tribe-editor__type-picker__frequency-select"
+					selected={ selected }
 				/>
 			)
 	);

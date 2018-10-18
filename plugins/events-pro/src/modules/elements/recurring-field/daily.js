@@ -16,10 +16,14 @@ import {
 } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-const DailyField = ( { isMultiDay, typeOption } ) => {
+const DailyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
 	return (
 		<Fragment>
-			<TypePicker options={ options.RECURRENCE_TYPE_RULES_OPTIONS } selected={ typeOption } />
+			<TypePicker
+				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
+				selected={ typeOption }
+				onChange={ onTypeChange }
+			/>
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }
 			<SeriesEnds />
@@ -30,6 +34,7 @@ const DailyField = ( { isMultiDay, typeOption } ) => {
 DailyField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
 	typeOption: proptypes.ReactSelectOption,
+	onTypeChange: PropTypes.func.isRequired,
 };
 
 export default DailyField;

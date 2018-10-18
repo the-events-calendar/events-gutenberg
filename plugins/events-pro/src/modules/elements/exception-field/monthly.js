@@ -18,13 +18,14 @@ import {
 } from '@moderntribe/events-pro/elements';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const MonthlyField = ( { isMultiDay, typeOption } ) => {
+const MonthlyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
 	return (
 		<Fragment>
 			<TypePicker
 				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
+				onChange={ onTypeChange }
 			/>
 			<DayOfMonthPicker />
 			<FromTimeRangePicker />
@@ -37,6 +38,7 @@ const MonthlyField = ( { isMultiDay, typeOption } ) => {
 MonthlyField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
 	typeOption: proptypes.ReactSelectOption,
+	onTypeChange: PropTypes.func.isRequired,
 };
 
 export default MonthlyField;

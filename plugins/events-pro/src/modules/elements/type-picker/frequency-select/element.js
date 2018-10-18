@@ -24,13 +24,13 @@ const {
 const FrequencySelect = ( {
 	className,
 	onFrequencyChange,
-	type,
+	selected,
 } ) => {
 	// TODO: Update to use passed in options
 	const getFrequencyOptions = () => {
 		let frequencyOptions = [];
 
-		switch ( type.value ) {
+		switch ( selected.value ) {
 			case DAILY:
 				frequencyOptions = DAILY_RECURRENCE_FREQUENCY_OPTIONS;
 				break;
@@ -72,7 +72,7 @@ const FrequencySelect = ( {
 			isValidNewOption={ isValidNewOption }
 			onChange={ onFrequencyChange }
 			options={ getFrequencyOptions() }
-			value={ type }
+			value={ selected }
 		/>
 	);
 };
@@ -81,7 +81,7 @@ FrequencySelect.propTypes = {
 	className: PropTypes.string,
 	frequencyOptions: proptypes.ReactSelectOptions.isRequired,
 	onFrequencyChange: PropTypes.func,
-	type: proptypes.ReactSelectOption.isRequired,
+	selected: proptypes.ReactSelectOption.isRequired,
 };
 
 export default FrequencySelect;

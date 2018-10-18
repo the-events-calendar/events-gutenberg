@@ -19,12 +19,14 @@ import Yearly from './yearly';
 export default class RecurringField extends PureComponent {
 	static propTypes = {
 		onRemoveClick: PropTypes.func.isRequired,
+		editRule: PropTypes.func.isRequired,
 		id: PropTypes.string.isRequired,
 		index: PropTypes.number.isRequired,
 		type: PropTypes.string.isRequired,
 	}
 
 	handleClick = () => this.props.onRemoveClick( this.props.index )
+	handleTypeChange = ( option ) => this.props.editRule( this.props.index, { type: option.value } )
 
 	get typeOption() {
 		return selectors.getRuleTypeOption( this.props );
@@ -33,15 +35,45 @@ export default class RecurringField extends PureComponent {
 	renderFieldType = () => {
 		switch ( this.props.type ) {
 			case constants.DAILY:
-				return <Daily { ...this.props } typeOption={ this.typeOption } />;
+				return (
+					<Daily
+						{ ...this.props }
+						typeOption={ this.typeOption }
+						onTypeChange={ this.handleTypeChange }
+					/>
+				);
 			case constants.WEEKLY:
-				return <Weekly { ...this.props } typeOption={ this.typeOption } />;
+				return (
+					<Weekly
+						{ ...this.props }
+						typeOption={ this.typeOption }
+						onTypeChange={ this.handleTypeChange }
+					/>
+				);
 			case constants.MONTHLY:
-				return <Monthly { ...this.props } typeOption={ this.typeOption } />;
+				return (
+					<Monthly
+						{ ...this.props }
+						typeOption={ this.typeOption }
+						onTypeChange={ this.handleTypeChange }
+					/>
+				);
 			case constants.YEARLY:
-				return <Yearly { ...this.props } typeOption={ this.typeOption } />;
+				return (
+					<Yearly
+						{ ...this.props }
+						typeOption={ this.typeOption }
+						onTypeChange={ this.handleTypeChange }
+					/>
+				);
 			default:
-				return <Singular { ...this.props } typeOption={ this.typeOption } />;
+				return (
+					<Singular
+						{ ...this.props }
+						typeOption={ this.typeOption }
+						onTypeChange={ this.handleTypeChange }
+					/>
+				);
 		}
 	}
 
