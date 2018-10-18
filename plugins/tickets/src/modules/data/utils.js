@@ -45,9 +45,9 @@ export function getProviderCurrency( provider ) {
 		return tickets.default_currency;
 	}
 
-	const index = providers.findIndex( el => el.class === provider );
+	const result = providers.filter( el => el.class === provider );
 
-	return providers[index].currency;
+	return result[0].currency;
 
 };
 
