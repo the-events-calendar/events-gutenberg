@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { last } from 'lodash';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -28,8 +29,8 @@ const RecurrenceTypePicker = ( {
 	);
 
 	const getFrequencySelect = () => (
-		recurrenceType.value !== constants.SINGLE
-			&& (
+		recurrenceType.value !== constants.SINGLE &&
+			(
 				<FrequencySelect
 					className="tribe-editor__recurrence-type-picker__recurrence-frequency-select"
 				/>
@@ -52,7 +53,11 @@ const RecurrenceTypePicker = ( {
 			/>
 		</LabeledRow>
 	);
-}
+};
+
+RecurrenceTypePicker.defaultProps = {
+	recurrenceType: last( options.RECURRENCE_TYPE_RULES_OPTIONS ),
+};
 
 RecurrenceTypePicker.propTypes = {
 	className: PropTypes.string,

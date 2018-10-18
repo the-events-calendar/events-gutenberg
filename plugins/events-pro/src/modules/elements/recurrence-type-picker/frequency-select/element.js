@@ -45,10 +45,10 @@ const FrequencySelect = ( {
 				break;
 			default:
 				break;
-		};
+		}
 
 		return frequencyOptions;
-	}
+	};
 
 	const formatCreateLabel = ( inputValue ) => inputValue;
 
