@@ -17,7 +17,6 @@ import {
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 const SingularField = ( { isMultiDay, typeOption } ) => {
-	console.warn( typeOption, options );
 	return (
 		<Fragment>
 			<TypePicker options={ options.RECURRENCE_TYPE_RULES_OPTIONS } selected={ typeOption } />

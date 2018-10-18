@@ -32,7 +32,6 @@ export default class ExceptionField extends PureComponent {
 	}
 
 	renderFieldType = () => {
-		console.warn( this.typeOption, this.props );
 		switch ( this.props.type ) {
 			case constants.DAILY:
 				return <Daily { ...this.props } typeOption={ this.typeOption } />;
