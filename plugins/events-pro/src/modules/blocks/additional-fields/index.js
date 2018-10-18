@@ -7,8 +7,10 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import {
-	Placeholder,
+	Preview,
 } from './elements';
+
+import { Placeholder } from '@moderntribe/common/elements';
 
 /**
  * Module Code
@@ -31,7 +33,12 @@ export default {
 
 	attributes: {},
 	edit: () => (
+		<div>
 			<Placeholder>Add refreshments</Placeholder>
+			<Preview name={ 'Refreshments' }>
+				consectetur ea est laboris sint <a href="#">in aliqua incididunt</a> asdas asdas
+			</Preview>
+		</div>
 	),
 	save: () => null,
 };

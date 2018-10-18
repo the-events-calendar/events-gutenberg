@@ -11,22 +11,13 @@ import classNames from 'classnames';
 import './style.pcss';
 
 const Placeholder = ( { children, className } ) => (
-	<div className={ classNames( 'tribe-editor__additional-fields__placeholder', className ) }>
+	<div className={ classNames( 'tribe-editor__placeholder', className ) }>
 		{ children }
 	</div>
 );
 
 Placeholder.propTypes = {
 	children: PropTypes.node.isRequired,
-	className: PropTypes.oneOfType(
-		PropTypes.string,
-		PropTypes.array,
-		PropTypes.object,
-	),
-};
-
-Placeholder.defaultProps = {
-	className: [],
 };
 
 export default Placeholder;

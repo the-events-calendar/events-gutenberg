@@ -10,3 +10,6 @@ export { default as LabelWithModal } from './label-with-modal/element';
 export { default as ModalButton } from './modal-button/element';
 export { default as TimePicker } from './time-picker/element';
 export { default as Tooltip } from './tooltip/element';
+export { default as Placeholder } from './placeholder/element';
+export { default as Heading } from './heading/element';
+export { default as Paragraph } from './paragraph/element';
