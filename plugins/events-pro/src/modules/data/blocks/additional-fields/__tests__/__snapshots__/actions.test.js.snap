@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions in Additional Fields add field 1`] = `
+Object {
+  "payload": Object {
+    "name": "Host",
+  },
+  "type": "@@MT/EVENTS-PRO/ADD_ADDITIONAL_FIELD",
+}
+`;
+
+exports[`Actions in Additional Fields remove field 1`] = `
+Object {
+  "payload": Object {
+    "name": "Host",
+  },
+  "type": "@@MT/EVENTS-PRO/REMOVE_ADDITIONAL_FIELD",
+}
+`;
+
+exports[`Actions in Additional Fields set field divider end 1`] = `
+Object {
+  "payload": Object {
+    "dividerEnd": " & ",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_DIVIDER_END",
+}
+`;
+
+exports[`Actions in Additional Fields set field is pristine 1`] = `
+Object {
+  "payload": Object {
+    "isPristine": true,
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_IS_PRISTINE",
+}
+`;
+
+exports[`Actions in Additional Fields set field is pristine 2`] = `
+Object {
+  "payload": Object {
+    "isPristine": false,
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_IS_PRISTINE",
+}
+`;
+
+exports[`Actions in Additional Fields set field list divider 1`] = `
+Object {
+  "payload": Object {
+    "dividerList": ", ",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_DIVIDER_LIST",
+}
+`;
+
+exports[`Actions in Additional Fields set field name 1`] = `
+Object {
+  "payload": Object {
+    "name": "Host",
+  },
+  "type": "@@MT/EVENTS-PRO/REMOVE_ADDITIONAL_FIELD",
+}
+`;
+
+exports[`Actions in Additional Fields set field options 1`] = `
+Object {
+  "payload": Object {
+    "options": Array [
+      "Option 1",
+      "Option 2 ",
+    ],
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_OPTIONS",
+}
+`;
+
+exports[`Actions in Additional Fields set field type 1`] = `
+Object {
+  "payload": Object {
+    "type": "CHECKBOX",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_TYPE",
+}
+`;
+
+exports[`Actions in Additional Fields set field value 1`] = `
+Object {
+  "payload": Object {
+    "value": "Rachel MA",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_VALUE",
+}
+`;
