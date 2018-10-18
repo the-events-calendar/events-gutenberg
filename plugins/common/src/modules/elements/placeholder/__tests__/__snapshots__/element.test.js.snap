@@ -2,7 +2,7 @@
 
 exports[`<Placeholder> component Custom Class name attached 1`] = `
 <div
-  className="tribe-editor__additional-fields__placeholder custom-class-name"
+  className="tribe-editor__placeholder custom-class-name"
 >
   Custom Text
 </div>
@@ -10,7 +10,7 @@ exports[`<Placeholder> component Custom Class name attached 1`] = `
 
 exports[`<Placeholder> component Default behavior 1`] = `
 <div
-  className="tribe-editor__additional-fields__placeholder"
+  className="tribe-editor__placeholder"
 >
   Custom Text
 </div>

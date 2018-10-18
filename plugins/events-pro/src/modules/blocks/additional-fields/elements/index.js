@@ -1,4 +1,4 @@
 /**
  * Internal dependencies
  */
-export { default as Placeholder } from './placeholder/element';
+export { default as Preview } from './preview/element';
