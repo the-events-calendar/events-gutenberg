@@ -13,7 +13,7 @@ describe( 'FrequencySelect', () => {
 				className="test-class"
 				onFrequencyChange={ jest.fn() }
 				frequencyOptions={ options.DAILY_RECURRENCE_FREQUENCY_OPTIONS[ 0 ] }
-				type={ options.RECURRENCE_TYPE_RULES_OPTIONS[ 0 ] }
+				selected={ options.RECURRENCE_TYPE_RULES_OPTIONS[ 0 ] }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
