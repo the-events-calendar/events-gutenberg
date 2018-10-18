@@ -38,9 +38,9 @@ exports[`<Settings> link is provided with after 1`] = `
         Additional Fields
       </a>
     </span>
-    <span>
-      after
-    </span>
+  </span>
+  <span>
+    after
   </span>
 </div>
 `;
@@ -49,12 +49,12 @@ exports[`<Settings> link is provided with before 1`] = `
 <div
   className="InspectorControls"
 >
+  <span>
+    Before
+  </span>
   <span
     className="PanelBody"
   >
-    <span>
-      Before
-    </span>
     <span>
       Adjust this block’s options under Events → Settings → 
       <a

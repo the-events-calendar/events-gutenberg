@@ -14,8 +14,8 @@ import { InspectorControls } from '@wordpress/editor';
 
 const Settings = ( { name, before, after, settingsLink } ) => (
 	<InspectorControls key="inspector">
+		{ before }
 		<PanelBody title={ sprintf( __( '%1$s Settings', 'events-gutenberg' ), name ) }>
-			{ before }
 			{ ! ! settingsLink && (
 				<span>
 				{ __( 'Adjust this block’s options under Events → Settings → ', 'events-gutenberg' ) }
@@ -28,8 +28,8 @@ const Settings = ( { name, before, after, settingsLink } ) => (
 				</a>
 			</span>
 			) }
-			{ after }
 		</PanelBody>
+		{ after }
 	</InspectorControls>
 );
 
