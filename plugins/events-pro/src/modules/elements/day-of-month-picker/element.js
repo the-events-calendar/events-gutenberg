@@ -22,8 +22,8 @@ const DayOfMonthPicker = ( {
 } ) => {
 	const getWeekDaySelect = () => {
 		const inWeekOfTheMonth = ! ! options.WEEKS_OF_THE_MONTH_OPTIONS.filter(
-			( option ) => option.value === dayOfMonth.value
-		).length
+			( option ) => dayOfMonth && option.value === dayOfMonth.value
+		).length;
 
 		return inWeekOfTheMonth && (
 			<Select
@@ -41,7 +41,8 @@ const DayOfMonthPicker = ( {
 		<div className={ classNames(
 			'tribe-editor__day-of-month-picker',
 			className,
-		) }>
+		) }
+		>
 			<Select
 				className="tribe-editor__day-of-month-picker__day-of-month-select"
 				backspaceRemovesValue={ false }
