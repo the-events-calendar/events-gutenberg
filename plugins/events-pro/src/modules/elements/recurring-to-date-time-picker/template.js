@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  */
 import { Select, TimePicker } from '@moderntribe/common/elements';
 import { TribePropTypes } from '@moderntribe/common/utils';
-import { LabeledRow } from '@moderntribe/events-pro/elements';
+import LabeledRow from '@moderntribe/events-pro/elements/labeled-row/element';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 const RecurringToDateTimePicker = ( {
