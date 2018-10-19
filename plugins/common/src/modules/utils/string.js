@@ -40,32 +40,3 @@ export const replaceWithObject = ( str = '', pairs = {} ) => {
 		.map( part => isUndefined( pairs[ part ] ) ? part : pairs[ part ] )
 		.join( '' );
 };
-
-/**
- * Interpolate any number of %d on number values
- *
- * @param {string} str The input with the placeholders
- * @param {number} params Any list of numbers to replace with placeholders
- * @returns {string} The updated string
- */
-export const interpolateNumbers = ( str = '', ...params ) => {
-	const [ number, ...remaining ] = params;
-
-	if ( ! isString( str ) ) {
-		return '';
-	}
-
-	const position = str.indexOf( '%d' );
-	if ( position === -1 || params.length === 0 ) {
-		return str;
-	}
-
-	const chars = str.split( '' );
-	if ( chars[ position ] === '%' && chars[ position + 1 ] === 'd' ) {
-		// Remove %d at start of % + 2 steps until d and insert number on it's place.
-		chars.splice( position, 2, number );
-		return interpolateNumbers( chars.join( '' ), ...remaining );
-	} else {
-		return chars.join( '' );
-	}
-};
