@@ -38,7 +38,7 @@ const allFields = ( state = [], action ) => {
 		case types.SET_ADDITIONAL_FIELD_NAME:
 			return [ ...state, action.payload.name ];
 		case types.REMOVE_ADDITIONAL_FIELD:
-			return [ ...state ].filter( ( name ) => name !== action.payload.name );
+			return state.filter( ( name ) => name !== action.payload.name );
 		default:
 			return state;
 	}
