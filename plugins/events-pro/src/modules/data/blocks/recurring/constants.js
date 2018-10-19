@@ -3,11 +3,6 @@
  */
 import { __ } from '@wordpress/i18n';
 
-/**
- * Internal dependencies
- */
-import { SERIES_ENDS_OPTIONS } from './options';
-
 //
 // ─── RECURRENCE TYPES ───────────────────────────────────────────────────────────
 //
@@ -46,9 +41,9 @@ export const LIMIT_TYPE_MAPPING_TO_STATE = {
 };
 
 export const LIMIT_TYPE_MAPPING_FROM_STATE = {
-	[ DATE ]: SERIES_ENDS_OPTIONS[ 0 ],
-	[ COUNT ]: SERIES_ENDS_OPTIONS[ 1 ],
-	[ null ]: SERIES_ENDS_OPTIONS[ 2 ],
+	[ DATE ]: ON,
+	[ COUNT ]: AFTER,
+	[ null ]: NEVER,
 };
 
 //

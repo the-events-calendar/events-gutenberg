@@ -15,7 +15,7 @@ import {
 	Select,
 	DayPickerInput,
 } from '@moderntribe/common/elements';
-import { LabeledRow } from '@moderntribe/events-pro/elements';
+import LabeledRow from '@moderntribe/events-pro/elements/labeled-row/element';
 import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
 import './style.pcss';
 
