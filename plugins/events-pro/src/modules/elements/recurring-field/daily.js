@@ -28,7 +28,6 @@ const DailyField = ( { index, isMultiDay } ) => {
 			<SeriesEnds
 				blockType={ constants.RECURRING }
 				index={ index }
-				rowLabel={ __( 'Series Ends', 'events-gutenberg' ) }
 			/>
 		</Fragment>
 	);

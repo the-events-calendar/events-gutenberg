@@ -1,6 +1,7 @@
 /**
- * WordPress dependencies
+ * External dependencies
  */
+import { invert } from 'lodash';
 import { __ } from '@wordpress/i18n';
 
 //
@@ -40,11 +41,7 @@ export const LIMIT_TYPE_MAPPING_TO_STATE = {
 	[ NEVER ]: null,
 };
 
-export const LIMIT_TYPE_MAPPING_FROM_STATE = {
-	[ DATE ]: ON,
-	[ COUNT ]: AFTER,
-	[ null ]: NEVER,
-};
+export const LIMIT_TYPE_MAPPING_FROM_STATE = invert( LIMIT_TYPE_MAPPING_TO_STATE );
 
 //
 // ─── DAYS OF THE WEEK ───────────────────────────────────────────────────────────
