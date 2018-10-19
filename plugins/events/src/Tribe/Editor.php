@@ -39,31 +39,24 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 
 		// Add Block Categories to Editor
 		add_action( 'block_categories', array( $this, 'block_categories' ), 10, 2 );
-		// Make sure empty string is consider as a "true" value
-		add_filter( 'tribe_get_option', array( $this, 'get_option' ), 10, 2 );
+
+		// Make sure Events supports 'custom-fields'
+		add_action( 'init', array( $this, 'add_event_custom_field_support' ), 11 );
 	}
 
 	/**
-	 * When the plugin loads the option is not set so the value is an empty string and when casting into a bool value
-	 * this returns a `false` positive. As empty string indicates the value has not set already.
-	 *
-	 * This is something should be addressed on TEC as is affecting any new user installing the plugin.
+	 * When Gutenberg is active do not care about custom-fields as a metabox, but as part o the Rest API
 	 *
 	 * Code is located at: https://github.com/moderntribe/the-events-calendar/blob/f8af49bc41048e8632372fc8da77202d9cb98d86/src/Tribe/Admin/Event_Meta_Box.php#L345
 	 *
-	 * @since 0.3.0-alpha
+	 * @todo  Block that option once the user has Gutenberg active
 	 *
-	 * @param $value
-	 * @param $name
+	 * @since 0.3.2-alpha
 	 *
-	 * @return bool
+	 * @return void
 	 */
-	public function get_option( $value, $name ) {
-		// If value is empty string indicates the value hasn't been set into the DB and should be true by default.
-		if ( 'disable_metabox_custom_fields' === $name && '' === $value ) {
-			return true;
-		}
-		return $value;
+	public function add_event_custom_field_support() {
+		add_post_type_support( Tribe__Events__Main::POSTTYPE, 'custom-fields' );
 	}
 
 	/**
@@ -605,4 +598,30 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 	public function add_template_blocks( $args = array() ) {
 		return $this->add_event_template_blocks( $args );
 	}
+
+	/**
+	 * When the plugin loads the option is not set so the value is an empty string and when casting into a bool value
+	 * this returns a `false` positive. As empty string indicates the value has not set already.
+	 *
+	 * This is something should be addressed on TEC as is affecting any new user installing the plugin.
+	 *
+	 * Code is located at: https://github.com/moderntribe/the-events-calendar/blob/f8af49bc41048e8632372fc8da77202d9cb98d86/src/Tribe/Admin/Event_Meta_Box.php#L345
+	 *
+	 * @since      0.3.0-alpha
+	 * @deprecated 0.3.2-alpha
+	 *
+	 * @param $value
+	 * @param $name
+	 *
+	 * @return bool
+	 */
+	public function get_option( $value, $name ) {
+		// If value is empty string indicates the value hasn't been set into the DB and should be true by default.
+		if ( 'disable_metabox_custom_fields' === $name && '' === $value ) {
+			return true;
+		}
+
+		return $value;
+	}
+
 }
