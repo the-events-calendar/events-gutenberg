@@ -12,10 +12,15 @@ import { __ } from '@wordpress/i18n';
 import FrequencySelect from './frequency-select/element';
 import { Select } from '@moderntribe/common/elements';
 import { LabeledRow } from '@moderntribe/events-pro/elements';
-import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import {
+	constants as recurringConstants,
+	options,
+} from '@moderntribe/events-pro/data/blocks/recurring';
 import './style.pcss';
 
 const RecurrenceTypePicker = ( {
+	blockType,
 	className,
 	index,
 	onRecurrenceTypeChange,
@@ -23,16 +28,17 @@ const RecurrenceTypePicker = ( {
 	rowLabel,
 } ) => {
 	const getLabel = () => (
-		recurrenceType.value === constants.SINGLE
+		recurrenceType.value === recurringConstants.SINGLE
 			? __( 'A', 'events-gutenberg' )
 			: __( 'Every', 'events-gutenberg' )
 	);
 
 	const getFrequencySelect = () => (
-		recurrenceType.value !== constants.SINGLE
+		recurrenceType.value !== recurringConstants.SINGLE
 			&& (
 				<FrequencySelect
 					className="tribe-editor__recurrence-type-picker__recurrence-frequency-select"
+					blockType={ blockType }
 					index={ index }
 				/>
 			)
@@ -57,6 +63,7 @@ const RecurrenceTypePicker = ( {
 }
 
 RecurrenceTypePicker.propTypes = {
+	blockType: PropTypes.oneOf( constants.BLOCK_TYPES ),
 	className: PropTypes.string,
 	index: PropTypes.number,
 	onRecurrenceTypeChange: PropTypes.func,

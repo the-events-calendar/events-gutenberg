@@ -13,11 +13,15 @@ import {
 	RecurringToDateTimePicker,
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 
-const DailyField = ( { isMultiDay } ) => {
+const DailyField = ( { index, isMultiDay } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker />
+			<RecurrenceTypePicker
+				blockType={ constants.RECURRING }
+				index={ index }
+			/>
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }
 			<SeriesEnds />
@@ -26,6 +30,7 @@ const DailyField = ( { isMultiDay } ) => {
 };
 
 DailyField.propTypes = {
+	index: PropTypes.number.isRequired,
 	isMultiDay: PropTypes.bool.isRequired,
 };
 
