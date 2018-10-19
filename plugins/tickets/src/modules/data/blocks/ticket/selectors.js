@@ -317,4 +317,14 @@ export const getProviders = () => {
 export const hasTicketProviders = createSelector(
 	[ getProviders ],
 	( providers ) => providers.length > 0
-)
+);
+
+export const getTicketProvider = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.provider,
+);
+
+export const getTicketCurrency = createSelector(
+	[ getTicketBlock ],
+	( block ) => block.currencySymbol,
+);

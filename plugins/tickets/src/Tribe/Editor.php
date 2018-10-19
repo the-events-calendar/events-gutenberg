@@ -191,15 +191,21 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 			if ( $modules[ $class ] === 'RSVP' ) {
 				continue;
 			}
+
+			$currency = tribe( 'tickets.commerce.currency' );
+
 			$providers[] = array(
 				'name' => $modules[ $class ],
 				'class' => $class,
+				'currency' => html_entity_decode( $currency->get_provider_symbol( $class, null ) ),
+				'currency_position' => $currency->get_provider_symbol_position( $class, null ),
 			);
 		}
 
 		$js_config['tickets'] = array(
 			'providers' => $providers,
 			'default_provider' => Tribe__Tickets__Tickets::get_default_module(),
+			'default_currency' => tribe_get_option( 'defaultCurrencySymbol', '$' ),
 		);
 		return $js_config;
 	}
