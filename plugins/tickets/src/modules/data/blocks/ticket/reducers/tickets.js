@@ -32,6 +32,8 @@ const ticketsById = ( state = {}, action ) => {
 		case types.SET_TICKET_HAS_BEEN_CREATED:
 		case types.SET_TICKET_SOLD:
 		case types.SET_TICKET_AVAILABLE:
+		case types.SET_TICKET_CURRENCY:
+		case types.SET_TICKET_PROVIDER:
 			return {
 				...state,
 				[ action.payload.blockId ]: ticket( state[ action.payload.blockId ], action ),

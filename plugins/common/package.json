@@ -1,6 +1,6 @@
 {
   "name": "@moderntribe/common",
-  "version": "0.3.1-alpha",
+  "version": "0.3.2-alpha",
   "description": "Common gutenberg modules",
   "main": "src/resources/main.js",
   "scripts": {

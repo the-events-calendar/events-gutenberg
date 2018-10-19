@@ -31,9 +31,7 @@ exports[`Ticket Form Header Header with default values 1`] = `
   <div
     className="tribe-editor__ticket-container__header-price"
   >
-    <span>
-      $
-    </span>
+    <span />
     <span
       className="tribe-editor__new-ticket__description"
       id="ticket-creation-price-"
@@ -81,9 +79,7 @@ exports[`Ticket Form Header Header with expiration 1`] = `
   <div
     className="tribe-editor__ticket-container__header-price"
   >
-    <span>
-      $
-    </span>
+    <span />
     <span
       className="tribe-editor__new-ticket__description"
       id="ticket-creation-price-"
@@ -131,9 +127,7 @@ exports[`Ticket Form Header Header with no expiration 1`] = `
   <div
     className="tribe-editor__ticket-container__header-price"
   >
-    <span>
-      $
-    </span>
+    <span />
     <span
       className="tribe-editor__new-ticket__description"
       id="ticket-creation-price-"
