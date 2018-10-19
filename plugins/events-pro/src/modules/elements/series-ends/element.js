@@ -33,7 +33,7 @@ const SeriesEnds = ( {
 	const getPostfix = () => {
 		let postfix = null;
 
-		if ( seriesEnds.value === constants.ON ) {
+		if ( seriesEnds && seriesEnds.value === constants.ON ) {
 			const seriesEndsOnDateObj = new Date( seriesEndsOnDate )
 			postfix = (
 				<DayPickerInput
@@ -50,7 +50,7 @@ const SeriesEnds = ( {
 					onDayChange={ onSeriesEndsOnDateChange }
 				/>
 			);
-		} else if ( seriesEnds.value === constants.AFTER ) {
+		} else if ( seriesEnds && seriesEnds.value === constants.AFTER ) {
 			postfix = (
 				<Fragment>
 					<NumberInput

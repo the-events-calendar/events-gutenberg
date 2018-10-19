@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecurrenceSelectors getRecurrence 1`] = `undefined`;
+
+exports[`RecurrenceSelectors getRuleTypeOption 1`] = `
+Object {
+  "label": "Single Recurrence",
+  "value": "single",
+}
+`;

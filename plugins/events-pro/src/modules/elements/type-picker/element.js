@@ -4,7 +4,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { noop } from 'lodash';
 import { __ } from '@wordpress/i18n';
+import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -12,53 +14,61 @@ import { __ } from '@wordpress/i18n';
 import FrequencySelect from './frequency-select/element';
 import { Select } from '@moderntribe/common/elements';
 import { LabeledRow } from '@moderntribe/events-pro/elements';
-import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
+import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
 import './style.pcss';
 
-const RecurrenceTypePicker = ( {
+const TypePicker = ( {
 	className,
-	onRecurrenceTypeChange,
-	recurrenceType,
+	onChange,
+	options,
+	selected,
 	rowLabel,
 } ) => {
 	const getLabel = () => (
-		recurrenceType.value === constants.SINGLE
+		selected && selected.value === constants.SINGLE
 			? __( 'A', 'events-gutenberg' )
 			: __( 'Every', 'events-gutenberg' )
 	);
 
 	const getFrequencySelect = () => (
-		recurrenceType.value !== constants.SINGLE
-			&& (
+		selected && selected.value !== constants.SINGLE &&
+			(
 				<FrequencySelect
-					className="tribe-editor__recurrence-type-picker__recurrence-frequency-select"
+					className="tribe-editor__type-picker__frequency-select"
+					selected={ selected }
 				/>
 			)
 	);
 
 	return (
 		<LabeledRow
-			className={ classNames( 'tribe-editor__recurrence-type-picker', className ) }
+			className={ classNames( 'tribe-editor__type-picker', className ) }
 			label={ rowLabel || getLabel() }
 		>
 			{ getFrequencySelect() }
 			<Select
-				className="tribe-editor__recurrence-type-picker__recurrence-type-select"
+				className="tribe-editor__type-picker__type-select"
 				backspaceRemovesValue={ false }
-				value={ recurrenceType }
+				value={ selected }
 				isSearchable={ false }
-				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
-				onChange={ onRecurrenceTypeChange }
+				options={ options }
+				onChange={ onChange }
 			/>
 		</LabeledRow>
 	);
-}
+};
 
-RecurrenceTypePicker.propTypes = {
+TypePicker.defaultProps = {
+	onChange: noop,
+	options: [],
+};
+
+TypePicker.propTypes = {
 	className: PropTypes.string,
-	onRecurrenceTypeChange: PropTypes.func,
-	recurrenceType: PropTypes.oneOf( options.RECURRENCE_TYPE_RULES_OPTIONS ),
+	onChange: PropTypes.func,
+	options: proptypes.ReactSelectOptions,
+	selected: proptypes.ReactSelectOption.isRequired,
 	rowLabel: PropTypes.string,
 };
 
-export default RecurrenceTypePicker;
+export default TypePicker;

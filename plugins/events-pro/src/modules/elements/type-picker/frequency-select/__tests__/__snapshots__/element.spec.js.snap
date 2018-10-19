@@ -16,7 +16,7 @@ exports[`FrequencySelect should render component 1`] = `
       <div
         className="css-xp4uvy tribe-editor__creatable-select__single-value"
       >
-        1
+        Day
       </div>
       <div
         className="css-1g6gooi"
