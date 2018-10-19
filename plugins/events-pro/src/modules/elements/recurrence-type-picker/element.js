@@ -29,15 +29,17 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	recurrenceType: getRecurrenceType( state, ownProps ),
 } );
 
-const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	onRecurrenceTypeChange: ( selectedOption ) => {
-		const edit = ownProps.blockType === constants.RECURRING
-			? recurringActions.editRule
-			: exceptionActions.editException;
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const edit = ownProps.blockType === constants.RECURRING
+		? recurringActions.editRule
+		: exceptionActions.editException;
 
-		dispatch( edit( ownProps.index, { type: selectedOption.value } ) );
-	},
-} );
+	return {
+		onRecurrenceTypeChange: ( selectedOption ) => (
+			dispatch( edit( ownProps.index, { type: selectedOption.value } ) )
+		),
+	};
+};
 
 export default compose(
 	withStore(),
