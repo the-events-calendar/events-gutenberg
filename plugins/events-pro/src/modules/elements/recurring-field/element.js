@@ -19,7 +19,6 @@ import Yearly from './yearly';
 export default class RecurringField extends PureComponent {
 	static propTypes = {
 		onRemoveClick: PropTypes.func.isRequired,
-		id: PropTypes.string.isRequired,
 		index: PropTypes.number.isRequired,
 		type: PropTypes.string.isRequired,
 	}

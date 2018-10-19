@@ -1,64 +1,36 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { __ } from '@wordpress/i18n';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 /**
  * Internal dependencies
  */
-import FrequencySelect from './frequency-select/element';
-import { Select } from '@moderntribe/common/elements';
-import { LabeledRow } from '@moderntribe/events-pro/elements';
-import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
-import './style.pcss';
+import RecurrenceTypePicker from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import { actions, selectors } from '@moderntribe/events-pro/data/blocks/recurring';
+import { withStore } from '@moderntribe/common/hoc';
 
-const RecurrenceTypePicker = ( {
-	className,
-	onRecurrenceTypeChange,
-	recurrenceType,
-	rowLabel,
-} ) => {
-	const getLabel = () => (
-		recurrenceType.value === constants.SINGLE
-			? __( 'A', 'events-gutenberg' )
-			: __( 'Every', 'events-gutenberg' )
-	);
+const getRecurrenceType = ( state, ownProps ) => (
+	selectors.getRules( state, ownProps )
+	// TODO: get blockType part of this
+	// ownProps.blockType === constants.RECURRING
+	// 	? recurringSelectors.getType( state, ownProps )
+	// 	: exceptionSelectors.getType( state, ownProps )
+);
 
-	const getFrequencySelect = () => (
-		recurrenceType.value !== constants.SINGLE
-			&& (
-				<FrequencySelect
-					className="tribe-editor__recurrence-type-picker__recurrence-frequency-select"
-				/>
-			)
-	);
+const mapStateToProps = ( state, ownProps ) => ( {
+	recurrenceType: getRecurrenceType( state, ownProps ),
+} );
 
-	return (
-		<LabeledRow
-			className={ classNames( 'tribe-editor__recurrence-type-picker', className ) }
-			label={ rowLabel || getLabel() }
-		>
-			{ getFrequencySelect() }
-			<Select
-				className="tribe-editor__recurrence-type-picker__recurrence-type-select"
-				backspaceRemovesValue={ false }
-				value={ recurrenceType }
-				isSearchable={ false }
-				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
-				onChange={ onRecurrenceTypeChange }
-			/>
-		</LabeledRow>
-	);
-}
+const mapDispatchToProps = ( dispatch, ownProps ) => ( {
+	onRecurrenceTypeChange: ( selectedOption ) => (
+		dispatch( actions.editRule( ownProps.index, { type: selectedOption.value } ) )
+	),
+} );
 
-RecurrenceTypePicker.propTypes = {
-	className: PropTypes.string,
-	onRecurrenceTypeChange: PropTypes.func,
-	recurrenceType: PropTypes.oneOf( options.RECURRENCE_TYPE_RULES_OPTIONS ),
-	rowLabel: PropTypes.string,
-};
-
-export default RecurrenceTypePicker;
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps ),
+)( RSVPContainerContent );
