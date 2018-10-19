@@ -16,6 +16,7 @@ import {
 	RecurringToDateTimePicker,
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
 const MonthlyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
@@ -26,11 +27,15 @@ const MonthlyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
 				onChange={ onTypeChange }
+				blockType={ constants.EXCEPTION }
 			/>
 			<DayOfMonthPicker />
 			<FromTimeRangePicker />
 			{ isMultiDay && <RecurringToDateTimePicker /> }
-			<SeriesEnds rowLabel={ __( 'Exception ends', 'events-gutenberg' ) } />
+			<SeriesEnds
+				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
+				blockType={ constants.EXCEPTION }
+			/>
 		</Fragment>
 	);
 };

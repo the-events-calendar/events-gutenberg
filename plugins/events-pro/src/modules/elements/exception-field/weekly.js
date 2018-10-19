@@ -16,6 +16,7 @@ import {
 	RecurringToDateTimePicker,
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
 const WeeklyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
@@ -26,6 +27,7 @@ const WeeklyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
 				onChange={ onTypeChange }
+				blockType={ constants.EXCEPTION }
 			/>
 			<OnDayOfWeek />
 			<FromTimeRangePicker />

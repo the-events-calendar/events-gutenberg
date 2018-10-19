@@ -13,6 +13,7 @@ import {
 	OnDatePicker,
 	TypePicker,
 } from '@moderntribe/events-pro/elements';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
 const SingularField = ( { typeOption, onTypeChange } ) => {
@@ -23,6 +24,7 @@ const SingularField = ( { typeOption, onTypeChange } ) => {
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
 				onChange={ onTypeChange }
+				blockType={ constants.EXCEPTION }
 			/>
 			<OnDatePicker />
 		</Fragment>
