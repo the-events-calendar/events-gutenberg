@@ -6,8 +6,8 @@
 		display: block;
 		position: absolute;
 		background: #F8F9F9;
-		left: -28px;
-		right: -28px;
+		left: -14px;
+		right: -14px;
 		top: -14px;
 		bottom: -14px;
 		z-index: 1;
@@ -48,6 +48,8 @@
 		&:checked {
 			border-color: #E1E3E6;
 			background-color: #FFF;
+			margin-top: 0;
+
 			&:before {
 				color: #009FD4;
 				margin: -3px 0 0 -4px;
@@ -61,9 +63,15 @@
 			background-color: #FFF;
 			&:before {
 				background-color: #009FD4;
-				margin: 3px 0 0 3px;
-				width: 8px;
-				height: 8px;
+				margin: 5px 0 0 5px;
+				width: 12px;
+				height: 12px;
+
+				@media screen and (min-width: 783px) {
+					margin: 3px 0 0 3px;
+					width: 8px;
+					height: 8px;
+				}
 			}
 		}
 	}

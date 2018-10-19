@@ -16,6 +16,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		add_action( 'tribe_events_pro_after_custom_field_content', array( $this, 'after_custom_field_content' ), 10, 3 );
 		add_filter( 'tribe-events-save-options', array( $this, 'save_custom_field_values' ) );
 		add_action( 'block_categories', array( $this, 'register_additional_fields_category' ), 10, 2 );
+		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'add_events_pro_config' ) );
 		$this->assets();
 	}
 	
@@ -174,22 +175,48 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 *
 	 * @param $categories
 	 * @param $post
+	 *
 	 * @return array
 	 */
 	public function register_additional_fields_category( $categories, $post ) {
 		if ( ! tribe_is_event( $post ) ) {
 			return $categories;
 		}
-
+		
 		return array_merge(
 			$categories,
 			array(
 				array(
-					'slug' => 'tribe-events-pro-additional-fields',
+					'slug'  => 'tribe-events-pro-additional-fields',
 					'title' => __( 'Additional Fields', 'events-gutenberg' ),
 				),
 			)
 		);
 	}
 	
+	/**
+	 * Add custom config / values for the Events PRO settings on the Gutenberg Editor
+	 *
+	 * @since TBD
+	 *
+	 * @param $js_config
+	 *
+	 * @return mixed
+	 */
+	public function add_events_pro_config( $js_config ) {
+		$events_pro_js_config = array();
+		
+		if ( empty( $js_config['admin_url'] ) ) {
+			$js_config['admin_url'] = admin_url();
+		}
+		
+		$events_pro_js_config['additional_fields_tab'] = sprintf(
+			'%s%s',
+			trailingslashit( $js_config['admin_url'] ),
+			'edit.php?page=tribe-common&tab=additional-fields&post_type=tribe_events'
+		);
+		
+		$js_config['events_pro'] = $events_pro_js_config;
+		return $js_config;
+	}
 }

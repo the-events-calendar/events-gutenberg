@@ -1,12 +1,18 @@
 /**
- * WordPress dependencies
+ * External dependencies
  */
 import React, { Fragment } from 'react';
+
+/**
+ * WordPress dependencies
+ */
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
+import { Settings } from './checkbox';
+
 import {
 	Preview,
 	EditContainer,
@@ -43,6 +49,7 @@ export default {
 	edit: () => (
 		<Fragment>
 			<Placeholder>Add refreshments</Placeholder>
+			<Settings name="Refreshments" />
 			<Preview name={ 'Refreshments' }>
 				consectetur ea est laboris sint <a href="#">in aliqua incididunt</a> asdas asdas
 			</Preview>

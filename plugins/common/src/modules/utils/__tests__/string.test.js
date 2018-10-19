@@ -5,7 +5,8 @@ import {
 	isTruthy,
 	isFalsy,
 	replaceWithObject,
-	interpolateNumbers,
+	getWords,
+	wordsAsList,
 } from '@moderntribe/common/utils/string';
 
 describe( 'Tests for string.js', () => {
@@ -37,35 +38,41 @@ describe( 'Tests for string.js', () => {
 		expect( replaceWithObject( 'abcd', { a: '', c: '' } ) ).toEqual( 'bd' );
 	} );
 
-	describe( 'interpolateNumbers', () => {
-		test( 'Strings with no values', () => {
-			expect( interpolateNumbers( '' ) ).toBe( '' );
-			expect( interpolateNumbers( '   Modern     Tribe    ' ) ).toBe( '   Modern     Tribe    ' );
+	describe( 'getWords', () => {
+		test( 'when strings are formed correctly', () => {
+			expect( getWords( 'Modern Tribe' ) ).toEqual( [ 'Modern', 'Tribe' ] );
+			expect( getWords( 'The Next Generation of Digital Agency' ) )
+				.toEqual( [ 'The', 'Next', 'Generation', 'of', 'Digital', 'Agency' ] );
+			expect( getWords( 'A list with numbers: 1, 2, 3' ) )
+				.toEqual( [ 'A', 'list', 'with', 'numbers:', '1,', '2,', '3' ] );
 		} );
 
-		test( 'Interpolation with no params', () => {
-			expect( interpolateNumbers( 'Modern Tribe - %d projects' ) )
-				.toBe( 'Modern Tribe - %d projects' );
-			expect( interpolateNumbers( '%d %d %d' ) ).toBe( '%d %d %d' );
+		test( 'Words with multiple spaces on it', () => {
+			expect( getWords( '       Modern       Tribe       ' ) ).toEqual( [ 'Modern', 'Tribe' ] );
+		} );
+	} );
+
+	describe( 'applySeparatorsAsCheckboxList', () => {
+		test( 'Single word no separator is applied', () => {
+			expect( wordsAsList( [ 'Modern' ] ) ).toEqual( 'Modern' );
 		} );
 
-		test( 'Interpolate with numeric values', () => {
-			expect( interpolateNumbers( 'WordPress %d', 5 ) ).toBe( 'WordPress 5' );
-			expect( interpolateNumbers( '%d apples', 12 ) ).toBe( '12 apples' );
-			expect( interpolateNumbers( '%d bugs were found on %d projects on %d', 10, 20, 2018 ) )
-				.toBe( '10 bugs were found on 20 projects on 2018' );
+		test( 'Two words last separator is applied', () => {
+			expect( wordsAsList( getWords( 'Modern Tribe' ) ) ).toEqual( 'Modern & Tribe' );
+			expect( wordsAsList( getWords( 'Events Calendar' ), ',', ' - ' ) )
+				.toEqual( 'Events - Calendar' );
 		} );
 
-		test( 'Unbalance interpolation', () => {
-			expect( interpolateNumbers( '%d bugs were found on %d projects on %d', 10 ) )
-				.toBe( '10 bugs were found on %d projects on %d' );
+		test( 'A large number of words', () => {
+			expect(
+				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ] )
+			).toEqual( 'Dog, Cat, Hamster, Parrot, Spider & Goldfish' );
 		} );
 
-		test( 'Interpolation with non strings values', () => {
-			expect( interpolateNumbers( null ) ).toBe( '' );
-			expect( interpolateNumbers( 2 ) ).toBe( '' );
-			expect( interpolateNumbers( [] ) ).toBe( '' );
-			expect( interpolateNumbers( {} ) ).toBe( '' );
+		test( 'Custom separators', () => {
+			expect(
+				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ], ' - ', ' => ' )
+			).toEqual( 'Dog - Cat - Hamster - Parrot - Spider => Goldfish' );
 		} );
 	} );
 } );

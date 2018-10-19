@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { escapeRegExp, isUndefined, isString } from 'lodash';
+import { escapeRegExp, isUndefined, isString, identity } from 'lodash';
 
 /**
  * Test if a string is equivalent to a true value
@@ -42,30 +42,34 @@ export const replaceWithObject = ( str = '', pairs = {} ) => {
 };
 
 /**
- * Interpolate any number of %d on number values
+ * Extract the words from a string into an array of words removing all the empty spaces.
  *
- * @param {string} str The input with the placeholders
- * @param {number} params Any list of numbers to replace with placeholders
- * @returns {string} The updated string
+ * @param {string} text The initial text
+ * @returns {array} Return an array with the words
  */
-export const interpolateNumbers = ( str = '', ...params ) => {
-	const [ number, ...remaining ] = params;
-
-	if ( ! isString( str ) ) {
-		return '';
+export const getWords = ( text = '' ) => {
+	if ( ! isString( text ) ) {
+		return [];
 	}
-
-	const position = str.indexOf( '%d' );
-	if ( position === -1 || params.length === 0 ) {
-		return str;
-	}
-
-	const chars = str.split( '' );
-	if ( chars[ position ] === '%' && chars[ position + 1 ] === 'd' ) {
-		// Remove %d at start of % + 2 steps until d and insert number on it's place.
-		chars.splice( position, 2, number );
-		return interpolateNumbers( chars.join( '' ), ...remaining );
-	} else {
-		return chars.join( '' );
-	}
+	return text.split( /\s/ ).filter( identity );
 };
+
+/**
+ * Apply separators specifically for check box style list where if there are more than 2 words the first
+ * separators except the last is different from the rest, and if there are only 2 words it only uses
+ * the last separator instead
+ *
+ * @param {array} words The list of words to join
+ * @param {string} startSeparator the separator applied if there are more than 2 words between all the words except the last one
+ * @param {string} endSeparator separator applied between the last words
+ * @returns {string} return a string with custom separators between words
+ */
+export const wordsAsList = ( words, startSeparator = ', ', endSeparator = ' & ' ) => {
+	if ( words.length <= 1 ) {
+		return words.join( '' );
+	} else {
+		const start = words.slice( 0, words.length - 1 ).join( startSeparator );
+		const last = words[ words.length - 1 ];
+		return `${ start }${ endSeparator }${ last }`;
+	}
+}
