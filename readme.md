@@ -98,6 +98,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Custom Fields a.k.a. Meta is now saving properly for Events
 * Fix - Adjust vertical alignment of the price section for the classic event date time block
 * Fix - Make sure the ticket block uses the currency from the ticket provider
+* Fix - Header image failing to load due to Incorrect variable type
 
 #### 0.3.1-alpha - 2018-10-12
 
