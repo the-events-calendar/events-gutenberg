@@ -204,7 +204,8 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 * @return mixed
 	 */
 	public function add_events_pro_config( $js_config ) {
-		$events_pro_js_config = array();
+		
+		$events_pro_js_config = array( 'additional_fields' => $this->get_additional_fields() );
 		
 		if ( empty( $js_config['admin_url'] ) ) {
 			$js_config['admin_url'] = admin_url();
@@ -218,5 +219,26 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		
 		$js_config['events_pro'] = $events_pro_js_config;
 		return $js_config;
+	}
+	
+	/**
+	 * Return the additional fields as an array of values without the ID of each field and also parsing the values
+	 * from field where they might have multiple values such as: radio, dropdown, checkbox send an array of values
+	 * instead of a single string of value.
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	protected function get_additional_fields() {
+		$additional_fields = array_values( tribe_get_option( 'custom-fields', array() ) );
+		$fields = array();
+		foreach ( $additional_fields as $field ) {
+			if ( ! empty( $field['values'] ) ) {
+				$field['values'] = explode( "\n", $field['values'] );
+			}
+			$fields[] = $field;
+		}
+		return $fields;
 	}
 }
