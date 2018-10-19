@@ -23,7 +23,6 @@ const DailyField = ( { index, isMultiDay } ) => {
 				index={ index }
 			/>
 			<FromTimeRangePicker
-				blockType={ constants.RECURRING }
 				index={ index }
 			/>
 			{ isMultiDay && <RecurringToDateTimePicker /> }
