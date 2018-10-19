@@ -7,6 +7,7 @@ import {
 	replaceWithObject,
 	getWords,
 	wordsAsList,
+	normalize,
 } from '@moderntribe/common/utils/string';
 
 describe( 'Tests for string.js', () => {
@@ -65,14 +66,35 @@ describe( 'Tests for string.js', () => {
 
 		test( 'A large number of words', () => {
 			expect(
-				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ] )
+				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ] ),
 			).toEqual( 'Dog, Cat, Hamster, Parrot, Spider & Goldfish' );
 		} );
 
 		test( 'Custom separators', () => {
 			expect(
-				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ], ' - ', ' => ' )
+				wordsAsList( [ 'Dog', 'Cat', 'Hamster', 'Parrot', 'Spider', 'Goldfish' ], ' - ', ' => ' ),
 			).toEqual( 'Dog - Cat - Hamster - Parrot - Spider => Goldfish' );
+		} );
+	} );
+
+	describe( 'normalize', () => {
+		test( 'single words', () => {
+			expect( normalize( 'modern' ) ).toEqual( 'modern' );
+			expect( normalize( 'TRIBE' ) ).toEqual( 'tribe' );
+		} );
+
+		test( 'multiple words', () => {
+			expect( normalize( 'Modern Tribe' ) ).toEqual( 'modern-tribe' );
+			expect( normalize( 'https://theeventscalendar.com/' ) )
+				.toEqual( 'httpstheeventscalendarcom' );
+		} );
+
+		test( 'Multiple spaces', () => {
+			expect( normalize( '      modern      TriBe' ) ).toEqual( 'modern-tribe' );
+		} );
+
+		test( 'non words', () => {
+			expect( normalize( '       12312321-,-.(()=^^ ¨¨:;:_¨¨Ç  *¿?=)(/&%$·"!.+' ) ).toEqual( '' );
 		} );
 	} );
 } );

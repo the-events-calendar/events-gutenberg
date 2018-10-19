@@ -72,4 +72,21 @@ export const wordsAsList = ( words, startSeparator = ', ', endSeparator = ' & ' 
 		const last = words[ words.length - 1 ];
 		return `${ start }${ endSeparator }${ last }`;
 	}
-}
+};
+
+/**
+ * Creates a string that only contains a-z characters, useful specially for keys
+ *
+ * @param {string} text Then ame to be normalized
+ * @returns {string} A formatted string with no spacing and only a-z chars
+ */
+export const normalize = ( text = '' ) => {
+	if ( ! isString( text ) ) {
+		return '';
+	}
+	return text.toLowerCase()
+		// Remove any non word or space
+		.replace( /[^a-z\s]/g, '' )
+		.trim()
+		.replace( /\s+/g, '-' );
+};
