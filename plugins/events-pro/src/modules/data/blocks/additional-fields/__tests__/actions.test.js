@@ -1,7 +1,8 @@
 /**
  * Internal dependencies
  */
-import { actions, utils } from '@moderntribe/events-pro/data/blocks/additional-fields';
+import { actions } from '@moderntribe/events-pro/data/blocks/additional-fields';
+import { FIELD_TYPES } from '@moderntribe/events-pro/blocks/additional-fields/utils';
 
 describe( 'Actions in Additional Fields', () => {
 	test( 'add field', () => {
@@ -26,7 +27,7 @@ describe( 'Actions in Additional Fields', () => {
 	} );
 
 	test( 'set field type', () => {
-		expect( actions.setFieldType( 'Host', utils.FIELD_TYPES.CHECKBOX ) ).toMatchSnapshot();
+		expect( actions.setFieldType( 'Host', FIELD_TYPES.checkbox ) ).toMatchSnapshot();
 	} );
 
 	test( 'set field options', () => {

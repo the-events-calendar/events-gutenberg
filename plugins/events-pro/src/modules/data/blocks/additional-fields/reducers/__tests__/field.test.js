@@ -1,8 +1,9 @@
 /**
  * Internal dependencies
  */
-import { actions, utils } from '@moderntribe/events-pro/data/blocks/additional-fields';
+import { actions } from '@moderntribe/events-pro/data/blocks/additional-fields';
 import field, { DEFAULT_STATE } from '../field';
+import { FIELD_TYPES } from '@moderntribe/events-pro/blocks/additional-fields/utils';
 
 describe( 'Fields reducer', () => {
 	let state = {};
@@ -25,7 +26,7 @@ describe( 'Fields reducer', () => {
 	} );
 
 	test( 'Set field type', () => {
-		expect( field( DEFAULT_STATE, actions.setFieldType( 'Website', utils.FIELD_TYPES.URL ) ) )
+		expect( field( DEFAULT_STATE, actions.setFieldType( 'Website', FIELD_TYPES.url ) ) )
 			.toMatchSnapshot();
 	} );
 

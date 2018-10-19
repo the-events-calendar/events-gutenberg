@@ -71,7 +71,7 @@ Object {
   "isPristine": true,
   "name": "",
   "options": Array [],
-  "type": "URL",
+  "type": "url",
   "value": "",
 }
 `;

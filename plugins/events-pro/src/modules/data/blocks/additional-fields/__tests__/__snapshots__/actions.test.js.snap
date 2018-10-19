@@ -78,7 +78,7 @@ Object {
 exports[`Actions in Additional Fields set field type 1`] = `
 Object {
   "payload": Object {
-    "type": "CHECKBOX",
+    "type": "checkbox",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_TYPE",
 }
