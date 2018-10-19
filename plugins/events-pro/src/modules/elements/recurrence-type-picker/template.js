@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  */
 import FrequencySelect from './frequency-select/element';
 import { Select } from '@moderntribe/common/elements';
-import { LabeledRow } from '@moderntribe/events-pro/elements';
+import LabeledRow from '@moderntribe/events-pro/elements/labeled-row/element';
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import {
 	constants as recurringConstants,

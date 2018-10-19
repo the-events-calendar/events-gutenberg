@@ -1,4 +1,4 @@
-export default RECURRING = 'recurring';
-export default EXCEPTION = 'exception';
+export const RECURRING = 'recurring';
+export const EXCEPTION = 'exception';
 
-export default BLOCK_TYPES = [ RECURRING, EXCEPTION ];
+export const BLOCK_TYPES = [ RECURRING, EXCEPTION ];
