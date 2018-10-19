@@ -10,7 +10,7 @@ import { compose } from 'redux';
 import FromTimeRangePicker from './template';
 import { actions, selectors } from '@moderntribe/events-pro/data/blocks/recurring';
 import { withStore } from '@moderntribe/common/hoc';
-import { time as timeUtil } from '@moderntribe/common/util';
+import { time as timeUtil } from '@moderntribe/common/utils';
 
 const {
 	HALF_HOUR_IN_SECONDS,

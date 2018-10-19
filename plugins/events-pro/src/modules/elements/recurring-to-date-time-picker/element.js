@@ -47,7 +47,7 @@ const mapDispatchToProps = ( dispatch ) => ( {
 	editRule: ( index, payload ) => dispatch( actions.editRule( index, payload ) ),
 } );
 
-const mapDispatchToProps = ( stateProps, dispatchProps, ownProps ) => ( {
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...ownProps,
 	...stateProps,
 	onEndTimeChange: onEndTimeChange( dispatchProps, ownProps ),
@@ -57,5 +57,5 @@ const mapDispatchToProps = ( stateProps, dispatchProps, ownProps ) => ( {
 
 export default compose(
 	withStore(),
-	connect( mapStateToProps, mapDispatchToProps ),
+	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
 )( RecurringToDateTimePicker );
