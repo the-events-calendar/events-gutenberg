@@ -22,14 +22,11 @@ const {
 } = timeUtil;
 
 const onEndTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
-	const { startTime, isMultiDay } = stateProps;
+	const { startTime } = stateProps;
+	const min = toSeconds( startTime, TIME_FORMAT_HH_MM );
 
-	if ( isMultiDay ) {
-		const min = toSeconds( startTime, TIME_FORMAT_HH_MM );
-
-		if ( toSeconds( e.target.value, TIME_FORMAT_HH_MM ) <= min ) {
-			return;
-		}
+	if ( toSeconds( e.target.value, TIME_FORMAT_HH_MM ) <= min ) {
+		return;
 	}
 
 	dispatchProps.editRule( ownProps.index, { end_time: `${ e.target.value }:00` } );
@@ -115,9 +112,9 @@ const onStartTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
 };
 
 const mapStateToProps = ( state, ownProps ) => ( {
-	endTime: selectors.getEndTime( state, ownProps ).slice( 0, -3 ),
+	endTime: selectors.getEndTime( state, ownProps ),
 	isMultiDay: selectors.getMultiDay( state, ownProps ),
-	startTime: selectors.getStartTime( state, ownProps ).slice( 0, -3 ),
+	startTime: selectors.getStartTime( state, ownProps ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
