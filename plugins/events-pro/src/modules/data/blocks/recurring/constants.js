@@ -3,6 +3,11 @@
  */
 import { __ } from '@wordpress/i18n';
 
+/**
+ * Internal dependencies
+ */
+import { SERIES_ENDS_OPTIONS } from './options';
+
 //
 // ─── RECURRENCE TYPES ───────────────────────────────────────────────────────────
 //
@@ -34,10 +39,16 @@ export const NEVER_LABEL = __( 'Never', 'events-gutenberg' );
 export const DATE = 'date';
 export const COUNT = 'count';
 
-export const LIMIT_TYPE_MAPPING = {
+export const LIMIT_TYPE_MAPPING_TO_STATE = {
 	[ ON ]: DATE,
 	[ AFTER ]: COUNT,
 	[ NEVER ]: null,
+};
+
+export const LIMIT_TYPE_MAPPING_FROM_STATE = {
+	[ DATE ]: SERIES_ENDS_OPTIONS[ 0 ],
+	[ COUNT ]: SERIES_ENDS_OPTIONS[ 1 ],
+	[ null ]: SERIES_ENDS_OPTIONS[ 2 ],
 };
 
 //

@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -24,7 +25,11 @@ const DailyField = ( { index, isMultiDay } ) => {
 			/>
 			<FromTimeRangePicker index={ index } />
 			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
-			<SeriesEnds />
+			<SeriesEnds
+				blockType={ constants.RECURRING }
+				index={ index }
+				rowLabel={ __( 'Series Ends', 'events-gutenberg' ) }
+			/>
 		</Fragment>
 	);
 };
