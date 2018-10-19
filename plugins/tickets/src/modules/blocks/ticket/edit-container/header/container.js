@@ -15,6 +15,8 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	title: selectors.getTicketTitle( state, ownProps ),
 	description: selectors.getTicketDescription( state, ownProps ),
 	price: selectors.getTicketPrice( state, ownProps ),
+	provider: selectors.getSelectedProvider( state, ownProps ),
+	currencySymbol: selectors.getTicketCurrency( state, ownProps ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
@@ -29,6 +31,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	setPrice( price ) {
 		const { blockId } = ownProps;
 		dispatch( actions.setPrice( blockId, price ) );
+	},
+	setTicketCurrency( currencySymbol ) {
+		const { blockId } = ownProps;
+		dispatch( actions.setTicketCurrency( blockId, currencySymbol ) );
 	},
 } );
 
