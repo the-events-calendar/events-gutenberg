@@ -13,6 +13,7 @@ import { TextTemplate } from './text';
 import { Dropdown } from './dropdown';
 import { URL } from './url';
 import { Checkbox } from './checkbox';
+import { config } from '@moderntribe/common/src/modules/utils/globals';
 
 export const FIELD_TYPES = {
 	text: 'text',
@@ -91,4 +92,21 @@ export const fieldToBlock = ( field ) => {
 		edit: getContainer( type ),
 		save: () => null,
 	};
+};
+
+/**
+ * Extract the additional fields from the localized variable `tribe_js_config` and attempt to extract
+ * any additional field and convert into a block.
+ *
+ * @since TBD
+ *
+ * @param {array} blocks An array of blocks where to append more blocks
+ *
+ * @returns {[]} An array with the merge of blocks an addiitional fields
+ */
+export const addAdditionalFields = ( blocks ) => {
+	const eventsPro = config().events_pro || {};
+	const additionalFields = eventsPro.additional_fields || [];
+	const fields = additionalFields.map( ( field ) => fieldToBlock( field ) );
+	return [ ...blocks, ...fields ];
 };
