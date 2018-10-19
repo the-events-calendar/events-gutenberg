@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { curry } from 'lodash/fp';
+
+/**
  * Internal dependencies
  */
 import * as types from './types';
@@ -21,8 +26,8 @@ export const removeRule = ( index ) => ( {
 	index,
 } );
 
-export const editRule = ( index, payload ) => ( {
+export const editRule = curry( ( index, payload ) => ( {
 	type: types.EDIT_RULE,
 	index,
 	payload,
-} );
+} ) );

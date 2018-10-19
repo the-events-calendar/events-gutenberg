@@ -16,6 +16,7 @@ export default class EventRecurring extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
 		removeException: PropTypes.func.isRequired,
+		editException: PropTypes.func.isRequired,
 		exceptions: PropTypes.array.isRequired,
 		initialExceptionPanelClick: PropTypes.func.isRequired,
 		isExceptionPanelExpanded: PropTypes.bool.isRequired,
@@ -36,6 +37,7 @@ export default class EventRecurring extends PureComponent {
 						<ExceptionForm
 							exceptions={ this.props.exceptions }
 							removeException={ this.props.removeException }
+							editException={ this.props.editException }
 						/>
 						<ExceptionAddField onClick={ this.props.addField } noBorder />
 					</Panel>

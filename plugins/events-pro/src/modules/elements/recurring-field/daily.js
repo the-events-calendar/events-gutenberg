@@ -3,25 +3,26 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
 import {
 	FromTimeRangePicker,
-	RecurrenceTypePicker,
+	TypePicker,
 	RecurringToDateTimePicker,
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
 import { constants } from '@moderntribe/events-pro/data/blocks';
+import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 const DailyField = ( { index, isMultiDay } ) => {
 	return (
 		<Fragment>
-			<RecurrenceTypePicker
+			<TypePicker
 				blockType={ constants.RECURRING }
 				index={ index }
+				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 			/>
 			<FromTimeRangePicker index={ index } />
 			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }

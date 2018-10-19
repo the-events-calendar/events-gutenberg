@@ -2,6 +2,14 @@
  * External dependencies
  */
 import { createSelector } from 'reselect';
+import { find } from 'lodash';
+
+/**
+ * Internal dependencies
+ */
+import {
+	EXCEPTION_OCCURRENCE_OPTIONS,
+} from './options';
 import { constants } from '@moderntribe/common/data/plugins';
 
 export const getExceptions = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ].blocks.exception;
@@ -55,4 +63,9 @@ export const getDay = createSelector(
 export const getMonth = createSelector(
 	[ getException ],
 	( exception ) => exception.month,
+);
+
+export const getTypeOption = createSelector(
+	( exception ) => exception,
+	( exception ) => find( EXCEPTION_OCCURRENCE_OPTIONS, type => type.value === exception.type )
 );

@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { curry } from 'lodash/fp';
+
+/**
  * Internal dependencies
  */
 import * as types from './types';
@@ -21,8 +26,8 @@ export const removeException = ( index ) => ( {
 	index,
 } );
 
-export const editException = ( index, payload ) => ( {
+export const editException = curry( ( index, payload ) => ( {
 	type: types.EDIT_EXCEPTION,
 	index,
 	payload,
-} );
+} ) );

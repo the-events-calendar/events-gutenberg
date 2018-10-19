@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -14,7 +15,6 @@ import './style.pcss';
 
 const { DAILY, WEEKLY, MONTHLY, YEARLY } = constants;
 const {
-	RECURRENCE_TYPE_RULES_OPTIONS,
 	DAILY_RECURRENCE_FREQUENCY_OPTIONS,
 	WEEKLY_RECURRENCE_FREQUENCY_OPTIONS,
 	MONTHLY_RECURRENCE_FREQUENCY_OPTIONS,
@@ -23,14 +23,14 @@ const {
 
 const FrequencySelect = ( {
 	className,
-	onRecurrenceFrequencyChange,
-	recurrenceFrequency,
-	recurrenceType,
+	onFrequencyChange,
+	selected,
 } ) => {
+	// TODO: Update to use passed in options
 	const getFrequencyOptions = () => {
 		let frequencyOptions = [];
 
-		switch ( recurrenceType.value ) {
+		switch ( selected.value ) {
 			case DAILY:
 				frequencyOptions = DAILY_RECURRENCE_FREQUENCY_OPTIONS;
 				break;
@@ -45,10 +45,10 @@ const FrequencySelect = ( {
 				break;
 			default:
 				break;
-		};
+		}
 
 		return frequencyOptions;
-	}
+	};
 
 	const formatCreateLabel = ( inputValue ) => inputValue;
 
@@ -70,21 +70,18 @@ const FrequencySelect = ( {
 			backspaceRemovesValue={ false }
 			formatCreateLabel={ formatCreateLabel }
 			isValidNewOption={ isValidNewOption }
-			onChange={ onRecurrenceFrequencyChange }
+			onChange={ onFrequencyChange }
 			options={ getFrequencyOptions() }
-			value={ recurrenceFrequency }
+			value={ selected }
 		/>
 	);
 };
 
 FrequencySelect.propTypes = {
 	className: PropTypes.string,
-	onRecurrenceFrequencyChange: PropTypes.func,
-	recurrenceFrequency: PropTypes.shape( {
-		label: PropTypes.string,
-		value: PropTypes.number,
-	} ),
-	recurrenceType: PropTypes.oneOf( RECURRENCE_TYPE_RULES_OPTIONS ),
+	frequencyOptions: proptypes.ReactSelectOptions.isRequired,
+	onFrequencyChange: PropTypes.func,
+	selected: proptypes.ReactSelectOption.isRequired,
 };
 
 export default FrequencySelect;

@@ -28,6 +28,7 @@ const mapDispatchToProps = dispatch => ( {
 	expandExceptionPanel: () => dispatch( ui.actions.expandExceptionPanel() ),
 	addField: ( payload ) => dispatch( exception.actions.addField( payload ) ),
 	removeException: ( id ) => dispatch( exception.actions.removeException( id ) ),
+	editException: ( ...args ) => dispatch( exception.actions.editException( ...args ) ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {

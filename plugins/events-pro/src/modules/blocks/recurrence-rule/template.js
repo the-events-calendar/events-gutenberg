@@ -16,6 +16,7 @@ export default class EventRecurring extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
 		removeRule: PropTypes.func.isRequired,
+		editRule: PropTypes.func.isRequired,
 		initialRulePanelClick: PropTypes.func.isRequired,
 		isRulePanelExpanded: PropTypes.bool.isRequired,
 		isRulePanelVisible: PropTypes.bool.isRequired,
@@ -35,6 +36,7 @@ export default class EventRecurring extends PureComponent {
 						<RecurringForm
 							rules={ this.props.rules }
 							removeRule={ this.props.removeRule }
+							editRule={ this.props.editRule }
 						/>
 						<RecurringAddField onClick={ this.props.addField } noBorder />
 					</Panel>

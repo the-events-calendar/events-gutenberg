@@ -10,6 +10,7 @@ export default class RecurringForm extends PureComponent {
 	static propTypes = {
 		rules: PropTypes.arrayOf( PropTypes.shape( {} ) ),
 		removeRule: PropTypes.func.isRequired,
+		editRule: PropTypes.func.isRequired,
 	}
 
 	static defaultProps = {
@@ -25,6 +26,7 @@ export default class RecurringForm extends PureComponent {
 							index={ i }
 							key={ i }
 							onRemoveClick={ this.props.removeRule }
+							editRule={ this.props.editRule }
 							{ ...rule }
 						/>
 					) )

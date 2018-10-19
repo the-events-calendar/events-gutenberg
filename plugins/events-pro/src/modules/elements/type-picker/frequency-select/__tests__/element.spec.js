@@ -1,3 +1,6 @@
+/**
+ * External Dependencies
+ */
 import React from 'react';
 import renderer from 'react-test-renderer';
 import FrequencySelect from '../element';
@@ -8,9 +11,9 @@ describe( 'FrequencySelect', () => {
 		const component = renderer.create(
 			<FrequencySelect
 				className="test-class"
-				onRecurrenceFrequencyChange={ jest.fn() }
-				recurrenceFrequency={ options.DAILY_RECURRENCE_FREQUENCY_OPTIONS[ 0 ] }
-				recurrenceType={ options.RECURRENCE_TYPE_RULES_OPTIONS[ 0 ] }
+				onFrequencyChange={ jest.fn() }
+				frequencyOptions={ options.DAILY_RECURRENCE_FREQUENCY_OPTIONS[ 0 ] }
+				selected={ options.RECURRENCE_TYPE_RULES_OPTIONS[ 0 ] }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
