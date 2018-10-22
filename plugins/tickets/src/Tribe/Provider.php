@@ -37,6 +37,7 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 
 		$this->container->singleton( 'gutenberg.tickets.blocks.tickets', 'Tribe__Gutenberg__Tickets__Blocks__Tickets' );
 		$this->container->singleton( 'gutenberg.tickets.blocks.rsvp', 'Tribe__Gutenberg__Tickets__Blocks__Rsvp' );
+		$this->container->singleton( 'gutenberg.tickets.blocks.attendees', 'Tribe__Gutenberg__Tickets__Blocks__Attendees' );
 
 		$this->container->singleton( 'gutenberg.tickets.meta', 'Tribe__Gutenberg__Tickets__Meta' );
 
@@ -85,6 +86,11 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 		add_action(
 			'tribe_events_editor_register_blocks',
 			tribe_callback( 'gutenberg.tickets.blocks.tickets', 'register' )
+		);
+
+		add_action(
+			'tribe_events_editor_register_blocks',
+			tribe_callback( 'gutenberg.tickets.blocks.attendees', 'register' )
 		);
 
 		add_action(

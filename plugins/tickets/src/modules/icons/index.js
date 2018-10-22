@@ -6,3 +6,5 @@ export { default as TicketInactive } from './inactive/ticket.svg';
 
 export { default as RSVPActive } from './active/rsvp.svg';
 export { default as RSVPInactive } from './inactive/rsvp.svg';
+
+export { default as AttendeesGravatar } from './gravatar.svg';
