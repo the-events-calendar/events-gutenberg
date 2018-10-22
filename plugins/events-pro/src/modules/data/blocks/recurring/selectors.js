@@ -44,7 +44,7 @@ export const getStartDate = createSelector(
 
 export const getStartTime = createSelector(
 	[ getRule ],
-	( rule ) => rule.start_time.slice( 0, -3 ),
+	( rule ) => rule.start_time
 );
 
 export const getEndDate = createSelector(
@@ -54,7 +54,7 @@ export const getEndDate = createSelector(
 
 export const getEndTime = createSelector(
 	[ getRule ],
-	( rule ) => rule.end_time.slice( 0, -3 ),
+	( rule ) => rule.end_time
 );
 
 export const getBetween = createSelector(

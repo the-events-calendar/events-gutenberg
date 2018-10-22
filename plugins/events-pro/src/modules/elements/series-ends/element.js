@@ -27,7 +27,7 @@ import {
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state, ownProps ) => {
-	const selectors = ownProps.blockType = constants.RECURRING
+	const selectors = ownProps.blockType === constants.RECURRING
 		? recurringSelectors
 		: exceptionSelectors;
 	const limitType = selectors.getLimitType( state, ownProps );
@@ -35,13 +35,13 @@ const mapStateToProps = ( state, ownProps ) => {
 	const stateProps = {};
 
 	stateProps.seriesEnds = recurringOptions.SERIES_ENDS_OPTIONS.filter( ( option ) => (
-		option.value === LIMIT_TYPE_MAPPING_FROM_STATE[ limitType ]
+		option.value === recurringConstants.LIMIT_TYPE_MAPPING_FROM_STATE[ limitType ]
 	) )[ 0 ];
 
 	if ( limitType === recurringConstants.DATE ) {
-		stateProps.seriesEndsOnDate = selectors.limit;
+		stateProps.seriesEndsOnDate = selectors.getLimit( state, ownProps );
 	} else if ( limitType === recurringConstants.COUNT ) {
-		stateProps.seriesEndsAfterTimes = selectors.limit;
+		stateProps.seriesEndsAfterTimes = selectors.getLimit( state, ownProps );
 	}
 
 	return stateProps;

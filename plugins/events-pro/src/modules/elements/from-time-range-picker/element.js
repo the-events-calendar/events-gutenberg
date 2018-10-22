@@ -21,94 +21,43 @@ const {
 	fromSeconds,
 } = timeUtil;
 
-const onEndTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
-	const { startTime } = stateProps;
-	const min = toSeconds( startTime, TIME_FORMAT_HH_MM );
 
-	if ( toSeconds( e.target.value, TIME_FORMAT_HH_MM ) <= min ) {
-		return;
-	}
-
-	dispatchProps.editRule( ownProps.index, { end_time: `${ e.target.value }:00` } );
+const onMultiDayChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
+	dispatchProps.editRule( ownProps.index, { multi_day: !! e.target.value } );
 };
 
-const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
-	const isAllDay = value === 'all-day';
-	const payload = {};
-
-	if ( isAllDay ) {
-		payload.all_day = true;
-		payload.start_time = '00:00:00';
-		payload.end_time = '23:59:00';
-	} else {
-		payload.all_day = false;
-		payload.end_time = fromSeconds( value, TIME_FORMAT_HH_MM );
-	}
-
-	dispatchProps.editRule( ownProps.index, payload );
+const onStartTimeClick = ( stateProps, dispatchProps, ownProps ) => ( value, onClose ) => {
+	dispatchProps.editRule( ownProps.index, { start_time: value } );
 	onClose();
 };
 
-const onMultiDayChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
-	const { startTime, endTime } = stateProps;
-	const payload = {};
+const onEndTimeClick = ( stateProps, dispatchProps, ownProps ) => ( value, onClose ) => {
+	dispatchProps.editRule( ownProps.index, { end_time: value } );
+	onClose();
+};
 
-	if ( e.target.value ) {
-		// If multi-day is checked, set multi-day to true
-		payload.multi_day = true;
-	} else {
-		payload.multi_day = false;
+const onEndTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
+	const seconds = toSeconds( e.target.value, TIME_FORMAT_HH_MM );
+	const min = toSeconds( stateProps.startTime, TIME_FORMAT_HH_MM );
 
-		// If multi-day is unchecked, set multi-day to false and fix time if necessary
-		let startTimeSeconds = toSeconds( startTime, TIME_FORMAT_HH_MM );
-		let endTimeSeconds = toSeconds( endTime, TIME_FORMAT_HH_MM );
-
-		// If end time is earlier than start time, fix time
-		if ( endTimeSeconds <= startTimeSeconds ) {
-			// If there is less than half an hour left in the day, roll back one hour
-			if ( startTimeSeconds + HALF_HOUR_IN_SECONDS >= DAY_IN_SECONDS ) {
-				startTimeSeconds -= HOUR_IN_SECONDS;
-			}
-
-			endTimeSeconds = startTimeSeconds + HALF_HOUR_IN_SECONDS;
-
-			payload.start_time = `${ fromSeconds( startTimeSeconds, TIME_FORMAT_HH_MM ) }:00`;
-			payload.end_time = `${ fromSeconds( endTimeSeconds, TIME_FORMAT_HH_MM ) }:00`;
-		}
+	if (
+		stateProps.isMultiDay ||
+		( ! stateProps.isMultiDay && seconds > min )
+	) {
+		dispatchProps.editRule( ownProps.index, { end_time: e.target.value } );
 	}
-
-	dispatchProps.editRule( ownProps.index, payload );
 };
 
 const onStartTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
-	const { endTime, isMultiDay } = stateProps;
+	const seconds = toSeconds( e.target.value, TIME_FORMAT_HH_MM );
+	const max = toSeconds( stateProps.endTime, TIME_FORMAT_HH_MM );
 
-	if ( isMultiDay ) {
-		const max = toSeconds( endTime, TIME_FORMAT_HH_MM );
-
-		if ( toSeconds( e.target.value, TIME_FORMAT_HH_MM ) >= max ) {
-			return;
-		}
+	if (
+		stateProps.isMultiDay ||
+		( ! stateProps.isMultiDay && seconds < max )
+	) {
+		dispatchProps.editRule( ownProps.index, { start_time: e.target.value } );
 	}
-
-	dispatchProps.editRule( ownProps.index, { start_time: `${ e.target.value}:00` } );
-};
-
-const onStartTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
-	const isAllDay = value === 'all-day';
-	const payload = {};
-
-	if ( isAllDay ) {
-		payload.all_day = true;
-		payload.start_time = '00:00:00';
-		payload.end_time = '23:59:00';
-	} else {
-		payload.all_day = false;
-		payload.start_time = fromSeconds( value, TIME_FORMAT_HH_MM );
-	}
-
-	dispatchProps.editRule( ownProps.index, payload );
-	onClose();
 };
 
 const mapStateToProps = ( state, ownProps ) => ( {
@@ -125,10 +74,10 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...ownProps,
 	...stateProps,
 	onEndTimeChange: onEndTimeChange( stateProps, dispatchProps, ownProps ),
-	onEndTimeClick: onEndTimeClick( dispatchProps, ownProps ),
-	onMultiDayChange: onMultiDayChange(),
 	onStartTimeChange: onStartTimeChange( stateProps, dispatchProps, ownProps ),
-	onStartTimeClick: onStartTimeClick( dispatchProps, ownProps ),
+	onMultiDayChange: onMultiDayChange( stateProps, dispatchProps, ownProps ),
+	onEndTimeClick: onEndTimeClick( stateProps, dispatchProps, ownProps ),
+	onStartTimeClick: onStartTimeClick( stateProps, dispatchProps, ownProps ),
 } );
 
 export default compose(

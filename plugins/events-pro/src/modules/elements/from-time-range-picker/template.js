@@ -34,20 +34,18 @@ const FromTimeRangePicker = ( {
 		) }
 		label={ __( 'From', 'events-gutenberg' ) }
 	>
-		{/* @todo: set start and end time, set min and max */}
+		{ /* @todo: set start and end time, set min and max, and all day */ }
 		<TimePicker
-			allDay={ true }
 			current={ startTime }
 			start="00:00"
 			end="23:59"
 			onChange={ onStartTimeChange }
 			onClick={ onStartTimeClick }
 		/>
-		{/* @todo: remove span and timepicker if all day */}
+		{ /* @todo: remove span and timepicker if all day */ }
 		<span>{ __( 'to', 'events-gutenberg' ) }</span>
-		{/* @todo: set start and end time, set min and max */}
+		{ /* @todo: set start and end time, set min and max, and all day */ }
 		<TimePicker
-			allDay={ true }
 			current={ endTime }
 			start="00:00"
 			end="23:59"
@@ -70,7 +68,9 @@ FromTimeRangePicker.propTypes = {
 	onEndTimeClick: PropTypes.func,
 	onStartTimeChange: PropTypes.func,
 	onStartTimeClick: PropTypes.func,
+	onMultiDayChange: PropTypes.func,
 	startTime: TribePropTypes.timeFormat,
+	isMultiDay: PropTypes.bool,
 };
 
 export default FromTimeRangePicker;
