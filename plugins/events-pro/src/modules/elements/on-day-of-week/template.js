@@ -9,7 +9,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { LabeledRow, DayOfWeekPicker } from '@moderntribe/events-pro/elements';
+import LabeledRow from '@moderntribe/events-pro/elements/labeled-row/element';
+import DayOfWeekPicker from '@moderntribe/events-pro/elements/day-of-week-picker/element';
 
 const OnDayOfWeek = ( {
 	className,

@@ -1,14 +1,17 @@
 /**
  * External dependencies
  */
-import { takeEvery, put, select, call, all } from 'redux-saga/effects';
+import { takeEvery, put, select, call } from 'redux-saga/effects';
 import { keys } from 'lodash';
 
 /**
  * Internal dependencies
  */
-import { constants } from '@moderntribe/events-pro/data/blocks';
-import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
+import * as constants from '@moderntribe/events-pro/data/blocks/constants';
+import * as actions from './actions';
+import * as recurringConstants from './constants';
+import * as selectors from './selectors';
+import * as types from './types';
 import * as ui from '@moderntribe/events-pro/data/ui';
 import { moment as momentUtil, time } from '@moderntribe/common/utils';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
@@ -32,7 +35,7 @@ const {
 } = constants;
 
 export function* handleRuleRemoval() {
-	const rules = yield select( recurring.selectors.getRules );
+	const rules = yield select( selectors.getRules );
 
 	if ( ! rules.length ) {
 		yield put( ui.actions.hideRulePanel() );
@@ -54,8 +57,8 @@ export function* handleRuleAddition() {
 	const endDate = momentUtil.toDate( endMoment );
 	const endTime = momentUtil.toTime24Hr( endMoment );
 
-	yield put( recurring.actions.addRule( {
-		[ KEY_TYPE ]: recurring.constants.SINGLE,
+	yield put( actions.addRule( {
+		[ KEY_TYPE ]: recurringConstants.SINGLE,
 		[ KEY_ALL_DAY ]: allDay,
 		[ KEY_MULTI_DAY ]: multiDay,
 		[ KEY_START_DATE ]: startDate,
@@ -63,10 +66,10 @@ export function* handleRuleAddition() {
 		[ KEY_END_DATE ]: endDate,
 		[ KEY_END_TIME ]: endTime,
 		[ KEY_BETWEEN ]: 1,
-		[ KEY_LIMIT_TYPE ]: recurring.constants.COUNT,
+		[ KEY_LIMIT_TYPE ]: recurringConstants.COUNT,
 		[ KEY_LIMIT ]: 7,
 		[ KEY_DAYS ]: [],
-		[ KEY_WEEK ]: recurring.constants.FIRST,
+		[ KEY_WEEK ]: recurringConstants.FIRST,
 		[ KEY_DAY ]: 1,
 		[ KEY_MONTH ]: [],
 		[ KEY_TIMEZONE ]: timezone,
@@ -106,7 +109,7 @@ export function* handleTimeChange( action, key ) {
 
 	if ( isAllDay ) {
 		yield put(
-			recurring.actions.syncRule( action.index, {
+			actions.syncRule( action.index, {
 				[ KEY_ALL_DAY ]: isAllDay,
 				[ KEY_START_TIME ]: '00:00:00',
 				[ KEY_END_TIME ]: '23:59:00',
@@ -114,7 +117,7 @@ export function* handleTimeChange( action, key ) {
 		);
 	} else {
 		yield put(
-			recurring.actions.syncRule( action.index, {
+			actions.syncRule( action.index, {
 				[ KEY_ALL_DAY ]: isAllDay,
 				[ key ]: time.fromSeconds( payloadTime, time.TIME_FORMAT_HH_MM ),
 			} )
@@ -126,8 +129,8 @@ export function* handleMultiDayChange( action, key ) {
 	const isMultiDay = action.payload[ key ];
 
 	if ( ! isMultiDay ) {
-		const startTime = yield select( recurring.selectors.getStartTime, action );
-		const endTime = yield select( recurring.selectors.getEndTime, action );
+		const startTime = yield select( selectors.getStartTime, action );
+		const endTime = yield select( selectors.getEndTime, action );
 
 		let startTimeSeconds = time.toSeconds( startTime, time.TIME_FORMAT_HH_MM );
 		let endTimeSeconds = time.toSeconds( endTime, time.TIME_FORMAT_HH_MM );
@@ -142,7 +145,7 @@ export function* handleMultiDayChange( action, key ) {
 			endTimeSeconds = startTimeSeconds + time.HALF_HOUR_IN_SECONDS;
 
 			yield put(
-				recurring.actions.syncRule( action.index, {
+				actions.syncRule( action.index, {
 					[ KEY_START_TIME ]: (
 						time.fromSeconds( startTimeSeconds, time.TIME_FORMAT_HH_MM )
 					),
@@ -156,7 +159,7 @@ export function* handleMultiDayChange( action, key ) {
 }
 
 export default function* watchers() {
-	yield takeEvery( [ recurring.types.REMOVE_RULE ], handleRuleRemoval );
-	yield takeEvery( [ recurring.types.ADD_RULE_FIELD ], handleRuleAddition );
-	yield takeEvery( [ recurring.types.EDIT_RULE ], handleRuleEdit );
+	yield takeEvery( [ types.REMOVE_RULE ], handleRuleRemoval );
+	yield takeEvery( [ types.ADD_RULE_FIELD ], handleRuleAddition );
+	yield takeEvery( [ types.EDIT_RULE ], handleRuleEdit );
 }

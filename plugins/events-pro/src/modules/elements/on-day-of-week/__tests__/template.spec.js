@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OnDayOfWeek from '../element';
+import OnDayOfWeek from '../template';
 
 describe( 'OnDayOfWeek', () => {
 	test( 'should render component', () => {

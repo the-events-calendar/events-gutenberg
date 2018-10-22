@@ -6,13 +6,15 @@ import { takeEvery, put, select } from 'redux-saga/effects';
 /**
  * Internal dependencies
  */
-import * as exception from '@moderntribe/events-pro/data/blocks/exception';
-import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
+import actions from './actions';
+import selectors from './selectors';
+import types from './types';
+import * as recurringConstants from '@moderntribe/events-pro/data/blocks/recurring/constants';
 import * as ui from '@moderntribe/events-pro/data/ui';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
 
 export function* handleExceptionRemoval() {
-	const exceptions = yield select( exception.selectors.getExceptions );
+	const exceptions = yield select( selectors.getExceptions );
 
 	if ( ! exceptions.length ) {
 		yield put( ui.actions.hideExceptionPanel() );
@@ -21,13 +23,13 @@ export function* handleExceptionRemoval() {
 
 export function* handleExceptionAddition() {
 	const payload = yield select( datetime.datetimeSelector );
-	yield put( exception.actions.addException( {
-		type: recurring.constants.SINGLE,
+	yield put( actions.addException( {
+		type: recurringConstants.SINGLE,
 		...payload,
 	} ) );
 }
 
 export default function* watchers() {
-	yield takeEvery( [ exception.types.REMOVE_EXCEPTION ], handleExceptionRemoval );
-	yield takeEvery( [ exception.types.ADD_EXCEPTION_FIELD ], handleExceptionAddition );
+	yield takeEvery( [ types.REMOVE_EXCEPTION ], handleExceptionRemoval );
+	yield takeEvery( [ types.ADD_EXCEPTION_FIELD ], handleExceptionAddition );
 }
