@@ -35,7 +35,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	const stateProps = {};
 
 	stateProps.seriesEnds = recurringOptions.SERIES_ENDS_OPTIONS.filter( ( option ) => (
-		option.value === LIMIT_TYPE_MAPPING_FROM_STATE[ limitType ]
+		option.value === recurringOptions.LIMIT_TYPE_MAPPING_FROM_STATE[ limitType ]
 	) )[ 0 ];
 
 	if ( limitType === recurringConstants.DATE ) {
