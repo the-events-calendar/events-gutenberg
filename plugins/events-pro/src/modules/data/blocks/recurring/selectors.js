@@ -44,7 +44,12 @@ export const getStartDate = createSelector(
 
 export const getStartTime = createSelector(
 	[ getRule ],
-	( rule ) => rule.start_time
+	( rule ) => rule.start_time,
+);
+
+export const getStartTimeNoSeconds = createSelector(
+	[ getStartTime ],
+	( startTime ) => startTime.slice( 0, -3 ),
 );
 
 export const getEndDate = createSelector(
@@ -54,7 +59,12 @@ export const getEndDate = createSelector(
 
 export const getEndTime = createSelector(
 	[ getRule ],
-	( rule ) => rule.end_time
+	( rule ) => rule.end_time,
+);
+
+export const getEndTimeNoSeconds = createSelector(
+	[ getEndTime ],
+	( endTime ) => endTime.slice( 0, -3 ),
 );
 
 export const getBetween = createSelector(
@@ -99,5 +109,5 @@ export const getTimezone = createSelector(
 
 export const getTypeOption = createSelector(
 	( rule ) => rule,
-	( rule ) => find( RECURRENCE_TYPE_RULES_OPTIONS, type => type.value === rule.type )
+	( rule ) => find( RECURRENCE_TYPE_RULES_OPTIONS, type => type.value === rule.type ),
 );

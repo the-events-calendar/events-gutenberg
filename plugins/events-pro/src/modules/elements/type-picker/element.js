@@ -38,7 +38,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 	return {
 		onChange: ( selectedOption ) => (
-			dispatch( edit( ownProps.index, { type: selectedOption.value } ) )
+			dispatch( edit(
+				ownProps.index,
+				{ [ constants.KEY_TYPE ]: selectedOption.value },
+			) )
 		),
 	};
 };
