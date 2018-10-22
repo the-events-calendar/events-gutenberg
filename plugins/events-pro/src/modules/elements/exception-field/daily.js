@@ -18,19 +18,19 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const SingularField = ( { isMultiDay, typeOption, onTypeChange } ) => {
+const SingularField = ( { isMultiDay, typeOption, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
 				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
-				onChange={ onTypeChange }
 				blockType={ constants.EXCEPTION }
+				index={ index }
 			/>
-			<OnDatePicker />
-			<FromTimeRangePicker />
-			{ isMultiDay && <SingleToDateTimePicker /> }
+			<OnDatePicker index={ index } />
+			<FromTimeRangePicker index={ index } />
+			{ isMultiDay && <SingleToDateTimePicker index={ index } /> }
 		</Fragment>
 	);
 };
@@ -38,7 +38,7 @@ const SingularField = ( { isMultiDay, typeOption, onTypeChange } ) => {
 SingularField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
 	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
 };
 
 export default SingularField;

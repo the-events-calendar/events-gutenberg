@@ -26,7 +26,7 @@ export default class ExceptionField extends PureComponent {
 	}
 
 	handleRemove = () => this.props.onRemoveClick( this.props.index )
-	handleTypeChange = ( option ) => this.props.editException( this.props.index, { type: option.value } )
+
 
 	get typeOption() {
 		return selectors.getTypeOption( this.props );
@@ -39,7 +39,6 @@ export default class ExceptionField extends PureComponent {
 					<Daily
 						{ ...this.props }
 						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
 					/>
 				);
 			case constants.WEEKLY:
@@ -47,7 +46,6 @@ export default class ExceptionField extends PureComponent {
 					<Weekly
 						{ ...this.props }
 						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
 					/>
 				);
 			case constants.MONTHLY:
@@ -55,7 +53,6 @@ export default class ExceptionField extends PureComponent {
 					<Monthly
 						{ ...this.props }
 						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
 					/>
 				);
 			case constants.YEARLY:
@@ -63,7 +60,6 @@ export default class ExceptionField extends PureComponent {
 					<Yearly
 						{ ...this.props }
 						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
 					/>
 				);
 			default:
@@ -71,7 +67,6 @@ export default class ExceptionField extends PureComponent {
 					<Singular
 						{ ...this.props }
 						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
 					/>
 				);
 		}
