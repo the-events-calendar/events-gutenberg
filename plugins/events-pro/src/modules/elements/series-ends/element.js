@@ -27,7 +27,7 @@ import {
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state, ownProps ) => {
-	const selectors = ownProps.blockType = constants.RECURRING
+	const selectors = ownProps.blockType === constants.RECURRING
 		? recurringSelectors
 		: exceptionSelectors;
 	const limitType = selectors.getLimitType( state, ownProps );
