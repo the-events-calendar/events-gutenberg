@@ -38,13 +38,7 @@ const OnDayOfWeek = ( {
 			thursdayChecked={ thursdayChecked }
 			fridayChecked={ fridayChecked }
 			saturdayChecked={ saturdayChecked }
-			onSundayChange={ onDayChange }
-			onMondayChange={ onDayChange }
-			onTuesdayChange={ onDayChange }
-			onWednesdayChange={ onDayChange }
-			onThursdayChange={ onDayChange }
-			onFridayChange={ onDayChange }
-			onSaturdayChange={ onDayChange }
+			onDayChange={ onDayChange }
 		/>
 	</LabeledRow>
 );

@@ -18,23 +18,22 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-const WeeklyField = ( { isMultiDay, typeOption, onTypeChange, index } ) => {
+const WeeklyField = ( { isMultiDay, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
-				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
-				selected={ typeOption }
-				onChange={ onTypeChange }
 				blockType={ constants.RECURRING }
 				index={ index }
+				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 			/>
 			<OnDayOfWeek />
 			<FromTimeRangePicker
 				index={ index }
 			/>
-			{ isMultiDay && <RecurringToDateTimePicker /> }
+			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds
 				blockType={ constants.RECURRING }
+				index={ index }
 			/>
 		</Fragment>
 	);

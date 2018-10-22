@@ -71,6 +71,18 @@ export const THURSDAY_ABBR = __( 'T', 'events-gutenberg' );
 export const FRIDAY_ABBR = __( 'F', 'events-gutenberg' );
 export const SATURDAY_ABBR = __( 'S', 'events-gutenberg' );
 
+export const DAYS_OF_THE_WEEK_MAPPING_TO_STATE = {
+	[ MONDAY ]: 1,
+	[ TUESDAY ]: 2,
+	[ WEDNESDAY ]: 3,
+	[ THURSDAY ]: 4,
+	[ FRIDAY ]: 5,
+	[ SATURDAY ]: 6,
+	[ SUNDAY ]: 7,
+};
+
+export const DAYS_OF_THE_WEEK_MAPPING_FROM_STATE = invert( DAYS_OF_THE_WEEK_MAPPING_TO_STATE );
+
 //
 // ─── DAYS OF THE MONTH ──────────────────────────────────────────────────────────
 //
