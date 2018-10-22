@@ -67,5 +67,5 @@ export const getMonth = createSelector(
 
 export const getTypeOption = createSelector(
 	( exception ) => exception,
-	( exception ) => find( EXCEPTION_OCCURRENCE_OPTIONS, type => type.value === exception.type )
+	( exception ) => find( EXCEPTION_OCCURRENCE_OPTIONS, ( type ) => type.value === exception.type )
 );

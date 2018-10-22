@@ -109,5 +109,5 @@ export const getTimezone = createSelector(
 
 export const getTypeOption = createSelector(
 	( rule ) => rule,
-	( rule ) => find( RECURRENCE_TYPE_RULES_OPTIONS, type => type.value === rule.type ),
+	( rule ) => find( RECURRENCE_TYPE_RULES_OPTIONS, ( type ) => type.value === rule.type ),
 );
