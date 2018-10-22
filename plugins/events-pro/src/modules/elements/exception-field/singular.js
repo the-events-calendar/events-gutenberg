@@ -17,7 +17,6 @@ import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
 const SingularField = ( { typeOption, index } ) => {
-	console.warn( typeOption );
 	return (
 		<Fragment>
 			<TypePicker
