@@ -40,7 +40,10 @@ const onEndTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
 	const seconds = toSeconds( e.target.value, TIME_FORMAT_HH_MM );
 	const min = toSeconds( stateProps.startTime, TIME_FORMAT_HH_MM );
 
-	if ( seconds > min ) {
+	if (
+		stateProps.isMultiDay ||
+		( ! stateProps.isMultiDay && seconds > min )
+	) {
 		dispatchProps.editRule( ownProps.index, { end_time: e.target.value } );
 	}
 };
@@ -49,7 +52,10 @@ const onStartTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
 	const seconds = toSeconds( e.target.value, TIME_FORMAT_HH_MM );
 	const max = toSeconds( stateProps.endTime, TIME_FORMAT_HH_MM );
 
-	if ( ! stateProps.isMultiDay && seconds < max ) {
+	if (
+		stateProps.isMultiDay ||
+		( ! stateProps.isMultiDay && seconds < max )
+	) {
 		dispatchProps.editRule( ownProps.index, { start_time: e.target.value } );
 	}
 };
