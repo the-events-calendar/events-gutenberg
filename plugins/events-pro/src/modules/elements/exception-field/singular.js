@@ -16,24 +16,24 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const SingularField = ( { typeOption, onTypeChange } ) => {
+const SingularField = ( { typeOption, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
 				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
-				onChange={ onTypeChange }
 				blockType={ constants.EXCEPTION }
+				index={ index }
 			/>
-			<OnDatePicker />
+			<OnDatePicker index={ index } />
 		</Fragment>
 	);
 };
 
 SingularField.propTypes = {
 	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
 };
 
 export default SingularField;

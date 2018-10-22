@@ -19,22 +19,23 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const MonthlyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
+const MonthlyField = ( { isMultiDay, typeOption, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
 				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
-				onChange={ onTypeChange }
 				blockType={ constants.EXCEPTION }
+				index={ index }
 			/>
-			<DayOfMonthPicker />
-			<FromTimeRangePicker />
-			{ isMultiDay && <RecurringToDateTimePicker /> }
+			<DayOfMonthPicker index={ index } />
+			<FromTimeRangePicker index={ index } />
+			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds
 				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
 				blockType={ constants.EXCEPTION }
+				index={ index }
 			/>
 		</Fragment>
 	);
@@ -43,7 +44,7 @@ const MonthlyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
 MonthlyField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
 	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
 };
 
 export default MonthlyField;
