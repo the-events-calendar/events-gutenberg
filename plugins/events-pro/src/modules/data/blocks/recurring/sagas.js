@@ -13,6 +13,19 @@ import * as ui from '@moderntribe/events-pro/data/ui';
 import { moment as momentUtil, time } from '@moderntribe/common/utils';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
 
+const {
+	KEY_TYPE,
+	KEY_ALL_DAY,
+	KEY_MULTI_DAY,
+	KEY_START_TIME,
+	KEY_END_TIME,
+	KEY_START_DATE,
+	KEY_LIMIT,
+	KEY_LIMIT_TYPE,
+	KEY_BETWEEN,
+	KEY_TIMEZONE,
+} = constants;
+
 export function* handleRuleRemoval() {
 	const rules = yield select( recurring.selectors.getRules );
 
@@ -37,21 +50,21 @@ export function* handleRuleAddition() {
 	const endTime = momentUtil.toTime24Hr( endMoment );
 
 	yield put( recurring.actions.addRule( {
-		type: recurring.constants.SINGLE,
-		all_day: allDay,
-		multi_day: multiDay,
-		start_date: startDate,
-		start_time: startTime,
+		[ KEY_TYPE ]: recurring.constants.SINGLE,
+		[ KEY_ALL_DAY ]: allDay,
+		[ KEY_MULTI_DAY ]: multiDay,
+		[ KEY_START_DATE ]: startDate,
+		[ KEY_START_TIME ]: startTime,
 		end_date: endDate,
-		end_time: endTime,
-		between: 1,
-		limit_type: recurring.constants.COUNT,
-		limit: 7,
+		[ KEY_END_TIME ]: endTime,
+		[ KEY_BETWEEN ]: 1,
+		[ KEY_LIMIT_TYPE ]: recurring.constants.COUNT,
+		[ KEY_LIMIT ]: 7,
 		days: [],
 		week: recurring.constants.FIRST,
 		day: 1,
 		month: [],
-		timezone,
+		[ KEY_TIMEZONE ]: timezone,
 	} ) );
 }
 
@@ -67,12 +80,12 @@ export function* handleRuleEdit( action ) {
 		const fieldKey = fieldKeys[ i ];
 
 		switch ( fieldKey ) {
-			case constants.KEY_START_TIME:
-			case constants.KEY_END_TIME:
+			case KEY_START_TIME:
+			case KEY_END_TIME:
 				yield call( handleTimeChange, action, fieldKey );
 				break;
 
-			case constants.KEY_MULTI_DAY:
+			case KEY_MULTI_DAY:
 				yield call( handleMultiDayChange, action, fieldKey );
 				break;
 
@@ -125,10 +138,10 @@ export function* handleMultiDayChange( action, key ) {
 
 			yield put(
 				recurring.actions.syncRule( action.index, {
-					[ constants.KEY_START_TIME ]: (
+					[ KEY_START_TIME ]: (
 						time.fromSeconds( startTimeSeconds, time.TIME_FORMAT_HH_MM )
 					),
-					[ constants.KEY_END_TIME ]: (
+					[ KEY_END_TIME ]: (
 						time.fromSeconds( endTimeSeconds, time.TIME_FORMAT_HH_MM )
 					),
 				} )

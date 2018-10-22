@@ -19,8 +19,10 @@ import {
 } from '@moderntribe/events-pro/data/blocks/exception';
 import { withStore } from '@moderntribe/common/hoc';
 
+const { RECURRING, KEY_TYPE } = constants;
+
 const getSelected = ( state, ownProps ) => {
-	const selectors = ownProps.blockType === constants.RECURRING
+	const selectors = ownProps.blockType === RECURRING
 		? recurringSelectors
 		: exceptionSelectors;
 	const rule = selectors.getRule( state, ownProps );
@@ -32,7 +34,7 @@ const mapStateToProps = ( state, ownProps ) => ( {
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	const edit = ownProps.blockType === constants.RECURRING
+	const edit = ownProps.blockType === RECURRING
 		? recurringActions.editRule
 		: exceptionActions.editException;
 
@@ -40,7 +42,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		onChange: ( selectedOption ) => (
 			dispatch( edit(
 				ownProps.index,
-				{ [ constants.KEY_TYPE ]: selectedOption.value },
+				{ [ KEY_TYPE ]: selectedOption.value },
 			) )
 		),
 	};

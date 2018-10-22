@@ -14,6 +14,7 @@ import { withStore } from '@moderntribe/common/hoc';
 import { time as timeUtil } from '@moderntribe/common/utils';
 
 const { TIME_FORMAT_HH_MM, toSeconds } = timeUtil;
+const { KEY_END_TIME, KEY_MULTI_DAY, KEY_START_TIME } = constants;
 
 const onEndTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
 	const seconds = toSeconds( e.target.value, TIME_FORMAT_HH_MM );
@@ -25,7 +26,7 @@ const onEndTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
 	) {
 		dispatchProps.editRule(
 			ownProps.index,
-			{ [ constants.KEY_END_TIME ]: e.target.value },
+			{ [ KEY_END_TIME ]: e.target.value },
 		);
 	}
 };
@@ -40,7 +41,7 @@ const onStartTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
 	) {
 		dispatchProps.editRule(
 			ownProps.index,
-			{ [ constants.KEY_START_TIME ]: e.target.value },
+			{ [ KEY_START_TIME ]: e.target.value },
 		);
 	}
 };
@@ -48,14 +49,14 @@ const onStartTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
 const onMultiDayChange = ( dispatchProps, ownProps ) => ( e ) => {
 	dispatchProps.editRule(
 		ownProps.index,
-		{ [ constants.KEY_MULTI_DAY ]: !! e.target.value },
+		{ [ KEY_MULTI_DAY ]: !! e.target.value },
 	);
 };
 
 const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
 	dispatchProps.editRule(
 		ownProps.index,
-		{ [ constants.KEY_END_TIME ]: value },
+		{ [ KEY_END_TIME ]: value },
 	);
 	onClose();
 };
@@ -63,7 +64,7 @@ const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
 const onStartTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
 	dispatchProps.editRule(
 		ownProps.index,
-		{ [ constants.KEY_START_TIME ]: value },
+		{ [ KEY_START_TIME ]: value },
 	);
 	onClose();
 };
