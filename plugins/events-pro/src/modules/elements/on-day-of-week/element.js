@@ -1,58 +1,75 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { __ } from '@wordpress/i18n';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 /**
  * Internal dependencies
  */
-import { LabeledRow, DayOfWeekPicker } from '@moderntribe/events-pro/elements';
+import OnDayOfWeek from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import {
+	actions as recurringActions,
+	constants as recurringConstants,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
+import { withStore } from '@moderntribe/common/hoc';
 
-const OnDayOfWeek = ( {
-	className,
-	sundayChecked,
-	mondayChecked,
-	tuesdayChecked,
-	wednesdayChecked,
-	thursdayChecked,
-	fridayChecked,
-	saturdayChecked,
-	onDayChange,
-} ) => (
-	<LabeledRow
-		className={ classNames(
-			'tribe-editor__on-day-of-week',
-			className
-		) }
-		label={ __( 'On', 'events-gutenberg' ) }
-	>
-		<DayOfWeekPicker
-			// TODO: handle checked and on day change
-			sundayChecked={ sundayChecked }
-			mondayChecked={ mondayChecked }
-			tuesdayChecked={ tuesdayChecked }
-			wednesdayChecked={ wednesdayChecked }
-			thursdayChecked={ thursdayChecked }
-			fridayChecked={ fridayChecked }
-			saturdayChecked={ saturdayChecked }
-			onDayChange={ onDayChange }
-		/>
-	</LabeledRow>
-);
+const {
+	DAYS_OF_THE_WEEK_MAPPING_TO_STATE,
+	DAYS_OF_THE_WEEK_MAPPING_FROM_STATE,
+} = recurringConstants;
 
-OnDayOfWeek.propTypes = {
-	className: PropTypes.string,
-	sundayChecked: PropTypes.bool,
-	mondayChecked: PropTypes.bool,
-	tuesdayChecked: PropTypes.bool,
-	wednesdayChecked: PropTypes.bool,
-	thursdayChecked: PropTypes.bool,
-	fridayChecked: PropTypes.bool,
-	saturdayChecked: PropTypes.bool,
-	onDayChange: PropTypes.func,
+const mapStateToProps = ( state, ownProps ) => {
+	const selectors = ownProps.blockType === RECURRING
+		? recurringSelectors
+		: exceptionSelectors;
+	const days = selectors.getDays( state, ownProps );
+	const stateProps = { days };
+
+	days.forEach( ( day ) => {
+		const propKey = DAYS_OF_THE_WEEK_MAPPING_FROM_STATE[ day ];
+		stateProps[ propKey ] = true;
+	});
+
+	return stateProps;
 };
 
-export default OnDayOfWeek;
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const edit = ownProps.blockType === RECURRING
+		? recurringActions.editRule
+		: exceptionActions.editException;
+
+	return {
+		edit: ( index, payload ) => dispatch( edit( index, payload ) ),
+	};
+};
+
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
+	const { days, ...restStateProps } = stateProps;
+	const { edit } = dispatchProps;
+
+	return {
+		...ownProps,
+		...restStateProps,
+		onDayChange: ( e ) => {
+			const { checked, value } = e.target;
+			const mappedValue = DAYS_OF_THE_WEEK_MAPPING_TO_STATE[ value ];
+			const newDays = checked
+				? [ ...days, mappedValue ].sort()
+				: days.filter( ( day ) => day !== mappedValue );
+
+			edit( ownProps.index, { [ constants.KEY_DAYS ]: newDays } );
+		},
+	}
+}
+
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
+)( OnDayOfWeek );

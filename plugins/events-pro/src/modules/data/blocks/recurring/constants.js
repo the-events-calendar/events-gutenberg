@@ -71,6 +71,14 @@ export const THURSDAY_ABBR = __( 'T', 'events-gutenberg' );
 export const FRIDAY_ABBR = __( 'F', 'events-gutenberg' );
 export const SATURDAY_ABBR = __( 'S', 'events-gutenberg' );
 
+export const SUNDAY_CHECKED = 'sundayChecked';
+export const MONDAY_CHECKED = 'mondayChecked';
+export const TUESDAY_CHECKED = 'tuesdayChecked';
+export const WEDNESDAY_CHECKED = 'wednesdayChecked';
+export const THURSDAY_CHECKED = 'thursdayChecked';
+export const FRIDAY_CHECKED = 'fridayChecked';
+export const SATURDAY_CHECKED = 'saturdayChecked';
+
 export const DAYS_OF_THE_WEEK_MAPPING_TO_STATE = {
 	[ MONDAY ]: 1,
 	[ TUESDAY ]: 2,
@@ -81,7 +89,15 @@ export const DAYS_OF_THE_WEEK_MAPPING_TO_STATE = {
 	[ SUNDAY ]: 7,
 };
 
-export const DAYS_OF_THE_WEEK_MAPPING_FROM_STATE = invert( DAYS_OF_THE_WEEK_MAPPING_TO_STATE );
+export const DAYS_OF_THE_WEEK_MAPPING_FROM_STATE = {
+	1: MONDAY_CHECKED,
+	2: TUESDAY_CHECKED,
+	3: WEDNESDAY_CHECKED,
+	4: THURSDAY_CHECKED,
+	5: FRIDAY_CHECKED,
+	6: SATURDAY_CHECKED,
+	7: SUNDAY_CHECKED,
+};
 
 //
 // ─── DAYS OF THE MONTH ──────────────────────────────────────────────────────────

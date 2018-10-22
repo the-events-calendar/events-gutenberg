@@ -20,9 +20,14 @@ const {
 	KEY_START_TIME,
 	KEY_END_TIME,
 	KEY_START_DATE,
+	KEY_END_DATE,
 	KEY_LIMIT,
 	KEY_LIMIT_TYPE,
 	KEY_BETWEEN,
+	KEY_DAYS,
+	KEY_WEEK,
+	KEY_DAY,
+	KEY_MONTH,
 	KEY_TIMEZONE,
 } = constants;
 
@@ -55,15 +60,15 @@ export function* handleRuleAddition() {
 		[ KEY_MULTI_DAY ]: multiDay,
 		[ KEY_START_DATE ]: startDate,
 		[ KEY_START_TIME ]: startTime,
-		end_date: endDate,
+		[ KEY_END_DATE ]: endDate,
 		[ KEY_END_TIME ]: endTime,
 		[ KEY_BETWEEN ]: 1,
 		[ KEY_LIMIT_TYPE ]: recurring.constants.COUNT,
 		[ KEY_LIMIT ]: 7,
-		days: [],
-		week: recurring.constants.FIRST,
-		day: 1,
-		month: [],
+		[ KEY_DAYS ]: [],
+		[ KEY_WEEK ]: recurring.constants.FIRST,
+		[ KEY_DAY ]: 1,
+		[ KEY_MONTH ]: [],
 		[ KEY_TIMEZONE ]: timezone,
 	} ) );
 }
@@ -102,15 +107,15 @@ export function* handleTimeChange( action, key ) {
 	if ( isAllDay ) {
 		yield put(
 			recurring.actions.syncRule( action.index, {
-				all_day: isAllDay,
-				start_time: '00:00:00',
-				end_time: '23:59:00',
+				[ KEY_ALL_DAY ]: isAllDay,
+				[ KEY_START_TIME ]: '00:00:00',
+				[ KEY_END_TIME ]: '23:59:00',
 			} )
 		);
 	} else {
 		yield put(
 			recurring.actions.syncRule( action.index, {
-				all_day: isAllDay,
+				[ KEY_ALL_DAY ]: isAllDay,
 				[ key ]: time.fromSeconds( payloadTime, time.TIME_FORMAT_HH_MM ),
 			} )
 		);

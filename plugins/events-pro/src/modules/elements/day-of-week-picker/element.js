@@ -109,13 +109,13 @@ const DayOfWeekPicker = ( {
 
 DayOfWeekPicker.propTypes = {
 	className: PropTypes.string,
-	sundayChecked: PropTypes.bool.isRequired,
-	mondayChecked: PropTypes.bool.isRequired,
-	tuesdayChecked: PropTypes.bool.isRequired,
-	wednesdayChecked: PropTypes.bool.isRequired,
-	thursdayChecked: PropTypes.bool.isRequired,
-	fridayChecked: PropTypes.bool.isRequired,
-	saturdayChecked: PropTypes.bool.isRequired,
+	sundayChecked: PropTypes.bool,
+	mondayChecked: PropTypes.bool,
+	tuesdayChecked: PropTypes.bool,
+	wednesdayChecked: PropTypes.bool,
+	thursdayChecked: PropTypes.bool,
+	fridayChecked: PropTypes.bool,
+	saturdayChecked: PropTypes.bool,
 	onDayChange: PropTypes.func.isRequired,
 };
 
