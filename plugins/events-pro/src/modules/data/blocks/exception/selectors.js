@@ -10,6 +10,8 @@ import { find } from 'lodash';
 import {
 	EXCEPTION_OCCURRENCE_OPTIONS,
 } from './options';
+import { SERIES_ENDS_OPTIONS } from '@moderntribe/events-pro/data/blocks/recurring/options';
+import { LIMIT_TYPE_OPTIONS } from '@moderntribe/events-pro/data/blocks/recurring/constants';
 import { constants } from '@moderntribe/common/data/plugins';
 
 export const getExceptions = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ].blocks.exception;
@@ -108,4 +110,9 @@ export const getTimezone = createSelector(
 export const getTypeOption = createSelector(
 	( exception ) => exception,
 	( exception ) => find( EXCEPTION_OCCURRENCE_OPTIONS, type => exception && type.value === exception.type )
+);
+
+export const getLimitTypeOption = createSelector(
+	( exception ) => exception,
+	( exception ) => find( LIMIT_TYPE_OPTIONS, option => exception && option.value === exception.limit_type )
 );
