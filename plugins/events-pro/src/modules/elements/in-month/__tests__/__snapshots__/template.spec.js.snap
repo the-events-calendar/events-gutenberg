@@ -21,7 +21,6 @@ exports[`InMonth should render component 1`] = `
     >
       <button
         className="tribe-editor__month-tag tribe-editor__month-picker__month-tag"
-        onClick={[MockFunction]}
       >
         <<svg>icon mock</svg> />
         <span
@@ -33,7 +32,6 @@ exports[`InMonth should render component 1`] = `
       </button>
       <button
         className="tribe-editor__month-tag tribe-editor__month-picker__month-tag"
-        onClick={[MockFunction]}
       >
         <<svg>icon mock</svg> />
         <span

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import InMonth from '../element';
+import InMonth from '../template';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 describe( 'InMonth', () => {
