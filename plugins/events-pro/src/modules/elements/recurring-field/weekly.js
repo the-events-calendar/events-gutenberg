@@ -30,9 +30,7 @@ const WeeklyField = ( { isMultiDay, index } ) => {
 				blockType={ consants.RECURRING }
 				index={ index }
 			/>
-			<FromTimeRangePicker
-				index={ index }
-			/>
+			<FromTimeRangePicker index={ index } />
 			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds
 				blockType={ constants.RECURRING }

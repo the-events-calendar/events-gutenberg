@@ -17,20 +17,16 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-const SingularField = ( { isMultiDay, typeOption, onTypeChange, index } ) => {
+const SingularField = ( { isMultiDay, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
-				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
-				selected={ typeOption }
-				onChange={ onTypeChange }
 				blockType={ constants.RECURRING }
 				index={ index }
+				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 			/>
 			<OnDatePicker />
-			<FromTimeRangePicker
-				index={ index }
-			/>
+			<FromTimeRangePicker index={ index } />
 			{ isMultiDay && <SingleToDateTimePicker /> }
 		</Fragment>
 	);
