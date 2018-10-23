@@ -174,6 +174,23 @@ export const OCTOBER_ABBR = __( 'Oct', 'events-gutenberg' );
 export const NOVEMBER_ABBR = __( 'Nov', 'events-gutenberg' );
 export const DECEMBER_ABBR = __( 'Dec', 'events-gutenberg' );
 
+export const MONTHS_OF_THE_YEAR_MAPPING_TO_STATE = {
+	[ JANUARY ]: 1,
+	[ FEBRUARY ]: 2,
+	[ MARCH ]: 3,
+	[ APRIL ]: 4,
+	[ MAY ]: 5,
+	[ JUNE ]: 6,
+	[ JULY ]: 7,
+	[ AUGUST ]: 8,
+	[ SEPTEMBER ]: 9,
+	[ OCTOBER ]: 10,
+	[ NOVEMBER ]: 11,
+	[ DECEMBER ]: 12,
+};
+
+export const MONTHS_OF_THE_YEAR_MAPPING_FROM_STATE = invert( MONTHS_OF_THE_YEAR_MAPPING_TO_STATE );
+
 //
 // ─── RECURRING MULTI DAY ────────────────────────────────────────────────────────
 //

@@ -35,7 +35,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	days.forEach( ( day ) => {
 		const propKey = DAYS_OF_THE_WEEK_PROP_KEY_MAPPING_FROM_STATE[ day ];
 		stateProps[ propKey ] = true;
-	});
+	} );
 
 	return stateProps;
 };
