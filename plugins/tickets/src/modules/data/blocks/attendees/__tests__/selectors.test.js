@@ -9,7 +9,7 @@ const state = {
 		blocks: {
 			attendees: DEFAULT_STATE,
 		},
-	}
+	},
 };
 
 describe( '[STORE] - Attendees selectors', () => {
