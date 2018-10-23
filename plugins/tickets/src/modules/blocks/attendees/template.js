@@ -59,9 +59,9 @@ const renderPlaceholder = () => {
 	];
 
 	return (
-		<button className={ classNames( classes ) }>
+		<span className={ classNames( classes ) }>
 			{ placeholder }
-		</button>
+		</span>
 	);
 };
 
