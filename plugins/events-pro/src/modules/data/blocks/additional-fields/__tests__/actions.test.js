@@ -3,6 +3,7 @@
  */
 import { actions } from '@moderntribe/events-pro/data/blocks/additional-fields';
 import { FIELD_TYPES } from '@moderntribe/events-pro/blocks/additional-fields/utils';
+import { DEFAULT_STATE } from '../reducers/field';
 
 describe( 'Actions in Additional Fields', () => {
 	const fieldName = '_ecp_custom_23';
@@ -42,5 +43,21 @@ describe( 'Actions in Additional Fields', () => {
 
 	test( 'set field divider end', () => {
 		expect( actions.setFieldDividerEnd( fieldName, ' & ' ) ).toMatchSnapshot();
+	} );
+
+	test( 'initial state', () => {
+		expect( actions.setInitialState( DEFAULT_STATE ) ).toMatchSnapshot();
+	} );
+
+	test( 'on change', () => {
+		expect( actions.setChange( fieldName ) ).toMatchSnapshot();
+	} );
+
+	test( 'append field value', () => {
+		expect( actions.appendFieldValue( fieldName, 'Chocolate' ) ).toMatchSnapshot();
+	} );
+
+	test( 'remove field value', () => {
+		expect( actions.removeFieldValue( fieldName, 'Chocolate' ) ).toMatchSnapshot();
 	} );
 } );

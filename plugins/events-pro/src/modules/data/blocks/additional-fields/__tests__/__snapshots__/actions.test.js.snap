@@ -9,12 +9,56 @@ Object {
 }
 `;
 
+exports[`Actions in Additional Fields append field value 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+    "value": "Chocolate",
+  },
+  "type": "@@MT/EVENTS-PRO/APPEND_ADDITIONAL_FIELD_VALUE",
+}
+`;
+
+exports[`Actions in Additional Fields initial state 1`] = `
+Object {
+  "payload": Object {
+    "dividerEnd": " & ",
+    "dividerList": ", ",
+    "isPristine": true,
+    "label": "",
+    "options": Array [],
+    "type": null,
+    "value": null,
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_INITIAL_STATE",
+}
+`;
+
+exports[`Actions in Additional Fields on change 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_CHANGE",
+}
+`;
+
 exports[`Actions in Additional Fields remove field 1`] = `
 Object {
   "payload": Object {
     "name": "_ecp_custom_23",
   },
   "type": "@@MT/EVENTS-PRO/REMOVE_ADDITIONAL_FIELD",
+}
+`;
+
+exports[`Actions in Additional Fields remove field value 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+    "value": "Chocolate",
+  },
+  "type": "@@MT/EVENTS-PRO/REMOVE_ADDITIONAL_FIELD_VALUE",
 }
 `;
 
