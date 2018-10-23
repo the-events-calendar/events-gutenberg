@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
  */
 import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
 import { selectors } from '@moderntribe/events-pro/data/blocks/exception';
+import { constants as keys } from '@moderntribe/events-pro/data/blocks';
+import { moment as momentUtils } from '@moderntribe/common/utils';
 import { Fieldset } from '@moderntribe/events-pro/elements';
 import RemoveField from '@moderntribe/events-pro/elements/remove-field/element';
 import Singular from './singular';
@@ -26,7 +28,9 @@ export default class ExceptionField extends PureComponent {
 	}
 
 	handleRemove = () => this.props.onRemoveClick( this.props.index )
-
+	handleStartDate = ( value ) => this.props.editException( this.props.index, {
+		[ keys.KEY_START_DATE ]: value,
+	} )
 
 	get typeOption() {
 		return selectors.getTypeOption( this.props );
@@ -39,6 +43,7 @@ export default class ExceptionField extends PureComponent {
 					<Daily
 						{ ...this.props }
 						typeOption={ this.typeOption }
+						handleStartDate={ this.handleStartDate }
 					/>
 				);
 			case constants.WEEKLY:
@@ -67,6 +72,7 @@ export default class ExceptionField extends PureComponent {
 					<Singular
 						{ ...this.props }
 						typeOption={ this.typeOption }
+						handleStartDate={ this.handleStartDate }
 					/>
 				);
 		}

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
  * External dependencies
  */
@@ -16,7 +17,7 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const SingularField = ( { typeOption, index } ) => {
+const SingularField = ( { typeOption, index, handleStartDate, start_date } ) => {
 	return (
 		<Fragment>
 			<TypePicker
@@ -26,7 +27,11 @@ const SingularField = ( { typeOption, index } ) => {
 				blockType={ constants.EXCEPTION }
 				index={ index }
 			/>
-			<OnDatePicker index={ index } />
+			<OnDatePicker
+				index={ index }
+				onDateChange={ handleStartDate }
+				date={ start_date }
+			/>
 		</Fragment>
 	);
 };
@@ -34,6 +39,8 @@ const SingularField = ( { typeOption, index } ) => {
 SingularField.propTypes = {
 	typeOption: proptypes.ReactSelectOption,
 	index: PropTypes.number.isRequired,
+	handleStartDate: PropTypes.func.isRequired,
+	start_date: PropTypes.string.isRequired,
 };
 
 export default SingularField;

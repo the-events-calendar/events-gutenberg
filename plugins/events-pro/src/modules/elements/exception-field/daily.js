@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
  * External dependencies
  */
@@ -18,7 +19,15 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const SingularField = ( { isMultiDay, typeOption, index } ) => {
+const DailyField = ( {
+	handleStartDate,
+	index,
+	multi_day,
+	start_date,
+	start_time,
+	end_time,
+	typeOption,
+} ) => {
 	return (
 		<Fragment>
 			<TypePicker
@@ -28,17 +37,31 @@ const SingularField = ( { isMultiDay, typeOption, index } ) => {
 				blockType={ constants.EXCEPTION }
 				index={ index }
 			/>
-			<OnDatePicker index={ index } />
-			<FromTimeRangePicker index={ index } />
-			{ isMultiDay && <SingleToDateTimePicker index={ index } /> }
+			<OnDatePicker
+				date={ start_date }
+				onDateChange={ handleStartDate }
+				blockType={ constants.EXCEPTION }
+				index={ index }
+			/>
+			<FromTimeRangePicker
+				startTime={ start_time }
+				endTime={ end_time }
+				index={ index }
+				blockType={ constants.EXCEPTION }
+			/>
+			{ multi_day && <SingleToDateTimePicker index={ index } /> }
 		</Fragment>
 	);
 };
 
-SingularField.propTypes = {
-	isMultiDay: PropTypes.bool.isRequired,
+DailyField.propTypes = {
+	multi_day: PropTypes.bool.isRequired,
 	typeOption: proptypes.ReactSelectOption,
 	index: PropTypes.number.isRequired,
+	start_date: PropTypes.string.isRequired,
+	start_time: PropTypes.string.isRequired,
+	end_time: PropTypes.string.isRequired,
+	handleStartDate: PropTypes.func.isRequired,
 };
 
-export default SingularField;
+export default DailyField;
