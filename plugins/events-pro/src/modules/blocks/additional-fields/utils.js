@@ -7,12 +7,8 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { toBlockName } from '@moderntribe/common/utils/string';
-import { Radio } from './radio';
-import { TextArea } from './text-area';
-import { TextTemplate } from './text';
-import { Dropdown } from './dropdown';
-import { URL } from './url';
-import { Checkbox } from './checkbox';
+import Container from './container';
+import * as Fields from '@moderntribe/events-pro/blocks/additional-fields';
 import { config } from '@moderntribe/common/src/modules/utils/globals';
 
 export const FIELD_TYPES = {
@@ -24,37 +20,37 @@ export const FIELD_TYPES = {
 	textarea: 'textarea',
 };
 
-/**
- * Returns the name of the icon to be used, uses the set from dashicons to represent the different
- * types of fields.
- *
- * @since TBD
- *
- * @param {string} type Type of the field
- * @returns {string} The name of the icon to be used for that field type
- */
-export const getIcon = ( type ) => {
-	const icons = {
-		text: 'editor-textcolor',
-		textarea: 'admin-comments',
-		checkbox: 'yes',
-		radio: 'editor-ul',
-		dropdown: 'randomize',
-		url: 'admin-links',
-	};
-	return icons[ type ] || icons.text;
-};
-
-export const getContainer = ( type ) => {
-	const templates = {
-		text: TextTemplate,
-		textarea: TextArea,
-		checkbox: Checkbox,
-		radio: Radio,
-		dropdown: Dropdown,
-		url: URL,
-	};
-	return templates[ type ] || templates.text;
+export const FIELDS_SCHEMA = {
+	text: {
+		icon: 'editor-textcolor',
+		container: Fields.Text,
+		type: 'string',
+	},
+	url: {
+		icon: 'admin-links',
+		container: Fields.URL,
+		type: 'string',
+	},
+	textarea: {
+		icon: 'admin-comments',
+		container: Fields.TextArea,
+		type: 'string',
+	},
+	dropdown: {
+		icon: 'randomize',
+		container: Fields.Dropdown,
+		type: 'array',
+	},
+	checkbox: {
+		icon: 'yes',
+		container: Fields.Checkbox,
+		type: 'array',
+	},
+	radio: {
+		icon: 'editor-ul',
+		container: Fields.Radio,
+		type: 'array',
+	},
 };
 
 /**
@@ -67,7 +63,8 @@ export const getContainer = ( type ) => {
  * @returns {object} Returns an object that represents the block
  */
 export const fieldToBlock = ( field ) => {
-	const { name, label, type } = field;
+	const { name, label, type, values } = field;
+	const schema = FIELDS_SCHEMA[ type ] || FIELDS_SCHEMA.text;
 	return {
 		id: `field-${ toBlockName( name ) }`,
 		title: label,
@@ -75,7 +72,7 @@ export const fieldToBlock = ( field ) => {
 			'Additional Field',
 			'events-gutenberg',
 		),
-		icon: getIcon( type ),
+		icon: schema.icon,
 		category: 'tribe-events-pro-additional-fields',
 		keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
@@ -86,10 +83,27 @@ export const fieldToBlock = ( field ) => {
 		attributes: {
 			isPristine: {
 				type: 'boolean',
-				default: false,
+				default: true,
+			},
+			type: {
+				type: 'string',
+				default: type,
+			},
+			label: {
+				type: 'string',
+				default: label,
+			},
+			options: {
+				type: schema.type,
+				default: values,
+			},
+			value: {
+				type: schema.type,
+				source: 'meta',
+				meta: name,
 			},
 		},
-		edit: getContainer( type ),
+		edit: Container( schema.container ),
 		save: () => null,
 	};
 };
