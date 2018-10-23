@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 /**
  * Internal dependencies
  */
-import { constants, selectors } from '@moderntribe/events-pro/data/blocks/recurring';
+import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
 import { Fieldset } from '@moderntribe/events-pro/src/modules/elements';
 import RemoveField from '@moderntribe/events-pro/src/modules/elements/remove-field/element';
 import Singular from './singular';
@@ -16,61 +16,58 @@ import Weekly from './weekly';
 import Monthly from './monthly';
 import Yearly from './yearly';
 
+const {
+	DAILY,
+	WEEKLY,
+	MONTHLY,
+	YEARLY,
+} = constants;
+
 export default class RecurringField extends PureComponent {
 	static propTypes = {
 		onRemoveClick: PropTypes.func.isRequired,
-		editRule: PropTypes.func.isRequired,
 		index: PropTypes.number.isRequired,
-		type: PropTypes.string.isRequired,
+		isMultiDay: PropTypes.bool.isRequired,
 	}
 
 	handleClick = () => this.props.onRemoveClick( this.props.index )
-	handleTypeChange = ( option ) => this.props.editRule( this.props.index, { type: option.value } )
-
-	get typeOption() {
-		return selectors.getTypeOption( this.props );
-	}
 
 	renderFieldType = () => {
-		switch ( this.props.type ) {
-			case constants.DAILY:
+		const { index, isMultiDay, type } = this.props;
+		switch ( type ) {
+			case DAILY:
 				return (
 					<Daily
-						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
+						index={ index }
+						isMultiDay={ isMultiDay }
 					/>
 				);
-			case constants.WEEKLY:
+			case WEEKLY:
 				return (
 					<Weekly
-						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
+						index={ index }
+						isMultiDay={ isMultiDay }
 					/>
 				);
-			case constants.MONTHLY:
+			case MONTHLY:
 				return (
 					<Monthly
-						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
+						index={ index }
+						isMultiDay={ isMultiDay }
 					/>
 				);
-			case constants.YEARLY:
+			case YEARLY:
 				return (
 					<Yearly
-						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
+						index={ index }
+						isMultiDay={ isMultiDay }
 					/>
 				);
 			default:
 				return (
 					<Singular
-						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
+						index={ index }
+						isMultiDay={ isMultiDay }
 					/>
 				);
 		}

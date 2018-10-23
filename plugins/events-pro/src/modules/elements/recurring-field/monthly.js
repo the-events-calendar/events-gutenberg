@@ -42,8 +42,6 @@ const MonthlyField = ( { isMultiDay, index } ) => {
 
 MonthlyField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
-	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
 };
 

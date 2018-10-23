@@ -7,9 +7,11 @@ import { keys } from 'lodash';
 /**
  * Internal dependencies
  */
-import * as exception from '@moderntribe/events-pro/data/blocks/exception';
 import { constants } from '@moderntribe/events-pro/data/blocks';
-import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
+import * as actions from './actions';
+import * as selectors from './selectors';
+import * as types from './types';
+import * as recurringConstants from '@moderntribe/events-pro/data/blocks/recurring/constants';
 import * as ui from '@moderntribe/events-pro/data/ui';
 import { moment as momentUtil, time } from '@moderntribe/common/utils';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
@@ -33,7 +35,7 @@ const {
 } = constants;
 
 export function* handleExceptionRemoval() {
-	const exceptions = yield select( exception.selectors.getExceptions );
+	const exceptions = yield select( selectors.getExceptions );
 
 	if ( ! exceptions.length ) {
 		yield put( ui.actions.hideExceptionPanel() );
@@ -55,8 +57,8 @@ export function* handleExceptionAddition() {
 	const endDate = momentUtil.toDate( endMoment );
 	const endTime = momentUtil.toTime24Hr( endMoment );
 
-	yield put( exception.actions.addException( {
-		[ KEY_TYPE ]: recurring.constants.SINGLE,
+	yield put( actions.addException( {
+		[ KEY_TYPE ]: recurringConstants.SINGLE,
 		[ KEY_ALL_DAY ]: allDay,
 		[ KEY_MULTI_DAY ]: multiDay,
 		[ KEY_START_DATE ]: startDate,
@@ -64,10 +66,10 @@ export function* handleExceptionAddition() {
 		[ KEY_END_DATE ]: endDate,
 		[ KEY_END_TIME ]: endTime,
 		[ KEY_BETWEEN ]: 1,
-		[ KEY_LIMIT_TYPE ]: recurring.constants.COUNT,
+		[ KEY_LIMIT_TYPE ]: recurringConstants.COUNT,
 		[ KEY_LIMIT ]: 7,
 		[ KEY_DAYS ]: [],
-		[ KEY_WEEK ]: recurring.constants.FIRST,
+		[ KEY_WEEK ]: recurringConstants.FIRST,
 		[ KEY_DAY ]: 1,
 		[ KEY_MONTH ]: [],
 		[ KEY_TIMEZONE ]: timezone,
@@ -107,7 +109,7 @@ export function* handleTimeChange( action, key ) {
 
 	if ( isAllDay ) {
 		yield put(
-			exception.actions.syncException( action.index, {
+			actions.syncException( action.index, {
 				all_day: isAllDay,
 				start_time: '00:00:00',
 				end_time: '23:59:00',
@@ -115,7 +117,7 @@ export function* handleTimeChange( action, key ) {
 		);
 	} else {
 		yield put(
-			exception.actions.syncException( action.index, {
+			actions.syncException( action.index, {
 				all_day: isAllDay,
 				[ key ]: time.fromSeconds( payloadTime, time.TIME_FORMAT_HH_MM ),
 			} )
@@ -127,8 +129,8 @@ export function* handleMultiDayChange( action, key ) {
 	const isMultiDay = action.payload[ key ];
 
 	if ( ! isMultiDay ) {
-		const startTime = yield select( exception.selectors.getStartTime, action );
-		const endTime = yield select( exception.selectors.getEndTime, action );
+		const startTime = yield select( selectors.getStartTime, action );
+		const endTime = yield select( selectors.getEndTime, action );
 
 		let startTimeSeconds = time.toSeconds( startTime, time.TIME_FORMAT_HH_MM );
 		let endTimeSeconds = time.toSeconds( endTime, time.TIME_FORMAT_HH_MM );
@@ -143,7 +145,7 @@ export function* handleMultiDayChange( action, key ) {
 			endTimeSeconds = startTimeSeconds + time.HALF_HOUR_IN_SECONDS;
 
 			yield put(
-				exception.actions.syncException( action.index, {
+				actions.syncException( action.index, {
 					[ constants.KEY_START_TIME ]: (
 						time.fromSeconds( startTimeSeconds, time.TIME_FORMAT_HH_MM )
 					),
@@ -158,11 +160,11 @@ export function* handleMultiDayChange( action, key ) {
 
 export function* handleWeekChange( action, key ) {
 	const payloadWeek = action.payload[ key ];
-	const weekWasNull = ! ( yield select( exception.selectors.getWeek, action ) );
+	const weekWasNull = ! ( yield select( selectors.getWeek, action ) );
 
 	if ( payloadWeek && weekWasNull ) {
 		yield put(
-			exception.actions.syncException( action.index, {
+			actions.syncException( action.index, {
 				[ key ]: payloadWeek,
 				[ KEY_DAY ]: 1,
 			} )
@@ -171,7 +173,7 @@ export function* handleWeekChange( action, key ) {
 }
 
 export default function* watchers() {
-	yield takeEvery( [ exception.types.REMOVE_EXCEPTION ], handleExceptionRemoval );
-	yield takeEvery( [ exception.types.ADD_EXCEPTION_FIELD ], handleExceptionAddition );
-	yield takeEvery( [ exception.types.EDIT_EXCEPTION ], handleExceptionEdit );
+	yield takeEvery( [ types.REMOVE_EXCEPTION ], handleExceptionRemoval );
+	yield takeEvery( [ types.ADD_EXCEPTION_FIELD ], handleExceptionAddition );
+	yield takeEvery( [ types.EDIT_EXCEPTION ], handleExceptionEdit );
 }
