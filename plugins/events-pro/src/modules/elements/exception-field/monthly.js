@@ -11,7 +11,7 @@ import { proptypes } from '@moderntribe/common/data/plugins';
  */
 import {
 	FromTimeRangePicker,
-	DayOfMonthPicker,
+	OnDayOfMonthPicker,
 	TypePicker,
 	RecurringToDateTimePicker,
 	SeriesEnds,
@@ -29,7 +29,7 @@ const MonthlyField = ( { isMultiDay, typeOption, index } ) => {
 				blockType={ constants.EXCEPTION }
 				index={ index }
 			/>
-			<DayOfMonthPicker index={ index } />
+			<OnDayOfMonthPicker index={ index } />
 			<FromTimeRangePicker index={ index } />
 			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds

@@ -22,7 +22,7 @@ import { withStore } from '@moderntribe/common/hoc';
 
 const {
 	DAYS_OF_THE_WEEK_MAPPING_TO_STATE,
-	DAYS_OF_THE_WEEK_MAPPING_FROM_STATE,
+	DAYS_OF_THE_WEEK_PROP_KEY_MAPPING_FROM_STATE,
 } = recurringConstants;
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -33,7 +33,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	const stateProps = { days };
 
 	days.forEach( ( day ) => {
-		const propKey = DAYS_OF_THE_WEEK_MAPPING_FROM_STATE[ day ];
+		const propKey = DAYS_OF_THE_WEEK_PROP_KEY_MAPPING_FROM_STATE[ day ];
 		stateProps[ propKey ] = true;
 	});
 
@@ -67,7 +67,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 			edit( ownProps.index, { [ constants.KEY_DAYS ]: newDays } );
 		},
 	}
-}
+};
 
 export default compose(
 	withStore(),

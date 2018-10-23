@@ -11,7 +11,7 @@ describe( 'OnDayOfMonthPicker', () => {
 				dayOfMonth={ options.MONTH_DAYS_OPTIONS[ 0 ] }
 				onDayOfMonthChange={ jest.fn() }
 				onWeekDayChange={ jest.fn() }
-				weekDay={ options.DAYS_OF_THE_WEEK[ 0 ] }
+				weekDay={ options.DAYS_OF_THE_WEEK_OPTIONS[ 0 ] }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();

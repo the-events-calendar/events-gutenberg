@@ -54,7 +54,7 @@ export const SERIES_ENDS_OPTIONS = [
 // ─── DAYS OF THE WEEK OPTIONS ────────────────────────────────────────
 //
 
-export const DAYS_OF_THE_WEEK = [
+export const DAYS_OF_THE_WEEK_OPTIONS = [
 	{ label: constants.MONDAY_LABEL, value: constants.MONDAY },
 	{ label: constants.TUESDAY_LABEL, value: constants.TUESDAY },
 	{ label: constants.WEDNESDAY_LABEL, value: constants.WEDNESDAY },

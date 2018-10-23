@@ -39,29 +39,20 @@ const {
 	LIMIT_TYPE_MAPPING_FROM_STATE,
 } = recurringConstants;
 
-const onSeriesEndsAfterTimesChange = ( dispatch, ownProps, edit ) => ( e ) => {
+const onSeriesEndsAfterTimesChange = ( ownProps, edit ) => ( e ) => {
 	const limit = parseInt( e.target.value, 10 );
-	dispatch( edit(
-		ownProps.index,
-		{ [ KEY_LIMIT ]: limit },
-	) );
+	edit( ownProps.index, { [ KEY_LIMIT ]: limit } );
 };
 
-const onSeriesEndsChange = ( dispatch, ownProps, edit ) => ( selectedOption ) => (
-	dispatch( edit(
-		ownProps.index,
-		{ [ KEY_LIMIT_TYPE ]: selectedOption.value },
-	) )
+const onSeriesEndsChange = ( ownProps, edit ) => ( selectedOption ) => (
+	edit( ownProps.index, { [ KEY_LIMIT_TYPE ]: selectedOption.value } )
 );
 
-const onSeriesEndsOnDateChange = ( dispatch, ownProps, edit ) => ( date ) => {
+const onSeriesEndsOnDateChange = ( ownProps, edit ) => ( date ) => {
 	const endDate = date
 		? momentUtil.toDate( moment( date ), dateUtil.FORMATS.DATABASE.datetime )
 		: '';
-	dispatch( edit(
-		ownProps.index,
-		{ [ KEY_LIMIT ]: endDate },
-	) );
+	edit( ownProps.index, { [ KEY_LIMIT ]: endDate } );
 };
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -87,14 +78,15 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	const edit = ownProps.blockType === RECURRING
+	const editAction = ownProps.blockType === RECURRING
 		? recurringActions.editRule
 		: exceptionActions.editException;
+	const edit = ( index, payload ) => dispatch( editAction( index, payload ) );
 
 	return {
-		onSeriesEndsAfterTimesChange: onSeriesEndsAfterTimesChange( dispatch, ownProps, edit ),
-		onSeriesEndsChange: onSeriesEndsChange( dispatch, ownProps, edit ),
-		onSeriesEndsOnDateChange: onSeriesEndsOnDateChange( dispatch, ownProps, edit ),
+		onSeriesEndsAfterTimesChange: onSeriesEndsAfterTimesChange( ownProps, edit ),
+		onSeriesEndsChange: onSeriesEndsChange( ownProps, edit ),
+		onSeriesEndsOnDateChange: onSeriesEndsOnDateChange( ownProps, edit ),
 	};
 };
 

@@ -89,7 +89,9 @@ export const DAYS_OF_THE_WEEK_MAPPING_TO_STATE = {
 	[ SUNDAY ]: 7,
 };
 
-export const DAYS_OF_THE_WEEK_MAPPING_FROM_STATE = {
+export const DAYS_OF_THE_WEEK_MAPPING_FROM_STATE = invert( DAYS_OF_THE_WEEK_MAPPING_TO_STATE );
+
+export const DAYS_OF_THE_WEEK_PROP_KEY_MAPPING_FROM_STATE = {
 	1: MONDAY_CHECKED,
 	2: TUESDAY_CHECKED,
 	3: WEDNESDAY_CHECKED,
@@ -126,6 +128,8 @@ export const THIRD_LABEL = __( 'Third', 'events-gutenberg' );
 export const FOURTH_LABEL = __( 'Fourth', 'events-gutenberg' );
 export const FIFTH_LABEL = __( 'Fifth', 'events-gutenberg' );
 export const LAST_LABEL = __( 'Last', 'events-gutenberg' );
+
+export const WEEKS_OF_THE_MONTH = [ FIRST, SECOND, THIRD, FOURTH, FIFTH, LAST ];
 
 //
 // ─── MONTHS OF THE YEAR ─────────────────────────────────────────────────────────
