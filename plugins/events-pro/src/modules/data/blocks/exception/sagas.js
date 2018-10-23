@@ -6,9 +6,9 @@ import { takeEvery, put, select } from 'redux-saga/effects';
 /**
  * Internal dependencies
  */
-import actions from './actions';
-import selectors from './selectors';
-import types from './types';
+import * as actions from './actions';
+import * as selectors from './selectors';
+import * as types from './types';
 import * as recurringConstants from '@moderntribe/events-pro/data/blocks/recurring/constants';
 import * as ui from '@moderntribe/events-pro/data/ui';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
