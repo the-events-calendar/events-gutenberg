@@ -8,26 +8,31 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import { Field } from '@moderntribe/events-pro/blocks/additional-fields/elements';
+import { Paragraph } from '@moderntribe/common/elements';
 
-const TextAreaField = ( { name, value, onInputChange, ...rest } ) => (
-	<Field
-		name={ name }
-		input={ <textarea rows="5" wrap="hard" value={ value } onChange={ onInputChange } /> }
-		output={ value }
-		{ ...rest }
-	/>
-);
+const TextAreaField = ( { name, value, onInputChange, output, isSelected } ) => {
+	const paragraphs = output.map( ( paragraph, index ) => (
+		<Paragraph key={ `textarea-${ name }-${ index + 1 }` }>{ paragraph }</Paragraph>
+	) );
+	return (
+		<Field
+			id={ name }
+			input={ <textarea rows="5" wrap="hard" value={ value } onChange={ onInputChange } /> }
+			output={ paragraphs }
+			isSelected={ isSelected }
+		/>
+	);
+}
 
 TextAreaField.propTypes = {
 	name: PropTypes.string.isRequired,
-	isPristine: PropTypes.bool,
 	isSelected: PropTypes.bool,
 	onInputChange: PropTypes.func,
 	value: PropTypes.string,
+	output: PropTypes.arrayOf( PropTypes.string ),
 };
 
 TextAreaField.defaultProps = {
-	isPristine: true,
 	isSelected: false,
 };
 
