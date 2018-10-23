@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Initialize Gutenberg Event Meta fields
  *
@@ -24,7 +25,7 @@ class Tribe__Gutenberg__Events__Meta extends Tribe__Gutenberg__Common__Meta {
 		register_meta( 'post', '_EventCostDescription', $this->text() );
 		register_meta( 'post', '_EventCurrencySymbol', $this->text() );
 		register_meta( 'post', '_EventCurrencyPosition', $this->text() );
-
+		
 		// Use sanitize_textarea_field to allow whitespaces
 		register_meta(
 			'post',
@@ -56,25 +57,25 @@ class Tribe__Gutenberg__Events__Meta extends Tribe__Gutenberg__Common__Meta {
 				)
 			)
 		);
-
+		
 		register_meta(
 			'post',
 			'_EventVenueID',
 			array(
-				'description' => __( 'Event Organizers', 'events-gutenberg' ),
-				'auth_callback' => array( $this,'auth_callback' ),
+				'description'       => __( 'Event Organizers', 'events-gutenberg' ),
+				'auth_callback'     => array( $this, 'auth_callback' ),
 				'sanitize_callback' => 'absint',
-				'type' => 'integer',
-				'single' => true,
-				'show_in_rest' => true,
+				'type'              => 'integer',
+				'single'            => true,
+				'show_in_rest'      => true,
 			)
 		);
-
+		
 		// Organizers Meta
 		register_meta( 'post', '_OrganizerEmail', $this->text() );
 		register_meta( 'post', '_OrganizerPhone', $this->text() );
 		register_meta( 'post', '_OrganizerWebsite', $this->text() );
-
+		
 		// Venue Meta
 		register_meta( 'post', '_VenueAddress', $this->text() );
 		register_meta( 'post', '_VenueCity', $this->text() );

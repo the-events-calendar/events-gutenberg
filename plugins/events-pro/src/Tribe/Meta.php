@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Initialize Gutenberg Event Meta fields
  *

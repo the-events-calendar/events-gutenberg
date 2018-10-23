@@ -17,11 +17,11 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 */
 	protected function text() {
 		return array(
-			'auth_callback' => array( $this, 'auth_callback' ),
+			'auth_callback'     => array( $this, 'auth_callback' ),
 			'sanitize_callback' => 'sanitize_text_field',
-			'type' => 'string',
-			'single' => true,
-			'show_in_rest' => true,
+			'type'              => 'string',
+			'single'            => true,
+			'show_in_rest'      => true,
 		);
 	}
 	
@@ -34,11 +34,11 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 */
 	private function numeric() {
 		return array(
-			'auth_callback' => array( $this, 'auth_callback' ),
+			'auth_callback'     => array( $this, 'auth_callback' ),
 			'sanitize_callback' => 'absint',
-			'type' => 'number',
-			'single' => true,
-			'show_in_rest' => true,
+			'type'              => 'number',
+			'single'            => true,
+			'show_in_rest'      => true,
 		);
 	}
 	
@@ -51,11 +51,11 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 */
 	protected function boolean() {
 		return array(
-			'auth_callback' => array( $this, 'auth_callback' ),
+			'auth_callback'     => array( $this, 'auth_callback' ),
 			'sanitize_callback' => array( $this, 'sanitize_boolean' ),
-			'type' => 'boolean',
-			'single' => true,
-			'show_in_rest' => true,
+			'type'              => 'boolean',
+			'single'            => true,
+			'show_in_rest'      => true,
 		);
 	}
 	
@@ -68,12 +68,12 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 */
 	protected function numeric_array() {
 		return array(
-			'description' => __( 'Array block', 'events-gutenberg' ),
-			'auth_callback' => array( $this, 'auth_callback' ),
+			'description'       => __( 'Array block', 'events-gutenberg' ),
+			'auth_callback'     => array( $this, 'auth_callback' ),
 			'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
-			'type' => 'number',
-			'single' => false,
-			'show_in_rest' => true,
+			'type'              => 'number',
+			'single'            => false,
+			'show_in_rest'      => true,
 		);
 	}
 	
@@ -82,18 +82,18 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 *
 	 * @since  0.1.1-alpha
 	 *
-	 * @param bool   $allowed  Whether the user can add the post meta. Default false.
+	 * @param bool   $allowed Whether the user can add the post meta. Default false.
 	 * @param string $meta_key The meta key.
-	 * @param int    $post_id  Post ID.
-	 * @param int    $user_id  User ID.
-	 * @param string $cap      Capability name.
-	 * @param array  $caps     User capabilities.
+	 * @param int    $post_id Post ID.
+	 * @param int    $user_id User ID.
+	 * @param string $cap Capability name.
+	 * @param array  $caps User capabilities.
 	 *
 	 * @return boolean
 	 */
 	public function auth_callback( $allowed, $meta_key, $post_id, $user_id, $cap, $caps ) {
-		$post = get_post( $post_id );
-		$post_type_obj = get_post_type_object( $post->post_type );
+		$post             = get_post( $post_id );
+		$post_type_obj    = get_post_type_object( $post->post_type );
 		$current_user_can = current_user_can( $post_type_obj->cap->edit_post, $post_id );
 		
 		return $current_user_can;
@@ -123,6 +123,7 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 * to the function
 	 *
 	 * @since 0.2.4-alpha
+	 *
 	 * @param $value
 	 *
 	 * @return bool
@@ -136,6 +137,7 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 * - sanitize_text_field removes any whitespace
 	 *
 	 * @since 0.2.4-alpha
+	 *
 	 * @param $value
 	 *
 	 * @return mixed
