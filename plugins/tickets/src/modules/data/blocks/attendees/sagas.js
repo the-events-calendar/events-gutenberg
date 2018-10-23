@@ -13,9 +13,7 @@ import * as actions from './actions';
 export function* setInitialState( action ) {
 	const { get } = action.payload;
 
-	yield all( [
-		put( actions.setTitle( get( 'title', DEFAULT_STATE.title ) ) ),
-	] );
+	yield put( actions.setTitle( get( 'title', DEFAULT_STATE.title ) ) );
 }
 
 export default function* watchers() {
