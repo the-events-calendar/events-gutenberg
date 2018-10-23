@@ -45,6 +45,11 @@ export const getStartTime = createSelector(
 	( exception ) => exception.start_time
 );
 
+export const getStartTimeNoSeconds = createSelector(
+	[ getStartTime ],
+	( startTime ) => startTime.slice( 0, -3 ),
+);
+
 export const getEndDate = createSelector(
 	[ getRule ],
 	( exception ) => exception.end_date,
@@ -53,6 +58,11 @@ export const getEndDate = createSelector(
 export const getEndTime = createSelector(
 	[ getRule ],
 	( exception ) => exception.end_time
+);
+
+export const getEndTimeNoSeconds = createSelector(
+	[ getEndTime ],
+	( endTime ) => endTime.slice( 0, -3 ),
 );
 
 export const getBetween = createSelector(
