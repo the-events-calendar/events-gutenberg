@@ -1,61 +1,60 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { formatDate, parseDate } from 'react-day-picker/moment';
-import { __ } from '@wordpress/i18n';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import moment from 'moment/moment';
 
 /**
  * Internal dependencies
  */
-import { DayPickerInput } from '@moderntribe/common/elements';
-import { LabeledRow } from '@moderntribe/events-pro/elements';
-import './style.pcss';
+import OnDatePicker from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import {
+	actions as recurringActions,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
+import {
+	date as dateUtil,
+	moment as momentUtil,
+} from '@moderntribe/common/utils';
+import { withStore } from '@moderntribe/common/hoc';
 
-const OnDatePicker = ( {
-	className,
-	date,
-	dateFormat,
-	onDateChange,
-} ) => {
-	const dateObj = new Date( date );
+const {
+	RECURRING,
+	KEY_START_DATE,
+} = constants;
 
-	return (
-		<LabeledRow
-			className={ classNames(
-				'tribe-editor__on-date-picker',
-				className
-			) }
-			label={ __( 'On', 'events-gutenberg' ) }
-		>
-			<DayPickerInput
-				value={ date }
-				format={ dateFormat }
-				formatDate={ formatDate }
-				parseDate={ parseDate }
-				dayPickerProps={ {
-					modifiers: {
-						start: dateObj,
-						end: dateObj,
-					},
-				} }
-				onDayChange={ onDateChange }
-			/>
-		</LabeledRow>
-	);
+const mapStateToProps = ( state, ownProps ) => {
+	const selectors = ownProps.blockType === RECURRING
+		? recurringSelectors
+		: exceptionSelectors;
+
+	return {
+		date: selectors.getStartDate( state, ownProps ),
+	};
 };
 
-OnDatePicker.propTypes = {
-	className: PropTypes.string,
-	date: PropTypes.string,
-	dateFormat: PropTypes.string,
-	onDateChange: PropTypes.func,
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const edit = ownProps.blockType === RECURRING
+		? recurringActions.editRule
+		: exceptionActions.editException;
+
+	return {
+		onDateChange: ( date ) => {
+			const startDate = date
+				? momentUtil.toDate( moment( date ), dateUtil.FORMATS.DATABASE.datetime )
+				: '';
+			dispatch( edit( ownProps.index, { [ KEY_START_DATE ]: startDate } ) );
+		},
+	};
 };
 
-OnDatePicker.defaultProps = {
-	dateFormat: 'LL',
-};
-
-export default OnDatePicker;
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps ),
+)( OnDatePicker );
