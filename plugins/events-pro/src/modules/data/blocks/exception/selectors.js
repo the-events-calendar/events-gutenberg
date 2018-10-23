@@ -15,57 +15,57 @@ import { constants } from '@moderntribe/common/data/plugins';
 export const getExceptions = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ].blocks.exception;
 export const getIndex = ( _, props ) => props.index;
 
-export const getException = createSelector(
+export const getRule = createSelector(
 	[ getExceptions, getIndex ],
-	( exception, index ) => exception[ index ],
+	( exceptions, index ) => exceptions[ index ],
 );
 
 export const getType = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.type,
 );
 
 export const getDate = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.date,
 );
 
 export const getBetween = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.between,
 );
 
 export const getLimitType = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.limit_type,
 );
 
 export const getLimit = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.limit,
 );
 
 export const getDays = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.days,
 );
 
 export const getWeek = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.week,
 );
 
 export const getDay = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.day,
 );
 
 export const getMonth = createSelector(
-	[ getException ],
+	[ getRule ],
 	( exception ) => exception.month,
 );
 
 export const getTypeOption = createSelector(
 	( exception ) => exception,
-	( exception ) => find( EXCEPTION_OCCURRENCE_OPTIONS, type => type.value === exception.type )
+	( exception ) => find( EXCEPTION_OCCURRENCE_OPTIONS, type => exception && type.value === exception.type )
 );

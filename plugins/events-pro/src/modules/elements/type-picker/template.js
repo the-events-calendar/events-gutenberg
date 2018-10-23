@@ -34,13 +34,14 @@ const TypePicker = ( {
 	);
 
 	const getFrequencySelect = () => (
-		selected
-			&& selected.value !== recurringConstants.SINGLE
-			&& (
+		selected &&
+			selected.value !== recurringConstants.SINGLE &&
+			(
 				<FrequencySelect
 					className="tribe-editor__type-picker__frequency-select"
 					blockType={ blockType }
 					index={ index }
+					selected={ selected }
 				/>
 			)
 	);
@@ -61,7 +62,7 @@ const TypePicker = ( {
 			/>
 		</LabeledRow>
 	);
-}
+};
 
 TypePicker.defaultProps = {
 	onChange: noop,
