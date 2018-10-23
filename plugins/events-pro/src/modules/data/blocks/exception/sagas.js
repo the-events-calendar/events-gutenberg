@@ -15,7 +15,7 @@ import { moment as momentUtil, time } from '@moderntribe/common/utils';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
 
 export function* handleExceptionRemoval() {
-	const exceptions = yield select( exception.selectors.getExceptions );
+	const exceptions = yield select( selectors.getExceptions );
 
 	if ( ! exceptions.length ) {
 		yield put( ui.actions.hideExceptionPanel() );

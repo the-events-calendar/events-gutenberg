@@ -10,7 +10,7 @@ import { proptypes } from '@moderntribe/common/data/plugins';
  */
 import {
 	FromTimeRangePicker,
-	DayOfMonthPicker,
+	OnDayOfMonthPicker,
 	TypePicker,
 	RecurringToDateTimePicker,
 	SeriesEnds,
@@ -18,21 +18,22 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-const MonthlyField = ( { isMultiDay, typeOption, onTypeChange, index } ) => {
+const MonthlyField = ( { isMultiDay, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
-				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
-				selected={ typeOption }
-				onChange={ onTypeChange }
 				blockType={ constants.RECURRING }
 				index={ index }
+				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 			/>
-			<DayOfMonthPicker />
+			<OnDayOfMonthPicker
+				blockType={ consants.RECURRING }
+				index={ index }
+			/>
 			<FromTimeRangePicker
 				index={ index }
 			/>
-			{ isMultiDay && <RecurringToDateTimePicker /> }
+			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds
 				blockType={ constants.RECURRING }
 				index={ index }

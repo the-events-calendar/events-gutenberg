@@ -2,7 +2,7 @@
 
 exports[`RecurrenceSelectors getRecurrence 1`] = `undefined`;
 
-exports[`RecurrenceSelectors getRuleTypeOption 1`] = `
+exports[`RecurrenceSelectors getTypeOption 1`] = `
 Object {
   "label": "Single Recurrence",
   "value": "single",

@@ -13,6 +13,7 @@ exports[`Day Of Week Picker Element renders day of week picker 1`] = `
       id="uniqid"
       onChange={[MockFunction]}
       type="checkbox"
+      value="sunday"
     />
     <label
       className="tribe-editor__checkbox__label"
@@ -35,6 +36,7 @@ exports[`Day Of Week Picker Element renders day of week picker 1`] = `
       id="uniqid"
       onChange={[MockFunction]}
       type="checkbox"
+      value="monday"
     />
     <label
       className="tribe-editor__checkbox__label"
@@ -57,6 +59,7 @@ exports[`Day Of Week Picker Element renders day of week picker 1`] = `
       id="uniqid"
       onChange={[MockFunction]}
       type="checkbox"
+      value="tuesday"
     />
     <label
       className="tribe-editor__checkbox__label"
@@ -79,6 +82,7 @@ exports[`Day Of Week Picker Element renders day of week picker 1`] = `
       id="uniqid"
       onChange={[MockFunction]}
       type="checkbox"
+      value="wednesday"
     />
     <label
       className="tribe-editor__checkbox__label"
@@ -101,6 +105,7 @@ exports[`Day Of Week Picker Element renders day of week picker 1`] = `
       id="uniqid"
       onChange={[MockFunction]}
       type="checkbox"
+      value="thursday"
     />
     <label
       className="tribe-editor__checkbox__label"
@@ -123,6 +128,7 @@ exports[`Day Of Week Picker Element renders day of week picker 1`] = `
       id="uniqid"
       onChange={[MockFunction]}
       type="checkbox"
+      value="friday"
     />
     <label
       className="tribe-editor__checkbox__label"
@@ -145,6 +151,7 @@ exports[`Day Of Week Picker Element renders day of week picker 1`] = `
       id="uniqid"
       onChange={[MockFunction]}
       type="checkbox"
+      value="saturday"
     />
     <label
       className="tribe-editor__checkbox__label"

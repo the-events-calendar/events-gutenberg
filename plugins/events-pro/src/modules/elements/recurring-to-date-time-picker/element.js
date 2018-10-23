@@ -3,43 +3,54 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { find } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import RecurringToDateTimePicker from './template';
-import { actions, selectors, } from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions,
+	options,
+	selectors
+} from '@moderntribe/events-pro/data/blocks/recurring';
 import { withStore } from '@moderntribe/common/hoc';
 
 const getRecurringMultiDay = ( state, ownProps ) => {
-
+	// TODO: remove this once we have recurring multi day in state
+	const recurringMultiDay = 'next_day';
+	// const recurringMultiDay = selectors.getRecurringMultiDay( state, ownProps );
+	return find(
+		options.RECURRING_MULTI_DAY_OPTIONS,
+		( option ) => option.value === recurringMultiDay,
+	);
 };
 
 const onEndTimeChange = ( dispatchProps, ownProps ) => ( e ) => (
-	dispatchProps.editRule( ownProps.index, { end_time: `${ e.target.value }:00` } )
+	dispatchProps.editRule(
+		ownProps.index,
+		{ [ constants.KEY_END_TIME ]: e.target.value } )
 );
 
 const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
-	const isAllDay = value === 'all-day';
-	const payload = {};
-
-	if ( isAllDay ) {
-		payload.all_day = true;
-		payload.start_time = '00:00:00';
-		payload.end_time = '23:59:00';
-	} else {
-		payload.all_day = false;
-		payload.end_time = fromSeconds( value, TIME_FORMAT_HH_MM );
-	}
-
-	dispatchProps.editRule( ownProps.index, payload );
+	dispatchProps.editRule(
+		ownProps.index,
+		{ [ KEY_END_TIME ]: value },
+	);
 	onClose();
 };
 
-const onRecurringMultiDayChange = () => {};
+const onRecurringMultiDayChange = ( dispatchProps, ownProps ) => ( selectedOption ) => (
+	// TODO: fix this once we have recurring multi day in state
+	null
+	// dispatchProps.editRule(
+	// 	ownProps.index,
+	// 	{ recurring_multi_day: selectedOption.value },
+	// )
+);
 
 const mapStateToProps = ( state, ownProps ) => ( {
-	endTime: selectors.getEndTime( state, ownProps ),
+	endTime: selectors.getEndTimeNoSeconds( state, ownProps ),
 	recurringMultiDay: getRecurringMultiDay( state, ownProps ),
 } );
 
@@ -52,7 +63,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...stateProps,
 	onEndTimeChange: onEndTimeChange( dispatchProps, ownProps ),
 	onEndTimeClick: onEndTimeClick( dispatchProps, ownProps ),
-	onRecurringMultiDayChange,
+	onRecurringMultiDayChange: onRecurringMultiDayChange( dispatchProps, ownProps ),
 } );
 
 export default compose(

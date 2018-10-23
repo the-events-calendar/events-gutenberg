@@ -71,6 +71,36 @@ export const THURSDAY_ABBR = __( 'T', 'events-gutenberg' );
 export const FRIDAY_ABBR = __( 'F', 'events-gutenberg' );
 export const SATURDAY_ABBR = __( 'S', 'events-gutenberg' );
 
+export const SUNDAY_CHECKED = 'sundayChecked';
+export const MONDAY_CHECKED = 'mondayChecked';
+export const TUESDAY_CHECKED = 'tuesdayChecked';
+export const WEDNESDAY_CHECKED = 'wednesdayChecked';
+export const THURSDAY_CHECKED = 'thursdayChecked';
+export const FRIDAY_CHECKED = 'fridayChecked';
+export const SATURDAY_CHECKED = 'saturdayChecked';
+
+export const DAYS_OF_THE_WEEK_MAPPING_TO_STATE = {
+	[ MONDAY ]: 1,
+	[ TUESDAY ]: 2,
+	[ WEDNESDAY ]: 3,
+	[ THURSDAY ]: 4,
+	[ FRIDAY ]: 5,
+	[ SATURDAY ]: 6,
+	[ SUNDAY ]: 7,
+};
+
+export const DAYS_OF_THE_WEEK_MAPPING_FROM_STATE = invert( DAYS_OF_THE_WEEK_MAPPING_TO_STATE );
+
+export const DAYS_OF_THE_WEEK_PROP_KEY_MAPPING_FROM_STATE = {
+	1: MONDAY_CHECKED,
+	2: TUESDAY_CHECKED,
+	3: WEDNESDAY_CHECKED,
+	4: THURSDAY_CHECKED,
+	5: FRIDAY_CHECKED,
+	6: SATURDAY_CHECKED,
+	7: SUNDAY_CHECKED,
+};
+
 //
 // ─── DAYS OF THE MONTH ──────────────────────────────────────────────────────────
 //
@@ -98,6 +128,8 @@ export const THIRD_LABEL = __( 'Third', 'events-gutenberg' );
 export const FOURTH_LABEL = __( 'Fourth', 'events-gutenberg' );
 export const FIFTH_LABEL = __( 'Fifth', 'events-gutenberg' );
 export const LAST_LABEL = __( 'Last', 'events-gutenberg' );
+
+export const WEEKS_OF_THE_MONTH = [ FIRST, SECOND, THIRD, FOURTH, FIFTH, LAST ];
 
 //
 // ─── MONTHS OF THE YEAR ─────────────────────────────────────────────────────────
@@ -141,6 +173,23 @@ export const SEPTEMBER_ABBR = __( 'Sep', 'events-gutenberg' );
 export const OCTOBER_ABBR = __( 'Oct', 'events-gutenberg' );
 export const NOVEMBER_ABBR = __( 'Nov', 'events-gutenberg' );
 export const DECEMBER_ABBR = __( 'Dec', 'events-gutenberg' );
+
+export const MONTHS_OF_THE_YEAR_MAPPING_TO_STATE = {
+	[ JANUARY ]: 1,
+	[ FEBRUARY ]: 2,
+	[ MARCH ]: 3,
+	[ APRIL ]: 4,
+	[ MAY ]: 5,
+	[ JUNE ]: 6,
+	[ JULY ]: 7,
+	[ AUGUST ]: 8,
+	[ SEPTEMBER ]: 9,
+	[ OCTOBER ]: 10,
+	[ NOVEMBER ]: 11,
+	[ DECEMBER ]: 12,
+};
+
+export const MONTHS_OF_THE_YEAR_MAPPING_FROM_STATE = invert( MONTHS_OF_THE_YEAR_MAPPING_TO_STATE );
 
 //
 // ─── RECURRING MULTI DAY ────────────────────────────────────────────────────────

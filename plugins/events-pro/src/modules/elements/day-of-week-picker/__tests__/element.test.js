@@ -20,13 +20,7 @@ describe( 'Day Of Week Picker Element', () => {
 				thursdayChecked={ true }
 				fridayChecked={ false }
 				saturdayChecked={ true }
-				onSundayChange={ jest.fn() }
-				onMondayChange={ jest.fn() }
-				onTuesdayChange={ jest.fn() }
-				onWednesdayChange={ jest.fn() }
-				onThursdayChange={ jest.fn() }
-				onFridayChange={ jest.fn() }
-				onSaturdayChange={ jest.fn() }
+				onDayChange={ jest.fn() }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();

@@ -6,8 +6,8 @@ import { store } from '@moderntribe/common/store';
 /**
  * Internal dependencies
  */
-import * as recurring from '@moderntribe/events-pro/src/modules/data/blocks/recurring';
-import * as exception from '@moderntribe/events-pro/src/modules/data/blocks/exception';
+import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
+import * as exception from '@moderntribe/events-pro/data/blocks/exception';
 
 [
 	recurring.sagas,
