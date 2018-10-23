@@ -29,6 +29,7 @@ import { withStore } from '@moderntribe/common/hoc';
 
 const {
 	RECURRING,
+	KEY_END_DATE,
 	KEY_LIMIT,
 	KEY_LIMIT_TYPE,
 } = constants;
@@ -52,7 +53,7 @@ const onSeriesEndsOnDateChange = ( ownProps, edit ) => ( date ) => {
 	const endDate = date
 		? momentUtil.toDate( moment( date ), dateUtil.FORMATS.DATABASE.datetime )
 		: '';
-	edit( ownProps.index, { [ KEY_LIMIT ]: endDate } );
+	edit( ownProps.index, { [ KEY_END_DATE ]: endDate } );
 };
 
 const mapStateToProps = ( state, ownProps ) => {

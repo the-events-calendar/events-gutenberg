@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import SingleToDateTimePicker from '../element';
+import SingleToDateTimePicker from '../template';
 
 describe( 'SingleToDateTimePicker', () => {
 	test( 'should render component', () => {

@@ -9,12 +9,15 @@ import { find } from 'lodash';
  * Internal dependencies
  */
 import RecurringToDateTimePicker from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import {
 	actions,
 	options,
 	selectors
 } from '@moderntribe/events-pro/data/blocks/recurring';
 import { withStore } from '@moderntribe/common/hoc';
+
+const { KEY_END_TIME } = constants;
 
 const getRecurringMultiDay = ( state, ownProps ) => {
 	// TODO: remove this once we have recurring multi day in state
@@ -26,27 +29,28 @@ const getRecurringMultiDay = ( state, ownProps ) => {
 	);
 };
 
-const onEndTimeChange = ( dispatchProps, ownProps ) => ( e ) => (
-	dispatchProps.editRule(
+const onEndTimeChange = ( dispatch, ownProps ) => ( e ) => (
+	dispatch( actions.editRule(
 		ownProps.index,
-		{ [ constants.KEY_END_TIME ]: e.target.value } )
+		{ [ KEY_END_TIME ]: e.target.value },
+	) )
 );
 
-const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
-	dispatchProps.editRule(
+const onEndTimeClick = ( dispatch, ownProps ) => ( value, onClose ) => {
+	dispatch( actions.editRule(
 		ownProps.index,
 		{ [ KEY_END_TIME ]: value },
-	);
+	) );
 	onClose();
 };
 
-const onRecurringMultiDayChange = ( dispatchProps, ownProps ) => ( selectedOption ) => (
+const onRecurringMultiDayChange = ( dispatch, ownProps ) => ( selectedOption ) => (
 	// TODO: fix this once we have recurring multi day in state
 	null
-	// dispatchProps.editRule(
+	// dispatch( actions.editRule(
 	// 	ownProps.index,
 	// 	{ recurring_multi_day: selectedOption.value },
-	// )
+	// ) )
 );
 
 const mapStateToProps = ( state, ownProps ) => ( {
@@ -54,19 +58,13 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	recurringMultiDay: getRecurringMultiDay( state, ownProps ),
 } );
 
-const mapDispatchToProps = ( dispatch ) => ( {
-	editRule: ( index, payload ) => dispatch( actions.editRule( index, payload ) ),
-} );
-
-const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
-	...ownProps,
-	...stateProps,
-	onEndTimeChange: onEndTimeChange( dispatchProps, ownProps ),
-	onEndTimeClick: onEndTimeClick( dispatchProps, ownProps ),
-	onRecurringMultiDayChange: onRecurringMultiDayChange( dispatchProps, ownProps ),
+const mapDispatchToProps = ( dispatch, ownProps ) => ( {
+	onEndTimeChange: onEndTimeChange( dispatch, ownProps ),
+	onEndTimeClick: onEndTimeClick( dispatch, ownProps ),
+	onRecurringMultiDayChange: onRecurringMultiDayChange( dispatch, ownProps ),
 } );
 
 export default compose(
 	withStore(),
-	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
+	connect( mapStateToProps, mapDispatchToProps ),
 )( RecurringToDateTimePicker );

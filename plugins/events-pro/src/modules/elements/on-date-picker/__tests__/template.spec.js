@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OnDatePicker from '../element';
+import OnDatePicker from '../template';
 
 describe( 'OnDatePicker', () => {
 	test( 'should render component', () => {
