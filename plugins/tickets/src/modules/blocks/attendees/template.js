@@ -79,9 +79,10 @@ const renderGravatars = () => {
 
 }
 
-const Attendees = ( { isSelected, title } ) => {
+const Attendees = ( props ) => {
 
-	const blockTitle = ! ( isSelected || title ) 
+	const { isSelected, title } = props;
+	const blockTitle = ( ! isSelected && ! title )
 		? renderPlaceholder()
 		: [ renderLabelInput( props ) ];
 
