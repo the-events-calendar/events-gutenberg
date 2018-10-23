@@ -35,7 +35,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		: exceptionSelectors;
 
 	return {
-		date: selectors.getStartDate( state, ownProps );
+		date: selectors.getStartDate( state, ownProps ),
 	};
 };
 
