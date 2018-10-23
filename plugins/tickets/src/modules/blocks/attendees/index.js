@@ -40,7 +40,5 @@ export default {
 
 	edit: Attendees,
 
-	save( props ) {
-		return null;
-	},
+	save: () => null,
 };
