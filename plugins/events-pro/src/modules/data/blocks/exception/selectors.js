@@ -25,9 +25,34 @@ export const getType = createSelector(
 	( exception ) => exception.type,
 );
 
-export const getDate = createSelector(
+export const getAllDay = createSelector(
 	[ getRule ],
-	( exception ) => exception.date,
+	( exception ) => exception.all_day,
+);
+
+export const getMultiDay = createSelector(
+	[ getRule ],
+	( exception ) => exception.multi_day,
+);
+
+export const getStartDate = createSelector(
+	[ getRule ],
+	( exception ) => exception.start_date,
+);
+
+export const getStartTime = createSelector(
+	[ getRule ],
+	( exception ) => exception.start_time
+);
+
+export const getEndDate = createSelector(
+	[ getRule ],
+	( exception ) => exception.end_date,
+);
+
+export const getEndTime = createSelector(
+	[ getRule ],
+	( exception ) => exception.end_time
 );
 
 export const getBetween = createSelector(
@@ -63,6 +88,11 @@ export const getDay = createSelector(
 export const getMonth = createSelector(
 	[ getRule ],
 	( exception ) => exception.month,
+);
+
+export const getTimezone = createSelector(
+	[ getRule ],
+	( exception ) => exception.timezone,
 );
 
 export const getTypeOption = createSelector(
