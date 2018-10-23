@@ -10,10 +10,8 @@ import { proptypes } from '@moderntribe/common/data/plugins';
  * Internal dependencies
  */
 import {
-	FromTimeRangePicker,
 	OnDayOfMonthPicker,
 	TypePicker,
-	RecurringToDateTimePicker,
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
 import { constants } from '@moderntribe/events-pro/data/blocks';

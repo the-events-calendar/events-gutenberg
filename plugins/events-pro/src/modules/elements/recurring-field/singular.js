@@ -3,7 +3,6 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -30,7 +29,10 @@ const SingularField = ( { isMultiDay, index } ) => {
 				index={ index }
 				blockType={ constants.RECURRING }
 			/>
-			<FromTimeRangePicker index={ index } />
+			<FromTimeRangePicker
+				blockType={ constants.RECURRING }
+				index={ index }
+			/>
 			{ isMultiDay && (
 				<SingleToDateTimePicker
 					blockType={ constants.RECURRING }
