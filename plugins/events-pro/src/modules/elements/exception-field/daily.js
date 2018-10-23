@@ -15,6 +15,7 @@ import {
 	OnDatePicker,
 	TypePicker,
 	SingleToDateTimePicker,
+	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
@@ -37,19 +38,11 @@ const DailyField = ( {
 				blockType={ constants.EXCEPTION }
 				index={ index }
 			/>
-			<OnDatePicker
-				date={ start_date }
-				onDateChange={ handleStartDate }
+			<SeriesEnds
+				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
 				blockType={ constants.EXCEPTION }
 				index={ index }
 			/>
-			<FromTimeRangePicker
-				startTime={ start_time }
-				endTime={ end_time }
-				index={ index }
-				blockType={ constants.EXCEPTION }
-			/>
-			{ multi_day && <SingleToDateTimePicker index={ index } /> }
 		</Fragment>
 	);
 };

@@ -30,11 +30,6 @@ const MonthlyField = ( { isMultiDay, typeOption, index } ) => {
 				index={ index }
 			/>
 			<OnDayOfMonthPicker index={ index } />
-			<FromTimeRangePicker
-				index={ index }
-				blockType={ constants.EXCEPTION }
-			/>
-			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds
 				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
 				blockType={ constants.EXCEPTION }
