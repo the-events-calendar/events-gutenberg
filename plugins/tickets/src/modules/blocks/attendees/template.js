@@ -92,6 +92,9 @@ const Attendees = ( props ) => {
 
 Attendees.propTypes = {
 	setTitle: PropTypes.func,
+	title: PropTypes.string,
+	isSelected: PropTypes.bool,
+	isEmpty: PropTypes.bool,
 };
 
 export default Attendees;
