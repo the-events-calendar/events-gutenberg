@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 import { RecurringField } from '@moderntribe/events-pro/elements';
 import { constants } from '@moderntribe/events-pro/data/blocks';
 
+const { KEY_MULTI_DAY, KEY_TYPE } = constants;
+
 export default class RecurringForm extends PureComponent {
 	static propTypes = {
 		rules: PropTypes.arrayOf( PropTypes.shape( {} ) ),
@@ -28,8 +30,9 @@ export default class RecurringForm extends PureComponent {
 						<RecurringField
 							key={ i }
 							index={ i }
-							isMultiDay={ rule[ constants.KEY_MULTI_DAY ] }
+							isMultiDay={ rule[ KEY_MULTI_DAY ] }
 							onRemoveClick={ this.props.removeRule }
+							type={ rule[ KEY_TYPE ] }
 						/>
 					) )
 				}

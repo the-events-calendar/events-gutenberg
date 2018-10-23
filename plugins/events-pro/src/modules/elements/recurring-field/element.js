@@ -21,6 +21,7 @@ const {
 	WEEKLY,
 	MONTHLY,
 	YEARLY,
+	RECURRENCE_TYPES,
 } = constants;
 
 export default class RecurringField extends PureComponent {
@@ -28,6 +29,7 @@ export default class RecurringField extends PureComponent {
 		onRemoveClick: PropTypes.func.isRequired,
 		index: PropTypes.number.isRequired,
 		isMultiDay: PropTypes.bool.isRequired,
+		type: PropTypes.oneOf( RECURRENCE_TYPES ).isRequired,
 	}
 
 	handleClick = () => this.props.onRemoveClick( this.props.index )

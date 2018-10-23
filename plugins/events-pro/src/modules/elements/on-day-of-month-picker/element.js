@@ -3,7 +3,7 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { includes } from 'lodash';
+import { find, includes } from 'lodash';
 
 /**
  * Internal dependencies
