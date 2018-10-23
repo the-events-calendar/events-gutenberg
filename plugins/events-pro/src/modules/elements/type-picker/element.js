@@ -7,7 +7,7 @@ import { compose } from 'redux';
 /**
  * Internal dependencies
  */
-import RecurrenceTypePicker from './template';
+import TypePicker from './template';
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import {
 	actions as recurringActions,
@@ -51,4 +51,4 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 export default compose(
 	withStore(),
 	connect( mapStateToProps, mapDispatchToProps ),
-)( RecurrenceTypePicker );
+)( TypePicker );
