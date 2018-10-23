@@ -65,31 +65,27 @@ const renderPlaceholder = () => {
 	);
 }
 
-const renderGravatars = () => {
-
-	return (
-		<div className="tribe-editor__event-attendees__gravatars">
-			<AttendeesGravatar />
-			<AttendeesGravatar />
-			<AttendeesGravatar />
-			<AttendeesGravatar />
-			<AttendeesGravatar />
-		</div>
-	);
-
-}
+const RenderGravatars = () => (
+	<div className="tribe-editor__event-attendees__gravatars">
+		<AttendeesGravatar />
+		<AttendeesGravatar />
+		<AttendeesGravatar />
+		<AttendeesGravatar />
+		<AttendeesGravatar />
+	</div>
+);
 
 const Attendees = ( props ) => {
 
 	const { isSelected, title } = props;
-	const blockTitle = ( ! isSelected && ! title )
+	const blockTitle = ! ( isSelected || title ) 
 		? renderPlaceholder()
 		: [ renderLabelInput( props ) ];
 
 	return (
 		<div className="tribe-editor__block tribe-editor__event-attendees">
 			{ blockTitle }
-			{ renderGravatars() }
+			{ <RenderGravatars /> }
 		</div>
 	);
 
