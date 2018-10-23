@@ -63,7 +63,7 @@ const getCapacityLabel = ( capacity ) => {
 
 	return (
 		<NumericLabel
-			count={ parseInt( capacity ) }
+			count={ parseInt( capacity, 10 ) }
 			singular={ singular }
 			plural={ plural }
 			className="tribe-editor__rsvp-container-header__capacity-label"

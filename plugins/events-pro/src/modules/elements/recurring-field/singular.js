@@ -3,7 +3,6 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -45,8 +44,6 @@ const SingularField = ( { isMultiDay, index } ) => {
 
 SingularField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
-	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
 };
 

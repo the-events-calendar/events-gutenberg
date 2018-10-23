@@ -3,7 +3,6 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -36,8 +35,8 @@ const YearlyField = ( { isMultiDay, index } ) => {
 				index={ index }
 			/>
 			<FromTimeRangePicker
-				index={ index }
 				blockType={ constants.RECURRING }
+				index={ index }
 			/>
 			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds
@@ -50,8 +49,6 @@ const YearlyField = ( { isMultiDay, index } ) => {
 
 YearlyField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
-	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
 };
 

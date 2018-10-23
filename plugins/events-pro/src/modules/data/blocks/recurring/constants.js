@@ -20,6 +20,8 @@ export const MONTHLY_LABEL = __( 'Month', 'events-gutenberg' );
 export const YEARLY_LABEL = __( 'Year', 'events-gutenberg' );
 export const SINGLE_LABEL = __( 'Single Recurrence', 'events-gutenberg' );
 
+export const RECURRENCE_TYPES = [ DAILY, WEEKLY, MONTHLY, YEARLY, SINGLE ];
+
 //
 // ─── SERIES END TYPES ───────────────────────────────────────────────────────────
 //

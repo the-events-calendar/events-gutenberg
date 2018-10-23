@@ -80,6 +80,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	const selectors = ownProps.blockType === constants.RECURRING
 		? recurringSelectors
 		: exceptionSelectors;
+
 	return {
 		endTime: selectors.getEndTime( state, ownProps ),
 		isMultiDay: selectors.getMultiDay( state, ownProps ),
