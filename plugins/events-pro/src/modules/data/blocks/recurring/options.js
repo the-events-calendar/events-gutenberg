@@ -45,8 +45,8 @@ export const YEARLY_RECURRENCE_FREQUENCY_OPTIONS = createNumericalOptions( 6 );
 //
 
 export const SERIES_ENDS_OPTIONS = [
-	{ label: constants.ON_LABEL, value: constants.ON },
-	{ label: constants.AFTER_LABEL, value: constants.AFTER },
+	{ label: constants.ON_LABEL, value: constants.DATE },
+	{ label: constants.AFTER_LABEL, value: constants.COUNT },
 	{ label: constants.NEVER_LABEL, value: constants.NEVER },
 ];
 

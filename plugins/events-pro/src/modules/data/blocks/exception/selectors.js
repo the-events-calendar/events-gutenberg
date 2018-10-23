@@ -11,7 +11,6 @@ import {
 	EXCEPTION_OCCURRENCE_OPTIONS,
 } from './options';
 import { SERIES_ENDS_OPTIONS } from '@moderntribe/events-pro/data/blocks/recurring/options';
-import { LIMIT_TYPE_OPTIONS } from '@moderntribe/events-pro/data/blocks/recurring/constants';
 import { constants } from '@moderntribe/common/data/plugins';
 
 export const getExceptions = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ].blocks.exception;
@@ -114,5 +113,5 @@ export const getTypeOption = createSelector(
 
 export const getLimitTypeOption = createSelector(
 	( exception ) => exception,
-	( exception ) => find( LIMIT_TYPE_OPTIONS, option => exception && option.value === exception.limit_type )
+	( exception ) => find( SERIES_ENDS_OPTIONS, option => exception && option.value === exception.limit_type )
 );

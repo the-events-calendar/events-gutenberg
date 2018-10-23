@@ -45,12 +45,6 @@ export const LIMIT_TYPE_MAPPING_TO_STATE = {
 
 export const LIMIT_TYPE_MAPPING_FROM_STATE = invert( LIMIT_TYPE_MAPPING_TO_STATE );
 
-export const LIMIT_TYPE_OPTIONS = [
-	{ label: ON_LABEL, value: DATE },
-	{ label: AFTER_LABEL, value: COUNT },
-	{ label: NEVER_LABEL, value: NEVER },
-];
-
 //
 // ─── DAYS OF THE WEEK ───────────────────────────────────────────────────────────
 //

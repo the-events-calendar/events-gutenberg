@@ -66,7 +66,7 @@ const mapStateToProps = ( state, ownProps ) => {
 
 	stateProps.seriesEnds = find(
 		recurringOptions.SERIES_ENDS_OPTIONS,
-		( option ) => option.value === LIMIT_TYPE_MAPPING_FROM_STATE[ limitType ],
+		( option ) => option.value === limitType
 	);
 
 	if ( limitType === DATE ) {
