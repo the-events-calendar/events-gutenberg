@@ -1,6 +1,6 @@
 .tribe-editor__event-attendees__title {
 	align-items: center;
-	display: inline-flex;
+	display: flex;
 	font-family: 'Helvetica', 'sans-serif';
 	justify-content: center;
 	max-width: 100%;
@@ -27,7 +27,7 @@
 	margin: 0;
 	color: #fff;
 	background-color: transparent;
-	flex-grow: 1;
+	flex-grow: flex;
 	font-size: 1.3125rem;
 	font-weight: normal;
 	table-layout: fixed;
@@ -63,9 +63,11 @@
 		}
 	}
 
-	.tribe-editor__event-attendees__title & *[data-mce-selected="inline-boundary"],
-	.tribe-editor__event-attendees__title &:focus *[data-mce-selected="inline-boundary"] {
-		background: transparent;
+	.tribe-editor__event-attendees__title &,
+	.tribe-editor__event-attendees__title &:focus {
+		[data-mce-selected="inline-boundary"] {
+			background: transparent;
+		}
 	}
 }
 
