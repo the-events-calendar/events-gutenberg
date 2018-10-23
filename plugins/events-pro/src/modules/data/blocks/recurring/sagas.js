@@ -7,6 +7,7 @@ import { keys } from 'lodash';
 /**
  * Internal dependencies
  */
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
 import * as ui from '@moderntribe/events-pro/data/ui';
 import { moment as momentUtil, time } from '@moderntribe/common/utils';
@@ -66,12 +67,12 @@ export function* handleRuleEdit( action ) {
 		const fieldKey = fieldKeys[ i ];
 
 		switch ( fieldKey ) {
-			case recurring.constants.KEY_START_TIME:
-			case recurring.constants.KEY_END_TIME:
+			case constants.KEY_START_TIME:
+			case constants.KEY_END_TIME:
 				yield call( handleTimeChange, action, fieldKey );
 				break;
 
-			case recurring.constants.KEY_MULTI_DAY:
+			case constants.KEY_MULTI_DAY:
 				yield call( handleMultiDayChange, action, fieldKey );
 				break;
 
@@ -124,10 +125,10 @@ export function* handleMultiDayChange( action, key ) {
 
 			yield put(
 				recurring.actions.syncRule( action.index, {
-					[ recurring.constants.KEY_START_TIME ]: (
+					[ constants.KEY_START_TIME ]: (
 						time.fromSeconds( startTimeSeconds, time.TIME_FORMAT_HH_MM )
 					),
-					[ recurring.constants.KEY_END_TIME ]: (
+					[ constants.KEY_END_TIME ]: (
 						time.fromSeconds( endTimeSeconds, time.TIME_FORMAT_HH_MM )
 					),
 				} )
