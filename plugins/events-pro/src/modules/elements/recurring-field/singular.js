@@ -30,6 +30,7 @@ const SingularField = ( { isMultiDay, typeOption, onTypeChange, index } ) => {
 			<OnDatePicker />
 			<FromTimeRangePicker
 				index={ index }
+				blockType={ constants.RECURRING }
 			/>
 			{ isMultiDay && <SingleToDateTimePicker /> }
 		</Fragment>

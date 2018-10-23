@@ -32,11 +32,12 @@ const YearlyField = ( { isMultiDay, index } ) => {
 				index={ index }
 			/>
 			<OnDayOfMonthPicker
-				blockType={ consants.RECURRING }
+				blockType={ constants.RECURRING }
 				index={ index }
 			/>
 			<FromTimeRangePicker
 				index={ index }
+				blockType={ constants.RECURRING }
 			/>
 			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds
