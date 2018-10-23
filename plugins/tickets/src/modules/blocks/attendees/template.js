@@ -23,9 +23,9 @@ import './style.pcss';
  * Module Code
  */
 
-const placeholder = __( 'Who\'s Attending?' , 'events-gutenberg' );
+const placeholder = __( 'Who\'s Attending?', 'events-gutenberg' );
 
-const renderLabelInput = ({ isSelected, isEmpty, title, setTitle }) => {
+const renderLabelInput = ( { isSelected, isEmpty, title, setTitle } ) => {
 	const containerClassNames = classNames( {
 		'tribe-editor__event-attendees__title': true,
 		'tribe-editor__event-attendees__title--selected': isSelected,
@@ -79,10 +79,9 @@ const renderGravatars = () => {
 
 }
 
-const Attendees = ( props ) => {
+const Attendees = ( { isSelected, title } ) => {
 
-	const { isSelected, title } = props;
-	const blockTitle = ( ! isSelected && ! title )
+	const blockTitle = ! ( isSelected || title ) 
 		? renderPlaceholder()
 		: [ renderLabelInput( props ) ];
 
