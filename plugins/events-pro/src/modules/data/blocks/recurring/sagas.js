@@ -97,6 +97,10 @@ export function* handleRuleEdit( action ) {
 				break;
 			case KEY_WEEK:
 				yield call( handleWeekChange, action, fieldKey );
+				break;
+			case KEY_LIMIT_TYPE:
+				yield call( handleLimitTypeChange, action, fieldKey );
+				break;
 			default:
 				break;
 		}
@@ -167,6 +171,36 @@ export function* handleWeekChange( action, key ) {
 			actions.syncRule( action.index, {
 				[ key ]: payloadWeek,
 				[ KEY_DAY ]: 1,
+			} )
+		);
+	}
+}
+
+export function* handleLimitTypeChange( action, key ) {
+	const value = action.payload[ key ];
+	const isDate = value === recurringConstants.DATE;
+	const isCount = value === recurringConstants.COUNT;
+
+	if ( isDate ) {
+		const start = yield select( datetime.getStart );
+		const startMoment = yield call( momentUtil.toMoment, start );
+		const startDate = yield call( momentUtil.toDate, startMoment.add( 1, 'day' ) );
+		yield put(
+			actions.syncRule( action.index, {
+				[ constants.KEY_LIMIT ]: startDate,
+			} )
+		);
+	} else if ( isCount ) {
+		yield put(
+			actions.syncRule( action.index, {
+				[ constants.KEY_LIMIT ]: 1,
+			} )
+		);
+	} else {
+		// Never ending
+		yield put(
+			actions.syncRule( action.index, {
+				[ constants.KEY_LIMIT ]: null,
 			} )
 		);
 	}
