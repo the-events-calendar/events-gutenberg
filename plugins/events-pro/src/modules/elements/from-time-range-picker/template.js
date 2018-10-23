@@ -25,41 +25,44 @@ const FromTimeRangePicker = ( {
 	onStartTimeChange,
 	onStartTimeClick,
 	startTime,
-} ) => (
-	<LabeledRow
-		className={ classNames(
-			'tribe-editor__from-time-range-picker',
-			{ 'tribe-editor__from-time-range-picker--multi-day': isMultiDay },
-			className
-		) }
-		label={ __( 'From', 'events-gutenberg' ) }
-	>
-		{ /* @todo: set start and end time, set min and max, and all day */ }
-		<TimePicker
-			current={ startTime }
-			start="00:00"
-			end="23:59"
-			onChange={ onStartTimeChange }
-			onClick={ onStartTimeClick }
-		/>
-		{ /* @todo: remove span and timepicker if all day */ }
-		<span>{ __( 'to', 'events-gutenberg' ) }</span>
-		{ /* @todo: set start and end time, set min and max, and all day */ }
-		<TimePicker
-			current={ endTime }
-			start="00:00"
-			end="23:59"
-			onChange={ onEndTimeChange }
-			onClick={ onEndTimeClick }
-			disabled={ isMultiDay }
-		/>
-		<MultiDayCheckbox
-			className="tribe-editor__from-time-range-picker__multi-day-checkbox"
-			checked={ isMultiDay }
-			onChange={ onMultiDayChange }
-		/>
-	</LabeledRow>
-);
+} ) => {
+	return (
+		<LabeledRow
+			className={ classNames(
+				'tribe-editor__from-time-range-picker',
+				{ 'tribe-editor__from-time-range-picker--multi-day': isMultiDay },
+				className
+			) }
+			label={ __( 'From', 'events-gutenberg' ) }
+		>
+			{ /* @todo: set start and end time, set min and max, and all day */ }
+			<TimePicker
+				current={ startTime }
+				start="00:00"
+				end="23:59"
+				onChange={ onStartTimeChange }
+				onClick={ onStartTimeClick }
+			/>
+			{ /* @todo: remove span and timepicker if all day */ }
+			<span>{ __( 'to', 'events-gutenberg' ) }</span>
+			{ /* @todo: set start and end time, set min and max, and all day */ }
+			<TimePicker
+				current={ endTime }
+				start="00:00"
+				end="23:59"
+				onChange={ onEndTimeChange }
+				onClick={ onEndTimeClick }
+				disabled={ isMultiDay }
+			/>
+			<MultiDayCheckbox
+				className="tribe-editor__from-time-range-picker__multi-day-checkbox"
+				checked={ isMultiDay }
+				onChange={ onMultiDayChange }
+			/>
+		</LabeledRow>
+
+	);
+};
 
 FromTimeRangePicker.propTypes = {
 	className: PropTypes.string,

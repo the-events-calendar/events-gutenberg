@@ -9,7 +9,14 @@ import { compose } from 'redux';
  */
 import FromTimeRangePicker from './template';
 import { constants } from '@moderntribe/events-pro/data/blocks';
-import { actions, selectors } from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as recurringActions,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
 import { withStore } from '@moderntribe/common/hoc';
 import { time as timeUtil } from '@moderntribe/common/utils';
 
@@ -69,18 +76,30 @@ const onStartTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
 	onClose();
 };
 
-const mapStateToProps = ( state, ownProps ) => ( {
-	endTime: selectors.getEndTimeNoSeconds( state, ownProps ),
-	isMultiDay: selectors.getMultiDay( state, ownProps ),
-	startTime: selectors.getStartTimeNoSeconds( state, ownProps ),
-} );
+const mapStateToProps = ( state, ownProps ) => {
+	const selectors = ownProps.blockType === constants.RECURRING
+		? recurringSelectors
+		: exceptionSelectors;
+	return {
+		endTime: selectors.getEndTime( state, ownProps ),
+		isMultiDay: selectors.getMultiDay( state, ownProps ),
+		startTime: selectors.getStartTime( state, ownProps ),
+	};
+};
 
-const mapDispatchToProps = ( dispatch ) => ( {
-	editRule: ( index, payload ) => dispatch( actions.editRule( index, payload ) ),
-} );
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const action = ownProps.blockType === constants.RECURRING
+		? recurringActions
+		: exceptionActions;
+
+	return {
+		editRule: ( index, payload ) => dispatch( action.editRule( index, payload ) ),
+	};
+};
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 	...ownProps,
+	...dispatchProps,
 	...stateProps,
 	onEndTimeChange: onEndTimeChange( stateProps, dispatchProps, ownProps ),
 	onStartTimeChange: onStartTimeChange( stateProps, dispatchProps, ownProps ),

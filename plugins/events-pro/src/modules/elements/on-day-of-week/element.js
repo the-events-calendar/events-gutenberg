@@ -26,7 +26,7 @@ const {
 } = recurringConstants;
 
 const mapStateToProps = ( state, ownProps ) => {
-	const selectors = ownProps.blockType === RECURRING
+	const selectors = ownProps.blockType === constants.RECURRING
 		? recurringSelectors
 		: exceptionSelectors;
 	const days = selectors.getDays( state, ownProps );
@@ -41,7 +41,7 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	const edit = ownProps.blockType === RECURRING
+	const edit = ownProps.blockType === constants.RECURRING
 		? recurringActions.editRule
 		: exceptionActions.editException;
 
@@ -66,7 +66,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 
 			edit( ownProps.index, { [ constants.KEY_DAYS ]: newDays } );
 		},
-	}
+	};
 };
 
 export default compose(

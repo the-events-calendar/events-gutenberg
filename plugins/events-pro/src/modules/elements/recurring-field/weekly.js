@@ -27,7 +27,7 @@ const WeeklyField = ( { isMultiDay, index } ) => {
 				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 			/>
 			<OnDayOfWeek
-				blockType={ consants.RECURRING }
+				blockType={ constants.RECURRING }
 				index={ index }
 			/>
 			<FromTimeRangePicker index={ index } />

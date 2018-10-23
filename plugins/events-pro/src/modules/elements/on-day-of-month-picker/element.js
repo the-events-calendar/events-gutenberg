@@ -40,10 +40,10 @@ const onDayOfMonthChange = ( ownProps, edit ) => ( selectedOption ) => {
 	const { value } = selectedOption;
 	const payload = {};
 
-	if( includes( WEEKS_OF_THE_MONTH, value ) ) {
+	if ( includes( WEEKS_OF_THE_MONTH, value ) ) {
 		payload[ KEY_WEEK ] = value;
 	} else {
-		paylaod[ KEY_WEEK ] = null;
+		payload[ KEY_WEEK ] = null;
 		payload[ KEY_DAY ] = value;
 	}
 
@@ -57,7 +57,7 @@ const onWeekDayChange = ( ownProps, edit ) => ( selectedOption ) => {
 };
 
 const mapStateToProps = ( state, ownProps ) => {
-	const selectors = ownProps.blockType === RECURRING
+	const selectors = ownProps.blockType === constants.RECURRING
 		? recurringSelectors
 		: exceptionSelectors;
 	const stateProps = {};
@@ -78,7 +78,7 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	const editAction = ownProps.blockType === RECURRING
+	const editAction = ownProps.blockType === constants.RECURRING
 		? recurringActions.editRule
 		: exceptionActions.editException;
 	const edit = ( index, payload ) => dispatch( editAction( index, payload ) );

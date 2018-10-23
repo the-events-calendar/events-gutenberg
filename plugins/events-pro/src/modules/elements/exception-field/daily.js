@@ -4,41 +4,37 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
-import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
  */
 import {
-	FromTimeRangePicker,
-	OnDatePicker,
 	TypePicker,
-	SingleToDateTimePicker,
+	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
 import { constants } from '@moderntribe/events-pro/data/blocks';
-import { options } from '@moderntribe/events-pro/data/blocks/exception';
+import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-const SingularField = ( { isMultiDay, typeOption, index } ) => {
+const DailyField = ( { index, isMultiDay } ) => {
 	return (
 		<Fragment>
 			<TypePicker
-				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
-				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
-				selected={ typeOption }
 				blockType={ constants.EXCEPTION }
 				index={ index }
+				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
 			/>
-			<OnDatePicker index={ index } />
-			<FromTimeRangePicker index={ index } />
-			{ isMultiDay && <SingleToDateTimePicker index={ index } /> }
+			<SeriesEnds
+				blockType={ constants.EXCEPTION }
+				index={ index }
+				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
+			/>
 		</Fragment>
 	);
 };
 
-SingularField.propTypes = {
-	isMultiDay: PropTypes.bool.isRequired,
-	typeOption: proptypes.ReactSelectOption,
+DailyField.propTypes = {
 	index: PropTypes.number.isRequired,
+	isMultiDay: PropTypes.bool.isRequired,
 };
 
-export default SingularField;
+export default DailyField;

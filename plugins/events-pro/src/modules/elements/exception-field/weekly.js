@@ -30,8 +30,6 @@ const WeeklyField = ( { isMultiDay, typeOption, index } ) => {
 				index={ index }
 			/>
 			<OnDayOfWeek index={ index } />
-			<FromTimeRangePicker index={ index } />
-			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 			<SeriesEnds
 				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
 				index={ index }
