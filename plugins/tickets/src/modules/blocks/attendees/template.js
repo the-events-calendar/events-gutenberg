@@ -50,7 +50,7 @@ const renderLabelInput = ( { isSelected, isEmpty, title, setTitle } ) => {
 			/>
 		</div>
 	);
-}
+};
 
 const renderPlaceholder = () => {
 	const classes = [
@@ -63,7 +63,7 @@ const renderPlaceholder = () => {
 			{ placeholder }
 		</button>
 	);
-}
+};
 
 const RenderGravatars = () => (
 	<div className="tribe-editor__event-attendees__gravatars">
@@ -88,11 +88,10 @@ const Attendees = ( props ) => {
 			{ <RenderGravatars /> }
 		</div>
 	);
-
-}
+};
 
 Attendees.propTypes = {
 	setTitle: PropTypes.func,
-}
+};
 
 export default Attendees;
