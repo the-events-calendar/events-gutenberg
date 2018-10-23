@@ -9,8 +9,14 @@ import { compose } from 'redux';
  */
 import FromTimeRangePicker from './template';
 import { constants } from '@moderntribe/events-pro/data/blocks';
-import { actions as recurringActions, selectors as recurringSelectors } from '@moderntribe/events-pro/data/blocks/recurring';
-import { actions as exceptionActions, selectors as exceptionSelectors } from '@moderntribe/events-pro/data/blocks/exception';
+import {
+	actions as recurringActions,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
 import { withStore } from '@moderntribe/common/hoc';
 import { time as timeUtil } from '@moderntribe/common/utils';
 
@@ -75,9 +81,9 @@ const mapStateToProps = ( state, ownProps ) => {
 		? recurringSelectors
 		: exceptionSelectors;
 	return {
-		endTime: selectors.getEndTimeNoSeconds( state, ownProps ),
+		endTime: selectors.getEndTime( state, ownProps ),
 		isMultiDay: selectors.getMultiDay( state, ownProps ),
-		startTime: selectors.getStartTimeNoSeconds( state, ownProps ),
+		startTime: selectors.getStartTime( state, ownProps ),
 	};
 };
 

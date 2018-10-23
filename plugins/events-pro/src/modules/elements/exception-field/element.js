@@ -32,8 +32,16 @@ export default class ExceptionField extends PureComponent {
 		[ keys.KEY_START_DATE ]: value,
 	} )
 
+	handleLimitType = option => this.props.editException( this.props.index, {
+		[ keys.KEY_LIMIT_TYPE ]: option.value,
+	} )
+
 	get typeOption() {
 		return selectors.getTypeOption( this.props );
+	}
+
+	get limitTypeOption() {
+		return selectors.getLimitTypeOption( this.props );
 	}
 
 	renderFieldType = () => {
@@ -43,7 +51,9 @@ export default class ExceptionField extends PureComponent {
 					<Daily
 						{ ...this.props }
 						typeOption={ this.typeOption }
+						limitTypeOption={ this.limitTypeOption }
 						handleStartDate={ this.handleStartDate }
+						handleLimitType={ this.handleLimitType }
 					/>
 				);
 			case constants.WEEKLY:
@@ -51,6 +61,7 @@ export default class ExceptionField extends PureComponent {
 					<Weekly
 						{ ...this.props }
 						typeOption={ this.typeOption }
+						limitTypeOption={ this.limitTypeOption }
 					/>
 				);
 			case constants.MONTHLY:
@@ -58,12 +69,14 @@ export default class ExceptionField extends PureComponent {
 					<Monthly
 						{ ...this.props }
 						typeOption={ this.typeOption }
+						limitTypeOption={ this.limitTypeOption }
 					/>
 				);
 			case constants.YEARLY:
 				return (
 					<Yearly
 						{ ...this.props }
+						limitTypeOption={ this.limitTypeOption }
 						typeOption={ this.typeOption }
 					/>
 				);
@@ -71,6 +84,7 @@ export default class ExceptionField extends PureComponent {
 				return (
 					<Singular
 						{ ...this.props }
+						limitTypeOption={ this.limitTypeOption }
 						typeOption={ this.typeOption }
 						handleStartDate={ this.handleStartDate }
 					/>
