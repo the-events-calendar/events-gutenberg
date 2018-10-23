@@ -59,7 +59,13 @@ const SeriesEnds = ( {
 						value={ seriesEndsAfterTimes }
 						onChange={ onSeriesEndsAfterTimesChange }
 					/>
-					<span>{ __( 'event', 'events-gutenberg' ) }</span>
+					<span>
+						{
+							seriesEndsAfterTimes > 1
+								? __( 'events', 'events-gutenberg' )
+								: __( 'event', 'events-gutenberg' )
+						}
+					</span>
 				</Fragment>
 			);
 		}

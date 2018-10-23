@@ -15,7 +15,7 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-const DailyField = ( { index, isMultiDay } ) => {
+const DailyField = ( { index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
