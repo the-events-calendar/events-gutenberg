@@ -53,4 +53,22 @@ describe( 'Fields reducer', () => {
 		const action = actions.setFieldDividerEnd( fieldName, ' & ' );
 		expect( field( DEFAULT_STATE, action ) ).toMatchSnapshot();
 	} );
+
+	test( 'append field value', () => {
+		const action = actions.appendFieldValue( fieldName, 'Chocolate' );
+		const newState = {
+			...DEFAULT_STATE,
+			value: [],
+		};
+		expect( field( newState, action ) ).toMatchSnapshot();
+	} );
+
+	test( 'remove field value', () => {
+		const action = actions.removeFieldValue( fieldName, 'Chocolate' );
+		const newState = {
+			...DEFAULT_STATE,
+			value: [ 'Chocolate' ],
+		};
+		expect( field( newState, action ) ).toMatchSnapshot();
+	} );
 } );
