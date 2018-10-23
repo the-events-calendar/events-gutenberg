@@ -92,11 +92,11 @@ export function* handleRuleEdit( action ) {
 			case KEY_END_TIME:
 				yield call( handleTimeChange, action, fieldKey );
 				break;
-
 			case KEY_MULTI_DAY:
 				yield call( handleMultiDayChange, action, fieldKey );
 				break;
-
+			case KEY_WEEK:
+				yield call( handleWeekChange, action, fieldKey );
 			default:
 				break;
 		}
@@ -155,6 +155,20 @@ export function* handleMultiDayChange( action, key ) {
 				} )
 			);
 		}
+	}
+}
+
+export function* handleWeekChange( action, key ) {
+	const payloadWeek = action.payload[ key ];
+	const weekWasNull = ! ( yield select( selectors.getWeek, action ) );
+
+	if ( payloadWeek && weekWasNull ) {
+		yield put(
+			actions.syncRule( action.index, {
+				[ key ]: payloadWeek,
+				[ KEY_DAY ]: 1,
+			} )
+		);
 	}
 }
 
