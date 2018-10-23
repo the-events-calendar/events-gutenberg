@@ -5,7 +5,7 @@ import { selectors } from '@moderntribe/tickets/data/blocks/attendees';
 import { DEFAULT_STATE } from '@moderntribe/tickets/data/blocks/attendees/reducer';
 
 const state = {
-	events: {
+	tickets: {
 		blocks: {
 			attendees: DEFAULT_STATE,
 		},
