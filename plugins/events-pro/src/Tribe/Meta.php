@@ -17,10 +17,7 @@ class Tribe__Gutenberg__Events_Pro__Meta extends Tribe__Gutenberg__Common__Meta 
 		$additional_fields = array_values( tribe_get_option( 'custom-fields', array() ) );
 		foreach ( $additional_fields as $field ) {
 			
-			$has_fields = isset( $field['name'] )
-			              && isset( $field['type'] )
-			              && isset( $field['gutenberg_editor'] );
-			
+			$has_fields = isset( $field['name'], $field['type'], $field['gutenberg_editor'] );
 			if ( ! $has_fields ) {
 				continue;
 			}
