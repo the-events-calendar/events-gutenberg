@@ -21,6 +21,8 @@ const fieldsById = ( state = {}, action ) => {
 		case types.SET_ADDITIONAL_FIELD_DIVIDER_LIST:
 		case types.SET_ADDITIONAL_FIELD_LABEL:
 		case types.SET_ADDITIONAL_FIELD_DIVIDER_END:
+		case types.APPEND_ADDITIONAL_FIELD_VALUE:
+		case types.REMOVE_ADDITIONAL_FIELD_VALUE:
 			return {
 				...state,
 				[ payload.name ]: field( state[ payload.name ], action ),
