@@ -14,8 +14,26 @@ import * as ui from '@moderntribe/events-pro/data/ui';
 import { moment as momentUtil, time } from '@moderntribe/common/utils';
 import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
 
+const {
+	KEY_TYPE,
+	KEY_ALL_DAY,
+	KEY_MULTI_DAY,
+	KEY_START_TIME,
+	KEY_END_TIME,
+	KEY_START_DATE,
+	KEY_END_DATE,
+	KEY_LIMIT,
+	KEY_LIMIT_TYPE,
+	KEY_BETWEEN,
+	KEY_DAYS,
+	KEY_WEEK,
+	KEY_DAY,
+	KEY_MONTH,
+	KEY_TIMEZONE,
+} = constants;
+
 export function* handleExceptionRemoval() {
-	const exceptions = yield select( selectors.getExceptions );
+	const exceptions = yield select( exception.selectors.getExceptions );
 
 	if ( ! exceptions.length ) {
 		yield put( ui.actions.hideExceptionPanel() );
@@ -38,21 +56,21 @@ export function* handleExceptionAddition() {
 	const endTime = momentUtil.toTime24Hr( endMoment );
 
 	yield put( exception.actions.addException( {
-		type: recurring.constants.SINGLE,
-		all_day: allDay,
-		multi_day: multiDay,
-		start_date: startDate,
-		start_time: startTime,
-		end_date: endDate,
-		end_time: endTime,
-		between: 1,
-		limit_type: recurring.constants.COUNT,
-		limit: 7,
-		days: [],
-		week: recurring.constants.FIRST,
-		day: 1,
-		month: [],
-		timezone,
+		[ KEY_TYPE ]: recurring.constants.SINGLE,
+		[ KEY_ALL_DAY ]: allDay,
+		[ KEY_MULTI_DAY ]: multiDay,
+		[ KEY_START_DATE ]: startDate,
+		[ KEY_START_TIME ]: startTime,
+		[ KEY_END_DATE ]: endDate,
+		[ KEY_END_TIME ]: endTime,
+		[ KEY_BETWEEN ]: 1,
+		[ KEY_LIMIT_TYPE ]: recurring.constants.COUNT,
+		[ KEY_LIMIT ]: 7,
+		[ KEY_DAYS ]: [],
+		[ KEY_WEEK ]: recurring.constants.FIRST,
+		[ KEY_DAY ]: 1,
+		[ KEY_MONTH ]: [],
+		[ KEY_TIMEZONE ]: timezone,
 	} ) );
 }
 
@@ -135,6 +153,20 @@ export function* handleMultiDayChange( action, key ) {
 				} )
 			);
 		}
+	}
+}
+
+export function* handleWeekChange( action, key ) {
+	const payloadWeek = action.payload[ key ];
+	const weekWasNull = ! ( yield select( exception.selectors.getWeek, action ) );
+
+	if ( payloadWeek && weekWasNull ) {
+		yield put(
+			exception.actions.syncException( action.index, {
+				[ key ]: payloadWeek,
+				[ KEY_DAY ]: 1,
+			} )
+		);
 	}
 }
 
