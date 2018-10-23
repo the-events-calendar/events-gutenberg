@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { TimePicker, DayPickerInput } from '@moderntribe/common/elements';
-import { LabeledRow } from '@moderntribe/events-pro/elements';
+import LabeledRow from '@moderntribe/events-pro/elements/labeled-row/element';
 import { TribePropTypes } from '@moderntribe/common/utils';
 import './style.pcss';
 
