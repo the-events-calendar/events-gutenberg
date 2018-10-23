@@ -29,7 +29,7 @@ const {
 } = recurringConstants;
 
 const mapStateToProps = ( state, ownProps ) => {
-	const selectors = ownProps.blockType === RECURRING
+	const selectors = ownProps.blockType === constants.RECURRING
 		? recurringSelectors
 		: exceptionSelectors;
 	const monthsArr = selectors.getMonth( state, ownProps );
@@ -45,7 +45,7 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	const edit = ownProps.blockType === RECURRING
+	const edit = ownProps.blockType === constants.RECURRING
 		? recurringActions.editRule
 		: exceptionActions.editException;
 
