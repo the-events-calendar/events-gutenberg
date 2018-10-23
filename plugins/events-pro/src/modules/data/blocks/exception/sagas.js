@@ -11,28 +11,16 @@ import { constants } from '@moderntribe/events-pro/data/blocks';
 import * as actions from './actions';
 import * as selectors from './selectors';
 import * as types from './types';
-import * as recurringConstants from '@moderntribe/events-pro/data/blocks/recurring/constants';
+import * as sagas from '@moderntribe/events-pro/data/shared/sagas';
 import * as ui from '@moderntribe/events-pro/data/ui';
-import { moment as momentUtil, time } from '@moderntribe/common/utils';
-import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
 
-const {
-	KEY_TYPE,
-	KEY_ALL_DAY,
-	KEY_MULTI_DAY,
-	KEY_START_TIME,
-	KEY_END_TIME,
-	KEY_START_DATE,
-	KEY_END_DATE,
-	KEY_LIMIT,
-	KEY_LIMIT_TYPE,
-	KEY_BETWEEN,
-	KEY_DAYS,
-	KEY_WEEK,
-	KEY_DAY,
-	KEY_MONTH,
-	KEY_TIMEZONE,
-} = constants;
+const sagaArgs = {
+	actions: {
+		add: actions.addException,
+		sync: actions.syncException,
+	},
+	selectors,
+};
 
 export function* handleExceptionRemoval() {
 	const exceptions = yield select( selectors.getExceptions );
@@ -40,40 +28,6 @@ export function* handleExceptionRemoval() {
 	if ( ! exceptions.length ) {
 		yield put( ui.actions.hideExceptionPanel() );
 	}
-}
-
-export function* handleExceptionAddition() {
-	const start = yield select( datetime.getStart );
-	const end = yield select( datetime.getEnd );
-	const allDay = yield select( datetime.getAllDay );
-	const multiDay = yield select( datetime.getMultiDay );
-	const timezone = yield select( datetime.getTimeZone );
-
-	const startMoment = momentUtil.toMoment( start );
-	const endMoment = momentUtil.toMoment( end );
-
-	const startDate = momentUtil.toDate( startMoment );
-	const startTime = momentUtil.toTime24Hr( startMoment );
-	const endDate = momentUtil.toDate( endMoment );
-	const endTime = momentUtil.toTime24Hr( endMoment );
-
-	yield put( actions.addException( {
-		[ KEY_TYPE ]: recurringConstants.SINGLE,
-		[ KEY_ALL_DAY ]: allDay,
-		[ KEY_MULTI_DAY ]: multiDay,
-		[ KEY_START_DATE ]: startDate,
-		[ KEY_START_TIME ]: startTime,
-		[ KEY_END_DATE ]: endDate,
-		[ KEY_END_TIME ]: endTime,
-		[ KEY_BETWEEN ]: 1,
-		[ KEY_LIMIT_TYPE ]: recurringConstants.COUNT,
-		[ KEY_LIMIT ]: 7,
-		[ KEY_DAYS ]: [],
-		[ KEY_WEEK ]: recurringConstants.FIRST,
-		[ KEY_DAY ]: 1,
-		[ KEY_MONTH ]: [],
-		[ KEY_TIMEZONE ]: timezone,
-	} ) );
 }
 
 export function* handleExceptionEdit( action ) {
@@ -90,19 +44,19 @@ export function* handleExceptionEdit( action ) {
 		switch ( fieldKey ) {
 			case constants.KEY_START_TIME:
 			case constants.KEY_END_TIME:
-				yield call( handleTimeChange, action, fieldKey );
+				yield call( sagas.handleTimeChange, sagaArgs, action, fieldKey );
 				break;
 
 			case constants.KEY_MULTI_DAY:
-				yield call( handleMultiDayChange, action, fieldKey );
+				yield call( sagas.handleMultiDayChange, sagaArgs, action, fieldKey );
 				break;
 
 			case constants.KEY_WEEK:
-				yield call( handleWeekChange, action, fieldKey );
+				yield call( sagas.handleWeekChange, sagaArgs, action, fieldKey );
 				break;
 
 			case constants.KEY_LIMIT_TYPE:
-				yield call( handleLimitTypeChange, action, fieldKey );
+				yield call( sagas.handleLimitTypeChange, sagaArgs, action, fieldKey );
 				break;
 
 			default:
@@ -111,107 +65,8 @@ export function* handleExceptionEdit( action ) {
 	}
 }
 
-export function* handleTimeChange( action, key ) {
-	const payloadTime = action.payload[ key ];
-	const isAllDay = payloadTime === 'all-day';
-
-	if ( isAllDay ) {
-		yield put(
-			actions.syncException( action.index, {
-				all_day: isAllDay,
-				start_time: '00:00:00',
-				end_time: '23:59:00',
-			} )
-		);
-	} else {
-		yield put(
-			actions.syncException( action.index, {
-				all_day: isAllDay,
-				[ key ]: time.fromSeconds( payloadTime, time.TIME_FORMAT_HH_MM ),
-			} )
-		);
-	}
-}
-
-export function* handleMultiDayChange( action, key ) {
-	const isMultiDay = action.payload[ key ];
-
-	if ( ! isMultiDay ) {
-		const startTime = yield select( selectors.getStartTime, action );
-		const endTime = yield select( selectors.getEndTime, action );
-
-		let startTimeSeconds = time.toSeconds( startTime, time.TIME_FORMAT_HH_MM );
-		let endTimeSeconds = time.toSeconds( endTime, time.TIME_FORMAT_HH_MM );
-
-		// If end time is earlier than start time, fix time
-		if ( endTimeSeconds <= startTimeSeconds ) {
-			// If there is less than half an hour left in the day, roll back one hour
-			if ( startTimeSeconds + time.HALF_HOUR_IN_SECONDS >= time.DAY_IN_SECONDS ) {
-				startTimeSeconds -= time.HOUR_IN_SECONDS;
-			}
-
-			endTimeSeconds = startTimeSeconds + time.HALF_HOUR_IN_SECONDS;
-
-			yield put(
-				actions.syncException( action.index, {
-					[ constants.KEY_START_TIME ]: (
-						time.fromSeconds( startTimeSeconds, time.TIME_FORMAT_HH_MM )
-					),
-					[ constants.KEY_END_TIME ]: (
-						time.fromSeconds( endTimeSeconds, time.TIME_FORMAT_HH_MM )
-					),
-				} )
-			);
-		}
-	}
-}
-
-export function* handleWeekChange( action, key ) {
-	const payloadWeek = action.payload[ key ];
-	const weekWasNull = ! ( yield select( selectors.getWeek, action ) );
-
-	if ( payloadWeek && weekWasNull ) {
-		yield put(
-			actions.syncException( action.index, {
-				[ key ]: payloadWeek,
-				[ KEY_DAY ]: 1,
-			} )
-		);
-	}
-}
-
-export function* handleLimitTypeChange( action, key ) {
-	const value = action.payload[ key ];
-	const isDate = value === recurringConstants.DATE;
-	const isCount = value === recurringConstants.COUNT;
-
-	if ( isDate ) {
-		const start = yield select( datetime.getStart );
-		const startMoment = yield call( momentUtil.toMoment, start );
-		const startDate = yield call( momentUtil.toDate, startMoment.add( 1, 'day' ) );
-		yield put(
-			actions.syncException( action.index, {
-				[ constants.KEY_LIMIT ]: startDate,
-			} )
-		);
-	} else if ( isCount ) {
-		yield put(
-			actions.syncException( action.index, {
-				[ constants.KEY_LIMIT ]: 1,
-			} )
-		);
-	} else {
-		// Never ending
-		yield put(
-			actions.syncException( action.index, {
-				[ constants.KEY_LIMIT ]: null,
-			} )
-		);
-	}
-}
-
 export default function* watchers() {
 	yield takeEvery( [ types.REMOVE_EXCEPTION ], handleExceptionRemoval );
-	yield takeEvery( [ types.ADD_EXCEPTION_FIELD ], handleExceptionAddition );
+	yield takeEvery( [ types.ADD_EXCEPTION_FIELD ], sagas.handleAddition, sagaArgs );
 	yield takeEvery( [ types.EDIT_EXCEPTION ], handleExceptionEdit );
 }
