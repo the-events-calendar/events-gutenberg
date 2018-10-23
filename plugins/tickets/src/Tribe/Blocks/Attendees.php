@@ -23,7 +23,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 	public function default_attributes() {
 
 		$defaults = array(
-			'title' => __( 'Who\'s coming', 'events-gutenberg' ),
+			'title' => __( "Who's coming?", 'events-gutenberg' ),
 		);
 
 		return $defaults;
