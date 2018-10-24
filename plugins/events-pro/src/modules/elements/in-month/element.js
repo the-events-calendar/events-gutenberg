@@ -3,6 +3,7 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { uniq, find } from 'lodash';
 
 /**
  * Internal dependencies
@@ -33,7 +34,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		? recurringSelectors
 		: exceptionSelectors;
 	const monthsArr = selectors.getMonth( state, ownProps );
-	const months = monthsArr.forEach( ( monthNum ) => {
+	const months = monthsArr.map( ( monthNum ) => {
 		const month = MONTHS_OF_THE_YEAR_MAPPING_FROM_STATE[ monthNum ];
 		return find( MONTHS_OF_THE_YEAR_OPTIONS, { value: month } );
 	} );
@@ -67,13 +68,13 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 
 			edit( ownProps.index, { [ KEY_MONTH ]: newMonths } );
 		},
-		onSelectChange: ( selectedOption ) => {
-			const mappedMonth = MONTHS_OF_THE_YEAR_MAPPING_TO_STATE[ selectedOption.value ];
-			const newMonths = [ ...monthsArr, mappedMonth ].sort( ( a, b ) => a - b );
+		onSelectChange: ( selectedOptions ) => {
+			const selectedMonths = selectedOptions.map( option => MONTHS_OF_THE_YEAR_MAPPING_TO_STATE[ option.value ] );
+			const months = uniq( [ ...monthsArr, ...selectedMonths ] ).sort( ( a, b ) => a - b );
 
-			edit( ownProps.index, { [ KEY_MONTH ]: newMonths } );
+			edit( ownProps.index, { [ KEY_MONTH ]: months } );
 		},
-	}
+	};
 };
 
 export default compose(
