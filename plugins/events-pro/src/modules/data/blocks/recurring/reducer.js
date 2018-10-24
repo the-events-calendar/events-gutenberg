@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { merge } from 'lodash';
 
 /**
  * Internal dependencies
@@ -9,7 +8,7 @@ import { merge } from 'lodash';
 import * as types from './types';
 
 function edit( state, action ) {
-	const field = merge( {}, state[ action.index ], action.payload );
+	const field = Object.assign( {}, state[ action.index ], action.payload );
 
 	if ( state.length === 1 ) {
 		return [ field ];
