@@ -37,14 +37,6 @@ export const NEVER_LABEL = __( 'Never', 'events-gutenberg' );
 export const DATE = 'date';
 export const COUNT = 'count';
 
-export const LIMIT_TYPE_MAPPING_TO_STATE = {
-	[ ON ]: DATE,
-	[ AFTER ]: COUNT,
-	[ NEVER ]: null,
-};
-
-export const LIMIT_TYPE_MAPPING_FROM_STATE = invert( LIMIT_TYPE_MAPPING_TO_STATE );
-
 //
 // ─── DAYS OF THE WEEK ───────────────────────────────────────────────────────────
 //

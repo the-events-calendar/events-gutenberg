@@ -25,8 +25,7 @@ const getSelected = ( state, ownProps ) => {
 	const selectors = ownProps.blockType === RECURRING
 		? recurringSelectors
 		: exceptionSelectors;
-	const rule = selectors.getRule( state, ownProps );
-	return selectors.getTypeOption( rule );
+	return selectors.getTypeOption( state, ownProps );
 };
 
 const mapStateToProps = ( state, ownProps ) => ( {

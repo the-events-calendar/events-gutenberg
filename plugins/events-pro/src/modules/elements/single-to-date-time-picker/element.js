@@ -3,7 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { find } from 'lodash';
 import moment from 'moment/moment';
 
 /**
@@ -13,8 +12,6 @@ import SingleToDateTimePicker from './template';
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import {
 	actions as recurringActions,
-	constants as recurringConstants,
-	options as recurringOptions,
 	selectors as recurringSelectors,
 } from '@moderntribe/events-pro/data/blocks/recurring';
 import {
@@ -31,15 +28,7 @@ const {
 	RECURRING,
 	KEY_END_DATE,
 	KEY_END_TIME,
-	KEY_LIMIT,
-	KEY_LIMIT_TYPE,
 } = constants;
-
-const {
-	COUNT,
-	DATE,
-	LIMIT_TYPE_MAPPING_FROM_STATE,
-} = recurringConstants;
 
 const onEndDateChange = ( ownProps, edit ) => ( date ) => {
 	const endDate = date
