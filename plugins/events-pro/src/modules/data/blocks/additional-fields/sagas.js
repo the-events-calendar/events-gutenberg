@@ -16,7 +16,6 @@ export function* setInitialState( props ) {
 	const { payload = {} } = props;
 	const { name = '', get = noop } = payload;
 	const type = get( 'type' );
-	const value = get( 'value' );
 
 	yield all( [
 		put( actions.addField( name ) ),
@@ -25,6 +24,7 @@ export function* setInitialState( props ) {
 		put( actions.setFieldLabel( name, get( 'label' ) ) ),
 		put( actions.setFieldOptions( name, get( 'options' ) ) ),
 		put( actions.setFieldValue( name, get( 'value' ) ) ),
+		put( actions.setChange( name ) ),
 	] );
 }
 
