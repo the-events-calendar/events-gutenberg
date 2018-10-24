@@ -10,35 +10,39 @@ import { proptypes } from '@moderntribe/common/data/plugins';
  * Internal dependencies
  */
 import {
-	FromTimeRangePicker,
 	OnDayOfWeek,
 	TypePicker,
-	RecurringToDateTimePicker,
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const WeeklyField = ( { isMultiDay, typeOption, onTypeChange } ) => {
+const WeeklyField = ( { typeOption, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
 				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
-				onChange={ onTypeChange }
+				blockType={ constants.EXCEPTION }
+				index={ index }
 			/>
-			<OnDayOfWeek />
-			<FromTimeRangePicker />
-			{ isMultiDay && <RecurringToDateTimePicker /> }
-			<SeriesEnds rowLabel={ __( 'Exception ends', 'events-gutenberg' ) } />
+			<OnDayOfWeek
+				index={ index }
+				blockType={ constants.EXCEPTION }
+			/>
+			<SeriesEnds
+				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
+				index={ index }
+				blockType={ constants.EXCEPTION }
+			/>
 		</Fragment>
 	);
 };
 
 WeeklyField.propTypes = {
-	isMultiDay: PropTypes.bool.isRequired,
 	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
 };
 
 export default WeeklyField;

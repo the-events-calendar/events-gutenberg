@@ -1,19 +1,17 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import InMonth from '../element';
+import OnDayOfMonthPicker from '../template';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-describe( 'InMonth', () => {
+describe( 'OnDayOfMonthPicker', () => {
 	test( 'should render component', () => {
 		const component = renderer.create(
-			<InMonth
+			<OnDayOfMonthPicker
 				className="test-class"
-				months={ [
-					options.MONTHS_OF_THE_YEAR_OPTIONS[ 2 ],
-					options.MONTHS_OF_THE_YEAR_OPTIONS[ 5 ],
-				] }
-				onMonthClick={ jest.fn() }
-				onSelectChange={ jest.fn() }
+				dayOfMonth={ options.MONTH_DAYS_OPTIONS[ 0 ] }
+				onDayOfMonthChange={ jest.fn() }
+				onWeekDayChange={ jest.fn() }
+				weekDay={ options.DAYS_OF_THE_WEEK_OPTIONS[ 0 ] }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();

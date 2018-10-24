@@ -10,7 +10,7 @@ describe( 'DayOfMonthPicker', () => {
 				dayOfMonth={ options.MONTH_DAYS_OPTIONS[0]}
 				onDayChange={ jest.fn() }
 				onDayOfMonthChange={ jest.fn() }
-				weekDay={ options.DAYS_OF_THE_WEEK[0] }
+				weekDay={ options.DAYS_OF_THE_WEEK_OPTIONS[0] }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
@@ -22,7 +22,7 @@ describe( 'DayOfMonthPicker', () => {
 				dayOfMonth={ options.MONTH_DAYS_OPTIONS[0]}
 				onDayChange={ jest.fn() }
 				onDayOfMonthChange={ jest.fn() }
-				weekDay={ options.DAYS_OF_THE_WEEK[5] }
+				weekDay={ options.DAYS_OF_THE_WEEK_OPTIONS[5] }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
@@ -34,7 +34,7 @@ describe( 'DayOfMonthPicker', () => {
 				dayOfMonth={ options.MONTH_DAYS_OPTIONS[10]}
 				onDayChange={ jest.fn() }
 				onDayOfMonthChange={ jest.fn() }
-				weekDay={ options.DAYS_OF_THE_WEEK[0] }
+				weekDay={ options.DAYS_OF_THE_WEEK_OPTIONS[0] }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();

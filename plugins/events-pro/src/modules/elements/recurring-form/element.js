@@ -4,13 +4,18 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Internal dependencies
+ */
 import { RecurringField } from '@moderntribe/events-pro/elements';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+
+const { KEY_MULTI_DAY, KEY_TYPE } = constants;
 
 export default class RecurringForm extends PureComponent {
 	static propTypes = {
 		rules: PropTypes.arrayOf( PropTypes.shape( {} ) ),
 		removeRule: PropTypes.func.isRequired,
-		editRule: PropTypes.func.isRequired,
 	}
 
 	static defaultProps = {
@@ -23,11 +28,11 @@ export default class RecurringForm extends PureComponent {
 				{
 					this.props.rules.map( ( rule, i ) => (
 						<RecurringField
-							index={ i }
 							key={ i }
+							index={ i }
+							isMultiDay={ rule[ KEY_MULTI_DAY ] }
 							onRemoveClick={ this.props.removeRule }
-							editRule={ this.props.editRule }
-							{ ...rule }
+							type={ rule[ KEY_TYPE ] }
 						/>
 					) )
 				}

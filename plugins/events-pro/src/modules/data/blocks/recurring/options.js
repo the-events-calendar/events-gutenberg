@@ -45,8 +45,8 @@ export const YEARLY_RECURRENCE_FREQUENCY_OPTIONS = createNumericalOptions( 6 );
 //
 
 export const SERIES_ENDS_OPTIONS = [
-	{ label: constants.ON_LABEL, value: constants.ON },
-	{ label: constants.AFTER_LABEL, value: constants.AFTER },
+	{ label: constants.ON_LABEL, value: constants.DATE },
+	{ label: constants.AFTER_LABEL, value: constants.COUNT },
 	{ label: constants.NEVER_LABEL, value: constants.NEVER },
 ];
 
@@ -54,7 +54,7 @@ export const SERIES_ENDS_OPTIONS = [
 // ─── DAYS OF THE WEEK OPTIONS ────────────────────────────────────────
 //
 
-export const DAYS_OF_THE_WEEK = [
+export const DAYS_OF_THE_WEEK_OPTIONS = [
 	{ label: constants.MONDAY_LABEL, value: constants.MONDAY },
 	{ label: constants.TUESDAY_LABEL, value: constants.TUESDAY },
 	{ label: constants.WEDNESDAY_LABEL, value: constants.WEDNESDAY },

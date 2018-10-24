@@ -20,6 +20,7 @@ class DayOfWeek extends PureComponent {
 		label: PropTypes.string.isRequired,
 		labelTitle: PropTypes.string.isRequired,
 		onChange: PropTypes.func.isRequired,
+		value: PropTypes.string.isRequired,
 	};
 
 	constructor( props ) {
@@ -44,6 +45,7 @@ class DayOfWeek extends PureComponent {
 			label,
 			labelTitle,
 			onChange,
+			value,
 		} = this.props;
 
 		return (
@@ -54,6 +56,7 @@ class DayOfWeek extends PureComponent {
 				id={ this.id }
 				label={ this.getLabel( label, labelTitle ) }
 				onChange={ onChange }
+				value={ value }
 			/>
 		);
 	}

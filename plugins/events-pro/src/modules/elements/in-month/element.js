@@ -1,43 +1,82 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { __ } from '@wordpress/i18n';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 /**
  * Internal dependencies
  */
-import { LabeledRow, MonthPicker } from '@moderntribe/events-pro/elements';
-import { options } from '@moderntribe/events-pro/data/blocks/recurring';
+import InMonth from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import {
+	actions as recurringActions,
+	constants as recurringConstants,
+	options as recurringOptions,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
+import { withStore } from '@moderntribe/common/hoc';
 
-const InMonth = ( {
-	className,
-	months,
-	onMonthClick,
-	onSelectChange,
-} ) => (
-	<LabeledRow
-		className={ classNames( 'tribe-editor__in-month', className ) }
-		label={ __( 'In', 'events-gutenberg' ) }
-	>
-		<MonthPicker
-			className="tribe-editor__in-month__month-picker"
-			months={ months }
-			onMonthClick={ onMonthClick }
-			onSelectChange={ onSelectChange }
-		/>
-	</LabeledRow>
-);
+const { KEY_MONTH } = constants;
+const { MONTHS_OF_THE_YEAR_OPTIONS } = recurringOptions;
+const {
+	MONTHS_OF_THE_YEAR_MAPPING_TO_STATE,
+	MONTHS_OF_THE_YEAR_MAPPING_FROM_STATE,
+} = recurringConstants;
 
-InMonth.propTypes = {
-	className: PropTypes.string,
-	months: PropTypes.arrayOf(
-		PropTypes.oneOf( options.MONTHS_OF_THE_YEAR_OPTIONS )
-	),
-	onMonthClick: PropTypes.func,
-	onSelectChange: PropTypes.func,
+const mapStateToProps = ( state, ownProps ) => {
+	const selectors = ownProps.blockType === constants.RECURRING
+		? recurringSelectors
+		: exceptionSelectors;
+	const monthsArr = selectors.getMonth( state, ownProps );
+	const months = monthsArr.forEach( ( monthNum ) => {
+		const month = MONTHS_OF_THE_YEAR_MAPPING_FROM_STATE[ monthNum ];
+		return find( MONTHS_OF_THE_YEAR_OPTIONS, { value: month } );
+	} );
+
+	return {
+		monthsArr,
+		months,
+	};
 };
 
-export default InMonth;
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const edit = ownProps.blockType === constants.RECURRING
+		? recurringActions.editRule
+		: exceptionActions.editException;
+
+	return {
+		edit: ( index, payload ) => dispatch( edit( index, payload ) ),
+	};
+};
+
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
+	const { monthsArr, ...restStateProps } = stateProps;
+	const { edit } = dispatchProps;
+
+	return {
+		...ownProps,
+		...restStateProps,
+		onMonthClick: ( month ) => () => {
+			const mappedMonth = MONTHS_OF_THE_YEAR_MAPPING_TO_STATE[ month ];
+			const newMonths = monthsArr.filter( ( monthNum ) => monthNum !== mappedMonth );
+
+			edit( ownProps.index, { [ KEY_MONTH ]: newMonths } );
+		},
+		onSelectChange: ( selectedOption ) => {
+			const mappedMonth = MONTHS_OF_THE_YEAR_MAPPING_TO_STATE[ selectedOption.value ];
+			const newMonths = [ ...monthsArr, mappedMonth ].sort( ( a, b ) => a - b );
+
+			edit( ownProps.index, { [ KEY_MONTH ]: newMonths } );
+		},
+	}
+};
+
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
+)( InMonth );

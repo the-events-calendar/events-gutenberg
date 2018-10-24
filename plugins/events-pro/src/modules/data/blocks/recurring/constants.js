@@ -1,6 +1,7 @@
 /**
- * WordPress dependencies
+ * External dependencies
  */
+import { invert } from 'lodash';
 import { __ } from '@wordpress/i18n';
 
 //
@@ -19,65 +20,7 @@ export const MONTHLY_LABEL = __( 'Month', 'events-gutenberg' );
 export const YEARLY_LABEL = __( 'Year', 'events-gutenberg' );
 export const SINGLE_LABEL = __( 'Single Recurrence', 'events-gutenberg' );
 
-export const TYPES = [ DAILY, WEEKLY, MONTHLY, YEARLY, SINGLE ];
-
-export const DAILY_BETWEEN = 'days_between';
-export const WEEKLY_BETWEEN = 'weeks_between';
-export const MONTHLY_BETWEEN = 'months_between';
-export const YEARLY_BETWEEN = 'years_between';
-
-export const BETWEEN_TYPES = [
-	DAILY_BETWEEN,
-	WEEKLY_BETWEEN,
-	MONTHLY_BETWEEN,
-	YEARLY_BETWEEN,
-];
-
-export const BETWEEN_KEY_MAPPING = {
-	[ DAILY ]: DAILY_BETWEEN,
-	[ WEEKLY ]: WEEKLY_BETWEEN,
-	[ MONTHLY ]: MONTHLY_BETWEEN,
-	[ YEARLY ]: YEARLY_BETWEEN,
-};
-
-export const NUMBER_FIELD = 'number';
-export const DAY_FIELD = 'day';
-
-//
-// ─── WEEKLY RECURRING ───────────────────────────────────────────────────────────
-//
-
-export const WEEKLY_DAYS_FIELD = 'days';
-
-//
-// ─── MONTHLY RECURRING ──────────────────────────────────────────────────────────
-//
-
-export const DAYS_OF_MONTH_FIELD = NUMBER_FIELD;
-export const MONTHLY_WEEK_FIELD = NUMBER_FIELD;
-export const MONTHLY_DAY_OF_WEEK_FIELD = DAY_FIELD;
-export const MONTHLY_REPEAT_BY_WEEKDAY = 'weekday';
-export const MONTHLY_REPEAT_BY_DATE = 'date';
-
-//
-// ─── YEARLY RECURRING ───────────────────────────────────────────────────────────
-//
-
-export const YEARLY_DATE_FIELD = NUMBER_FIELD;
-export const YEARLY_WEEK_FIELD = NUMBER_FIELD;
-export const YEARLY_MONTH_OF_YEAR_FIELD = 'month';
-export const YEARLY_DAY_OF_WEEK_FIELD = DAY_FIELD;
-export const YEARLY_REPEAT_BY_WEEK = 'week';
-export const YEARLY_REPEAT_BY_DATE = 'date';
-
-//
-// ─── AUTHORITY TYPES ────────────────────────────────────────────────────────────
-//
-
-export const ALL = 'all';
-export const CURRENT = 'current';
-export const CURRENT_THEN_ALL = 'current-then-all';
-export const UPCOMING = 'upcoming';
+export const RECURRENCE_TYPES = [ DAILY, WEEKLY, MONTHLY, YEARLY, SINGLE ];
 
 //
 // ─── SERIES END TYPES ───────────────────────────────────────────────────────────
@@ -90,6 +33,9 @@ export const NEVER = 'never';
 export const ON_LABEL = __( 'On', 'events-gutenberg' );
 export const AFTER_LABEL = __( 'After', 'events-gutenberg' );
 export const NEVER_LABEL = __( 'Never', 'events-gutenberg' );
+
+export const DATE = 'date';
+export const COUNT = 'count';
 
 //
 // ─── DAYS OF THE WEEK ───────────────────────────────────────────────────────────
@@ -119,6 +65,36 @@ export const THURSDAY_ABBR = __( 'T', 'events-gutenberg' );
 export const FRIDAY_ABBR = __( 'F', 'events-gutenberg' );
 export const SATURDAY_ABBR = __( 'S', 'events-gutenberg' );
 
+export const SUNDAY_CHECKED = 'sundayChecked';
+export const MONDAY_CHECKED = 'mondayChecked';
+export const TUESDAY_CHECKED = 'tuesdayChecked';
+export const WEDNESDAY_CHECKED = 'wednesdayChecked';
+export const THURSDAY_CHECKED = 'thursdayChecked';
+export const FRIDAY_CHECKED = 'fridayChecked';
+export const SATURDAY_CHECKED = 'saturdayChecked';
+
+export const DAYS_OF_THE_WEEK_MAPPING_TO_STATE = {
+	[ MONDAY ]: 1,
+	[ TUESDAY ]: 2,
+	[ WEDNESDAY ]: 3,
+	[ THURSDAY ]: 4,
+	[ FRIDAY ]: 5,
+	[ SATURDAY ]: 6,
+	[ SUNDAY ]: 7,
+};
+
+export const DAYS_OF_THE_WEEK_MAPPING_FROM_STATE = invert( DAYS_OF_THE_WEEK_MAPPING_TO_STATE );
+
+export const DAYS_OF_THE_WEEK_PROP_KEY_MAPPING_FROM_STATE = {
+	1: MONDAY_CHECKED,
+	2: TUESDAY_CHECKED,
+	3: WEDNESDAY_CHECKED,
+	4: THURSDAY_CHECKED,
+	5: FRIDAY_CHECKED,
+	6: SATURDAY_CHECKED,
+	7: SUNDAY_CHECKED,
+};
+
 //
 // ─── DAYS OF THE MONTH ──────────────────────────────────────────────────────────
 //
@@ -146,6 +122,8 @@ export const THIRD_LABEL = __( 'Third', 'events-gutenberg' );
 export const FOURTH_LABEL = __( 'Fourth', 'events-gutenberg' );
 export const FIFTH_LABEL = __( 'Fifth', 'events-gutenberg' );
 export const LAST_LABEL = __( 'Last', 'events-gutenberg' );
+
+export const WEEKS_OF_THE_MONTH = [ FIRST, SECOND, THIRD, FOURTH, FIFTH, LAST ];
 
 //
 // ─── MONTHS OF THE YEAR ─────────────────────────────────────────────────────────
@@ -189,6 +167,23 @@ export const SEPTEMBER_ABBR = __( 'Sep', 'events-gutenberg' );
 export const OCTOBER_ABBR = __( 'Oct', 'events-gutenberg' );
 export const NOVEMBER_ABBR = __( 'Nov', 'events-gutenberg' );
 export const DECEMBER_ABBR = __( 'Dec', 'events-gutenberg' );
+
+export const MONTHS_OF_THE_YEAR_MAPPING_TO_STATE = {
+	[ JANUARY ]: 1,
+	[ FEBRUARY ]: 2,
+	[ MARCH ]: 3,
+	[ APRIL ]: 4,
+	[ MAY ]: 5,
+	[ JUNE ]: 6,
+	[ JULY ]: 7,
+	[ AUGUST ]: 8,
+	[ SEPTEMBER ]: 9,
+	[ OCTOBER ]: 10,
+	[ NOVEMBER ]: 11,
+	[ DECEMBER ]: 12,
+};
+
+export const MONTHS_OF_THE_YEAR_MAPPING_FROM_STATE = invert( MONTHS_OF_THE_YEAR_MAPPING_TO_STATE );
 
 //
 // ─── RECURRING MULTI DAY ────────────────────────────────────────────────────────

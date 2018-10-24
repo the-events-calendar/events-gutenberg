@@ -1,87 +1,91 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { proptypes } from '@moderntribe/common/data/plugins';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 /**
  * Internal dependencies
  */
-import { CreatableSelect } from '@moderntribe/common/elements';
-import { constants, options } from '@moderntribe/events-pro/data/blocks/recurring';
-import './style.pcss';
+import FrequencySelect from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import {
+	actions as recurringActions,
+	constants as recurringConstants,
+	options as recurringOptions,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
+import { withStore } from '@moderntribe/common/hoc';
 
-const { DAILY, WEEKLY, MONTHLY, YEARLY } = constants;
+const { RECURRING, KEY_BETWEEN } = constants;
+const { DAILY, WEEKLY, MONTHLY, YEARLY } = recurringConstants;
 const {
 	DAILY_RECURRENCE_FREQUENCY_OPTIONS,
 	WEEKLY_RECURRENCE_FREQUENCY_OPTIONS,
 	MONTHLY_RECURRENCE_FREQUENCY_OPTIONS,
 	YEARLY_RECURRENCE_FREQUENCY_OPTIONS,
-} = options;
+} = recurringOptions;
 
-const FrequencySelect = ( {
-	className,
-	onFrequencyChange,
-	selected,
-} ) => {
-	// TODO: Update to use passed in options
-	const getFrequencyOptions = () => {
-		let frequencyOptions = [];
+const getFrequency = ( state, ownProps ) => {
+	const selectors = ownProps.blockType === RECURRING
+		? recurringSelectors
+		: exceptionSelectors;
+	const frequency = selectors.getBetween( state, ownProps );
 
-		switch ( selected.value ) {
-			case DAILY:
-				frequencyOptions = DAILY_RECURRENCE_FREQUENCY_OPTIONS;
-				break;
-			case WEEKLY:
-				frequencyOptions = WEEKLY_RECURRENCE_FREQUENCY_OPTIONS;
-				break;
-			case MONTHLY:
-				frequencyOptions = MONTHLY_RECURRENCE_FREQUENCY_OPTIONS;
-				break;
-			case YEARLY:
-				frequencyOptions = YEARLY_RECURRENCE_FREQUENCY_OPTIONS;
-				break;
-			default:
-				break;
-		}
-
-		return frequencyOptions;
+	return {
+		label: String( frequency ),
+		value: frequency,
 	};
-
-	const formatCreateLabel = ( inputValue ) => inputValue;
-
-	const isValidNewOption = ( inputValue, selectValue, selectOptions ) => {
-		const isNotDuplicated = ! selectOptions
-			.filter( ( option ) => option.label === inputValue )
-			.length;
-		const isNotEmpty = inputValue !== '';
-		const isNumber = ! isNaN( inputValue );
-		return isNotEmpty && isNotDuplicated && isNumber;
-	};
-
-	return (
-		<CreatableSelect
-			className={ classNames(
-				'tribe-editor__frequency-select',
-				className,
-			) }
-			backspaceRemovesValue={ false }
-			formatCreateLabel={ formatCreateLabel }
-			isValidNewOption={ isValidNewOption }
-			onChange={ onFrequencyChange }
-			options={ getFrequencyOptions() }
-			value={ selected }
-		/>
-	);
 };
 
-FrequencySelect.propTypes = {
-	className: PropTypes.string,
-	frequencyOptions: proptypes.ReactSelectOptions.isRequired,
-	onFrequencyChange: PropTypes.func,
-	selected: proptypes.ReactSelectOption.isRequired,
+const getOptions = ( ownProps ) => {
+	let options = [];
+
+	switch ( ownProps.selected.value ) {
+		case DAILY:
+			options = DAILY_RECURRENCE_FREQUENCY_OPTIONS;
+			break;
+		case WEEKLY:
+			options = WEEKLY_RECURRENCE_FREQUENCY_OPTIONS;
+			break;
+		case MONTHLY:
+			options = MONTHLY_RECURRENCE_FREQUENCY_OPTIONS;
+			break;
+		case YEARLY:
+			options = YEARLY_RECURRENCE_FREQUENCY_OPTIONS;
+			break;
+		default:
+			break;
+	}
+
+	return options;
 };
 
-export default FrequencySelect;
+const mapStateToProps = ( state, ownProps ) => ( {
+	frequency: getFrequency( state, ownProps ),
+	options: getOptions( ownProps ),
+} );
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const edit = ownProps.blockType === RECURRING
+		? recurringActions.editRule
+		: exceptionActions.editException;
+
+	return {
+		onChange: ( selectedOption ) => {
+			dispatch( edit(
+				ownProps.index,
+				{ [ KEY_BETWEEN ]: Number( selectedOption.value ) },
+			) );
+		},
+	};
+};
+
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps ),
+)( FrequencySelect );

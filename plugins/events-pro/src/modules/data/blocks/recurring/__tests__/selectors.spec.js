@@ -26,7 +26,7 @@ describe( 'RecurrenceSelectors', () => {
 	test( 'getRecurrence', () => {
 		expect( selectors.getRules( state ) ).toMatchSnapshot();
 	} );
-	test( 'getRuleTypeOption', () => {
-		expect( selectors.getRuleTypeOption( rule ) ).toMatchSnapshot();
+	test( 'getTypeOption', () => {
+		expect( selectors.getTypeOption( rule ) ).toMatchSnapshot();
 	} );
 } );

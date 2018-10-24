@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /**
  * External dependencies
  */
@@ -13,25 +14,33 @@ import {
 	OnDatePicker,
 	TypePicker,
 } from '@moderntribe/events-pro/elements';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const SingularField = ( { typeOption, onTypeChange } ) => {
+const SingularField = ( { typeOption, index, handleStartDate, start_date } ) => {
 	return (
 		<Fragment>
 			<TypePicker
 				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
-				onChange={ onTypeChange }
+				blockType={ constants.EXCEPTION }
+				index={ index }
 			/>
-			<OnDatePicker />
+			<OnDatePicker
+				index={ index }
+				onDateChange={ handleStartDate }
+				date={ start_date }
+			/>
 		</Fragment>
 	);
 };
 
 SingularField.propTypes = {
 	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
+	handleStartDate: PropTypes.func.isRequired,
+	start_date: PropTypes.string.isRequired,
 };
 
 export default SingularField;

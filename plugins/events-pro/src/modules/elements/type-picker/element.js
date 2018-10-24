@@ -1,74 +1,53 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { noop } from 'lodash';
-import { __ } from '@wordpress/i18n';
-import { proptypes } from '@moderntribe/common/data/plugins';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 /**
  * Internal dependencies
  */
-import FrequencySelect from './frequency-select/element';
-import { Select } from '@moderntribe/common/elements';
-import { LabeledRow } from '@moderntribe/events-pro/elements';
-import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
-import './style.pcss';
+import TypePicker from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import {
+	actions as recurringActions,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
+import { withStore } from '@moderntribe/common/hoc';
 
-const TypePicker = ( {
-	className,
-	onChange,
-	options,
-	selected,
-	rowLabel,
-} ) => {
-	const getLabel = () => (
-		selected && selected.value === constants.SINGLE
-			? __( 'A', 'events-gutenberg' )
-			: __( 'Every', 'events-gutenberg' )
-	);
+const { RECURRING, KEY_TYPE } = constants;
 
-	const getFrequencySelect = () => (
-		selected && selected.value !== constants.SINGLE &&
-			(
-				<FrequencySelect
-					className="tribe-editor__type-picker__frequency-select"
-					selected={ selected }
-				/>
-			)
-	);
-
-	return (
-		<LabeledRow
-			className={ classNames( 'tribe-editor__type-picker', className ) }
-			label={ rowLabel || getLabel() }
-		>
-			{ getFrequencySelect() }
-			<Select
-				className="tribe-editor__type-picker__type-select"
-				backspaceRemovesValue={ false }
-				value={ selected }
-				isSearchable={ false }
-				options={ options }
-				onChange={ onChange }
-			/>
-		</LabeledRow>
-	);
+const getSelected = ( state, ownProps ) => {
+	const selectors = ownProps.blockType === RECURRING
+		? recurringSelectors
+		: exceptionSelectors;
+	return selectors.getTypeOption( state, ownProps );
 };
 
-TypePicker.defaultProps = {
-	onChange: noop,
-	options: [],
+const mapStateToProps = ( state, ownProps ) => ( {
+	selected: getSelected( state, ownProps ),
+} );
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const edit = ownProps.blockType === RECURRING
+		? recurringActions.editRule
+		: exceptionActions.editException;
+
+	return {
+		onChange: ( selectedOption ) => (
+			dispatch( edit(
+				ownProps.index,
+				{ [ KEY_TYPE ]: selectedOption.value },
+			) )
+		),
+	};
 };
 
-TypePicker.propTypes = {
-	className: PropTypes.string,
-	onChange: PropTypes.func,
-	options: proptypes.ReactSelectOptions,
-	selected: proptypes.ReactSelectOption.isRequired,
-	rowLabel: PropTypes.string,
-};
-
-export default TypePicker;
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps ),
+)( TypePicker );

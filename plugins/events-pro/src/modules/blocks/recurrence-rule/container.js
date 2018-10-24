@@ -27,8 +27,7 @@ const mapDispatchToProps = dispatch => ( {
 	toggleRulePanelExpand: () => dispatch( ui.actions.toggleRulePanelExpand() ),
 	expandRulePanel: () => dispatch( ui.actions.expandRulePanel() ),
 	addField: () => dispatch( recurring.actions.addField() ),
-	removeRule: ( id ) => dispatch( recurring.actions.removeRule( id ) ),
-	editRule: ( ...args ) => dispatch( recurring.actions.editRule( ...args ) ),
+	removeRule: ( index ) => dispatch( recurring.actions.removeRule( index ) ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {

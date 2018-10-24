@@ -4,7 +4,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
-import TypePicker from '../element';
+import TypePicker from '../template';
 
 describe( 'TypePicker', () => {
 	test( 'should render component', () => {

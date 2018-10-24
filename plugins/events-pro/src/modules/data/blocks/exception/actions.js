@@ -31,3 +31,10 @@ export const editException = curry( ( index, payload ) => ( {
 	index,
 	payload,
 } ) );
+
+export const syncException = curry( ( index, payload ) => ( {
+	type: types.EDIT_EXCEPTION,
+	index,
+	payload,
+	sync: true,
+} ) );

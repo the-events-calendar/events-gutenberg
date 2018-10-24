@@ -21,6 +21,9 @@ describe( 'recurring sagas', () => {
 			expect( gen.next().value ).toEqual(
 				takeEvery( [ recurring.types.ADD_RULE_FIELD ], sagas.handleRuleAddition )
 			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( [ recurring.types.EDIT_RULE ], sagas.handleRuleEdit )
+			);
 			expect( gen.next().done ).toEqual( true );
 		} );
 	} );
@@ -47,7 +50,19 @@ describe( 'recurring sagas', () => {
 		it( 'should add rule to store', () => {
 			const gen = sagas.handleRuleAddition();
 			expect( gen.next().value ).toEqual(
-				select( datetime.datetimeSelector )
+				select( datetime.getStart )
+			);
+			expect( gen.next().value ).toEqual(
+				select( datetime.getEnd )
+			);
+			expect( gen.next().value ).toEqual(
+				select( datetime.getAllDay )
+			);
+			expect( gen.next().value ).toEqual(
+				select( datetime.getMultiDay )
+			);
+			expect( gen.next().value ).toEqual(
+				select( datetime.getTimeZone )
 			);
 			const payload = { start: 'start' };
 			expect( gen.next( payload ).value ).toEqual(

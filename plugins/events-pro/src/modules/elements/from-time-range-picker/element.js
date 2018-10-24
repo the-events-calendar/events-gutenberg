@@ -1,77 +1,116 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { __ } from '@wordpress/i18n';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 /**
  * Internal dependencies
  */
-import { TimePicker } from '@moderntribe/common/elements';
+import FromTimeRangePicker from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import {
-	LabeledRow,
-	MultiDayCheckbox,
-} from '@moderntribe/events-pro/elements';
-import { TribePropTypes } from '@moderntribe/common/utils';
-import './style.pcss';
+	actions as recurringActions,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
+import { withStore } from '@moderntribe/common/hoc';
+import { time as timeUtil } from '@moderntribe/common/utils';
 
-const FromTimeRangePicker = ( {
-	className,
-	endTime,
-	isMultiDay,
-	onEndTimeChange,
-	onEndTimeClick,
-	onMultiDayChange,
-	onStartTimeChange,
-	onStartTimeClick,
-	startTime,
-} ) => (
-	<LabeledRow
-		className={ classNames(
-			'tribe-editor__from-time-range-picker',
-			{ 'tribe-editor__from-time-range-picker--multi-day': isMultiDay },
-			className
-		) }
-		label={ __( 'From', 'events-gutenberg' ) }
-	>
-		<TimePicker
-			current={ startTime }
-			// TODO: logic to handle start and end times
-			start="00:00"
-			end="23:59"
-			onChange={ onStartTimeChange }
-			onClick={ onStartTimeClick }
-			// TODO: Add onChange handler
-		/>
-		<span>{ __( 'to', 'events-gutenberg' ) }</span>
-		<TimePicker
-			current={ endTime }
-			// TODO: logic to handle start and end times
-			start="00:00"
-			end="23:59"
-			onChange={ onEndTimeChange }
-			onClick={ onEndTimeClick }
-			disabled={ isMultiDay }
-			// TODO: Add onChange handler
-		/>
-		<MultiDayCheckbox
-			className="tribe-editor__from-time-range-picker__multi-day-checkbox"
-			checked={ isMultiDay }
-			onChange={ onMultiDayChange }
-		/>
-	</LabeledRow>
-);
+const { TIME_FORMAT_HH_MM, toSeconds, fromSeconds } = timeUtil;
+const { KEY_END_TIME, KEY_MULTI_DAY, KEY_START_TIME } = constants;
 
-FromTimeRangePicker.propTypes = {
-	className: PropTypes.string,
-	endTime: TribePropTypes.timeFormat,
-	onEndTimeChange: PropTypes.func,
-	onEndTimeClick: PropTypes.func,
-	onStartTimeChange: PropTypes.func,
-	onStartTimeClick: PropTypes.func,
-	startTime: TribePropTypes.timeFormat,
+const onEndTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
+	const seconds = toSeconds( e.target.value, TIME_FORMAT_HH_MM );
+	const min = toSeconds( stateProps.startTime, TIME_FORMAT_HH_MM );
+
+	if (
+		stateProps.isMultiDay ||
+		( ! stateProps.isMultiDay && seconds > min )
+	) {
+		dispatchProps.editRule(
+			ownProps.index,
+			{ [ KEY_END_TIME ]: e.target.value },
+		);
+	}
 };
 
-export default FromTimeRangePicker;
+const onStartTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
+	const seconds = toSeconds( e.target.value, TIME_FORMAT_HH_MM );
+	const max = toSeconds( stateProps.endTime, TIME_FORMAT_HH_MM );
+
+	if (
+		stateProps.isMultiDay ||
+		( ! stateProps.isMultiDay && seconds < max )
+	) {
+		dispatchProps.editRule(
+			ownProps.index,
+			{ [ KEY_START_TIME ]: e.target.value },
+		);
+	}
+};
+
+const onMultiDayChange = ( dispatchProps, ownProps ) => ( e ) => {
+	dispatchProps.editRule(
+		ownProps.index,
+		{ [ KEY_MULTI_DAY ]: !! e.target.value },
+	);
+};
+
+const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
+	dispatchProps.editRule(
+		ownProps.index,
+		{ [ KEY_END_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) },
+	);
+	onClose();
+};
+
+const onStartTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
+	dispatchProps.editRule(
+		ownProps.index,
+		{ [ KEY_START_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) },
+	);
+	onClose();
+};
+
+const mapStateToProps = ( state, ownProps ) => {
+	const selectors = ownProps.blockType === constants.RECURRING
+		? recurringSelectors
+		: exceptionSelectors;
+
+	return {
+		endTime: selectors.getEndTimeNoSeconds( state, ownProps ),
+		isAllDay: selectors.getAllDay( state, ownProps ),
+		isMultiDay: selectors.getMultiDay( state, ownProps ),
+		startTime: selectors.getStartTimeNoSeconds( state, ownProps ),
+	};
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const action = ownProps.blockType === constants.RECURRING
+		? recurringActions
+		: exceptionActions;
+
+	return {
+		editRule: ( index, payload ) => dispatch( action.editRule( index, payload ) ),
+	};
+};
+
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
+	...ownProps,
+	...dispatchProps,
+	...stateProps,
+	onEndTimeChange: onEndTimeChange( stateProps, dispatchProps, ownProps ),
+	onStartTimeChange: onStartTimeChange( stateProps, dispatchProps, ownProps ),
+	onMultiDayChange: onMultiDayChange( dispatchProps, ownProps ),
+	onEndTimeClick: onEndTimeClick( dispatchProps, ownProps ),
+	onStartTimeClick: onStartTimeClick( dispatchProps, ownProps ),
+} );
+
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
+)( FromTimeRangePicker );

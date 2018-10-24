@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { includes } from 'lodash';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -21,9 +22,7 @@ const DayOfMonthPicker = ( {
 	weekDay,
 } ) => {
 	const getWeekDaySelect = () => {
-		const inWeekOfTheMonth = ! ! options.WEEKS_OF_THE_MONTH_OPTIONS.filter(
-			( option ) => dayOfMonth && option.value === dayOfMonth.value
-		).length;
+		const inWeekOfTheMonth = includes( options.WEEKS_OF_THE_MONTH_OPTIONS, dayOfMonth );
 
 		return inWeekOfTheMonth && (
 			<Select
@@ -31,7 +30,7 @@ const DayOfMonthPicker = ( {
 				backspaceRemovesValue={ false }
 				value={ weekDay }
 				isSearchable={ false }
-				options={ options.DAYS_OF_THE_WEEK }
+				options={ options.DAYS_OF_THE_WEEK_OPTIONS }
 				onChange={ onWeekDayChange }
 			/>
 		);
@@ -62,7 +61,7 @@ DayOfMonthPicker.propTypes = {
 	dayOfMonth: PropTypes.oneOf( options.MONTH_DAYS_OPTIONS ),
 	onWeekDayChange: PropTypes.func,
 	onDayOfMonthChange: PropTypes.func,
-	weekDay: PropTypes.oneOf( options.DAYS_OF_THE_WEEK ),
+	weekDay: PropTypes.oneOf( options.DAYS_OF_THE_WEEK_OPTIONS ),
 };
 
 export default DayOfMonthPicker;

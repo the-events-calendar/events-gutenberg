@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
  */
 import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
 import { selectors } from '@moderntribe/events-pro/data/blocks/exception';
+import { constants as keys } from '@moderntribe/events-pro/data/blocks';
+import { moment as momentUtils } from '@moderntribe/common/utils';
 import { Fieldset } from '@moderntribe/events-pro/elements';
 import RemoveField from '@moderntribe/events-pro/elements/remove-field/element';
 import Singular from './singular';
@@ -21,16 +23,25 @@ export default class ExceptionField extends PureComponent {
 	static propTypes = {
 		onRemoveClick: PropTypes.func.isRequired,
 		editException: PropTypes.func.isRequired,
-		id: PropTypes.string.isRequired,
 		index: PropTypes.number.isRequired,
 		type: PropTypes.string.isRequired,
 	}
 
 	handleRemove = () => this.props.onRemoveClick( this.props.index )
-	handleTypeChange = ( option ) => this.props.editException( this.props.index, { type: option.value } )
+	handleStartDate = ( value ) => this.props.editException( this.props.index, {
+		[ keys.KEY_START_DATE ]: value,
+	} )
+
+	handleLimitType = option => this.props.editException( this.props.index, {
+		[ keys.KEY_LIMIT_TYPE ]: option.value,
+	} )
 
 	get typeOption() {
-		return selectors.getExceptionTypeOption( this.props );
+		return selectors.getTypeOption( this.props );
+	}
+
+	get limitTypeOption() {
+		return selectors.getLimitTypeOption( this.props );
 	}
 
 	renderFieldType = () => {
@@ -39,40 +50,33 @@ export default class ExceptionField extends PureComponent {
 				return (
 					<Daily
 						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
+						handleStartDate={ this.handleStartDate }
+						handleLimitType={ this.handleLimitType }
 					/>
 				);
 			case constants.WEEKLY:
 				return (
 					<Weekly
 						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
 					/>
 				);
 			case constants.MONTHLY:
 				return (
 					<Monthly
 						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
 					/>
 				);
 			case constants.YEARLY:
 				return (
 					<Yearly
 						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
 					/>
 				);
 			default:
 				return (
 					<Singular
 						{ ...this.props }
-						typeOption={ this.typeOption }
-						onTypeChange={ this.handleTypeChange }
+						handleStartDate={ this.handleStartDate }
 					/>
 				);
 		}

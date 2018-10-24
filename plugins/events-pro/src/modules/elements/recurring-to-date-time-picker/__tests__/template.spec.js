@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import RecurringToDateTimePicker from '../element';
+import RecurringToDateTimePicker from '../template';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
 describe( 'RecurringToDateTimePicker', () => {

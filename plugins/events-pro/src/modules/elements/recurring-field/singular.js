@@ -3,7 +3,6 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -14,27 +13,38 @@ import {
 	TypePicker,
 	SingleToDateTimePicker,
 } from '@moderntribe/events-pro/elements';
+import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
 
-const SingularField = ( { isMultiDay, typeOption, onTypeChange } ) => {
+const SingularField = ( { isMultiDay, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
+				blockType={ constants.RECURRING }
+				index={ index }
 				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
-				selected={ typeOption }
-				onChange={ onTypeChange }
 			/>
-			<OnDatePicker />
-			<FromTimeRangePicker />
-			{ isMultiDay && <SingleToDateTimePicker /> }
+			<OnDatePicker
+				blockType={ constants.RECURRING }
+				index={ index }
+			/>
+			<FromTimeRangePicker
+				blockType={ constants.RECURRING }
+				index={ index }
+			/>
+			{ isMultiDay && (
+				<SingleToDateTimePicker
+					blockType={ constants.RECURRING }
+					index={ index }
+				/>
+			) }
 		</Fragment>
 	);
 };
 
 SingularField.propTypes = {
 	isMultiDay: PropTypes.bool.isRequired,
-	typeOption: proptypes.ReactSelectOption,
-	onTypeChange: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
 };
 
 export default SingularField;

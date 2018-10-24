@@ -74,7 +74,7 @@ class MonthPicker extends PureComponent {
 					<MonthTag
 						key={ month.value }
 						className="tribe-editor__month-picker__month-tag"
-						onClick={ onMonthClick }
+						onClick={ onMonthClick( month.value ) }
 					>
 						{ month.tag }
 					</MonthTag>

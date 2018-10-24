@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import moment from 'moment';
-
-/**
  * Internal dependencies
  */
 import { actions } from '@moderntribe/events-pro/data/ui';

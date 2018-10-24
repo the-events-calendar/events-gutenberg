@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import FromDateTimePicker from '../element';
+import FromDateTimePicker from '../template';
 
 describe( 'FromDateTimePicker', () => {
 	test( 'should render component', () => {

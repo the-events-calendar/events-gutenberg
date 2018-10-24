@@ -1,78 +1,75 @@
 /**
  * External dependencies
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { formatDate, parseDate } from 'react-day-picker/moment';
-import { __ } from '@wordpress/i18n';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 /**
  * Internal dependencies
  */
-import { TimePicker, DayPickerInput } from '@moderntribe/common/elements';
-import { LabeledRow } from '@moderntribe/events-pro/elements';
-import { TribePropTypes } from '@moderntribe/common/utils';
-import './style.pcss';
+import SingleToDateTimePicker from './template';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import {
+	actions as recurringActions,
+	selectors as recurringSelectors,
+} from '@moderntribe/events-pro/data/blocks/recurring';
+import {
+	actions as exceptionActions,
+	selectors as exceptionSelectors,
+} from '@moderntribe/events-pro/data/blocks/exception';
+import {
+	date as dateUtil,
+	moment as momentUtil,
+} from '@moderntribe/common/utils';
+import { withStore } from '@moderntribe/common/hoc';
 
-const SingleToDateTimePicker = ( {
-	className,
-	endDate,
-	endDateFormat,
-	endTime,
-	onEndDateChange,
-	onEndTimeChange,
-	onEndTimeClick,
-} ) => {
-	const endDateObj = new Date( endDate );
+const {
+	RECURRING,
+	KEY_END_DATE,
+	KEY_END_TIME,
+} = constants;
 
-	return (
-		<LabeledRow
-			className={ classNames(
-				'tribe-editor__single-to-date-time-picker',
-				className,
-			) }
-			label={ __( 'To', 'events-gutenberg' ) }
-		>
-			<TimePicker
-				current={ endTime }
-				// TODO: logic to handle start and end times
-				start="00:00"
-				end="23:59"
-				onChange={ onEndTimeChange }
-				onClick={ onEndTimeClick }
-				// TODO: Add onChange handler
-			/>
-			<span>{ __( 'on', 'events-gutenberg' ) }</span>
-			<DayPickerInput
-				value={ endDate }
-				format={ endDateFormat }
-				formatDate={ formatDate }
-				parseDate={ parseDate }
-				dayPickerProps={ {
-					modifiers: {
-						start: endDateObj,
-						end: endDateObj,
-					},
-				} }
-				onDayChange={ onEndDateChange }
-			/>
-		</LabeledRow>
-	);
+const onEndDateChange = ( ownProps, edit ) => ( date ) => {
+	const endDate = date
+		? momentUtil.toDate( momentUtil.toMoment( date ), dateUtil.FORMATS.DATABASE.datetime )
+		: '';
+	edit( ownProps.index, { [ KEY_END_DATE ]: endDate } );
 };
 
-SingleToDateTimePicker.propTypes = {
-	className: PropTypes.string,
-	endDate: PropTypes.string,
-	endDateFormat: PropTypes.string,
-	endTime: TribePropTypes.timeFormat,
-	onEndDateChange: PropTypes.func,
-	onEndTimeChange: PropTypes.func,
-	onEndTimeClick: PropTypes.func,
+const onEndTimeChange = ( ownProps, edit ) => ( e ) => (
+	edit( ownProps.index, { [ KEY_END_TIME ]: e.target.value } )
+);
+
+const onEndTimeClick = ( ownProps, edit ) => ( value, onClose ) => {
+	edit( ownProps.index, { [ KEY_END_TIME ]: value } );
+	onClose();
 };
 
-SingleToDateTimePicker.defaultProps = {
-	endDateFormat: 'LL',
+const mapStateToProps = ( state, ownProps ) => {
+	const selectors = ownProps.blockType === RECURRING
+		? recurringSelectors
+		: exceptionSelectors;
+
+	return {
+		endDate: selectors.getEndDate( state, ownProps ),
+		endTime: selectors.getEndTime( state, ownProps ),
+	};
 };
 
-export default SingleToDateTimePicker;
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const editAction = ownProps.blockType === RECURRING
+		? recurringActions.editRule
+		: exceptionActions.editException;
+	const edit = ( index, payload ) => dispatch( editAction( index, payload ) );
+
+	return {
+		onEndDateChange: onEndDateChange( ownProps, edit ),
+		onEndTimeChange: onEndTimeChange( ownProps, edit ),
+		onEndTimeClick: onEndTimeClick( ownProps, edit ),
+	};
+};
+
+export default compose(
+	withStore(),
+	connect( mapStateToProps, mapDispatchToProps ),
+)( SingleToDateTimePicker );

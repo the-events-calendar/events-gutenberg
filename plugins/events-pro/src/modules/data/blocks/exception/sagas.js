@@ -1,33 +1,72 @@
 /**
  * External dependencies
  */
-import { takeEvery, put, select } from 'redux-saga/effects';
+import { takeEvery, put, select, call } from 'redux-saga/effects';
+import { keys } from 'lodash';
 
 /**
  * Internal dependencies
  */
-import * as exception from '@moderntribe/events-pro/data/blocks/exception';
-import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
+import { constants } from '@moderntribe/events-pro/data/blocks';
+import * as actions from './actions';
+import * as selectors from './selectors';
+import * as types from './types';
+import * as sagas from '@moderntribe/events-pro/data/shared/sagas';
 import * as ui from '@moderntribe/events-pro/data/ui';
-import { selectors as datetime } from '@moderntribe/events/data/blocks/datetime';
+
+const sagaArgs = {
+	actions: {
+		add: actions.addException,
+		sync: actions.syncException,
+	},
+	selectors,
+};
 
 export function* handleExceptionRemoval() {
-	const exceptions = yield select( exception.selectors.getExceptions );
+	const exceptions = yield select( selectors.getExceptions );
 
 	if ( ! exceptions.length ) {
 		yield put( ui.actions.hideExceptionPanel() );
 	}
 }
 
-export function* handleExceptionAddition() {
-	const payload = yield select( datetime.datetimeSelector );
-	yield put( exception.actions.addException( {
-		type: recurring.constants.SINGLE,
-		...payload,
-	} ) );
+export function* handleExceptionEdit( action ) {
+	// Prevent rule syncs from looping
+	if ( action.sync ) {
+		return;
+	}
+
+	const fieldKeys = yield call( keys, action.payload );
+
+	for ( let i = 0; i < fieldKeys.length; i++ ) {
+		const fieldKey = fieldKeys[ i ];
+
+		switch ( fieldKey ) {
+			case constants.KEY_START_TIME:
+			case constants.KEY_END_TIME:
+				yield call( sagas.handleTimeChange, sagaArgs, action, fieldKey );
+				break;
+
+			case constants.KEY_MULTI_DAY:
+				yield call( sagas.handleMultiDayChange, sagaArgs, action, fieldKey );
+				break;
+
+			case constants.KEY_WEEK:
+				yield call( sagas.handleWeekChange, sagaArgs, action, fieldKey );
+				break;
+
+			case constants.KEY_LIMIT_TYPE:
+				yield call( sagas.handleLimitTypeChange, sagaArgs, action, fieldKey );
+				break;
+
+			default:
+				break;
+		}
+	}
 }
 
 export default function* watchers() {
-	yield takeEvery( [ exception.types.REMOVE_EXCEPTION ], handleExceptionRemoval );
-	yield takeEvery( [ exception.types.ADD_EXCEPTION_FIELD ], handleExceptionAddition );
+	yield takeEvery( [ types.REMOVE_EXCEPTION ], handleExceptionRemoval );
+	yield takeEvery( [ types.ADD_EXCEPTION_FIELD ], sagas.handleAddition, sagaArgs );
+	yield takeEvery( [ types.EDIT_EXCEPTION ], handleExceptionEdit );
 }

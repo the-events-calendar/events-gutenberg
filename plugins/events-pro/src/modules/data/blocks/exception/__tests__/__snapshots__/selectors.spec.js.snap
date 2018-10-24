@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Exception Selectors getExceptionTypeOption 1`] = `
-Object {
-  "label": "Single Exception",
-  "value": "single",
-}
-`;
-
 exports[`Exception Selectors getExceptions 1`] = `
 Array [
   Object {
     "type": "single",
   },
 ]
+`;
+
+exports[`Exception Selectors getTypeOption 1`] = `
+Object {
+  "label": "Single Exception",
+  "value": "single",
+}
 `;
