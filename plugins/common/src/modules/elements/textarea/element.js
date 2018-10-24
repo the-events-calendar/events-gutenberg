@@ -15,7 +15,6 @@ const Textarea = ( { className, ...rest } ) => (
 
 Textarea.propTypes = {
 	className: PropTypes.string,
-	type: PropTypes.string.isRequired,
 };
 
 export default Textarea;
