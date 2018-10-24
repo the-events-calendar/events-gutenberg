@@ -34,7 +34,6 @@ const DailyField = ( { index } ) => {
 
 DailyField.propTypes = {
 	index: PropTypes.number.isRequired,
-	isMultiDay: PropTypes.bool.isRequired,
 };
 
 export default DailyField;

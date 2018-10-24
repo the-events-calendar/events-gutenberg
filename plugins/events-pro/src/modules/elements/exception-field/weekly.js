@@ -17,7 +17,7 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const WeeklyField = ( { isMultiDay, typeOption, index } ) => {
+const WeeklyField = ( { typeOption, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
@@ -27,7 +27,10 @@ const WeeklyField = ( { isMultiDay, typeOption, index } ) => {
 				blockType={ constants.EXCEPTION }
 				index={ index }
 			/>
-			<OnDayOfWeek index={ index } />
+			<OnDayOfWeek
+				index={ index }
+				blockType={ constants.EXCEPTION }
+			/>
 			<SeriesEnds
 				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
 				index={ index }
@@ -38,7 +41,6 @@ const WeeklyField = ( { isMultiDay, typeOption, index } ) => {
 };
 
 WeeklyField.propTypes = {
-	isMultiDay: PropTypes.bool.isRequired,
 	typeOption: proptypes.ReactSelectOption,
 	index: PropTypes.number.isRequired,
 };
