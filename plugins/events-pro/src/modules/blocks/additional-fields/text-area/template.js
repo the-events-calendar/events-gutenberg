@@ -8,7 +8,10 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import { Field } from '@moderntribe/events-pro/blocks/additional-fields/elements';
-import { Paragraph } from '@moderntribe/common/elements';
+import {
+	Paragraph,
+	Textarea,
+} from '@moderntribe/common/elements';
 
 const TextAreaField = ( { name, value, onInputChange, output, isSelected } ) => {
 	const paragraphs = output.map( ( paragraph, index ) => (
@@ -17,12 +20,12 @@ const TextAreaField = ( { name, value, onInputChange, output, isSelected } ) => 
 	return (
 		<Field
 			id={ name }
-			input={ <textarea rows="5" wrap="hard" value={ value } onChange={ onInputChange } /> }
+			input={ <Textarea rows="5" wrap="hard" value={ value } onChange={ onInputChange } /> }
 			output={ paragraphs }
 			isSelected={ isSelected }
 		/>
 	);
-}
+};
 
 TextAreaField.propTypes = {
 	name: PropTypes.string.isRequired,
