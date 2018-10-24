@@ -40,9 +40,9 @@ export function* handleAddition( { actions } ) {
 	const endMoment = momentUtil.toMoment( end );
 
 	const startDate = momentUtil.toDate( startMoment );
-	const startTime = momentUtil.toTime24Hr( startMoment );
+	const startTime = momentUtil.toTimeDatabase( startMoment );
 	const endDate = momentUtil.toDate( endMoment );
-	const endTime = momentUtil.toTime24Hr( endMoment );
+	const endTime = momentUtil.toTimeDatabase( endMoment );
 
 	yield put( actions.add( {
 		[ KEY_TYPE ]: recurringConstants.SINGLE,
@@ -79,7 +79,7 @@ export function* handleTimeChange( { actions }, action, key ) {
 		yield put(
 			actions.sync( action.index, {
 				[ KEY_ALL_DAY ]: isAllDay,
-				[ key ]: time.fromSeconds( payloadTime, time.TIME_FORMAT_HH_MM ),
+				[ key ]: `${ payloadTime }:00`,
 			} )
 		);
 	}

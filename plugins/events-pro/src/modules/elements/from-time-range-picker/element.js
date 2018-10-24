@@ -82,10 +82,10 @@ const mapStateToProps = ( state, ownProps ) => {
 		: exceptionSelectors;
 
 	return {
-		endTime: selectors.getEndTime( state, ownProps ),
+		endTime: selectors.getEndTimeNoSeconds( state, ownProps ),
 		isAllDay: selectors.getAllDay( state, ownProps ),
 		isMultiDay: selectors.getMultiDay( state, ownProps ),
-		startTime: selectors.getStartTime( state, ownProps ),
+		startTime: selectors.getStartTimeNoSeconds( state, ownProps ),
 	};
 };
 
