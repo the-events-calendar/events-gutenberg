@@ -98,7 +98,7 @@ export const fieldToBlock = ( field ) => {
 				default: values,
 			},
 			value: {
-				type: schema.type,
+				type: 'string',
 				source: 'meta',
 				meta: name,
 			},
