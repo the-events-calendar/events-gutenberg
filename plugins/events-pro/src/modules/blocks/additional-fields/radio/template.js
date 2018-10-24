@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -9,26 +9,24 @@ import PropTypes from 'prop-types';
  */
 import { normalize } from '@moderntribe/common/utils/string';
 import { Field } from '@moderntribe/events-pro/blocks/additional-fields/elements';
+import { Radio } from '@moderntribe/common/elements';
+import './style.pcss';
 
 const RadioInput = ( { options, onChange, selectedValue } ) => (
 	<fieldset className="tribe-editor__additional-fields__edit--horizontal-fields">
 		{ options.map( ( option, index ) => {
 			const { label = '', value = '' } = option;
-			const name = normalize( label );
-			const id = `name-${ index + 1 }`;
 			const isChecked = value === selectedValue;
 			return (
-				<Fragment key={ id }>
-					<input
-						type="radio"
-						id={ id }
-						name={ name }
-						value={ value }
-						checked={ isChecked }
-						onChange={ onChange }
-					/>
-					<label htmlFor={ id }>{ label }</label>
-				</Fragment>
+				<Radio
+					checked={ isChecked }
+					id={ `name-${ index + 1 }` }
+					value={ value }
+					onChange={ onChange }
+					name={ normalize( label ) }
+					label={ label }
+					className={ 'tribe-editor__additional-fields__field--radio' }
+				/>
 			);
 		} ) }
 	</fieldset>
