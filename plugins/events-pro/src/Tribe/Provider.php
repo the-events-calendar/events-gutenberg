@@ -20,6 +20,8 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 			'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' )
 		);
 
+		$this->container->singleton( 'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Meta' );
+
 		$this->hook();
 
 	}
@@ -35,6 +37,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 	protected function hook() {
 		// Initialize the correct Singletons
 		tribe( 'gutenberg.events-pro.assets' );
+		add_action( 'init', tribe_callback( 'gutenberg.events-pro.meta', 'register' ), 15 );
 	}
 
 	/**
