@@ -61,7 +61,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 			const { checked, value } = e.target;
 			const mappedValue = DAYS_OF_THE_WEEK_MAPPING_TO_STATE[ value ];
 			const newDays = checked
-				? [ ...days, mappedValue ].sort()
+				? [ ...days, mappedValue ].sort( ( a, b ) => a - b )
 				: days.filter( ( day ) => day !== mappedValue );
 
 			edit( ownProps.index, { [ constants.KEY_DAYS ]: newDays } );
