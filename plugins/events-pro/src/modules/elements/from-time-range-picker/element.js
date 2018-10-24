@@ -56,7 +56,7 @@ const onStartTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
 const onMultiDayChange = ( dispatchProps, ownProps ) => ( e ) => {
 	dispatchProps.editRule(
 		ownProps.index,
-		{ [ KEY_MULTI_DAY ]: !! e.target.value },
+		{ [ KEY_MULTI_DAY ]: e.target.checked },
 	);
 };
 
