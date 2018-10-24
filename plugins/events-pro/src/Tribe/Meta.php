@@ -35,12 +35,10 @@ class Tribe__Gutenberg__Events_Pro__Meta extends Tribe__Gutenberg__Common__Meta 
 						break;
 				}
 				register_meta( 'post', $field['name'], $args );
-				/**
-				 * if ( $is_checkbox ) {
-				 * @todo handle the case when there's an array specifically for checkboxes
-				 * that includes an extra dash on the name '_'-
-				 * }
-				 */
+				
+				if ( 'checkbox' === $field['type'] ) {
+					register_meta( 'post', '_' . $field['name'], $this->text_array() );
+				}
 			}
 		}
 	}
