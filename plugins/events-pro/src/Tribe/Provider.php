@@ -20,7 +20,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 			'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' )
 		);
 
-		$this->container->singleton( 'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Meta' );
+		$this->container->singleton( 'gutenberg.events-pro.meta', 'Tribe__Gutenberg__Events_Pro__Meta' );
 
 		$this->hook();
 
