@@ -5,28 +5,40 @@ import { types } from '@moderntribe/events-pro/data/blocks/additional-fields';
 
 export const DEFAULT_STATE = {
 	isPristine: true,
-	value: '',
-	type: '',
+	value: null,
+	type: null,
 	options: [],
-	dividerList: '',
-	dividerEnd: '',
-	name: '',
+	dividerList: ', ',
+	dividerEnd: ' & ',
+	label: '',
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
 	const { payload = {} } = action;
 	switch ( action.type ) {
-		case types.ADD_ADDITIONAL_FIELD:
-		case types.SET_ADDITIONAL_FIELD_NAME:
+		case types.SET_ADDITIONAL_FIELD_LABEL:
 			return {
 				...state,
-				name: payload.name,
+				label: payload.label,
 			};
 		case types.SET_ADDITIONAL_FIELD_VALUE:
 			return {
 				...state,
 				value: payload.value,
 			};
+		case types.APPEND_ADDITIONAL_FIELD_VALUE:
+			return {
+				...state,
+				value: [
+					...state.value,
+					payload.value,
+				],
+			};
+		case types.REMOVE_ADDITIONAL_FIELD_VALUE:
+			return {
+				...state,
+				value: state.value.filter( ( fieldValue ) => fieldValue !== payload.value ),
+			}
 		case types.SET_ADDITIONAL_FIELD_TYPE:
 			return {
 				...state,

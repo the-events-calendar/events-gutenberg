@@ -16,13 +16,13 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { Settings } from '../elements';
+import { Settings } from '@moderntribe/events-pro/blocks/additional-fields/elements';
 import './style.pcss';
 
 const CheckboxSettings = ( props ) => {
 
 	const {
-		name,
+		label,
 		listDividerOnChange,
 		listDividerValue,
 		listEnderOnChange,
@@ -47,12 +47,13 @@ const CheckboxSettings = ( props ) => {
 	);
 
 	return (
-		<Settings name={ name } after={ <After /> } />
+		<Settings name={ label } after={ <After /> } />
 	);
 };
 
 CheckboxSettings.propTypes = {
-	name: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
+	label: PropTypes.string,
 	listDividerValue: PropTypes.string,
 	listDividerOnChange: PropTypes.func,
 	listEnderValue: PropTypes.string,

@@ -10,21 +10,29 @@ import PropTypes from 'prop-types';
 import { Field } from '@moderntribe/events-pro/blocks/additional-fields/elements';
 import { Select } from '@moderntribe/common/elements';
 
-const DropdownField = ( { name, value, options, onInputChange, ...rest } ) => (
+const DropdownField = ( { name, value, options, onInputChange, isSelected, output } ) => (
 	<Field
-		name={ name }
-		input={ <Select options={ options } value={ value } onChange={ onInputChange } /> }
-		output={ value }
-		{ ...rest }
+		id={ name }
+		input={ (
+			<Select
+				options={ options }
+				value={ value }
+				onChange={ onInputChange }
+				isSearchable={ false }
+				backspaceRemovesValue={ false }
+			/>
+		) }
+		output={ output }
+		isSelected={ isSelected }
 	/>
 );
 
 DropdownField.propTypes = {
 	name: PropTypes.string.isRequired,
-	isPristine: PropTypes.bool,
 	isSelected: PropTypes.bool,
 	onInputChange: PropTypes.func,
-	value: PropTypes.string,
+	value: PropTypes.object,
+	output: PropTypes.string,
 	options: PropTypes.arrayOf(
 		PropTypes.shape( {
 			value: PropTypes.string,
@@ -34,16 +42,7 @@ DropdownField.propTypes = {
 };
 
 DropdownField.defaultProps = {
-	isPristine: true,
 	isSelected: false,
-	/**
-	 * @todo remove placeholder options with data from the store
-	 */
-	options: [
-		{ value: 'chocolate', label: 'Chocolate' },
-		{ value: 'strawberry', label: 'Strawberry' },
-		{ value: 'vanilla', label: 'Vanilla' },
-	],
 };
 
 export default DropdownField;

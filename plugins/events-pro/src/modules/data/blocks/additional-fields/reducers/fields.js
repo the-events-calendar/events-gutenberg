@@ -19,8 +19,10 @@ const fieldsById = ( state = {}, action ) => {
 		case types.SET_ADDITIONAL_FIELD_OPTIONS:
 		case types.SET_ADDITIONAL_FIELD_IS_PRISTINE:
 		case types.SET_ADDITIONAL_FIELD_DIVIDER_LIST:
-		case types.SET_ADDITIONAL_FIELD_NAME:
+		case types.SET_ADDITIONAL_FIELD_LABEL:
 		case types.SET_ADDITIONAL_FIELD_DIVIDER_END:
+		case types.APPEND_ADDITIONAL_FIELD_VALUE:
+		case types.REMOVE_ADDITIONAL_FIELD_VALUE:
 			return {
 				...state,
 				[ payload.name ]: field( state[ payload.name ], action ),
@@ -35,7 +37,6 @@ const fieldsById = ( state = {}, action ) => {
 const allFields = ( state = [], action ) => {
 	switch ( action.type ) {
 		case types.ADD_ADDITIONAL_FIELD:
-		case types.SET_ADDITIONAL_FIELD_NAME:
 			return [ ...state, action.payload.name ];
 		case types.REMOVE_ADDITIONAL_FIELD:
 			return state.filter( ( name ) => name !== action.payload.name );

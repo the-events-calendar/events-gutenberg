@@ -90,3 +90,20 @@ export const normalize = ( text = '' ) => {
 		.trim()
 		.replace( /\s+/g, '-' );
 };
+
+/**
+ * Remove invalid characters from a string that aren't consider as valid for a block name.
+ *
+ * @since TBD
+ *
+ * @param {string} text The text to be formatted as block name
+ * @returns {string} The formatted text
+ */
+export const toBlockName = ( text = '' ) => {
+	if ( ! isString( text ) ) {
+		return '';
+	}
+
+	// Remove any non numeric, a-z or - value
+	return text.replace(/[^a-zA-Z0-9-]/g, '' );
+}

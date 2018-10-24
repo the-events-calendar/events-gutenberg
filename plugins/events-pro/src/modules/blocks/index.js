@@ -6,12 +6,10 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal Dependencies
  */
-import additionalFields from '@moderntribe/events-pro/blocks/additional-fields';
 import { initStore } from '@moderntribe/events-pro/data';
+import { addAdditionalFields } from '@moderntribe/events-pro/blocks/additional-fields/utils';
 
-const blocks = [
-	additionalFields,
-];
+const blocks = addAdditionalFields( [] );
 
 blocks.forEach( block => {
 	const blockName = `tribe/${ block.id }`;

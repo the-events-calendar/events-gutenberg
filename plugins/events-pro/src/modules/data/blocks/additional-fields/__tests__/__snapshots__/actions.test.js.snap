@@ -3,18 +3,62 @@
 exports[`Actions in Additional Fields add field 1`] = `
 Object {
   "payload": Object {
-    "name": "Host",
+    "name": "_ecp_custom_23",
   },
   "type": "@@MT/EVENTS-PRO/ADD_ADDITIONAL_FIELD",
+}
+`;
+
+exports[`Actions in Additional Fields append field value 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+    "value": "Chocolate",
+  },
+  "type": "@@MT/EVENTS-PRO/APPEND_ADDITIONAL_FIELD_VALUE",
+}
+`;
+
+exports[`Actions in Additional Fields initial state 1`] = `
+Object {
+  "payload": Object {
+    "dividerEnd": " & ",
+    "dividerList": ", ",
+    "isPristine": true,
+    "label": "",
+    "options": Array [],
+    "type": null,
+    "value": null,
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_INITIAL_STATE",
+}
+`;
+
+exports[`Actions in Additional Fields on change 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_CHANGE",
 }
 `;
 
 exports[`Actions in Additional Fields remove field 1`] = `
 Object {
   "payload": Object {
-    "name": "Host",
+    "name": "_ecp_custom_23",
   },
   "type": "@@MT/EVENTS-PRO/REMOVE_ADDITIONAL_FIELD",
+}
+`;
+
+exports[`Actions in Additional Fields remove field value 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+    "value": "Chocolate",
+  },
+  "type": "@@MT/EVENTS-PRO/REMOVE_ADDITIONAL_FIELD_VALUE",
 }
 `;
 
@@ -22,6 +66,7 @@ exports[`Actions in Additional Fields set field divider end 1`] = `
 Object {
   "payload": Object {
     "dividerEnd": " & ",
+    "name": "_ecp_custom_23",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_DIVIDER_END",
 }
@@ -31,6 +76,7 @@ exports[`Actions in Additional Fields set field is pristine 1`] = `
 Object {
   "payload": Object {
     "isPristine": true,
+    "name": "_ecp_custom_23",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_IS_PRISTINE",
 }
@@ -40,6 +86,7 @@ exports[`Actions in Additional Fields set field is pristine 2`] = `
 Object {
   "payload": Object {
     "isPristine": false,
+    "name": "_ecp_custom_23",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_IS_PRISTINE",
 }
@@ -49,6 +96,7 @@ exports[`Actions in Additional Fields set field list divider 1`] = `
 Object {
   "payload": Object {
     "dividerList": ", ",
+    "name": "_ecp_custom_23",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_DIVIDER_LIST",
 }
@@ -57,15 +105,17 @@ Object {
 exports[`Actions in Additional Fields set field name 1`] = `
 Object {
   "payload": Object {
-    "name": "Host",
+    "label": "Host",
+    "name": "_ecp_custom_23",
   },
-  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_NAME",
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_LABEL",
 }
 `;
 
 exports[`Actions in Additional Fields set field options 1`] = `
 Object {
   "payload": Object {
+    "name": "_ecp_custom_23",
     "options": Array [
       "Option 1",
       "Option 2 ",
@@ -78,7 +128,8 @@ Object {
 exports[`Actions in Additional Fields set field type 1`] = `
 Object {
   "payload": Object {
-    "type": "CHECKBOX",
+    "name": "_ecp_custom_23",
+    "type": "checkbox",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_TYPE",
 }
@@ -87,6 +138,7 @@ Object {
 exports[`Actions in Additional Fields set field value 1`] = `
 Object {
   "payload": Object {
+    "name": "_ecp_custom_23",
     "value": "Rachel MA",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_VALUE",
