@@ -40,9 +40,9 @@ export function* handleAddition( { actions } ) {
 	const endMoment = momentUtil.toMoment( end );
 
 	const startDate = momentUtil.toDate( startMoment );
-	const startTime = momentUtil.toTimeDatabase( startMoment );
+	const startTime = momentUtil.toDatabaseTime( startMoment );
 	const endDate = momentUtil.toDate( endMoment );
-	const endTime = momentUtil.toTimeDatabase( endMoment );
+	const endTime = momentUtil.toDatabaseTime( endMoment );
 
 	yield put( actions.add( {
 		[ KEY_TYPE ]: recurringConstants.SINGLE,
