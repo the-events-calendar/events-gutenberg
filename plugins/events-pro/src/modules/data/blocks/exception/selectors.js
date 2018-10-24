@@ -107,11 +107,11 @@ export const getTimezone = createSelector(
 );
 
 export const getTypeOption = createSelector(
-	( exception ) => exception,
-	( exception ) => find( EXCEPTION_OCCURRENCE_OPTIONS, type => exception && type.value === exception.type )
+	[ getType ],
+	( type ) => find( EXCEPTION_OCCURRENCE_OPTIONS, ( option ) => option.value === type )
 );
 
 export const getLimitTypeOption = createSelector(
-	( exception ) => exception,
-	( exception ) => find( SERIES_ENDS_OPTIONS, option => exception && option.value === exception.limit_type )
+	[ getLimitType ],
+	( limitType ) => find( SERIES_ENDS_OPTIONS, ( option ) => option.value === limitType )
 );

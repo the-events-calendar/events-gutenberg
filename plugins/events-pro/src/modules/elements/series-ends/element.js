@@ -3,7 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { find } from 'lodash';
 import moment from 'moment/moment';
 
 /**
@@ -14,7 +13,6 @@ import { constants } from '@moderntribe/events-pro/data/blocks';
 import {
 	actions as recurringActions,
 	constants as recurringConstants,
-	options as recurringOptions,
 	selectors as recurringSelectors,
 } from '@moderntribe/events-pro/data/blocks/recurring';
 import {
@@ -37,7 +35,6 @@ const {
 const {
 	COUNT,
 	DATE,
-	LIMIT_TYPE_MAPPING_FROM_STATE,
 } = recurringConstants;
 
 const onSeriesEndsAfterTimesChange = ( ownProps, edit ) => ( e ) => {
@@ -62,12 +59,9 @@ const mapStateToProps = ( state, ownProps ) => {
 		: exceptionSelectors;
 	const limitType = selectors.getLimitType( state, ownProps );
 
-	const stateProps = {};
-
-	stateProps.seriesEnds = find(
-		recurringOptions.SERIES_ENDS_OPTIONS,
-		( option ) => option.value === limitType
-	);
+	const stateProps = {
+		seriesEnds: selectors.getLimitTypeOption( state, ownProps ),
+	};
 
 	if ( limitType === DATE ) {
 		stateProps.seriesEndsOnDate = selectors.getLimit( state, ownProps );
