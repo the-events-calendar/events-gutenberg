@@ -95,7 +95,7 @@ class Tribe__Gutenberg__Events__Meta {
 	 *
 	 * @return array
 	 */
-	private function text() {
+	public function text() {
 		return array(
 			'auth_callback' => array( $this, 'auth_callback' ),
 			'sanitize_callback' => 'sanitize_text_field',
@@ -112,7 +112,7 @@ class Tribe__Gutenberg__Events__Meta {
 	 *
 	 * @return array
 	 */
-	private function boolean() {
+	public function boolean() {
 		return array(
 			'auth_callback' => array( $this, 'auth_callback' ),
 			'sanitize_callback' => array( $this, 'sanitize_boolean' ),
@@ -129,7 +129,7 @@ class Tribe__Gutenberg__Events__Meta {
 	 *
 	 * @return array
 	 */
-	private function numeric_array() {
+	public function numeric_array() {
 		return array(
 			'description' => __( 'Array block', 'events-gutenberg' ),
 			'auth_callback' => array( $this, 'auth_callback' ),
