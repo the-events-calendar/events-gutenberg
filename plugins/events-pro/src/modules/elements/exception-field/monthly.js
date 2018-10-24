@@ -21,7 +21,7 @@ const MonthlyField = ( { typeOption, index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
-				rowLabel={ __( 'Excluding', 'events-gutenberg' ) }
+				rowLabel={ __( 'Every', 'events-gutenberg' ) }
 				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
 				selected={ typeOption }
 				blockType={ constants.EXCEPTION }

@@ -13,11 +13,12 @@ describe( 'RecurrenceSelectors', () => {
 	beforeEach( () => {
 		rule = {
 			type: 'single',
+			limit_type: 'date',
 		};
 		state = {
 			[ constants.EVENTS_PRO_PLUGIN ]: {
 				blocks: {
-					recurrence: [ rule ],
+					recurring: [ rule ],
 				},
 			},
 		};
@@ -27,6 +28,6 @@ describe( 'RecurrenceSelectors', () => {
 		expect( selectors.getRules( state ) ).toMatchSnapshot();
 	} );
 	test( 'getTypeOption', () => {
-		expect( selectors.getTypeOption( rule ) ).toMatchSnapshot();
+		expect( selectors.getTypeOption( state, { index: 0 } ) ).toMatchSnapshot();
 	} );
 } );
