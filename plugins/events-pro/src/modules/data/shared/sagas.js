@@ -18,7 +18,11 @@ const {
 	KEY_START_TIME,
 	KEY_END_TIME,
 	KEY_START_DATE,
+	KEY_START_DATE_INPUT,
+	KEY_START_DATE_OBJ,
 	KEY_END_DATE,
+	KEY_END_DATE_INPUT,
+	KEY_END_DATE_OBJ,
 	KEY_LIMIT,
 	KEY_LIMIT_TYPE,
 	KEY_BETWEEN,
@@ -29,6 +33,22 @@ const {
 	KEY_TIMEZONE,
 } = constants;
 
+const {
+	toMoment,
+	toDate,
+	toDatabaseDate,
+	toDatabaseTime,
+} = momentUtil;
+
+const {
+	HALF_HOUR_IN_SECONDS,
+	HOUR_IN_SECONDS,
+	DAY_IN_SECONDS,
+	TIME_FORMAT_HH_MM,
+	toSeconds,
+	fromSeconds,
+} = time;
+
 export function* handleAddition( { actions } ) {
 	const start = yield select( datetime.getStart );
 	const end = yield select( datetime.getEnd );
@@ -36,21 +56,30 @@ export function* handleAddition( { actions } ) {
 	const multiDay = yield select( datetime.getMultiDay );
 	const timezone = yield select( datetime.getTimeZone );
 
-	const startMoment = momentUtil.toMoment( start );
-	const endMoment = momentUtil.toMoment( end );
+	const startMoment = yield call( toMoment, start );
+	const endMoment = yield call( toMoment, end );
 
-	const startDate = momentUtil.toDate( startMoment );
-	const startTime = momentUtil.toDatabaseTime( startMoment );
-	const endDate = momentUtil.toDate( endMoment );
-	const endTime = momentUtil.toDatabaseTime( endMoment );
+	const startDate = yield( toDatabaseDate, startMoment );
+	const startTime = yield( toDatabaseTime, startMoment );
+	const endDate = yield( toDatabaseDate, endMoment );
+	const endTime = yield( toDatabaseTime, endMoment );
+
+	const startDateInput = yield( toDate, startMoment );
+	const startDateObj = new Date( startDateInput );
+	const endDateInput = yield( toDate, endMoment );
+	const endDateObj = new Date( endDateInput );
 
 	yield put( actions.add( {
 		[ KEY_TYPE ]: recurringConstants.SINGLE,
 		[ KEY_ALL_DAY ]: allDay,
 		[ KEY_MULTI_DAY ]: multiDay,
 		[ KEY_START_DATE ]: startDate,
+		[ KEY_START_DATE_INPUT]: startDateInput,
+		[ KEY_START_DATE_OBJ]: startDateObj,
 		[ KEY_START_TIME ]: startTime,
 		[ KEY_END_DATE ]: endDate,
+		[ KEY_END_DATE_INPUT ]: endDateInput,
+		[ KEY_END_DATE_OBJ ]: endDateObj,
 		[ KEY_END_TIME ]: endTime,
 		[ KEY_BETWEEN ]: 1,
 		[ KEY_LIMIT_TYPE ]: recurringConstants.COUNT,
@@ -72,7 +101,7 @@ export function* handleTimeChange( { actions }, action, key ) {
 			actions.sync( action.index, {
 				[ KEY_ALL_DAY ]: isAllDay,
 				[ KEY_START_TIME ]: '00:00:00',
-				[ KEY_END_TIME ]: '23:59:00',
+				[ KEY_END_TIME ]: '23:59:59',
 			} )
 		);
 	} else {
@@ -92,25 +121,25 @@ export function* handleMultiDayChange( { actions, selectors }, action, key ) {
 		const startTime = yield select( selectors.getStartTime, action );
 		const endTime = yield select( selectors.getEndTime, action );
 
-		let startTimeSeconds = time.toSeconds( startTime, time.TIME_FORMAT_HH_MM );
-		let endTimeSeconds = time.toSeconds( endTime, time.TIME_FORMAT_HH_MM );
+		let startTimeSeconds = yield call( toSeconds, startTime, TIME_FORMAT_HH_MM );
+		let endTimeSeconds = yield call( toSeconds, endTime, TIME_FORMAT_HH_MM );
 
 		// If end time is earlier than start time, fix time
 		if ( endTimeSeconds <= startTimeSeconds ) {
 			// If there is less than half an hour left in the day, roll back one hour
-			if ( startTimeSeconds + time.HALF_HOUR_IN_SECONDS >= time.DAY_IN_SECONDS ) {
-				startTimeSeconds -= time.HOUR_IN_SECONDS;
+			if ( startTimeSeconds + HALF_HOUR_IN_SECONDS >= DAY_IN_SECONDS ) {
+				startTimeSeconds -= HOUR_IN_SECONDS;
 			}
 
-			endTimeSeconds = startTimeSeconds + time.HALF_HOUR_IN_SECONDS;
+			endTimeSeconds = startTimeSeconds + HALF_HOUR_IN_SECONDS;
 
 			yield put(
 				actions.sync( action.index, {
 					[ KEY_START_TIME ]: (
-						time.fromSeconds( startTimeSeconds, time.TIME_FORMAT_HH_MM )
+						fromSeconds( startTimeSeconds, TIME_FORMAT_HH_MM )
 					),
 					[ KEY_END_TIME ]: (
-						time.fromSeconds( endTimeSeconds, time.TIME_FORMAT_HH_MM )
+						fromSeconds( endTimeSeconds, TIME_FORMAT_HH_MM )
 					),
 				} )
 			);
@@ -139,8 +168,8 @@ export function* handleLimitTypeChange( { actions }, action, key ) {
 
 	if ( isDate ) {
 		const start = yield select( datetime.getStart );
-		const startMoment = yield call( momentUtil.toMoment, start );
-		const startDate = yield call( momentUtil.toDate, startMoment.add( 1, 'day' ) );
+		const startMoment = yield call( toMoment, start );
+		const startDate = yield call( toDate, startMoment.add( 1, 'day' ) );
 		yield put(
 			actions.sync( action.index, {
 				[ constants.KEY_LIMIT ]: startDate,
