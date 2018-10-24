@@ -102,7 +102,7 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 */
 	protected function numeric_array() {
 		return array(
-			'description'       => __( 'Array block', 'events-gutenberg' ),
+			'description'       => __( 'Numeric Array', 'events-gutenberg' ),
 			'auth_callback'     => array( $this, 'auth_callback' ),
 			'sanitize_callback' => array( $this, 'sanitize_numeric_array' ),
 			'type'              => 'number',
@@ -112,25 +112,38 @@ abstract class Tribe__Gutenberg__Common__Meta
 	}
 	
 	/**
-	 * Verify if the current user can edit or not this Post
+	 * Register a text type of array
 	 *
-	 * @since  0.1.1-alpha
+	 * @since TBD
 	 *
-	 * @param bool   $allowed Whether the user can add the post meta. Default false.
-	 * @param string $meta_key The meta key.
-	 * @param int    $post_id Post ID.
-	 * @param int    $user_id User ID.
-	 * @param string $cap Capability name.
-	 * @param array  $caps User capabilities.
-	 *
-	 * @return boolean
+	 * @return array
 	 */
-	public function auth_callback( $allowed, $meta_key, $post_id, $user_id, $cap, $caps ) {
-		$post             = get_post( $post_id );
-		$post_type_obj    = get_post_type_object( $post->post_type );
-		$current_user_can = current_user_can( $post_type_obj->cap->edit_post, $post_id );
-		
-		return $current_user_can;
+	protected function text_array() {
+		return array(
+			'description'       => __( 'Text Array', 'events-gutenberg' ),
+			'auth_callback'     => array( $this, 'auth_callback' ),
+			'sanitize_callback' => array( $this, 'sanitize_text_array' ),
+			'type'              => 'string',
+			'single'            => false,
+			'show_in_rest'      => true,
+		);
+	}
+	
+	/**
+	 * Sanitize an array of text
+	 *
+	 * @since TBD
+	 *
+	 * @param $value
+	 *
+	 * @return array
+	 */
+	public function sanitize_text_array( $value ) {
+		if ( is_array( $value ) ) {
+			return array_map( 'sanitize_text_field', $value );
+		} else {
+			return sanitize_text_field( $value );
+		}
 	}
 	
 	/**
@@ -178,5 +191,27 @@ abstract class Tribe__Gutenberg__Common__Meta
 	 */
 	public function sanitize_separator( $value ) {
 		return filter_var( $value, FILTER_SANITIZE_STRING );
+	}
+	
+	/**
+	 * Verify if the current user can edit or not this Post
+	 *
+	 * @since  0.1.1-alpha
+	 *
+	 * @param bool   $allowed Whether the user can add the post meta. Default false.
+	 * @param string $meta_key The meta key.
+	 * @param int    $post_id Post ID.
+	 * @param int    $user_id User ID.
+	 * @param string $cap Capability name.
+	 * @param array  $caps User capabilities.
+	 *
+	 * @return boolean
+	 */
+	public function auth_callback( $allowed, $meta_key, $post_id, $user_id, $cap, $caps ) {
+		$post             = get_post( $post_id );
+		$post_type_obj    = get_post_type_object( $post->post_type );
+		$current_user_can = current_user_can( $post_type_obj->cap->edit_post, $post_id );
+		
+		return $current_user_can;
 	}
 }
