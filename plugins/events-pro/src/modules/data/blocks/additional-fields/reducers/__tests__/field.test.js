@@ -1,11 +1,13 @@
 /**
  * Internal dependencies
  */
-import { actions, utils } from '@moderntribe/events-pro/data/blocks/additional-fields';
+import { actions } from '@moderntribe/events-pro/data/blocks/additional-fields';
 import field, { DEFAULT_STATE } from '../field';
+import { FIELD_TYPES } from '@moderntribe/events-pro/blocks/additional-fields/utils';
 
 describe( 'Fields reducer', () => {
 	let state = {};
+	const fieldName = '_ecp_custom_23';
 
 	beforeEach( () => {
 		state = { allIds: [], byId: {} };
@@ -16,38 +18,57 @@ describe( 'Fields reducer', () => {
 	} );
 
 	test( 'Set ticket name', () => {
-		expect( field( DEFAULT_STATE, actions.setFieldName( 'Website' ) ) ).toMatchSnapshot();
+		expect( field( DEFAULT_STATE, actions.setFieldLabel( fieldName, 'Website' ) ) )
+			.toMatchSnapshot();
 	} );
 
 	test( 'Set ticket value', () => {
-		const action = actions.setFieldValue( 'Website', 'https://theeventscalendar.com/' );
+		const action = actions.setFieldValue( fieldName, 'https://theeventscalendar.com/' );
 		expect( field( DEFAULT_STATE, action ) ).toMatchSnapshot();
 	} );
 
 	test( 'Set field type', () => {
-		expect( field( DEFAULT_STATE, actions.setFieldType( 'Website', utils.FIELD_TYPES.URL ) ) )
+		expect( field( DEFAULT_STATE, actions.setFieldType( fieldName, FIELD_TYPES.url ) ) )
 			.toMatchSnapshot();
 	} );
 
 	test( 'Set field is pristine', () => {
-		expect( field( DEFAULT_STATE, actions.setFieldIsPristine( 'Website', true ) ) )
+		expect( field( DEFAULT_STATE, actions.setFieldIsPristine( fieldName, true ) ) )
 			.toMatchSnapshot();
-		expect( field( DEFAULT_STATE, actions.setFieldIsPristine( 'Website', false ) ) )
+		expect( field( DEFAULT_STATE, actions.setFieldIsPristine( fieldName, false ) ) )
 			.toMatchSnapshot();
 	} );
 
 	test( 'Set field options', () => {
-		const action = actions.setFieldOptions( 'Refreshments', [ 'Pizza', 'Cheese Cake', 'Cheese' ] );
+		const action = actions.setFieldOptions( fieldName, [ 'Pizza', 'Cheese Cake', 'Cheese' ] );
 		expect( field( DEFAULT_STATE, action ) ).toMatchSnapshot();
 	} );
 
 	test( 'Set field divider list', () => {
-		const action = actions.setFieldDividerList( 'Refreshments', ', ' );
+		const action = actions.setFieldDividerList( fieldName, ', ' );
 		expect( field( DEFAULT_STATE, action ) ).toMatchSnapshot();
 	} );
 
 	test( 'Set field divider end', () => {
-		const action = actions.setFieldDividerEnd( 'Refreshments', ' & ' );
+		const action = actions.setFieldDividerEnd( fieldName, ' & ' );
 		expect( field( DEFAULT_STATE, action ) ).toMatchSnapshot();
+	} );
+
+	test( 'append field value', () => {
+		const action = actions.appendFieldValue( fieldName, 'Chocolate' );
+		const newState = {
+			...DEFAULT_STATE,
+			value: [],
+		};
+		expect( field( newState, action ) ).toMatchSnapshot();
+	} );
+
+	test( 'remove field value', () => {
+		const action = actions.removeFieldValue( fieldName, 'Chocolate' );
+		const newState = {
+			...DEFAULT_STATE,
+			value: [ 'Chocolate' ],
+		};
+		expect( field( newState, action ) ).toMatchSnapshot();
 	} );
 } );

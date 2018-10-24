@@ -8,6 +8,7 @@ import {
 	getWords,
 	wordsAsList,
 	normalize,
+	toBlockName,
 } from '@moderntribe/common/utils/string';
 
 describe( 'Tests for string.js', () => {
@@ -95,6 +96,40 @@ describe( 'Tests for string.js', () => {
 
 		test( 'non words', () => {
 			expect( normalize( '       12312321-,-.(()=^^ ¨¨:;:_¨¨Ç  *¿?=)(/&%$·"!.+' ) ).toEqual( '' );
+		} );
+
+		test( 'non strings types', () => {
+			expect( normalize( undefined ) ).toBe( '' );
+			expect( normalize( [] ) ).toBe( '' );
+			expect( normalize( [] ) ).toBe( '' );
+			expect( normalize( null ) ).toBe( '' );
+			expect( normalize( 1 ) ).toBe( '' );
+		} );
+	} );
+
+	describe( 'toBlockName', () => {
+		test( 'words', () => {
+			expect( toBlockName( 'modern tribe' ) )
+				.toBe( 'moderntribe' );
+			expect( toBlockName( 'https://theeventscalendar.com/' ) )
+				.toBe( 'httpstheeventscalendarcom' );
+		} );
+
+		test( 'non valid characters of a block', () => {
+			expect( toBlockName( '_ecp_custom_2' ) ).toBe( 'ecpcustom2' );
+			expect( toBlockName( 'ecp-custom-2' ) ).toBe( 'ecp-custom-2' );
+			expect( toBlockName( '„…–~~}][‚|#¢∞ecp-custom-2;:_¨¨Ç¨^^=)(/&%$·"!' ) )
+				.toBe( 'ecp-custom-2' );
+			expect( toBlockName( '„…–    ~~}]      [‚|#¢∞ecp-custom-2;:_¨    ¨Ç¨^^=)(/    &%$·"!' ) )
+				.toBe( 'ecp-custom-2' );
+		} );
+
+		test( 'non strings types', () => {
+			expect( toBlockName( undefined ) ).toBe( '' );
+			expect( toBlockName( [] ) ).toBe( '' );
+			expect( toBlockName( [] ) ).toBe( '' );
+			expect( toBlockName( null ) ).toBe( '' );
+			expect( toBlockName( 1 ) ).toBe( '' );
 		} );
 	} );
 } );

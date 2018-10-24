@@ -8,26 +8,25 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import { Field } from '@moderntribe/events-pro/blocks/additional-fields/elements';
+import { Input } from '@moderntribe/common/elements';
 
-const TextField = ( { name, value, onInputChange, ...rest } ) => (
+const TextField = ( { isSelected, value, onInputChange, name } ) => (
 	<Field
-		name={ name }
-		input={ <input type="text" value={ value } onChange={ onInputChange } /> }
+		id={ name }
+		input={ <Input type="text" value={ value } onChange={ onInputChange } /> }
 		output={ value }
-		{ ...rest }
+		isSelected={ isSelected }
 	/>
 );
 
 TextField.propTypes = {
-	name: PropTypes.string.isRequired,
-	isPristine: PropTypes.bool,
+	name: PropTypes.string,
 	isSelected: PropTypes.bool,
 	onInputChange: PropTypes.func,
 	value: PropTypes.string,
 };
 
 TextField.defaultProps = {
-	isPristine: true,
 	isSelected: false,
 };
 

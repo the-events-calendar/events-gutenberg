@@ -35,7 +35,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
+				'in_footer' => true,
 				'localize'  => array(),
 			)
 		);
@@ -47,7 +47,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
+				'in_footer' => true,
 				'localize'  => array(),
 			)
 		);
@@ -62,7 +62,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
+				'in_footer' => true,
 				'localize'  => array(),
 			)
 		);
@@ -74,7 +74,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
+				'in_footer' => true,
 				'localize'  => array(),
 			)
 		);

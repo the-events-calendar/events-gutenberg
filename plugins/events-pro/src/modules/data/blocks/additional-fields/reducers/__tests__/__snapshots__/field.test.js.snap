@@ -3,99 +3,125 @@
 exports[`Fields reducer Set field divider end 1`] = `
 Object {
   "dividerEnd": " & ",
-  "dividerList": "",
+  "dividerList": ", ",
   "isPristine": true,
-  "name": "",
+  "label": "",
   "options": Array [],
-  "type": "",
-  "value": "",
+  "type": null,
+  "value": null,
 }
 `;
 
 exports[`Fields reducer Set field divider list 1`] = `
 Object {
-  "dividerEnd": "",
+  "dividerEnd": " & ",
   "dividerList": ", ",
   "isPristine": true,
-  "name": "",
+  "label": "",
   "options": Array [],
-  "type": "",
-  "value": "",
+  "type": null,
+  "value": null,
 }
 `;
 
 exports[`Fields reducer Set field is pristine 1`] = `
 Object {
-  "dividerEnd": "",
-  "dividerList": "",
+  "dividerEnd": " & ",
+  "dividerList": ", ",
   "isPristine": true,
-  "name": "",
+  "label": "",
   "options": Array [],
-  "type": "",
-  "value": "",
+  "type": null,
+  "value": null,
 }
 `;
 
 exports[`Fields reducer Set field is pristine 2`] = `
 Object {
-  "dividerEnd": "",
-  "dividerList": "",
+  "dividerEnd": " & ",
+  "dividerList": ", ",
   "isPristine": false,
-  "name": "",
+  "label": "",
   "options": Array [],
-  "type": "",
-  "value": "",
+  "type": null,
+  "value": null,
 }
 `;
 
 exports[`Fields reducer Set field options 1`] = `
 Object {
-  "dividerEnd": "",
-  "dividerList": "",
+  "dividerEnd": " & ",
+  "dividerList": ", ",
   "isPristine": true,
-  "name": "",
+  "label": "",
   "options": Array [
     "Pizza",
     "Cheese Cake",
     "Cheese",
   ],
-  "type": "",
-  "value": "",
+  "type": null,
+  "value": null,
 }
 `;
 
 exports[`Fields reducer Set field type 1`] = `
 Object {
-  "dividerEnd": "",
-  "dividerList": "",
+  "dividerEnd": " & ",
+  "dividerList": ", ",
   "isPristine": true,
-  "name": "",
+  "label": "",
   "options": Array [],
-  "type": "URL",
-  "value": "",
+  "type": "url",
+  "value": null,
 }
 `;
 
 exports[`Fields reducer Set ticket name 1`] = `
 Object {
-  "dividerEnd": "",
-  "dividerList": "",
+  "dividerEnd": " & ",
+  "dividerList": ", ",
   "isPristine": true,
-  "name": "Website",
+  "label": "Website",
   "options": Array [],
-  "type": "",
-  "value": "",
+  "type": null,
+  "value": null,
 }
 `;
 
 exports[`Fields reducer Set ticket value 1`] = `
 Object {
-  "dividerEnd": "",
-  "dividerList": "",
+  "dividerEnd": " & ",
+  "dividerList": ", ",
   "isPristine": true,
-  "name": "",
+  "label": "",
   "options": Array [],
-  "type": "",
+  "type": null,
   "value": "https://theeventscalendar.com/",
+}
+`;
+
+exports[`Fields reducer append field value 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "options": Array [],
+  "type": null,
+  "value": Array [
+    "Chocolate",
+  ],
+}
+`;
+
+exports[`Fields reducer remove field value 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "options": Array [],
+  "type": null,
+  "value": Array [],
 }
 `;
