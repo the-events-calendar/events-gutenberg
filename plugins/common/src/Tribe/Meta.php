@@ -26,13 +26,47 @@ abstract class Tribe__Gutenberg__Common__Meta
 	}
 	
 	/**
+	 * Add arguments to escape a text area field
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	protected function textarea() {
+		return array(
+			'auth_callback'     => array( $this, 'auth_callback' ),
+			'sanitize_callback' => 'sanitize_textarea_field',
+			'type'              => 'string',
+			'single'            => true,
+			'show_in_rest'      => true,
+		);
+	}
+	
+	/**
+	 * Add arguments to escape a field of URL type
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	protected function url() {
+		return array(
+			'auth_callback'     => array( $this, 'auth_callback' ),
+			'sanitize_callback' => 'esc_url_raw',
+			'type'              => 'string',
+			'single'            => true,
+			'show_in_rest'      => true,
+		);
+	}
+	
+	/**
 	 * Default definition for an attribute of type text
 	 *
 	 * @since 0.3.0-alpha
 	 *
 	 * @return array
 	 */
-	private function numeric() {
+	protected function numeric() {
 		return array(
 			'auth_callback'     => array( $this, 'auth_callback' ),
 			'sanitize_callback' => 'absint',
