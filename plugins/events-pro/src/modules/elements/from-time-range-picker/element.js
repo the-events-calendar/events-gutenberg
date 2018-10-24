@@ -83,6 +83,7 @@ const mapStateToProps = ( state, ownProps ) => {
 
 	return {
 		endTime: selectors.getEndTime( state, ownProps ),
+		isAllDay: selectors.getAllDay( state, ownProps ),
 		isMultiDay: selectors.getMultiDay( state, ownProps ),
 		startTime: selectors.getStartTime( state, ownProps ),
 	};

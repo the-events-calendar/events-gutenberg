@@ -3,7 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import moment from 'moment/moment';
 
 /**
  * Internal dependencies
@@ -32,7 +31,7 @@ const {
 
 const onEndDateChange = ( ownProps, edit ) => ( date ) => {
 	const endDate = date
-		? momentUtil.toDate( moment( date ), dateUtil.FORMATS.DATABASE.datetime )
+		? momentUtil.toDate( momentUtil.toMoment( date ), dateUtil.FORMATS.DATABASE.datetime )
 		: '';
 	edit( ownProps.index, { [ KEY_END_DATE ]: endDate } );
 };
