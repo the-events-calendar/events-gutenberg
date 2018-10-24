@@ -12,10 +12,9 @@ import Input from '@moderntribe/common/elements/input/element';
 
 const UrlInput = ( { checked, className, onChange, ...rest } ) => (
 	<Input
-		checked={ checked }
+		type="url"
 		className={ classNames( 'tribe-editor__input--url', className ) }
 		onChange={ onChange }
-		type="url"
 		{ ...rest }
 	/>
 );
