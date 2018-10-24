@@ -12,8 +12,13 @@ import { __ } from '@wordpress/i18n';
  */
 import { TimePicker, DayPickerInput } from '@moderntribe/common/elements';
 import LabeledRow from '@moderntribe/events-pro/elements/labeled-row/element';
-import { TribePropTypes } from '@moderntribe/common/utils';
+import { TribePropTypes, time } from '@moderntribe/common/utils';
 import './style.pcss';
+
+const {
+	START_OF_DAY,
+	END_OF_DAY,
+} = time;
 
 const SingleToDateTimePicker = ( {
 	className,
@@ -37,8 +42,8 @@ const SingleToDateTimePicker = ( {
 			<TimePicker
 				current={ endTime }
 				// TODO: logic to handle start and end times
-				start="00:00"
-				end="23:59"
+				start={ START_OF_DAY }
+				end={ END_OF_DAY }
 				onChange={ onEndTimeChange }
 				onClick={ onEndTimeClick }
 				// TODO: Add onChange handler
