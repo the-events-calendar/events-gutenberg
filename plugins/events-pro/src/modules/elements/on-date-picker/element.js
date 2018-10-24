@@ -3,7 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import moment from 'moment/moment';
 
 /**
  * Internal dependencies
@@ -47,7 +46,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		onDateChange: ( date ) => {
 			const startDate = date
-				? momentUtil.toDate( moment( date ), dateUtil.FORMATS.DATABASE.datetime )
+				? momentUtil.toDate( momentUtil.toMoment( date ), dateUtil.FORMATS.DATABASE.datetime )
 				: '';
 			dispatch( edit( ownProps.index, { [ KEY_START_DATE ]: startDate } ) );
 		},

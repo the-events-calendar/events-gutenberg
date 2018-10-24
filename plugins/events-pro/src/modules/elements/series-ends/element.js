@@ -3,8 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { find } from 'lodash';
-import moment from 'moment/moment';
 
 /**
  * Internal dependencies
@@ -14,7 +12,6 @@ import { constants } from '@moderntribe/events-pro/data/blocks';
 import {
 	actions as recurringActions,
 	constants as recurringConstants,
-	options as recurringOptions,
 	selectors as recurringSelectors,
 } from '@moderntribe/events-pro/data/blocks/recurring';
 import {
@@ -37,7 +34,6 @@ const {
 const {
 	COUNT,
 	DATE,
-	LIMIT_TYPE_MAPPING_FROM_STATE,
 } = recurringConstants;
 
 const onSeriesEndsAfterTimesChange = ( ownProps, edit ) => ( e ) => {
@@ -51,7 +47,7 @@ const onSeriesEndsChange = ( ownProps, edit ) => ( selectedOption ) => (
 
 const onSeriesEndsOnDateChange = ( ownProps, edit ) => ( date ) => {
 	const endDate = date
-		? momentUtil.toDate( moment( date ), dateUtil.FORMATS.DATABASE.datetime )
+		? momentUtil.toDate( momentUtil.toMoment( date ), dateUtil.FORMATS.DATABASE.datetime )
 		: '';
 	edit( ownProps.index, { [ KEY_END_DATE ]: endDate } );
 };
@@ -62,12 +58,9 @@ const mapStateToProps = ( state, ownProps ) => {
 		: exceptionSelectors;
 	const limitType = selectors.getLimitType( state, ownProps );
 
-	const stateProps = {};
-
-	stateProps.seriesEnds = find(
-		recurringOptions.SERIES_ENDS_OPTIONS,
-		( option ) => option.value === limitType
-	);
+	const stateProps = {
+		seriesEnds: selectors.getLimitTypeOption( state, ownProps ),
+	};
 
 	if ( limitType === DATE ) {
 		stateProps.seriesEndsOnDate = selectors.getLimit( state, ownProps );

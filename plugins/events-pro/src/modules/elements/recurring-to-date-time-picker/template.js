@@ -10,9 +10,14 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { Select, TimePicker } from '@moderntribe/common/elements';
-import { TribePropTypes } from '@moderntribe/common/utils';
+import { TribePropTypes, time } from '@moderntribe/common/utils';
 import LabeledRow from '@moderntribe/events-pro/elements/labeled-row/element';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
+
+const {
+	START_OF_DAY,
+	END_OF_DAY,
+} = time;
 
 const RecurringToDateTimePicker = ( {
 	className,
@@ -32,8 +37,8 @@ const RecurringToDateTimePicker = ( {
 		<TimePicker
 			current={ endTime }
 			// TODO: logic to handle start and end times
-			start="00:00"
-			end="23:59"
+			start={ START_OF_DAY }
+			end={ END_OF_DAY }
 			onChange={ onEndTimeChange }
 			onClick={ onEndTimeClick }
 			// TODO: Add onChange handler

@@ -11,6 +11,7 @@ import { find } from 'lodash';
  */
 import {
 	RECURRENCE_TYPE_RULES_OPTIONS,
+	SERIES_ENDS_OPTIONS,
 } from './options';
 import { constants } from '@moderntribe/common/data/plugins';
 
@@ -108,6 +109,11 @@ export const getTimezone = createSelector(
 );
 
 export const getTypeOption = createSelector(
-	( rule ) => rule,
-	( rule ) => find( RECURRENCE_TYPE_RULES_OPTIONS, ( type ) => type.value === rule.type ),
+	[ getType ],
+	( type ) => find( RECURRENCE_TYPE_RULES_OPTIONS, ( option ) => option.value === type ),
+);
+
+export const getLimitTypeOption = createSelector(
+	[ getLimitType ],
+	( limitType ) => find( SERIES_ENDS_OPTIONS, ( option ) => option.value === limitType ),
 );

@@ -50,8 +50,6 @@ export default class ExceptionField extends PureComponent {
 				return (
 					<Daily
 						{ ...this.props }
-						typeOption={ this.typeOption }
-						limitTypeOption={ this.limitTypeOption }
 						handleStartDate={ this.handleStartDate }
 						handleLimitType={ this.handleLimitType }
 					/>
@@ -60,32 +58,24 @@ export default class ExceptionField extends PureComponent {
 				return (
 					<Weekly
 						{ ...this.props }
-						typeOption={ this.typeOption }
-						limitTypeOption={ this.limitTypeOption }
 					/>
 				);
 			case constants.MONTHLY:
 				return (
 					<Monthly
 						{ ...this.props }
-						typeOption={ this.typeOption }
-						limitTypeOption={ this.limitTypeOption }
 					/>
 				);
 			case constants.YEARLY:
 				return (
 					<Yearly
 						{ ...this.props }
-						limitTypeOption={ this.limitTypeOption }
-						typeOption={ this.typeOption }
 					/>
 				);
 			default:
 				return (
 					<Singular
 						{ ...this.props }
-						limitTypeOption={ this.limitTypeOption }
-						typeOption={ this.typeOption }
 						handleStartDate={ this.handleStartDate }
 					/>
 				);
