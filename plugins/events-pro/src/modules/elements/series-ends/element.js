@@ -19,14 +19,16 @@ import {
 	selectors as exceptionSelectors,
 } from '@moderntribe/events-pro/data/blocks/exception';
 import {
-	date as dateUtil,
-	moment as momentUtil,
-} from '@moderntribe/common/utils';
+	selectors as dateTimeSelectors
+} from '@moderntribe/events/data/blocks/datetime';
+import { moment as momentUtil } from '@moderntribe/common/utils';
 import { withStore } from '@moderntribe/common/hoc';
 
 const {
 	RECURRING,
 	KEY_END_DATE,
+	KEY_END_DATE_INPUT,
+	KEY_END_DATE_OBJ,
 	KEY_LIMIT,
 	KEY_LIMIT_TYPE,
 } = constants;
@@ -35,6 +37,12 @@ const {
 	COUNT,
 	DATE,
 } = recurringConstants;
+
+const {
+	toMoment,
+	toDate,
+	toDatabaseDate,
+} = momentUtil;
 
 const onSeriesEndsAfterTimesChange = ( ownProps, edit ) => ( e ) => {
 	const limit = parseInt( e.target.value, 10 );
@@ -45,12 +53,25 @@ const onSeriesEndsChange = ( ownProps, edit ) => ( selectedOption ) => (
 	edit( ownProps.index, { [ KEY_LIMIT_TYPE ]: selectedOption.value } )
 );
 
-const onSeriesEndsOnDateChange = ( ownProps, edit ) => ( date ) => {
-	const endDate = date
-		? momentUtil.toDate( momentUtil.toMoment( date ), dateUtil.FORMATS.DATABASE.datetime )
-		: '';
-	edit( ownProps.index, { [ KEY_END_DATE ]: endDate } );
-};
+const onSeriesEndsOnDateChange = ( ownProps, edit, end ) => (
+	( date, modifiers, dayPickerInput ) => {
+		let endDate, endDateInput;
+
+		if ( date ) {
+			const endDateMoment = toMoment( date );
+			endDate = toDatabaseDate( endDateMoment );
+			endDateInput = toDate( endDateMoment );
+		} else {
+			// set default end date as date time end date
+			endDate = toDatabaseDate( toMoment( end ) );
+			endDateInput = dayPickerInput.state.value;
+		}
+
+		edit( ownProps.index, { [ KEY_END_DATE_INPUT ]: endDateInput } );
+		edit( ownProps.index, { [ KEY_END_DATE_OBJ ]: date } );
+		edit( ownProps.index, { [ KEY_END_DATE ]: endDate } );
+	}
+);
 
 const mapStateToProps = ( state, ownProps ) => {
 	const selectors = ownProps.blockType === RECURRING
@@ -59,6 +80,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	const limitType = selectors.getLimitType( state, ownProps );
 
 	const stateProps = {
+		end: dateTimeSelectors.getEnd( state ),
 		seriesEnds: selectors.getLimitTypeOption( state, ownProps ),
 	};
 
@@ -78,13 +100,25 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	const edit = ( index, payload ) => dispatch( editAction( index, payload ) );
 
 	return {
+		edit,
 		onSeriesEndsAfterTimesChange: onSeriesEndsAfterTimesChange( ownProps, edit ),
 		onSeriesEndsChange: onSeriesEndsChange( ownProps, edit ),
-		onSeriesEndsOnDateChange: onSeriesEndsOnDateChange( ownProps, edit ),
+	};
+};
+
+const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
+	const { end, ...restStateProps } = stateProps;
+	const { edit, ...restDispatchProps } = dispatchProps;
+
+	return {
+		...ownProps,
+		...restStateProps,
+		...restDispatchProps,
+		onSeriesEndsOnDateChange: onSeriesEndsOnDateChange( ownProps, edit, end ),
 	};
 };
 
 export default compose(
 	withStore(),
-	connect( mapStateToProps, mapDispatchToProps ),
+	connect( mapStateToProps, mapDispatchToProps, mergeProps ),
 )( SeriesEnds );

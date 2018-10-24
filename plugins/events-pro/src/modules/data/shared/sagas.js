@@ -59,14 +59,14 @@ export function* handleAddition( { actions } ) {
 	const startMoment = yield call( toMoment, start );
 	const endMoment = yield call( toMoment, end );
 
-	const startDate = yield( toDatabaseDate, startMoment );
-	const startTime = yield( toDatabaseTime, startMoment );
-	const endDate = yield( toDatabaseDate, endMoment );
-	const endTime = yield( toDatabaseTime, endMoment );
+	const startDate = yield call( toDatabaseDate, startMoment );
+	const startTime = yield call( toDatabaseTime, startMoment );
+	const endDate = yield call( toDatabaseDate, endMoment );
+	const endTime = yield call( toDatabaseTime, endMoment );
 
-	const startDateInput = yield( toDate, startMoment );
+	const startDateInput = yield call( toDate, startMoment );
 	const startDateObj = new Date( startDateInput );
-	const endDateInput = yield( toDate, endMoment );
+	const endDateInput = yield call( toDate, endMoment );
 	const endDateObj = new Date( endDateInput );
 
 	yield put( actions.add( {

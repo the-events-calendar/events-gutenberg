@@ -64,16 +64,16 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 		...ownProps,
 		...restStateProps,
 		onDateChange: ( date, modifiers, dayPickerInput ) => {
-			let startDateInput;
-			let startDate;
+			let startDate, startDateInput;
+
 			if ( date ) {
 				const startDateMoment = toMoment( date );
-				startDateInput = toDate( startDateMoment );
 				startDate = toDatabaseDate( startDateMoment );
+				startDateInput = toDate( startDateMoment );
 			} else {
-				startDateInput = dayPickerInput.state.value;
-				// set default start date as date time start date if date object is invalid
+				// set default start date as date time start date
 				startDate = toDatabaseDate( toMoment( start ) );
+				startDateInput = dayPickerInput.state.value;
 			}
 
 			dispatchProps.edit( ownProps.index, { [ KEY_START_DATE_INPUT ]: startDateInput } );
