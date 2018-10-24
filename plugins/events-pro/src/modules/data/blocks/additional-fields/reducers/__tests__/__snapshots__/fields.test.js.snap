@@ -3,17 +3,17 @@
 exports[`Fields reducer Add a new block inside of the reducer 1`] = `
 Object {
   "allIds": Array [
-    "Website",
+    "_ecp_custom_23",
   ],
   "byId": Object {
-    "Website": Object {
-      "dividerEnd": "",
-      "dividerList": "",
+    "_ecp_custom_23": Object {
+      "dividerEnd": " & ",
+      "dividerList": ", ",
       "isPristine": true,
-      "name": "Website",
+      "label": "",
       "options": Array [],
-      "type": "",
-      "value": "",
+      "type": null,
+      "value": null,
     },
   },
 }
@@ -21,18 +21,16 @@ Object {
 
 exports[`Fields reducer Add a new block inside of the reducer 2`] = `
 Object {
-  "allIds": Array [
-    "Website",
-  ],
+  "allIds": Array [],
   "byId": Object {
-    "Website": Object {
-      "dividerEnd": "",
-      "dividerList": "",
+    "_ecp_custom_23": Object {
+      "dividerEnd": " & ",
+      "dividerList": ", ",
       "isPristine": true,
-      "name": "Website",
+      "label": "Website",
       "options": Array [],
-      "type": "",
-      "value": "",
+      "type": null,
+      "value": null,
     },
   },
 }

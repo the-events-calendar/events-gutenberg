@@ -1,8 +1,0 @@
-export const FIELD_TYPES = {
-	CHECKBOX: 'CHECKBOX',
-	TEXT: 'TEXT',
-	DROP_DOWN: 'DROP_DOWN',
-	URL: 'URL',
-	RADIO: 'RADIO',
-	TEXT_AREA: 'TEXT_AREA',
-};

@@ -9,13 +9,13 @@ const Image = ( {
 	alt,
 	className,
 	src,
-	...props,
+	...rest,
 } ) => (
 	<img
 		src={ src }
 		alt={ alt }
 		className={ classNames( 'tribe-editor__image', className ) }
-		{ ...props }
+		{ ...rest }
 	/>
 );
 

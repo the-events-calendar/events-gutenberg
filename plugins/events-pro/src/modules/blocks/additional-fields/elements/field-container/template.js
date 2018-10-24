@@ -22,47 +22,42 @@ import {
 	Settings,
 } from '@moderntribe/events-pro/blocks/additional-fields/elements';
 
-/**
- * @todo: Connect this component into the store to inject and get all this properties by the name
- * and replace the "key" of the additional field in the store to be the meta field value instead
- * of the field name as multiple field of different types can have the same name
- */
-
-const TextField = (  { isPristine, isSelected, name, output, input, settings } ) => {
+const FieldTemplate = ( { isPristine, isSelected, label, output, input, settings } ) => {
 
 	if ( isSelected ) {
-		const nameNormalized = normalize( name );
+		const nameNormalized = normalize( label );
 		return [
-			<EditContainer key={ `edit-container-${ nameNormalized }` } name={ name }>
+			<EditContainer key={ `edit-container-${ nameNormalized }` } name={ label }>
 				{ input }
 			</EditContainer>,
-			settings ? settings : <Settings key={ `settings-${ nameNormalized }` } name={ name } />
+			settings ? settings : <Settings key={ `settings-${ nameNormalized }` } name={ label } />
 		];
 	}
 
 	if ( isPristine ) {
 		const placeholderMessage = sprintf(
 			__( 'Add %1$s', 'events-gutenberg' ),
-			capitalize( name )
+			capitalize( label )
 		);
 		return <Placeholder>{ placeholderMessage }</Placeholder>;
 	} else {
-		return <Preview name={ name }>{ output }</Preview>;
+		return <Preview name={ label }>{ output }</Preview>;
 	}
 };
 
-TextField.propTypes = {
-	name: PropTypes.string.isRequired,
+FieldTemplate.propTypes = {
+	id: PropTypes.string.isRequired,
 	input: PropTypes.node.isRequired,
+	label: PropTypes.string,
 	isPristine: PropTypes.bool,
 	isSelected: PropTypes.bool,
 	settings: PropTypes.node,
-	output: PropTypes.string,
+	output: PropTypes.node,
 };
 
-TextField.defaultProps = {
+FieldTemplate.defaultProps = {
 	isPristine: true,
 	isSelected: false,
 };
 
-export default TextField;
+export default FieldTemplate;

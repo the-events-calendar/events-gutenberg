@@ -9,7 +9,7 @@ import { noop } from 'lodash';
 /**
  * Internal dependencies
  */
-import './style.pcss';
+import { CheckboxInput } from '@moderntribe/common/elements';
 
 const Checkbox = ( {
 	checked,
@@ -23,14 +23,13 @@ const Checkbox = ( {
 } ) => {
 	return (
 		<div className={ classNames( 'tribe-editor__checkbox', className ) }>
-			<input
+			<CheckboxInput
 				checked={ checked }
 				className="tribe-editor__checkbox__input"
 				disabled={ disabled }
 				id={ id }
 				name={ name }
 				onChange={ onChange }
-				type="checkbox"
 				value={ value }
 			/>
 			<label
