@@ -27,8 +27,8 @@ Object {
     "isPristine": true,
     "label": "",
     "options": Array [],
-    "type": null,
-    "value": null,
+    "type": "",
+    "value": "",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_INITIAL_STATE",
 }

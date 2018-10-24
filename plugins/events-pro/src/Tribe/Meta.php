@@ -23,13 +23,21 @@ class Tribe__Gutenberg__Events_Pro__Meta extends Tribe__Gutenberg__Common__Meta 
 			}
 			
 			if ( false === $field['gutenberg_editor'] ) {
-				$is_checkbox = 'checkbox' === $field['type'];
-				register_meta( 'post', $field['name'], $this->text() );
-				if ( $is_checkbox ) {
-					/**
-					 * @todo handle the case when there's an array specifically for checkboxes
-					 * that includes an extra dash on the name '_'-
-					 */
+				switch ( $field['type'] ) {
+					case 'textarea':
+						$args = $this->textarea();
+						break;
+					case 'url':
+						$args = $this->url();
+						break;
+					default:
+						$args = $this->text();
+						break;
+				}
+				register_meta( 'post', $field['name'], $args );
+				
+				if ( 'checkbox' === $field['type'] ) {
+					register_meta( 'post', '_' . $field['name'], $this->text_array() );
 				}
 			}
 		}

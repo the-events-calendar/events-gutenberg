@@ -12,8 +12,8 @@ Object {
       "isPristine": true,
       "label": "",
       "options": Array [],
-      "type": null,
-      "value": null,
+      "type": "",
+      "value": "",
     },
   },
 }
@@ -29,8 +29,8 @@ Object {
       "isPristine": true,
       "label": "Website",
       "options": Array [],
-      "type": null,
-      "value": null,
+      "type": "",
+      "value": "",
     },
   },
 }

@@ -222,28 +222,4 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		
 		return $js_config;
 	}
-	
-	/**
-	 *
-	 *
-	 * @since TBD
-	 *
-	 * @param array $templates
-	 *
-	 * @return array An array with the templates
-	 */
-	public function add_additional_fields_in_editor( $templates ) {
-		$blocks                      = array();
-		$additional_fields_templates = tribe( 'gutenberg.events.pro.fields' )->get_block_names();
-		foreach ( $templates as $template ) {
-			$blocks[] = $template;
-			if ( is_array( $template ) && 'tribe/event-venue' === $template[0] ) {
-				foreach ( $additional_fields_templates as $additional_field ) {
-					$blocks[] = array( $additional_field );
-				}
-			}
-		}
-		
-		return $blocks;
-	}
 }

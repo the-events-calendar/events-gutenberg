@@ -17,10 +17,16 @@ describe( 'Event Date time Block sagas', () => {
 		test( 'watcher actions', () => {
 			const gen = watchers();
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_ADDITIONAL_FIELD_INITIAL_STATE, sagas.setInitialState )
+				takeEvery( types.SET_ADDITIONAL_FIELD_INITIAL_STATE, sagas.setInitialState ),
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_ADDITIONAL_FIELD_CHANGE, sagas.setPristineState )
+				takeEvery( types.SET_ADDITIONAL_FIELD_CHANGE, sagas.setPristineState ),
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.APPEND_ADDITIONAL_FIELD_VALUE, sagas.appendFieldValue ),
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.REMOVE_ADDITIONAL_FIELD_VALUE, sagas.removeFieldValue ),
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
