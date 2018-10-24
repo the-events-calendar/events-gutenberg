@@ -8,11 +8,12 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import { Field } from '@moderntribe/events-pro/blocks/additional-fields/elements';
+import { UrlInput } from '@moderntribe/common/elements';
 
 const URLField = ( { name, value, onInputChange, isSelected } ) => (
 	<Field
 		id={ name }
-		input={ <input type="url" value={ value } onChange={ onInputChange } /> }
+		input={ <UrlInput value={ value } onChange={ onInputChange } /> }
 		output={ value }
 		isSelected={ isSelected }
 	/>
