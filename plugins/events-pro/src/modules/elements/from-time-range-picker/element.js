@@ -20,7 +20,7 @@ import {
 import { withStore } from '@moderntribe/common/hoc';
 import { time as timeUtil } from '@moderntribe/common/utils';
 
-const { TIME_FORMAT_HH_MM, toSeconds } = timeUtil;
+const { TIME_FORMAT_HH_MM, toSeconds, fromSeconds } = timeUtil;
 const { KEY_END_TIME, KEY_MULTI_DAY, KEY_START_TIME } = constants;
 
 const onEndTimeChange = ( stateProps, dispatchProps, ownProps ) => ( e ) => {
@@ -63,7 +63,7 @@ const onMultiDayChange = ( dispatchProps, ownProps ) => ( e ) => {
 const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
 	dispatchProps.editRule(
 		ownProps.index,
-		{ [ KEY_END_TIME ]: value },
+		{ [ KEY_END_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) },
 	);
 	onClose();
 };
@@ -71,7 +71,7 @@ const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
 const onStartTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
 	dispatchProps.editRule(
 		ownProps.index,
-		{ [ KEY_START_TIME ]: value },
+		{ [ KEY_START_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) },
 	);
 	onClose();
 };
