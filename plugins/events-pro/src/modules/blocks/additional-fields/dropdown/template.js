@@ -13,7 +13,15 @@ import { Select } from '@moderntribe/common/elements';
 const DropdownField = ( { name, value, options, onInputChange, isSelected, output } ) => (
 	<Field
 		id={ name }
-		input={ <Select options={ options } value={ value } onChange={ onInputChange } isSearchable={ false } /> }
+		input={ (
+			<Select
+				options={ options }
+				value={ value }
+				onChange={ onInputChange }
+				isSearchable={ false }
+				backspaceRemovesValue={ false }
+			/>
+		) }
 		output={ output }
 		isSelected={ isSelected }
 	/>
