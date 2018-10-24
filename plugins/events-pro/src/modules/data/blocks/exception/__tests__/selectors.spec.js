@@ -27,6 +27,6 @@ describe( 'Exception Selectors', () => {
 		expect( selectors.getExceptions( state ) ).toMatchSnapshot();
 	} );
 	test( 'getTypeOption', () => {
-		expect( selectors.getTypeOption( exception ) ).toMatchSnapshot();
+		expect( selectors.getTypeOption( state, { index: 0 } ) ).toMatchSnapshot();
 	} );
 } );
