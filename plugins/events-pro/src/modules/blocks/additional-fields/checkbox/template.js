@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -17,14 +17,12 @@ const CheckboxInput = ( { options, onChange } ) => (
 	<fieldset className="tribe-editor__additional-fields__edit--horizontal-fields">
 		{ options.map( ( option, index ) => {
 			const { label = '', value = '', isChecked = false } = option;
-			const name = normalize( label );
-			const id = `name-${ index + 1 }`;
 			return (
 				<Checkbox
-					id={ id }
+					id={ `name-${ index + 1 }` }
 					checked={ isChecked }
 					onChange={ onChange }
-					name={ name }
+					name={ normalize( label ) }
 					value={ value }
 					label={ label }
 					className={ 'tribe-editor__additional-fields__field--checkbox' }
