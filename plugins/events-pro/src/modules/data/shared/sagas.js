@@ -118,8 +118,8 @@ export function* handleMultiDayChange( { actions, selectors }, action, key ) {
 	const isMultiDay = action.payload[ key ];
 
 	if ( ! isMultiDay ) {
-		const startTime = yield select( selectors.getStartTime, action );
-		const endTime = yield select( selectors.getEndTime, action );
+		const startTime = yield select( selectors.getStartTimeNoSeconds, action );
+		const endTime = yield select( selectors.getEndTimeNoSeconds, action );
 
 		let startTimeSeconds = yield call( toSeconds, startTime, TIME_FORMAT_HH_MM );
 		let endTimeSeconds = yield call( toSeconds, endTime, TIME_FORMAT_HH_MM );
@@ -133,14 +133,13 @@ export function* handleMultiDayChange( { actions, selectors }, action, key ) {
 
 			endTimeSeconds = startTimeSeconds + HALF_HOUR_IN_SECONDS;
 
+			const adjustedStartTime = yield call( fromSeconds, startTimeSeconds, TIME_FORMAT_HH_MM );
+			const adjustedEndTime = yield call( fromSeconds, endTimeSeconds, TIME_FORMAT_HH_MM )
+
 			yield put(
 				actions.sync( action.index, {
-					[ KEY_START_TIME ]: (
-						fromSeconds( startTimeSeconds, TIME_FORMAT_HH_MM )
-					),
-					[ KEY_END_TIME ]: (
-						fromSeconds( endTimeSeconds, TIME_FORMAT_HH_MM )
-					),
+					[ KEY_START_TIME ]: `${ adjustedStartTime }:00`,
+					[ KEY_END_TIME ]: `${ adjustedEndTime }:00`,
 				} )
 			);
 		}
