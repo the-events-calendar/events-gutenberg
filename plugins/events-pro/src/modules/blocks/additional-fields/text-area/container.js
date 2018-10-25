@@ -20,7 +20,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	onInputChange( e ) {
 		const { name } = ownProps;
 		dispatch( actions.setFieldValue( name, e.target.value ) );
-		dispatch( actions.setChange( name ) );
+		dispatch( actions.setFieldChange( name ) );
 	},
 } );
 

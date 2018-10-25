@@ -12,8 +12,7 @@ import { selectors, actions } from '@moderntribe/events-pro/data/blocks/addition
 import CheckboxTemplate from './template';
 
 const mapStateToProps = ( state, ownProps ) => ( {
-	value: selectors.getTextFieldValue( state, ownProps ),
-	output: selectors.getFieldCheckboxOutput( state, ownProps ),
+	output: selectors.getFieldOutput( state, ownProps ),
 	options: selectors.getFieldCheckboxOptions( state, ownProps ),
 } );
 
@@ -25,7 +24,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 		} else {
 			dispatch( actions.removeFieldValue( name, event.target.value ) );
 		}
-		dispatch( actions.setChange( name ) );
+		dispatch( actions.setFieldChange( name ) );
 	},
 } );
 
