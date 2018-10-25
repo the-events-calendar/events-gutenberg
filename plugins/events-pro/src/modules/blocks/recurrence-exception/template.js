@@ -12,7 +12,8 @@ import ExceptionForm from '@moderntribe/events-pro/elements/exception-form/eleme
 import ExceptionAddField from '@moderntribe/events-pro/elements/exception-add-field/element';
 import Panel from '@moderntribe/events-pro/elements/panel/element';
 import AttributeSync from '@moderntribe/events-pro/elements/attribute-sync/element';
-import * as exceptions from '@moderntribe/events-pro/data/blocks/exception';
+import { getExceptions } from '@moderntribe/events-pro/data/blocks/exception/selectors';
+import * as types from '@moderntribe/events-pro/data/blocks/exception/types';
 
 export default class EventRecurring extends PureComponent {
 	static propTypes = {
@@ -54,11 +55,11 @@ export default class EventRecurring extends PureComponent {
 					setAttributes={ this.props.setAttributes }
 					clientId={ this.props.clientId }
 					metaField="exceptions"
-					selector={ exceptions.selectors.getExceptions }
+					selector={ getExceptions }
 					listeners={ [
-						exceptions.types.ADD_EXCEPTION,
-						exceptions.types.EDIT_EXCEPTION,
-						exceptions.types.REMOVE_EXCEPTION,
+						types.ADD_EXCEPTION,
+						types.EDIT_EXCEPTION,
+						types.REMOVE_EXCEPTION,
 					] }
 				/>
 			</Fragment>

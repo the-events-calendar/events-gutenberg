@@ -35,8 +35,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {
 		dispatchProps.toggleRulePanelVisibility,
 		dispatchProps.toggleRulePanelExpand,
 		dispatchProps.toggleRepeatBlocksVisibility,
-		// TODO: Add fields properly
-		() => dispatchProps.addField( { id: Date.now() } )
+		dispatchProps.addField,
 	),
 } );
 

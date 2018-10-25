@@ -12,7 +12,8 @@ import RecurringForm from '@moderntribe/events-pro/elements/recurring-form/eleme
 import RecurringAddField from '@moderntribe/events-pro/elements/recurring-add-field/element';
 import Panel from '@moderntribe/events-pro/elements/panel/element';
 import AttributeSync from '@moderntribe/events-pro/elements/attribute-sync/element';
-import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
+import { getRules } from '@moderntribe/events-pro/data/blocks/recurring/selectors';
+import * as types from '@moderntribe/events-pro/data/blocks/recurring/types';
 
 export default class EventRecurring extends PureComponent {
 	static propTypes = {
@@ -52,11 +53,11 @@ export default class EventRecurring extends PureComponent {
 					setAttributes={ this.props.setAttributes }
 					clientId={ this.props.clientId }
 					metaField="rules"
-					selector={ recurring.selectors.getRules }
+					selector={ getRules }
 					listeners={ [
-						recurring.types.ADD_RULE,
-						recurring.types.EDIT_RULE,
-						recurring.types.REMOVE_RULE,
+						types.ADD_RULE,
+						types.EDIT_RULE,
+						types.REMOVE_RULE,
 					] }
 				/>
 			</Fragment>
