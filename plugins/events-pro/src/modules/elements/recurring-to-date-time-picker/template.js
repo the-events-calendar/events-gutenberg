@@ -13,6 +13,7 @@ import { Select, TimePicker } from '@moderntribe/common/elements';
 import { TribePropTypes, time } from '@moderntribe/common/utils';
 import LabeledRow from '@moderntribe/events-pro/elements/labeled-row/element';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
+import './style.pcss';
 
 const {
 	START_OF_DAY,
