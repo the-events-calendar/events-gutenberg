@@ -53,6 +53,7 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 
 			$template[] = array( 'tribe/tickets' );
 			$template[] = array( 'tribe/rsvp' );
+			$template[] = array( 'tribe/attendees' );
 
 			$post_type_object->template = $template;
 		}
