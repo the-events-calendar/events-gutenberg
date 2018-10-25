@@ -93,9 +93,11 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.3-alpha - TBD
+#### 0.3.3-alpha - 2018-10-25
 
-* Feature - Event Attendees block
+* Feature - Event Attendees list block
+* Fix - Style changes to make RSVP and Ticket settings compatible with Gutenberg 4.1
+* Tweak - Make sure users can select older Years on the Datetime block
 
 #### 0.3.2-alpha - 2018-10-18
 
