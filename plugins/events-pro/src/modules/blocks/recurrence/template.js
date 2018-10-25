@@ -47,7 +47,9 @@ export default class RecurringEntry extends PureComponent {
 
 	render() {
 		return (
-			this.props.isRepeatBlockVisible
+			this.props.isRepeatBlockVisible ||
+			this.props.hasRules ||
+			this.props.hasExceptions
 				? (
 					<PluginBlockHooks
 						pluginTemplates={ PLUGIN_TEMPLATES }

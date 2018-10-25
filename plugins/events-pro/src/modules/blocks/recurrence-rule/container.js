@@ -20,6 +20,7 @@ const mapStateToProps = state => ( {
 	isRulePanelVisible: ui.selectors.isRulePanelVisible( state ),
 	isRulePanelExpanded: ui.selectors.isRulePanelExpanded( state ),
 	rules: recurring.selectors.getRules( state ),
+	hasRules: recurring.selectors.hasRules( state ),
 } );
 
 const mapDispatchToProps = dispatch => ( {

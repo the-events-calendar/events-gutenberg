@@ -15,12 +15,13 @@ import AttributeSync from '@moderntribe/events-pro/elements/attribute-sync/eleme
 import { getExceptions } from '@moderntribe/events-pro/data/blocks/exception/selectors';
 import * as types from '@moderntribe/events-pro/data/blocks/exception/types';
 
-export default class EventRecurring extends PureComponent {
+export default class RecurringExceptions extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
 		clientId: PropTypes.string.isRequired,
 		editException: PropTypes.func.isRequired,
 		exceptions: PropTypes.array.isRequired,
+		hasExceptions: PropTypes.bool.isRequired,
 		initialExceptionPanelClick: PropTypes.func.isRequired,
 		isExceptionPanelExpanded: PropTypes.bool.isRequired,
 		isExceptionPanelVisible: PropTypes.bool.isRequired,
@@ -34,7 +35,8 @@ export default class EventRecurring extends PureComponent {
 		return (
 			<Fragment>
 				{
-					this.props.isExceptionPanelVisible
+					this.props.isExceptionPanelVisible ||
+					this.props.hasExceptions
 						? (
 							<Panel
 								onHeaderClick={ this.props.toggleExceptionPanelExpand }

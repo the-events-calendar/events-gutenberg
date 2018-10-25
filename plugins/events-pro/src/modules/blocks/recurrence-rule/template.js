@@ -19,6 +19,7 @@ export default class EventRecurring extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
 		clientId: PropTypes.string.isRequired,
+		hasRules: PropTypes.bool.isRequired,
 		initialRulePanelClick: PropTypes.func.isRequired,
 		isRulePanelExpanded: PropTypes.bool.isRequired,
 		isRulePanelVisible: PropTypes.bool.isRequired,
@@ -32,7 +33,8 @@ export default class EventRecurring extends PureComponent {
 		return (
 			<Fragment>
 				{
-					this.props.isRulePanelVisible
+					this.props.isRulePanelVisible ||
+					this.props.hasRules
 						? (
 							<Panel
 								onHeaderClick={ this.props.toggleRulePanelExpand }
