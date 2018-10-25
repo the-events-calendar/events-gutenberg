@@ -11,9 +11,6 @@ import { __ } from '@wordpress/i18n';
 import ExceptionForm from '@moderntribe/events-pro/elements/exception-form/element';
 import ExceptionAddField from '@moderntribe/events-pro/elements/exception-add-field/element';
 import Panel from '@moderntribe/events-pro/elements/panel/element';
-import AttributeSync from '@moderntribe/events-pro/elements/attribute-sync/element';
-import { getExceptions } from '@moderntribe/events-pro/data/blocks/exception/selectors';
-import * as types from '@moderntribe/events-pro/data/blocks/exception/types';
 
 export default class RecurringExceptions extends PureComponent {
 	static propTypes = {
@@ -53,17 +50,6 @@ export default class RecurringExceptions extends PureComponent {
 						)
 						: <ExceptionAddField onClick={ this.props.initialExceptionPanelClick } />
 				}
-				<AttributeSync
-					setAttributes={ this.props.setAttributes }
-					clientId={ this.props.clientId }
-					metaField="exceptions"
-					selector={ getExceptions }
-					listeners={ [
-						types.ADD_EXCEPTION,
-						types.EDIT_EXCEPTION,
-						types.REMOVE_EXCEPTION,
-					] }
-				/>
 			</Fragment>
 		);
 	}
