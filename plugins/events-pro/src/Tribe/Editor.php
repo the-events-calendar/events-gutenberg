@@ -17,6 +17,8 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		add_filter( 'tribe-events-save-options', array( $this, 'save_custom_field_values' ) );
 		add_action( 'block_categories', array( $this, 'register_additional_fields_category' ), 10, 2 );
 		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'add_events_pro_config' ) );
+		add_filter( 'tribe_events_editor_default_template', array( $this, 'add_additional_fields_in_editor' ) );
+		
 		$this->assets();
 	}
 	
@@ -232,13 +234,71 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 */
 	protected function get_additional_fields() {
 		$additional_fields = array_values( tribe_get_option( 'custom-fields', array() ) );
-		$fields = array();
+		$fields            = array();
 		foreach ( $additional_fields as $field ) {
 			if ( ! empty( $field['values'] ) ) {
 				$field['values'] = explode( "\n", str_replace( "\r\t", '', $field['values'] ) );
 			}
 			$fields[] = $field;
 		}
+		
 		return $fields;
+	}
+	
+	/**
+	 *
+	 *
+	 * @since TBD
+	 *
+	 * @param array $templates
+	 *
+	 * @return array An array with the templates
+	 */
+	public function add_additional_fields_in_editor( $templates ) {
+		$blocks                      = array();
+		$additional_fields_templates = $this->get_block_names_from_additional_fields();
+		foreach ( $templates as $template ) {
+			$blocks[] = $template;
+			if ( is_array( $template ) && 'tribe/event-venue' === $template[0] ) {
+				foreach ( $additional_fields_templates as $additional_field ) {
+					$blocks[] = array( $additional_field );
+				}
+			}
+		}
+		
+		return $blocks;
+	}
+	
+	/**
+	 * Return the name of the blocks created by additional fields settings as blocks in a format:
+	 *
+	 * `tribe/field-%s, where %s is the name of meta used to save the block.
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	protected function get_block_names_from_additional_fields() {
+		$fields = $this->get_additional_fields();
+		$names  = [];
+		foreach ( $fields as $field ) {
+			if ( isset( $field['gutenberg_editor'] ) && false === $field['gutenberg_editor'] ) {
+				$names[] = $this->to_block_name( $field['name'] );
+			}
+		}
+		return $names;
+	}
+	
+	/**
+	 * Convert a string into a valid block name where only a-z and 0-9 characters are valid
+	 *
+	 * @since TBD
+	 *
+	 * @param string $name
+	 *
+	 * @return string
+	 */
+	protected function to_block_name( $name = '' ) {
+		return sprintf( 'tribe/field-%s', preg_replace( '/[^a-zA-Z0-9-]/', '', $name ) );
 	}
 }
