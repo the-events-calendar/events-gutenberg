@@ -35,6 +35,11 @@ export default {
 	},
 
 	attributes: {
+		rules: {
+			type: 'string',
+			source: 'meta',
+			meta: '_tribe_blocks_recurrence_rules',
+		},
 	},
 
 	edit: EventRecurring,

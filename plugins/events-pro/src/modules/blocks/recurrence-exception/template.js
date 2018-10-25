@@ -12,22 +12,26 @@ import ExceptionForm from '@moderntribe/events-pro/elements/exception-form/eleme
 import ExceptionAddField from '@moderntribe/events-pro/elements/exception-add-field/element';
 import Panel from '@moderntribe/events-pro/elements/panel/element';
 
-export default class EventRecurring extends PureComponent {
+export default class RecurringExceptions extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
-		removeException: PropTypes.func.isRequired,
+		clientId: PropTypes.string.isRequired,
 		editException: PropTypes.func.isRequired,
 		exceptions: PropTypes.array.isRequired,
+		hasExceptions: PropTypes.bool.isRequired,
 		initialExceptionPanelClick: PropTypes.func.isRequired,
 		isExceptionPanelExpanded: PropTypes.bool.isRequired,
 		isExceptionPanelVisible: PropTypes.bool.isRequired,
+		removeException: PropTypes.func.isRequired,
+		setAttributes: PropTypes.func.isRequired,
 		toggleExceptionPanelExpand: PropTypes.func.isRequired,
 		toggleExceptionPanelVisibility: PropTypes.func.isRequired,
 	}
 
 	render() {
 		return (
-			this.props.isExceptionPanelVisible
+			this.props.isExceptionPanelVisible ||
+			this.props.hasExceptions
 				? (
 					<Panel
 						onHeaderClick={ this.props.toggleExceptionPanelExpand }

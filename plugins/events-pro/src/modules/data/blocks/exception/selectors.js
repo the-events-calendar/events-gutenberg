@@ -14,6 +14,7 @@ import { SERIES_ENDS_OPTIONS } from '@moderntribe/events-pro/data/blocks/recurri
 import { constants } from '@moderntribe/common/data/plugins';
 
 export const getExceptions = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ].blocks.exception;
+export const hasExceptions = createSelector( getExceptions, exceptions => !! exceptions.length );
 export const getIndex = ( _, props ) => props.index;
 
 export const getRule = createSelector(
