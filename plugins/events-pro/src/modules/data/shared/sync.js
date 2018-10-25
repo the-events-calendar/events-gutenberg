@@ -1,11 +1,11 @@
 /**
  * External dependencies
  */
-import { takeLatest, takeEvery, take, put, select, call, cancel } from 'redux-saga/effects';
-// import { updateBlockAttributes } from '@wordpress/editor/src/store/actions';
+import { takeLatest, takeEvery, take, select, call, cancel } from 'redux-saga/effects';
+import { PREFIX_EVENTS_PRO_STORE } from '@moderntribe/events-pro/data/prefix';
 
-export const INITIALIZE_SYNC = 'INITIALIZE_SYNC';
-export const CANCEL_SYNC = 'CANCEL_SYNC';
+export const INITIALIZE_SYNC = `${ PREFIX_EVENTS_PRO_STORE }/INITIALIZE_SYNC`;
+export const CANCEL_SYNC = `${ PREFIX_EVENTS_PRO_STORE }/CANCEL_SYNC`;
 
 export function* serialize( payload ) {
 	return yield call( [ JSON, 'stringify' ], payload );
