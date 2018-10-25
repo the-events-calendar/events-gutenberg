@@ -84,6 +84,8 @@ export function* handleAddition( { actions } ) {
 		[ KEY_BETWEEN ]: 1,
 		[ KEY_LIMIT_TYPE ]: recurringConstants.COUNT,
 		[ KEY_LIMIT ]: 7,
+		[ KEY_LIMIT_DATE_INPUT ]: endDateInput,
+		[ KEY_LIMIT_DATE_OBJ ]: endDateObj,
 		[ KEY_DAYS ]: [],
 		[ KEY_WEEK ]: recurringConstants.FIRST,
 		[ KEY_DAY ]: 1,

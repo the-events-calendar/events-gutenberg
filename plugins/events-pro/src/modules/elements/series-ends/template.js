@@ -35,6 +35,8 @@ const SeriesEnds = ( {
 
 		if ( seriesEnds && seriesEnds.value === constants.DATE ) {
 			const seriesEndsOnDateObj = new Date( seriesEndsOnDate );
+			console.log( 'seriesEndsOnDate', seriesEndsOnDate );
+			console.log( 'seriesEndsOnDateObj', seriesEndsOnDateObj );
 			postfix = (
 				<DayPickerInput
 					value={ seriesEndsOnDate }

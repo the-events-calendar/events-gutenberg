@@ -26,10 +26,9 @@ import { withStore } from '@moderntribe/common/hoc';
 
 const {
 	RECURRING,
-	KEY_END_DATE,
-	KEY_END_DATE_INPUT,
-	KEY_END_DATE_OBJ,
 	KEY_LIMIT,
+	KEY_LIMIT_DATE_INPUT,
+	KEY_LIMIT_DATE_OBJ,
 	KEY_LIMIT_TYPE,
 } = constants;
 
@@ -55,21 +54,24 @@ const onSeriesEndsChange = ( ownProps, edit ) => ( selectedOption ) => (
 
 const onSeriesEndsOnDateChange = ( ownProps, edit, end ) => (
 	( date, modifiers, dayPickerInput ) => {
-		let endDate, endDateInput;
+		console.log('here in day change');
+		console.log('date', date);
+		console.log('dayPickerInput', dayPickerInput);
+		let limit, limitDateInput;
 
 		if ( date ) {
-			const endDateMoment = toMoment( date );
-			endDate = toDatabaseDate( endDateMoment );
-			endDateInput = toDate( endDateMoment );
+			const limitDateMoment = toMoment( date );
+			limit = toDatabaseDate( limitDateMoment );
+			limitDateInput = toDate( limitDateMoment );
 		} else {
 			// set default end date as date time end date
-			endDate = toDatabaseDate( toMoment( end ) );
-			endDateInput = dayPickerInput.state.value;
+			limit = toDatabaseDate( toMoment( end ) );
+			limitDateInput = dayPickerInput.state.value;
 		}
 
-		edit( ownProps.index, { [ KEY_END_DATE_INPUT ]: endDateInput } );
+		edit( ownProps.index, { [ KEY_END_DATE_INPUT ]: limitDateInput } );
 		edit( ownProps.index, { [ KEY_END_DATE_OBJ ]: date } );
-		edit( ownProps.index, { [ KEY_END_DATE ]: endDate } );
+		edit( ownProps.index, { [ KEY_LIMIT ]: limit } );
 	}
 );
 
