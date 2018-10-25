@@ -26,11 +26,23 @@ Object {
     "dividerList": ", ",
     "isPristine": true,
     "label": "",
+    "metaKey": "",
     "options": Array [],
+    "output": "",
     "type": "",
     "value": "",
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_INITIAL_STATE",
+}
+`;
+
+exports[`Actions in Additional Fields meta key 1`] = `
+Object {
+  "payload": Object {
+    "metaKey": "_tribe_events",
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_META_KEY",
 }
 `;
 
@@ -59,6 +71,69 @@ Object {
     "value": "Chocolate",
   },
   "type": "@@MT/EVENTS-PRO/REMOVE_ADDITIONAL_FIELD_VALUE",
+}
+`;
+
+exports[`Actions in Additional Fields set field blur 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_BLUR",
+}
+`;
+
+exports[`Actions in Additional Fields set field blur with type type 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_BLUR/text",
+}
+`;
+
+exports[`Actions in Additional Fields set field blur with type type 2`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_BLUR/checkbox",
+}
+`;
+
+exports[`Actions in Additional Fields set field blur with type type 3`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_BLUR/radio",
+}
+`;
+
+exports[`Actions in Additional Fields set field blur with type type 4`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_BLUR/dropdown",
+}
+`;
+
+exports[`Actions in Additional Fields set field blur with type type 5`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_BLUR/textarea",
+}
+`;
+
+exports[`Actions in Additional Fields set field blur with type type 6`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_BLUR/url",
 }
 `;
 
@@ -122,6 +197,16 @@ Object {
     ],
   },
   "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_OPTIONS",
+}
+`;
+
+exports[`Actions in Additional Fields set field output 1`] = `
+Object {
+  "payload": Object {
+    "name": "_ecp_custom_23",
+    "output": "Label on my field",
+  },
+  "type": "@@MT/EVENTS-PRO/SET_ADDITIONAL_FIELD_OUTPUT",
 }
 `;
 
