@@ -8,8 +8,10 @@ import { combineReducers } from 'redux';
  */
 import rsvp from './rsvp';
 import ticket from './ticket';
+import attendees from './attendees';
 
 export default combineReducers( {
 	rsvp,
 	ticket,
+	attendees,
 } );
