@@ -9,6 +9,7 @@ import moment from 'moment/moment';
 import * as types from './../types';
 import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
 import { moment as momentUtil } from '@moderntribe/common/utils';
+import { getDefaultProviderCurrency } from '@moderntribe/tickets/data/utils';
 
 const currentMoment = moment();
 const ADDITIONAL_DAYS = 3;
@@ -32,6 +33,8 @@ export const DEFAULT_STATE = {
 	isLoading: false,
 	hasBeenCreated: false,
 	available: 0,
+	provider: '',
+	currencySymbol: getDefaultProviderCurrency(),
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -95,6 +98,16 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				ticketId: action.payload.ticketId,
+			};
+		case types.SET_TICKET_PROVIDER:
+			return {
+				...state,
+				provider: action.payload.provider,
+			};
+		case types.SET_TICKET_CURRENCY:
+			return {
+				...state,
+				currencySymbol: action.payload.currencySymbol,
 			};
 		case types.SET_TICKET_DATE_PRISTINE:
 			return {

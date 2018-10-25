@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 import { sendValue } from '@moderntribe/common/utils/input';
+import { getDefaultProviderCurrency } from '@moderntribe/tickets/data/utils';
 
 class Header extends PureComponent {
 	static PRICE_POSITIONS = {
@@ -31,11 +32,12 @@ class Header extends PureComponent {
 		descriptionPlaceholder: PropTypes.string,
 		setDescription: PropTypes.func.isRequired,
 		price: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
-		priceCurrency: PropTypes.string,
+		currencySymbol: PropTypes.string,
 		pricePosition: PropTypes.oneOf( Object.keys( Header.PRICE_POSITIONS ) ),
 		pricePlaceholder: PropTypes.string,
 		setPrice: PropTypes.func.isRequired,
 	};
+
 
 	static defaultProps = {
 		title: '',
@@ -44,7 +46,7 @@ class Header extends PureComponent {
 		descriptionPlaceholder: __( 'Description', 'events-gutenberg' ),
 		price: 0,
 		pricePlaceholder: __( '0', 'events-gutenberg' ),
-		priceCurrency: __( '$', 'events-gutenberg' ),
+		currencySymbol: getDefaultProviderCurrency(),
 		pricePosition: Header.PRICE_POSITIONS.prefix,
 	};
 
@@ -76,8 +78,8 @@ class Header extends PureComponent {
 	}
 
 	renderPriceLabel() {
-		const { priceCurrency } = this.props;
-		return [ <span key="price-currency">{ priceCurrency }</span>, this.renderPriceInput() ];
+		const { currencySymbol } = this.props;
+		return [ <span key="price-currency">{ currencySymbol }</span>, this.renderPriceInput() ];
 	}
 
 	renderPrice() {

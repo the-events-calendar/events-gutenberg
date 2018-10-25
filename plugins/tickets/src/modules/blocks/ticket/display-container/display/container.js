@@ -28,6 +28,8 @@ const mapStateToProps = ( state, ownProps ) => {
 		isShared: selectors.isSharedTicket( state, ownProps ),
 		shared: shared || 0,
 		isTicketDisabled: selectors.isTicketDisabled( state, ownProps ),
+		provider: selectors.getTicketProvider( state, ownProps ),
+		currencySymbol: selectors.getTicketCurrency( state, ownProps ),
 	};
 };
 

@@ -17,11 +17,16 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 		// Add Rest API support
 		add_filter( 'tribe_tickets_register_ticket_post_type_args', array( $this, 'add_rest_support' ) );
 
+		// Update Post content to use correct child blocks for tickets
+		add_filter( 'tribe_blocks_editor_update_classic_content', array( $this, 'update_tickets_block_with_childs' ), 10, 3 );
+
 		// Make data available to the current ticket
 		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'add_tickets_js_config' ) );
 
 		// Add RSVP and tickets blocks
 		add_action( 'admin_init', array( $this, 'add_tickets_block_in_editor' ) );
+
+		add_filter( 'tribe_events_editor_default_classic_template', array( $this, 'filter_default_template_classic_blocks' ), 15 );
 	}
 
 	/**
@@ -54,11 +59,26 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	}
 
 	/**
+	 * Filters and adds the ticket block into the default classic blocks
+	 *
+	 * @since  0.3.1-alpha
+	 *
+	 * @param  array $template
+	 *
+	 * @return array
+	 */
+	public function filter_default_template_classic_blocks( $template = array() ) {
+		$template[] = array( 'tribe/tickets' );
+		return $template;
+	}
+
+	/**
 	 * Check if current admin page is post type `tribe_events`
 	 *
 	 * @since  0.2.2-alpha
 	 *
-	 * @param $post_type
+	 * @param  mixed $post_type
+	 *
 	 * @return bool
 	 */
 	public function current_type_support_tickets( $post_type = null ) {
@@ -77,6 +97,47 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 			}
 		}
 		return $is_valid_type;
+	}
+
+	/**
+	 * Making sure we have correct post content for tickets blocks after going into Gutenberg
+	 *
+	 * @since  0.3.1-alpha
+	 *
+	 * @param  string  $content Content that will be updated
+	 * @param  WP_Post $post    Which post we will migrate
+	 * @param  array   $blocks  Which blocks we are updating with
+	 *
+	 * @return bool
+	 */
+	public function update_tickets_block_with_childs( $content, $post, $blocks ) {
+		$search = '<!-- wp:tribe/tickets  /-->';
+
+		// Do we haave a tickets blocks already setup? (we should)
+		if ( false === strpos( $content, $search ) ) {
+			return $content;
+		}
+
+		$tickets = Tribe__Tickets__Tickets::get_all_event_tickets( $post->ID );
+
+		$replace[] = '<!-- wp:tribe/tickets --><div class="wp-block-tribe-tickets">';
+
+		foreach ( $tickets as $key => $ticket ) {
+			// Skip RSVP items
+			if ( 'Tribe__Tickets__RSVP' === $ticket->provider_class ) {
+				continue;
+			}
+
+			// Insert into the replace a single Child ticket
+			$replace[] = '<!-- wp:tribe/tickets-item {"hasBeenCreated":true,"ticketId":' . $ticket->ID . '} --><div class="wp-block-tribe-tickets-item"></div><!-- /wp:tribe/tickets-item -->';
+		}
+
+		$replace[] = '</div><!-- /wp:tribe/tickets -->';
+
+		// Do the actual replace for tickets blocks
+		$content = str_replace( $search, implode( "\n\r", $replace ), $content );
+
+		return $content;
 	}
 
 	/**
@@ -125,20 +186,38 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 		$modules = Tribe__Tickets__Tickets::modules();
 		$class_names = array_keys( $modules );
 		$providers = array();
+		$default_currency_symbol = tribe_get_option( 'defaultCurrencySymbol', '$' );
 
 		foreach ( $class_names as $class ) {
-			if ( $modules[ $class ] === 'RSVP' ) {
+			if ( 'RSVP' === $modules[ $class ] ) {
 				continue;
 			}
+
+			$currency = tribe( 'tickets.commerce.currency' );
+
+			// Backwards to avoid fatals
+			$currency_symbol = $default_currency_symbol;
+			if ( is_callable( array( $currency, 'get_provider_symbol' ) ) ) {
+				$currency_symbol = $currency->get_provider_symbol( $class, null );
+			}
+
+			$currency_position = 'prefix';
+			if ( is_callable( array( $currency, 'get_provider_symbol_position' ) ) ) {
+				$currency_position = $currency->get_provider_symbol_position( $class, null );
+			}
+
 			$providers[] = array(
 				'name' => $modules[ $class ],
 				'class' => $class,
+				'currency' => html_entity_decode( $currency_symbol ),
+				'currency_position' => $currency_position,
 			);
 		}
 
 		$js_config['tickets'] = array(
 			'providers' => $providers,
 			'default_provider' => Tribe__Tickets__Tickets::get_default_module(),
+			'default_currency' => tribe_get_option( 'defaultCurrencySymbol', '$' ),
 		);
 		return $js_config;
 	}

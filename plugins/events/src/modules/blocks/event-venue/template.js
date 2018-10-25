@@ -94,7 +94,7 @@ class EventVenue extends Component {
 		this.props.removeVenue();
 	}
 
-	renderForm = () => {
+	renderForm() {
 		const { fields, onFormSubmit } = this.props;
 		return (
 			<VenueForm

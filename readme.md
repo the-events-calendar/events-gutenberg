@@ -93,6 +93,25 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.2-alpha - 2018-10-18
+
+* Fix - Custom Fields a.k.a. Meta is now saving properly for Events
+* Fix - Adjust vertical alignment of the price section for the classic event date time block
+* Fix - Make sure the ticket block uses the currency from the ticket provider
+* Fix - Header image failing to load due to Incorrect variable type on RSVP block
+* Fix - Venue form is now loading correctly on the Venue block
+
+#### 0.3.1-alpha - 2018-10-12
+
+* Fix - Make sure Classic Editor migration treats correctly Events with Tickets
+* Fix - Error when multi day toggle component was not functional
+* Fix - Prevent reset of times when set for an event from time pickers
+* Fix - Sync UI of datetime block and human readable input so any changes on any is reflected on the other
+* Fix - Make sure `meta` types matches before send into the request for `Tickets` block
+* Fix - Load Going an Not Going values on the RSVP block
+* Fix - Render "Not Going" `<button>` on RSVP block conditionally
+* Fix - Make sure that the event venue selection works
+
 #### 0.3.0-alpha - 2018-10-05
 
 * Feature - RSVP block

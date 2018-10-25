@@ -21,8 +21,8 @@ import classNames from 'classnames';
  * @param {*} fallback The value to be returned if count is zero or negative
  * @returns {*} return fallback if count is zero or negative otherwise singular or plural
  */
-const NumericLabel = ( { count, singular, plural, fallback, className } ) => {
-	if ( ! ( count > 0 ) ) {
+const NumericLabel = ( { count, singular, plural, useFallback, fallback, className } ) => {
+	if ( ! ( count > 0 ) && useFallback ) {
 		return fallback;
 	}
 	const targetStr = count === 1 ? singular : plural;
@@ -40,7 +40,7 @@ NumericLabel.propTypes = {
 	count: PropTypes.number.isRequired,
 	singular: PropTypes.string,
 	plural: PropTypes.string,
-	fallback: PropTypes.any,
+	useFallback: PropTypes.any,
 	className: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.arrayOf( PropTypes.string ),
@@ -54,6 +54,7 @@ NumericLabel.defaultProps = {
 	plural: '',
 	className: '',
 	fallback: null,
+	useFallback: true,
 }
 
 export default NumericLabel;

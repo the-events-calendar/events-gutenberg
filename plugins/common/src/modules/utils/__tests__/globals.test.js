@@ -30,6 +30,16 @@ describe( 'Tests for globals.js', () => {
 				},
 				url: 'http://gutenberg.local/wp-json/',
 			},
+			tickets: {
+				providers: [ {
+					class: 'Tribe__Tickets_Plus__Commerce__WooCommerce__Main',
+					currency: '$',
+					currency_position: 'prefix',
+					name: 'WooCommerce',
+				} ],
+				default_provider: 'Tribe__Tickets_Plus__Commerce__WooCommerce__Main',
+				default_currency: '$',
+			},
 		};
 	} );
 

@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import { date, moment as momentUtil } from '@moderntribe/common/utils';
+import moment from 'moment';
 
 const {
 	FORMATS,
@@ -10,6 +11,7 @@ const {
 	timezonesAsSelectData,
 	toNaturalLanguage,
 	rangeToNaturalLanguage,
+	labelToDate,
 } = date;
 
 jest.mock( '@moderntribe/common/utils/timezone', () => ( {
@@ -98,21 +100,46 @@ describe( 'Tests for date.js', () => {
 
 	describe( 'toNaturalLanguage', () => {
 		it( 'Should return empty string when non parsed', () => {
-			expect( toNaturalLanguage( null ) ).toEqual( { moment: null, text: '' } );
-			expect( toNaturalLanguage( undefined ) ).toEqual( { moment: null, text: '' } );
-			expect( toNaturalLanguage( '' ) ).toEqual( { moment: '', text: '' } );
+			const defaultDetail = { month: '', day: '', year: '', time: '' };
+			expect( toNaturalLanguage( {} ) ).toEqual( { moment: null, text: '', detail: defaultDetail, isValid: false } );
+			expect( toNaturalLanguage( { date: undefined } ) ).toEqual( {
+				moment: undefined,
+				text: '',
+				detail: defaultDetail,
+				isValid: false
+			} );
+			expect( toNaturalLanguage( { date: '' } ) ).toEqual( {
+				moment: '',
+				text: '',
+				detail: defaultDetail,
+				isValid: false
+			} );
 		} );
 
 		it( 'Should return the parsed date', () => {
-			expect( toNaturalLanguage( '2018-05-04 17:00:00' ) )
+			expect( toNaturalLanguage( { date: '2018-05-04 17:00:00' } ) )
 				.toEqual( {
 					moment: momentUtil.toMoment( '2018-05-04 17:00:00' ),
-					text: 'May 4 2018 at 5:00 pm',
+					text: 'May 4 2018  5:00 pm',
+					detail: {
+						month: 'May',
+						day: '4',
+						year: '2018',
+						time: '5:00 pm',
+					},
+					isValid: true,
 				} );
-			expect( toNaturalLanguage( '2019-12-24 12:00:00' ) )
+			expect( toNaturalLanguage( { date: '2019-12-24 12:00:00' } ) )
 				.toEqual( {
 					moment: momentUtil.toMoment( '2019-12-24 12:00:00' ),
-					text: 'Dec 24 2019 at 12:00 pm',
+					text: 'December 24 2019  12:00 pm',
+					detail: {
+						month: 'December',
+						day: '24',
+						year: '2019',
+						time: '12:00 pm',
+					},
+					isValid: true,
 				} );
 		} );
 	} );
@@ -126,14 +153,37 @@ describe( 'Tests for date.js', () => {
 
 		it( 'Should return only the start date', () => {
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00' ) )
-				.toBe( 'Dec 24 2019 at 12:00 pm' );
+				.toBe( 'December 24 2019 at 12:00 pm' );
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '' ) )
-				.toBe( 'Dec 24 2019 at 12:00 pm' );
+				.toBe( 'December 24 2019 at 12:00 pm' );
 		} );
 
-		it( 'Should return the range', () => {
+		it( 'Should return the range with time on same day', () => {
 			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '2019-12-24 17:00:00' ) )
-				.toBe( 'Dec 24 2019 at 12:00 pm - Dec 24 2019 at 5:00 pm' );
+				.toBe( 'December 24 2019 at 12:00 pm - 5:00 pm' );
+		} );
+
+		it( 'Should return the range without year on same year', () => {
+			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '2019-12-29 17:00:00' ) )
+				.toBe( 'December 24 2019 at 12:00 pm - December 29 at 5:00 pm' );
+		} );
+
+		it( 'Should return the range on different years', () => {
+			expect( rangeToNaturalLanguage( '2019-12-24 12:00:00', '2020-12-24 17:00:00' ) )
+				.toBe( 'December 24 2019 at 12:00 pm - December 24 2020 at 5:00 pm' );
 		} );
 	} );
+
+	describe( 'labelToDate - be aware chrono module is being mocked to avoid parsing', () => {
+		test( 'Default value when date is invalid', () => {
+			expect( labelToDate() ).toEqual( { start: null, end: null } );
+		} );
+
+		test( 'Valid dates', () => {
+			const momentDate = moment( '12-25-1995', 'MM-DD-YYYY' );
+			expect( labelToDate( momentDate ) )
+				.toEqual( { start: momentUtil.toDateTime( momentDate ), end: momentUtil.toDateTime( momentDate ) } );
+		} );
+	} );
+
 } );
