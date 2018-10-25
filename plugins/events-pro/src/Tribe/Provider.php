@@ -24,7 +24,9 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.events.pro.editor', 'Tribe__Gutenberg__Events_Pro__Editor' );
 		$this->container->singleton( 'gutenberg.events.pro.meta', 'Tribe__Gutenberg__Events_Pro__Meta' );
 		$this->container->singleton( 'gutenberg.events.pro.fields', 'Tribe__Gutenberg__Events_Pro__Additional_Fields' );
+		$this->container->singleton( 'gutenberg.events.pro.frontend.template', 'Tribe__Gutenberg__Events_Pro__Template__Frontend' );
 		$this->container->singleton( 'gutenberg.events.pro.admin.template', 'Tribe__Gutenberg__Events_Pro__Template__Admin' );
+		$this->container->singleton( 'gutenberg.events.pro.blocks.fields', 'Tribe__Gutenberg__Events_Pro__Blocks__Additional_Fields' );
 		$this->container->singleton(
 			'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' )
 		);
@@ -46,6 +48,10 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 		tribe( 'gutenberg.events.pro.editor' )->hook();
 		// Setup the Meta registration
 		add_action( 'init', tribe_callback( 'gutenberg.events.pro.meta', 'register' ), 15 );
+		add_action(
+			'tribe_events_editor_register_blocks',
+			tribe_callback( 'gutenberg.events.pro.blocks.fields', 'register' )
+		);
 	}
 
 	/**
