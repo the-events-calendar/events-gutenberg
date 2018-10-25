@@ -23,6 +23,18 @@ export default class RecurringEntry extends PureComponent {
 	static propTypes = {
 		isRepeatBlockVisible: PropTypes.bool.isRequired,
 		initialRepeatBlockClick: PropTypes.func.isRequired,
+		syncRulesFromDB: PropTypes.func.isRequired,
+		syncExceptionsFromDB: PropTypes.func.isRequired,
+		attributes: PropTypes.shape( {
+			rules: PropTypes.string,
+			exceptions: PropTypes.string,
+		} ),
+	}
+
+	componentDidMount() {
+		const { rules, exceptions } = this.props.attributes;
+		rules && this.props.syncRulesFromDB( rules );
+		exceptions && this.props.syncExceptionsFromDB( exceptions );
 	}
 
 	renderRepeatEventButton() {

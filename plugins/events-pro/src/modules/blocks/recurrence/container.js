@@ -10,6 +10,7 @@ import { compose } from 'redux';
 import { withStore } from '@moderntribe/common/hoc';
 import { selectors, actions } from '@moderntribe/events-pro/data/ui';
 import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
+import * as exception from '@moderntribe/events-pro/data/blocks/exception';
 import EventRecurringBlock from './template';
 
 /**
@@ -18,6 +19,8 @@ import EventRecurringBlock from './template';
 
 const mapStateToProps = state => ( {
 	isRepeatBlockVisible: selectors.isRepeatBlockVisible( state ),
+	hasRules: recurring.selectors.hasRules( state ),
+	hasExceptions: exception.selectors.hasExceptions( state ),
 } );
 
 const mapDispatchToProps = dispatch => ( {
@@ -25,6 +28,8 @@ const mapDispatchToProps = dispatch => ( {
 	toggleRulePanelVisibility: () => dispatch( actions.toggleRulePanelVisibility() ),
 	toggleRulePanelExpand: () => dispatch( actions.toggleRulePanelExpand() ),
 	addField: ( payload ) => dispatch( recurring.actions.addField( payload ) ),
+	syncRulesFromDB: ( payload ) => dispatch( recurring.actions.syncRulesFromDB( payload ) ),
+	syncExceptionsFromDB: ( payload ) => dispatch( exception.actions.syncExceptionsFromDB( payload ) ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => ( {

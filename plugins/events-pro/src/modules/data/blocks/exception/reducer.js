@@ -31,6 +31,8 @@ export default function exception( state = [], action ) {
 			return edit( state, action );
 		case types.REMOVE_EXCEPTION:
 			return state.filter( ( _, index ) => index !== action.index );
+		case types.SYNC_EXCEPTIONS_FROM_DB:
+			return JSON.parse( action.payload );
 		default:
 			return state;
 	}
