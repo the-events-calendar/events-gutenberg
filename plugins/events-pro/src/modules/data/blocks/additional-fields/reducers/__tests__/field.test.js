@@ -71,4 +71,14 @@ describe( 'Fields reducer', () => {
 		};
 		expect( field( newState, action ) ).toMatchSnapshot();
 	} );
+
+	test( 'set meta key value', () => {
+		const action = actions.setFieldMetaKey( fieldName, '_additional_field' );
+		expect( field( DEFAULT_STATE, action ) ).toMatchSnapshot();
+	} );
+
+	test( 'field output', () => {
+		const action = actions.setFieldOutput( fieldName, 'My custom output' );
+		expect( field( DEFAULT_STATE, action ) ).toMatchSnapshot();
+	} );
 } );

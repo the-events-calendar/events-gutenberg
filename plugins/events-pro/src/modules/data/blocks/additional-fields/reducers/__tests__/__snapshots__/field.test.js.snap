@@ -6,7 +6,9 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "",
   "value": "",
 }
@@ -18,7 +20,9 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "",
   "value": "",
 }
@@ -30,7 +34,9 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "",
   "value": "",
 }
@@ -42,7 +48,9 @@ Object {
   "dividerList": ", ",
   "isPristine": false,
   "label": "",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "",
   "value": "",
 }
@@ -54,11 +62,13 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "",
+  "metaKey": "",
   "options": Array [
     "Pizza",
     "Cheese Cake",
     "Cheese",
   ],
+  "output": "",
   "type": "",
   "value": "",
 }
@@ -70,7 +80,9 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "url",
   "value": "",
 }
@@ -82,7 +94,9 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "Website",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "",
   "value": "",
 }
@@ -94,7 +108,9 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "",
   "value": "https://theeventscalendar.com/",
 }
@@ -106,9 +122,25 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "",
   "value": Array [],
+}
+`;
+
+exports[`Fields reducer field output 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "My custom output",
+  "type": "",
+  "value": "",
 }
 `;
 
@@ -118,10 +150,26 @@ Object {
   "dividerList": ", ",
   "isPristine": true,
   "label": "",
+  "metaKey": "",
   "options": Array [],
+  "output": "",
   "type": "",
   "value": Array [
     "Chocolate",
   ],
+}
+`;
+
+exports[`Fields reducer set meta key value 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "_additional_field",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": "",
 }
 `;
