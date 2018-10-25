@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 
@@ -26,27 +26,23 @@ export default class EventRecurring extends PureComponent {
 
 	render() {
 		return (
-			<Fragment>
-				{
-					this.props.isRulePanelVisible ||
-					this.props.hasRules
-						? (
-							<Panel
-								onHeaderClick={ this.props.toggleRulePanelExpand }
-								isExpanded={ this.props.isRulePanelExpanded }
-								panelTitle={ __( 'Recurrence Rules', 'events-gutenberg' ) }
-							>
-								<RecurringForm
-									rules={ this.props.rules }
-									removeRule={ this.props.removeRule }
-								/>
-								<RecurringAddField onClick={ this.props.addField } noBorder />
-							</Panel>
-						)
-						: <RecurringAddField onClick={ this.props.initialRulePanelClick } />
+			this.props.isRulePanelVisible ||
+			this.props.hasRules
+				? (
+					<Panel
+						onHeaderClick={ this.props.toggleRulePanelExpand }
+						isExpanded={ this.props.isRulePanelExpanded }
+						panelTitle={ __( 'Recurrence Rules', 'events-gutenberg' ) }
+					>
+						<RecurringForm
+							rules={ this.props.rules }
+							removeRule={ this.props.removeRule }
+						/>
+						<RecurringAddField onClick={ this.props.addField } noBorder />
+					</Panel>
+				)
+				: <RecurringAddField onClick={ this.props.initialRulePanelClick } />
 
-				}
-			</Fragment>
 		);
 	}
 }

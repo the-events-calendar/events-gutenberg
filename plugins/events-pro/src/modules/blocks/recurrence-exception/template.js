@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
 
@@ -30,27 +30,23 @@ export default class RecurringExceptions extends PureComponent {
 
 	render() {
 		return (
-			<Fragment>
-				{
-					this.props.isExceptionPanelVisible ||
-					this.props.hasExceptions
-						? (
-							<Panel
-								onHeaderClick={ this.props.toggleExceptionPanelExpand }
-								isExpanded={ this.props.isExceptionPanelExpanded }
-								panelTitle={ __( 'Exceptions', 'events-gutenberg' ) }
-							>
-								<ExceptionForm
-									exceptions={ this.props.exceptions }
-									removeException={ this.props.removeException }
-									editException={ this.props.editException }
-								/>
-								<ExceptionAddField onClick={ this.props.addField } noBorder />
-							</Panel>
-						)
-						: <ExceptionAddField onClick={ this.props.initialExceptionPanelClick } />
-				}
-			</Fragment>
+			this.props.isExceptionPanelVisible ||
+			this.props.hasExceptions
+				? (
+					<Panel
+						onHeaderClick={ this.props.toggleExceptionPanelExpand }
+						isExpanded={ this.props.isExceptionPanelExpanded }
+						panelTitle={ __( 'Exceptions', 'events-gutenberg' ) }
+					>
+						<ExceptionForm
+							exceptions={ this.props.exceptions }
+							removeException={ this.props.removeException }
+							editException={ this.props.editException }
+						/>
+						<ExceptionAddField onClick={ this.props.addField } noBorder />
+					</Panel>
+				)
+				: <ExceptionAddField onClick={ this.props.initialExceptionPanelClick } />
 		);
 	}
 }
