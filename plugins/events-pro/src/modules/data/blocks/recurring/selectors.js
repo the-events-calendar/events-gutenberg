@@ -14,6 +14,7 @@ import {
 	SERIES_ENDS_OPTIONS,
 } from './options';
 import { constants } from '@moderntribe/common/data/plugins';
+import * as selectors from '@moderntribe/events-pro/data/shared/selectors';
 
 export const getRules = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ].blocks.recurring;
 export const hasRules = createSelector( getRules, rules => !! rules.length );
@@ -24,95 +25,24 @@ export const getRule = createSelector(
 	( rules, index ) => rules[ index ],
 );
 
-export const getType = createSelector(
-	[ getRule ],
-	( rule ) => rule.type,
-);
-
-export const getAllDay = createSelector(
-	[ getRule ],
-	( rule ) => rule.all_day,
-);
-
-export const getMultiDay = createSelector(
-	[ getRule ],
-	( rule ) => rule.multi_day,
-);
-
-export const getMultiDaySpan = createSelector(
-	[ getRule ],
-	( rule ) => rule.multi_day_span,
-);
-
-export const getStartDate = createSelector(
-	[ getRule ],
-	( rule ) => rule.start_date,
-);
-
-export const getStartTime = createSelector(
-	[ getRule ],
-	( rule ) => rule.start_time,
-);
-
-export const getStartTimeNoSeconds = createSelector(
-	[ getStartTime ],
-	( startTime ) => startTime.slice( 0, -3 ),
-);
-
-export const getEndDate = createSelector(
-	[ getRule ],
-	( rule ) => rule.end_date,
-);
-
-export const getEndTime = createSelector(
-	[ getRule ],
-	( rule ) => rule.end_time,
-);
-
-export const getEndTimeNoSeconds = createSelector(
-	[ getEndTime ],
-	( endTime ) => endTime.slice( 0, -3 ),
-);
-
-export const getBetween = createSelector(
-	[ getRule ],
-	( rule ) => rule.between,
-);
-
-export const getLimitType = createSelector(
-	[ getRule ],
-	( rule ) => rule.limit_type,
-);
-
-export const getLimit = createSelector(
-	[ getRule ],
-	( rule ) => rule.limit,
-);
-
-export const getDays = createSelector(
-	[ getRule ],
-	( rule ) => rule.days,
-);
-
-export const getWeek = createSelector(
-	[ getRule ],
-	( rule ) => rule.week,
-);
-
-export const getDay = createSelector(
-	[ getRule ],
-	( rule ) => rule.day,
-);
-
-export const getMonth = createSelector(
-	[ getRule ],
-	( rule ) => rule.month,
-);
-
-export const getTimezone = createSelector(
-	[ getRule ],
-	( rule ) => rule.timezone,
-);
+export const getType = createSelector( getRule, selectors.getType );
+export const getAllDay = createSelector( getRule, selectors.getAllDay );
+export const getMultiDay = createSelector( getRule, selectors.getMultiDay );
+export const getMultiDaySpan = createSelector( getRule, selectors.getMultiDaySpan );
+export const getStartDate = createSelector( getRule, selectors.getStartDate );
+export const getStartTime = createSelector( getRule, selectors.getStartTime );
+export const getStartTimeNoSeconds = createSelector( getRule, selectors.getStartTimeNoSeconds );
+export const getEndDate = createSelector( getRule, selectors.getEndDate );
+export const getEndTime = createSelector( getRule, selectors.getEndTime );
+export const getEndTimeNoSeconds = createSelector( getRule, selectors.getEndTimeNoSeconds );
+export const getBetween = createSelector( getRule, selectors.getBetween );
+export const getLimitType = createSelector( getRule, selectors.getLimitType );
+export const getLimit = createSelector( getRule, selectors.getLimit );
+export const getDays = createSelector( getRule, selectors.getDays );
+export const getDay = createSelector( getRule, selectors.getDay );
+export const getMonth = createSelector( getRule, selectors.getMonth );
+export const getWeek = createSelector( getRule, selectors.getWeek );
+export const getTimezone = createSelector( getRule, selectors.getTimezone );
 
 export const getTypeOption = createSelector(
 	[ getType ],
