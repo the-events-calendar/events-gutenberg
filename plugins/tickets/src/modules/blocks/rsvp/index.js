@@ -21,7 +21,7 @@ export default {
 	id: 'rsvp',
 	title: __( 'RSVP', 'events-gutenberg' ),
 	description: __(
-		'RSVP block',
+		'Find out who is planning to attend!',
 		'events-gutenberg',
 	),
 	icon: BlockIcon,
