@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import identity from 'lodash/identity';
 
 /**
  * Internal dependencies
