@@ -20,7 +20,7 @@ export default {
 	id: 'attendees',
 	title: __( 'Event Attendees', 'events-gutenberg' ),
 	description: __(
-		'Who is attending to this event? List them with their gravatar!',
+		'Show the gravatars of people coming to this event.',
 		'events-gutenberg'
 	),
 	icon: BlockIcon,
