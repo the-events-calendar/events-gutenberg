@@ -20,7 +20,6 @@ import { withStore } from '@moderntribe/common/hoc';
 const { KEY_END_TIME, KEY_MULTI_DAY_SPAN } = constants;
 
 const getRecurringMultiDay = ( state, ownProps ) => {
-	// TODO: remove this once we have recurring multi day in state
 	const recurringMultiDay = selectors.getMultiDaySpan( state, ownProps );
 	return find(
 		options.RECURRING_MULTI_DAY_OPTIONS,
