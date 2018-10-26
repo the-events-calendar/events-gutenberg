@@ -39,6 +39,11 @@ export const getMultiDay = createSelector(
 	( rule ) => rule.multi_day,
 );
 
+export const getMultiDaySpan = createSelector(
+	[ getRule ],
+	( rule ) => rule.multi_day_span,
+);
+
 export const getStartDate = createSelector(
 	[ getRule ],
 	( rule ) => rule.start_date,
