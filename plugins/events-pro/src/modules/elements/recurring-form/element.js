@@ -33,6 +33,7 @@ export default class RecurringForm extends PureComponent {
 							isMultiDay={ rule[ KEY_MULTI_DAY ] }
 							onRemoveClick={ this.props.removeRule }
 							type={ rule[ KEY_TYPE ] }
+							{ ...rule }
 						/>
 					) )
 				}
