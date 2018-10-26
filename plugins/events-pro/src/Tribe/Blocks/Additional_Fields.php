@@ -12,7 +12,7 @@ class Tribe__Gutenberg__Events_Pro__Blocks__Additional_Fields {
 	 * @return void
 	 */
 	public function register() {
-		$blocks = tribe( 'gutenberg.events.pro.fields' )->get_block_names( );
+		$blocks = tribe( 'gutenberg.events.pro.fields' )->get_block_names();
 		foreach ( $blocks as $block ) {
 			$field = new Tribe__Gutenberg__Events_Pro__Blocks__Additional_Field( $block );
 			$field->register();
