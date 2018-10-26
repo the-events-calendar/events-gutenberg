@@ -41,6 +41,7 @@ const {
 } = constants;
 
 export const getRules = ( state ) => state[ pluginConstants.EVENTS_PRO_PLUGIN ].blocks.recurring;
+export const hasRules = createSelector( getRules, rules => !! rules.length );
 export const getIndex = ( _, props ) => props.index;
 
 export const getRule = createSelector(

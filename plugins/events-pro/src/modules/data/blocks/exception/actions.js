@@ -38,3 +38,8 @@ export const syncException = curry( ( index, payload ) => ( {
 	payload,
 	sync: true,
 } ) );
+
+export const syncExceptionsFromDB = payload => ( {
+	type: types.SYNC_EXCEPTIONS_FROM_DB,
+	payload,
+} );

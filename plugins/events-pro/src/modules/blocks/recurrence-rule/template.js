@@ -15,17 +15,19 @@ import Panel from '@moderntribe/events-pro/elements/panel/element';
 export default class EventRecurring extends PureComponent {
 	static propTypes = {
 		addField: PropTypes.func.isRequired,
-		removeRule: PropTypes.func.isRequired,
+		hasRules: PropTypes.bool.isRequired,
 		initialRulePanelClick: PropTypes.func.isRequired,
 		isRulePanelExpanded: PropTypes.bool.isRequired,
 		isRulePanelVisible: PropTypes.bool.isRequired,
+		removeRule: PropTypes.func.isRequired,
 		rules: PropTypes.array.isRequired,
 		toggleRulePanelExpand: PropTypes.func.isRequired,
 	}
 
 	render() {
 		return (
-			this.props.isRulePanelVisible
+			this.props.isRulePanelVisible ||
+			this.props.hasRules
 				? (
 					<Panel
 						onHeaderClick={ this.props.toggleRulePanelExpand }
@@ -40,6 +42,7 @@ export default class EventRecurring extends PureComponent {
 					</Panel>
 				)
 				: <RecurringAddField onClick={ this.props.initialRulePanelClick } />
+
 		);
 	}
 }

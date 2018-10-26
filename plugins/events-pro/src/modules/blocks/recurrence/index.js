@@ -35,6 +35,16 @@ export default {
 	},
 
 	attributes: {
+		exceptions: {
+			type: 'string',
+			source: 'meta',
+			meta: '_tribe_blocks_recurrence_exclusions',
+		},
+		rules: {
+			type: 'string',
+			source: 'meta',
+			meta: '_tribe_blocks_recurrence_rules',
+		},
 	},
 
 	edit: EventRecurring,

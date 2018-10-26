@@ -36,3 +36,8 @@ export const syncRule = curry( ( index, payload ) => ( {
 	...editRule( index, payload ),
 	sync: true,
 } ) );
+
+export const syncRulesFromDB = payload => ( {
+	type: types.SYNC_RULES_FROM_DB,
+	payload,
+} );
