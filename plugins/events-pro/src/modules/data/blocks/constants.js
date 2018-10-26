@@ -15,6 +15,7 @@ export const BLOCK_TYPES = [ RECURRING, EXCEPTION ];
 export const KEY_TYPE = 'type';
 export const KEY_ALL_DAY = 'all_day';
 export const KEY_MULTI_DAY = 'multi_day';
+export const KEY_MULTI_DAY_SPAN = 'multi_day_span';
 export const KEY_START_TIME = 'start_time';
 export const KEY_END_TIME = 'end_time';
 export const KEY_START_DATE = 'start_date';

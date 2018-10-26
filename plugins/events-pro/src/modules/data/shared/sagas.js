@@ -33,6 +33,7 @@ const {
 	KEY_DAY,
 	KEY_MONTH,
 	KEY_TIMEZONE,
+	KEY_MULTI_DAY_SPAN,
 } = constants;
 
 const {
@@ -93,6 +94,7 @@ export function* handleAddition( { actions } ) {
 		[ KEY_DAY ]: 1,
 		[ KEY_MONTH ]: [],
 		[ KEY_TIMEZONE ]: timezone,
+		[ KEY_MULTI_DAY_SPAN ]: recurringConstants.NEXT_DAY,
 	} ) );
 }
 
