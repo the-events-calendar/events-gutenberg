@@ -24,7 +24,6 @@ import { TimePicker } from '@moderntribe/common/elements';
 import {
 	Dashboard,
 	Month,
-	DateInput,
 	Upsell,
 	TimeZone,
 } from '@moderntribe/events/elements';
@@ -34,8 +33,9 @@ import {
 	time,
 } from '@moderntribe/common/utils';
 import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
-import PluginDateTimeBlockHooks from './hooks';
 import './style.pcss';
+import HumanReadableInput from './human-readable-input/container';
+import PluginDateTimeBlockHooks from './hooks';
 
 /**
  * Module Code
@@ -72,14 +72,13 @@ class EventDateTime extends Component {
 		naturalLanguageLabel: PropTypes.string,
 		setInitialState: PropTypes.func,
 		setCost: PropTypes.func,
-		setDateTime: PropTypes.func,
 		setTimeZone: PropTypes.func,
 		setSeparatorTime: PropTypes.func,
 		setSeparatorDate: PropTypes.func,
 		setVisibleMonth: PropTypes.func,
 		setNaturalLanguageLabel: PropTypes.func,
 		onKeyDown: PropTypes.func,
-		onClickOutside: PropTypes.func,
+		onClick: PropTypes.func,
 		onSelectDay: PropTypes.func,
 		onStartTimePickerChange: PropTypes.func,
 		onStartTimePickerClick: PropTypes.func,
@@ -91,6 +90,18 @@ class EventDateTime extends Component {
 		visibleMonth: PropTypes.instanceOf( Date ),
 	};
 
+	componentDidMount() {
+		const { onKeyDown, onClick } = this.props;
+		document.addEventListener( 'keydown', onKeyDown );
+		document.addEventListener( 'click', onClick );
+	}
+
+	componentWillUnmount() {
+		const { onKeyDown, onClick } = this.props;
+		document.removeEventListener( 'keydown', onKeyDown );
+		document.removeEventListener( 'click', onClick );
+	}
+
 	renderPrice = () => {
 		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
@@ -100,7 +111,6 @@ class EventDateTime extends Component {
 		}
 
 		return (
-
 			<div
 				key="tribe-editor-event-cost"
 				className="tribe-editor__event-cost"
@@ -260,9 +270,9 @@ class EventDateTime extends Component {
 								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
+						<PluginDateTimeBlockHooks />
+						{ ! hideUpsell && <Upsell /> }
 					</footer>
-					<PluginDateTimeBlockHooks />
-					{ ! hideUpsell && <Upsell /> }
 				</Fragment>
 			</Dashboard>
 		);
@@ -302,7 +312,7 @@ class EventDateTime extends Component {
 			allDay,
 			multiDay,
 			onStartTimePickerChange,
-			onStartTimePickerClick,
+			onStartTimePickerClick
 		} = this.props;
 		const startMoment = toMoment( start );
 		const endMoment = toMoment( end );
@@ -365,6 +375,7 @@ class EventDateTime extends Component {
 			allDay,
 		};
 
+
 		if ( ! multiDay ) {
 			// if the start time has less than half an hour left in the day
 			if ( endMoment.clone().add( 1, 'days' ).startOf( 'day' ).diff( startMoment, 'seconds' ) <= time.HALF_HOUR_IN_SECONDS ) {
@@ -411,9 +422,6 @@ class EventDateTime extends Component {
 			allDay,
 			showDateInput,
 			onDateTimeLabelClick,
-			setDateTime,
-			setNaturalLanguageLabel,
-			naturalLanguageLabel,
 		} = this.props;
 
 		return (
@@ -423,30 +431,25 @@ class EventDateTime extends Component {
 			>
 				{
 					showDateInput
-						? (
-							<DateInput
-								onChange={ setNaturalLanguageLabel }
-								setDateTime={ setDateTime }
-								value={ naturalLanguageLabel }
-								after={ this.renderExtras() }
-							/>
-						)
-						: (
-							<h2 className="tribe-editor__subtitle__headline">
-								<button
-									className="tribe-editor__btn--label"
-									onClick={ onDateTimeLabelClick }
-								>
-									{ this.renderStartDate() }
-									{ this.renderStartTime() }
-									{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
-									{ this.renderEndDate() }
-									{ this.renderEndTime() }
-									{ allDay && this.renderSeparator( 'all-day' ) }
-								</button>
-								{ this.renderExtras() }
-							</h2>
-						)
+					? (
+						<HumanReadableInput after={ this.renderExtras() } />
+					)
+					: (
+						<h2 className="tribe-editor__subtitle__headline">
+							<button
+								className="tribe-editor__btn--label"
+								onClick={ onDateTimeLabelClick }
+							>
+								{ this.renderStartDate() }
+								{ this.renderStartTime() }
+								{ ( multiDay || ! allDay ) && this.renderSeparator( 'time-range' ) }
+								{ this.renderEndDate() }
+								{ this.renderEndTime() }
+								{ allDay && this.renderSeparator( 'all-day' ) }
+							</button>
+							{ this.renderExtras() }
+						</h2>
+					)
 				}
 				{ this.renderDashboard() }
 			</section>
@@ -503,9 +506,7 @@ class EventDateTime extends Component {
 	}
 
 	render() {
-		return (
-			[ this.renderBlock(), this.renderControls() ]
-		);
+		return [ this.renderBlock(), this.renderControls() ];
 	}
 }
 

@@ -26,14 +26,30 @@ class Tribe__Gutenberg__Common__Editor {
 	 * @return bool
 	 */
 	public function should_load_blocks() {
-		return $this->is_gutenberg_active() && $this->is_blocks_editor_active();
+		return (
+			$this->is_gutenberg_active()
+			|| $this->is_wp_version()
+		)
+		&& $this->is_blocks_editor_active();
+	}
+
+	/**
+	 * Checks if we are on version 5.0-alpha or higher where we no longer have
+	 * Gutenberg Project, but the Blocks Editor
+	 *
+	 * @since  0.3.3-alpha
+	 *
+	 * @return boolean
+	 */
+	public function is_wp_version() {
+		global $wp_version;
+
+		return version_compare( $wp_version, '5.0-alpha', '>=' );
 	}
 
 	/**
 	 * Checks if we have Gutenberg Project online, only useful while
 	 * its a external plugin
-	 *
-	 * @todo   Revise when Gutenberg is merged into core
 	 *
 	 * @since  0.2.7-alpha
 	 *

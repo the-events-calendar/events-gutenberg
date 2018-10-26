@@ -70,6 +70,19 @@ export const getRSVPCapacity = createSelector(
 	( details ) => details.capacity,
 );
 
+export const getRSVPAvailable = createSelector(
+	[ getRSVPCapacity, getRSVPGoingCount ],
+	( capacity, goingCount ) => {
+		const total = parseInt( capacity, 10 ) || 0;
+		const going = parseInt( goingCount, 10 ) || 0;
+		/**
+		 * Prevent to have negative values when subtracting the going amount from total amount, so it takes the max value
+		 * of the substraction operation or zero if the operation is lower than zero it will return zero insted.
+		 */
+		return Math.max( total - going, 0 );
+	}
+)
+
 export const getRSVPNotGoingResponses = createSelector(
 	[ getRSVPDetails ],
 	( details ) => details.notGoingResponses,

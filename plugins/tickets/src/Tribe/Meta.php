@@ -72,7 +72,7 @@ class Tribe__Gutenberg__Tickets__Meta {
 		register_meta(
 			'post',
 			'_tribe_ticket_show_not_going',
-			$this->text()
+			$this->boolean()
 		);
 
 		// Global Stock
@@ -108,7 +108,6 @@ class Tribe__Gutenberg__Tickets__Meta {
 			$rsvp->event_key,
 			$this->text()
 		);
-
 
 		// "Ghost" Meta fields
 		register_meta(

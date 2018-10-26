@@ -1,3 +1,5 @@
+import { config } from '@moderntribe/common/src/modules/utils/globals';
+
 export const PREFIX_TICKETS_STORE = '@@MT/TICKETS';
 
 export const RSVP_POST_TYPE = 'tribe_rsvp_tickets';
@@ -30,3 +32,30 @@ export const TICKET_ORDERS_PAGE_SLUG = {
 	Tribe__Tickets__Commerce__PayPal__Main: 'tpp-orders',
 	Tribe__Tickets_Plus__Commerce__WooCommerce__Main: 'tickets-orders',
 };
+
+/**
+ * Get currency symbol by provider
+ */
+export function getProviderCurrency( provider ) {
+	const tickets = config().tickets || {};
+	const providers = tickets.providers || {};
+
+	// if we don't get the provider, return the default one
+	if ( '' == provider ) {
+		return tickets.default_currency;
+	}
+
+	const [ result ] = providers.filter( el => el.class === provider );
+	return result ? result.currency : tickets.default_currency;
+};
+
+/**
+ * Get the default provider's currency symbol
+ */
+export function getDefaultProviderCurrency() {
+	const tickets = config().tickets || {};
+	const defaultProvider = tickets.default_provider || '';
+
+	return getProviderCurrency( defaultProvider );
+}
+

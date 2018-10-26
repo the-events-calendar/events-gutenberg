@@ -34,7 +34,7 @@ const TicketDisplay = ( props ) => {
 		title,
 		description,
 		price,
-		currencySign,
+		currencySymbol,
 		currencyPosition,
 		isUnlimited,
 		expires,
@@ -48,7 +48,7 @@ const TicketDisplay = ( props ) => {
 		isTicketDisabled,
 	} = props;
 
-	const priceLabel = [ currencySign, price ];
+	const priceLabel = [ currencySymbol, price ];
 	const labels = {
 		unlimited: interpolateNumbers( __( '%d sold', 'events-gutenberg' ), sold ),
 		normal: interpolateNumbers( __( '%d of %d sold', 'events-gutenberg' ), sold, capacity ),
@@ -102,7 +102,7 @@ TicketDisplay.propTypes = {
 	title: PropTypes.string.isRequired,
 	description: PropTypes.string,
 	price: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
-	currencySign: PropTypes.string,
+	currencySymbol: PropTypes.string,
 	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix' ] ),
 	isUnlimited: PropTypes.bool,
 	available: PropTypes.number,
@@ -122,7 +122,7 @@ TicketDisplay.defaultProps = {
 	title: '',
 	description: '',
 	price: 0,
-	currencySign: '$',
+	currencySymbol: '$',
 	currencyPosition: 'prefix',
 	isUnlimited: false,
 	available: 0,

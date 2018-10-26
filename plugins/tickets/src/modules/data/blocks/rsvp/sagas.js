@@ -56,7 +56,7 @@ export function* setRSVPTempDetails( action ) {
 		put( actions.setRSVPTempNotGoingResponses( tempNotGoingResponses ) ),
 		put( actions.setRSVPTempStartDate( tempStartDate ) ),
 		put( actions.setRSVPTempStartDateObj( tempStartDateObj ) ),
-		put( actions.setRSVPTempStartTime( tempStartTime) ),
+		put( actions.setRSVPTempStartTime( tempStartTime ) ),
 		put( actions.setRSVPTempEndDate( tempEndDate ) ),
 		put( actions.setRSVPTempEndDateObj( tempEndDateObj ) ),
 		put( actions.setRSVPTempEndTime( tempEndTime ) ),

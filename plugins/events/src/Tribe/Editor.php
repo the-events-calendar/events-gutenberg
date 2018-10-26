@@ -23,7 +23,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 		add_filter( 'tribe_events_register_organizer_type_args', array( $this, 'add_rest_support' ) );
 
 		// Maybe add flag from classic editor
-		add_action( 'init', array( $this, 'flag_post_from_classic_editor' ), 0 );
+		add_action( 'load-post.php', array( $this, 'flag_post_from_classic_editor' ), 0 );
 
 		// Update Post content to use blocks
 		add_action( 'tribe_blocks_editor_flag_post_classic_editor', array( $this, 'update_post_content_to_blocks' ) );
@@ -39,31 +39,24 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 
 		// Add Block Categories to Editor
 		add_action( 'block_categories', array( $this, 'block_categories' ), 10, 2 );
-		// Make sure empty string is consider as a "true" value
-		add_filter( 'tribe_get_option', array( $this, 'get_option' ), 10, 2 );
+
+		// Make sure Events supports 'custom-fields'
+		add_action( 'init', array( $this, 'add_event_custom_field_support' ), 11 );
 	}
 
 	/**
-	 * When the plugin loads the option is not set so the value is an empty string and when casting into a bool value
-	 * this returns a `false` positive. As empty string indicates the value has not set already.
-	 *
-	 * This is something should be addressed on TEC as is affecting any new user installing the plugin.
+	 * When Gutenberg is active do not care about custom-fields as a metabox, but as part o the Rest API
 	 *
 	 * Code is located at: https://github.com/moderntribe/the-events-calendar/blob/f8af49bc41048e8632372fc8da77202d9cb98d86/src/Tribe/Admin/Event_Meta_Box.php#L345
 	 *
-	 * @since 0.3.0-alpha
+	 * @todo  Block that option once the user has Gutenberg active
 	 *
-	 * @param $value
-	 * @param $name
+	 * @since 0.3.2-alpha
 	 *
-	 * @return bool
+	 * @return void
 	 */
-	public function get_option( $value, $name ) {
-		// If value is empty string indicates the value hasn't been set into the DB and should be true by default.
-		if ( 'disable_metabox_custom_fields' === $name && '' === $value ) {
-			return true;
-		}
-		return $value;
+	public function add_event_custom_field_support() {
+		add_post_type_support( Tribe__Events__Main::POSTTYPE, 'custom-fields' );
 	}
 
 	/**
@@ -87,8 +80,9 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 		}
 
 		$on_classic_editor_page = tribe_get_request_var( 'classic-editor', false );
+
 		// Bail if in classic editor
-		if ( $on_classic_editor_page ) {
+		if ( '' === $on_classic_editor_page || $on_classic_editor_page ) {
 			return false;
 		}
 
@@ -102,12 +96,20 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			return false;
 		}
 
+		$has_flag_classic_editor = metadata_exists( 'post', $post, $this->key_flag_classic_editor );
+
+		// If we already have a flag we bail
+		if ( $has_flag_classic_editor ) {
+			return false;
+		}
+
+		// Update with the flag for the update process
 		$status = update_post_meta( $post, $this->key_flag_classic_editor, 1 );
 
 		// Only trigger when we actually have the correct post
 		if ( $status ) {
 			/**
-			 * Triggers
+			 * Flags when we are coming from a Classic editor into Blocks
 			 *
 			 * @since  0.2.2-alpha
 			 *
@@ -130,11 +132,21 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 	 */
 	public function update_post_content_to_blocks( $post ) {
 		$post    = get_post( $post );
+
 		$blocks  = $this->get_classic_template();
 		$content = array();
 
 		foreach ( $blocks as $key => $block_param ) {
 			$slug = reset( $block_param );
+			$params = end( $block_param );
+			$json_param = false;
+
+			// Checks for Params to attach to the tag
+			if ( is_array( $params ) ) {
+				$json_param = json_encode( $params );
+			}
+
+			$block_tag = "<!-- wp:{$slug} {$json_params} /-->";
 
 			if ( 'core/paragraph' === $slug ) {
 				if ( '' === $post->post_content ) {
@@ -144,13 +156,26 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 				$content[] = $post->post_content;
 				$content[] = '<!-- /wp:freeform -->';
 			} else {
-				$content[] = '<!-- wp:' . $slug . ' /-->';
+				$content[] = $block_tag;
 			}
 		}
 
+		$content = implode( "\n\r", $content );
+
+		/**
+		 * Allow filtering of the Content updated
+		 *
+		 * @since  0.3.1-alpha
+		 *
+		 * @param  string  $content Content that will be updated
+		 * @param  WP_Post $post    Which post we will migrate
+		 * @param  array   $blocks  Which blocks we are updating with
+		 */
+		$content = apply_filters( 'tribe_blocks_editor_update_classic_content', $content, $post, $blocks );
+
 		$status = wp_update_post( array(
 			'ID' => $post->ID,
-			'post_content' => implode( "\n\r", $content ),
+			'post_content' => $content,
 		) );
 
 		return $status;
@@ -176,6 +201,17 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 		$template[] = array( 'tribe/event-links' );
 		$template[] = array( 'tribe/classic-event-details' );
 		$template[] = array( 'tribe/event-venue' );
+
+		/**
+		 * Allow modifying the default classic template for Events
+		 *
+		 * @since  0.3.1-alpha
+		 *
+		 * @param  array   $template   Array of all the templates used by default
+		 *
+		 */
+		$template = apply_filters( 'tribe_events_editor_default_classic_template', $template );
+
 		return $template;
 	}
 
@@ -562,4 +598,30 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 	public function add_template_blocks( $args = array() ) {
 		return $this->add_event_template_blocks( $args );
 	}
+
+	/**
+	 * When the plugin loads the option is not set so the value is an empty string and when casting into a bool value
+	 * this returns a `false` positive. As empty string indicates the value has not set already.
+	 *
+	 * This is something should be addressed on TEC as is affecting any new user installing the plugin.
+	 *
+	 * Code is located at: https://github.com/moderntribe/the-events-calendar/blob/f8af49bc41048e8632372fc8da77202d9cb98d86/src/Tribe/Admin/Event_Meta_Box.php#L345
+	 *
+	 * @since      0.3.0-alpha
+	 * @deprecated 0.3.2-alpha
+	 *
+	 * @param $value
+	 * @param $name
+	 *
+	 * @return bool
+	 */
+	public function get_option( $value, $name ) {
+		// If value is empty string indicates the value hasn't been set into the DB and should be true by default.
+		if ( 'disable_metabox_custom_fields' === $name && '' === $value ) {
+			return true;
+		}
+
+		return $value;
+	}
+
 }
