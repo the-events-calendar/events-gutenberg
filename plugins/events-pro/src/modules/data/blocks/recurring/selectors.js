@@ -29,6 +29,8 @@ const {
 	KEY_END_DATE_INPUT,
 	KEY_END_DATE_OBJ,
 	KEY_LIMIT,
+	KEY_LIMIT_DATE_INPUT,
+	KEY_LIMIT_DATE_OBJ,
 	KEY_LIMIT_TYPE,
 	KEY_BETWEEN,
 	KEY_DAYS,
@@ -124,6 +126,16 @@ export const getLimitType = createSelector(
 export const getLimit = createSelector(
 	[ getRule ],
 	( rule ) => rule[ KEY_LIMIT ],
+);
+
+export const getLimitDateInput = createSelector(
+	[ getRule ],
+	( rule ) => rule[ KEY_LIMIT_DATE_INPUT ],
+);
+
+export const getLimitDateObj = createSelector(
+	[ getRule ],
+	( rule ) => rule[ KEY_LIMIT_DATE_OBJ ],
 );
 
 export const getDays = createSelector(
