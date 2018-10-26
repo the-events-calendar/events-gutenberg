@@ -15,9 +15,12 @@ import {
 	options,
 	selectors,
 } from '@moderntribe/events-pro/data/blocks/recurring';
+import { time as timeUtil } from '@moderntribe/common/utils';
 import { withStore } from '@moderntribe/common/hoc';
 
 const { KEY_END_TIME, KEY_MULTI_DAY_SPAN } = constants;
+
+const { TIME_FORMAT_HH_MM, fromSeconds } = timeUtil;
 
 const getRecurringMultiDay = ( state, ownProps ) => {
 	const recurringMultiDay = selectors.getMultiDaySpan( state, ownProps );
@@ -37,7 +40,7 @@ const onEndTimeChange = ( dispatch, ownProps ) => ( e ) => (
 const onEndTimeClick = ( dispatch, ownProps ) => ( value, onClose ) => {
 	dispatch( actions.editRule(
 		ownProps.index,
-		{ [ KEY_END_TIME ]: value },
+		{ [ KEY_END_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) },
 	) );
 	onClose();
 };

@@ -21,6 +21,7 @@ import {
 import { withStore } from '@moderntribe/common/hoc';
 
 const {
+	DAYS_OF_THE_WEEK_PROP_KEYS,
 	DAYS_OF_THE_WEEK_MAPPING_TO_STATE,
 	DAYS_OF_THE_WEEK_PROP_KEY_MAPPING_FROM_STATE,
 } = recurringConstants;
@@ -32,6 +33,12 @@ const mapStateToProps = ( state, ownProps ) => {
 	const days = selectors.getDays( state, ownProps );
 	const stateProps = { days };
 
+	// set default checked values of each weekday to false
+	DAYS_OF_THE_WEEK_PROP_KEYS.forEach( ( key ) => {
+		stateProps[ key ] = false;
+	} );
+
+	// set checked value to true if weekday exists in state
 	days.forEach( ( day ) => {
 		const propKey = DAYS_OF_THE_WEEK_PROP_KEY_MAPPING_FROM_STATE[ day ];
 		stateProps[ propKey ] = true;
@@ -61,7 +68,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 			const { checked, value } = e.target;
 			const mappedValue = DAYS_OF_THE_WEEK_MAPPING_TO_STATE[ value ];
 			const newDays = checked
-				? [ ...days, mappedValue ].sort()
+				? [ ...days, mappedValue ].sort( ( a, b ) => a - b )
 				: days.filter( ( day ) => day !== mappedValue );
 
 			edit( ownProps.index, { [ constants.KEY_DAYS ]: newDays } );

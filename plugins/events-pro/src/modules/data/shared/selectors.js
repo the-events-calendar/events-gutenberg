@@ -33,6 +33,16 @@ export const getStartDate = createSelector(
 	( rule ) => rule[ constants.KEY_START_DATE ],
 );
 
+export const getStartDateInput = createSelector(
+	[ getRule ],
+	( rule ) => rule[ constants.KEY_START_DATE_INPUT ],
+);
+
+export const getStartDateObj = createSelector(
+	[ getRule ],
+	( rule ) => rule[ constants.KEY_START_DATE_OBJ ],
+);
+
 export const getStartTime = createSelector(
 	[ getRule ],
 	( rule ) => rule[ constants.KEY_START_TIME ],
@@ -46,6 +56,16 @@ export const getStartTimeNoSeconds = createSelector(
 export const getEndDate = createSelector(
 	[ getRule ],
 	( rule ) => rule[ constants.KEY_END_DATE ],
+);
+
+export const getEndDateInput = createSelector(
+	[ getRule ],
+	( rule ) => rule[ constants.KEY_END_DATE_INPUT ],
+);
+
+export const getEndDateObj = createSelector(
+	[ getRule ],
+	( rule ) => rule[ constants.KEY_END_DATE_OBJ ],
 );
 
 export const getEndTime = createSelector(
@@ -71,6 +91,16 @@ export const getLimitType = createSelector(
 export const getLimit = createSelector(
 	[ getRule ],
 	( rule ) => rule[ constants.KEY_LIMIT ],
+);
+
+export const getLimitDateInput = createSelector(
+	[ getRule ],
+	( rule ) => rule[ constants.KEY_LIMIT_DATE_INPUT ],
+);
+
+export const getLimitDateObj = createSelector(
+	[ getRule ],
+	( rule ) => rule[ constants.KEY_LIMIT_DATE_OBJ ],
 );
 
 export const getDays = createSelector(

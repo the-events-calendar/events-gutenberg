@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -25,6 +26,7 @@ const YearlyField = ( { isMultiDay, index } ) => {
 				blockType={ constants.RECURRING }
 				index={ index }
 				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
+				rowLabel={ __( 'Every', 'events-gutenberg' ) }
 			/>
 			<InMonth
 				blockType={ constants.RECURRING }

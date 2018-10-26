@@ -27,12 +27,6 @@ const TypePicker = ( {
 	rowLabel,
 	selected,
 } ) => {
-	const getLabel = () => (
-		selected && selected.value === recurringConstants.SINGLE
-			? __( 'A', 'events-gutenberg' )
-			: __( 'Every', 'events-gutenberg' )
-	);
-
 	const getFrequencySelect = () => (
 		selected &&
 			selected.value !== recurringConstants.SINGLE &&

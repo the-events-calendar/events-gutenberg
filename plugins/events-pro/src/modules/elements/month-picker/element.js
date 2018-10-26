@@ -50,6 +50,7 @@ class MonthPicker extends PureComponent {
 					isMulti={ true }
 					onBlur={ this.onSelectBlur }
 					onChange={ this.props.onSelectChange }
+					openMenuOnFocus={ true }
 					options={ options.MONTHS_OF_THE_YEAR_OPTIONS }
 					value={ this.props.months }
 				/>
