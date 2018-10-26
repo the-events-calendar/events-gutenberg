@@ -31,6 +31,8 @@ export default function recurring( state = [], action ) {
 			return edit( state, action );
 		case types.REMOVE_RULE:
 			return state.filter( ( _, index ) => index !== action.index );
+		case types.SYNC_RULES_FROM_DB:
+			return JSON.parse( action.payload );
 		default:
 			return state;
 	}
