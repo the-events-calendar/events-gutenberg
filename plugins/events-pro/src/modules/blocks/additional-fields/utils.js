@@ -65,7 +65,7 @@ export const FIELDS_SCHEMA = {
 export const fieldToBlock = ( field ) => {
 	const { name, label, type, values } = field;
 	const schema = FIELDS_SCHEMA[ type ] || FIELDS_SCHEMA.text;
-	return {
+	const block = {
 		id: `field-${ toBlockName( name ) }`,
 		title: label,
 		description: __(
@@ -98,7 +98,7 @@ export const fieldToBlock = ( field ) => {
 				default: values,
 			},
 			value: {
-				type: schema.type,
+				type: 'string',
 				source: 'meta',
 				meta: name,
 			},
@@ -106,6 +106,16 @@ export const fieldToBlock = ( field ) => {
 		edit: Container( schema.container ),
 		save: () => null,
 	};
+
+	if ( type === FIELD_TYPES.checkbox ) {
+		block.attributes.list = {
+			type: 'array',
+			source: 'meta',
+			meta: `_${ name }`,
+		};
+	}
+
+	return block;
 };
 
 /**

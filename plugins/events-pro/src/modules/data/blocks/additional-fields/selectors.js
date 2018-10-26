@@ -100,7 +100,7 @@ export const getFieldOptionsWithLabels = createSelector(
 
 export const getFieldDropdownValue = createSelector(
 	[ getFieldBlock ],
-	( field ) => field.value || {},
+	( field ) => ( { value: field.value, label: field.value } ),
 );
 
 export const getFieldDropdownOutput = createSelector(
@@ -108,8 +108,13 @@ export const getFieldDropdownOutput = createSelector(
 	( value ) => value.label || '',
 );
 
+export const getFieldCheckboxValue = createSelector(
+	[ getTextFieldValue ],
+	( value ) => value.split( '|' ),
+);
+
 export const getFieldCheckboxOptions = createSelector(
-	[ getArrayFieldValue, getFieldOptionsWithLabels ],
+	[ getFieldCheckboxValue, getFieldOptionsWithLabels ],
 	( values, optionsWithLabels ) => {
 		return optionsWithLabels.map( ( option ) => ( {
 			...option,
@@ -119,6 +124,6 @@ export const getFieldCheckboxOptions = createSelector(
 );
 
 export const getFieldCheckboxOutput = createSelector(
-	[ getArrayFieldValue, getFieldDividerList, getFieldDividerEnd ],
+	[ getFieldCheckboxValue, getFieldDividerList, getFieldDividerEnd ],
 	( values, listDivider, dividerEnd ) => wordsAsList( values, listDivider, dividerEnd ),
 );

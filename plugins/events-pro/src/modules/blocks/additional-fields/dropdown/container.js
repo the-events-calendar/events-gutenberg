@@ -18,9 +18,9 @@ const mapStateToProps = ( state, ownProps ) => ( {
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	onInputChange( event ) {
+	onInputChange( { value } ) {
 		const { name } = ownProps;
-		dispatch( actions.setFieldValue( name, event ) );
+		dispatch( actions.setFieldValue( name, value ) );
 		dispatch( actions.setChange( name ) );
 	},
 } );

@@ -237,7 +237,10 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		$fields            = array();
 		foreach ( $additional_fields as $field ) {
 			if ( ! empty( $field['values'] ) ) {
-				$field['values'] = explode( "\n", str_replace( "\r\t", '', $field['values'] ) );
+				$field['values'] = explode(
+					"\n",
+					str_replace( array( "\r", "\t" ), '', $field['values'] )
+				);
 			}
 			$fields[] = $field;
 		}
