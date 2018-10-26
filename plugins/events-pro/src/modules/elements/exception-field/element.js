@@ -8,9 +8,6 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import { constants } from '@moderntribe/events-pro/data/blocks/recurring';
-import { selectors } from '@moderntribe/events-pro/data/blocks/exception';
-import { constants as keys } from '@moderntribe/events-pro/data/blocks';
-import { moment as momentUtils } from '@moderntribe/common/utils';
 import { Fieldset } from '@moderntribe/events-pro/elements';
 import RemoveField from '@moderntribe/events-pro/elements/remove-field/element';
 import Singular from './singular';
@@ -19,66 +16,36 @@ import Weekly from './weekly';
 import Monthly from './monthly';
 import Yearly from './yearly';
 
+const {
+	DAILY,
+	WEEKLY,
+	MONTHLY,
+	YEARLY,
+	RECURRENCE_TYPES,
+} = constants;
+
 export default class ExceptionField extends PureComponent {
 	static propTypes = {
-		onRemoveClick: PropTypes.func.isRequired,
-		editException: PropTypes.func.isRequired,
 		index: PropTypes.number.isRequired,
-		type: PropTypes.string.isRequired,
+		onRemoveClick: PropTypes.func.isRequired,
+		type: PropTypes.oneOf( RECURRENCE_TYPES ).isRequired,
 	}
 
 	handleRemove = () => this.props.onRemoveClick( this.props.index )
-	handleStartDate = ( value ) => this.props.editException( this.props.index, {
-		[ keys.KEY_START_DATE ]: value,
-	} )
-
-	handleLimitType = option => this.props.editException( this.props.index, {
-		[ keys.KEY_LIMIT_TYPE ]: option.value,
-	} )
-
-	get typeOption() {
-		return selectors.getTypeOption( this.props );
-	}
-
-	get limitTypeOption() {
-		return selectors.getLimitTypeOption( this.props );
-	}
 
 	renderFieldType = () => {
-		switch ( this.props.type ) {
-			case constants.DAILY:
-				return (
-					<Daily
-						{ ...this.props }
-						handleStartDate={ this.handleStartDate }
-						handleLimitType={ this.handleLimitType }
-					/>
-				);
-			case constants.WEEKLY:
-				return (
-					<Weekly
-						{ ...this.props }
-					/>
-				);
-			case constants.MONTHLY:
-				return (
-					<Monthly
-						{ ...this.props }
-					/>
-				);
-			case constants.YEARLY:
-				return (
-					<Yearly
-						{ ...this.props }
-					/>
-				);
+		const { index, type } = this.props;
+		switch ( type ) {
+			case DAILY:
+				return <Daily index={ index } />;
+			case WEEKLY:
+				return <Weekly index={ index } />;
+			case MONTHLY:
+				return <Monthly index={ index } />;
+			case YEARLY:
+				return <Yearly index={ index } />;
 			default:
-				return (
-					<Singular
-						{ ...this.props }
-						handleStartDate={ this.handleStartDate }
-					/>
-				);
+				return <Singular index={ index } />;
 		}
 	}
 

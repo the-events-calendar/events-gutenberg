@@ -43,7 +43,7 @@ const TypePicker = ( {
 	return (
 		<LabeledRow
 			className={ classNames( 'tribe-editor__type-picker', className ) }
-			label={ rowLabel || getLabel() }
+			label={ rowLabel }
 		>
 			{ getFrequencySelect() }
 			<Select

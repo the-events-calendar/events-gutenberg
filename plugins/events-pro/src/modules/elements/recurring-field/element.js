@@ -26,59 +26,34 @@ const {
 
 export default class RecurringField extends PureComponent {
 	static propTypes = {
-		onRemoveClick: PropTypes.func.isRequired,
 		index: PropTypes.number.isRequired,
 		isMultiDay: PropTypes.bool.isRequired,
+		onRemoveClick: PropTypes.func.isRequired,
 		type: PropTypes.oneOf( RECURRENCE_TYPES ).isRequired,
 	}
 
-	handleClick = () => this.props.onRemoveClick( this.props.index )
+	handleRemove = () => this.props.onRemoveClick( this.props.index )
 
 	renderFieldType = () => {
 		const { index, isMultiDay, type } = this.props;
 		switch ( type ) {
 			case DAILY:
-				return (
-					<Daily
-						index={ index }
-						isMultiDay={ isMultiDay }
-					/>
-				);
+				return <Daily index={ index } isMultiDay={ isMultiDay } />;
 			case WEEKLY:
-				return (
-					<Weekly
-						index={ index }
-						isMultiDay={ isMultiDay }
-					/>
-				);
+				return <Weekly index={ index } isMultiDay={ isMultiDay } />;
 			case MONTHLY:
-				return (
-					<Monthly
-						index={ index }
-						isMultiDay={ isMultiDay }
-					/>
-				);
+				return <Monthly index={ index } isMultiDay={ isMultiDay } />;
 			case YEARLY:
-				return (
-					<Yearly
-						index={ index }
-						isMultiDay={ isMultiDay }
-					/>
-				);
+				return <Yearly index={ index } isMultiDay={ isMultiDay } />;
 			default:
-				return (
-					<Singular
-						index={ index }
-						isMultiDay={ isMultiDay }
-					/>
-				);
+				return <Singular index={ index } isMultiDay={ isMultiDay } />;
 		}
 	}
 
 	render() {
 		return (
 			<Fieldset>
-				<RemoveField onClick={ this.handleClick } />
+				<RemoveField onClick={ this.handleRemove } />
 				{ this.renderFieldType() }
 			</Fieldset>
 		);
