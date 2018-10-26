@@ -50,7 +50,7 @@ describe( 'Actions in Additional Fields', () => {
 	} );
 
 	test( 'on change', () => {
-		expect( actions.setChange( fieldName ) ).toMatchSnapshot();
+		expect( actions.setFieldChange( fieldName ) ).toMatchSnapshot();
 	} );
 
 	test( 'append field value', () => {
@@ -59,5 +59,26 @@ describe( 'Actions in Additional Fields', () => {
 
 	test( 'remove field value', () => {
 		expect( actions.removeFieldValue( fieldName, 'Chocolate' ) ).toMatchSnapshot();
+	} );
+
+	test( 'meta key', () => {
+		expect( actions.setFieldMetaKey( fieldName, '_tribe_events' ) ).toMatchSnapshot();
+	} );
+
+	test( 'set field output', () => {
+		expect( actions.setFieldOutput( fieldName, 'Label on my field' ) ).toMatchSnapshot();
+	} );
+
+	test( 'set field blur', () => {
+		expect( actions.setFieldBlur( fieldName ) ).toMatchSnapshot();
+	} );
+
+	test( 'set field blur with type type', () => {
+		expect( actions.setFieldBlurWithType( fieldName, FIELD_TYPES.text ) ).toMatchSnapshot();
+		expect( actions.setFieldBlurWithType( fieldName, FIELD_TYPES.checkbox ) ).toMatchSnapshot();
+		expect( actions.setFieldBlurWithType( fieldName, FIELD_TYPES.radio ) ).toMatchSnapshot();
+		expect( actions.setFieldBlurWithType( fieldName, FIELD_TYPES.dropdown ) ).toMatchSnapshot();
+		expect( actions.setFieldBlurWithType( fieldName, FIELD_TYPES.textarea ) ).toMatchSnapshot();
+		expect( actions.setFieldBlurWithType( fieldName, FIELD_TYPES.url) ).toMatchSnapshot();
 	} );
 } );

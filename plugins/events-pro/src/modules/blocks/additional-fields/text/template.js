@@ -10,17 +10,18 @@ import PropTypes from 'prop-types';
 import { Field } from '@moderntribe/events-pro/blocks/additional-fields/elements';
 import { Input } from '@moderntribe/common/elements';
 
-const TextField = ( { isSelected, value, onInputChange, name } ) => (
+const TextField = ( { isSelected, value, output, onInputChange, name } ) => (
 	<Field
 		id={ name }
 		input={ <Input type="text" value={ value } onChange={ onInputChange } /> }
-		output={ value }
+		output={ output }
 		isSelected={ isSelected }
 	/>
 );
 
 TextField.propTypes = {
 	name: PropTypes.string,
+	output: PropTypes.string,
 	isSelected: PropTypes.bool,
 	onInputChange: PropTypes.func,
 	value: PropTypes.string,

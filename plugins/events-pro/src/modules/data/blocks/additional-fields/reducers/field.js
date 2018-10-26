@@ -11,6 +11,8 @@ export const DEFAULT_STATE = {
 	dividerList: ', ',
 	dividerEnd: ' & ',
 	label: '',
+	metaKey: '',
+	output: '',
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -51,6 +53,16 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				dividerEnd: payload.dividerEnd,
 			};
+		case types.SET_ADDITIONAL_FIELD_META_KEY:
+			return {
+				...state,
+				metaKey: payload.metaKey,
+			}
+		case types.SET_ADDITIONAL_FIELD_OUTPUT:
+			return {
+				...state,
+				output: payload.output,
+			}
 		default:
 			return state;
 	}

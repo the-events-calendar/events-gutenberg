@@ -87,20 +87,37 @@ export const fieldToBlock = ( field ) => {
 			},
 			type: {
 				type: 'string',
-				default: type,
+				default: '',
 			},
 			label: {
 				type: 'string',
-				default: label,
+				default: '',
 			},
 			options: {
 				type: schema.type,
-				default: values,
+				default: schema.type === 'string' ? '' : [],
+			},
+			metaKey: {
+				type: 'string',
+				default: '',
+			},
+			output: {
+				type: 'string',
+				default: '',
 			},
 			value: {
 				type: 'string',
 				source: 'meta',
 				meta: name,
+			},
+			initialValues: {
+				type: 'object',
+				default: {
+					metaKey: name,
+					options: values,
+					type,
+					label,
+				},
 			},
 		},
 		edit: Container( schema.container ),
@@ -114,7 +131,6 @@ export const fieldToBlock = ( field ) => {
 			meta: `_${ name }`,
 		};
 	}
-
 	return block;
 };
 

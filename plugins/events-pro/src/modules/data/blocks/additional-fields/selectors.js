@@ -9,7 +9,6 @@ import includes from 'lodash/includes';
  * Internal dependencies
  */
 import { constants } from '@moderntribe/common/data/plugins';
-import { wordsAsList } from '@moderntribe/common/utils/string';
 
 export const getPlugin = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ];
 export const getBlocks = createSelector(
@@ -49,6 +48,16 @@ export const getFieldDividerEnd = createSelector(
 	( field ) => field.dividerEnd,
 );
 
+export const getFieldOutput = createSelector(
+	[ getFieldBlock ],
+	( field ) => field.output,
+);
+
+export const getFieldMetaKey = createSelector(
+	[ getFieldBlock ],
+	( field ) => field.metaKey,
+);
+
 export const getFieldType = createSelector(
 	[ getFieldBlock ],
 	( field ) => field.type,
@@ -69,15 +78,10 @@ export const getTextFieldValue = createSelector(
 	( value ) => value || '',
 );
 
-export const getArrayFieldValue = createSelector(
-	[ getFieldBlock ],
-	( field ) => field.value || [],
-);
-
 export const getTextAreaOutput = createSelector(
-	[ getTextFieldValue ],
-	( value ) => {
-		return value.split( '\n' ).filter( identity );
+	[ getFieldOutput ],
+	( output = '' ) => {
+		return output.split( '\n' ).filter( identity );
 	},
 );
 
@@ -104,8 +108,8 @@ export const getFieldDropdownValue = createSelector(
 );
 
 export const getFieldDropdownOutput = createSelector(
-	[ getFieldDropdownValue ],
-	( value ) => value.label || '',
+	[ getFieldBlock ],
+	( field ) => field.output,
 );
 
 export const getFieldCheckboxValue = createSelector(
@@ -121,9 +125,4 @@ export const getFieldCheckboxOptions = createSelector(
 			isChecked: includes( values, option.value ),
 		} ) );
 	},
-);
-
-export const getFieldCheckboxOutput = createSelector(
-	[ getFieldCheckboxValue, getFieldDividerList, getFieldDividerEnd ],
-	( values, listDivider, dividerEnd ) => wordsAsList( values, listDivider, dividerEnd ),
 );

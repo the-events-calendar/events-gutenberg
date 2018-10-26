@@ -207,8 +207,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 */
 	public function add_events_pro_config( $js_config ) {
 		
-		$events_pro_js_config = array( 'additional_fields' => $this->get_additional_fields() );
-		
+		$events_pro_js_config = array( 'additional_fields' => tribe( 'gutenberg.events.pro.fields' )->get_fields() );
 		if ( empty( $js_config['admin_url'] ) ) {
 			$js_config['admin_url'] = admin_url();
 		}
@@ -220,36 +219,13 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 		);
 		
 		$js_config['events_pro'] = $events_pro_js_config;
+		
 		return $js_config;
 	}
 	
-	/**
-	 * Return the additional fields as an array of values without the ID of each field and also parsing the values
-	 * from field where they might have multiple values such as: radio, dropdown, checkbox send an array of values
-	 * instead of a single string of value.
-	 *
-	 * @since TBD
-	 *
-	 * @return array
-	 */
-	protected function get_additional_fields() {
-		$additional_fields = array_values( tribe_get_option( 'custom-fields', array() ) );
-		$fields            = array();
-		foreach ( $additional_fields as $field ) {
-			if ( ! empty( $field['values'] ) ) {
-				$field['values'] = explode(
-					"\n",
-					str_replace( array( "\r", "\t" ), '', $field['values'] )
-				);
-			}
-			$fields[] = $field;
-		}
-		
-		return $fields;
-	}
 	
 	/**
-	 *
+	 * Add additional fields templates for new events
 	 *
 	 * @since TBD
 	 *
@@ -259,7 +235,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 */
 	public function add_additional_fields_in_editor( $templates ) {
 		$blocks                      = array();
-		$additional_fields_templates = $this->get_block_names_from_additional_fields();
+		$additional_fields_templates = tribe( 'gutenberg.events.pro.fields' )->get_block_names();
 		foreach ( $templates as $template ) {
 			$blocks[] = $template;
 			if ( is_array( $template ) && 'tribe/event-venue' === $template[0] ) {
@@ -268,40 +244,6 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 				}
 			}
 		}
-		
 		return $blocks;
-	}
-	
-	/**
-	 * Return the name of the blocks created by additional fields settings as blocks in a format:
-	 *
-	 * `tribe/field-%s, where %s is the name of meta used to save the block.
-	 *
-	 * @since TBD
-	 *
-	 * @return array
-	 */
-	protected function get_block_names_from_additional_fields() {
-		$fields = $this->get_additional_fields();
-		$names  = [];
-		foreach ( $fields as $field ) {
-			if ( isset( $field['gutenberg_editor'] ) && false === $field['gutenberg_editor'] ) {
-				$names[] = $this->to_block_name( $field['name'] );
-			}
-		}
-		return $names;
-	}
-	
-	/**
-	 * Convert a string into a valid block name where only a-z and 0-9 characters are valid
-	 *
-	 * @since TBD
-	 *
-	 * @param string $name
-	 *
-	 * @return string
-	 */
-	protected function to_block_name( $name = '' ) {
-		return sprintf( 'tribe/field-%s', preg_replace( '/[^a-zA-Z0-9-]/', '', $name ) );
 	}
 }

@@ -32,11 +32,11 @@ const RadioInput = ( { options, onChange, selectedValue } ) => (
 	</fieldset>
 );
 
-const RadioField = ( { name, value, options, onInputChange, isSelected } ) => (
+const RadioField = ( { name, value, output, options, onInputChange, isSelected } ) => (
 	<Field
 		id={ name }
 		input={ <RadioInput selectedValue={ value } onChange={ onInputChange } options={ options } /> }
-		output={ value }
+		output={ output }
 		isSelected={ isSelected }
 	/>
 );
@@ -46,6 +46,7 @@ RadioField.propTypes = {
 	isSelected: PropTypes.bool,
 	onInputChange: PropTypes.func,
 	value: PropTypes.string,
+	output: PropTypes.string,
 	options: PropTypes.arrayOf(
 		PropTypes.shape( {
 			value: PropTypes.string,

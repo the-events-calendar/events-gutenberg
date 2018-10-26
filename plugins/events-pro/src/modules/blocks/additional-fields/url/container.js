@@ -13,13 +13,14 @@ import UrlTemplate from './template';
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	value: selectors.getTextFieldValue( state, ownProps ),
+	output: selectors.getFieldOutput( state, ownProps ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	onInputChange( event ) {
 		const { name } = ownProps;
 		dispatch( actions.setFieldValue( name, event.target.value ) );
-		dispatch( actions.setChange( name ) );
+		dispatch( actions.setFieldChange( name ) );
 	},
 } );
 
