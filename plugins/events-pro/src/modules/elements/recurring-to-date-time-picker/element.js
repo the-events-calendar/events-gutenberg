@@ -13,16 +13,15 @@ import { constants } from '@moderntribe/events-pro/data/blocks';
 import {
 	actions,
 	options,
-	selectors
+	selectors,
 } from '@moderntribe/events-pro/data/blocks/recurring';
 import { withStore } from '@moderntribe/common/hoc';
 
-const { KEY_END_TIME } = constants;
+const { KEY_END_TIME, KEY_MULTI_DAY_SPAN } = constants;
 
 const getRecurringMultiDay = ( state, ownProps ) => {
 	// TODO: remove this once we have recurring multi day in state
-	const recurringMultiDay = 'next_day';
-	// const recurringMultiDay = selectors.getRecurringMultiDay( state, ownProps );
+	const recurringMultiDay = selectors.getMultiDaySpan( state, ownProps );
 	return find(
 		options.RECURRING_MULTI_DAY_OPTIONS,
 		( option ) => option.value === recurringMultiDay,
@@ -45,12 +44,10 @@ const onEndTimeClick = ( dispatch, ownProps ) => ( value, onClose ) => {
 };
 
 const onRecurringMultiDayChange = ( dispatch, ownProps ) => ( selectedOption ) => (
-	// TODO: fix this once we have recurring multi day in state
-	null
-	// dispatch( actions.editRule(
-	// 	ownProps.index,
-	// 	{ recurring_multi_day: selectedOption.value },
-	// ) )
+	dispatch( actions.editRule(
+		ownProps.index,
+		{ [ KEY_MULTI_DAY_SPAN ]: selectedOption.value },
+	) )
 );
 
 const mapStateToProps = ( state, ownProps ) => ( {
