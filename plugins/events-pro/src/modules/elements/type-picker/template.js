@@ -27,12 +27,6 @@ const TypePicker = ( {
 	rowLabel,
 	selected,
 } ) => {
-	const getLabel = () => (
-		selected && selected.value === recurringConstants.SINGLE
-			? __( 'A', 'events-gutenberg' )
-			: __( 'Every', 'events-gutenberg' )
-	);
-
 	const getFrequencySelect = () => (
 		selected &&
 			selected.value !== recurringConstants.SINGLE &&
@@ -49,7 +43,7 @@ const TypePicker = ( {
 	return (
 		<LabeledRow
 			className={ classNames( 'tribe-editor__type-picker', className ) }
-			label={ rowLabel || getLabel() }
+			label={ rowLabel }
 		>
 			{ getFrequencySelect() }
 			<Select

@@ -159,6 +159,12 @@ describe( 'Tests for moment.js', () => {
 		expect( converted ).toBe( moment().format( 'HH:mm' ) );
 	} );
 
+	test( 'toDatabaseDate', () => {
+		const converted = momentUtil.toDatabaseDate( moment() );
+		expect( typeof converted ).toBe( 'string' );
+		expect( converted ).toBe( moment().format( 'YYYY-MM-DD' ) );
+	} );
+
 	test( 'toDatabaseTime', () => {
 		const converted = momentUtil.toDatabaseTime( moment() );
 		expect( typeof converted ).toBe( 'string' );

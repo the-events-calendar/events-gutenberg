@@ -232,6 +232,10 @@ export const toTime24Hr = ( date, format = dateUtil.FORMATS.WP.time24Hr ) => (
 	date.format( toFormat( format ) )
 );
 
+export const toDatabaseDate = ( date, format = dateUtil.FORMATS.DATABASE.date ) => (
+	date.format( toFormat( format ) )
+);
+
 export const toDatabaseTime = ( date, format = dateUtil.FORMATS.DATABASE.time ) => (
 	date.format( toFormat( format ) )
 );

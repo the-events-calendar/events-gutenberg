@@ -73,6 +73,16 @@ export const THURSDAY_CHECKED = 'thursdayChecked';
 export const FRIDAY_CHECKED = 'fridayChecked';
 export const SATURDAY_CHECKED = 'saturdayChecked';
 
+export const DAYS_OF_THE_WEEK_PROP_KEYS = [
+	SUNDAY_CHECKED,
+	MONDAY_CHECKED,
+	TUESDAY_CHECKED,
+	WEDNESDAY_CHECKED,
+	THURSDAY_CHECKED,
+	FRIDAY_CHECKED,
+	SATURDAY_CHECKED,
+];
+
 export const DAYS_OF_THE_WEEK_MAPPING_TO_STATE = {
 	[ MONDAY ]: 1,
 	[ TUESDAY ]: 2,

@@ -3,7 +3,7 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { uniq, find } from 'lodash';
+import { find } from 'lodash';
 
 /**
  * Internal dependencies
@@ -70,7 +70,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 		},
 		onSelectChange: ( selectedOptions ) => {
 			const selectedMonths = selectedOptions.map( option => MONTHS_OF_THE_YEAR_MAPPING_TO_STATE[ option.value ] );
-			const months = uniq( [ ...monthsArr, ...selectedMonths ] ).sort( ( a, b ) => a - b );
+			const months = [ ...selectedMonths ].sort( ( a, b ) => a - b );
 
 			edit( ownProps.index, { [ KEY_MONTH ]: months } );
 		},

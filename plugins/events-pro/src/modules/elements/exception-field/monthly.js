@@ -4,7 +4,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { __ } from '@wordpress/i18n';
-import { proptypes } from '@moderntribe/common/data/plugins';
 
 /**
  * Internal dependencies
@@ -17,31 +16,29 @@ import {
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
-const MonthlyField = ( { typeOption, index } ) => {
+const MonthlyField = ( { index } ) => {
 	return (
 		<Fragment>
 			<TypePicker
-				rowLabel={ __( 'Every', 'events-gutenberg' ) }
-				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
-				selected={ typeOption }
 				blockType={ constants.EXCEPTION }
 				index={ index }
+				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
+				rowLabel={ __( 'Every', 'events-gutenberg' ) }
 			/>
 			<OnDayOfMonthPicker
-				index={ index }
 				blockType={ constants.EXCEPTION }
+				index={ index }
 			/>
 			<SeriesEnds
-				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
 				blockType={ constants.EXCEPTION }
 				index={ index }
+				rowLabel={ __( 'Exception ends', 'events-gutenberg' ) }
 			/>
 		</Fragment>
 	);
 };
 
 MonthlyField.propTypes = {
-	typeOption: proptypes.ReactSelectOption,
 	index: PropTypes.number.isRequired,
 };
 
