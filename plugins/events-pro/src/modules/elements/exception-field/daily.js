@@ -13,7 +13,7 @@ import {
 	SeriesEnds,
 } from '@moderntribe/events-pro/elements';
 import { constants } from '@moderntribe/events-pro/data/blocks';
-import { options } from '@moderntribe/events-pro/data/blocks/recurring';
+import { options } from '@moderntribe/events-pro/data/blocks/exception';
 
 const DailyField = ( { index } ) => {
 	return (
@@ -21,7 +21,8 @@ const DailyField = ( { index } ) => {
 			<TypePicker
 				blockType={ constants.EXCEPTION }
 				index={ index }
-				options={ options.RECURRENCE_TYPE_RULES_OPTIONS }
+				options={ options.EXCEPTION_OCCURRENCE_OPTIONS }
+				rowLabel={ __( 'Every', 'events-gutenberg' ) }
 			/>
 			<SeriesEnds
 				blockType={ constants.EXCEPTION }

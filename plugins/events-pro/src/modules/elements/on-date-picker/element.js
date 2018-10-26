@@ -32,9 +32,21 @@ const {
 
 const {
 	toMoment,
-	toDate,
 	toDatabaseDate,
 } = momentUtil;
+
+const onDateChange = ( ownProps, edit, start ) => (
+	( date, modifiers, dayPickerInput ) => {
+		// default end date is date time end date if date is undefined
+		const startDate = date ? date : start;
+
+		edit( ownProps.index, {
+			[ KEY_START_DATE_INPUT ]: dayPickerInput.input.value,
+			[ KEY_START_DATE_OBJ ]: date,
+			[ KEY_START_DATE ]: toDatabaseDate( toMoment( startDate ) ),
+		} );
+	}
+);
 
 const mapStateToProps = ( state, ownProps ) => {
 	const selectors = ownProps.blockType === RECURRING
@@ -59,27 +71,12 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 	const { start, ...restStateProps } = stateProps;
+	const { edit } = dispatchProps;
 
 	return {
 		...ownProps,
 		...restStateProps,
-		onDateChange: ( date, modifiers, dayPickerInput ) => {
-			let startDate, startDateInput;
-
-			if ( date ) {
-				const startDateMoment = toMoment( date );
-				startDate = toDatabaseDate( startDateMoment );
-				startDateInput = toDate( startDateMoment );
-			} else {
-				// set default start date as date time start date
-				startDate = toDatabaseDate( toMoment( start ) );
-				startDateInput = dayPickerInput.state.value;
-			}
-
-			dispatchProps.edit( ownProps.index, { [ KEY_START_DATE_INPUT ]: startDateInput } );
-			dispatchProps.edit( ownProps.index, { [ KEY_START_DATE_OBJ ]: date } );
-			dispatchProps.edit( ownProps.index, { [ KEY_START_DATE ]: startDate } );
-		},
+		onDateChange: onDateChange( ownProps, edit, start ),
 	};
 };
 

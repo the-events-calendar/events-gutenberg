@@ -50,10 +50,10 @@ export const getTimezone = createSelector( getRule, selectors.getTimezone );
 
 export const getTypeOption = createSelector(
 	[ getType ],
-	( type ) => find( EXCEPTION_OCCURRENCE_OPTIONS, ( option ) => option.value === type )
+	( type ) => find( EXCEPTION_OCCURRENCE_OPTIONS, ( option ) => option.value === type ),
 );
 
 export const getLimitTypeOption = createSelector(
 	[ getLimitType ],
-	( limitType ) => find( SERIES_ENDS_OPTIONS, ( option ) => option.value === limitType )
+	( limitType ) => find( SERIES_ENDS_OPTIONS, ( option ) => option.value === limitType ),
 );

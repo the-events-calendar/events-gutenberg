@@ -44,21 +44,14 @@ const { TIME_FORMAT_HH_MM, fromSeconds } = timeUtil;
 
 const onEndDateChange = ( ownProps, edit, end ) => (
 	( date, modifiers, dayPickerInput ) => {
-		let endDate, endDateInput;
+		// default end date is date time end date if date is undefined
+		const endDate = date ? date : end;
 
-		if ( date ) {
-			const endDateMoment = toMoment( date );
-			endDate = toDatabaseDate( endDateMoment );
-			endDateInput = toDate( endDateMoment );
-		} else {
-			// set default end date as date time end date
-			endDate = toDatabaseDate( toMoment( end ) );
-			endDateInput = dayPickerInput.state.value;
-		}
-
-		edit( ownProps.index, { [ KEY_END_DATE_INPUT ]: endDateInput } );
-		edit( ownProps.index, { [ KEY_END_DATE_OBJ ]: date } );
-		edit( ownProps.index, { [ KEY_END_DATE ]: endDate } );
+		edit( ownProps.index, {
+			[ KEY_END_DATE_INPUT ]: dayPickerInput.input.value,
+			[ KEY_END_DATE_OBJ ]: date,
+			[ KEY_END_DATE ]: toDatabaseDate( toMoment( endDate ) ),
+		} );
 	}
 );
 

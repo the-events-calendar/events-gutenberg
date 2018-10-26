@@ -54,24 +54,14 @@ const onSeriesEndsChange = ( ownProps, edit ) => ( selectedOption ) => (
 
 const onSeriesEndsOnDateChange = ( ownProps, edit, end ) => (
 	( date, modifiers, dayPickerInput ) => {
-		console.log('here in day change');
-		console.log('date', date);
-		console.log('dayPickerInput', dayPickerInput);
-		let limit, limitDateInput;
+		// default end date is date time end date if date is undefined
+		const limitDate = date ? date : end;
 
-		if ( date ) {
-			const limitDateMoment = toMoment( date );
-			limit = toDatabaseDate( limitDateMoment );
-			limitDateInput = toDate( limitDateMoment );
-		} else {
-			// set default end date as date time end date
-			limit = toDatabaseDate( toMoment( end ) );
-			limitDateInput = dayPickerInput.state.value;
-		}
-
-		edit( ownProps.index, { [ KEY_END_DATE_INPUT ]: limitDateInput } );
-		edit( ownProps.index, { [ KEY_END_DATE_OBJ ]: date } );
-		edit( ownProps.index, { [ KEY_LIMIT ]: limit } );
+		edit( ownProps.index, {
+			[ KEY_LIMIT_DATE_INPUT ]: dayPickerInput.input.value,
+			[ KEY_LIMIT_DATE_OBJ ]: date,
+			[ KEY_LIMIT ]: toDatabaseDate( toMoment( limitDate ) ),
+		} );
 	}
 );
 
@@ -87,7 +77,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	};
 
 	if ( limitType === DATE ) {
-		stateProps.seriesEndsOnDate = selectors.getLimit( state, ownProps );
+		stateProps.seriesEndsOnDate = selectors.getLimitDateInput( state, ownProps );
 	} else if ( limitType === COUNT ) {
 		stateProps.seriesEndsAfterTimes = selectors.getLimit( state, ownProps );
 	}
