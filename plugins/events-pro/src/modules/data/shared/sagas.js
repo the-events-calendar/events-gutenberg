@@ -161,3 +161,11 @@ export function* handleLimitTypeChange( { actions }, action, key ) {
 		);
 	}
 }
+
+export function* handleTimezoneChange( { actions }, action, key ) {
+	yield put(
+		actions.sync( action.index, {
+			[ constants.KEY_TIMEZONE ]: action.payload[ key ],
+		} )
+	);
+}

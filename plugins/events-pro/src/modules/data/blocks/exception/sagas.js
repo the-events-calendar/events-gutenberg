@@ -13,6 +13,7 @@ import * as selectors from './selectors';
 import * as types from './types';
 import * as sagas from '@moderntribe/events-pro/data/shared/sagas';
 import * as ui from '@moderntribe/events-pro/data/ui';
+import { SET_TIME_ZONE } from '@moderntribe/events/data/blocks/datetime/types';
 
 const sagaArgs = {
 	actions: {
@@ -65,8 +66,24 @@ export function* handleExceptionEdit( action ) {
 	}
 }
 
+export function* syncExceptions( action ) {
+	const exceptions = yield select( selectors.getExceptions );
+
+	for ( let i = 0; i < exceptions.length; i++ ) {
+		const _action = { index: i, ...action };
+		switch ( action.type ) {
+			case SET_TIME_ZONE:
+				yield call( sagas.handleTimezoneChange, sagaArgs, _action, 'timeZone' );
+				break;
+			default:
+				break;
+		}
+	}
+}
+
 export default function* watchers() {
 	yield takeEvery( [ types.REMOVE_EXCEPTION ], handleExceptionRemoval );
 	yield takeEvery( [ types.ADD_EXCEPTION_FIELD ], sagas.handleAddition, sagaArgs );
 	yield takeEvery( [ types.EDIT_EXCEPTION ], handleExceptionEdit );
+	yield takeEvery( [ SET_TIME_ZONE ], syncExceptions );
 }

@@ -13,6 +13,7 @@ import * as selectors from './selectors';
 import * as types from './types';
 import * as ui from '@moderntribe/events-pro/data/ui';
 import * as sagas from '@moderntribe/events-pro/data/shared/sagas';
+import { SET_TIME_ZONE } from '@moderntribe/events/data/blocks/datetime/types';
 
 const sagaArgs = {
 	actions: {
@@ -64,8 +65,24 @@ export function* handleRuleEdit( action ) {
 	}
 }
 
+export function* syncRules( action ) {
+	const rules = yield select( selectors.getRules );
+
+	for ( let i = 0; i < rules.length; i++ ) {
+		const _action = { index: i, ...action };
+		switch ( action.type ) {
+			case SET_TIME_ZONE:
+				yield call( sagas.handleTimezoneChange, sagaArgs, _action, 'timeZone' );
+				break;
+			default:
+				break;
+		}
+	}
+}
+
 export default function* watchers() {
 	yield takeEvery( [ types.REMOVE_RULE ], handleRuleRemoval );
 	yield takeEvery( [ types.ADD_RULE_FIELD ], sagas.handleAddition, sagaArgs );
 	yield takeEvery( [ types.EDIT_RULE ], handleRuleEdit );
+	yield takeEvery( [ SET_TIME_ZONE ], syncRules );
 }
