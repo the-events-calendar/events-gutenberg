@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 const plugin = () => new MiniCssExtractPlugin( {
-	filename: 'src/resources/css/[name].css',
+	filename: 'src/resources/css/app/[name].css',
 } );
 
 const loaders = [
