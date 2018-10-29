@@ -20,7 +20,7 @@ Object {
     },
   },
   "category": "tribe-tickets",
-  "description": "Basic ticket functionality",
+  "description": "Sell tickets and register attendees.",
   "edit": [Function],
   "icon": [Function],
   "id": "tickets",

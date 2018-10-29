@@ -22,7 +22,7 @@ import Tickets from './container';
 export default {
 	id: 'tickets',
 	title: __( 'Event Tickets', 'events-gutenberg' ),
-	description: __( 'Basic ticket functionality', 'events-gutenberg' ),
+	description: __( 'Sell tickets and register attendees.', 'events-gutenberg' ),
 	icon: BlockIcon,
 	category: 'tribe-tickets',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
