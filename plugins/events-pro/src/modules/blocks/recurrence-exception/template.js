@@ -31,6 +31,7 @@ export default class RecurringExceptions extends PureComponent {
 			this.props.hasExceptions
 				? (
 					<Panel
+						count={ this.props.exceptionsCount }
 						onHeaderClick={ this.props.toggleExceptionPanelExpand }
 						isExpanded={ this.props.isExceptionPanelExpanded }
 						panelTitle={ __( 'Exceptions', 'events-gutenberg' ) }
