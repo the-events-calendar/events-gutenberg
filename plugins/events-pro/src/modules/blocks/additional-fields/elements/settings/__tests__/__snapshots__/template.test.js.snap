@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Settings> link is provided 1`] = `
+<div
+  className="InspectorControls"
+>
+  <span
+    className="PanelBody"
+  >
+    <span>
+      Adjust this block’s options under Events → Settings → 
+      <a
+        href="http://guti.local/wp-admin/edit.php?page=tribe-common&tab=additional-fields&post_type=tribe_events"
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        Additional Fields
+      </a>
+    </span>
+  </span>
+</div>
+`;
+
+exports[`<Settings> link is provided with after 1`] = `
+<div
+  className="InspectorControls"
+>
+  <span
+    className="PanelBody"
+  >
+    <span>
+      Adjust this block’s options under Events → Settings → 
+      <a
+        href="http://guti.local/wp-admin/edit.php?page=tribe-common&tab=additional-fields&post_type=tribe_events"
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        Additional Fields
+      </a>
+    </span>
+  </span>
+  <span>
+    after
+  </span>
+</div>
+`;
+
+exports[`<Settings> link is provided with before 1`] = `
+<div
+  className="InspectorControls"
+>
+  <span>
+    Before
+  </span>
+  <span
+    className="PanelBody"
+  >
+    <span>
+      Adjust this block’s options under Events → Settings → 
+      <a
+        href="http://guti.local/wp-admin/edit.php?page=tribe-common&tab=additional-fields&post_type=tribe_events"
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        Additional Fields
+      </a>
+    </span>
+  </span>
+</div>
+`;
+
+exports[`<Settings> no link is provided 1`] = `
+<div
+  className="InspectorControls"
+>
+  <span
+    className="PanelBody"
+  />
+</div>
+`;
