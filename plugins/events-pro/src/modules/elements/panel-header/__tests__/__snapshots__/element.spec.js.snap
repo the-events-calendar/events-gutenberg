@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PanelHeader should render component with count 1`] = `
+<header
+  className="tribe-editor__events-pro__panel-header"
+>
+  <button
+    className="tribe-editor__events-pro__panel-header-button"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    <span
+      className="tribe-editor__events-pro__panel-header-button-text"
+    >
+      <span
+        className="tribe-editor__events-pro__panel-header-button-title"
+      >
+        <span>
+          Test children
+        </span>
+      </span>
+      <span
+        className="tribe-editor__events-pro__panel-header-button-count"
+      >
+        (2)
+      </span>
+    </span>
+    <<svg>icon mock</svg> />
+  </button>
+</header>
+`;
+
+exports[`PanelHeader should render component without count 1`] = `
+<header
+  className="tribe-editor__events-pro__panel-header tribe-editor__events-pro__panel-header--expanded"
+>
+  <button
+    className="tribe-editor__events-pro__panel-header-button"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    <span
+      className="tribe-editor__events-pro__panel-header-button-text"
+    >
+      <span
+        className="tribe-editor__events-pro__panel-header-button-title"
+      >
+        <span>
+          Test children
+        </span>
+      </span>
+    </span>
+    <<svg>icon mock</svg> />
+  </button>
+</header>
+`;
+
+exports[`PanelHeader should render component without count when count is 0 1`] = `
+<header
+  className="tribe-editor__events-pro__panel-header"
+>
+  <button
+    className="tribe-editor__events-pro__panel-header-button"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    <span
+      className="tribe-editor__events-pro__panel-header-button-text"
+    >
+      <span
+        className="tribe-editor__events-pro__panel-header-button-title"
+      >
+        <span>
+          Test children
+        </span>
+      </span>
+    </span>
+    <<svg>icon mock</svg> />
+  </button>
+</header>
+`;
