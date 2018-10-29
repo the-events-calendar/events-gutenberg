@@ -52,7 +52,7 @@ const RSVPContainerContentOptions = ( {
 			className="tribe-editor__rsvp-container-content__not-going-responses"
 			disabled={ isDisabled }
 			id={ notGoingId }
-			label={ __( 'Enable Not Going responses', 'events-gutenberg' ) }
+			label={ __( 'Enable "Not Going responses"', 'events-gutenberg' ) }
 			onChange={ onTempNotGoingResponsesChange }
 		/>
 	</div>
