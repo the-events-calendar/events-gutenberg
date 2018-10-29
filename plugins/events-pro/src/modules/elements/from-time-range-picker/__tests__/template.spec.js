@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import FromDateTimePicker from '../template';
+import FromTimeRangePicker from '../template';
 
 describe( 'FromDateTimePicker', () => {
 	test( 'should render component', () => {
 		const component = renderer.create(
-			<FromDateTimePicker
+			<FromTimeRangePicker
 				className="test-class"
 				endTime="07:34"
 				isMultiDay={ false }
