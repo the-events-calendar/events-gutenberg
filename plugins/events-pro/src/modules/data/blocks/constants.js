@@ -2,7 +2,6 @@
 // ─── BLOCK TYPES ────────────────────────────────────────────────────────────────
 //
 
-
 export const RECURRING = 'recurring';
 export const EXCEPTION = 'exception';
 
