@@ -3,7 +3,7 @@
 	border-top: 1px solid #e1e3e6;
 	display: flex;
 
-	&__button {
+	&-button {
 		align-items: center;
 		background: transparent;
 		border: none;
@@ -15,14 +15,26 @@
 		padding: 18px;
 		text-align: left;
 
-		&__title {
+		&-text {
 			flex: 1;
-
-			color: #000000;
+			display: flex;
+			align-items: baseline;
 			font-family: "SF Pro Display", Helvetica;
-			font-size: 15px;
 			font-weight: 700;
 			letter-spacing: 0.38px;
+		}
+
+		&-title {
+			flex: none;
+			color: #000000;
+			font-size: 15px;
+		}
+
+		&-count {
+			flex: none;
+			color: #8D949B;
+			font-size: 13px;
+			margin-left: 4px;
 		}
 	}
 

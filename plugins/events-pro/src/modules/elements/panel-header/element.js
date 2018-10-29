@@ -13,6 +13,7 @@ import './style.pcss';
 
 const PanelHeader = ( {
 	children,
+	count,
 	isExpanded,
 	onClick,
 } ) => {
@@ -26,11 +27,16 @@ const PanelHeader = ( {
 			) }
 		>
 			<button
-				className="tribe-editor__events-pro__panel-header__button"
+				className="tribe-editor__events-pro__panel-header-button"
 				onClick={ onClick }
 				type="button"
 			>
-				<span className="tribe-editor__events-pro__panel-header__button__title">{ children }</span>
+				<span className="tribe-editor__events-pro__panel-header-button-text">
+					<span className="tribe-editor__events-pro__panel-header-button-title">{ children }</span>
+					{ !! count && ! isExpanded && (
+						<span className="tribe-editor__events-pro__panel-header-button-count">{ `(${ count })` }</span>
+					) }
+				</span>
 				<ArrowIcon />
 			</button>
 		</header>
@@ -39,6 +45,7 @@ const PanelHeader = ( {
 
 PanelHeader.propTypes = {
 	children: PropTypes.node.isRequired,
+	count: PropTypes.number.isRequired,
 	isExpanded: PropTypes.bool.isRequired,
 	onClick: PropTypes.func.isRequired,
 };
