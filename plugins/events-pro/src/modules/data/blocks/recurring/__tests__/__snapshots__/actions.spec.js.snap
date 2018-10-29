@@ -37,3 +37,23 @@ Object {
   "type": "@@MT/EVENTS-PRO/REMOVE_RULE",
 }
 `;
+
+exports[`Recurrence actions syncRule 1`] = `
+Object {
+  "index": 1,
+  "payload": Object {
+    "value": 1,
+  },
+  "sync": true,
+  "type": "@@MT/EVENTS-PRO/EDIT_RULE",
+}
+`;
+
+exports[`Recurrence actions syncRulesFromDB 1`] = `
+Object {
+  "payload": Object {
+    "value": 1,
+  },
+  "type": "@@MT/EVENTS-PRO/SYNC_RULES_FROM_DB",
+}
+`;
