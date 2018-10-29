@@ -28,5 +28,4 @@ describe( 'Recurrence types', () => {
 	test( 'sync rules from database', () => {
 		expect( types.SYNC_RULES_FROM_DB ).toEqual( `${ PREFIX_EVENTS_PRO_STORE }/SYNC_RULES_FROM_DB` );
 	} );
-
 } );
