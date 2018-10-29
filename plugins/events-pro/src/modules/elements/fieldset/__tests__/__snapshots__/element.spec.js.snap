@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fieldset should match snapshot 1`] = `
+<fieldset
+  className="tribe-editor__events-pro__fieldset test-class"
+>
+  <span>
+    Test children
+  </span>
+</fieldset>
+`;
