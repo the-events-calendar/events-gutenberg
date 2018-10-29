@@ -1,30 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Rule reducer edit should only edit a single exception 1`] = `
-Array [
-  Object {
-    "cool": "thanks",
-    "id": 1,
-  },
-]
-`;
-
-exports[`Rule reducer edit should update the correct exception 1`] = `
-Array [
-  Object {
-    "id": 1,
-  },
-  Object {
-    "cool": "thanks",
-    "id": 2,
-  },
-  Object {
-    "id": 3,
-  },
-]
-`;
-
-exports[`Rule reducer should add a exception 1`] = `
+exports[`Rule reducer should add a rule 1`] = `
 Array [
   Object {
     "id": 1,
@@ -41,10 +17,48 @@ Array [
 ]
 `;
 
-exports[`Rule reducer should remove an exception 1`] = `
+exports[`Rule reducer should only edit a single rule 1`] = `
+Array [
+  Object {
+    "cool": "thanks",
+    "id": 1,
+  },
+]
+`;
+
+exports[`Rule reducer should remove a rule 1`] = `
 Array [
   Object {
     "id": 1,
+  },
+  Object {
+    "id": 3,
+  },
+]
+`;
+
+exports[`Rule reducer should sync rules from db 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "id": 2,
+  },
+  Object {
+    "id": 3,
+  },
+]
+`;
+
+exports[`Rule reducer should update the correct rule 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "cool": "thanks",
+    "id": 2,
   },
   Object {
     "id": 3,

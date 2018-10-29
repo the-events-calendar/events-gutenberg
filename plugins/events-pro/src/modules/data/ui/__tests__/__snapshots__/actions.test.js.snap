@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`[STORE] - UI actions Should toggle the repeat block 1`] = `
-Object {
-  "type": "@@MT/EVENTS-PRO/TOGGLE_REPEAT_EVENTS_BLOCK_VISIBILITY",
-}
-`;
