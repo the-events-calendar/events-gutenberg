@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fields reducer Add a new block inside of the reducer 1`] = `
+Object {
+  "allIds": Array [
+    "_ecp_custom_23",
+  ],
+  "byId": Object {
+    "_ecp_custom_23": Object {
+      "dividerEnd": " & ",
+      "dividerList": ", ",
+      "isPristine": true,
+      "label": "",
+      "metaKey": "",
+      "options": Array [],
+      "output": "",
+      "type": "",
+      "value": "",
+    },
+  },
+}
+`;
+
+exports[`Fields reducer Add a new block inside of the reducer 2`] = `
+Object {
+  "allIds": Array [],
+  "byId": Object {
+    "_ecp_custom_23": Object {
+      "dividerEnd": " & ",
+      "dividerList": ", ",
+      "isPristine": true,
+      "label": "Website",
+      "metaKey": "",
+      "options": Array [],
+      "output": "",
+      "type": "",
+      "value": "",
+    },
+  },
+}
+`;
+
+exports[`Fields reducer Remove an existing block from the reducer 1`] = `
+Object {
+  "allIds": Array [],
+  "byId": Object {},
+}
+`;

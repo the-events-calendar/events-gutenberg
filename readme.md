@@ -93,6 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.4-alpha - TBD
+
+* Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
+
 #### 0.3.3-alpha - 2018-10-25
 
 * Feature - Event Attendees list block

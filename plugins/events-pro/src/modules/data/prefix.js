@@ -1,0 +1,1 @@
+export const PREFIX_EVENTS_PRO_STORE = '@@MT/EVENTS-PRO';
