@@ -15,6 +15,7 @@ import { constants } from '@moderntribe/common/data/plugins';
 import * as selectors from '@moderntribe/events-pro/data/shared/selectors';
 
 export const getExceptions = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ].blocks.exception;
+export const getRules = getExceptions;
 export const hasExceptions = createSelector( getExceptions, exceptions => !! exceptions.length );
 export const getIndex = ( _, props ) => props.index;
 

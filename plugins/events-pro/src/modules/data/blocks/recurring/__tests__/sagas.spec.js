@@ -9,8 +9,8 @@ import { keys } from 'lodash';
  */
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import * as recurring from '@moderntribe/events-pro/data/blocks/recurring';
-import * as selectors from '@moderntribe/events-pro/data/blocks/exception/selectors';
 import * as ui from '@moderntribe/events-pro/data/ui';
+import * as selectors from '../selectors';
 import watchers, * as sagas from '../sagas';
 import * as shared from '@moderntribe/events-pro/data/shared/sagas';
 import { SET_TIME_ZONE } from '@moderntribe/events/data/blocks/datetime/types';
