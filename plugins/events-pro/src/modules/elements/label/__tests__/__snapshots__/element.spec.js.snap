@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Label should match snapshot 1`] = `
+<div
+  className="tribe-editor__events-pro__label test-class"
+>
+  <span
+    className="tribe-editor__events-pro__label-text"
+  >
+    Test label
+  </span>
+</div>
+`;
