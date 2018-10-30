@@ -25,6 +25,7 @@ const SingleToDateTimePicker = ( {
 	endDate,
 	endDateFormat,
 	endTime,
+	isAllDay,
 	onEndDateChange,
 	onEndTimeChange,
 	onEndTimeClick,
@@ -41,12 +42,12 @@ const SingleToDateTimePicker = ( {
 		>
 			<TimePicker
 				current={ endTime }
-				// TODO: logic to handle start and end times
 				start={ START_OF_DAY }
 				end={ END_OF_DAY }
 				onChange={ onEndTimeChange }
 				onClick={ onEndTimeClick }
-				// TODO: Add onChange handler
+				showAllDay={ true }
+				allDay={ isAllDay }
 			/>
 			<span>{ __( 'on', 'events-gutenberg' ) }</span>
 			<DayPickerInput
@@ -71,6 +72,7 @@ SingleToDateTimePicker.propTypes = {
 	endDate: PropTypes.string,
 	endDateFormat: PropTypes.string,
 	endTime: TribePropTypes.timeFormat,
+	isAllDay: PropTypes.bool,
 	onEndDateChange: PropTypes.func,
 	onEndTimeChange: PropTypes.func,
 	onEndTimeClick: PropTypes.func,
