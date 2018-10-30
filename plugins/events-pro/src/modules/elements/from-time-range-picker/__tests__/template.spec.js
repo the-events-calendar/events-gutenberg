@@ -23,7 +23,7 @@ describe( 'FromDateTimePicker', () => {
 
 	test( 'should render component with multi day', () => {
 		const component = renderer.create(
-			<FromDateTimePicker
+			<FromTimeRangePicker
 				className="test-class"
 				endTime="07:34"
 				isAllDay={ false }
@@ -41,7 +41,7 @@ describe( 'FromDateTimePicker', () => {
 
 	test( 'should render component with all day', () => {
 		const component = renderer.create(
-			<FromDateTimePicker
+			<FromTimeRangePicker
 				className="test-class"
 				endTime="07:34"
 				isAllDay={ true }
