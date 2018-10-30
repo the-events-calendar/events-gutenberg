@@ -73,10 +73,8 @@ class Tribe__Gutenberg__Events_Pro__Additional_Fields {
 	 * @return string
 	 */
 	public function to_block_name( $name = '' ) {
-		return sprintf(
-			'%s/field-%s',
-			$this->namespace,
-			preg_replace( '/[^a-zA-Z0-9-]/', '', $name )
-		);
+		/** @var Tribe__Gutenberg__Common__Utils $utils */
+		$utils = tribe( 'gutenberg.common.utils' );
+		return sprintf('%s/field-%s', $this->namespace, $utils->to_block_name( $name ) );
 	}
 }
