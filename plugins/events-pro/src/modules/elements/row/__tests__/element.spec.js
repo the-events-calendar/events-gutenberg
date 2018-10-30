@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Label from '../element';
+import Row from '../element';
 
-describe( 'Label', () => {
-	test( 'should match snapshot', () => {
+describe( 'Row', () => {
+	test( 'should render component', () => {
 		const component = renderer.create(
-			<Label className="test-class">
-				Test label
-			</Label>
+			<Row className="test-class">
+				<span>Test children</span>
+			</Row>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );

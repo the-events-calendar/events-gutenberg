@@ -13,7 +13,7 @@ describe( 'Panel', () => {
 			>
 				<span>Test children</span>
 			</Panel>
-			);
+		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
@@ -27,7 +27,7 @@ describe( 'Panel', () => {
 			>
 				<span>Test children</span>
 			</Panel>
-			);
+		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 } );

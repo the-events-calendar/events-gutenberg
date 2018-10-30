@@ -8,7 +8,7 @@ describe( 'Fieldset', () => {
 			<Fieldset className="test-class">
 				<span>Test children</span>
 			</Fieldset>
-			);
+		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 } );

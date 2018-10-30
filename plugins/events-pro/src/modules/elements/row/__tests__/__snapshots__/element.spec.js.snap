@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Row should render component 1`] = `
+<div
+  className="tribe-editor__events-pro__row test-class"
+>
+  <span>
+    Test children
+  </span>
+</div>
+`;
