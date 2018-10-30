@@ -9,6 +9,7 @@ describe( 'RecurringToDateTimePicker', () => {
 			<RecurringToDateTimePicker
 				className="test-class"
 				endTime="12:34"
+				isAllDay={ false }
 				onEndTimeChange={ jest.fn() }
 				onEndTimeClick={ jest.fn() }
 				onRecurringMultiDayChange={ jest.fn() }

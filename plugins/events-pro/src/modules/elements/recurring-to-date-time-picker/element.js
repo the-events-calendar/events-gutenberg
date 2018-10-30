@@ -38,9 +38,10 @@ const onEndTimeChange = ( dispatch, ownProps ) => ( e ) => (
 );
 
 const onEndTimeClick = ( dispatch, ownProps ) => ( value, onClose ) => {
+	const endTime = value === 'all-day' ? value : fromSeconds( value, TIME_FORMAT_HH_MM );
 	dispatch( actions.editRule(
 		ownProps.index,
-		{ [ KEY_END_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) },
+		{ [ KEY_END_TIME ]: endTime },
 	) );
 	onClose();
 };
@@ -54,6 +55,7 @@ const onRecurringMultiDayChange = ( dispatch, ownProps ) => ( selectedOption ) =
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	endTime: selectors.getEndTimeNoSeconds( state, ownProps ),
+	isAllDay: selectors.getAllDay( state, ownProps ),
 	recurringMultiDay: getRecurringMultiDay( state, ownProps ),
 } );
 
