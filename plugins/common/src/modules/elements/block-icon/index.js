@@ -9,8 +9,17 @@ import React from 'react';
 import { TEC } from '@moderntribe/common/icons';
 import './style.pcss';
 
-export default () => (
-	<div className="tribe-editor__icons__container tribe-editor__icons--tec">
-		<TEC />
-	</div>
-);
+const Icon = ( props ) => {
+	const ChildIcon = props.icon
+	return (
+		<div className="tribe-editor__icons__container tribe-editor__icons--tec">
+			<ChildIcon />
+		</div>
+	)
+};
+
+Icon.defaultProps = {
+	icon: TEC
+}
+
+export default Icon

@@ -13,6 +13,7 @@ import { get } from 'lodash';
  */
 import EventDateTime from './container';
 import { BlockIcon } from '@moderntribe/common/elements';
+import { Clipboard } from '@moderntribe/common/icons';
 import { date, globals } from '@moderntribe/common/utils';
 
 /**
@@ -28,7 +29,7 @@ export default {
 		'Define the date, time, and duration for your event.',
 		'events-gutenberg'
 	),
-	icon: BlockIcon,
+	icon: ()=><BlockIcon icon={Clipboard}/>,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
