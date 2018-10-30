@@ -174,7 +174,7 @@ export function* handleLimitTypeChange( { actions }, action, key ) {
 	if ( isDate ) {
 		const start = yield select( datetime.getStart );
 		const startMoment = yield call( toMoment, start );
-		const startDate = yield call( toDate, startMoment.add( 1, 'day' ) );
+		const startDate = yield call( toDatabaseDate, startMoment );
 		yield put(
 			actions.sync( action.index, {
 				[ constants.KEY_LIMIT ]: startDate,
