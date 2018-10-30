@@ -23,6 +23,7 @@ describe( 'Shared recurrence sagas', () => {
 		selectors = {
 			getStartTimeNoSeconds: jest.fn( () => '12:00' ),
 			getEndTimeNoSeconds: jest.fn( () => '15:00' ),
+			getWeek: jest.fn(),
 		};
 		args = {
 			start_date: '2018-01-01 12:00:00',
@@ -245,4 +246,112 @@ describe( 'Shared recurrence sagas', () => {
 			);
 		} );
 	} );
+
+	describe( 'handleWeekChange', ()=>{
+		it( 'should sync week', ()=>{
+			const action = {
+				index: 0,
+				payload: {
+					[constants.KEY_WEEK]: 1
+				}
+			}
+			const gen = sagas.handleWeekChange({actions, selectors}, action, constants.KEY_WEEK);
+
+			expect(gen.next().value).toEqual(
+				select(selectors.getWeek, action)
+			);
+
+			expect(gen.next(false).value).toEqual(
+				put(
+					actions.sync(action.index, {
+						[constants.KEY_WEEK]: 1,
+						[constants.KEY_DAY]: 1
+					})
+				)
+			);
+
+			expect(gen.next().done).toBeTruthy();
+		});
+	});
+
+	describe( 'handleLimitTypeChange', ()=>{
+		let action, payload;
+		beforeEach(()=>{
+			payload = {};
+			action = {
+				index: 0,
+				payload,
+			};
+		});
+
+		it( 'should handle date changes', ()=>{
+			payload[constants.KEY_LIMIT] = recurringConstants.DATE;
+			const gen = sagas.handleLimitTypeChange({actions}, action, constants.KEY_LIMIT);
+
+			expect(gen.next().value).toEqual(
+				select(datetime.getStart)
+			);
+
+			expect(gen.next('2018-01-01').value).toEqual(
+				call(momentUtil.toMoment, '2018-01-01')
+			);
+
+			expect(gen.next('2018-01-01').value).toEqual(
+				call(momentUtil.toDatabaseDate, '2018-01-01')
+			);
+
+			expect(gen.next().value).toEqual(
+				put( actions.sync(action.index, {
+					[constants.KEY_LIMIT]: '2018-01-01'
+				}))
+			);
+
+			expect(gen.next().done).toBeTruthy();
+		});
+
+		it( 'should handle count changes', ()=>{
+			payload[constants.KEY_LIMIT] = recurringConstants.COUNT;
+			const gen = sagas.handleLimitTypeChange({actions}, action, constants.KEY_LIMIT);
+
+			expect(gen.next().value).toEqual(
+				put( actions.sync(action.index, {
+					[constants.KEY_LIMIT]: 1
+				}))
+			);
+			expect(gen.next().done).toBeTruthy();
+		});
+
+
+		it( 'should handle never ending changes', ()=>{
+			const gen = sagas.handleLimitTypeChange({actions}, action, constants.KEY_LIMIT);
+
+			expect(gen.next().value).toEqual(
+				put( actions.sync(action.index, {
+					[constants.KEY_LIMIT]: null
+				}))
+			);
+
+			expect(gen.next().done).toBeTruthy();
+		});
+	});
+
+	describe( 'handleTimezoneChange', ()=>{
+		it( 'should sync timezone', ()=>{
+			const action = {
+				index: 0,
+				payload: {
+					[constants.KEY_TIMEZONE]: 'UTC+0'
+				}
+			};
+			const gen = sagas.handleTimezoneChange({actions}, action, constants.KEY_TIMEZONE);
+
+			expect(gen.next().value).toEqual(
+				put( actions.sync(action.index, {
+					[constants.KEY_TIMEZONE]: action.payload[ constants.KEY_TIMEZONE ]
+				}))
+			);
+
+			expect(gen.next().done).toBeTruthy();
+		});
+	});
 } );
