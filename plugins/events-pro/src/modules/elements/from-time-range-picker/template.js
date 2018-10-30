@@ -108,7 +108,7 @@ const FromTimeRangePicker = ( {
 			{ ! isAllDay && (
 				<Fragment>
 					<span>{ __( 'to', 'events-gutenberg' ) }</span>
-					<TimePicker { ...getEndTimePickerProps() } /> }
+					<TimePicker { ...getEndTimePickerProps() } />
 				</Fragment>
 			) }
 			<MultiDayCheckbox
