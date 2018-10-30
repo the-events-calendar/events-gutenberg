@@ -21,7 +21,7 @@ export const RECURRENCE_TYPE_RULES_OPTIONS = [
 ];
 
 //
-// ─── RECURRENCE TYPES OPTIONS ───────────────────────────────────────────────────
+// ─── RECURRENCE FREQUENCY OPTIONS ───────────────────────────────────────────────
 //
 
 /**

@@ -61,17 +61,19 @@ const onMultiDayChange = ( dispatchProps, ownProps ) => ( e ) => {
 };
 
 const onEndTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
+	const endTime = value === 'all-day' ? value : fromSeconds( value, TIME_FORMAT_HH_MM );
 	dispatchProps.editRule(
 		ownProps.index,
-		{ [ KEY_END_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) },
+		{ [ KEY_END_TIME ]: endTime },
 	);
 	onClose();
 };
 
 const onStartTimeClick = ( dispatchProps, ownProps ) => ( value, onClose ) => {
+	const startTime = value === 'all-day' ? value : fromSeconds( value, TIME_FORMAT_HH_MM );
 	dispatchProps.editRule(
 		ownProps.index,
-		{ [ KEY_START_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) },
+		{ [ KEY_START_TIME ]: startTime },
 	);
 	onClose();
 };

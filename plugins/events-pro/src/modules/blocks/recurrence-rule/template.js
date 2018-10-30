@@ -21,6 +21,7 @@ export default class EventRecurring extends PureComponent {
 		isRulePanelVisible: PropTypes.bool.isRequired,
 		removeRule: PropTypes.func.isRequired,
 		rules: PropTypes.array.isRequired,
+		rulesCount: PropTypes.number.isRequired,
 		toggleRulePanelExpand: PropTypes.func.isRequired,
 	}
 
@@ -30,6 +31,7 @@ export default class EventRecurring extends PureComponent {
 			this.props.hasRules
 				? (
 					<Panel
+						count={ this.props.rulesCount }
 						onHeaderClick={ this.props.toggleRulePanelExpand }
 						isExpanded={ this.props.isRulePanelExpanded }
 						panelTitle={ __( 'Recurrence Rules', 'events-gutenberg' ) }

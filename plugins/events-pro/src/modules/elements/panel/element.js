@@ -12,13 +12,18 @@ import PanelHeader from '@moderntribe/events-pro/elements/panel-header/element';
 
 const Panel = ( {
 	children,
+	count,
 	isExpanded,
 	onHeaderClick,
 	panelTitle,
 } ) => {
 	return (
 		<section>
-			<PanelHeader onClick={ onHeaderClick } isExpanded={ isExpanded }>
+			<PanelHeader
+				count={ count }
+				onClick={ onHeaderClick }
+				isExpanded={ isExpanded }
+			>
 				{ panelTitle }
 			</PanelHeader>
 			{
@@ -30,6 +35,7 @@ const Panel = ( {
 
 Panel.propTypes = {
 	children: PropTypes.node.isRequired,
+	count: PropTypes.number.isRequired,
 	isExpanded: PropTypes.bool.isRequired,
 	panelTitle: PropTypes.string.isRequired,
 	onHeaderClick: PropTypes.func.isRequired,

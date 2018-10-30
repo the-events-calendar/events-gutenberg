@@ -36,7 +36,6 @@ const {
 
 const {
 	toMoment,
-	toDate,
 	toDatabaseDate,
 } = momentUtil;
 
@@ -60,7 +59,8 @@ const onEndTimeChange = ( ownProps, edit ) => ( e ) => (
 );
 
 const onEndTimeClick = ( ownProps, edit ) => ( value, onClose ) => {
-	edit( ownProps.index, { [ KEY_END_TIME ]: fromSeconds( value, TIME_FORMAT_HH_MM ) } );
+	const endTime = value === 'all-day' ? value : fromSeconds( value, TIME_FORMAT_HH_MM );
+	edit( ownProps.index, { [ KEY_END_TIME ]: endTime } );
 	onClose();
 };
 
@@ -73,6 +73,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		end: dateTimeSelectors.getEnd( state ),
 		endDate: selectors.getEndDateInput( state, ownProps ),
 		endTime: selectors.getEndTimeNoSeconds( state, ownProps ),
+		isAllDay: selectors.getAllDay( state, ownProps ),
 	};
 };
 

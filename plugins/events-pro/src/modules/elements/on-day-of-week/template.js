@@ -31,7 +31,6 @@ const OnDayOfWeek = ( {
 		label={ __( 'On', 'events-gutenberg' ) }
 	>
 		<DayOfWeekPicker
-			// TODO: handle checked and on day change
 			sundayChecked={ sundayChecked }
 			mondayChecked={ mondayChecked }
 			tuesdayChecked={ tuesdayChecked }
