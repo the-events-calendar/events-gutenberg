@@ -10,6 +10,7 @@ exports[`Day Of Week Element renders day of week 1`] = `
     id="uniqid"
     onChange={[Function]}
     type="checkbox"
+    value="friday"
   />
   <label
     className="tribe-editor__checkbox__label"

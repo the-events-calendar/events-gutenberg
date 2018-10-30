@@ -18,6 +18,7 @@ describe( 'Day Of Week Element', () => {
 				label="F"
 				labelTitle="Friday"
 				onChange={ noop }
+				value="friday"
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();

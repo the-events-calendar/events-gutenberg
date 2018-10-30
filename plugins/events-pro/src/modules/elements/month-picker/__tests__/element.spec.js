@@ -23,7 +23,7 @@ describe( 'MonthPicker', () => {
 					options.MONTHS_OF_THE_YEAR_OPTIONS[6],
 					options.MONTHS_OF_THE_YEAR_OPTIONS[8],
 				] }
-				onMonthClick={ jest.fn( ( month ) => () => month ) }
+				onMonthClick={ jest.fn() }
 			/>
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
