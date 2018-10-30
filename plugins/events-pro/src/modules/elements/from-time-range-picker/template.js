@@ -69,6 +69,7 @@ const FromTimeRangePicker = ( {
 			onClick: onEndTimeClick,
 			start: START_OF_DAY,
 			end: END_OF_DAY,
+			disabled: isMultiDay,
 		};
 
 		if ( ! isMultiDay ) {
