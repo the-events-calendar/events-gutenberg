@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exception Types ADD_EXCEPTION 1`] = `"@@MT/EVENTS-PRO/ADD_EXCEPTION"`;
+
+exports[`Exception Types ADD_EXCEPTION_FIELD 1`] = `"@@MT/EVENTS-PRO/ADD_EXCEPTION_FIELD"`;
+
+exports[`Exception Types EDIT_EXCEPTION 1`] = `"@@MT/EVENTS-PRO/EDIT_EXCEPTION"`;
+
+exports[`Exception Types REMOVE_EXCEPTION 1`] = `"@@MT/EVENTS-PRO/REMOVE_EXCEPTION"`;
+
+exports[`Exception Types REMOVE_EXCEPTION_FIELD 1`] = `"@@MT/EVENTS-PRO/REMOVE_EXCEPTION_FIELD"`;
+
+exports[`Exception Types SYNC_EXCEPTIONS_FROM_DB 1`] = `"@@MT/EVENTS-PRO/SYNC_EXCEPTIONS_FROM_DB"`;

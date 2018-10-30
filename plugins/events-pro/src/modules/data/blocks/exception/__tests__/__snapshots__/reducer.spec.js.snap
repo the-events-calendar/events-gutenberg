@@ -51,3 +51,10 @@ Array [
   },
 ]
 `;
+
+exports[`Exception reducer should sync from DB 1`] = `
+Array [
+  Object {},
+  Object {},
+]
+`;
