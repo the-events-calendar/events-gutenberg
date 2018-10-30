@@ -93,15 +93,23 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.3-alpha - TBD
+#### 0.3.4-alpha - TBD
 
 * Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
+
+#### 0.3.3-alpha - 2018-10-25
+
+* Feature - Event Attendees list block
+* Fix - Style changes to make RSVP and Ticket settings compatible with Gutenberg 4.1
+* Tweak - Make sure users can select older Years on the Datetime block
 
 #### 0.3.2-alpha - 2018-10-18
 
 * Fix - Custom Fields a.k.a. Meta is now saving properly for Events
 * Fix - Adjust vertical alignment of the price section for the classic event date time block
 * Fix - Make sure the ticket block uses the currency from the ticket provider
+* Fix - Header image failing to load due to Incorrect variable type on RSVP block
+* Fix - Venue form is now loading correctly on the Venue block
 
 #### 0.3.1-alpha - 2018-10-12
 

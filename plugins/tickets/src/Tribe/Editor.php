@@ -53,6 +53,7 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 
 			$template[] = array( 'tribe/tickets' );
 			$template[] = array( 'tribe/rsvp' );
+			$template[] = array( 'tribe/attendees' );
 
 			$post_type_object->template = $template;
 		}
@@ -186,19 +187,31 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 		$modules = Tribe__Tickets__Tickets::modules();
 		$class_names = array_keys( $modules );
 		$providers = array();
+		$default_currency_symbol = tribe_get_option( 'defaultCurrencySymbol', '$' );
 
 		foreach ( $class_names as $class ) {
-			if ( $modules[ $class ] === 'RSVP' ) {
+			if ( 'RSVP' === $modules[ $class ] ) {
 				continue;
 			}
 
 			$currency = tribe( 'tickets.commerce.currency' );
 
+			// Backwards to avoid fatals
+			$currency_symbol = $default_currency_symbol;
+			if ( is_callable( array( $currency, 'get_provider_symbol' ) ) ) {
+				$currency_symbol = $currency->get_provider_symbol( $class, null );
+			}
+
+			$currency_position = 'prefix';
+			if ( is_callable( array( $currency, 'get_provider_symbol_position' ) ) ) {
+				$currency_position = $currency->get_provider_symbol_position( $class, null );
+			}
+
 			$providers[] = array(
 				'name' => $modules[ $class ],
 				'class' => $class,
-				'currency' => html_entity_decode( $currency->get_provider_symbol( $class, null ) ),
-				'currency_position' => $currency->get_provider_symbol_position( $class, null ),
+				'currency' => html_entity_decode( $currency_symbol ),
+				'currency_position' => $currency_position,
 			);
 		}
 

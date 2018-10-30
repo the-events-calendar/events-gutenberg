@@ -43,7 +43,7 @@ const setInitialState = ( dispatch, ownProps ) => () => {
 	const postId = select( 'core/editor' ).getCurrentPostId();
 	dispatch( thunks.getRSVP( postId ) );
 	const { attributes = {} } = ownProps;
-	if ( attributes.headerImageId ) {
+	if ( parseInt( attributes.headerImageId, 10 ) ) {
 		dispatch( thunks.getRSVPHeaderImage( attributes.headerImageId ) );
 	}
 	if ( attributes.goingCount ) {

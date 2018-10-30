@@ -14,8 +14,9 @@ const YearMonthForm = ( { today, date, localeUtils, onChange } ) => {
 	const toMonth = new Date( currentYear + 10, 11 );
 	const months = localeUtils.getMonths();
 	const years = [];
+	const yearsBack = 5;
 
-	for ( let i = currentYear; i <= toMonth.getFullYear(); i += 1 ) {
+	for ( let i = currentYear - yearsBack; i <= toMonth.getFullYear(); i++ ) {
 		years.push( i );
 	}
 
@@ -33,7 +34,7 @@ const YearMonthForm = ( { today, date, localeUtils, onChange } ) => {
 				value={ date.getMonth() }
 			>
 				{ months.map( ( month, monthNum ) => {
-					if ( date.getFullYear() === currentYear && monthNum < currentMonth ) {
+					if ( date.getFullYear() === currentYear && monthNum < currentMonth - yearsBack ) {
 						return (
 							<option key={ month } value={ monthNum } disabled>
 								{ month }
