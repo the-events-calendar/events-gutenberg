@@ -23,6 +23,7 @@ const {
 const RecurringToDateTimePicker = ( {
 	className,
 	endTime,
+	isAllDay,
 	onEndTimeChange,
 	onEndTimeClick,
 	onRecurringMultiDayChange,
@@ -37,12 +38,12 @@ const RecurringToDateTimePicker = ( {
 	>
 		<TimePicker
 			current={ endTime }
-			// TODO: logic to handle start and end times
 			start={ START_OF_DAY }
 			end={ END_OF_DAY }
 			onChange={ onEndTimeChange }
 			onClick={ onEndTimeClick }
-			// TODO: Add onChange handler
+			showAllDay={ true }
+			allDay={ isAllDay }
 		/>
 		<span>{ __( 'on the', 'events-gutenberg' ) }</span>
 		<Select
@@ -59,6 +60,7 @@ const RecurringToDateTimePicker = ( {
 RecurringToDateTimePicker.propTypes = {
 	className: PropTypes.string,
 	endTime: TribePropTypes.timeFormat,
+	isAllDay: PropTypes.bool,
 	onEndTimeChange: PropTypes.func,
 	onEndTimeClick: PropTypes.func,
 	onRecurringMultiDayChange: PropTypes.func,
