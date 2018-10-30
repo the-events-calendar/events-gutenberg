@@ -17,7 +17,8 @@ import { constants } from '@moderntribe/common/data/plugins';
 import * as selectors from '@moderntribe/events-pro/data/shared/selectors';
 
 export const getRules = ( state ) => state[ constants.EVENTS_PRO_PLUGIN ].blocks.recurring;
-export const hasRules = createSelector( getRules, rules => !! rules.length );
+export const getRulesCount = createSelector( getRules, ( rules ) => rules.length );
+export const hasRules = createSelector( getRulesCount, ( count ) => !! count );
 export const getIndex = ( _, props ) => props.index;
 
 export const getRule = createSelector(

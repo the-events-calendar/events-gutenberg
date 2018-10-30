@@ -20,6 +20,7 @@ const mapStateToProps = state => ( {
 	isExceptionPanelVisible: ui.selectors.isExceptionPanelVisible( state ),
 	isExceptionPanelExpanded: ui.selectors.isExceptionPanelExpanded( state ),
 	exceptions: exception.selectors.getExceptions( state ),
+	exceptionsCount: exception.selectors.getExceptionsCount( state ),
 	hasExceptions: exception.selectors.hasExceptions( state ),
 } );
 

@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recurrence constants Days of the month days of the month 1`] = `
+Array [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+]
+`;
+
+exports[`Recurrence constants Days of the week days of the week mapping from state 1`] = `
+Object {
+  "1": "monday",
+  "2": "tuesday",
+  "3": "wednesday",
+  "4": "thursday",
+  "5": "friday",
+  "6": "saturday",
+  "7": "sunday",
+}
+`;
+
+exports[`Recurrence constants Days of the week days of the week mapping to state 1`] = `
+Object {
+  "friday": 5,
+  "monday": 1,
+  "saturday": 6,
+  "sunday": 7,
+  "thursday": 4,
+  "tuesday": 2,
+  "wednesday": 3,
+}
+`;
+
+exports[`Recurrence constants Days of the week days of the week prop key mapping from state 1`] = `
+Object {
+  "1": "mondayChecked",
+  "2": "tuesdayChecked",
+  "3": "wednesdayChecked",
+  "4": "thursdayChecked",
+  "5": "fridayChecked",
+  "6": "saturdayChecked",
+  "7": "sundayChecked",
+}
+`;
+
+exports[`Recurrence constants Days of the week days of the week prop keys 1`] = `
+Array [
+  "sundayChecked",
+  "mondayChecked",
+  "tuesdayChecked",
+  "wednesdayChecked",
+  "thursdayChecked",
+  "fridayChecked",
+  "saturdayChecked",
+]
+`;
+
+exports[`Recurrence constants Months of the year months of the year mapping from state 1`] = `
+Object {
+  "1": "january",
+  "10": "october",
+  "11": "november",
+  "12": "december",
+  "2": "february",
+  "3": "march",
+  "4": "april",
+  "5": "may",
+  "6": "june",
+  "7": "july",
+  "8": "august",
+  "9": "september",
+}
+`;
+
+exports[`Recurrence constants Months of the year months of the year mapping to state 1`] = `
+Object {
+  "april": 4,
+  "august": 8,
+  "december": 12,
+  "february": 2,
+  "january": 1,
+  "july": 7,
+  "june": 6,
+  "march": 3,
+  "may": 5,
+  "november": 11,
+  "october": 10,
+  "september": 9,
+}
+`;

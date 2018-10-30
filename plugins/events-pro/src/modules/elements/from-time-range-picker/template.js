@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import moment from 'moment';
@@ -39,7 +39,6 @@ const FromTimeRangePicker = ( {
 	onStartTimeClick,
 	startTime,
 } ) => {
-	{ /* @todo: set all day */ }
 	const getStartTimePickerProps = () => {
 		const props = {
 			current: startTime,
@@ -47,6 +46,8 @@ const FromTimeRangePicker = ( {
 			onClick: onStartTimeClick,
 			start: START_OF_DAY,
 			end: END_OF_DAY,
+			showAllDay: true,
+			allDay: isAllDay,
 		};
 
 		if ( ! isMultiDay ) {
@@ -61,7 +62,6 @@ const FromTimeRangePicker = ( {
 		return props;
 	};
 
-	{ /* @todo: set all day */ }
 	const getEndTimePickerProps = () => {
 		const props = {
 			current: endTime,
@@ -70,6 +70,8 @@ const FromTimeRangePicker = ( {
 			start: START_OF_DAY,
 			end: END_OF_DAY,
 			disabled: isMultiDay,
+			showAllDay: true,
+			allDay: isAllDay,
 		};
 
 		if ( ! isMultiDay ) {
@@ -104,9 +106,12 @@ const FromTimeRangePicker = ( {
 			label={ __( 'From', 'events-gutenberg' ) }
 		>
 			<TimePicker { ...getStartTimePickerProps() } />
-			{ /* @todo: remove span and timepicker if all day */ }
-			<span>{ __( 'to', 'events-gutenberg' ) }</span>
-			<TimePicker { ...getEndTimePickerProps() } />
+			{ ! isAllDay && (
+				<Fragment>
+					<span>{ __( 'to', 'events-gutenberg' ) }</span>
+					<TimePicker { ...getEndTimePickerProps() } />
+				</Fragment>
+			) }
 			<MultiDayCheckbox
 				className="tribe-editor__from-time-range-picker__multi-day-checkbox"
 				checked={ isMultiDay }

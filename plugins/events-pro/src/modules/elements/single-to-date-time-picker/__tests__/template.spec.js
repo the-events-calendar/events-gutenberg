@@ -9,6 +9,7 @@ describe( 'SingleToDateTimePicker', () => {
 				className="test-class"
 				endDate="September 21, 2019"
 				endTime="12:40"
+				isAllDay={ false }
 				onEndDateChange={ jest.fn() }
 				onEndTimeChange={ jest.fn() }
 				onEndTimeClick={ jest.fn() }
