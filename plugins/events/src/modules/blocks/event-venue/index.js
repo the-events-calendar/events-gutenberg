@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventVenue from './container';
-import { BlockIcon } from '@moderntribe/common/elements';
+import { Venue } from '@moderntribe/events/icons';
 
 /**
  * Module Code
@@ -19,7 +19,7 @@ export default {
 		'Where is this event happening? Select or create a location.',
 		'events-gutenberg'
 	),
-	icon: BlockIcon,
+	icon: <Venue/>,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

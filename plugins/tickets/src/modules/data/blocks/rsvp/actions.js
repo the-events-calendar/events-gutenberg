@@ -7,6 +7,10 @@ export const createRSVP = () => ( {
 	type: types.CREATE_RSVP,
 } );
 
+export const initializeRSVP = () => ( {
+	type: types.INITIALIZE_RSVP,
+} );
+
 export const deleteRSVP = () => ( {
 	type: types.DELETE_RSVP,
 } );
