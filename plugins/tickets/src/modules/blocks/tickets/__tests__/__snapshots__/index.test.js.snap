@@ -22,7 +22,7 @@ Object {
   "category": "tribe-tickets",
   "description": "Sell tickets and register attendees.",
   "edit": [Function],
-  "icon": [Function],
+  "icon": <<svg>icon mock</svg> />,
   "id": "tickets",
   "keywords": Array [
     "event",
@@ -33,6 +33,6 @@ Object {
   "supports": Object {
     "html": false,
   },
-  "title": "Event Tickets",
+  "title": "Tickets",
 }
 `;

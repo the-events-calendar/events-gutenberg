@@ -14,13 +14,16 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { ActionButton } from '@moderntribe/tickets/elements';
-import { User as UserIcon } from '@moderntribe/common/src/modules/icons';
+
+// @todo: attendee SVG is loading weird, so, not using this icon yet
+// import { Attendees } from '@moderntribe/tickets/icons';
+import { User as Attendees } from '@moderntribe/common/src/modules/icons';
 
 const AttendeesActionButton = ( { isDisabled, onClick } ) => (
 	<ActionButton
 		className="tribe-editor__rsvp__action-button tribe-editor__rsvp__action-button--attendees"
 		disabled={ isDisabled }
-		icon={ <UserIcon /> }
+		icon={ <Attendees /> }
 		onClick={ onClick }
 	>
 		{ __( 'Attendees', 'events-gutenberg' ) }
