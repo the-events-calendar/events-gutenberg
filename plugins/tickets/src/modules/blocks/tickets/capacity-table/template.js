@@ -26,6 +26,7 @@ const CapacityTable = ( props ) => {
 		totalCapacity,
 		onSharedCapacityChange,
 		sharedCapacity,
+		sharedRemaining,
 	} = props;
 
 	const sharedData = getValues( sharedTickets );
@@ -37,6 +38,7 @@ const CapacityTable = ( props ) => {
 			value={ sharedCapacity }
 			type="number"
 			min="0"
+			max={ sharedRemaining }
 		/>
 	);
 
@@ -69,9 +71,10 @@ CapacityTable.propTypes = {
 	independentLabel: PropTypes.string,
 	totalLabel: PropTypes.string,
 	totalCapacity: PropTypes.number,
+	sharedRemaining: PropTypes.number,
 	sharedCapacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	onSharedCapacityChange: PropTypes.func,
-}
+};
 
 CapacityTable.defaultProps = {
 	title: __( 'Capacity', 'events-gutenberg' ),
@@ -82,6 +85,6 @@ CapacityTable.defaultProps = {
 	totalLabel: __( 'Total Capacity', 'events-gutenberg' ),
 	totalCapacity: 0,
 	onSharedCapacityChange: noop,
-}
+};
 
 export default CapacityTable;

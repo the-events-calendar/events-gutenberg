@@ -124,45 +124,31 @@ export const getUnlimitedTickets = createSelector(
 	),
 );
 
-export const getTicketsIndependentCapacity = createSelector(
-	[ getIndependentTickets ],
-	( tickets ) => {
-		return tickets.reduce( ( total, ticket ) => {
-			const capacity = parseInt( ticket.capacity, 10 );
-			return total + ( isNaN( capacity ) ? 0 : capacity );
-		}, 0 );
-	},
-);
+//
+// ─── REDUCER ────────────────────────────────────────────────────────────────────
+//
 
-export const getTicketsSharedCapacity = createSelector(
-	[ getSharedTickets ],
-	( tickets ) => {
-		return tickets.reduce( ( total, ticket ) => {
-			const capacity = parseInt( ticket.capacity, 10 ) || 0;
-			return total + capacity;
-		}, 0 );
-	},
-);
+const _getTotalCapacity = tickets => tickets.reduce( ( total, ticket ) => {
+	const capacity = parseInt( ticket.capacity, 10 ) || 0;
+	return total + capacity;
+}, 0 );
 
-export const getTotalSold = createSelector(
-	[ getTicketsArray ],
-	( tickets ) => {
-		return tickets.reduce( ( total, ticket ) => {
-			const sold = parseInt( ticket.sold, 10 ) || 0;
-			return total + sold;
-		}, 0 );
-	},
-);
+const _getTotalSold = tickets => tickets.reduce( ( total, ticket ) => {
+	const sold = parseInt( ticket.sold, 10 ) || 0;
+	return total + sold;
+}, 0 );
 
-export const getTotalAvailable = createSelector(
-	[ getTicketsArray ],
-	( tickets ) => {
-		return tickets.reduce( ( total, ticket ) => {
-			const available = parseInt( ticket.available, 10 ) || 0;
-			return total + available;
-		}, 0 );
-	},
-);
+const _getTotalAvailable = tickets => tickets.reduce( ( total, ticket ) => {
+	const available = parseInt( ticket.available, 10 ) || 0;
+	return total + available;
+}, 0 );
+
+export const getTicketsIndependentCapacity = createSelector( getIndependentTickets, _getTotalCapacity );
+export const getTicketsSharedCapacity = createSelector( getSharedTickets, _getTotalCapacity );
+export const getTicketsSharedAvailable = createSelector( getSharedTickets, _getTotalAvailable );
+export const getTotalSold = createSelector( getTicketsArray, _getTotalSold );
+export const getTotalAvailable = createSelector( getTicketsArray, _getTotalAvailable );
+export const getSharedRemaining = getTicketsSharedAvailable;
 
 export const getTotalCapacity = createSelector(
 	[ getTicketsSharedCapacity, getTicketsIndependentCapacity ],
