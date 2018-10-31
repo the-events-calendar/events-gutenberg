@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventCategory from './block';
-import { BlockIcon } from '@moderntribe/common/elements';
+import { Categories } from '@moderntribe/events/icons';
 
 /**
  * Module Code
@@ -23,7 +23,7 @@ export default {
 		'Show assigned event categories as links to their respective archives.',
 		'events-gutenberg'
 	),
-	icon: BlockIcon,
+	icon: <Categories/>,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

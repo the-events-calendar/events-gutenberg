@@ -12,7 +12,11 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { User as UserIcon } from '@moderntribe/common/src/modules/icons';
+import { ActionButton } from '@moderntribe/tickets/elements';
+
+// @todo: attendee SVG is loading weird, so, not using this icon yet
+// import { RSVP } from '@moderntribe/tickets/icons';
+import { User as RSVP } from '@moderntribe/common/src/modules/icons';
 
 const AttendeesActionButton = ( { href, hasProviders } ) => ( hasProviders && (
 	<a
@@ -21,7 +25,7 @@ const AttendeesActionButton = ( { href, hasProviders } ) => ( hasProviders && (
 		target="_blank"
 		rel="noopener noreferrer"
 	>
-		<UserIcon />
+		<RSVP />
 		<span>{ __( 'Attendees', 'events-gutenberg' ) }</span>
 	</a>
 ) );

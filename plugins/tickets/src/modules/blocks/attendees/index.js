@@ -11,7 +11,10 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import Attendees from './container';
-import { BlockIcon } from '@moderntribe/common/elements';
+
+// @todo: this SVG is acting weird, so, commenting it out for now
+//import { Attendees as AttendeesIcon } from '@moderntribe/tickets/icons';
+import { TEC as AttendeesIcon } from '@moderntribe/common/icons';
 
 /**
  * Module Code
@@ -23,7 +26,7 @@ export default {
 		'Show the gravatars of people coming to this event.',
 		'events-gutenberg'
 	),
-	icon: BlockIcon,
+	icon: <AttendeesIcon/>,
 	category: 'tribe-tickets',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
