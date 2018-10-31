@@ -18,7 +18,7 @@ import { Attendees as AttendeesIcon } from '@moderntribe/tickets/icons';
  */
 export default {
 	id: 'attendees',
-	title: __( 'Event Attendees', 'events-gutenberg' ),
+	title: __( 'Attendee List', 'events-gutenberg' ),
 	description: __(
 		'Show the gravatars of people coming to this event.',
 		'events-gutenberg'

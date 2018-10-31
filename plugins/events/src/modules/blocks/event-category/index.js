@@ -18,7 +18,7 @@ import { Categories } from '@moderntribe/events/icons';
  */
 export default {
 	id: 'event-category',
-	title: __( 'Event Category', 'events-gutenberg' ),
+	title: __( 'Event Categories', 'events-gutenberg' ),
 	description: __(
 		'Show assigned event categories as links to their respective archives.',
 		'events-gutenberg'
