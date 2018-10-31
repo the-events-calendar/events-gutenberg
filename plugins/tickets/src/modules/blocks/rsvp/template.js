@@ -22,10 +22,16 @@ class RSVP extends PureComponent {
 	static propTypes = {
 		created: PropTypes.bool.isRequired,
 		deleteRSVP: PropTypes.func.isRequired,
+		initializeRSVP: PropTypes.func.isRequired,
 		isInactive: PropTypes.bool.isRequired,
 		isLoading: PropTypes.bool.isRequired,
 		isSelected: PropTypes.bool.isRequired,
+		rsvpId: PropTypes.number.isRequired,
 	};
+
+	componentDidMount() {
+		! this.props.rsvpId && this.props.initializeRSVP();
+	}
 
 	componentWillUnmount() {
 		this.props.deleteRSVP();

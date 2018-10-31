@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { takeEvery, put, call, all } from 'redux-saga/effects';
+import { takeEvery, put, call, select, all } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
 
 /**
@@ -10,6 +10,8 @@ import { cloneableGenerator } from 'redux-saga/utils';
 import * as types from '../types';
 import * as actions from '../actions';
 import watchers, * as sagas from '../sagas';
+import { getStart, getEnd } from '@moderntribe/events/data/blocks/datetime/selectors';
+import { toMoment, toDate, toTime24Hr } from '@moderntribe/common/utils/moment';
 
 describe( 'RSVP block sagas', () => {
 	describe( 'watchers', () => {
@@ -20,6 +22,9 @@ describe( 'RSVP block sagas', () => {
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_RSVP_TEMP_DETAILS, sagas.setRSVPTempDetails ),
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.INITIALIZE_RSVP, sagas.initializeRSVP ),
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
@@ -38,7 +43,7 @@ describe( 'RSVP block sagas', () => {
 				startTime: '12:34',
 				endDate: 'January 4, 2018',
 				endDateObj: new Date( 'January 4, 2018' ),
-				endTime: '23:32'
+				endTime: '23:32',
 			} };
 		} );
 
@@ -52,7 +57,7 @@ describe( 'RSVP block sagas', () => {
 					put( actions.setRSVPNotGoingResponses( true ) ),
 					put( actions.setRSVPStartDate( 'January 1, 2018' ) ),
 					put( actions.setRSVPStartDateObj( new Date( 'January 1, 2018' ) ) ),
-					put( actions.setRSVPStartTime( '12:34') ),
+					put( actions.setRSVPStartTime( '12:34' ) ),
 					put( actions.setRSVPEndDate( 'January 4, 2018' ) ),
 					put( actions.setRSVPEndDateObj( new Date( 'January 4, 2018' ) ) ),
 					put( actions.setRSVPEndTime( '23:32' ) ),
@@ -75,7 +80,7 @@ describe( 'RSVP block sagas', () => {
 				tempStartTime: '12:34',
 				tempEndDate: 'January 4, 2018',
 				tempEndDateObj: new Date( 'January 4, 2018' ),
-				tempEndTime: '23:32'
+				tempEndTime: '23:32',
 			} };
 		} );
 
@@ -93,6 +98,64 @@ describe( 'RSVP block sagas', () => {
 					put( actions.setRSVPTempEndDate( 'January 4, 2018' ) ),
 					put( actions.setRSVPTempEndDateObj( new Date( 'January 4, 2018' ) ) ),
 					put( actions.setRSVPTempEndTime( '23:32' ) ),
+				] )
+			);
+			expect( gen.next().done ).toEqual( true );
+		} );
+	} );
+
+	describe( 'initializeRSVP', () => {
+		let state;
+		beforeEach( () => {
+			state = {
+				startDate: 'January 1, 2018',
+				startDateObj: new Date( 'January 1, 2018' ),
+				startTime: '12:34',
+				endDate: 'January 4, 2018',
+				endDateObj: new Date( 'January 4, 2018' ),
+				endTime: '23:32',
+			};
+		} );
+
+		it( 'should initialize state from datetime block', () => {
+			const gen = sagas.initializeRSVP();
+
+			expect( gen.next().value ).toEqual(
+				select( getStart )
+			);
+			expect( gen.next( state.startDate ).value ).toEqual(
+				select( getEnd )
+			);
+
+			expect( gen.next( state.endDate ).value ).toEqual(
+				call( toMoment, state.startDate )
+			);
+			expect( gen.next( state.startDate ).value ).toEqual(
+				call( toMoment, state.endDate )
+			);
+
+			expect( gen.next( state.endDate ).value ).toEqual(
+				call( toDate, state.startDate )
+			);
+			expect( gen.next( state.startDate ).value ).toEqual(
+				call( toDate, state.endDate )
+			);
+
+			expect( gen.next( state.endDate ).value ).toEqual(
+				call( toTime24Hr, state.startDate )
+			);
+			expect( gen.next( state.startTime ).value ).toEqual(
+				call( toTime24Hr, state.endDate )
+			);
+
+			expect( gen.next( state.endTime ).value ).toEqual(
+				all( [
+					put( actions.setRSVPTempStartDate( state.startDate ) ),
+					put( actions.setRSVPTempStartDateObj( state.startDateObj ) ),
+					put( actions.setRSVPTempStartTime( state.startTime ) ),
+					put( actions.setRSVPTempEndDate( state.endDate ) ),
+					put( actions.setRSVPTempEndDateObj( state.endDateObj ) ),
+					put( actions.setRSVPTempEndTime( state.endTime ) ),
 				] )
 			);
 			expect( gen.next().done ).toEqual( true );
