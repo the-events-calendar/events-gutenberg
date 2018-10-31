@@ -11,10 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import Attendees from './container';
-
-// @todo: this SVG is acting weird, so, commenting it out for now
-//import { Attendees as AttendeesIcon } from '@moderntribe/tickets/icons';
-import { TEC as AttendeesIcon } from '@moderntribe/common/icons';
+import { Attendees as AttendeesIcon } from '@moderntribe/tickets/icons';
 
 /**
  * Module Code
