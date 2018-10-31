@@ -15,6 +15,7 @@ export const getBlock = ( state ) => state.tickets.blocks.ticket;
 // UI selectors
 
 export const getTicketUI = createSelector( [ getBlock ], ( block ) => block.ui );
+export const getTicketSettings = createSelector( [ getBlock ], ( block ) => block.settings );
 export const getTickets = createSelector( [ getBlock ], ( block ) => block.tickets );
 
 export const getBlockParentSelected = createSelector(
@@ -32,7 +33,7 @@ export const getParentOrChildSelected = createSelector(
 	( parentSelected, childSelected ) => parentSelected || childSelected,
 );
 
-export const getSharedCapacity = createSelector( [ getTicketUI ], ( ui ) => ui.sharedCapacity );
+export const getSharedCapacity = createSelector( [ getTicketSettings ], ( settings ) => settings.sharedCapacity );
 export const getSettingsIsOpen = createSelector( [ getTicketUI ], ( ui ) => ui.isSettingsOpen );
 
 export const getActiveBlockId = createSelector( [ getTicketUI ], ( ui ) => ui.activeChildBlockId );
@@ -53,15 +54,12 @@ export const getSelectedProvider = createSelector(
 
 // Temporarily UI selectors
 
-export const getTmpUI = createSelector(
-	[ getTicketUI ],
-	( ui ) => ui.tmp,
+export const getTmpSettings = createSelector(
+	[ getTicketSettings ],
+	( settings ) => settings.tmp,
 );
 
-export const getTmpSharedCapacity = createSelector(
-	[ getTmpUI ],
-	( tmp ) => tmp.sharedCapacity,
-);
+export const getTmpSharedCapacity = createSelector( getTmpSettings, tmp => tmp.sharedCapacity );
 
 // Header Image
 
