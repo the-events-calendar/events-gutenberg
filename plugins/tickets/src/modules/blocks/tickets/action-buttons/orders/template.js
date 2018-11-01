@@ -12,7 +12,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { Tag as TagIcon } from '@moderntribe/common/src/modules/icons';
+// @todo: orders SVG is loading weird, so, not using this icon yet
+// import { Orders } from '@moderntribe/tickets/icons';
+import { Tag as Orders } from '@moderntribe/common/src/modules/icons';
 
 const OrdersActionButton = ( { href } ) => ( href && (
 	<a
@@ -21,7 +23,7 @@ const OrdersActionButton = ( { href } ) => ( href && (
 		target="_blank"
 		rel="noopener noreferrer"
 	>
-		<TagIcon />
+		<Orders />
 		<span>{ __( 'Orders', 'events-gutenberg' ) }</span>
 	</a>
 ) );
