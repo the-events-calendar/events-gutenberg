@@ -23,6 +23,8 @@ import {
 import { wpREST } from '@moderntribe/common/utils/api';
 import { config, restNonce } from '@moderntribe/common/src/modules/utils/globals';
 import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
+import { getStart, getEnd } from '@moderntribe/events/data/blocks/datetime/selectors';
+import { toMoment, toDate, toTime24Hr } from '@moderntribe/common/utils/moment';
 
 /**
  * @todo missing tests.
@@ -246,10 +248,24 @@ export function* setTicketInitialState( action ) {
 		dateIsPristine: get( 'dateIsPristine', DEFAULT_TICKET_STATE.dateIsPristine ),
 	};
 
+	const start = yield select(getStart);
+	const end = yield select(getEnd);
+
+	const startMoment = yield call( toMoment, start );
+	const endMoment = yield call( toMoment, end );
+ 	const startDate = yield call( toDate, startMoment );
+	const endDate = yield call( toDate, endMoment );
+ 	const startTime = yield call( toTime24Hr, startMoment );
+	const endTime = yield call( toTime24Hr, endMoment );
+
 	yield all( [
 		put( actions.seTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
 		put( actions.setTicketId( clientId, values.ticketId ) ),
 		put( actions.setTicketDateIsPristine( clientId, values.dateIsPristine ) ),
+		put( actions.setStartDate( clientId, startDate ) ),
+		put( actions.setStartTime( clientId, startTime ) ),
+		put( actions.setEndDate( clientId, endDate ) ),
+		put( actions.setEndTime( clientId, endTime ) ),
 		put( actions.fetchTicketDetails( clientId, values.ticketId ) ),
 	] );
 }

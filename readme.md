@@ -97,6 +97,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 * Fix - RSVP blocks sets initial start and end date based on events
 * Fix - Add wp-editor as dependency for scripts
+* Fix - RSVP blocks sets initial start and end date based on event
+* Fix - Ticket blocks sets initial start and end date based on event
 
 #### 0.3.3-alpha - 2018-10-25
 
