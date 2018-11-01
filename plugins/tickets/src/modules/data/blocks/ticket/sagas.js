@@ -261,7 +261,6 @@ export function* setTicketInitialState( action ) {
 	const sharedCapacity = yield select( selectors.getSharedCapacityInt );
 
 	if (sharedCapacity) {
-		console.warn(sharedCapacity);
 		yield put( actions.setCapacity( clientId, sharedCapacity ) );
 	}
 
