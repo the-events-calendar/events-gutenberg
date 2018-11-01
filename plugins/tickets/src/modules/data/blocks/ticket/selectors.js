@@ -164,8 +164,8 @@ export const getSharedRemainingCapacity = createSelector(
 );
 
 export const getTotalCapacity = createSelector(
-	[ getSharedCapacity, getTicketsSharedCapacity, getTicketsIndependentCapacity ],
-	( globalShared, shared, independent ) => Math.max( shared, globalShared ) + independent,
+	[ getSharedCapacityInt, getTicketsIndependentCapacity ],
+	( globalShared, independent ) => globalShared + independent,
 );
 
 export const getTicketBlock = createSelector(
