@@ -25,8 +25,8 @@ export const attachBehavior = ( isCreatingFields ) => ( button ) => {
 
 	// Reset input and button fields is is creating a new duplicate of the same field
 	if ( isCreatingFields ) {
-		toggleInput( input, true );
-		toggleButton( button, true );
+		toggleInput( input, false );
+		toggleButton( button, false );
 	}
 
 	button.addEventListener( 'click', () => {
