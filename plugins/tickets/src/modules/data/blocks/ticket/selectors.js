@@ -34,7 +34,7 @@ export const getParentOrChildSelected = createSelector(
 );
 
 export const getSharedCapacity = createSelector( [ getTicketSettings ], ( settings ) => settings.sharedCapacity );
-export const getSharedCapacityInt = createSelector( [ getSharedCapacity ], ( capacity ) => parseInt( capacity, 10 ) );
+export const getSharedCapacityInt = createSelector( [ getSharedCapacity ], ( capacity ) => parseInt( capacity, 10 ) || 0 );
 export const getSettingsIsOpen = createSelector( [ getTicketUI ], ( ui ) => ui.isSettingsOpen );
 
 export const getActiveBlockId = createSelector( [ getTicketUI ], ( ui ) => ui.activeChildBlockId );
@@ -155,8 +155,8 @@ export const getTicketsSharedCapacity = createSelector( getSharedTickets, _getTo
 export const getTicketsSharedAvailable = createSelector( getSharedTickets, _getTotalAvailable );
 export const getTotalSold = createSelector( getTicketsArray, _getTotalSold );
 export const getTotalAvailable = createSelector(
-	[ getTicketsIndependentAvailable, getTicketsSharedAvailable ],
-	( independent, shared ) => independent + shared
+	[ getSharedCapacityInt, getTicketsIndependentAvailable ],
+	( globalShared, independent ) => globalShared + independent
 );
 export const getSharedRemainingCapacity = createSelector(
 	[ getSharedCapacity, getTicketsSharedCapacity ],
