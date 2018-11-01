@@ -333,7 +333,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			'enqueue_block_editor_assets',
 			array(
 				'type'         => 'js',
-				'in_footer'    => false,
+				'in_footer'    => true,
 				'localize'     => array(
 					'name' => 'tribe_blocks_editor_google_maps_api',
 					'data' => array(
@@ -372,7 +372,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
+				'in_footer'    => true,
 				'localize'     => array(
 					array(
 						'name' => 'tribe_js_config',
@@ -453,7 +453,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'tribe-events-editor-blocks-gmaps-api', 'tribe-events-editor-elements' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
+				'in_footer'    => true,
 				'localize'     => $localize_blocks,
 				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
@@ -466,7 +466,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
+				'in_footer'    => true,
 				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
@@ -478,7 +478,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
+				'in_footer'    => true,
 				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
@@ -490,7 +490,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
+				'in_footer'    => true,
 				'conditionals' => array( $this, 'is_events_post_type' ),
 			)
 		);
