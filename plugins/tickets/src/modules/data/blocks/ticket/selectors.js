@@ -154,8 +154,8 @@ export const getTicketsSharedCapacity = createSelector( getSharedTickets, _getTo
 export const getTicketsSharedAvailable = createSelector( getSharedTickets, _getTotalAvailable );
 export const getTotalSold = createSelector( getTicketsArray, _getTotalSold );
 export const getTotalAvailable = createSelector(
-	[ getTicketsIndependentAvailable, getTicketsSharedAvailable, getSharedCapacity ],
-	( independent, shared, globalShared ) => independent + Math.max( shared, globalShared )
+	[ getTicketsIndependentAvailable, getTicketsSharedAvailable ],
+	( independent, shared ) => independent + shared
 );
 export const getSharedRemainingCapacity = createSelector(
 	[ getSharedCapacity, getTicketsSharedCapacity ],
@@ -163,8 +163,8 @@ export const getSharedRemainingCapacity = createSelector(
 );
 
 export const getTotalCapacity = createSelector(
-	[ getTicketsSharedCapacity, getTicketsIndependentCapacity ],
-	( shared, independent ) => shared + independent,
+	[ getSharedCapacity, getTicketsSharedCapacity, getTicketsIndependentCapacity ],
+	( globalShared, shared, independent ) => Math.max( shared, globalShared ) + independent,
 );
 
 export const getTicketBlock = createSelector(
