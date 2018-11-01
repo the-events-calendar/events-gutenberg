@@ -161,29 +161,27 @@ class Capacity extends PureComponent {
 							id={ this.ids.select }
 						/>
 					</div>
-					{
-						( type === TICKET_TYPES.independent ||
-						( type === TICKET_TYPES.shared && ! hasSharedTickets ) ) && (
-							<Input
-								id={ this.ids.capacity }
-								input={ inputProps }
-								min="0"
-								{ ...extraInputProps }
-							/>
-						)
-					}
 					{ type === TICKET_TYPES.shared && totalSharedCapacity === '' && (
 						<Input
 							id={ this.ids.globalShared }
 							input={ {
 								onChange: setTemporarilySharedCapacity,
-								label: __( '(optional) Limit sales of this ticket to:', 'events-gutenberg' ),
+								label: __( 'Set shared capacity:', 'events-gutenberg' ),
 								value: tmpSharedCapacity,
 							} }
 							min="0"
 						/>
 					) }
-					{ type === TICKET_TYPES.shared && totalSharedCapacity && (
+					{
+						type === TICKET_TYPES.independent && (
+							<Input
+								id={ this.ids.capacity }
+								input={ inputProps }
+								min="0"
+							/>
+						)
+					}
+					{ type === TICKET_TYPES.shared && (
 						<Input
 							id={ this.ids.capacity }
 							input={ {
@@ -192,7 +190,7 @@ class Capacity extends PureComponent {
 								value: capacity,
 							} }
 							min="0"
-							max={ capacity + remainingCapacity }
+							{ ...extraInputProps }
 						/>
 					) }
 				</div>
