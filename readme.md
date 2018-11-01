@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.3.4-alpha - TBD
 
 * Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
+* Feature - Add dynamic additional blocks present on the Gutenberg Editor
 
 #### 0.3.3-alpha - 2018-10-25
 
