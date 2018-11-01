@@ -95,7 +95,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 #### 0.3.4-alpha - 2018-11-01
 
-* Fix - RSVP blocks sets initial start and end date based on events
+* Fix - RSVP blocks sets initial start and end date based on event
+* Fix - Ticket blocks sets initial start and end date based on event
 
 #### 0.3.3-alpha - 2018-10-25
 
