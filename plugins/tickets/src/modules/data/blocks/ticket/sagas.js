@@ -258,6 +258,13 @@ export function* setTicketInitialState( action ) {
  	const startTime = yield call( toTime24Hr, startMoment );
 	const endTime = yield call( toTime24Hr, endMoment );
 
+	const sharedCapacity = yield select( selectors.getSharedCapacityInt );
+
+	if (sharedCapacity) {
+		console.warn(sharedCapacity);
+		yield put( actions.setCapacity( clientId, sharedCapacity ) );
+	}
+
 	yield all( [
 		put( actions.seTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
 		put( actions.setTicketId( clientId, values.ticketId ) ),
