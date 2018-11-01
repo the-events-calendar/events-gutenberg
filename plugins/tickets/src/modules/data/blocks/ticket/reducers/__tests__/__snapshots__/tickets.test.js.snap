@@ -10,7 +10,7 @@ Object {
       "SKU": "",
       "available": 0,
       "capacity": "",
-      "capacityType": "own",
+      "capacityType": "capped",
       "currencySymbol": undefined,
       "dateIsPristine": false,
       "description": "",
