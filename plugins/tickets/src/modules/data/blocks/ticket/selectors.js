@@ -117,6 +117,11 @@ export const getSharedTickets = createSelector(
 	),
 );
 
+export const getSharedTicketsCount = createSelector(
+	getSharedTickets,
+	tickets => tickets.length
+);
+
 export const getUnlimitedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
@@ -148,7 +153,10 @@ export const getTicketsSharedCapacity = createSelector( getSharedTickets, _getTo
 export const getTicketsSharedAvailable = createSelector( getSharedTickets, _getTotalAvailable );
 export const getTotalSold = createSelector( getTicketsArray, _getTotalSold );
 export const getTotalAvailable = createSelector( getTicketsArray, _getTotalAvailable );
-export const getSharedRemaining = getTicketsSharedAvailable;
+export const getSharedRemainingCapacity = createSelector(
+	[ getTicketsSharedAvailable, getTicketsSharedCapacity ],
+	( available, capacity ) => Math.max( 0, available - capacity )
+);
 
 export const getTotalCapacity = createSelector(
 	[ getTicketsSharedCapacity, getTicketsIndependentCapacity ],

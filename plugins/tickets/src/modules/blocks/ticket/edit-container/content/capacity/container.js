@@ -18,6 +18,8 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	capacity: selectors.getTicketCapacity( state, ownProps ),
 	totalSharedCapacity: selectors.getSharedCapacity( state ),
 	tmpSharedCapacity: selectors.getTmpSharedCapacity( state ),
+	hasSharedTickets: selectors.getSharedTicketsCount( state ) > 1,
+	remainingCapacity: selectors.getSharedRemainingCapacity( state ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
@@ -55,7 +57,7 @@ const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
 			dispatchProps.setCapacity( stateProps.type, stateProps.totalSharedCapacity, value );
 		},
 	};
-}
+};
 
 export default compose(
 	withStore(),

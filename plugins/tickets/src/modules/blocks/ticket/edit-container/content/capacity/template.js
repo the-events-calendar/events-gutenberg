@@ -19,7 +19,6 @@ import { TICKET_TYPES, TICKET_TYPES_VALUES } from '@moderntribe/tickets/data/uti
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
-
 // todo: replace with custom select from Events Pro
 const Select = ( { id, options, selected, onSelect } ) => {
 	function onChange( event ) {
@@ -33,7 +32,7 @@ const Select = ( { id, options, selected, onSelect } ) => {
 			) ) }
 		</select>
 	);
-}
+};
 
 Select.propTypes = {
 	id: PropTypes.string,
@@ -47,7 +46,6 @@ Select.propTypes = {
 
 // Custom input for this type of form
 const Input = ( { id, input, ...props } ) => {
-
 	function onChange( event ) {
 		input.onChange( event.target.value );
 	}
@@ -64,7 +62,7 @@ const Input = ( { id, input, ...props } ) => {
 			/>
 		</div>
 	);
-}
+};
 
 Input.propTypes = {
 	id: PropTypes.string,
@@ -125,6 +123,8 @@ class Capacity extends PureComponent {
 			setTemporarilySharedCapacity,
 			tmpSharedCapacity,
 			onCapacityChange,
+			hasSharedTickets,
+			remainingCapacity,
 		} = this.props;
 
 		const inputProps = {
@@ -161,13 +161,17 @@ class Capacity extends PureComponent {
 							id={ this.ids.select }
 						/>
 					</div>
-					{ type !== TICKET_TYPES.unlimited && (
-						<Input
-							id={ this.ids.capacity }
-							input={ inputProps }
-							min="0"
-							{ ...extraInputProps }
-						/> ) }
+					{
+						( type === TICKET_TYPES.independent ||
+						( type === TICKET_TYPES.shared && ! hasSharedTickets ) ) && (
+							<Input
+								id={ this.ids.capacity }
+								input={ inputProps }
+								min="0"
+								{ ...extraInputProps }
+							/>
+						)
+					}
 					{ type === TICKET_TYPES.shared && totalSharedCapacity === '' && (
 						<Input
 							id={ this.ids.globalShared }
@@ -177,6 +181,18 @@ class Capacity extends PureComponent {
 								value: tmpSharedCapacity,
 							} }
 							min="0"
+						/>
+					) }
+					{ type === TICKET_TYPES.shared && totalSharedCapacity && (
+						<Input
+							id={ this.ids.capacity }
+							input={ {
+								onChange: onCapacityChange,
+								label: __( '(optional) Limit sales of this ticket to:', 'events-gutenberg' ),
+								value: capacity,
+							} }
+							min="0"
+							max={ capacity + remainingCapacity }
 						/>
 					) }
 				</div>

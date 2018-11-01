@@ -18,7 +18,8 @@ export default ( state = DEFAULT_STATE, action ) => {
 			};
 		case types.SET_TICKET_TMP_TICKET_SHARED_CAPACITY:
 			return {
-				tmp: tmp( state, action ),
+				...state,
+				tmp: tmp( state.tmp, action ),
 			};
 		default:
 			return state;
