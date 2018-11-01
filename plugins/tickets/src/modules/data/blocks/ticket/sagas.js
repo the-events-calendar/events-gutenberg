@@ -167,6 +167,7 @@ export function* createNewTicket( action ) {
 			put( actions.setTicketId( blockId, ticket.ID ) ),
 			put( actions.seTicketHasBeenCreated( blockId, true ) ),
 			put( actions.setActiveChildBlockId( '' ) ),
+			put( actions.setTicketAvailable( blockId, ticket.capacity ) ),
 		] );
 	} catch ( e ) {
 		/**
