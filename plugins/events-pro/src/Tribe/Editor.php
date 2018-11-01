@@ -39,7 +39,10 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 * @return mixed
 	 */
 	public function after_custom_field_content( $ticket, $index, $count ) {
-		$value = isset( $ticket['gutenberg_editor'] ) && $ticket['gutenberg_editor'] ? '1' : '0';
+		$value = '1';
+		if ( isset( $ticket['gutenberg_editor'] ) ) {
+			$value = $ticket['gutenberg_editor'] ? '1' : '0';
+		}
 		$args  = array(
 			'input_id'   => 'gutenberg_editor_' . esc_attr( $index ),
 			'value'      => $value,
@@ -235,7 +238,7 @@ class Tribe__Gutenberg__Events_Pro__Editor extends Tribe__Gutenberg__Common__Edi
 	 */
 	public function add_additional_fields_in_editor( $templates ) {
 		$blocks                      = array();
-		$additional_fields_templates = tribe( 'gutenberg.events.pro.fields' )->get_block_names();
+		$additional_fields_templates = tribe( 'gutenberg.events.pro.fields' )->get_block_names( true );
 		foreach ( $templates as $template ) {
 			$blocks[] = $template;
 			if ( is_array( $template ) && 'tribe/event-venue' === $template[0] ) {
