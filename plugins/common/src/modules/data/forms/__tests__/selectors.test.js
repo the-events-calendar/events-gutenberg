@@ -1,8 +1,8 @@
 /**
  * External dependencies
  */
-import { selectors } from '@moderntribe/events/data/forms';
-import { DEFAULT_STATE } from '@moderntribe/events/data/forms/reducers/form';
+import { selectors } from '@moderntribe/common/data/forms';
+import { DEFAULT_STATE } from '@moderntribe/common/data/forms/reducers/form';
 
 const state = {
 	events: {
