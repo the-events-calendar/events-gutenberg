@@ -66,6 +66,7 @@ const mapStateToProps = ( state ) => ( {
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	dispatch,
 	setInitialState: setInitialState( dispatch, ownProps ),
+	initializeRSVP: () => dispatch( actions.initializeRSVP() ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {

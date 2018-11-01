@@ -8,6 +8,10 @@ describe( 'RSVP block actions', () => {
 		expect( actions.createRSVP() ).toMatchSnapshot();
 	} );
 
+	test( 'initialize RSVP', () => {
+		expect( actions.initializeRSVP() ).toMatchSnapshot();
+	} );
+
 	test( 'delete RSVP', () => {
 		expect( actions.deleteRSVP() ).toMatchSnapshot();
 	} );

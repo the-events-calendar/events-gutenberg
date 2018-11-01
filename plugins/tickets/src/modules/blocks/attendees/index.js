@@ -11,19 +11,19 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import Attendees from './container';
-import { BlockIcon } from '@moderntribe/common/elements';
+import { Attendees as AttendeesIcon } from '@moderntribe/tickets/icons';
 
 /**
  * Module Code
  */
 export default {
 	id: 'attendees',
-	title: __( 'Event Attendees', 'events-gutenberg' ),
+	title: __( 'Attendee List', 'events-gutenberg' ),
 	description: __(
 		'Show the gravatars of people coming to this event.',
 		'events-gutenberg'
 	),
-	icon: BlockIcon,
+	icon: <AttendeesIcon/>,
 	category: 'tribe-tickets',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
