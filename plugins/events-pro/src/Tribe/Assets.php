@@ -35,7 +35,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => true,
+				'in_footer' => false,
 				'localize'  => array(),
 			)
 		);
