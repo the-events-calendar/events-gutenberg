@@ -93,8 +93,9 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.4-alpha - 2018-11-01
+#### 0.3.4-alpha - TBD
 
+* Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
 * Fix - RSVP blocks sets initial start and end date based on events
 
 #### 0.3.3-alpha - 2018-10-25
