@@ -17,7 +17,7 @@ Object {
     },
   },
   "category": "tribe-tickets",
-  "description": "Entry for ticket",
+  "description": "A single configured ticket type.",
   "edit": [Function],
   "icon": [Function],
   "id": "tickets-item",

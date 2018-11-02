@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import FeaturedImage from './block';
-import { BlockIcon } from '@moderntribe/common/elements';
+import { FeaturedImage as FeaturedImageIcon } from '@moderntribe/events/icons';
 
 /**
  * Module Code
@@ -20,7 +20,7 @@ export default {
 	id: 'featured-image',
 	title: __( 'Featured Image', 'events-gutenberg' ),
 	description: __( 'Display the featured image in the post content.', 'events-gutenberg' ),
-	icon: BlockIcon,
+	icon: <FeaturedImageIcon/>,
 	category: 'common',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

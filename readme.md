@@ -97,12 +97,13 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 * Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
 * Feature - Add dynamic additional blocks present on the Gutenberg Editor
+* Fix - RSVP blocks sets initial start and end date based on events
 
 #### 0.3.3-alpha - 2018-10-25
 
 * Feature - Event Attendees list block
-* Fix - Style changes to make RSVP and Ticket settings compatible with Gutenberg 4.1
 * Tweak - Make sure users can select older Years on the Datetime block
+* Fix - Style changes to make RSVP and Ticket settings compatible with Gutenberg 4.1
 
 #### 0.3.2-alpha - 2018-10-18
 
