@@ -167,6 +167,7 @@ export function* createNewTicket( action ) {
 			put( actions.setTicketId( blockId, ticket.ID ) ),
 			put( actions.seTicketHasBeenCreated( blockId, true ) ),
 			put( actions.setActiveChildBlockId( '' ) ),
+			put( actions.setTicketAvailable( blockId, ticket.capacity ) ),
 		] );
 	} catch ( e ) {
 		/**
@@ -257,6 +258,12 @@ export function* setTicketInitialState( action ) {
 	const endDate = yield call( toDate, endMoment );
  	const startTime = yield call( toTime24Hr, startMoment );
 	const endTime = yield call( toTime24Hr, endMoment );
+
+	const sharedCapacity = yield select( selectors.getSharedCapacityInt );
+
+	if (sharedCapacity) {
+		yield put( actions.setCapacity( clientId, sharedCapacity ) );
+	}
 
 	yield all( [
 		put( actions.seTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),

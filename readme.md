@@ -99,6 +99,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Add wp-editor as dependency for scripts
 * Fix - RSVP blocks sets initial start and end date based on event
 * Fix - Ticket blocks sets initial start and end date based on event
+* Fix - Allow ticket UI to show proper shared capacity state
 
 #### 0.3.3-alpha - 2018-10-25
 

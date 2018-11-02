@@ -11,8 +11,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -25,8 +23,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -39,8 +35,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -53,8 +47,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -67,8 +59,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -81,8 +71,6 @@ Object {
   "isParentBlockSelected": true,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -95,8 +83,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -109,8 +95,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "Tribe__Tickets__Commerce__PayPal__Main",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -123,8 +107,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -137,8 +119,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -151,8 +131,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": true,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -165,8 +143,6 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": "",
-  "tmp": Object {},
 }
 `;
 
@@ -179,7 +155,5 @@ Object {
   "isParentBlockSelected": false,
   "isSettingsOpen": false,
   "provider": "",
-  "sharedCapacity": 50,
-  "tmp": Object {},
 }
 `;
