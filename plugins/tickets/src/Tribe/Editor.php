@@ -27,6 +27,9 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 		add_action( 'admin_init', array( $this, 'add_tickets_block_in_editor' ) );
 
 		add_filter( 'tribe_events_editor_default_classic_template', array( $this, 'filter_default_template_classic_blocks' ), 15 );
+
+		// Add attendee information metabox
+		add_action( 'add_meta_boxes', array( $this, 'add_attendee_info_metabox' ) );
 	}
 
 	/**
@@ -222,4 +225,34 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 		);
 		return $js_config;
 	}
+
+	/**
+	 * Adds the attendee information metabox as an iframe
+	 * Note: this is a temporary solution until we can build a proper block
+	 *
+	 * @since  0.3.3-alpha
+	 *
+	 */
+	public function add_attendee_info_metabox() {
+		add_meta_box(
+			'event-tickets-attendee-information',
+			'Attendee Information',
+			array( $this, 'attendee_info_metabox' ),
+			'tribe_events'
+		);
+	}
+
+	/**
+	 * output for attendee information metabox
+	 *
+	 * @since  0.3.3-alpha
+	 *
+	 * @param  $post_id post id for the event
+	 *
+	 */
+	public function attendee_info_metabox( $post_id ) {
+		$meta = Tribe__Tickets_Plus__Main::instance()->meta();
+		$meta->meta_fieldset()->metabox( $post_id );
+	}
+
 }
