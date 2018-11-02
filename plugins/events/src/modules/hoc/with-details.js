@@ -38,6 +38,10 @@ export default ( key = 'clientId' ) => ( WrappedComponent ) => {
 			this.fetch();
 		}
 
+		get id() {
+			return this.props[ key ];
+		}
+
 		fetch() {
 			if ( isUndefined( this.id ) || ! this.id ) {
 				return;
@@ -56,10 +60,6 @@ export default ( key = 'clientId' ) => ( WrappedComponent ) => {
 			setDetailsPostType( this.id, postType );
 			fetchDetails( this.id );
 			this.details = tmp;
-		}
-
-		get id() {
-			return this.props[ key ];
 		}
 
 		render() {
