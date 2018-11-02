@@ -165,7 +165,7 @@ export function* createNewTicket( action ) {
 		yield all( [
 			put( actions.setTicketIsEditing( blockId, false ) ),
 			put( actions.setTicketId( blockId, ticket.ID ) ),
-			put( actions.seTicketHasBeenCreated( blockId, true ) ),
+			put( actions.setTicketHasBeenCreated( blockId, true ) ),
 			put( actions.setActiveChildBlockId( '' ) ),
 		] );
 	} catch ( e ) {
@@ -259,7 +259,7 @@ export function* setTicketInitialState( action ) {
 	const endTime = yield call( toTime24Hr, endMoment );
 
 	yield all( [
-		put( actions.seTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
+		put( actions.setTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
 		put( actions.setTicketId( clientId, values.ticketId ) ),
 		put( actions.setTicketDateIsPristine( clientId, values.dateIsPristine ) ),
 		put( actions.setStartDate( clientId, startDate ) ),
