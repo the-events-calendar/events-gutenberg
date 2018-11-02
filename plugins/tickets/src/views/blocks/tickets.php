@@ -17,6 +17,9 @@ if ( ! $provider ) {
 	return false;
 }
 ?>
+
+<?php $this->template( 'blocks/attendees/order-links', array( 'type' => 'ticket' ) ); ?>
+
 <form
 	id="tribe-block__tickets"
 	action="<?php echo esc_url( $cart_url ) ?>"
