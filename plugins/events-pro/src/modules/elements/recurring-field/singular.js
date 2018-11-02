@@ -11,8 +11,8 @@ import { __ } from '@wordpress/i18n';
 import {
 	FromTimeRangePicker,
 	OnDatePicker,
+	RecurringToDateTimePicker,
 	TypePicker,
-	SingleToDateTimePicker,
 } from '@moderntribe/events-pro/elements';
 import { constants } from '@moderntribe/events-pro/data/blocks';
 import { options } from '@moderntribe/events-pro/data/blocks/recurring';
@@ -34,12 +34,8 @@ const SingularField = ( { isMultiDay, index } ) => {
 				blockType={ constants.RECURRING }
 				index={ index }
 			/>
-			{ isMultiDay && (
-				<SingleToDateTimePicker
-					blockType={ constants.RECURRING }
-					index={ index }
-				/>
-			) }
+			{/* @todo: change this to <SingleToDateTimePicker /> once BE is set */}
+			{ isMultiDay && <RecurringToDateTimePicker index={ index } /> }
 		</Fragment>
 	);
 };
