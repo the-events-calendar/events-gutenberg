@@ -249,14 +249,14 @@ class EventVenue extends Component {
 
 		return (
 			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Venue Settings' ) }>
+				<PanelBody title={ __( 'Venue Settings', 'events-gutenberg' ) }>
 					<ToggleControl
-						label={ __( 'Show Google Maps Link' ) }
+						label={ __( 'Show Google Maps Link', 'events-gutenberg' ) }
 						checked={ showMapLink }
 						onChange={ toggleVenueMapLink }
 					/>
 					<ToggleControl
-						label={ __( 'Show Google Maps Embed' ) }
+						label={ __( 'Show Google Maps Embed', 'events-gutenberg' ) }
 						checked={ showMap }
 						onChange={ toggleVenueMap }
 					/>

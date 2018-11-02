@@ -51,7 +51,7 @@ class FeaturedImage extends Component {
 		}
 
 		return (
-			<img src={ image.source_url } alt="Featured Image" />
+			<img src={ image.source_url } alt={ __( 'Featured Image'. 'events-gutenberg' ) } />
 		);
 	}
 

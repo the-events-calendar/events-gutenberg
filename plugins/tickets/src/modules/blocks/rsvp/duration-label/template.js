@@ -7,6 +7,7 @@ import React from 'react';
  * WordPress dependencies
  */
 import { Dashicon } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -24,11 +25,11 @@ const tooltipLabel = (
 const RSVPDurationLabel = ( { tooltipDisabled } ) => (
 	<LabelWithTooltip
 		className="tribe-editor__rsvp-duration__duration-label"
-		label="Duration"
+		label={ __( 'Duration', 'events-gutenberg' ) }
 		tooltipDisabled={ tooltipDisabled }
 		tooltipLabel={ tooltipLabel }
 		// @TODO: get tooltip text based on post type
-		tooltipText={ 'By default, sales will begin as soon as you save the ticket and end when the event begins' }
+		tooltipText={ __( 'By default, sales will begin as soon as you save the ticket and end when the event begins', 'events-gutenberg' ) }
 	/>
 );
 
