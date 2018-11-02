@@ -7,7 +7,7 @@ import { isEmpty, difference } from 'lodash';
  * External dependencies
  */
 import { createSelector } from 'reselect';
-import { selectors as formsSelectors } from '@moderntribe/events/data/forms';
+import { selectors as formsSelectors } from '@moderntribe/common/data/forms';
 import { DEFAULT_STATE } from './reducers/details';
 
 export const blockSelector = ( state, props ) => state.events.details[ props.name ];

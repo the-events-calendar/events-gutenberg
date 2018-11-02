@@ -13,9 +13,9 @@ import { withForm } from '@moderntribe/common/hoc';
 
 const initialState = {
 	events: {
-		forms: {
-			byId: {},
-		},
+	},
+	forms: {
+		byId: {},
 	},
 };
 // here it is possible to pass in any middleware if needed into //configureStore
