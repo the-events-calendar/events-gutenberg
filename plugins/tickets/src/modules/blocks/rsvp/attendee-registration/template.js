@@ -21,31 +21,28 @@ const label = __( 'Attendee Registration', 'events-gutenberg' );
 
 const modalButtonLabel = __( '+ Add', 'events-gutenberg' );
 
-// @todo: no idea how to get an appropriate URL loaded in here
-const attendeeRegistrationURL = 'edit.php?post_type=tribe_events&page=attendee-registration&ticket_id=80';
+const RSVPAttendeeRegistration = ( {
+	attendeeRegistrationURL,
+	isDisabled,
+} ) => {
+	const modalContent = <iframe src={ attendeeRegistrationURL } />;
 
-// @todo: replace this altogether.
-const modalContent = __(
-	'Adding Attendee Fields is not yet supported in the Gutenberg block editor.',
-	'events-gutenberg',
-);
-
-// @todo: only show the link here after a ticket has been saved, having a ticket ID
-const RSVPAttendeeRegistration = ( { isDisabled } ) => (
-	<div>
+	return (
 		<LabelWithModal
 			className="tribe-editor__rsvp__attendee-registration"
 			closeButtonLabel={ closeButtonLabel }
 			label={ label }
 			modalButtonDisabled={ isDisabled }
 			modalButtonLabel={ modalButtonLabel }
+			modalClassName="tribe-editor__rsvp__attendee-registration-modal-content"
 			modalContent={ modalContent }
+			modalOverlayClassName="tribe-editor__rsvp__attendee-registration-modal-overlay"
 		/>
-		<div><a href={ attendeeRegistrationURL }>{ label }</a></div>
-	</div>
-);
+	);
+};
 
 RSVPAttendeeRegistration.propTypes = {
+	attendeeRegistrationURL: PropTypes.string,
 	isDisabled: PropTypes.bool,
 };
 
