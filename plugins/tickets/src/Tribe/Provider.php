@@ -43,6 +43,8 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 
 		$this->container->singleton( 'gutenberg.tickets.rest.compatibility', 'Tribe__Gutenberg__Tickets__REST__Compatibility', array( 'hook' ) );
 
+		$this->container->singleton( 'gutenberg.tickets.attendee_registration', 'Tribe__Gutenberg__Tickets__Attendee_Registration' );
+
 		$this->hook();
 		/**
 		 * Lets load all compatibility related methods
@@ -76,6 +78,8 @@ class Tribe__Gutenberg__Tickets__Provider extends tad_DI52_ServiceProvider {
 
 		// Setup the Rest compatibility layer for WP
 		tribe( 'gutenberg.tickets.rest.compatibility' );
+
+		tribe( 'gutenberg.tickets.attendee_registration' )->hook();
 
 		// Register blocks
 		add_action(
