@@ -25,7 +25,12 @@ const RSVPAttendeeRegistration = ( {
 	attendeeRegistrationURL,
 	isDisabled,
 } ) => {
-	const modalContent = <iframe src={ attendeeRegistrationURL } />;
+	const modalContent = (
+		<iframe
+			className="tribe-editor__rsvp__attendee-registration-iframe"
+			src={ attendeeRegistrationURL }
+		/>
+	);
 
 	return (
 		<LabelWithModal
@@ -34,7 +39,7 @@ const RSVPAttendeeRegistration = ( {
 			label={ label }
 			modalButtonDisabled={ isDisabled }
 			modalButtonLabel={ modalButtonLabel }
-			modalClassName="tribe-editor__rsvp__attendee-registration-modal-content"
+			modalClassName="tribe-editor__rsvp__attendee-registration-modal"
 			modalContent={ modalContent }
 			modalOverlayClassName="tribe-editor__rsvp__attendee-registration-modal-overlay"
 		/>
