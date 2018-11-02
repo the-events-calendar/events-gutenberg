@@ -16,6 +16,7 @@ const getIsDisabled = ( state ) => (
 );
 
 const mapStateToProps = ( state ) => ( {
+	isCreated: selectors.getRSVPCreated( state ),
 	isDisabled: getIsDisabled( state ),
 } );
 
