@@ -26,11 +26,14 @@ const getAttendeeRegistrationUrl = ( state ) => {
 };
 
 const getIsDisabled = ( state ) => (
-	selectors.getRSVPIsLoading( state ) || selectors.getRSVPSettingsOpen( state )
+	selectors.getRSVPIsLoading( state )
+		|| selectors.getRSVPSettingsOpen( state )
+		|| ! selectors.getRSVPCreated( state )
 );
 
 const mapStateToProps = ( state ) => ( {
 	attendeeRegistrationURL: getAttendeeRegistrationUrl( state ),
+	isCreated: selectors.getRSVPCreated( state ),
 	isDisabled: getIsDisabled( state ),
 } );
 

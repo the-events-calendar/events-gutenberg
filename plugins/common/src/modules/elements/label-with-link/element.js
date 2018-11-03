@@ -25,7 +25,7 @@ const LabelWithLink = ( {
 
 		return linkDisabled
 			? (
-				<span classname={ classNames( linkClass, `${ linkClass }--disabled` ) }>
+				<span className={ classNames( linkClass, `${ linkClass }--disabled` ) }>
 					{ linkText }
 				</span>
 			)
