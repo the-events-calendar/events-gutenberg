@@ -21,6 +21,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 		);
 
 		$this->container->singleton( 'gutenberg.events-pro.meta', 'Tribe__Gutenberg__Events_Pro__Meta' );
+		$this->container->singleton( 'gutenberg.events-pro.recurrence.provider', 'Tribe__Gutenberg__Events_Pro__Recurrence__Provider' );
 
 		$this->hook();
 
@@ -37,6 +38,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 	protected function hook() {
 		// Initialize the correct Singletons
 		tribe( 'gutenberg.events-pro.assets' );
+		tribe( 'gutenberg.events-pro.recurrence.provider' )->hook();
 		add_action( 'init', tribe_callback( 'gutenberg.events-pro.meta', 'register' ), 15 );
 	}
 
