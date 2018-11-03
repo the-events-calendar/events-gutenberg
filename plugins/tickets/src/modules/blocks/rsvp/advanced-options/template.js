@@ -21,7 +21,6 @@ import './style.pcss';
 
 class RSVPAdvancedOptions extends PureComponent {
 	static propTypes = {
-		isCreated: PropTypes.bool.isRequired,
 		isDisabled: PropTypes.bool.isRequired,
 	};
 
@@ -33,7 +32,7 @@ class RSVPAdvancedOptions extends PureComponent {
 	getContent = () => (
 		<Fragment>
 			<RSVPDuration />
-			{ this.props.isCreated && <RSVPAttendeeRegistration /> }
+			<RSVPAttendeeRegistration />
 		</Fragment>
 	);
 

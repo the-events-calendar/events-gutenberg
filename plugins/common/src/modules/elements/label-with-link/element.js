@@ -10,7 +10,7 @@ import classNames from 'classnames';
  */
 import LabeledItem from '@moderntribe/common/elements/labeled-item/element';
 import Link from '@moderntribe/common/elements/link/element';
-
+import './style.pcss';
 
 const LabelWithLink = ( {
 	className,
@@ -24,10 +24,14 @@ const LabelWithLink = ( {
 		const linkClass = 'tribe-editor__label-with-link__link';
 
 		return linkDisabled
-			? <span classname={ linkClass }>{ linkText }</span>
+			? (
+				<span classname={ classNames( linkClass, `${ linkClass }--disabled` ) }>
+					{ linkText }
+				</span>
+			)
 			: (
 				<Link
-					className="tribe-editor__label-with-link__link"
+					className={ linkClass }
 					href={ linkHref }
 					target={ linkTarget }
 				>
