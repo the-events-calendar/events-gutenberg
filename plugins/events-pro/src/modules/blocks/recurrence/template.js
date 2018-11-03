@@ -72,6 +72,7 @@ export default class RecurringEntry extends PureComponent {
 					setAttributes={ this.props.setAttributes }
 					clientId={ this.props.clientId }
 					metaField="exceptions"
+					current={ this.props.attributes.exceptions }
 					selector={ exception.selectors.getExceptions }
 					listeners={ [
 						exception.types.ADD_EXCEPTION,
@@ -85,6 +86,7 @@ export default class RecurringEntry extends PureComponent {
 					clientId={ this.props.clientId }
 					metaField="rules"
 					selector={ recurring.selectors.getRules }
+					current={ this.props.attributes.rules }
 					listeners={ [
 						recurring.types.ADD_RULE,
 						recurring.types.EDIT_RULE,

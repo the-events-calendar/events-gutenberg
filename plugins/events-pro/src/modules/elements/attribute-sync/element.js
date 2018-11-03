@@ -20,6 +20,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			clientId: ownProps.clientId,
 			selector: ownProps.selector,
 			metaField: ownProps.metaField,
+			current: ownProps.current,
 		} ),
 		cancel: () => dispatch( {
 			type: sync.CANCEL_SYNC,
