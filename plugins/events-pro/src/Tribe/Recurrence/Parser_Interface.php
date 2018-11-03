@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * Interface Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface
+ *
+ * @since TBD
+ */
+interface Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface {
+	
+	/**
+	 * Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface constructor.
+	 *
+	 * @param array $args
+	 */
+	public function __construct( $args = array() );
+	
+	/**
+	 *
+	 *
+	 * @since TBD
+	 *
+	 * @param string $type
+	 *
+	 * @return mixed
+	 */
+	public function set_type( $type = '' );
+	
+	/**
+	 * Return the parsed data
+	 *
+	 * @since TBD
+	 *
+	 * @return array
+	 */
+	public function parsed();
+}
