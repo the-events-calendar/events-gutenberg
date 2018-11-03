@@ -23,7 +23,7 @@ const LabelWithLink = ( {
 	const getLink = () => {
 		const linkClass = 'tribe-editor__label-with-link__link';
 
-		linkDisabled
+		return linkDisabled
 			? <span classname={ linkClass }>{ linkText }</span>
 			: (
 				<Link
