@@ -93,11 +93,19 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.4-alpha - 2018-11-01
+
+* Fix - RSVP blocks sets initial start and end date based on events
+* Fix - Add wp-editor as dependency for scripts
+* Fix - RSVP blocks sets initial start and end date based on event
+* Fix - Ticket blocks sets initial start and end date based on event
+* Fix - Allow ticket UI to show proper shared capacity state
+
 #### 0.3.3-alpha - 2018-10-25
 
 * Feature - Event Attendees list block
-* Fix - Style changes to make RSVP and Ticket settings compatible with Gutenberg 4.1
 * Tweak - Make sure users can select older Years on the Datetime block
+* Fix - Style changes to make RSVP and Ticket settings compatible with Gutenberg 4.1
 
 #### 0.3.2-alpha - 2018-10-18
 

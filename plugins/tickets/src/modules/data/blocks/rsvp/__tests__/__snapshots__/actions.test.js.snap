@@ -12,6 +12,12 @@ Object {
 }
 `;
 
+exports[`RSVP block actions initialize RSVP 1`] = `
+Object {
+  "type": "@@MT/TICKETS/INITIALIZE_RSVP",
+}
+`;
+
 exports[`RSVP block actions set RSVP capacity 1`] = `
 Object {
   "payload": Object {

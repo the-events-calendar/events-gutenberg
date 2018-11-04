@@ -1,8 +1,8 @@
 /**
  * Internal dependencies
  */
-import { volatile } from '@moderntribe/events/data/forms/reducers';
-import { actions } from '@moderntribe/events/data/forms';
+import { volatile } from '@moderntribe/common/data/forms/reducers';
+import { actions } from '@moderntribe/common/data/forms';
 
 describe( '[STORE] - Volatile reducer', () => {
 	it( 'Should return the default state', () => {

@@ -16,6 +16,7 @@ const mapStateToProps = ( state ) => ( {
 	totalCapacity: selectors.getTotalCapacity( state ),
 	independentTickets: selectors.getIndependentTickets( state ),
 	sharedTickets: selectors.getSharedTickets( state ),
+	remainingCapacity: selectors.getSharedRemainingCapacity( state ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
