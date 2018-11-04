@@ -77,8 +77,8 @@ export function* handleAddition( { actions } ) {
 		[ KEY_ALL_DAY ]: allDay,
 		[ KEY_MULTI_DAY ]: multiDay,
 		[ KEY_START_DATE ]: startDate,
-		[ KEY_START_DATE_INPUT]: startDateInput,
-		[ KEY_START_DATE_OBJ]: startDateObj,
+		[ KEY_START_DATE_INPUT ]: startDateInput,
+		[ KEY_START_DATE_OBJ ]: startDateObj,
 		[ KEY_START_TIME ]: startTime,
 		[ KEY_END_DATE ]: endDate,
 		[ KEY_END_DATE_INPUT ]: endDateInput,
@@ -140,7 +140,7 @@ export function* handleMultiDayChange( { actions, selectors }, action, key ) {
 			endTimeSeconds = startTimeSeconds + HALF_HOUR_IN_SECONDS;
 
 			const adjustedStartTime = yield call( fromSeconds, startTimeSeconds, TIME_FORMAT_HH_MM );
-			const adjustedEndTime = yield call( fromSeconds, endTimeSeconds, TIME_FORMAT_HH_MM )
+			const adjustedEndTime = yield call( fromSeconds, endTimeSeconds, TIME_FORMAT_HH_MM );
 
 			yield put(
 				actions.sync( action.index, {

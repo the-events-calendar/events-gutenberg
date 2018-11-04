@@ -19,4 +19,10 @@ describe( 'Exception actions', () => {
 	test( 'editException', () => {
 		expect( actions.editException( 1, { value: 1 } ) ).toMatchSnapshot();
 	} );
+	test( 'syncException', () => {
+		expect( actions.syncException( 1, { value: 1 } ) ).toMatchSnapshot();
+	} );
+	test( 'syncExceptionsFromDB', () => {
+		expect( actions.syncExceptionsFromDB( { value: 1 } ) ).toMatchSnapshot();
+	} );
 } );

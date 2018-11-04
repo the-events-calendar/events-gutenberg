@@ -15,7 +15,7 @@ import * as ui from '@moderntribe/events-pro/data/ui';
 import * as sagas from '@moderntribe/events-pro/data/shared/sagas';
 import { SET_TIME_ZONE } from '@moderntribe/events/data/blocks/datetime/types';
 
-const sagaArgs = {
+export const sagaArgs = {
 	actions: {
 		add: actions.addRule,
 		sync: actions.syncRule,

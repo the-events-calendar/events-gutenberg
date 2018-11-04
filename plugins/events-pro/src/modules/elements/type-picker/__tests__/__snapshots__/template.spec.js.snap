@@ -9,9 +9,7 @@ exports[`TypePicker should render component 1`] = `
   >
     <span
       className="tribe-editor__events-pro__label-text"
-    >
-      A
-    </span>
+    />
   </div>
   <div
     className="tribe-editor__labeled-row__content"

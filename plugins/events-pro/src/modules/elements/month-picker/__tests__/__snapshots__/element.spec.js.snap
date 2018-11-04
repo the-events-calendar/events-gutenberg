@@ -24,7 +24,6 @@ exports[`MonthPicker should render month tags 1`] = `
 >
   <button
     className="tribe-editor__month-tag tribe-editor__month-picker__month-tag"
-    onClick={[Function]}
   >
     <<svg>icon mock</svg> />
     <span
@@ -36,7 +35,6 @@ exports[`MonthPicker should render month tags 1`] = `
   </button>
   <button
     className="tribe-editor__month-tag tribe-editor__month-picker__month-tag"
-    onClick={[Function]}
   >
     <<svg>icon mock</svg> />
     <span
