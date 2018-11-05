@@ -44,7 +44,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 		tribe_asset(
 			$gutenberg,
 			'tribe-tickets-gutenberg-block-attendees-style',
-			'attendees/frontend.css',
+			'app/attendees/frontend.css',
 			array(),
 			null
 		);

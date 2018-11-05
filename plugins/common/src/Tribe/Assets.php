@@ -31,7 +31,7 @@ class Tribe__Gutenberg__Common__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-common-gutenberg-hoc',
-			'hoc.js',
+			'app/hoc.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -44,7 +44,7 @@ class Tribe__Gutenberg__Common__Assets {
 				'wp-blocks',
 				'wp-i18n',
 				'wp-element',
-				'wp-editor'
+				'wp-editor',
 			),
 			'enqueue_block_editor_assets',
 			array(

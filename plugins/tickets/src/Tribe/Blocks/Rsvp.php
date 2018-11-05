@@ -146,7 +146,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 		tribe_asset(
 			$gutenberg,
 			'tribe-tickets-gutenberg-block-rsvp-style',
-			'rsvp/frontend.css',
+			'app/rsvp/frontend.css',
 			array(),
 			null
 		);
