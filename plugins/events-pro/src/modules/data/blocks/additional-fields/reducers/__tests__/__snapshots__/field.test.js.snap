@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fields reducer Set field divider end 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": "",
+}
+`;
+
+exports[`Fields reducer Set field divider list 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": "",
+}
+`;
+
+exports[`Fields reducer Set field is pristine 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": "",
+}
+`;
+
+exports[`Fields reducer Set field is pristine 2`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": false,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": "",
+}
+`;
+
+exports[`Fields reducer Set field options 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [
+    "Pizza",
+    "Cheese Cake",
+    "Cheese",
+  ],
+  "output": "",
+  "type": "",
+  "value": "",
+}
+`;
+
+exports[`Fields reducer Set field type 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "url",
+  "value": "",
+}
+`;
+
+exports[`Fields reducer Set ticket name 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "Website",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": "",
+}
+`;
+
+exports[`Fields reducer Set ticket value 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": "https://theeventscalendar.com/",
+}
+`;
+
+exports[`Fields reducer append field value 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": Array [],
+}
+`;
+
+exports[`Fields reducer field output 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "My custom output",
+  "type": "",
+  "value": "",
+}
+`;
+
+exports[`Fields reducer remove field value 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": Array [
+    "Chocolate",
+  ],
+}
+`;
+
+exports[`Fields reducer set meta key value 1`] = `
+Object {
+  "dividerEnd": " & ",
+  "dividerList": ", ",
+  "isPristine": true,
+  "label": "",
+  "metaKey": "_additional_field",
+  "options": Array [],
+  "output": "",
+  "type": "",
+  "value": "",
+}
+`;

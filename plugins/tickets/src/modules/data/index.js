@@ -3,7 +3,7 @@
  */
 import reducer from './reducers';
 
-import { actions } from '@moderntribe/common/data/reducers/plugins';
+import { actions } from '@moderntribe/common/data/plugins';
 import { store } from '@moderntribe/common/store';
 
 export const initStore = () => {
