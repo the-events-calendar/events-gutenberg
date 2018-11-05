@@ -19,24 +19,22 @@ import { ActionButton } from '@moderntribe/tickets/elements';
 // import { Attendees } from '@moderntribe/tickets/icons';
 import { User as Attendees } from '@moderntribe/common/src/modules/icons';
 
-const AttendeesActionButton = ( { isDisabled, onClick } ) => (
+const AttendeesActionButton = ( { href, isDisabled } ) => (
 	<ActionButton
+		asLink={ true }
 		className="tribe-editor__rsvp__action-button tribe-editor__rsvp__action-button--attendees"
 		disabled={ isDisabled }
+		href={ href }
 		icon={ <Attendees /> }
-		onClick={ onClick }
+		target="_blank"
 	>
 		{ __( 'Attendees', 'events-gutenberg' ) }
 	</ActionButton>
 );
 
 AttendeesActionButton.propTypes = {
+	href: PropTypes.string,
 	isDisabled: PropTypes.bool,
-	onClick: PropTypes.func,
-};
-
-AttendeesActionButton.defaultProps = {
-	onClick: noop,
 };
 
 export default AttendeesActionButton;
