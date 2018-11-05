@@ -43,7 +43,6 @@ if ( $has_tickets ) {
 
 $link = $view->get_tickets_page_url( $event_id, $is_event_page );
 $message  = sprintf( esc_html__( 'You have %s for this %s.', 'event-tickets' ), implode( __( ' and ', 'event-tickets' ), $counters ), $events_label_singular );
-$message .= ' <a href="' . esc_url( $link ) . '">' . sprintf( esc_html__( 'View your %s', 'event-tickets' ), $view->get_description_rsvp_ticket( $event_id, $user_id, true ) ) . '</a>';
 
 if ( ! $has_rsvps || ! $has_tickets ){
 	return false;
@@ -51,5 +50,6 @@ if ( ! $has_rsvps || ! $has_tickets ){
 ?>
 
 <div class="tribe-link-view-attendee">
-	<?php echo $message; ?>
+	<?php echo $message ?>
+	<a href="<?php echo esc_url( $link ) ?>"><?php echo sprintf( esc_html__( 'View your %s', 'event-tickets' ), $view->get_description_rsvp_ticket( $event_id, $user_id, true ) ) ?></a>
 </div>
