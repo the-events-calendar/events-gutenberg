@@ -48,6 +48,7 @@ const ActionButton = ( {
 			elemProps.href = href;
 			elemProps.target = target;
 		} else {
+			elemProps.disabled = disabled;
 			elemProps.onClick = onClick;
 		}
 
@@ -79,7 +80,6 @@ ActionButton.propTypes = {
 
 ActionButton.defaultProps = {
 	asLink: false,
-	disabled: false,
 	position: positions.left,
 };
 
