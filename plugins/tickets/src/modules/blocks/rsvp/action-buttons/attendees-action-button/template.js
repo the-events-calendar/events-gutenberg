@@ -14,7 +14,6 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { ActionButton } from '@moderntribe/tickets/elements';
-
 // @todo: attendee SVG is loading weird, so, not using this icon yet
 // import { Attendees } from '@moderntribe/tickets/icons';
 import { User as Attendees } from '@moderntribe/common/src/modules/icons';
