@@ -12,32 +12,40 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { LabelWithModal } from '@moderntribe/common/elements';
+import { LabelWithLink } from '@moderntribe/common/elements';
 import './style.pcss';
 
-const closeButtonLabel = __( 'close', 'events-gutenberg' );
+const helperText = __( 'Save your RSVP to enable attendee registration fields', 'events-gutenberg' );
 
 const label = __( 'Attendee Registration', 'events-gutenberg' );
 
-const modalButtonLabel = __( '+ Add', 'events-gutenberg' );
+const linkText = __( '+ Add', 'events-gutenberg' );
 
-const modalContent = __(
-	'Adding Attendee Fields is not yet supported in the Gutenberg block editor.',
-	'events-gutenberg',
-);
-
-const RSVPAttendeeRegistration = ( { isDisabled } ) => (
-	<LabelWithModal
-		className="tribe-editor__rsvp__attendee-registration"
-		closeButtonLabel={ closeButtonLabel }
-		label={ label }
-		modalButtonDisabled={ isDisabled }
-		modalButtonLabel={ modalButtonLabel }
-		modalContent={ modalContent }
-	/>
+const RSVPAttendeeRegistration = ( {
+	attendeeRegistrationURL,
+	isCreated,
+	isDisabled,
+} ) => (
+	<div className="tribe-editor__rsvp__attendee-registration">
+		<LabelWithLink
+			className="tribe-editor__rsvp__attendee-registration-label-with-link"
+			label={ label }
+			linkDisabled={ isDisabled }
+			linkHref={ attendeeRegistrationURL }
+			linkTarget="_blank"
+			linkText={ linkText }
+		/>
+		{ ! isCreated && (
+			<span className="tribe-editor__rsvp__attendee-registration-helper-text">
+				{ helperText }
+			</span>
+		) }
+	</div>
 );
 
 RSVPAttendeeRegistration.propTypes = {
+	attendeeRegistrationURL: PropTypes.string,
+	isCreated: PropTypes.bool,
 	isDisabled: PropTypes.bool,
 };
 

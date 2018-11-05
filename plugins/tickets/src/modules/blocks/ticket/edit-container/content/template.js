@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  */
 import Capacity from './capacity/container';
 import AdvancedOptions from './advanced-options/template';
-import AttendeesRegistration from './attendees-registration/template';
+import AttendeesRegistration from './attendees-registration/container';
 
 import './style.pcss';
 
