@@ -34,10 +34,10 @@ const TicketContainer = ( props ) => {
 	const messages = {
 		title: hasProviders
 			? __( 'There are no tickets yet', 'events-gutenberg' )
-			: __( 'There are no providers yet', 'events-gutenberg' ),
+			: __( 'There is no ecommerce available', 'events-gutenberg' ),
 		description: hasProviders
 			? __( 'Edit this block to create your first ticket.', 'events-gutenberg' )
-			: __( 'Enable at least one ticket providers first', 'events-gutenberg' ),
+			: __( 'To create tickets, you\'ll need to enable an ecommerce solution.', 'events-gutenberg' ),
 	};
 
 	return (
@@ -48,7 +48,7 @@ const TicketContainer = ( props ) => {
 			{ tickets.length === 0 && (
 				<InactiveBlock
 					layout={ LAYOUT.ticket }
-					title={ messages.title  }
+					title={ messages.title }
 					description={ messages.description }
 					icon={ <StatusIcon disabled={ true } /> }
 				/>
@@ -58,7 +58,7 @@ const TicketContainer = ( props ) => {
 			) }
 		</div>
 	);
-}
+};
 
 TicketContainer.propTypes = {
 	isSelected: PropTypes.bool,

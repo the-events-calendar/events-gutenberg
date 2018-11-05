@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { types } from '@moderntribe/events/data/forms';
+import { types } from '@moderntribe/common/data/forms';
 import { PREFIX_EVENTS_STORE } from '@moderntribe/events/data/utils';
 
 describe( '[STORE] - Form types', () => {

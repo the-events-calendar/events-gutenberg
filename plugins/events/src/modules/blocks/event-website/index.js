@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import EventWebsite from './container';
-import { BlockIcon } from '@moderntribe/common/elements';
+import { Website } from '@moderntribe/events/icons';
 
 /**
  * Module Code
@@ -23,7 +23,7 @@ export default {
 		'Is there another website for this event? Link to it with a button!',
 		'events-gutenberg'
 	),
-	icon: BlockIcon,
+	icon: <Website/>,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

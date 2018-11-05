@@ -13,7 +13,7 @@ import Ticket from './container';
 export default {
 	id: 'tickets-item',
 	title: __( 'Event Ticket', 'events-gutenberg' ),
-	description: __( 'Entry for ticket', 'events-gutenberg' ),
+	description: __( 'A single configured ticket type.', 'events-gutenberg' ),
 	icon: BlockIcon,
 	category: 'tribe-tickets',
 	keywords: [ 'event', 'events-tickets', 'tribe' ],
