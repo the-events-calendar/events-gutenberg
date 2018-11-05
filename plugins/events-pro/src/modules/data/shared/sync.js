@@ -11,16 +11,21 @@ export function* serialize( payload ) {
 	return yield call( [ JSON, 'stringify' ], payload );
 }
 
-export function* sync( { selector, metaField, setAttributes } ) {
+export function* sync( { selector, metaField, setAttributes, current } ) {
 	const state = yield select( selector );
 	const payload = yield call( serialize, state );
+	
+	if ( current === payload ) {
+		return;
+	}
+
 	yield call( setAttributes, {
 		[ metaField ]: payload,
 	} );
 }
 
-export function* initialize( { listeners, selector, clientId, metaField, setAttributes } ) {
-	const syncSaga = yield takeLatest( listeners, sync, { selector, metaField, setAttributes } );
+export function* initialize( { listeners, selector, clientId, metaField, setAttributes, current } ) {
+	const syncSaga = yield takeLatest( listeners, sync, { selector, metaField, setAttributes, current } );
 
 	while ( true ) {
 		const action = yield take( CANCEL_SYNC );
