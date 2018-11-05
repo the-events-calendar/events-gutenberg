@@ -3,12 +3,7 @@
  */
 import ui, { DEFAULT_STATE } from '../ui';
 import { actions } from '@moderntribe/tickets/data/blocks/ticket';
-import tmp from '../tmp';
 
-jest.mock( '../tmp', () => ( {
-	__esModule: true,
-	default: jest.fn(),
-} ) );
 
 describe( 'UI reducer', () => {
 	test( 'default state', () => {
@@ -42,12 +37,6 @@ describe( 'UI reducer', () => {
 	test( 'Is Active Child block', () => {
 		expect( ui( DEFAULT_STATE, actions.setActiveChildBlockId( 'modern-tribe' ) ) )
 			.toMatchSnapshot();
-	} );
-
-	test( 'Tmp actions are passed down to the reducer', () => {
-		ui( DEFAULT_STATE, actions.setTempSharedCapacity( 100 ) );
-		expect( tmp ).toHaveBeenCalledTimes( 1 );
-		expect( tmp ).toHaveBeenCalledWith( DEFAULT_STATE.tmp, actions.setTempSharedCapacity( 100 ) );
 	} );
 
 	test( 'Set loading on the parent block', () => {

@@ -167,7 +167,7 @@ class Tribe__Gutenberg__Events__Meta {
 	 *
 	 * @since  0.1.0-alpha
 	 *
-	 * @param  mixed $value Check agains this value
+	 * @param  mixed $value Check against this value
 	 *
 	 * @return array|bool|int
 	 */

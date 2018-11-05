@@ -18,8 +18,10 @@ const LabelWithModal = ( {
 	label,
 	modalButtonDisabled,
 	modalButtonLabel,
-	modalTitle,
+	modalClassName,
 	modalContent,
+	modalOverlayClassName,
+	modalTitle,
 	onClick,
 	onClose,
 	onOpen,
@@ -32,7 +34,9 @@ const LabelWithModal = ( {
 			className="tribe-editor__label-with-modal__modal-button"
 			disabled={ modalButtonDisabled }
 			label={ modalButtonLabel }
+			modalClassName={ modalClassName }
 			modalContent={ modalContent }
+			modalOverlayClassName={ modalOverlayClassName }
 			modalTitle={ modalTitle }
 			onClick={ onClick }
 			onClose={ onClose }
@@ -52,7 +56,9 @@ LabelWithModal.propTypes = {
 	label: PropTypes.node,
 	modalButtonDisabled: PropTypes.bool,
 	modalButtonLabel: PropTypes.string,
+	modalClassName: PropTypes.string,
 	modalContent: PropTypes.node,
+	modalOverlayClassName: PropTypes.string,
 	modalTitle: PropTypes.string,
 	onClick: PropTypes.func,
 	onClose: PropTypes.func,

@@ -9,6 +9,10 @@ describe( 'RSVP block types', () => {
 		expect( types.CREATE_RSVP )
 			.toBe( `${ PREFIX_TICKETS_STORE }/CREATE_RSVP` );
 	} );
+	test( 'initialize RSVP', () => {
+		expect( types.INITIALIZE_RSVP )
+			.toBe( `${ PREFIX_TICKETS_STORE }/INITIALIZE_RSVP` );
+	} );
 
 	test( 'delete RSVP', () => {
 		expect( types.DELETE_RSVP )

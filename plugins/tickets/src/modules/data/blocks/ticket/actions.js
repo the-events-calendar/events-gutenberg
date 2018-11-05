@@ -246,7 +246,7 @@ export const setTicketIsLoading = ( blockId, isLoading ) => ( {
 	},
 } );
 
-export const seTicketHasBeenCreated = ( blockId, hasBeenCreated ) => ( {
+export const setTicketHasBeenCreated = ( blockId, hasBeenCreated ) => ( {
 	type: types.SET_TICKET_HAS_BEEN_CREATED,
 	payload: {
 		blockId,

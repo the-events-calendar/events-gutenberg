@@ -369,7 +369,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			$plugin,
 			'tribe-events-editor-elements',
 			'elements.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer'    => false,
@@ -450,7 +450,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			$plugin,
 			'tribe-events-editor-blocks',
 			'blocks.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'tribe-events-editor-blocks-gmaps-api', 'tribe-events-editor-elements' ),
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'tribe-events-editor-blocks-gmaps-api', 'tribe-events-editor-elements' ),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer'    => false,

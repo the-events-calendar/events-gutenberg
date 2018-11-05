@@ -12,18 +12,20 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { Tag as TagIcon } from '@moderntribe/common/src/modules/icons';
+import { ActionButton } from '@moderntribe/tickets/elements';
+// @todo: orders SVG is loading weird, so, not using this icon yet
+// import { Orders } from '@moderntribe/tickets/icons';
+import { Tag as Orders } from '@moderntribe/common/src/modules/icons';
 
 const OrdersActionButton = ( { href } ) => ( href && (
-	<a
-		className="tribe-editor__action-link"
+	<ActionButton
+		asLink={ true }
 		href={ href }
+		icon={ <Orders /> }
 		target="_blank"
-		rel="noopener noreferrer"
 	>
-		<TagIcon />
-		<span>{ __( 'Orders', 'events-gutenberg' ) }</span>
-	</a>
+		{ __( 'Orders', 'events-gutenberg' ) }
+	</ActionButton>
 ) );
 
 OrdersActionButton.propTypes = {

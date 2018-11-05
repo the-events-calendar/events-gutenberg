@@ -35,7 +35,6 @@ const TicketsDashboardAction = ( props ) => {
 	const {
 		onConfirmClick,
 		isEditing,
-		created,
 		isEditFormValid,
 		hasBeenCreated,
 		onCancelClick,

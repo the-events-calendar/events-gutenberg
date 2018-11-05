@@ -66,20 +66,20 @@ const mapStateToProps = ( state ) => ( {
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
 	dispatch,
 	setInitialState: setInitialState( dispatch, ownProps ),
+	initializeRSVP: () => dispatch( actions.initializeRSVP() ),
 } );
 
 const mergeProps = ( stateProps, dispatchProps, ownProps ) => {
-	const { rsvpId, ...restStateProps } = stateProps;
 	const { dispatch, ...restDispatchProps } = dispatchProps;
 
 	return {
 		...ownProps,
-		...restStateProps,
+		...stateProps,
 		...restDispatchProps,
 		deleteRSVP: () => {
 			dispatch( actions.deleteRSVP() );
-			if ( stateProps.created && rsvpId ) {
-				dispatch( thunks.deleteRSVP( rsvpId ) );
+			if ( stateProps.created && stateProps.rsvpId ) {
+				dispatch( thunks.deleteRSVP( stateProps.rsvpId ) );
 			}
 		},
 	};

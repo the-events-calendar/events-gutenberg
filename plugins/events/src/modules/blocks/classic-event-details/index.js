@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import ClassicEventDetails from './container';
-import { BlockIcon } from '@moderntribe/common/elements';
+import { Classic } from '@moderntribe/events/icons';
 
 /**
  * Module Code
@@ -20,10 +20,10 @@ export default {
 	id: 'classic-event-details',
 	title: __( 'Event Details Classic', 'events-gutenberg' ),
 	description: __(
-		'Display your event info together in one place -- just like in the Classic Editor..',
+		'Display your event info together in one place — just like in the Classic Editor.',
 		'events-gutenberg'
 	),
-	icon: BlockIcon,
+	icon: <Classic/>,
 	category: 'tribe-events',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 
