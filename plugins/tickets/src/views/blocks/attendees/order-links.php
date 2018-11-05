@@ -14,14 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $view      = Tribe__Tickets__Tickets_View::instance();
-$event_id  = get_the_ID();
+$event_id  = $this->get( 'post_id' );
 $event     = get_post( $event_id );
 $post_type = get_post_type_object( $event->post_type );
 $user_id   = get_current_user_id();
 
 $ticket_type = $this->get( 'type' );
-$is_ticket = $ticket_type === 'ticket';
-$is_rsvp = $ticket_type === 'RSVP';
+$is_ticket = 'ticket' === $ticket_type;
+$is_rsvp = 'RSVP' === $ticket_type;
 
 $is_event_page = class_exists( 'Tribe__Events__Main' ) && Tribe__Events__Main::POSTTYPE === $event->post_type ? true : false;
 
