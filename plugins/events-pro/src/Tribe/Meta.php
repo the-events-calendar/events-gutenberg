@@ -22,24 +22,22 @@ class Tribe__Gutenberg__Events_Pro__Meta extends Tribe__Gutenberg__Common__Meta 
 				continue;
 			}
 			
-			if ( false === $field['gutenberg_editor'] ) {
-				switch ( $field['type'] ) {
-					case 'textarea':
-						$args = $this->textarea();
-						break;
-					case 'url':
-						$args = $this->url();
-						break;
-					default:
-						$args = $this->text();
-						break;
-				}
-				register_meta( 'post', $field['name'], $args );
-				
-				if ( 'checkbox' === $field['type'] ) {
+			switch ( $field['type'] ) {
+				case 'textarea':
+					$args = $this->textarea();
+					break;
+				case 'url':
+					$args = $this->url();
+					break;
+				case 'checkbox':
+					$args = $this->text();
 					register_meta( 'post', '_' . $field['name'], $this->text_array() );
-				}
+					break;
+				default:
+					$args = $this->text();
+					break;
 			}
+			register_meta( 'post', $field['name'], $args );
 		}
 	}
 }

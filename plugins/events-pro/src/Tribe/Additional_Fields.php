@@ -48,14 +48,19 @@ class Tribe__Gutenberg__Events_Pro__Additional_Fields {
 	 * `tribe/field-%s, where %s is the name of meta used to save the block.
 	 *
 	 * @since TBD
+	 * @param $only_visible
 	 *
 	 * @return array
 	 */
-	public function get_block_names() {
+	public function get_block_names( $only_visible = false ) {
 		$fields = $this->get_fields();
 		$names  = [];
 		foreach ( $fields as $field ) {
-			if ( isset( $field['gutenberg_editor'] ) && false === $field['gutenberg_editor'] ) {
+			$should_be_attached = true;
+			if ( $only_visible ) {
+				$should_be_attached = true === $field['gutenberg_editor'];
+			}
+			if ( isset( $field['gutenberg_editor'] ) && $should_be_attached ) {
 				$names[] = $this->to_block_name( $field['name'] );
 			}
 		}
