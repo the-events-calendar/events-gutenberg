@@ -45,6 +45,7 @@ const RSVPAttendeeRegistration = ( {
 
 RSVPAttendeeRegistration.propTypes = {
 	attendeeRegistrationURL: PropTypes.string,
+	isCreated: PropTypes.bool,
 	isDisabled: PropTypes.bool,
 };
 
