@@ -22,7 +22,7 @@ export default {
 	title: __( 'Exception', 'events-gutenberg' ),
 	description: __(
 		'Add exceptions to your event.',
-		'events-gutenberg'
+		'events-gutenberg',
 	),
 	icon: BlockIcon,
 	category: 'tribe-events',
@@ -32,14 +32,6 @@ export default {
 
 	supports: {
 		html: false,
-	},
-
-	attributes: {
-		exceptions: {
-			type: 'string',
-			source: 'meta',
-			meta: '_tribe_blocks_recurrence_exclusions',
-		},
 	},
 
 	edit: EventException,
