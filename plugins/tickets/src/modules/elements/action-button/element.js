@@ -41,7 +41,7 @@ const ActionButton = ( {
 	const Element = asLink ? components.link : components.button;
 
 	const getProps = () => {
-		elemProps = { ...props };
+		const elemProps = { ...props };
 
 		if ( asLink ) {
 			elemProps.href = href;

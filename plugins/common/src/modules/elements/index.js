@@ -8,6 +8,7 @@ export { default as ImageUpload } from './image-upload/element';
 export { default as LabeledItem } from './labeled-item/element';
 export { default as LabelWithLink } from './label-with-link/element';
 export { default as LabelWithModal } from './label-with-modal/element';
+export { default as Link } from './link/element';
 export { default as ModalButton } from './modal-button/element';
 export { default as TimePicker } from './time-picker/element';
 export { default as Tooltip } from './tooltip/element';
