@@ -8,6 +8,7 @@ import classNames from 'classnames';
 /**
  * Internal dependencies
  */
+import Button from '@moderntribe/common/elements/button/element';
 import LabeledItem from '@moderntribe/common/elements/labeled-item/element';
 import Link from '@moderntribe/common/elements/link/element';
 import './style.pcss';
@@ -25,9 +26,12 @@ const LabelWithLink = ( {
 
 		return linkDisabled
 			? (
-				<span className={ classNames( linkClass, `${ linkClass }--disabled` ) }>
+				<Button
+					className={ classNames( linkClass, `${ linkClass }--disabled` ) }
+					disabled={ true }
+				>
 					{ linkText }
-				</span>
+				</Button>
 			)
 			: (
 				<Link
