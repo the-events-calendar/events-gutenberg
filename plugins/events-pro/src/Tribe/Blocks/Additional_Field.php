@@ -92,5 +92,15 @@ class Tribe__Gutenberg__Events_Pro__Blocks__Additional_Field extends Tribe__Gute
 	 * @return void
 	 */
 	public function assets() {
+		tribe_asset(
+			tribe( 'gutenberg.events-pro.plugin' ),
+			'tribe-events-pro-additional-fields-fe',
+			'additional-fields/frontend.css',
+			array(),
+			'wp_enqueue_scripts',
+			array(
+				'conditionals' => array( $this, 'has_block'),
+			)
+		);
 	}
 }
