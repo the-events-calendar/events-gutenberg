@@ -24,7 +24,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-tickets-gutenberg-blocks',
-			'blocks.js',
+			'app/blocks.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -50,7 +50,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-tickets-gutenberg-blocks-styles',
-			'blocks.css',
+			'app/blocks.css',
 			array(),
 			'enqueue_block_editor_assets',
 			array(
