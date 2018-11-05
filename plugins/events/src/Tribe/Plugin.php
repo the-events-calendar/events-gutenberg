@@ -19,7 +19,7 @@ class Tribe__Gutenberg__Events__Plugin {
 	 * @since  0.2.7-alpha
 	 */
 	public function __construct() {
-		// Setup the Condiguration file
+		// Setup the Configuration file
 		$this->plugin_file = str_replace( '/src/Tribe/', '/', __FILE__ );
 		$this->plugin_path = trailingslashit( dirname( $this->plugin_file ) );
 		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );

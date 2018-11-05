@@ -229,7 +229,7 @@ class EventDateTime extends Component {
 				);
 			case 'all-day':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>ALL DAY</span>
+					<span className={ classNames( 'tribe-editor__separator', className ) }>{ __( 'ALL DAY', 'events-gutenberg' ) }</span>
 				);
 			default:
 				return null;
@@ -471,36 +471,39 @@ class EventDateTime extends Component {
 			onTimeZoneVisibilityChange,
 		} = this.props;
 
-		return ( <InspectorControls key="inspector">
-			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
-				<TextControl
-					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
-					value={ separatorDate }
-					onChange={ setSeparatorDate }
-					className="tribe-editor__date-time__date-time-separator-setting"
-					maxLength="2"
-				/>
-				<TextControl
-					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
-					value={ separatorTime }
-					onChange={ setSeparatorTime }
-					className="tribe-editor__date-time__time-range-separator-setting"
-					maxLength="2"
-				/>
-				<SelectControl
-					label={ __( 'Time Zone', 'events-gutenberg' ) }
-					value={ timeZone }
-					onChange={ setTimeZone }
-					options={ timezonesAsSelectData() }
-					className="tribe-editor__date-time__time-zone-setting"
-				/>
-				<ToggleControl
-					label={ __( 'Show Time Zone', 'events-gutenberg' ) }
-					checked={ showTimeZone }
-					onChange={ onTimeZoneVisibilityChange }
-				/>
-			</PanelBody>
-		</InspectorControls> );
+		// @todo: modify so this code does not fire unless the block is selected
+		return (
+			<InspectorControls key="inspector">
+				<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
+					<TextControl
+						label={ __( 'Date Time Separator', 'events-gutenberg' ) }
+						value={ separatorDate }
+						onChange={ setSeparatorDate }
+						className="tribe-editor__date-time__date-time-separator-setting"
+						maxLength="2"
+					/>
+					<TextControl
+						label={ __( 'Time Range Separator', 'events-gutenberg' ) }
+						value={ separatorTime }
+						onChange={ setSeparatorTime }
+						className="tribe-editor__date-time__time-range-separator-setting"
+						maxLength="2"
+					/>
+					<SelectControl
+						label={ __( 'Time Zone', 'events-gutenberg' ) }
+						value={ timeZone }
+						onChange={ setTimeZone }
+						options={ timezonesAsSelectData() }
+						className="tribe-editor__date-time__time-zone-setting"
+					/>
+					<ToggleControl
+						label={ __( 'Show Time Zone', 'events-gutenberg' ) }
+						checked={ showTimeZone }
+						onChange={ onTimeZoneVisibilityChange }
+					/>
+				</PanelBody>
+			</InspectorControls>
+		);
 	}
 
 	render() {
