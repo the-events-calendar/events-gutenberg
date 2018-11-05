@@ -98,6 +98,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
 * Feature - Add dynamic additional blocks present on the Gutenberg Editor
 * Fix - RSVP blocks sets initial start and end date based on events
+* Fix - Add wp-editor as dependency for scripts
+* Fix - RSVP blocks sets initial start and end date based on event
+* Fix - Ticket blocks sets initial start and end date based on event
+* Fix - Allow ticket UI to show proper shared capacity state
 
 #### 0.3.3-alpha - 2018-10-25
 

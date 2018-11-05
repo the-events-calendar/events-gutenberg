@@ -25,7 +25,7 @@ export const DEFAULT_STATE = {
 	startTime: momentUtil.toTime24Hr( currentMoment ),
 	endTime: momentUtil.toTime24Hr( currentMoment ),
 	dateIsPristine: false,
-	capacityType: TICKET_TYPES.independent,
+	capacityType: TICKET_TYPES.shared,
 	capacity: '',
 	isEditing: false,
 	ticketId: 0,

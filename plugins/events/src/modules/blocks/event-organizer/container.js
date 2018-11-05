@@ -7,10 +7,11 @@ import { connect } from 'react-redux';
 /**
  * Internal dependencies
  */
-import { withStore, withSaveData, withDetails, withForm } from '@moderntribe/common/hoc';
+import { withStore, withSaveData, withForm } from '@moderntribe/common/hoc';
+import { withDetails } from '@moderntribe/events/hoc';
 import { actions, selectors } from '@moderntribe/events/data/blocks/organizers';
 import { actions as detailsActions } from '@moderntribe/events/data/details';
-import { actions as formActions } from '@moderntribe/events/data/forms';
+import { actions as formActions } from '@moderntribe/common/data/forms';
 import { ORGANIZER } from '@moderntribe/events/editor/post-types';
 import EventOrganizer from './template';
 import { toOrganizer } from '@moderntribe/events/elements/organizer-form/utils';

@@ -6,7 +6,8 @@ import { compose } from 'redux';
 /**
  * Internal dependencies
  */
-import { withStore, withDetails } from '@moderntribe/common/hoc';
+import { withStore } from '@moderntribe/common/hoc';
+import { withDetails } from '@moderntribe/events/hoc';
 import EventDetailsOrganizer from './template';
 
 /**

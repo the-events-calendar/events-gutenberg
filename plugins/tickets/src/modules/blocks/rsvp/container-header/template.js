@@ -58,6 +58,7 @@ const getDescription = (
 );
 
 const getCapacityLabel = ( capacity ) => {
+	// todo: should use _n to be translator friendly
 	const singular = __( '%d available', 'events-gutenberg' );
 	const plural = singular;
 

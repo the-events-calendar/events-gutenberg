@@ -1,10 +1,10 @@
 /**
  * Internal dependencies
  */
-import reducer, { actions } from '@moderntribe/events/data/forms';
-import form, { DEFAULT_STATE } from '@moderntribe/events/data/forms/reducers/form';
+import reducer, { actions } from '@moderntribe/common/data/forms';
+import form, { DEFAULT_STATE } from '@moderntribe/common/data/forms/reducers/form';
 
-jest.mock( '@moderntribe/events/data/forms/reducers/form', () => {
+jest.mock( '@moderntribe/common/data/forms/reducers/form', () => {
 	const original = require.requireActual( '@moderntribe/events/data/search/reducers/search' );
 	return {
 		__esModule: true,
@@ -13,7 +13,7 @@ jest.mock( '@moderntribe/events/data/forms/reducers/form', () => {
 	};
 } );
 
-jest.mock( '@moderntribe/events/data/forms/reducers/volatile', () => {
+jest.mock( '@moderntribe/common/data/forms/reducers/volatile', () => {
 	return {
 		__esModule: true,
 		default: jest.fn( ( state = [] ) => state ),
