@@ -38,4 +38,11 @@ describe( 'ActionButton', () => {
 		const button = component.find( Button );
 		expect( button.hasClass( 'tribe-editor__action-button' ) ).toBe( true );
 	} );
+
+	test( 'component rendered as link', () => {
+		const component = renderer.create(
+			<ActionButton asLink={ true } icon={ <Icon /> } href="#">Test Action</ActionButton>
+		);
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
 } );

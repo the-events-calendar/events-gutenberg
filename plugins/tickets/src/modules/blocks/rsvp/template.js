@@ -38,7 +38,13 @@ class RSVP extends PureComponent {
 	}
 
 	render() {
-		const { created, isInactive, isLoading, isSelected } = this.props;
+		const {
+			created,
+			isInactive,
+			isLoading,
+			isSelected
+		} = this.props;
+
 		return (
 			! isSelected && ( ( created && isInactive ) || ! created )
 				? <RSVPInactiveBlock />

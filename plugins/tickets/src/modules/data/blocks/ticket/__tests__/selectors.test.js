@@ -23,6 +23,9 @@ const state = {
 					byId: {},
 					allIds: [],
 				},
+				settings: {
+					sharedCapacity: '',
+				},
 			},
 		},
 	},
@@ -85,6 +88,9 @@ describe( 'Ticket blocks selectors', () => {
 								'modern-tribe': { ...TICKET_DEFAULT_STATE },
 							},
 						},
+						settings: {
+							sharedCapacity: 0,
+						},
 					},
 				},
 			},
@@ -127,7 +133,7 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Select shared capacity after being set', () => {
-			newState.tickets.blocks.ticket.ui.sharedCapacity = 99;
+			newState.tickets.blocks.ticket.settings.sharedCapacity = 99;
 			expect( selectors.getSharedCapacity( newState ) ).toBe( 99 );
 		} );
 	} );
@@ -174,7 +180,7 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Expiring ticket', () => {
-			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].dateIsPristine = false;
+			newState.tickets.blocks.ticket.tickets.byId[ 'modern-tribe' ].dateIsPristine = false;
 			expect( selectors.getTicketExpires( newState, ownProps ) ).toBe( true );
 		} );
 
@@ -221,7 +227,7 @@ describe( 'Ticket blocks selectors', () => {
 			expect( selectors.getTicketSold( newState, ownProps ) ).toMatchSnapshot();
 			expect( selectors.getTicketCapacity( newState, ownProps ) ).toBe( 0 );
 			expect( selectors.isUnlimitedTicket( newState, ownProps ) ).toBe( false );
-			expect( selectors.isSharedTicket( newState, ownProps ) ).toBe( false );
+			expect( selectors.isSharedTicket( newState, ownProps ) ).toBe( true );
 		} );
 
 		test( 'Ticket validness', () => {
@@ -239,7 +245,7 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Ticket custom loading value', () => {
-			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].isLoading = true;
+			newState.tickets.blocks.ticket.tickets.byId[ 'modern-tribe' ].isLoading = true;
 			expect( selectors.getTicketIsLoading( newState, ownProps ) ).toBe( true );
 		} );
 
@@ -248,7 +254,7 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Ticket has been created custom value', () => {
-			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].hasBeenCreated = true;
+			newState.tickets.blocks.ticket.tickets.byId[ 'modern-tribe' ].hasBeenCreated = true;
 			expect( selectors.getTicketHasBeenCreated( newState, ownProps ) ).toBe( true );
 		} );
 
@@ -257,8 +263,8 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'Ticket is been edited - when is Editing and has been created', () => {
-			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].isEditing = true;
-			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].hasBeenCreated = true;
+			newState.tickets.blocks.ticket.tickets.byId[ 'modern-tribe' ].isEditing = true;
+			newState.tickets.blocks.ticket.tickets.byId[ 'modern-tribe' ].hasBeenCreated = true;
 			expect( selectors.getTicketIsBeingEdited( newState, ownProps ) ).toBe( true );
 		} );
 
@@ -276,7 +282,7 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 
 		test( 'custom ticket availability', () => {
-			newState.tickets.blocks.ticket.tickets.byId['modern-tribe'].available = 99;
+			newState.tickets.blocks.ticket.tickets.byId[ 'modern-tribe' ].available = 99;
 			expect( selectors.getTicketAvailability( newState, ownProps ) ).toBe( 99 );
 		} );
 

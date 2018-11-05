@@ -18,7 +18,7 @@ Object {
     "SKU": "",
     "available": 0,
     "capacity": "",
-    "capacityType": "own",
+    "capacityType": "capped",
     "currencySymbol": undefined,
     "dateIsPristine": false,
     "description": "",
@@ -40,13 +40,15 @@ Object {
 }
 `;
 
-exports[`Ticket blocks selectors Ticket selectors Select type of tickets 1`] = `
+exports[`Ticket blocks selectors Ticket selectors Select type of tickets 1`] = `Array []`;
+
+exports[`Ticket blocks selectors Ticket selectors Select type of tickets 2`] = `
 Array [
   Object {
     "SKU": "",
     "available": 0,
     "capacity": "",
-    "capacityType": "own",
+    "capacityType": "capped",
     "currencySymbol": undefined,
     "dateIsPristine": false,
     "description": "",
@@ -68,8 +70,6 @@ Array [
 ]
 `;
 
-exports[`Ticket blocks selectors Ticket selectors Select type of tickets 2`] = `Array []`;
-
 exports[`Ticket blocks selectors Ticket selectors Select type of tickets 3`] = `Array []`;
 
 exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 1`] = `"22:30"`;
@@ -88,7 +88,7 @@ exports[`Ticket blocks selectors Ticket selectors Ticket fields 3`] = `""`;
 
 exports[`Ticket blocks selectors Ticket selectors Ticket fields 4`] = `""`;
 
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 5`] = `"own"`;
+exports[`Ticket blocks selectors Ticket selectors Ticket fields 5`] = `"capped"`;
 
 exports[`Ticket blocks selectors Ticket selectors Ticket fields 6`] = `false`;
 
