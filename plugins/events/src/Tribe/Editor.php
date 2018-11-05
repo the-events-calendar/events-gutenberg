@@ -365,15 +365,16 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			),
 		);
 
+
 		tribe_asset(
 			$plugin,
-			'tribe-events-editor-elements',
-			'elements.js',
+			'tribe-events-gutenberg-data',
+			'data.js',
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
-				'localize'     => array(
+				'in_footer' => false,
+				'localize'  => array(
 					array(
 						'name' => 'tribe_js_config',
 						/**
@@ -407,6 +408,72 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 					),
 				),
 				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 100,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-editor',
+			'editor.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 102,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-icons',
+			'icons.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 103,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-hoc',
+			'hoc.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 104,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-elements',
+			'elements.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 105,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-blocks',
+			'blocks.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 106,
 			)
 		);
 
