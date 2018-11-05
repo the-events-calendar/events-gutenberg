@@ -2,7 +2,7 @@
  * External dependencies
  */
 import { setupCreateReducer } from '@nfen/redux-reducer-injector';
-import forms from '../forms';
+import forms from './forms';
 
 /**
  * Internal dependencies
