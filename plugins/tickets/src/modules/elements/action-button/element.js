@@ -25,6 +25,7 @@ const ActionButton = ( {
 	asLink,
 	children,
 	className,
+	disabled,
 	href,
 	icon,
 	onClick,
@@ -38,12 +39,12 @@ const ActionButton = ( {
 		className,
 	);
 
-	const Element = asLink ? components.link : components.button;
+	const Element = asLink && ! disabled ? components.link : components.button;
 
 	const getProps = () => {
 		const elemProps = { ...props };
 
-		if ( asLink ) {
+		if ( asLink && ! disabled ) {
 			elemProps.href = href;
 			elemProps.target = target;
 		} else {
@@ -68,6 +69,7 @@ ActionButton.propTypes = {
 	asLink: PropTypes.bool,
 	children: PropTypes.node,
 	className: PropTypes.string,
+	disabled: PropTypes.bool,
 	href: PropTypes.string,
 	icon: PropTypes.node.isRequired,
 	onClick: PropTypes.func,
@@ -77,6 +79,7 @@ ActionButton.propTypes = {
 
 ActionButton.defaultProps = {
 	asLink: false,
+	disabled: false,
 	position: positions.left,
 };
 
