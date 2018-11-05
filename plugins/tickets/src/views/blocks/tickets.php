@@ -31,6 +31,6 @@ if ( ! $provider ) {
 		<?php $this->template( 'blocks/tickets/item', array( 'ticket' => $ticket, 'key' => $key ) ); ?>
 	<?php endforeach; ?>
 	<?php if ( 0 < count( $tickets ) ) : ?>
-		<?php $this->template( 'blocks/tickets/button-submit', array( 'provider' => $provider, 'provider_id' => $provider_id, 'ticket' => $ticket ) ); ?>
+		<?php $this->template( 'blocks/tickets/submit', array( 'provider' => $provider, 'provider_id' => $provider_id, 'ticket' => $ticket ) ); ?>
 	<?php endif; ?>
 </form>
