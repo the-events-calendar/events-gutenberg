@@ -8,11 +8,12 @@ module.exports = {
 	devtool: (
 		process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map'
 	),
-	externals,
+	target: 'web',
 	output: {
 		filename: './src/resources/js/[name].js',
 		libraryTarget: 'var',
 	},
+	externals,
 	module: {
 		rules: [
 			js,
