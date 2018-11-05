@@ -11,16 +11,28 @@ const Link = ( {
 	href,
 	target,
 	...props,
-} ) => (
-	<a
-		className={ classNames( 'tribe-editor__link', className ) }
-		href={ href }
-		target={ target }
-		{ ...props }
-	>
-		{ children }
-	</a>
-);
+} ) => {
+	const getProps = () => {
+		const elemProps = { ...props };
+
+		if ( target === '_blank' ) {
+			elemProps.rel = 'noopener noreferrer';
+		}
+
+		return elemProps;
+	};
+
+	return (
+		<a
+			className={ classNames( 'tribe-editor__link', className ) }
+			href={ href }
+			target={ target }
+			{ ...getProps() }
+		>
+			{ children }
+		</a>
+	);
+};
 
 Link.propTypes = {
 	children: PropTypes.node,
