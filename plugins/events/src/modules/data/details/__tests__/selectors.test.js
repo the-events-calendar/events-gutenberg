@@ -15,11 +15,11 @@ const state = {
 				},
 			},
 		},
-		forms: {
-			byID: {},
-			volatile: [ 20 ],
-		},
-	}
+	},
+	forms: {
+		byID: {},
+		volatile: [ 20 ],
+	},
 };
 
 describe( '[STORE] - Details selectors', () => {

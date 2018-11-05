@@ -4,7 +4,7 @@
 import { createSelector } from 'reselect';
 import { DEFAULT_STATE } from './reducers/form';
 
-export const formSelector = ( state, props ) => state.events.forms.byId[ props.name ];
+export const formSelector = ( state, props ) => state.forms.byId[ props.name ];
 
 export const getFormType = createSelector(
 	[ formSelector ],
@@ -36,4 +36,4 @@ export const getFormSaving = createSelector(
 	( block ) => block ? block.saving : DEFAULT_STATE.saving
 );
 
-export const getVolatile = ( state ) => state.events.forms.volatile;
+export const getVolatile = ( state ) => state.forms.volatile;

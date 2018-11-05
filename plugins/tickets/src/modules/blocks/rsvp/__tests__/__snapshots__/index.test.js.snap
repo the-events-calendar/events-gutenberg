@@ -20,9 +20,9 @@ Object {
     },
   },
   "category": "tribe-tickets",
-  "description": "RSVP block",
+  "description": "Find out who is planning to attend!",
   "edit": [Function],
-  "icon": [Function],
+  "icon": <<svg>icon mock</svg> />,
   "id": "rsvp",
   "keywords": Array [
     "event",
