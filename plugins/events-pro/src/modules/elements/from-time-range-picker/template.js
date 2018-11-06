@@ -49,16 +49,6 @@ const FromTimeRangePicker = ( {
 			showAllDay: true,
 			allDay: isAllDay,
 		};
-
-		if ( ! isMultiDay ) {
-			const max = fromSeconds(
-				toSeconds( endTime, TIME_FORMAT_HH_MM ) - MINUTE_IN_SECONDS,
-				TIME_FORMAT_HH_MM,
-			);
-			props.end = momentUtil.roundTime( moment( max, 'HH:mm' ) ).format( 'HH:mm' );
-			props.max = max;
-		}
-
 		return props;
 	};
 
@@ -73,26 +63,6 @@ const FromTimeRangePicker = ( {
 			showAllDay: true,
 			allDay: isAllDay,
 		};
-
-		if ( ! isMultiDay ) {
-			const startTimeSeconds = toSeconds( startTime, TIME_FORMAT_HH_MM );
-			// if the start time has less than half an hour left in the day
-			if ( startTimeSeconds + HALF_HOUR_IN_SECONDS >= DAY_IN_SECONDS ) {
-				props.start = END_OF_DAY;
-			} else {
-				const adjustedStartTime = fromSeconds(
-					startTimeSeconds + HALF_HOUR_IN_SECONDS,
-					TIME_FORMAT_HH_MM,
-				);
-				props.start = momentUtil.roundTime( moment( adjustedStartTime, 'HH:mm' ) ).format( 'HH:mm' );
-			}
-
-			props.min = fromSeconds(
-				startTimeSeconds + MINUTE_IN_SECONDS,
-				TIME_FORMAT_HH_MM,
-			);
-		}
-
 		return props;
 	};
 

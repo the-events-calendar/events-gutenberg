@@ -6,7 +6,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { BlockIcon } from '@moderntribe/common/elements';
+import { RSVP as RSVPIcon } from '@moderntribe/tickets/icons';
 import RSVP from './container';
 import {
 	KEY_TICKET_GOING_COUNT,
@@ -21,10 +21,10 @@ export default {
 	id: 'rsvp',
 	title: __( 'RSVP', 'events-gutenberg' ),
 	description: __(
-		'RSVP block',
+		'Find out who is planning to attend!',
 		'events-gutenberg',
 	),
-	icon: BlockIcon,
+	icon: <RSVPIcon/>,
 	category: 'tribe-tickets',
 	keywords: [ 'event', 'events-gutenberg', 'tribe' ],
 

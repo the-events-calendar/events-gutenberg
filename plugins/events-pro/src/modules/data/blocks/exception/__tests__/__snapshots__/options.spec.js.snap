@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exception options EXCEPTION_OCCURRENCE_OPTIONS 1`] = `
+Array [
+  Object {
+    "label": "Daily",
+    "value": "daily",
+  },
+  Object {
+    "label": "Weekly",
+    "value": "weekly",
+  },
+  Object {
+    "label": "Monthly",
+    "value": "monthly",
+  },
+  Object {
+    "label": "Yearly",
+    "value": "yearly",
+  },
+  Object {
+    "label": "Single Exception",
+    "value": "single",
+  },
+]
+`;

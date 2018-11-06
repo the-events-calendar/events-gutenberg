@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { put, select, call } from 'redux-saga/effects';
+import { put, select, call, all } from 'redux-saga/effects';
 
 /**
  * Internal dependencies
@@ -44,6 +44,7 @@ const {
 } = momentUtil;
 
 const {
+	MINUTE_IN_SECONDS,
 	HALF_HOUR_IN_SECONDS,
 	HOUR_IN_SECONDS,
 	DAY_IN_SECONDS,
@@ -77,8 +78,8 @@ export function* handleAddition( { actions } ) {
 		[ KEY_ALL_DAY ]: allDay,
 		[ KEY_MULTI_DAY ]: multiDay,
 		[ KEY_START_DATE ]: startDate,
-		[ KEY_START_DATE_INPUT]: startDateInput,
-		[ KEY_START_DATE_OBJ]: startDateObj,
+		[ KEY_START_DATE_INPUT ]: startDateInput,
+		[ KEY_START_DATE_OBJ ]: startDateObj,
 		[ KEY_START_TIME ]: startTime,
 		[ KEY_END_DATE ]: endDate,
 		[ KEY_END_DATE_INPUT ]: endDateInput,
@@ -98,9 +99,10 @@ export function* handleAddition( { actions } ) {
 	} ) );
 }
 
-export function* handleTimeChange( { actions }, action, key ) {
+export function* handleTimeChange( { actions, selectors }, action, key ) {
 	const payloadTime = action.payload[ key ];
 	const isAllDay = payloadTime === 'all-day';
+	const isMultiDay = yield select( selectors.getMultiDay, action );
 
 	if ( isAllDay ) {
 		yield put(
@@ -110,6 +112,30 @@ export function* handleTimeChange( { actions }, action, key ) {
 				[ KEY_END_TIME ]: '23:59:59',
 			} )
 		);
+	} else if ( ! isMultiDay ) {
+		const isStartTime = key === KEY_START_TIME;
+		const isEndTime = key === KEY_END_TIME;
+
+		const startTime = isStartTime
+			? payloadTime
+			: yield select( selectors.getStartTimeNoSeconds, action );
+
+		const endTime = isEndTime
+			? payloadTime
+			: yield select( selectors.getEndTimeNoSeconds, action );
+
+		// This put needs to be here to prevent incorrect time formats when 'adjusting'
+		// as it will not adjust in all cases
+		yield put(
+			actions.sync( action.index, {
+				[ KEY_ALL_DAY ]: isAllDay,
+				[ key ]: `${ payloadTime }:00`,
+			} )
+		);
+
+		isStartTime
+			? yield call( preventEndTimeBeforeStartTime, { actions }, { startTime, endTime }, action )
+			: yield call( preventStartTimeAfterEndTime, { actions }, { startTime, endTime }, action );
 	} else {
 		yield put(
 			actions.sync( action.index, {
@@ -127,28 +153,70 @@ export function* handleMultiDayChange( { actions, selectors }, action, key ) {
 		const startTime = yield select( selectors.getStartTimeNoSeconds, action );
 		const endTime = yield select( selectors.getEndTimeNoSeconds, action );
 
-		let startTimeSeconds = yield call( toSeconds, startTime, TIME_FORMAT_HH_MM );
-		let endTimeSeconds = yield call( toSeconds, endTime, TIME_FORMAT_HH_MM );
+		yield call( preventEndTimeBeforeStartTime, { actions }, { startTime, endTime }, action );
+	}
+}
 
-		// If end time is earlier than start time, fix time
-		if ( endTimeSeconds <= startTimeSeconds ) {
-			// If there is less than half an hour left in the day, roll back one hour
-			if ( startTimeSeconds + HALF_HOUR_IN_SECONDS >= DAY_IN_SECONDS ) {
-				startTimeSeconds -= HOUR_IN_SECONDS;
-			}
+/**
+ * Prevents end time from being before start time.
+ * Should only prevent when not a multi-day event.
+ *
+ * @export
+ * @param {Object} { actions } Actions for syncing
+ * @param {Object} { startTime, endTime } Start and end time
+ * @param {Object} action Action received
+ */
+export function* preventEndTimeBeforeStartTime( { actions }, { startTime, endTime }, action ) {
+	let startTimeSeconds = yield call( toSeconds, startTime, TIME_FORMAT_HH_MM );
+	let endTimeSeconds = yield call( toSeconds, endTime, TIME_FORMAT_HH_MM );
 
-			endTimeSeconds = startTimeSeconds + HALF_HOUR_IN_SECONDS;
-
-			const adjustedStartTime = yield call( fromSeconds, startTimeSeconds, TIME_FORMAT_HH_MM );
-			const adjustedEndTime = yield call( fromSeconds, endTimeSeconds, TIME_FORMAT_HH_MM )
-
-			yield put(
-				actions.sync( action.index, {
-					[ KEY_START_TIME ]: `${ adjustedStartTime }:00`,
-					[ KEY_END_TIME ]: `${ adjustedEndTime }:00`,
-				} )
-			);
+	// If end time is earlier than start time, fix time
+	if ( endTimeSeconds <= startTimeSeconds ) {
+		// If there is less than half an hour left in the day, roll back one hour
+		if ( startTimeSeconds + HALF_HOUR_IN_SECONDS >= DAY_IN_SECONDS ) {
+			startTimeSeconds -= HOUR_IN_SECONDS;
 		}
+
+		endTimeSeconds = startTimeSeconds + HALF_HOUR_IN_SECONDS;
+
+		const adjustedStartTime = yield call( fromSeconds, startTimeSeconds, TIME_FORMAT_HH_MM );
+		const adjustedEndTime = yield call( fromSeconds, endTimeSeconds, TIME_FORMAT_HH_MM );
+
+		yield put(
+			actions.sync( action.index, {
+				[ KEY_START_TIME ]: `${ adjustedStartTime }:00`,
+				[ KEY_END_TIME ]: `${ adjustedEndTime }:00`,
+			} )
+		);
+	}
+}
+
+/**
+ * Prevents start time from appearing ahead of end time.
+ * Should only prevent when not a multi-day event.
+ *
+ * @export
+ * @param {Object} { actions } Actions for syncing
+ * @param {Object} { startTime, endTime } Start and end time
+ * @param {Object} action Action received
+ */
+export function* preventStartTimeAfterEndTime( { actions }, { startTime, endTime }, action ) {
+	let startTimeSeconds = yield call( toSeconds, startTime, TIME_FORMAT_HH_MM );
+	let endTimeSeconds = yield call( toSeconds, endTime, TIME_FORMAT_HH_MM );
+
+	if ( startTimeSeconds >= endTimeSeconds ) {
+		startTimeSeconds = Math.max( endTimeSeconds - HALF_HOUR_IN_SECONDS, 0 );
+		endTimeSeconds = Math.max( startTimeSeconds + MINUTE_IN_SECONDS, endTimeSeconds );
+
+		const adjustedStartTime = yield call( fromSeconds, startTimeSeconds, TIME_FORMAT_HH_MM );
+		const adjustedEndTime = yield call( fromSeconds, endTimeSeconds, TIME_FORMAT_HH_MM );
+
+		yield put(
+			actions.sync( action.index, {
+				[ KEY_START_TIME ]: `${ adjustedStartTime }:00`,
+				[ KEY_END_TIME ]: `${ adjustedEndTime }:00`,
+			} )
+		);
 	}
 }
 

@@ -4,6 +4,7 @@
 import { PREFIX_TICKETS_STORE } from '@moderntribe/tickets/data/utils';
 
 export const CREATE_RSVP = `${ PREFIX_TICKETS_STORE }/CREATE_RSVP`;
+export const INITIALIZE_RSVP = `${ PREFIX_TICKETS_STORE }/INITIALIZE_RSVP`;
 export const DELETE_RSVP = `${ PREFIX_TICKETS_STORE }/DELETE_RSVP`;
 
 export const SET_RSVP_ID = `${ PREFIX_TICKETS_STORE }/SET_RSVP_ID`;

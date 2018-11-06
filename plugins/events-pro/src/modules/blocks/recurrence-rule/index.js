@@ -34,14 +34,6 @@ export default {
 		html: false,
 	},
 
-	attributes: {
-		rules: {
-			type: 'string',
-			source: 'meta',
-			meta: '_tribe_blocks_recurrence_rules',
-		},
-	},
-
 	edit: EventRecurring,
 
 	save( props ) {

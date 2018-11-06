@@ -39,4 +39,10 @@ describe( 'Exception reducer', () => {
 			).toMatchSnapshot();
 		} );
 	} );
+
+	it( 'should sync from DB', () => {
+		expect(
+			reducer( state, actions.syncExceptionsFromDB( '[{},{}]' ) )
+		).toMatchSnapshot();
+	} );
 } );
