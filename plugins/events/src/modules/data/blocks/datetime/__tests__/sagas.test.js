@@ -47,10 +47,6 @@ describe( 'Event Date time Block sagas', () => {
 				call( rangeToNaturalLanguage, undefined, undefined ),
 			);
 
-			expect( gen.next().value ).toEqual(
-				put( actions.setNaturalLanguageLabel( undefined ) ),
-			);
-
 			expect( gen.next().done ).toEqual( true );
 		} );
 
