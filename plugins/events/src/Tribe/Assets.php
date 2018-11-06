@@ -31,7 +31,7 @@ class Tribe__Gutenberg__Events__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-events-gutenberg-views',
-			'views.css',
+			'app/views.css',
 			array(),
 			'wp_enqueue_scripts',
 			array(

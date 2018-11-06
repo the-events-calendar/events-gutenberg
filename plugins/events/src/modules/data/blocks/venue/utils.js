@@ -43,8 +43,8 @@ export function getVenueCountry( meta ) {
 
 	if ( '' === country ) {
 		const defaultCountry = editorDefaults().venueCountry;
-
-		country = defaultCountry && defaultCountry.length > 0 ? defaultCountry[1] : '';
+		const [ countryName ] = defaultCountry || [];
+		country = countryName || '';
 	}
 	return country;
 }

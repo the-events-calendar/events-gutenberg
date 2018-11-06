@@ -93,13 +93,18 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.4-alpha - 2018-11-01
+#### 0.3.4-alpha - 2018-11-06
 
+* Feature - Attendee additional fields properly working from Blocks Editor link
+* Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
+* Feature - Add dynamic additional blocks present on the Gutenberg Editor
+* Tweak - Moving all CSS and JavaScript files into an `app` folder to allow better compatibility with Core Plugins
 * Fix - RSVP blocks sets initial start and end date based on events
-* Fix - Add wp-editor as dependency for scripts
+* Fix - Add `wp-editor` as dependency for scripts
 * Fix - RSVP blocks sets initial start and end date based on event
 * Fix - Ticket blocks sets initial start and end date based on event
 * Fix - Allow ticket UI to show proper shared capacity state
+* Fix - Remove `max-width` definition from Blocks Editor default for events page.
 
 #### 0.3.3-alpha - 2018-10-25
 

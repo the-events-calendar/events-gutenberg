@@ -29,15 +29,15 @@
 		}],
 		[ "transform-react-jsx", {
 			"pragma": "wp.element.createElement"
-		} ]
+		} ],
+		["lodash"]
 	],
 	"env": {
 		"default": {
 			"plugins": [
 				"transform-class-properties",
 				"syntax-class-properties",
-				"import-glob",
-				"lodash"
+				"import-glob"
 			]
 		},
 		"test": {

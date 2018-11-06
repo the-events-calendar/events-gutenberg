@@ -28,20 +28,58 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-pro-gutenberg-blocks',
-			'blocks.js',
+			'app/blocks.js',
 			/**
 			 * @todo revise this dependencies
 			 */
 			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
+				'in_footer' => true,
+				'localize'  => array(),
+			)
+		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-pro-gutenberg-elements',
+			'app/elements.js',
+			/**
+			 * @todo revise this dependencies
+			 */
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => true,
+				'localize'  => array(),
+			)
+		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-pro-gutenberg-blocks-styles',
+			'app/blocks.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => true,
+				'localize'  => array(),
+			)
+		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-pro-gutenberg-element',
+			'app/elements.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => true,
 				'localize'  => array(),
 			)
 		);
 
 		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'set_editor_defaults' ), 10 );
-
 	}
 
 	/**
@@ -80,17 +118,17 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		}
 
 		$venue_province = tribe_get_option( 'eventsDefaultProvince', '' );
-		if ( '' !==  $venue_province ) {
+		if ( '' !== $venue_province ) {
 			$defaults['venueProvince'] = $venue_province;
 		}
 
 		$venue_zip = tribe_get_option( 'eventsDefaultZip', '' );
-		if ( '' !==  $venue_zip ) {
+		if ( '' !== $venue_zip ) {
 			$defaults['venueZip'] = $venue_zip;
 		}
 
 		$venue_phone = tribe_get_option( 'eventsDefaultPhone', '' );
-		if ( '' !==  $venue_phone ) {
+		if ( '' !== $venue_phone ) {
 			$defaults['venuePhone'] = $venue_phone;
 		}
 
@@ -108,7 +146,6 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		$js_config['editor_defaults'] = $defaults;
 
 		return $js_config;
-
 	}
 
 }
