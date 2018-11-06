@@ -26,7 +26,7 @@ exports[`Ticket Duration picker and label default properties 1`] = `
         className="tribe-editor__date-time-range-picker__start"
       >
         <div
-          className="DayPickerInput"
+          className="tribe-editor__day-picker-input DayPickerInput"
         >
           <input
             onBlur={[Function]}
@@ -61,7 +61,7 @@ exports[`Ticket Duration picker and label default properties 1`] = `
           to
         </span>
         <div
-          className="DayPickerInput"
+          className="tribe-editor__day-picker-input DayPickerInput"
         >
           <input
             onBlur={[Function]}

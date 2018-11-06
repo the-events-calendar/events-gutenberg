@@ -9,7 +9,6 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 	 *
 	 */
 	public function register() {
-
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.events-pro.plugin', 'Tribe__Gutenberg__Events_Pro__Plugin' );
 		
@@ -31,6 +30,8 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 			'gutenberg.events-pro.assets', 'Tribe__Gutenberg__Events_Pro__Assets', array( 'register' )
 		);
 
+		$this->container->singleton( 'gutenberg.events-pro.meta', 'Tribe__Gutenberg__Events_Pro__Meta' );
+
 		$this->hook();
 	}
 
@@ -45,6 +46,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 	protected function hook() {
 		// Initialize the correct Singletons
 		tribe( 'gutenberg.events-pro.assets' );
+
 		tribe( 'gutenberg.events.pro.editor' )->hook();
 		// Setup the Meta registration
 		add_action( 'init', tribe_callback( 'gutenberg.events.pro.meta', 'register' ), 15 );
@@ -52,6 +54,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 			'tribe_events_editor_register_blocks',
 			tribe_callback( 'gutenberg.events.pro.blocks.fields', 'register' )
 		);
+		add_action( 'init', tribe_callback( 'gutenberg.events-pro.meta', 'register' ), 15 );
 	}
 
 	/**

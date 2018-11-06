@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddField should match snapshot 1`] = `
+<aside
+  className="tribe-editor__events-pro__add-field"
+>
+  <button
+    className="tribe-editor__events-pro__add-field__button"
+    onClick={[MockFunction]}
+    type="button"
+  >
+    <span
+      className="tribe-editor__events-pro__add-field__button__plus"
+    >
+      +
+    </span>
+    <span />
+  </button>
+</aside>
+`;

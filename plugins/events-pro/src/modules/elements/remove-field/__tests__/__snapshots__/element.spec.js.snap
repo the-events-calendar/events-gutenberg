@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RemoveField should render component 1`] = `
+<button
+  className="tribe-editor__events-pro__remove-field"
+  onClick={[MockFunction]}
+  type="button"
+>
+  <<svg>icon mock</svg> />
+</button>
+`;

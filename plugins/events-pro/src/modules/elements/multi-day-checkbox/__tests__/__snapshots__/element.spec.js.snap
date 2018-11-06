@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Multi Day Checkbox Element renders multi day checkbox 1`] = `
+<div
+  className="tribe-editor__checkbox tribe-editor__multi-day-checkbox test-class"
+>
+  <input
+    checked={true}
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+    id="uniqid"
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <label
+    className="tribe-editor__checkbox__label"
+    htmlFor="uniqid"
+  >
+    Multi-day
+  </label>
+</div>
+`;

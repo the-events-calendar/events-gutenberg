@@ -5,6 +5,8 @@ import reducer from './reducers';
 
 import { actions, constants } from '@moderntribe/common/data/plugins';
 import { store } from '@moderntribe/common/store';
+import '@moderntribe/events-pro/data/blocks/sagas';
+
 const { EVENTS_PRO_PLUGIN } = constants;
 
 export const initStore = () => {

@@ -35,6 +35,7 @@ import {
 import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
 import './style.pcss';
 import HumanReadableInput from './human-readable-input/container';
+import PluginDateTimeBlockHooks from './hooks';
 
 /**
  * Module Code
@@ -269,6 +270,7 @@ class EventDateTime extends Component {
 								{ this.renderMultiDayToggle() }
 							</div>
 						</div>
+						<PluginDateTimeBlockHooks />
 						{ ! hideUpsell && <Upsell /> }
 					</footer>
 				</Fragment>

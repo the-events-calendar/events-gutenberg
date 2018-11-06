@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exception reducer edit should only edit a single exception 1`] = `
+Array [
+  Object {
+    "cool": "thanks",
+    "id": 1,
+  },
+]
+`;
+
+exports[`Exception reducer edit should update the correct exception 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "cool": "thanks",
+    "id": 2,
+  },
+  Object {
+    "id": 3,
+  },
+]
+`;
+
+exports[`Exception reducer should add a exception 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "id": 2,
+  },
+  Object {
+    "id": 3,
+  },
+  Object {
+    "id": 4,
+  },
+]
+`;
+
+exports[`Exception reducer should remove an exception 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "id": 3,
+  },
+]
+`;
+
+exports[`Exception reducer should sync from DB 1`] = `
+Array [
+  Object {},
+  Object {},
+]
+`;

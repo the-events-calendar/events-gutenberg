@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthPicker should render component 1`] = `
+<div
+  className="tribe-editor__month-picker test-class"
+>
+  <button
+    className="tribe-editor__month-picker__add"
+    onClick={[Function]}
+  >
+    <span
+      className="tribe-editor__month-picker__add-icon"
+    >
+      +
+    </span>
+    Add
+  </button>
+</div>
+`;
+
+exports[`MonthPicker should render month tags 1`] = `
+<div
+  className="tribe-editor__month-picker test-class"
+>
+  <button
+    className="tribe-editor__month-tag tribe-editor__month-picker__month-tag"
+  >
+    <<svg>icon mock</svg> />
+    <span
+      className="tribe-editor__month-tag__remove"
+    >
+      Remove
+    </span>
+    Jul
+  </button>
+  <button
+    className="tribe-editor__month-tag tribe-editor__month-picker__month-tag"
+  >
+    <<svg>icon mock</svg> />
+    <span
+      className="tribe-editor__month-tag__remove"
+    >
+      Remove
+    </span>
+    Sep
+  </button>
+  <button
+    className="tribe-editor__month-picker__add"
+    onClick={[Function]}
+  >
+    <span
+      className="tribe-editor__month-picker__add-icon"
+    >
+      +
+    </span>
+    Add
+  </button>
+</div>
+`;

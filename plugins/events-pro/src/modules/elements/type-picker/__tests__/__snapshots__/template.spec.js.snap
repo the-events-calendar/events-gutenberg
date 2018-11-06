@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TypePicker should render component 1`] = `
+<div
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__type-picker test-class"
+>
+  <div
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
+  >
+    <span
+      className="tribe-editor__events-pro__label-text"
+    />
+  </div>
+  <div
+    className="tribe-editor__labeled-row__content"
+  >
+    <div
+      className="css-10nd86i tribe-editor__select tribe-editor__type-picker__type-select"
+      onKeyDown={[Function]}
+    >
+      <div
+        className="css-vj8t7z tribe-editor__select__control"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <div
+          className="css-1hwfws3 tribe-editor__select__value-container tribe-editor__select__value-container--has-value"
+        >
+          <div
+            className="css-xp4uvy tribe-editor__select__single-value"
+          >
+            Single Recurrence
+          </div>
+          <input
+            className="css-14uuagi"
+            id="react-select-2-input"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            readOnly={true}
+            tabIndex="0"
+            value=""
+          />
+        </div>
+        <div
+          className="css-1wy0on6 tribe-editor__select__indicators"
+        >
+          <div
+            aria-hidden="true"
+            className="css-1ep9fjw tribe-editor__select__indicator tribe-editor__select__dropdown-indicator"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <span
+              className="tribe-editor__select__dropdown-indicator"
+            >
+              arrow-down
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

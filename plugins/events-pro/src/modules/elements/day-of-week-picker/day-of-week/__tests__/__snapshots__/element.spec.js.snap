@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Day Of Week Element renders day of week 1`] = `
+<div
+  className="tribe-editor__checkbox tribe-editor__day-of-week test-class"
+>
+  <input
+    checked={true}
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+    id="uniqid"
+    onChange={[Function]}
+    type="checkbox"
+    value="friday"
+  />
+  <label
+    className="tribe-editor__checkbox__label"
+    htmlFor="uniqid"
+  >
+    <abbr
+      className="tribe-editor__day-of-week__label-abbr"
+      title="Friday"
+    >
+      F
+    </abbr>
+  </label>
+</div>
+`;

@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[STORE] - UI reducer Should expand exception panel 1`] = `
+Object {
+  "isExceptionPanelExpanded": true,
+  "isExceptionPanelVisible": false,
+  "isRepeatBlockVisible": false,
+  "isRulePanelExpanded": false,
+  "isRulePanelVisible": false,
+}
+`;
+
+exports[`[STORE] - UI reducer Should expand rule panel 1`] = `
+Object {
+  "isExceptionPanelExpanded": false,
+  "isExceptionPanelVisible": false,
+  "isRepeatBlockVisible": false,
+  "isRulePanelExpanded": true,
+  "isRulePanelVisible": false,
+}
+`;
+
+exports[`[STORE] - UI reducer Should hide exception panel 1`] = `
+Object {
+  "isExceptionPanelExpanded": false,
+  "isExceptionPanelVisible": false,
+  "isRepeatBlockVisible": false,
+  "isRulePanelExpanded": false,
+  "isRulePanelVisible": false,
+}
+`;
+
+exports[`[STORE] - UI reducer Should hide rule panel 1`] = `
+Object {
+  "isExceptionPanelExpanded": false,
+  "isExceptionPanelVisible": false,
+  "isRepeatBlockVisible": false,
+  "isRulePanelExpanded": false,
+  "isRulePanelVisible": false,
+}
+`;
+
+exports[`[STORE] - UI reducer Should toggle exception panel 1`] = `
+Object {
+  "isExceptionPanelExpanded": false,
+  "isExceptionPanelVisible": true,
+  "isRepeatBlockVisible": false,
+  "isRulePanelExpanded": false,
+  "isRulePanelVisible": false,
+}
+`;
+
+exports[`[STORE] - UI reducer Should toggle exception panel expand 1`] = `
+Object {
+  "isExceptionPanelExpanded": true,
+  "isExceptionPanelVisible": false,
+  "isRepeatBlockVisible": false,
+  "isRulePanelExpanded": false,
+  "isRulePanelVisible": false,
+}
+`;
+
+exports[`[STORE] - UI reducer Should toggle repeat panel 1`] = `
+Object {
+  "isExceptionPanelExpanded": false,
+  "isExceptionPanelVisible": false,
+  "isRepeatBlockVisible": true,
+  "isRulePanelExpanded": false,
+  "isRulePanelVisible": false,
+}
+`;
+
+exports[`[STORE] - UI reducer Should toggle rule panel 1`] = `
+Object {
+  "isExceptionPanelExpanded": false,
+  "isExceptionPanelVisible": false,
+  "isRepeatBlockVisible": false,
+  "isRulePanelExpanded": false,
+  "isRulePanelVisible": true,
+}
+`;
+
+exports[`[STORE] - UI reducer Should toggle rule panel expand 1`] = `
+Object {
+  "isExceptionPanelExpanded": false,
+  "isExceptionPanelVisible": false,
+  "isRepeatBlockVisible": false,
+  "isRulePanelExpanded": true,
+  "isRulePanelVisible": false,
+}
+`;

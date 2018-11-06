@@ -11,6 +11,7 @@ export { default as Link } from './link/element';
 export { default as ModalButton } from './modal-button/element';
 export { default as TimePicker } from './time-picker/element';
 export { default as Tooltip } from './tooltip/element';
+
 export { default as Placeholder } from './placeholder/element';
 export { default as Heading } from './heading/element';
 export { default as Paragraph } from './paragraph/element';
@@ -25,3 +26,6 @@ export { default as Checkbox } from './checkbox/element';
 export { default as CheckboxInput } from './checkbox-input/element';
 export { default as Select } from './select/element';
 export { default as Textarea } from './textarea/element';
+
+export { default as DayPickerInput } from './day-picker-input/element';
+export { default as CreatableSelect } from './creatable-select/element';
