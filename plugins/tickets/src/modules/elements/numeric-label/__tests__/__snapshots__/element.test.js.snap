@@ -5,7 +5,33 @@ exports[`NumericLabel Disable fallback rendering 1`] = `
   className="tribe-editor__numeric-label"
 >
   
-  0
+  <span
+    className="tribe-editor__numeric-label--count"
+  >
+    0
+  </span>
+</span>
+`;
+
+exports[`NumericLabel include zero in numeric label 1`] = `
+<span
+  className="tribe-editor__numeric-label"
+>
+  <span
+    className="tribe-editor__numeric-label--before"
+  >
+    We have 
+  </span>
+  <span
+    className="tribe-editor__numeric-label--count"
+  >
+    0
+  </span>
+  <span
+    className="tribe-editor__numeric-label--after"
+  >
+     items
+  </span>
 </span>
 `;
 
