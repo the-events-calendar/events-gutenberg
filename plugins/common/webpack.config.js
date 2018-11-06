@@ -5,6 +5,7 @@ const { resolve } = require( 'path' );
 const merge = require( 'webpack-merge' );
 const common = require( '../../webpack/common/webpack.config' );
 const wpExternals = require( '../../webpack/externals/wp.js' );
+const vendor = require( '../../webpack/externals/vendor.js' );
 const { getDirectoryNames } = require( '../../webpack/utils/directories' );
 const { generateEntries } = require( '../../webpack/entry/tribe' );
 
@@ -16,7 +17,7 @@ const config = merge.strategy( {
 } )(
 	common,
 	{
-		externals: [ wpExternals ], // Only use WP externals
+		externals: { ...wpExternals, ...vendor }, // Only use WP externals
 		entry: generateEntries( __dirname, directoryNames ),
 		output: {
 			path: __dirname,

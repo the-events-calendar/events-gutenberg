@@ -8,7 +8,7 @@ const externals = require( '../externals' );
 
 const isProduction = process.env.NODE_ENV === 'production';
 const postfix = isProduction ? 'min.js' : 'js';
-const plugins = isProduction ? [new UnminifiedWebpackPlugin()] : [];
+const plugins = isProduction ? [ new UnminifiedWebpackPlugin() ] : [];
 
 module.exports = {
 	devtool: (
@@ -16,7 +16,7 @@ module.exports = {
 	),
 	target: 'web',
 	output: {
-		filename: `./src/resources/js/app/[name].${postfix}`,
+		filename: `./src/resources/js/app/[name].${ postfix }`,
 		libraryTarget: 'var',
 	},
 	externals,
@@ -31,6 +31,6 @@ module.exports = {
 	},
 	plugins: [
 		styles.plugin(),
-		...plugins
+		...plugins,
 	],
 };
