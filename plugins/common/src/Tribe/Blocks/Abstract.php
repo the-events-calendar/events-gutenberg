@@ -20,9 +20,24 @@ implements Tribe__Gutenberg__Common__Blocks__Interface {
 	 * @return string
 	 */
 	public function name() {
-		return $this->namespace . '/' . $this->slug();
+		if ( false === strpos( $this->slug(), $this->namespace . '/' ) ) {
+			return $this->namespace . '/' . $this->slug();
+		} else {
+			return $this->slug();
+		}
 	}
-
+	
+	/**
+	 * Return the namespace to child or external sources
+	 *
+	 * @since TBD
+	 *
+	 * @return string
+	 */
+	public function get_namespace() {
+		return $this->namespace;
+	}
+	
 	/*
 	 * Return the block attributes
 	 *
