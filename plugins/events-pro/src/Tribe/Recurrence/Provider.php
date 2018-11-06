@@ -38,7 +38,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Provider {
 			'recurrence'     => array(
 				'rules'      => $this->parse_rules( $rules ),
 				'exclusions' => $this->parse_rules( $exclusions ),
-			)
+			),
 		);
 		
 		/**

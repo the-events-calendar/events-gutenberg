@@ -160,8 +160,8 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	 */
 	protected function maybe_set_limit_type() {
 		if (
-			! isset( $this->fields['limit_type'] ) ||
-			$this->data['type'] === Tribe__Events__Pro__Recurrence__Custom_Types::DATE_CUSTOM_TYPE
+			! isset( $this->fields['limit_type'] )
+			|| $this->data['type'] === Tribe__Events__Pro__Recurrence__Custom_Types::DATE_CUSTOM_TYPE
 		) {
 			return;
 		}
