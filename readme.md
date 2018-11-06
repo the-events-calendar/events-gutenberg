@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.3.5-alpha - TBD
 
 * Feature - Ecommerce options for ticket block
+* Fix - Add conditional to human readable input saga to prevent infinite loop
 
 #### 0.3.4-alpha - 2018-11-06
 
