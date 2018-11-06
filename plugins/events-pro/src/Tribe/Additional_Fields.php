@@ -7,7 +7,7 @@
  * additional if required from external places
  */
 class Tribe__Gutenberg__Events_Pro__Additional_Fields {
-	
+
 	/**
 	 * Namespace for Blocks from tribe
 	 *
@@ -16,7 +16,7 @@ class Tribe__Gutenberg__Events_Pro__Additional_Fields {
 	 * @var string
 	 */
 	private $namespace = 'tribe';
-	
+
 	/**
 	 * Return the additional fields as an array of values without the ID of each field and also parsing the values
 	 * from field where they might have multiple values such as: radio, dropdown, checkbox send an array of values
@@ -38,10 +38,10 @@ class Tribe__Gutenberg__Events_Pro__Additional_Fields {
 			}
 			$fields[] = $field;
 		}
-		
+
 		return $fields;
 	}
-	
+
 	/**
 	 * Return the name of the blocks created by additional fields settings as blocks in a format:
 	 *
@@ -57,17 +57,22 @@ class Tribe__Gutenberg__Events_Pro__Additional_Fields {
 		$names  = [];
 		foreach ( $fields as $field ) {
 			$should_be_attached = true;
+			if ( ! isset( $field['gutenberg_editor'] ) ) {
+				continue;
+			}
+
 			if ( $only_visible ) {
 				$should_be_attached = true === $field['gutenberg_editor'];
 			}
-			if ( isset( $field['gutenberg_editor'] ) && $should_be_attached ) {
+
+			if ( $should_be_attached ) {
 				$names[] = $this->to_block_name( $field['name'] );
 			}
 		}
-		
+
 		return $names;
 	}
-	
+
 	/**
 	 * Convert a string into a valid block name where only a-z and 0-9 characters are valid
 	 *
