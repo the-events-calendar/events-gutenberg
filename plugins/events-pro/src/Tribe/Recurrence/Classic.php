@@ -81,14 +81,12 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 		if ( empty( $args ) || ! $this->has_valid_fields() ) {
 			return;
 		}
-		error_log( print_r( $this->fields, true ) );
 		
 		$this->set_type( $args['type'] );
 		$this->set_custom_args();
 		$this->maybe_set_interval();
 		$this->maybe_set_limit_type();
 		$this->maybe_set_limit();
-		error_log( print_r( $this->data, true ) );
 	}
 	
 	/**
