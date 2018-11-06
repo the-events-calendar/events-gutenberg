@@ -31,7 +31,7 @@ class Tribe__Gutenberg__Common__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-common-gutenberg-data',
-			'data.js',
+			'app/data.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -46,7 +46,7 @@ class Tribe__Gutenberg__Common__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-common-gutenberg-utils',
-			'utils.js',
+			'app/utils.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -61,7 +61,7 @@ class Tribe__Gutenberg__Common__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-common-gutenberg-store',
-			'store.js',
+			'app/store.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -76,7 +76,7 @@ class Tribe__Gutenberg__Common__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-common-gutenberg-icons',
-			'icons.js',
+			'app/icons.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -91,11 +91,21 @@ class Tribe__Gutenberg__Common__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-common-gutenberg-hoc',
-			'hoc.js',
+			'app/hoc.js',
 			/**
 			 * @todo revise this dependencies
 			 */
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			array(
+				'react',
+				'react-dom',
+				'wp-components',
+				'wp-api',
+				'wp-api-request',
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-editor',
+			),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,
@@ -106,7 +116,7 @@ class Tribe__Gutenberg__Common__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-common-gutenberg-elements',
-			'elements.js',
+			'app/elements.js',
 			/**
 			 * @todo revise this dependencies
 			 */

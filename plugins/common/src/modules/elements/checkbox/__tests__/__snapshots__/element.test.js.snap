@@ -6,7 +6,7 @@ exports[`Checkbox Element renders checkbox 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     onChange={[Function]}
     type="checkbox"
   />
@@ -22,7 +22,7 @@ exports[`Checkbox Element renders checkbox with class 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     onChange={[Function]}
     type="checkbox"
   />
@@ -38,7 +38,7 @@ exports[`Checkbox Element renders checkbox with id 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     id="test-id"
     onChange={[Function]}
     type="checkbox"
@@ -56,7 +56,7 @@ exports[`Checkbox Element renders checkbox with label 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     onChange={[Function]}
     type="checkbox"
   />
@@ -74,7 +74,7 @@ exports[`Checkbox Element renders checkbox with name 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     name="test-name"
     onChange={[Function]}
     type="checkbox"
@@ -91,7 +91,7 @@ exports[`Checkbox Element renders checkbox with onChange handler 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     onChange={[MockFunction]}
     type="checkbox"
   />
@@ -107,7 +107,7 @@ exports[`Checkbox Element renders checkbox with value 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     onChange={[Function]}
     type="checkbox"
     value="Test Value"
@@ -124,7 +124,7 @@ exports[`Checkbox Element renders checked checkbox 1`] = `
 >
   <input
     checked={true}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     onChange={[Function]}
     type="checkbox"
   />
@@ -140,7 +140,7 @@ exports[`Checkbox Element renders disabled checkbox 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     disabled={true}
     onChange={[Function]}
     type="checkbox"
@@ -157,7 +157,7 @@ exports[`Checkbox Element renders unchecked checkbox 1`] = `
 >
   <input
     checked={false}
-    className="tribe-editor__checkbox__input"
+    className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
     onChange={[Function]}
     type="checkbox"
   />

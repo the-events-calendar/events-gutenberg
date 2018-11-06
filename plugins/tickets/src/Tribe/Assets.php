@@ -24,11 +24,20 @@ class Tribe__Gutenberg__Tickets__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-tickets-gutenberg-data',
-			'data.js',
+			'app/data.js',
 			/**
 			 * @todo revise this dependencies
 			 */
-			array( 'react', 'react-dom', 'wp-components', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			array(
+				'react',
+				'react-dom',
+				'thickbox',
+				'wp-components',
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-editor',
+			),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer'    => false,
@@ -41,7 +50,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-tickets-gutenberg-icons',
-			'icons.js',
+			'app/icons.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -58,7 +67,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-tickets-gutenberg-elements',
-			'elements.js',
+			'app/elements.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -75,7 +84,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-tickets-gutenberg-blocks',
-			'blocks.js',
+			'app/blocks.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -92,7 +101,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-tickets-gutenberg-blocks-styles',
-			'blocks.css',
+			'app/blocks.css',
 			array(),
 			'enqueue_block_editor_assets',
 			array(

@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { sprintf } from 'sprintf-js';
 
 /**
  * WordPress dependencies
@@ -20,7 +21,6 @@ import {
 } from '@moderntribe/common/icons';
 import QuantityBar from './quantity-bar/element';
 import { Button } from '@moderntribe/common/elements';
-import { interpolateNumbers } from '@moderntribe/common/utils/string';
 import './style.pcss';
 
 /**
@@ -50,8 +50,8 @@ const TicketDisplay = ( props ) => {
 
 	const priceLabel = [ currencySymbol, price ];
 	const labels = {
-		unlimited: interpolateNumbers( __( '%d sold', 'events-gutenberg' ), sold ),
-		normal: interpolateNumbers( __( '%d of %d sold', 'events-gutenberg' ), sold, capacity ),
+		unlimited: sprintf( __( '%1$d sold', 'events-gutenberg' ), sold ),
+		normal: sprintf( __( '%1$d of %d sold', 'events-gutenberg' ), sold, capacity ),
 	};
 
 	let quantityBar = <span className="tribe-editor__quantity--unlimited">unlimited</span>;
