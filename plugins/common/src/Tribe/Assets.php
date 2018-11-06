@@ -30,6 +30,66 @@ class Tribe__Gutenberg__Common__Assets {
 
 		tribe_asset(
 			$plugin,
+			'tribe-common-gutenberg-data',
+			'app/data.js',
+			/**
+			 * @todo revise this dependencies
+			 */
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'priority'  => 1,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-common-gutenberg-utils',
+			'app/utils.js',
+			/**
+			 * @todo revise this dependencies
+			 */
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'priority'  => 2,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-common-gutenberg-store',
+			'app/store.js',
+			/**
+			 * @todo revise this dependencies
+			 */
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'priority'  => 3,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-common-gutenberg-icons',
+			'app/icons.js',
+			/**
+			 * @todo revise this dependencies
+			 */
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'priority'  => 4,
+			)
+		);
+		tribe_asset(
+			$plugin,
 			'tribe-common-gutenberg-hoc',
 			'app/hoc.js',
 			/**
@@ -51,6 +111,21 @@ class Tribe__Gutenberg__Common__Assets {
 				'in_footer' => false,
 				'localize'  => array(),
 				'priority'  => 5,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-common-gutenberg-elements',
+			'app/elements.js',
+			/**
+			 * @todo revise this dependencies
+			 */
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'priority'  => 6,
 			)
 		);
 	}

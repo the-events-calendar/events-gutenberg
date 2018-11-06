@@ -105,7 +105,7 @@ class EventDateTime extends Component {
 		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
 		// Bail when not classic
-		if ( ! tribe_blocks_editor || ! tribe_blocks_editor.is_classic ) {
+		if ( ! window.tribe_blocks_editor || ! window.tribe_blocks_editor.is_classic ) {
 			return null;
 		}
 

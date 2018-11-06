@@ -39,23 +39,11 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 				'localize'  => array(),
 			)
 		);
-		
-		tribe_asset(
-			$plugin,
-			'tribe-pro-gutenberg-blocks-styles',
-			'blocks.css',
-			array(),
-			'enqueue_block_editor_assets',
-			array(
-				'in_footer' => true,
-				'localize'  => array(),
-			)
-		);
-		
+
 		tribe_asset(
 			$plugin,
 			'tribe-pro-gutenberg-elements',
-			'elements.js',
+			'app/elements.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -66,11 +54,23 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 				'localize'  => array(),
 			)
 		);
-		
+
+		tribe_asset(
+			$plugin,
+			'tribe-pro-gutenberg-blocks-styles',
+			'app/blocks.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => true,
+				'localize'  => array(),
+			)
+		);
+
 		tribe_asset(
 			$plugin,
 			'tribe-pro-gutenberg-element',
-			'elements.css',
+			'app/elements.css',
 			array(),
 			'enqueue_block_editor_assets',
 			array(
