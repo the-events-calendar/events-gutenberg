@@ -99,7 +99,6 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	public function has_valid_fields() {
 		return isset(
 			$this->fields['type'],
-			$this->fields['start_date'],
 			$this->fields['start_time'],
 			$this->fields['end_time'],
 			$this->fields['all_day'],
@@ -204,9 +203,11 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	protected function set_custom_args_per_type() {
 		switch ( $this->data['type'] ) {
 			case Tribe__Events__Pro__Recurrence__Custom_Types::DATE_CUSTOM_TYPE:
-				$this->data['custom']['date'] = array(
-					'date' => $this->fields['start_date'],
-				);
+				if ( isset( $this->fields['start_date'] ) ) {
+					$this->data['custom']['date'] = array(
+						'date' => $this->fields['start_date'],
+					);
+				}
 				break;
 			case Tribe__Events__Pro__Recurrence__Custom_Types::WEEKLY_CUSTOM_TYPE:
 				$this->data['custom']['week'] = array(
