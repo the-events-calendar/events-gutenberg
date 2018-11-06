@@ -10,6 +10,9 @@ $event_id = $this->get( 'post_id' );
 $tickets  = $this->get( 'tickets' );
 
 ?>
+
+<?php $this->template( 'blocks/attendees/order-links', array( 'type' => 'RSVP' ) ); ?>
+
 <div class="tribe-block tribe-block__rsvp">
 
 	<?php foreach ( $tickets as $ticket ) : ?>
