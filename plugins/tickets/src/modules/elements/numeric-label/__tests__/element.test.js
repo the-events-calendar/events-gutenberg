@@ -111,4 +111,16 @@ describe( 'NumericLabel', () => {
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
+
+	test( 'include zero in numeric label', () => {
+		const component = renderer.create(
+			<NumericLabel
+				count={ 0 }
+				includeZero={ true }
+				singular="We have %d item"
+				plural="We have %d items"
+			/>
+		);
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
 } );

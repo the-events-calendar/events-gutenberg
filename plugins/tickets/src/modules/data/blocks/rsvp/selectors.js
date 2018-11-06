@@ -73,6 +73,10 @@ export const getRSVPCapacity = createSelector(
 export const getRSVPAvailable = createSelector(
 	[ getRSVPCapacity, getRSVPGoingCount ],
 	( capacity, goingCount ) => {
+		if ( capacity === '' ) {
+			return -1;
+		};
+
 		const total = parseInt( capacity, 10 ) || 0;
 		const going = parseInt( goingCount, 10 ) || 0;
 		/**
