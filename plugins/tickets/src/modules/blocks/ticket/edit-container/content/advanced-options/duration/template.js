@@ -16,7 +16,7 @@ import { DateTimeRangePicker, LabelWithTooltip } from '@moderntribe/tickets/elem
 import './style.pcss';
 
 const TicketDurationPicker = ( { label, tooltip, isSameDay, ...remainingProps } ) => (
-	<div className="tribe-editor__container-panel__row">
+	<div className="tribe-editor__container-panel__row tribe-editor__container-panel__row--duration">
 		<LabelWithTooltip
 			className="tribe-editor__container-panel__label"
 			label={ label }
