@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Preview> default params 1`] = `
+<div
+  className="tribe-editor__additional-fields__preview"
+>
+  <h2
+    className="tribe-editor__heading tribe-editor__heading--h2 tribe-editor__additional-fields__preview-title"
+  >
+    Modern Tribe
+  </h2>
+  <p
+    className="tribe-editor__paragraph tribe-editor__paragraph--medium"
+  >
+    The Next Generation of Digital Agency
+  </p>
+</div>
+`;

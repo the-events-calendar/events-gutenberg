@@ -10,7 +10,7 @@ export const setTitle = ( title ) => ( {
 	},
 } );
 
-export const setInitialState = ( props ) => ( {
+export const setInitialState = ( payload ) => ( {
 	type: types.SET_ATTENDEES_INITIAL_STATE,
-	payload: props,
+	payload,
 } );
