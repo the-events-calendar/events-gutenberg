@@ -93,6 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.5-alpha - TBD
+
+* Fix - Events and Events Pro front-end views are now looking for Theme customizations correctly
+
 #### 0.3.4-alpha - 2018-11-06
 
 * Feature - Attendee additional fields properly working from Blocks Editor link
