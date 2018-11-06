@@ -104,6 +104,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - RSVP blocks sets initial start and end date based on event
 * Fix - Ticket blocks sets initial start and end date based on event
 * Fix - Allow ticket UI to show proper shared capacity state
+* Fix - Remove `max-width` definition from Blocks Editor default for events page.
 
 #### 0.3.3-alpha - 2018-10-25
 
