@@ -58,7 +58,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-pro-gutenberg-blocks-styles',
-			'blocks.css',
+			'app/blocks.css',
 			array(),
 			'enqueue_block_editor_assets',
 			array(
@@ -70,7 +70,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-pro-gutenberg-element',
-			'elements.css',
+			'app/elements.css',
 			array(),
 			'enqueue_block_editor_assets',
 			array(
