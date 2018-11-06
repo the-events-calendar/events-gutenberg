@@ -85,14 +85,14 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 	 *
 	 * @since 0.3.0-alpha
 	 *
-	 * @param  mixed  $check
+	 * @param  mixed  $value
 	 * @param  int    $object_id
 	 * @param  string $meta_key
 	 * @param  bool   $single
 	 *
 	 * @return null|int
 	 */
-	public function filter_going_fields( $check, $object_id, $meta_key, $single ) {
+	public function filter_going_fields( $value, $object_id, $meta_key, $single ) {
 
 		$valid_keys = array(
 			'_tribe_ticket_going_count',
@@ -100,19 +100,19 @@ class Tribe__Gutenberg__Tickets__REST__Compatibility {
 		);
 
 		if ( ! in_array( $meta_key, $valid_keys ) ) {
-			return $check;
+			return $value;
 		}
 
 		$repository    = tribe( 'tickets.rest-v1.repository' );
 		$ticket_object = tribe_tickets_get_ticket_provider( $object_id );
 
 		if ( ! $ticket_object instanceof Tribe__Tickets__RSVP ) {
-			return $check;
+			return $value;
 		}
 
 		$attendees = $repository->get_ticket_attendees( $object_id );
 		if ( false === $attendees ) {
-			return $check;
+			return $value;
 		}
 
 		$going     = 0;
