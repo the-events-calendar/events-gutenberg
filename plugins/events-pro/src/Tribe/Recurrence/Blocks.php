@@ -333,7 +333,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 *
 	 * @return array
 	 */
-	public function parsed() {
+	public function get_parsed() {
 		return $this->data;
 	}
 }

@@ -32,5 +32,5 @@ interface Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface {
 	 *
 	 * @return array
 	 */
-	public function parsed();
+	public function get_parsed();
 }

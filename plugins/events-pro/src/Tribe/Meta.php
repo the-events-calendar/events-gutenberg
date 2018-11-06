@@ -60,7 +60,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 		$data  = array();
 		foreach ( $types as $type ) {
 			$blocks = new Tribe__Gutenberg__Events_Pro__Recurrence__Blocks( $type );
-			$data[] = $blocks->parsed();
+			$data[] = $blocks->get_parsed();
 		}
 		$encoded = json_encode( $data );
 		return ( $single )  ? $encoded : array( $encoded );
