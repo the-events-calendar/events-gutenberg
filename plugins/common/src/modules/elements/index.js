@@ -25,3 +25,10 @@ export { default as Checkbox } from './checkbox/element';
 export { default as CheckboxInput } from './checkbox-input/element';
 export { default as Select } from './select/element';
 export { default as Textarea } from './textarea/element';
+
+
+/**
+ * @todo move this into Editor Module
+ */
+
+import './style.pcss'
