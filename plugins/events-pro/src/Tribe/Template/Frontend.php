@@ -12,13 +12,19 @@ class Tribe__Gutenberg__Events_Pro__Template__Frontend extends Tribe__Template {
 	 * @since TBD
 	 */
 	public function __construct() {
-		$this->set_template_origin( tribe( 'gutenberg.events-pro.plugin' ) );
-		$this->set_template_folder( 'src/views' );
-		
+		$this->set_template_origin( tribe( 'gutenberg' ) );
+
+		// todo: update to the plugins directory only
+		$this->set_template_folder( 'plugins/events-pro/src/views' );
+
 		// Configures this templating class extract variables
 		$this->set_template_context_extract( true );
+
+		// Uses the public folders
+		$this->set_template_folder_lookup( true );
+
 	}
-	
+
 	/**
 	 * Return the attributes of the template
 	 *
@@ -33,7 +39,7 @@ class Tribe__Gutenberg__Events_Pro__Template__Frontend extends Tribe__Template {
 			$default_attributes
 		);
 	}
-	
+
 	/**
 	 * Return a specific attribute
 	 *
