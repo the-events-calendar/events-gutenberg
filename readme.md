@@ -93,6 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.5-alpha - TBD
+
+* Feature - Ecommerce options for ticket block
+
 #### 0.3.4-alpha - 2018-11-06
 
 * Feature - Attendee additional fields properly working from Blocks Editor link
