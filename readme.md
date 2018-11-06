@@ -93,7 +93,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.4-alpha - 2018-11-05
+#### 0.3.4-alpha - 2018-11-06
 
 * Feature - Attendee additional fields properly working from Blocks Editor link
 * Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
