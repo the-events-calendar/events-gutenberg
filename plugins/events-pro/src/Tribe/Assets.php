@@ -28,7 +28,7 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		tribe_asset(
 			$plugin,
 			'tribe-pro-gutenberg-blocks',
-			'blocks.js',
+			'app/blocks.js',
 			/**
 			 * @todo revise this dependencies
 			 */
@@ -118,17 +118,17 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		}
 
 		$venue_province = tribe_get_option( 'eventsDefaultProvince', '' );
-		if ( '' !==  $venue_province ) {
+		if ( '' !== $venue_province ) {
 			$defaults['venueProvince'] = $venue_province;
 		}
 
 		$venue_zip = tribe_get_option( 'eventsDefaultZip', '' );
-		if ( '' !==  $venue_zip ) {
+		if ( '' !== $venue_zip ) {
 			$defaults['venueZip'] = $venue_zip;
 		}
 
 		$venue_phone = tribe_get_option( 'eventsDefaultPhone', '' );
-		if ( '' !==  $venue_phone ) {
+		if ( '' !== $venue_phone ) {
 			$defaults['venuePhone'] = $venue_phone;
 		}
 
