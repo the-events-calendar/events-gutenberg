@@ -39,24 +39,28 @@ const EcommerceOptions = ( {
 	showEcommerceOptions
 		&& (
 			<LabeledItem
-				className="tribe-editor__ticket__ecommerce-options"
+				className="tribe-editor__ticket__ecommerce-options tribe-editor__container-panel__row tribe-editor__container-panel__row--ecommerce-options"
 				label={ __( 'Ecommerce', 'events-gutenberg' ) }
 			>
-				<div className="tribe-editor__ticket__ecommerce-options-links">
-					<Link
-						className="tribe-editor__ticket__ecommerce-options-edit-ticket-link"
-						href={ editTicketLink }
-						target="_blank"
-					>
-						{ getEditTicketLinkLabel( provider ) }
-					</Link>
-					<Link
-						className="tribe-editor__ticket__ecommerce-options-report-link"
-						href={ reportLink }
-						target="_blank"
-					>
-						{ __( 'View Sales Report', 'events-gutenberg' ) }
-					</Link>
+				<div className="tribe-editor__ticket__ecommerce-options-links tribe-editor__container-panel__input-group">
+					<span className="tribe-editor__ticket__ecommerce-options-link-wrapper">
+						<Link
+							className="tribe-editor__ticket__ecommerce-options-link tribe-editor__ticket__ecommerce-options-link--edit-ticket"
+							href={ editTicketLink }
+							target="_blank"
+						>
+							{ getEditTicketLinkLabel( provider ) }
+						</Link>
+					</span>
+					<span className="tribe-editor__ticket__ecommerce-options-link-wrapper">
+						<Link
+							className="tribe-editor__ticket__ecommerce-options-link tribe-editor__ticket__ecommerce-options-link--report"
+							href={ reportLink }
+							target="_blank"
+						>
+							{ __( 'View Sales Report', 'events-gutenberg' ) }
+						</Link>
+					</span>
 				</div>
 			</LabeledItem>
 		)
