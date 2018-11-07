@@ -32,7 +32,10 @@ export function* setHumanReadableLabel( dates = {} ) {
 	}
 
 	const updatedLabel = yield call( rangeToNaturalLanguage, dates.start, dates.end );
-	yield put( actions.setNaturalLanguageLabel( updatedLabel ) );
+
+	if ( currentLabel !== updatedLabel ) {
+		yield put( actions.setNaturalLanguageLabel( updatedLabel ) );
+	}
 }
 
 /**
