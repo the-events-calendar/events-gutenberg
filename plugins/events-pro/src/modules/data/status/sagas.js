@@ -101,6 +101,15 @@ function createWPEditorChannel() {
 }
 
 /**
+ * Only used to get around redux saga bug when using channels and actions `takes` together
+ *
+ * @export
+ */
+export function* actionTaker() {
+	yield take( [ recurringTypes.SYNC_RULES_FROM_DB ] );
+}
+
+/**
  * Poll on actions or channel emit
  *
  * @export
@@ -111,7 +120,7 @@ export default function* watchers() {
 	while ( true ) {
 		yield race( [
 			take( channel ),
-			take( [ recurringTypes.SYNC_RULES_FROM_DB ] ),
+			call( actionTaker ),
 		] );
 		yield call( pollUntilSeriesCompleted );
 	}
