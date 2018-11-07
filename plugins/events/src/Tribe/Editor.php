@@ -325,26 +325,6 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 		 */
 		$gmaps_api_url = apply_filters( 'tribe_events_google_maps_api', $gmaps_api_url );
 
-		tribe_asset(
-			$plugin,
-			'tribe-events-editor-blocks-gmaps-api',
-			$gmaps_api_url,
-			array(),
-			'enqueue_block_editor_assets',
-			array(
-				'type'         => 'js',
-				'in_footer'    => false,
-				'localize'     => array(
-					'name' => 'tribe_blocks_editor_google_maps_api',
-					'data' => array(
-						'zoom' => $gmaps_api_zoom,
-						'key' => $gmaps_api_key,
-					),
-				),
-				'conditionals' => array( $this, 'is_events_post_type' ),
-			)
-		);
-
 		$js_config = array(
 			'admin_url' => admin_url(),
 			'timeZone' => array(
@@ -365,16 +345,26 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			),
 		);
 
-
+		/**
+		 * @todo: Put js config into common
+		 */
 		tribe_asset(
 			$plugin,
-			'tribe-events-editor-data',
-			'app/data.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			'tribe-events-editor-blocks-gmaps-api',
+			$gmaps_api_url,
+			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => false,
-				'localize'  => array(
+				'type'         => 'js',
+				'in_footer'    => false,
+				'localize'     => array(
+					array(
+						'name' => 'tribe_blocks_editor_google_maps_api',
+						'data' => array(
+							'zoom' => $gmaps_api_zoom,
+							'key' => $gmaps_api_key,
+						),
+					),
 					array(
 						'name' => 'tribe_js_config',
 						/**
@@ -407,6 +397,20 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 						'data' => Tribe__View_Helpers::loadStates(),
 					),
 				),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority' => 1
+			)
+		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-events-editor-data',
+			'app/data.js',
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize' => array(),
 				'conditionals' => array( $this, 'is_events_post_type' ),
 				'priority'  => 100,
 			)

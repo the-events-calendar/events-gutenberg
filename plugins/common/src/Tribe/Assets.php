@@ -40,7 +40,7 @@ class Tribe__Gutenberg__Common__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
-				'priority'  => 1,
+				'priority'  => 11,
 			)
 		);
 		tribe_asset(
@@ -55,7 +55,7 @@ class Tribe__Gutenberg__Common__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
-				'priority'  => 2,
+				'priority'  => 12,
 			)
 		);
 		tribe_asset(
@@ -70,7 +70,7 @@ class Tribe__Gutenberg__Common__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
-				'priority'  => 3,
+				'priority'  => 13,
 			)
 		);
 		tribe_asset(
@@ -85,7 +85,7 @@ class Tribe__Gutenberg__Common__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
-				'priority'  => 4,
+				'priority'  => 14,
 			)
 		);
 		tribe_asset(
@@ -110,7 +110,7 @@ class Tribe__Gutenberg__Common__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
-				'priority'  => 5,
+				'priority'  => 15,
 			)
 		);
 		tribe_asset(
@@ -125,7 +125,7 @@ class Tribe__Gutenberg__Common__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
-				'priority'  => 6,
+				'priority'  => 16,
 			)
 		);
 	}
