@@ -345,6 +345,8 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			),
 		);
 
+		$is_classic_editor = $this->post_is_from_classic_editor( tribe_get_request_var( 'post', 0 ) );
+
 		/**
 		 * @todo: Put js config into common
 		 */
@@ -383,6 +385,28 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 					array(
 						'name' => 'tribe_blocks_editor_timezone_html',
 						'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
+					),
+					array(
+						'name' => 'tribe_blocks_editor_price_settings',
+						'data' => array(
+							'default_currency_symbol'   => tribe_get_option( 'defaultCurrencySymbol', '$' ),
+							'default_currency_position' => (
+								tribe_get_option( 'reverseCurrencyPosition', false ) ? 'suffix' : 'prefix'
+							),
+							'is_new_event'              => tribe( 'context' )->is_new_post(),
+						),
+					),
+					array(
+						'name' => 'tribe_blocks_editor_constants',
+						'data' => array(
+							'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ) ? 'true' : 'false',
+						),
+					),
+					array(
+						'name' => 'tribe_blocks_editor',
+						'data' => array(
+							'is_classic' => $is_classic_editor,
+						),
 					),
 					array(
 						'name' => 'tribe_date_settings',
@@ -468,34 +492,6 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			)
 		);
 
-		$localize_blocks = array(
-			array(
-				'name' => 'tribe_blocks_editor_price_settings',
-				'data' => array(
-					'default_currency_symbol'   => tribe_get_option( 'defaultCurrencySymbol', '$' ),
-					'default_currency_position' => (
-						tribe_get_option( 'reverseCurrencyPosition', false ) ? 'suffix' : 'prefix'
-					),
-					'is_new_event'              => tribe( 'context' )->is_new_post(),
-				),
-			),
-			array(
-				'name' => 'tribe_blocks_editor_constants',
-				'data' => array(
-					'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ) ? 'true' : 'false',
-				),
-			),
-		);
-
-		$is_classic_editor = $this->post_is_from_classic_editor( tribe_get_request_var( 'post', 0 ) );
-
-		$localize_blocks[] = array(
-			'name' => 'tribe_blocks_editor',
-			'data' => array(
-				'is_classic' => $is_classic_editor,
-			),
-		);
-
 		tribe_asset(
 			$plugin,
 			'tribe-events-gutenberg-blocks',
@@ -504,7 +500,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,
-				'localize'  => $localize_blocks,
+				'localize'  => array(),
 				'conditionals' => array( $this, 'is_events_post_type' ),
 				'priority'  => 106,
 			)
