@@ -33,7 +33,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Queue_Status {
 		) {
 			$response = $this->process( $post_id );
 		}
-		$this->response( $response );
+		exit( $this->response( $response ) );
 	}
 	
 	/**
@@ -90,8 +90,10 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Queue_Status {
 	 * @since TBD
 	 *
 	 * @param $data
+	 * @return string
 	 */
 	public function response( $data ) {
-		exit( json_encode( $data ) );
+		$encoded = json_encode( $data );
+		return false === $encoded ? '' : $encoded;
 	}
 }
