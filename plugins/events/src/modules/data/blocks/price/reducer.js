@@ -10,7 +10,7 @@ import { settings, priceSettings } from '@moderntribe/common/utils/globals';
 import { string } from '@moderntribe/common/utils';
 import * as types from './types';
 
-const position = string.isTruthy( settings().reverseCurrencyPosition )
+const position = string.isTruthy( settings() && settings().reverseCurrencyPosition )
 	? 'suffix'
 	: 'prefix';
 
