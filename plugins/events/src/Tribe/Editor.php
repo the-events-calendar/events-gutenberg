@@ -146,7 +146,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 				$json_param = json_encode( $params );
 			}
 
-			$block_tag = "<!-- wp:{$slug} {$json_params} /-->";
+			$block_tag = "<!-- wp:{$slug} {$json_param} /-->";
 
 			if ( 'core/paragraph' === $slug ) {
 				if ( '' === $post->post_content ) {
