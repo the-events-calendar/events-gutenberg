@@ -75,15 +75,15 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 		'never' => 'Never',
 	);
 	
-	public function __construct( $args = array() ) {
+	public function __construct( $fields = array() ) {
 		
-		$this->fields = $args;
+		$this->fields = $fields;
 		
-		if ( empty( $args ) || ! $this->has_valid_fields() ) {
+		if ( empty( $fields ) || ! $this->has_valid_fields() ) {
 			return;
 		}
 		
-		$this->set_type( $args['type'] );
+		$this->set_type( $fields['type'] );
 		$this->set_custom_args();
 		$this->maybe_set_interval();
 		$this->maybe_set_limit_type();

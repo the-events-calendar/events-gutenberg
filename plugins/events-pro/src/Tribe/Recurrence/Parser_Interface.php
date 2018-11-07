@@ -10,9 +10,9 @@ interface Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface {
 	/**
 	 * Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface constructor.
 	 *
-	 * @param array $args
+	 * @param array $fields
 	 */
-	public function __construct( $args = array() );
+	public function __construct( $fields = array() );
 	
 	/**
 	 *

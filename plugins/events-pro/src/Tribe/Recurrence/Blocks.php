@@ -87,12 +87,12 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 *
 	 * @since TBD
 	 *
-	 * @param array $args
+	 * @param array $fields
 	 */
-	public function __construct( $args = array() ) {
+	public function __construct( $fields = array() ) {
 		
-		$this->fields = $args;
-		if ( empty( $args ) || ! $this->has_valid_fields() ) {
+		$this->fields = $fields;
+		if ( empty( $fields ) || ! $this->has_valid_fields() ) {
 			return;
 		}
 		
