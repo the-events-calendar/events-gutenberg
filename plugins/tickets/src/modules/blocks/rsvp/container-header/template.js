@@ -81,6 +81,7 @@ const getCapacityLabel = ( capacity ) => {
 
 const RSVPContainerHeader = ( {
 	description,
+	isCreated,
 	isDisabled,
 	isSelected,
 	onTempDescriptionChange,
@@ -107,7 +108,7 @@ const RSVPContainerHeader = ( {
 					tempDescription,
 					description,
 				) }
-				{ getCapacityLabel( available ) }
+				{ isCreated && getCapacityLabel( available ) }
 			</div>
 			<RSVPCounters />
 		</Fragment>
@@ -117,6 +118,7 @@ const RSVPContainerHeader = ( {
 RSVPContainerHeader.propTypes = {
 	available: PropTypes.number,
 	description: PropTypes.string,
+	isCreated: PropTypes.bool,
 	isDisabled: PropTypes.bool.isRequired,
 	isSelected: PropTypes.bool.isRequired,
 	onTempDescriptionChange: PropTypes.func,

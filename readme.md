@@ -95,10 +95,14 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 #### 0.3.5-alpha - TBD
 
-* Feature - Ecommerce options for ticket block
+* Feature - eCommerce options for ticket block
+* Fix - Events and Events Pro front-end views are now looking for Theme customizations correctly
 * Fix - Add conditional to human readable input saga to prevent infinite loop
 * Fix - Missing variable that is used to parse the attributes of the block
 * Fix - Show RSVP and Attendees blocks when coming from classic editor
+* Fix - load order of tribe_js_config
+* Fix - Conditionally show the RSVP block capacity label
+* Fix - Change timezone label with timezone change
 
 #### 0.3.4-alpha - 2018-11-06
 

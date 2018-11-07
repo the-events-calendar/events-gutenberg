@@ -4,10 +4,13 @@
 import { find, flatten, map, get } from 'lodash';
 
 /**
+ * Internal dependencies
+ */
+import { timezoneHtml } from '@moderntribe/common/utils/globals';
+
+/**
  * Module Code
  */
-const options = get( window, 'tribe_blocks_editor_timezone_html', '' );
-const $timezoneOpts = jQuery( options );
 
 let timezoneOpts;
 
@@ -17,6 +20,7 @@ export const getTimezoneOpts = () => {
 		return timezoneOpts;
 	}
 
+	const $timezoneOpts = jQuery( timezoneHtml() );
 	const groups = [];
 	let number = 0;
 

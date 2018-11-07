@@ -13,6 +13,7 @@ import watchers, {
 	setHumanReadableFromDate,
 	setHumanReadableLabel,
 	resetNaturalLanguageLabel,
+	onTimeZoneChange,
 } from '@moderntribe/events/data/blocks/datetime/sagas';
 import moment from 'moment';
 import { toDateTime } from '@moderntribe/common/utils/moment';
@@ -27,6 +28,9 @@ describe( 'Event Date time Block sagas', () => {
 			);
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_END_DATE_TIME, setHumanReadableFromDate )
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_TIME_ZONE, onTimeZoneChange )
 			);
 			expect( gen.next().value ).toEqual(
 				takeLatest( types.SET_NATURAL_LANGUAGE_LABEL, onHumanReadableChange )
@@ -166,6 +170,24 @@ describe( 'Event Date time Block sagas', () => {
 
 				expect( gen.next().done ).toEqual( true );
 			} );
+		} );
+	} );
+
+	describe( 'onTimeZoneChange', () => {
+		test( 'Set timezone label on timezone change', () => {
+			const action = {
+				payload: {
+					timeZone: 'America/Los_Angeles',
+				}
+			};
+
+			const gen = onTimeZoneChange( action );
+
+			expect( gen.next().value ).toEqual(
+				put( actions.setTimeZoneLabel( action.payload.timeZone ) )
+			);
+
+			expect( gen.next().done ).toEqual( true );
 		} );
 	} );
 } );

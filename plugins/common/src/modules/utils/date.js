@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { get, identity } from 'lodash';
+import { identity } from 'lodash';
 import chrono from 'chrono-node';
 
 /**
@@ -16,9 +16,10 @@ import {
 	moment as momentUtil,
 	timezone as timezoneUtil,
 } from '@moderntribe/common/utils';
+import { dateSettings } from '@moderntribe/common/utils/globals';
 
-const WPDateSettings = get( window, 'tribe_date_settings', {} );
-const { formats = {}, timezone = {} } = WPDateSettings;
+const formats = dateSettings() && dateSettings().formats ? dateSettings().formats : {};
+const timezone = dateSettings() && dateSettings().formats ? dateSettings().formats : {};
 
 export const FORMATS = {
 	TIME: 'HH:mm:ss',
