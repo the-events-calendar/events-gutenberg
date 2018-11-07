@@ -101,6 +101,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Missing variable that is used to parse the attributes of the block
 * Fix - load order of tribe_js_config
 * Fix - Conditionally show the RSVP block capacity label
+* Fix - Change timezone label with timezone change
 
 #### 0.3.4-alpha - 2018-11-06
 
