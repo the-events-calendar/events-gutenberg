@@ -19,3 +19,8 @@ export const getVisibleMonth = createSelector(
 	[ getUI ],
 	( ui ) => ui.visibleMonth
 );
+
+export const isEditable = createSelector(
+	[ getUI ],
+	( ui ) => ui.isEditable
+);
