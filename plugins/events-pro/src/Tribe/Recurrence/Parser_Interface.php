@@ -21,7 +21,7 @@ interface Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface {
 	 *
 	 * @return boolean
 	 */
-	public function set_up();
+	public function parse();
 	
 	/**
 	 *
