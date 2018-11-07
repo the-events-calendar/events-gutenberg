@@ -3,7 +3,6 @@
  */
 import { put, takeEvery, select, takeLatest, call, all } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-import { find } from 'lodash';
 
 /**
  * Internal dependencies
