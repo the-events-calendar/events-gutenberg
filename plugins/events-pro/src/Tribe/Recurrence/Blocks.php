@@ -7,6 +7,7 @@
  */
 class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	implements Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface {
+	
 	/**
 	 * Array holding the parsed data
 	 *
@@ -15,6 +16,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 * @var array
 	 */
 	protected $data = array();
+	
 	/**
 	 * Array holding the fields values from the original recurrence rule before moving into the blocks
 	 * format
@@ -24,6 +26,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 * @var array
 	 */
 	protected $fields = array();
+	
 	/**
 	 * Array that holds the custom data from the fields
 	 *

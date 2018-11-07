@@ -63,7 +63,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 			$data[] = $blocks->get_parsed();
 		}
 		$encoded = json_encode( $data );
-		return ( $single )  ? $encoded : array( $encoded );
+		return $single ? $encoded : array( $encoded );
 	}
 	
 	/**

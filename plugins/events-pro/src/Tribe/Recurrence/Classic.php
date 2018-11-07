@@ -16,6 +16,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	 * @var array
 	 */
 	protected $fields = array();
+	
 	/**
 	 * Default data structure
 	 *
