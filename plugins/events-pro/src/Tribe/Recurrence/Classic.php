@@ -75,12 +75,29 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 		'never' => 'Never',
 	);
 	
+	/**
+	 * Tribe__Gutenberg__Events_Pro__Recurrence__Classic constructor.
+	 *
+	 * @since TBD
+	 *
+	 * @param array $fields
+	 */
 	public function __construct( $fields = array() ) {
-		
 		$this->fields = $fields;
+		$this->set_up();
+	}
+	
+	/**
+	 * Setup values into the data variable
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	public function set_up() {
 		
 		if ( empty( $fields ) || ! $this->has_valid_fields() ) {
-			return;
+			return false;
 		}
 		
 		$this->set_type( $fields['type'] );
@@ -88,6 +105,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 		$this->maybe_set_interval();
 		$this->maybe_set_limit_type();
 		$this->maybe_set_limit();
+		return true;
 	}
 	
 	/**

@@ -92,8 +92,19 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	public function __construct( $fields = array() ) {
 		
 		$this->fields = $fields;
+		$this->set_up();
+	}
+	
+	/**
+	 * Setup values into the data variable
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	public function set_up(){
 		if ( empty( $fields ) || ! $this->has_valid_fields() ) {
-			return;
+			return false;
 		}
 		
 		// All day per event is not enabled yet
@@ -105,6 +116,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 		$this->set_limit_count();
 		$this->set_interval();
 		$this->set_dates();
+		return true;
 	}
 	
 	/**

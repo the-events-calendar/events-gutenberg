@@ -15,13 +15,22 @@ interface Tribe__Gutenberg__Events_Pro__Recurrence__Parser_Interface {
 	public function __construct( $fields = array() );
 	
 	/**
+	 * Method used to setup the class
+	 *
+	 * @since TBD
+	 *
+	 * @return boolean
+	 */
+	public function set_up();
+	
+	/**
 	 *
 	 *
 	 * @since TBD
 	 *
 	 * @param string $type
 	 *
-	 * @return mixed
+	 * @return boolean
 	 */
 	public function set_type( $type = '' );
 	
