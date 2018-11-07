@@ -32,7 +32,7 @@ import {
 	moment as momentUtil,
 	time,
 } from '@moderntribe/common/utils';
-import { settings, editorConstants } from '@moderntribe/common/utils/globals';
+import { editor, settings, editorConstants } from '@moderntribe/common/utils/globals';
 import './style.pcss';
 import HumanReadableInput from './human-readable-input/container';
 
@@ -107,7 +107,7 @@ class EventDateTime extends Component {
 		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
 		// Bail when not classic
-		if ( ! window.tribe_blocks_editor || ! window.tribe_blocks_editor.is_classic ) {
+		if ( ! editor() || ! editor().is_classic ) {
 			return null;
 		}
 

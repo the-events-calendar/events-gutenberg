@@ -3,6 +3,7 @@
  */
 export const get = ( key, defaultValue ) => window[ key ] || defaultValue;
 export const google = () => get( 'google' );
+export const dateSettings = () => get( 'tribe_date_settings' );
 export const editor = () => get( 'tribe_blocks_editor' );
 export const editorConstants = () => get( 'tribe_blocks_editor_constants' );
 export const mapsAPI = () => get( 'tribe_blocks_editor_google_maps_api' );
