@@ -32,7 +32,7 @@ import {
 	moment as momentUtil,
 	time,
 } from '@moderntribe/common/utils';
-import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
+import { settings, editorConstants } from '@moderntribe/common/utils/globals';
 import './style.pcss';
 import HumanReadableInput from './human-readable-input/container';
 
@@ -49,7 +49,9 @@ const {
 	toTime,
 	isSameYear,
 } = momentUtil;
-FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
+FORMATS.date = settings() && settings().dateWithYearFormat
+	? settings().dateWithYearFormat
+	: __( 'F j', 'events-gutenberg' );
 
 class EventDateTime extends Component {
 	static propTypes = {
@@ -247,7 +249,7 @@ class EventDateTime extends Component {
 
 	renderDashboard = () => {
 		const { isDashboardOpen, multiDay, allDay } = this.props;
-		const hideUpsell = getConstants().hide_upsell === 'true';
+		const hideUpsell = editorConstants().hide_upsell === 'true';
 
 		return (
 			<Dashboard isOpen={ isDashboardOpen }>
