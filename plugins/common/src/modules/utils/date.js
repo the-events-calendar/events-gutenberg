@@ -18,7 +18,7 @@ import {
 } from '@moderntribe/common/utils';
 import { dateSettings } from '@moderntribe/common/utils/globals';
 
-const { formats = {}, timezone = {} } = dateSettings();;
+const { formats = {}, timezone = {} } = dateSettings();
 
 export const FORMATS = {
 	TIME: 'HH:mm:ss',

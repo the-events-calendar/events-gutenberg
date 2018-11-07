@@ -108,9 +108,7 @@ export function* onHumanReadableChange() {
  * @since 0.3.5-alpha
  */
 export function* onTimeZoneChange( action ) {
-	const value = action.payload.timeZone;
-	const timezone = find( dateUtil.timezonesAsSelectData(), { value } );
-	yield put( actions.setTimeZoneLabel( timezone.label ) );
+	yield put( actions.setTimeZoneLabel( action.payload.timeZone ) );
 }
 
 /**
