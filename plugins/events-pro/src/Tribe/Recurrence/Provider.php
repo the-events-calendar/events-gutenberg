@@ -69,6 +69,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Provider {
 		$parsed = array();
 		foreach ( $rules as $rule ) {
 			$converter = new Tribe__Gutenberg__Events_Pro__Recurrence__Classic( $rule );
+			$converter->parse();
 			$parsed[]  = $converter->get_parsed();
 		}
 		

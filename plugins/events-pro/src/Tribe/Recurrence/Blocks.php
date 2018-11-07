@@ -15,7 +15,10 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 *
 	 * @var array
 	 */
-	protected $data = array();
+	protected $data = array(
+		'all_day'   => false,
+		'multi_day' => false,
+	);
 	
 	/**
 	 * Array holding the fields values from the original recurrence rule before moving into the blocks
@@ -90,9 +93,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 * @param array $fields
 	 */
 	public function __construct( $fields = array() ) {
-		
 		$this->fields = $fields;
-		$this->set_up();
 	}
 	
 	/**
@@ -102,15 +103,12 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 *
 	 * @return bool
 	 */
-	public function set_up() {
-		if ( empty( $fields ) || ! $this->has_valid_fields() ) {
+	public function parse() {
+		if ( empty( $this->fields ) || ! $this->has_valid_fields() ) {
 			return false;
 		}
 		
-		// All day per event is not enabled yet
-		$this->data['all_day']   = false;
-		$this->data['multi_day'] = false;
-		$this->custom            = $this->fields['custom'];
+		$this->custom = $this->fields['custom'];
 		$this->set_type( $this->custom['type'] );;
 		$this->set_limit_type();
 		$this->set_limit_count();

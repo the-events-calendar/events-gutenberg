@@ -84,7 +84,6 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	 */
 	public function __construct( $fields = array() ) {
 		$this->fields = $fields;
-		$this->set_up();
 	}
 	
 	/**
@@ -94,13 +93,13 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	 *
 	 * @return bool
 	 */
-	public function set_up() {
+	public function parse() {
 		
-		if ( empty( $fields ) || ! $this->has_valid_fields() ) {
+		if ( empty( $this->fields ) || ! $this->has_valid_fields() ) {
 			return false;
 		}
 		
-		$this->set_type( $fields['type'] );
+		$this->set_type( $this->fields['type'] );
 		$this->set_custom_args();
 		$this->maybe_set_interval();
 		$this->maybe_set_limit_type();
