@@ -102,7 +102,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 *
 	 * @return bool
 	 */
-	public function set_up(){
+	public function set_up() {
 		if ( empty( $fields ) || ! $this->has_valid_fields() ) {
 			return false;
 		}
@@ -116,6 +116,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 		$this->set_limit_count();
 		$this->set_interval();
 		$this->set_dates();
+		
 		return true;
 	}
 	
@@ -181,7 +182,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 				break;
 			case 'On':
 				if ( isset( $this->fields['end'] ) ) {
-					$this->data['limit'] = $this->fields['end'];
+					$this->data['limit']             = $this->fields['end'];
 					$this->data['_limit_date_input'] = date( 'F j, Y', strtotime( $this->fields['end'] ) );
 				}
 				break;
@@ -262,10 +263,10 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 			return;
 		}
 		
-		$index = is_numeric( $this->custom['end-day'] ) ? absint( $this->custom['end-day'] ) : 0;
+		$index                   = is_numeric( $this->custom['end-day'] ) ? absint( $this->custom['end-day'] ) : 0;
 		$this->data['multi_day'] = ( $index > 0 );
 		if ( $this->data['multi_day'] ) {
-			$this->data['multi_day_span'] = $this->day_span[ $index  % count( $this->day_span ) ];
+			$this->data['multi_day_span'] = $this->day_span[ $index % count( $this->day_span ) ];
 		}
 	}
 	
@@ -279,7 +280,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 		if ( ! isset( $date['date'] ) ) {
 			return;
 		}
-		$this->data['start_date'] = $date['date'];
+		$this->data['start_date']        = $date['date'];
 		$this->data['_start_date_input'] = date( 'F j, Y', strtotime( $date['date'] ) );
 	}
 	
@@ -289,8 +290,8 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 * @since TBD
 	 */
 	protected function set_weekly_fields() {
-		$week = isset( $this->custom['week'] ) ? $this->custom['week'] : array();
-		$days = isset( $week['day'] ) && is_array( $week['day'] ) ? $week['day'] : array();
+		$week               = isset( $this->custom['week'] ) ? $this->custom['week'] : array();
+		$days               = isset( $week['day'] ) && is_array( $week['day'] ) ? $week['day'] : array();
 		$this->data['days'] = array_unique( array_map( 'absint', $days ) );
 	}
 	
@@ -336,8 +337,8 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Blocks
 	 * @since TBD
 	 */
 	protected function set_yearly_fields() {
-		$year = isset( $this->custom['year'] ) ? $this->custom['year'] : array();
-		$months = isset( $year['month'] ) ? explode( ',', $year['month'] ) : array();
+		$year                = isset( $this->custom['year'] ) ? $this->custom['year'] : array();
+		$months              = isset( $year['month'] ) ? explode( ',', $year['month'] ) : array();
 		$this->data['month'] = array_unique( array_map( 'absint', $months ) );
 	}
 	

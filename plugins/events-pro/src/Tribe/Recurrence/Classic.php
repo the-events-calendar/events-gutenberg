@@ -52,13 +52,13 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	 * @var array
 	 */
 	protected $day_span = array(
-		'same_day' => 0,
-		'next_day' => 1,
-		'second_day' => 2,
-		'third_day' => 3,
-		'fourth_day' => 4,
-		'fifth_day' => 5,
-		'sixth_day' => 6,
+		'same_day'    => 0,
+		'next_day'    => 1,
+		'second_day'  => 2,
+		'third_day'   => 3,
+		'fourth_day'  => 4,
+		'fifth_day'   => 5,
+		'sixth_day'   => 6,
 		'seventh_day' => 7,
 	);
 	
@@ -105,6 +105,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 		$this->maybe_set_interval();
 		$this->maybe_set_limit_type();
 		$this->maybe_set_limit();
+		
 		return true;
 	}
 	
@@ -152,10 +153,10 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 			'end-time'   => $this->fields['end_time'],
 		);
 		
-		if ( $this->fields['multi_day'] && isset( $this->fields['multi_day_span'] ) )  {
+		if ( $this->fields['multi_day'] && isset( $this->fields['multi_day_span'] ) ) {
 			$this->data['custom']['end-day'] = $this->day_span[ $this->fields['multi_day_span'] ];
 		} else {
-			$this->data['custom']['end-day'] = $this->day_span[ 'same_day' ];
+			$this->data['custom']['end-day'] = $this->day_span['same_day'];
 		}
 		$this->set_custom_args_per_type();
 	}
@@ -278,6 +279,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	 */
 	public function add_months() {
 		$months = isset( $this->fields['month'] ) ? $this->fields['month'] : array();
+		
 		return array_merge(
 			array( 'month' => $months ),
 			$this->add_week()
