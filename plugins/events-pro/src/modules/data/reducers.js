@@ -8,9 +8,11 @@ import { combineReducers } from 'redux';
  */
 import ui from './ui';
 import blocks from './blocks';
+import status from './status';
 
 export default combineReducers( {
 	ui,
 	blocks,
+	status,
 } );
 
