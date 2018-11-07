@@ -148,8 +148,8 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 	protected function set_custom_args() {
 		$this->data['custom'] = array(
 			'same-time'  => 'no',
-			'start-time' => $this->fields['start_time'],
-			'end-time'   => $this->fields['end_time'],
+			'start-time' => date( 'H:i:s', strtotime( $this->fields['start_time'] ) ),
+			'end-time'   => date( 'H:i:s', strtotime( $this->fields['end_time'] ) ),
 		);
 		
 		if ( $this->fields['multi_day'] && isset( $this->fields['multi_day_span'] ) ) {
