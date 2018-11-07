@@ -70,6 +70,8 @@ class Tribe__Gutenberg__Tickets__Editor extends Tribe__Gutenberg__Common__Editor
 	 */
 	public function filter_default_template_classic_blocks( $template = array() ) {
 		$template[] = array( 'tribe/tickets' );
+		$template[] = array( 'tribe/rsvp' );
+		$template[] = array( 'tribe/attendees' );
 		return $template;
 	}
 
