@@ -6,6 +6,7 @@ import { race, take, select, call, put } from 'redux-saga/effects';
 import { delay, eventChannel } from 'redux-saga';
 import { select as wpSelect, subscribe } from '@wordpress/data';
 import 'whatwg-fetch';
+import { allowEdits, disableEdits } from '@moderntribe/events/data/blocks/datetime/actions';
 
 /**
  * Internal dependencies
@@ -53,6 +54,9 @@ export function* fetchStatus() {
  * @export
  */
 export function* pollUntilSeriesCompleted() {
+	// Disable datetime block edits until we know we're not making an series events
+	yield put( disableEdits() );
+
 	while ( true ) {
 		const response = yield call( fetchStatus );
 		const isCompleted = response === false; // If false, no edits being done
@@ -64,6 +68,7 @@ export function* pollUntilSeriesCompleted() {
 		}
 
 		if ( yield select( selectors.isCompleted ) ) {
+			yield put( allowEdits() ); // Allow datetime block to be editable again
 			break; // We done
 		}
 
