@@ -467,19 +467,6 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 				'priority'  => 105,
 			)
 		);
-		tribe_asset(
-			$plugin,
-			'tribe-events-gutenberg-blocks',
-			'app/blocks.js',
-			array(),
-			'enqueue_block_editor_assets',
-			array(
-				'in_footer' => false,
-				'localize'  => array(),
-				'conditionals' => array( $this, 'is_events_post_type' ),
-				'priority'  => 106,
-			)
-		);
 
 		$localize_blocks = array(
 			array(
@@ -519,14 +506,15 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 
 		tribe_asset(
 			$plugin,
-			'tribe-events-editor-blocks',
-			'blocks.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'tribe-events-editor-blocks-gmaps-api', 'tribe-events-editor-elements' ),
+			'tribe-events-gutenberg-blocks',
+			'app/blocks.js',
+			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
-				'localize'     => $localize_blocks,
+				'in_footer' => false,
+				'localize'  => $localize_blocks,
 				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 106,
 			)
 		);
 
