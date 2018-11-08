@@ -11,7 +11,6 @@ import * as types from './types';
 export const DEFAULT_STATE = {
 	dashboardDateTimeOpen: false,
 	dashboardPriceOpen: false,
-	isEditable: true,
 	visibleMonth: moment().startOf( 'month' ).toDate(),
 };
 
