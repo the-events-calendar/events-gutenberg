@@ -104,6 +104,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Conditionally show the RSVP block capacity label
 * Fix - Change timezone label with timezone change
 * Fix - Add element styles to asset loading
+* Fix - Add filters for wpauto when using gutenberg blocks
 
 #### 0.3.4-alpha - 2018-11-06
 
