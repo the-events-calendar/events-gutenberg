@@ -508,18 +508,6 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 
 		tribe_asset(
 			$plugin,
-			'tribe-block-editor-element',
-			'app/element.css',
-			array(),
-			'enqueue_block_editor_assets',
-			array(
-				'in_footer'    => false,
-				'conditionals' => array( $this, 'is_events_post_type' ),
-			)
-		);
-
-		tribe_asset(
-			$plugin,
 			'tribe-block-editor',
 			'app/editor.css',
 			array(),
