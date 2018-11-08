@@ -11,7 +11,7 @@ import * as types from '../types';
 import { DEFAULT_STATE } from '../reducer';
 import * as actions from '../actions';
 import { isTruthy } from '@moderntribe/common/utils/string';
-import { getPriceSettings } from '@moderntribe/events/editor/settings';
+import { priceSettings } from '@moderntribe/common/utils/globals';
 import watchers, * as sagas from '../sagas';
 
 describe( 'Price Block sagas', () => {
@@ -42,7 +42,7 @@ describe( 'Price Block sagas', () => {
 		it( 'should handle new events', () => {
 			const gen = cloneableGenerator( sagas.setInitialState )( action );
 			expect( gen.next().value ).toEqual(
-				call( getPriceSettings )
+				call( priceSettings )
 			);
 			clone = gen.clone();
 			expect( gen.next( settings ).value ).toEqual(

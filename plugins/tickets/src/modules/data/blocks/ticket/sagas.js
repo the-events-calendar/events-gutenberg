@@ -11,6 +11,7 @@ import { select as wpSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
+import * as constants from './constants';
 import * as types from './types';
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -168,6 +169,7 @@ export function* createNewTicket( action ) {
 			put( actions.setTicketHasBeenCreated( blockId, true ) ),
 			put( actions.setActiveChildBlockId( '' ) ),
 			put( actions.setTicketAvailable( blockId, ticket.capacity ) ),
+			put( actions.setTicketProvider( blockId, constants.PROVIDER_CLASS_TO_PROVIDER_MAPPING[ ticket.provider_class ] ) ),
 		] );
 	} catch ( e ) {
 		/**

@@ -3,7 +3,6 @@
  */
 import { put, takeEvery, select, takeLatest, call, all } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-import { date as dateUtil } from '@moderntribe/common/src/modules/utils';
 
 /**
  * Internal dependencies
@@ -14,7 +13,7 @@ import {
 	actions,
 	thunks,
 } from '@moderntribe/events/data/blocks/datetime';
-import { rangeToNaturalLanguage } from '@moderntribe/common/utils/date';
+import { date as dateUtil } from '@moderntribe/common/utils';
 
 /**
  * Set the human readable label into the store, based on a start and end date to generate a new label based on those
@@ -31,8 +30,11 @@ export function* setHumanReadableLabel( dates = {} ) {
 		return;
 	}
 
-	const updatedLabel = yield call( rangeToNaturalLanguage, dates.start, dates.end );
-	yield put( actions.setNaturalLanguageLabel( updatedLabel ) );
+	const updatedLabel = yield call( dateUtil.rangeToNaturalLanguage, dates.start, dates.end );
+
+	if ( currentLabel !== updatedLabel ) {
+		yield put( actions.setNaturalLanguageLabel( updatedLabel ) );
+	}
 }
 
 /**
@@ -100,6 +102,15 @@ export function* onHumanReadableChange() {
 }
 
 /**
+ * Set timezone label on timezone change
+ *
+ * @since 0.3.5-alpha
+ */
+export function* onTimeZoneChange( action ) {
+	yield put( actions.setTimeZoneLabel( action.payload.timeZone ) );
+}
+
+/**
  * Watchers of actions and act accordingly to each.
  *
  * @since 0.3.1-alpha
@@ -109,5 +120,6 @@ export function* onHumanReadableChange() {
 export default function* watchers() {
 	yield takeEvery( types.SET_START_DATE_TIME, setHumanReadableFromDate );
 	yield takeEvery( types.SET_END_DATE_TIME, setHumanReadableFromDate );
+	yield takeEvery( types.SET_TIME_ZONE, onTimeZoneChange );
 	yield takeLatest( types.SET_NATURAL_LANGUAGE_LABEL, onHumanReadableChange );
 }
