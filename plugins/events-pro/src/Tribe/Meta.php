@@ -21,7 +21,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 		
 		add_filter( 'get_post_metadata', array( $this, 'filter_going_fields' ), 15, 4 );
 		add_action( 'deleted_post_meta', array( $this, 'remove_recurrence_meta' ), 10, 3  );
-		add_filter( 'tribe_pro_show_recurrence_meta_box', array( $this, 'remove_recurrence_classic_meta' ) );
+		add_filter( 'tribe_events_pro_show_recurrence_meta_box', array( $this, 'remove_recurrence_classic_meta' ) );
 	}
 	
 	/**
