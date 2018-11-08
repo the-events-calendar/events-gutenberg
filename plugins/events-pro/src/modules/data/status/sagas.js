@@ -7,6 +7,7 @@ import { delay, eventChannel } from 'redux-saga';
 import { select as wpSelect, subscribe } from '@wordpress/data';
 import 'whatwg-fetch';
 import { allowEdits, disableEdits } from '@moderntribe/events/data/blocks/datetime/actions';
+import { restNonce } from '@moderntribe/common/src/modules/utils/globals';
 
 /**
  * Internal dependencies
@@ -31,7 +32,7 @@ export function* fetchStatus() {
 		}
 
 		yield call( [ payload, 'append' ], 'action', 'gutenberg_events_pro_recurrence_queue' );
-		yield call( [ payload, 'append' ], 'recurrence_queue_status_nonce', window.tribe_js_config.rest.nonce.queue_status_nonce ); // eslint-disable-line max-len
+		yield call( [ payload, 'append' ], 'recurrence_queue_status_nonce', restNonce().queue_status_nonce ); // eslint-disable-line max-len
 		yield call( [ payload, 'append' ], 'postId', postId );
 
 		const response = yield call( fetch, window.ajaxurl, {
