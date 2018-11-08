@@ -24,7 +24,7 @@ import * as selectors from './selectors';
 export function* fetchStatus() {
 	try {
 		const payload = new FormData();
-		const postId = yield call( wpSelect( 'core/editor' ).getCurrentPostId );
+		const postId = wpSelect( 'core/editor' ).getCurrentPostId();
 
 		if ( ! postId ) {
 			throw 'No post ID';
@@ -81,7 +81,7 @@ export function* pollUntilSeriesCompleted() {
  *
  * @returns {Function} Channel
  */
-function createWPEditorChannel() {
+export function createWPEditorChannel() {
 	return eventChannel( emit => {
 		const editor = wpSelect( 'core/editor' );
 
@@ -115,7 +115,7 @@ export function* actionTaker() {
  * @export
  */
 export default function* watchers() {
-	const channel = createWPEditorChannel();
+	const channel = yield call( createWPEditorChannel );
 
 	while ( true ) {
 		yield race( [
