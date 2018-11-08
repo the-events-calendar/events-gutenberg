@@ -120,8 +120,8 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	 * @return bool
 	 */
 	public function remove_recurrence_classic_meta( $show_meta ) {
-		$is_classic_editor = tribe_get_request_var('classic-editor', null );
-		
+		$is_classic_editor = tribe_get_request_var( 'classic-editor', null );
+
 		return $is_classic_editor === null ? false : $show_meta;
 	}
 }
