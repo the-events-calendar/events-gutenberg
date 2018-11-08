@@ -22,7 +22,7 @@ import * as selectors from './selectors';
 //
 export const NOTICE_EDITING_SERIES = 'NOTICE_EDITING_SERIES';
 export const NOTICES = {
-	[ NOTICE_EDITING_SERIES ]: __( 'You are currently editing all events in a series.' ),
+	[ NOTICE_EDITING_SERIES ]: __( 'You are currently editing all events in a recurring series.' ),
 };
 
 /**
