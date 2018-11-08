@@ -67,8 +67,8 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			)
 		);
 
-		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'set_editor_defaults' ), 10 );
-
+		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'set_editor_defaults' ) );
+		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'add_queue_status_nonce' ) );
 	}
 
 	/**
@@ -133,9 +133,36 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		}
 
 		$js_config['editor_defaults'] = $defaults;
-
+		
 		return $js_config;
-
+	}
+	
+	/**
+	 * Attach the queue status nonce into the tribe_js_config variable
+	 *
+	 * @since TBD
+	 *
+	 * @param $js_config
+	 *
+	 * @return mixed
+	 */
+	public function add_queue_status_nonce( $js_config ) {
+		if ( ! isset( $js_config['rest'] ) ) {
+			$js_config['rest'] = array();
+		}
+		
+		if ( ! isset( $js_config['rest']['nonce'] ) ) {
+			$js_config['rest']['nonce'] = array();
+		}
+		
+		$js_config['rest']['nonce'] = array_merge(
+			$js_config['rest']['nonce'],
+			array(
+				'queue_status_nonce' => tribe( 'gutenberg.events-pro.recurrence.queue-status' )->get_ajax_nonce(),
+			)
+		);
+		
+		return $js_config;
 	}
 
 }
