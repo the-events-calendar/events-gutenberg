@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { EVENT } from '@moderntribe/events/editor/post-types';
+import { EVENT } from '@moderntribe/common/data/editor/post-types';
 import * as types from '@moderntribe/common/data/forms/types';
 
 export const DEFAULT_STATE = {

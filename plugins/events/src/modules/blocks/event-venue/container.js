@@ -12,7 +12,7 @@ import { toVenue } from '@moderntribe/events/elements';
 import { withStore, withSaveData, withForm } from '@moderntribe/common/hoc';
 import { withDetails } from '@moderntribe/events/hoc';
 import { actions, selectors } from '@moderntribe/events/data/blocks/venue';
-import { VENUE } from '@moderntribe/events/editor/post-types';
+import { VENUE } from '@moderntribe/common/data/editor/post-types';
 
 /**
  * Module Code
