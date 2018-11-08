@@ -5,7 +5,7 @@ Object {
   "payload": Object {
     "id": 20,
   },
-  "type": "@@MT/EVENTS/ADD_VOLATILE_ID",
+  "type": "@@MT/COMMON/ADD_VOLATILE_ID",
 }
 `;
 
@@ -14,7 +14,7 @@ Object {
   "payload": Object {
     "id": 20,
   },
-  "type": "@@MT/EVENTS/CLEAR_FORM",
+  "type": "@@MT/COMMON/CLEAR_FORM",
 }
 `;
 
@@ -26,7 +26,7 @@ Object {
     },
     "id": 20,
   },
-  "type": "@@MT/EVENTS/CREATE_FORM_DRAFT",
+  "type": "@@MT/COMMON/CREATE_FORM_DRAFT",
 }
 `;
 
@@ -38,7 +38,7 @@ Object {
     },
     "id": 20,
   },
-  "type": "@@MT/EVENTS/EDIT_FORM_ENTRY",
+  "type": "@@MT/COMMON/EDIT_FORM_ENTRY",
 }
 `;
 
@@ -48,7 +48,7 @@ Object {
     "id": 20,
     "type": "tribe_organizers",
   },
-  "type": "@@MT/EVENTS/ADD_FORM",
+  "type": "@@MT/COMMON/ADD_FORM",
 }
 `;
 
@@ -57,7 +57,7 @@ Object {
   "payload": Object {
     "id": 20,
   },
-  "type": "@@MT/EVENTS/REMOVE_VOLATILE_ID",
+  "type": "@@MT/COMMON/REMOVE_VOLATILE_ID",
 }
 `;
 
@@ -67,7 +67,7 @@ Object {
     "id": 20,
     "saving": true,
   },
-  "type": "@@MT/EVENTS/SET_SAVING_FORM",
+  "type": "@@MT/COMMON/SET_SAVING_FORM",
 }
 `;
 
@@ -77,7 +77,7 @@ Object {
     "id": 20,
     "saving": false,
   },
-  "type": "@@MT/EVENTS/SET_SAVING_FORM",
+  "type": "@@MT/COMMON/SET_SAVING_FORM",
 }
 `;
 
@@ -86,7 +86,7 @@ Object {
   "payload": Object {
     "id": 20,
   },
-  "type": "@@MT/EVENTS/SUBMIT_FORM",
+  "type": "@@MT/COMMON/SUBMIT_FORM",
 }
 `;
 
