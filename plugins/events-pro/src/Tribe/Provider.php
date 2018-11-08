@@ -23,6 +23,7 @@ class Tribe__Gutenberg__Events_Pro__Provider extends tad_DI52_ServiceProvider {
 		$this->container->singleton( 'gutenberg.events-pro.meta', 'Tribe__Gutenberg__Events_Pro__Meta' );
 		$this->container->singleton( 'gutenberg.events-pro.recurrence.provider', 'Tribe__Gutenberg__Events_Pro__Recurrence__Provider' );
 		$this->container->singleton( 'gutenberg.events-pro.recurrence.queue-status', 'Tribe__Gutenberg__Events_Pro__Recurrence__Queue_Status' );
+		$this->container->singleton( 'gutenberg.events-pro.recurrence.blocks-meta', 'Tribe__Gutenberg__Events_Pro__Recurrence__Blocks_Meta' );
 
 		$this->hook();
 
