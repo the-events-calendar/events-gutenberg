@@ -26,7 +26,7 @@ implements Tribe__Gutenberg__Common__Blocks__Interface {
 			return $this->slug();
 		}
 	}
-	
+
 	/**
 	 * Return the namespace to child or external sources
 	 *
@@ -37,7 +37,7 @@ implements Tribe__Gutenberg__Common__Blocks__Interface {
 	public function get_namespace() {
 		return $this->namespace;
 	}
-	
+
 	/*
 	 * Return the block attributes
 	 *
@@ -125,17 +125,6 @@ implements Tribe__Gutenberg__Common__Blocks__Interface {
 	 */
 	public function ajax() {
 		wp_send_json_error( esc_attr__( 'Problem loading the block, please remove this block to restart.', 'events-gutenberg' ) );
-	}
-
-	/**
-	 * Fetches which ever is the plugin we are dealing with
-	 *
-	 * @since  0.1.0-alpha
-	 *
-	 * @return mixed
-	 */
-	public function plugin() {
-		return tribe( 'gutenberg' );
 	}
 
 	/**
