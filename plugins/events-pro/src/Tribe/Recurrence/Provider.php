@@ -24,8 +24,10 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Provider {
 	public function to_classic_format( $event_id ) {
 		/** @var Tribe__Gutenberg__Events_Pro__Meta $meta */
 		$meta       = tribe( 'gutenberg.events-pro.meta' );
-		$rules      = json_decode( $meta->get_value( $event_id, '_tribe_blocks_recurrence_rules' ), true );
-		$exclusions = json_decode( $meta->get_value( $event_id, '_tribe_blocks_recurrence_exclusions' ), true );
+		/** @var Tribe__Gutenberg__Events_Pro__Recurrence__Blocks_Meta $blocks_meta */
+		$blocks_meta = tribe( 'gutenberg.events-pro.recurrence.blocks-meta' );
+		$rules      = json_decode( $meta->get_value( $event_id, $blocks_meta->get_rules_key() ), true );
+		$exclusions = json_decode( $meta->get_value( $event_id, $blocks_meta->get_exclusions_key() ), true );
 		
 		// Don't do anything if the block does not have any data.
 		if ( is_null( $rules ) ) {
