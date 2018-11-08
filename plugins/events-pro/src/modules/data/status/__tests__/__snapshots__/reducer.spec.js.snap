@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[STORE] - Status reducer Should set status 1`] = `
+Object {
+  "cool": true,
+}
+`;

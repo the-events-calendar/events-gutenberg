@@ -128,6 +128,7 @@ const mapStateToProps = ( state ) => ( {
 	isDashboardOpen: UISelectors.getDashboardDateTimeOpen( state ),
 	isOpen: UISelectors.getDashboardDateTimeOpen( state ),
 	visibleMonth: UISelectors.getVisibleMonth( state ),
+	isEditable: dateTimeSelectors.isEditable( state ),
 	start: dateTimeSelectors.getStart( state ),
 	end: dateTimeSelectors.getEnd( state ),
 	naturalLanguageLabel: dateTimeSelectors.getNaturalLanguageLabel( state ),
