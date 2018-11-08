@@ -14,10 +14,16 @@ class Tribe__Gutenberg__Events__Template__Overwrite {
 	 * @return void
 	 */
 	public function hook() {
+		/**
+		 * @todo remove filter if WP 5.0 patches this function and filter
+		 */
 		if ( ! function_exists( 'gutenberg_disable_editor_settings_wpautop' ) ) {
 			add_filter( 'wp_editor_settings', array( $this, 'disable_editor_settings_wpautop' ), 10, 2 );
 		}
 
+		/**
+		 * @todo remove filter if WP 5.0 patches this function and filter
+		 */
 		if ( ! function_exists( 'gutenberg_wpautop' ) ) {
 			remove_filter( 'the_content', 'wpautop' );
 			add_filter( 'the_content', array( $this, 'wpautop' ), 6 );
@@ -104,7 +110,8 @@ class Tribe__Gutenberg__Events__Template__Overwrite {
 	/**
 	 * If function gutenberg_disable_editor_settings_wpautop() does not exist, use this to
 	 * disable wpautop in classic editor if blocks exist.
-	 * This function is a copy of gutenberg_disable_editor_settings_wpautop() from the
+	 *
+	 * @todo This function is a copy of gutenberg_disable_editor_settings_wpautop() from the
 	 * gutenberg plugin. If WP 5.0 patches this, this function should be removed.
 	 *
 	 * @since 0.3.5-alpha
@@ -124,7 +131,8 @@ class Tribe__Gutenberg__Events__Template__Overwrite {
 
 	/**
 	 * If function gutengerg_wpautop() does not exist, use this to disable wpautop.
-	 * This function is a copy of gutenberg_wpautop() from the gutenberg plugin.
+	 *
+	 * @todo This function is a copy of gutenberg_wpautop() from the gutenberg plugin.
 	 * If WP 5.0 patches this, this function should be removed.
 	 *
 	 * @param  string $content Post content.
