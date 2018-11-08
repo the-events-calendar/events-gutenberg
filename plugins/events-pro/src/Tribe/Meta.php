@@ -115,9 +115,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	 */
 	public function remove_recurrence_classic_meta( $show_meta ) {
 		$is_classic_editor = tribe_get_request_var('classic-editor', null );
-		if ( $is_classic_editor === null ) {
-			return false;
-		}
-		return $show_meta;
+		
+		return $is_classic_editor === null ? false : $show_meta;
 	}
 }
