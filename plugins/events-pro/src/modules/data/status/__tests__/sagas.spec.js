@@ -1,10 +1,10 @@
 /**
  * External dependencies
  */
-import { some } from 'lodash';
+import { some, noop } from 'lodash';
 import { race, take, select, call, put } from 'redux-saga/effects';
 import { delay, eventChannel } from 'redux-saga';
-import { select as wpSelect, subscribe } from '@wordpress/data';
+import { select as wpSelect, subscribe, dispatch as wpDispatch } from '@wordpress/data';
 import 'whatwg-fetch';
 import { allowEdits, disableEdits } from '@moderntribe/events/data/blocks/datetime/actions';
 
@@ -16,14 +16,22 @@ import * as actions from '../actions';
 import * as selectors from '../selectors';
 import watchers, * as sagas from '../sagas';
 
-jest.mock( '@wordpress/data', () => ( {
-	select: jest.fn( () => ( {
-		isSavingPost: jest.fn( () => true ),
-		isPublishingPost: jest.fn( () => true ),
-		getCurrentPostId: jest.fn( () => 1 ),
-	} ) ),
-	subscribe: jest.fn( () => () => {} ),
-} ) );
+function mock() {
+	return {
+		select: jest.fn( () => ( {
+			isSavingPost: noop,
+			isPublishingPost: noop,
+			getCurrentPostId: jest.fn( () => 1 ),
+		} ) ),
+		subscribe: jest.fn( () => noop ),
+		dispatch: jest.fn( () => ( {
+			removeNotice: noop,
+			createSuccessNotice: noop,
+		} ) ),
+	};
+}
+
+jest.mock( '@wordpress/data', () => mock() );
 
 describe( 'Status sagas', () => {
 	describe( 'fetchStatus', () => {
@@ -112,6 +120,14 @@ describe( 'Status sagas', () => {
 				put( actions.setSeriesQueueStatus( response ) )
 			);
 
+			expect( gen.next().value ).toEqual(
+				call(
+					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+					sagas.NOTICES[ sagas.NOTICE_EDITING_SERIES ],
+					{ id: sagas.NOTICE_EDITING_SERIES, isDismissible: false }
+				)
+			);
+
 			expect( gen.next( false ).value ).toEqual(
 				select( selectors.isCompleted )
 			);
@@ -138,12 +154,27 @@ describe( 'Status sagas', () => {
 				put( actions.setSeriesQueueStatus( response ) )
 			);
 
+			expect( gen.next().value ).toEqual(
+				call(
+					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+					sagas.NOTICES[ sagas.NOTICE_EDITING_SERIES ],
+					{ id: sagas.NOTICE_EDITING_SERIES, isDismissible: false }
+				)
+			);
+
 			expect( gen.next( true ).value ).toEqual(
 				select( selectors.isCompleted )
 			);
 
 			expect( gen.next( true ).value ).toEqual(
 				put( allowEdits() )
+			);
+
+			expect( gen.next().value ).toEqual(
+				call(
+					[ wpDispatch( 'core/editor' ), 'removeNotice' ],
+					sagas.NOTICE_EDITING_SERIES
+				)
 			);
 
 			expect( gen.next().done ).toBeTruthy();

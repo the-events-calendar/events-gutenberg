@@ -1,10 +1,11 @@
 /**
  * External dependencies
  */
+import { __ } from '@wordpress/i18n';
 import { some } from 'lodash';
 import { race, take, select, call, put } from 'redux-saga/effects';
 import { delay, eventChannel } from 'redux-saga';
-import { select as wpSelect, subscribe } from '@wordpress/data';
+import { select as wpSelect, subscribe, dispatch as wpDispatch } from '@wordpress/data';
 import 'whatwg-fetch';
 import { allowEdits, disableEdits } from '@moderntribe/events/data/blocks/datetime/actions';
 import { restNonce } from '@moderntribe/common/src/modules/utils/globals';
@@ -15,6 +16,14 @@ import { restNonce } from '@moderntribe/common/src/modules/utils/globals';
 import * as recurringTypes from '@moderntribe/events-pro/data/blocks/recurring/types';
 import * as actions from './actions';
 import * as selectors from './selectors';
+
+//
+// ─── NOTICES ─────────────────────────────────────────────────────────────────────
+//
+export const NOTICE_EDITING_SERIES = 'NOTICE_EDITING_SERIES';
+export const NOTICES = {
+	[ NOTICE_EDITING_SERIES ]: __( 'You are currently editing all events in a series.' ),
+};
 
 /**
  * Fetches current series queue status
@@ -55,7 +64,7 @@ export function* fetchStatus() {
  * @export
  */
 export function* pollUntilSeriesCompleted() {
-	// Disable datetime block edits until we know we're not making an series events
+	// Disable datetime block edits until we know we're not making any series events
 	yield put( disableEdits() );
 
 	while ( true ) {
@@ -66,10 +75,21 @@ export function* pollUntilSeriesCompleted() {
 			yield put( actions.setSeriesQueueStatus( { completed: isCompleted } ) );
 		} else {
 			yield put( actions.setSeriesQueueStatus( response ) );
+			// Show editing notice
+			yield call(
+				[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+				NOTICES[ NOTICE_EDITING_SERIES ],
+				{ id: NOTICE_EDITING_SERIES, isDismissible: false }
+			);
 		}
 
 		if ( yield select( selectors.isCompleted ) ) {
 			yield put( allowEdits() ); // Allow datetime block to be editable again
+			// Remove editing notice
+			yield call(
+				[ wpDispatch( 'core/editor' ), 'removeNotice' ],
+				NOTICE_EDITING_SERIES
+			);
 			break; // We done
 		}
 
