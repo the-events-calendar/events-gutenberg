@@ -46,7 +46,7 @@ const FromTimeRangePicker = ( {
 			onClick: onStartTimeClick,
 			start: START_OF_DAY,
 			end: END_OF_DAY,
-			showAllDay: true,
+			showAllDay: false,
 			allDay: isAllDay,
 		};
 		return props;
@@ -60,7 +60,7 @@ const FromTimeRangePicker = ( {
 			start: START_OF_DAY,
 			end: END_OF_DAY,
 			disabled: isMultiDay,
-			showAllDay: true,
+			showAllDay: false,
 			allDay: isAllDay,
 		};
 		return props;
