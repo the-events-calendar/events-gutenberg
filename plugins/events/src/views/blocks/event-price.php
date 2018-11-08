@@ -9,8 +9,7 @@ $cost             = $this->attr( 'cost' );
 $cost_description = $this->attr( 'costDescription' );
 ?>
 <div class="tribe-block tribe-block__event-price">
-	<?php
-	if ( $cost ) : ?>
+	<?php if ( $cost ) : ?>
 		<span class="tribe-block__event-price__cost"> <?php echo esc_html( $cost ); ?> </span>
 	<?php endif; ?>
 	<?php if ( $cost_description ) : ?>

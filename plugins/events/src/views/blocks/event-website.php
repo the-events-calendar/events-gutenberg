@@ -17,7 +17,7 @@ $target = apply_filters( 'tribe_get_event_website_link_target', '_self' );
 		href="<?php echo esc_url( $this->attr( 'href' ) ); ?>"
 		target="<?php echo esc_attr( $target ); ?>"
 		<?php if ( '_blank' === $target  ) : ?> rel="noopener noreferrer" <?php endif; ?>
-		>
+	>
 		<?php echo esc_html( $this->attr( 'urlLabel' ) ); ?>
 	</a>
 </div>
