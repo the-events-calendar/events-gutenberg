@@ -31,7 +31,11 @@ const QuantityBar = ( { sharedSold, sold, capacity, total, isDisabled } ) => {
 								className="tribe-editor__quantity-bar__bar--capacity"
 								value={ capacity }
 								total={ total }
-							/>
+							>
+								<span className="tribe-editor__quantity-bar__bar-label">
+									{ __( 'cap', 'events-gutenberg' ) }
+								</span>
+							</Bar>
 					) }
 				</Fragment>
 			) }
@@ -48,10 +52,10 @@ QuantityBar.propTypes = {
 }
 
 QuantityBar.defaultProps = {
-	sharedSold: 0,
-	capacity: 0,
-	sold: 0,
-	total: 0,
+	sharedSold: 40,
+	capacity: 30,
+	sold: 10,
+	total: 100,
 	isDisabled: false,
 };
 

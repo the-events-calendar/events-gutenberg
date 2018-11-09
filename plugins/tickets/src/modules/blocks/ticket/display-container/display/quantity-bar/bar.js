@@ -13,7 +13,7 @@ import {
 	TribePropTypes,
 } from '@moderntribe/common/utils';
 
-const Bar = ( { className, value, total } ) => {
+const Bar = ( { children, className, value, total } ) => {
 
 	if ( value === 0 || total === 0 ) {
 		return null;
@@ -40,11 +40,14 @@ const Bar = ( { className, value, total } ) => {
 		<span
 			className={ classNames( 'tribe-editor__quantity-bar__bar', className ) }
 			style={ style }
-		/>
+		>
+			{ children }
+		</span>
 	);
 }
 
 Bar.propTypes = {
+	children: PropTypes.node,
 	className: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.arrayOf( PropTypes.string ),
