@@ -31,7 +31,7 @@ describe( '<Bar />', () => {
 		const component = shallow( <Bar value={ -200 } total={ 100 } /> );
 		const span = component.get( 0 );
 		const { style } = span.props;
-		expect( style ).toEqual( {} );
+		expect( style ).toEqual( { width: '0.00%' } );
 	} );
 
 	test( 'render percentage as inline style', () => {
