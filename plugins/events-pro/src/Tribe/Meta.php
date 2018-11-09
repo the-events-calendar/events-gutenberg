@@ -19,9 +19,19 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 		register_meta( 'post', $blocks_meta->get_rules_key(), tribe( 'gutenberg.events.meta' )->text() );
 		register_meta( 'post', $blocks_meta->get_exclusions_key(), tribe( 'gutenberg.events.meta' )->text() );
 		
-		add_filter( 'get_post_metadata', array( $this, 'filter_going_fields' ), 15, 4 );
+		$this->hook();
+	}
+	
+	/**
+	 * Add filters into the Meta class
+	 *
+	 * @since TBD
+	 */
+	public function hook() {
+		add_filter( 'get_post_metadata', array( $this, 'fake_blocks_response' ), 15, 4 );
 		add_action( 'deleted_post_meta', array( $this, 'remove_recurrence_meta' ), 10, 3  );
 		add_filter( 'tribe_events_pro_show_recurrence_meta_box', array( $this, 'remove_recurrence_classic_meta' ) );
+		add_filter( 'tribe_events_pro_split_redirect_url', array( $this, 'split_series_link' ), 10, 2 );
 	}
 	
 	/**
@@ -35,7 +45,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	 *
 	 * @return array|null|string The attachment metadata value, array of values, or null.
 	 */
-	public function filter_going_fields( $value, $post_id, $meta_key, $single ) {
+	public function fake_blocks_response( $value, $post_id, $meta_key, $single ) {
 		/** @var Tribe__Gutenberg__Events_Pro__Recurrence__Blocks_Meta $blocks_meta */
 		$blocks_meta = tribe( 'gutenberg.events-pro.recurrence.blocks-meta' );
 		$valid_keys = array(
@@ -48,7 +58,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 		}
 		
 		$recurrence = get_post_meta( $post_id, '_EventRecurrence', true );
-		$result = $this->get_value( $post_id, $meta_key );
+		$result     = $this->get_value( $post_id, $meta_key );
 		if ( empty( $recurrence ) || ! empty( $result ) ) {
 			return $value;
 		}
@@ -70,6 +80,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 			$data[] = $blocks->get_parsed();
 		}
 		$encoded = json_encode( $data );
+		
 		return $single ? $encoded : array( $encoded );
 	}
 	
@@ -121,7 +132,24 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	 */
 	public function remove_recurrence_classic_meta( $show_meta ) {
 		$is_classic_editor = tribe_get_request_var( 'classic-editor', null );
-
 		return $is_classic_editor === null ? false : $show_meta;
+	}
+	
+	/**
+	 * Redirect to classic editor if the event does not have any block on it
+	 *
+	 * @since TBD
+	 *
+	 * @param $url
+	 * @param $post_id
+	 *
+	 * @return mixed
+	 */
+	public function split_series_link( $url, $post_id ) {
+		$args = array();
+		if ( ! has_blocks( absint( $post_id ) ) ) {
+			$args = array( 'classic-editor' => '' );
+		}
+		return add_query_arg( $args, $url );
 	}
 }
