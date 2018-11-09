@@ -18,7 +18,7 @@ class Tribe__Gutenberg__Common__Provider extends tad_DI52_ServiceProvider {
 			return;
 		}
 
-		$this->container->singleton( 'gutenberg.common.assets', 'Tribe__Gutenberg__Common__Assets', array( 'register' ) );
+		$this->container->singleton( 'gutenberg.common.assets', 'Tribe__Gutenberg__Common__Assets', array( 'hook' ) );
 
 		$this->hook();
 
