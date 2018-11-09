@@ -2,7 +2,7 @@
 
 exports[`<Bar /> render percentage with custom class name 1`] = `
 <span
-  className="jest-test"
+  className="tribe-editor__quantity-bar__bar jest-test"
   style={
     Object {
       "width": "45.00%",
