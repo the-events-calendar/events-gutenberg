@@ -106,6 +106,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Change timezone label with timezone change
 * Fix - Add element styles to asset loading
 * Fix - Remove Tickets block sidebar if only one provider is used
+* Fix - Ticket blocks show proper sales and progress totals
 
 #### 0.3.4-alpha - 2018-11-06
 
