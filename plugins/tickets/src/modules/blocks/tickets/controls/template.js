@@ -1,13 +1,14 @@
 /**
  * External dependencies
  */
-import React, { PureComponent, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { noop } from 'lodash';
 
 /**
  * Wordpress dependencies
  */
-import { Panel, PanelBody, PanelRow } from '@wordpress/components';
+import { PanelBody, PanelRow } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/editor';
 
@@ -44,26 +45,23 @@ const RadioInput = ( { provider, onProviderChange, ...additionalProps }) => (
 	</div>
 );
 
-const Controls = ( { selectedProvider, providers, onProviderChange } ) => {
-	const hasManyProviders = providers.length > 1;
-
-	return (
+const Controls = ( {
+	hasMultipleProviders,
+	providers,
+	selectedProvider,
+	onProviderChange,
+} ) => (
+	hasMultipleProviders && (
 		<InspectorControls key="inspector">
 			<PanelBody title={ __( 'Tickets Settings', 'events-gutenberg' ) }>
 				<PanelRow>
 					<fieldset className="tribe-editor__tickets-controls-provider">
-						{ hasManyProviders && (
-							<legend>{ __( 'Sell tickets using', 'events-gutenberg' ) }</legend>
-						) }
-
-						{ hasManyProviders && (
-							<p>
-								{ message }
-								<em>{ note }</em>
-							</p>
-						) }
-
-						{ hasManyProviders && providers.map( ( provider, key ) => {
+						<legend>{ __( 'Sell tickets using', 'events-gutenberg' ) }</legend>
+						<p>
+							{ message }
+							<em>{ note }</em>
+						</p>
+						{ providers.map( ( provider, key ) => {
 							const inputProps = {
 								checked: selectedProvider === provider.class,
 							};
@@ -81,22 +79,22 @@ const Controls = ( { selectedProvider, providers, onProviderChange } ) => {
 				</PanelRow>
 			</PanelBody>
 		</InspectorControls>
-	);
-};
+	)
+);
 
 Controls.propTypes = {
-	selectedProvider: PropTypes.string,
+	hasMultipleProviders: PropTypes.bool,
 	providers: PropTypes.arrayOf( PropTypes.shape( {
 		name: PropTypes.string,
 		class: PropTypes.string,
 	} ) ),
+	selectedProvider: PropTypes.string,
 	onProviderChange: PropTypes.func,
 };
 
 Controls.defaultProps = {
 	providers: [],
-	onProviderChange: () => {
-	},
+	onProviderChange: noop,
 };
 
 export default Controls;

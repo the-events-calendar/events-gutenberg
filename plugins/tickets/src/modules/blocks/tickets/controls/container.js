@@ -12,6 +12,7 @@ import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state ) => ( {
+	hasMultipleProviders: selectors.hasMultipleProviders(),
 	providers: selectors.getProviders(),
 	selectedProvider: selectors.getSelectedProvider( state ),
 } );
