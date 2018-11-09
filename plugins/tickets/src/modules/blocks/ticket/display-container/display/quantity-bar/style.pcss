@@ -5,16 +5,16 @@
 	margin: 5px 0;
 }
 
-.tribe-editor__quantity-bar--available,
-.tribe-editor__quantity-bar--shared,
-.tribe-editor__quantity-bar--capacity {
+.tribe-editor__quantity-bar__bar--sold,
+.tribe-editor__quantity-bar__bar--shared-sold,
+.tribe-editor__quantity-bar__bar--capacity {
 	position: absolute;
 	left: 0;
 	top: 0;
 	bottom: 0;
 }
 
-.tribe-editor__quantity-bar--capacity {
+.tribe-editor__quantity-bar__bar--capacity {
 	z-index: 3;
 
 	&:after {
@@ -28,12 +28,12 @@
 	}
 }
 
-.tribe-editor__quantity-bar--available {
+.tribe-editor__quantity-bar__bar--sold {
 	background-color: #009FD4;
 	z-index: 2;
 }
 
-.tribe-editor__quantity-bar--shared {
+.tribe-editor__quantity-bar__bar--shared-sold {
 	background-color: #C9EBF7;
 	z-index: 1;
 }

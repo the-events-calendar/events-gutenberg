@@ -16,11 +16,23 @@ const QuantityBar = ( { sharedSold, sold, capacity, total, isDisabled } ) => {
 		<div className="tribe-editor__quantity-bar">
 			{ ! isDisabled && (
 				<Fragment>
-					<Bar className="tribe-editor__quantity-bar--shared-sold" value={ sharedSold } total={ total } />
-					<Bar className="tribe-editor__quantity-bar--sold" value={ sold } total={ total } />
-					{ ! capacity === total
-							&& <Bar className="tribe-editor__quantity-bar--capacity" value={ capacity } total={ total } />
-					}
+					<Bar
+						className="tribe-editor__quantity-bar__bar--shared-sold"
+						value={ sharedSold }
+						total={ total }
+					/>
+					<Bar
+						className="tribe-editor__quantity-bar__bar--sold"
+						value={ sold }
+						total={ total }
+					/>
+					{ ! capacity === total && (
+							<Bar
+								className="tribe-editor__quantity-bar__bar--capacity"
+								value={ capacity }
+								total={ total }
+							/>
+					) }
 				</Fragment>
 			) }
 		</div>

@@ -37,7 +37,10 @@ const Bar = ( { className, value, total } ) => {
 	};
 
 	return (
-		<span className={ classNames( className ) } style={ style }></span>
+		<span
+			className={ classNames( 'tribe-editor__quantity-bar__bar', className ) }
+			style={ style }
+		/>
 	);
 }
 
