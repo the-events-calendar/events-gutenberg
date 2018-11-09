@@ -92,8 +92,8 @@ $is_same_day      = $formatted_start_date == $formatted_end_date;
 			</span>
 		<?php endif; ?>
 
-        <?php if ( $show_time_zone ) : ?>
-            <span class="tribe-events-schedule__timezone"><?php echo esc_html( $time_zone_label ); ?></span>
-        <?php endif; ?>
+		<?php if ( $show_time_zone ) : ?>
+			<span class="tribe-events-schedule__timezone"><?php echo esc_html( $time_zone_label ); ?></span>
+		<?php endif; ?>
 	</h2>
 </div>
