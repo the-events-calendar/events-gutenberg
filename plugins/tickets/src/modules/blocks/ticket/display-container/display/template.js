@@ -14,11 +14,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import {
-	Alert,
-	Clipboard,
-	Pencil,
-} from '@moderntribe/common/icons';
+import { Pencil } from '@moderntribe/common/icons';
 import QuantityBar from './quantity-bar/element';
 import { Button } from '@moderntribe/common/elements';
 import './style.pcss';
@@ -37,14 +33,11 @@ const TicketDisplay = ( props ) => {
 		currencySymbol,
 		currencyPosition,
 		isUnlimited,
-		expires,
-		available,
 		capacity,
 		editBlock,
 		sold,
-		shared,
+		totalSharedSold,
 		isSelected,
-		isShared,
 		isTicketDisabled,
 	} = props;
 
@@ -60,8 +53,8 @@ const TicketDisplay = ( props ) => {
 		quantityBar = (
 			<QuantityBar
 				sold={ sold }
-				shared={ isShared ? capacity : 0 }
-				total={ isShared ? shared : capacity }
+				sharedSold={ totalSharedSold }
+				total={ capacity }
 				isDisabled={ isTicketDisabled }
 			/>
 		);
@@ -105,10 +98,8 @@ TicketDisplay.propTypes = {
 	currencySymbol: PropTypes.string,
 	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix' ] ),
 	isUnlimited: PropTypes.bool,
-	available: PropTypes.number,
 	capacity: PropTypes.number,
 	sold: PropTypes.number,
-	expires: PropTypes.bool,
 	editBlock: PropTypes.func,
 	isSelected: PropTypes.bool,
 	isTicketDisabled: PropTypes.bool,
@@ -125,9 +116,7 @@ TicketDisplay.defaultProps = {
 	currencySymbol: '$',
 	currencyPosition: 'prefix',
 	isUnlimited: false,
-	available: 0,
 	capacity: 0,
-	expires: true,
 };
 
 export default TicketDisplay;
