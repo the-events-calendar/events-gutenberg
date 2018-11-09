@@ -138,17 +138,6 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 	} );
 
-	describe( 'Total capacity', () => {
-		test( 'Default value of total capacity', () => {
-			expect( selectors.getTotalCapacity( state ) ).toBe( 0 );
-		} );
-
-		test( 'Value of total capacity when sharedCapacity is only set', () => {
-			newState.tickets.blocks.ticket.ui.sharedCapacity = 15;
-			expect( selectors.getTotalCapacity( newState ) ).toBe( 0 );
-		} );
-	} );
-
 	describe( 'Dashboard settings', () => {
 		test( 'Default value of settings dashboard', () => {
 			expect( selectors.getSettingsIsOpen( state ) ).toBe( false );
@@ -196,14 +185,21 @@ describe( 'Ticket blocks selectors', () => {
 			expect( selectors.getUnlimitedTickets( newState ) ).toMatchSnapshot();
 		} );
 
-		test( 'Select ticket capacity', () => {
-			expect( selectors.getTicketsSharedCapacity( newState ) ).toBe( 0 );
+		test( 'Independent tickets selectors', () => {
 			expect( selectors.getTicketsIndependentCapacity( newState ) ).toBe( 0 );
-			expect( selectors.getTotalCapacity( newState ) ).toBe( 0 );
+			expect( selectors.getTicketsIndependentSold( newState ) ).toBe( 0 );
+			expect( selectors.getTicketsIndependentAvailable( newState ) ).toBe( 0 );
 		} );
 
-		test( 'Select totals sold', () => {
-			expect( selectors.getTotalSold( newState ) ).toBe( 0 );
+		test( 'Shared tickets selectors', () => {
+			expect( selectors.getTicketsSharedSold( newState ) ).toBe( 0 );
+			expect( selectors.getTicketsSharedAvailable( newState ) ).toBe( 0 );
+		} )
+
+		test( 'Independent and shared tickets selectors', () => {
+			expect( selectors.getTicketsIndependentAndSharedCapacity( newState ) ).toBe( 0 );
+			expect( selectors.getTicketsIndependentAndSharedSold( newState ) ).toBe( 0 );
+			expect( selectors.getTicketsIndependentAndSharedAvailable( newState ) ).toBe( 0 );
 		} );
 
 		test( 'Ticket dates and times', () => {
@@ -299,4 +295,3 @@ describe( 'Ticket blocks selectors', () => {
 		} );
 	} );
 } );
-
