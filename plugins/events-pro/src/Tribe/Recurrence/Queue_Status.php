@@ -56,9 +56,13 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Queue_Status {
 			}
 		}
 		
+		$start_dates = tribe_get_recurrence_start_dates( $post_id );
+		
 		return array(
-			'done'       => $is_empty,
-			'percentage' => $is_empty ? 100 : $queue->progress_percentage(),
+			'done'            => $is_empty,
+			'items_created'   => count( $start_dates ),
+			'last_created_at' => end( $start_dates ),
+			'percentage'      => $is_empty ? 100 : $queue->progress_percentage(),
 		);
 	}
 	
