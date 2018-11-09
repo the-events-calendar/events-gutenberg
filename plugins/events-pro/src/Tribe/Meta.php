@@ -14,10 +14,14 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	 * @return void
 	 */
 	public function register() {
-		register_meta( 'post', '_tribe_blocks_recurrence_rules', tribe( 'gutenberg.events.meta' )->text() );
-		register_meta( 'post', '_tribe_blocks_recurrence_exclusions', tribe( 'gutenberg.events.meta' )->text() );
+		/** @var Tribe__Gutenberg__Events_Pro__Recurrence__Blocks_Meta $blocks_meta */
+		$blocks_meta = tribe( 'gutenberg.events-pro.recurrence.blocks-meta' );
+		register_meta( 'post', $blocks_meta->get_rules_key(), tribe( 'gutenberg.events.meta' )->text() );
+		register_meta( 'post', $blocks_meta->get_exclusions_key(), tribe( 'gutenberg.events.meta' )->text() );
 		
 		add_filter( 'get_post_metadata', array( $this, 'filter_going_fields' ), 15, 4 );
+		add_action( 'deleted_post_meta', array( $this, 'remove_recurrence_meta' ), 10, 3  );
+		add_filter( 'tribe_events_pro_show_recurrence_meta_box', array( $this, 'remove_recurrence_classic_meta' ) );
 	}
 	
 	/**
@@ -32,9 +36,11 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	 * @return array|null|string The attachment metadata value, array of values, or null.
 	 */
 	public function filter_going_fields( $value, $post_id, $meta_key, $single ) {
+		/** @var Tribe__Gutenberg__Events_Pro__Recurrence__Blocks_Meta $blocks_meta */
+		$blocks_meta = tribe( 'gutenberg.events-pro.recurrence.blocks-meta' );
 		$valid_keys = array(
-			'_tribe_blocks_recurrence_rules',
-			'_tribe_blocks_recurrence_exclusions',
+			$blocks_meta->get_exclusions_key(),
+			$blocks_meta->get_rules_key(),
 		);
 		
 		if ( ! in_array( $meta_key, $valid_keys ) ) {
@@ -48,8 +54,8 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 		}
 		
 		$keys = array(
-			'_tribe_blocks_recurrence_rules'      => 'rules',
-			'_tribe_blocks_recurrence_exclusions' => 'exclusions',
+			$blocks_meta->get_rules_key() => 'rules',
+			$blocks_meta->get_exclusions_key() => 'exclusions',
 		);
 		$key  = $keys[ $meta_key ];
 		if ( empty( $recurrence[ $key ] ) ) {
@@ -82,5 +88,40 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 		$query = "SELECT meta_value FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s";
 		
 		return $wpdb->get_var( $wpdb->prepare( $query, $post_id, $meta_key ) );
+	}
+	
+	/**
+	 * Removes the meta keys that maps into the classic editor when the `_EventRecurrence` is
+	 * removed.
+	 *
+	 * @since TBD
+	 *
+	 * @param $meta_id
+	 * @param $object_id
+	 * @param $meta_key
+	 */
+	public function remove_recurrence_meta( $meta_id, $object_id, $meta_key ) {
+		if ( '_EventRecurrence' !== $meta_key ) {
+			return;
+		}
+		/** @var Tribe__Gutenberg__Events_Pro__Recurrence__Blocks_Meta $blocks_meta */
+		$blocks_meta = tribe( 'gutenberg.events-pro.recurrence.blocks-meta' );
+		delete_post_meta( $object_id, $blocks_meta->get_rules_key() );
+		delete_post_meta( $object_id, $blocks_meta->get_exclusions_key() );
+	}
+	
+	/**
+	 * Remove the recurrence meta box if classic-editor is set
+	 *
+	 * @since TBD
+	 *
+	 * @param $show_meta
+	 *
+	 * @return bool
+	 */
+	public function remove_recurrence_classic_meta( $show_meta ) {
+		$is_classic_editor = tribe_get_request_var( 'classic-editor', null );
+
+		return $is_classic_editor === null ? false : $show_meta;
 	}
 }
