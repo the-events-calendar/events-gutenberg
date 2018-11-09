@@ -10,6 +10,7 @@ import { select as wpSelect, subscribe, dispatch as wpDispatch } from '@wordpres
 import 'whatwg-fetch';
 import { allowEdits, disableEdits } from '@moderntribe/events/data/blocks/datetime/actions';
 import { restNonce } from '@moderntribe/common/src/modules/utils/globals';
+import { moment as momentUtils } from '@moderntribe/common/utils';
 
 /**
  * Internal dependencies
@@ -83,6 +84,8 @@ export function* pollUntilSeriesCompleted() {
 
 			const { items_created, last_created_at } = response;
 
+			const date = momentUtils.toDate( momentUtils.toMoment( last_created_at ) );
+
 			// Show editing notice
 			yield call(
 				[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
@@ -93,7 +96,7 @@ export function* pollUntilSeriesCompleted() {
 			// Show progress notice
 			yield call(
 				[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
-				`${ sprintf( NOTICES[ NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ], items_created ) } ${ sprintf( NOTICES[ NOTICE_PROGRESS_ON_SERIES_CREATION ], last_created_at ) }`,
+				`${ sprintf( NOTICES[ NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ], items_created ) } ${ sprintf( NOTICES[ NOTICE_PROGRESS_ON_SERIES_CREATION ], date ) }`,
 				{ id: NOTICE_PROGRESS_ON_SERIES_CREATION, isDismissible: true }
 			);
 		}
