@@ -10,7 +10,7 @@ describe( 'Status selectors', () => {
 		state = {
 			[ constants.EVENTS_PRO_PLUGIN ]: {
 				status: {
-					completed: true,
+					done: true,
 					progress: 60,
 				},
 			},
