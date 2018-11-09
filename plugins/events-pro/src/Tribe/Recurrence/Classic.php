@@ -169,7 +169,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 		if ( ! isset( $this->fields['between'] ) ) {
 			return;
 		}
-		$this->data['custom']['interval'] = $this->fields['between'];
+		$this->data['custom']['interval'] = strval( $this->fields['between'] );
 	}
 	
 	/**
@@ -230,7 +230,9 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 				break;
 			case Tribe__Events__Pro__Recurrence__Custom_Types::WEEKLY_CUSTOM_TYPE:
 				$this->data['custom']['week'] = array(
-					'day' => isset( $this->fields['days'] ) ? $this->fields['days'] : array(),
+					'day' => isset( $this->fields['days'] )
+						? array_map( 'strval', $this->fields['days'] )
+						: array(),
 				);
 				break;
 			case Tribe__Events__Pro__Recurrence__Custom_Types::MONTHLY_CUSTOM_TYPE:
@@ -241,6 +243,7 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Classic
 				break;
 		}
 	}
+	
 	
 	/**
 	 * Convert the week and day values into corresponding values
