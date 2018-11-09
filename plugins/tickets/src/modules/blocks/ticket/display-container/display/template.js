@@ -32,33 +32,39 @@ const TicketDisplay = ( props ) => {
 		price,
 		currencySymbol,
 		currencyPosition,
+		isShared,
 		isUnlimited,
 		capacity,
 		editBlock,
 		sold,
-		totalSharedSold,
+		sharedSold,
+		sharedCapacity,
 		isSelected,
 		isTicketDisabled,
 	} = props;
 
+	const total = isShared ? sharedCapacity : capacity;
 	const priceLabel = [ currencySymbol, price ];
 	const labels = {
-		unlimited: sprintf( __( '%1$d sold', 'events-gutenberg' ), sold ),
-		normal: sprintf( __( '%1$d of %d sold', 'events-gutenberg' ), sold, capacity ),
+		unlimited: sprintf( __( '%d sold', 'events-gutenberg' ), sold ),
+		normal: sprintf( __( '%d of %d sold', 'events-gutenberg' ), sold, total ),
 	};
 
-	let quantityBar = <span className="tribe-editor__quantity--unlimited">unlimited</span>;
-
-	if ( ! isUnlimited ) {
-		quantityBar = (
+	const quantityBar = isUnlimited
+		? (
+			<span className="tribe-editor__quantity--unlimited">
+				{ __( 'unlimited', 'events-gutenberg' ) }
+			</span>
+		)
+		: (
 			<QuantityBar
 				sold={ sold }
-				sharedSold={ totalSharedSold }
-				total={ capacity }
+				sharedSold={ sharedSold }
+				capacity={ capacity }
+				total={ total }
 				isDisabled={ isTicketDisabled }
 			/>
 		);
-	}
 
 	const editIcon = ! isTicketDisabled && isSelected && (
 		<Button className="tribe-editor__btn--label" onClick={ editBlock }><Pencil /></Button>
@@ -97,9 +103,12 @@ TicketDisplay.propTypes = {
 	price: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	currencySymbol: PropTypes.string,
 	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix' ] ),
+	isShared: PropTypes.bool,
 	isUnlimited: PropTypes.bool,
 	capacity: PropTypes.number,
 	sold: PropTypes.number,
+	sharedSold: PropTypes.number,
+	sharedCapacity: PropTypes.number,
 	editBlock: PropTypes.func,
 	isSelected: PropTypes.bool,
 	isTicketDisabled: PropTypes.bool,
