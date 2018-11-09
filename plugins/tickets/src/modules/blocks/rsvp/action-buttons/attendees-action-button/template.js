@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -14,9 +13,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { ActionButton } from '@moderntribe/tickets/elements';
-// @todo: attendee SVG is loading weird, so, not using this icon yet
-// import { Attendees } from '@moderntribe/tickets/icons';
-import { User as Attendees } from '@moderntribe/common/src/modules/icons';
+import { Attendees } from '@moderntribe/tickets/icons';
 
 const AttendeesActionButton = ( { href, isDisabled } ) => (
 	<ActionButton

@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.3.5-alpha - TBD
 
 * Feature - eCommerce options for ticket block
+* Tweak - Update icons for attendees and orders buttons on rsvp and tickets blocks
 * Fix - Events and Events Pro front-end views are now looking for Theme customizations correctly
 * Fix - Add conditional to human readable input saga to prevent infinite loop
 * Fix - Missing variable that is used to parse the attributes of the block
