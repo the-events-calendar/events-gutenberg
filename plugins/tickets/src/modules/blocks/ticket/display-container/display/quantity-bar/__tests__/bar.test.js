@@ -45,4 +45,9 @@ describe( '<Bar />', () => {
 		const component = renderer.create( <Bar value={ 45 } total={ 100 } className="jest-test" /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
+
+	test( 'render percentage with children', () => {
+		const component = renderer.create( <Bar value={ 45 } total={ 100 }>test</Bar> );
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
 } );

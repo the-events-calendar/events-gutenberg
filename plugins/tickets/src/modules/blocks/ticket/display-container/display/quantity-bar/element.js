@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -26,7 +27,7 @@ const QuantityBar = ( { sharedSold, sold, capacity, total, isDisabled } ) => {
 						value={ sold }
 						total={ total }
 					/>
-					{ ! ( capacity === total ) && (
+					{ capacity && ! ( capacity === total ) && (
 							<Bar
 								className="tribe-editor__quantity-bar__bar--capacity"
 								value={ capacity }
@@ -52,10 +53,10 @@ QuantityBar.propTypes = {
 }
 
 QuantityBar.defaultProps = {
-	sharedSold: 40,
-	capacity: 30,
-	sold: 10,
-	total: 100,
+	sharedSold: 0,
+	capacity: 0,
+	sold: 0,
+	total: 0,
 	isDisabled: false,
 };
 
