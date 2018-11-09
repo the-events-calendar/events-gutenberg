@@ -7,9 +7,41 @@
  */
 class Tribe__Gutenberg__Events_Pro__Recurrence__Provider {
 	public function hook() {
-		// Add 30 as priority as 20 is the default set by PRO so we need to hook up later than that
-		// To avoid being override by PRO
-		add_action( 'tribe_events_update_meta', array( $this, 'to_classic_format' ), 30 );
+		add_filter( 'rest_pre_echo_response', array( $this, 'trigger_recurrence_rules' ), 10, 3 );
+	}
+	
+	/**
+	 * Hook before the response of a endpoint is executed to maybe trigger the recurrence rules, in
+	 * order to execute a recurrence rule it must follow the following:
+	 *
+	 * - if $request is valid
+	 * - and has an ID that is of type Events
+	 * - and is part of the valid methods that are used to update / create a new item (PUT/POST)
+	 * - and is not part of an /autosaves request as shouldn't be trigger on auto saves
+	 *
+	 * The hook does not modify the original response so the response is returned without any
+	 * modifications on it
+	 *
+	 * @since TBD
+	 *
+	 * @param $result
+	 * @param $server
+	 * @param $request
+	 *
+	 * @return mixed
+	 */
+	public function trigger_recurrence_rules( $result, $server, $request ) {
+		$valid_methods = array( 'POST', 'PUT', 'PATCH' );
+		
+		if (
+			$request instanceof WP_REST_Request
+			&& get_post_type( $request->get_param( 'id' ) ) === Tribe__Events__Main::POSTTYPE
+			&& in_array( $request->get_method(), $valid_methods )
+			&& false === strpos(   $request->get_route(), '/autosaves' )
+		) {
+			$this->to_classic_format( $request->get_param( 'id' ) );
+		}
+		return $result;
 	}
 	
 	/**
@@ -42,7 +74,6 @@ class Tribe__Gutenberg__Events_Pro__Recurrence__Provider {
 				'exclusions' => $this->parse_rules( $exclusions ),
 			),
 		);
-		
 		/**
 		 * Use same mechanism as PRO to update the parsed data into the event
 		 */
