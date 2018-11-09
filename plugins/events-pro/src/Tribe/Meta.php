@@ -131,7 +131,11 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	 * @return bool
 	 */
 	public function remove_recurrence_classic_meta( $show_meta ) {
-		$is_classic_editor = tribe_get_request_var( 'classic-editor', null );
+		/** @var Tribe__Gutenberg__Common__Plugin $plugin */
+		$plugin             = tribe( 'gutenberg.common.plugin' );
+		$disabled_by_plugin = $plugin->is_classic_plugin_active() && $plugin->is_classic_option_active();
+		$is_classic_editor  = tribe_get_request_var( 'classic-editor', null ) || $disabled_by_plugin;
+		
 		return $is_classic_editor === null ? false : $show_meta;
 	}
 	

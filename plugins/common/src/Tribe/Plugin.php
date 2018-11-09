@@ -25,4 +25,29 @@ class Tribe__Gutenberg__Common__Plugin {
 		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );
 		$this->plugin_url  = plugins_url( $this->plugin_dir );
 	}
+	
+	/**
+	 * classic_editor_replace is function that is created by the plugin:
+	 *
+	 * - https://wordpress.org/plugins/classic-editor/
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	function is_classic_plugin_active() {
+		return function_exists( 'classic_editor_replace' );
+	}
+	
+	/**
+	 * Check if the setting `'classic-editor-replace'` is set to `replace` that option means to
+	 * replace the gutenberg editor with the classic editor
+	 *
+	 * @since TBD
+	 *
+	 * @return bool
+	 */
+	function is_classic_option_active() {
+		return 'replace' === get_option( 'classic-editor-replace' );
+	}
 }
