@@ -133,16 +133,6 @@ class Tribe__Gutenberg__Common__Assets {
 		 */
 		tribe_asset(
 			$plugin,
-			'tribe-common-gutenberg-elements-styles',
-			'app/elements.css',
-			array(),
-			'enqueue_block_editor_assets',
-			array(
-				'in_footer'    => false,
-			)
-		);
-		tribe_asset(
-			$plugin,
 			'tribe-common-gutenberg-components',
 			'components.js',
 			/**
@@ -153,6 +143,16 @@ class Tribe__Gutenberg__Common__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-common-gutenberg-elements-styles',
+			'app/elements.css',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer'    => false,
 			)
 		);
 	}

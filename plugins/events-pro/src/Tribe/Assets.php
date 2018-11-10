@@ -24,10 +24,27 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			/**
 			 * @todo revise this dependencies
 			 */
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			array(
+				'react',
+				'react-dom',
+				'wp-components',
+				'wp-api',
+				'wp-api-request',
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-editor',
+				'tribe-common-gutenberg-data',
+				'tribe-common-gutenberg-utils',
+				'tribe-common-gutenberg-store',
+				'tribe-common-gutenberg-icons',
+				'tribe-common-gutenberg-hoc',
+				'tribe-common-gutenberg-elements',
+				'tribe-common-gutenberg-components'
+			),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => true,
+				'in_footer' => false,
 				'localize'  => array(),
 			)
 		);
@@ -36,10 +53,10 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			$plugin,
 			'tribe-pro-gutenberg-blocks-styles',
 			'app/blocks.css',
-			array(),
+			array( 'tribe-common-gutenberg-elements-styles' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => true,
+				'in_footer' => false,
 				'localize'  => array(),
 			)
 		);
@@ -51,7 +68,23 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			/**
 			 * @todo revise this dependencies
 			 */
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
+			array(
+				'react',
+				'react-dom',
+				'wp-components',
+				'wp-api',
+				'wp-api-request',
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'tribe-common-gutenberg-data',
+				'tribe-common-gutenberg-utils',
+				'tribe-common-gutenberg-store',
+				'tribe-common-gutenberg-icons',
+				'tribe-common-gutenberg-hoc',
+				'tribe-common-gutenberg-elements',
+				'tribe-common-gutenberg-components'
+			),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,
@@ -63,10 +96,10 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			$plugin,
 			'tribe-pro-gutenberg-element',
 			'app/elements.css',
-			array(),
+			array( 'tribe-common-gutenberg-elements-styles' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => true,
+				'in_footer' => false,
 				'localize'  => array(),
 			)
 		);
