@@ -118,7 +118,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 		tribe_asset(
 			$gutenberg,
 			'tribe-tickets-gutenberg-block-tickets-style',
-			'tickets/frontend.css',
+			'app/tickets/frontend.css',
 			array(),
 			null
 		);

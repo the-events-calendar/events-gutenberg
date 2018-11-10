@@ -30,7 +30,7 @@ import {
 	GoogleMap,
 	EditLink,
 } from '@moderntribe/events/elements';
-import { VENUE } from '@moderntribe/events/editor/post-types';
+import { VENUE } from '@moderntribe/common/data/editor/post-types';
 import VenueDetails from './venue-details';
 import { Venue as VenueIcon } from '@moderntribe/events/icons';
 import { Close as CloseIcon } from '@moderntribe/common/icons';
@@ -249,14 +249,14 @@ class EventVenue extends Component {
 
 		return (
 			<InspectorControls key="inspector">
-				<PanelBody title={ __( 'Venue Settings' ) }>
+				<PanelBody title={ __( 'Venue Settings', 'events-gutenberg' ) }>
 					<ToggleControl
-						label={ __( 'Show Google Maps Link' ) }
+						label={ __( 'Show Google Maps Link', 'events-gutenberg' ) }
 						checked={ showMapLink }
 						onChange={ toggleVenueMapLink }
 					/>
 					<ToggleControl
-						label={ __( 'Show Google Maps Embed' ) }
+						label={ __( 'Show Google Maps Embed', 'events-gutenberg' ) }
 						checked={ showMap }
 						onChange={ toggleVenueMap }
 					/>

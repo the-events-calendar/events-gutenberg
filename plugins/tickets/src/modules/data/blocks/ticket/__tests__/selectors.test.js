@@ -293,6 +293,10 @@ describe( 'Ticket blocks selectors', () => {
 		test( 'Has providers', () => {
 			expect( selectors.hasTicketProviders() ).toBe( false );
 		} );
+
+		test( 'Has multiple providers', () => {
+			expect( selectors.hasMultipleProviders() ).toBe( false );
+		} );
 	} );
 } );
 

@@ -53,6 +53,7 @@ Availability.propTypes = {
 	isDisabled: PropTypes.bool,
 }
 
+// todo: consider changing to __n for better translation compatibility
 Availability.defaultProps = {
 	isDisabled: false,
 	available: 0,

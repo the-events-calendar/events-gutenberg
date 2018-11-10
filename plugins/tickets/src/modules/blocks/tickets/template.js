@@ -50,7 +50,12 @@ class TicketsTemplate extends PureComponent {
 	}
 
 	render() {
-		const { isBlockSelected, isEditing, clientId } = this.props;
+		const {
+			isBlockSelected,
+			isEditing,
+			clientId
+		} = this.props;
+
 		return (
 			<div
 				className={ classNames(

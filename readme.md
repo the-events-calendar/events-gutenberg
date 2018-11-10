@@ -93,13 +93,33 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.4-alpha - 2018-11-01
+#### 0.3.5-alpha - TBD
 
+* Feature - eCommerce options for ticket block
+* Tweak - Update icons for attendees and orders buttons on rsvp and tickets blocks
+* Fix - Events and Events Pro front-end views are now looking for Theme customizations correctly
+* Fix - Add conditional to human readable input saga to prevent infinite loop
+* Fix - Missing variable that is used to parse the attributes of the block
+* Fix - Show RSVP and Attendees blocks when coming from classic editor
+* Fix - load order of tribe_js_config
+* Fix - Conditionally show the RSVP block capacity label
+* Fix - Change timezone label with timezone change
+* Fix - Add element styles to asset loading
+* Fix - Add filters for wpauto when using gutenberg blocks
+* Fix - Remove Tickets block sidebar if only one provider is used
+
+#### 0.3.4-alpha - 2018-11-06
+
+* Feature - Attendee additional fields properly working from Blocks Editor link
+* Feature - Add HOC `withSelected` that is executed when a block is on focus and when the block losses focus
+* Feature - Add dynamic additional blocks present on the Gutenberg Editor
+* Tweak - Moving all CSS and JavaScript files into an `app` folder to allow better compatibility with Core Plugins
 * Fix - RSVP blocks sets initial start and end date based on events
-* Fix - Add wp-editor as dependency for scripts
+* Fix - Add `wp-editor` as dependency for scripts
 * Fix - RSVP blocks sets initial start and end date based on event
 * Fix - Ticket blocks sets initial start and end date based on event
 * Fix - Allow ticket UI to show proper shared capacity state
+* Fix - Remove `max-width` definition from Blocks Editor default for events page.
 
 #### 0.3.3-alpha - 2018-10-25
 

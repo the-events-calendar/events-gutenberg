@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Initialize Gutenberg Events Pro Meta fields
+ * Register the required Meta fields for Blocks Editor API saving
+ * Initialize Gutenberg Event Meta fields
  *
  * @since TBD
  */
-class Tribe__Gutenberg__Events_Pro__Meta {
+class Tribe__Gutenberg__Events_Pro__Meta extends Tribe__Gutenberg__Common__Meta {
 	/**
-	 * Register the required Meta fields for Blocks Editor API saving
+	 * Register the required Meta fields for good Gutenberg saving
 	 *
 	 * @since  TBD
 	 *
@@ -16,10 +17,44 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	public function register() {
 		/** @var Tribe__Gutenberg__Events_Pro__Recurrence__Blocks_Meta $blocks_meta */
 		$blocks_meta = tribe( 'gutenberg.events-pro.recurrence.blocks-meta' );
-		register_meta( 'post', $blocks_meta->get_rules_key(), tribe( 'gutenberg.events.meta' )->text() );
-		register_meta( 'post', $blocks_meta->get_exclusions_key(), tribe( 'gutenberg.events.meta' )->text() );
+		register_meta( 'post', $blocks_meta->get_rules_key(), $this->text() );
+		register_meta( 'post', $blocks_meta->get_exclusions_key(), $this->text() );
+		$this->register_additional_fields();
 		
 		$this->hook();
+	}
+	
+	/**
+	 * Register the fields used by dynamic fields into the REST API
+	 *
+	 * @since TBD
+	 */
+	public function register_additional_fields() {
+		$additional_fields = array_values( tribe_get_option( 'custom-fields', array() ) );
+		foreach ( $additional_fields as $field ) {
+			
+			$has_fields = isset( $field['name'], $field['type'], $field['gutenberg_editor'] );
+			if ( ! $has_fields ) {
+				continue;
+			}
+			
+			switch ( $field['type'] ) {
+				case 'textarea':
+					$args = $this->textarea();
+					break;
+				case 'url':
+					$args = $this->url();
+					break;
+				case 'checkbox':
+					$args = $this->text();
+					register_meta( 'post', '_' . $field['name'], $this->text_array() );
+					break;
+				default:
+					$args = $this->text();
+					break;
+			}
+			register_meta( 'post', $field['name'], $args );
+		}
 	}
 	
 	/**
@@ -29,7 +64,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	 */
 	public function hook() {
 		add_filter( 'get_post_metadata', array( $this, 'fake_blocks_response' ), 15, 4 );
-		add_action( 'deleted_post_meta', array( $this, 'remove_recurrence_meta' ), 10, 3  );
+		add_action( 'deleted_post_meta', array( $this, 'remove_recurrence_meta' ), 10, 3 );
 		add_filter( 'tribe_events_pro_show_recurrence_meta_box', array( $this, 'remove_recurrence_classic_meta' ) );
 		add_filter( 'tribe_events_pro_split_redirect_url', array( $this, 'split_series_link' ), 10, 2 );
 	}
@@ -48,7 +83,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 	public function fake_blocks_response( $value, $post_id, $meta_key, $single ) {
 		/** @var Tribe__Gutenberg__Events_Pro__Recurrence__Blocks_Meta $blocks_meta */
 		$blocks_meta = tribe( 'gutenberg.events-pro.recurrence.blocks-meta' );
-		$valid_keys = array(
+		$valid_keys  = array(
 			$blocks_meta->get_exclusions_key(),
 			$blocks_meta->get_rules_key(),
 		);
@@ -64,7 +99,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 		}
 		
 		$keys = array(
-			$blocks_meta->get_rules_key() => 'rules',
+			$blocks_meta->get_rules_key()      => 'rules',
 			$blocks_meta->get_exclusions_key() => 'exclusions',
 		);
 		$key  = $keys[ $meta_key ];
@@ -154,6 +189,7 @@ class Tribe__Gutenberg__Events_Pro__Meta {
 		if ( ! has_blocks( absint( $post_id ) ) ) {
 			$args = array( 'classic-editor' => '' );
 		}
+		
 		return add_query_arg( $args, $url );
 	}
 }

@@ -58,22 +58,30 @@ const getDescription = (
 );
 
 const getCapacityLabel = ( capacity ) => {
+	// todo: should use _n to be translator friendly
 	const singular = __( '%d available', 'events-gutenberg' );
 	const plural = singular;
+	const fallback = (
+		<span className="tribe-editor__rsvp-container-header__capacity-label-fallback">
+			{ __( 'Unlimited', 'events-gutenberg' ) }
+		</span>
+	);
 
 	return (
 		<NumericLabel
+			className="tribe-editor__rsvp-container-header__capacity-label"
 			count={ capacity }
+			includeZero={ true }
 			singular={ singular }
 			plural={ plural }
-			useFallback={ false }
-			className="tribe-editor__rsvp-container-header__capacity-label"
+			fallback={ fallback }
 		/>
 	)
 };
 
 const RSVPContainerHeader = ( {
 	description,
+	isCreated,
 	isDisabled,
 	isSelected,
 	onTempDescriptionChange,
@@ -100,7 +108,7 @@ const RSVPContainerHeader = ( {
 					tempDescription,
 					description,
 				) }
-				{ getCapacityLabel( available ) }
+				{ isCreated && getCapacityLabel( available ) }
 			</div>
 			<RSVPCounters />
 		</Fragment>
@@ -110,6 +118,7 @@ const RSVPContainerHeader = ( {
 RSVPContainerHeader.propTypes = {
 	available: PropTypes.number,
 	description: PropTypes.string,
+	isCreated: PropTypes.bool,
 	isDisabled: PropTypes.bool.isRequired,
 	isSelected: PropTypes.bool.isRequired,
 	onTempDescriptionChange: PropTypes.func,

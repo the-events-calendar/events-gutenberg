@@ -12,12 +12,13 @@ class Tribe__Gutenberg__Common__Provider extends tad_DI52_ServiceProvider {
 		// Setup to check if gutenberg is active
 		$this->container->singleton( 'gutenberg.common.plugin', 'Tribe__Gutenberg__Common__Plugin' );
 		$this->container->singleton( 'gutenberg.common.editor', 'Tribe__Gutenberg__Common__Editor' );
+		$this->container->singleton( 'gutenberg.common.utils', 'Tribe__Gutenberg__Common__Utils' );
 
 		if ( ! tribe( 'gutenberg.common.editor' )->should_load_blocks() ) {
 			return;
 		}
 
-		$this->container->singleton( 'gutenberg.common.assets', 'Tribe__Gutenberg__Common__Assets', array( 'register' ) );
+		$this->container->singleton( 'gutenberg.common.assets', 'Tribe__Gutenberg__Common__Assets', array( 'hook' ) );
 
 		$this->hook();
 

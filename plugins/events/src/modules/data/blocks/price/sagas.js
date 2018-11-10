@@ -10,11 +10,11 @@ import * as types from './types';
 import { DEFAULT_STATE } from './reducer';
 import * as actions from './actions';
 import { isTruthy } from '@moderntribe/common/utils/string';
-import { getPriceSettings } from '@moderntribe/events/editor/settings';
+import { priceSettings } from '@moderntribe/common/utils/globals';
 
 export function* setInitialState( action ) {
 	const { get } = action.payload;
-	const settings = yield call( getPriceSettings );
+	const settings = yield call( priceSettings );
 	const isNewEvent = yield call( isTruthy, settings.is_new_event );
 
 	const currencySymbol = isNewEvent

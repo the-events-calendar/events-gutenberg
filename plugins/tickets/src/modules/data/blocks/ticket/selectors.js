@@ -311,9 +311,14 @@ export const getProviders = () => {
 	return tickets.providers || [];
 };
 
+export const hasMultipleProviders = createSelector(
+	[ getProviders ],
+	( providers ) => providers.length > 1,
+);
+
 export const hasTicketProviders = createSelector(
 	[ getProviders ],
-	( providers ) => providers.length > 0
+	( providers ) => providers.length > 0,
 );
 
 export const getTicketProvider = createSelector(

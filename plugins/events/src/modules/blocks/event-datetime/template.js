@@ -32,7 +32,7 @@ import {
 	moment as momentUtil,
 	time,
 } from '@moderntribe/common/utils';
-import { getSetting, getConstants } from '@moderntribe/events/editor/settings';
+import { editor, settings, editorConstants } from '@moderntribe/common/utils/globals';
 import './style.pcss';
 import HumanReadableInput from './human-readable-input/container';
 import PluginDateTimeBlockHooks from './hooks';
@@ -50,7 +50,9 @@ const {
 	toTime,
 	isSameYear,
 } = momentUtil;
-FORMATS.date = getSetting( 'dateWithYearFormat', __( 'F j', 'events-gutenberg' ) );
+FORMATS.date = settings() && settings().dateWithYearFormat
+	? settings().dateWithYearFormat
+	: __( 'F j', 'events-gutenberg' );
 
 class EventDateTime extends Component {
 	static propTypes = {
@@ -107,7 +109,7 @@ class EventDateTime extends Component {
 		const { cost, currencyPosition, currencySymbol, setCost } = this.props;
 
 		// Bail when not classic
-		if ( ! tribe_blocks_editor || ! tribe_blocks_editor.is_classic ) {
+		if ( ! editor() || ! editor().is_classic ) {
 			return null;
 		}
 
@@ -231,7 +233,7 @@ class EventDateTime extends Component {
 				);
 			case 'all-day':
 				return (
-					<span className={ classNames( 'tribe-editor__separator', className ) }>ALL DAY</span>
+					<span className={ classNames( 'tribe-editor__separator', className ) }>{ __( 'ALL DAY', 'events-gutenberg' ) }</span>
 				);
 			default:
 				return null;
@@ -249,7 +251,7 @@ class EventDateTime extends Component {
 
 	renderDashboard = () => {
 		const { isDashboardOpen, multiDay, allDay } = this.props;
-		const hideUpsell = getConstants().hide_upsell === 'true';
+		const hideUpsell = editorConstants().hide_upsell === 'true';
 
 		return (
 			<Dashboard isOpen={ isDashboardOpen }>
@@ -475,36 +477,39 @@ class EventDateTime extends Component {
 			onTimeZoneVisibilityChange,
 		} = this.props;
 
-		return ( <InspectorControls key="inspector">
-			<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
-				<TextControl
-					label={ __( 'Date Time Separator', 'events-gutenberg' ) }
-					value={ separatorDate }
-					onChange={ setSeparatorDate }
-					className="tribe-editor__date-time__date-time-separator-setting"
-					maxLength="2"
-				/>
-				<TextControl
-					label={ __( 'Time Range Separator', 'events-gutenberg' ) }
-					value={ separatorTime }
-					onChange={ setSeparatorTime }
-					className="tribe-editor__date-time__time-range-separator-setting"
-					maxLength="2"
-				/>
-				<SelectControl
-					label={ __( 'Time Zone', 'events-gutenberg' ) }
-					value={ timeZone }
-					onChange={ setTimeZone }
-					options={ timezonesAsSelectData() }
-					className="tribe-editor__date-time__time-zone-setting"
-				/>
-				<ToggleControl
-					label={ __( 'Show Time Zone', 'events-gutenberg' ) }
-					checked={ showTimeZone }
-					onChange={ onTimeZoneVisibilityChange }
-				/>
-			</PanelBody>
-		</InspectorControls> );
+		// @todo: modify so this code does not fire unless the block is selected
+		return (
+			<InspectorControls key="inspector">
+				<PanelBody title={ __( 'Date Time Settings', 'events-gutenberg' ) }>
+					<TextControl
+						label={ __( 'Date Time Separator', 'events-gutenberg' ) }
+						value={ separatorDate }
+						onChange={ setSeparatorDate }
+						className="tribe-editor__date-time__date-time-separator-setting"
+						maxLength="2"
+					/>
+					<TextControl
+						label={ __( 'Time Range Separator', 'events-gutenberg' ) }
+						value={ separatorTime }
+						onChange={ setSeparatorTime }
+						className="tribe-editor__date-time__time-range-separator-setting"
+						maxLength="2"
+					/>
+					<SelectControl
+						label={ __( 'Time Zone', 'events-gutenberg' ) }
+						value={ timeZone }
+						onChange={ setTimeZone }
+						options={ timezonesAsSelectData() }
+						className="tribe-editor__date-time__time-zone-setting"
+					/>
+					<ToggleControl
+						label={ __( 'Show Time Zone', 'events-gutenberg' ) }
+						checked={ showTimeZone }
+						onChange={ onTimeZoneVisibilityChange }
+					/>
+				</PanelBody>
+			</InspectorControls>
+		);
 	}
 
 	render() {

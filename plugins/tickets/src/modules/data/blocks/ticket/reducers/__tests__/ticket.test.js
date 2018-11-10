@@ -104,9 +104,9 @@ describe( 'Individual Ticket reducer', () => {
 	} );
 
 	test( 'Set has been created value', () => {
-		expect( ticket( DEFAULT_STATE, actions.seTicketHasBeenCreated( blockId, false ) ) )
+		expect( ticket( DEFAULT_STATE, actions.setTicketHasBeenCreated( blockId, false ) ) )
 			.toMatchSnapshot();
-		expect( ticket( DEFAULT_STATE, actions.seTicketHasBeenCreated( blockId, true ) ) )
+		expect( ticket( DEFAULT_STATE, actions.setTicketHasBeenCreated( blockId, true ) ) )
 			.toMatchSnapshot();
 	} );
 

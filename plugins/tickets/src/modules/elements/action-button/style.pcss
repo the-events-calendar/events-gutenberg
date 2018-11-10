@@ -1,5 +1,4 @@
-.tribe-editor__action-button,
-.tribe-editor__action-link {
+.tribe-editor__action-button {
 	display: flex;
 	align-items: center;
 	font-family: Helvetica, sans-serif, arial;
@@ -7,8 +6,11 @@
 	line-height: 18px;
 	letter-spacing: 0.38px;
 	color: #545D66;
+	text-decoration: none;
+	transition: none;
 
 	& > svg {
+		width: 20px;
 		fill: #545D66;
 
 		path {
@@ -44,13 +46,6 @@
 				}
 			}
 		}
-	}
-}
-
-.tribe-editor__action-link {
-	text-decoration: none;
-	svg {
-		margin-right: 6px;
 	}
 }
 

@@ -60,15 +60,6 @@ interface Tribe__Gutenberg__Common__Blocks__Interface {
 	public function assets();
 
 	/**
-	 * Fetches which ever is the plugin we are dealing with
-	 *
-	 * @since  0.1.0-alpha
-	 *
-	 * @return mixed
-	 */
-	public function plugin();
-
-	/**
 	 * Attach any specific hook to the current block.
 	 *
 	 * @since 0.2.4-alpha

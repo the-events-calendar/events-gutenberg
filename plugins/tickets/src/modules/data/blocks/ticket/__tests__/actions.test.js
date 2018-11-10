@@ -152,8 +152,8 @@ describe( 'Gutenberg actions', () => {
 		} );
 
 		test( 'Ticket has been created', () => {
-			expect( actions.seTicketHasBeenCreated( blockId, true ) ).toMatchSnapshot();
-			expect( actions.seTicketHasBeenCreated( blockId, false ) ).toMatchSnapshot();
+			expect( actions.setTicketHasBeenCreated( blockId, true ) ).toMatchSnapshot();
+			expect( actions.setTicketHasBeenCreated( blockId, false ) ).toMatchSnapshot();
 		} );
 
 		test( 'Ticket is loading', () => {
