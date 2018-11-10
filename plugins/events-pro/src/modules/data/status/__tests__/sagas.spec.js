@@ -1,12 +1,14 @@
 /**
  * External dependencies
  */
+import { sprintf } from '@wordpress/i18n';
 import { some, noop } from 'lodash';
 import { race, take, select, call, put } from 'redux-saga/effects';
 import { delay, eventChannel } from 'redux-saga';
 import { select as wpSelect, subscribe, dispatch as wpDispatch } from '@wordpress/data';
 import 'whatwg-fetch';
 import { allowEdits, disableEdits } from '@moderntribe/events/data/blocks/datetime/actions';
+import { moment as momentUtils } from '@moderntribe/common/utils';
 
 /**
  * Internal dependencies
@@ -104,7 +106,7 @@ describe( 'Status sagas', () => {
 	} );
 
 	describe( 'pollUntilSeriesCompleted', () => {
-		it( 'should poll if not completed', () => {
+		it( 'should poll if not done', () => {
 			const gen = sagas.pollUntilSeriesCompleted();
 
 			expect( gen.next().value ).toEqual(
@@ -115,7 +117,7 @@ describe( 'Status sagas', () => {
 				call( sagas.fetchStatus )
 			);
 
-			const response = { completed: false };
+			const response = { done: false, items_created: 1, last_created_at: '2019-11-07 00:00:00' };
 			expect( gen.next( response ).value ).toEqual(
 				put( actions.setSeriesQueueStatus( response ) )
 			);
@@ -125,6 +127,14 @@ describe( 'Status sagas', () => {
 					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
 					sagas.NOTICES[ sagas.NOTICE_EDITING_SERIES ],
 					{ id: sagas.NOTICE_EDITING_SERIES, isDismissible: false }
+				)
+			);
+
+			expect( gen.next().value ).toEqual(
+				 call(
+					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+					`${ sprintf( sagas.NOTICES[ sagas.NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ], response.items_created ) } ${ sprintf( sagas.NOTICES[ sagas.NOTICE_PROGRESS_ON_SERIES_CREATION ], momentUtils.toDate( momentUtils.toMoment( response.last_created_at ) ) ) }`,
+					{ id: sagas.NOTICE_PROGRESS_ON_SERIES_CREATION, isDismissible: true }
 				)
 			);
 
@@ -138,7 +148,7 @@ describe( 'Status sagas', () => {
 
 			expect( gen.next().done ).toBeFalsy();
 		} );
-		it( 'should exit when completed', () => {
+		it( 'should exit when done', () => {
 			const gen = sagas.pollUntilSeriesCompleted();
 
 			expect( gen.next().value ).toEqual(
@@ -149,7 +159,7 @@ describe( 'Status sagas', () => {
 				call( sagas.fetchStatus )
 			);
 
-			const response = { completed: true };
+			const response = { done: true, items_created: 3, last_created_at: '2019-11-07 00:00:00' };
 			expect( gen.next( response ).value ).toEqual(
 				put( actions.setSeriesQueueStatus( response ) )
 			);
@@ -159,6 +169,14 @@ describe( 'Status sagas', () => {
 					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
 					sagas.NOTICES[ sagas.NOTICE_EDITING_SERIES ],
 					{ id: sagas.NOTICE_EDITING_SERIES, isDismissible: false }
+				)
+			);
+
+			expect( gen.next( true ).value ).toEqual(
+				 call(
+					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+					`${ sprintf( sagas.NOTICES[ sagas.NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ], response.items_created ) } ${ sprintf( sagas.NOTICES[ sagas.NOTICE_PROGRESS_ON_SERIES_CREATION ], momentUtils.toDate( momentUtils.toMoment( response.last_created_at ) ) ) }`,
+					{ id: sagas.NOTICE_PROGRESS_ON_SERIES_CREATION, isDismissible: true }
 				)
 			);
 
@@ -174,6 +192,13 @@ describe( 'Status sagas', () => {
 				call(
 					[ wpDispatch( 'core/editor' ), 'removeNotice' ],
 					sagas.NOTICE_EDITING_SERIES
+				)
+			);
+
+			expect( gen.next().value ).toEqual(
+				call(
+					[ wpDispatch( 'core/editor' ), 'removeNotice' ],
+					sagas.NOTICE_PROGRESS_ON_SERIES_CREATION
 				)
 			);
 

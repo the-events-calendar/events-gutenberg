@@ -1,7 +1,8 @@
+/* eslint-disable max-len, camelcase */
 /**
  * External dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf, _n } from '@wordpress/i18n';
 import { some } from 'lodash';
 import { race, take, select, call, put } from 'redux-saga/effects';
 import { delay, eventChannel } from 'redux-saga';
@@ -9,6 +10,7 @@ import { select as wpSelect, subscribe, dispatch as wpDispatch } from '@wordpres
 import 'whatwg-fetch';
 import { allowEdits, disableEdits } from '@moderntribe/events/data/blocks/datetime/actions';
 import { restNonce } from '@moderntribe/common/src/modules/utils/globals';
+import { moment as momentUtils } from '@moderntribe/common/utils';
 
 /**
  * Internal dependencies
@@ -21,8 +23,12 @@ import * as selectors from './selectors';
 // ─── NOTICES ─────────────────────────────────────────────────────────────────────
 //
 export const NOTICE_EDITING_SERIES = 'NOTICE_EDITING_SERIES';
+export const NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT = 'NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT';
+export const NOTICE_PROGRESS_ON_SERIES_CREATION = 'NOTICE_PROGRESS_ON_SERIES_CREATION';
 export const NOTICES = {
-	[ NOTICE_EDITING_SERIES ]: __( 'You are currently editing all events in a recurring series.' ),
+	[ NOTICE_EDITING_SERIES ]: __( 'You are currently editing all events in a recurring series.', 'events-gutenberg' ),
+	[ NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ]: _n( '%d instance', '%d instances', 1, 'events-gutenberg' ),
+	[ NOTICE_PROGRESS_ON_SERIES_CREATION ]: __( 'of this event have been created through %s.', 'events-gutenberg' ),
 };
 
 /**
@@ -72,14 +78,26 @@ export function* pollUntilSeriesCompleted() {
 		const isCompleted = response === false; // If false, no edits being done
 
 		if ( isCompleted ) {
-			yield put( actions.setSeriesQueueStatus( { completed: isCompleted } ) );
+			yield put( actions.setSeriesQueueStatus( { done: isCompleted } ) );
 		} else {
 			yield put( actions.setSeriesQueueStatus( response ) );
+
+			const { items_created, last_created_at } = response;
+
+			const date = momentUtils.toDate( momentUtils.toMoment( last_created_at ) );
+
 			// Show editing notice
 			yield call(
 				[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
 				NOTICES[ NOTICE_EDITING_SERIES ],
 				{ id: NOTICE_EDITING_SERIES, isDismissible: false }
+			);
+
+			// Show progress notice
+			yield call(
+				[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+				`${ sprintf( NOTICES[ NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ], items_created ) } ${ sprintf( NOTICES[ NOTICE_PROGRESS_ON_SERIES_CREATION ], date ) }`,
+				{ id: NOTICE_PROGRESS_ON_SERIES_CREATION, isDismissible: true }
 			);
 		}
 
@@ -89,6 +107,10 @@ export function* pollUntilSeriesCompleted() {
 			yield call(
 				[ wpDispatch( 'core/editor' ), 'removeNotice' ],
 				NOTICE_EDITING_SERIES
+			);
+			yield call(
+				[ wpDispatch( 'core/editor' ), 'removeNotice' ],
+				NOTICE_PROGRESS_ON_SERIES_CREATION
 			);
 			break; // We done
 		}
