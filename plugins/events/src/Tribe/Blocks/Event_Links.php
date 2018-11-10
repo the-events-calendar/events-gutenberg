@@ -67,7 +67,7 @@ extends Tribe__Gutenberg__Common__Blocks__Abstract {
 		tribe_asset(
 			tribe( 'gutenberg.events.plugin' ),
 			'tribe-events-block-' . $this->slug(),
-			$this->slug() . '/frontend.css',
+			'app/' . $this->slug() . '/frontend.css',
 			array(),
 			'wp_enqueue_scripts',
 			array(

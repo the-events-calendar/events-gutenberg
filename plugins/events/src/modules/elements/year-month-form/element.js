@@ -16,7 +16,7 @@ const YearMonthForm = ( { today, date, localeUtils, onChange } ) => {
 	const years = [];
 	const yearsBack = 5;
 
-	for ( let i = currentYear - yearsBack; i <= toMonth.getFullYear(); i += 1 ) {
+	for ( let i = currentYear - yearsBack; i <= toMonth.getFullYear(); i++ ) {
 		years.push( i );
 	}
 

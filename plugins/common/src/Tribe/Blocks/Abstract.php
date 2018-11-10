@@ -20,7 +20,22 @@ implements Tribe__Gutenberg__Common__Blocks__Interface {
 	 * @return string
 	 */
 	public function name() {
-		return $this->namespace . '/' . $this->slug();
+		if ( false === strpos( $this->slug(), $this->namespace . '/' ) ) {
+			return $this->namespace . '/' . $this->slug();
+		} else {
+			return $this->slug();
+		}
+	}
+
+	/**
+	 * Return the namespace to child or external sources
+	 *
+	 * @since TBD
+	 *
+	 * @return string
+	 */
+	public function get_namespace() {
+		return $this->namespace;
 	}
 
 	/*
@@ -110,17 +125,6 @@ implements Tribe__Gutenberg__Common__Blocks__Interface {
 	 */
 	public function ajax() {
 		wp_send_json_error( esc_attr__( 'Problem loading the block, please remove this block to restart.', 'events-gutenberg' ) );
-	}
-
-	/**
-	 * Fetches which ever is the plugin we are dealing with
-	 *
-	 * @since  0.1.0-alpha
-	 *
-	 * @return mixed
-	 */
-	public function plugin() {
-		return tribe( 'gutenberg' );
 	}
 
 	/**

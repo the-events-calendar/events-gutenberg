@@ -11,6 +11,7 @@ import validator from 'validator';
  */
 import { Component } from '@wordpress/element';
 import { RichText } from '@wordpress/editor';
+import { __ } from '@wordpress/i18n';
 
 import './style.pcss';
 
@@ -72,21 +73,21 @@ export default class OrganizerForm extends Component {
 						type="tel"
 						name="phone"
 						value={ phone }
-						placeholder="Add Phone"
+						placeholder={ __( 'Add Phone', 'events-gutenberg' ) }
 						onChange={ this.saveEventField( 'phone' ) }
 					/>
 					<input
 						type="url"
 						name="website"
 						value={ website }
-						placeholder="Add website"
+						placeholder={ __( 'Add website', 'events-gutenberg' ) }
 						onChange={ this.saveEventField( 'website' ) }
 					/>
 					<input
 						type="email"
 						name="email"
 						value={ email }
-						placeholder="Add email"
+						placeholder={ __( 'Add email', 'events-gutenberg' ) }
 						onChange={ this.saveEventField( 'email' ) }
 					/>
 				</div>

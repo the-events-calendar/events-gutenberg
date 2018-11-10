@@ -27,7 +27,7 @@ const CheckboxInput = ( {
 );
 
 CheckboxInput.propTypes = {
-	checkbox: PropTypes.bool,
+	checked: PropTypes.bool,
 	className: PropTypes.string,
 	onChange: PropTypes.func,
 };

@@ -60,7 +60,6 @@ const onConfirmClick = ( state, dispatch, ownProps ) => () => {
 	dispatch( actions.setRSVPHasChanges( false ) );
 
 	if ( ! selectors.getRSVPCreated( state ) ) {
-		dispatch( actions.createRSVP() );
 		dispatch( thunks.createRSVP( {
 			...payload,
 			postId: select( 'core/editor' ).getCurrentPostId(),

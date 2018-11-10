@@ -46,7 +46,7 @@ class SKU extends PureComponent {
 	render() {
 		const { value, label, tooltip } = this.props;
 		return (
-			<div className="tribe-editor__container-panel__row">
+			<div className="tribe-editor__container-panel__row tribe-editor__container-panel__row--sku">
 				<LabelWithTooltip
 					className="tribe-editor__container-panel__label"
 					forId={ this.id }

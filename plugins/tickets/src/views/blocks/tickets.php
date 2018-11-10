@@ -17,6 +17,9 @@ if ( ! $provider ) {
 	return false;
 }
 ?>
+
+<?php $this->template( 'blocks/attendees/order-links', array( 'type' => 'ticket' ) ); ?>
+
 <form
 	id="tribe-block__tickets"
 	action="<?php echo esc_url( $cart_url ) ?>"
@@ -31,6 +34,6 @@ if ( ! $provider ) {
 		<?php $this->template( 'blocks/tickets/item', array( 'ticket' => $ticket, 'key' => $key ) ); ?>
 	<?php endforeach; ?>
 	<?php if ( 0 < count( $tickets ) ) : ?>
-		<?php $this->template( 'blocks/tickets/button-submit', array( 'provider' => $provider, 'provider_id' => $provider_id, 'ticket' => $ticket ) ); ?>
+		<?php $this->template( 'blocks/tickets/submit', array( 'provider' => $provider, 'provider_id' => $provider_id, 'ticket' => $ticket ) ); ?>
 	<?php endif; ?>
 </form>

@@ -79,7 +79,7 @@ describe( 'RSVP block selectors', () => {
 	} );
 
 	it( 'should return the total available tickets', () => {
-		expect( selectors.getRSVPAvailable( state ) ).toBe( 0 );
+		expect( selectors.getRSVPAvailable( state ) ).toBe( -1 );
 	} );
 
 	it( 'should return the not going responses', () => {

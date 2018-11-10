@@ -325,26 +325,6 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 		 */
 		$gmaps_api_url = apply_filters( 'tribe_events_google_maps_api', $gmaps_api_url );
 
-		tribe_asset(
-			$plugin,
-			'tribe-events-editor-blocks-gmaps-api',
-			$gmaps_api_url,
-			array(),
-			'enqueue_block_editor_assets',
-			array(
-				'type'         => 'js',
-				'in_footer'    => false,
-				'localize'     => array(
-					'name' => 'tribe_blocks_editor_google_maps_api',
-					'data' => array(
-						'zoom' => $gmaps_api_zoom,
-						'key' => $gmaps_api_key,
-					),
-				),
-				'conditionals' => array( $this, 'is_events_post_type' ),
-			)
-		);
-
 		$js_config = array(
 			'admin_url' => admin_url(),
 			'timeZone' => array(
@@ -365,15 +345,28 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 			),
 		);
 
+		$is_classic_editor = $this->post_is_from_classic_editor( tribe_get_request_var( 'post', 0 ) );
+
+		/**
+		 * @todo: Put js config into common
+		 */
 		tribe_asset(
 			$plugin,
-			'tribe-events-editor-elements',
-			'elements.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			'tribe-events-editor-blocks-gmaps-api',
+			$gmaps_api_url,
+			array(),
 			'enqueue_block_editor_assets',
 			array(
+				'type'         => 'js',
 				'in_footer'    => false,
 				'localize'     => array(
+					array(
+						'name' => 'tribe_blocks_editor_google_maps_api',
+						'data' => array(
+							'zoom' => $gmaps_api_zoom,
+							'key' => $gmaps_api_key,
+						),
+					),
 					array(
 						'name' => 'tribe_js_config',
 						/**
@@ -394,6 +387,28 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 						'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
 					),
 					array(
+						'name' => 'tribe_blocks_editor_price_settings',
+						'data' => array(
+							'default_currency_symbol'   => tribe_get_option( 'defaultCurrencySymbol', '$' ),
+							'default_currency_position' => (
+								tribe_get_option( 'reverseCurrencyPosition', false ) ? 'suffix' : 'prefix'
+							),
+							'is_new_event'              => tribe( 'context' )->is_new_post(),
+						),
+					),
+					array(
+						'name' => 'tribe_blocks_editor_constants',
+						'data' => array(
+							'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ) ? 'true' : 'false',
+						),
+					),
+					array(
+						'name' => 'tribe_blocks_editor',
+						'data' => array(
+							'is_classic' => $is_classic_editor,
+						),
+					),
+					array(
 						'name' => 'tribe_date_settings',
 						'data' => array( $this, 'get_date_settings' ),
 					),
@@ -407,74 +422,94 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 					),
 				),
 				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority' => 1
 			)
-		);
-
-		$localize_blocks = array(
-			array(
-				'name' => 'tribe_blocks_editor_settings',
-				'data' => tribe( 'gutenberg.events.settings' )->get_options(),
-			),
-			array(
-				'name' => 'tribe_blocks_editor_timezone_html',
-				'data' => tribe_events_timezone_choice( Tribe__Events__Timezones::get_event_timezone_string() ),
-			),
-			array(
-				'name' => 'tribe_blocks_editor_price_settings',
-				'data' => array(
-					'default_currency_symbol'   => tribe_get_option( 'defaultCurrencySymbol', '$' ),
-					'default_currency_position' => (
-						tribe_get_option( 'reverseCurrencyPosition', false ) ? 'suffix' : 'prefix'
-					),
-					'is_new_event'              => tribe( 'context' )->is_new_post(),
-				),
-			),
-			array(
-				'name' => 'tribe_blocks_editor_constants',
-				'data' => array(
-					'hide_upsell' => ( defined( 'TRIBE_HIDE_UPSELL' ) && TRIBE_HIDE_UPSELL ) ? 'true' : 'false',
-				),
-			),
-		);
-
-		$is_classic_editor = $this->post_is_from_classic_editor( tribe_get_request_var( 'post', 0 ) );
-
-		$localize_blocks[] = array(
-			'name' => 'tribe_blocks_editor',
-			'data' => array(
-				'is_classic' => $is_classic_editor,
-			),
 		);
 
 		tribe_asset(
 			$plugin,
-			'tribe-events-editor-blocks',
-			'blocks.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'tribe-events-editor-blocks-gmaps-api', 'tribe-events-editor-elements' ),
+			'tribe-events-editor-data',
+			'app/data.js',
+			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
-				'localize'     => $localize_blocks,
+				'in_footer' => false,
+				'localize' => array(),
 				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 100,
 			)
 		);
-
 		tribe_asset(
 			$plugin,
-			'tribe-block-editor-element',
-			'element.css',
+			'tribe-events-gutenberg-editor',
+			'app/editor.js',
 			array(),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer'    => false,
+				'in_footer' => false,
+				'localize'  => array(),
 				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 102,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-icons',
+			'app/icons.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 103,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-hoc',
+			'app/hoc.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 104,
+			)
+		);
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-elements',
+			'app/elements.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 105,
+			)
+		);
+
+		tribe_asset(
+			$plugin,
+			'tribe-events-gutenberg-blocks',
+			'app/blocks.js',
+			array(),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'conditionals' => array( $this, 'is_events_post_type' ),
+				'priority'  => 106,
 			)
 		);
 
 		tribe_asset(
 			$plugin,
 			'tribe-block-editor',
-			'editor.css',
+			'app/editor.css',
 			array(),
 			'enqueue_block_editor_assets',
 			array(
@@ -486,7 +521,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 		tribe_asset(
 			$plugin,
 			'tribe-block-editor-blocks',
-			'blocks.css',
+			'app/blocks.css',
 			array(),
 			'enqueue_block_editor_assets',
 			array(

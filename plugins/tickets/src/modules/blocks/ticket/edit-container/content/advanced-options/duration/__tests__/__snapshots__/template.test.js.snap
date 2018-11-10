@@ -2,7 +2,7 @@
 
 exports[`Ticket Duration picker and label default properties 1`] = `
 <div
-  className="tribe-editor__container-panel__row"
+  className="tribe-editor__container-panel__row tribe-editor__container-panel__row--duration"
 >
   <div
     className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__container-panel__label"

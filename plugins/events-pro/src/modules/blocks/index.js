@@ -9,13 +9,14 @@ import { registerBlockType } from '@wordpress/blocks';
 import recurrence from '@moderntribe/events-pro/blocks/recurrence';
 import recurrenceRule from '@moderntribe/events-pro/blocks/recurrence-rule';
 import recurrenceException from '@moderntribe/events-pro/blocks/recurrence-exception';
+import { addAdditionalFields } from '@moderntribe/events-pro/blocks/additional-fields/utils';
 import { initStore } from '@moderntribe/events-pro/data';
 
-const blocks = [
+const blocks = addAdditionalFields( [
 	recurrence,
 	recurrenceRule,
 	recurrenceException,
-];
+] );
 
 blocks.forEach( block => {
 	const blockName = `tribe/${ block.id }`;
@@ -28,4 +29,3 @@ blocks.forEach( block => {
 initStore();
 
 export default blocks;
-

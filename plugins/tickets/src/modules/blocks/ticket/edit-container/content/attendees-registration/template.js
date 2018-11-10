@@ -13,31 +13,39 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { LabelWithModal } from '@moderntribe/common/elements';
+import { LabelWithLink } from '@moderntribe/common/elements';
 import './style.pcss';
 
-/* eslint-disable-next-line max-len */
-const AttendeesRegistration = ( { attendeeRegistrationLabel, attendeeButtonLabel, closeButtonLabel } ) => (
-	<LabelWithModal
-		className="tribe-editor__ticket__attendee-registration"
-		closeButtonLabel={ closeButtonLabel }
-		label={ attendeeRegistrationLabel }
-		modalButtonLabel={ attendeeButtonLabel }
-	/>
+const helperText = __( 'Save your ticket to enable attendee registration fields', 'events-gutenberg' );
+
+const label = __( 'Attendee Registration', 'events-gutenberg' );
+
+const linkText = __( '+ Add', 'events-gutenberg' );
+
+const AttendeesRegistration = ( {
+	attendeeRegistrationURL,
+	isCreated,
+}) => (
+	<div className="tribe-editor__ticket__attendee-registration">
+		<LabelWithLink
+			className="tribe-editor__ticket__attendee-registration-label-with-link"
+			label={ label }
+			linkDisabled={ ! isCreated }
+			linkHref={ attendeeRegistrationURL }
+			linkTarget="_blank"
+			linkText={ linkText }
+		/>
+		{ ! isCreated && (
+			<span className="tribe-editor__ticket__attendee-registration-helper-text">
+				{ helperText }
+			</span>
+		) }
+	</div>
 );
 
 AttendeesRegistration.propTypes = {
-	attendeeRegistrationLabel: PropTypes.string,
-	attendeeButtonLabel: PropTypes.string,
-	closeButtonLabel: PropTypes.string,
-	attendeeButtonClick: PropTypes.func,
-};
-
-AttendeesRegistration.defaultProps = {
-	attendeeRegistrationLabel: __( 'Attendee Registration', 'events-gutenberg' ),
-	attendeeButtonLabel: __( '+Add', 'events-gutenberg' ),
-	closeButtonLabel: __( 'close', 'events-gutenberg' ),
-	attendeeButtonClick: noop,
+	attendeeRegistrationURL: PropTypes.string,
+	isCreated: PropTypes.bool,
 };
 
 export default AttendeesRegistration;

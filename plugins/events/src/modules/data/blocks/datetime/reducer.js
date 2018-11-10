@@ -12,15 +12,15 @@ import {
 	moment as momentUtil,
 	time,
 } from '@moderntribe/common/utils';
-import { getSetting } from '@moderntribe/events/editor/settings';
+import { settings } from '@moderntribe/common/utils/globals';
 import * as types from './types';
 
 export const DEFAULT_STATE = {
 	start: momentUtil.toDateTime( momentUtil.roundTime( moment() ) ),
 	end: momentUtil.toDateTime( momentUtil.roundTime( moment() ).add( time.HALF_HOUR_IN_SECONDS, 'seconds' ) ),
 	naturalLanguage: '',
-	dateTimeSeparator: getSetting( 'dateTimeSeparator', __( '@', 'events-gutenberg' ) ),
-	timeRangeSeparator: getSetting( 'timeRangeSeparator', __( '-', 'events-gutenberg' ) ),
+	dateTimeSeparator: settings() && settings().dateTimeSeparator ? settings().dateTimeSeparator : __( '@', 'events-gutenberg' ),
+	timeRangeSeparator: settings() && settings().timeRangeSeparator ? settings().timeRangeSeparator : __( '-', 'events-gutenberg' ),
 	allDay: false,
 	multiDay: false,
 	timeZone: date.FORMATS.TIMEZONE.string,

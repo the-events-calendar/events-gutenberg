@@ -75,6 +75,7 @@ const createOrUpdateRSVP = ( method ) => ( payload ) => ( dispatch ) => {
 			start: () => dispatch( actions.setRSVPIsLoading( true ) ),
 			success: ( { body } ) => {
 				if ( method === METHODS.POST ) {
+					dispatch( actions.createRSVP() );
 					dispatch( actions.setRSVPId( body.id ) );
 				}
 				dispatch( actions.setRSVPIsLoading( false ) );

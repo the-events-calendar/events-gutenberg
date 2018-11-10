@@ -11,6 +11,7 @@ import { select as wpSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
+import * as constants from './constants';
 import * as types from './types';
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -165,9 +166,10 @@ export function* createNewTicket( action ) {
 		yield all( [
 			put( actions.setTicketIsEditing( blockId, false ) ),
 			put( actions.setTicketId( blockId, ticket.ID ) ),
-			put( actions.seTicketHasBeenCreated( blockId, true ) ),
+			put( actions.setTicketHasBeenCreated( blockId, true ) ),
 			put( actions.setActiveChildBlockId( '' ) ),
 			put( actions.setTicketAvailable( blockId, ticket.capacity ) ),
+			put( actions.setTicketProvider( blockId, constants.PROVIDER_CLASS_TO_PROVIDER_MAPPING[ ticket.provider_class ] ) ),
 		] );
 	} catch ( e ) {
 		/**
@@ -266,7 +268,7 @@ export function* setTicketInitialState( action ) {
 	}
 
 	yield all( [
-		put( actions.seTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
+		put( actions.setTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
 		put( actions.setTicketId( clientId, values.ticketId ) ),
 		put( actions.setTicketDateIsPristine( clientId, values.dateIsPristine ) ),
 		put( actions.setStartDate( clientId, startDate ) ),
