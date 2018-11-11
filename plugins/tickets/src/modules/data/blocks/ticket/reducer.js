@@ -2,10 +2,11 @@
  * Internal dependencies
  */
 import tickets from './reducers/tickets';
+import { DEFAULT_STATE as HEADER_DEFAULT_STATE } from './reducers/header';
 import * as types from './types';
 
 export const DEFAULT_STATE = {
-	header: null,
+	header: HEADER_DEFAULT_STATE,
 	isSettingsOpen: false,
 	isParentBlockSelected: false,
 	isChildBlockSelected: false,

@@ -3,7 +3,11 @@
 exports[`Reducer should set the active child block id 1`] = `
 Object {
   "activeChildBlockId": "modern-tribe",
-  "header": null,
+  "header": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
   "isChildBlockSelected": false,
   "isParentBlockLoading": false,
   "isParentBlockSelected": false,
@@ -39,7 +43,11 @@ Object {
 exports[`Reducer should set the is child block selected 1`] = `
 Object {
   "activeChildBlockId": "",
-  "header": null,
+  "header": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
   "isChildBlockSelected": true,
   "isParentBlockLoading": false,
   "isParentBlockSelected": false,
@@ -57,7 +65,11 @@ Object {
 exports[`Reducer should set the is parent block loading 1`] = `
 Object {
   "activeChildBlockId": "",
-  "header": null,
+  "header": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
   "isChildBlockSelected": false,
   "isParentBlockLoading": false,
   "isParentBlockSelected": undefined,
@@ -75,7 +87,11 @@ Object {
 exports[`Reducer should set the is parent block selected 1`] = `
 Object {
   "activeChildBlockId": "",
-  "header": null,
+  "header": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
   "isChildBlockSelected": false,
   "isParentBlockLoading": undefined,
   "isParentBlockSelected": false,
@@ -93,7 +109,11 @@ Object {
 exports[`Reducer should set the is settings open 1`] = `
 Object {
   "activeChildBlockId": "",
-  "header": null,
+  "header": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
   "isChildBlockSelected": false,
   "isParentBlockLoading": false,
   "isParentBlockSelected": false,
@@ -111,7 +131,11 @@ Object {
 exports[`Reducer should set the provider 1`] = `
 Object {
   "activeChildBlockId": "",
-  "header": null,
+  "header": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
   "isChildBlockSelected": false,
   "isParentBlockLoading": false,
   "isParentBlockSelected": false,
@@ -129,7 +153,11 @@ Object {
 exports[`Reducer should set the shared capacity 1`] = `
 Object {
   "activeChildBlockId": "",
-  "header": null,
+  "header": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
   "isChildBlockSelected": false,
   "isParentBlockLoading": false,
   "isParentBlockSelected": false,
@@ -147,7 +175,11 @@ Object {
 exports[`Reducer should set the temp shared capacity 1`] = `
 Object {
   "activeChildBlockId": "",
-  "header": null,
+  "header": Object {
+    "alt": "",
+    "id": 0,
+    "src": "",
+  },
   "isChildBlockSelected": false,
   "isParentBlockLoading": false,
   "isParentBlockSelected": false,
