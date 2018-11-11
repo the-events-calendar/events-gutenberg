@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import tickets, { DEFAULT_STATE as TICKETS_DEFAULT_STATE } from './reducers/tickets';
+import tickets from './reducers/tickets';
 import * as types from './types';
 
 export const DEFAULT_STATE = {
@@ -14,7 +14,7 @@ export const DEFAULT_STATE = {
 	provider: '',
 	sharedCapacity: '',
 	tempSharedCapacity: '',
-	tickets: TICKETS_DEFAULT_STATE,
+	tickets: tickets( undefined, {} ),
 };
 
 export default ( state = DEFAULT_STATE, action ) => {
@@ -22,47 +22,47 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_TICKETS_HEADER:
 			return {
 				...state,
-					header: actions.payload.header,
+				header: action.payload.header,
 			};
 		case types.SET_TICKETS_IS_SETTINGS_OPEN:
 			return {
 				...state,
-					isSettingsOpen: actions.payload.isSettingsOpen,
+				isSettingsOpen: action.payload.isSettingsOpen,
 			};
 		case types.SET_TICKETS_IS_PARENT_BLOCK_LOADING:
 			return {
 				...state,
-					isParentBlockSelected: actions.payload.isParentBlockSelected,
+				isParentBlockSelected: action.payload.isParentBlockSelected,
 			};
 		case types.SET_TICKETS_IS_CHILD_BLOCK_SELECTED:
 			return {
 				...state,
-					isChildBlockSelected: actions.payload.isChildBlockSelected,
+				isChildBlockSelected: action.payload.isChildBlockSelected,
 			};
 		case types.SET_TICKETS_IS_PARENT_BLOCK_SELECTED:
 			return {
 				...state,
-					isParentBlockLoading: actions.payload.isParentBlockLoading,
+				isParentBlockLoading: action.payload.isParentBlockLoading,
 			};
 		case types.SET_TICKETS_ACTIVE_CHILD_BLOCK_ID:
 			return {
 				...state,
-					activeChildBlockId: actions.payload.activeChildBlockId,
+				activeChildBlockId: action.payload.activeChildBlockId,
 			};
 		case types.SET_TICKETS_PROVIDER:
 			return {
 				...state,
-					provider: actions.payload.provider,
+				provider: action.payload.provider,
 			};
 		case types.SET_TICKETS_SHARED_CAPACITY:
 			return {
 				...state,
-					sharedCapacity: actions.payload.sharedCapacity,
+				sharedCapacity: action.payload.sharedCapacity,
 			};
 		case types.SET_TICKETS_TEMP_SHARED_CAPACITY:
 			return {
 				...state,
-					tempSharedCapacity: actions.payload.tempSharedCapacity,
+				tempSharedCapacity: action.payload.tempSharedCapacity,
 			};
 		case types.SET_TICKET_TITLE:
 		case types.SET_TICKET_DESCRIPTION:
@@ -103,5 +103,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 				...state,
 				tickets: tickets( state.tickets, action ),
 			};
+		default:
+			return state;
 	}
 };
