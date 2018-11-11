@@ -9,11 +9,6 @@ import React from 'react';
 import CapacityTable from './../template';
 
 describe( '<CapacityTable />', () => {
-	test( 'title property', () => {
-		const component = renderer.create( <CapacityTable title="Modern Tribe" /> );
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
-
 	test( 'shared property', () => {
 		const component = renderer.create(
 			<CapacityTable

@@ -11,13 +11,14 @@ exports[`<QuantityBar> independent capacity 1`] = `
   className="tribe-editor__quantity-bar"
 >
   <span
-    className="tribe-editor__quantity-bar--available"
+    className="tribe-editor__quantity-bar__bar tribe-editor__quantity-bar__bar--sold"
     style={
       Object {
         "width": "20.00%",
       }
     }
   />
+  0
 </div>
 `;
 
@@ -26,7 +27,7 @@ exports[`<QuantityBar> shared capacity 1`] = `
   className="tribe-editor__quantity-bar"
 >
   <span
-    className="tribe-editor__quantity-bar--shared"
+    className="tribe-editor__quantity-bar__bar tribe-editor__quantity-bar__bar--shared-sold"
     style={
       Object {
         "width": "80.00%",
@@ -34,13 +35,14 @@ exports[`<QuantityBar> shared capacity 1`] = `
     }
   />
   <span
-    className="tribe-editor__quantity-bar--available"
+    className="tribe-editor__quantity-bar__bar tribe-editor__quantity-bar__bar--sold"
     style={
       Object {
         "width": "20.00%",
       }
     }
   />
+  0
 </div>
 `;
 
@@ -49,7 +51,7 @@ exports[`<QuantityBar> with limited capacity 1`] = `
   className="tribe-editor__quantity-bar"
 >
   <span
-    className="tribe-editor__quantity-bar--shared"
+    className="tribe-editor__quantity-bar__bar tribe-editor__quantity-bar__bar--shared-sold"
     style={
       Object {
         "width": "80.00%",
@@ -57,7 +59,7 @@ exports[`<QuantityBar> with limited capacity 1`] = `
     }
   />
   <span
-    className="tribe-editor__quantity-bar--available"
+    className="tribe-editor__quantity-bar__bar tribe-editor__quantity-bar__bar--sold"
     style={
       Object {
         "width": "20.00%",
@@ -65,12 +67,18 @@ exports[`<QuantityBar> with limited capacity 1`] = `
     }
   />
   <span
-    className="tribe-editor__quantity-bar--capacity"
+    className="tribe-editor__quantity-bar__bar tribe-editor__quantity-bar__bar--capacity"
     style={
       Object {
         "width": "50.00%",
       }
     }
-  />
+  >
+    <span
+      className="tribe-editor__quantity-bar__bar-label"
+    >
+      cap
+    </span>
+  </span>
 </div>
 `;

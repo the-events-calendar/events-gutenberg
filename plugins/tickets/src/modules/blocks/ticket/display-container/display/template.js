@@ -14,11 +14,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import {
-	Alert,
-	Clipboard,
-	Pencil,
-} from '@moderntribe/common/icons';
+import { Pencil } from '@moderntribe/common/icons';
 import QuantityBar from './quantity-bar/element';
 import { Button } from '@moderntribe/common/elements';
 import './style.pcss';
@@ -36,36 +32,39 @@ const TicketDisplay = ( props ) => {
 		price,
 		currencySymbol,
 		currencyPosition,
+		isShared,
 		isUnlimited,
-		expires,
-		available,
 		capacity,
 		editBlock,
 		sold,
-		shared,
+		sharedSold,
+		sharedCapacity,
 		isSelected,
-		isShared,
 		isTicketDisabled,
 	} = props;
 
+	const total = isShared ? sharedCapacity : capacity;
 	const priceLabel = [ currencySymbol, price ];
 	const labels = {
-		unlimited: sprintf( __( '%1$d sold', 'events-gutenberg' ), sold ),
-		normal: sprintf( __( '%1$d of %d sold', 'events-gutenberg' ), sold, capacity ),
+		unlimited: sprintf( __( '%d sold', 'events-gutenberg' ), sold ),
+		normal: sprintf( __( '%d of %d sold', 'events-gutenberg' ), sold, total ),
 	};
 
-	let quantityBar = <span className="tribe-editor__quantity--unlimited">unlimited</span>;
-
-	if ( ! isUnlimited ) {
-		quantityBar = (
+	const quantityBar = isUnlimited
+		? (
+			<span className="tribe-editor__quantity--unlimited">
+				{ __( 'unlimited', 'events-gutenberg' ) }
+			</span>
+		)
+		: (
 			<QuantityBar
 				sold={ sold }
-				shared={ isShared ? capacity : 0 }
-				total={ isShared ? shared : capacity }
+				sharedSold={ sharedSold }
+				capacity={ capacity }
+				total={ total }
 				isDisabled={ isTicketDisabled }
 			/>
 		);
-	}
 
 	const editIcon = ! isTicketDisabled && isSelected && (
 		<Button className="tribe-editor__btn--label" onClick={ editBlock }><Pencil /></Button>
@@ -104,11 +103,12 @@ TicketDisplay.propTypes = {
 	price: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	currencySymbol: PropTypes.string,
 	currencyPosition: PropTypes.oneOf( [ 'prefix', 'suffix' ] ),
+	isShared: PropTypes.bool,
 	isUnlimited: PropTypes.bool,
-	available: PropTypes.number,
 	capacity: PropTypes.number,
 	sold: PropTypes.number,
-	expires: PropTypes.bool,
+	sharedSold: PropTypes.number,
+	sharedCapacity: PropTypes.number,
 	editBlock: PropTypes.func,
 	isSelected: PropTypes.bool,
 	isTicketDisabled: PropTypes.bool,
@@ -125,9 +125,7 @@ TicketDisplay.defaultProps = {
 	currencySymbol: '$',
 	currencyPosition: 'prefix',
 	isUnlimited: false,
-	available: 0,
 	capacity: 0,
-	expires: true,
 };
 
 export default TicketDisplay;

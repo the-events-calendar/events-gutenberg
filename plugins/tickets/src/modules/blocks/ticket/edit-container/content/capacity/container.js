@@ -3,7 +3,6 @@
  */
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import React from 'react';
 
 /**
  * Internal dependencies
@@ -18,8 +17,6 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	capacity: selectors.getTicketCapacity( state, ownProps ),
 	totalSharedCapacity: selectors.getSharedCapacity( state ),
 	tmpSharedCapacity: selectors.getTmpSharedCapacity( state ),
-	hasSharedTickets: selectors.getSharedTicketsCount( state ) > 1,
-	remainingCapacity: selectors.getSharedRemainingCapacity( state ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {

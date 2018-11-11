@@ -11,38 +11,43 @@ import classNames from 'classnames';
 import {
 	number,
 	TribePropTypes,
-} from '@moderntribe/common/utils/';
+} from '@moderntribe/common/utils';
 
-const Bar = ( { className, value, total } ) => {
+const Bar = ( { children, className, value, total } ) => {
 
 	if ( value === 0 || total === 0 ) {
 		return null;
 	}
 
-	let percentageResult;
+	let valuePercentage;
 	try {
-		percentageResult = number.percentage( value, total );
+		valuePercentage = number.percentage( value, total );
 	} catch ( e ) {
-		percentageResult = 0;
-	} finally {
-		// Prevent to have numbers above 100 and below 0
-		percentageResult = Math.max(
-			0,
-			Math.min( 100, percentageResult ),
-		);
+		valuePercentage = 0;
 	}
-	const style = {};
 
-	if ( percentageResult > 0 ) {
-		style.width = `${ percentageResult.toFixed( 2 ) }%`;
-	}
+	// Prevent numbers above 100 and below 0
+	const limitedValuePercentage = Math.max(
+		0,
+		Math.min( 100, valuePercentage ),
+	);
+
+	const style = {
+		width: `${ limitedValuePercentage.toFixed( 2 ) }%`,
+	};
 
 	return (
-		<span className={ classNames( className ) } style={ style }></span>
+		<span
+			className={ classNames( 'tribe-editor__quantity-bar__bar', className ) }
+			style={ style }
+		>
+			{ children }
+		</span>
 	);
 }
 
 Bar.propTypes = {
+	children: PropTypes.node,
 	className: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.arrayOf( PropTypes.string ),
