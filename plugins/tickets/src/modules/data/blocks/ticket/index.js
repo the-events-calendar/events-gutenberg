@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import reducer from './reducers';
+import reducer from './reducer';
 
 import * as constants from './constants';
 import * as utils from './utils';
