@@ -15,9 +15,17 @@ import { Dashicon } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { TICKET_TYPES, TICKET_TYPES_VALUES } from '@moderntribe/tickets/data/utils';
+import { constants } from '@moderntribe/tickets/data/ticket';
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 import './style.pcss';
+
+const {
+	UNLIMITED,
+	INDEPENDENT,
+	SHARED,
+	TICKET_TYPES_VALUES,
+	TICKET_TYPES,
+} = constants;
 
 // todo: replace with custom select from Events Pro
 const Select = ( { id, options, selected, onSelect } ) => {
@@ -89,14 +97,14 @@ class Capacity extends PureComponent {
 	};
 
 	static defaultProps = {
-		type: TICKET_TYPES.independent,
+		type: TICKET_TYPES[ INDEPENDENT ],
 		capacityOptions: [
-			{ name: __( 'Share capacity with other tickets', 'events-gutenberg' ), value: TICKET_TYPES.shared },
+			{ name: __( 'Share capacity with other tickets', 'events-gutenberg' ), value: TICKET_TYPES[ SHARED ] },
 			{
 				name: __( 'Set capacity for this ticket only', 'events-gutenberg' ),
-				value: TICKET_TYPES.independent,
+				value: TICKET_TYPES[ INDEPENDENT ],
 			},
-			{ name: __( 'unlimited', 'events-gutenberg' ), value: TICKET_TYPES.unlimited },
+			{ name: __( 'unlimited', 'events-gutenberg' ), value: TICKET_TYPES[ UNLIMITED ] },
 		],
 		onSelectType: noop,
 		capacity: 0,
@@ -133,7 +141,7 @@ class Capacity extends PureComponent {
 
 		const extraInputProps = {};
 
-		if ( type === TICKET_TYPES.shared && ( totalSharedCapacity || tmpSharedCapacity ) ) {
+		if ( type === TICKET_TYPES[ SHARED ] && ( totalSharedCapacity || tmpSharedCapacity ) ) {
 			extraInputProps.max = totalSharedCapacity ? totalSharedCapacity : tmpSharedCapacity;
 		}
 
@@ -159,7 +167,7 @@ class Capacity extends PureComponent {
 							id={ this.ids.select }
 						/>
 					</div>
-					{ type === TICKET_TYPES.shared && totalSharedCapacity === '' && (
+					{ type === TICKET_TYPES[ SHARED ] && totalSharedCapacity === '' && (
 						<Input
 							id={ this.ids.globalShared }
 							input={ {
@@ -171,7 +179,7 @@ class Capacity extends PureComponent {
 						/>
 					) }
 					{
-						type === TICKET_TYPES.independent && (
+						type === TICKET_TYPES[ INDEPENDENT ] && (
 							<Input
 								id={ this.ids.capacity }
 								input={ inputProps }
@@ -179,7 +187,7 @@ class Capacity extends PureComponent {
 							/>
 						)
 					}
-					{ type === TICKET_TYPES.shared && (
+					{ type === TICKET_TYPES[ SHARED ] && (
 						<Input
 							id={ this.ids.capacity }
 							input={ {

@@ -26,9 +26,15 @@ import {
 	tickets as ticketsConfig,
 	restNonce,
 } from '@moderntribe/common/src/modules/utils/globals';
-import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
 import { getStart, getEnd } from '@moderntribe/events/data/blocks/datetime/selectors';
 import { toMoment, toDate, toTime24Hr } from '@moderntribe/common/utils/moment';
+
+const {
+	UNLIMITED,
+	SHARED,
+	TICKET_TYPES,
+	PROVIDER_CLASS_TO_PROVIDER_MAPPING,
+} = constants;
 
 /**
  * @todo missing tests.
@@ -133,11 +139,11 @@ export function* setBodyDetails( blockId ) {
 		amount: yield select( selectors.getTicketCapacity, props ),
 	};
 
-	const isUnlimited = capacity.type === TICKET_TYPES.unlimited;
+	const isUnlimited = capacity.type === TICKET_TYPES[ UNLIMITED ];
 	body.append( 'ticket[mode]', isUnlimited ? '' : capacity.type );
 	body.append( 'ticket[capacity]', isUnlimited ? '' : capacity.amount );
 
-	if ( capacity.type === TICKET_TYPES.shared ) {
+	if ( capacity.type === TICKET_TYPES[ SHARED ] ) {
 		body.append( 'ticket[event_capacity]', yield select( selectors.getSharedCapacity ) );
 	}
 
@@ -172,7 +178,7 @@ export function* createNewTicket( action ) {
 			put( actions.setTicketHasBeenCreated( blockId, true ) ),
 			put( actions.setActiveChildBlockId( '' ) ),
 			put( actions.setTicketAvailable( blockId, ticket.capacity ) ),
-			put( actions.setTicketProvider( blockId, constants.PROVIDER_CLASS_TO_PROVIDER_MAPPING[ ticket.provider_class ] ) ),
+			put( actions.setTicketProvider( blockId, PROVIDER_CLASS_TO_PROVIDER_MAPPING[ ticket.provider_class ] ) ),
 		] );
 	} catch ( e ) {
 		/**

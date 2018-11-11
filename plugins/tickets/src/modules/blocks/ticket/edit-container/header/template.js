@@ -16,7 +16,7 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.pcss';
 import { sendValue } from '@moderntribe/common/utils/input';
-import { getDefaultProviderCurrency } from '@moderntribe/tickets/data/utils';
+import { getDefaultProviderCurrency } from '@moderntribe/tickets/data/blocks/ticket/utils';
 
 class Header extends PureComponent {
 	static PRICE_POSITIONS = {

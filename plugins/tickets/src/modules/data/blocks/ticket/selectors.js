@@ -7,8 +7,15 @@ import trim from 'lodash/trim';
 /**
  * Internal dependencies
  */
-import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
+import * as constants from './constants';
 import { tickets as ticketsConfig } from '@moderntribe/common/utils/globals';
+
+const {
+	UNLIMITED,
+	INDEPENDENT,
+	SHARED,
+	TICKET_TYPES,
+} = constants;
 
 export const getBlock = ( state ) => state.tickets.blocks.ticket;
 
@@ -116,14 +123,14 @@ export const getTicketsArray = createSelector(
 export const getIndependentTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES.independent )
+		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES[ INDEPENDENT ] )
 	),
 );
 
 export const getSharedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES.shared )
+		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES[ SHARED ] )
 	),
 );
 
@@ -135,7 +142,7 @@ export const getSharedTicketsCount = createSelector(
 export const getUnlimitedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES.unlimited )
+		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES[ UNLIMITED ] )
 	),
 );
 
@@ -247,7 +254,7 @@ export const getTicketValidness = createSelector(
 	[ getTicketBlock ],
 	( block ) => {
 		const isTitleValid = trim( block.title ) !== '';
-		if ( block.capacityType === TICKET_TYPES.unlimited ) {
+		if ( block.capacityType === TICKET_TYPES[ UNLIMITED ] ) {
 			return isTitleValid;
 		}
 
@@ -268,12 +275,12 @@ export const getTicketExpires = createSelector(
 
 export const isUnlimitedTicket = createSelector(
 	[ getTicketBlock ],
-	( block ) => block.capacityType === TICKET_TYPES.unlimited,
+	( block ) => block.capacityType === TICKET_TYPES[ UNLIMITED ],
 );
 
 export const isSharedTicket = createSelector(
 	[ getTicketBlock ],
-	( block ) => block.capacityType === TICKET_TYPES.shared,
+	( block ) => block.capacityType === TICKET_TYPES[ SHARED ],
 );
 
 export const getTicketStartDateMoment = createSelector(

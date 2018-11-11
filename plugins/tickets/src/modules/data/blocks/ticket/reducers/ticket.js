@@ -6,10 +6,10 @@ import moment from 'moment/moment';
 /**
  * Internal dependencies
  */
-import * as types from './../types';
-import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
+import * as types from '../types';
+import * as constants from '../constants';
 import { moment as momentUtil } from '@moderntribe/common/utils';
-import { getDefaultProviderCurrency } from '@moderntribe/tickets/data/utils';
+import { getDefaultProviderCurrency } from '@moderntribe/tickets/data/blocks/ticket/utils';
 
 const currentMoment = moment();
 const ADDITIONAL_DAYS = 3;
@@ -25,7 +25,7 @@ export const DEFAULT_STATE = {
 	startTime: momentUtil.toTime24Hr( currentMoment ),
 	endTime: momentUtil.toTime24Hr( currentMoment ),
 	dateIsPristine: false,
-	capacityType: TICKET_TYPES.shared,
+	capacityType: constants.TICKET_TYPES[ constants.SHARED ],
 	capacity: '',
 	isEditing: false,
 	ticketId: 0,
