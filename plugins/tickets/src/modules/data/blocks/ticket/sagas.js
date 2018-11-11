@@ -22,7 +22,10 @@ import {
 	DEFAULT_STATE as DEFAULT_TICKET_STATE,
 } from '@moderntribe/tickets/data/blocks/ticket/reducers/ticket';
 import { wpREST } from '@moderntribe/common/utils/api';
-import { config, restNonce } from '@moderntribe/common/src/modules/utils/globals';
+import {
+	tickets as ticketsConfig,
+	restNonce,
+} from '@moderntribe/common/src/modules/utils/globals';
 import { TICKET_TYPES } from '@moderntribe/tickets/data/utils';
 import { getStart, getEnd } from '@moderntribe/events/data/blocks/datetime/selectors';
 import { toMoment, toDate, toTime24Hr } from '@moderntribe/common/utils/moment';
@@ -237,7 +240,7 @@ export function* setInitialState( action ) {
 		yield call( getMedia, header );
 	}
 
-	const tickets = config().tickets || {};
+	const tickets = ticketsConfig();
 	const defaultProvider = tickets.default_provider || '';
 	const provider = get( 'provider', DEFAULT_UI_STATE.provider );
 	yield put( actions.setProvider( provider || defaultProvider ) );

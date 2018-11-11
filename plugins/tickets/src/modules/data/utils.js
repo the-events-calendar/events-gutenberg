@@ -1,4 +1,7 @@
-import { config } from '@moderntribe/common/src/modules/utils/globals';
+/**
+ * External dependencies
+ */
+import { tickets as ticketsConfig } from '@moderntribe/common/src/modules/utils/globals';
 
 export const PREFIX_TICKETS_STORE = '@@MT/TICKETS';
 
@@ -37,11 +40,11 @@ export const TICKET_ORDERS_PAGE_SLUG = {
  * Get currency symbol by provider
  */
 export function getProviderCurrency( provider ) {
-	const tickets = config().tickets || {};
+	const tickets = ticketsConfig();
 	const providers = tickets.providers || {};
 
 	// if we don't get the provider, return the default one
-	if ( '' == provider ) {
+	if ( '' === provider ) {
 		return tickets.default_currency;
 	}
 
@@ -53,7 +56,7 @@ export function getProviderCurrency( provider ) {
  * Get the default provider's currency symbol
  */
 export function getDefaultProviderCurrency() {
-	const tickets = config().tickets || {};
+	const tickets = ticketsConfig();
 	const defaultProvider = tickets.default_provider || '';
 
 	return getProviderCurrency( defaultProvider );

@@ -15,10 +15,10 @@ import { select } from '@wordpress/data';
 import RSVPAttendeeRegistration from './template';
 import { selectors } from '@moderntribe/tickets/data/blocks/rsvp';
 import { withStore } from '@moderntribe/common/hoc';
-import { config } from '@moderntribe/common/src/modules/utils/globals';
+import { adminUrl } from '@moderntribe/common/src/modules/utils/globals';
 
 const getAttendeeRegistrationUrl = ( state ) => {
-	const adminURL = config().admin_url || '';
+	const adminURL = adminUrl();
 	const postType = select( 'core/editor' ).getCurrentPostType();
 	const rsvpId = selectors.getRSVPId( state );
 

@@ -11,21 +11,21 @@ import includes from 'lodash/includes';
 import EcommerceOptions from './template';
 import { constants, selectors } from '@moderntribe/tickets/data/blocks/ticket';
 import { withStore } from '@moderntribe/common/hoc';
-import { config } from '@moderntribe/common/src/modules/utils/globals';
+import { adminUrl } from '@moderntribe/common/src/modules/utils/globals';
 
 const { EDD, WOO } = constants;
 
 const showEcommerceOptions = ( provider ) => includes( [ EDD, WOO ], provider );
 
 const getEditTicketLink = ( state, ownProps, provider ) => {
-	const adminURL = config().admin_url || '';
+	const adminURL = adminUrl();
 	const ticketId = selectors.getTicketId( state, ownProps );
 
 	return showEcommerceOptions( provider ) ? `${ adminURL }post.php?post=${ ticketId }&action=edit` : '';
 };
 
 const getReportLink = ( state, ownProps, provider ) => {
-	const adminURL = config().admin_url || '';
+	const adminURL = adminUrl();
 	const ticketId = selectors.getTicketId( state, ownProps );
 	let path = '';
 
