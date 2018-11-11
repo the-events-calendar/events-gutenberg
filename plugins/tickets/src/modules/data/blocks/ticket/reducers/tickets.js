@@ -10,11 +10,6 @@ import omit from 'lodash/omit';
 import * as types from '@moderntribe/tickets/data/blocks/ticket/types';
 import ticket from './tickets/ticket';
 
-export const DEFAULT_STATE = {
-	byId: {},
-	allIds: [],
-};
-
 export const byId = ( state = {}, action ) => {
 	switch ( action.type ) {
 		case types.SET_TICKET_TITLE:
