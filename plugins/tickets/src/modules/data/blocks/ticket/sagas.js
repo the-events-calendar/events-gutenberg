@@ -15,12 +15,10 @@ import * as constants from './constants';
 import * as types from './types';
 import * as actions from './actions';
 import * as selectors from './selectors';
+import { DEFAULT_STATE } from './reducer';
 import {
-	DEFAULT_STATE as DEFAULT_UI_STATE,
-} from '@moderntribe/tickets/data/blocks/ticket/reducers/ui';
-import {
-	DEFAULT_STATE as DEFAULT_TICKET_STATE,
-} from '@moderntribe/tickets/data/blocks/ticket/reducers/ticket';
+	DEFAULT_STATE as TICKET_DEFAULT_STATE,
+} from './reducers/tickets/ticket';
 import { wpREST } from '@moderntribe/common/utils/api';
 import {
 	tickets as ticketsConfig,
@@ -234,7 +232,7 @@ export function* getMedia( id ) {
 export function* setInitialState( action ) {
 	const { get } = action.payload;
 
-	const header = parseInt( get( 'header', DEFAULT_UI_STATE.header ), 10 ) || 0;
+	const header = parseInt( get( 'header', DEFAULT_STATE.header ), 10 ) || 0;
 	const sharedCapacity = get( 'sharedCapacity' );
 
 	// Meta value is '0' however fields use empty string as default
@@ -248,16 +246,16 @@ export function* setInitialState( action ) {
 
 	const tickets = ticketsConfig();
 	const defaultProvider = tickets.default_provider || '';
-	const provider = get( 'provider', DEFAULT_UI_STATE.provider );
+	const provider = get( 'provider', DEFAULT_STATE.provider );
 	yield put( actions.setProvider( provider || defaultProvider ) );
 }
 
 export function* setTicketInitialState( action ) {
 	const { clientId, get } = action.payload;
 	const values = {
-		ticketId: get( 'ticketId', DEFAULT_TICKET_STATE.ticketId ),
-		hasBeenCreated: get( 'hasBeenCreated', DEFAULT_TICKET_STATE.hasBeenCreated ),
-		dateIsPristine: get( 'dateIsPristine', DEFAULT_TICKET_STATE.dateIsPristine ),
+		ticketId: get( 'ticketId', TICKET_DEFAULT_STATE.ticketId ),
+		hasBeenCreated: get( 'hasBeenCreated', TICKET_DEFAULT_STATE.hasBeenCreated ),
+		dateIsPristine: get( 'dateIsPristine', TICKET_DEFAULT_STATE.dateIsPristine ),
 	};
 
 	const start = yield select(getStart);
