@@ -21,9 +21,7 @@ Object {
 exports[`Reducer should set the header 1`] = `
 Object {
   "activeChildBlockId": "",
-  "header": Object {
-    "header": 1,
-  },
+  "header": 1,
   "isChildBlockSelected": false,
   "isParentBlockLoading": false,
   "isParentBlockSelected": false,

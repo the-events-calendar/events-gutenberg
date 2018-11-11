@@ -8,6 +8,8 @@ exports[`Tickets block types FETCH_TICKET 1`] = `"@@MT/TICKETS/FETCH_TICKET"`;
 
 exports[`Tickets block types REGISTER_TICKET_BLOCK 1`] = `"@@MT/TICKETS/REGISTER_TICKET_BLOCK"`;
 
+exports[`Tickets block types REMOVE_TICKET_BLOCK 1`] = `"@@MT/TICKETS/REMOVE_TICKET_BLOCK"`;
+
 exports[`Tickets block types SET_TICKET_AVAILABLE 1`] = `"@@MT/TICKETS/SET_TICKET_AVAILABLE"`;
 
 exports[`Tickets block types SET_TICKET_CAPACITY 1`] = `"@@MT/TICKETS/SET_TICKET_CAPACITY"`;
@@ -93,5 +95,7 @@ exports[`Tickets block types SET_TICKETS_IS_SETTINGS_OPEN 1`] = `"@@MT/TICKETS/S
 exports[`Tickets block types SET_TICKETS_PROVIDER 1`] = `"@@MT/TICKETS/SET_TICKETS_PROVIDER"`;
 
 exports[`Tickets block types SET_TICKETS_SHARED_CAPACITY 1`] = `"@@MT/TICKETS/SET_TICKETS_SHARED_CAPACITY"`;
+
+exports[`Tickets block types SET_TICKETS_TEMP_SHARED_CAPACITY 1`] = `"@@MT/TICKETS/SET_TICKETS_TEMP_SHARED_CAPACITY"`;
 
 exports[`Tickets block types UPDATE_TICKET 1`] = `"@@MT/TICKETS/UPDATE_TICKET"`;

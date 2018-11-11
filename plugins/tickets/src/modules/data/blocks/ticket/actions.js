@@ -12,11 +12,9 @@ export const setTicketsInitialState = ( props ) => ( {
 	payload: props,
 } );
 
-export const setTicketsHeader = ( header ) => ( {
+export const setTicketsHeader = ( payload ) => ( {
 	type: types.SET_TICKETS_HEADER,
-	payload: {
-		header,
-	},
+	payload,
 } );
 
 export const setTicketsIsSettingsOpen = ( isSettingsOpen ) => ( {
