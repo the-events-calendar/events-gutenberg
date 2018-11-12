@@ -20,337 +20,438 @@ const {
 export const getBlock = ( state ) => state.tickets.blocks.ticket;
 
 //
-// ─── UI SELECTORS ───────────────────────────────────────────────────────────────
+// ─── BLOCK SELECTORS ────────────────────────────────────────────────────────────
 //
 
-export const getTicketUI = createSelector( [ getBlock ], ( block ) => block.ui );
-export const getTicketSettings = createSelector( [ getBlock ], ( block ) => block.settings );
-export const getTickets = createSelector( [ getBlock ], ( block ) => block.tickets );
-
-export const getBlockParentSelected = createSelector(
-	[ getTicketUI ],
-	( ui ) => ui.isParentBlockSelected,
+export const getTicketsIsSettingsOpen = createSelector(
+	[ getBlock ],
+	( block ) => block.isSettingsOpen,
 );
 
-export const getChildParentSelected = createSelector(
-	[ getTicketUI ],
-	( ui ) => ui.isChildBlockSelected,
+export const getTicketsIsParentBlockLoading = createSelector(
+	[ getBlock ],
+	( block ) => block.isParentBlockLoading,
 );
 
-export const getParentOrChildSelected = createSelector(
-	[ getBlockParentSelected, getChildParentSelected ],
-	( parentSelected, childSelected ) => parentSelected || childSelected,
+export const getTicketsIsChildBlockSelected = createSelector(
+	[ getBlock ],
+	( block ) => block.isChildBlockSelected,
 );
 
-export const getSharedCapacity = createSelector( [ getTicketSettings ], ( settings ) => settings.sharedCapacity );
-export const getSharedCapacityInt = createSelector( [ getSharedCapacity ], ( capacity ) => parseInt( capacity, 10 ) || 0 );
-export const getSettingsIsOpen = createSelector( [ getTicketUI ], ( ui ) => ui.isSettingsOpen );
-
-export const getActiveBlockId = createSelector( [ getTicketUI ], ( ui ) => ui.activeChildBlockId );
-export const hasActiveBlockId = createSelector(
-	[ getActiveBlockId ],
-	( blockId ) => blockId !== '',
+export const getTicketsIsParentBlockSelected = createSelector(
+	[ getBlock ],
+	( block ) => block.isParentBlockSelected,
 );
 
-export const isParentBlockLoading = createSelector(
-	[ getTicketUI ],
-	( ui ) => ui.isParentBlockLoading,
+export const getTicketsActiveChildBlockId = createSelector(
+	[ getBlock ],
+	( block ) => block.activeChildBlockId,
 );
 
-export const getSelectedProvider = createSelector(
-	[ getTicketUI ],
-	( ui ) => ui.provider,
+export const hasTicketsActiveChildBlockId = createSelector(
+	[ getTicketsActiveChildBlockId ],
+	( id ) => id !== '',
 );
 
-//
-// ─── TEMPORARY UI SELECTORS ─────────────────────────────────────────────────────
-//
-
-export const getTmpSettings = createSelector(
-	[ getTicketSettings ],
-	( settings ) => settings.tmp,
+export const getTicketsProvider = createSelector(
+	[ getBlock ],
+	( block ) => block.provider,
 );
 
-export const getTmpSharedCapacity = createSelector( getTmpSettings, tmp => tmp.sharedCapacity );
-
-//
-// ─── HEADER IMAGE SELECTORS ─────────────────────────────────────────────────────
-//
-
-export const getHeader = createSelector( [ getTicketUI ], ( ui ) => ui.header );
-export const getImageSize = ( state, props ) => props.size;
-export const getImageId = createSelector(
-	[ getHeader ],
-	( header ) => header === null ? 0 : header.id,
+export const getTicketsSharedCapacity = createSelector(
+	[ getBlock ],
+	( block ) => block.sharedCapacity,
 );
 
-export const getImageAlt = createSelector(
-	[ getHeader ],
-	( header ) => header === null ? '' : header.alt,
+export const getTicketsSharedCapacityInt = createSelector(
+	[ getTicketsSharedCapacity ],
+	( capacity ) => parseInt( capacity, 10 ) || 0,
 );
 
-export const getHeaderSize = createSelector(
-	[ getHeader, getImageSize ],
-	( header, size ) => {
-		if ( header === null || ! header.sizes || ! header.sizes[ size ] ) {
-			return '';
-		}
-		return header.sizes[ size ].url || header.sizes[ size ].source_url;
-	},
+export const getTicketsTempSharedCapacity = createSelector(
+	[ getBlock ],
+	( block ) => block.tempSharedCapacity,
+);
+
+export const getTicketsTempSharedCapacityInt = createSelector(
+	[ getTicketsTempSharedCapacity ],
+	( capacity ) => parseInt( capacity, 10 ) || 0,
 );
 
 //
-// ─── TICKETS SELECTORS ───────────────────────────────────────────────────────────
+// ─── HEADER SELECTORS ───────────────────────────────────────────────────────────
 //
 
-export const getTicketBlockId = ( state, props ) => props.blockId;
+export const getTicketsHeader = createSelector(
+	[ getBlock ],
+	( block ) => block.header,
+);
 
-export const getTicketsIds = createSelector(
+export const getTicketsHeaderId = createSelector(
+	[ getTicketsHeader ],
+	( header ) => header.id,
+);
+
+export const getTicketsHeaderSrc = createSelector(
+	[ getTicketsHeader ],
+	( header ) => header.src,
+);
+
+export const getTicketsHeaderAlt = createSelector(
+	[ getTicketsHeader ],
+	( header ) => header.alt,
+);
+
+//
+// ─── TICKETS SELECTORS ──────────────────────────────────────────────────────────
+//
+
+export const getTickets = createSelector(
+	[ getBlock ],
+	( block ) => block.tickets,
+);
+
+export const getAllTicketIds = createSelector(
 	[ getTickets ],
 	( tickets ) => tickets.allIds,
 );
 
-export const getTicketsObject = createSelector(
+export const getTicketsById = createSelector(
 	[ getTickets ],
 	( tickets ) => tickets.byId,
 );
 
 export const getTicketsArray = createSelector(
-	[ getTicketsIds, getTicketsObject ],
+	[ getAllTicketIds, getTicketsById ],
 	( ids, tickets ) => ids.map( ( id ) => tickets[ id ] ),
 );
 
 export const getIndependentTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES[ INDEPENDENT ] )
+		tickets.filter( ( ticket ) => ticket.details.capacityType === TICKET_TYPES[ INDEPENDENT ] )
 	),
 );
 
 export const getSharedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES[ SHARED ] )
+		tickets.filter( ( ticket ) => ticket.details.capacityType === TICKET_TYPES[ SHARED ] )
 	),
 );
 
 export const getSharedTicketsCount = createSelector(
-	getSharedTickets,
+	[ getSharedTickets ],
 	tickets => tickets.length,
 );
 
 export const getUnlimitedTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (
-		tickets.filter( ( ticket ) => ticket.capacityType === TICKET_TYPES[ UNLIMITED ] )
+		tickets.filter( ( ticket ) => ticket.details.capacityType === TICKET_TYPES[ UNLIMITED ] )
 	),
-);
-
-//
-// ─── TICKETS REDUCERS ───────────────────────────────────────────────────────────
-//
-
-const _getTotalCapacity = tickets => tickets.reduce( ( total, ticket ) => {
-	const capacity = parseInt( ticket.capacity, 10 ) || 0;
-	return total + capacity;
-}, 0 );
-
-const _getTotalSold = tickets => tickets.reduce( ( total, ticket ) => {
-	const sold = parseInt( ticket.sold, 10 ) || 0;
-	return total + sold;
-}, 0 );
-
-const _getTotalAvailable = tickets => tickets.reduce( ( total, ticket ) => {
-	const available = parseInt( ticket.available, 10 ) || 0;
-	return total + available;
-}, 0 );
-
-export const getTicketsIndependentCapacity = createSelector( getIndependentTickets, _getTotalCapacity );
-export const getTicketsIndependentSold = createSelector( getIndependentTickets, _getTotalSold );
-export const getTicketsIndependentAvailable = createSelector( getIndependentTickets, _getTotalAvailable );
-
-export const getTicketsSharedSold = createSelector( getSharedTickets, _getTotalSold );
-export const getTicketsSharedAvailable = createSelector(
-	[ getSharedCapacityInt, getTicketsSharedSold ],
-	( sharedCapacity, sharedSold ) => Math.max( sharedCapacity - sharedSold, 0 ),
-);
-
-export const getTicketsIndependentAndSharedCapacity = createSelector(
-	[ getTicketsIndependentCapacity, getSharedCapacityInt ],
-	( independentCapacity, sharedCapacity ) => independentCapacity + sharedCapacity,
-);
-export const getTicketsIndependentAndSharedSold = createSelector(
-	[ getTicketsIndependentSold, getTicketsSharedSold ],
-	( independentSold, sharedSold ) => independentSold + sharedSold,
-);
-export const getTicketsIndependentAndSharedAvailable = createSelector(
-	[ getTicketsIndependentAvailable, getTicketsSharedAvailable ],
-	( independentAvailable, sharedAvailable ) => independentAvailable + sharedAvailable,
 );
 
 //
 // ─── TICKET SELECTORS ───────────────────────────────────────────────────────────
 //
 
-export const getTicketBlock = createSelector(
-	[ getTicketsObject, getTicketBlockId ],
-	( tickets, blockId ) => tickets[ blockId ] || {},
+export const getTicketBlockId = ( state, ownProps ) => ownProps.blockId;
+
+export const getTicket = createSelector(
+	[ getTicketsById, getTicketBlockId ],
+	( tickets, blockId ) => tickets[ blockId ],
 );
 
-export const getTicketTitle = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.title,
+export const getTicketSold = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.sold,
 );
 
-export const getTicketDescription = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.description,
+export const getTicketAvailable = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.available,
 );
 
-export const getTicketPrice = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.price,
+export const getTicketId = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.ticketId,
 );
 
-export const getTicketSKU = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.SKU,
+export const getTicketCurrencySymbol = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.currencySymbol,
 );
 
-export const getTicketStartDate = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.startDate,
-);
-
-export const getTicketStartTime = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.startTime,
-);
-
-export const getTicketEndDate = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.endDate,
-);
-
-export const getTicketEndTime = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.endTime,
-);
-
-export const getTicketCapacity = createSelector(
-	[ getTicketBlock ],
-	( block ) => {
-		const capacity = parseInt( block.capacity, 10 );
-		return capacity || 0;
-	},
-);
-
-export const getTicketCapacityType = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.capacityType,
-);
-
-export const getTicketValidness = createSelector(
-	[ getTicketBlock ],
-	( block ) => {
-		const isTitleValid = trim( block.title ) !== '';
-		if ( block.capacityType === TICKET_TYPES[ UNLIMITED ] ) {
-			return isTitleValid;
-		}
-
-		const isCapacityValid = trim( block.capacity ) !== '';
-		return isTitleValid && isCapacityValid;
-	},
-);
-
-export const getTicketEditing = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.isEditing,
+export const getTicketProvider = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.provider,
 );
 
 export const getTicketExpires = createSelector(
-	[ getTicketBlock ],
-	( block ) => ! block.dateIsPristine,
+	[ getTicket ],
+	( ticket ) => ticket.expires,
+);
+
+export const getTicketIsLoading = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.isLoading,
+);
+
+export const getTicketHasBeenCreated = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.hasBeenCreated,
+);
+
+export const getTicketHasChanges = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.hasChanges,
+);
+
+//
+// ─── TICKET DETAILS SELECTORS ───────────────────────────────────────────────────
+//
+
+export const getTicketDetails = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.details,
+);
+
+export const getTicketTitle = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.title,
+);
+
+export const getTicketDescription = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.description,
+);
+
+export const getTicketPrice = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.price,
+);
+
+export const getTicketSku = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.sku,
+);
+
+export const getTicketStartDate = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.startDate,
+);
+
+export const getTicketStartDateMoment = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.startDateMoment,
+);
+
+export const getTicketEndDate = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.endDate,
+);
+
+export const getTicketEndDateMoment = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.endDateMoment,
+);
+
+export const getTicketStartTime = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.startTime,
+);
+
+export const getTicketEndTime = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.endTime,
+);
+
+export const getTicketCapacityType = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.capacityType,
+);
+
+export const getTicketCapacity = createSelector(
+	[ getTicketDetails ],
+	( details ) => parseInt( details.capacity, 10 ) || 0,
 );
 
 export const isUnlimitedTicket = createSelector(
-	[ getTicketBlock ],
+	[ getTicketDetails ],
 	( block ) => block.capacityType === TICKET_TYPES[ UNLIMITED ],
 );
 
 export const isSharedTicket = createSelector(
-	[ getTicketBlock ],
+	[ getTicketDetails ],
 	( block ) => block.capacityType === TICKET_TYPES[ SHARED ],
 );
 
-export const getTicketStartDateMoment = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.startDateMoment,
+export const isIndependentTicket = createSelector(
+	[ getTicketDetails ],
+	( block ) => block.capacityType === TICKET_TYPES[ INDEPENDENT ],
 );
 
-export const getTicketEndDateMoment = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.endDateMoment,
+//
+// ─── TICKET TEMP DETAILS SELECTORS ──────────────────────────────────────────────
+//
+
+export const getTicketTempDetails = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.tempDetails,
 );
 
-export const getTicketIsLoading = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.isLoading,
+export const getTicketTempTitle = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.title,
 );
 
-export const getTicketHasBeenCreated = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.hasBeenCreated,
+export const getTicketTempDescription = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.description,
 );
 
-export const getTicketId = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.ticketId,
+export const getTicketTempPrice = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.price,
 );
 
-export const getTicketIsBeingEdited = createSelector(
-	[ getTicketEditing, getTicketHasBeenCreated ],
-	( isEditing, hasBeenCreated ) => isEditing && hasBeenCreated,
+export const getTicketTempSku = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.sku,
 );
 
-export const isTicketDisabled = createSelector(
-	[ getSettingsIsOpen, getActiveBlockId, getTicketEditing ],
-	( isSettingsOpen, activeBlockId, isEditing ) => (
-		isSettingsOpen || ( !! activeBlockId && ! isEditing )
-	),
+export const getTicketTempStartDate = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.startDate,
 );
 
-export const getTicketSold = createSelector(
-	[ getTicketBlock ],
-	( block ) => parseInt( block.sold, 10 ) || 0,
+export const getTicketTempStartDateMoment = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.startDateMoment,
 );
 
-export const getTicketAvailability = createSelector(
-	[ getTicketBlock ],
-	( block ) => parseInt( block.available, 10 ) || 0,
+export const getTicketTempEndDate = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.endDate,
 );
 
-export const getProviders = () => {
+export const getTicketTempEndDateMoment = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.endDateMoment,
+);
+
+export const getTicketTempStartTime = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.startTime,
+);
+
+export const getTicketTempEndTime = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.endTime,
+);
+
+export const getTicketTempCapacityType = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.capacityType,
+);
+
+export const getTicketTempCapacity = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => parseInt( tempDetails.capacity, 10 ) || 0,
+);
+
+//
+// ─── AMOUNT REDUCERS ────────────────────────────────────────────────────────────
+//
+
+export const _getTotalCapacity = ( tickets ) => tickets.reduce( ( total, ticket ) => {
+	const capacity = parseInt( ticket.details.capacity, 10 ) || 0;
+	return total + capacity;
+}, 0 );
+
+export const _getTotalTempCapacity = ( tickets ) => tickets.reduce( ( total, ticket ) => {
+	const tempCapacity = parseInt( ticket.tempDetails.capacity, 10 ) || 0;
+	return total + tempCapacity;
+}, 0 );
+
+export const _getTotalSold = ( tickets ) => tickets.reduce( ( total, ticket ) => {
+	const sold = parseInt( ticket.sold, 10 ) || 0;
+	return total + sold;
+}, 0 );
+
+export const _getTotalAvailable = ( tickets ) => tickets.reduce( ( total, ticket ) => {
+	const available = parseInt( ticket.available, 10 ) || 0;
+	return total + available;
+}, 0 );
+
+export const getIndependentTicketsCapacity = createSelector( getIndependentTickets, _getTotalCapacity );
+export const getIndependentTicketsTempCapacity = createSelector( getIndependentTickets, _getTotalTempCapacity );
+export const getIndependentTicketsSold = createSelector( getIndependentTickets, _getTotalSold );
+export const getIndependentTicketsAvailable = createSelector( getIndependentTickets, _getTotalAvailable );
+
+export const getSharedTicketsSold = createSelector( getSharedTickets, _getTotalSold );
+export const getSharedTicketsAvailable = createSelector(
+	[ getTicketsSharedCapacityInt, getSharedTicketsSold ],
+	( sharedCapacity, sharedSold ) => Math.max( sharedCapacity - sharedSold, 0 ),
+);
+
+export const getIndependentAndSharedTicketsCapacity = createSelector(
+	[ getIndependentTicketsCapacity, getTicketsSharedCapacityInt ],
+	( independentCapacity, sharedCapacity ) => independentCapacity + sharedCapacity,
+);
+export const getIndependentAndSharedTicketsTempCapacity = createSelector(
+	[ getIndependentTicketsTempCapacity, getTicketsTempSharedCapacityInt ],
+	( independentTempCapacity, tempSharedCapacity ) => independentTempCapacity + tempSharedCapacity,
+);
+export const getIndependentAndSharedTicketsSold = createSelector(
+	[ getIndependentTicketsSold, getSharedTicketsSold ],
+	( independentSold, sharedSold ) => independentSold + sharedSold,
+);
+export const getIndependentAndSharedTicketsAvailable = createSelector(
+	[ getIndependentTicketsAvailable, getSharedTicketsAvailable ],
+	( independentAvailable, sharedAvailable ) => independentAvailable + sharedAvailable,
+);
+
+//
+// ─── MISC SELECTORS ─────────────────────────────────────────────────────────────
+//
+
+export const getTicketProviders = () => {
 	const tickets = ticketsConfig();
 	return tickets.providers || [];
 };
 
-export const hasMultipleProviders = createSelector(
-	[ getProviders ],
+export const hasMultipleTicketProviders = createSelector(
+	[ getTicketProviders ],
 	( providers ) => providers.length > 1,
 );
 
-export const hasTicketProviders = createSelector(
-	[ getProviders ],
+export const hasTicketTicketProviders = createSelector(
+	[ getTicketProviders ],
 	( providers ) => providers.length > 0,
 );
 
-export const getTicketProvider = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.provider,
-);
+//
+// ─── OTHER SELECTORS ────────────────────────────────────────────────────────────
+//
 
-export const getTicketCurrency = createSelector(
-	[ getTicketBlock ],
-	( block ) => block.currencySymbol,
-);
+// export const getTicketValidness = createSelector(
+// 	[ getTicketBlock ],
+// 	( block ) => {
+// 		const isTitleValid = trim( block.title ) !== '';
+// 		if ( block.capacityType === TICKET_TYPES[ UNLIMITED ] ) {
+// 			return isTitleValid;
+// 		}
+
+// 		const isCapacityValid = trim( block.capacity ) !== '';
+// 		return isTitleValid && isCapacityValid;
+// 	},
+// );
+
+// export const isTicketDisabled = createSelector(
+// 	[ getSettingsIsOpen, getActiveBlockId, getTicketEditing ],
+// 	( isSettingsOpen, activeBlockId, isEditing ) => (
+// 		isSettingsOpen || ( !! activeBlockId && ! isEditing )
+// 	),
+// );

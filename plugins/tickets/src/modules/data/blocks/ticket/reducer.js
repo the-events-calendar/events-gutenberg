@@ -8,9 +8,9 @@ import * as types from './types';
 export const DEFAULT_STATE = {
 	header: HEADER_DEFAULT_STATE,
 	isSettingsOpen: false,
-	isParentBlockSelected: false,
-	isChildBlockSelected: false,
 	isParentBlockLoading: false,
+	isChildBlockSelected: false,
+	isParentBlockSelected: false,
 	activeChildBlockId: '',
 	provider: '',
 	sharedCapacity: '',

@@ -1,95 +1,478 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Ticket blocks selectors Ticket selectors Select the group of tickets 1`] = `
-Array [
-  "modern-tribe",
-]
-`;
+exports[`Ticket block selectors Amount reducers selectors Reducer functions _getTotalAvailable 1`] = `16`;
 
-exports[`Ticket blocks selectors Ticket selectors Select the group of tickets 2`] = `
-Array [
-  "modern-tribe",
-]
-`;
+exports[`Ticket block selectors Amount reducers selectors Reducer functions _getTotalCapacity 1`] = `35`;
 
-exports[`Ticket blocks selectors Ticket selectors Select the group of tickets 3`] = `
+exports[`Ticket block selectors Amount reducers selectors Reducer functions _getTotalSold 1`] = `19`;
+
+exports[`Ticket block selectors Amount reducers selectors Reducer functions _getTotalTempCapacity 1`] = `33`;
+
+exports[`Ticket block selectors Amount reducers selectors getIndependentAndSharedTicketsAvailable 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getIndependentAndSharedTicketsCapacity 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getIndependentAndSharedTicketsSold 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getIndependentAndSharedTicketsTempCapacity 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getIndependentTicketsAvailable 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getIndependentTicketsCapacity 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getIndependentTicketsSold 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getIndependentTicketsTempCapacity 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getSharedTicketsAvailable 1`] = `0`;
+
+exports[`Ticket block selectors Amount reducers selectors getSharedTicketsSold 1`] = `0`;
+
+exports[`Ticket block selectors Block selectors getBlock 1`] = `
 Object {
-  "modern-tribe": Object {
-    "SKU": "",
-    "available": 0,
-    "capacity": "",
-    "capacityType": "capped",
-    "currencySymbol": undefined,
-    "dateIsPristine": false,
-    "description": "",
-    "endDate": "September 4, 2018",
-    "endDateMoment": "2018-09-01T22:30:00.000Z",
-    "endTime": "22:30",
-    "hasBeenCreated": false,
-    "isEditing": false,
-    "isLoading": false,
-    "price": "",
-    "provider": "",
-    "sold": 0,
-    "startDate": "September 1, 2018",
-    "startDateMoment": "2018-09-01T22:30:00.000Z",
-    "startTime": "22:30",
-    "ticketId": 0,
-    "title": "",
+  "activeChildBlockId": "",
+  "header": Object {
+    "alt": "aircraft",
+    "id": 4961,
+    "src": "http://gutenberg.local/wp-content/uploads/2018/09/aircraft-1362586_1920-300x189.jpg",
+  },
+  "isChildBlockSelected": false,
+  "isParentBlockLoading": false,
+  "isParentBlockSelected": false,
+  "isSettingsOpen": false,
+  "provider": "",
+  "sharedCapacity": "",
+  "tempSharedCapacity": "",
+  "tickets": Object {
+    "allIds": Array [
+      "modern-tribe",
+    ],
+    "byId": Object {
+      "modern-tribe": Object {
+        "available": 0,
+        "currencySymbol": undefined,
+        "details": Object {
+          "capacity": "",
+          "capacityType": "capped",
+          "description": "",
+          "endDate": "September 4, 2018",
+          "endDateMoment": "2018-09-01T22:30:00.000Z",
+          "endTime": "22:30",
+          "price": "",
+          "sku": "",
+          "startDate": "September 1, 2018",
+          "startDateMoment": "2018-09-01T22:30:00.000Z",
+          "startTime": "22:30",
+          "title": "",
+        },
+        "expires": true,
+        "hasBeenCreated": false,
+        "hasChanges": false,
+        "isLoading": false,
+        "provider": "",
+        "sold": 0,
+        "tempDetails": Object {
+          "capacity": "",
+          "capacityType": "capped",
+          "description": "",
+          "endDate": "September 4, 2018",
+          "endDateMoment": "2018-09-01T22:30:00.000Z",
+          "endTime": "22:30",
+          "price": "",
+          "sku": "",
+          "startDate": "September 1, 2018",
+          "startDateMoment": "2018-09-01T22:30:00.000Z",
+          "startTime": "22:30",
+          "title": "",
+        },
+        "ticketId": 0,
+      },
+    },
   },
 }
 `;
 
-exports[`Ticket blocks selectors Ticket selectors Select type of tickets 1`] = `Array []`;
+exports[`Ticket block selectors Block selectors getTicketsActiveChildBlockId 1`] = `""`;
 
-exports[`Ticket blocks selectors Ticket selectors Select type of tickets 2`] = `
-Array [
-  Object {
-    "SKU": "",
-    "available": 0,
+exports[`Ticket block selectors Block selectors getTicketsIsChildBlockSelected 1`] = `false`;
+
+exports[`Ticket block selectors Block selectors getTicketsIsParentBlockLoading 1`] = `false`;
+
+exports[`Ticket block selectors Block selectors getTicketsIsParentBlockSelected 1`] = `false`;
+
+exports[`Ticket block selectors Block selectors getTicketsIsSettingsOpen 1`] = `false`;
+
+exports[`Ticket block selectors Block selectors getTicketsProvider 1`] = `""`;
+
+exports[`Ticket block selectors Block selectors getTicketsSharedCapacity 1`] = `""`;
+
+exports[`Ticket block selectors Block selectors getTicketsSharedCapacityInt 1`] = `0`;
+
+exports[`Ticket block selectors Block selectors getTicketsTempSharedCapacity 1`] = `""`;
+
+exports[`Ticket block selectors Block selectors getTicketsTempSharedCapacityInt 1`] = `0`;
+
+exports[`Ticket block selectors Block selectors hasTicketsActiveChildBlockId 1`] = `false`;
+
+exports[`Ticket block selectors Header selectors getTicketsHeader 1`] = `
+Object {
+  "alt": "aircraft",
+  "id": 4961,
+  "src": "http://gutenberg.local/wp-content/uploads/2018/09/aircraft-1362586_1920-300x189.jpg",
+}
+`;
+
+exports[`Ticket block selectors Header selectors getTicketsHeaderAlt 1`] = `"aircraft"`;
+
+exports[`Ticket block selectors Header selectors getTicketsHeaderId 1`] = `4961`;
+
+exports[`Ticket block selectors Header selectors getTicketsHeaderSrc 1`] = `"http://gutenberg.local/wp-content/uploads/2018/09/aircraft-1362586_1920-300x189.jpg"`;
+
+exports[`Ticket block selectors Misc selectors getTicketProviders 1`] = `Array []`;
+
+exports[`Ticket block selectors Misc selectors hasMultipleTicketProviders 1`] = `false`;
+
+exports[`Ticket block selectors Misc selectors hasTicketTicketProviders 1`] = `false`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketCapacity 1`] = `0`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketCapacityType 1`] = `"capped"`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketDescription 1`] = `""`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketDetails 1`] = `
+Object {
+  "capacity": "",
+  "capacityType": "capped",
+  "description": "",
+  "endDate": "September 4, 2018",
+  "endDateMoment": "2018-09-01T22:30:00.000Z",
+  "endTime": "22:30",
+  "price": "",
+  "sku": "",
+  "startDate": "September 1, 2018",
+  "startDateMoment": "2018-09-01T22:30:00.000Z",
+  "startTime": "22:30",
+  "title": "",
+}
+`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketEndDate 1`] = `"September 4, 2018"`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketEndDateMoment 1`] = `"2018-09-01T22:30:00.000Z"`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketEndTime 1`] = `"22:30"`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketPrice 1`] = `""`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketSku 1`] = `""`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketStartDate 1`] = `"September 1, 2018"`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketStartDateMoment 1`] = `"2018-09-01T22:30:00.000Z"`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketStartTime 1`] = `"22:30"`;
+
+exports[`Ticket block selectors Ticket details selectors getTicketTitle 1`] = `""`;
+
+exports[`Ticket block selectors Ticket details selectors isIndependentTicket 1`] = `false`;
+
+exports[`Ticket block selectors Ticket details selectors isSharedTicket 1`] = `true`;
+
+exports[`Ticket block selectors Ticket details selectors isUnlimitedTicket 1`] = `false`;
+
+exports[`Ticket block selectors Ticket selectors getTicket 1`] = `
+Object {
+  "available": 0,
+  "currencySymbol": undefined,
+  "details": Object {
     "capacity": "",
     "capacityType": "capped",
-    "currencySymbol": undefined,
-    "dateIsPristine": false,
     "description": "",
     "endDate": "September 4, 2018",
     "endDateMoment": "2018-09-01T22:30:00.000Z",
     "endTime": "22:30",
-    "hasBeenCreated": false,
-    "isEditing": false,
-    "isLoading": false,
     "price": "",
-    "provider": "",
-    "sold": 0,
+    "sku": "",
     "startDate": "September 1, 2018",
     "startDateMoment": "2018-09-01T22:30:00.000Z",
     "startTime": "22:30",
-    "ticketId": 0,
     "title": "",
+  },
+  "expires": true,
+  "hasBeenCreated": false,
+  "hasChanges": false,
+  "isLoading": false,
+  "provider": "",
+  "sold": 0,
+  "tempDetails": Object {
+    "capacity": "",
+    "capacityType": "capped",
+    "description": "",
+    "endDate": "September 4, 2018",
+    "endDateMoment": "2018-09-01T22:30:00.000Z",
+    "endTime": "22:30",
+    "price": "",
+    "sku": "",
+    "startDate": "September 1, 2018",
+    "startDateMoment": "2018-09-01T22:30:00.000Z",
+    "startTime": "22:30",
+    "title": "",
+  },
+  "ticketId": 0,
+}
+`;
+
+exports[`Ticket block selectors Ticket selectors getTicketAvailable 1`] = `0`;
+
+exports[`Ticket block selectors Ticket selectors getTicketBlockId 1`] = `"modern-tribe"`;
+
+exports[`Ticket block selectors Ticket selectors getTicketCurrencySymbol 1`] = `undefined`;
+
+exports[`Ticket block selectors Ticket selectors getTicketExpires 1`] = `true`;
+
+exports[`Ticket block selectors Ticket selectors getTicketHasBeenCreated 1`] = `false`;
+
+exports[`Ticket block selectors Ticket selectors getTicketHasChanges 1`] = `false`;
+
+exports[`Ticket block selectors Ticket selectors getTicketId 1`] = `0`;
+
+exports[`Ticket block selectors Ticket selectors getTicketIsLoading 1`] = `false`;
+
+exports[`Ticket block selectors Ticket selectors getTicketProvider 1`] = `""`;
+
+exports[`Ticket block selectors Ticket selectors getTicketSold 1`] = `0`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempCapacity 1`] = `0`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempCapacityType 1`] = `"capped"`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempDescription 1`] = `""`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempDetails 1`] = `
+Object {
+  "capacity": "",
+  "capacityType": "capped",
+  "description": "",
+  "endDate": "September 4, 2018",
+  "endDateMoment": "2018-09-01T22:30:00.000Z",
+  "endTime": "22:30",
+  "price": "",
+  "sku": "",
+  "startDate": "September 1, 2018",
+  "startDateMoment": "2018-09-01T22:30:00.000Z",
+  "startTime": "22:30",
+  "title": "",
+}
+`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempEndDate 1`] = `"September 4, 2018"`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempEndDateMoment 1`] = `"2018-09-01T22:30:00.000Z"`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempEndTime 1`] = `"22:30"`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempPrice 1`] = `""`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempSku 1`] = `""`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempStartDate 1`] = `"September 1, 2018"`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempStartDateMoment 1`] = `"2018-09-01T22:30:00.000Z"`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempStartTime 1`] = `"22:30"`;
+
+exports[`Ticket block selectors Ticket temp details selectors getTicketTempTitle 1`] = `""`;
+
+exports[`Ticket block selectors Tickets selectors getAllTicketIds 1`] = `
+Array [
+  "modern-tribe",
+]
+`;
+
+exports[`Ticket block selectors Tickets selectors getIndependentTickets 1`] = `Array []`;
+
+exports[`Ticket block selectors Tickets selectors getSharedTickets 1`] = `
+Array [
+  Object {
+    "available": 0,
+    "currencySymbol": undefined,
+    "details": Object {
+      "capacity": "",
+      "capacityType": "capped",
+      "description": "",
+      "endDate": "September 4, 2018",
+      "endDateMoment": "2018-09-01T22:30:00.000Z",
+      "endTime": "22:30",
+      "price": "",
+      "sku": "",
+      "startDate": "September 1, 2018",
+      "startDateMoment": "2018-09-01T22:30:00.000Z",
+      "startTime": "22:30",
+      "title": "",
+    },
+    "expires": true,
+    "hasBeenCreated": false,
+    "hasChanges": false,
+    "isLoading": false,
+    "provider": "",
+    "sold": 0,
+    "tempDetails": Object {
+      "capacity": "",
+      "capacityType": "capped",
+      "description": "",
+      "endDate": "September 4, 2018",
+      "endDateMoment": "2018-09-01T22:30:00.000Z",
+      "endTime": "22:30",
+      "price": "",
+      "sku": "",
+      "startDate": "September 1, 2018",
+      "startDateMoment": "2018-09-01T22:30:00.000Z",
+      "startTime": "22:30",
+      "title": "",
+    },
+    "ticketId": 0,
   },
 ]
 `;
 
-exports[`Ticket blocks selectors Ticket selectors Select type of tickets 3`] = `Array []`;
+exports[`Ticket block selectors Tickets selectors getSharedTicketsCount 1`] = `1`;
 
-exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 1`] = `"22:30"`;
+exports[`Ticket block selectors Tickets selectors getTickets 1`] = `
+Object {
+  "allIds": Array [
+    "modern-tribe",
+  ],
+  "byId": Object {
+    "modern-tribe": Object {
+      "available": 0,
+      "currencySymbol": undefined,
+      "details": Object {
+        "capacity": "",
+        "capacityType": "capped",
+        "description": "",
+        "endDate": "September 4, 2018",
+        "endDateMoment": "2018-09-01T22:30:00.000Z",
+        "endTime": "22:30",
+        "price": "",
+        "sku": "",
+        "startDate": "September 1, 2018",
+        "startDateMoment": "2018-09-01T22:30:00.000Z",
+        "startTime": "22:30",
+        "title": "",
+      },
+      "expires": true,
+      "hasBeenCreated": false,
+      "hasChanges": false,
+      "isLoading": false,
+      "provider": "",
+      "sold": 0,
+      "tempDetails": Object {
+        "capacity": "",
+        "capacityType": "capped",
+        "description": "",
+        "endDate": "September 4, 2018",
+        "endDateMoment": "2018-09-01T22:30:00.000Z",
+        "endTime": "22:30",
+        "price": "",
+        "sku": "",
+        "startDate": "September 1, 2018",
+        "startDateMoment": "2018-09-01T22:30:00.000Z",
+        "startTime": "22:30",
+        "title": "",
+      },
+      "ticketId": 0,
+    },
+  },
+}
+`;
 
-exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 2`] = `"22:30"`;
+exports[`Ticket block selectors Tickets selectors getTicketsArray 1`] = `
+Array [
+  Object {
+    "available": 0,
+    "currencySymbol": undefined,
+    "details": Object {
+      "capacity": "",
+      "capacityType": "capped",
+      "description": "",
+      "endDate": "September 4, 2018",
+      "endDateMoment": "2018-09-01T22:30:00.000Z",
+      "endTime": "22:30",
+      "price": "",
+      "sku": "",
+      "startDate": "September 1, 2018",
+      "startDateMoment": "2018-09-01T22:30:00.000Z",
+      "startTime": "22:30",
+      "title": "",
+    },
+    "expires": true,
+    "hasBeenCreated": false,
+    "hasChanges": false,
+    "isLoading": false,
+    "provider": "",
+    "sold": 0,
+    "tempDetails": Object {
+      "capacity": "",
+      "capacityType": "capped",
+      "description": "",
+      "endDate": "September 4, 2018",
+      "endDateMoment": "2018-09-01T22:30:00.000Z",
+      "endTime": "22:30",
+      "price": "",
+      "sku": "",
+      "startDate": "September 1, 2018",
+      "startDateMoment": "2018-09-01T22:30:00.000Z",
+      "startTime": "22:30",
+      "title": "",
+    },
+    "ticketId": 0,
+  },
+]
+`;
 
-exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 3`] = `"September 4, 2018"`;
+exports[`Ticket block selectors Tickets selectors getTicketsById 1`] = `
+Object {
+  "modern-tribe": Object {
+    "available": 0,
+    "currencySymbol": undefined,
+    "details": Object {
+      "capacity": "",
+      "capacityType": "capped",
+      "description": "",
+      "endDate": "September 4, 2018",
+      "endDateMoment": "2018-09-01T22:30:00.000Z",
+      "endTime": "22:30",
+      "price": "",
+      "sku": "",
+      "startDate": "September 1, 2018",
+      "startDateMoment": "2018-09-01T22:30:00.000Z",
+      "startTime": "22:30",
+      "title": "",
+    },
+    "expires": true,
+    "hasBeenCreated": false,
+    "hasChanges": false,
+    "isLoading": false,
+    "provider": "",
+    "sold": 0,
+    "tempDetails": Object {
+      "capacity": "",
+      "capacityType": "capped",
+      "description": "",
+      "endDate": "September 4, 2018",
+      "endDateMoment": "2018-09-01T22:30:00.000Z",
+      "endTime": "22:30",
+      "price": "",
+      "sku": "",
+      "startDate": "September 1, 2018",
+      "startDateMoment": "2018-09-01T22:30:00.000Z",
+      "startTime": "22:30",
+      "title": "",
+    },
+    "ticketId": 0,
+  },
+}
+`;
 
-exports[`Ticket blocks selectors Ticket selectors Ticket dates and times 4`] = `"September 1, 2018"`;
-
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 1`] = `""`;
-
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 2`] = `""`;
-
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 3`] = `""`;
-
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 4`] = `""`;
-
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 5`] = `"capped"`;
-
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 6`] = `false`;
-
-exports[`Ticket blocks selectors Ticket selectors Ticket fields 7`] = `0`;
+exports[`Ticket block selectors Tickets selectors getUnlimitedTickets 1`] = `Array []`;
