@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { createSelector } from 'reselect';
-import trim from 'lodash/trim';
 
 /**
  * Internal dependencies

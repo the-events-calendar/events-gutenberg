@@ -13,7 +13,7 @@ export const getValues = ( items ) => (
 			accumulator.names.push( item.title );
 		}
 		const capacity = parseInt( item.capacity, 10 );
-		if ( 'capacity' in item && ! isNaN( capacity ) ) {
+		if ( ! isNaN( capacity ) ) {
 			accumulator.total += capacity;
 		}
 		return accumulator;
