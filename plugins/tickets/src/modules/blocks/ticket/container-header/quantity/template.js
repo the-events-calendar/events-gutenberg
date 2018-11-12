@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
  * Wordpress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
+import QuantityBar from './quantity-bar/element';
 
 const TicketContainerHeaderDescription = ( {
 	isDisabled,
