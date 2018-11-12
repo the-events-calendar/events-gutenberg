@@ -9,6 +9,7 @@ import AutosizeInput from 'react-input-autosize';
  * Wordpress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { Pencil } from '@moderntribe/common/icons';
 
 const TicketContainerHeaderTitle = ( {
 	isDisabled,
@@ -17,21 +18,26 @@ const TicketContainerHeaderTitle = ( {
 	tempTitle,
 	title,
 } ) => (
-	isSelected
-		? (
-			<AutosizeInput
-				className="tribe-editor__ticket__container-header-title-input"
-				value={ tempTitle }
-				placeholder={ __( 'Ticket Type', 'events-gutenberg' ) }
-				onChange={ onTempTitleChange }
-				disabled={ isDisabled }
-			/>
-		)
-		: title && (
-			<h3 className="tribe-editor__ticket__container-header-title">
-				{ title }
-			</h3>
-		)
+	<div className="tribe-editor__ticket__container-header-title">
+		{
+			isSelected
+				? (
+					<AutosizeInput
+						className="tribe-editor__ticket__container-header-title-input"
+						value={ tempTitle }
+						placeholder={ __( 'Ticket Type', 'events-gutenberg' ) }
+						onChange={ onTempTitleChange }
+						disabled={ isDisabled }
+					/>
+				)
+				: title && (
+					<h3 className="tribe-editor__ticket__container-header-title-label">
+						{ title }
+					</h3>
+				)
+		}
+		<Pencil />
+	</div>
 );
 
 TicketContainerHeaderTitle.propTypes = {
