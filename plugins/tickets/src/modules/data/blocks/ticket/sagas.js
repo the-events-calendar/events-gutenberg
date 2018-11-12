@@ -251,8 +251,8 @@ export function* setTicketInitialState( action ) {
 		dateIsPristine: get( 'dateIsPristine', DEFAULT_TICKET_STATE.dateIsPristine ),
 	};
 
-	const start = yield select(getStart);
-	const end = yield select(getEnd);
+	const start = yield select( getStart );
+	const end = yield select( getEnd );
 
 	const startMoment = yield call( toMoment, start );
 	const endMoment = yield call( toMoment, end );
@@ -263,7 +263,7 @@ export function* setTicketInitialState( action ) {
 
 	const sharedCapacity = yield select( selectors.getSharedCapacityInt );
 
-	if (sharedCapacity) {
+	if ( sharedCapacity ) {
 		yield put( actions.setCapacity( clientId, sharedCapacity ) );
 	}
 
