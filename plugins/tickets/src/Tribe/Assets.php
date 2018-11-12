@@ -20,33 +20,7 @@ class Tribe__Gutenberg__Tickets__Assets {
 	 */
 	public function register() {
 		$plugin = tribe( 'gutenberg.tickets.plugin' );
-
-		tribe_asset(
-			$plugin,
-			'tribe-tickets-gutenberg-data',
-			'app/data.js',
-			/**
-			 * @todo revise this dependencies
-			 */
-			array(
-				'react',
-				'react-dom',
-				'thickbox',
-				'wp-components',
-				'wp-blocks',
-				'wp-i18n',
-				'wp-element',
-				'wp-editor',
-			),
-			'enqueue_block_editor_assets',
-			array(
-				'in_footer'    => false,
-				'localize'     => array(),
-				'conditionals' => tribe_callback( 'gutenberg.tickets.editor', 'current_type_support_tickets' ),
-				'priority'     => 200,
-			)
-		);
-
+		
 		tribe_asset(
 			$plugin,
 			'tribe-tickets-gutenberg-icons',

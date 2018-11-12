@@ -425,20 +425,7 @@ class Tribe__Gutenberg__Events__Editor extends Tribe__Gutenberg__Common__Editor 
 				'priority' => 1
 			)
 		);
-
-		tribe_asset(
-			$plugin,
-			'tribe-events-editor-data',
-			'app/data.js',
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
-			'enqueue_block_editor_assets',
-			array(
-				'in_footer' => false,
-				'localize' => array(),
-				'conditionals' => array( $this, 'is_events_post_type' ),
-				'priority'  => 100,
-			)
-		);
+		
 		tribe_asset(
 			$plugin,
 			'tribe-events-gutenberg-editor',
