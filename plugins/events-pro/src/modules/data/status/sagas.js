@@ -78,7 +78,8 @@ export function* pollUntilSeriesCompleted() {
 		const isCompleted = response === false || response.done; // If false, no edits being done
 
 		if ( isCompleted ) {
-			yield put( actions.setSeriesQueueStatus( { done: isCompleted } ) );
+			const payload = response === false ? { done: isCompleted } : response;
+			yield put( actions.setSeriesQueueStatus( payload ) );
 		} else {
 			yield put( actions.setSeriesQueueStatus( response ) );
 
