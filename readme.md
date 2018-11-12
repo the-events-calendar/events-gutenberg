@@ -93,8 +93,9 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.5-alpha - TBD
+#### 0.3.5-alpha - 2018-11-12
 
+* Feature - Recurrence compatibility for Events Pro into Date Time block
 * Feature - eCommerce options for ticket block
 * Feature - Add the opt-out option to users who submit an RSVP
 * Tweak - Update icons for attendees and orders buttons on rsvp and tickets blocks
