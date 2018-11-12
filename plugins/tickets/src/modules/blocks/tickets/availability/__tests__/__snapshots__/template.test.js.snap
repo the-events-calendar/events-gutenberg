@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Availability element render component 1`] = `
+exports[`Availability render component 1`] = `
 <div
-  className="tribe-editor__availability"
+  className="tribe-editor__tickets__availability"
 />
 `;
 
-exports[`Availability element render component with available property 1`] = `
+exports[`Availability render component with available property 1`] = `
 <div
-  className="tribe-editor__availability"
+  className="tribe-editor__tickets__availability"
 >
   <span
     className="tribe-editor__numeric-label"
@@ -28,9 +28,9 @@ exports[`Availability element render component with available property 1`] = `
 </div>
 `;
 
-exports[`Availability element renders component with available and total properties 1`] = `
+exports[`Availability renders component with available and total properties 1`] = `
 <div
-  className="tribe-editor__availability"
+  className="tribe-editor__tickets__availability"
 >
   <span
     className="tribe-editor__numeric-label"
@@ -48,11 +48,6 @@ exports[`Availability element renders component with available and total propert
     </span>
   </span>
   <span
-    className="tribe-editor__availability--separator"
-  >
-    |
-  </span>
-  <span
     className="tribe-editor__numeric-label"
   >
     
@@ -70,9 +65,9 @@ exports[`Availability element renders component with available and total propert
 </div>
 `;
 
-exports[`Availability element renders component with custom separator 1`] = `
+exports[`Availability renders component with custom separator 1`] = `
 <div
-  className="tribe-editor__availability"
+  className="tribe-editor__tickets__availability"
 >
   <span
     className="tribe-editor__numeric-label"
@@ -90,11 +85,6 @@ exports[`Availability element renders component with custom separator 1`] = `
     </span>
   </span>
   <span
-    className="tribe-editor__availability--separator"
-  >
-     [*] 
-  </span>
-  <span
     className="tribe-editor__numeric-label"
   >
     
@@ -112,9 +102,9 @@ exports[`Availability element renders component with custom separator 1`] = `
 </div>
 `;
 
-exports[`Availability element renders component with total property 1`] = `
+exports[`Availability renders component with total property 1`] = `
 <div
-  className="tribe-editor__availability"
+  className="tribe-editor__tickets__availability"
 >
   <span
     className="tribe-editor__numeric-label"

@@ -7,10 +7,9 @@ import renderer from 'react-test-renderer';
 /**
  * Internal dependencies
  */
-import { ActionDashboard } from '@moderntribe/tickets/elements';
-import Availability from './../element';
+import Availability from '../template';
 
-describe( 'Availability element', () => {
+describe( 'Availability', () => {
 	it( 'render component', () => {
 		const component = renderer.create( <Availability /> );
 		expect( component.toJSON() ).toMatchSnapshot();
