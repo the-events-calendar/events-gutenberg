@@ -48,7 +48,7 @@ export function* fetchStatus() {
 
 		yield call( [ payload, 'append' ], 'action', 'gutenberg_events_pro_recurrence_queue' );
 		yield call( [ payload, 'append' ], 'recurrence_queue_status_nonce', restNonce().queue_status_nonce ); // eslint-disable-line max-len
-		yield call( [ payload, 'append' ], 'postId', postId );
+		yield call( [ payload, 'append' ], 'post_id', postId );
 
 		const response = yield call( fetch, window.ajaxurl, {
 			method: 'POST',
