@@ -170,6 +170,15 @@
 		flex-wrap: wrap;
 		padding: 30px 0;
 
+		label {
+			font-weight: initial;
+			color: #8d959b;
+
+			.tribe-tickets-meta-option-label {
+				cursor: pointer;
+			}
+		}
+
 		input {
 			margin-bottom: 15px;
 			padding: 10px;
@@ -181,6 +190,11 @@
 			&[type="number"] {
 				border-color: #e2e3e7;
 				color: #8d959b;
+			}
+
+			&:[type="radio"],
+			&:[type="checkbox"] {
+				margin-right: 0.5em;
 			}
 
 			&::-webkit-input-placeholder,
