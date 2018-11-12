@@ -16,7 +16,9 @@ const RSVPDurationPicker = ( props ) => (
 
 RSVPDurationPicker.propTypes = {
 	fromDate: PropTypes.string,
+	fromDateDisabled: PropTypes.bool,
 	fromTime: PropTypes.string,
+	fromTimeDisabled: PropTypes.bool,
 	isSameDay: PropTypes.bool,
 	onFromDateChange: PropTypes.func,
 	onFromTimePickerChange: PropTypes.func,
@@ -25,7 +27,9 @@ RSVPDurationPicker.propTypes = {
 	onToTimePickerChange: PropTypes.func,
 	onToTimePickerClick: PropTypes.func,
 	toDate: PropTypes.string,
+	toDateDisabled: PropTypes.bool,
 	toTime: PropTypes.string,
+	toTimeDisabled: PropTypes.bool,
 };
 
 export default RSVPDurationPicker;
