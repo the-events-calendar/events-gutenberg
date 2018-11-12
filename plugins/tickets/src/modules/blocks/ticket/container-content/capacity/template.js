@@ -15,12 +15,9 @@ import { Dashicon } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { constants, options } from '@moderntribe/tickets/data/ticket';
-import {
-	LabeledItem,
-	LabelWithTooltip,
-	NumberInput,
-} from '@moderntribe/tickets/elements';
+import { constants, options } from '@moderntribe/tickets/data/blocks/ticket';
+import { LabeledItem, NumberInput } from '@moderntribe/common/elements';
+import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
 const {

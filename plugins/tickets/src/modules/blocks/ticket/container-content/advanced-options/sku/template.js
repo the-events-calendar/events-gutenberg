@@ -14,7 +14,8 @@ import uniqid from 'uniqid';
 /**
  * Internal dependencies
  */
-import { Input, LabelWithTooltip } from '@moderntribe/tickets/elements';
+import { Input } from '@moderntribe/common/elements';
+import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 
 class SKU extends PureComponent {
 	static propTypes = {
