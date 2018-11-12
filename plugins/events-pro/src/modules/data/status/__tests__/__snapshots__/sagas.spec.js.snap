@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status sagas createWPEditorChannel should create channel 1`] = `
+Object {
+  "close": [Function],
+  "flush": [Function],
+  "take": [Function],
+}
+`;
+
+exports[`Status sagas fetchStatus should fetch successfully 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      "action",
+      "gutenberg_events_pro_recurrence_queue",
+    ],
+    "context": FormDataMock {
+      "append": [MockFunction],
+    },
+    "fn": [MockFunction],
+  },
+}
+`;
+
+exports[`Status sagas fetchStatus should fetch successfully 2`] = `Array []`;
+
+exports[`Status sagas fetchStatus should fetch successfully 3`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      "recurrence_queue_status_nonce",
+      "nonce",
+    ],
+    "context": FormDataMock {
+      "append": [MockFunction],
+    },
+    "fn": [MockFunction],
+  },
+}
+`;
+
+exports[`Status sagas fetchStatus should fetch successfully 4`] = `Array []`;
+
+exports[`Status sagas fetchStatus should fetch successfully 5`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      "post_id",
+      1,
+    ],
+    "context": FormDataMock {
+      "append": [MockFunction],
+    },
+    "fn": [MockFunction],
+  },
+}
+`;
+
+exports[`Status sagas fetchStatus should fetch successfully 6`] = `Array []`;

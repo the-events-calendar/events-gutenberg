@@ -6,14 +6,26 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal Dependencies
  */
-import { initStore } from '@moderntribe/events-pro/data';
+import recurrence from '@moderntribe/events-pro/blocks/recurrence';
+import recurrenceRule from '@moderntribe/events-pro/blocks/recurrence-rule';
+import recurrenceException from '@moderntribe/events-pro/blocks/recurrence-exception';
 import { addAdditionalFields } from '@moderntribe/events-pro/blocks/additional-fields/utils';
+import { initStore } from '@moderntribe/events-pro/data';
 
-const blocks = addAdditionalFields( [] );
+const blocks = addAdditionalFields( [
+	recurrence,
+	recurrenceRule,
+	recurrenceException,
+] );
 
 blocks.forEach( block => {
 	const blockName = `tribe/${ block.id }`;
 	registerBlockType( blockName, block );
 } );
 
+// Initialize AFTER blocks are registered
+// to avoid plugin shown as available in reducer
+// but not having block available for use
 initStore();
+
+export default blocks;

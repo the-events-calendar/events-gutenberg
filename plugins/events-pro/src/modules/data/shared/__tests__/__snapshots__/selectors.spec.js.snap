@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shared selectors getAllDay 1`] = `false`;
+
+exports[`shared selectors getBetween 1`] = `1`;
+
+exports[`shared selectors getDay 1`] = `1`;
+
+exports[`shared selectors getDays 1`] = `Array []`;
+
+exports[`shared selectors getEndDate 1`] = `"October 25, 2018"`;
+
+exports[`shared selectors getEndDateInput 1`] = `""`;
+
+exports[`shared selectors getEndDateObj 1`] = `Object {}`;
+
+exports[`shared selectors getEndTime 1`] = `"08:00:00"`;
+
+exports[`shared selectors getEndTimeNoSeconds 1`] = `"08:00"`;
+
+exports[`shared selectors getLimit 1`] = `7`;
+
+exports[`shared selectors getLimitDateInput 1`] = `""`;
+
+exports[`shared selectors getLimitDateObj 1`] = `Object {}`;
+
+exports[`shared selectors getLimitType 1`] = `"count"`;
+
+exports[`shared selectors getMonth 1`] = `Array []`;
+
+exports[`shared selectors getMultiDay 1`] = `false`;
+
+exports[`shared selectors getMultiDaySpan 1`] = `"next-day"`;
+
+exports[`shared selectors getRule 1`] = `
+Object {
+  "_end_date_input": "",
+  "_end_date_obj": Object {},
+  "_limit_date_input": "",
+  "_limit_date_obj": Object {},
+  "_start_date_input": "",
+  "_start_date_obj": Object {},
+  "all_day": false,
+  "between": 1,
+  "day": 1,
+  "days": Array [],
+  "end_date": "October 25, 2018",
+  "end_time": "08:00:00",
+  "limit": 7,
+  "limit_type": "count",
+  "month": Array [],
+  "multi_day": false,
+  "multi_day_span": "next-day",
+  "start_date": "October 25, 2018",
+  "start_time": "07:30:00",
+  "timezone": "UTC-6",
+  "type": "single",
+  "week": "first",
+}
+`;
+
+exports[`shared selectors getStartDate 1`] = `"October 25, 2018"`;
+
+exports[`shared selectors getStartDateInput 1`] = `""`;
+
+exports[`shared selectors getStartDateObj 1`] = `Object {}`;
+
+exports[`shared selectors getStartTime 1`] = `"07:30:00"`;
+
+exports[`shared selectors getStartTimeNoSeconds 1`] = `"07:30"`;
+
+exports[`shared selectors getTimezone 1`] = `"UTC-6"`;
+
+exports[`shared selectors getType 1`] = `"single"`;
+
+exports[`shared selectors getWeek 1`] = `"first"`;

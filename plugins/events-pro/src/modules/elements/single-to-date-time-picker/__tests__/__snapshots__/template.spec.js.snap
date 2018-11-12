@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SingleToDateTimePicker should render component 1`] = `
+<div
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__single-to-date-time-picker test-class"
+>
+  <div
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
+  >
+    <span
+      className="tribe-editor__events-pro__label-text"
+    >
+      To
+    </span>
+  </div>
+  <div
+    className="tribe-editor__labeled-row__content"
+  >
+    <div
+      className="tribe-editor__timepicker"
+    >
+      <span>
+        Dropdown
+      </span>
+    </div>
+    <span>
+      on
+    </span>
+    <div
+      className="tribe-editor__day-picker-input DayPickerInput"
+    >
+      <input
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        placeholder="YYYY-M-D"
+        value="September 21, 2019"
+      />
+    </div>
+  </div>
+</div>
+`;

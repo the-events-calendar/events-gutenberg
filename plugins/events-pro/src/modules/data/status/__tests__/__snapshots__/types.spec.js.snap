@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status types SET_SERIES_QUEUE_STATUS 1`] = `"@@MT/EVENTS-PRO/SET_SERIES_QUEUE_STATUS"`;

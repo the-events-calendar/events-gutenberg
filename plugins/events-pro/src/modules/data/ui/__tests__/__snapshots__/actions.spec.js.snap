@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[STORE] - UI actions expandExceptionPanel 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/EXPAND_EXCEPTION_PANEL",
+}
+`;
+
+exports[`[STORE] - UI actions expandRulePanel 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/EXPAND_RULE_PANEL",
+}
+`;
+
+exports[`[STORE] - UI actions hideExceptionPanel 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/HIDE_EXCEPTION_PANEL",
+}
+`;
+
+exports[`[STORE] - UI actions hideRulePanel 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/HIDE_RULE_PANEL",
+}
+`;
+
+exports[`[STORE] - UI actions toggleExceptionPanelExpand 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/TOGGLE_EXCEPTION_PANEL_EXPAND",
+}
+`;
+
+exports[`[STORE] - UI actions toggleExceptionPanelVisibility 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/TOGGLE_EXCEPTION_PANEL_VISIBILITY",
+}
+`;
+
+exports[`[STORE] - UI actions toggleRepeatBlocksVisibility 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/TOGGLE_REPEAT_EVENTS_BLOCK_VISIBILITY",
+}
+`;
+
+exports[`[STORE] - UI actions toggleRulePanelExpand 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/TOGGLE_RULE_PANEL_EXPAND",
+}
+`;
+
+exports[`[STORE] - UI actions toggleRulePanelVisibility 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/TOGGLE_RULE_PANEL_VISIBILITY",
+}
+`;

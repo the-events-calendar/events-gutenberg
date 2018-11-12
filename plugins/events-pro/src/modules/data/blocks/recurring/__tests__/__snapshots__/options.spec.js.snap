@@ -1,0 +1,654 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recurrence options Days of the month options days of the month options 1`] = `
+Array [
+  Object {
+    "label": "1",
+    "value": 1,
+  },
+  Object {
+    "label": "2",
+    "value": 2,
+  },
+  Object {
+    "label": "3",
+    "value": 3,
+  },
+  Object {
+    "label": "4",
+    "value": 4,
+  },
+  Object {
+    "label": "5",
+    "value": 5,
+  },
+  Object {
+    "label": "6",
+    "value": 6,
+  },
+  Object {
+    "label": "7",
+    "value": 7,
+  },
+  Object {
+    "label": "8",
+    "value": 8,
+  },
+  Object {
+    "label": "9",
+    "value": 9,
+  },
+  Object {
+    "label": "10",
+    "value": 10,
+  },
+  Object {
+    "label": "11",
+    "value": 11,
+  },
+  Object {
+    "label": "12",
+    "value": 12,
+  },
+  Object {
+    "label": "13",
+    "value": 13,
+  },
+  Object {
+    "label": "14",
+    "value": 14,
+  },
+  Object {
+    "label": "15",
+    "value": 15,
+  },
+  Object {
+    "label": "16",
+    "value": 16,
+  },
+  Object {
+    "label": "17",
+    "value": 17,
+  },
+  Object {
+    "label": "18",
+    "value": 18,
+  },
+  Object {
+    "label": "19",
+    "value": 19,
+  },
+  Object {
+    "label": "20",
+    "value": 20,
+  },
+  Object {
+    "label": "21",
+    "value": 21,
+  },
+  Object {
+    "label": "22",
+    "value": 22,
+  },
+  Object {
+    "label": "23",
+    "value": 23,
+  },
+  Object {
+    "label": "24",
+    "value": 24,
+  },
+  Object {
+    "label": "25",
+    "value": 25,
+  },
+  Object {
+    "label": "26",
+    "value": 26,
+  },
+  Object {
+    "label": "27",
+    "value": 27,
+  },
+  Object {
+    "label": "28",
+    "value": 28,
+  },
+  Object {
+    "label": "29",
+    "value": 29,
+  },
+  Object {
+    "label": "30",
+    "value": 30,
+  },
+  Object {
+    "label": "31",
+    "value": 31,
+  },
+]
+`;
+
+exports[`Recurrence options Days of the month options month days options 1`] = `
+Array [
+  Object {
+    "label": "First",
+    "value": "first",
+  },
+  Object {
+    "label": "Second",
+    "value": "second",
+  },
+  Object {
+    "label": "Third",
+    "value": "third",
+  },
+  Object {
+    "label": "Fourth",
+    "value": "fourth",
+  },
+  Object {
+    "label": "Fifth",
+    "value": "fifth",
+  },
+  Object {
+    "label": "Last",
+    "value": "last",
+  },
+  Object {
+    "label": "1",
+    "value": 1,
+  },
+  Object {
+    "label": "2",
+    "value": 2,
+  },
+  Object {
+    "label": "3",
+    "value": 3,
+  },
+  Object {
+    "label": "4",
+    "value": 4,
+  },
+  Object {
+    "label": "5",
+    "value": 5,
+  },
+  Object {
+    "label": "6",
+    "value": 6,
+  },
+  Object {
+    "label": "7",
+    "value": 7,
+  },
+  Object {
+    "label": "8",
+    "value": 8,
+  },
+  Object {
+    "label": "9",
+    "value": 9,
+  },
+  Object {
+    "label": "10",
+    "value": 10,
+  },
+  Object {
+    "label": "11",
+    "value": 11,
+  },
+  Object {
+    "label": "12",
+    "value": 12,
+  },
+  Object {
+    "label": "13",
+    "value": 13,
+  },
+  Object {
+    "label": "14",
+    "value": 14,
+  },
+  Object {
+    "label": "15",
+    "value": 15,
+  },
+  Object {
+    "label": "16",
+    "value": 16,
+  },
+  Object {
+    "label": "17",
+    "value": 17,
+  },
+  Object {
+    "label": "18",
+    "value": 18,
+  },
+  Object {
+    "label": "19",
+    "value": 19,
+  },
+  Object {
+    "label": "20",
+    "value": 20,
+  },
+  Object {
+    "label": "21",
+    "value": 21,
+  },
+  Object {
+    "label": "22",
+    "value": 22,
+  },
+  Object {
+    "label": "23",
+    "value": 23,
+  },
+  Object {
+    "label": "24",
+    "value": 24,
+  },
+  Object {
+    "label": "25",
+    "value": 25,
+  },
+  Object {
+    "label": "26",
+    "value": 26,
+  },
+  Object {
+    "label": "27",
+    "value": 27,
+  },
+  Object {
+    "label": "28",
+    "value": 28,
+  },
+  Object {
+    "label": "29",
+    "value": 29,
+  },
+  Object {
+    "label": "30",
+    "value": 30,
+  },
+  Object {
+    "label": "31",
+    "value": 31,
+  },
+]
+`;
+
+exports[`Recurrence options Days of the month options weeks of the month options 1`] = `
+Array [
+  Object {
+    "label": "First",
+    "value": "first",
+  },
+  Object {
+    "label": "Second",
+    "value": "second",
+  },
+  Object {
+    "label": "Third",
+    "value": "third",
+  },
+  Object {
+    "label": "Fourth",
+    "value": "fourth",
+  },
+  Object {
+    "label": "Fifth",
+    "value": "fifth",
+  },
+  Object {
+    "label": "Last",
+    "value": "last",
+  },
+]
+`;
+
+exports[`Recurrence options Days of the week options days of the week options 1`] = `
+Array [
+  Object {
+    "label": "Monday",
+    "value": "monday",
+  },
+  Object {
+    "label": "Tuesday",
+    "value": "tuesday",
+  },
+  Object {
+    "label": "Wednesday",
+    "value": "wednesday",
+  },
+  Object {
+    "label": "Thursday",
+    "value": "thursday",
+  },
+  Object {
+    "label": "Friday",
+    "value": "friday",
+  },
+  Object {
+    "label": "Saturday",
+    "value": "saturday",
+  },
+  Object {
+    "label": "Sunday",
+    "value": "sunday",
+  },
+  Object {
+    "label": "Day",
+    "value": "day",
+  },
+]
+`;
+
+exports[`Recurrence options Months of the year options months of the year options 1`] = `
+Array [
+  Object {
+    "label": "January",
+    "tag": "Jan",
+    "value": "january",
+  },
+  Object {
+    "label": "February",
+    "tag": "Feb",
+    "value": "february",
+  },
+  Object {
+    "label": "March",
+    "tag": "Mar",
+    "value": "march",
+  },
+  Object {
+    "label": "April",
+    "tag": "Apr",
+    "value": "april",
+  },
+  Object {
+    "label": "May",
+    "tag": "May",
+    "value": "may",
+  },
+  Object {
+    "label": "June",
+    "tag": "Jun",
+    "value": "june",
+  },
+  Object {
+    "label": "July",
+    "tag": "Jul",
+    "value": "july",
+  },
+  Object {
+    "label": "August",
+    "tag": "Aug",
+    "value": "august",
+  },
+  Object {
+    "label": "September",
+    "tag": "Sep",
+    "value": "september",
+  },
+  Object {
+    "label": "October",
+    "tag": "Oct",
+    "value": "october",
+  },
+  Object {
+    "label": "November",
+    "tag": "Nov",
+    "value": "november",
+  },
+  Object {
+    "label": "December",
+    "tag": "Dec",
+    "value": "december",
+  },
+]
+`;
+
+exports[`Recurrence options Recurrence frequency options createNumericalOptions 1`] = `
+Array [
+  Object {
+    "label": "1",
+    "value": 1,
+  },
+  Object {
+    "label": "2",
+    "value": 2,
+  },
+  Object {
+    "label": "3",
+    "value": 3,
+  },
+  Object {
+    "label": "4",
+    "value": 4,
+  },
+  Object {
+    "label": "5",
+    "value": 5,
+  },
+]
+`;
+
+exports[`Recurrence options Recurrence frequency options daily recurrence frequency options 1`] = `
+Array [
+  Object {
+    "label": "1",
+    "value": 1,
+  },
+  Object {
+    "label": "2",
+    "value": 2,
+  },
+  Object {
+    "label": "3",
+    "value": 3,
+  },
+  Object {
+    "label": "4",
+    "value": 4,
+  },
+  Object {
+    "label": "5",
+    "value": 5,
+  },
+  Object {
+    "label": "6",
+    "value": 6,
+  },
+]
+`;
+
+exports[`Recurrence options Recurrence frequency options monthly recurrence frequency options 1`] = `
+Array [
+  Object {
+    "label": "1",
+    "value": 1,
+  },
+  Object {
+    "label": "2",
+    "value": 2,
+  },
+  Object {
+    "label": "3",
+    "value": 3,
+  },
+  Object {
+    "label": "4",
+    "value": 4,
+  },
+  Object {
+    "label": "5",
+    "value": 5,
+  },
+  Object {
+    "label": "6",
+    "value": 6,
+  },
+  Object {
+    "label": "7",
+    "value": 7,
+  },
+  Object {
+    "label": "8",
+    "value": 8,
+  },
+  Object {
+    "label": "9",
+    "value": 9,
+  },
+  Object {
+    "label": "10",
+    "value": 10,
+  },
+  Object {
+    "label": "11",
+    "value": 11,
+  },
+  Object {
+    "label": "12",
+    "value": 12,
+  },
+]
+`;
+
+exports[`Recurrence options Recurrence frequency options weekly recurrence frequency options 1`] = `
+Array [
+  Object {
+    "label": "1",
+    "value": 1,
+  },
+  Object {
+    "label": "2",
+    "value": 2,
+  },
+  Object {
+    "label": "3",
+    "value": 3,
+  },
+  Object {
+    "label": "4",
+    "value": 4,
+  },
+  Object {
+    "label": "5",
+    "value": 5,
+  },
+  Object {
+    "label": "6",
+    "value": 6,
+  },
+]
+`;
+
+exports[`Recurrence options Recurrence frequency options yearly recurrence frequency options 1`] = `
+Array [
+  Object {
+    "label": "1",
+    "value": 1,
+  },
+  Object {
+    "label": "2",
+    "value": 2,
+  },
+  Object {
+    "label": "3",
+    "value": 3,
+  },
+  Object {
+    "label": "4",
+    "value": 4,
+  },
+  Object {
+    "label": "5",
+    "value": 5,
+  },
+  Object {
+    "label": "6",
+    "value": 6,
+  },
+]
+`;
+
+exports[`Recurrence options Recurrence type options recurrence type rules options 1`] = `
+Array [
+  Object {
+    "label": "Day",
+    "value": "daily",
+  },
+  Object {
+    "label": "Week",
+    "value": "weekly",
+  },
+  Object {
+    "label": "Month",
+    "value": "monthly",
+  },
+  Object {
+    "label": "Year",
+    "value": "yearly",
+  },
+  Object {
+    "label": "Single Recurrence",
+    "value": "single",
+  },
+]
+`;
+
+exports[`Recurrence options Recurring multi day options recurring multi day options 1`] = `
+Array [
+  Object {
+    "label": "Next day",
+    "value": "next_day",
+  },
+  Object {
+    "label": "2nd day",
+    "value": "second_day",
+  },
+  Object {
+    "label": "3rd day",
+    "value": "third_day",
+  },
+  Object {
+    "label": "4th day",
+    "value": "fourth_day",
+  },
+  Object {
+    "label": "5th day",
+    "value": "fifth_day",
+  },
+  Object {
+    "label": "6th day",
+    "value": "sixth_day",
+  },
+  Object {
+    "label": "7th day",
+    "value": "seventh_day",
+  },
+]
+`;
+
+exports[`Recurrence options Series ends options series ends options 1`] = `
+Array [
+  Object {
+    "label": "On",
+    "value": "date",
+  },
+  Object {
+    "label": "After",
+    "value": "count",
+  },
+  Object {
+    "label": "Never",
+    "value": "never",
+  },
+]
+`;

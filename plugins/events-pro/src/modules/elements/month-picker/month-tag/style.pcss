@@ -1,0 +1,46 @@
+.tribe-editor__month-tag {
+	position: relative;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #FFFFFF;
+	height: 40px;
+	padding: 7px 15px;
+	border: 1px solid #E1E3E6;
+	border-radius: 3px;
+	margin: 0;
+	background-color: #009FD4;
+	cursor: pointer;
+
+	svg {
+		display: none;
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		transform: scale(0.5);
+
+		path {
+			fill: #FFFFFF;
+		}
+	}
+
+	&:hover,
+	&:focus {
+		background-color: #007BB4;
+
+		svg {
+			display: block;
+		}
+	}
+}
+
+.tribe-editor__month-tag__remove {
+	/* visually hidden */
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}

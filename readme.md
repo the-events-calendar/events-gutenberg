@@ -211,6 +211,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Display timezone label when selection is a UTC offset
 * Fix - Allow removal of organizers from classic block if the organizer block is removed
 * Fix - Separate logic and presentation from date time block
+* Feature - Add store registration in `common`
+* Feature - Move `events` reducer into the `common` store
 
 #### 0.2.6-alpha - 2018-08-10
 

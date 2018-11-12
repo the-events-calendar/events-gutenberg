@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exception actions addException 1`] = `
+Object {
+  "payload": Object {
+    "value": 1,
+  },
+  "type": "@@MT/EVENTS-PRO/ADD_EXCEPTION",
+}
+`;
+
+exports[`Exception actions addField 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/ADD_EXCEPTION_FIELD",
+}
+`;
+
+exports[`Exception actions editException 1`] = `
+Object {
+  "index": 1,
+  "payload": Object {
+    "value": 1,
+  },
+  "type": "@@MT/EVENTS-PRO/EDIT_EXCEPTION",
+}
+`;
+
+exports[`Exception actions removeException 1`] = `
+Object {
+  "index": 1,
+  "type": "@@MT/EVENTS-PRO/REMOVE_EXCEPTION",
+}
+`;
+
+exports[`Exception actions removeField 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/REMOVE_EXCEPTION_FIELD",
+}
+`;
+
+exports[`Exception actions syncException 1`] = `
+Object {
+  "index": 1,
+  "payload": Object {
+    "value": 1,
+  },
+  "sync": true,
+  "type": "@@MT/EVENTS-PRO/EDIT_EXCEPTION",
+}
+`;
+
+exports[`Exception actions syncExceptionsFromDB 1`] = `
+Object {
+  "payload": Object {
+    "value": 1,
+  },
+  "type": "@@MT/EVENTS-PRO/SYNC_EXCEPTIONS_FROM_DB",
+}
+`;

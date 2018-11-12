@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recurrence actions addField 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/ADD_RULE_FIELD",
+}
+`;
+
+exports[`Recurrence actions addRule 1`] = `
+Object {
+  "payload": Object {
+    "value": 1,
+  },
+  "type": "@@MT/EVENTS-PRO/ADD_RULE",
+}
+`;
+
+exports[`Recurrence actions editRule 1`] = `
+Object {
+  "index": 1,
+  "payload": Object {
+    "value": 1,
+  },
+  "type": "@@MT/EVENTS-PRO/EDIT_RULE",
+}
+`;
+
+exports[`Recurrence actions removeField 1`] = `
+Object {
+  "type": "@@MT/EVENTS-PRO/REMOVE_RULE_FIELD",
+}
+`;
+
+exports[`Recurrence actions removeRule 1`] = `
+Object {
+  "index": 1,
+  "type": "@@MT/EVENTS-PRO/REMOVE_RULE",
+}
+`;
+
+exports[`Recurrence actions syncRule 1`] = `
+Object {
+  "index": 1,
+  "payload": Object {
+    "value": 1,
+  },
+  "sync": true,
+  "type": "@@MT/EVENTS-PRO/EDIT_RULE",
+}
+`;
+
+exports[`Recurrence actions syncRulesFromDB 1`] = `
+Object {
+  "payload": Object {
+    "value": 1,
+  },
+  "type": "@@MT/EVENTS-PRO/SYNC_RULES_FROM_DB",
+}
+`;

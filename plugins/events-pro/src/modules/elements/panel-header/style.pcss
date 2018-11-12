@@ -1,0 +1,48 @@
+.tribe-editor__events-pro__panel-header {
+	background-color: #f3f4f5;
+	border-top: 1px solid #e1e3e6;
+	display: flex;
+
+	&-button {
+		align-items: center;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		flex: 1;
+		justify-content: stretch;
+		outline: none;
+		padding: 18px;
+		text-align: left;
+
+		&-text {
+			flex: 1;
+			display: flex;
+			align-items: baseline;
+			font-family: "SF Pro Display", Helvetica;
+			font-weight: 700;
+			letter-spacing: 0.38px;
+		}
+
+		&-title {
+			flex: none;
+			color: #000000;
+			font-size: 15px;
+		}
+
+		&-count {
+			flex: none;
+			color: #8D949B;
+			font-size: 13px;
+			margin-left: 4px;
+		}
+	}
+
+	&--expanded {
+
+		& svg {
+			transform: rotate(180deg);
+			transform-origin: center center;
+		}
+	}
+}
