@@ -12,11 +12,10 @@ import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state ) => ( {
-	isSettingsOpen: selectors.getSettingsIsOpen( state ),
+	isSettingsOpen: selectors.getTicketsIsSettingsOpen( state ),
 } );
 
 export default compose(
 	withStore(),
 	connect( mapStateToProps ),
 )( TicketsDashboard );
-

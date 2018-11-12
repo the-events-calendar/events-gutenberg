@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import Availability from '../availability/element';
+import Availability from '../availability/container';
 import { InactiveBlock } from '@moderntribe/tickets/elements';
 import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';

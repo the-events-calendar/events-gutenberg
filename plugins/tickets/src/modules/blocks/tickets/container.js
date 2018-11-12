@@ -13,7 +13,7 @@ import { actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	setInitialState: ( props ) => {
-		dispatch( actions.setInitialState( props ) );
+		dispatch( actions.setTicketsInitialState( props ) );
 	},
 } );
 
