@@ -27,6 +27,8 @@ $going     = $this->get( 'going' );
 
 		<?php $this->template( 'blocks/rsvp/form/email', array( 'ticket' => $ticket ) ); ?>
 
+		<?php $this->template( 'blocks/rsvp/form/opt-out', array( 'ticket' => $ticket ) ); ?>
+
 		<?php $this->template( 'blocks/rsvp/form/submit', array( 'ticket' => $ticket ) ); ?>
 	</div>
 
