@@ -17,16 +17,11 @@ import './style.pcss';
 
 const CapacityTable = ( props ) => {
 	const {
-		title,
 		sharedTickets,
 		independentTickets,
-		sharedLabel,
-		independentLabel,
-		totalLabel,
 		totalCapacity,
 		onSharedCapacityChange,
 		sharedCapacity,
-		remainingCapacity,
 	} = props;
 
 	const sharedData = getValues( sharedTickets );
@@ -38,25 +33,26 @@ const CapacityTable = ( props ) => {
 			value={ sharedCapacity }
 			type="number"
 			min="0"
-			max={ remainingCapacity }
 		/>
 	);
 
 	return (
 		<div className="tribe-editor__capacity">
-			{ title && <h3 className="tribe-editor__capacity__title">{ title }</h3> }
+			<h3 className="tribe-editor__capacity__title">
+				{ __( 'Capacity', 'events-gutenberg' ) }
+			</h3>
 			<Row
-				label={ sharedLabel }
+				label={ __( 'Shared Capacity', 'events-gutenberg' ) }
 				items={ toLabel( sharedData.names ) }
 				right={ sharedInput }
 			/>
 			<Row
-				label={ independentLabel }
+				label={ __( 'Independent capacity', 'events-gutenberg' ) }
 				items={ toLabel( independentData.names ) }
 				right={ independentData.total }
 			/>
 			<Row
-				label={ totalLabel }
+				label={ __( 'Total Capacity', 'events-gutenberg' ) }
 				right={ totalCapacity }
 			/>
 		</div>
@@ -64,25 +60,16 @@ const CapacityTable = ( props ) => {
 };
 
 CapacityTable.propTypes = {
-	title: PropTypes.string,
 	sharedTickets: itemsSchema,
-	sharedLabel: PropTypes.string,
 	independentTickets: itemsSchema,
-	independentLabel: PropTypes.string,
-	totalLabel: PropTypes.string,
 	totalCapacity: PropTypes.number,
-	remainingCapacity: PropTypes.number,
 	sharedCapacity: PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
 	onSharedCapacityChange: PropTypes.func,
 };
 
 CapacityTable.defaultProps = {
-	title: __( 'Capacity', 'events-gutenberg' ),
 	sharedTickets: [],
 	independentTickets: [],
-	sharedLabel: __( 'Shared Capacity', 'events-gutenberg' ),
-	independentLabel: __( 'Independent capacity', 'events-gutenberg' ),
-	totalLabel: __( 'Total Capacity', 'events-gutenberg' ),
 	totalCapacity: 0,
 	onSharedCapacityChange: noop,
 };

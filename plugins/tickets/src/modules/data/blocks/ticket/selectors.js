@@ -12,7 +12,9 @@ import { config } from '@moderntribe/common/utils/globals';
 
 export const getBlock = ( state ) => state.tickets.blocks.ticket;
 
-// UI selectors
+//
+// ─── UI SELECTORS ───────────────────────────────────────────────────────────────
+//
 
 export const getTicketUI = createSelector( [ getBlock ], ( block ) => block.ui );
 export const getTicketSettings = createSelector( [ getBlock ], ( block ) => block.settings );
@@ -53,7 +55,9 @@ export const getSelectedProvider = createSelector(
 	( ui ) => ui.provider,
 );
 
-// Temporarily UI selectors
+//
+// ─── TEMPORARY UI SELECTORS ─────────────────────────────────────────────────────
+//
 
 export const getTmpSettings = createSelector(
 	[ getTicketSettings ],
@@ -62,7 +66,9 @@ export const getTmpSettings = createSelector(
 
 export const getTmpSharedCapacity = createSelector( getTmpSettings, tmp => tmp.sharedCapacity );
 
-// Header Image
+//
+// ─── HEADER IMAGE SELECTORS ─────────────────────────────────────────────────────
+//
 
 export const getHeader = createSelector( [ getTicketUI ], ( ui ) => ui.header );
 export const getImageSize = ( state, props ) => props.size;
@@ -86,7 +92,10 @@ export const getHeaderSize = createSelector(
 	},
 );
 
-// ticket selectors
+//
+// ─── TICKETS SELECTORS ───────────────────────────────────────────────────────────
+//
+
 export const getTicketBlockId = ( state, props ) => props.blockId;
 
 export const getTicketsIds = createSelector(
@@ -120,7 +129,7 @@ export const getSharedTickets = createSelector(
 
 export const getSharedTicketsCount = createSelector(
 	getSharedTickets,
-	tickets => tickets.length
+	tickets => tickets.length,
 );
 
 export const getUnlimitedTickets = createSelector(
@@ -131,7 +140,7 @@ export const getUnlimitedTickets = createSelector(
 );
 
 //
-// ─── REDUCER ────────────────────────────────────────────────────────────────────
+// ─── TICKETS REDUCERS ───────────────────────────────────────────────────────────
 //
 
 const _getTotalCapacity = tickets => tickets.reduce( ( total, ticket ) => {
@@ -150,23 +159,31 @@ const _getTotalAvailable = tickets => tickets.reduce( ( total, ticket ) => {
 }, 0 );
 
 export const getTicketsIndependentCapacity = createSelector( getIndependentTickets, _getTotalCapacity );
+export const getTicketsIndependentSold = createSelector( getIndependentTickets, _getTotalSold );
 export const getTicketsIndependentAvailable = createSelector( getIndependentTickets, _getTotalAvailable );
-export const getTicketsSharedCapacity = createSelector( getSharedTickets, _getTotalCapacity );
-export const getTicketsSharedAvailable = createSelector( getSharedTickets, _getTotalAvailable );
-export const getTotalSold = createSelector( getTicketsArray, _getTotalSold );
-export const getTotalAvailable = createSelector(
-	[ getSharedCapacityInt, getTicketsIndependentAvailable ],
-	( globalShared, independent ) => globalShared + independent
-);
-export const getSharedRemainingCapacity = createSelector(
-	[ getSharedCapacity, getTicketsSharedCapacity ],
-	( globalShared, sharedCapacity ) => Math.max( 0, globalShared - sharedCapacity )
+
+export const getTicketsSharedSold = createSelector( getSharedTickets, _getTotalSold );
+export const getTicketsSharedAvailable = createSelector(
+	[ getSharedCapacityInt, getTicketsSharedSold ],
+	( sharedCapacity, sharedSold ) => Math.max( sharedCapacity - sharedSold, 0 ),
 );
 
-export const getTotalCapacity = createSelector(
-	[ getSharedCapacityInt, getTicketsIndependentCapacity ],
-	( globalShared, independent ) => globalShared + independent,
+export const getTicketsIndependentAndSharedCapacity = createSelector(
+	[ getTicketsIndependentCapacity, getSharedCapacityInt ],
+	( independentCapacity, sharedCapacity ) => independentCapacity + sharedCapacity,
 );
+export const getTicketsIndependentAndSharedSold = createSelector(
+	[ getTicketsIndependentSold, getTicketsSharedSold ],
+	( independentSold, sharedSold ) => independentSold + sharedSold,
+);
+export const getTicketsIndependentAndSharedAvailable = createSelector(
+	[ getTicketsIndependentAvailable, getTicketsSharedAvailable ],
+	( independentAvailable, sharedAvailable ) => independentAvailable + sharedAvailable,
+);
+
+//
+// ─── TICKET SELECTORS ───────────────────────────────────────────────────────────
+//
 
 export const getTicketBlock = createSelector(
 	[ getTicketsObject, getTicketBlockId ],
