@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
+import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 import { DEFAULT_STATE } from '@moderntribe/tickets/data/blocks/ticket/reducer';
 import {
 	DEFAULT_STATE as TICKET_DEFAULT_STATE,
