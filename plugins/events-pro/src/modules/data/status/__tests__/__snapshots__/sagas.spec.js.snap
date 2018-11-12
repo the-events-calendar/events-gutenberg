@@ -49,7 +49,7 @@ Object {
   "@@redux-saga/IO": true,
   "CALL": Object {
     "args": Array [
-      "postId",
+      "post_id",
       1,
     ],
     "context": FormDataMock {

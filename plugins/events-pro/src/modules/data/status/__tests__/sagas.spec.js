@@ -124,7 +124,7 @@ describe( 'Status sagas', () => {
 
 			expect( gen.next().value ).toEqual(
 				call(
-					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+					[ wpDispatch( 'core/notices' ), 'createSuccessNotice' ],
 					sagas.NOTICES[ sagas.NOTICE_EDITING_SERIES ],
 					{ id: sagas.NOTICE_EDITING_SERIES, isDismissible: false }
 				)
@@ -132,7 +132,7 @@ describe( 'Status sagas', () => {
 
 			expect( gen.next().value ).toEqual(
 				 call(
-					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+					[ wpDispatch( 'core/notices' ), 'createSuccessNotice' ],
 					`${ sprintf( sagas.NOTICES[ sagas.NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ], response.items_created ) } ${ sprintf( sagas.NOTICES[ sagas.NOTICE_PROGRESS_ON_SERIES_CREATION ], momentUtils.toDate( momentUtils.toMoment( response.last_created_at ) ) ) }`,
 					{ id: sagas.NOTICE_PROGRESS_ON_SERIES_CREATION, isDismissible: true }
 				)
@@ -164,22 +164,6 @@ describe( 'Status sagas', () => {
 				put( actions.setSeriesQueueStatus( response ) )
 			);
 
-			expect( gen.next().value ).toEqual(
-				call(
-					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
-					sagas.NOTICES[ sagas.NOTICE_EDITING_SERIES ],
-					{ id: sagas.NOTICE_EDITING_SERIES, isDismissible: false }
-				)
-			);
-
-			expect( gen.next( true ).value ).toEqual(
-				 call(
-					[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
-					`${ sprintf( sagas.NOTICES[ sagas.NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ], response.items_created ) } ${ sprintf( sagas.NOTICES[ sagas.NOTICE_PROGRESS_ON_SERIES_CREATION ], momentUtils.toDate( momentUtils.toMoment( response.last_created_at ) ) ) }`,
-					{ id: sagas.NOTICE_PROGRESS_ON_SERIES_CREATION, isDismissible: true }
-				)
-			);
-
 			expect( gen.next( true ).value ).toEqual(
 				select( selectors.isCompleted )
 			);
@@ -192,13 +176,6 @@ describe( 'Status sagas', () => {
 				call(
 					[ wpDispatch( 'core/editor' ), 'removeNotice' ],
 					sagas.NOTICE_EDITING_SERIES
-				)
-			);
-
-			expect( gen.next().value ).toEqual(
-				call(
-					[ wpDispatch( 'core/editor' ), 'removeNotice' ],
-					sagas.NOTICE_PROGRESS_ON_SERIES_CREATION
 				)
 			);
 
