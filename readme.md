@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.3.5-alpha - TBD
 
 * Feature - eCommerce options for ticket block
+* Feature - Add the opt-out option to users who submit an RSVP
 * Tweak - Update icons for attendees and orders buttons on rsvp and tickets blocks
 * Fix - Events and Events Pro front-end views are now looking for Theme customizations correctly
 * Fix - Add conditional to human readable input saga to prevent infinite loop
@@ -107,6 +108,8 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 * Fix - Add element styles to asset loading
 * Fix - Add filters for wpauto when using gutenberg blocks
 * Fix - Remove Tickets block sidebar if only one provider is used
+* Fix - Remove duplicates XHR requests and data calls
+* Fix - Ticket blocks show proper sales and progress totals
 
 #### 0.3.4-alpha - 2018-11-06
 

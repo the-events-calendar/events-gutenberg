@@ -31,7 +31,7 @@ describe( '<Bar />', () => {
 		const component = shallow( <Bar value={ -200 } total={ 100 } /> );
 		const span = component.get( 0 );
 		const { style } = span.props;
-		expect( style ).toEqual( {} );
+		expect( style ).toEqual( { width: '0.00%' } );
 	} );
 
 	test( 'render percentage as inline style', () => {
@@ -43,6 +43,11 @@ describe( '<Bar />', () => {
 
 	test( 'render percentage with custom class name', () => {
 		const component = renderer.create( <Bar value={ 45 } total={ 100 } className="jest-test" /> );
+		expect( component.toJSON() ).toMatchSnapshot();
+	} );
+
+	test( 'render percentage with children', () => {
+		const component = renderer.create( <Bar value={ 45 } total={ 100 }>test</Bar> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 } );

@@ -123,8 +123,6 @@ class Capacity extends PureComponent {
 			setTemporarilySharedCapacity,
 			tmpSharedCapacity,
 			onCapacityChange,
-			hasSharedTickets,
-			remainingCapacity,
 		} = this.props;
 
 		const inputProps = {

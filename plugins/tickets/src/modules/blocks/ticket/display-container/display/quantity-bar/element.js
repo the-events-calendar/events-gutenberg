@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -11,14 +12,32 @@ import './style.pcss';
 import Bar from './bar';
 
 // todo: add tooltip into the capacity bar
-const QuantityBar = ( { shared, sold, capacity, total, isDisabled } ) => {
+const QuantityBar = ( { sharedSold, sold, capacity, total, isDisabled } ) => {
 	return (
 		<div className="tribe-editor__quantity-bar">
 			{ ! isDisabled && (
 				<Fragment>
-					<Bar className="tribe-editor__quantity-bar--shared" value={ shared } total={ total } />
-					<Bar className="tribe-editor__quantity-bar--available" value={ sold } total={ total } />
-					<Bar className="tribe-editor__quantity-bar--capacity" value={ capacity } total={ total } />
+					<Bar
+						className="tribe-editor__quantity-bar__bar--shared-sold"
+						value={ sharedSold }
+						total={ total }
+					/>
+					<Bar
+						className="tribe-editor__quantity-bar__bar--sold"
+						value={ sold }
+						total={ total }
+					/>
+					{ capacity && ! ( capacity === total ) && (
+							<Bar
+								className="tribe-editor__quantity-bar__bar--capacity"
+								value={ capacity }
+								total={ total }
+							>
+								<span className="tribe-editor__quantity-bar__bar-label">
+									{ __( 'cap', 'events-gutenberg' ) }
+								</span>
+							</Bar>
+					) }
 				</Fragment>
 			) }
 		</div>
@@ -26,7 +45,7 @@ const QuantityBar = ( { shared, sold, capacity, total, isDisabled } ) => {
 };
 
 QuantityBar.propTypes = {
-	shared: PropTypes.number,
+	sharedSold: PropTypes.number,
 	capacity: PropTypes.number,
 	sold: PropTypes.number,
 	total: PropTypes.number,
@@ -34,7 +53,7 @@ QuantityBar.propTypes = {
 }
 
 QuantityBar.defaultProps = {
-	shared: 0,
+	sharedSold: 0,
 	capacity: 0,
 	sold: 0,
 	total: 0,
