@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import { ContainerPanel } from '@moderntribe/tickets/elements';
+import TicketContainerHeader from '@moderntribe/tickets/blocks/ticket/container-header/template';
+import TicketContainerContent from '@moderntribe/tickets/blocks/ticket/container-content/template';
 import { LAYOUT } from '@moderntribe/tickets/elements/container-panel/element';
 import {
 	ClockActive,

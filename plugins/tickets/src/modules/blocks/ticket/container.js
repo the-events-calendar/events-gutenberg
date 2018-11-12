@@ -14,28 +14,22 @@ import { actions, selectors } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state, ownProps ) => {
 	const props = { blockId: ownProps.clientId };
+
 	return {
-		isBlockSelected: selectors.getParentOrChildSelected( state ),
-		isEditing: selectors.getTicketEditing( state, props ),
-		dateIsPristine: ! selectors.getTicketExpires( state, props ),
-		hasBeenCreated: selectors.getTicketHasBeenCreated( state, props ),
+		blockId: ownProps.clientId,
 		isLoading: selectors.getTicketIsLoading( state, props ),
-		ticketId: selectors.getTicketId( state, props ),
-		isTicketDisabled: selectors.isTicketDisabled( state, props ),
 	};
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	setIsSelected( selected ) {
-		dispatch( actions.setChildBlockSelected( selected ) );
-	},
-	onBlockRemoved() {
+	removeTicketBlock: () => {
 		const { clientId } = ownProps;
-		dispatch( actions.requestRemovalOfTicketBlock( clientId ) );
+		dispatch( actions.deleteTicket( clientId ) );
+		dispatch( actions.removeTicketBlock( clientId ) );
 	},
-	setInitialState( props ) {
+	setInitialState: ( props ) => {
+		const { clientId } = ownProps;
 		dispatch( actions.setTicketInitialState( props ) );
-		const { clientId } = ownProps;
 		dispatch( actions.registerTicketBlock( clientId ) );
 	},
 } );
