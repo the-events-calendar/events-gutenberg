@@ -123,6 +123,14 @@ describe( 'Ticket block selectors', () => {
 			expect( selectors.getTicketsArray( state ) ).toMatchSnapshot();
 		} );
 
+		test( 'getTicketsCount', () => {
+			expect( selectors.getTicketsCount( state ) ).toMatchSnapshot();
+		} );
+
+		test( 'hasTickets', () => {
+			expect( selectors.hasTickets( state ) ).toMatchSnapshot();
+		} );
+
 		test( 'getIndependentTickets', () => {
 			expect( selectors.getIndependentTickets( state ) ).toMatchSnapshot();
 		} );

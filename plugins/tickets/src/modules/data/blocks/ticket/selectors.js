@@ -125,6 +125,16 @@ export const getTicketsArray = createSelector(
 	( ids, tickets ) => ids.map( ( id ) => tickets[ id ] ),
 );
 
+export const getTicketsCount = createSelector(
+	[ getAllTicketIds ],
+	( allIds ) => allIds.length,
+);
+
+export const hasTickets = createSelector(
+	[ getTicketsCount ],
+	( count ) => count > 0,
+);
+
 export const getIndependentTickets = createSelector(
 	[ getTicketsArray ],
 	( tickets ) => (

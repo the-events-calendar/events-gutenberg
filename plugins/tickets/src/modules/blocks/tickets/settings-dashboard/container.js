@@ -7,18 +7,17 @@ import { compose } from 'redux';
 /**
  * Internal dependencies
  */
-import Template from './template';
-import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
+import TicketsSettingsDashboard from './template';
+
 import { actions } from '@moderntribe/tickets/data/blocks/ticket';
+import { withStore } from '@moderntribe/common/hoc';
 
 const mapDispatchToProps = ( dispatch ) => ( {
-	setInitialState: ( props ) => {
-		dispatch( actions.setInitialState( props ) );
-	},
+	onCloseClick: () => dispatch( actions.closeSettings() ),
 } );
 
 export default compose(
 	withStore(),
 	connect( null, mapDispatchToProps ),
-	withSaveData(),
-)( Template );
+)( TicketsSettingsDashboard );
+
