@@ -10,6 +10,15 @@ exports[`Ticket Constants INDEPENDENT 1`] = `"independent"`;
 
 exports[`Ticket Constants OWN 1`] = `"own"`;
 
+exports[`Ticket Constants PREFIX 1`] = `"prefix"`;
+
+exports[`Ticket Constants PRICE_POSITIONS 1`] = `
+Array [
+  "prefix",
+  "suffix",
+]
+`;
+
 exports[`Ticket Constants PROVIDER_CLASS_TO_PROVIDER_MAPPING 1`] = `
 Object {
   "Tribe__Tickets_Plus__Commerce__EDD__Main": "edd",
@@ -27,6 +36,8 @@ Array [
 `;
 
 exports[`Ticket Constants SHARED 1`] = `"shared"`;
+
+exports[`Ticket Constants SUFFIX 1`] = `"suffix"`;
 
 exports[`Ticket Constants TC 1`] = `"tribe-commerce"`;
 

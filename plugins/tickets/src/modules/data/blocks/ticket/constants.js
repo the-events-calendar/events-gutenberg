@@ -35,3 +35,8 @@ export const TICKET_TYPES = {
 	[ SHARED ]: CAPPED,
 	[ INDEPENDENT ]: OWN,
 };
+
+export const PREFIX = 'prefix';
+export const SUFFIX = 'suffix';
+
+export const PRICE_POSITIONS = [ PREFIX, SUFFIX ];
