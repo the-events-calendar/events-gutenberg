@@ -75,7 +75,7 @@ export function* pollUntilSeriesCompleted() {
 
 	while ( true ) {
 		const response = yield call( fetchStatus );
-		const isCompleted = response === false; // If false, no edits being done
+		const isCompleted = response === false || response.done; // If false, no edits being done
 
 		if ( isCompleted ) {
 			yield put( actions.setSeriesQueueStatus( { done: isCompleted } ) );
@@ -88,14 +88,14 @@ export function* pollUntilSeriesCompleted() {
 
 			// Show editing notice
 			yield call(
-				[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+				[ wpDispatch( 'core/notices' ), 'createSuccessNotice' ],
 				NOTICES[ NOTICE_EDITING_SERIES ],
 				{ id: NOTICE_EDITING_SERIES, isDismissible: false }
 			);
 
 			// Show progress notice
 			yield call(
-				[ wpDispatch( 'core/editor' ), 'createSuccessNotice' ],
+				[ wpDispatch( 'core/notices' ), 'createSuccessNotice' ],
 				`${ sprintf( NOTICES[ NOTICE_PROGRESS_ON_SERIES_CREATION_COUNT ], items_created ) } ${ sprintf( NOTICES[ NOTICE_PROGRESS_ON_SERIES_CREATION ], date ) }`,
 				{ id: NOTICE_PROGRESS_ON_SERIES_CREATION, isDismissible: true }
 			);
@@ -105,12 +105,8 @@ export function* pollUntilSeriesCompleted() {
 			yield put( allowEdits() ); // Allow datetime block to be editable again
 			// Remove editing notice
 			yield call(
-				[ wpDispatch( 'core/editor' ), 'removeNotice' ],
+				[ wpDispatch( 'core/notices' ), 'removeNotice' ],
 				NOTICE_EDITING_SERIES
-			);
-			yield call(
-				[ wpDispatch( 'core/editor' ), 'removeNotice' ],
-				NOTICE_PROGRESS_ON_SERIES_CREATION
 			);
 			break; // We done
 		}
