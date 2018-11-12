@@ -427,7 +427,7 @@ export const hasMultipleTicketProviders = createSelector(
 	( providers ) => providers.length > 1,
 );
 
-export const hasTicketTicketProviders = createSelector(
+export const hasTicketProviders = createSelector(
 	[ getTicketProviders ],
 	( providers ) => providers.length > 0,
 );

@@ -393,8 +393,8 @@ describe( 'Ticket block selectors', () => {
 			expect( selectors.hasMultipleTicketProviders() ).toMatchSnapshot();
 		} );
 
-		test( 'hasTicketTicketProviders', () => {
-			expect( selectors.hasTicketTicketProviders() ).toMatchSnapshot();
+		test( 'hasTicketProviders', () => {
+			expect( selectors.hasTicketProviders() ).toMatchSnapshot();
 		} );
 	} );
 } );

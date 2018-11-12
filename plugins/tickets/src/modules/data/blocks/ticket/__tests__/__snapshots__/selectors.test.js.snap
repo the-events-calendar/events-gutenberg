@@ -132,7 +132,7 @@ exports[`Ticket block selectors Misc selectors getTicketProviders 1`] = `Array [
 
 exports[`Ticket block selectors Misc selectors hasMultipleTicketProviders 1`] = `false`;
 
-exports[`Ticket block selectors Misc selectors hasTicketTicketProviders 1`] = `false`;
+exports[`Ticket block selectors Misc selectors hasTicketProviders 1`] = `false`;
 
 exports[`Ticket block selectors Ticket details selectors getTicketCapacity 1`] = `0`;
 
