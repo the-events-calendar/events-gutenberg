@@ -4,6 +4,7 @@
 		position: relative;
 
 		&.active {
+
 			&:before {
 				content: '';
 				height: 1px;
@@ -16,24 +17,21 @@
 		}
 
 		&.open {
+
 			.tribe-editor__accordion__row-content {
 				overflow: visible;
 			}
 		}
 	}
+}
 
-	.tribe-editor__accordion__row-header {
-		border: none;
-		background-color: #f8f9f9;
-		display: inline-flex;
-		align-items: center;
-		padding: 0;
-		position: relative;
-
-		span {
-			flex: none;
-		}
-	}
+.tribe-editor__ticket__advanced-options-header {
+	border: none;
+	background-color: #f8f9f9;
+	display: flex;
+	align-items: center;
+	padding: 0;
+	position: relative;
 }
 
 svg.tribe-editor__tickets__advanced-options-header-icon {
@@ -44,11 +42,20 @@ svg.tribe-editor__tickets__advanced-options-header-icon {
 	.tribe-editor__accordion__row.active & {
 		transform: rotate(180deg) translateX(-2px);
 	}
+
+	.tribe-editor__ticket--disabled & {
+		fill: #AEB4BB;
+	}
 }
 
 .tribe-editor__tickets__advanced-options-header-text {
+	color: #000000;
 	font-size: 15px;
 	font-weight: bold;
 	line-height: 18px;
 	padding-right: 10px;
+
+	.tribe-editor__ticket--disabled & {
+		fill: #AEB4BB;
+	}
 }
