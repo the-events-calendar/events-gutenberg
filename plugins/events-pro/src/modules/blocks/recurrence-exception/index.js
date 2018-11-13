@@ -21,7 +21,7 @@ export default {
 	id: 'event-pro-recurrence-exception',
 	title: __( 'Exception', 'events-gutenberg' ),
 	description: __(
-		'Add exceptions to your event.',
+		'Define exceptions for your recurrence rules.',
 		'events-gutenberg',
 	),
 	icon: BlockIcon,
