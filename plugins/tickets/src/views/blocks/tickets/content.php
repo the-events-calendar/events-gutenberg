@@ -19,4 +19,5 @@ $context = array(
 >
 	<?php $this->template( 'blocks/tickets/content-title', $context ); ?>
 	<?php $this->template( 'blocks/tickets/content-description', $context ); ?>
+	<?php $this->template( 'blocks/tickets/opt-out', $context ); ?>
 </div>
