@@ -20,6 +20,7 @@ tribe.tickets.block = {
 		container                 : '.tribe-block__tickets',
 		submit                    : '.tribe-block__tickets__buy',
 		item                      : '.tribe-block__tickets__item',
+		itemOptOut                : '.tribe-block__tickets__item__optout',
 		itemQuantity              : '.tribe-block__tickets__item__quantity',
 		itemQuantityInput         : '.tribe-ticket-quantity',
 		itemExtraAvailable        : '.tribe-block__tickets__item__extra__available',
@@ -71,13 +72,19 @@ tribe.tickets.block = {
 
 			var $form = $this.closest( obj.selector.container );
 
+			var new_quantity = parseInt( $this.val(), 10 );
+			new_quantity     = isNaN( new_quantity ) ? 0 : new_quantity;
+
+			// Maybe display the Opt Out
+			var $has_optout = $ticket.has( obj.selector.itemOptOut ).length;
+			if ( $has_optout ) {
+				( new_quantity > 0 ) ? $( obj.selector.itemOptOut ).show() : $( obj.selector.itemOptOut ).hide();
+			}
+
 			// Only disable / enable if is a Tribe Commerce Paypal form.
 			if ( 'Tribe__Tickets__Commerce__PayPal__Main' !== $form.data( 'provider' ) ) {
 				return;
 			}
-
-			var new_quantity = parseInt( $this.val(), 10 );
-			new_quantity     = isNaN( new_quantity ) ? 0 : new_quantity;
 
 			if ( new_quantity > 0 ) {
 				$form
@@ -87,6 +94,7 @@ tribe.tickets.block = {
 					.attr( 'disabled', 'disabled' )
 					.closest( 'div' )
 					.addClass( 'tribe-tickets-purchase-disabled' );
+
 			} else {
 				$form
 					.find( 'input, button' )

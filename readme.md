@@ -93,6 +93,13 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.6-alpha - TBD
+
+* Feature - Add the opt-out option to users who submit tickets
+* Fix - Add start date weekday to default weekday for weekly and monthly recurrence on rule addition
+* Fix - Allow for earlier dates to be selected in date time block
+* Fix - Set cursor for weekday tag to pointer
+
 #### 0.3.5-alpha - 2018-11-12
 
 * Feature - Recurrence compatibility for Events Pro into Date Time block
