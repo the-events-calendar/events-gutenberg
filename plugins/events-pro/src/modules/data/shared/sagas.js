@@ -63,6 +63,8 @@ export function* handleAddition( { actions } ) {
 	const startMoment = yield call( toMoment, start );
 	const endMoment = yield call( toMoment, end );
 
+	const startWeekday = yield call( [ startMoment, 'isoWeekday' ] );
+
 	const startDate = yield call( toDatabaseDate, startMoment );
 	const startTime = yield call( toDatabaseTime, startMoment );
 	const endDate = yield call( toDatabaseDate, endMoment );
@@ -90,9 +92,9 @@ export function* handleAddition( { actions } ) {
 		[ KEY_LIMIT ]: 7,
 		[ KEY_LIMIT_DATE_INPUT ]: endDateInput,
 		[ KEY_LIMIT_DATE_OBJ ]: endDateObj,
-		[ KEY_DAYS ]: [],
+		[ KEY_DAYS ]: [ startWeekday ],
 		[ KEY_WEEK ]: recurringConstants.FIRST,
-		[ KEY_DAY ]: 1,
+		[ KEY_DAY ]: startWeekday,
 		[ KEY_MONTH ]: [],
 		[ KEY_TIMEZONE ]: timezone,
 		[ KEY_MULTI_DAY_SPAN ]: recurringConstants.NEXT_DAY,
