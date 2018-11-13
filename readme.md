@@ -96,6 +96,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 #### 0.3.6-alpha - TBD
 
 * Feature - Add the opt-out option to users who submit tickets
+* Fix - Set cursor for weekday tag to pointer
 
 #### 0.3.5-alpha - 2018-11-12
 
