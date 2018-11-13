@@ -12,7 +12,7 @@ import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 
 const getSharedSold = ( state, isShared ) => (
-	isShared ? selectors.getTicketsSharedSold( state ) : 0
+	isShared ? selectors.getSharedTicketsSold( state ) : 0
 );
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -28,7 +28,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		sold: selectors.getTicketSold( state, ownProps ),
 		capacity: selectors.getTicketCapacity( state, ownProps ),
 		sharedSold: getSharedSold( state, isShared ),
-		sharedCapacity: selectors.getSharedCapacityInt( state ),
+		sharedCapacity: selectors.getTicketsSharedCapacityInt( state ),
 	};
 };
 

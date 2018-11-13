@@ -12,8 +12,12 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import TicketContainerHeaderTitle from './title/container';
+import TicketContainerHeaderDescription from './description/container';
+import TicketContainerHeaderPrice from './price/container';
+import TicketContainerHeaderQuantity from './quantity/container';
 import './style.pcss';
-
+console.log('container', TicketContainerHeaderDescription);
 const TicketContainerHeader = ( {
 	blockId,
 	isSelected,

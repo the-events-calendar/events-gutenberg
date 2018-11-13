@@ -77,6 +77,14 @@ export const getTicketsTempSharedCapacityInt = createSelector(
 	( capacity ) => parseInt( capacity, 10 ) || 0,
 );
 
+/**
+ * @todo: fix this later, add test
+ */
+export const isTicketDisabled = createSelector(
+	[ getTicketsIsSettingsOpen ],
+	( isSettingsOpen ) => isSettingsOpen,
+);
+
 //
 // ─── HEADER SELECTORS ───────────────────────────────────────────────────────────
 //

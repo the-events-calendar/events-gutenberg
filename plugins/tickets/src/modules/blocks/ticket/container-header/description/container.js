@@ -11,20 +11,22 @@ import Template from './template';
 import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 
+/**
+ * @todo: fix this
+ */
 const mapStateToProps = ( state, ownProps ) => ( {
-	/**
-	 * @todo: fix this
-	 */
 	isDisabled: false,
 	tempDescription: selectors.getTicketTempDescription( state, ownProps ),
 	description: selectors.getTicketDescription( state, ownProps ),
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	onTempDescriptionChange: ( e ) => dispatch( actions.setTicketTempDescription(
-		ownProps.blockId,
-		e.target.value,
-	) ),
+	onTempDescriptionChange: ( e ) => (
+		dispatch( actions.setTicketTempDescription(
+			ownProps.blockId,
+			e.target.value,
+		) )
+	),
 } );
 
 export default compose(

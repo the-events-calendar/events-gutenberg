@@ -48,8 +48,8 @@ const onConfirmClick = ( state, dispatch, ownProps ) => () => {
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	hasBeenCreated: selectors.getTicketHasBeenCreated( state, ownProps ),
-	isCancelDisabled: getIsCancelDisabled( state ),
-	isConfirmDisabled: getIsConfirmDisabled( state ),
+	isCancelDisabled: getIsCancelDisabled( state, ownProps ),
+	isConfirmDisabled: getIsConfirmDisabled( state, ownProps ),
 	state,
 } );
 

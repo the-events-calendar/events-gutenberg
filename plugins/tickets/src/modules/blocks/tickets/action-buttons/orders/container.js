@@ -21,7 +21,7 @@ const mapStateToProps = ( state ) => {
 	const adminURL = adminUrl();
 	const postType = select( 'core/editor' ).getCurrentPostType();
 	const postId = select( 'core/editor' ).getCurrentPostId();
-	const provider = selectors.getSelectedProvider( state );
+	const provider = selectors.getTicketsProvider( state );
 	const page = constants.TICKET_ORDERS_PAGE_SLUG[ provider ];
 
 	return {
