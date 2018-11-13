@@ -169,7 +169,7 @@ export const getTicketBlockId = ( state, ownProps ) => ownProps.blockId;
 
 export const getTicket = createSelector(
 	[ getTicketsById, getTicketBlockId ],
-	( tickets, blockId ) => tickets[ blockId ],
+	( tickets, blockId ) => tickets[ blockId ] || {},
 );
 
 export const getTicketSold = createSelector(
@@ -223,7 +223,7 @@ export const getTicketHasChanges = createSelector(
 
 export const getTicketDetails = createSelector(
 	[ getTicket ],
-	( ticket ) => ticket.details,
+	( ticket ) => ticket.details || {},
 );
 
 export const getTicketTitle = createSelector(
@@ -307,7 +307,7 @@ export const isIndependentTicket = createSelector(
 
 export const getTicketTempDetails = createSelector(
 	[ getTicket ],
-	( ticket ) => ticket.tempDetails,
+	( ticket ) => ticket.tempDetails || {},
 );
 
 export const getTicketTempTitle = createSelector(
