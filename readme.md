@@ -95,6 +95,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 #### 0.3.5-alpha - 2018-11-12
 
+* Fix - Add start date weekday to default weekday for weekly and monthly recurrence on rule addition
+
+#### 0.3.5-alpha - 2018-11-12
+
 * Feature - Recurrence compatibility for Events Pro into Date Time block
 * Feature - eCommerce options for ticket block
 * Feature - Add the opt-out option to users who submit an RSVP
