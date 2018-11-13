@@ -66,26 +66,6 @@ Object {
 }
 `;
 
-exports[`Ticket actions Ticket actions set ticket expires 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-    "expires": true,
-  },
-  "type": "@@MT/TICKETS/SET_TICKET_EXPIRES",
-}
-`;
-
-exports[`Ticket actions Ticket actions set ticket expires 2`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-    "expires": false,
-  },
-  "type": "@@MT/TICKETS/SET_TICKET_EXPIRES",
-}
-`;
-
 exports[`Ticket actions Ticket actions set ticket has been created 1`] = `
 Object {
   "payload": Object {
@@ -494,9 +474,7 @@ Object {
 
 exports[`Ticket actions Tickets actions set tickets header 1`] = `
 Object {
-  "payload": Object {
-    "header": null,
-  },
+  "payload": null,
   "type": "@@MT/TICKETS/SET_TICKETS_HEADER",
 }
 `;
@@ -504,9 +482,7 @@ Object {
 exports[`Ticket actions Tickets actions set tickets header 2`] = `
 Object {
   "payload": Object {
-    "header": Object {
-      "image": 10,
-    },
+    "image": 10,
   },
   "type": "@@MT/TICKETS/SET_TICKETS_HEADER",
 }

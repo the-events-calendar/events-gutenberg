@@ -2,10 +2,10 @@
 
 exports[`SKU Render the component with no errors 1`] = `
 <div
-  className="tribe-editor__container-panel__row tribe-editor__container-panel__row--sku"
+  className="tribe-editor__ticket__sku"
 >
   <div
-    className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__container-panel__label"
+    className="tribe-editor__labeled-item tribe-editor__label-with-tooltip tribe-editor__ticket__sku-label-with-tooltip"
   >
     <label
       className="tribe-editor__labeled-item__label"
@@ -17,16 +17,11 @@ exports[`SKU Render the component with no errors 1`] = `
       Tooltip
     </span>
   </div>
-  <div
-    className="tribe-editor__container-panel__input-group"
-  >
-    <input
-      className="tribe-editor__ticket-field__sku"
-      id="ticket-sku"
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-  </div>
+  <input
+    className="tribe-editor__input tribe-editor__ticket__sku-input"
+    id="ticket-sku"
+    onChange={[MockFunction]}
+    type="text"
+  />
 </div>
 `;

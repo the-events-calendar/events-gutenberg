@@ -320,14 +320,6 @@ export const setTicketProvider = ( blockId, provider ) => ( {
 	},
 } );
 
-export const setTicketExpires = ( blockId, expires ) => ( {
-	type: types.SET_TICKET_EXPIRES,
-	payload: {
-		blockId,
-		expires,
-	},
-} );
-
 export const setTicketIsLoading = ( blockId, isLoading ) => ( {
 	type: types.SET_TICKET_IS_LOADING,
 	payload: {

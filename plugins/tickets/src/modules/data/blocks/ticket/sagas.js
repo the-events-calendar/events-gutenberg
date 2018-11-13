@@ -119,13 +119,9 @@ export function* setBodyDetails( blockId ) {
 	body.append( 'price', yield select( selectors.getTicketPrice, props ) );
 	body.append( 'start_date', yield select( selectors.getTicketStartDate, props ) );
 	body.append( 'start_time', yield select( selectors.getTicketStartTime, props ) );
+	body.append( 'end_date', yield select( selectors.getTicketEndDate, props ) );
+	body.append( 'end_time', yield select( selectors.getTicketEndTime, props ) );
 	body.append( 'sku', yield select( selectors.getTicketSku, props ) );
-
-	const expires = yield select( selectors.getTicketExpires, props );
-	if ( expires ) {
-		body.append( 'end_date', yield select( selectors.getTicketEndDate, props ) );
-		body.append( 'end_time', yield select( selectors.getTicketEndTime, props ) );
-	}
 
 	const capacity = {
 		type: yield select( selectors.getTicketCapacityType, props ),
@@ -246,7 +242,6 @@ export function* setTicketInitialState( action ) {
 	const values = {
 		ticketId: get( 'ticketId', TICKET_DEFAULT_STATE.ticketId ),
 		hasBeenCreated: get( 'hasBeenCreated', TICKET_DEFAULT_STATE.hasBeenCreated ),
-		dateIsPristine: get( 'dateIsPristine', ! TICKET_DEFAULT_STATE.expires ),
 	};
 
 	const start = yield select( getStart );
@@ -268,7 +263,6 @@ export function* setTicketInitialState( action ) {
 	yield all( [
 		put( actions.setTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
 		put( actions.setTicketId( clientId, values.ticketId ) ),
-		put( actions.setTicketExpires( clientId, ! values.dateIsPristine ) ),
 		put( actions.setTicketStartDate( clientId, startDate ) ),
 		put( actions.setTicketStartTime( clientId, startTime ) ),
 		put( actions.setTicketEndDate( clientId, endDate ) ),

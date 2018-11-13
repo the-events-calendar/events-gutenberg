@@ -33,7 +33,6 @@ Object {
       "startTime": "17:30",
       "title": "",
     },
-    "expires": true,
     "hasBeenCreated": false,
     "hasChanges": false,
     "isLoading": false,

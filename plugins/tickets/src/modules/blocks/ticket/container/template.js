@@ -14,28 +14,21 @@ import { LAYOUT } from '@moderntribe/tickets/elements/container-panel/element';
 import {
 	ClockActive,
 	ClockInactive,
-	TicketActive,
-	TicketInactive,
 } from '@moderntribe/tickets/icons';
 
-const TicketContainerIcon = ( { expires, isDisabled } ) => {
-	if ( expires ) {
-		return isDisabled ? <ClockInactive /> : <ClockActive />;
-	}
-
-	return isDisabled ? <TicketInactive /> : <TicketActive />;
-};
+const TicketContainerIcon = ( { isDisabled } ) => (
+	isDisabled ? <ClockInactive /> : <ClockActive />;
+);
 
 TicketContainerIcon.propTypes = {
-	expires: PropTypes.bool.isRequired,
 	isDisabled: PropTypes.bool.isRequired,
 };
 
-const TicketContainer = ( { blockId, expires, isDisabled, isSelected } ) => (
+const TicketContainer = ( { blockId, isDisabled, isSelected } ) => (
 	<ContainerPanel
 		className="tribe-editor__ticket__container"
 		layout={ LAYOUT.ticket }
-		icon={ <TicketContainerIcon expires={ expires } isDisabled={ isDisabled } /> }
+		icon={ <TicketContainerIcon isDisabled={ isDisabled } /> }
 		header={ <TicketContainerHeader blockId={ blockId } isSelected={ isSelected } /> }
 		content={ <TicketContainerContent blockId={ blockId } /> }
 	/>
@@ -43,7 +36,6 @@ const TicketContainer = ( { blockId, expires, isDisabled, isSelected } ) => (
 
 TicketContainer.propTypes = {
 	blockId: PropTypes.string.isRequired,
-	expires: PropTypes.bool,
 	isDisabled: PropTypes.bool,
 	isSelected: PropTypes.bool,
 };

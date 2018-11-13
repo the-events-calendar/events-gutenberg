@@ -199,11 +199,6 @@ describe( 'Ticket actions', () => {
 			expect( actions.setTicketProvider( blockId, 'provider' ) ).toMatchSnapshot();
 		} );
 
-		test( 'set ticket expires', () => {
-			expect( actions.setTicketExpires( blockId, true ) ).toMatchSnapshot();
-			expect( actions.setTicketExpires( blockId, false ) ).toMatchSnapshot();
-		} );
-
 		test( 'set ticket is loading', () => {
 			expect( actions.setTicketIsLoading( blockId, true ) ).toMatchSnapshot();
 			expect( actions.setTicketIsLoading( blockId, false ) ).toMatchSnapshot();

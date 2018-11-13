@@ -14,7 +14,6 @@ export const DEFAULT_STATE = {
 	ticketId: 0,
 	currencySymbol: getDefaultProviderCurrency(),
 	provider: '',
-	expires: true,
 	isLoading: false,
 	hasBeenCreated: false,
 	hasChanges: false,
@@ -78,11 +77,6 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				provider: action.payload.provider,
-			};
-		case types.SET_TICKET_EXPIRES:
-			return {
-				...state,
-				expires: action.payload.expires,
 			};
 		case types.SET_TICKET_IS_LOADING:
 			return {

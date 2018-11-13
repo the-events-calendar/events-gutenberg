@@ -49,13 +49,6 @@ describe( 'Details reducer', () => {
 		) ).toMatchSnapshot();
 	} );
 
-	it( 'should set the expires', () => {
-		expect( reducer(
-			DEFAULT_STATE,
-			actions.setTicketExpires( 'block-id', false )
-		) ).toMatchSnapshot();
-	} );
-
 	it( 'should set the is loading', () => {
 		expect( reducer(
 			DEFAULT_STATE,

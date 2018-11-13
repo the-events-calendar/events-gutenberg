@@ -205,11 +205,6 @@ export const getTicketProvider = createSelector(
 	( ticket ) => ticket.provider,
 );
 
-export const getTicketExpires = createSelector(
-	[ getTicket ],
-	( ticket ) => ticket.expires,
-);
-
 export const getTicketIsLoading = createSelector(
 	[ getTicket ],
 	( ticket ) => ticket.isLoading,

@@ -17,6 +17,5 @@ describe( 'SKU', () => {
 		const component = mount( <SKU onChange={ onChange } value={ 'modern-tribe'} /> );
 		component.find( 'input' ).simulate( 'change' );
 		expect( onChange ).toHaveBeenCalled();
-		expect( onChange ).toHaveBeenCalledWith( 'modern-tribe' );
 	} );
 } );

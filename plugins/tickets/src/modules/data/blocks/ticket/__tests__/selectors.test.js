@@ -177,10 +177,6 @@ describe( 'Ticket block selectors', () => {
 			expect( selectors.getTicketProvider( state, ownProps ) ).toMatchSnapshot();
 		} );
 
-		test( 'getTicketExpires', () => {
-			expect( selectors.getTicketExpires( state, ownProps ) ).toMatchSnapshot();
-		} );
-
 		test( 'getTicketIsLoading', () => {
 			expect( selectors.getTicketIsLoading( state, ownProps ) ).toMatchSnapshot();
 		} );

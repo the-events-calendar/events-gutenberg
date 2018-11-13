@@ -65,7 +65,6 @@ Object {
           "startTime": "22:30",
           "title": "",
         },
-        "expires": true,
         "hasBeenCreated": false,
         "hasChanges": false,
         "isLoading": false,
@@ -199,7 +198,6 @@ Object {
     "startTime": "22:30",
     "title": "",
   },
-  "expires": true,
   "hasBeenCreated": false,
   "hasChanges": false,
   "isLoading": false,
@@ -228,8 +226,6 @@ exports[`Ticket block selectors Ticket selectors getTicketAvailable 1`] = `0`;
 exports[`Ticket block selectors Ticket selectors getTicketBlockId 1`] = `"modern-tribe"`;
 
 exports[`Ticket block selectors Ticket selectors getTicketCurrencySymbol 1`] = `undefined`;
-
-exports[`Ticket block selectors Ticket selectors getTicketExpires 1`] = `true`;
 
 exports[`Ticket block selectors Ticket selectors getTicketHasBeenCreated 1`] = `false`;
 
@@ -311,7 +307,6 @@ Array [
       "startTime": "22:30",
       "title": "",
     },
-    "expires": true,
     "hasBeenCreated": false,
     "hasChanges": false,
     "isLoading": false,
@@ -361,7 +356,6 @@ Object {
         "startTime": "22:30",
         "title": "",
       },
-      "expires": true,
       "hasBeenCreated": false,
       "hasChanges": false,
       "isLoading": false,
@@ -406,7 +400,6 @@ Array [
       "startTime": "22:30",
       "title": "",
     },
-    "expires": true,
     "hasBeenCreated": false,
     "hasChanges": false,
     "isLoading": false,
@@ -450,7 +443,6 @@ Object {
       "startTime": "22:30",
       "title": "",
     },
-    "expires": true,
     "hasBeenCreated": false,
     "hasChanges": false,
     "isLoading": false,
