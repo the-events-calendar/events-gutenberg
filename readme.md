@@ -93,6 +93,10 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
+#### 0.3.6-alpha - TBD
+
+* Fix - Allow for earlier dates to be selected in date time block
+
 #### 0.3.5-alpha - 2018-11-12
 
 * Feature - Recurrence compatibility for Events Pro into Date Time block
