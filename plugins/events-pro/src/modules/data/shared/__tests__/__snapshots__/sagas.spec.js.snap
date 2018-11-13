@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Shared recurrence sagas handleAddition should add rule 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "PUT": Object {
+    "action": Object {
+      "_end_date_input": undefined,
+      "_end_date_obj": Date { NaN },
+      "_limit_date_input": undefined,
+      "_limit_date_obj": Date { NaN },
+      "_start_date_input": "2018-01-01 12:00:00",
+      "_start_date_obj": 2018-01-01T12:00:00.000Z,
+      "all_day": false,
+      "between": 1,
+      "day": 1,
+      "days": Array [
+        1,
+      ],
+      "end_date": "2018-01-02 12:00:00",
+      "end_time": "2018-01-02 12:00:00",
+      "limit": 7,
+      "limit_type": "count",
+      "month": Array [],
+      "multi_day": false,
+      "multi_day_span": "next_day",
+      "start_date": "2018-01-01 12:00:00",
+      "start_time": "2018-01-01 12:00:00",
+      "timezone": "UTC+0",
+      "type": "single",
+      "week": "first",
+    },
+    "channel": null,
+  },
+}
+`;
