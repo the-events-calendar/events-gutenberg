@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { SUFFIX, PRICE_POSITIONS } from '@moderntribe/tickets/data/blocks/ticket/constants';
+import './style.pcss';
 
 const TicketContainerHeaderPriceInput = ( {
 	isDisabled,
@@ -57,7 +58,7 @@ const TicketContainerHeaderPriceLabel = ( {
 		<span className="tribe-editor__ticket__container-header-price-currency">
 			{ currencySymbol }
 		</span>,
-			<span className="tribe-editor__ticket__container-header-price">
+		<span className="tribe-editor__ticket__container-header-price-value">
 			{ price }
 		</span>,
 	];

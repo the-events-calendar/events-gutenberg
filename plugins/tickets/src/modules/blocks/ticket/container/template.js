@@ -17,7 +17,7 @@ import {
 } from '@moderntribe/tickets/icons';
 
 const TicketContainerIcon = ( { isDisabled } ) => (
-	isDisabled ? <ClockInactive /> : <ClockActive />;
+	isDisabled ? <ClockInactive /> : <ClockActive />
 );
 
 TicketContainerIcon.propTypes = {

@@ -10,6 +10,11 @@ import AutosizeInput from 'react-input-autosize';
  */
 import { __ } from '@wordpress/i18n';
 
+/**
+ * Internal dependencies
+ */
+import './style.pcss';
+
 const TicketContainerHeaderDescription = ( {
 	isDisabled,
 	isSelected,

@@ -10,6 +10,7 @@ import AutosizeInput from 'react-input-autosize';
  */
 import { __ } from '@wordpress/i18n';
 import { Pencil } from '@moderntribe/common/icons';
+import './style.pcss';
 
 const TicketContainerHeaderTitle = ( {
 	isDisabled,

@@ -13,6 +13,7 @@ import { __, sprintf } from '@wordpress/i18n';
  * Internal dependencies
  */
 import QuantityBar from './quantity-bar/element';
+import './style.pcss';
 
 const TicketContainerHeaderDescription = ( {
 	isDisabled,
@@ -50,7 +51,7 @@ const TicketContainerHeaderDescription = ( {
 			)
 	);
 
-	return isSelected && (
+	return ! isSelected && (
 		<div className="tribe-editor__ticket__container-header-quantity">
 			<span className="tribe-editor__ticket__container-header-quantity-label">
 				{ getLabel() }
