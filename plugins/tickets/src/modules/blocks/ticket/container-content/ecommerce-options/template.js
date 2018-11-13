@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 /**
  * Wordpress dependencies
@@ -39,10 +40,14 @@ const EcommerceOptions = ( {
 	showEcommerceOptions
 		&& (
 			<LabeledItem
-				className="tribe-editor__ticket__ecommerce-options tribe-editor__container-panel__row tribe-editor__container-panel__row--ecommerce-options"
+				className={ classNames(
+					'tribe-editor__ticket__ecommerce-options',
+					'tribe-editor__ticket__content-row',
+					'tribe-editor__ticket__content-row--ecommerce-options',
+				) }
 				label={ __( 'Ecommerce', 'events-gutenberg' ) }
 			>
-				<div className="tribe-editor__ticket__ecommerce-options-links tribe-editor__container-panel__input-group">
+				<div className="tribe-editor__ticket__ecommerce-options-links">
 					<span className="tribe-editor__ticket__ecommerce-options-link-wrapper">
 						<Link
 							className="tribe-editor__ticket__ecommerce-options-link tribe-editor__ticket__ecommerce-options-link--edit-ticket"

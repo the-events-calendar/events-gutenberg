@@ -163,7 +163,11 @@ class Capacity extends PureComponent {
 		} = this.props;
 
 		return (
-			<div className="tribe-editor__ticket__capacity">
+			<div className={ classNames(
+					'tribe-editor__ticket__capacity',
+					'tribe-editor__ticket__content-row',
+					'tribe-editor__ticket__content-row--capacity',
+			) }>
 				<LabelWithTooltip
 					className="tribe-editor__ticket__capacity-label-with-tooltip"
 					forId={ this.ids.select }
@@ -173,7 +177,7 @@ class Capacity extends PureComponent {
 						'Ticket capacity will only be used by attendees buying this ticket type',
 						'events-gutenberg',
 					) }
-					tooltipLabel={ <Dashicon icon="info-outline" /> }
+					tooltipLabel={ <Dashicon className="tribe-editor__ticket__tooltip-label" icon="info-outline" /> }
 				/>
 				<div className="tribe-editor__ticket__capacity-form">
 					<Select

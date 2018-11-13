@@ -11,7 +11,10 @@ import { DateTimeRangePicker } from '@moderntribe/tickets/elements';
 import './style.pcss';
 
 const RSVPDurationPicker = ( props ) => (
-	<DateTimeRangePicker { ...props } />
+	<DateTimeRangePicker
+		className="tribe-editor__rsvp-duration__duration-picker"
+		{ ...props }
+	/>
 );
 
 RSVPDurationPicker.propTypes = {

@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 /**
  * Wordpress dependencies
@@ -17,7 +18,11 @@ import { DateTimeRangePicker, LabelWithTooltip } from '@moderntribe/tickets/elem
 import './style.pcss';
 
 const TicketDuration = ( props ) => (
-	<div className="tribe-editor__ticket__duration">
+	<div className={ classNames(
+		'tribe-editor__ticket__duration',
+		'tribe-editor__ticket__content-row',
+		'tribe-editor__ticket__content-row--duration',
+	) }>
 		<LabelWithTooltip
 			className="tribe-editor__ticket__duration-label-with-tooltip"
 			label={ __( 'Sale Duration', 'events-gutenberg' ) }
@@ -25,9 +30,12 @@ const TicketDuration = ( props ) => (
 				'If you do not set a start sale date, tickets will be available immediately.',
 				'events-gutenberg',
 			) }
-			tooltipLabel={ <Dashicon icon="info-outline" /> }
+			tooltipLabel={ <Dashicon className="tribe-editor__ticket__tooltip-label" icon="info-outline" /> }
 		/>
-		<DateTimeRangePicker { ...props } />
+		<DateTimeRangePicker
+			className="tribe-editor__ticket__duration-picker"
+			{ ...props }
+		/>
 	</div>
 );
 

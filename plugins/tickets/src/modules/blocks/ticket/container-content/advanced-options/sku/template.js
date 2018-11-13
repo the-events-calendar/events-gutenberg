@@ -3,6 +3,7 @@
  */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 /**
  * Wordpress dependencies
@@ -32,7 +33,11 @@ class SKU extends PureComponent {
 		const { value, onChange } = this.props;
 
 		return (
-			<div className="tribe-editor__ticket__sku">
+			<div className={ classNames(
+				'tribe-editor__ticket__sku',
+				'tribe-editor__ticket__content-row',
+				'tribe-editor__ticket__content-row--sku',
+			) }>
 				<LabelWithTooltip
 					className="tribe-editor__ticket__sku-label-with-tooltip"
 					forId={ this.id }
@@ -42,7 +47,7 @@ class SKU extends PureComponent {
 						'A unique identifying code for each ticket type you\'re selling',
 						'events-gutenberg',
 					) }
-					tooltipLabel={ <Dashicon icon="info-outline" /> }
+					tooltipLabel={ <Dashicon className="tribe-editor__ticket__tooltip-label" icon="info-outline" /> }
 				/>
 				<Input
 					className="tribe-editor__ticket__sku-input"
