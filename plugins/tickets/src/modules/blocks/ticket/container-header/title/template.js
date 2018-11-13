@@ -30,7 +30,7 @@ const TicketContainerHeaderTitle = ( {
 						disabled={ isDisabled }
 					/>
 				)
-				: title && (
+				: (
 					<h3 className="tribe-editor__ticket__container-header-title-label">
 						{ title }
 					</h3>

@@ -3,6 +3,7 @@
  */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { includes } from 'lodash';
 import uniqid from 'uniqid';
 

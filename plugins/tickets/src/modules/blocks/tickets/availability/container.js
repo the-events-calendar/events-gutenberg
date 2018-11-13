@@ -12,8 +12,8 @@ import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state ) => ( {
-	total: selectors.getTicketsIndependentAndSharedCapacity( state ),
-	available: selectors.getTicketsIndependentAndSharedAvailable( state ),
+	total: selectors.getIndependentAndSharedTicketsCapacity( state ),
+	available: selectors.getIndependentAndSharedTicketsAvailable( state ),
 } );
 
 export default compose(

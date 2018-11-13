@@ -47,7 +47,7 @@ const TicketContainer = ( {
 				/>
 			) }
 			{ isSelected && hasTickets && (
-				<Availability available={ available } total={ total } />
+				<Availability />
 			) }
 		</div>
 	);

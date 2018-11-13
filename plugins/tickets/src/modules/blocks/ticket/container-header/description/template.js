@@ -27,7 +27,7 @@ const TicketContainerHeaderDescription = ( {
 				disabled={ isDisabled }
 			/>
 		)
-		: description && (
+		: (
 			<span className="tribe-editor__ticket__container-header-description">
 				{ description }
 			</span>
