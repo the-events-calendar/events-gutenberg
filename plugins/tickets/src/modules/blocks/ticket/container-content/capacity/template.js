@@ -17,39 +17,17 @@ import { Dashicon } from '@wordpress/components';
  * Internal dependencies
  */
 import { constants, options } from '@moderntribe/tickets/data/blocks/ticket';
-import { LabeledItem, NumberInput } from '@moderntribe/common/elements';
+import { LabeledItem, NumberInput, Select } from '@moderntribe/common/elements';
 import { LabelWithTooltip } from '@moderntribe/tickets/elements';
+import { ReactSelectOption } from '@moderntribe/common/data/plugins/proptypes'
 import './style.pcss';
 
 const {
 	INDEPENDENT,
 	SHARED,
-	TICKET_TYPES_VALUES,
 	TICKET_TYPES,
 } = constants;
 const { CAPACITY_TYPE_OPTIONS } = options;
-
-/**
- * @todo: replace with custom select from Events Pro
- */
-const Select = ( { className, id, onChange, value } ) => (
-	<select
-		id={ id }
-		className={ className }
-		value={ value }
-		onChange={ onChange }
-	>
-		{ CAPACITY_TYPE_OPTIONS.map( ( { label, value }, index ) => (
-			<option key={ index } value={ value }>{ label }</option>
-		) ) }
-	</select>
-);
-
-Select.propTypes = {
-	id: PropTypes.string,
-	onChange: PropTypes.func.isRequired,
-	value: PropTypes.string,
-};
 
 // Custom input for this type of form
 const LabeledNumberInput = ( {
@@ -80,8 +58,9 @@ LabeledNumberInput.propTypes = {
 class Capacity extends PureComponent {
 	static propTypes = {
 		sharedCapacity: PropTypes.string,
-		tempCapacityType: PropTypes.oneOf( TICKET_TYPES_VALUES ),
 		tempCapacity: PropTypes.string,
+		tempCapacityType: PropTypes.string,
+		tempCapacityTypeOption: ReactSelectOption,
 		tempSharedCapacity: PropTypes.string,
 		onTempCapacityChange: PropTypes.func,
 		onTempCapacityTypeChange: PropTypes.func,
@@ -113,7 +92,10 @@ class Capacity extends PureComponent {
 		if ( tempCapacityType === TICKET_TYPES[ SHARED ] && sharedCapacity === '' ) {
 			inputs.push(
 				<LabeledNumberInput
-					className="tribe-editor__ticket__shared-capacity-input"
+					className={ classNames(
+						'tribe-editor__ticket__capacity-input-row',
+						'tribe-editor__ticket__capacity-input-row--shared-capacity',
+					) }
 					id={ this.ids.sharedCapacity }
 					label={ __( 'Set shared capacity:', 'events-gutenberg' ) }
 					value={ tempSharedCapacity }
@@ -143,7 +125,10 @@ class Capacity extends PureComponent {
 
 			inputs.push(
 				<LabeledNumberInput
-					className="tribe-editor__ticket__capacity-input"
+					className={ classNames(
+						'tribe-editor__ticket__capacity-input-row',
+						'tribe-editor__ticket__capacity-input-row--capacity',
+					) }
 					id={ this.ids.capacity }
 					value={ tempCapacity }
 					onChange={ onTempCapacityChange }
@@ -158,7 +143,7 @@ class Capacity extends PureComponent {
 
 	render() {
 		const {
-			tempCapacityType,
+			tempCapacityTypeOption,
 			onTempCapacityTypeChange,
 		} = this.props;
 
@@ -181,10 +166,13 @@ class Capacity extends PureComponent {
 				/>
 				<div className="tribe-editor__ticket__capacity-form">
 					<Select
-						className="tribe-editor__ticket__capacity-type-select"
 						id={ this.ids.select }
+						className="tribe-editor__ticket__capacity-type-select"
+						backspaceRemovesValue={ false }
+						value={ tempCapacityTypeOption }
+						isSearchable={ false }
+						options={ CAPACITY_TYPE_OPTIONS }
 						onChange={ onTempCapacityTypeChange }
-						value={ tempCapacityType }
 					/>
 					{ this.getInputs() }
 				</div>

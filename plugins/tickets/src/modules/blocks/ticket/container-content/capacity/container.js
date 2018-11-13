@@ -16,8 +16,9 @@ import {
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	sharedCapacity: selectors.getTicketsSharedCapacity( state ),
-	tempCapacityType: selectors.getTicketTempCapacityType( state, ownProps ),
 	tempCapacity: selectors.getTicketTempCapacity( state, ownProps ),
+	tempCapacityType: selectors.getTicketTempCapacityType( state, ownProps ),
+	tempCapacityTypeOption: selectors.getTicketTempCapacityTypeOption( state, ownProps ),
 	tempSharedCapacity: selectors.getTicketsTempSharedCapacity( state ),
 } );
 

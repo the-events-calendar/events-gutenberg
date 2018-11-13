@@ -2,11 +2,13 @@
  * External dependencies
  */
 import { createSelector } from 'reselect';
+import { find } from 'lodash';
 
 /**
  * Internal dependencies
  */
 import * as constants from './constants';
+import { CAPACITY_TYPE_OPTIONS } from './options';
 import { tickets as ticketsConfig } from '@moderntribe/common/utils/globals';
 
 const {
@@ -371,6 +373,11 @@ export const getTicketTempCapacityType = createSelector(
 export const getTicketTempCapacity = createSelector(
 	[ getTicketTempDetails ],
 	( tempDetails ) => parseInt( tempDetails.capacity, 10 ) || 0,
+);
+
+export const getTicketTempCapacityTypeOption = createSelector(
+	[ getTicketTempCapacityType ],
+	( capacityType ) => find( CAPACITY_TYPE_OPTIONS, { value: capacityType } ) || {},
 );
 
 //
