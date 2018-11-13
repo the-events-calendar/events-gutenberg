@@ -13,6 +13,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { ActionDashboard } from '@moderntribe/tickets/elements';
+import './style.pcss';
 
 const confirmLabel = ( hasBeenCreated ) => (
 	hasBeenCreated
