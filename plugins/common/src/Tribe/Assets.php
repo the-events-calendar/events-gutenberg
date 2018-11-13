@@ -163,6 +163,7 @@ class Tribe__Gutenberg__Common__Assets {
 			array(
 				'in_footer' => false,
 				'localize'  => array(),
+				'priority'  => 17,
 			)
 		);
 		tribe_asset(
