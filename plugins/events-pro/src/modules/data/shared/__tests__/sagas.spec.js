@@ -36,20 +36,12 @@ describe( 'Shared recurrence sagas', () => {
 	} );
 
 	describe( 'handleAddition', () => {
-		const _tempDate = global.Date;
-		beforeAll( () => {
-			global.Date = class _Date {
-				constructor( date ) {
-					return date;
-				}
-			};
-		} );
-
-		afterAll( () => {
-			global.Date = _tempDate;
-		} );
 		it( 'should add rule', () => {
 			const gen = sagas.handleAddition( { actions } );
+
+			const startMoment = momentUtil.toMoment( args.start_date );
+			const endMoment = momentUtil.toMoment( args.end_date );
+
 			expect( gen.next().value ).toEqual(
 				select( datetime.getStart )
 			);
@@ -69,59 +61,36 @@ describe( 'Shared recurrence sagas', () => {
 			expect( gen.next( args.timezone ).value ).toEqual(
 				call( momentUtil.toMoment, args.start_date )
 			);
-			expect( gen.next( args.start_date ).value ).toEqual(
+			expect( gen.next( startMoment ).value ).toEqual(
 				call( momentUtil.toMoment, args.end_date )
 			);
 
-			expect( gen.next( args.end_date ).value ).toEqual(
-				call( momentUtil.toDatabaseDate, args.start_date )
+			expect( gen.next( endMoment ).value ).toEqual(
+				call( [ startMoment, 'isoWeekday' ] )
+			);
+
+			expect( gen.next( 1 ).value ).toEqual(
+				call( momentUtil.toDatabaseDate, startMoment )
 			);
 			expect( gen.next( args.start_date ).value ).toEqual(
-				call( momentUtil.toDatabaseTime, args.start_date )
+				call( momentUtil.toDatabaseTime, startMoment )
 			);
 
 			expect( gen.next( args.start_date ).value ).toEqual(
-				call( momentUtil.toDatabaseDate, args.end_date )
+				call( momentUtil.toDatabaseDate, endMoment )
 			);
 			expect( gen.next( args.end_date ).value ).toEqual(
-				call( momentUtil.toDatabaseTime, args.end_date )
+				call( momentUtil.toDatabaseTime, endMoment )
 			);
 
 			expect( gen.next( args.end_date ).value ).toEqual(
-				call( momentUtil.toDate, args.start_date )
+				call( momentUtil.toDate, startMoment )
 			);
 			expect( gen.next( args.start_date ).value ).toEqual(
-				call( momentUtil.toDate, args.end_date )
+				call( momentUtil.toDate, endMoment )
 			);
 
-			expect( gen.next().value ).toEqual(
-				put(
-					actions.add( {
-						[ constants.KEY_TYPE ]: recurringConstants.SINGLE,
-						[ constants.KEY_ALL_DAY ]: args.all_day,
-						[ constants.KEY_MULTI_DAY ]: args.multi_day,
-						[ constants.KEY_START_DATE ]: args.start_date,
-						[ constants.KEY_START_DATE_INPUT ]: args.start_date,
-						[ constants.KEY_START_DATE_OBJ ]: new Date( '2018-01-01T12:00:00.000Z' ),
-						[ constants.KEY_START_TIME ]: args.start_date,
-						[ constants.KEY_END_DATE ]: args.end_date,
-						[ constants.KEY_END_DATE_INPUT ]: undefined,
-						[ constants.KEY_END_DATE_OBJ ]: new Date( NaN ),
-						[ constants.KEY_END_TIME ]: args.end_date,
-						[ constants.KEY_BETWEEN ]: 1,
-						[ constants.KEY_LIMIT_TYPE ]: recurringConstants.COUNT,
-						[ constants.KEY_LIMIT ]: 7,
-						[ constants.KEY_LIMIT_DATE_INPUT ]: undefined,
-						[ constants.KEY_LIMIT_DATE_OBJ ]: new Date( NaN ),
-						[ constants.KEY_DAYS ]: [],
-						[ constants.KEY_WEEK ]: recurringConstants.FIRST,
-						[ constants.KEY_DAY ]: 1,
-						[ constants.KEY_MONTH ]: [],
-						[ constants.KEY_TIMEZONE ]: args.timezone,
-						[ constants.KEY_MULTI_DAY_SPAN ]: recurringConstants.NEXT_DAY,
-					} )
-				)
-			);
+			expect( gen.next().value ).toMatchSnapshot();
 		} );
 	} );
 
@@ -378,14 +347,12 @@ describe( 'Shared recurrence sagas', () => {
 				call( time.toSeconds, endTime, time.TIME_FORMAT_HH_MM )
 			);
 
-
 			expect( gen.next( 43200 ).value ).toEqual(
 				call( time.fromSeconds, 41400, time.TIME_FORMAT_HH_MM )
 			);
 			expect( gen.next( startTime ).value ).toEqual(
 				call( time.fromSeconds, 43200, time.TIME_FORMAT_HH_MM )
 			);
-
 
 			expect( gen.next( '11:30' ).value ).toEqual(
 				put( actions.sync( 0, {
