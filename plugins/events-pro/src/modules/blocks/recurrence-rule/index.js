@@ -21,7 +21,7 @@ export default {
 	id: 'event-pro-recurrence-rule',
 	title: __( 'Rules', 'events-gutenberg' ),
 	description: __(
-		'Add recurrence to your event.',
+		'Add recurrence rules to generate a series of events.',
 		'events-gutenberg'
 	),
 	icon: BlockIcon,
