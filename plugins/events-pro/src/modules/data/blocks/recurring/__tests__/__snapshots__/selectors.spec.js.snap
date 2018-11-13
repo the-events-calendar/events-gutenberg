@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recurrence selectors getLimitTypeOption 1`] = `
+Object {
+  "label": "After",
+  "value": "count",
+}
+`;
+
+exports[`Recurrence selectors getRule 1`] = `
+Object {
+  "_end_date_input": "May 14, 2019",
+  "_end_date_obj": 2019-05-14T00:00:00.000Z,
+  "_limit_date_input": "May 14, 2019",
+  "_limit_date_obj": 2019-05-14T00:00:00.000Z,
+  "_start_date_input": "September 21, 2018",
+  "_start_date_obj": 2018-09-21T00:00:00.000Z,
+  "all_day": false,
+  "between": 1,
+  "day": 1,
+  "days": Array [],
+  "end_date": "2019-05-14",
+  "end_time": "09:43",
+  "limit": 7,
+  "limit_type": "count",
+  "month": Array [],
+  "multi_day": true,
+  "multi_day_span": "next_day",
+  "start_date": "2018-09-21",
+  "start_time": "14:53",
+  "timezone": "UTC",
+  "type": "single",
+  "week": "first",
+}
+`;
+
+exports[`Recurrence selectors getRules 1`] = `
+Array [
+  Object {
+    "_end_date_input": "May 14, 2019",
+    "_end_date_obj": 2019-05-14T00:00:00.000Z,
+    "_limit_date_input": "May 14, 2019",
+    "_limit_date_obj": 2019-05-14T00:00:00.000Z,
+    "_start_date_input": "September 21, 2018",
+    "_start_date_obj": 2018-09-21T00:00:00.000Z,
+    "all_day": false,
+    "between": 1,
+    "day": 1,
+    "days": Array [],
+    "end_date": "2019-05-14",
+    "end_time": "09:43",
+    "limit": 7,
+    "limit_type": "count",
+    "month": Array [],
+    "multi_day": true,
+    "multi_day_span": "next_day",
+    "start_date": "2018-09-21",
+    "start_time": "14:53",
+    "timezone": "UTC",
+    "type": "single",
+    "week": "first",
+  },
+]
+`;
+
+exports[`Recurrence selectors getTypeOption 1`] = `
+Object {
+  "label": "Single Recurrence",
+  "value": "single",
+}
+`;

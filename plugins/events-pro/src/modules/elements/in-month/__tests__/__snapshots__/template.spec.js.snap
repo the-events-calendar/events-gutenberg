@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InMonth should render component 1`] = `
+<div
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__in-month test-class"
+>
+  <div
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
+  >
+    <span
+      className="tribe-editor__events-pro__label-text"
+    >
+      In
+    </span>
+  </div>
+  <div
+    className="tribe-editor__labeled-row__content"
+  >
+    <div
+      className="tribe-editor__month-picker tribe-editor__in-month__month-picker"
+    >
+      <button
+        className="tribe-editor__month-tag tribe-editor__month-picker__month-tag"
+      >
+        <<svg>icon mock</svg> />
+        <span
+          className="tribe-editor__month-tag__remove"
+        >
+          Remove
+        </span>
+        Mar
+      </button>
+      <button
+        className="tribe-editor__month-tag tribe-editor__month-picker__month-tag"
+      >
+        <<svg>icon mock</svg> />
+        <span
+          className="tribe-editor__month-tag__remove"
+        >
+          Remove
+        </span>
+        Jun
+      </button>
+      <button
+        className="tribe-editor__month-picker__add"
+        onClick={[Function]}
+      >
+        <span
+          className="tribe-editor__month-picker__add-icon"
+        >
+          +
+        </span>
+        Add
+      </button>
+    </div>
+  </div>
+</div>
+`;

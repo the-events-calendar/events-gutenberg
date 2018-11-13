@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FromDateTimePicker should render component 1`] = `
+<div
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__from-time-range-picker test-class"
+>
+  <div
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
+  >
+    <span
+      className="tribe-editor__events-pro__label-text"
+    >
+      From
+    </span>
+  </div>
+  <div
+    className="tribe-editor__labeled-row__content"
+  >
+    <div
+      className="tribe-editor__timepicker"
+    >
+      <span>
+        Dropdown
+      </span>
+    </div>
+    <span>
+      to
+    </span>
+    <div
+      className="tribe-editor__timepicker"
+    >
+      <span>
+        Dropdown
+      </span>
+    </div>
+    <div
+      className="tribe-editor__checkbox tribe-editor__multi-day-checkbox tribe-editor__from-time-range-picker__multi-day-checkbox"
+    >
+      <input
+        checked={false}
+        className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+        id="uniqid"
+        onChange={[MockFunction]}
+        type="checkbox"
+      />
+      <label
+        className="tribe-editor__checkbox__label"
+        htmlFor="uniqid"
+      >
+        Multi-day
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FromDateTimePicker should render component with all day 1`] = `
+<div
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__from-time-range-picker test-class"
+>
+  <div
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
+  >
+    <span
+      className="tribe-editor__events-pro__label-text"
+    >
+      From
+    </span>
+  </div>
+  <div
+    className="tribe-editor__labeled-row__content"
+  >
+    <div
+      className="tribe-editor__timepicker"
+    >
+      <span>
+        Dropdown
+      </span>
+    </div>
+    <div
+      className="tribe-editor__checkbox tribe-editor__multi-day-checkbox tribe-editor__from-time-range-picker__multi-day-checkbox"
+    >
+      <input
+        checked={false}
+        className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+        id="uniqid"
+        onChange={[MockFunction]}
+        type="checkbox"
+      />
+      <label
+        className="tribe-editor__checkbox__label"
+        htmlFor="uniqid"
+      >
+        Multi-day
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`FromDateTimePicker should render component with multi day 1`] = `
+<div
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__from-time-range-picker tribe-editor__from-time-range-picker--multi-day test-class"
+>
+  <div
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
+  >
+    <span
+      className="tribe-editor__events-pro__label-text"
+    >
+      From
+    </span>
+  </div>
+  <div
+    className="tribe-editor__labeled-row__content"
+  >
+    <div
+      className="tribe-editor__timepicker"
+    >
+      <span>
+        Dropdown
+      </span>
+    </div>
+    <span>
+      to
+    </span>
+    <div
+      className="tribe-editor__timepicker"
+    >
+      <span>
+        Dropdown
+      </span>
+    </div>
+    <div
+      className="tribe-editor__checkbox tribe-editor__multi-day-checkbox tribe-editor__from-time-range-picker__multi-day-checkbox"
+    >
+      <input
+        checked={true}
+        className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+        id="uniqid"
+        onChange={[MockFunction]}
+        type="checkbox"
+      />
+      <label
+        className="tribe-editor__checkbox__label"
+        htmlFor="uniqid"
+      >
+        Multi-day
+      </label>
+    </div>
+  </div>
+</div>
+`;

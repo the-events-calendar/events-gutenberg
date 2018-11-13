@@ -120,7 +120,17 @@ class Tribe__Gutenberg__Common__Assets {
 			/**
 			 * @todo revise this dependencies
 			 */
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			array(
+				'react',
+				'react-dom',
+				'wp-components',
+				'wp-api',
+				'wp-api-request',
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-editor',
+			),
 			'enqueue_block_editor_assets',
 			array(
 				'in_footer' => false,
@@ -131,6 +141,31 @@ class Tribe__Gutenberg__Common__Assets {
 		/**
 		 * @todo: figure out why element styles are loading for tickets but not events.
 		 */
+		tribe_asset(
+			$plugin,
+			'tribe-common-gutenberg-components',
+			'app/components.js',
+			/**
+			 * @todo revise this dependencies
+			 */
+			array(
+				'react',
+				'react-dom',
+				'wp-components',
+				'wp-api',
+				'wp-api-request',
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-editor',
+			),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
+				'localize'  => array(),
+				'priority'  => 17,
+			)
+		);
 		tribe_asset(
 			$plugin,
 			'tribe-common-gutenberg-elements-styles',

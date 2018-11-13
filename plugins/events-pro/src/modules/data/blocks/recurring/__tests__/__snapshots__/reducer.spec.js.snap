@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rule reducer should add a rule 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "id": 2,
+  },
+  Object {
+    "id": 3,
+  },
+  Object {
+    "id": 4,
+  },
+]
+`;
+
+exports[`Rule reducer should only edit a single rule 1`] = `
+Array [
+  Object {
+    "cool": "thanks",
+    "id": 1,
+  },
+]
+`;
+
+exports[`Rule reducer should remove a rule 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "id": 3,
+  },
+]
+`;
+
+exports[`Rule reducer should sync rules from db 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "id": 2,
+  },
+  Object {
+    "id": 3,
+  },
+]
+`;
+
+exports[`Rule reducer should update the correct rule 1`] = `
+Array [
+  Object {
+    "id": 1,
+  },
+  Object {
+    "cool": "thanks",
+    "id": 2,
+  },
+  Object {
+    "id": 3,
+  },
+]
+`;

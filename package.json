@@ -1,6 +1,6 @@
 {
 	"name": "events-gutenberg",
-	"version": "0.3.4-alpha",
+	"version": "0.3.5-alpha",
 	"description": "A new WordPress editor experience for Events",
 	"repository": "git+https://github.com/moderntribe/events-gutenberg.git",
 	"author": "Modern Tribe",
@@ -60,7 +60,7 @@
 		"react-places-autocomplete": "^6.1.2",
 		"react-redux": "^5.0.7",
 		"react-scroll-to": "^1.2.2",
-		"react-select": "^2.1.1",
+		"react-select": "^2.1.0",
 		"react-text-input": "^0.0.8",
 		"redux": "^4.0.0",
 		"redux-saga": "^0.16.1",

@@ -5,6 +5,7 @@
  * @todo  Remove once merged into actual Plugin
  */
 class Tribe__Gutenberg__Events_Pro__Plugin {
+
 	/**
 	 * The semantic version number of this extension; should always match the plugin header.
 	 *
@@ -18,10 +19,10 @@ class Tribe__Gutenberg__Events_Pro__Plugin {
 	 * @since 0.3.0-alpha
 	 */
 	public function __construct() {
-		// Setup the Configuration file
+		// Setup the Condiguration file
 		$this->plugin_file = str_replace( '/src/Tribe/', '/', __FILE__ );
 		$this->plugin_path = trailingslashit( dirname( $this->plugin_file ) );
-		$this->plugin_dir = trailingslashit( basename( $this->plugin_path ) );
-		$this->plugin_url = plugins_url( $this->plugin_dir );
+		$this->plugin_dir  = trailingslashit( basename( $this->plugin_path ) );
+		$this->plugin_url  = plugins_url( $this->plugin_dir );
 	}
 }

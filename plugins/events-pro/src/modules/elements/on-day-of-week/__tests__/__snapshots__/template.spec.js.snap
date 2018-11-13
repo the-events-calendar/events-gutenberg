@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OnDayOfWeek should render component 1`] = `
+<div
+  className="tribe-editor__events-pro__row tribe-editor__labeled-row tribe-editor__on-day-of-week test-class"
+>
+  <div
+    className="tribe-editor__events-pro__label tribe-editor__labeled-row__label"
+  >
+    <span
+      className="tribe-editor__events-pro__label-text"
+    >
+      On
+    </span>
+  </div>
+  <div
+    className="tribe-editor__labeled-row__content"
+  >
+    <div
+      className="tribe-editor__day-of-week-picker"
+    >
+      <div
+        className="tribe-editor__checkbox tribe-editor__day-of-week tribe-editor__day-of-week-picker__day tribe-editor__day-of-week-picker__day--sunday"
+      >
+        <input
+          checked={false}
+          className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+          id="uniqid"
+          onChange={[MockFunction]}
+          type="checkbox"
+          value="sunday"
+        />
+        <label
+          className="tribe-editor__checkbox__label"
+          htmlFor="uniqid"
+        >
+          <abbr
+            className="tribe-editor__day-of-week__label-abbr"
+            title="Sunday"
+          >
+            S
+          </abbr>
+        </label>
+      </div>
+      <div
+        className="tribe-editor__checkbox tribe-editor__day-of-week tribe-editor__day-of-week-picker__day tribe-editor__day-of-week-picker__day--monday"
+      >
+        <input
+          checked={false}
+          className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+          id="uniqid"
+          onChange={[MockFunction]}
+          type="checkbox"
+          value="monday"
+        />
+        <label
+          className="tribe-editor__checkbox__label"
+          htmlFor="uniqid"
+        >
+          <abbr
+            className="tribe-editor__day-of-week__label-abbr"
+            title="Monday"
+          >
+            M
+          </abbr>
+        </label>
+      </div>
+      <div
+        className="tribe-editor__checkbox tribe-editor__day-of-week tribe-editor__day-of-week-picker__day tribe-editor__day-of-week-picker__day--tuesday"
+      >
+        <input
+          checked={false}
+          className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+          id="uniqid"
+          onChange={[MockFunction]}
+          type="checkbox"
+          value="tuesday"
+        />
+        <label
+          className="tribe-editor__checkbox__label"
+          htmlFor="uniqid"
+        >
+          <abbr
+            className="tribe-editor__day-of-week__label-abbr"
+            title="Tuesday"
+          >
+            T
+          </abbr>
+        </label>
+      </div>
+      <div
+        className="tribe-editor__checkbox tribe-editor__day-of-week tribe-editor__day-of-week-picker__day tribe-editor__day-of-week-picker__day--wednesday"
+      >
+        <input
+          checked={false}
+          className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+          id="uniqid"
+          onChange={[MockFunction]}
+          type="checkbox"
+          value="wednesday"
+        />
+        <label
+          className="tribe-editor__checkbox__label"
+          htmlFor="uniqid"
+        >
+          <abbr
+            className="tribe-editor__day-of-week__label-abbr"
+            title="Wednesday"
+          >
+            W
+          </abbr>
+        </label>
+      </div>
+      <div
+        className="tribe-editor__checkbox tribe-editor__day-of-week tribe-editor__day-of-week-picker__day tribe-editor__day-of-week-picker__day--thursday"
+      >
+        <input
+          checked={false}
+          className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+          id="uniqid"
+          onChange={[MockFunction]}
+          type="checkbox"
+          value="thursday"
+        />
+        <label
+          className="tribe-editor__checkbox__label"
+          htmlFor="uniqid"
+        >
+          <abbr
+            className="tribe-editor__day-of-week__label-abbr"
+            title="Thursday"
+          >
+            T
+          </abbr>
+        </label>
+      </div>
+      <div
+        className="tribe-editor__checkbox tribe-editor__day-of-week tribe-editor__day-of-week-picker__day tribe-editor__day-of-week-picker__day--friday"
+      >
+        <input
+          checked={false}
+          className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+          id="uniqid"
+          onChange={[MockFunction]}
+          type="checkbox"
+          value="friday"
+        />
+        <label
+          className="tribe-editor__checkbox__label"
+          htmlFor="uniqid"
+        >
+          <abbr
+            className="tribe-editor__day-of-week__label-abbr"
+            title="Friday"
+          >
+            F
+          </abbr>
+        </label>
+      </div>
+      <div
+        className="tribe-editor__checkbox tribe-editor__day-of-week tribe-editor__day-of-week-picker__day tribe-editor__day-of-week-picker__day--saturday"
+      >
+        <input
+          checked={false}
+          className="tribe-editor__input tribe-editor__input--checkbox tribe-editor__checkbox__input"
+          id="uniqid"
+          onChange={[MockFunction]}
+          type="checkbox"
+          value="saturday"
+        />
+        <label
+          className="tribe-editor__checkbox__label"
+          htmlFor="uniqid"
+        >
+          <abbr
+            className="tribe-editor__day-of-week__label-abbr"
+            title="Saturday"
+          >
+            S
+          </abbr>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;

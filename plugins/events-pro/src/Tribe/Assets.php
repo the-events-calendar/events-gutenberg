@@ -6,14 +6,6 @@
  */
 class Tribe__Gutenberg__Events_Pro__Assets {
 	/**
-	 *
-	 * @since 0.2.7-alpha
-	 *
-	 * @return void
-	 */
-	public function hook() {}
-
-	/**
 	 * Registers and Enqueues the assets
 	 *
 	 * @since 0.2.7-alpha
@@ -32,10 +24,39 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			/**
 			 * @todo revise this dependencies
 			 */
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+			array(
+				'react',
+				'react-dom',
+				'wp-components',
+				'wp-api',
+				'wp-api-request',
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-editor',
+				'tribe-common-gutenberg-data',
+				'tribe-common-gutenberg-utils',
+				'tribe-common-gutenberg-store',
+				'tribe-common-gutenberg-icons',
+				'tribe-common-gutenberg-hoc',
+				'tribe-common-gutenberg-elements',
+				'tribe-common-gutenberg-components'
+			),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => true,
+				'in_footer' => false,
+				'localize'  => array(),
+			)
+		);
+		
+		tribe_asset(
+			$plugin,
+			'tribe-pro-gutenberg-blocks-styles',
+			'app/blocks.css',
+			array( 'tribe-common-gutenberg-elements-styles' ),
+			'enqueue_block_editor_assets',
+			array(
+				'in_footer' => false,
 				'localize'  => array(),
 			)
 		);
@@ -47,41 +68,57 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 			/**
 			 * @todo revise this dependencies
 			 */
-			array( 'react', 'react-dom', 'wp-components', 'wp-api', 'wp-api-request', 'wp-blocks', 'wp-i18n', 'wp-element' ),
+			array(
+				'react',
+				'react-dom',
+				'wp-components',
+				'wp-api',
+				'wp-api-request',
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'tribe-common-gutenberg-data',
+				'tribe-common-gutenberg-utils',
+				'tribe-common-gutenberg-store',
+				'tribe-common-gutenberg-icons',
+				'tribe-common-gutenberg-hoc',
+				'tribe-common-gutenberg-elements',
+				'tribe-common-gutenberg-components'
+			),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => true,
+				'in_footer' => false,
 				'localize'  => array(),
 			)
 		);
-
-		tribe_asset(
-			$plugin,
-			'tribe-pro-gutenberg-blocks-styles',
-			'app/blocks.css',
-			array(),
-			'enqueue_block_editor_assets',
-			array(
-				'in_footer' => true,
-				'localize'  => array(),
-			)
-		);
-
+		
 		tribe_asset(
 			$plugin,
 			'tribe-pro-gutenberg-element',
 			'app/elements.css',
-			array(),
+			array( 'tribe-common-gutenberg-elements-styles' ),
 			'enqueue_block_editor_assets',
 			array(
-				'in_footer' => true,
+				'in_footer' => false,
 				'localize'  => array(),
 			)
 		);
-
-		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'set_editor_defaults' ), 10 );
+		
+		$this->hook();
 	}
-
+	
+	/**
+	 *
+	 * @since 0.2.7-alpha
+	 *
+	 * @return void
+	 */
+	public function hook() {
+		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'set_editor_defaults' ) );
+		add_filter( 'tribe_events_gutenberg_js_config', array( $this, 'add_queue_status_nonce' ) );
+	}
+	
+	
 	/**
 	 * Set default values for the editor localization
 	 *
@@ -144,7 +181,35 @@ class Tribe__Gutenberg__Events_Pro__Assets {
 		}
 
 		$js_config['editor_defaults'] = $defaults;
-
+		
+		return $js_config;
+	}
+	
+	/**
+	 * Attach the queue status nonce into the tribe_js_config variable
+	 *
+	 * @since TBD
+	 *
+	 * @param $js_config
+	 *
+	 * @return mixed
+	 */
+	public function add_queue_status_nonce( $js_config ) {
+		if ( ! isset( $js_config['rest'] ) ) {
+			$js_config['rest'] = array();
+		}
+		
+		if ( ! isset( $js_config['rest']['nonce'] ) ) {
+			$js_config['rest']['nonce'] = array();
+		}
+		
+		$js_config['rest']['nonce'] = array_merge(
+			$js_config['rest']['nonce'],
+			array(
+				'queue_status_nonce' => tribe( 'gutenberg.events-pro.recurrence.queue-status' )->get_ajax_nonce(),
+			)
+		);
+		
 		return $js_config;
 	}
 

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status selectors getProgress 1`] = `60`;
+
+exports[`Status selectors getStatus 1`] = `
+Object {
+  "done": true,
+  "progress": 60,
+}
+`;
+
+exports[`Status selectors isCompleted 1`] = `true`;

@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exception Selectors getAllDay 1`] = `false`;
+
+exports[`Exception Selectors getBetween 1`] = `1`;
+
+exports[`Exception Selectors getDay 1`] = `1`;
+
+exports[`Exception Selectors getDays 1`] = `Array []`;
+
+exports[`Exception Selectors getEndDate 1`] = `"2019-05-14"`;
+
+exports[`Exception Selectors getEndDateInput 1`] = `"May 14, 2019"`;
+
+exports[`Exception Selectors getEndDateObj 1`] = `2019-05-14T00:00:00.000Z`;
+
+exports[`Exception Selectors getEndTime 1`] = `"09:43"`;
+
+exports[`Exception Selectors getEndTimeNoSeconds 1`] = `"09"`;
+
+exports[`Exception Selectors getExceptions 1`] = `
+Array [
+  Object {
+    "_end_date_input": "May 14, 2019",
+    "_end_date_obj": 2019-05-14T00:00:00.000Z,
+    "_limit_date_input": "May 14, 2019",
+    "_limit_date_obj": 2019-05-14T00:00:00.000Z,
+    "_start_date_input": "September 21, 2018",
+    "_start_date_obj": 2018-09-21T00:00:00.000Z,
+    "all_day": false,
+    "between": 1,
+    "day": 1,
+    "days": Array [],
+    "end_date": "2019-05-14",
+    "end_time": "09:43",
+    "limit": 7,
+    "limit_type": "count",
+    "month": Array [],
+    "multi_day": true,
+    "multi_day_span": "next_day",
+    "start_date": "2018-09-21",
+    "start_time": "14:53",
+    "timezone": "UTC",
+    "type": "single",
+    "week": "first",
+  },
+]
+`;
+
+exports[`Exception Selectors getExceptionsCount 1`] = `1`;
+
+exports[`Exception Selectors getIndex 1`] = `0`;
+
+exports[`Exception Selectors getLimit 1`] = `7`;
+
+exports[`Exception Selectors getLimitDateInput 1`] = `"May 14, 2019"`;
+
+exports[`Exception Selectors getLimitDateObj 1`] = `2019-05-14T00:00:00.000Z`;
+
+exports[`Exception Selectors getLimitType 1`] = `"count"`;
+
+exports[`Exception Selectors getLimitTypeOption 1`] = `
+Object {
+  "label": "After",
+  "value": "count",
+}
+`;
+
+exports[`Exception Selectors getMonth 1`] = `Array []`;
+
+exports[`Exception Selectors getMultiDay 1`] = `true`;
+
+exports[`Exception Selectors getMultiDaySpan 1`] = `"next_day"`;
+
+exports[`Exception Selectors getRule 1`] = `
+Object {
+  "_end_date_input": "May 14, 2019",
+  "_end_date_obj": 2019-05-14T00:00:00.000Z,
+  "_limit_date_input": "May 14, 2019",
+  "_limit_date_obj": 2019-05-14T00:00:00.000Z,
+  "_start_date_input": "September 21, 2018",
+  "_start_date_obj": 2018-09-21T00:00:00.000Z,
+  "all_day": false,
+  "between": 1,
+  "day": 1,
+  "days": Array [],
+  "end_date": "2019-05-14",
+  "end_time": "09:43",
+  "limit": 7,
+  "limit_type": "count",
+  "month": Array [],
+  "multi_day": true,
+  "multi_day_span": "next_day",
+  "start_date": "2018-09-21",
+  "start_time": "14:53",
+  "timezone": "UTC",
+  "type": "single",
+  "week": "first",
+}
+`;
+
+exports[`Exception Selectors getRules 1`] = `
+Array [
+  Object {
+    "_end_date_input": "May 14, 2019",
+    "_end_date_obj": 2019-05-14T00:00:00.000Z,
+    "_limit_date_input": "May 14, 2019",
+    "_limit_date_obj": 2019-05-14T00:00:00.000Z,
+    "_start_date_input": "September 21, 2018",
+    "_start_date_obj": 2018-09-21T00:00:00.000Z,
+    "all_day": false,
+    "between": 1,
+    "day": 1,
+    "days": Array [],
+    "end_date": "2019-05-14",
+    "end_time": "09:43",
+    "limit": 7,
+    "limit_type": "count",
+    "month": Array [],
+    "multi_day": true,
+    "multi_day_span": "next_day",
+    "start_date": "2018-09-21",
+    "start_time": "14:53",
+    "timezone": "UTC",
+    "type": "single",
+    "week": "first",
+  },
+]
+`;
+
+exports[`Exception Selectors getStartDate 1`] = `"2018-09-21"`;
+
+exports[`Exception Selectors getStartDateInput 1`] = `"September 21, 2018"`;
+
+exports[`Exception Selectors getStartDateObj 1`] = `2018-09-21T00:00:00.000Z`;
+
+exports[`Exception Selectors getStartTime 1`] = `"14:53"`;
+
+exports[`Exception Selectors getStartTimeNoSeconds 1`] = `"14"`;
+
+exports[`Exception Selectors getTimezone 1`] = `"UTC"`;
+
+exports[`Exception Selectors getType 1`] = `"single"`;
+
+exports[`Exception Selectors getTypeOption 1`] = `
+Object {
+  "label": "Single Exception",
+  "value": "single",
+}
+`;
+
+exports[`Exception Selectors getWeek 1`] = `"first"`;
+
+exports[`Exception Selectors hasExceptions 1`] = `true`;

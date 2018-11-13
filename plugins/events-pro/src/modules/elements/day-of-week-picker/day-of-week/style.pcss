@@ -1,0 +1,75 @@
+.tribe-editor__checkbox__input {
+
+	.tribe-editor__day-of-week & {
+		/* visually hide */
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+
+		&:hover,
+		&:focus {
+
+			& + .tribe-editor__checkbox__label {
+
+				.tribe-editor__day-of-week__label-abbr {
+					color: #009FD4;
+				}
+			}
+		}
+
+		&:checked {
+
+			& + .tribe-editor__checkbox__label {
+				background-color: #009FD4;
+
+				.tribe-editor__day-of-week__label-abbr {
+					color: #FFFFFF;
+				}
+
+				&:hover {
+					background-color: #007BB4;
+				}
+			}
+
+			&:hover,
+			&:focus {
+
+				& + .tribe-editor__checkbox__label {
+					background-color: #007BB4;
+				}
+			}
+		}
+	}
+}
+
+.tribe-editor__checkbox__label {
+
+	.tribe-editor__day-of-week & {
+		display: block;
+		width: 40px;
+		height: 40px;
+		padding: 7px 0;
+		border: 1px solid #E1E3E6;
+		border-radius: 3px;
+		background-color: #FFFFFF;
+	}
+}
+
+.tribe-editor__day-of-week__label-abbr {
+	display: block;
+	font-family: "SF Pro Display", Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	text-align: center;
+	text-decoration: none;
+	color: #545D66;
+
+	.tribe-editor__checkbox__label:hover & {
+		color: #009FD4;
+	}
+}
