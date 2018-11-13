@@ -93,7 +93,7 @@ Finally, run `npm run bootstrap` from the root to link the plugin up.
 
 ### Changelog
 
-#### 0.3.5-alpha - 2018-11-12
+#### 0.3.6-alpha - TBD
 
 * Fix - Add start date weekday to default weekday for weekly and monthly recurrence on rule addition
 
