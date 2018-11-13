@@ -32,10 +32,10 @@ class AdvancedOptions extends Component {
 	getHeader = () => (
 		<Fragment>
 			<Dashicon
-				className="tribe-editor__tickets__advanced-options-header-icon"
+				className="tribe-editor__ticket__advanced-options-header-icon"
 				icon="arrow-down"
 			/>
-			<span className="tribe-editor__tickets__advanced-options-header-text">
+			<span className="tribe-editor__ticket__advanced-options-header-text">
 				{ __( 'Advanced Options', 'events-gutenberg' ) }
 			</span>
 		</Fragment>
@@ -52,16 +52,16 @@ class AdvancedOptions extends Component {
 		{
 			accordionId: this.accordionId,
 			content: this.getContent(),
-			contentClassName: 'tribe-editor__tickets__advanced-options-content',
+			contentClassName: 'tribe-editor__ticket__advanced-options-content',
 			header: this.getHeader(),
-			headerClassName: 'tribe-editor__tickets__advanced-options-header',
+			headerClassName: 'tribe-editor__ticket__advanced-options-header',
 		},
 	] );
 
 	render() {
 		return (
 			<Accordion
-				className="tribe-editor__tickets__advanced-options"
+				className="tribe-editor__ticket__advanced-options"
 				rows={ this.getRows() }
 			/>
 		)
