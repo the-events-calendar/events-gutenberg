@@ -47,24 +47,8 @@ describe( 'Ticket block selectors', () => {
 			expect( selectors.getTicketsIsSettingsOpen( state ) ).toMatchSnapshot();
 		} );
 
-		test( 'getTicketsIsParentBlockLoading', () => {
-			expect( selectors.getTicketsIsParentBlockLoading( state ) ).toMatchSnapshot();
-		} );
-
-		test( 'getTicketsIsChildBlockSelected', () => {
-			expect( selectors.getTicketsIsChildBlockSelected( state ) ).toMatchSnapshot();
-		} );
-
-		test( 'getTicketsIsParentBlockSelected', () => {
-			expect( selectors.getTicketsIsParentBlockSelected( state ) ).toMatchSnapshot();
-		} );
-
-		test( 'getTicketsActiveChildBlockId', () => {
-			expect( selectors.getTicketsActiveChildBlockId( state ) ).toMatchSnapshot();
-		} );
-
-		test( 'hasTicketsActiveChildBlockId', () => {
-			expect( selectors.hasTicketsActiveChildBlockId( state ) ).toMatchSnapshot();
+		test( 'getTicketsIsSettingsLoading', () => {
+			expect( selectors.getTicketsIsSettingsLoading( state ) ).toMatchSnapshot();
 		} );
 
 		test( 'getTicketsProvider', () => {
@@ -88,21 +72,21 @@ describe( 'Ticket block selectors', () => {
 		} );
 	} );
 
-	describe( 'Header selectors', () => {
-		test( 'getTicketsHeader', () => {
-			expect( selectors.getTicketsHeader( state ) ).toMatchSnapshot();
+	describe( 'Header image selectors', () => {
+		test( 'getTicketsHeaderImage', () => {
+			expect( selectors.getTicketsHeaderImage( state ) ).toMatchSnapshot();
 		} );
 
-		test( 'getTicketsHeaderId', () => {
-			expect( selectors.getTicketsHeaderId( state ) ).toMatchSnapshot();
+		test( 'getTicketsHeaderImageId', () => {
+			expect( selectors.getTicketsHeaderImageId( state ) ).toMatchSnapshot();
 		} );
 
-		test( 'getTicketsHeaderSrc', () => {
-			expect( selectors.getTicketsHeaderSrc( state ) ).toMatchSnapshot();
+		test( 'getTicketsHeaderImageSrc', () => {
+			expect( selectors.getTicketsHeaderImageSrc( state ) ).toMatchSnapshot();
 		} );
 
-		test( 'getTicketsHeaderAlt', () => {
-			expect( selectors.getTicketsHeaderAlt( state ) ).toMatchSnapshot();
+		test( 'getTicketsHeaderImageAlt', () => {
+			expect( selectors.getTicketsHeaderImageAlt( state ) ).toMatchSnapshot();
 		} );
 	} );
 

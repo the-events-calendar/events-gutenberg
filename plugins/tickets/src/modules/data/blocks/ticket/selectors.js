@@ -29,29 +29,9 @@ export const getTicketsIsSettingsOpen = createSelector(
 	( block ) => block.isSettingsOpen,
 );
 
-export const getTicketsIsParentBlockLoading = createSelector(
+export const getTicketsIsSettingsLoading = createSelector(
 	[ getBlock ],
-	( block ) => block.isParentBlockLoading,
-);
-
-export const getTicketsIsChildBlockSelected = createSelector(
-	[ getBlock ],
-	( block ) => block.isChildBlockSelected,
-);
-
-export const getTicketsIsParentBlockSelected = createSelector(
-	[ getBlock ],
-	( block ) => block.isParentBlockSelected,
-);
-
-export const getTicketsActiveChildBlockId = createSelector(
-	[ getBlock ],
-	( block ) => block.activeChildBlockId,
-);
-
-export const hasTicketsActiveChildBlockId = createSelector(
-	[ getTicketsActiveChildBlockId ],
-	( id ) => id !== '',
+	( block ) => block.isSettingsLoading,
 );
 
 export const getTicketsProvider = createSelector(
@@ -88,27 +68,27 @@ export const isTicketDisabled = createSelector(
 );
 
 //
-// ─── HEADER SELECTORS ───────────────────────────────────────────────────────────
+// ─── HEADER IMAGE SELECTORS ─────────────────────────────────────────────────────
 //
 
-export const getTicketsHeader = createSelector(
+export const getTicketsHeaderImage = createSelector(
 	[ getBlock ],
-	( block ) => block.header,
+	( block ) => block.headerImage,
 );
 
-export const getTicketsHeaderId = createSelector(
-	[ getTicketsHeader ],
-	( header ) => header.id,
+export const getTicketsHeaderImageId = createSelector(
+	[ getTicketsHeaderImage ],
+	( headerImage ) => headerImage.id,
 );
 
-export const getTicketsHeaderSrc = createSelector(
-	[ getTicketsHeader ],
-	( header ) => header.src,
+export const getTicketsHeaderImageSrc = createSelector(
+	[ getTicketsHeaderImage ],
+	( headerImage ) => headerImage.src,
 );
 
-export const getTicketsHeaderAlt = createSelector(
-	[ getTicketsHeader ],
-	( header ) => header.alt,
+export const getTicketsHeaderImageAlt = createSelector(
+	[ getTicketsHeaderImage ],
+	( headerImage ) => headerImage.alt,
 );
 
 //
