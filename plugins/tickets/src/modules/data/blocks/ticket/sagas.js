@@ -475,7 +475,6 @@ export function* deleteTicket( action ) {
 		];
 
 		try {
-			yield put( actions.setTicketIsLoading( blockId, true ) ),
 			yield call( wpREST, {
 				path: `tickets/${ ticketId }`,
 				namespace: 'tribe/tickets/v1',

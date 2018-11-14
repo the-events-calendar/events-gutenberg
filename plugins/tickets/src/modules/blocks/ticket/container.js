@@ -21,18 +21,23 @@ const mapStateToProps = ( state, ownProps ) => {
 	};
 };
 
-const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	removeTicketBlock: () => {
-		const { clientId } = ownProps;
-		dispatch( actions.deleteTicket( clientId ) );
-		dispatch( actions.removeTicketBlock( clientId ) );
-	},
-	setInitialState: ( props ) => {
-		const { clientId } = ownProps;
-		dispatch( actions.setTicketInitialState( props ) );
-		dispatch( actions.registerTicketBlock( clientId ) );
-	},
-} );
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const { clientId } = ownProps;
+
+	return {
+		onBlockUpdate: ( isSelected ) => (
+			dispatch( actions.setTicketIsSelected( clientId, isSelected ) )
+		),
+		removeTicketBlock: () => {
+			dispatch( actions.removeTicketBlock( clientId ) );
+			dispatch( actions.deleteTicket( clientId ) );
+		},
+		setInitialState: ( props ) => {
+			dispatch( actions.registerTicketBlock( clientId ) );
+			dispatch( actions.setTicketInitialState( props ) );
+		},
+	};
+};
 
 export default compose(
 	withStore( { isolated: true } ),

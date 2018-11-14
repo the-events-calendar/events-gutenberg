@@ -23,8 +23,15 @@ class Ticket extends PureComponent {
 		blockId: PropTypes.string.isRequired,
 		isLoading: PropTypes.bool,
 		isSelected: PropTypes.bool,
+		onBlockUpdate: PropTypes.func,
 		removeTicketBlock: PropTypes.func,
 	};
+
+	componentDidUpdate( prevProps ) {
+		if ( prevProps.isSelected !== this.props.isSelected ) {
+			this.props.onBlockUpdate( this.props.isSelected );
+		}
+	}
 
 	componentWillUnmount() {
 		this.props.removeTicketBlock();
