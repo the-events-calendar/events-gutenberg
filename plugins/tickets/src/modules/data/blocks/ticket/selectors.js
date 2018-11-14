@@ -281,9 +281,19 @@ export const getTicketStartTime = createSelector(
 	( details ) => details.startTime,
 );
 
+export const getTicketStartTimeNoSeconds = createSelector(
+	[ getTicketStartTime ],
+	( startTime ) => startTime.slice( 0, -3 ),
+);
+
 export const getTicketEndTime = createSelector(
 	[ getTicketDetails ],
 	( details ) => details.endTime,
+);
+
+export const getTicketEndTimeNoSeconds = createSelector(
+	[ getTicketEndTime ],
+	( endTime ) => endTime.slice( 0, -3 ),
 );
 
 export const getTicketCapacityType = createSelector(
@@ -365,9 +375,19 @@ export const getTicketTempStartTime = createSelector(
 	( tempDetails ) => tempDetails.startTime,
 );
 
+export const getTicketTempStartTimeNoSeconds = createSelector(
+	[ getTicketTempStartTime ],
+	( startTime ) => startTime.slice( 0, -3 ),
+);
+
 export const getTicketTempEndTime = createSelector(
 	[ getTicketTempDetails ],
 	( tempDetails ) => tempDetails.endTime,
+);
+
+export const getTicketTempEndTimeNoSeconds = createSelector(
+	[ getTicketTempEndTime ],
+	( endTime ) => endTime.slice( 0, -3 ),
 );
 
 export const getTicketTempCapacityType = createSelector(
