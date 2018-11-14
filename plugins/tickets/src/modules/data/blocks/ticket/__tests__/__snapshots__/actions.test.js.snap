@@ -164,9 +164,19 @@ exports[`Ticket actions Ticket details actions set ticket end date 1`] = `
 Object {
   "payload": Object {
     "blockId": "modern-tribe",
-    "endDate": "January 10, 2018",
+    "endDate": "2018-01-10",
   },
   "type": "@@MT/TICKETS/SET_TICKET_END_DATE",
+}
+`;
+
+exports[`Ticket actions Ticket details actions set ticket end date input 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "endDateInput": "January 10, 2018",
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_END_DATE_INPUT",
 }
 `;
 
@@ -226,9 +236,19 @@ exports[`Ticket actions Ticket details actions set ticket start date 1`] = `
 Object {
   "payload": Object {
     "blockId": "modern-tribe",
-    "startDate": "January 1, 2018",
+    "startDate": "2018-01-01",
   },
   "type": "@@MT/TICKETS/SET_TICKET_START_DATE",
+}
+`;
+
+exports[`Ticket actions Ticket details actions set ticket start date input 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "startDateInput": "January 1, 2018",
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_START_DATE_INPUT",
 }
 `;
 
@@ -385,9 +405,19 @@ exports[`Ticket actions Ticket temp details actions set ticket temp end date 1`]
 Object {
   "payload": Object {
     "blockId": "modern-tribe",
-    "endDate": "January 10, 2018",
+    "endDate": "2018-01-10",
   },
   "type": "@@MT/TICKETS/SET_TICKET_TEMP_END_DATE",
+}
+`;
+
+exports[`Ticket actions Ticket temp details actions set ticket temp end date input 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "endDateInput": "January 10, 2018",
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_TEMP_END_DATE_INPUT",
 }
 `;
 
@@ -447,9 +477,19 @@ exports[`Ticket actions Ticket temp details actions set ticket temp start date 1
 Object {
   "payload": Object {
     "blockId": "modern-tribe",
-    "startDate": "January 1, 2018",
+    "startDate": "2018-01-01",
   },
   "type": "@@MT/TICKETS/SET_TICKET_TEMP_START_DATE",
+}
+`;
+
+exports[`Ticket actions Ticket temp details actions set ticket temp start date input 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "startDateInput": "January 1, 2018",
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_TEMP_START_DATE_INPUT",
 }
 `;
 

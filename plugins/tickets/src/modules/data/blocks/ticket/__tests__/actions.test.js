@@ -87,7 +87,11 @@ describe( 'Ticket actions', () => {
 		} );
 
 		test( 'set ticket start date', () => {
-			expect( actions.setTicketStartDate( blockId, 'January 1, 2018' ) ).toMatchSnapshot();
+			expect( actions.setTicketStartDate( blockId, '2018-01-01' ) ).toMatchSnapshot();
+		} );
+
+		test( 'set ticket start date input', () => {
+			expect( actions.setTicketStartDateInput( blockId, 'January 1, 2018' ) ).toMatchSnapshot();
 		} );
 
 		test( 'set ticket start moment', () => {
@@ -96,7 +100,11 @@ describe( 'Ticket actions', () => {
 		} );
 
 		test( 'set ticket end date', () => {
-			expect( actions.setTicketEndDate( blockId, 'January 10, 2018' ) ).toMatchSnapshot();
+			expect( actions.setTicketEndDate( blockId, '2018-01-10' ) ).toMatchSnapshot();
+		} );
+
+		test( 'set ticket end date input', () => {
+			expect( actions.setTicketEndDateInput( blockId, 'January 10, 2018' ) ).toMatchSnapshot();
 		} );
 
 		test( 'set ticket end moment', () => {
@@ -140,7 +148,11 @@ describe( 'Ticket actions', () => {
 		} );
 
 		test( 'set ticket temp start date', () => {
-			expect( actions.setTicketTempStartDate( blockId, 'January 1, 2018' ) ).toMatchSnapshot();
+			expect( actions.setTicketTempStartDate( blockId, '2018-01-01' ) ).toMatchSnapshot();
+		} );
+
+		test( 'set ticket temp start date input', () => {
+			expect( actions.setTicketTempStartDateInput( blockId, 'January 1, 2018' ) ).toMatchSnapshot();
 		} );
 
 		test( 'set ticket temp start moment', () => {
@@ -149,7 +161,11 @@ describe( 'Ticket actions', () => {
 		} );
 
 		test( 'set ticket temp end date', () => {
-			expect( actions.setTicketTempEndDate( blockId, 'January 10, 2018' ) ).toMatchSnapshot();
+			expect( actions.setTicketTempEndDate( blockId, '2018-01-10' ) ).toMatchSnapshot();
+		} );
+
+		test( 'set ticket temp end date input', () => {
+			expect( actions.setTicketTempEndDateInput( blockId, 'January 10, 2018' ) ).toMatchSnapshot();
 		} );
 
 		test( 'set ticket temp end moment', () => {

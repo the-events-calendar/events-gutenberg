@@ -120,6 +120,14 @@ export const setTicketStartDate = ( blockId, startDate ) => ( {
 	},
 } );
 
+export const setTicketStartDateInput = ( blockId, startDateInput ) => ( {
+	type: types.SET_TICKET_START_DATE_INPUT,
+	payload: {
+		blockId,
+		startDateInput,
+	},
+} );
+
 export const setTicketStartDateMoment = ( blockId, startDateMoment ) => ( {
 	type: types.SET_TICKET_START_DATE_MOMENT,
 	payload: {
@@ -133,6 +141,14 @@ export const setTicketEndDate = ( blockId, endDate ) => ( {
 	payload: {
 		blockId,
 		endDate,
+	},
+} );
+
+export const setTicketEndDateInput = ( blockId, endDateInput ) => ( {
+	type: types.SET_TICKET_END_DATE_INPUT,
+	payload: {
+		blockId,
+		endDateInput,
 	},
 } );
 
@@ -220,6 +236,14 @@ export const setTicketTempStartDate = ( blockId, startDate ) => ( {
 	},
 } );
 
+export const setTicketTempStartDateInput = ( blockId, startDateInput ) => ( {
+	type: types.SET_TICKET_TEMP_START_DATE_INPUT,
+	payload: {
+		blockId,
+		startDateInput,
+	},
+} );
+
 export const setTicketTempStartDateMoment = ( blockId, startDateMoment ) => ( {
 	type: types.SET_TICKET_TEMP_START_DATE_MOMENT,
 	payload: {
@@ -233,6 +257,14 @@ export const setTicketTempEndDate = ( blockId, endDate ) => ( {
 	payload: {
 		blockId,
 		endDate,
+	},
+} );
+
+export const setTicketTempEndDateInput = ( blockId, endDateInput ) => ( {
+	type: types.SET_TICKET_TEMP_END_DATE_INPUT,
+	payload: {
+		blockId,
+		endDateInput,
 	},
 } );
 
