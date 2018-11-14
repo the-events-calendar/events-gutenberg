@@ -2,11 +2,12 @@
  * External Dependencies
  */
 import { put, all, select, takeEvery, call } from 'redux-saga/effects';
+import moment from 'moment/moment';
 
 /**
  * Wordpress dependencies
  */
-import { select as wpSelect } from '@wordpress/data';
+import { select as wpSelect, dispatch as wpDispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -51,132 +52,33 @@ export function* setEditInTicketBlock( action ) {
 	] );
 }
 
-/**
- * @todo missing tests.
- */
-export function* removeActiveTicketBlock( action ) {
-	const { blockId } = action.payload;
-	const currentId = yield select( selectors.getTicketsActiveChildBlockId );
-
-	if ( currentId === blockId ) {
-		yield put( actions.setTicketsActiveChildBlockId( '' ) );
-	}
-
-	const hasBeenCreated = yield select( selectors.getTicketHasBeenCreated, { blockId } );
-
-	if ( ! hasBeenCreated ) {
-		yield put( actions.removeTicketBlock( blockId ) );
-		return;
-	}
-
-	const ticketId = yield select( selectors.getTicketId, { blockId } );
-	const { remove_ticket_nonce = '' } = restNonce();
-
-	const postId = wpSelect( 'core/editor' ).getCurrentPostId();
-	/**
-	 * Encode params to be passed into the DELETE request as PHP doesn’t transform the request body
-	 * of a DELETE request into a super global.
-	 */
-	const body = [
-		`${ encodeURIComponent( 'post_id' ) }=${ encodeURIComponent( postId ) }`,
-		`${ encodeURIComponent( 'remove_ticket_nonce' ) }=${ encodeURIComponent( remove_ticket_nonce ) }`,
-	];
-
-	try {
-		yield all( [
-			put( actions.setTicketsIsParentBlockLoading( true ) ),
-			put( actions.setTicketIsLoading( blockId, true ) ),
-		] );
-		yield call( wpREST, {
-			path: `tickets/${ ticketId }`,
-			namespace: 'tribe/tickets/v1',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-			},
-			initParams: {
-				method: 'DELETE',
-				body: body.join( '&' ),
-			},
-		} );
-		yield put( actions.removeTicketBlock( blockId ) );
-	} catch ( e ) {
-		/**
-		 * @todo handle error on removal
-		 */
-	} finally {
-		yield put( actions.setTicketsIsParentBlockLoading( false ) );
-	}
-}
-
 export function* setBodyDetails( blockId ) {
 	const body = new FormData();
 	const props = { blockId };
 
 	body.append( 'post_id', wpSelect( 'core/editor' ).getCurrentPostId() );
-	body.append( 'provider', yield select( selectors.getTicketsProvider ) );
-	body.append( 'name', yield select( selectors.getTicketTitle, props ) );
-	body.append( 'description', yield select( selectors.getTicketDescription, props ) );
-	body.append( 'price', yield select( selectors.getTicketPrice, props ) );
-	body.append( 'start_date', yield select( selectors.getTicketStartDate, props ) );
-	body.append( 'start_time', yield select( selectors.getTicketStartTime, props ) );
-	body.append( 'end_date', yield select( selectors.getTicketEndDate, props ) );
-	body.append( 'end_time', yield select( selectors.getTicketEndTime, props ) );
-	body.append( 'sku', yield select( selectors.getTicketSku, props ) );
+	body.append( 'provider', yield select( selectors.getTicketsTempProvider ) );
+	body.append( 'name', yield select( selectors.getTicketTempTitle, props ) );
+	body.append( 'description', yield select( selectors.getTicketTempDescription, props ) );
+	body.append( 'price', yield select( selectors.getTicketTempPrice, props ) );
+	body.append( 'start_date', yield select( selectors.getTicketTempStartDate, props ) );
+	body.append( 'start_time', yield select( selectors.getTicketTempStartTime, props ) );
+	body.append( 'end_date', yield select( selectors.getTicketTempEndDate, props ) );
+	body.append( 'end_time', yield select( selectors.getTicketTempEndTime, props ) );
+	body.append( 'sku', yield select( selectors.getTicketTempSku, props ) );
 
-	const capacity = {
-		type: yield select( selectors.getTicketCapacityType, props ),
-		amount: yield select( selectors.getTicketCapacity, props ),
-	};
+	const capacityType = yield select( selectors.getTicketTempCapacityType, props );
+	const capacity = yield select( selectors.getTicketTempCapacity, props );
 
-	const isUnlimited = capacity.type === TICKET_TYPES[ UNLIMITED ];
-	body.append( 'ticket[mode]', isUnlimited ? '' : capacity.type );
-	body.append( 'ticket[capacity]', isUnlimited ? '' : capacity.amount );
+	const isUnlimited = capacityType === TICKET_TYPES[ UNLIMITED ];
+	body.append( 'ticket[mode]', isUnlimited ? '' : capacityType );
+	body.append( 'ticket[capacity]', isUnlimited ? '' : capacity );
 
-	if ( capacity.type === TICKET_TYPES[ SHARED ] ) {
-		body.append( 'ticket[event_capacity]', yield select( selectors.getTicketsSharedCapacity ) );
+	if ( capacityType === TICKET_TYPES[ SHARED ] ) {
+		body.append( 'ticket[event_capacity]', yield select( selectors.getTicketsTempSharedCapacity ) );
 	}
 
 	return body;
-}
-
-/**
- * @todo missing tests.
- */
-export function* createNewTicket( action ) {
-	const { blockId } = action.payload;
-
-	yield call( setGlobalSharedCapacity );
-	const { add_ticket_nonce = '' } = restNonce();
-	const body = yield call( setBodyDetails, blockId );
-	body.append( 'add_ticket_nonce', add_ticket_nonce );
-
-	try {
-		yield put( actions.setTicketIsLoading( blockId, true ) );
-		const ticket = yield call( wpREST, {
-			path: 'tickets/',
-			namespace: 'tribe/tickets/v1',
-			initParams: {
-				method: 'POST',
-				body,
-			},
-		} );
-
-		yield all( [
-			put( actions.setTicketId( blockId, ticket.ID ) ),
-			put( actions.setTicketHasBeenCreated( blockId, true ) ),
-			put( actions.setTicketsActiveChildBlockId( '' ) ),
-			put( actions.setTicketAvailable( blockId, ticket.capacity ) ),
-			put( actions.setTicketProvider( blockId, PROVIDER_CLASS_TO_PROVIDER_MAPPING[ ticket.provider_class ] ) ),
-		] );
-	} catch ( e ) {
-		/**
-		 * @todo: handle error scenario
-		 */
-	} finally {
-		yield all( [
-			put( actions.setTicketIsLoading( blockId, false ) ),
-		] );
-	}
 }
 
 /**
@@ -192,6 +94,16 @@ export function* updateActiveEditBlock( action ) {
 	const currentId = yield select( selectors.getTicketsActiveChildBlockId );
 
 	yield put( actions.setTicketsActiveChildBlockId( blockId ) );
+}
+
+export function* cancelEditTicket( action ) {
+	const { blockId } = action.payload;
+	const ticketId = yield select( selectors.getTicketId, { blockId } );
+
+	yield all( [
+		put( actions.setTicketsActiveChildBlockId( '' ) ),
+		put( actions.fetchTicket( blockId, ticketId ) ),
+	] );
 }
 
 /**
@@ -244,43 +156,69 @@ export function* setTicketInitialState( action ) {
 		hasBeenCreated: get( 'hasBeenCreated', TICKET_DEFAULT_STATE.hasBeenCreated ),
 	};
 
-	const start = yield select( getStart );
-	const end = yield select( getEnd );
+	const publishDate = wpSelect( 'core/editor' ).getEditedPostAttribute( 'date' );
+	const startMoment = yield call( momentUtil.toMoment, publishDate );
+	const startDate = yield call( momentUtil.toDatabaseDate, startMoment );
+	const startDateInput = yield call( momentUtil.toDate, startMoment );
+	const startTime = yield call( momentUtil.toDatabaseTime, startMoment );
 
-	const startMoment = yield call( toMoment, start );
-	const endMoment = yield call( toMoment, end );
- 	const startDate = yield call( toDate, startMoment );
-	const endDate = yield call( toDate, endMoment );
- 	const startTime = yield call( toTime24Hr, startMoment );
-	const endTime = yield call( toTime24Hr, endMoment );
+	yield all( [
+		put( actions.setTicketStartDate( clientId, startDate ) ),
+		put( actions.setTicketStartDateInput( clientId, startDateInput ) ),
+		put( actions.setTicketStartDateMoment( clientId, startMoment ) ),
+		put( actions.setTicketStartTime( clientId, startTime ) ),
+		put( actions.setTicketTempStartDate( clientId, startDate ) ),
+		put( actions.setTicketTempStartDateInput( clientId, startDateInput ) ),
+		put( actions.setTicketTempStartDateMoment( clientId, startMoment ) ),
+		put( actions.setTicketTempStartTime( clientId, startTime ) ),
+	] );
 
-	const sharedCapacity = yield select( selectors.getTicketsSharedCapacityInt );
+	try {
+		// NOTE: This requires TEC to be installed, if not installed, do not set an end date
+		const eventEnd = yield select( getEnd ); // Ticket purchase window should end when event ends
+		const endMoment = yield call( momentUtil.toMoment, eventEnd );
+		const endDate = yield call( momentUtil.toDatabaseDate, endMoment );
+		const endDateInput = yield call( momentUtil.toDate, endMoment );
+		const endTime = yield call( momentUtil.toDatabaseTime, endMoment );
 
+		yield all( [
+			put( actions.setTicketEndDate( clientId, endDate ) ),
+			put( actions.setTicketEndDateInput( clientId, endDateInput ) ),
+			put( actions.setTicketEndDateMoment( clientId, endMoment ) ),
+			put( actions.setTicketEndTime( clientId, endTime ) ),
+			put( actions.setTicketTempEndDate( clientId, endDate ) ),
+			put( actions.setTicketTempEndDateInput( clientId, endDateInput ) ),
+			put( actions.setTicketTempEndDateMoment( clientId, endMoment ) ),
+			put( actions.setTicketTempEndTime( clientId, endTime ) ),
+		] );
+	} catch ( err ) {
+		// ¯\_(ツ)_/¯
+	}
+
+	const sharedCapacity = yield select( selectors.getTicketsSharedCapacity );
 	if ( sharedCapacity ) {
-		yield put( actions.setTicketCapacity( clientId, sharedCapacity ) );
+		yield all( [
+			put( actions.setTicketCapacity( clientId, sharedCapacity ) ),
+			put( actions.setTicketTempCapacity( clientId, sharedCapacity ) ),
+		] );
 	}
 
 	yield all( [
-		put( actions.setTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
 		put( actions.setTicketId( clientId, values.ticketId ) ),
-		put( actions.setTicketStartDate( clientId, startDate ) ),
-		put( actions.setTicketStartTime( clientId, startTime ) ),
-		put( actions.setTicketEndDate( clientId, endDate ) ),
-		put( actions.setTicketEndTime( clientId, endTime ) ),
 		put( actions.fetchTicket( clientId, values.ticketId ) ),
 	] );
 }
 
-export function* fetchTicketDetails( action ) {
-	const { ticketId = 0, blockId } = action.payload;
+export function* fetchTicket( action ) {
+	const { ticketId, blockId } = action.payload;
 
 	yield put( actions.setTicketIsLoading( blockId, true ) );
 
-	try {
-		if ( ticketId === 0 ) {
-			return;
-		}
+	if ( ticketId === 0 ) {
+		return;
+	}
 
+	try {
 		const ticket = yield call( wpREST, {
 			path: `tickets/${ ticketId }`,
 			namespace: 'tribe/tickets/v1',
@@ -288,19 +226,56 @@ export function* fetchTicketDetails( action ) {
 
 		const costDetails = ticket.cost_details || {};
 		const costValues = costDetails.values || [];
-		const { totals = {} } = ticket;
+		const {
+			totals = {},
+			available_from,
+			available_until,
+			cost_details,
+			provider,
+		} = ticket;
+
+		const startMoment = yield call( moment, available_from );
+		const startDate = yield call( momentUtil.toDatabaseDate, startMoment );
+		const startDateInput = yield call( momentUtil.toDate, startMoment );
+		const startTime = yield call( momentUtil.toDatabaseTime, startMoment );
+
+		let endMoment = yield call( moment, '' );
+		let endDate = '';
+		let endDateInput = '';
+		let endTime = '';
+
+		if ( available_until ) {
+			endMoment = yield call( moment, available_until );
+			endDate = yield call( momentUtil.toDatabaseDate, endMoment );
+			endDateInput = yield call( momentUtil.toDate, endMoment );
+			endTime = yield call( momentUtil.toDatabaseTime, endMoment );
+		}
+
+		const details = {
+			title: ticket.title,
+			description: ticket.description,
+			price: costValues[ 0 ],
+			sku: ticket.sku,
+			startDate,
+			startDateInput,
+			startDateMoment: startMoment,
+			endDate,
+			endDateInput,
+			endDateMoment: endMoment,
+			startTime,
+			endTime,
+			capacityType: ticket.capacity_type,
+			capacity: ticket.capacity,
+		};
 
 		yield all( [
-			put( actions.setTicketTitle( blockId, ticket.title ) ),
-			put( actions.setTicketDescription( blockId, ticket.description ) ),
-			put( actions.setTicketCapacity( blockId, ticket.capacity ) ),
-			put( actions.setTicketPrice( blockId, costValues[ 0 ] ) ),
-			put( actions.setTicketSku( blockId, ticket.sku ) ),
-			put( actions.setTicketCapacityType( blockId, ticket.capacity_type ) ),
+			put( actions.setTicketDetails( blockId, details ) ),
+			put( actions.setTicketTempDetails( blockId, details ) ),
 			put( actions.setTicketSold( blockId, totals.sold ) ),
 			put( actions.setTicketAvailable( blockId, totals.stock ) ),
-			put( actions.setTicketCurrencySymbol( blockId, ticket.cost_details.currency_symbol ) ),
-			put( actions.setTicketProvider( blockId, ticket.provider ) ),
+			put( actions.setTicketCurrencySymbol( blockId, cost_details.currency_symbol ) ),
+			put( actions.setTicketProvider( blockId, provider ) ),
+			put( actions.setTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
 		] );
 	} catch ( e ) {
 		/**
@@ -311,36 +286,74 @@ export function* fetchTicketDetails( action ) {
 	}
 }
 
-export function* cancelEditTicket( action ) {
+/**
+ * @todo missing tests.
+ */
+export function* createNewTicket( action ) {
 	const { blockId } = action.payload;
-	const ticketId = yield select( selectors.getTicketId, { blockId } );
+	const props = { blockId }
 
-	yield all( [
-		put( actions.setTicketsActiveChildBlockId( '' ) ),
-		put( actions.fetchTicket( blockId, ticketId ) ),
-	] );
-}
+	const { add_ticket_nonce = '' } = restNonce();
+	const body = yield call( setBodyDetails, blockId );
+	body.append( 'add_ticket_nonce', add_ticket_nonce );
 
-export function* setGlobalSharedCapacity() {
-	const tmpSharedCapacity = yield select( selectors.getTicketsTempSharedCapacity );
-	const sharedValue = parseInt( tmpSharedCapacity, 10 );
+	try {
+		yield put( actions.setTicketIsLoading( blockId, true ) );
+		const ticket = yield call( wpREST, {
+			path: 'tickets/',
+			namespace: 'tribe/tickets/v1',
+			initParams: {
+				method: 'POST',
+				body,
+			},
+		} );
 
-	if ( ! isNaN( sharedValue ) && sharedValue > 0 ) {
+		const tempSharedCapacity = yield select( selectors.getTicketsTempSharedCapacity );
+		if ( ! isNaN( tempSharedCapacity ) && tempSharedCapacity > 0 ) {
+			yield put( actions.setTicketsSharedCapacity( tempSharedCapacity ) );
+		}
+
 		yield all( [
-			put( actions.setTicketsSharedCapacity( sharedValue ) ),
+			put( actions.setTicketDetails( blockId, {
+				title: yield select( actions.getTicketTempTitle, props ),
+				description: yield select( actions.getTicketTempDescription, props ),
+				price: yield select( actions.getTicketTempPrice, props ),
+				sku: yield select( actions.getTicketTempSku, props ),
+				startDate: yield select( actions.getTicketTempStartDate, props ),
+				startDateInput: yield select( actions.getTicketTempStartDateInput, props ),
+				startDateMoment: yield select( actions.getTicketTempStartDateMoment, props ),
+				endDate: yield select( actions.getTicketTempEndDate, props ),
+				endDateInput: yield select( actions.getTicketTempEndDateInput, props ),
+				endDateMoment: yield select( actions.getTicketTempEndDateMoment, props ),
+				startTime: yield select( actions.getTicketTempStartTime, props ),
+				endTime: yield select( actions.getTicketTempEndTime, props ),
+				capacityType: yield select( actions.getTicketTempCapacityType, props ),
+				capacity: yield select( actions.getTicketTempCapacity, props ),
+			} ) ),
+			put( actions.setTicketId( blockId, ticket.ID ) ),
+			put( actions.setTicketHasBeenCreated( blockId, true ) ),
+			put( actions.setTicketAvailable( blockId, ticket.capacity ) ),
+			put( actions.setTicketProvider( blockId, PROVIDER_CLASS_TO_PROVIDER_MAPPING[ ticket.provider_class ] ) ),
+			put( actions.setTicketHasChanges( blockId, false ) ),
 		] );
+	} catch ( e ) {
+		/**
+		 * @todo: handle error scenario
+		 */
+	} finally {
+		yield put( actions.setTicketIsLoading( blockId, false ) ),
 	}
 }
 
 export function* updateTicket( action ) {
 	const { blockId } = action.payload;
+	const props = { blockId };
 
 	const { edit_ticket_nonce = '' } = restNonce();
 	const body = yield call( setBodyDetails, blockId );
 	body.append( 'edit_ticket_nonce', edit_ticket_nonce );
 
-	yield call( setGlobalSharedCapacity );
-	const ticketId = yield select( selectors.getTicketId, { blockId } );
+	const ticketId = yield select( selectors.getTicketId, props );
 
 	try {
 		const data = [];
@@ -348,30 +361,88 @@ export function* updateTicket( action ) {
 			data.push( `${ encodeURIComponent( pair[ 0 ] ) }=${ encodeURIComponent( pair[ 1 ] ) }` );
 		}
 
+		yield put( actions.setTicketIsLoading( blockId, true ) );
+		yield call( wpREST, {
+			path: `tickets/${ ticketId }`,
+			namespace: 'tribe/tickets/v1',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+			},
+			initParams: {
+				method: 'PUT',
+				body: data.join( '&' ),
+			},
+		} );
+
 		yield all( [
-			put( actions.setTicketIsLoading( blockId, true ) ),
-			call( wpREST, {
+			put( actions.setTicketDetails( blockId, {
+				title: yield select( actions.getTicketTempTitle, props ),
+				description: yield select( actions.getTicketTempDescription, props ),
+				price: yield select( actions.getTicketTempPrice, props ),
+				sku: yield select( actions.getTicketTempSku, props ),
+				startDate: yield select( actions.getTicketTempStartDate, props ),
+				startDateInput: yield select( actions.getTicketTempStartDateInput, props ),
+				startDateMoment: yield select( actions.getTicketTempStartDateMoment, props ),
+				endDate: yield select( actions.getTicketTempEndDate, props ),
+				endDateInput: yield select( actions.getTicketTempEndDateInput, props ),
+				endDateMoment: yield select( actions.getTicketTempEndDateMoment, props ),
+				startTime: yield select( actions.getTicketTempStartTime, props ),
+				endTime: yield select( actions.getTicketTempEndTime, props ),
+				capacityType: yield select( actions.getTicketTempCapacityType, props ),
+				capacity: yield select( actions.getTicketTempCapacity, props ),
+			} ) ),
+			put( actions.setTicketHasChanges( blockId, false ) ),
+		] );
+	} catch ( e ) {
+		/**
+		 * @todo: handle error scenario
+		 */
+	} finally {
+		put( actions.setTicketIsLoading( blockId, false ) );
+	}
+}
+
+/**
+ * @todo missing tests.
+ */
+export function* deleteTicket( action ) {
+	const { blockId } = action.payload;
+	const props = { blockId };
+
+	const hasBeenCreated = yield select( selectors.getTicketHasBeenCreated, props );
+
+	if ( hasBeenCreated ) {
+		const ticketId = yield select( selectors.getTicketId, props );
+		const { remove_ticket_nonce = '' } = restNonce();
+		const postId = wpSelect( 'core/editor' ).getCurrentPostId();
+
+		/**
+		 * Encode params to be passed into the DELETE request as PHP doesn’t transform the request body
+		 * of a DELETE request into a super global.
+		 */
+		const body = [
+			`${ encodeURIComponent( 'post_id' ) }=${ encodeURIComponent( postId ) }`,
+			`${ encodeURIComponent( 'remove_ticket_nonce' ) }=${ encodeURIComponent( remove_ticket_nonce ) }`,
+		];
+
+		try {
+			yield put( actions.setTicketIsLoading( blockId, true ) ),
+			yield call( wpREST, {
 				path: `tickets/${ ticketId }`,
 				namespace: 'tribe/tickets/v1',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
 				},
 				initParams: {
-					method: 'PUT',
-					body: data.join( '&' ),
+					method: 'DELETE',
+					body: body.join( '&' ),
 				},
-			} ),
-		] );
-	} catch ( e ) {
-		/**
-		 * @todo: handle error scenario
-		 */
-		yield put( actions.fetchTicket( blockId, ticketId ) );
-	} finally {
-		yield all( [
-			put( actions.setTicketIsLoading( blockId, false ) ),
-			put( actions.setTicketsActiveChildBlockId( '' ) ),
-		] );
+			} );
+		} catch ( e ) {
+			/**
+			 * @todo handle error on removal
+			 */
+		}
 	}
 }
 
@@ -443,13 +514,13 @@ export function* setTempTicketDetails( action ) {
 
 export default function* watchers() {
 	// yield takeEvery( types.SET_TICKET_BLOCK_ID, setEditInTicketBlock );
-	yield takeEvery( types.DELETE_TICKET, removeActiveTicketBlock );
-	yield takeEvery( types.CREATE_NEW_TICKET, createNewTicket );
 	// yield takeEvery( types.SET_TICKET_IS_EDITING, updateActiveEditBlock );
 	yield takeEvery( types.SET_TICKETS_INITIAL_STATE, setInitialState );
 	yield takeEvery( types.SET_TICKET_INITIAL_STATE, setTicketInitialState );
-	yield takeEvery( types.FETCH_TICKET, fetchTicketDetails );
+	yield takeEvery( types.FETCH_TICKET, fetchTicket );
+	yield takeEvery( types.CREATE_NEW_TICKET, createNewTicket );
 	yield takeEvery( types.UPDATE_TICKET, updateTicket );
+	yield takeEvery( types.DELETE_TICKET, deleteTicket );
 	yield takeEvery( types.SET_TICKET_DETAILS, setTicketDetails );
 	yield takeEvery( types.SET_TICKET_TEMP_DETAILS, setTicketTempDetails );
 }
