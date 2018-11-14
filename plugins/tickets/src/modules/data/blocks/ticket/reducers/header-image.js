@@ -15,7 +15,7 @@ export const DEFAULT_STATE = {
 
 export default ( state = DEFAULT_STATE, action ) => {
 	switch ( action.type ) {
-		case types.SET_TICKETS_HEADER:
+		case types.SET_TICKETS_HEADER_IMAGE:
 			return {
 				id: action.payload.id,
 				src: action.payload.src,

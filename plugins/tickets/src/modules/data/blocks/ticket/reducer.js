@@ -2,16 +2,13 @@
  * Internal dependencies
  */
 import tickets from './reducers/tickets';
-import { DEFAULT_STATE as HEADER_DEFAULT_STATE } from './reducers/header';
+import headerImage, { DEFAULT_STATE as HEADER_IMAGE_DEFAULT_STATE } from './reducers/header-image';
 import * as types from './types';
 
 export const DEFAULT_STATE = {
-	header: HEADER_DEFAULT_STATE,
+	headerImage: HEADER_IMAGE_DEFAULT_STATE,
 	isSettingsOpen: false,
-	isParentBlockLoading: false,
-	isChildBlockSelected: false,
-	isParentBlockSelected: false,
-	activeChildBlockId: '',
+	isSettingsLoading: false,
 	provider: '',
 	sharedCapacity: '',
 	tempSharedCapacity: '',
@@ -23,32 +20,17 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_TICKETS_HEADER:
 			return {
 				...state,
-				header: action.payload.header,
+				headerImage: headerImage( state.headerImage, action ),
 			};
 		case types.SET_TICKETS_IS_SETTINGS_OPEN:
 			return {
 				...state,
 				isSettingsOpen: action.payload.isSettingsOpen,
 			};
-		case types.SET_TICKETS_IS_PARENT_BLOCK_LOADING:
+		case types.SET_TICKETS_IS_SETTINGS_LOADING:
 			return {
 				...state,
-				isParentBlockSelected: action.payload.isParentBlockSelected,
-			};
-		case types.SET_TICKETS_IS_CHILD_BLOCK_SELECTED:
-			return {
-				...state,
-				isChildBlockSelected: action.payload.isChildBlockSelected,
-			};
-		case types.SET_TICKETS_IS_PARENT_BLOCK_SELECTED:
-			return {
-				...state,
-				isParentBlockLoading: action.payload.isParentBlockLoading,
-			};
-		case types.SET_TICKETS_ACTIVE_CHILD_BLOCK_ID:
-			return {
-				...state,
-				activeChildBlockId: action.payload.activeChildBlockId,
+				isSettingsLoading: action.payload.isSettingsLoading,
 			};
 		case types.SET_TICKETS_PROVIDER:
 			return {

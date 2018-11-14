@@ -9,13 +9,6 @@ describe( 'Reducer', () => {
 		expect( reducer( undefined, {} ) ).toEqual( DEFAULT_STATE );
 	} );
 
-	it( 'should set the header', () => {
-		expect( reducer(
-			DEFAULT_STATE,
-			actions.setTicketsHeader( { header: 1 } ),
-		) ).toMatchSnapshot();
-	} );
-
 	it( 'should set the is settings open', () => {
 		expect( reducer(
 			DEFAULT_STATE,
@@ -23,31 +16,10 @@ describe( 'Reducer', () => {
 		) ).toMatchSnapshot();
 	} );
 
-	it( 'should set the is parent block loading', () => {
+	it( 'should set the is settings loading', () => {
 		expect( reducer(
 			DEFAULT_STATE,
-			actions.setTicketsIsParentBlockLoading( true ),
-		) ).toMatchSnapshot();
-	} );
-
-	it( 'should set the is child block selected', () => {
-		expect( reducer(
-			DEFAULT_STATE,
-			actions.setTicketsIsChildBlockSelected( true ),
-		) ).toMatchSnapshot();
-	} );
-
-	it( 'should set the is parent block selected', () => {
-		expect( reducer(
-			DEFAULT_STATE,
-			actions.setTicketsIsParentBlockSelected( true ),
-		) ).toMatchSnapshot();
-	} );
-
-	it( 'should set the active child block id', () => {
-		expect( reducer(
-			DEFAULT_STATE,
-			actions.setTicketsActiveChildBlockId( 'modern-tribe' ),
+			actions.setTicketsIsSettingsLoading( true ),
 		) ).toMatchSnapshot();
 	} );
 
