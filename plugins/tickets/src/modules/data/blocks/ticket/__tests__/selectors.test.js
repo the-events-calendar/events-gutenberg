@@ -203,12 +203,20 @@ describe( 'Ticket block selectors', () => {
 			expect( selectors.getTicketStartDate( state, ownProps ) ).toMatchSnapshot();
 		} );
 
+		test( 'getTicketStartDateInput', () => {
+			expect( selectors.getTicketStartDateInput( state, ownProps ) ).toMatchSnapshot();
+		} );
+
 		test( 'getTicketStartDateMoment', () => {
 			expect( selectors.getTicketStartDateMoment( state, ownProps ) ).toMatchSnapshot();
 		} );
 
 		test( 'getTicketEndDate', () => {
 			expect( selectors.getTicketEndDate( state, ownProps ) ).toMatchSnapshot();
+		} );
+
+		test( 'getTicketEndDateInput', () => {
+			expect( selectors.getTicketEndDateInput( state, ownProps ) ).toMatchSnapshot();
 		} );
 
 		test( 'getTicketEndDateMoment', () => {
@@ -277,12 +285,20 @@ describe( 'Ticket block selectors', () => {
 			expect( selectors.getTicketTempStartDate( state, ownProps ) ).toMatchSnapshot();
 		} );
 
+		test( 'getTicketTempStartDateInput', () => {
+			expect( selectors.getTicketTempStartDateInput( state, ownProps ) ).toMatchSnapshot();
+		} );
+
 		test( 'getTicketTempStartDateMoment', () => {
 			expect( selectors.getTicketTempStartDateMoment( state, ownProps ) ).toMatchSnapshot();
 		} );
 
 		test( 'getTicketTempEndDate', () => {
 			expect( selectors.getTicketTempEndDate( state, ownProps ) ).toMatchSnapshot();
+		} );
+
+		test( 'getTicketTempEndDateInput', () => {
+			expect( selectors.getTicketTempEndDateInput( state, ownProps ) ).toMatchSnapshot();
 		} );
 
 		test( 'getTicketTempEndDateMoment', () => {

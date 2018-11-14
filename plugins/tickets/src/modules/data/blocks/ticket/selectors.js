@@ -241,6 +241,11 @@ export const getTicketStartDate = createSelector(
 	( details ) => details.startDate,
 );
 
+export const getTicketStartDateInput = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.startDateInput,
+);
+
 export const getTicketStartDateMoment = createSelector(
 	[ getTicketDetails ],
 	( details ) => details.startDateMoment,
@@ -249,6 +254,11 @@ export const getTicketStartDateMoment = createSelector(
 export const getTicketEndDate = createSelector(
 	[ getTicketDetails ],
 	( details ) => details.endDate,
+);
+
+export const getTicketEndDateInput = createSelector(
+	[ getTicketDetails ],
+	( details ) => details.endDateInput,
 );
 
 export const getTicketEndDateMoment = createSelector(
@@ -335,6 +345,11 @@ export const getTicketTempStartDate = createSelector(
 	( tempDetails ) => tempDetails.startDate,
 );
 
+export const getTicketTempStartDateInput = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.startDateInput,
+);
+
 export const getTicketTempStartDateMoment = createSelector(
 	[ getTicketTempDetails ],
 	( tempDetails ) => tempDetails.startDateMoment,
@@ -343,6 +358,11 @@ export const getTicketTempStartDateMoment = createSelector(
 export const getTicketTempEndDate = createSelector(
 	[ getTicketTempDetails ],
 	( tempDetails ) => tempDetails.endDate,
+);
+
+export const getTicketTempEndDateInput = createSelector(
+	[ getTicketTempDetails ],
+	( tempDetails ) => tempDetails.endDateInput,
 );
 
 export const getTicketTempEndDateMoment = createSelector(
