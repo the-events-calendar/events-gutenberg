@@ -47,6 +47,16 @@ Object {
 }
 `;
 
+exports[`Ticket actions Ticket actions set ticket currency positioin 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "currencyPosition": "suffix",
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_CURRENCY_POSITION",
+}
+`;
+
 exports[`Ticket actions Ticket actions set ticket currency symbol 1`] = `
 Object {
   "payload": Object {

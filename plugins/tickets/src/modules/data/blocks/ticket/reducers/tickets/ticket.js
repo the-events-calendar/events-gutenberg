@@ -2,7 +2,10 @@
  * Internal dependencies
  */
 import * as types from '@moderntribe/tickets/data/blocks/ticket/types';
-import { getDefaultProviderCurrency } from '@moderntribe/tickets/data/blocks/ticket/utils';
+import {
+	getDefaultProviderCurrency,
+	getDefaultCurrencyPosition,
+} from '@moderntribe/tickets/data/blocks/ticket/utils';
 import details, { DEFAULT_STATE as DETAILS_DEFAULT_STATE } from './ticket/details';
 import tempDetails, { DEFAULT_STATE as TEMP_DETAILS_DEFAULT_STATE } from './ticket/temp-details';
 
@@ -13,6 +16,7 @@ export const DEFAULT_STATE = {
 	available: 0,
 	ticketId: 0,
 	currencySymbol: getDefaultProviderCurrency(),
+	currencyPosition: getDefaultCurrencyPosition(),
 	provider: '',
 	isLoading: false,
 	hasBeenCreated: false,
@@ -77,6 +81,11 @@ export default ( state = DEFAULT_STATE, action ) => {
 			return {
 				...state,
 				currencySymbol: action.payload.currencySymbol,
+			};
+		case types.SET_TICKET_CURRENCY_POSITION:
+			return {
+				...state,
+				currencyPosition: action.payload.currencyPosition,
 			};
 		case types.SET_TICKET_PROVIDER:
 			return {

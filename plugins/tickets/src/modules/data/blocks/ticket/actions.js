@@ -352,6 +352,14 @@ export const setTicketCurrencySymbol = ( blockId, currencySymbol ) => ( {
 	},
 } );
 
+export const setTicketCurrencyPosition = ( blockId, currencyPosition ) => ( {
+	type: types.SET_TICKET_CURRENCY_POSITION,
+	payload: {
+		blockId,
+		currencyPosition,
+	},
+} );
+
 export const setTicketProvider = ( blockId, provider ) => ( {
 	type: types.SET_TICKET_PROVIDER,
 	payload: {

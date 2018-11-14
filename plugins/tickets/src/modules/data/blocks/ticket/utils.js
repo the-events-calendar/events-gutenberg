@@ -1,7 +1,12 @@
 /**
  * External dependencies
  */
-import { tickets as ticketsConfig } from '@moderntribe/common/src/modules/utils/globals';
+import {
+	settings,
+	priceSettings,
+	tickets as ticketsConfig,
+} from '@moderntribe/common/src/modules/utils/globals';
+import { string } from '@moderntribe/common/utils';
 
 /**
  * Get currency symbol by provider
@@ -27,4 +32,17 @@ export const getDefaultProviderCurrency = () => {
 	const defaultProvider = tickets.default_provider || '';
 
 	return getProviderCurrency( defaultProvider );
-}
+};
+
+/**
+ * Get currency position
+ */
+export const getDefaultCurrencyPosition = () => {
+	const position = string.isTruthy( settings() && settings().reverseCurrencyPosition )
+		? 'suffix'
+		: 'prefix';
+
+	return priceSettings() && priceSettings().default_currency_position
+		? priceSettings().default_currency_position
+		: position;
+};

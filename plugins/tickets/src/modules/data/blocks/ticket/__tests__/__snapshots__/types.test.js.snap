@@ -18,6 +18,8 @@ exports[`Tickets block types SET_TICKET_CAPACITY 1`] = `"@@MT/TICKETS/SET_TICKET
 
 exports[`Tickets block types SET_TICKET_CAPACITY_TYPE 1`] = `"@@MT/TICKETS/SET_TICKET_CAPACITY_TYPE"`;
 
+exports[`Tickets block types SET_TICKET_CURRENCY_POSITION 1`] = `"@@MT/TICKETS/SET_TICKET_CURRENCY_POSITION"`;
+
 exports[`Tickets block types SET_TICKET_CURRENCY_SYMBOL 1`] = `"@@MT/TICKETS/SET_TICKET_CURRENCY_SYMBOL"`;
 
 exports[`Tickets block types SET_TICKET_DESCRIPTION 1`] = `"@@MT/TICKETS/SET_TICKET_DESCRIPTION"`;

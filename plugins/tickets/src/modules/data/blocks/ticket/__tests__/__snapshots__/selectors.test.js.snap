@@ -52,6 +52,7 @@ Object {
     "byId": Object {
       "modern-tribe": Object {
         "available": 0,
+        "currencyPosition": "prefix",
         "currencySymbol": undefined,
         "details": Object {
           "capacity": "",
@@ -192,6 +193,7 @@ exports[`Ticket block selectors Ticket details selectors isUnlimitedTicket 1`] =
 exports[`Ticket block selectors Ticket selectors getTicket 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",
@@ -239,6 +241,8 @@ exports[`Ticket block selectors Ticket selectors getTicketAvailable 1`] = `0`;
 
 exports[`Ticket block selectors Ticket selectors getTicketBlockId 1`] = `"modern-tribe"`;
 
+exports[`Ticket block selectors Ticket selectors getTicketCurrencyPosition 1`] = `"prefix"`;
+
 exports[`Ticket block selectors Ticket selectors getTicketCurrencySymbol 1`] = `undefined`;
 
 exports[`Ticket block selectors Ticket selectors getTicketHasBeenCreated 1`] = `false`;
@@ -247,8 +251,6 @@ exports[`Ticket block selectors Ticket selectors getTicketHasChanges 1`] = `fals
 
 exports[`Ticket block selectors Ticket selectors getTicketId 1`] = `0`;
 
-exports[`Ticket block selectors Ticket selectors getTicketIsDisabled 1`] = `false`;
-
 exports[`Ticket block selectors Ticket selectors getTicketIsLoading 1`] = `false`;
 
 exports[`Ticket block selectors Ticket selectors getTicketIsSelected 1`] = `false`;
@@ -256,6 +258,8 @@ exports[`Ticket block selectors Ticket selectors getTicketIsSelected 1`] = `fals
 exports[`Ticket block selectors Ticket selectors getTicketProvider 1`] = `""`;
 
 exports[`Ticket block selectors Ticket selectors getTicketSold 1`] = `0`;
+
+exports[`Ticket block selectors Ticket selectors isTicketDisabled 1`] = `false`;
 
 exports[`Ticket block selectors Ticket temp details selectors getTicketTempCapacity 1`] = `0`;
 
@@ -320,6 +324,7 @@ exports[`Ticket block selectors Tickets selectors getSharedTickets 1`] = `
 Array [
   Object {
     "available": 0,
+    "currencyPosition": "prefix",
     "currencySymbol": undefined,
     "details": Object {
       "capacity": "",
@@ -374,6 +379,7 @@ Object {
   "byId": Object {
     "modern-tribe": Object {
       "available": 0,
+      "currencyPosition": "prefix",
       "currencySymbol": undefined,
       "details": Object {
         "capacity": "",
@@ -423,6 +429,7 @@ exports[`Ticket block selectors Tickets selectors getTicketsArray 1`] = `
 Array [
   Object {
     "available": 0,
+    "currencyPosition": "prefix",
     "currencySymbol": undefined,
     "details": Object {
       "capacity": "",
@@ -471,6 +478,7 @@ exports[`Ticket block selectors Tickets selectors getTicketsById 1`] = `
 Object {
   "modern-tribe": Object {
     "available": 0,
+    "currencyPosition": "prefix",
     "currencySymbol": undefined,
     "details": Object {
       "capacity": "",

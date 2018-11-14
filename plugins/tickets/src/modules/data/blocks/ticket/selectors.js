@@ -59,14 +59,6 @@ export const getTicketsTempSharedCapacityInt = createSelector(
 	( capacity ) => parseInt( capacity, 10 ) || 0,
 );
 
-/**
- * @todo: fix this later, add test
- */
-export const isTicketDisabled = createSelector(
-	[ getTicketsIsSettingsOpen ],
-	( isSettingsOpen ) => isSettingsOpen,
-);
-
 //
 // ─── HEADER IMAGE SELECTORS ─────────────────────────────────────────────────────
 //
@@ -189,6 +181,11 @@ export const getTicketCurrencySymbol = createSelector(
 	( ticket ) => ticket.currencySymbol,
 );
 
+export const getTicketCurrencyPosition = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.currencyPosition,
+);
+
 export const getTicketProvider = createSelector(
 	[ getTicket ],
 	( ticket ) => ticket.provider,
@@ -214,9 +211,16 @@ export const getTicketIsSelected = createSelector(
 	( ticket ) => ticket.isSelected,
 );
 
-export const getTicketIsDisabled = createSelector(
-	[ hasATicketSelected, getTicketIsSelected ],
-	( hasSelected, isSelected ) => hasSelected && ! isSelected,
+export const isTicketDisabled = createSelector(
+	[
+		hasATicketSelected,
+		getTicketIsSelected,
+		getTicketIsLoading,
+		getTicketsIsSettingsOpen,
+	],
+	( hasSelected, isSelected, isLoading, isSettingsOpen ) => (
+		( hasSelected && ! isSelected ) || isLoading || isSettingsOpen
+	),
 );
 
 //

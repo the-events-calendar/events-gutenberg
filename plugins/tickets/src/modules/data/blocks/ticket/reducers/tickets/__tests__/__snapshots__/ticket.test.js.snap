@@ -3,6 +3,54 @@
 exports[`Details reducer should set the available 1`] = `
 Object {
   "available": 20,
+  "currencyPosition": "prefix",
+  "currencySymbol": undefined,
+  "details": Object {
+    "capacity": "",
+    "capacityType": "capped",
+    "description": "",
+    "endDate": "2118-07-19",
+    "endDateInput": "July 19, 2118",
+    "endDateMoment": "2118-07-19T19:30:00.000Z",
+    "endTime": "19:30:00",
+    "price": "",
+    "sku": "",
+    "startDate": "2018-07-19",
+    "startDateInput": "July 19, 2018",
+    "startDateMoment": "2018-07-19T19:30:00.000Z",
+    "startTime": "19:30:00",
+    "title": "",
+  },
+  "hasBeenCreated": false,
+  "hasChanges": false,
+  "isLoading": false,
+  "isSelected": false,
+  "provider": "",
+  "sold": 0,
+  "tempDetails": Object {
+    "capacity": "",
+    "capacityType": "capped",
+    "description": "",
+    "endDate": "2118-07-19",
+    "endDateInput": "July 19, 2118",
+    "endDateMoment": "2118-07-19T19:30:00.000Z",
+    "endTime": "19:30:00",
+    "price": "",
+    "sku": "",
+    "startDate": "2018-07-19",
+    "startDateInput": "July 19, 2018",
+    "startDateMoment": "2018-07-19T19:30:00.000Z",
+    "startTime": "19:30:00",
+    "title": "",
+  },
+  "ticketId": 0,
+}
+`;
+
+exports[`Details reducer should set the currency position 1`] = `
+Object {
+  "available": 0,
+  "currencyPosition": "suffix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",
@@ -49,6 +97,7 @@ Object {
 exports[`Details reducer should set the currency symbol 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": "$",
   "details": Object {
     "capacity": "",
@@ -95,6 +144,7 @@ Object {
 exports[`Details reducer should set the has been created 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",
@@ -141,6 +191,7 @@ Object {
 exports[`Details reducer should set the has changes 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",
@@ -187,6 +238,7 @@ Object {
 exports[`Details reducer should set the is loading 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",
@@ -233,6 +285,7 @@ Object {
 exports[`Details reducer should set the is selected 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",
@@ -279,6 +332,7 @@ Object {
 exports[`Details reducer should set the provider 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",
@@ -325,6 +379,7 @@ Object {
 exports[`Details reducer should set the sold 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",
@@ -371,6 +426,7 @@ Object {
 exports[`Details reducer should set the ticket id 1`] = `
 Object {
   "available": 0,
+  "currencyPosition": "prefix",
   "currencySymbol": undefined,
   "details": Object {
     "capacity": "",

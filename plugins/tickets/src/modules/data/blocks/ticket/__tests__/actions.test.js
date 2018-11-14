@@ -210,6 +210,10 @@ describe( 'Ticket actions', () => {
 			expect( actions.setTicketCurrencySymbol( blockId, '$' ) ).toMatchSnapshot();
 		} );
 
+		test( 'set ticket currency positioin', () => {
+			expect( actions.setTicketCurrencyPosition( blockId, 'suffix' ) ).toMatchSnapshot();
+		} );
+
 		test( 'set ticket provider', () => {
 			expect( actions.setTicketProvider( blockId, 'provider' ) ).toMatchSnapshot();
 		} );

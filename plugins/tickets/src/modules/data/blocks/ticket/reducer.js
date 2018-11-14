@@ -79,6 +79,7 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_TICKET_AVAILABLE:
 		case types.SET_TICKET_ID:
 		case types.SET_TICKET_CURRENCY_SYMBOL:
+		case types.SET_TICKET_CURRENCY_POSITION:
 		case types.SET_TICKET_PROVIDER:
 		case types.SET_TICKET_IS_LOADING:
 		case types.SET_TICKET_HAS_BEEN_CREATED:

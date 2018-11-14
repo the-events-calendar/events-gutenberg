@@ -161,6 +161,10 @@ describe( 'Ticket block selectors', () => {
 			expect( selectors.getTicketCurrencySymbol( state, ownProps ) ).toMatchSnapshot();
 		} );
 
+		test( 'getTicketCurrencyPosition', () => {
+			expect( selectors.getTicketCurrencyPosition( state, ownProps ) ).toMatchSnapshot();
+		} );
+
 		test( 'getTicketProvider', () => {
 			expect( selectors.getTicketProvider( state, ownProps ) ).toMatchSnapshot();
 		} );
@@ -181,8 +185,8 @@ describe( 'Ticket block selectors', () => {
 			expect( selectors.getTicketIsSelected( state, ownProps ) ).toMatchSnapshot();
 		} );
 
-		test( 'getTicketIsDisabled', () => {
-			expect( selectors.getTicketIsDisabled( state, ownProps ) ).toMatchSnapshot();
+		test( 'isTicketDisabled', () => {
+			expect( selectors.isTicketDisabled( state, ownProps ) ).toMatchSnapshot();
 		} );
 	} );
 
