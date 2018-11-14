@@ -12,10 +12,7 @@ import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state, ownProps ) => ( {
-	/**
-	 * @todo: fix this
-	 */
-	isDisabled: false,
+	isDisabled: selectors.isTicketDisabled( state, ownProps ),
 	tempTitle: selectors.getTicketTempTitle( state, ownProps ),
 	title: selectors.getTicketTitle( state, ownProps ),
 } );

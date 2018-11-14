@@ -21,6 +21,7 @@ class Ticket extends PureComponent {
 
 	static propTypes = {
 		blockId: PropTypes.string.isRequired,
+		isDisabled: PropTypes.bool,
 		isLoading: PropTypes.bool,
 		isSelected: PropTypes.bool,
 		onBlockUpdate: PropTypes.func,
@@ -43,6 +44,7 @@ class Ticket extends PureComponent {
 		return (
 			<article className={ classNames(
 				'tribe-editor__ticket',
+				{ 'tribe-editor__ticket--disabled': isDisabled },
 				{ 'tribe-editor__ticket--selected': isSelected },
 			) }>
 				<TicketContainer blockId={ blockId } isSelected={ isSelected } />

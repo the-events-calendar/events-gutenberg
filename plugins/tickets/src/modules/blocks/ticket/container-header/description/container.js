@@ -11,11 +11,8 @@ import Template from './template';
 import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 
-/**
- * @todo: fix this
- */
 const mapStateToProps = ( state, ownProps ) => ( {
-	isDisabled: false,
+	isDisabled: selectors.isTicketDisabled( state, ownProps ),
 	tempDescription: selectors.getTicketTempDescription( state, ownProps ),
 	description: selectors.getTicketDescription( state, ownProps ),
 } );

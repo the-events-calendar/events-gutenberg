@@ -17,6 +17,7 @@ const mapStateToProps = ( state, ownProps ) => {
 
 	return {
 		blockId: ownProps.clientId,
+		isDisabled: selectors.isTicketDisabled( state, props ),
 		isLoading: selectors.getTicketIsLoading( state, props ),
 	};
 };

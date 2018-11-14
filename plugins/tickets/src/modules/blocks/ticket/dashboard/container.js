@@ -13,8 +13,7 @@ import { withStore } from '@moderntribe/common/hoc';
 
 const getIsCancelDisabled = ( state, ownProps ) => (
 	! selectors.getTicketHasChanges( state, ownProps )
-		|| selectors.getTicketIsLoading( state, ownProps )
-		|| selectors.getTicketIsDisabled( state, ownProps )
+		|| selectors.isTicketDisabled( state, ownProps )
 );
 
 /**
@@ -23,8 +22,7 @@ const getIsCancelDisabled = ( state, ownProps ) => (
 const getIsConfirmDisabled = ( state, ownProps ) => (
 	! selectors.getTicketTempTitle( state, ownProps )
 		|| ! selectors.getTicketHasChanges( state, ownProps )
-		|| selectors.getTicketIsLoading( state, ownProps )
-		|| selectors.getTicketIsDisabled( state, ownProps )
+		|| selectors.isTicketDisabled( state, ownProps )
 );
 
 const onCancelClick = ( state, dispatch, ownProps ) => () => {

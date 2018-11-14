@@ -19,10 +19,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	const isShared = selectors.isSharedTicket( state, ownProps )
 
 	return {
-		/**
-		 * @todo: fix this
-		 */
-		isDisabled: false,
+		isDisabled: selectors.isTicketDisabled( state, ownProps ),
 		isShared,
 		isUnlimited: selectors.isUnlimitedTicket( state, ownProps ),
 		sold: selectors.getTicketSold( state, ownProps ),

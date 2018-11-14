@@ -12,14 +12,8 @@ import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state, ownProps ) => ( {
-	/**
-	 * @todo: fix this
-	 */
-	isDisabled: false,
-	/**
-	 * @todo: fix this later
-	 */
-	currencyPosition: 'prefix',
+	isDisabled: selectors.isTicketDisabled( state, ownProps ),
+	currencyPosition: selectors.getTicketCurrencyPosition( state, ownProps ),
 	currencySymbol: selectors.getTicketCurrencySymbol( state, ownProps ),
 	tempPrice: selectors.getTicketTempPrice( state, ownProps ),
 	price: selectors.getTicketPrice( state, ownProps ),
