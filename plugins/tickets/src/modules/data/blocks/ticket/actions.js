@@ -344,6 +344,14 @@ export const setTicketHasChanges = ( blockId, hasChanges ) => ( {
 	},
 } );
 
+export const setTicketIsSelected = ( blockId, isSelected ) => ( {
+	type: types.SET_TICKET_IS_SELECTED,
+	payload: {
+		blockId,
+		isSelected,
+	},
+} );
+
 export const fetchTicket = ( blockId, ticketId ) => ( {
 	type: types.FETCH_TICKET,
 	payload: {

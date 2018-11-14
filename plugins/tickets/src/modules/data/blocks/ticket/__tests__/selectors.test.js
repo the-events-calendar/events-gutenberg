@@ -188,6 +188,10 @@ describe( 'Ticket block selectors', () => {
 		test( 'getTicketHasChanges', () => {
 			expect( selectors.getTicketHasChanges( state, ownProps ) ).toMatchSnapshot();
 		} );
+
+		test( 'getTicketIsSelected', () => {
+			expect( selectors.getTicketIsSelected( state, ownProps ) ).toMatchSnapshot();
+		} );
 	} );
 
 	describe( 'Ticket details selectors', () => {

@@ -21,6 +21,7 @@ Object {
   "hasBeenCreated": false,
   "hasChanges": false,
   "isLoading": false,
+  "isSelected": false,
   "provider": "",
   "sold": 0,
   "tempDetails": Object {
@@ -62,6 +63,7 @@ Object {
   "hasBeenCreated": false,
   "hasChanges": false,
   "isLoading": false,
+  "isSelected": false,
   "provider": "",
   "sold": 0,
   "tempDetails": Object {
@@ -103,6 +105,7 @@ Object {
   "hasBeenCreated": true,
   "hasChanges": false,
   "isLoading": false,
+  "isSelected": false,
   "provider": "",
   "sold": 0,
   "tempDetails": Object {
@@ -144,6 +147,7 @@ Object {
   "hasBeenCreated": false,
   "hasChanges": true,
   "isLoading": false,
+  "isSelected": false,
   "provider": "",
   "sold": 0,
   "tempDetails": Object {
@@ -185,6 +189,49 @@ Object {
   "hasBeenCreated": false,
   "hasChanges": false,
   "isLoading": true,
+  "isSelected": false,
+  "provider": "",
+  "sold": 0,
+  "tempDetails": Object {
+    "capacity": "",
+    "capacityType": "capped",
+    "description": "",
+    "endDate": "July 22, 2018",
+    "endDateMoment": "2018-07-19T19:30:00.000Z",
+    "endTime": "19:30",
+    "price": "",
+    "sku": "",
+    "startDate": "July 19, 2018",
+    "startDateMoment": "2018-07-19T19:30:00.000Z",
+    "startTime": "19:30",
+    "title": "",
+  },
+  "ticketId": 0,
+}
+`;
+
+exports[`Details reducer should set the is selected 1`] = `
+Object {
+  "available": 0,
+  "currencySymbol": undefined,
+  "details": Object {
+    "capacity": "",
+    "capacityType": "capped",
+    "description": "",
+    "endDate": "July 22, 2018",
+    "endDateMoment": "2018-07-19T19:30:00.000Z",
+    "endTime": "19:30",
+    "price": "",
+    "sku": "",
+    "startDate": "July 19, 2018",
+    "startDateMoment": "2018-07-19T19:30:00.000Z",
+    "startTime": "19:30",
+    "title": "",
+  },
+  "hasBeenCreated": false,
+  "hasChanges": false,
+  "isLoading": false,
+  "isSelected": true,
   "provider": "",
   "sold": 0,
   "tempDetails": Object {
@@ -226,6 +273,7 @@ Object {
   "hasBeenCreated": false,
   "hasChanges": false,
   "isLoading": false,
+  "isSelected": false,
   "provider": "provider",
   "sold": 0,
   "tempDetails": Object {
@@ -267,6 +315,7 @@ Object {
   "hasBeenCreated": false,
   "hasChanges": false,
   "isLoading": false,
+  "isSelected": false,
   "provider": "",
   "sold": 20,
   "tempDetails": Object {
@@ -308,6 +357,7 @@ Object {
   "hasBeenCreated": false,
   "hasChanges": false,
   "isLoading": false,
+  "isSelected": false,
   "provider": "",
   "sold": 0,
   "tempDetails": Object {

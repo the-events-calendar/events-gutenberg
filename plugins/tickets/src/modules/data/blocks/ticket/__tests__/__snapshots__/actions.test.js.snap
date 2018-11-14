@@ -148,6 +148,26 @@ Object {
 }
 `;
 
+exports[`Ticket actions Ticket actions set ticket is selected 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "isSelected": true,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_IS_SELECTED",
+}
+`;
+
+exports[`Ticket actions Ticket actions set ticket is selected 2`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "isSelected": false,
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_IS_SELECTED",
+}
+`;
+
 exports[`Ticket actions Ticket actions set ticket provider 1`] = `
 Object {
   "payload": Object {

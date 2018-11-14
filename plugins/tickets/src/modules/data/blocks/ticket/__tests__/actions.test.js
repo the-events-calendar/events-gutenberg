@@ -214,6 +214,11 @@ describe( 'Ticket actions', () => {
 			expect( actions.setTicketHasChanges( blockId, false ) ).toMatchSnapshot();
 		} );
 
+		test( 'set ticket is selected', () => {
+			expect( actions.setTicketIsSelected( blockId, true ) ).toMatchSnapshot();
+			expect( actions.setTicketIsSelected( blockId, false ) ).toMatchSnapshot();
+		} );
+
 		test( 'fetch ticket', () => {
 			expect( actions.fetchTicket( blockId, 99 ) ).toMatchSnapshot();
 		} );

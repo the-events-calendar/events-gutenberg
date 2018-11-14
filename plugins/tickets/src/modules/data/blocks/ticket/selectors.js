@@ -222,6 +222,11 @@ export const getTicketHasChanges = createSelector(
 	( ticket ) => ticket.hasChanges,
 );
 
+export const getTicketIsSelected = createSelector(
+	[ getTicket ],
+	( ticket ) => ticket.isSelected,
+);
+
 //
 // ─── TICKET DETAILS SELECTORS ───────────────────────────────────────────────────
 //
@@ -450,27 +455,3 @@ export const hasTicketProviders = createSelector(
 	[ getTicketProviders ],
 	( providers ) => providers.length > 0,
 );
-
-//
-// ─── OTHER SELECTORS ────────────────────────────────────────────────────────────
-//
-
-// export const getTicketValidness = createSelector(
-// 	[ getTicketBlock ],
-// 	( block ) => {
-// 		const isTitleValid = trim( block.title ) !== '';
-// 		if ( block.capacityType === TICKET_TYPES[ UNLIMITED ] ) {
-// 			return isTitleValid;
-// 		}
-
-// 		const isCapacityValid = trim( block.capacity ) !== '';
-// 		return isTitleValid && isCapacityValid;
-// 	},
-// );
-
-// export const isTicketDisabled = createSelector(
-// 	[ getSettingsIsOpen, getActiveBlockId, getTicketEditing ],
-// 	( isSettingsOpen, activeBlockId, isEditing ) => (
-// 		isSettingsOpen || ( !! activeBlockId && ! isEditing )
-// 	),
-// );
