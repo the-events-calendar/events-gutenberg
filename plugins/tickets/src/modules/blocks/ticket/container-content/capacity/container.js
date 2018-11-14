@@ -23,19 +23,24 @@ const mapStateToProps = ( state, ownProps ) => ( {
 	tempSharedCapacity: selectors.getTicketsTempSharedCapacity( state ),
 } );
 
-const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	onTempCapacityChange: ( e ) => {
-		const { blockId } = ownProps;
-		dispatch( actions.setTicketTempCapacity( blockId, e.target.value ) );
-	},
-	onTempCapacityTypeChange: ( e ) => {
-		const { blockId } = ownProps;
-		dispatch( actions.setTicketTempCapacityType( blockId, e.target.value ) );
-	},
-	onTempSharedCapacityChange: ( e ) => (
-		dispatch( actions.setTicketsTempSharedCapacity( e.target.value ) )
-	),
-} );
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	const { blockId } = ownProps;
+
+	return {
+		onTempCapacityChange: ( e ) => {
+			dispatch( actions.setTicketTempCapacity( blockId, e.target.value ) );
+			dispatch( actions.setTicketHasChanges( blockId, true ) );
+		},
+		onTempCapacityTypeChange: ( selectedOption ) => {
+			dispatch( actions.setTicketTempCapacityType( blockId, selectedOption.value ) );
+			dispatch( actions.setTicketHasChanges( blockId, true ) );
+		},
+		onTempSharedCapacityChange: ( e ) => {
+			dispatch( actions.setTicketsTempSharedCapacity( e.target.value ) );
+			dispatch( actions.setTicketHasChanges( blockId, true ) );
+		},
+	};
+};
 
 export default compose(
 	withStore(),

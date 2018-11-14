@@ -19,9 +19,9 @@ import {
 const onFromDateChange = ( dispatch, ownProps ) => ( date, modifiers, dayPickerInput ) => {
 	const { blockId } = ownProps;
 	const startDateMoment = date ? moment( date ) : undefined;
-	dispatch( actions.setTicketStartDate( blockId, momentUtil.toDatabaseDate( startDateMoment ) ) );
-	dispatch( actions.setTicketStartDateInput( blockId, dayPickerInput.state.value ) );
-	dispatch( actions.setTicketStartDateMoment( blockId, startDateMoment ) );
+	dispatch( actions.setTicketTempStartDate( blockId, momentUtil.toDatabaseDate( startDateMoment ) ) );
+	dispatch( actions.setTicketTempStartDateInput( blockId, dayPickerInput.state.value ) );
+	dispatch( actions.setTicketTempStartDateMoment( blockId, startDateMoment ) );
 	dispatch( actions.setTicketHasChanges( blockId, true ) );
 };
 
@@ -29,7 +29,7 @@ const onFromTimePickerChange = ( dispatch, ownProps ) => ( e ) => {
 	const { blockId } = ownProps;
 	const startTime = e.target.value;
 	if ( startTime ) {
-		dispatch( actions.setTicketStartTime( blockId, startTime ) );
+		dispatch( actions.setTicketTempStartTime( blockId, `${ startTime }:00` ) );
 		dispatch( actions.setTicketHasChanges( blockId, true ) );
 	}
 };
@@ -37,7 +37,7 @@ const onFromTimePickerChange = ( dispatch, ownProps ) => ( e ) => {
 const onFromTimePickerClick = ( dispatch, ownProps ) => ( value, onClose ) => {
 	const { blockId } = ownProps;
 	const startTime = timeUtil.fromSeconds( value, timeUtil.TIME_FORMAT_HH_MM );
-	dispatch( actions.setTicketStartTime( blockId, startTime ) );
+	dispatch( actions.setTicketTempStartTime( blockId, `${ startTime }:00` ) );
 	dispatch( actions.setTicketHasChanges( blockId, true ) );
 	onClose();
 };
@@ -45,9 +45,9 @@ const onFromTimePickerClick = ( dispatch, ownProps ) => ( value, onClose ) => {
 const onToDateChange = ( dispatch, ownProps ) => ( date, modifiers, dayPickerInput ) => {
 	const { blockId } = ownProps;
 	const endDateMoment = date ? moment( date ) : undefined;
-	dispatch( actions.setTicketsEndDate( blockId, momentUtil.toDatabaseDate( endMoment ) ) );
-	dispatch( actions.setTicketEndDateInput( blockId, dayPickerInput.state.value ) );
-	dispatch( actions.setTicketEndDateMoment( blockId, endDateMoment ) );
+	dispatch( actions.setTicketTempEndDate( blockId, momentUtil.toDatabaseDate( endDateMoment ) ) );
+	dispatch( actions.setTicketTempEndDateInput( blockId, dayPickerInput.state.value ) );
+	dispatch( actions.setTicketTempEndDateMoment( blockId, endDateMoment ) );
 	dispatch( actions.setTicketHasChanges( blockId, true ) );
 };
 
@@ -55,7 +55,7 @@ const onToTimePickerChange = ( dispatch, ownProps ) => ( e ) => {
 	const { blockId } = ownProps;
 	const endTime = e.target.value;
 	if ( endTime ) {
-		dispatch( actions.setTicketEndTime( blockId, endTime ) );
+		dispatch( actions.setTicketTempEndTime( blockId, `${ endTime }:00` ) );
 		dispatch( actions.setTicketHasChanges( blockId, true ) );
 	}
 };
@@ -63,7 +63,7 @@ const onToTimePickerChange = ( dispatch, ownProps ) => ( e ) => {
 const onToTimePickerClick = ( dispatch, ownProps ) => ( value, onClose ) => {
 	const { blockId } = ownProps;
 	const endTime = timeUtil.fromSeconds( value, timeUtil.TIME_FORMAT_HH_MM );
-	dispatch( actions.setTicketEndTime( blockId, endTime ) );
+	dispatch( actions.setTicketTempEndTime( blockId, `${ endTime }:00` ) );
 	dispatch( actions.setTicketHasChanges( blockId, true ) );
 	onClose();
 };
@@ -72,17 +72,17 @@ const mapStateToProps = ( state, ownProps ) => {
 	const isDisabled = selectors.isTicketDisabled( state, ownProps );
 
 	return {
-		fromDate: selectors.getTicketStartDate( state, ownProps ),
+		fromDate: selectors.getTicketTempStartDateInput( state, ownProps ),
 		fromDateDisabled: isDisabled,
-		fromTime: selectors.getTicketStartTime( state, ownProps ),
+		fromTime: selectors.getTicketTempStartTimeNoSeconds( state, ownProps ),
 		fromTimeDisabled: isDisabled,
 		isSameDay: momentUtil.isSameDay(
-			selectors.getTicketStartDateMoment( state, ownProps ),
-			selectors.getTicketEndDateMoment( state, ownProps ),
+			selectors.getTicketTempStartDateMoment( state, ownProps ),
+			selectors.getTicketTempEndDateMoment( state, ownProps ),
 		),
-		toDate: selectors.getTicketEndDate( state, ownProps ),
+		toDate: selectors.getTicketTempEndDateInput( state, ownProps ),
 		toDateDisabled: isDisabled,
-		toTime: selectors.getTicketEndTime( state, ownProps ),
+		toTime: selectors.getTicketTempEndTimeNoSeconds( state, ownProps ),
 		toTimeDisabled: isDisabled,
 	};
 };

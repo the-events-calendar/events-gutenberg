@@ -223,9 +223,11 @@ export function* setTicketInitialState( action ) {
 export function* setBodyDetails( blockId ) {
 	const body = new FormData();
 	const props = { blockId };
+	const ticketProvider = yield select( selectors.getTicketProvider, props );
+	const ticketsProvider = yield select( selectors.getTicketsProvider );
 
 	body.append( 'post_id', wpSelect( 'core/editor' ).getCurrentPostId() );
-	body.append( 'provider', yield select( selectors.getTicketsTempProvider ) );
+	body.append( 'provider', ticketProvider || ticketsProvider );
 	body.append( 'name', yield select( selectors.getTicketTempTitle, props ) );
 	body.append( 'description', yield select( selectors.getTicketTempDescription, props ) );
 	body.append( 'price', yield select( selectors.getTicketTempPrice, props ) );
@@ -315,6 +317,7 @@ export function* fetchTicket( action ) {
 				put( actions.setTicketSold( blockId, totals.sold ) ),
 				put( actions.setTicketAvailable( blockId, totals.stock ) ),
 				put( actions.setTicketCurrencySymbol( blockId, cost_details.currency_symbol ) ),
+				put( actions.setTicketCurrencyPosition( blockId, cost_details.currency_position ) ),
 				put( actions.setTicketProvider( blockId, provider ) ),
 				put( actions.setTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
 			] );
@@ -361,20 +364,20 @@ export function* createNewTicket( action ) {
 
 			yield all( [
 				put( actions.setTicketDetails( blockId, {
-					title: yield select( actions.getTicketTempTitle, props ),
-					description: yield select( actions.getTicketTempDescription, props ),
-					price: yield select( actions.getTicketTempPrice, props ),
-					sku: yield select( actions.getTicketTempSku, props ),
-					startDate: yield select( actions.getTicketTempStartDate, props ),
-					startDateInput: yield select( actions.getTicketTempStartDateInput, props ),
-					startDateMoment: yield select( actions.getTicketTempStartDateMoment, props ),
-					endDate: yield select( actions.getTicketTempEndDate, props ),
-					endDateInput: yield select( actions.getTicketTempEndDateInput, props ),
-					endDateMoment: yield select( actions.getTicketTempEndDateMoment, props ),
-					startTime: yield select( actions.getTicketTempStartTime, props ),
-					endTime: yield select( actions.getTicketTempEndTime, props ),
-					capacityType: yield select( actions.getTicketTempCapacityType, props ),
-					capacity: yield select( actions.getTicketTempCapacity, props ),
+					title: yield select( selectors.getTicketTempTitle, props ),
+					description: yield select( selectors.getTicketTempDescription, props ),
+					price: yield select( selectors.getTicketTempPrice, props ),
+					sku: yield select( selectors.getTicketTempSku, props ),
+					startDate: yield select( selectors.getTicketTempStartDate, props ),
+					startDateInput: yield select( selectors.getTicketTempStartDateInput, props ),
+					startDateMoment: yield select( selectors.getTicketTempStartDateMoment, props ),
+					endDate: yield select( selectors.getTicketTempEndDate, props ),
+					endDateInput: yield select( selectors.getTicketTempEndDateInput, props ),
+					endDateMoment: yield select( selectors.getTicketTempEndDateMoment, props ),
+					startTime: yield select( selectors.getTicketTempStartTime, props ),
+					endTime: yield select( selectors.getTicketTempEndTime, props ),
+					capacityType: yield select( selectors.getTicketTempCapacityType, props ),
+					capacity: yield select( selectors.getTicketTempCapacity, props ),
 				} ) ),
 				put( actions.setTicketId( blockId, ticket.ID ) ),
 				put( actions.setTicketHasBeenCreated( blockId, true ) ),
@@ -424,20 +427,20 @@ export function* updateTicket( action ) {
 		if ( response.ok ) {
 			yield all( [
 				put( actions.setTicketDetails( blockId, {
-					title: yield select( actions.getTicketTempTitle, props ),
-					description: yield select( actions.getTicketTempDescription, props ),
-					price: yield select( actions.getTicketTempPrice, props ),
-					sku: yield select( actions.getTicketTempSku, props ),
-					startDate: yield select( actions.getTicketTempStartDate, props ),
-					startDateInput: yield select( actions.getTicketTempStartDateInput, props ),
-					startDateMoment: yield select( actions.getTicketTempStartDateMoment, props ),
-					endDate: yield select( actions.getTicketTempEndDate, props ),
-					endDateInput: yield select( actions.getTicketTempEndDateInput, props ),
-					endDateMoment: yield select( actions.getTicketTempEndDateMoment, props ),
-					startTime: yield select( actions.getTicketTempStartTime, props ),
-					endTime: yield select( actions.getTicketTempEndTime, props ),
-					capacityType: yield select( actions.getTicketTempCapacityType, props ),
-					capacity: yield select( actions.getTicketTempCapacity, props ),
+					title: yield select( selectors.getTicketTempTitle, props ),
+					description: yield select( selectors.getTicketTempDescription, props ),
+					price: yield select( selectors.getTicketTempPrice, props ),
+					sku: yield select( selectors.getTicketTempSku, props ),
+					startDate: yield select( selectors.getTicketTempStartDate, props ),
+					startDateInput: yield select( selectors.getTicketTempStartDateInput, props ),
+					startDateMoment: yield select( selectors.getTicketTempStartDateMoment, props ),
+					endDate: yield select( selectors.getTicketTempEndDate, props ),
+					endDateInput: yield select( selectors.getTicketTempEndDateInput, props ),
+					endDateMoment: yield select( selectors.getTicketTempEndDateMoment, props ),
+					startTime: yield select( selectors.getTicketTempStartTime, props ),
+					endTime: yield select( selectors.getTicketTempEndTime, props ),
+					capacityType: yield select( selectors.getTicketTempCapacityType, props ),
+					capacity: yield select( selectors.getTicketTempCapacity, props ),
 				} ) ),
 				put( actions.setTicketHasChanges( blockId, false ) ),
 			] );
@@ -502,8 +505,10 @@ export function* setTicketDetails( action ) {
 		price,
 		sku,
 		startDate,
+		startDateInput,
 		startDateMoment,
 		endDate,
+		endDateInput,
 		endDateMoment,
 		startTime,
 		endTime,
@@ -517,8 +522,10 @@ export function* setTicketDetails( action ) {
 		put( actions.setTicketPrice( blockId, price ) ),
 		put( actions.setTicketSku( blockId, sku ) ),
 		put( actions.setTicketStartDate( blockId, startDate ) ),
+		put( actions.setTicketStartDateInput( blockId, startDateInput ) ),
 		put( actions.setTicketStartDateMoment( blockId, startDateMoment ) ),
 		put( actions.setTicketEndDate( blockId, endDate ) ),
+		put( actions.setTicketEndDateInput( blockId, endDateInput ) ),
 		put( actions.setTicketEndDateMoment( blockId, endDateMoment ) ),
 		put( actions.setTicketStartTime( blockId, startTime ) ),
 		put( actions.setTicketEndTime( blockId, endTime ) ),
@@ -535,8 +542,10 @@ export function* setTicketTempDetails( action ) {
 		price,
 		sku,
 		startDate,
+		startDateInput,
 		startDateMoment,
 		endDate,
+		endDateInput,
 		endDateMoment,
 		startTime,
 		endTime,
@@ -550,8 +559,10 @@ export function* setTicketTempDetails( action ) {
 		put( actions.setTicketTempPrice( blockId, price ) ),
 		put( actions.setTicketTempSku( blockId, sku ) ),
 		put( actions.setTicketTempStartDate( blockId, startDate ) ),
+		put( actions.setTicketTempStartDateInput( blockId, startDateInput ) ),
 		put( actions.setTicketTempStartDateMoment( blockId, startDateMoment ) ),
 		put( actions.setTicketTempEndDate( blockId, endDate ) ),
+		put( actions.setTicketTempEndDateInput( blockId, endDateInput ) ),
 		put( actions.setTicketTempEndDateMoment( blockId, endDateMoment ) ),
 		put( actions.setTicketTempStartTime( blockId, startTime ) ),
 		put( actions.setTicketTempEndTime( blockId, endTime ) ),

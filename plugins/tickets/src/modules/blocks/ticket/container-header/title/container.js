@@ -18,10 +18,11 @@ const mapStateToProps = ( state, ownProps ) => ( {
 } );
 
 const mapDispatchToProps = ( dispatch, ownProps ) => ( {
-	onTempTitleChange: ( e ) => dispatch( actions.setTicketTempTitle(
-		ownProps.blockId,
-		e.target.value,
-	) ),
+	onTempTitleChange: ( e ) => {
+		const { blockId } = ownProps;
+		dispatch( actions.setTicketTempTitle( blockId, e.target.value ) );
+		dispatch( actions.setTicketHasChanges( blockId, true ) );
+	},
 } );
 
 export default compose(
