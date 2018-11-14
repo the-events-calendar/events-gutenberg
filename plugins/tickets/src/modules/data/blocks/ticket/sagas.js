@@ -375,6 +375,72 @@ export function* updateTicket( action ) {
 	}
 }
 
+export function* setTicketDetails( action ) {
+	const { blockId, details } = action.payload;
+	const {
+		title,
+		description,
+		price,
+		sku,
+		startDate,
+		startDateMoment,
+		endDate,
+		endDateMoment,
+		startTime,
+		endTime,
+		capacityType,
+		capacity,
+	} = details;
+
+	yield all( [
+		put( actions.setTicketTitle( blockId, title ) ),
+		put( actions.setTicketDescription( blockId, description ) ),
+		put( actions.setTicketPrice( blockId, price ) ),
+		put( actions.setTicketSku( blockId, sku ) ),
+		put( actions.setTicketStartDate( blockId, startDate ) ),
+		put( actions.setTicketStartDateMoment( blockId, startDateMoment ) ),
+		put( actions.setTicketEndDate( blockId, endDate ) ),
+		put( actions.setTicketEndDateMoment( blockId, endDateMoment ) ),
+		put( actions.setTicketStartTime( blockId, startTime ) ),
+		put( actions.setTicketEndTime( blockId, endTime ) ),
+		put( actions.setTicketCapacityType( blockId, capacityType ) ),
+		put( actions.setTicketCapacity( blockId, capacity ) ),
+	] );
+}
+
+export function* setTempTicketDetails( action ) {
+	const { blockId, tempDetails } = action.payload;
+	const {
+		title,
+		description,
+		price,
+		sku,
+		startDate,
+		startDateMoment,
+		endDate,
+		endDateMoment,
+		startTime,
+		endTime,
+		capacityType,
+		capacity,
+	} = tempDetails;
+
+	yield all( [
+		put( actions.setTicketTempTitle( blockId, title ) ),
+		put( actions.setTicketTempDescription( blockId, description ) ),
+		put( actions.setTicketTempPrice( blockId, price ) ),
+		put( actions.setTicketTempSku( blockId, sku ) ),
+		put( actions.setTicketTempStartDate( blockId, startDate ) ),
+		put( actions.setTicketTempStartDateMoment( blockId, startDateMoment ) ),
+		put( actions.setTicketTempEndDate( blockId, endDate ) ),
+		put( actions.setTicketTempEndDateMoment( blockId, endDateMoment ) ),
+		put( actions.setTicketTempStartTime( blockId, startTime ) ),
+		put( actions.setTicketTempEndTime( blockId, endTime ) ),
+		put( actions.setTicketTempCapacityType( blockId, capacityType ) ),
+		put( actions.setTicketTempCapacity( blockId, capacity ) ),
+	] );
+}
+
 export default function* watchers() {
 	// yield takeEvery( types.SET_TICKET_BLOCK_ID, setEditInTicketBlock );
 	yield takeEvery( types.DELETE_TICKET, removeActiveTicketBlock );
@@ -384,4 +450,6 @@ export default function* watchers() {
 	yield takeEvery( types.SET_TICKET_INITIAL_STATE, setTicketInitialState );
 	yield takeEvery( types.FETCH_TICKET, fetchTicketDetails );
 	yield takeEvery( types.UPDATE_TICKET, updateTicket );
+	yield takeEvery( types.SET_TICKET_DETAILS, setTicketDetails );
+	yield takeEvery( types.SET_TICKET_TEMP_DETAILS, setTicketTempDetails );
 }
