@@ -11,17 +11,19 @@ import * as types from '@moderntribe/tickets/data/blocks/ticket/types';
 import { moment as momentUtil } from '@moderntribe/common/utils';
 
 const currentMoment = moment();
-const ADDITIONAL_DAYS = 3;
+const endMoment = currentMoment.clone().add( 100, 'years' )
 
 export const DEFAULT_STATE = {
 	title: '',
 	description: '',
 	price: '',
 	sku: '',
-	startDate: momentUtil.toDate( currentMoment ),
+	startDate: momentUtil.toDatabaseDate( currentMoment ),
+	startDateInput: momentUtil.toDate( currentMoment ),
 	startDateMoment: currentMoment,
-	endDate: momentUtil.toDate( currentMoment.clone().add( ADDITIONAL_DAYS, 'days' ) ),
-	endDateMoment: currentMoment,
+	endDate: momentUtil.toDatabaseDate( endMoment ),
+	endDateInput: momentUtil.toDate( endMoment ),
+	endDateMoment: endMoment,
 	startTime: momentUtil.toDatabaseTime( currentMoment ),
 	endTime: momentUtil.toDatabaseTime( currentMoment ),
 	capacityType: constants.TICKET_TYPES[ constants.SHARED ],
@@ -33,62 +35,72 @@ export default ( state = DEFAULT_STATE, action ) => {
 		case types.SET_TICKET_TITLE:
 			return {
 				...state,
-				title: action.payload.title
+				title: action.payload.title,
 			};
 		case types.SET_TICKET_DESCRIPTION:
 			return {
 				...state,
-				description: action.payload.description
+				description: action.payload.description,
 			};
 		case types.SET_TICKET_PRICE:
 			return {
 				...state,
-				price: action.payload.price
+				price: action.payload.price,
 			};
 		case types.SET_TICKET_SKU:
 			return {
 				...state,
-				sku: action.payload.sku
+				sku: action.payload.sku,
 			};
 		case types.SET_TICKET_START_DATE:
 			return {
 				...state,
-				startDate: action.payload.startDate
+				startDate: action.payload.startDate,
+			};
+		case types.SET_TICKET_START_DATE_INPUT:
+			return {
+				...state,
+				startDateInput: action.payload.startDateInput,
 			};
 		case types.SET_TICKET_START_DATE_MOMENT:
 			return {
 				...state,
-				startDateMoment: action.payload.startDateMoment
+				startDateMoment: action.payload.startDateMoment,
 			};
 		case types.SET_TICKET_END_DATE:
 			return {
 				...state,
-				endDate: action.payload.endDate
+				endDate: action.payload.endDate,
+			};
+		case types.SET_TICKET_END_DATE_INPUT:
+			return {
+				...state,
+				endDateInput: action.payload.endDateInput,
 			};
 		case types.SET_TICKET_END_DATE_MOMENT:
 			return {
 				...state,
-				endDateMoment: action.payload.endDateMoment
+				endDateMoment: action.payload.endDateMoment,
 			};
 		case types.SET_TICKET_START_TIME:
 			return {
 				...state,
-				startTime: action.payload.startTime
+				startTime: action.payload.startTime,
 			};
 		case types.SET_TICKET_END_TIME:
 			return {
 				...state,
-				endTime: action.payload.endTime
+				endTime: action.payload.endTime,
 			};
 		case types.SET_TICKET_CAPACITY_TYPE:
 			return {
 				...state,
-				capacityType: action.payload.capacityType
+				capacityType: action.payload.capacityType,
 			};
 		case types.SET_TICKET_CAPACITY:
 			return {
 				...state,
-				capacity: action.payload.capacity
+				capacity: action.payload.capacity,
 			};
 		default:
 			return state;

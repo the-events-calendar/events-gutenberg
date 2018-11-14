@@ -17,8 +17,10 @@ export const byId = ( state = {}, action ) => {
 		case types.SET_TICKET_PRICE:
 		case types.SET_TICKET_SKU:
 		case types.SET_TICKET_START_DATE:
+		case types.SET_TICKET_START_DATE_INPUT:
 		case types.SET_TICKET_START_DATE_MOMENT:
 		case types.SET_TICKET_END_DATE:
+		case types.SET_TICKET_END_DATE_INPUT:
 		case types.SET_TICKET_END_DATE_MOMENT:
 		case types.SET_TICKET_START_TIME:
 		case types.SET_TICKET_END_TIME:
@@ -29,8 +31,10 @@ export const byId = ( state = {}, action ) => {
 		case types.SET_TICKET_TEMP_PRICE:
 		case types.SET_TICKET_TEMP_SKU:
 		case types.SET_TICKET_TEMP_START_DATE:
+		case types.SET_TICKET_TEMP_START_DATE_INPUT:
 		case types.SET_TICKET_TEMP_START_DATE_MOMENT:
 		case types.SET_TICKET_TEMP_END_DATE:
+		case types.SET_TICKET_TEMP_END_DATE_INPUT:
 		case types.SET_TICKET_TEMP_END_DATE_MOMENT:
 		case types.SET_TICKET_TEMP_START_TIME:
 		case types.SET_TICKET_TEMP_END_TIME:
