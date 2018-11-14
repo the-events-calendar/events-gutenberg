@@ -21,6 +21,9 @@ const getIsCancelDisabled = ( state, ownProps ) => (
 		|| selectors.getTicketIsLoading( state, ownProps )
 );
 
+/**
+ * @todo: update this with proper disabled requirements
+ */
 const getIsConfirmDisabled = ( state, ownProps ) => (
 	! selectors.getTicketTempTitle( state, ownProps )
 		|| ! selectors.getTicketHasChanges( state, ownProps )
@@ -28,23 +31,30 @@ const getIsConfirmDisabled = ( state, ownProps ) => (
 );
 
 const onCancelClick = ( state, dispatch, ownProps ) => () => {
-	/**
-	 * @todo: set ticket temp details to details, set has changes to false
-	 */
+	dispatch( actions.setTicketTempDetails( ownProps.blockId, {
+		title: selectors.getTicketTitle( state, ownProps ),
+		description: selectors.getTicketDescription( state, ownProps ),
+		price: selectors.getTicketPrice( state, ownProps ),
+		sku: selectors.getTicketSku( state, ownProps ),
+		startDate: selectors.getTicketStartDate( state, ownProps ),
+		startDateInput: selectors.getTicketStartDateInput( state, ownProps ),
+		startDateMoment: selectors.getTicketStartDateMoment( state, ownProps ),
+		endDate: selectors.getTicketEndDate( state, ownProps ),
+		endDateInput: selectors.getTicketEndDateInput( state, ownProps ),
+		endDateMoment: selectors.getTicketEndDateMoment( state, ownProps ),
+		startTime: selectors.getTicketStartTime( state, ownProps ),
+		endTime: selectors.getTicketEndTime( state, ownProps ),
+		capacityType: selectors.getTicketCapacityType( state, ownProps ),
+		capacity: selectors.getTicketCapacity( state, ownProps ),
+	} ) );
+	dispatch( actions.setTicketHasChanges( ownProps.blockId, false ) );
 };
 
-const onConfirmClick = ( state, dispatch, ownProps ) => () => {
-	/**
-	 * @todo: set ticket details to temp details, set has changes to false
-	 */
-
-	/**
-	 * @todo: if ticket is not created, dispatch create ticket with current post id
-	 * postId = select( 'core/editor' ).getCurrentPostId()
-	 *
-	 * else, update ticket using ticket id
-	 */
-};
+const onConfirmClick = ( state, dispatch, ownProps ) => () => (
+	selectors.getTicketHasBeenCreated( state, ownProps )
+		? dispatch( actions.updateTicket( ownProps.blockId ) )
+		: dispatch( actions.createNewTicket( ownProps.blockId ) )
+);
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	hasBeenCreated: selectors.getTicketHasBeenCreated( state, ownProps ),
