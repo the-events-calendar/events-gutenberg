@@ -22,8 +22,8 @@ export const DEFAULT_STATE = {
 	startDateMoment: currentMoment,
 	endDate: momentUtil.toDate( currentMoment.clone().add( ADDITIONAL_DAYS, 'days' ) ),
 	endDateMoment: currentMoment,
-	startTime: momentUtil.toTime24Hr( currentMoment ),
-	endTime: momentUtil.toTime24Hr( currentMoment ),
+	startTime: momentUtil.toDatabaseTime( currentMoment ),
+	endTime: momentUtil.toDatabaseTime( currentMoment ),
 	capacityType: constants.TICKET_TYPES[ constants.SHARED ],
 	capacity: '',
 };
