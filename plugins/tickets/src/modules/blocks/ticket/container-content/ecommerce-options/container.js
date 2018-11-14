@@ -53,6 +53,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	const provider = selectors.getTicketProvider( state, ownProps );
 
 	return {
+		isDisabled: selectors.isTicketDisabled( state, ownProps ),
 		provider,
 		editTicketLink: getEditTicketLink( state, ownProps, provider ),
 		reportLink: getReportLink( state, ownProps, provider ),

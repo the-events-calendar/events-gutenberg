@@ -15,6 +15,7 @@ import {
 } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state, ownProps ) => ( {
+	isDisabled: selectors.isTicketDisabled( state, ownProps ),
 	sharedCapacity: selectors.getTicketsSharedCapacity( state ),
 	tempCapacity: selectors.getTicketTempCapacity( state, ownProps ),
 	tempCapacityType: selectors.getTicketTempCapacityType( state, ownProps ),

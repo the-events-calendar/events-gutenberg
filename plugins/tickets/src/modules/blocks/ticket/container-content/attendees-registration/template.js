@@ -22,12 +22,13 @@ const linkText = __( '+ Add', 'events-gutenberg' );
 const AttendeesRegistration = ( {
 	attendeeRegistrationURL,
 	isCreated,
+	isDisabled,
 }) => (
 	<div className="tribe-editor__ticket__attendee-registration">
 		<LabelWithLink
 			className="tribe-editor__ticket__attendee-registration-label-with-link"
 			label={ label }
-			linkDisabled={ ! isCreated }
+			linkDisabled={ isDisabled }
 			linkHref={ attendeeRegistrationURL }
 			linkTarget="_blank"
 			linkText={ linkText }
@@ -43,6 +44,7 @@ const AttendeesRegistration = ( {
 AttendeesRegistration.propTypes = {
 	attendeeRegistrationURL: PropTypes.string,
 	isCreated: PropTypes.bool,
+	isDisabled: PropTypes.bool,
 };
 
 export default AttendeesRegistration;

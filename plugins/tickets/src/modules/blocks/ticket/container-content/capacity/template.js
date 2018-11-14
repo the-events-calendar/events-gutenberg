@@ -57,6 +57,7 @@ LabeledNumberInput.propTypes = {
 
 class Capacity extends PureComponent {
 	static propTypes = {
+		isDisabled: PropTypes.bool,
 		sharedCapacity: PropTypes.string,
 		tempCapacity: PropTypes.string,
 		tempCapacityType: PropTypes.string,
@@ -78,6 +79,7 @@ class Capacity extends PureComponent {
 
 	getInputs = () => {
 		const {
+			isDisabled,
 			sharedCapacity,
 			tempCapacityType,
 			tempCapacity,
@@ -100,6 +102,7 @@ class Capacity extends PureComponent {
 					label={ __( 'Set shared capacity:', 'events-gutenberg' ) }
 					value={ tempSharedCapacity }
 					onChange={ onTempSharedCapacityChange }
+					disabled={ isDisabled }
 					min="0"
 				/>
 			);
@@ -132,6 +135,7 @@ class Capacity extends PureComponent {
 					id={ this.ids.capacity }
 					value={ tempCapacity }
 					onChange={ onTempCapacityChange }
+					disabled={ isDisabled }
 					min="0"
 					{ ...extraProps }
 				/>
@@ -143,6 +147,7 @@ class Capacity extends PureComponent {
 
 	render() {
 		const {
+			isDisabled,
 			tempCapacityTypeOption,
 			onTempCapacityTypeChange,
 		} = this.props;
@@ -171,6 +176,7 @@ class Capacity extends PureComponent {
 						backspaceRemovesValue={ false }
 						value={ tempCapacityTypeOption }
 						isSearchable={ false }
+						isDisabled={ isDisabled }
 						options={ CAPACITY_TYPE_OPTIONS }
 						onChange={ onTempCapacityTypeChange }
 					/>

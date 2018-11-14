@@ -69,10 +69,7 @@ const onToTimePickerClick = ( dispatch, ownProps ) => ( value, onClose ) => {
 };
 
 const mapStateToProps = ( state, ownProps ) => {
-	/**
-	 * @todo: fix this later
-	 */
-	const isDisabled = false;
+	const isDisabled = selectors.isTicketDisabled( state, ownProps );
 
 	return {
 		fromDate: selectors.getTicketStartDate( state, ownProps ),

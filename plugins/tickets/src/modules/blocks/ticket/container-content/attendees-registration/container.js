@@ -25,10 +25,15 @@ const getAttendeeRegistrationUrl = ( state, ownProps ) => {
 	return `${ adminURL }edit.php?post_type=${ postType }&page=attendee-registration&ticket_id=${ ticketId }`;
 };
 
-const mapStateToProps = ( state, ownProps ) => ( {
-	attendeeRegistrationURL: getAttendeeRegistrationUrl( state, ownProps ),
-	isCreated: selectors.getTicketHasBeenCreated( state, ownProps ),
-} );
+const mapStateToProps = ( state, ownProps ) => {
+	isCreated = selectors.getTicketHasBeenCreated( state, ownProps );
+
+	return {
+		attendeeRegistrationURL: getAttendeeRegistrationUrl( state, ownProps ),
+		isCreated,
+		isDisabled: selectors.isTicketDisabled( state, ownProps ) || ! isCreated,
+	};
+};
 
 export default compose(
 	withStore(),

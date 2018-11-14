@@ -20,8 +20,9 @@ import { LabelWithTooltip } from '@moderntribe/tickets/elements';
 
 class SKU extends PureComponent {
 	static propTypes = {
+		isDisabled: PropTypes.bool,
 		onChange: PropTypes.func.isRequired,
-		value: PropTypes.string,
+		sku: PropTypes.string,
 	};
 
 	constructor( props ) {
@@ -30,7 +31,7 @@ class SKU extends PureComponent {
 	}
 
 	render() {
-		const { value, onChange } = this.props;
+		const { sku, isDisabled, onChange } = this.props;
 
 		return (
 			<div className={ classNames(
@@ -53,8 +54,9 @@ class SKU extends PureComponent {
 					className="tribe-editor__ticket__sku-input"
 					id={ this.id }
 					type="text"
-					value={ value }
+					value={ sku }
 					onChange={ onChange }
+					disabled={ isDisabled }
 				/>
 			</div>
 		);

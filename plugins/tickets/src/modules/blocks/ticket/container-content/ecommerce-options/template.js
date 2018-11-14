@@ -18,61 +18,80 @@ import { constants } from '@moderntribe/tickets/data/blocks/ticket';
 import './style.pcss';
 
 const { EDD, WOO, PROVIDER_TYPES } = constants;
-
-const getEditTicketLinkLabel = ( provider ) => {
-	let label = '';
-
-	if ( provider === EDD ) {
-		label = __( 'Edit Ticket in Easy Digital Downloads', 'events-gutenberg' );
-	} else if ( provider === WOO ) {
-		label = __( 'Edit Ticket in WooCommerce', 'events-gutenberg' );
-	}
-
-	return label;
-};
+const EDIT_TICKET = 'edit-ticket';
+const REPORT = 'report';
+const LINK_TYPES = [ EDIT_TICKET, REPORT ];
 
 const EcommerceOptions = ( {
 	editTicketLink,
+	isDisabled,
 	provider,
 	reportLink,
 	showEcommerceOptions,
-}) => (
-	showEcommerceOptions
-		&& (
-			<LabeledItem
-				className={ classNames(
-					'tribe-editor__ticket__ecommerce-options',
-					'tribe-editor__ticket__content-row',
-					'tribe-editor__ticket__content-row--ecommerce-options',
-				) }
-				label={ __( 'Ecommerce', 'events-gutenberg' ) }
-			>
-				<div className="tribe-editor__ticket__ecommerce-options-links">
-					<span className="tribe-editor__ticket__ecommerce-options-link-wrapper">
-						<Link
-							className="tribe-editor__ticket__ecommerce-options-link tribe-editor__ticket__ecommerce-options-link--edit-ticket"
-							href={ editTicketLink }
-							target="_blank"
-						>
-							{ getEditTicketLinkLabel( provider ) }
-						</Link>
-					</span>
-					<span className="tribe-editor__ticket__ecommerce-options-link-wrapper">
-						<Link
-							className="tribe-editor__ticket__ecommerce-options-link tribe-editor__ticket__ecommerce-options-link--report"
-							href={ reportLink }
-							target="_blank"
-						>
-							{ __( 'View Sales Report', 'events-gutenberg' ) }
-						</Link>
-					</span>
-				</div>
-			</LabeledItem>
-		)
-);
+}) => {
+	const getEditTicketLinkLabel = ( provider ) => {
+		let label = '';
+
+		if ( provider === EDD ) {
+			label = __( 'Edit Ticket in Easy Digital Downloads', 'events-gutenberg' );
+		} else if ( provider === WOO ) {
+			label = __( 'Edit Ticket in WooCommerce', 'events-gutenberg' );
+		}
+
+		return label;
+	};
+
+	const getLink = ( linkType ) => {
+		const className = classNames(
+			'tribe-editor__ticket__ecommerce-options-link',
+			`tribe-editor__ticket__ecommerce-options-link--${ linkType }`,
+		);
+		const href = linkType === REPORT ? reportLink : editTicketLink;
+		const label = linkType === REPORT
+			? __( 'View Sales Report', 'events-gutenberg' )
+			: getEditTicketLinkLabel( provider );
+
+		return (
+			isDisabled
+				? <span className={ className }>{ label }</span>
+				: (
+					<Link
+						className={ className }
+						href={ href }
+						target="_blank"
+					>
+						{ label }
+					</Link>
+				)
+		);
+	}
+
+	return (
+		showEcommerceOptions
+			&& (
+				<LabeledItem
+					className={ classNames(
+						'tribe-editor__ticket__ecommerce-options',
+						'tribe-editor__ticket__content-row',
+						'tribe-editor__ticket__content-row--ecommerce-options',
+					) }
+					label={ __( 'Ecommerce', 'events-gutenberg' ) }
+				>
+					<div className="tribe-editor__ticket__ecommerce-options-links">
+						{ LINK_TYPES.map( ( linkType ) => (
+							<span className="tribe-editor__ticket__ecommerce-options-link-wrapper">
+								{ getLink( linkType ) }
+							</span>
+						) ) }
+					</div>
+				</LabeledItem>
+			)
+	);
+};
 
 EcommerceOptions.propTypes = {
 	editTicketLink: PropTypes.string,
+	isDisabled: PropTypes.bool,
 	provider: PropTypes.oneOf( PROVIDER_TYPES ),
 	reportLink: PropTypes.string,
 	showEcommerceOptions: PropTypes.bool,
