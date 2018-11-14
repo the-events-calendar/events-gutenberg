@@ -26,7 +26,7 @@ const getAttendeeRegistrationUrl = ( state, ownProps ) => {
 };
 
 const mapStateToProps = ( state, ownProps ) => {
-	isCreated = selectors.getTicketHasBeenCreated( state, ownProps );
+	const isCreated = selectors.getTicketHasBeenCreated( state, ownProps );
 
 	return {
 		attendeeRegistrationURL: getAttendeeRegistrationUrl( state, ownProps ),

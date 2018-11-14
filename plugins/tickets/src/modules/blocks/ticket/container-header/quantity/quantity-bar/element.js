@@ -27,7 +27,7 @@ const QuantityBar = ( { sharedSold, sold, capacity, total, isDisabled } ) => {
 						value={ sold }
 						total={ total }
 					/>
-					{ capacity && ! ( capacity === total ) && (
+					{ !! capacity && ! ( capacity === total ) && (
 							<Bar
 								className="tribe-editor__quantity-bar__bar--capacity"
 								value={ capacity }

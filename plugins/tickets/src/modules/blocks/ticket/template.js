@@ -39,7 +39,7 @@ class Ticket extends PureComponent {
 	}
 
 	render() {
-		const { blockId, isLoading, isSelected } = this.props;
+		const { blockId, isDisabled, isLoading, isSelected } = this.props;
 
 		return (
 			<article className={ classNames(

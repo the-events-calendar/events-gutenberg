@@ -527,7 +527,7 @@ export function* setTicketDetails( action ) {
 	] );
 }
 
-export function* setTempTicketDetails( action ) {
+export function* setTicketTempDetails( action ) {
 	const { blockId, tempDetails } = action.payload;
 	const {
 		title,
