@@ -2,7 +2,6 @@
  * External Dependencies
  */
 import { put, all, select, takeEvery, call } from 'redux-saga/effects';
-import moment from 'moment/moment';
 
 /**
  * Wordpress dependencies
@@ -277,18 +276,18 @@ export function* fetchTicket( action ) {
 				provider,
 			} = ticket;
 
-			const startMoment = yield call( moment, available_from );
+			const startMoment = yield call( momentUtil.toMoment, available_from );
 			const startDate = yield call( momentUtil.toDatabaseDate, startMoment );
 			const startDateInput = yield call( momentUtil.toDate, startMoment );
 			const startTime = yield call( momentUtil.toDatabaseTime, startMoment );
 
-			let endMoment = yield call( moment, '' );
+			let endMoment = yield call( momentUtil.toMoment, '' );
 			let endDate = '';
 			let endDateInput = '';
 			let endTime = '';
 
 			if ( available_until ) {
-				endMoment = yield call( moment, available_until );
+				endMoment = yield call( momentUtil.toMoment, available_until );
 				endDate = yield call( momentUtil.toDatabaseDate, endMoment );
 				endDateInput = yield call( momentUtil.toDate, endMoment );
 				endTime = yield call( momentUtil.toDatabaseTime, endMoment );
@@ -319,7 +318,7 @@ export function* fetchTicket( action ) {
 				put( actions.setTicketCurrencySymbol( blockId, cost_details.currency_symbol ) ),
 				put( actions.setTicketCurrencyPosition( blockId, cost_details.currency_position ) ),
 				put( actions.setTicketProvider( blockId, provider ) ),
-				put( actions.setTicketHasBeenCreated( clientId, values.hasBeenCreated ) ),
+				put( actions.setTicketHasBeenCreated( blockId, true ) ),
 			] );
 		}
 	} catch ( e ) {
