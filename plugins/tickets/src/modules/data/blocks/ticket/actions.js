@@ -56,6 +56,21 @@ export const setTicketsTempSharedCapacity = ( tempSharedCapacity ) => ( {
 } );
 
 //
+// ─── HEADER IMAGE SAGA ACTIONS ──────────────────────────────────────────────────
+//
+
+export const updateTicketsHeaderImage = ( image ) => ( {
+	type: types.UPDATE_TICKETS_HEADER_IMAGE,
+	payload: {
+		image,
+	},
+} );
+
+export const deleteTicketsHeaderImage = () => ( {
+	type: types.DELETE_TICKETS_HEADER_IMAGE,
+} );
+
+//
 // ─── TICKET DETAILS ACTIONS ─────────────────────────────────────────────────────
 //
 
@@ -291,6 +306,20 @@ export const setTicketTempCapacity = ( blockId, capacity ) => ( {
 // ─── TICKET ACTIONS ─────────────────────────────────────────────────────────────
 //
 
+export const registerTicketBlock = ( blockId ) => ( {
+	type: types.REGISTER_TICKET_BLOCK,
+	payload: {
+		blockId,
+	},
+} );
+
+export const removeTicketBlock = ( blockId ) => ( {
+	type: types.REMOVE_TICKET_BLOCK,
+	payload: {
+		blockId,
+	},
+} );
+
 export const setTicketSold = ( blockId, sold ) => ( {
 	type: types.SET_TICKET_SOLD,
 	payload: {
@@ -410,20 +439,6 @@ export const deleteTicket = ( blockId ) => ( {
 	payload: {
 		blockId,
 	}
-} );
-
-export const registerTicketBlock = ( blockId ) => ( {
-	type: types.REGISTER_TICKET_BLOCK,
-	payload: {
-		blockId,
-	},
-} );
-
-export const removeTicketBlock = ( blockId ) => ( {
-	type: types.REMOVE_TICKET_BLOCK,
-	payload: {
-		blockId,
-	},
 } );
 
 export const setTicketInitialState = ( props ) => ( {

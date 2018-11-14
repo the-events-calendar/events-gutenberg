@@ -1,5 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Ticket actions Header image saga actions delete tickets header image 1`] = `
+Object {
+  "type": "@@MT/TICKETS/DELETE_TICKETS_HEADER_IMAGE",
+}
+`;
+
+exports[`Ticket actions Header image saga actions update tickets header image 1`] = `
+Object {
+  "payload": Object {
+    "image": Object {
+      "alt": "hi",
+      "id": 1,
+      "src": "#",
+    },
+  },
+  "type": "@@MT/TICKETS/UPDATE_TICKETS_HEADER_IMAGE",
+}
+`;
+
+exports[`Ticket actions Ticket actions register ticket block 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/REGISTER_TICKET_BLOCK",
+}
+`;
+
+exports[`Ticket actions Ticket actions remove ticket block 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/REMOVE_TICKET_BLOCK",
+}
+`;
+
 exports[`Ticket actions Ticket actions set ticket availability 1`] = `
 Object {
   "payload": Object {
@@ -309,24 +346,6 @@ Object {
     "ticketId": 99,
   },
   "type": "@@MT/TICKETS/FETCH_TICKET",
-}
-`;
-
-exports[`Ticket actions Ticket saga actions register ticket block 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/REGISTER_TICKET_BLOCK",
-}
-`;
-
-exports[`Ticket actions Ticket saga actions remove ticket block 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/REMOVE_TICKET_BLOCK",
 }
 `;
 

@@ -53,6 +53,16 @@ describe( 'Ticket actions', () => {
 		} );
 	} );
 
+	describe( 'Header image saga actions', () => {
+		test( 'update tickets header image', () => {
+			expect( actions.updateTicketsHeaderImage( { id: 1, alt: 'hi', src: '#' } ) ).toMatchSnapshot();
+		} );
+
+		test( 'delete tickets header image', () => {
+			expect( actions.deleteTicketsHeaderImage() ).toMatchSnapshot();
+		} );
+	} );
+
 	describe( 'Ticket details actions', () => {
 		test( 'set ticket title', () => {
 			expect( actions.setTicketTitle( blockId, 'Modern Tribe' ) );
@@ -176,6 +186,14 @@ describe( 'Ticket actions', () => {
 	} );
 
 	describe( 'Ticket actions', () => {
+		test( 'register ticket block', () => {
+			expect( actions.registerTicketBlock( blockId ) ).toMatchSnapshot();
+		} );
+
+		test( 'remove ticket block', () => {
+			expect( actions.removeTicketBlock( blockId ) ).toMatchSnapshot();
+		} );
+
 		test( 'set ticket sold', () => {
 			expect( actions.setTicketSold( blockId, 23 ) ).toMatchSnapshot();
 		} );
@@ -240,14 +258,6 @@ describe( 'Ticket actions', () => {
 
 		test( 'delete ticket', () => {
 			expect( actions.deleteTicket( blockId ) ).toMatchSnapshot();
-		} );
-
-		test( 'register ticket block', () => {
-			expect( actions.registerTicketBlock( blockId ) ).toMatchSnapshot();
-		} );
-
-		test( 'remove ticket block', () => {
-			expect( actions.removeTicketBlock( blockId ) ).toMatchSnapshot();
 		} );
 
 		test( 'set ticket initial state', () => {
