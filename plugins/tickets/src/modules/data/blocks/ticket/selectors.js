@@ -151,6 +151,13 @@ export const getUnlimitedTickets = createSelector(
 	),
 );
 
+export const hasATicketSelected = createSelector(
+	[ getTicketsArray ],
+	( tickets ) => tickets.reduce( ( selected, ticket ) => (
+		selected || ticket.isSelected
+	), false),
+);
+
 //
 // ─── TICKET SELECTORS ───────────────────────────────────────────────────────────
 //
@@ -205,6 +212,11 @@ export const getTicketHasChanges = createSelector(
 export const getTicketIsSelected = createSelector(
 	[ getTicket ],
 	( ticket ) => ticket.isSelected,
+);
+
+export const getTicketIsDisabled = createSelector(
+	[ hasATicketSelected, getTicketIsSelected ],
+	( hasSelected, isSelected ) => hasSelected && ! isSelected,
 );
 
 //

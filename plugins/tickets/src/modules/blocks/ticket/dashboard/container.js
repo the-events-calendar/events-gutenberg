@@ -5,11 +5,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 /**
- * WordPress dependencies
- */
-import { select } from '@wordpress/data';
-
-/**
  * Internal dependencies
  */
 import Template from './template';
@@ -19,6 +14,7 @@ import { withStore } from '@moderntribe/common/hoc';
 const getIsCancelDisabled = ( state, ownProps ) => (
 	! selectors.getTicketHasChanges( state, ownProps )
 		|| selectors.getTicketIsLoading( state, ownProps )
+		|| selectors.getTicketIsDisabled( state, ownProps )
 );
 
 /**
@@ -28,6 +24,7 @@ const getIsConfirmDisabled = ( state, ownProps ) => (
 	! selectors.getTicketTempTitle( state, ownProps )
 		|| ! selectors.getTicketHasChanges( state, ownProps )
 		|| selectors.getTicketIsLoading( state, ownProps )
+		|| selectors.getTicketIsDisabled( state, ownProps )
 );
 
 const onCancelClick = ( state, dispatch, ownProps ) => () => {
@@ -47,6 +44,9 @@ const onCancelClick = ( state, dispatch, ownProps ) => () => {
 		capacityType: selectors.getTicketCapacityType( state, ownProps ),
 		capacity: selectors.getTicketCapacity( state, ownProps ),
 	} ) );
+	dispatch( actions.setTicketsTempSharedCapacity(
+		selectors.getTicketsSharedCapacity( state ),
+	) );
 	dispatch( actions.setTicketHasChanges( ownProps.blockId, false ) );
 };
 

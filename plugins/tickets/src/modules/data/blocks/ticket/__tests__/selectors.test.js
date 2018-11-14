@@ -130,6 +130,10 @@ describe( 'Ticket block selectors', () => {
 		test( 'getUnlimitedTickets', () => {
 			expect( selectors.getUnlimitedTickets( state ) ).toMatchSnapshot();
 		} );
+
+		test( 'hasATicketSelected', () => {
+			expect( selectors.hasATicketSelected( state ) ).toMatchSnapshot();
+		} );
 	} );
 
 	describe( 'Ticket selectors', () => {
@@ -175,6 +179,10 @@ describe( 'Ticket block selectors', () => {
 
 		test( 'getTicketIsSelected', () => {
 			expect( selectors.getTicketIsSelected( state, ownProps ) ).toMatchSnapshot();
+		} );
+
+		test( 'getTicketIsDisabled', () => {
+			expect( selectors.getTicketIsDisabled( state, ownProps ) ).toMatchSnapshot();
 		} );
 	} );
 
