@@ -12,8 +12,8 @@ export const setTicketsInitialState = ( props ) => ( {
 	payload: props,
 } );
 
-export const setTicketsHeader = ( payload ) => ( {
-	type: types.SET_TICKETS_HEADER,
+export const setTicketsHeaderImage = ( payload ) => ( {
+	type: types.SET_TICKETS_HEADER_IMAGE,
 	payload,
 } );
 
@@ -24,36 +24,15 @@ export const setTicketsIsSettingsOpen = ( isSettingsOpen ) => ( {
 	},
 } );
 
+export const setTicketsIsSettingsLoading = ( isSettingsLoading ) => ( {
+	type: types.SET_TICKETS_IS_SETTINGS_LOADING,
+	payload: {
+		isSettingsLoading,
+	},
+} );
+
 export const openSettings = () => setTicketsIsSettingsOpen( true );
 export const closeSettings = () => setTicketsIsSettingsOpen( false );
-
-export const setTicketsIsParentBlockLoading = ( isParentBlockLoading ) => ( {
-	type: types.SET_TICKETS_IS_PARENT_BLOCK_LOADING,
-	payload: {
-		isParentBlockLoading,
-	},
-} );
-
-export const setTicketsIsChildBlockSelected = ( isChildBlockSelected ) => ( {
-	type: types.SET_TICKETS_IS_CHILD_BLOCK_SELECTED,
-	payload: {
-		isChildBlockSelected,
-	},
-} );
-
-export const setTicketsIsParentBlockSelected = ( isParentBlockSelected ) => ( {
-	type: types.SET_TICKETS_IS_PARENT_BLOCK_SELECTED,
-	payload: {
-		isParentBlockSelected,
-	},
-} );
-
-export const setTicketsActiveChildBlockId = ( activeChildBlockId ) => ( {
-	type: types.SET_TICKETS_ACTIVE_CHILD_BLOCK_ID,
-	payload: {
-		activeChildBlockId,
-	},
-} );
 
 export const setTicketsProvider = ( provider ) => ( {
 	type: types.SET_TICKETS_PROVIDER,

@@ -18,14 +18,18 @@ describe( 'Ticket actions', () => {
 			expect( actions.setTicketsInitialState( props ) ).toMatchSnapshot();
 		} );
 
-		test( 'set tickets header', () => {
-			expect( actions.setTicketsHeader( null ) ).toMatchSnapshot();
-			expect( actions.setTicketsHeader( { image: 10 } ) ).toMatchSnapshot();
+		test( 'set tickets header image', () => {
+			expect( actions.setTicketsHeaderImage( { image: 10 } ) ).toMatchSnapshot();
 		} );
 
 		test( 'set tickets is settings open', () => {
 			expect( actions.setTicketsIsSettingsOpen( true ) ).toMatchSnapshot();
 			expect( actions.setTicketsIsSettingsOpen( false ) ).toMatchSnapshot();
+		} );
+
+		test( 'set tickets is settings loading', () => {
+			expect( actions.setTicketsIsSettingsLoading( true ) ).toMatchSnapshot();
+			expect( actions.setTicketsIsSettingsLoading( false ) ).toMatchSnapshot();
 		} );
 
 		test( 'open settings', () => {
@@ -34,25 +38,6 @@ describe( 'Ticket actions', () => {
 
 		test( 'close settings', () => {
 			expect( actions.closeSettings() ).toMatchSnapshot();
-		} );
-
-		test( 'set tickets is parent block loading', () => {
-			expect( actions.setTicketsIsParentBlockLoading( true ) ).toMatchSnapshot();
-			expect( actions.setTicketsIsParentBlockLoading( false ) ).toMatchSnapshot();
-		} );
-
-		test( 'set tickets is child block selected', () => {
-			expect( actions.setTicketsIsChildBlockSelected( true ) ).toMatchSnapshot();
-			expect( actions.setTicketsIsChildBlockSelected( false ) ).toMatchSnapshot();
-		} );
-
-		test( 'set tickets is parent block selected', () => {
-			expect( actions.setTicketsIsParentBlockSelected( true ) ).toMatchSnapshot();
-			expect( actions.setTicketsIsParentBlockSelected( false ) ).toMatchSnapshot();
-		} );
-
-		test( 'set tickets active child block id', () => {
-			expect( actions.setTicketsActiveChildBlockId( 'modern-tribe' ) ).toMatchSnapshot();
 		} );
 
 		test( 'set tickets provider', () => {

@@ -543,28 +543,12 @@ Object {
 }
 `;
 
-exports[`Ticket actions Tickets actions set tickets active child block id 1`] = `
-Object {
-  "payload": Object {
-    "activeChildBlockId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/SET_TICKETS_ACTIVE_CHILD_BLOCK_ID",
-}
-`;
-
-exports[`Ticket actions Tickets actions set tickets header 1`] = `
-Object {
-  "payload": null,
-  "type": "@@MT/TICKETS/SET_TICKETS_HEADER",
-}
-`;
-
-exports[`Ticket actions Tickets actions set tickets header 2`] = `
+exports[`Ticket actions Tickets actions set tickets header image 1`] = `
 Object {
   "payload": Object {
     "image": 10,
   },
-  "type": "@@MT/TICKETS/SET_TICKETS_HEADER",
+  "type": "@@MT/TICKETS/SET_TICKETS_HEADER_IMAGE",
 }
 `;
 
@@ -581,57 +565,21 @@ Object {
 }
 `;
 
-exports[`Ticket actions Tickets actions set tickets is child block selected 1`] = `
+exports[`Ticket actions Tickets actions set tickets is settings loading 1`] = `
 Object {
   "payload": Object {
-    "isChildBlockSelected": true,
+    "isSettingsLoading": true,
   },
-  "type": "@@MT/TICKETS/SET_TICKETS_IS_CHILD_BLOCK_SELECTED",
+  "type": "@@MT/TICKETS/SET_TICKETS_IS_SETTINGS_LOADING",
 }
 `;
 
-exports[`Ticket actions Tickets actions set tickets is child block selected 2`] = `
+exports[`Ticket actions Tickets actions set tickets is settings loading 2`] = `
 Object {
   "payload": Object {
-    "isChildBlockSelected": false,
+    "isSettingsLoading": false,
   },
-  "type": "@@MT/TICKETS/SET_TICKETS_IS_CHILD_BLOCK_SELECTED",
-}
-`;
-
-exports[`Ticket actions Tickets actions set tickets is parent block loading 1`] = `
-Object {
-  "payload": Object {
-    "isParentBlockLoading": true,
-  },
-  "type": "@@MT/TICKETS/SET_TICKETS_IS_PARENT_BLOCK_LOADING",
-}
-`;
-
-exports[`Ticket actions Tickets actions set tickets is parent block loading 2`] = `
-Object {
-  "payload": Object {
-    "isParentBlockLoading": false,
-  },
-  "type": "@@MT/TICKETS/SET_TICKETS_IS_PARENT_BLOCK_LOADING",
-}
-`;
-
-exports[`Ticket actions Tickets actions set tickets is parent block selected 1`] = `
-Object {
-  "payload": Object {
-    "isParentBlockSelected": true,
-  },
-  "type": "@@MT/TICKETS/SET_TICKETS_IS_PARENT_BLOCK_SELECTED",
-}
-`;
-
-exports[`Ticket actions Tickets actions set tickets is parent block selected 2`] = `
-Object {
-  "payload": Object {
-    "isParentBlockSelected": false,
-  },
-  "type": "@@MT/TICKETS/SET_TICKETS_IS_PARENT_BLOCK_SELECTED",
+  "type": "@@MT/TICKETS/SET_TICKETS_IS_SETTINGS_LOADING",
 }
 `;
 
