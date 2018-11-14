@@ -25,7 +25,7 @@ import {
 	tickets as ticketsConfig,
 	restNonce,
 } from '@moderntribe/common/src/modules/utils/globals';
-import { getStart, getEnd } from '@moderntribe/events/data/blocks/datetime/selectors';
+import { getStart } from '@moderntribe/events/data/blocks/datetime/selectors';
 import { toMoment, toDate, toTime24Hr } from '@moderntribe/common/utils/moment';
 
 const {
@@ -175,8 +175,8 @@ export function* setTicketInitialState( action ) {
 
 	try {
 		// NOTE: This requires TEC to be installed, if not installed, do not set an end date
-		const eventEnd = yield select( getEnd ); // Ticket purchase window should end when event ends
-		const endMoment = yield call( momentUtil.toMoment, eventEnd );
+		const eventStart = yield select( getStart ); // Ticket purchase window should end when event starts
+		const endMoment = yield call( momentUtil.toMoment, eventStart );
 		const endDate = yield call( momentUtil.toDatabaseDate, endMoment );
 		const endDateInput = yield call( momentUtil.toDate, endMoment );
 		const endTime = yield call( momentUtil.toDatabaseTime, endMoment );
