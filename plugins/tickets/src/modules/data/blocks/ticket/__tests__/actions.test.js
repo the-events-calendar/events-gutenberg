@@ -4,6 +4,8 @@
 import * as actions from '../actions';
 
 describe( 'Ticket actions', () => {
+	const blockId = 'modern-tribe';
+
 	describe( 'Tickets actions', () => {
 		test( 'set tickets initial state', () => {
 			const props = {
@@ -67,8 +69,6 @@ describe( 'Ticket actions', () => {
 	} );
 
 	describe( 'Ticket details actions', () => {
-		const blockId = 'modern-tribe';
-
 		test( 'set ticket title', () => {
 			expect( actions.setTicketTitle( blockId, 'Modern Tribe' ) );
 		} );
@@ -122,8 +122,6 @@ describe( 'Ticket actions', () => {
 	} );
 
 	describe( 'Ticket temp details actions', () => {
-		const blockId = 'modern-tribe';
-
 		test( 'set ticket temp title', () => {
 			expect( actions.setTicketTempTitle( blockId, 'Modern Tribe' ) );
 		} );
@@ -177,8 +175,6 @@ describe( 'Ticket actions', () => {
 	} );
 
 	describe( 'Ticket actions', () => {
-		const blockId = 'modern-tribe';
-
 		test( 'set ticket sold', () => {
 			expect( actions.setTicketSold( blockId, 23 ) ).toMatchSnapshot();
 		} );
@@ -217,6 +213,16 @@ describe( 'Ticket actions', () => {
 		test( 'set ticket is selected', () => {
 			expect( actions.setTicketIsSelected( blockId, true ) ).toMatchSnapshot();
 			expect( actions.setTicketIsSelected( blockId, false ) ).toMatchSnapshot();
+		} );
+	} );
+
+	describe( 'Ticket saga actions', () => {
+		test( 'set ticket details', () => {
+			expect( actions.setTicketDetails( blockId, {} ) ).toMatchSnapshot();
+		} );
+
+		test( 'set ticket temp details', () => {
+			expect( actions.setTicketTempDetails( blockId, {} ) ).toMatchSnapshot();
 		} );
 
 		test( 'fetch ticket', () => {

@@ -38,6 +38,8 @@ exports[`Tickets block types SET_TICKET_INITIAL_STATE 1`] = `"@@MT/TICKETS/SET_T
 
 exports[`Tickets block types SET_TICKET_IS_LOADING 1`] = `"@@MT/TICKETS/SET_TICKET_IS_LOADING"`;
 
+exports[`Tickets block types SET_TICKET_IS_SELECTED 1`] = `"@@MT/TICKETS/SET_TICKET_IS_SELECTED"`;
+
 exports[`Tickets block types SET_TICKET_PRICE 1`] = `"@@MT/TICKETS/SET_TICKET_PRICE"`;
 
 exports[`Tickets block types SET_TICKET_PROVIDER 1`] = `"@@MT/TICKETS/SET_TICKET_PROVIDER"`;

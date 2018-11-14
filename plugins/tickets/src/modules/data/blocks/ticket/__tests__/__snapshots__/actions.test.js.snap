@@ -1,51 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Ticket actions Ticket actions create new ticket 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/CREATE_NEW_TICKET",
-}
-`;
-
-exports[`Ticket actions Ticket actions delete ticket 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/DELETE_TICKET",
-}
-`;
-
-exports[`Ticket actions Ticket actions fetch ticket 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-    "ticketId": 99,
-  },
-  "type": "@@MT/TICKETS/FETCH_TICKET",
-}
-`;
-
-exports[`Ticket actions Ticket actions register ticket block 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/REGISTER_TICKET_BLOCK",
-}
-`;
-
-exports[`Ticket actions Ticket actions remove ticket block 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/REMOVE_TICKET_BLOCK",
-}
-`;
-
 exports[`Ticket actions Ticket actions set ticket availability 1`] = `
 Object {
   "payload": Object {
@@ -116,18 +70,6 @@ Object {
 }
 `;
 
-exports[`Ticket actions Ticket actions set ticket initial state 1`] = `
-Object {
-  "payload": Object {
-    "attributes": Object {
-      "ticketId": 99,
-    },
-    "clientId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/SET_TICKET_INITIAL_STATE",
-}
-`;
-
 exports[`Ticket actions Ticket actions set ticket is loading 1`] = `
 Object {
   "payload": Object {
@@ -185,15 +127,6 @@ Object {
     "sold": 23,
   },
   "type": "@@MT/TICKETS/SET_TICKET_SOLD",
-}
-`;
-
-exports[`Ticket actions Ticket actions update ticket 1`] = `
-Object {
-  "payload": Object {
-    "blockId": "modern-tribe",
-  },
-  "type": "@@MT/TICKETS/UPDATE_TICKET",
 }
 `;
 
@@ -328,6 +261,93 @@ Object {
     "startTime": "10:00",
   },
   "type": "@@MT/TICKETS/SET_TICKET_START_TIME",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions create new ticket 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/CREATE_NEW_TICKET",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions delete ticket 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/DELETE_TICKET",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions fetch ticket 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "ticketId": 99,
+  },
+  "type": "@@MT/TICKETS/FETCH_TICKET",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions register ticket block 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/REGISTER_TICKET_BLOCK",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions remove ticket block 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/REMOVE_TICKET_BLOCK",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions set ticket details 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "details": Object {},
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_DETAILS",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions set ticket initial state 1`] = `
+Object {
+  "payload": Object {
+    "attributes": Object {
+      "ticketId": 99,
+    },
+    "clientId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_INITIAL_STATE",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions set ticket temp details 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+    "tempDetails": Object {},
+  },
+  "type": "@@MT/TICKETS/SET_TICKET_TEMP_DETAILS",
+}
+`;
+
+exports[`Ticket actions Ticket saga actions update ticket 1`] = `
+Object {
+  "payload": Object {
+    "blockId": "modern-tribe",
+  },
+  "type": "@@MT/TICKETS/UPDATE_TICKET",
 }
 `;
 

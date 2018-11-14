@@ -352,6 +352,26 @@ export const setTicketIsSelected = ( blockId, isSelected ) => ( {
 	},
 } );
 
+//
+// ─── TICKET SAGA ACTIONS ────────────────────────────────────────────────────────
+//
+
+export const setTicketDetails = ( blockId, details ) => ( {
+	type: types.SET_TICKET_DETAILS,
+	payload: {
+		blockId,
+		details,
+	},
+} );
+
+export const setTicketTempDetails = ( blockId, tempDetails ) => ( {
+	type: types.SET_TICKET_TEMP_DETAILS,
+	payload: {
+		blockId,
+		tempDetails,
+	},
+} );
+
 export const fetchTicket = ( blockId, ticketId ) => ( {
 	type: types.FETCH_TICKET,
 	payload: {
