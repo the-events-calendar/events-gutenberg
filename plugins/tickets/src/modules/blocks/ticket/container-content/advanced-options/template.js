@@ -22,6 +22,7 @@ import SKU from './sku/container';
 class AdvancedOptions extends Component {
 	static propTypes = {
 		blockId: PropTypes.string.isRequired,
+		isDisabled: PropTypes.bool,
 	};
 
 	constructor( props ) {
@@ -54,6 +55,7 @@ class AdvancedOptions extends Component {
 			content: this.getContent(),
 			contentClassName: 'tribe-editor__ticket__advanced-options-content',
 			header: this.getHeader(),
+			headerAttrs: { disabled: this.props.isDisabled },
 			headerClassName: 'tribe-editor__ticket__advanced-options-header',
 		},
 	] );

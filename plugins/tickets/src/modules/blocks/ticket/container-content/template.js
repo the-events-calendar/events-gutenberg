@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * Internal dependencies
  */
 import Capacity from './capacity/container';
-import AdvancedOptions from './advanced-options/template';
+import AdvancedOptions from './advanced-options/container';
 import EcommerceOptions from './ecommerce-options/container';
 import AttendeesRegistration from './attendees-registration/container';
 import './style.pcss';
