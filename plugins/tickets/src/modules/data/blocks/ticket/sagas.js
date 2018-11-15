@@ -38,9 +38,6 @@ const {
 	PROVIDER_CLASS_TO_PROVIDER_MAPPING,
 } = constants;
 
-/**
- * @todo missing tests.
- */
 export function* fetchTicketsHeaderImage( action ) {
 	const { id } = action.payload;
 	yield put( actions.setTicketsIsSettingsLoading( true ) );
@@ -52,7 +49,7 @@ export function* fetchTicketsHeaderImage( action ) {
 			const headerImage = {
 				id: media.id,
 				alt: media.alt_text,
-				src: media_details.sizes.medium.source_url,
+				src: media.media_details.sizes.medium.source_url,
 			};
 			yield put( actions.setTicketsHeaderImage( headerImage ) );
 		}

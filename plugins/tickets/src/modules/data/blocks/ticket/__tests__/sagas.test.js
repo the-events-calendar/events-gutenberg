@@ -11,10 +11,27 @@ import * as types from '../types';
 import * as actions from '../actions';
 import watchers, * as sagas from '../sagas';
 import * as selectors from '../selectors';
+import * as utils from '@moderntribe/tickets/data/utils';
+import { wpREST } from '@moderntribe/common/utils/api';
+
+jest.mock( '@wordpress/data', () => ( {
+	select: ( key ) => {
+		if ( key === 'core/editor' ) {
+			return {
+				getCurrentPostId: () => 10,
+				getEditedPostAttribute: ( attr ) => {
+					if ( attr === 'date' ) {
+						return '2018-11-09T19:48:42';
+					}
+				},
+			};
+		}
+	},
+} ) );
 
 describe( 'Ticket Block sagas', () => {
 	describe( 'watchers', () => {
-		test( 'actions', () => {
+		it( 'should watch actions', () => {
 			const gen = watchers();
 			expect( gen.next().value ).toEqual(
 				takeEvery( types.SET_TICKETS_INITIAL_STATE, sagas.setTicketsInitialState )
@@ -53,80 +70,134 @@ describe( 'Ticket Block sagas', () => {
 		} );
 	} );
 
-	describe( 'sagas', () => {
-		describe( 'updateActiveEditBlock', () => {
-			test( 'when is not editing', () => {
-				const gen = cloneableGenerator( sagas.updateActiveEditBlock )( {
-					payload: {
-						blockId: 'modern-tribe',
-						isEditing: false,
-					},
-				} );
-				expect( gen.next().done ).toEqual( true );
-			} );
+	describe( 'fetchTicketsHeaderImage', () => {
+		it( 'should fetch tickets header image', () => {
+			const action = {
+				payload: {
+					id: 99,
+				},
+			};
+			const gen = cloneableGenerator( sagas.fetchTicketsHeaderImage )( action );
 
-			test( 'when editing an no active block is present', () => {
-				const gen = cloneableGenerator( sagas.updateActiveEditBlock )( {
-					payload: {
-						blockId: 'modern-tribe',
-						isEditing: true,
+			expect( gen.next().value ).toEqual(
+				put( actions.setTicketsIsSettingsLoading( true ) )
+			);
+			expect( gen.next().value ).toEqual(
+				call( wpREST, { path: `media/${ action.payload.id }` } )
+			);
+
+			const clone1 = gen.clone();
+			const apiResponseBad = {
+				response: {
+					ok: false,
+				},
+				data: {},
+			};
+
+			expect( clone1.next( apiResponseBad ).value ).toEqual(
+				put( actions.setTicketsIsSettingsLoading( false ) )
+			);
+			expect( clone1.next().done ).toEqual( true );
+
+			const clone2 = gen.clone();
+			const apiResponseGood = {
+				response: {
+					ok: true,
+				},
+				data: {
+					id: 99,
+					alt_text: 'tribe',
+					media_details: {
+						sizes: {
+							medium: {
+								source_url: '#',
+							},
+						},
 					},
-				} );
-				expect( gen.next().value )
-					.toEqual( select( selectors.getActiveBlockId ) );
-				expect( gen.next().value )
-					.toEqual( put( actions.setActiveChildBlockId( 'modern-tribe' ) ) );
-				expect( gen.next().done ).toEqual( true );
-			} );
+				},
+			};
+
+			expect( clone2.next( apiResponseGood ).value ).toEqual(
+				put( actions.setTicketsHeaderImage( {
+					id: apiResponseGood.data.id,
+					alt: apiResponseGood.data.alt_text,
+					src: apiResponseGood.data.media_details.sizes.medium.source_url,
+				} ) )
+			);
+			expect( clone2.next().value ).toEqual(
+				put( actions.setTicketsIsSettingsLoading( false ) )
+			);
+			expect( clone2.next().done ).toEqual( true );
 		} );
+	} );
 
-		describe( 'setInitialState', () => {
-			let props;
-			beforeEach( () => {
-				props = {
-					attributes: {
-						header: '0',
-						sharedCapacity: '0',
-						provider: '',
+	describe( 'updateTicketsHeaderImage', () => {
+		it( 'should update tickets header image', () => {
+			const action = {
+				payload: {
+					image: {
+						id: 99,
+						alt: 'tribe',
+						sizes: {
+							medium: {
+								url: '#',
+							},
+						},
 					},
-					get( value, defaultValue ) {
-						return props.attributes[ value ] ? props.attributes[ value ] : defaultValue;
+				},
+			};
+			const gen = cloneableGenerator( sagas.updateTicketsHeaderImage )( action );
+
+			expect( gen.next().value ).toEqual(
+				put( actions.setTicketsIsSettingsLoading( true ) )
+			);
+			expect( gen.next().value ).toEqual(
+				call( wpREST, {
+					path: `tribe_events/${ 10 }`,
+					headers: {
+						'Content-Type': 'application/json',
 					},
-				};
-			} );
+					initParams: {
+						method: 'PUT',
+						body: JSON.stringify( {
+							meta: {
+								[ utils.KEY_TICKET_HEADER ]: `${ action.payload.image.id }`,
+							},
+						} ),
+					},
+				} )
+			);
 
-			test( 'default values', () => {
-				const gen = sagas.setInitialState( { payload: props } );
-				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
-				expect( gen.next().done ).toBe( true );
-			} );
+			const clone1 = gen.clone();
+			const apiResponseBad = {
+				response: {
+					ok: false,
+				},
+			};
 
-			test( 'Shared capacity is other than the default', () => {
-				props.attributes.sharedCapacity = '33';
-				const gen = sagas.setInitialState( { payload: props } );
-				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( '33' ) ) );
-				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
-				expect( gen.next().done ).toBe( true );
-			} );
+			expect( clone1.next( apiResponseBad ).value ).toEqual(
+				put( actions.setTicketsIsSettingsLoading( false ) )
+			);
+			expect( clone1.next().done ).toEqual( true );
 
-			test( 'Shared capacity and header are valid values', () => {
-				props.attributes.sharedCapacity = '20';
-				props.attributes.header = '509';
-				const gen = sagas.setInitialState( { payload: props } );
-				expect( gen.next().value ).toEqual( put( actions.setTotalSharedCapacity( '20' ) ) );
-				expect( gen.next().value ).toEqual( call( sagas.getMedia, 509 ) );
-				expect( gen.next().value ).toEqual( put( actions.setProvider( '' ) ) );
-				expect( gen.next().done ).toBe( true );
-			} );
+			const clone2 = gen.clone();
+			const apiResponseGood = {
+				response: {
+					ok: true,
+				},
+			};
 
-			test( 'Custom provider is present', () => {
-				props.attributes.provider = 'Tribe__Tickets__Commerce__PayPal__Main';
-				const gen = sagas.setInitialState( { payload: props } );
-				expect( gen.next().value ).toEqual(
-					put( actions.setProvider( 'Tribe__Tickets__Commerce__PayPal__Main' ) )
-				);
-				expect( gen.next().done ).toBe( true );
-			} );
+			expect( clone2.next( apiResponseGood ).value ).toEqual(
+				put( actions.setTicketsHeaderImage( {
+					id: action.payload.image.id,
+					alt: action.payload.image.alt,
+					src: action.payload.image.sizes.medium.url,
+				} ) )
+			);
+			expect( clone2.next().value ).toEqual(
+				put( actions.setTicketsIsSettingsLoading( false ) )
+			);
+			expect( clone2.next().done ).toEqual( true );
 		} );
 	} );
 } );
