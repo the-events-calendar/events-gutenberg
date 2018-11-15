@@ -11,7 +11,7 @@ Object {
   "payload": Object {
     "id": 1,
   },
-  "type": "@@MT/TICKETS/UPDATE_TICKETS_HEADER_IMAGE",
+  "type": "@@MT/TICKETS/FETCH_TICKETS_HEADER_IMAGE",
 }
 `;
 
