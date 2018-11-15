@@ -29,11 +29,4 @@ describe( 'Availability', () => {
 		const component = renderer.create( <Availability available={ 1 } total={ 20 } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
-
-	it( 'renders component with custom separator', () => {
-		const component = renderer.create(
-			<Availability available={ 2 } total={ 20 } separator={ ' [*] ' } />
-		);
-		expect( component.toJSON() ).toMatchSnapshot();
-	} );
 } );
