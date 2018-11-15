@@ -49,6 +49,7 @@ export const byId = ( state = {}, action ) => {
 		case types.SET_TICKET_IS_LOADING:
 		case types.SET_TICKET_HAS_BEEN_CREATED:
 		case types.SET_TICKET_HAS_CHANGES:
+		case types.SET_TICKET_IS_SELECTED:
 		case types.REGISTER_TICKET_BLOCK:
 			return {
 				...state,
