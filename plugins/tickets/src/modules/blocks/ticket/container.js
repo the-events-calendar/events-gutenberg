@@ -17,8 +17,10 @@ const mapStateToProps = ( state, ownProps ) => {
 
 	return {
 		blockId: ownProps.clientId,
+		hasBeenCreated: selectors.getTicketHasBeenCreated( state, props ),
 		isDisabled: selectors.isTicketDisabled( state, props ),
 		isLoading: selectors.getTicketIsLoading( state, props ),
+		ticketId: selectors.getTicketId( state, props ),
 	};
 };
 
