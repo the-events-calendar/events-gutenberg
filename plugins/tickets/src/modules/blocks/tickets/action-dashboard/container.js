@@ -15,14 +15,8 @@ import { createBlock } from '@wordpress/blocks';
  */
 import Template from './template';
 import { withStore } from '@moderntribe/common/src/modules/hoc';
-import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 const mapStateToProps = ( state, ownProps ) => ( {
-	/**
-	 * @todo: fix this later
-	 */
-	isConfirmDisabled: false,
-	showConfirm: true,
 	onConfirmClick: () => {
 		const { clientId } = ownProps;
 		const { getBlockCount } = select( 'core/editor' );

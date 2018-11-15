@@ -27,25 +27,18 @@ const actions = [
 
 const confirmLabel = __( 'Add Tickets', 'events-gutenberg' );
 
-const TicketsDashboardAction = ( {
-	isConfirmDisabled,
-	onConfirmClick,
-	showConfirm,
-} ) => (
+const TicketsDashboardAction = ( { onConfirmClick } ) => (
 	<ActionDashboard
 		className="tribe-editor__tickets__action-dashboard"
 		actions={ actions }
 		confirmLabel={ confirmLabel }
-		isConfirmDisabled={ isConfirmDisabled }
 		onConfirmClick={ onConfirmClick }
-		showConfirm={ showConfirm }
+		showCancel={ false }
 	/>
 );
 
 TicketsDashboardAction.propTypes = {
-	isConfirmDisabled: PropTypes.bool,
 	onConfirmClick: PropTypes.func,
-	showConfirm: PropTypes.bool,
 };
 
 export default TicketsDashboardAction;

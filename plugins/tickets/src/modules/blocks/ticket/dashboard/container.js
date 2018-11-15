@@ -16,9 +16,6 @@ const getIsCancelDisabled = ( state, ownProps ) => (
 		|| selectors.isTicketDisabled( state, ownProps )
 );
 
-/**
- * @todo: update this with proper disabled requirements
- */
 const getIsConfirmDisabled = ( state, ownProps ) => (
 	! selectors.getTicketTempTitle( state, ownProps )
 		|| ! selectors.getTicketHasChanges( state, ownProps )
