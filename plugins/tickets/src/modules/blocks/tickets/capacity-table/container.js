@@ -12,8 +12,11 @@ import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 
 const getTicketItems = ( tickets ) => {
-	const items = tickets.filter( ( ticket ) => ticket.title ).join( ', ' );
-	return items ? ` ( ${ items } ) ` : '';
+	const items = tickets
+		.filter( ( ticket ) => ticket.details.title )
+		.map( ( ticket ) => ticket.details.title )
+		.join( ', ' );
+	return items ? ` (${ items }) ` : '';
 };
 
 const getIndependentTicketItems = ( state ) => {
