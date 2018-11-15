@@ -6,6 +6,15 @@ Object {
 }
 `;
 
+exports[`Ticket actions Header image saga actions fetch tickets header image 1`] = `
+Object {
+  "payload": Object {
+    "id": 1,
+  },
+  "type": "@@MT/TICKETS/UPDATE_TICKETS_HEADER_IMAGE",
+}
+`;
+
 exports[`Ticket actions Header image saga actions update tickets header image 1`] = `
 Object {
   "payload": Object {

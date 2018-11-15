@@ -59,6 +59,13 @@ export const setTicketsTempSharedCapacity = ( tempSharedCapacity ) => ( {
 // ─── HEADER IMAGE SAGA ACTIONS ──────────────────────────────────────────────────
 //
 
+export const fetchTicketsHeaderImage = ( id ) => ( {
+	type: types.FETCH_TICKETS_HEADER_IMAGE,
+	payload: {
+		id,
+	},
+} );
+
 export const updateTicketsHeaderImage = ( image ) => ( {
 	type: types.UPDATE_TICKETS_HEADER_IMAGE,
 	payload: {

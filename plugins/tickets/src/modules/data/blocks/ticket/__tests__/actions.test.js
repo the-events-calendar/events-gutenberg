@@ -54,6 +54,10 @@ describe( 'Ticket actions', () => {
 	} );
 
 	describe( 'Header image saga actions', () => {
+		test( 'fetch tickets header image', () => {
+			expect( actions.fetchTicketsHeaderImage( 1 ) ).toMatchSnapshot();
+		} );
+
 		test( 'update tickets header image', () => {
 			expect( actions.updateTicketsHeaderImage( { id: 1, alt: 'hi', src: '#' } ) ).toMatchSnapshot();
 		} );

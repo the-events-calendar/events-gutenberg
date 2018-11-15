@@ -8,6 +8,8 @@ exports[`Tickets block types DELETE_TICKETS_HEADER_IMAGE 1`] = `"@@MT/TICKETS/DE
 
 exports[`Tickets block types FETCH_TICKET 1`] = `"@@MT/TICKETS/FETCH_TICKET"`;
 
+exports[`Tickets block types FETCH_TICKETS_HEADER_IMAGE 1`] = `"@@MT/TICKETS/FETCH_TICKETS_HEADER_IMAGE"`;
+
 exports[`Tickets block types REGISTER_TICKET_BLOCK 1`] = `"@@MT/TICKETS/REGISTER_TICKET_BLOCK"`;
 
 exports[`Tickets block types REMOVE_TICKET_BLOCK 1`] = `"@@MT/TICKETS/REMOVE_TICKET_BLOCK"`;

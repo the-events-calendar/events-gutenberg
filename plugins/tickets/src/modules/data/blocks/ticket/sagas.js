@@ -41,7 +41,8 @@ const {
 /**
  * @todo missing tests.
  */
-export function* fetchTicketsHeaderImage( id ) {
+export function* fetchTicketsHeaderImage( action ) {
+	const { id } = action.payload;
 	yield put( actions.setTicketsIsSettingsLoading( true ) );
 
 	try {
@@ -149,8 +150,8 @@ export function* setTicketsInitialState( action ) {
 		] );
 	}
 
-	if ( header !== 0 ) {
-		yield call( fetchTicketsHeaderImage, header );
+	if ( ! isNaN( header ) && header !== 0 ) {
+		yield put( actions.fetchTicketsHeaderImage( header ) );
 	}
 
 	const tickets = ticketsConfig();
@@ -582,6 +583,7 @@ export default function* watchers() {
 	yield takeEvery( types.CREATE_NEW_TICKET, createNewTicket );
 	yield takeEvery( types.UPDATE_TICKET, updateTicket );
 	yield takeEvery( types.DELETE_TICKET, deleteTicket );
+	yield takeEvery( types.FETCH_TICKETS_HEADER_IMAGE, fetchTicketsHeaderImage );
 	yield takeEvery( types.UPDATE_TICKETS_HEADER_IMAGE, updateTicketsHeaderImage );
 	yield takeEvery( types.DELETE_TICKETS_HEADER_IMAGE, deleteTicketsHeaderImage );
 	yield takeEvery( types.SET_TICKET_DETAILS, setTicketDetails );
