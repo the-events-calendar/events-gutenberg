@@ -9,7 +9,20 @@ import { compose } from 'redux';
  */
 import Template from './template';
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
-import { actions } from '@moderntribe/tickets/data/blocks/ticket';
+import { actions, selectors } from '@moderntribe/tickets/data/blocks/ticket';
+
+const getHasOverlay = ( state, ownProps ) => (
+	selectors.getTicketsIsSettingsOpen( state )
+		|| (
+			! selectors.getTicketsIsSettingsOpen( state )
+				&& ! selectors.hasATicketSelected( state )
+				&& ! ownProps.isSelected
+		)
+);
+
+const mapStateToProps = ( state, ownProps ) => ( {
+	hasOverlay: getHasOverlay( state, ownProps ),
+} );
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	setInitialState: ( props ) => {
@@ -19,6 +32,6 @@ const mapDispatchToProps = ( dispatch ) => ( {
 
 export default compose(
 	withStore(),
-	connect( null, mapDispatchToProps ),
+	connect( mapStateToProps, mapDispatchToProps ),
 	withSaveData(),
 )( Template );
