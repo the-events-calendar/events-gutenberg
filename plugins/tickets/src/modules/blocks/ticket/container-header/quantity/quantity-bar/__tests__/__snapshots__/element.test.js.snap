@@ -18,7 +18,6 @@ exports[`<QuantityBar> independent capacity 1`] = `
       }
     }
   />
-  0
 </div>
 `;
 
@@ -42,7 +41,6 @@ exports[`<QuantityBar> shared capacity 1`] = `
       }
     }
   />
-  0
 </div>
 `;
 
