@@ -39,9 +39,10 @@ const mapStateToProps = ( state ) => ( {
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
-	onSharedCapacityChange: ( e ) => (
-		dispatch( actions.setTotalSharedCapacity( e.target.value ) )
-	),
+	onSharedCapacityChange: ( e ) => {
+		dispatch( actions.setTicketsSharedCapacity( e.target.value ) );
+		dispatch( actions.setTicketsTempSharedCapacity( e.target.value ) );
+	},
 } );
 
 export default compose(
