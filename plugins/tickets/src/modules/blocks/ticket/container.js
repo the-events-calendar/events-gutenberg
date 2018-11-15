@@ -30,7 +30,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( actions.setTicketIsSelected( clientId, isSelected ) )
 		),
 		removeTicketBlock: () => {
-			dispatch( actions.removeTicketBlock( clientId ) );
 			dispatch( actions.deleteTicket( clientId ) );
 		},
 		setInitialState: ( props ) => {

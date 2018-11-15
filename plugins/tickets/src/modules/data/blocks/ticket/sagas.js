@@ -149,7 +149,7 @@ export function* setTicketsInitialState( action ) {
 		] );
 	}
 
-	if ( header > 0 ) {
+	if ( header !== 0 ) {
 		yield call( fetchTicketsHeaderImage, header );
 	}
 
@@ -213,10 +213,12 @@ export function* setTicketInitialState( action ) {
 		] );
 	}
 
-	yield all( [
-		put( actions.setTicketId( clientId, values.ticketId ) ),
-		put( actions.fetchTicket( clientId, values.ticketId ) ),
-	] );
+	if ( values.ticketId !== 0 ) {
+		yield all( [
+			put( actions.setTicketId( clientId, values.ticketId ) ),
+			put( actions.fetchTicket( clientId, values.ticketId ) ),
+		] );
+	}
 }
 
 export function* setBodyDetails( blockId ) {
@@ -449,7 +451,7 @@ export function* updateTicket( action ) {
 		 * @todo: handle error scenario
 		 */
 	} finally {
-		put( actions.setTicketIsLoading( blockId, false ) );
+		yield put( actions.setTicketIsLoading( blockId, false ) );
 	}
 }
 
@@ -461,9 +463,12 @@ export function* deleteTicket( action ) {
 	const props = { blockId };
 
 	const hasBeenCreated = yield select( selectors.getTicketHasBeenCreated, props );
+	const ticketId = yield select( selectors.getTicketId, props );
+
+	yield put( actions.setTicketIsSelected( blockId, false ) );
+	yield put( actions.removeTicketBlock( blockId ) );
 
 	if ( hasBeenCreated ) {
-		const ticketId = yield select( selectors.getTicketId, props );
 		const { remove_ticket_nonce = '' } = restNonce();
 		const postId = wpSelect( 'core/editor' ).getCurrentPostId();
 
