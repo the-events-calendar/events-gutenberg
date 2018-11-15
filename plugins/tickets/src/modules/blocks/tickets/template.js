@@ -16,12 +16,14 @@ import './style.pcss';
 class Tickets extends PureComponent {
 	static propTypes = {
 		isSelected: PropTypes.bool,
+		isSettingsOpen: PropTypes.bool,
 		clientId: PropTypes.string,
 	};
 
 	render() {
 		const {
 			isSelected,
+			isSettingsOpen,
 			clientId
 		} = this.props;
 
@@ -30,6 +32,7 @@ class Tickets extends PureComponent {
 				className={ classNames(
 					'tribe-editor__tickets',
 					{ 'tribe-editor__tickets--selected': isSelected },
+					{ 'tribe-editor__tickets--settings-open': isSettingsOpen },
 				) }
 			>
 				<TicketsContainer isSelected={ isSelected } />

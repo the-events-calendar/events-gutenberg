@@ -9,7 +9,11 @@ import { compose } from 'redux';
  */
 import Template from './template';
 import { withSaveData, withStore } from '@moderntribe/common/src/modules/hoc';
-import { actions } from '@moderntribe/tickets/data/blocks/ticket';
+import { actions, selectors } from '@moderntribe/tickets/data/blocks/ticket';
+
+const mapStateToProps = ( state ) => ( {
+	isSettingsOpen: selectors.getTicketsIsSettingsOpen( state ),
+} );
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	setInitialState: ( props ) => {
@@ -19,6 +23,6 @@ const mapDispatchToProps = ( dispatch ) => ( {
 
 export default compose(
 	withStore(),
-	connect( null, mapDispatchToProps ),
+	connect( mapStateToProps, mapDispatchToProps ),
 	withSaveData(),
 )( Template );
