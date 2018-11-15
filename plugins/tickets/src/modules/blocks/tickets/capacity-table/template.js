@@ -12,20 +12,20 @@ import { NumberInput } from '@moderntribe/common/elements';
 import Row from './row/template';
 import './style.pcss';
 
-const CapacityTable = ( props ) => {
-	const {
-		independentCapacity,
-		sharedCapacity,
-		independentAndSharedCapacity,
-		independentTicketItems,
-		sharedTicketItems,
-		onSharedCapacityChange,
-	} = props;
-
+const CapacityTable = ( {
+	isSettingsLoading,
+	independentCapacity,
+	sharedCapacity,
+	independentAndSharedCapacity,
+	independentTicketItems,
+	sharedTicketItems,
+	onSharedCapacityChange,
+} ) => {
 	const sharedInput = (
 		<NumberInput
 			onChange={ onSharedCapacityChange }
 			value={ sharedCapacity }
+			disabled={ isSettingsLoading }
 			min="0"
 		/>
 	);
@@ -54,6 +54,7 @@ const CapacityTable = ( props ) => {
 };
 
 CapacityTable.propTypes = {
+	isSettingsLoading: PropTypes.bool,
 	independentCapacity: PropTypes.number,
 	sharedCapacity: PropTypes.string,
 	independentAndSharedCapacity: PropTypes.number,

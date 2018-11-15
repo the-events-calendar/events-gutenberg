@@ -23,18 +23,11 @@ const mapStateToProps = ( state ) => ( {
 
 const mapDispatchToProps = ( dispatch ) => ( {
 	/**
-	 * @todo: fix this later
-	 */
-	/**
 	 * Full payload from gutenberg media upload is not used,
 	 * only id, alt, and medium src are used for this specific case.
 	 */
-	onSelect( image ) {
-		dispatch( actions.setTicketsHeader( image ) );
-	},
-	onRemove() {
-		dispatch( actions.setTicketsHeader( null ) );
-	},
+	onSelect: ( image ) => dispatch( actions.updateTicketsHeaderImage( image ) ),
+	onRemove: () => dispatch( actions.deleteTicketsHeaderImage() ),
 } );
 
 export default compose(

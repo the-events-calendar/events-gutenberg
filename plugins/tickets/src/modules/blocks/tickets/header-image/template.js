@@ -13,6 +13,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { ImageUpload } from '@moderntribe/common/elements';
+import './style.pcss';
 
 const HeaderImage = ( {
 	image,

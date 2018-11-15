@@ -14,11 +14,17 @@
 .tribe-editor__tickets__capacity-row-right {
 	flex: none;
 	width: 85px;
+	padding-right: 15px;
 	text-align: right;
 	color: #000;
 
+	.tribe-editor__tickets__settings-dashboard--loading & {
+		color: #AEB4BB;
+	}
+
 	input[type="number"] {
-		width: 100%;
+		width: 85px;
+		margin-right: -15px;
 		text-align: right;
 	}
 }
@@ -28,6 +34,10 @@
 	font-size: 15px;
 	line-height: 18px;
 	color: #000;
+
+	.tribe-editor__tickets__settings-dashboard--loading & {
+		color: #AEB4BB;
+	}
 }
 
 .tribe-editor__tickets__capacity-row-items {
@@ -35,4 +45,8 @@
 	font-size: 14px;
 	line-height: 18px;
 	color: #545D66;
+
+	.tribe-editor__tickets__settings-dashboard--loading & {
+		color: #AEB4BB;
+	}
 }

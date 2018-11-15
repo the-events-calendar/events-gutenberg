@@ -27,6 +27,7 @@ const getSharedTicketItems = ( state ) => {
 };
 
 const mapStateToProps = ( state ) => ( {
+	isSettingsLoading: selectors.getTicketsIsSettingsLoading( state ),
 	independentCapacity: selectors.getIndependentTicketsCapacity( state ),
 	sharedCapacity: selectors.getTicketsSharedCapacity( state ),
 	independentAndSharedCapacity: selectors.getIndependentAndSharedTicketsCapacity( state ),
