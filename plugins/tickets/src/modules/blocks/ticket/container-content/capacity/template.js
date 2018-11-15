@@ -103,7 +103,7 @@ class Capacity extends PureComponent {
 					value={ tempSharedCapacity }
 					onChange={ onTempSharedCapacityChange }
 					disabled={ isDisabled }
-					min="0"
+					min={ 0 }
 				/>
 			);
 		}
@@ -136,7 +136,7 @@ class Capacity extends PureComponent {
 					value={ tempCapacity }
 					onChange={ onTempCapacityChange }
 					disabled={ isDisabled }
-					min="0"
+					min={ 0 }
 					{ ...extraProps }
 				/>
 			);

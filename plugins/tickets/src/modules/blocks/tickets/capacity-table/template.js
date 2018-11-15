@@ -26,7 +26,7 @@ const CapacityTable = ( {
 			onChange={ onSharedCapacityChange }
 			value={ sharedCapacity }
 			disabled={ isSettingsLoading }
-			min="0"
+			min={ 0 }
 		/>
 	);
 
