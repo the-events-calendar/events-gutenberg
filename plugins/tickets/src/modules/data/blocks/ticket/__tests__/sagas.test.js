@@ -17,31 +17,37 @@ describe( 'Ticket Block sagas', () => {
 		test( 'actions', () => {
 			const gen = watchers();
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_TICKET_BLOCK_ID, sagas.setEditInTicketBlock ),
+				takeEvery( types.SET_TICKETS_INITIAL_STATE, sagas.setTicketsInitialState )
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.REQUEST_REMOVAL_OF_TICKET_BLOCK, sagas.removeActiveTicketBlock ),
+				takeEvery( types.SET_TICKET_INITIAL_STATE, sagas.setTicketInitialState )
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_CREATE_NEW_TICKET, sagas.createNewTicket ),
+				takeEvery( types.FETCH_TICKET, sagas.fetchTicket )
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_TICKET_IS_EDITING, sagas.updateActiveEditBlock ),
+				takeEvery( types.CREATE_NEW_TICKET, sagas.createNewTicket )
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_INITIAL_STATE, sagas.setInitialState ),
+				takeEvery( types.UPDATE_TICKET, sagas.updateTicket )
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_TICKET_INITIAL_STATE, sagas.setTicketInitialState ),
+				takeEvery( types.DELETE_TICKET, sagas.deleteTicket )
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.FETCH_TICKET_DETAILS, sagas.fetchTicketDetails )
+				takeEvery( types.FETCH_TICKETS_HEADER_IMAGE, sagas.fetchTicketsHeaderImage )
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.CANCEL_EDIT_OF_TICKET, sagas.cancelEditTicket )
+				takeEvery( types.UPDATE_TICKETS_HEADER_IMAGE, sagas.updateTicketsHeaderImage )
 			);
 			expect( gen.next().value ).toEqual(
-				takeEvery( types.SET_UPDATE_TICKET, sagas.updateTicket )
+				takeEvery( types.DELETE_TICKETS_HEADER_IMAGE, sagas.deleteTicketsHeaderImage )
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_TICKET_DETAILS, sagas.setTicketDetails )
+			);
+			expect( gen.next().value ).toEqual(
+				takeEvery( types.SET_TICKET_TEMP_DETAILS, sagas.setTicketTempDetails )
 			);
 			expect( gen.next().done ).toEqual( true );
 		} );
