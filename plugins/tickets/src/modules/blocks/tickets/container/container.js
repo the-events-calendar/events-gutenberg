@@ -11,7 +11,17 @@ import Template from './template';
 import { withStore } from '@moderntribe/common/src/modules/hoc';
 import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 
-const mapStateToProps = ( state ) => ( {
+const getHasOverlay = ( state, ownProps ) => (
+	selectors.getTicketsIsSettingsOpen( state )
+		|| (
+			! selectors.getTicketsIsSettingsOpen( state )
+				&& ! selectors.hasATicketSelected( state )
+				&& ! ownProps.isSelected
+		)
+);
+
+const mapStateToProps = ( state, ownProps ) => ( {
+	hasOverlay: getHasOverlay( state, ownProps ),
 	hasTickets: selectors.hasTickets( state ),
 	hasProviders: selectors.hasTicketProviders(),
 } );

@@ -19,10 +19,13 @@ import { LAYOUT } from '@moderntribe/tickets/elements/inactive-block/element';
 import { TicketInactive } from '@moderntribe/tickets/icons';
 import './style.pcss';
 
+const TicketsOverlay = () => <div className="tribe-editor__tickets__overlay" />;
+
 const TicketContainer = ( {
+	hasOverlay,
 	hasTickets,
-	isSelected,
 	hasProviders,
+	isSelected,
 } ) => {
 	const messages = {
 		title: hasProviders
@@ -49,6 +52,7 @@ const TicketContainer = ( {
 			{ isSelected && hasTickets && (
 				<Availability />
 			) }
+			{ hasOverlay && <TicketsOverlay /> }
 		</div>
 	);
 };

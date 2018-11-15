@@ -13,18 +13,14 @@ import TicketsContainer from './container/container';
 import TicketControls from './controls/container';
 import './style.pcss';
 
-const TicketsOverlay = () => <div className="tribe-editor__tickets__overlay" />;
-
 class Tickets extends PureComponent {
 	static propTypes = {
-		hasOverlay: PropTypes.bool,
 		isSelected: PropTypes.bool,
 		clientId: PropTypes.string,
 	};
 
 	render() {
 		const {
-			hasOverlay,
 			isSelected,
 			clientId
 		} = this.props;
@@ -39,7 +35,6 @@ class Tickets extends PureComponent {
 				<TicketsContainer isSelected={ isSelected } />
 				<TicketsDashboard isSelected={ isSelected } clientId={ clientId } />
 				<TicketControls />
-				{ hasOverlay && <TicketsOverlay /> }
 			</div>
 		);
 	}

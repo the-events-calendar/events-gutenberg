@@ -14,14 +14,11 @@ import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state ) => ( {
 	image: {
-		id: selectors.getTicketsHeaderId( state ),
-		alt: selectors.getTicketsHeaderAlt( state ),
-		src: selectors.getTicketsHeaderSrc( state ),
+		id: selectors.getTicketsHeaderImageId( state ),
+		alt: selectors.getTicketsHeaderImageAlt( state ),
+		src: selectors.getTicketsHeaderImageSrc( state ),
 	},
-	/**
-	 * @todo: fix this later
-	 */
-	isSettingsLoading: false,
+	isSettingsLoading: selectors.getTicketsIsSettingsLoading( state ),
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
