@@ -14,7 +14,7 @@ import { selectors, actions } from '@moderntribe/tickets/data/blocks/ticket';
 const getTicketItems = ( tickets ) => {
 	const items = tickets.filter( ( ticket ) => ticket.title ).join( ', ' );
 	return items ? ` ( ${ items } ) ` : '';
-}
+};
 
 const getIndependentTicketItems = ( state ) => {
 	const independentTickets = selectors.getIndependentTickets( state );

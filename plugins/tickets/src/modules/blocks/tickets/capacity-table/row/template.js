@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 /**
  * Internal dependencies
  */
+import './style.pcss';
 
 const CapacityRow = ( { label, items, right } ) => (
 	<div className="tribe-editor__tickets__capacity-row">
