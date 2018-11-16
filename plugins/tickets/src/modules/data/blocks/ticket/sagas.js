@@ -155,11 +155,11 @@ export function* setBodyDetails( blockId ) {
 export function* fetchTicket( action ) {
 	const { ticketId, blockId } = action.payload;
 
-	yield put( actions.setTicketIsLoading( blockId, true ) );
-
 	if ( ticketId === 0 ) {
 		return;
 	}
+
+	yield put( actions.setTicketIsLoading( blockId, true ) );
 
 	try {
 		const { response, data: ticket } = yield call( wpREST, {
@@ -235,12 +235,9 @@ export function* fetchTicket( action ) {
 	}
 }
 
-/**
- * @todo missing tests.
- */
 export function* createNewTicket( action ) {
 	const { blockId } = action.payload;
-	const props = { blockId }
+	const props = { blockId };
 
 	const { add_ticket_nonce = '' } = restNonce();
 	const body = yield call( setBodyDetails, blockId );
@@ -259,29 +256,62 @@ export function* createNewTicket( action ) {
 
 		if ( response.ok ) {
 			const sharedCapacity = yield select( selectors.getTicketsSharedCapacity );
-			if ( sharedCapacity === '' ) {
-				const tempSharedCapacity = yield select( selectors.getTicketsTempSharedCapacity );
-				if ( ! isNaN( tempSharedCapacity ) && tempSharedCapacity > 0 ) {
-					yield put( actions.setTicketsSharedCapacity( tempSharedCapacity ) );
-				}
+			const tempSharedCapacity = yield select( selectors.getTicketsTempSharedCapacity );
+			if (
+				sharedCapacity === ''
+					&& ( ! isNaN( tempSharedCapacity ) && tempSharedCapacity > 0 )
+			) {
+				yield put( actions.setTicketsSharedCapacity( tempSharedCapacity ) );
 			}
+
+			const [
+				title,
+				description,
+				price,
+				sku,
+				startDate,
+				startDateInput,
+				startDateMoment,
+				endDate,
+				endDateInput,
+				endDateMoment,
+				startTime,
+				endTime,
+				capacityType,
+				capacity,
+			] = yield all( [
+				select( selectors.getTicketTempTitle, props ),
+				select( selectors.getTicketTempDescription, props ),
+				select( selectors.getTicketTempPrice, props ),
+				select( selectors.getTicketTempSku, props ),
+				select( selectors.getTicketTempStartDate, props ),
+				select( selectors.getTicketTempStartDateInput, props ),
+				select( selectors.getTicketTempStartDateMoment, props ),
+				select( selectors.getTicketTempEndDate, props ),
+				select( selectors.getTicketTempEndDateInput, props ),
+				select( selectors.getTicketTempEndDateMoment, props ),
+				select( selectors.getTicketTempStartTime, props ),
+				select( selectors.getTicketTempEndTime, props ),
+				select( selectors.getTicketTempCapacityType, props ),
+				select( selectors.getTicketTempCapacity, props ),
+			] );
 
 			yield all( [
 				put( actions.setTicketDetails( blockId, {
-					title: yield select( selectors.getTicketTempTitle, props ),
-					description: yield select( selectors.getTicketTempDescription, props ),
-					price: yield select( selectors.getTicketTempPrice, props ),
-					sku: yield select( selectors.getTicketTempSku, props ),
-					startDate: yield select( selectors.getTicketTempStartDate, props ),
-					startDateInput: yield select( selectors.getTicketTempStartDateInput, props ),
-					startDateMoment: yield select( selectors.getTicketTempStartDateMoment, props ),
-					endDate: yield select( selectors.getTicketTempEndDate, props ),
-					endDateInput: yield select( selectors.getTicketTempEndDateInput, props ),
-					endDateMoment: yield select( selectors.getTicketTempEndDateMoment, props ),
-					startTime: yield select( selectors.getTicketTempStartTime, props ),
-					endTime: yield select( selectors.getTicketTempEndTime, props ),
-					capacityType: yield select( selectors.getTicketTempCapacityType, props ),
-					capacity: yield select( selectors.getTicketTempCapacity, props ),
+					title,
+					description,
+					price,
+					sku,
+					startDate,
+					startDateInput,
+					startDateMoment,
+					endDate,
+					endDateInput,
+					endDateMoment,
+					startTime,
+					endTime,
+					capacityType,
+					capacity,
 				} ) ),
 				put( actions.setTicketId( blockId, ticket.ID ) ),
 				put( actions.setTicketHasBeenCreated( blockId, true ) ),

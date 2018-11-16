@@ -25,6 +25,7 @@ const {
 	SHARED,
 	TICKET_TYPES,
 	PROVIDER_CLASS_TO_PROVIDER_MAPPING,
+	WOO_CLASS
 } = constants;
 
 jest.mock( '@wordpress/data', () => ( {
@@ -633,6 +634,247 @@ describe( 'Ticket Block sagas', () => {
 				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
 			);
 			expect( clone3.next().done ).toEqual( true );
+		} );
+
+		it( 'should not fetch ticket if new ticket', () => {
+			const TICKET_ID = 0;
+			const BLOCK_ID = 'modern-tribe';
+			const action = {
+				payload: {
+					ticketId: TICKET_ID,
+					blockId: BLOCK_ID,
+				},
+			};
+
+			const gen = sagas.fetchTicket( action );
+			expect( gen.next().done ).toEqual( true );
+		} );
+	} );
+
+	describe( 'createNewTicket', () => {
+		it( 'should create new ticket', () => {
+			const title = 'title';
+			const description = 'description';
+			const price = 10;
+			const sku = '12345678';
+			const startDate = '2018-11-09 19:48:42';
+			const startDateInput = '2018-11-09 19:48:42';
+			const startDateMoment = '2018-11-09 19:48:42';
+			const endDate = '2018-11-09 19:48:42';
+			const endDateInput = '2018-11-09 19:48:42';
+			const endDateMoment = '2018-11-09 19:48:42';
+			const startTime = '19:48:42';
+			const endTime = '19:48:42';
+			const capacityType = 'own';
+			const capacity = 100;
+
+			const BLOCK_ID = 'modern-tribe';
+			const props = { blockId: BLOCK_ID };
+			const action = {
+				payload: {
+					blockId: BLOCK_ID,
+				},
+			};
+
+			const gen = cloneableGenerator( sagas.createNewTicket )( action );
+			expect( gen.next().value ).toEqual(
+				call( sagas.setBodyDetails, BLOCK_ID )
+			);
+
+			const body = new FormData();
+
+			expect( gen.next( body ).value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, true ) )
+			);
+			expect( gen.next().value ).toEqual(
+				call( wpREST, {
+					path: 'tickets/',
+					namespace: 'tribe/tickets/v1',
+					initParams: {
+						method: 'POST',
+						body,
+					},
+				} )
+			);
+
+			const clone1 = gen.clone();
+			const apiResponse1 = {
+				response: {
+					ok: true,
+				},
+				data: {
+					ID: 13,
+					capacity: 100,
+					provider_class: WOO_CLASS,
+				},
+			};
+
+			expect( clone1.next( apiResponse1 ).value ).toEqual(
+				select( selectors.getTicketsSharedCapacity )
+			);
+
+			const clone11 = clone1.clone();
+			const sharedCapacity11 = '';
+			const tempSharedCapacity11 = 100;
+
+			expect( clone11.next( sharedCapacity11 ).value ).toEqual(
+				select( selectors.getTicketsTempSharedCapacity )
+			);
+			expect( clone11.next( tempSharedCapacity11 ).value ).toEqual(
+				put( actions.setTicketsSharedCapacity( tempSharedCapacity11 ) )
+			);
+			expect( clone11.next().value ).toEqual(
+				all( [
+					select( selectors.getTicketTempTitle, props ),
+					select( selectors.getTicketTempDescription, props ),
+					select( selectors.getTicketTempPrice, props ),
+					select( selectors.getTicketTempSku, props ),
+					select( selectors.getTicketTempStartDate, props ),
+					select( selectors.getTicketTempStartDateInput, props ),
+					select( selectors.getTicketTempStartDateMoment, props ),
+					select( selectors.getTicketTempEndDate, props ),
+					select( selectors.getTicketTempEndDateInput, props ),
+					select( selectors.getTicketTempEndDateMoment, props ),
+					select( selectors.getTicketTempStartTime, props ),
+					select( selectors.getTicketTempEndTime, props ),
+					select( selectors.getTicketTempCapacityType, props ),
+					select( selectors.getTicketTempCapacity, props ),
+				] )
+			);
+
+			expect( clone11.next( [
+				title,
+				description,
+				price,
+				sku,
+				startDate,
+				startDateInput,
+				startDateMoment,
+				endDate,
+				endDateInput,
+				endDateMoment,
+				startTime,
+				endTime,
+				capacityType,
+				capacity,
+			] ).value ).toEqual(
+				all( [
+					put( actions.setTicketDetails( BLOCK_ID, {
+						title,
+						description,
+						price,
+						sku,
+						startDate,
+						startDateInput,
+						startDateMoment,
+						endDate,
+						endDateInput,
+						endDateMoment,
+						startTime,
+						endTime,
+						capacityType,
+						capacity,
+					} ) ),
+					put( actions.setTicketId( BLOCK_ID, apiResponse1.data.ID ) ),
+					put( actions.setTicketHasBeenCreated( BLOCK_ID, true ) ),
+					put( actions.setTicketAvailable( BLOCK_ID, apiResponse1.data.capacity ) ),
+					put( actions.setTicketProvider(
+						BLOCK_ID,
+						PROVIDER_CLASS_TO_PROVIDER_MAPPING[ apiResponse1.data.provider_class ],
+					) ),
+					put( actions.setTicketHasChanges( BLOCK_ID, false ) ),
+				] )
+			);
+			expect( clone11.next().value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
+			);
+			expect( clone11.next().done ).toEqual( true );
+
+			const clone12 = clone1.clone();
+			const sharedCapacity12 = 100;
+			const tempSharedCapacity12 = 100;
+
+			expect( clone12.next( sharedCapacity12 ).value ).toEqual(
+				select( selectors.getTicketsTempSharedCapacity )
+			);
+			expect( clone12.next( tempSharedCapacity12 ).value ).toEqual(
+				all( [
+					select( selectors.getTicketTempTitle, props ),
+					select( selectors.getTicketTempDescription, props ),
+					select( selectors.getTicketTempPrice, props ),
+					select( selectors.getTicketTempSku, props ),
+					select( selectors.getTicketTempStartDate, props ),
+					select( selectors.getTicketTempStartDateInput, props ),
+					select( selectors.getTicketTempStartDateMoment, props ),
+					select( selectors.getTicketTempEndDate, props ),
+					select( selectors.getTicketTempEndDateInput, props ),
+					select( selectors.getTicketTempEndDateMoment, props ),
+					select( selectors.getTicketTempStartTime, props ),
+					select( selectors.getTicketTempEndTime, props ),
+					select( selectors.getTicketTempCapacityType, props ),
+					select( selectors.getTicketTempCapacity, props ),
+				] )
+			);
+
+			expect( clone12.next( [
+				title,
+				description,
+				price,
+				sku,
+				startDate,
+				startDateInput,
+				startDateMoment,
+				endDate,
+				endDateInput,
+				endDateMoment,
+				startTime,
+				endTime,
+				capacityType,
+				capacity,
+			] ).value ).toEqual(
+				all( [
+					put( actions.setTicketDetails( BLOCK_ID, {
+						title,
+						description,
+						price,
+						sku,
+						startDate,
+						startDateInput,
+						startDateMoment,
+						endDate,
+						endDateInput,
+						endDateMoment,
+						startTime,
+						endTime,
+						capacityType,
+						capacity,
+					} ) ),
+					put( actions.setTicketId( BLOCK_ID, apiResponse1.data.ID ) ),
+					put( actions.setTicketHasBeenCreated( BLOCK_ID, true ) ),
+					put( actions.setTicketAvailable( BLOCK_ID, apiResponse1.data.capacity ) ),
+					put( actions.setTicketProvider(
+						BLOCK_ID,
+						PROVIDER_CLASS_TO_PROVIDER_MAPPING[ apiResponse1.data.provider_class ],
+					) ),
+					put( actions.setTicketHasChanges( BLOCK_ID, false ) ),
+				] )
+			);
+			expect( clone12.next().value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
+			);
+			expect( clone12.next().done ).toEqual( true );
+
+			const clone2 = gen.clone();
+			const apiResponse2 = {
+				response: {
+					ok: false,
+				},
+			};
+
+			expect( clone2.next( apiResponse2 ).value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
+			);
+			expect( clone2.next().done ).toEqual( true );
 		} );
 	} );
 
