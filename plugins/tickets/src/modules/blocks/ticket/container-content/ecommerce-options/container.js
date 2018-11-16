@@ -11,7 +11,7 @@ import includes from 'lodash/includes';
 import EcommerceOptions from './template';
 import { constants, selectors } from '@moderntribe/tickets/data/blocks/ticket';
 import { withStore } from '@moderntribe/common/hoc';
-import { adminUrl } from '@moderntribe/common/src/modules/utils/globals';
+import { globals } from '@moderntribe/common/utils';
 
 const { EDD, WOO } = constants;
 
@@ -21,7 +21,7 @@ const getEditTicketLink = ( state, ownProps, provider ) => {
 	let editTicketLink = '';
 
 	if ( showEcommerceOptions( provider ) ) {
-		const adminURL = adminUrl();
+		const adminURL = globals.adminUrl();
 		const ticketId = selectors.getTicketId( state, ownProps );
 		editTicketLink = `${ adminURL }post.php?post=${ ticketId }&action=edit`;
 	}
@@ -33,7 +33,7 @@ const getReportLink = ( state, ownProps, provider ) => {
 	let reportLink = '';
 
 	if ( showEcommerceOptions( provider ) ) {
-		const adminURL = adminUrl();
+		const adminURL = globals.adminUrl();
 		const ticketId = selectors.getTicketId( state, ownProps );
 		let path = '';
 

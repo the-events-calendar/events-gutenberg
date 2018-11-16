@@ -15,10 +15,10 @@ import { select } from '@wordpress/data';
 import AttendeeRegistration from './template';
 import { selectors } from '@moderntribe/tickets/data/blocks/ticket';
 import { withStore } from '@moderntribe/common/hoc';
-import { adminUrl } from '@moderntribe/common/src/modules/utils/globals';
+import { globals } from '@moderntribe/common/utils';
 
 const getAttendeeRegistrationUrl = ( state, ownProps ) => {
-	const adminURL = adminUrl();
+	const adminURL = globals.adminUrl();
 	const postType = select( 'core/editor' ).getCurrentPostType();
 	const ticketId = selectors.getTicketId( state, ownProps );
 

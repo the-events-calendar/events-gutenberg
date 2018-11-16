@@ -14,7 +14,7 @@ import { createBlock } from '@wordpress/blocks';
  * Internal dependencies
  */
 import Template from './template';
-import { withStore } from '@moderntribe/common/src/modules/hoc';
+import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state, ownProps ) => ( {
 	onConfirmClick: () => {

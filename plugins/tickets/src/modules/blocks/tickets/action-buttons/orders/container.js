@@ -14,11 +14,11 @@ import { select } from '@wordpress/data';
  */
 import AttendeesActionButton from './template';
 import { selectors, constants } from '@moderntribe/tickets/data/blocks/ticket';
-import { adminUrl } from '@moderntribe/common/utils/globals';
+import { globals } from '@moderntribe/common/utils';
 import { withStore } from '@moderntribe/common/hoc';
 
 const mapStateToProps = ( state ) => {
-	const adminURL = adminUrl();
+	const adminURL = globals.adminUrl();
 	const postType = select( 'core/editor' ).getCurrentPostType();
 	const postId = select( 'core/editor' ).getCurrentPostId();
 	const provider = selectors.getTicketsProvider( state );
