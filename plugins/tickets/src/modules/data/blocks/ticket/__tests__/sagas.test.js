@@ -7,6 +7,7 @@ import { cloneableGenerator } from 'redux-saga/utils';
 /**
  * Internal Dependencies
  */
+import * as constants from '../constants';
 import * as types from '../types';
 import * as actions from '../actions';
 import watchers, * as sagas from '../sagas';
@@ -18,6 +19,13 @@ import { getStart } from '@moderntribe/events/data/blocks/datetime/selectors';
 import * as utils from '@moderntribe/tickets/data/utils';
 import { wpREST } from '@moderntribe/common/utils/api';
 import { moment as momentUtil } from '@moderntribe/common/utils';
+
+const {
+	INDEPENDENT,
+	SHARED,
+	TICKET_TYPES,
+	PROVIDER_CLASS_TO_PROVIDER_MAPPING,
+} = constants;
 
 jest.mock( '@wordpress/data', () => ( {
 	select: ( key ) => {
@@ -350,6 +358,281 @@ describe( 'Ticket Block sagas', () => {
 				] )
 			);
 			expect( clone2.next().done ).toEqual( true );
+		} );
+	} );
+
+	describe( 'setBodyDetails', () => {
+		it( 'should set body details', () => {
+			const blockId = 'modern-tribe';
+			const props = { blockId };
+			const gen = cloneableGenerator( sagas.setBodyDetails )( blockId );
+
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketProvider, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketsProvider )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempTitle, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempDescription, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempPrice, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempStartDate, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempStartTime, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempEndDate, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempEndTime, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempSku, props )
+			);
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketTempCapacityType, props )
+			);
+
+			const clone1 = gen.clone();
+			const sharedCapacityType = TICKET_TYPES[ SHARED ];
+
+			expect( clone1.next( sharedCapacityType ).value ).toEqual(
+				select( selectors.getTicketTempCapacity, props )
+			);
+			expect( clone1.next().value ).toEqual(
+				select( selectors.getTicketsTempSharedCapacity )
+			);
+			expect( clone1.next().done ).toEqual( true );
+
+			const clone2 = gen.clone();
+			const independentCapacityType = TICKET_TYPES[ INDEPENDENT ];
+
+			expect( clone2.next( independentCapacityType ).value ).toEqual(
+				select( selectors.getTicketTempCapacity, props )
+			);
+			expect( clone2.next().done ).toEqual( true );
+		} );
+	} );
+
+	describe( 'fetchTicket', () => {
+		it( 'should fetch ticket', () => {
+			const TICKET_ID = 13;
+			const BLOCK_ID = 'modern-tribe';
+			const action = {
+				payload: {
+					ticketId: TICKET_ID,
+					blockId: BLOCK_ID,
+				},
+			};
+
+			const gen = cloneableGenerator( sagas.fetchTicket )( action );
+			expect( gen.next().value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, true ) )
+			);
+			expect( gen.next().value ).toEqual(
+				call( wpREST, {
+					path: `tickets/${ TICKET_ID }`,
+					namespace: 'tribe/tickets/v1',
+				} )
+			);
+
+			const clone1 = gen.clone();
+			const apiResponse1 = {
+				response: {
+					ok: false,
+				},
+				data: {},
+			};
+
+			expect( clone1.next( apiResponse1 ).value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
+			);
+			expect( clone1.next().done ).toEqual( true );
+
+			const clone2 = gen.clone();
+			const apiResponse2 = {
+				response: {
+					ok: true,
+				},
+				data: {
+					cost_details: {
+						values: [ 20 ],
+					},
+					totals: {
+						sold: 10,
+						stock: 45,
+					},
+					available_from: '2018-11-09 19:48:42',
+					available_until: '',
+					provider: 'woo',
+					title: 'title',
+					description: 'description',
+					sku: '12345678',
+					capacity_type: 'own',
+					capacity: 100,
+				},
+			};
+			const startMoment2 = momentUtil.toMoment( apiResponse2.data.available_from );
+			const startDate2 = momentUtil.toDatabaseDate( startMoment2 );
+			const startDateInput2 = momentUtil.toDate( startMoment2 );
+			const startTime2 = momentUtil.toDatabaseTime( startMoment2 );
+			const endMoment2 = momentUtil.toMoment( '' );
+			const endDate2 = '';
+			const endDateInput2 = '';
+			const endTime2 = '';
+
+			expect( clone2.next( apiResponse2 ).value ).toEqual(
+				call( momentUtil.toMoment, apiResponse2.data.available_from )
+			);
+			expect( clone2.next( startMoment2 ).value ).toEqual(
+				call( momentUtil.toDatabaseDate, startMoment2 )
+			);
+			expect( clone2.next( startDate2 ).value ).toEqual(
+				call( momentUtil.toDate, startMoment2 )
+			);
+			expect( clone2.next( startDateInput2 ).value ).toEqual(
+				call( momentUtil.toDatabaseTime, startMoment2 )
+			);
+			expect( clone2.next( startTime2 ).value ).toEqual(
+				call( momentUtil.toMoment, '' )
+			);
+
+			const details2 = {
+				title: apiResponse2.data.title,
+				description: apiResponse2.data.description,
+				price: apiResponse2.data.cost_details.values[ 0 ],
+				sku: apiResponse2.data.sku,
+				startDate: startDate2,
+				startDateInput: startDateInput2,
+				startDateMoment: startMoment2,
+				endDate: endDate2,
+				endDateInput: endDateInput2,
+				endDateMoment: endMoment2,
+				startTime: startTime2,
+				endTime: endTime2,
+				capacityType: apiResponse2.data.capacity_type,
+				capacity: apiResponse2.data.capacity,
+			};
+
+			expect( clone2.next( endMoment2 ).value ).toEqual(
+				all( [
+					put( actions.setTicketDetails( BLOCK_ID, details2 ) ),
+					put( actions.setTicketTempDetails( BLOCK_ID, details2 ) ),
+					put( actions.setTicketSold( BLOCK_ID, apiResponse2.data.totals.sold ) ),
+					put( actions.setTicketAvailable( BLOCK_ID, apiResponse2.data.totals.stock ) ),
+					put( actions.setTicketCurrencySymbol( BLOCK_ID, apiResponse2.data.cost_details.currency_symbol ) ),
+					put( actions.setTicketCurrencyPosition( BLOCK_ID, apiResponse2.data.cost_details.currency_position ) ),
+					put( actions.setTicketProvider( BLOCK_ID, apiResponse2.data.provider ) ),
+					put( actions.setTicketHasBeenCreated( BLOCK_ID, true ) ),
+				] )
+			);
+			expect( clone2.next().value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
+			);
+			expect( clone2.next().done ).toEqual( true );
+
+			const clone3 = gen.clone();
+			const apiResponse3 = {
+				response: {
+					ok: true,
+				},
+				data: {
+					cost_details: {
+						values: [ 20 ],
+					},
+					totals: {
+						sold: 10,
+						stock: 45,
+					},
+					available_from: '2018-11-09 19:48:42',
+					available_until: '2018-11-12 19:48:42',
+					provider: 'woo',
+					title: 'title',
+					description: 'description',
+					sku: '12345678',
+					capacity_type: 'own',
+					capacity: 100,
+				},
+			};
+
+			const startMoment3 = momentUtil.toMoment( apiResponse3.data.available_from );
+			const startDate3 = momentUtil.toDatabaseDate( startMoment3 );
+			const startDateInput3 = momentUtil.toDate( startMoment3 );
+			const startTime3 = momentUtil.toDatabaseTime( startMoment3 );
+			const endMoment3 = momentUtil.toMoment( apiResponse3.data.available_until );
+			const endDate3 = momentUtil.toDatabaseDate( endMoment3 );
+			const endDateInput3 = momentUtil.toDate( endMoment3 );
+			const endTime3 = momentUtil.toDatabaseTime( endMoment3 );
+
+			expect( clone3.next( apiResponse3 ).value ).toEqual(
+				call( momentUtil.toMoment, apiResponse3.data.available_from )
+			);
+			expect( clone3.next( startMoment3 ).value ).toEqual(
+				call( momentUtil.toDatabaseDate, startMoment3 )
+			);
+			expect( clone3.next( startDate3 ).value ).toEqual(
+				call( momentUtil.toDate, startMoment3 )
+			);
+			expect( clone3.next( startDateInput3 ).value ).toEqual(
+				call( momentUtil.toDatabaseTime, startMoment3 )
+			);
+			expect( clone3.next( startTime3 ).value ).toEqual(
+				call( momentUtil.toMoment, '' )
+			);
+			expect( clone3.next( endMoment2 ).value ).toEqual(
+				call( momentUtil.toMoment, apiResponse3.data.available_until )
+			);
+			expect( clone3.next( endMoment3 ).value ).toEqual(
+				call( momentUtil.toDatabaseDate, endMoment3 )
+			);
+			expect( clone3.next( endDate3 ).value ).toEqual(
+				call( momentUtil.toDate, endMoment3 )
+			);
+			expect( clone3.next( endDateInput3 ).value ).toEqual(
+				call( momentUtil.toDatabaseTime, endMoment3 )
+			);
+
+			const details3 = {
+				title: apiResponse3.data.title,
+				description: apiResponse3.data.description,
+				price: apiResponse3.data.cost_details.values[ 0 ],
+				sku: apiResponse3.data.sku,
+				startDate: startDate3,
+				startDateInput: startDateInput3,
+				startDateMoment: startMoment3,
+				endDate: endDate3,
+				endDateInput: endDateInput3,
+				endDateMoment: endMoment3,
+				startTime: startTime3,
+				endTime: endTime3,
+				capacityType: apiResponse3.data.capacity_type,
+				capacity: apiResponse3.data.capacity,
+			};
+
+			expect( clone3.next( startTime3 ).value ).toEqual(
+				all( [
+					put( actions.setTicketDetails( BLOCK_ID, details3 ) ),
+					put( actions.setTicketTempDetails( BLOCK_ID, details3 ) ),
+					put( actions.setTicketSold( BLOCK_ID, apiResponse3.data.totals.sold ) ),
+					put( actions.setTicketAvailable( BLOCK_ID, apiResponse3.data.totals.stock ) ),
+					put( actions.setTicketCurrencySymbol( BLOCK_ID, apiResponse3.data.cost_details.currency_symbol ) ),
+					put( actions.setTicketCurrencyPosition( BLOCK_ID, apiResponse3.data.cost_details.currency_position ) ),
+					put( actions.setTicketProvider( BLOCK_ID, apiResponse3.data.provider ) ),
+					put( actions.setTicketHasBeenCreated( BLOCK_ID, true ) ),
+				] )
+			);
+			expect( clone3.next().value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
+			);
+			expect( clone3.next().done ).toEqual( true );
 		} );
 	} );
 

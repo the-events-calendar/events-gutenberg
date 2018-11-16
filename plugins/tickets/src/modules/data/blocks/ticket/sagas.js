@@ -168,14 +168,17 @@ export function* fetchTicket( action ) {
 		} );
 
 		if ( response.ok ) {
-			const costDetails = ticket.cost_details || {};
-			const costValues = costDetails.values || [];
 			const {
 				totals = {},
 				available_from,
 				available_until,
 				cost_details,
 				provider,
+				title,
+				description,
+				sku,
+				capacity_type,
+				capacity,
 			} = ticket;
 
 			const startMoment = yield call( momentUtil.toMoment, available_from );
@@ -196,10 +199,10 @@ export function* fetchTicket( action ) {
 			}
 
 			const details = {
-				title: ticket.title,
-				description: ticket.description,
-				price: costValues[ 0 ],
-				sku: ticket.sku,
+				title,
+				description,
+				price: cost_details.values[ 0 ],
+				sku,
 				startDate,
 				startDateInput,
 				startDateMoment: startMoment,
@@ -208,8 +211,8 @@ export function* fetchTicket( action ) {
 				endDateMoment: endMoment,
 				startTime,
 				endTime,
-				capacityType: ticket.capacity_type,
-				capacity: ticket.capacity,
+				capacityType: capacity_type,
+				capacity,
 			};
 
 			yield all( [
