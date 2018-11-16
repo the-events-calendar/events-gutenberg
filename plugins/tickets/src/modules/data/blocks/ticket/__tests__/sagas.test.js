@@ -878,6 +878,205 @@ describe( 'Ticket Block sagas', () => {
 		} );
 	} );
 
+	describe( 'updateTicket', () => {
+		it( 'should update ticket', () => {
+			const title = 'title';
+			const description = 'description';
+			const price = 10;
+			const sku = '12345678';
+			const startDate = '2018-11-09 19:48:42';
+			const startDateInput = '2018-11-09 19:48:42';
+			const startDateMoment = '2018-11-09 19:48:42';
+			const endDate = '2018-11-09 19:48:42';
+			const endDateInput = '2018-11-09 19:48:42';
+			const endDateMoment = '2018-11-09 19:48:42';
+			const startTime = '19:48:42';
+			const endTime = '19:48:42';
+			const capacityType = 'own';
+			const capacity = 100;
+
+			const TICKET_ID = 13;
+			const BLOCK_ID = 'modern-tribe';
+			const props = { blockId: BLOCK_ID };
+			const action = {
+				payload: {
+					blockId: BLOCK_ID,
+				},
+			};
+
+			const gen = cloneableGenerator( sagas.updateTicket )( action );
+			expect( gen.next().value ).toEqual(
+				call( sagas.setBodyDetails, BLOCK_ID )
+			);
+
+			const body = new FormData();
+
+			expect( gen.next( body ).value ).toEqual(
+				select( selectors.getTicketId, props )
+			);
+			expect( gen.next( TICKET_ID ).value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, true ) )
+			);
+
+			const data = [];
+			for ( const pair of body.entries() ) {
+				data.push( `${ encodeURIComponent( pair[ 0 ] ) }=${ encodeURIComponent( pair[ 1 ] ) }` );
+			}
+
+			expect( gen.next().value ).toEqual(
+				call( wpREST, {
+					path: `tickets/${ TICKET_ID }`,
+					namespace: 'tribe/tickets/v1',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+					},
+					initParams: {
+						method: 'PUT',
+						body: data.join( '&' ),
+					},
+				} )
+			);
+
+			const clone1 = gen.clone();
+			const apiResponse1 = {
+				response: {
+					ok: false,
+				},
+			};
+
+			expect( clone1.next( apiResponse1 ).value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
+			);
+			expect( clone1.next().done ).toEqual( true );
+
+			const clone2 = gen.clone();
+			const apiResponse2 = {
+				response: {
+					ok: true,
+				},
+			};
+
+			expect( clone2.next( apiResponse2 ).value ).toEqual(
+				all( [
+					select( selectors.getTicketTempTitle, props ),
+					select( selectors.getTicketTempDescription, props ),
+					select( selectors.getTicketTempPrice, props ),
+					select( selectors.getTicketTempSku, props ),
+					select( selectors.getTicketTempStartDate, props ),
+					select( selectors.getTicketTempStartDateInput, props ),
+					select( selectors.getTicketTempStartDateMoment, props ),
+					select( selectors.getTicketTempEndDate, props ),
+					select( selectors.getTicketTempEndDateInput, props ),
+					select( selectors.getTicketTempEndDateMoment, props ),
+					select( selectors.getTicketTempStartTime, props ),
+					select( selectors.getTicketTempEndTime, props ),
+					select( selectors.getTicketTempCapacityType, props ),
+					select( selectors.getTicketTempCapacity, props ),
+				] )
+			);
+			expect( clone2.next( [
+				title,
+				description,
+				price,
+				sku,
+				startDate,
+				startDateInput,
+				startDateMoment,
+				endDate,
+				endDateInput,
+				endDateMoment,
+				startTime,
+				endTime,
+				capacityType,
+				capacity,
+			] ).value ).toEqual(
+				all( [
+					put( actions.setTicketDetails( BLOCK_ID, {
+						title,
+						description,
+						price,
+						sku,
+						startDate,
+						startDateInput,
+						startDateMoment,
+						endDate,
+						endDateInput,
+						endDateMoment,
+						startTime,
+						endTime,
+						capacityType,
+						capacity,
+					} ) ),
+					put( actions.setTicketHasChanges( BLOCK_ID, false ) ),
+				] )
+			);
+			expect( clone2.next( apiResponse1 ).value ).toEqual(
+				put( actions.setTicketIsLoading( BLOCK_ID, false ) )
+			);
+			expect( clone2.next().done ).toEqual( true );
+		} );
+	} );
+
+	describe( 'deleteTicket', () => {
+		it( 'should delete ticket', () => {
+			const TICKET_ID = 13;
+			const BLOCK_ID = 'modern-tribe';
+			const props = { blockId: BLOCK_ID };
+			const action = {
+				payload: {
+					blockId: BLOCK_ID,
+				},
+			};
+
+			const gen = cloneableGenerator( sagas.deleteTicket )( action );
+			expect( gen.next().value ).toEqual(
+				select( selectors.getTicketId, props )
+			);
+			expect( gen.next( TICKET_ID ).value ).toEqual(
+				select( selectors.getTicketHasBeenCreated, props )
+			);
+
+			const clone1 = gen.clone();
+			const hasBeenCreated1 = false;
+
+			expect( clone1.next( hasBeenCreated1 ).value ).toEqual(
+				put( actions.setTicketIsSelected( BLOCK_ID, false ) )
+			);
+			expect( clone1.next().value ).toEqual(
+				put( actions.removeTicketBlock( BLOCK_ID ) )
+			);
+			expect( clone1.next().done ).toEqual( true );
+
+			const clone2 = gen.clone();
+			const hasBeenCreated2 = true;
+			const body = [
+				`${ encodeURIComponent( 'post_id' ) }=${ encodeURIComponent( 10 ) }`,
+				`${ encodeURIComponent( 'remove_ticket_nonce' ) }=${ encodeURIComponent( '' ) }`,
+			];
+
+			expect( clone2.next( hasBeenCreated2 ).value ).toEqual(
+				put( actions.setTicketIsSelected( BLOCK_ID, false ) )
+			);
+			expect( clone2.next().value ).toEqual(
+				put( actions.removeTicketBlock( BLOCK_ID ) )
+			);
+			expect( clone2.next().value ).toEqual(
+				call( wpREST, {
+					path: `tickets/${ TICKET_ID }`,
+					namespace: 'tribe/tickets/v1',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+					},
+					initParams: {
+						method: 'DELETE',
+						body: body.join( '&' ),
+					},
+				} )
+			);
+			expect( clone2.next().done ).toEqual( true );
+		} );
+	} );
+
 	describe( 'fetchTicketsHeaderImage', () => {
 		it( 'should fetch tickets header image', () => {
 			const action = {
@@ -1059,5 +1258,127 @@ describe( 'Ticket Block sagas', () => {
 			);
 			expect( clone2.next().done ).toEqual( true );
 		} );
+	} );
+
+	describe( 'setTicketDetails', () => {
+		const title = 'title';
+		const description = 'description';
+		const price = 10;
+		const sku = '12345678';
+		const startDate = '2018-11-09 19:48:42';
+		const startDateInput = '2018-11-09 19:48:42';
+		const startDateMoment = '2018-11-09 19:48:42';
+		const endDate = '2018-11-09 19:48:42';
+		const endDateInput = '2018-11-09 19:48:42';
+		const endDateMoment = '2018-11-09 19:48:42';
+		const startTime = '19:48:42';
+		const endTime = '19:48:42';
+		const capacityType = 'own';
+		const capacity = 100;
+
+		const BLOCK_ID = 'modern-tribe';
+		const action = {
+			payload: {
+				blockId: BLOCK_ID,
+				details: {
+					title,
+					description,
+					price,
+					sku,
+					startDate,
+					startDateInput,
+					startDateMoment,
+					endDate,
+					endDateInput,
+					endDateMoment,
+					startTime,
+					endTime,
+					capacityType,
+					capacity,
+				},
+			},
+		};
+
+		const gen = sagas.setTicketDetails( action );
+		expect( gen.next().value ).toEqual(
+			all( [
+				put( actions.setTicketTitle( BLOCK_ID, title ) ),
+				put( actions.setTicketDescription( BLOCK_ID, description ) ),
+				put( actions.setTicketPrice( BLOCK_ID, price ) ),
+				put( actions.setTicketSku( BLOCK_ID, sku ) ),
+				put( actions.setTicketStartDate( BLOCK_ID, startDate ) ),
+				put( actions.setTicketStartDateInput( BLOCK_ID, startDateInput ) ),
+				put( actions.setTicketStartDateMoment( BLOCK_ID, startDateMoment ) ),
+				put( actions.setTicketEndDate( BLOCK_ID, endDate ) ),
+				put( actions.setTicketEndDateInput( BLOCK_ID, endDateInput ) ),
+				put( actions.setTicketEndDateMoment( BLOCK_ID, endDateMoment ) ),
+				put( actions.setTicketStartTime( BLOCK_ID, startTime ) ),
+				put( actions.setTicketEndTime( BLOCK_ID, endTime ) ),
+				put( actions.setTicketCapacityType( BLOCK_ID, capacityType ) ),
+				put( actions.setTicketCapacity( BLOCK_ID, capacity ) ),
+			] )
+		);
+		expect( gen.next().done ).toEqual( true );
+	} );
+
+	describe( 'setTicketTempDetails', () => {
+		const title = 'title';
+		const description = 'description';
+		const price = 10;
+		const sku = '12345678';
+		const startDate = '2018-11-09 19:48:42';
+		const startDateInput = '2018-11-09 19:48:42';
+		const startDateMoment = '2018-11-09 19:48:42';
+		const endDate = '2018-11-09 19:48:42';
+		const endDateInput = '2018-11-09 19:48:42';
+		const endDateMoment = '2018-11-09 19:48:42';
+		const startTime = '19:48:42';
+		const endTime = '19:48:42';
+		const capacityType = 'own';
+		const capacity = 100;
+
+		const BLOCK_ID = 'modern-tribe';
+		const action = {
+			payload: {
+				blockId: BLOCK_ID,
+				tempDetails: {
+					title,
+					description,
+					price,
+					sku,
+					startDate,
+					startDateInput,
+					startDateMoment,
+					endDate,
+					endDateInput,
+					endDateMoment,
+					startTime,
+					endTime,
+					capacityType,
+					capacity,
+				},
+			},
+		};
+
+		const gen = sagas.setTicketTempDetails( action );
+		expect( gen.next().value ).toEqual(
+			all( [
+				put( actions.setTicketTempTitle( BLOCK_ID, title ) ),
+				put( actions.setTicketTempDescription( BLOCK_ID, description ) ),
+				put( actions.setTicketTempPrice( BLOCK_ID, price ) ),
+				put( actions.setTicketTempSku( BLOCK_ID, sku ) ),
+				put( actions.setTicketTempStartDate( BLOCK_ID, startDate ) ),
+				put( actions.setTicketTempStartDateInput( BLOCK_ID, startDateInput ) ),
+				put( actions.setTicketTempStartDateMoment( BLOCK_ID, startDateMoment ) ),
+				put( actions.setTicketTempEndDate( BLOCK_ID, endDate ) ),
+				put( actions.setTicketTempEndDateInput( BLOCK_ID, endDateInput ) ),
+				put( actions.setTicketTempEndDateMoment( BLOCK_ID, endDateMoment ) ),
+				put( actions.setTicketTempStartTime( BLOCK_ID, startTime ) ),
+				put( actions.setTicketTempEndTime( BLOCK_ID, endTime ) ),
+				put( actions.setTicketTempCapacityType( BLOCK_ID, capacityType ) ),
+				put( actions.setTicketTempCapacity( BLOCK_ID, capacity ) ),
+			] )
+		);
+		expect( gen.next().done ).toEqual( true );
 	} );
 } );

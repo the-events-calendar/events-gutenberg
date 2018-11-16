@@ -359,22 +359,54 @@ export function* updateTicket( action ) {
 		} );
 
 		if ( response.ok ) {
+			const [
+				title,
+				description,
+				price,
+				sku,
+				startDate,
+				startDateInput,
+				startDateMoment,
+				endDate,
+				endDateInput,
+				endDateMoment,
+				startTime,
+				endTime,
+				capacityType,
+				capacity,
+			] = yield all( [
+				select( selectors.getTicketTempTitle, props ),
+				select( selectors.getTicketTempDescription, props ),
+				select( selectors.getTicketTempPrice, props ),
+				select( selectors.getTicketTempSku, props ),
+				select( selectors.getTicketTempStartDate, props ),
+				select( selectors.getTicketTempStartDateInput, props ),
+				select( selectors.getTicketTempStartDateMoment, props ),
+				select( selectors.getTicketTempEndDate, props ),
+				select( selectors.getTicketTempEndDateInput, props ),
+				select( selectors.getTicketTempEndDateMoment, props ),
+				select( selectors.getTicketTempStartTime, props ),
+				select( selectors.getTicketTempEndTime, props ),
+				select( selectors.getTicketTempCapacityType, props ),
+				select( selectors.getTicketTempCapacity, props ),
+			] );
+
 			yield all( [
 				put( actions.setTicketDetails( blockId, {
-					title: yield select( selectors.getTicketTempTitle, props ),
-					description: yield select( selectors.getTicketTempDescription, props ),
-					price: yield select( selectors.getTicketTempPrice, props ),
-					sku: yield select( selectors.getTicketTempSku, props ),
-					startDate: yield select( selectors.getTicketTempStartDate, props ),
-					startDateInput: yield select( selectors.getTicketTempStartDateInput, props ),
-					startDateMoment: yield select( selectors.getTicketTempStartDateMoment, props ),
-					endDate: yield select( selectors.getTicketTempEndDate, props ),
-					endDateInput: yield select( selectors.getTicketTempEndDateInput, props ),
-					endDateMoment: yield select( selectors.getTicketTempEndDateMoment, props ),
-					startTime: yield select( selectors.getTicketTempStartTime, props ),
-					endTime: yield select( selectors.getTicketTempEndTime, props ),
-					capacityType: yield select( selectors.getTicketTempCapacityType, props ),
-					capacity: yield select( selectors.getTicketTempCapacity, props ),
+					title,
+					description,
+					price,
+					sku,
+					startDate,
+					startDateInput,
+					startDateMoment,
+					endDate,
+					endDateInput,
+					endDateMoment,
+					startTime,
+					endTime,
+					capacityType,
+					capacity,
 				} ) ),
 				put( actions.setTicketHasChanges( blockId, false ) ),
 			] );
@@ -388,15 +420,12 @@ export function* updateTicket( action ) {
 	}
 }
 
-/**
- * @todo missing tests.
- */
 export function* deleteTicket( action ) {
 	const { blockId } = action.payload;
 	const props = { blockId };
 
-	const hasBeenCreated = yield select( selectors.getTicketHasBeenCreated, props );
 	const ticketId = yield select( selectors.getTicketId, props );
+	const hasBeenCreated = yield select( selectors.getTicketHasBeenCreated, props );
 
 	yield put( actions.setTicketIsSelected( blockId, false ) );
 	yield put( actions.removeTicketBlock( blockId ) );
