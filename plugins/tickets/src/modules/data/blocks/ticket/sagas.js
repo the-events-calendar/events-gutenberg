@@ -38,101 +38,6 @@ const {
 	PROVIDER_CLASS_TO_PROVIDER_MAPPING,
 } = constants;
 
-export function* fetchTicketsHeaderImage( action ) {
-	const { id } = action.payload;
-	yield put( actions.setTicketsIsSettingsLoading( true ) );
-
-	try {
-		const { response, data: media } = yield call( wpREST, { path: `media/${ id }` } );
-
-		if ( response.ok ) {
-			const headerImage = {
-				id: media.id,
-				alt: media.alt_text,
-				src: media.media_details.sizes.medium.source_url,
-			};
-			yield put( actions.setTicketsHeaderImage( headerImage ) );
-		}
-	} catch ( e ) {
-		/**
-		 * @todo: handle error scenario
-		 */
-	} finally {
-		yield put( actions.setTicketsIsSettingsLoading( false ) );
-	}
-}
-
-export function* updateTicketsHeaderImage( action ) {
-	const { image } = action.payload;
-	const postId = wpSelect( 'core/editor' ).getCurrentPostId();
-	const body = {
-		meta: {
-			[ utils.KEY_TICKET_HEADER ]: `${ image.id }`,
-		},
-	};
-
-	try {
-		yield put( actions.setTicketsIsSettingsLoading( true ) );
-		const { response } = yield call( wpREST, {
-			path: `tribe_events/${ postId }`,
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			initParams: {
-				method: 'PUT',
-				body: JSON.stringify( body ),
-			},
-		} );
-
-		if ( response.ok ) {
-			yield put( actions.setTicketsHeaderImage( {
-				id: image.id,
-				alt: image.alt,
-				src: image.sizes.medium.url,
-			} ) );
-		}
-	} catch ( e ) {
-		/**
-		 * @todo: handle error scenario
-		 */
-	} finally {
-		yield put( actions.setTicketsIsSettingsLoading( false ) );
-	}
-}
-
-export function* deleteTicketsHeaderImage( action ) {
-	const postId = wpSelect( 'core/editor' ).getCurrentPostId();
-	const body = {
-		meta: {
-			[ utils.KEY_TICKET_HEADER ]: null,
-		},
-	};
-
-	try {
-		yield put( actions.setTicketsIsSettingsLoading( true ) );
-		const { response } = yield call( wpREST, {
-			path: `tribe_events/${ postId }`,
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			initParams: {
-				method: 'PUT',
-				body: JSON.stringify( body ),
-			},
-		} );
-
-		if ( response.ok ) {
-			yield put( actions.setTicketsHeaderImage( HEADER_IMAGE_DEFAULT_STATE ) );
-		}
-	} catch ( e ) {
-		/**
-		 * @todo: handle error scenario
-		 */
-	} finally {
-		yield put( actions.setTicketsIsSettingsLoading( false ) );
-	}
-}
-
 export function* setTicketsInitialState( action ) {
 	const { get } = action.payload;
 
@@ -159,10 +64,7 @@ export function* setTicketsInitialState( action ) {
 
 export function* setTicketInitialState( action ) {
 	const { clientId, get } = action.payload;
-	const values = {
-		ticketId: get( 'ticketId', TICKET_DEFAULT_STATE.ticketId ),
-		hasBeenCreated: get( 'hasBeenCreated', TICKET_DEFAULT_STATE.hasBeenCreated ),
-	};
+	const ticketId = get( 'ticketId', TICKET_DEFAULT_STATE.ticketId );
 
 	const publishDate = wpSelect( 'core/editor' ).getEditedPostAttribute( 'date' );
 	const startMoment = yield call( momentUtil.toMoment, publishDate );
@@ -211,10 +113,10 @@ export function* setTicketInitialState( action ) {
 		] );
 	}
 
-	if ( values.ticketId !== 0 ) {
+	if ( ticketId !== 0 ) {
 		yield all( [
-			put( actions.setTicketId( clientId, values.ticketId ) ),
-			put( actions.fetchTicket( clientId, values.ticketId ) ),
+			put( actions.setTicketId( clientId, ticketId ) ),
+			put( actions.fetchTicket( clientId, ticketId ) ),
 		] );
 	}
 }
@@ -496,6 +398,101 @@ export function* deleteTicket( action ) {
 			 * @todo handle error on removal
 			 */
 		}
+	}
+}
+
+export function* fetchTicketsHeaderImage( action ) {
+	const { id } = action.payload;
+	yield put( actions.setTicketsIsSettingsLoading( true ) );
+
+	try {
+		const { response, data: media } = yield call( wpREST, { path: `media/${ id }` } );
+
+		if ( response.ok ) {
+			const headerImage = {
+				id: media.id,
+				alt: media.alt_text,
+				src: media.media_details.sizes.medium.source_url,
+			};
+			yield put( actions.setTicketsHeaderImage( headerImage ) );
+		}
+	} catch ( e ) {
+		/**
+		 * @todo: handle error scenario
+		 */
+	} finally {
+		yield put( actions.setTicketsIsSettingsLoading( false ) );
+	}
+}
+
+export function* updateTicketsHeaderImage( action ) {
+	const { image } = action.payload;
+	const postId = wpSelect( 'core/editor' ).getCurrentPostId();
+	const body = {
+		meta: {
+			[ utils.KEY_TICKET_HEADER ]: `${ image.id }`,
+		},
+	};
+
+	try {
+		yield put( actions.setTicketsIsSettingsLoading( true ) );
+		const { response } = yield call( wpREST, {
+			path: `tribe_events/${ postId }`,
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			initParams: {
+				method: 'PUT',
+				body: JSON.stringify( body ),
+			},
+		} );
+
+		if ( response.ok ) {
+			yield put( actions.setTicketsHeaderImage( {
+				id: image.id,
+				alt: image.alt,
+				src: image.sizes.medium.url,
+			} ) );
+		}
+	} catch ( e ) {
+		/**
+		 * @todo: handle error scenario
+		 */
+	} finally {
+		yield put( actions.setTicketsIsSettingsLoading( false ) );
+	}
+}
+
+export function* deleteTicketsHeaderImage() {
+	const postId = wpSelect( 'core/editor' ).getCurrentPostId();
+	const body = {
+		meta: {
+			[ utils.KEY_TICKET_HEADER ]: null,
+		},
+	};
+
+	try {
+		yield put( actions.setTicketsIsSettingsLoading( true ) );
+		const { response } = yield call( wpREST, {
+			path: `tribe_events/${ postId }`,
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			initParams: {
+				method: 'PUT',
+				body: JSON.stringify( body ),
+			},
+		} );
+
+		if ( response.ok ) {
+			yield put( actions.setTicketsHeaderImage( HEADER_IMAGE_DEFAULT_STATE ) );
+		}
+	} catch ( e ) {
+		/**
+		 * @todo: handle error scenario
+		 */
+	} finally {
+		yield put( actions.setTicketsIsSettingsLoading( false ) );
 	}
 }
 
