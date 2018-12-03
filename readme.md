@@ -21,19 +21,19 @@ Gutenberg and the changes that come with it are a big deal. Our goal is to help 
 
 ## And please remember
 
-You can also [disable Gutenberg and Keep the Classic WordPress Editor](https://theeventscalendar.com/disable-gutenberg-keep-wordpress-classic-editor/) while you still get more familiar with it and test things out before you go live. Our block editor interface for creating events will be disabled by default and we have included a setting to activate it when you are ready.
+You can also [disable Gutenberg and keep the Classic WordPress Editor](https://theeventscalendar.com/disable-gutenberg-keep-wordpress-classic-editor/) while you still get more familiar with it and test things out before you go live. Our block editor interface for creating events will be **disabled by default** and we have included a setting to activate it when you are ready.
 
 ## :link: Further reading
 
 * [All Things Gutenberg](https://theeventscalendar.com/gutenberg-block-editor-news/)
-* [Why Gutenberg is Worth the Effort](https://theeventscalendar.com/going-gutenberg-chapter/)
+* [Why Gutenberg is Worth the Effort](https://theeventscalendar.com/change-is-coming-gutenberg/)
 * [A Comprehensive Guide to the New Block Editor](https://theeventscalendar.com/gutenberg-block-editor-free-ebook/)
 * [Preparing for the New WordPress Block Editor](https://theeventscalendar.com/wordpress-gutenberg-block-editor-checklist/)
 * [Gutenberg Ready: The Events Calendar 4.7, Event Tickets 4.9, and Premium Add-ons!](https://theeventscalendar.com/gutenberg-ready-the-events-calendar-4-7-event-tickets-4-9-and-premium-add-ons/)
 
 ---
 
-###:calendar: Latest update: December 3rd, 2018
+### :calendar: Latest update: December 3rd, 2018
 
 ---
 
