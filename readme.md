@@ -2,7 +2,7 @@
 
 ## :warning: Important updates regarding the Gutenberg Extension
 
-Since the release of [The Events Calendar 4.7](https://downloads.wordpress.org/plugin/the-events-calendar.4.7.zip), we included compatibility with the upcoming release of WordPress 5.0 and the new Block Editor (codename "Gutenberg") directly in the plugins. 
+Since the release of **The Events Calendar 4.7**, we included compatibility with the upcoming release of WordPress 5.0 and the new Block Editor (codename "Gutenberg") directly in the plugins. 
 
 **This means that we are no longer supporting the Gutenberg Extension**, and instead we are including the features that we've been working on _out of the box_ in our main plugins.
 
