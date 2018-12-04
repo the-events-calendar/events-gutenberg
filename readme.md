@@ -1,93 +1,39 @@
 # The Events Calendar: Gutenberg Extension
 
-We've made significant rewrites and refactors of our products over the years, but adapting our plugins to fully integrate with the new editor coming in WordPress version 5.0, code-named "Gutenberg" **is the biggest ecosystem change we’ve faced since the introduction of custom post types.**
+## :warning: Important updates regarding the Gutenberg Extension
 
-This plugin is our first attempt at integrating the Event post type with the Gutenberg editor. Download this plugin as a .zip and install it on your site like any other plugin, or use the _Using developement Version from GitHub_ steps below.
+Since the release of **The Events Calendar 4.7**, we included compatibility with the upcoming release of WordPress 5.0 and the new Block Editor (codename "Gutenberg") directly in the plugins. 
 
-[Read more about _Why Gutenberg is Worth the Effort_](https://theeventscalendar.com/going-gutenberg-chapter/)
+**This means that we are no longer supporting the Gutenberg Extension**, and instead we are including the features that we've been working on _out of the box_ in our main plugins.
+
+## How can you test the blocks functionality
+
+When you activate the latest version of The Events Calendar with WordPress 5.0 or bigger, you will see a new Option on your Settings Page of Events, to activate Events on the Blocks Editor. You can find this option in **Events > Settings > Activate Block Editor for Events**. 
+
+In the same order, we've added the tickets related blocks directly to [Event Tickets](https://wordpress.org/plugins/event-tickets/) and [Event Tickets Plus](https://theeventscalendar.com/product/wordpress-event-tickets-plus/), and finally all the Events PRO functionality to [Events Pro](https://theeventscalendar.com/product/wordpress-events-calendar-pro/).
+
+## Supporting you on your journey to adoption
+
+Gutenberg and the changes that come with it are a big deal. Our goal is to help support you on your journey to adoption as it makes sense for you and your situation. In that spirit, here’s where we’re at when it comes to our own work and compatibility:
+
+* We’ve tested WordPress 4.9.8 + our plugins — good to go!
+* We’ve done limited testing with WP Beta + our plugins (which includes our Gutenberg work)
+
+## And please remember
+
+You can also [disable Gutenberg and keep the Classic WordPress Editor](https://theeventscalendar.com/disable-gutenberg-keep-wordpress-classic-editor/) while you still get more familiar with it and test things out before you go live. Our block editor interface for creating events will be **disabled by default** and we have included a setting to activate it when you are ready.
+
+## :link: Further reading
+
+* [All Things Gutenberg](https://theeventscalendar.com/gutenberg-block-editor-news/)
+* [Why Gutenberg is Worth the Effort](https://theeventscalendar.com/change-is-coming-gutenberg/)
+* [A Comprehensive Guide to the New Block Editor](https://theeventscalendar.com/gutenberg-block-editor-free-ebook/)
+* [Preparing for the New WordPress Block Editor](https://theeventscalendar.com/wordpress-gutenberg-block-editor-checklist/)
+* [Gutenberg Ready: The Events Calendar 4.7, Event Tickets 4.9, and Premium Add-ons!](https://theeventscalendar.com/gutenberg-ready-the-events-calendar-4-7-event-tickets-4-9-and-premium-add-ons/)
 
 ---
 
-:warning: **Please Note:** This is an Alpha-version plugin at this point; while we test thoroughly and hope to code well, _we do not recommend running this on production sites_.
-
----
-
-### Using development version from GitHub
-
-1. Clone the Repository
-2. Install [NPM](https://www.npmjs.com/)
-3. Run `npm install` on the repository
-4. Run `npm run bootstrap` to bootstrap the plugins
-5. Run `npm run build` to build out the assets
-
-#### Production
-
-To build for production
-
-```sh
-npm run build
-# To only build for certain plugins
-npm run build -- --scope=@moderntribe/common,@moderntribe/events
-```
-
-#### Development
-
-To watch files for development
-
-```sh
-npm run dev
-# To only run watchers for certain plugins
-npm run dev -- --scope=@moderntribe/common,@moderntribe/events
-```
-
-#### Analyze bundles
-
-This will open a browser window showing current bundle sizes for a plugin.
-
-```sh
-npm run analyze
-# To only analyze certain plugins
-npm run analyze -- --scope=@moderntribe/common
-```
-
-### Adding new plugins
-
-From the root, we'll need to symlink the new plugin so that it can be looked up via npm. Just doing the command below will do the trick.
-
-```sh
-npm install --save plugins/*
-```
-
-#### Symlinking folders
-
-Since the folder structure we use is not node-friendly, we have to symlink directories from within the plugin's `src/modules` directory into the root of the plugin. This allows plugins to be properly imported when importing a module i.e. `@moderntribe/events/blocks` would have to be `@moderntribe/events/src/modules/blocks` if we did not do this.
-
-Add a new `scripts` folder within the plugin with a `linkDependencies` bash script.
-
-```sh
-mkdir scripts
-touch scripts/linkDependencies
-chmod +x scripts/linkDependencies
-```
-
-Add into the script something like:
-
-```sh
-#! /bin/bash
-
-ln -sf $PWD/src/modules/[bundleName] $PWD # Add one for each bundle
-```
-
-Now add in a `bootstrap` script into the plugin's `package.json`
-```json
-{
-    "scripts": {
-        "bootstrap": "./scripts/linkDependencies"
-    }
-}
-```
-
-Finally, run `npm run bootstrap` from the root to link the plugin up.
+### :calendar: Latest update: December 3rd, 2018
 
 ---
 
